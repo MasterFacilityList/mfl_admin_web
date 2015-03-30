@@ -13,5 +13,5 @@ angular.module("mfl.home.routes", [])
                 },
                 data : { pageTitle: "Home" }
             });
-        $urlRouterProvider.otherwise("/home");
+        $urlRouterProvider.otherwise("/login");
     }]);
