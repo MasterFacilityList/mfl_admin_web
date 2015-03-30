@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# npm install
-# export PATH="$(npm bin):$PATH"
+npm install
+export PATH="$(npm bin):$PATH"
 
-# grunt test
-anything
+grunt test
