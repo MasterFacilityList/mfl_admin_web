@@ -1,10 +1,10 @@
 {
-  "author": "jason",
-  "name": "mfl-frontend",
+  "author": "antony",
+  "name": "mfl-admin-frontend",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git@github.com:MasterFacilityList/mfl_web.git"
+    "url": "git@github.com:MasterFacilityList/mfl_admin_web.git"
   },
   "scripts": {
     "postinstall": "./node_modules/bower/bin/bower install"
