@@ -8,6 +8,7 @@ angular.module("mflApp", [
     //our stuff
     "templates-app",
     "templates-common",
-    "mfl.home"
+    "mfl.home",
+    "mfl.auth"
 ]);
 

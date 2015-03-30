@@ -1,0 +1,81 @@
+//
+// card less
+// Inspired by doc-containers
+// --------------------------------------------------
+
+// Base class
+.card-container {
+  margin-bottom: @line-height-computed;
+  padding: 25px;
+  background-color: @card-container-bg;
+  border: 1px solid transparent;
+  border-radius: @card-container-border-radius;
+  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.26);
+}
+.card-container:hover{
+  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.86);
+}
+
+/*Customizations of card-container*/
+
+.card-container.card-primary{
+    background-color: #0076ff;
+    color: white;
+}
+.card-container.card-orange{
+    background-color: #ff6200;
+    color: white;
+}
+
+
+
+/*Behaviour for links inside card-container*/
+.card-container > a{
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.card-container.card-primary>div>a,.card-container.card-orange>div>a{
+    color: white;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card-header {
+  font-size: 26px; 
+  margin-bottom: @line-height-computed;
+  padding: 25px;
+  padding: 0px;
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 225, 0.8);/* blue with opacity */
+  box-shadow: 1px 1px 1px @moh-color;
+  border: 1px solid transparent;
+  /*border-bottom: 2px solid #2eaef0;*/
+  /*border-radius: @card-container-border-radius;
+  .box-shadow(0 1px 1px rgba(0,0,0,.05));*/
+}
+
+
+/*Adds constant height*/
+.card-height{
+    min-height: 10px;
+}
+@media(max-width: 991px) and (min-width:768){
+    .card-height{
+        min-height: 120px;
+    }
+}
+@media(min-width: 768px){
+    .card-height{
+        min-height: 120px;
+    }
+}
+
+@media(min-width: 991px){
+    .card-height{
+        min-height: 85px;
+    }
+}
