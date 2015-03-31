@@ -38,12 +38,12 @@ hr {
 img {
   max-width: 100%;
 }
-::selection {
+/*::selection {
   background: #fff7dd;
 }
 ::-moz-selection {
   background: #fff7dd;
-}
+}*/
 .badge.badge-success {
   background-color: #2dcc70;
   color: #fff;

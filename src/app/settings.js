@@ -1,5 +1,5 @@
 "use strict";
 
-angular.module("wellness.settings", [])
+angular.module("mfl.settings", [])
 
     .constant("SERVER_URL", "http://localhost:8081/");

@@ -7078,9 +7078,10 @@ body {
     font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
     overflow-x: hidden
 }
-::-moz-selection {
+/*::-moz-selection {
     background-color: #82CAFF;
     color: #ecf0f1
+    
 }
 ::selection {
     background-color: #82CAFF;
@@ -7093,7 +7094,7 @@ body {
 ::webkit-selection {
     background-color: #82CAFF;
     color: #ecf0f1
-}
+}*/
 a {
     color: #82CAFF
 }

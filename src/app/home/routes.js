@@ -9,6 +9,17 @@ angular.module("mfl.home.routes", [])
                     "main": {
                         controller: "mfl.home.controllers.home",
                         templateUrl: "home/tpls/main.tpl.html"
+                    },
+                    "header@home": {
+                        controller: "mfl.home.controllers.home",
+                        templateUrl: "home/tpls/header.tpl.html"
+                    },
+                    "sidebar@home": {
+                        templateUrl: "home/tpls/side_nav.tpl.html"
+                    },
+                    "main-content@home": {
+                        controller: "mfl.home.controllers.home",
+                        templateUrl: "home/tpls/index.tpl.html"
                     }
                 },
                 data : { pageTitle: "Home" }
