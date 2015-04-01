@@ -1,13 +1,8 @@
-<contentheader></contentheader>
+ <contentheader></contentheader>
 <div class="row">
     <div class="col-lg-12">
         <div class="col-lg-11 col-lg-offset-1">
             <div class="col-md-12 margin-t-20">
-                <div class="col-md-4 pull-left">
-                    <a ui-sref="facilities.new_facility" class="action-btn action-btn-primary action-btn-md">
-                        <i class="fa fa-plus"></i>
-                    </a>
-                </div>
                 <div class="col-md-5 pull-right">
                     <form role="form">
                         <div class="input-group">                                    
@@ -22,52 +17,18 @@
             <div class="col-md-12 margin-t-15">
                 <table class="table content-card">
                     <thead>
-                        <th class="text-center">Code</th>
+                        <th>Code</th>
                         <th>Name</th>
-                        <th>Date created</th>
                         <th>Description</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">MFL001</td>
-                            <td>Opongi's Xrays</td>
-                            <td>31 March, 2013</td>
-                            <td>Facilities specialized in offering xray & radiology services</td>
-                            <td>
-                                <a href class="action-btn action-btn-grid action-btn-primary">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href class="action-btn action-btn-grid action-btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                                <a href class="action-btn action-btn-grid action-btn-success">
-                                    <i class="fa fa-sign-out"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">MFL002</td>
-                            <td>Tanny's Physicians</td>
-                            <td>31 July, 2011</td>
-                            <td>Facility has physiotherapy equipment as well as scanners & X-ray facilities</td>
-                            <td>
-                                <a href class="action-btn action-btn-grid action-btn-primary">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href class="action-btn action-btn-grid action-btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                                <a href class="action-btn action-btn-grid action-btn-success">
-                                    <i class="fa fa-sign-out"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">MFL003</td>
-                            <td>Kuzaa Facilities</td>
-                            <td>31 December, 2012</td>
-                            <td>Facilities specialized cat scans utlra-sounds and the likes</td>
+                    <tbody class="example-animate-container">
+                        <tr class="animate-repeat" ng-repeat="facility in facilities.results | filter: search.query">
+                            <td>{{facility.code}}</td>
+                            <td>{{facility.name}}</td>
+                            <td>{{facility.description}}</td>
+                            <td>{{facility.status}}</td>
                             <td>
                                 <a href class="action-btn action-btn-grid action-btn-primary">
                                     <i class="fa fa-edit"></i>

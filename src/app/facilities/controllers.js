@@ -2,7 +2,8 @@
 
 angular.module("mfl.facilities.controllers", [])
 
-    .controller("mfl.facilities.controllers.facilities", ["$scope", function ($scope) {
+    .controller("mfl.facilities.controllers.facilities", ["$scope", 
+    "mfl.facilities.services.facilities", function ($scope, facilityService) {
         $scope.test = "Facilities";
         $scope.path = [
             {
@@ -16,6 +17,17 @@ angular.module("mfl.facilities.controllers", [])
                 name: "Facilities"
             }
         ];
+        $scope.action = [
+            {
+                func : "ui-sref='facilities.new_facility'",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "New Facility",
+                icon: "fa-plus"
+            }
+        ];
+
+        $scope.facilities = facilityService.getFacilities();
     }])
     .controller("mfl.facilities.controllers.new_facility", ["$scope", function ($scope) {
         $scope.test = "New facilities";
@@ -25,7 +37,7 @@ angular.module("mfl.facilities.controllers", [])
                 route: "facilities"
             },
             {
-                name: "New facility",
+                name: "New Facility",
                 route: "facilities.new_facility"
             }
         ];

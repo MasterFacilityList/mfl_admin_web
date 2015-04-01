@@ -6,5 +6,6 @@ angular.module("mfl.facilities", [
     //out stuff
     "mfl.facilities.controllers",
     "mfl.facilities.routes",
+    "mfl.facilities.services",
     "mfl.common.directives"
 ]);
