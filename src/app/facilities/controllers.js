@@ -2,7 +2,7 @@
 
 angular.module("mfl.facilities.controllers", [])
 
-    .controller("mfl.facilities.controllers.facilities", ["$scope", 
+    .controller("mfl.facilities.controllers.facilities", ["$scope",
     "mfl.facilities.services.facilities", function ($scope, facilityService) {
         $scope.test = "Facilities";
         $scope.path = [
@@ -19,7 +19,7 @@ angular.module("mfl.facilities.controllers", [])
         ];
         $scope.action = [
             {
-                func : "ui-sref='facilities.new_facility'",
+                func : "ui-sref='facilities.new_facility.basic' ",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
                 tipmsg: "New Facility",

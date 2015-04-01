@@ -21,6 +21,7 @@ angular.module("mfl.facilities.services", [])
                             date : "31 March, 2013",
                             description : "Facilities specialized in offers xray &"+
                                             " radiology services",
+                            location : "United Kisumu",
                             status : "PENDING"
                         },
                         {
@@ -29,6 +30,7 @@ angular.module("mfl.facilities.services", [])
                             date : "31 July, 2011",
                             description : "Facility has physiotherapy equipment as well as "+
                                             " scanners & X-ray facilities",
+                            location : "Mayakos",
                             status : "DRAFT"
                         },
                         {
@@ -37,6 +39,7 @@ angular.module("mfl.facilities.services", [])
                             date : "31 December, 2012",
                             description : "Facilities specialized cat scans utlra-sounds and"+
                                             " the likes",
+                            location : "Mombasa",
                             status : "APPROVED"
                         }
                     ]

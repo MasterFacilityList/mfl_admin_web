@@ -33,5 +33,13 @@ angular.module("mfl.facilities.routes",[])
                         templateUrl: "facilities/tpls/new_facility.tpl.html"
                     }
                 }
+            })
+            .state("facilities.new_facility.basic", {
+                url: "/basicdata",
+                views: {
+                    "reg-form": {
+                        templateUrl: "facilities/tpls/basic_data.tpl.html"
+                    }
+                }
             });
     }]);
