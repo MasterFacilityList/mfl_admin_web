@@ -12,7 +12,8 @@ angular.module("mfl.common.directives")
         link: function ($scope, $element) {
             var action = "";
             _.each($scope.action, function (link) {
-                action = action + "<a class='item-ch-extra " + link.color +
+                action = action + "<a " + link.func+ " class=' " + link.class +" '" +
+                    link.color +
                     "' tooltip-placement='bottom' tooltip='"+link.tipmsg+"'><i class=' fa "+
                     link.icon+"'></i></a>";
             });
