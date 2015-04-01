@@ -7536,7 +7536,7 @@ a:focus {
     position: relative;
     display: block;
     /*margin-left: 92px;*/
-    background-color: #F6F4F4;
+    background-color: #f1f1f1;
     padding-bottom: 0;
     min-height: 93vh;
     -webkit-transition: all .3s ease;

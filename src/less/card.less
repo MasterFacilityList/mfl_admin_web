@@ -27,6 +27,15 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12)
 }
 
+.content-card > thead > tr > th {
+  padding: 5px 0 5px 0 ;
+  font-size: 15px;
+}
+
+.content-card > tbody > tr > td {
+  font-size : 13px;
+}
+
 .search-card {
   margin-bottom: @line-height-computed;
   padding: 25px;
@@ -54,9 +63,9 @@
 }
 
 .search-input {
-  display: inline;
+ /* display: inline;*/
   background-color: transparent;
-  border-radius:0;
+  border-radius:0px;
   border: none;
   box-shadow: none;
   font-size: 20px;
@@ -71,6 +80,35 @@
   border-bottom: 1px solid #82CAFF;  
 }
 
+.grid-search-input {
+  background-color: transparent;
+  border-radius:3px;
+  border: none;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.36);
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+  border-top: 1px solid #F0F0F0;
+  border-bottom: 1px solid #C9C9C9;
+  border-left: 1px solid #C9C9C9;
+}
+
+.grid-search-input:hover {
+  border: 0 0 1px 1px solid #82CAFF;  
+}
+
+.grid-search-addon {
+  background-color: #0089FF;
+  color: #FFF;
+  font-size: 20px;
+  border:transparent;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.06);
+}
+
+.grid-search-addon:hover {
+  border-bottom: 1px solid #82CAFF;
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.36);
+  cursor: pointer;
+}
 /*Customizations of card-container*/
 
 .card-container.card-primary{
@@ -133,4 +171,16 @@
     .card-height{
         min-height: 85px;
     }
+}
+
+.side-notes {
+    border-left: 1px solid #C0C0C0; 
+    margin-left: -10px;
+}
+.side-notes > div > h3 {
+    font-size: 20px;
+    font-weight: 500;
+}
+.side-notes > div > p {
+    font-size: 13px;
 }
