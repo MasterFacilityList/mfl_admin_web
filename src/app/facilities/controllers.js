@@ -19,7 +19,7 @@ angular.module("mfl.facilities.controllers", [])
         ];
         $scope.action = [
             {
-                func : "ui-sref='facilities.new_facility.basic'",
+                func : "ui-sref='facilities.new_facility' ",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
                 tipmsg: "New Facility",
@@ -96,7 +96,7 @@ angular.module("mfl.facilities.controllers", [])
             },
             {
                 name: "New Facility",
-                route: "facilities.new_facility.basic"
+                route: "facilities.new_facility"
             }
         ];
         $scope.title = [
@@ -129,6 +129,12 @@ angular.module("mfl.facilities.controllers", [])
             {
                 name: "Edit Facility",
                 route: "facilities.edit_facility.basic"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-edit",
+                name: "Edit facility"
             }
         ];
         $scope.action = [

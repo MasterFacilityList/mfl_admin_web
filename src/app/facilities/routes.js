@@ -34,28 +34,12 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
-            .state("facilities.new_facility.basic", {
-                url: "/basicdata",
-                views: {
-                    "reg-form": {
-                        templateUrl: "facilities/tpls/basic_data.tpl.html"
-                    }
-                }
-            })
             .state("facilities.edit_facility", {
                 url: "/editfacility/:fac_id",
                 views: {
                     "main-content@facilities": {
                         controller: "mfl.facilities.controllers.edit_facility",
                         templateUrl: "facilities/tpls/new_facility.tpl.html"
-                    }
-                }
-            })
-            .state("facilities.edit_facility.basic", {
-                url: "/basicdata",
-                views: {
-                    "reg-form": {
-                        templateUrl: "facilities/tpls/basic_data.tpl.html"
                     }
                 }
             })
