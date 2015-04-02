@@ -41,5 +41,31 @@ angular.module("mfl.facilities.routes",[])
                         templateUrl: "facilities/tpls/basic_data.tpl.html"
                     }
                 }
+            })
+            .state("facilities.edit_facility", {
+                url: "/editfacility/:fac_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.edit_facility",
+                        templateUrl: "facilities/tpls/new_facility.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.edit_facility.basic", {
+                url: "/basicdata",
+                views: {
+                    "reg-form": {
+                        templateUrl: "facilities/tpls/basic_data.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.facility_action", {
+                url: "/processfacility/:fac_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.facilitiesaction",
+                        templateUrl: "facilities/tpls/facilities_action.tpl.html"
+                    }
+                }
             });
     }]);

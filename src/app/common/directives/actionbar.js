@@ -8,7 +8,7 @@ angular.module("mfl.common.directives")
         scope:{
             action:"="
         },
-        template: "<div class='content-header-extra'></div>",
+        template: "<div class='action-container content-header-extra'></div>",
         link: function ($scope, $element) {
             var action = "";
             _.each($scope.action, function (link) {

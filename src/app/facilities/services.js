@@ -16,6 +16,7 @@ angular.module("mfl.facilities.services", [])
                 var facilities = {
                     results : [
                         {
+                            id: "1",
                             code : "MFL001",
                             name : "Opongi's Xrays",
                             date : "31 March, 2013",
@@ -25,6 +26,7 @@ angular.module("mfl.facilities.services", [])
                             status : "PENDING"
                         },
                         {
+                            id: "2",
                             code : "MFL002",
                             name : "Tanny's Physicians",
                             date : "31 July, 2011",
@@ -34,6 +36,7 @@ angular.module("mfl.facilities.services", [])
                             status : "DRAFT"
                         },
                         {
+                            id: "3",
                             code : "MFL003",
                             name : "Kuzaa Facilities",
                             date : "31 December, 2012",

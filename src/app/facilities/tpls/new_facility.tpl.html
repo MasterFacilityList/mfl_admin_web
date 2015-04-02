@@ -6,7 +6,16 @@
                 <!-- /- Start of tabbed multi-step form -->
                 <ul class="form-tab margin-t--27  nav nav-tabs">
                     <li class="col-lg-4" ui-sref-active="active">
-                        <a ui-sref=".basic"><span class="fw-900 faa-parent animated-hover"><i class="fa fa-book"></i> Basic</span></a>
+                        <a ng-hide="setter" ui-sref=".basic">
+                            <span class="fw-500">
+                                <i class="fa fa-book"></i> Basic
+                            </span>
+                        </a>
+                        <a ng-if="setter" ui-sref=".basic">
+                            <span class="fw-500">
+                                <i class="fa fa-pencil"></i> Basic
+                            </span>
+                        </a>
                     </li>
                     <li class="col-lg-4" ui-sref-active="active">
                         <a ><span class="fw-900 faa-parent animated-hover"><i class="fa fa-map-marker"></i> Location</span></a>
@@ -23,3 +32,5 @@
         </div>
     </div>
 </div>
+
+<!-- /- TODO when editing add slot for leaving comments -->
