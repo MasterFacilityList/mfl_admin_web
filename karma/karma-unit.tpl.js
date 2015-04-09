@@ -18,15 +18,33 @@ module.exports = function ( karma ) {
       'src/assets/**/*.js'
     ],
     frameworks: [ 'jasmine' ],
-    plugins: [ 'karma-jasmine', 'karma-firefox-launcher', 'karma-coffee-preprocessor' ],
+    plugins: [ 
+        'karma-jasmine',
+        'karma-firefox-launcher',
+        'karma-phantomjs-launcher',
+        'karma-coverage',
+        'karma-threshold-reporter',
+        'karma-coffee-preprocessor',
+        'karma-mocha-reporter'
+        
+    ],
     preprocessors: {
       '**/*.coffee': 'coffee',
+      'src/app/**/*.js': ['coverage']
     },
 
     /**
      * How to report, by default.
      */
-    reporters: 'dots',
+    reporters: [
+        'progress',
+        'coverage',
+        'threshold',
+        'mocha'
+    ],
+    mochaReporter: {
+      output: 'autowatch'
+    },
 
     /**
      * On which port should the browser connect, on which port is the test runner
@@ -56,7 +74,29 @@ module.exports = function ( karma ) {
      */
     browsers: [
       'Firefox'
-    ]
+    ],
+    coverageReporter: {
+        dir: 'coverage/',
+        reporters: [
+            {
+                type: 'html',
+                subdir: 'html/'
+            },
+            {
+                type: 'text'
+            },
+            {
+                type: 'text-summary'
+            }
+        ]
+    },
+
+    thresholdReporter: {
+        statements: 100,
+        branches: 100,
+        lines: 100,
+        functions: 100
+    }
   });
 };
 
