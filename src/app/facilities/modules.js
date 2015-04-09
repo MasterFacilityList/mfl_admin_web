@@ -1,5 +1,4 @@
 "use strict";
-
 angular.module("mfl.facilities", [
     //3rd party stuff
     "ui.router",
