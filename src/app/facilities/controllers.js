@@ -114,6 +114,23 @@ angular.module("mfl.facilities.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
+        //facility contacts
+        $scope.facility = {
+            contacts : [
+                {
+                    contact_type: "",
+                    contact: ""
+                }
+            ]
+        };
+        //adding contacts
+        $scope.addContact = function () {
+            $scope.facility.contacts.push({contact_type: "", contact: ""});
+        };
+        //removing contacts
+        $scope.removeContact = function (obj) {
+            $scope.facility.contacts = _.without($scope.facility.contacts, obj);
+        };
     }])
     .controller("mfl.facilities.controllers.edit_facility", ["$scope", "$stateParams",
     "mfl.facilities.services.facilities", function ($scope, $stateParams, facilityService) {
