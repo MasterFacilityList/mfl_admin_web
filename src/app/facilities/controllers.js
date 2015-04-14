@@ -26,6 +26,13 @@ angular.module("mfl.facilities.controllers", [])
                 icon: "fa-plus"
             },
             {
+                func : "ui-sref='facilities.new_owner' ",
+                class: "action-btn action-btn-warning action-btn-md",
+                color: "blue",
+                tipmsg: "New Owner",
+                icon: "fa-user-secret"
+            },
+            {
                 func : "",
                 class: "action-btn action-btn-md action-btn-warm ",
                 color: "blue",
@@ -152,6 +159,34 @@ angular.module("mfl.facilities.controllers", [])
             {
                 icon: "fa-edit",
                 name: "Edit facility"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+    }])
+    .controller("mfl.facilities.controllers.new_owner", ["$scope", function ($scope) {
+        $scope.test = "New owner";
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "New owner",
+                route: "facilities.new_owner"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-user-secret",
+                name: "New Owner"
             }
         ];
         $scope.action = [

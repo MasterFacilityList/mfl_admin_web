@@ -25,6 +25,15 @@ angular.module("mfl.facilities.routes",[])
                 },
                 data : { pageTitle: "Facilities" }
             })
+            .state("facilities.new_owner", {
+                url: "/newowner",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.new_owner",
+                        templateUrl: "facilities/tpls/new_owner.tpl.html"
+                    }
+                }
+            })
             .state("facilities.new_facility", {
                 url: "/newfacility",
                 views: {
