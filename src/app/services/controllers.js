@@ -83,4 +83,42 @@ angular.module("mfl.services.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
+    }])
+    .controller("mfl.services.controllers.view_service", ["$scope",
+    "mfl.services.services.services", "$stateParams",
+    function ($scope, serviceServices, $stateParams) {
+        $scope.test = "View service";
+        $scope.path = [
+            {
+                name: "Services",
+                route: "services"
+            },
+            {
+                name: "View Service",
+                route: "services.view_service"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-eye",
+                name: "View Service"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+
+        $scope.services = serviceServices.getServices();
+        console.log($scope.services);
+        $scope.getOneService = function () {
+            $scope.oneService = _.findWhere(
+                $scope.services.results, {"id" : $stateParams.service_id});
+            return $scope.oneService;
+        };
     }]);

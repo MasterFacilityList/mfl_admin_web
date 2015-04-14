@@ -42,5 +42,14 @@ angular.module("mfl.services.routes", [])
                         templateUrl: "services/tpls/new_service.tpl.html"
                     }
                 }
+            })
+            .state("services.view_service", {
+                url: "/viewservice/:service_id",
+                views: {
+                    "main-content@services": {
+                        controller: "mfl.services.controllers.view_service",
+                        templateUrl: "services/tpls/view_service.tpl.html"
+                    }
+                }
             });
     }]);
