@@ -24,5 +24,23 @@ angular.module("mfl.services.routes", [])
                     }
                 },
                 data : { pageTitle: "Services" }
+            })
+            .state("services.new_service", {
+                url: "/newservice",
+                views: {
+                    "main-content@services": {
+                        controller: "mfl.services.controllers.new_service",
+                        templateUrl: "services/tpls/new_service.tpl.html"
+                    }
+                }
+            })
+            .state("services.edit_service", {
+                url: "/editservice/:service_id",
+                views: {
+                    "main-content@services": {
+                        controller: "mfl.services.controllers.edit_service",
+                        templateUrl: "services/tpls/new_service.tpl.html"
+                    }
+                }
             });
     }]);
