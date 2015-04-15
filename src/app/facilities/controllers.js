@@ -2,9 +2,154 @@
 
 angular.module("mfl.facilities.controllers", [])
 
+    .controller("mfl.facilities.controllers.services", ["$scope",  "mfl.services.services.services",
+    function ($scope, serviceServices) {
+        $scope.test = "Services";
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "Manage services",
+                route: "facilities.manage_services"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-exchange",
+                name: "Manage services"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "ui-sref='facilities.new_service' ",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "New Service",
+                icon: "fa-plus"
+            },
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+        $scope.services = serviceServices.getServices();
+    }])
+    //start of new and edit services
+    .controller("mfl.facilities.controllers.new_service", ["$scope", function ($scope) {
+        $scope.test = "New service";
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "Manage services",
+                route: "facilities.manage_services"
+            },
+            {
+                name: "New Service",
+                route: "services.new_service"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-plus-circle",
+                name: "New Service"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+    }])
+    .controller("mfl.facilities.controllers.edit_service", ["$scope", function ($scope) {
+        $scope.test = "Edit service";
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "Manage services",
+                route: "facilities.manage_services"
+            },
+            {
+                name: "Edit Service",
+                route: "services.edit_service"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-edit",
+                name: "Edit Service"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+    }])
+    .controller("mfl.facilities.controllers.view_service", ["$scope",
+    "mfl.services.services.services", "$stateParams",
+    function ($scope, serviceServices, $stateParams) {
+        $scope.test = "View service";
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "Manage services",
+                route: "facilities.manage_services"
+            },
+            {
+                name: "View Service",
+                route: "services.view_service"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-eye",
+                name: "View Service"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+
+        $scope.services = serviceServices.getServices();
+        console.log($scope.services);
+        $scope.getOneService = function () {
+            $scope.oneService = _.findWhere(
+                $scope.services.results, {"id" : $stateParams.service_id});
+            return $scope.oneService;
+        };
+    }])
+    //end of new and edit services
     .controller("mfl.facilities.controllers.facilities", ["$scope",
-    "mfl.facilities.services.facilities", function ($scope, facilityService) {
-        $scope.test = "Facilities";
+    function ($scope) {
+        $scope.test = "Facilities sub-menu";
         $scope.path = [
             {
                 name: "Facilities",
@@ -19,6 +164,36 @@ angular.module("mfl.facilities.controllers", [])
         ];
         $scope.action = [
             {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+    }])
+
+    .controller("mfl.facilities.controllers.manage_facilities", ["$scope",
+    "mfl.facilities.services.facilities", function ($scope, facilityService) {
+        $scope.test = "Facilities";
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "Manage facilities",
+                route: "facilities.manage_facilities"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-building",
+                name: "Manage facilities"
+            }
+        ];
+        $scope.action = [
+            {
                 func : "ui-sref='facilities.new_facility' ",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
@@ -26,21 +201,20 @@ angular.module("mfl.facilities.controllers", [])
                 icon: "fa-plus"
             },
             {
-                func : "ui-sref='facilities.new_owner' ",
-                class: "action-btn action-btn-warning action-btn-md",
-                color: "blue",
-                tipmsg: "New Owner",
-                icon: "fa-user-secret"
-            },
-            {
                 func : "",
                 class: "action-btn action-btn-md action-btn-warm ",
                 color: "blue",
                 tipmsg: "Publish Facilities",
                 icon: "fa-tag"
+            },
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
             }
         ];
-
         $scope.facilities = facilityService.getFacilities();
     }])
     .controller("mfl.facilities.controllers.facilitiesaction", ["$scope", "$stateParams",

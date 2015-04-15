@@ -34,6 +34,59 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
+            .state("facilities.manage_facilities", {
+                url: "/managefacilities",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.manage_facilities",
+                        templateUrl: "facilities/tpls/manage_facilities.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.manage_owners", {
+                url: "/manageowners",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.manage_owners",
+                        templateUrl: "facilities/tpls/manage_owners.tpl.html"
+                    }
+                }
+            }).state("facilities.manage_services", {
+                url: "/manageservices",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.services",
+                        templateUrl: "facilities/tpls/manage_services.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.new_service", {
+                url: "/newservice",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.new_service",
+                        templateUrl: "services/tpls/new_service.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.edit_service", {
+                url: "/editservice/:service_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.edit_service",
+                        templateUrl: "services/tpls/new_service.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.view_service", {
+                url: "/viewservice/:service_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.view_service",
+                        templateUrl: "services/tpls/view_service.tpl.html"
+                    }
+                }
+            })
             .state("facilities.new_facility", {
                 url: "/newfacility",
                 views: {
