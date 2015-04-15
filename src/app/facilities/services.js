@@ -49,4 +49,41 @@ angular.module("mfl.facilities.services", [])
                 };
                 return facilities;
             };
+            this.getOwners = function () {
+                var owners = {
+                    results : [
+                        {
+                            id: "1",
+                            code : "OWN001",
+                            name : "Ministry of Health",
+                            abbreviation: "MOH",
+                            type: "Governmental",
+                            date_created : "31 March, 2013",
+                            description : "Facilities specialized in offers xray &"+
+                                            " radiology services"
+                        },
+                        {
+                            id: "2",
+                            code : "OWN002",
+                            name : "Red cross",
+                            abbreviation: "RC",
+                            type: "NGO",
+                            date_created : "31 July, 2011",
+                            description : "Facility has physiotherapy equipment as well as "+
+                                            " scanners & X-ray facilities"
+                        },
+                        {
+                            id: "3",
+                            code : "OWN003",
+                            name : "Yitch Medical Facilties",
+                            abbreviation: "YTCH",
+                            type: "Private organization",
+                            date_created : "31 December, 2012",
+                            description : "Facilities specialized cat scans utlra-sounds and"+
+                                            " the likes"
+                        }
+                    ]
+                };
+                return owners;
+            };
         }]);

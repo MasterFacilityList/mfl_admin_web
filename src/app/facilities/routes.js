@@ -34,6 +34,24 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
+            .state("facilities.edit_owner", {
+                url: "/editowner/:owner_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.edit_owner",
+                        templateUrl: "facilities/tpls/new_owner.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.view_owner", {
+                url: "/viewowner/:owner_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.view_owner",
+                        templateUrl: "facilities/tpls/view_owner.tpl.html"
+                    }
+                }
+            })
             .state("facilities.manage_facilities", {
                 url: "/managefacilities",
                 views: {
@@ -47,7 +65,7 @@ angular.module("mfl.facilities.routes",[])
                 url: "/manageowners",
                 views: {
                     "main-content@facilities": {
-                        controller: "mfl.facilities.controllers.manage_owners",
+                        controller: "mfl.facilities.controllers.owners",
                         templateUrl: "facilities/tpls/manage_owners.tpl.html"
                     }
                 }

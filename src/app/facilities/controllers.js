@@ -2,6 +2,45 @@
 
 angular.module("mfl.facilities.controllers", [])
 
+    .controller("mfl.facilities.controllers.owners", ["$scope",
+    "mfl.facilities.services.facilities",
+    function ($scope, ownerService) {
+        $scope.test = "Owners";
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "Manage owners",
+                route: "facilities.manage_owners"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-user-secret",
+                name: "Manage Owner"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "ui-sref='facilities.new_owner' ",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "New Owner",
+                icon: "fa-plus"
+            },
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+        $scope.owners = ownerService.getOwners();
+    }])
+
     .controller("mfl.facilities.controllers.services", ["$scope",  "mfl.services.services.services",
     function ($scope, serviceServices) {
         $scope.test = "Services";
@@ -353,6 +392,10 @@ angular.module("mfl.facilities.controllers", [])
                 route: "facilities"
             },
             {
+                name: "Manage owners",
+                route: "facilities.manage_owners"
+            },
+            {
                 name: "New owner",
                 route: "facilities.new_owner"
             }
@@ -361,6 +404,78 @@ angular.module("mfl.facilities.controllers", [])
             {
                 icon: "fa-user-secret",
                 name: "New Owner"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+    }])
+    .controller("mfl.facilities.controllers.view_owner", ["$scope",
+    "mfl.facilities.services.facilities", "$stateParams",
+    function ($scope, ownerService, $stateParams) {
+        $scope.test = "View owner";
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "Manage owners",
+                route: "facilities.manage_owners"
+            },
+            {
+                name: "View owner",
+                route: "facilities.view_owner"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-eye",
+                name: "View Owner"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+        $scope.owners = ownerService.getOwners();
+        $scope.getOneOwner = function () {
+            $scope.oneOwner = _.findWhere(
+                $scope.owners.results, {"id" : $stateParams.owner_id});
+            return $scope.oneOwner;
+        };
+    }])
+    .controller("mfl.facilities.controllers.edit_owner", ["$scope", function ($scope) {
+        $scope.test = "Edit owner";
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "Manage owners",
+                route: "facilities.manage_owners"
+            },
+            {
+                name: "Edit owner",
+                route: "facilities.edit_owner"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-edit",
+                name: "Edit Owner"
             }
         ];
         $scope.action = [

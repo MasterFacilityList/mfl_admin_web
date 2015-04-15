@@ -20,6 +20,7 @@
                     <thead>
                         <th>Code</th>
                         <th>Name</th>
+                        <th>Abbreviation</th>
                         <th>Type</th>
                         <th>Date created</th>
                         <th class="text-center">Actions</th>
@@ -28,6 +29,7 @@
                         <tr class="animate-repeat" ng-repeat="owner in owners.results | filter: search.query">
                             <td>{{owner.code}}</td>
                             <td>{{owner.name}}</td>
+                            <td>{{owner.abbreviation}}</td>
                             <td>{{owner.type}}</td>
                             <td>{{owner.date_created}}</td>
                             <td class="text-center">
