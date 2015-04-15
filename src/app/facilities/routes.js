@@ -114,6 +114,16 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
+            //child states for adding a ne =w facility
+            .state("facilities.new_facility.basic", {
+                url: "/basicdetails",
+                views: {
+                    "form-view@facilities.new_facility" : {
+                        templateUrl : "facilities/tpls/new_form.tpl.html"
+                    }
+                }
+            })
+            //end of adding new facility child states
             .state("facilities.edit_facility", {
                 url: "/editfacility/:fac_id",
                 views: {
@@ -123,6 +133,16 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
+             //child states for adding a ne =w facility
+            .state("facilities.edit_facility.basic", {
+                url: "/basicdetails",
+                views: {
+                    "form-view@facilities.edit_facility" : {
+                        templateUrl : "facilities/tpls/new_form.tpl.html"
+                    }
+                }
+            })
+            //end of adding new facility child states
             .state("facilities.facility_action", {
                 url: "/processfacility/:fac_id",
                 views: {

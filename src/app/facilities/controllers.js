@@ -233,7 +233,7 @@ angular.module("mfl.facilities.controllers", [])
         ];
         $scope.action = [
             {
-                func : "ui-sref='facilities.new_facility' ",
+                func : "ui-sref='facilities.new_facility.basic' ",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
                 tipmsg: "New Facility",
