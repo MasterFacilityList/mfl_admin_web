@@ -21,6 +21,7 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Role</th>
+                    <th>Date of Creation</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
@@ -28,11 +29,12 @@
                         <td>{{user.id}}</td>
                         <td>{{user.name}}</td>
                         <td>{{user.role}}</td>
+                        <td>{{user.date_created}}</td>
                         <td>
-                            <a ui-sref="users.edit_users({user_id : user.id})" class="action-btn action-btn-grid action-btn-primary">
+                            <a ui-sref="users.edit_user({user_id : user.id})" class="action-btn action-btn-grid action-btn-primary">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a ui-sref="users.view_users({user_id : user.id})" class="action-btn action-btn-grid action-btn-info">
+                                <a ui-sref="users.view_user({user_id : user.id})" class="action-btn action-btn-grid action-btn-info">
                                     <i class="fa fa-eye"></i>
                                 </a>
                         </td>

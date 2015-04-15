@@ -17,13 +17,15 @@ angular.module("mfl.users.services", [])
                         id: "1",
                         code : "US001",
                         name : "Cobra Mweusi",
-                        role: "County Officer"
+                        role: "County Officer",
+                        date_created: "15/04/2015"
                     },
                     {
                         id: "2",
                         code : "US002",
                         name : "Jolly Giant",
-                        role: "Subcounty officer"
+                        role: "Subcounty officer",
+                        date_created: "15/04/2015"
                     }
                 ]
             };

@@ -24,5 +24,32 @@ angular.module("mfl.users.routes", [])
                     }
                 },
                 data : { pageTitle: "Users" }
+            })
+            .state("users.new_user", {
+                url: "/newuser",
+                views: {
+                    "main-content@users": {
+                        controller: "mfl.users.controllers.new_user",
+                        templateUrl: "users/tpls/new_user.tpl.html"
+                    }
+                }
+            })
+            .state("users.edit_user", {
+                url: "/edituser/:user_id",
+                views: {
+                    "main-content@users": {
+                        controller: "mfl.users.controllers.edit_user",
+                        templateUrl: "users/tpls/new_user.tpl.html"
+                    }
+                }
+            })
+            .state("users.view_user", {
+                url: "/viewuser/:user_id",
+                views: {
+                    "main-content@users": {
+                        controller: "mfl.users.controllers.view_user",
+                        templateUrl: "users/tpls/view_user.tpl.html"
+                    }
+                }
             });
     }]);
