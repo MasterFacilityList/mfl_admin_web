@@ -272,6 +272,10 @@ angular.module("mfl.facilities.controllers", [])
                 route: "facilities"
             },
             {
+                name: "Manage facilities",
+                route: "facilities.manage_facilities"
+            },
+            {
                 name: "Process Facility",
                 route: "facilities.facility_action"
             }
@@ -307,12 +311,16 @@ angular.module("mfl.facilities.controllers", [])
         ];
     }])
     .controller("mfl.facilities.controllers.new_facility", ["$scope", function ($scope) {
-        $scope.test = "New facilities";
+        $scope.new_fac = true;
         $scope.setter = false;
         $scope.path = [
             {
                 name: "Facilities",
                 route: "facilities"
+            },
+            {
+                name: "Manage facilities",
+                route: "facilities.manage_facilities"
             },
             {
                 name: "New Facility",
@@ -341,6 +349,13 @@ angular.module("mfl.facilities.controllers", [])
                     contact_type: "",
                     contact: ""
                 }
+            ],
+            services : [
+                {
+                    name: "",
+                    type: "",
+                    level: ""
+                }
             ]
         };
         //adding contacts
@@ -351,10 +366,18 @@ angular.module("mfl.facilities.controllers", [])
         $scope.removeContact = function (obj) {
             $scope.facility.contacts = _.without($scope.facility.contacts, obj);
         };
+         //adding services
+        $scope.addService = function () {
+            $scope.facility.services.push({type: "", name: ""});
+        };
+        //removing contacts
+        $scope.removeService = function (obj) {
+            $scope.facility.services = _.without($scope.facility.services, obj);
+        };
     }])
     .controller("mfl.facilities.controllers.edit_facility", ["$scope", "$stateParams",
     "mfl.facilities.services.facilities", function ($scope, $stateParams, facilityService) {
-        $scope.test="Edit facility";
+        $scope.edit=true;
         $scope.setter = true;
         $scope.facilities = facilityService.getFacilities();
         $scope.facility = _.findWhere($scope.facilities, {id : $stateParams.fac_id});
@@ -362,6 +385,10 @@ angular.module("mfl.facilities.controllers", [])
             {
                 name: "Facilities",
                 route: "facilities"
+            },
+            {
+                name: "Manage facilities",
+                route: "facilities.manage_facilities"
             },
             {
                 name: "Edit Facility",
@@ -383,6 +410,38 @@ angular.module("mfl.facilities.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
+        //facility contacts
+        $scope.facility = {
+            contacts : [
+                {
+                    contact_type: "",
+                    contact: ""
+                }
+            ],
+            services : [
+                {
+                    name: "",
+                    type: "",
+                    level: ""
+                }
+            ]
+        };
+        //adding contacts
+        $scope.addContact = function () {
+            $scope.facility.contacts.push({contact_type: "", contact: ""});
+        };
+        //removing contacts
+        $scope.removeContact = function (obj) {
+            $scope.facility.contacts = _.without($scope.facility.contacts, obj);
+        };
+         //adding services
+        $scope.addService = function () {
+            $scope.facility.services.push({type: "", name: ""});
+        };
+        //removing contacts
+        $scope.removeService = function (obj) {
+            $scope.facility.services = _.without($scope.facility.services, obj);
+        };
     }])
     .controller("mfl.facilities.controllers.new_owner", ["$scope", function ($scope) {
         $scope.test = "New owner";

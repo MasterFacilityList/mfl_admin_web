@@ -123,6 +123,22 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
+            .state("facilities.new_facility.services", {
+                url: "/services",
+                views: {
+                    "form-view@facilities.new_facility" : {
+                        templateUrl : "facilities/tpls/new_services.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.new_facility.location", {
+                url: "/location",
+                views: {
+                    "form-view@facilities.new_facility" : {
+                        templateUrl : "facilities/tpls/new_location.tpl.html"
+                    }
+                }
+            })
             //end of adding new facility child states
             .state("facilities.edit_facility", {
                 url: "/editfacility/:fac_id",
@@ -133,12 +149,28 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
-             //child states for adding a ne =w facility
+             //child states for editing facility
             .state("facilities.edit_facility.basic", {
                 url: "/basicdetails",
                 views: {
                     "form-view@facilities.edit_facility" : {
                         templateUrl : "facilities/tpls/new_form.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.edit_facility.services", {
+                url: "/services",
+                views: {
+                    "form-view@facilities.edit_facility" : {
+                        templateUrl : "facilities/tpls/new_services.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.edit_facility.location", {
+                url: "/location",
+                views: {
+                    "form-view@facilities.edit_facility" : {
+                        templateUrl : "facilities/tpls/new_location.tpl.html"
                     }
                 }
             })
