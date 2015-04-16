@@ -20,7 +20,6 @@
                     <thead>
                         <th>Code</th>
                         <th>Name</th>
-                        <th>Coordinates</th>
                         <th>Date created</th>
                         <th class="text-center">Actions</th>
                     </thead>
@@ -28,7 +27,6 @@
                         <tr class="animate-repeat" ng-repeat="unit in admin_units.results | filter: search.query">
                             <td>{{unit.code}}</td>
                             <td>{{unit.name}}</td>
-                            <td>{{unit.coordinates}}</td>
                             <td>{{unit.date_created}}</td>
                             <td class="text-center">
                                 <a ui-sref="admin_units.edit_unit({unit_id : unit.id})" class="action-btn action-btn-grid action-btn-primary">

@@ -17,7 +17,7 @@ angular.module("mfl.admin_units.services", [])
                             id: "1",
                             code : "FA001",
                             name : "Sio kimao",
-                            coordinates : "81.00, 97.012",
+
                             date_created: "15/04/2015",
                             description : "It is located in Kiambu county"+
                                             " no idea subcounty"
@@ -26,7 +26,7 @@ angular.module("mfl.admin_units.services", [])
                             id: "2",
                             code : "FA002",
                             name : "Kiambu county",
-                            coordinates : "103.7732, 44.0987",
+
                             date_created: "15/04/2015",
                             description : "Its @central province"+
                                             " area 254 Kenya"

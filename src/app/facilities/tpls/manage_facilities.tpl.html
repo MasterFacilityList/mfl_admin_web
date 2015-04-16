@@ -28,6 +28,7 @@
                         <th>Code</th>
                         <th>Name</th>
                         <th>Location</th>
+                        <th>Coordinates</th>
                         <th>Status</th>
                         <th class="text-center">Actions</th>
                     </thead>
@@ -39,6 +40,7 @@
                             <td>{{facility.code}}</td>
                             <td>{{facility.name}}</td>
                             <td>{{facility.location}}</td>
+                            <td>{{facility.coordinates}}</td>
                             <td>{{facility.status}}</td>
                             <td class="text-center">
                                 <a ui-sref="facilities.edit_facility.basic({fac_id : facility.id})" class="action-btn action-btn-grid action-btn-primary">
