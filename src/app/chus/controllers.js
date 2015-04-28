@@ -22,15 +22,8 @@ angular.module("mfl.chus.controllers", [])
                 func : "ui-sref='chus.new_chu' ",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
-                tipmsg: "New Services",
+                tipmsg: "New CHU",
                 icon: "fa-plus"
-            },
-            {
-                func : "",
-                class: "action-btn action-btn-md action-btn-warm ",
-                color: "blue",
-                tipmsg: "Publish services",
-                icon: "fa-tag"
             }
         ];
 
@@ -50,6 +43,15 @@ angular.module("mfl.chus.controllers", [])
             {
                 icon: "fa-sitemap",
                 name: "New CHU"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Save",
+                icon: "fa-save"
             }
         ];
     }]);

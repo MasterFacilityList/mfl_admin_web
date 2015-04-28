@@ -20,7 +20,7 @@ angular.module("mfl.chus.services", [])
                         code: "CHU001",
                         name: "Siakago East",
                         community: "Siakago",
-                        facility: "Siakago Clinic",
+                        facility: "Siakago Paediatric Clinic",
                         status: "Available"
                     },
                     {
@@ -36,7 +36,7 @@ angular.module("mfl.chus.services", [])
                         code: "CHU003",
                         name: "Gachoka",
                         community: "Gachoka",
-                        facility: "Focused antenatal care",
+                        facility: "Embu ENT Clinic",
                         status: "Available"
                     }
                 ]
