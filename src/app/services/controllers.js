@@ -2,12 +2,12 @@
 
 angular.module("mfl.services.controllers", [])
 
-    .controller("mfl.services.controllers.services", ["$scope",
-    "mfl.services.services.services", function ($scope, serviceService) {
-        $scope.test = "services";
+    .controller("mfl.services.controllers.services", ["$scope",  "mfl.services.services.services",
+    function ($scope, serviceServices) {
+        $scope.test = "Services";
         $scope.path = [
             {
-                name: "services",
+                name: "Services",
                 route: "services"
             }
         ];
@@ -22,17 +22,103 @@ angular.module("mfl.services.controllers", [])
                 func : "ui-sref='services.new_service' ",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
-                tipmsg: "New Services",
+                tipmsg: "New Service",
                 icon: "fa-plus"
+            }
+        ];
+        $scope.services = serviceServices.getServices();
+    }])
+    .controller("mfl.services.controllers.new_service", ["$scope", function ($scope) {
+        $scope.test = "New service";
+        $scope.path = [
+            {
+                name: "Services",
+                route: "services"
             },
             {
-                func : "",
-                class: "action-btn action-btn-md action-btn-warm ",
+                name: "New Service",
+                route: "services.new_service"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-plus-circle",
+                name: "New Service"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
-                tipmsg: "Publish services",
-                icon: "fa-tag"
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+    }])
+    .controller("mfl.services.controllers.edit_service", ["$scope", function ($scope) {
+        $scope.test = "Edit service";
+        $scope.path = [
+            {
+                name: "Services",
+                route: "services"
+            },
+            {
+                name: "Edit Service",
+                route: "services.edit_service"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-edit",
+                name: "Edit Service"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+    }])
+    .controller("mfl.services.controllers.view_service", ["$scope",
+    "mfl.services.services.services", "$stateParams",
+    function ($scope, serviceServices, $stateParams) {
+        $scope.test = "View service";
+        $scope.path = [
+            {
+                name: "Services",
+                route: "services"
+            },
+            {
+                name: "View Service",
+                route: "services.view_service"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-eye",
+                name: "View Service"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
             }
         ];
 
-        $scope.services = serviceService.getServices();
+        $scope.services = serviceServices.getServices();
+        console.log($scope.services);
+        $scope.getOneService = function () {
+            $scope.oneService = _.findWhere(
+                $scope.services.results, {"id" : $stateParams.service_id});
+            return $scope.oneService;
+        };
     }]);
