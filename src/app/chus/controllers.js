@@ -54,4 +54,35 @@ angular.module("mfl.chus.controllers", [])
                 icon: "fa-save"
             }
         ];
+    }]).controller("mfl.chus.controllers.edit_chu",["$scope",function ($scope) {
+        $scope.path = [
+            {
+                name: "CHUS",
+                route: "chus"
+            },{
+                name: "Edit CHU",
+                route: "edit_chus"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-sitemap",
+                name: "Edit CHU"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Save",
+                icon: "fa-save"
+            },{
+                func : "ui-href='chus.new_chu'",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "green",
+                tipmsg: "New CHU",
+                icon: "fa-plus"
+            }
+        ];
     }]);

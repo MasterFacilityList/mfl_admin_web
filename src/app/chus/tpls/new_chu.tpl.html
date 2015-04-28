@@ -30,7 +30,7 @@
                         </div>
                 </div>
             
-        <div class="margin-t-250">
+        <div class="margin-t-250 pad-10">
                 <div>
                     <a href="">Contacts</a>
                 </div>
@@ -43,12 +43,19 @@
                     </thead>
                     <tbody class="example-animate-container">
                         <tr class="animate-repeat">
-                            <td><input placeholder="Contact" class="form-control" type="text"></td>
-                            <td><input type="text" placeholder="Contact Type" class="form-control"></td>
+                            <td><input placeholder="Contact" class="reg-input form-control" type="text"></td>
+                            <td>
+                                <select type="text" class="reg-input input-group form-control" placeholder="Select Contact Type">
+                                    <option value="">Select Type</option>
+                                    <option value="">Phone</option>
+                                    <option value="">Email</option>
+                                </select>
+                            </td>
                             <td><i class="text-danger fa fa-2x fa-times"></i></td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="pull-right btn btn-primary">Add</div>
         </div>
         <!-- /- end of form -->
 </div>
