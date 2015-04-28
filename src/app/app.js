@@ -12,6 +12,7 @@ angular.module("mflApp", [
     "mfl.home",
     "mfl.auth",
     "mfl.facilities",
-    "mfl.services"
+    "mfl.services",
+    "mfl.chus"
 ]);
 
