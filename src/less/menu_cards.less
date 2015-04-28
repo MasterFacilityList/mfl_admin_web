@@ -12,21 +12,29 @@
 
 .menu-icon {
   display: block;
-  padding: 12px; 
-  background-color: rgba(0, 0, 255, 0.6); 
+  padding: 10.8px 10.8px 13px 10.8px;
+  background-color: #2196F3;
   color: #FFF;
-  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.26);
+  /*box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.26);*/
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12)
 }
 .menu-container {
   margin-bottom: @line-height-computed;
-  padding: 10px;
+  padding: 9.5px;
   background-color: @card-container-bg;
   border: 1px solid transparent;
   border-radius: @card-container-border-radius;
-  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.26);
+  /*box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.26);*/
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12)
 }
-.menu-wrapper:hover > div, .menu-icon .menu-container {
-  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.86);
+.menu-wrapper:hover > .menu-container {
+  background-color: darken(@card-container-bg, 5%);
+  box-shadow: 0px 1px 4px 0 rgba(0, 0, 0, 0.66);
+}
+
+.menu-wrapper:hover > .menu-icon {
+  background-color: darken(#2196F3, 5%);
+  box-shadow: 0px 1px 4px 0 rgba(0, 0, 0, 0.66);
 }
 /*Customizations of card-container*/
 
@@ -38,6 +46,7 @@
     background-color: #ff6200;
     color: white;
 }
+
 
 
 
@@ -57,7 +66,7 @@
 }
 
 .menu-header {
-  font-size: 26px; 
+  font-size: 26px;
   margin-bottom: @line-height-computed;
   padding: 25px;
   padding: 0px;

@@ -25,6 +25,86 @@ angular.module("mfl.facilities.routes",[])
                 },
                 data : { pageTitle: "Facilities" }
             })
+            .state("facilities.new_owner", {
+                url: "/newowner",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.new_owner",
+                        templateUrl: "facilities/tpls/new_owner.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.edit_owner", {
+                url: "/editowner/:owner_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.edit_owner",
+                        templateUrl: "facilities/tpls/new_owner.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.view_owner", {
+                url: "/viewowner/:owner_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.view_owner",
+                        templateUrl: "facilities/tpls/view_owner.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.manage_facilities", {
+                url: "/managefacilities",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.manage_facilities",
+                        templateUrl: "facilities/tpls/manage_facilities.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.manage_owners", {
+                url: "/manageowners",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.owners",
+                        templateUrl: "facilities/tpls/manage_owners.tpl.html"
+                    }
+                }
+            }).state("facilities.manage_services", {
+                url: "/manageservices",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.services",
+                        templateUrl: "facilities/tpls/manage_services.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.new_service", {
+                url: "/newservice",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.new_service",
+                        templateUrl: "services/tpls/new_service.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.edit_service", {
+                url: "/editservice/:service_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.edit_service",
+                        templateUrl: "services/tpls/new_service.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.view_service", {
+                url: "/viewservice/:service_id",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.view_service",
+                        templateUrl: "services/tpls/view_service.tpl.html"
+                    }
+                }
+            })
             .state("facilities.new_facility", {
                 url: "/newfacility",
                 views: {
@@ -34,6 +114,32 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
+            //child states for adding a ne =w facility
+            .state("facilities.new_facility.basic", {
+                url: "/basicdetails",
+                views: {
+                    "form-view@facilities.new_facility" : {
+                        templateUrl : "facilities/tpls/new_form.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.new_facility.services", {
+                url: "/services",
+                views: {
+                    "form-view@facilities.new_facility" : {
+                        templateUrl : "facilities/tpls/new_services.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.new_facility.location", {
+                url: "/location",
+                views: {
+                    "form-view@facilities.new_facility" : {
+                        templateUrl : "facilities/tpls/new_location.tpl.html"
+                    }
+                }
+            })
+            //end of adding new facility child states
             .state("facilities.edit_facility", {
                 url: "/editfacility/:fac_id",
                 views: {
@@ -43,6 +149,32 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
+             //child states for editing facility
+            .state("facilities.edit_facility.basic", {
+                url: "/basicdetails",
+                views: {
+                    "form-view@facilities.edit_facility" : {
+                        templateUrl : "facilities/tpls/new_form.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.edit_facility.services", {
+                url: "/services",
+                views: {
+                    "form-view@facilities.edit_facility" : {
+                        templateUrl : "facilities/tpls/new_services.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.edit_facility.location", {
+                url: "/location",
+                views: {
+                    "form-view@facilities.edit_facility" : {
+                        templateUrl : "facilities/tpls/new_location.tpl.html"
+                    }
+                }
+            })
+            //end of adding new facility child states
             .state("facilities.facility_action", {
                 url: "/processfacility/:fac_id",
                 views: {

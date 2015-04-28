@@ -20,19 +20,19 @@
                     <thead>
                         <th>Code</th>
                         <th>Name</th>
-                        <th>Category</th>
+                        <th>Date created</th>
                         <th class="text-center">Actions</th>
                     </thead>
                     <tbody class="example-animate-container">
-                        <tr class="animate-repeat" ng-repeat="service in services.results | filter: search.query">
-                            <td>{{service.code}}</td>
-                            <td>{{service.name}}</td>
-                            <td>{{service.category}}</td>
+                        <tr class="animate-repeat" ng-repeat="unit in admin_units.results | filter: search.query">
+                            <td>{{unit.code}}</td>
+                            <td>{{unit.name}}</td>
+                            <td>{{unit.date_created}}</td>
                             <td class="text-center">
-                                <a ui-sref="services.edit_service({service_id : service.id})" class="action-btn action-btn-grid action-btn-primary">
+                                <a ui-sref="admin_units.edit_unit({unit_id : unit.id})" class="action-btn action-btn-grid action-btn-primary">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a ui-sref="services.view_service({service_id : service.id})" class="action-btn action-btn-grid action-btn-info">
+                                <a ui-sref="admin_units.view_unit({unit_id : unit.id})" class="action-btn action-btn-grid action-btn-info">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </td>
@@ -40,6 +40,7 @@
                     </tbody>
                 </table>
             </div>
+            <!-- End of grid -->
         </div>
     </div>
 </div>

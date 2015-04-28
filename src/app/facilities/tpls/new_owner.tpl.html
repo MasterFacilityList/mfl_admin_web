@@ -9,18 +9,21 @@
                         <form role="form">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" class="reg-input input-group form-control" placeholder="Enter Service Name">
+                                    <input type="text" class="reg-input input-group form-control" placeholder="Enter name of owner">
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="reg-input" placeholder="Enter service description"></textarea>
+                                    <select type="text" class="reg-input input-group form-control" placeholder="Select Owner">
+                                    <option value="">-Select owner type-</option>
+                                    <option value="Government">INDIVIDUAL</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="reg-input" placeholder="Enter description of the owner"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <select type="text" class="reg-input input-group form-control" placeholder="Select Owner">
-                                    <option value="">-Select Service Category-</option>
-                                    <option value="Government">MEDICAL</option>
-                                    </select>
+                                    <input type="text" class="reg-input input-group form-control" placeholder="Enter abbrviation of owner name">
                                 </div>
                             </div>
                             <div class="col-md-12 form-group">
@@ -39,3 +42,4 @@
         </div>
     </div>
 </div>
+<!-- TODOs Is there going to be UI workflow to view and edit Owners -->
