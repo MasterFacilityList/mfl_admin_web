@@ -1,108 +1,143 @@
-<div class="col-lg-12">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-t-20">
     <form role="form">
-        <div class="col-lg-6">
-            <div class="form-group">
-                <input type="text" class="reg-input input-group form-control" placeholder="Enter Name">
+        <div class="col-lg-6 col-md-6">
+
+            <div class="group">
+                <input type="text" ng-model="facility.name" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Facility name
+                </label>
             </div>
-            <div class="form-group">
-                <select type="text" class="reg-input input-group form-control" placeholder="Select Owner">
-                    <option value="">-Select facility type-</option>
+
+            <div class="group">
+                <select type="text" ng-model="facility.type" required>
+                    <option value="">Select facility type</option>
+                    <option value="NGO">NGO</option>
                     <option value="Government">Dispensary</option>
                 </select>
-            </div>
-            <div class="form-group">
-                <input type="number" class="reg-input  input-group form-control" placeholder="Enter number of cots">
+                <span class="highlight"></span>
+                <span class="bar"></span>
             </div>
 
-            <div class="form-group margin-h-25" >
-                <label class="control-group" for="classified">Open whole day ?</label>
-                <br>
-                <div>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="Yes" name="whole_day" ng-model="facility.opened_whole_day">Yes
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="No" name="whole_day" ng-model="facility.opened_whole_day">No
-                    </label>
-                </div>
+            <div class="group">
+                <input type="number" ng-model="facility.cots" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Number of cots
+                </label>
             </div>
-            <div class="form-group">
-                <textarea class="reg-input" placeholder="Facility description"></textarea>
+
+            <div class="group">
+                <textarea type="text" required></textarea>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Facility description
+                </label>
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <select type="text" class="reg-input input-group form-control" placeholder="Select Owner">
-                <option value="">-Select owner-</option>
-                <option value="Government">Government</option>
+        <div class="col-lg-6 col-md-6">
+            <div class="group">
+                <select type="text" ng-model="facility.owner" required>
+                    <option value="">Select facility owner</option>
+                    <option value="NGO">NGO</option>
+                    <option value="Government">Government</option>
                 </select>
+                <span class="highlight"></span>
+                <span class="bar"></span>
             </div>
-            <div class="form-group">
-                <input type="text" class="reg-input  input-group form-control" placeholder="Facility type subcategory">
+            <div class="group">
+                <input type="text" ng-model="facility.subcategory" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Facility type subcategory
+                </label>
             </div>
 
-            <div class="form-group">
-                <input type="number" class="reg-input  input-group form-control" placeholder="Enter number of beds">
+            <div class="group">
+                <input type="number" ng-model="facility.beds" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Number of beds
+                </label>
             </div>
-
-            <div class="form-group margin-h-25 " >
-                <label class="control-group" for="classified">Open whole week ?</label>
-                <br>
-                <div>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="Yes" name="opened_whole_weekly" ng-model="facility.opened_whole_weekly">Yes
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="No" name="opened_whole_weekly" ng-model="facility.opened_whole_weekly">No
-                    </label>
+            <!-- <div class="col-lg-12"> -->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="day">
+                        <label for="day">
+                            <span class="check"></span>
+                            <span class="box"></span>
+                             Open whole day?
+                         </label>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group margin-h-25 margin-t-20" >
-                <label class="control-group" for="classified">Classified facility ?</label>
-                <br>
-                <div>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="Yes" name="existance" ng-model="facility.classified">Yes
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="No" name="existance" ng-model="facility.classified">No
-                    </label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="week">
+                        <label for="week">
+                            <span class="check"></span>
+                            <span class="box"></span>
+                             Open whole week?
+                         </label>
+                    </div>
+                </div>
+            <!-- </div> -->
+            <br>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-t-20">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="classified">
+                    <label for="classified">
+                        <span class="check"></span>
+                        <span class="box"></span>
+                         Classified facility?
+                     </label>
                 </div>
             </div>
         </div>
 
                 <div class="col-md-12  form-group margin-b-5" ng-repeat="cont in facility.contacts">
-                     <div class="col-md-6">
-                    <select class="reg-input input-group form-control"  aria-describedby="sizing-addon1"
-                     ng-model="cont.contact_type">
+                     <div class="col-md-4 group">
+                     <select type="text" ng-model="cont.contact_type" required>
                         <option value="">-Contact type-</option>
                         <option value="PHONE">Phone number</option>
                         <option value="WEBSITE">Website URL</option>
                         <option value="EMAIL">Email</option>
                     </select>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
                     </div>
-                    <div class="col-md-5">
-                        <input type="text" class="reg-input input-group form-control" placeholder="Contact Details"
-                         ng-model="cont.contact">
+                    <div class="col-md-7 group">
+                        <input type="text" ng-model="cont.contact" required>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>
+                            Contact details
+                        </label>
                     </div>
                     <div class="col-md-1">
                         <a href  ng-click="removeContact(cont)"><i class="text-danger fa fa-close fa-2x margin-t-10"></i></a>
                     </div>
                 </div>
                 <br>
-                <div class="pull-right col-md-3 margin-t-10 margin-b-5">
+                <div class="pull-right col-lg-3 col-md-3 col-sm-5 col-xs-10 margin-t-10 margin-b-5">
                     <a href class="login-btn login-btn-info" ng-click="addContact()">
                         <i class="fa fa-plus-circle"></i>&nbsp;Add
                     </a>
                 </div>
-            <div class="col-md-12 form-group">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
-                    <span class="">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                    <div class="col-lg-4 col-md-5 col-sm-10 col-xs-12 margin-t-10 pull-left">
+                        <span class="pull-left margin-h-5">
                             <a ui-sref="facilities.manage_facilities" class="login-btn login-btn-default">
                                 Cancel
                             </a>
                         </span>
-                        <span class="">
+                        <span class="pull-left margin-h-5">
                             <a ng-if="new_fac" ui-sref="facilities.new_facility.services" class="login-btn login-btn-info">
                                 Next <i class="fa fa-angle-right"></i>
                             </a>

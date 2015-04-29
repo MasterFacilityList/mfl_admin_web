@@ -40,21 +40,21 @@ input.login-input:active:focus,
 }
 
 .login-btn {
-    display: inline-block;
+    display: block;
     margin-bottom: 0;
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
+    border: none;
     white-space: nowrap;
-    width: 65px;
+    width: 75px;
     padding: 4px 7px 4px 7px;
     font-size: 14px;
     line-height: 1.42857143;
-    border-radius: 5px;
-    box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.36);
+    border-radius: 2px;
+    box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.26);
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -71,20 +71,20 @@ input.login-input:active:focus,
 .login-btn:focus {
   color: #333333;
   text-decoration: none;
-  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.86);
+  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.56);
 }
 .login-btn-primary {
   padding: 7px 13px 8px 5px;
   color: #ffffff;
-  background-color: rgba(0, 0, 255, 0.6);
-  border-color: #357ebd;
+  background-color: #2196F3;
+  border-color: transparent;
 }
 .login-btn-primary:hover,
 .login-btn-primary:focus,
 .login-btn-primary:active,
 .login-btn-primary.active{
   color: #ffffff;
-  background-color: rgba(0, 0, 255, 0.7);
+  background-color: darken(#2196F3, 5%);
   border-color: #285e8e;
 }
 
@@ -129,21 +129,28 @@ input.login-input:active:focus,
     font-weight: 300;
 }
 
-/*styling radio button*/
-/*
-input[type=radio] {
-    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+
+/*Material ripple effect =============*/
+/*.login-btn:after,
+.nav a:after {
+    content: "";
+    background: rgba(255,255,255,0.3);
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    padding-top: 240%;
+    padding-left: 240%;
+    margin-top: -120%;
+    margin-left: -120%;
+    opacity: 0;
+    transition: all 1s;
 }
-
-
-.radio label:before {
-    border-radius: 8px;
-}
-
-input[type=radio]:checked + label:before {
-    content: "\2022";
-    color: #f3f3f3;
-    font-size: 30px;
-    text-align: center;
-    line-height: 18px;
+.login-btn:active:after,
+.nav a:active:after {
+    padding-top: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-left: 0;
+    opacity: 1;
+    transition: 0s;
 }*/
