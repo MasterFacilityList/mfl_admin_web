@@ -7078,10 +7078,9 @@ body {
     font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
     overflow-x: hidden
 }
-/*::-moz-selection {
+::-moz-selection {
     background-color: #82CAFF;
     color: #ecf0f1
-    
 }
 ::selection {
     background-color: #82CAFF;
@@ -7094,7 +7093,7 @@ body {
 ::webkit-selection {
     background-color: #82CAFF;
     color: #ecf0f1
-}*/
+}
 a {
     color: #82CAFF
 }
@@ -7137,9 +7136,7 @@ a:focus {
 .header-brand {
     float: left;
     display: block;
-    margin-right: 20px;
-    margin-top: 14px;
-    font-size: 20px;
+    margin-right: 20px
 }
 .header-brand a {
     color: inherit;
@@ -7326,7 +7323,7 @@ a:focus {
     position: relative;
     display: block;
     height: 100%;
-    background-color: #F6F4F4;
+    background-color: #fff;
     overflow-x: hidden
 }
 .side-left {
@@ -7535,10 +7532,10 @@ a:focus {
 .content {
     position: relative;
     display: block;
-    /*margin-left: 92px;*/
-    background-color: #f1f1f1;
+    margin-left: 92px;
+    background-color: #F6F4F4;
     padding-bottom: 0;
-    min-height: 93vh;
+    min-height: 100vh;
     -webkit-transition: all .3s ease;
     -ms-transition: all .3s ease;
     transition: all .3s ease
