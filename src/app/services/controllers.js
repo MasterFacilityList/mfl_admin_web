@@ -26,10 +26,22 @@ angular.module("mfl.services.controllers", [])
                 icon: "fa-plus"
             }
         ];
-        $scope.services = serviceServices.getServices();
+        serviceServices.getServices()
+            .success(function (services) {
+                $scope.services = services.results;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
+
     }])
-    .controller("mfl.services.controllers.new_service", ["$scope", function ($scope) {
+    .controller("mfl.services.controllers.new_service", ["$scope",
+        "mfl.services.services.services", "$state",
+        function ($scope, serviceService, $state) {
         $scope.test = "New service";
+        $scope.service = {
+            category : "Select service"
+        };
         $scope.path = [
             {
                 name: "Services",
@@ -55,8 +67,28 @@ angular.module("mfl.services.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
+        serviceService.getServiceCategories()
+            .success(function (cat) {
+                $scope.categories = cat.results;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
+        $scope.submitService = function (serv) {
+            console.log(serv);
+            serviceService.createService(serv)
+                .success(function (result) {
+                    console.log(result);
+                    $state.go("services");
+                })
+                .error(function (e) {
+                    console.log(e);
+                });
+        };
     }])
-    .controller("mfl.services.controllers.edit_service", ["$scope", function ($scope) {
+    .controller("mfl.services.controllers.edit_service", ["$scope",
+        "$stateParams", "mfl.services.services.services",
+        function ($scope, $stateParams, serviceService) {
         $scope.test = "Edit service";
         $scope.path = [
             {
@@ -83,6 +115,20 @@ angular.module("mfl.services.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
+        serviceService.getServiceCategories()
+            .success(function (cat) {
+                $scope.categories = cat.results;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
+        serviceService.getOneService($stateParams.service_id)
+            .success(function (serv) {
+                $scope.service = serv;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
     }])
     .controller("mfl.services.controllers.view_service", ["$scope",
     "mfl.services.services.services", "$stateParams",
@@ -113,12 +159,11 @@ angular.module("mfl.services.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
-
-        $scope.services = serviceServices.getServices();
-        console.log($scope.services);
-        $scope.getOneService = function () {
-            $scope.oneService = _.findWhere(
-                $scope.services.results, {"id" : $stateParams.service_id});
-            return $scope.oneService;
-        };
+        serviceServices.getOneService($stateParams.service_id)
+            .success(function (data) {
+                $scope.oneService = data;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
     }]);
