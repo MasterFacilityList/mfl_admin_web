@@ -1,5 +1,5 @@
 "use strict";
-angular.module("mflApp")
+angular.module("mflAppConfig", ["ngCookies","sil.grid", "mfl.settings"])
     .config(["$httpProvider", function ($httpProvider) {
             $httpProvider.defaults.withCredentials = false;
             $httpProvider.defaults.headers.common = {
@@ -8,7 +8,7 @@ angular.module("mflApp")
             };
         }])
 
-    .run(["$http", "$cookies", 
+    .run(["$http", "$cookies",
         function ($http, $cookies) {
             // apparently the angular doesn't do CSRF headers using
             // CORS across different domains thereby this hack
@@ -20,4 +20,10 @@ angular.module("mflApp")
                     withCredentials: true
                 }
             });
-        }]);
+        }])
+        .config(["silGridConfigProvider", function(silGridConfig){
+                silGridConfig.apiMaps = {
+                        practitioners: ["mfl.practitioners.wrapper", "practitionersApi"]
+                    };
+                silGridConfig.appConfig = "mflAppConfig";
+            }]);
