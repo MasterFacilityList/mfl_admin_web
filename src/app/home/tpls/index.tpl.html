@@ -7,11 +7,12 @@
                     <div class="col-lg-12">
                         <div class="col-lg-12 margin-t-20 search-card">
                             <form role="form">
-                                <div class="input-group input-group-lg">
-                                    <input type="search" class="search-input input-group form-control" placeholder="Search Facilities here..." aria-describedby="sizing-addon1" ng-model="search.query" aria-describedby="basic-addon1">
-                                    <span class="search-addon input-group-addon">
-                                         <i class="fa fa-search"></i>
-                                     </span>
+
+                                <div class="group">
+                                    <input type="text" ng-model="search.query" required>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label><i class="fa fa-search"></i>&nbsp;Search Facilities</label>
                                 </div>
                             </form>
                         </div>

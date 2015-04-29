@@ -5,6 +5,10 @@ angular.module("mfl.facilities.controllers", [])
     .controller("mfl.facilities.controllers.owners", ["$scope",
     "mfl.facilities.services.facilities",
     function ($scope, ownerService) {
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.test = "Owners";
         $scope.path = [
             {
@@ -44,6 +48,10 @@ angular.module("mfl.facilities.controllers", [])
     .controller("mfl.facilities.controllers.services", ["$scope",  "mfl.services.services.services",
     function ($scope, serviceServices) {
         $scope.test = "Services";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.path = [
             {
                 name: "Facilities",
@@ -81,6 +89,10 @@ angular.module("mfl.facilities.controllers", [])
     //start of new and edit services
     .controller("mfl.facilities.controllers.new_service", ["$scope", function ($scope) {
         $scope.test = "New service";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.path = [
             {
                 name: "Facilities",
@@ -113,6 +125,10 @@ angular.module("mfl.facilities.controllers", [])
     }])
     .controller("mfl.facilities.controllers.edit_service", ["$scope", function ($scope) {
         $scope.test = "Edit service";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.path = [
             {
                 name: "Facilities",
@@ -147,6 +163,10 @@ angular.module("mfl.facilities.controllers", [])
     "mfl.services.services.services", "$stateParams",
     function ($scope, serviceServices, $stateParams) {
         $scope.test = "View service";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.path = [
             {
                 name: "Facilities",
@@ -189,6 +209,10 @@ angular.module("mfl.facilities.controllers", [])
     .controller("mfl.facilities.controllers.facilities", ["$scope",
     function ($scope) {
         $scope.test = "Facilities sub-menu";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.path = [
             {
                 name: "Facilities",
@@ -215,6 +239,10 @@ angular.module("mfl.facilities.controllers", [])
     .controller("mfl.facilities.controllers.manage_facilities", ["$scope",
     "mfl.facilities.services.facilities", function ($scope, facilityService) {
         $scope.test = "Facilities";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.path = [
             {
                 name: "Facilities",
@@ -259,6 +287,10 @@ angular.module("mfl.facilities.controllers", [])
     .controller("mfl.facilities.controllers.facilitiesaction", ["$scope", "$stateParams",
     "mfl.facilities.services.facilities", function ($scope, $stateParams,facilityService) {
         $scope.test = "Process Facilities";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.oneFacility = "";
         $scope.facilities = facilityService.getFacilities();
         $scope.results = $scope.facilities.results;
@@ -312,6 +344,10 @@ angular.module("mfl.facilities.controllers", [])
     }])
     .controller("mfl.facilities.controllers.new_facility", ["$scope", function ($scope) {
         $scope.new_fac = true;
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.setter = false;
         $scope.path = [
             {
@@ -378,6 +414,10 @@ angular.module("mfl.facilities.controllers", [])
     .controller("mfl.facilities.controllers.edit_facility", ["$scope", "$stateParams",
     "mfl.facilities.services.facilities", function ($scope, $stateParams, facilityService) {
         $scope.edit=true;
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.setter = true;
         $scope.facilities = facilityService.getFacilities();
         $scope.facility = _.findWhere($scope.facilities, {id : $stateParams.fac_id});
@@ -445,6 +485,10 @@ angular.module("mfl.facilities.controllers", [])
     }])
     .controller("mfl.facilities.controllers.new_owner", ["$scope", function ($scope) {
         $scope.test = "New owner";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.path = [
             {
                 name: "Facilities",
@@ -479,6 +523,10 @@ angular.module("mfl.facilities.controllers", [])
     "mfl.facilities.services.facilities", "$stateParams",
     function ($scope, ownerService, $stateParams) {
         $scope.test = "View owner";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.path = [
             {
                 name: "Facilities",
@@ -517,6 +565,10 @@ angular.module("mfl.facilities.controllers", [])
     }])
     .controller("mfl.facilities.controllers.edit_owner", ["$scope", function ($scope) {
         $scope.test = "Edit owner";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.path = [
             {
                 name: "Facilities",

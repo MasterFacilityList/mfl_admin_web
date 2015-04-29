@@ -56,4 +56,112 @@ textarea.reg-input:active:focus, .reg-input.active:focus,
 .reg-input:active,.reg-input.active {
     border-bottom: 1px solid #0089FF;
 }
+/*form starting to style ----------------------*/
+.group{
+    position:relative;
+    margin-bottom:20px;
+}
+input, select {
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:90%;
+    border:none;
+    border-bottom:1px solid #757575;
+}
+input:focus, select:focus { outline:none; }
+/* LABEL ======================================= */
+label          {
+    color:#999;
+    font-size:16px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+}
 
+/* active state */
+input:focus ~ label, input:valid ~ label ,
+select:focus ~ label, select:valid ~ label {
+    top:-10px;
+    font-size:14px;
+    color:#2196F3;
+}
+/* BOTTOM BARS ================================= */
+.bar  { position:relative; display:block; width:90%; }
+.bar:before, .bar:after   {
+    content:'';
+    height:2px;
+    width:0;
+    bottom:1px;
+    position:absolute;
+    background:#2196F3;
+    transition:0.2s ease all;
+}
+.bar:before {
+    left:50%;
+}
+.bar:after {
+    right:50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after,
+select:focus ~ .bar:before, select:focus ~ .bar:after {
+    width:50%;
+}
+/* HIGHLIGHTER ================================== */
+.highlight {
+    position:absolute;
+    height:60%;
+    width:90%;
+    top:25%;
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight, select:focus ~ .highlight {
+    animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@keyframes inputHighlighter {
+    from  { background:#2196F3; }
+    to    { width:0; background:transparent; }
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label,
+select:focus ~ label, select:valid ~ label {
+    top:-10px;
+    font-size:14px;
+    color:#2196F3;
+}
+/*Material ripple effect =============*/
+.btn:after,
+.nav a:after {
+    content: "";
+    background: rgba(255,255,255,0.3);
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    padding-top: 240%;
+    padding-left: 240%;
+    margin-top: -120%;
+    margin-left: -120%;
+    opacity: 0;
+    transition: all 1s;
+}
+.btn:active:after,
+.nav a:active:after {
+    padding-top: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-left: 0;
+    opacity: 1;
+    transition: 0s;
+}
