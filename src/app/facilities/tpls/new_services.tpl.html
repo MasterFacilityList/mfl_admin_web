@@ -1,23 +1,27 @@
-<div class="col-lg-12">
+<div class="col-lg-12 margin-t-20">
     <form role="form">
         <!-- Start of dynamic form -->
         <div class="col-md-12  form-group margin-b-5" ng-repeat="service in facility.services">
-            <div class="col-md-4">
-            <select class="reg-input input-group form-control"  aria-describedby="sizing-addon1"
-             ng-model="service.type">
+            <div class="col-md-4 group">
+            <select type="text" ng-model="service.type" required>
                 <option value="">-Service type-</option>
                 <option value="MEDICAL">Medical</option>
                 <option value="XRAY">X-ray</option>
                 <option value="LABORATORY">Laboratory</option>
             </select>
+            <span class="highlight"></span>
+            <span class="bar"></span>
             </div>
             <div class="col-md-4">
-                <input type="text" class="reg-input input-group form-control" placeholder="Service Details"
-                 ng-model="service.name">
+                <input type="text" ng-model="service.name" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Service details
+                </label>
             </div>
             <div class="col-md-3">
-            <select class="reg-input input-group form-control"  aria-describedby="sizing-addon1"
-             ng-model="service.level">
+            <select type="text" ng-model="service.level" required>
                 <option value="">-Service Level-</option>
                 <option value="LEVEL-1">Level 1</option>
                 <option value="LEVEL-2">Level 2</option>
@@ -26,6 +30,8 @@
                 <option value="LEVEL-5">Level 5</option>
                 <option value="LEVEL-6">Level 6</option>
             </select>
+            <span class="highlight"></span>
+            <span class="bar"></span>
             </div>
             <div class="col-md-1">
                 <a href  ng-click="removeService(service)"><i class="text-danger fa fa-close fa-2x margin-t-10"></i></a>
@@ -40,22 +46,24 @@
         <!-- End of the dynamic form -->
         <div class="col-md-12 form-group">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
-            <span class="">
+
+                <span class="pull-left margin-h-5">
                     <a ng-if="new_fac" ui-sref="facilities.new_facility.basic" class="login-btn login-btn-default">
                         <i class="fa fa-angle-left"></i> Back
                     </a>
                 </span>
-                <span class="">
+                <span class="pull-left margin-h-5">
                     <a ng-if="new_fac" ui-sref="facilities.new_facility.location" class="login-btn login-btn-info">
                         Next <i class="fa fa-angle-right"></i>
                     </a>
                 </span>
-                <span class="">
+
+                <span class="pull-left margin-h-5">
                     <a ng-if="edit" ui-sref="facilities.edit_facility.basic" class="login-btn login-btn-default">
                         <i class="fa fa-angle-left"></i> Back
                     </a>
                 </span>
-                <span class="">
+                <span class="pull-left">
                     <a ng-if="edit" ui-sref="facilities.edit_facility.location" class="login-btn login-btn-info">
                         Next <i class="fa fa-angle-right"></i>
                     </a>

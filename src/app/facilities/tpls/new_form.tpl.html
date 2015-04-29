@@ -3,36 +3,33 @@
         <div class="col-lg-6">
 
             <div class="group">
-                <input type="search" ng-model="facility.name" required>
+                <input type="text" ng-model="facility.name" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>
-                    <i class="fa fa-search"></i> Facility name
+                    Facility name
                 </label>
             </div>
             <div class="group">
-                <select ng-model="facility.type" required>
+                <select type="text" ng-model="facility.type" required>
+                    <option value="">Select facility type</option>
                     <option value="NGO">NGO</option>
                     <option value="Government">Dispensary</option>
                 </select>
                 <span class="highlight"></span>
                 <span class="bar"></span>
+            </div>
+
+            <div class="group">
+                <input type="number" ng-model="facility.cots" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
                 <label>
-                    <i class="fa fa-search"></i> Select facility type
+                    Number of cots
                 </label>
             </div>
 
-            <div class="form-group">
-                <select type="text" class="reg-input input-group form-control" placeholder="Select Owner">
-                    <option value="">-Select facility type-</option>
-                    <option value="Government">Dispensary</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="number" class="reg-input  input-group form-control" placeholder="Enter number of cots">
-            </div>
-
-            <div class="form-group margin-h-25" >
+            <!-- <div class="form-group margin-h-25" >
                 <label class="control-group" for="classified">Open whole day ?</label>
                 <br>
                 <div>
@@ -43,27 +40,46 @@
                         <input type="radio" class="" value="No" name="whole_day" ng-model="facility.opened_whole_day">No
                     </label>
                 </div>
-            </div>
-            <div class="form-group">
-                <textarea class="reg-input" placeholder="Facility description"></textarea>
+            </div> -->
+
+            <div class="group">
+                <textarea type="text" required></textarea>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Facility description
+                </label>
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="form-group">
-                <select type="text" class="reg-input input-group form-control" placeholder="Select Owner">
-                <option value="">-Select owner-</option>
-                <option value="Government">Government</option>
+            <div class="group">
+                <select type="text" ng-model="facility.owner" required>
+                    <option value="">Select facility owner</option>
+                    <option value="NGO">NGO</option>
+                    <option value="Government">Government</option>
                 </select>
+                <span class="highlight"></span>
+                <span class="bar"></span>
             </div>
-            <div class="form-group">
-                <input type="text" class="reg-input  input-group form-control" placeholder="Facility type subcategory">
+            <div class="group">
+                <input type="text" ng-model="facility.subcategory" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Facility type subcategory
+                </label>
             </div>
 
-            <div class="form-group">
-                <input type="number" class="reg-input  input-group form-control" placeholder="Enter number of beds">
+            <div class="group">
+                <input type="number" ng-model="facility.beds" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Number of beds
+                </label>
             </div>
 
-            <div class="form-group margin-h-25 " >
+            <!-- <div class="form-group margin-h-25 " >
                 <label class="control-group" for="classified">Open whole week ?</label>
                 <br>
                 <div>
@@ -74,8 +90,9 @@
                         <input type="radio" class="" value="No" name="opened_whole_weekly" ng-model="facility.opened_whole_weekly">No
                     </label>
                 </div>
-            </div>
-            <div class="form-group margin-h-25 margin-t-20" >
+            </div> -->
+
+            <!-- <div class="form-group margin-h-25 margin-t-20" >
                 <label class="control-group" for="classified">Classified facility ?</label>
                 <br>
                 <div>
@@ -86,22 +103,27 @@
                         <input type="radio" class="" value="No" name="existance" ng-model="facility.classified">No
                     </label>
                 </div>
-            </div>
+            </div> -->
         </div>
 
                 <div class="col-md-12  form-group margin-b-5" ng-repeat="cont in facility.contacts">
-                     <div class="col-md-6">
-                    <select class="reg-input input-group form-control"  aria-describedby="sizing-addon1"
-                     ng-model="cont.contact_type">
+                     <div class="col-md-4 group">
+                     <select type="text" ng-model="cont.contact_type" required>
                         <option value="">-Contact type-</option>
                         <option value="PHONE">Phone number</option>
                         <option value="WEBSITE">Website URL</option>
                         <option value="EMAIL">Email</option>
                     </select>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
                     </div>
-                    <div class="col-md-5">
-                        <input type="text" class="reg-input input-group form-control" placeholder="Contact Details"
-                         ng-model="cont.contact">
+                    <div class="col-md-7 group">
+                        <input type="text" ng-model="cont.contact" required>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>
+                            Contact details
+                        </label>
                     </div>
                     <div class="col-md-1">
                         <a href  ng-click="removeContact(cont)"><i class="text-danger fa fa-close fa-2x margin-t-10"></i></a>
@@ -114,13 +136,13 @@
                     </a>
                 </div>
             <div class="col-md-12 form-group">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
-                    <span class="">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 pull-left">
+                        <span class="pull-left margin-h-5">
                             <a ui-sref="facilities.manage_facilities" class="login-btn login-btn-default">
                                 Cancel
                             </a>
                         </span>
-                        <span class="">
+                        <span class="pull-left margin-h-5">
                             <a ng-if="new_fac" ui-sref="facilities.new_facility.services" class="login-btn login-btn-info">
                                 Next <i class="fa fa-angle-right"></i>
                             </a>
