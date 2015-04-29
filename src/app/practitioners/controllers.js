@@ -3,7 +3,7 @@
 angular.module("mfl.practitioners.controllers", [])
 
     .controller("mfl.practitioners.controllers.practitioners", ["$scope",
-    "mfl.practitioners.services.practitioners", function ($scope, practitionersService) {
+     function ($scope) {
         $scope.test = "practitioners";
         $scope.path = [
             {
@@ -26,11 +26,6 @@ angular.module("mfl.practitioners.controllers", [])
                 icon: "fa-user-plus"
             }
         ];
-
-        practitionersService.getPractitioners()
-        .success(function (data) {
-            $scope.practitioners = data.results;
-        });
     }])
     .controller("mfl.practitioners.controllers.new_practitioner",["$scope",function ($scope) {
         $scope.path = [

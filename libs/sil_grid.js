@@ -7,7 +7,6 @@
             BP_FILTER_TEMPLATE,
             PAGINATION_TPL,
             SEARCH_TPL,
-            "sil.businessPartnerApi.wrapper",
             "ui.bootstrap"
         ]
     )

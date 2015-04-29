@@ -1,14 +1,15 @@
 "use strict";
 
-angular.module("mfl.practitioners.services", [])
-
-.service("mfl.practitioners.services.practitioners", ["mfl.common.providers.requests",
-        function (requests) {
-        var url = {
-            practitioners: "api/facilities/practitioners/"
-        };
-
-        this.getPractitioners = function () {
-            return requests.callApi("GET", url.practitioners);
-        };
-    }]);
+(function(angular){
+    angular.module("mfl.practitioners.wrapper", ["sil.api.wrapper"])
+    .provider("practitionersApi", function(){
+        var self = this;
+        self.baseUrl = "api/facilities/practitioners";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
+            };
+        }];
+    });
+})(angular);

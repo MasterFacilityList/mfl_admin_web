@@ -19,33 +19,8 @@
                     </form>
                 </div>
             </div><!-- /-End of action area -->
-            <div id="no-more-tables" class="col-lg-12 margin-t-15">
-                <table class="table content-card cf">
-                    <thead class="cf">
-                        <th>Registration Number</th>
-                        <th>Name</th>
-                        <th>Practice Type</th>
-                        <th>Speciality</th>
-                        <th>Ward</th>
-                        <th class="text-center">Actions</th>
-                    </thead>
-                    <tbody class="example-animate-container">
-                        <tr class="animate-repeat" ng-repeat="practitioner in practitioners | filter: search.query">
-                            <td data-title="Registration #">{{practitioner.id}}</td>
-                            <td data-title="Name">{{practitioner.name}}</td>
-                            <td data-title="Practice Type">{{practitioner.practice_type}}</td>
-                            <td data-title="Speciality">{{practitioner.speciality}}</td>
-                            <td data-title="Ward">{{practitioner.ward}}</td>
-                            <td data-title="Actions" class="text-center">
-                                <a ui-sref="practitioners.view_practitioner({prac_id : practitioner.registration_number})" class="action-btn action-btn-grid action-btn-primary">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a ui-sref="practitioners.edit_practitioner({prac_id : practitioner.registration_number})" class="action-btn action-btn-grid action-btn-primary">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-    </div>
+            <sil-grid template="practitioners/tpls/practitioners-grid.tpl.html" grid-for="practitioners"
+                data="prac" filters="filters" error="alert">
+            </sil-grid>
+
 </div>

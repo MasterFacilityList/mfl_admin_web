@@ -5,6 +5,6 @@ angular.module("mfl.practitioners", [
     //out stuff
     "mfl.practitioners.controllers",
     "mfl.practitioners.routes",
-    "mfl.practitioners.services",
+    "mfl.practitioners.wrapper",
     "mfl.common.directives"
 ]);
