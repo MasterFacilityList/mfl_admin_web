@@ -3,7 +3,7 @@
             <div class="col-lg-12 margin-t-20">
                 <div class="col-lg-3 pull-left">
                     <select class="reg-form filer-select form-control" ng-model="publish">
-                    <option value="">-Select Facility-</option>
+                    <option value="">-Select Practice Type</option>
                     <option value="all">Select all</option>
                     <option value="published">Unelect all</option>
                     </select>
@@ -11,7 +11,7 @@
                 <div class="col-lg-4 pull-right">
                     <form role="form">
                         <div class="input-group">
-                             <input type="search" class="grid-search-input input-group form-control" placeholder="Search CHU..." aria-describedby="sizing-addon1" ng-model="search.query" aria-describedby="basic-addon1">
+                             <input type="search" class="grid-search-input input-group form-control" placeholder="Search Practitioner..." aria-describedby="sizing-addon1" ng-model="search.query" aria-describedby="basic-addon1">
                              <span class="grid-search-addon input-group-addon">
                                  <i class="fa fa-search"></i>
                              </span>
@@ -19,25 +19,28 @@
                     </form>
                 </div>
             </div><!-- /-End of action area -->
-            <div class="col-lg-12 margin-t-15">
-                <table class="table content-card">
-                    <thead>
-                        <th>Code</th>
+            <div id="no-more-tables" class="col-lg-12 margin-t-15">
+                <table class="table content-card cf">
+                    <thead class="cf">
+                        <th>Registration Number</th>
                         <th>Name</th>
-                        <th>Facility</th>
-                        <th>Category</th>
-                        <th>Status</th>
+                        <th>Practice Type</th>
+                        <th>Speciality</th>
+                        <th>Ward</th>
                         <th class="text-center">Actions</th>
                     </thead>
                     <tbody class="example-animate-container">
-                        <tr class="animate-repeat" ng-repeat="practitioner in practitioners.results | filter: search.query">
-                            <td>{{practitioner.code}}</td>
-                            <td>{{practitioner.name}}</td>
-                            <td>{{practitioner.facility}}</td>
-                            <td>{{practitioner.community}}</td>
-                            <td>{{practitioner.status}}</td>
-                            <td class="text-center">
-                                <a ui-sref="practitioners.edit_practitioner({fac_id : practitioner.id})" class="action-btn action-btn-grid action-btn-primary">
+                        <tr class="animate-repeat" ng-repeat="practitioner in practitioners | filter: search.query">
+                            <td data-title="Registration #">{{practitioner.id}}</td>
+                            <td data-title="Name">{{practitioner.name}}</td>
+                            <td data-title="Practice Type">{{practitioner.practice_type}}</td>
+                            <td data-title="Speciality">{{practitioner.speciality}}</td>
+                            <td data-title="Ward">{{practitioner.ward}}</td>
+                            <td data-title="Actions" class="text-center">
+                                <a ui-sref="practitioners.view_practitioner({prac_id : practitioner.registration_number})" class="action-btn action-btn-grid action-btn-primary">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a ui-sref="practitioners.edit_practitioner({prac_id : practitioner.registration_number})" class="action-btn action-btn-grid action-btn-primary">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             </td>

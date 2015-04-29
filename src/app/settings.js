@@ -2,4 +2,4 @@
 
 angular.module("mfl.settings", [])
 
-    .constant("SERVER_URL", "http://localhost:8081/");
+    .constant("SERVER_URL", "http://localhost:8061/");

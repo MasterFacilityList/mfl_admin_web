@@ -8,7 +8,7 @@ angular.module("mflApp")
             };
         }])
 
-    .run(["$http", "$cookies", 
+    .run(["$http", "$cookies",
         function ($http, $cookies) {
             // apparently the angular doesn't do CSRF headers using
             // CORS across different domains thereby this hack

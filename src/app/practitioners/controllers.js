@@ -27,7 +27,10 @@ angular.module("mfl.practitioners.controllers", [])
             }
         ];
 
-        $scope.practitioners = practitionersService.getPractitioners();
+        practitionersService.getPractitioners()
+        .success(function (data) {
+            $scope.practitioners = data.results;
+        });
     }])
     .controller("mfl.practitioners.controllers.new_practitioner",["$scope",function ($scope) {
         $scope.path = [

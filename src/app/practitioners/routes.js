@@ -37,7 +37,7 @@ angular.module("mfl.practitioners.routes", [])
             }
         })
         .state("practitioners.edit_chu", {
-            url: "/editpractitioner/:fac_id",
+            url: "/editpractitioner/:prac_id",
             views: {
                 "main-content@practitioners": {
                     controller: "mfl.practitioners.controllers.edit_chu",
