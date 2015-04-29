@@ -29,19 +29,6 @@
                 </label>
             </div>
 
-            <!-- <div class="form-group margin-h-25" >
-                <label class="control-group" for="classified">Open whole day ?</label>
-                <br>
-                <div>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="Yes" name="whole_day" ng-model="facility.opened_whole_day">Yes
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="No" name="whole_day" ng-model="facility.opened_whole_day">No
-                    </label>
-                </div>
-            </div> -->
-
             <div class="group">
                 <textarea type="text" required></textarea>
                 <span class="highlight"></span>
@@ -78,32 +65,39 @@
                     Number of beds
                 </label>
             </div>
-
-            <!-- <div class="form-group margin-h-25 " >
-                <label class="control-group" for="classified">Open whole week ?</label>
-                <br>
-                <div>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="Yes" name="opened_whole_weekly" ng-model="facility.opened_whole_weekly">Yes
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="No" name="opened_whole_weekly" ng-model="facility.opened_whole_weekly">No
-                    </label>
+            <!-- <div class="col-lg-12"> -->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="day">
+                        <label for="day">
+                            <span class="check"></span>
+                            <span class="box"></span>
+                             Open whole day?
+                         </label>
+                    </div>
                 </div>
-            </div> -->
-
-            <!-- <div class="form-group margin-h-25 margin-t-20" >
-                <label class="control-group" for="classified">Classified facility ?</label>
-                <br>
-                <div>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="Yes" name="existance" ng-model="facility.classified">Yes
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" class="" value="No" name="existance" ng-model="facility.classified">No
-                    </label>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="week">
+                        <label for="week">
+                            <span class="check"></span>
+                            <span class="box"></span>
+                             Open whole week?
+                         </label>
+                    </div>
                 </div>
-            </div> -->
+            <!-- </div> -->
+            <br>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-t-20">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="classified">
+                    <label for="classified">
+                        <span class="check"></span>
+                        <span class="box"></span>
+                         Classified facility?
+                     </label>
+                </div>
+            </div>
         </div>
 
                 <div class="col-md-12  form-group margin-b-5" ng-repeat="cont in facility.contacts">
@@ -130,13 +124,13 @@
                     </div>
                 </div>
                 <br>
-                <div class="pull-right col-md-3 margin-t-10 margin-b-5">
+                <div class="pull-right col-lg-3 col-md-3 col-sm-5 col-xs-10 margin-t-10 margin-b-5">
                     <a href class="login-btn login-btn-info" ng-click="addContact()">
                         <i class="fa fa-plus-circle"></i>&nbsp;Add
                     </a>
                 </div>
-            <div class="col-md-12 form-group">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 pull-left">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                    <div class="col-lg-4 col-md-5 col-sm-10 col-xs-12 margin-t-10 pull-left">
                         <span class="pull-left margin-h-5">
                             <a ui-sref="facilities.manage_facilities" class="login-btn login-btn-default">
                                 Cancel

@@ -268,13 +268,6 @@ angular.module("mfl.facilities.controllers", [])
                 icon: "fa-plus"
             },
             {
-                func : "",
-                class: "action-btn action-btn-md action-btn-warm ",
-                color: "blue",
-                tipmsg: "Publish Facilities",
-                icon: "fa-tag"
-            },
-            {
                 func : "onclick=window.history.back()",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
