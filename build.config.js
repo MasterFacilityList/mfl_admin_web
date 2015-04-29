@@ -72,7 +72,10 @@ module.exports = {
             "vendor/angular-resource/angular-resource.js",
             "vendor/angular-bootstrap/ui-bootstrap.js",
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
-            "vendor/angular-ui-router/release/angular-ui-router.js"
+            "vendor/angular-ui-router/release/angular-ui-router.js",
+            "libs/api_wrapper.js",
+            "libs/sil_grid_tpls.js",
+            "libs/sil_grid.js"
         ],
         css: [
         ],
