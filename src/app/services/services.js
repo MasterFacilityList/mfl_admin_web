@@ -2,37 +2,26 @@
 
 angular.module("mfl.services.services", [])
 
-    .service("mfl.services.services.services",  ["mfl.common.providers.requests",
+    .service("mfl.services.services.services", [
+        "mfl.common.providers.requests",
         function (requests) {
 
             var url = {
-                services : "api/v1/services"
+                services : "api/facilities/services/",
+                categories : "api/facilities/service_categories/"
             };
 
-            this.getServicesBackend = function () {
+            this.getServices = function () {
                 return requests.callApi("GET", url.services);
             };
-            this.getServices = function () {
-                var services = {
-                    results : [
-                        {
-                            id: "1",
-                            code : "FS001",
-                            name : "Scanning",
-                            category : "MEDICAL",
-                            description : "Facilities specialized in offers xray &"+
-                                            " radiology services"
-                        },
-                        {
-                            id: "2",
-                            code : "FS002",
-                            name : "Physiotherapy",
-                            category : "MEDICAL",
-                            description : "Facilities physical therapy to"+
-                                            " injured individuals"
-                        }
-                    ]
-                };
-                return services;
+            this.getOneService = function (id) {
+                return requests.callApi("GET", url.services + id + "/");
             };
-        }]);
+            this.getServiceCategories = function () {
+                return requests.callApi("GET", url.categories);
+            };
+            this.createService = function (service) {
+                return requests.callApi("POST", url.services, service);
+            };
+        }
+    ]);

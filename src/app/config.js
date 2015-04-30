@@ -29,7 +29,8 @@ angular.module("mflAppConfig", ["ngCookies","sil.grid", "mfl.settings"])
                         counties: ["mfl.counties.wrapper", "countiesApi"],
                         constituencies: ["mfl.constituencies.wrapper", "constituenciesApi"],
                         wards: ["mfl.wards.wrapper", "wardsApi"],
-                        towns: ["mfl.towns.wrapper", "townsApi"]
+                        towns: ["mfl.towns.wrapper", "townsApi"],
+                        owners: ["mfl.facilities.wrapper", "ownersApi"]
                     };
                 silGridConfig.appConfig = "mflAppConfig";
             }]);
