@@ -39,9 +39,6 @@ angular.module("mfl.services.controllers", [])
         "mfl.services.services.services", "$state",
         function ($scope, serviceService, $state) {
         $scope.test = "New service";
-        $scope.service = {
-            category : "Select service"
-        };
         $scope.path = [
             {
                 name: "Services",
