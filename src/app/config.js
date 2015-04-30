@@ -23,7 +23,13 @@ angular.module("mflAppConfig", ["ngCookies","sil.grid", "mfl.settings"])
         }])
         .config(["silGridConfigProvider", function(silGridConfig){
                 silGridConfig.apiMaps = {
-                        practitioners: ["mfl.practitioners.wrapper", "practitionersApi"]
+                        practitioners: ["mfl.practitioners.wrapper", "practitionersApi"],
+                        chul: ["mfl.chul.wrapper", "chulApi"],
+                        officers: ["mfl.officers.wrapper", "officersApi"],
+                        counties: ["mfl.counties.wrapper", "countiesApi"],
+                        constituencies: ["mfl.constituencies.wrapper", "constituenciesApi"],
+                        wards: ["mfl.wards.wrapper", "wardsApi"],
+                        towns: ["mfl.towns.wrapper", "townsApi"]
                     };
                 silGridConfig.appConfig = "mflAppConfig";
             }]);

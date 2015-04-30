@@ -1,0 +1,27 @@
+<div class="">
+    <div class="col-md-5 col-sm-5 pull-right">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+</div>
+<div id="no-more-tables" class="col-lg-12 margin-t-15">
+    <table class="table content-card cf">
+        <thead class="cf">
+            <th>Name</th>
+            <th class="text-center">Actions</th>
+        </thead>
+        <tbody class="example-animate-container">
+            <tr class="animate-repeat" ng-repeat="const in consts | filter: search.query">
+                <td data-title="Name">{{const.name}}</td>
+                <td data-title="Actions" class="text-center">
+                    <a ui-sref="admin_units.constituencies.view_wards({const_id : const.id})" tooltip="View Wards" tooltip-placement="bottom" class="action-btn action-btn-grid action-btn-primary">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a ui-sref="admin_units.constituencies.edit({const_id : const.id})" tooltip="Edit Constituency" tooltip-placement="bottom" class="action-btn action-btn-grid action-btn-primary">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>

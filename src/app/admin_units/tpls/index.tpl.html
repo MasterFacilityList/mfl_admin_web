@@ -1,46 +1,51 @@
  <contentheader></contentheader>
 <div class="row">
     <div class="col-lg-12">
-        <div class="col-lg-11 col-lg-offset-1">
+        <div class="col-lg-12">
             <div class="col-lg-12 margin-t-20">
-                <div class="col-lg-4 pull-right">
-                    <form role="form">
-                        <div class="input-group">
-                             <input type="search" class="grid-search-input input-group form-control" placeholder="Search Service..." aria-describedby="sizing-addon1" ng-model="search.query" aria-describedby="basic-addon1">
-                             <span class="grid-search-addon input-group-addon">
-                                 <i class="fa fa-search"></i>
-                             </span>
+
+                <a ui-sref="admin_units.counties" data-trigger="hover" data-type="success" data-title="Manage Counties" bs-tooltip title="Manage Counties">
+                    <div class="menu-wrapper col-lg-4 col-md-6 col-sm-6 col-xs-10" >
+                        <div class="menu-icon col-lg-2 col-md-2 col-sm-3 col-xs-3 text-center" style="">
+                            <!-- <a ui-sref="yitch_loanees_business.register" class="btn btn-primary"> -->
+                                <i class="fa fa-map-marker fa-3x"></i>
+                            <!-- </a> -->
                         </div>
-                    </form>
-                </div>
+                        <div class="menu-container col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Manage Counties</h4></div>
+                    </div>
+                </a>
+                <a ui-sref="admin_units.constituencies" data-trigger="hover" data-type="success" data-title="Manage Wards" bs-tooltip title="Manage Wards">
+                    <div class="menu-wrapper col-lg-4 col-md-6 col-sm-6 col-xs-10" >
+                        <div class="menu-icon col-lg-2 col-md-2 col-sm-3 col-xs-3 text-center" style="">
+                            <!-- <a ui-sref="yitch_loanees_business.register" class="btn btn-primary"> -->
+                                <i class="fa fa-map-marker fa-3x"></i>
+                            <!-- </a> -->
+                        </div>
+                        <div class="menu-container col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Manage Constituencies</h4></div>
+                    </div>
+                </a>
+                <a ui-sref="admin_units.wards" data-trigger="hover" data-type="success" data-title="Manage Wards" bs-tooltip title="Manage Wards">
+                    <div class="menu-wrapper col-lg-4 col-md-6 col-sm-6 col-xs-10" >
+                        <div class="menu-icon col-lg-2 col-md-2 col-sm-3 col-xs-3 text-center" style="">
+                            <!-- <a ui-sref="yitch_loanees_business.register" class="btn btn-primary"> -->
+                                <i class="fa fa-map-marker fa-3x"></i>
+                            <!-- </a> -->
+                        </div>
+                        <div class="menu-container col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Manage Wards</h4></div>
+                    </div>
+                </a>
+                <a ui-sref="admin_units.towns" data-trigger="hover" data-type="success" data-title="Manage Wards" bs-tooltip title="Manage Towns">
+                    <div class="menu-wrapper col-lg-4 col-md-6 col-sm-6 col-xs-10" >
+                        <div class="menu-icon col-lg-2 col-md-2 col-sm-3 col-xs-3 text-center" style="">
+                            <!-- <a ui-sref="yitch_loanees_business.register" class="btn btn-primary"> -->
+                                <i class="fa fa-map-marker fa-3x"></i>
+                            <!-- </a> -->
+                        </div>
+                        <div class="menu-container col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4>Manage Towns</h4></div>
+                    </div>
+                </a>
+
             </div><!-- /-End of action area -->
-            <!-- Beginning of grid -->
-            <div class="col-lg-12 margin-t-15">
-                <table class="table content-card">
-                    <thead>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Date created</th>
-                        <th class="text-center">Actions</th>
-                    </thead>
-                    <tbody class="example-animate-container">
-                        <tr class="animate-repeat" ng-repeat="unit in admin_units.results | filter: search.query">
-                            <td>{{unit.code}}</td>
-                            <td>{{unit.name}}</td>
-                            <td>{{unit.date_created}}</td>
-                            <td class="text-center">
-                                <a ui-sref="admin_units.edit_unit({unit_id : unit.id})" class="action-btn action-btn-grid action-btn-primary">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a ui-sref="admin_units.view_unit({unit_id : unit.id})" class="action-btn action-btn-grid action-btn-info">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- End of grid -->
         </div>
     </div>
 </div>

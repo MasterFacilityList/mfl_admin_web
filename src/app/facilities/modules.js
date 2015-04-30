@@ -8,5 +8,6 @@ angular.module("mfl.facilities", [
     "mfl.facilities.controllers",
     "mfl.facilities.routes",
     "mfl.facilities.services",
-    "mfl.common.directives"
+    "mfl.common.directives",
+    "mfl.officers.wrapper"
 ]);

@@ -5,6 +5,6 @@ angular.module("mfl.chus", [
     //out stuff
     "mfl.chus.controllers",
     "mfl.chus.routes",
-    "mfl.chus.services",
+    "mfl.chul.wrapper",
     "mfl.common.directives"
 ]);
