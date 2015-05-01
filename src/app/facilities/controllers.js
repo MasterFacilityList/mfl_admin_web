@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("mfl.facilities.controllers", [])
+angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
 
     .controller("mfl.facilities.controllers.owners", ["$scope",
     "mfl.facilities.services.facilities",
@@ -277,20 +277,22 @@ angular.module("mfl.facilities.controllers", [])
         ];
         $scope.facilities = facilityService.getFacilities();
     }])
-    .controller("mfl.facilities.controllers.facilitiesaction", ["$scope", "$stateParams",
-    "mfl.facilities.services.facilities", function ($scope, $stateParams,facilityService) {
+    .controller("mfl.facilities.controllers.facilitiesaction",
+        ["$scope", "$stateParams","facilitiesApi",
+        function ($scope, $stateParams,facilitiesApi) {
         $scope.test = "Process Facilities";
         $scope.tooltip = {
             "title": "",
             "checked": false
         };
         $scope.oneFacility = "";
-        $scope.facilities = facilityService.getFacilities();
-        $scope.results = $scope.facilities.results;
-        $scope.getOnefacility = function () {
-            $scope.oneFacility = _.findWhere($scope.results, {"id" : $stateParams.fac_id});
-            return $scope.oneFacility;
-        };
+        facilitiesApi.api.get($stateParams.fac_id)
+            .success(function (result) {
+                $scope.oneFacility = result;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
         $scope.path = [
             {
                 name: "Facilities",
@@ -316,15 +318,22 @@ angular.module("mfl.facilities.controllers", [])
                 func : " ",
                 class: "action-btn action-btn-md action-btn-success ",
                 color: "blue",
-                tipmsg: "New Facility",
+                tipmsg: "Approve Facility",
                 icon: "fa-check"
             },
             {
                 func : " ",
                 class: "action-btn action-btn-md action-btn-danger ",
                 color: "blue",
-                tipmsg: "New Facility",
+                tipmsg: "Reject Facility",
                 icon: "fa-close"
+            },
+            {
+                func : " ",
+                class: "action-btn action-btn-md action-btn-warm ",
+                color: "blue",
+                tipmsg: "Publish facility",
+                icon: "fa-tag"
             },
             {
                 func : "onclick=window.history.back()",
@@ -513,8 +522,8 @@ angular.module("mfl.facilities.controllers", [])
         ];
     }])
     .controller("mfl.facilities.controllers.view_owner", ["$scope",
-    "mfl.facilities.services.facilities", "$stateParams",
-    function ($scope, ownerService, $stateParams) {
+    "ownersApi", "$stateParams",
+    function ($scope, ownerApi, $stateParams) {
         $scope.test = "View owner";
         $scope.tooltip = {
             "title": "",
@@ -549,14 +558,16 @@ angular.module("mfl.facilities.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
-        $scope.owners = ownerService.getOwners();
-        $scope.getOneOwner = function () {
-            $scope.oneOwner = _.findWhere(
-                $scope.owners.results, {"id" : $stateParams.owner_id});
-            return $scope.oneOwner;
-        };
+        ownerApi.api.get($stateParams.owner_id)
+            .success(function (owner) {
+                $scope.oneOwner = owner;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
     }])
-    .controller("mfl.facilities.controllers.edit_owner", ["$scope", function ($scope) {
+    .controller("mfl.facilities.controllers.edit_owner", ["$scope", "ownersApi", "$stateParams",
+        function ($scope, ownerApi, $stateParams) {
         $scope.test = "Edit owner";
         $scope.tooltip = {
             "title": "",
@@ -591,4 +602,11 @@ angular.module("mfl.facilities.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
+        ownerApi.api.get($stateParams.owner_id)
+            .success(function (owner) {
+                $scope.owner = owner;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
     }]);

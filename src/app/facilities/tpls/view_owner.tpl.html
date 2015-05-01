@@ -1,40 +1,39 @@
 <contentheader></contentheader>
 <div class="row">
     <div class="col-lg-12">
-        <div class="col-lg-11 col-lg-offset-1">
+        <div class="col-lg-12">
             <div class="col-lg-10 col-lg-offset-1 margin-t-20 content-card">
                 <!-- /- Start of tabbed multi-step form -->
                 <div class="tab-content">
                     <div class="col-lg-12">
-                         <h3>
+                         <h4>
                             <label class="control-lable">Name: </label>
                             {{oneOwner.name}}
                             <span class="pull-right">
                                 <label class="control-label">Code: </label>
                                 {{oneOwner.code}}
                             </span>
-                        </h3>
-                        <h3 class="margin-t-10">
+                        </h4>
+                        <h4 class="margin-t-10">
                         <label class="control-label">Type: </label>
-                            {{oneOwner.type}}
+                            {{oneOwner.owner_type}}
                             <span class="pull-right">
                                 <label class="control-label">Abbreviation: </label>
-                                {{oneOwner.abbreviation}}
+                                <span class="label label-success">{{oneOwner.abbreviation}}</span>
                             </span>
-                        </h3>
+                        </h4>
                         <hr style="border: 1px solid #f0f0f0;">
-                        <h3 class="text-muted fw-600 margin-t-20">Description</h3>
+                        <h4 class="text-muted fw-600 margin-t-20">Description</h4>
                         <p class="lead ">
                             {{oneOwner.description}}
                         </p>
                         <h4>
                         <label class="control-label">Date created: </label>
-                                {{oneOwner.date_created}}
+                                {{oneOwner.created | date : 'medium'}}
                         </h4>
                         <!-- /-TODO put smaller action area to the right of card and show details of facility being acted upon -->
-                        <span style="display:none; color:#fff, font-size:8px">{{getOneOwner()}}</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>Owner
+    </div>

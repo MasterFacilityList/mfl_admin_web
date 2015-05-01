@@ -77,7 +77,7 @@
                     }
                 };
                 self.getData = function(){
-                    self.setLoading(true);
+                    // self.setLoading(true);
                     var promise;
                     if(_.isUndefined($scope.filters)){
                         if(_.has($scope.filters, "page")){
@@ -173,6 +173,7 @@
                     if(_.isUndefined($scope.filters)){
                         $scope.filters = {};
                     }
+                    console.log($scope.filters);
                     $scope.filters.page = page_count;
                     $scope.getData();
                 };
@@ -193,6 +194,7 @@
                 });
                 var modal;
                 $rootScope.$on("silGrid.loader.start", function(event){
+                    console.log("loader started");
                     modal = $modal.open(
                         {
                             template:"<div>"+
@@ -212,8 +214,10 @@
                 });
 
                 $rootScope.$on("silGrid.loader.stop", function(event){
+                    console.log("loader stoppped");
                     if(!_.isUndefined(modal)){
                         modal.close();
+                        modal.dismiss();
                     }
                     event.stopPropagation();
                 });

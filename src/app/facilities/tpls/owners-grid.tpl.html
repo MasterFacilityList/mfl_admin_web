@@ -11,16 +11,14 @@
             <th>Name</th>
             <th>Abbreviation</th>
             <th>Type</th>
-            <th>Date created</th>
             <th class="text-center">Actions</th>
         </thead>
         <tbody class="example-animate-container">
-            <tr class="animate-repeat" ng-repeat="owner in owners.results | filter: search.query">
+            <tr class="animate-repeat" ng-repeat="owner in owners | filter: search.query">
                 <td data-title="Code #">{{owner.code}}</td>
                 <td data-title="Name">{{owner.name}}</td>
                 <td data-title="Abbreviation">{{owner.abbreviation}}</td>
-                <td data-title="Type">{{owner.type}}</td>
-                <td data-title="Date created">{{owner.date_created}}</td>
+                <td data-title="Type">{{owner.owner_type}}</td>
                 <td class="text-center">
                     <a ui-sref="facilities.edit_owner({owner_id : owner.id})" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-edit"></i>
@@ -32,6 +30,7 @@
             </tr>
         </tbody>
     </table>
+    <sil-grid-pagination> </sil-grid-pagination>
 </div>
 <!-- End of grid -->
- <sil-grid-pagination> </sil-grid-pagination>
+

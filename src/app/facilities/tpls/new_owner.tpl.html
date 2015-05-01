@@ -19,8 +19,8 @@
                                 </div>
 
                                  <div class="group">
-                                    <select type="text" ng-model="facility.type" required>
-                                        <option value="">Select owner type</option>
+                                    <select ng-model="owner.owner_type" ng-init="owner.owner_type = owner.owner_type"  required>
+                                        <!-- <option value="">Select owner type</option> -->
                                         <option value="INDIVIDUAL">Individual</option>
                                         <option value="GOVERNMENT">Government</option>
                                     </select>
