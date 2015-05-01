@@ -3,7 +3,7 @@
 angular.module("mfl.chus.controllers", [])
 
     .controller("mfl.chus.controllers.chus", ["$scope",
-    "mfl.chus.services.chus", function ($scope, chusService) {
+    function ($scope) {
         $scope.test = "chus";
         $scope.path = [
             {
@@ -26,8 +26,6 @@ angular.module("mfl.chus.controllers", [])
                 icon: "fa-plus"
             }
         ];
-
-        $scope.chus = chusService.getChus();
     }])
     .controller("mfl.chus.controllers.new_chu",["$scope",function ($scope) {
         $scope.path = [
