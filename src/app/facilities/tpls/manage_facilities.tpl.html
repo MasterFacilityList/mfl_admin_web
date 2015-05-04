@@ -1,55 +1,8 @@
  <contentheader></contentheader>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="col-lg-12">
-            <div class="col-lg-12 margin-t-20">
-                <div class="col-lg-4 pull-right" style="background-color: #F1F1F1;">
-                    <form role="form">
-                        <div style="background-color: #F1F1F1;">
-                            <div class="group">
-                                <input type="search" ng-model="search.query" required>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>
-                                    <i class="fa fa-search"></i> Search facility
-                                </label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div><!-- /-End of action area -->
-            <div class="col-lg-12 margin-t-15">
-                <table class="table content-card">
-                    <thead>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Coordinates</th>
-                        <th>Status</th>
-                        <th class="text-center">Actions</th>
-                    </thead>
-                    <tbody class="example-animate-container">
-                        <tr class="animate-repeat" ng-repeat="facility in facilities.results | filter: search.query">
-                            <td>{{facility.code}}</td>
-                            <td>{{facility.name}}</td>
-                            <td>{{facility.location}}</td>
-                            <td>{{facility.coordinates}}</td>
-                            <td>{{facility.status}}</td>
-                            <td class="text-center">
-                                <a ui-sref="facilities.edit_facility.basic({fac_id : facility.id})" class="action-btn action-btn-grid action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Edit facility">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a ui-sref="facilities.edit_facility.basic({fac_id : facility.id})" class="action-btn action-btn-grid action-btn-info" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="View facility">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a ui-sref="facilities.facility_action({fac_id: facility.id})" class="action-btn action-btn-grid action-btn-success" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Process facility">
-                                    <i class="fa fa-sign-out"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<!-- Beggining of sil grid -->
+<div class="content-body">
+    <sil-grid template="facilities/tpls/facilities-grid.tpl.html" grid-for="facilities"
+        data="facilities" filters="filters" error="alert">
+    </sil-grid>
 </div>
+<!-- End of sil grid -->
