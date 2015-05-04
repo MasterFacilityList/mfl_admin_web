@@ -1,42 +1,36 @@
 "use strict";
 angular.module("mflAppConfig", ["ngCookies",
-    "sil.grid", "mfl.settings", "mflApp.interceptors"])
-    .config(["$httpProvider", function ($httpProvider) {
-            $httpProvider.defaults.withCredentials = false;
-            $httpProvider.defaults.headers.common = {
-                "Content-Type": "application/json",
-                "Accept": "application/json, */*"
-            };
-            /*$httpProvider.defaults.xsrfHeaderName = "X-CSRFToken";
-            $httpProvider.defaults.xsrfCookieName = "csrftoken";*/
-            $httpProvider.interceptors.push(
-                "mflApp.interceptors.http");
+    "sil.grid", "mfl.settings", "mfl.common.providers"])
+    .config(["$httpProvider",function ($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
+        $httpProvider.defaults.headers.common = {
+            "Content-Type":"application/json",
+            "Accept" : "application/json, */*"
+        };
+        //$httpProvider.interceptors.push("sessionInjector");
+        /*$httpProvider.interceptors.push(""sessionInjector"");
+        $httpProvider.interceptors.push("api.http.interceptor");
+        $httpProvider.interceptors.push("api.connection.interceptor");*/
 
-            //$httpProvider.defaults.withCredentials = true;
-        }])
+    }])
 
-    /*.run(["$http", function ($http) {
-        //$http.defaults.withCredentials = false;
-        $http.defaults.xsrfHeaderName = "X-CSRFToken";
-        $http.defaults.xsrfCookieName = "csrftoken";
-    }])*/
+    //beginning of configuring interceptor
+    .config(function($httpProvider) {
+        $httpProvider.interceptors.push("myCSRF");
+    })
 
-    .run(["$http",
-        function ($http) {
-            /*var csrftoken = $cookies.csrftoken;
-            var header_name = "X-CSRFToken";
-            $httpProvider.defaults.headers.get['My-Header']= .
-            $http.defaults.headers.common[header_name] = csrftoken;*/
-            $http.defaults.xsrfHeaderName = "X-CSRFToken";
-            $http.defaults.xsrfCookieName = "csrftoken";
-            $.ajaxSetup({
-                xhrFields: {
-                    withCredentials: true
-                }
-            });
-            console.log($http.defaults.headers.common);
-        }
-    ])
+    .run(["$http","$cookies", function ($http, $cookies) {
+        // apparently the angular doesn"t do CSRF headers using
+        // CORS across different domains thereby this hack
+        var csrftoken = $cookies.csrftoken;
+        var header_name = "X-CSRFToken";
+        $http.defaults.headers.common[header_name] = csrftoken;
+        $.ajaxSetup({
+            xhrFields: {
+                withCredentials: true
+            }
+        });
+    }])
 
     .config(["silGridConfigProvider", function(silGridConfig){
             silGridConfig.apiMaps = {
