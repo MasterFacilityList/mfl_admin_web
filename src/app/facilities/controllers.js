@@ -330,6 +330,20 @@ angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
             },
             {
                 func : " ",
+                class: "action-btn action-btn-md action-btn-success ",
+                color: "blue",
+                tipmsg: "Upgrade Facility",
+                icon: "fa-arrow-up"
+            },
+            {
+                func : " ",
+                class: "action-btn action-btn-md action-btn-danger ",
+                color: "blue",
+                tipmsg: "Downgrade Facility",
+                icon: "fa-arrow-down"
+            },
+            {
+                func : " ",
                 class: "action-btn action-btn-md action-btn-warm ",
                 color: "blue",
                 tipmsg: "Publish facility",
