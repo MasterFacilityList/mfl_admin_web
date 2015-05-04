@@ -1,38 +1,48 @@
 "use strict";
 
-angular.module("mfl.admin_units.services", [])
-
-    .service("mfl.admin_units.service.admin_units", ["mfl.common.providers.requests",
-        function (requests) {
-            var url = {
-                adminunits : "api/v1/admin_units"
+(function(angular){
+    angular.module("mfl.counties.wrapper", ["sil.api.wrapper"])
+    .provider("countiesApi", function(){
+        var self = this;
+        self.baseUrl = "api/common/counties";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
             };
-            this.getAdminUnitsBackend = function () {
-                return requests.callApi("GET", url.admin_units);
+        }];
+    });
+    angular.module("mfl.constituencies.wrapper", ["sil.api.wrapper"])
+    .provider("constituenciesApi", function(){
+        var self = this;
+        self.baseUrl = "api/common/constituencies";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
             };
-            this.getAdminUnits = function () {
-                var admin_units = {
-                    results : [
-                        {
-                            id: "1",
-                            code : "FA001",
-                            name : "Sio kimao",
-
-                            date_created: "15/04/2015",
-                            description : "It is located in Kiambu county"+
-                                            " no idea subcounty"
-                        },
-                        {
-                            id: "2",
-                            code : "FA002",
-                            name : "Kiambu county",
-
-                            date_created: "15/04/2015",
-                            description : "Its @central province"+
-                                            " area 254 Kenya"
-                        }
-                    ]
-                };
-                return admin_units;
+        }];
+    });
+    angular.module("mfl.wards.wrapper", ["sil.api.wrapper"])
+    .provider("wardsApi", function(){
+        var self = this;
+        self.baseUrl = "api/common/wards";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
             };
-        }]);
+        }];
+    });
+    angular.module("mfl.towns.wrapper", ["sil.api.wrapper"])
+    .provider("townsApi", function(){
+        var self = this;
+        self.baseUrl = "api/common/towns";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
+            };
+        }];
+    });
+})(angular);

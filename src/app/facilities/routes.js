@@ -61,6 +61,15 @@ angular.module("mfl.facilities.routes",[])
                     }
                 }
             })
+            .state("facilities.manage_officers", {
+                url: "/manageofficers",
+                views: {
+                    "main-content@facilities": {
+                        controller: "mfl.facilities.controllers.officers",
+                        templateUrl: "facilities/tpls/manage_officers.tpl.html"
+                    }
+                }
+            })
             .state("facilities.manage_owners", {
                 url: "/manageowners",
                 views: {

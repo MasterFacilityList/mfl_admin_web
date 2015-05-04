@@ -26,7 +26,14 @@ angular.module("mflAppConfig", ["ngCookies","sil.grid", "mfl.settings"])
                         practitioners: ["mfl.practitioners.wrapper", "practitionersApi"],
                         owners: ["mfl.facilities.wrapper", "ownersApi"],
                         facilities : ["mfl.facilities.wrapper",
-                            "facilitiesApi"]
+                            "facilitiesApi"],
+                        chul: ["mfl.chul.wrapper", "chulApi"],
+                        officers: ["mfl.officers.wrapper", "officersApi"],
+                        counties: ["mfl.counties.wrapper", "countiesApi"],
+                        constituencies: ["mfl.constituencies.wrapper", "constituenciesApi"],
+                        wards: ["mfl.wards.wrapper", "wardsApi"],
+                        towns: ["mfl.towns.wrapper", "townsApi"],
+                        owners: ["mfl.facilities.wrapper", "ownersApi"]
                     };
                 silGridConfig.appConfig = "mflAppConfig";
             }]);

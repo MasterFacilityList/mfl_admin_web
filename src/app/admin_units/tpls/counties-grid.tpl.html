@@ -1,0 +1,27 @@
+<div class="">
+    <div class="col-md-5 col-sm-5 pull-right">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+</div>
+<div id="no-more-tables" class="col-lg-12 margin-t-15">
+    <table class="table content-card cf">
+        <thead class="cf">
+            <th>Name</th>
+            <th class="text-center">Actions</th>
+        </thead>
+        <tbody class="example-animate-container">
+            <tr class="animate-repeat" ng-repeat="count in counts | filter: search.query">
+                <td data-title="Name">{{count.name}}</td>
+                <td data-title="Actions" class="text-center">
+                    <a ui-sref="admin_units.counties.view_consts({count_id : count.id})" class="action-btn action-btn-grid action-btn-primary" tooltip-placement="bottom" tooltip="View Constituencies">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a ui-sref="admin_units.counties.edit({count_id : count.id})" class="action-btn action-btn-grid action-btn-primary" tooltip-placement="bottom" tooltip="Edit County">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>

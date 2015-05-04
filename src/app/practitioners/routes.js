@@ -27,21 +27,30 @@ angular.module("mfl.practitioners.routes", [])
                 pageTitle: "practitioners"
             }
         })
-        .state("practitioners.new_chu", {
-            url: "/newpractitioner",
+        .state("practitioners.new_prac", {
+            url: "/newprac",
             views: {
                 "main-content@practitioners": {
-                    controller: "mfl.practitioners.controllers.new_chu",
-                    templateUrl: "practitioners/tpls/new_chu.tpl.html"
+                    controller: "mfl.practitioners.controllers.new_prac",
+                    templateUrl: "practitioners/tpls/new_prac.tpl.html"
                 }
             }
         })
-        .state("practitioners.edit_chu", {
-            url: "/editpractitioner/:prac_id",
+        .state("practitioners.edit_prac", {
+            url: "/editprac/:prac_id",
             views: {
                 "main-content@practitioners": {
-                    controller: "mfl.practitioners.controllers.edit_chu",
-                    templateUrl: "practitioners/tpls/new_chu.tpl.html"
+                    controller: "mfl.practitioners.controllers.edit_prac",
+                    templateUrl: "practitioners/tpls/new_prac.tpl.html"
+                }
+            }
+        })
+        .state("practitioners.view_prac", {
+            url: "/view/:prac_id",
+            views: {
+                "main-content@practitioners": {
+                    controller: "mfl.practitioners.controllers.view_prac",
+                    templateUrl: "practitioners/tpls/new_prac.tpl.html"
                 }
             }
         });

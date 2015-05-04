@@ -15,21 +15,21 @@
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="prac in pracs | filter: search.query">
-                <td data-title="Registration #">{{prac.id}}</td>
+                <td data-title="Registration #">{{prac.registration_number}}</td>
                 <td data-title="Name">{{prac.name}}</td>
                 <td data-title="Practice Type">{{prac.practice_type}}</td>
                 <td data-title="Speciality">{{prac.speciality}}</td>
                 <td data-title="Ward">{{prac.ward}}</td>
                 <td data-title="Actions" class="text-center">
-                    <a ui-sref="practitioners.view_practitioner({prac_id : prac.registration_number})" class="action-btn action-btn-grid action-btn-primary">
+                    <a ui-sref="practitioners.view_prac({prac_id : prac.id})" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-eye"></i>
                     </a>
-                    <a ui-sref="practitioners.edit_practitioner({prac_id : prac.registration_number})" class="action-btn action-btn-grid action-btn-primary">
+                    <a ui-sref="practitioners.edit_prac({prac_id : prac.id})" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-edit"></i>
                     </a>
                 </td>
             </tr>
         </tbody>
     </table>
+    <sil-grid-pagination> </sil-grid-pagination>
 </div>
- <sil-grid-pagination> </sil-grid-pagination>

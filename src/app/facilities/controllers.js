@@ -86,6 +86,46 @@ angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
         ];
         $scope.services = serviceServices.getServices();
     }])
+    .controller("mfl.facilities.controllers.officers", ["$scope",
+    function ($scope) {
+        $scope.test = "Services";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
+        $scope.path = [
+            {
+                name: "Facilities",
+                route: "facilities"
+            },
+            {
+                name: "Manage Officers",
+                route: "facilities.manage_officers"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-user",
+                name: "Manage Officers"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "ui-sref='facilities.new_service' ",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "New Service",
+                icon: "fa-plus"
+            },
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
+    }])
     //start of new and edit services
     .controller("mfl.facilities.controllers.new_service", ["$scope", function ($scope) {
         $scope.test = "New service";
