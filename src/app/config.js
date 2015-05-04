@@ -24,7 +24,6 @@ angular.module("mflAppConfig", ["ngCookies","sil.grid", "mfl.settings"])
         .config(["silGridConfigProvider", function(silGridConfig){
                 silGridConfig.apiMaps = {
                         practitioners: ["mfl.practitioners.wrapper", "practitionersApi"],
-                        owners: ["mfl.facilities.wrapper", "ownersApi"],
                         facilities : ["mfl.facilities.wrapper",
                             "facilitiesApi"],
                         chul: ["mfl.chul.wrapper", "chulApi"],
