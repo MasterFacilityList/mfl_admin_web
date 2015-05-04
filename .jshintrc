@@ -23,6 +23,7 @@
         "it": true,
         "browser": true,
         "localStorage":true,
+        "localforage" : true,
         "protractor": true,
         "by": true,
         "module":true,

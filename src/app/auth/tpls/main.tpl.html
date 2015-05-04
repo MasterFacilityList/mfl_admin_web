@@ -4,6 +4,12 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="margin-t-120 col-lg-6 col-md-6 col-sm-8 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-2 col-xs-offset-1 content-card">
                     <h2 class="text-center"> <span class="text-danger">e</span>-Health Kenya Facilities</h2>
+                    <span ng-if="err" class="alert alert-danger col-md-10 col-md-offset-1">
+                        {{login_err}}
+                        <span class="pull-right">
+                            <i class="fa fa-times"></i>
+                        </span>
+                    </span>
                     <form role="form" name="login" ng-submit="submitUser(user)">
                         <div class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1">
                             <div class="group">
