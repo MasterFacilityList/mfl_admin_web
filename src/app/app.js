@@ -11,6 +11,7 @@ angular.module("mflApp", [
     "templates-common",
     "mflAppConfig",
     "mfl.common",
+    //"mflApp.interceptors",
     "mfl.home",
     "mfl.auth",
     "mfl.facilities",

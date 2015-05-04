@@ -5,5 +5,6 @@ angular.module("mfl.auth", [
     "ui.router",
     //our stuff
     "mfl.auth.controllers",
-    "mfl.auth.routers"
+    "mfl.auth.routers",
+    "mflApp.interceptors"
 ]);
