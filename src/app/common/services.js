@@ -4,8 +4,9 @@ angular.module("mfl.common.services", [])
 
     .service("mfl.common.services.localForage", [function () {
         this.getItem = function (key) {
-            localforage.getItem(key).then(function (value) {
-                return value;
+            localforage.getItem(key).then(function(value) {
+                console.log(value);
+                return JSON.parse(value);
             });
         };
         this.setItem = function (key, value) {

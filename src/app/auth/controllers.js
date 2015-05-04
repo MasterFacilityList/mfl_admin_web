@@ -12,7 +12,7 @@ angular.module("mfl.auth.controllers", [])
                 loginService.login(obj)
                     .success(function (data) {
                         console.log(data);
-                        loginService.saveUser(data);
+                        loginService.saveUser(obj.username);
                         $state.go("home");
                     })
                     .error(function (e) {

@@ -16,6 +16,9 @@ angular.module("mfl.home.controllers", [])
             name: "Home"
         }
     ];
+    $scope.user = logoutService.getUser();
+    console.log($scope.user);
+
     $scope.logout = function () {
         logoutService.logout()
             .success(function () {

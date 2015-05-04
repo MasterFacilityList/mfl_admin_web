@@ -3,7 +3,7 @@
 angular.module("mfl.auth.services", [])
 
     .service("mfl.auth.services.login", ["mfl.common.providers.requests",
-        "mfl.common.services.localForage",
+        "mfl.common.services.localStorage",
         function (requests, forageService) {
             var url = {
                 login : "api/rest-auth/login/",
