@@ -29,13 +29,11 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
     .run(["$rootScope","$state","mfl.auth.services.login",
         "mfl.auth.permissions.permissionList",
         function ($rootScope,$state, authService, permissionService) {
-            $rootScope.$on("$stateChangeStart", function (event) {
+            $rootScope.$on("$stateChangeStart", function () {
                 if(!authService.isLoggedIn()){
                     $state.go("login");
                 }
                 else{
-                    console.log(event);
-                    console.log("logged in");
                     $rootScope.current_user = authService.getUser();
                     var permissionList =
                         $rootScope.current_user.all_permissions;
