@@ -24,6 +24,7 @@
         "browser": true,
         "localStorage":true,
         "localforage" : true,
+        "History" : true,
         "protractor": true,
         "by": true,
         "module":true,

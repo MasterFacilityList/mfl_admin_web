@@ -105,7 +105,7 @@
                     return {
                         title: "Error",
                         type:"danger",
-                        msg: error.error.$$unwrapTrustedValue()
+                        msg: error.error
                     };
                 };
                 self.setError = function(error){

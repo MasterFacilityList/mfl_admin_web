@@ -1,19 +1,7 @@
 "use strict";
-angular.module("mflAppConfig", ["ngCookies", "mfl.auth.permissions",
-    "sil.grid", "mfl.settings", "mfl.common.providers", "mfl.auth.services"])
-    .config(["$httpProvider",function ($httpProvider) {
-        $httpProvider.defaults.withCredentials = true;
-        $httpProvider.defaults.headers.common = {
-            "Content-Type":"application/json",
-            "Accept" : "application/json, */*"
-        };
+angular.module("mflAppConfig", ["mfl.auth.permissions",
+    "sil.grid", "mfl.auth.services"])
 
-    }])
-
-    //beginning of configuring interceptor
-    .config(function($httpProvider) {
-        $httpProvider.interceptors.push("myCSRF");
-    })
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
                 practitioners: ["mfl.practitioners.wrapper", "practitionersApi"],
@@ -27,38 +15,27 @@ angular.module("mflAppConfig", ["ngCookies", "mfl.auth.permissions",
                 towns: ["mfl.towns.wrapper", "townsApi"],
                 owners: ["mfl.facilities.wrapper", "ownersApi"]
             };
-        silGridConfig.appConfig = "mflAppConfig";
+        silGridConfig.appConfig = "mfl.settings";
     }])
 
-    .run(["$http","$cookies", function ($http, $cookies) {
-        // apparently the angular doesn"t do CSRF headers using
-        // CORS across different domains thereby this hack
-        var csrftoken = $cookies.csrftoken;
-        var header_name = "X-CSRFToken";
-        $http.defaults.headers.common[header_name] = csrftoken;
-        $.ajaxSetup({
-            xhrFields: {
-                withCredentials: true
-            }
-        });
-    }])
-
-    .run(["mfl.auth.services.login", "$window",
-        function (authService, $window) {
+    .run(["mfl.auth.services.login","$state",
+        function (authService, $state) {
             if(!authService.isLoggedIn()) {
-                $window.location = "/#login";
+                $state.go("login");
             }
 
         }
     ])
-    .run(["$rootScope", "mfl.auth.services.login",
-        "mfl.auth.permissions.permissionList", "$window",
-        function ($rootScope, authService, permissionService, $window) {
-            $rootScope.$on("$stateChangeStart", function () {
+    .run(["$rootScope","$state","mfl.auth.services.login",
+        "mfl.auth.permissions.permissionList",
+        function ($rootScope,$state, authService, permissionService) {
+            $rootScope.$on("$stateChangeStart", function (event) {
                 if(!authService.isLoggedIn()){
-                    $window.location = "/#login";
+                    $state.go("login");
                 }
                 else{
+                    console.log(event);
+                    console.log("logged in");
                     $rootScope.current_user = authService.getUser();
                     var permissionList =
                         $rootScope.current_user.all_permissions;
