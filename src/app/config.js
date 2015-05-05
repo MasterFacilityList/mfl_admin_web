@@ -1,5 +1,5 @@
 "use strict";
-angular.module("mflAppConfig", ["ngCookies",
+angular.module("mflAppConfig", ["ngCookies", "mfl.auth.permissions",
     "sil.grid", "mfl.settings", "mfl.common.providers", "mfl.auth.services"])
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
@@ -48,16 +48,22 @@ angular.module("mflAppConfig", ["ngCookies",
             if(!authService.isLoggedIn()) {
                 window.location = "/#login";
             }
+
         }
     ])
     .run(["$rootScope", "mfl.auth.services.login",
-        function ($rootScope, authService) {
+        "mfl.auth.permissions.permissionList",
+        function ($rootScope, authService, permissionService) {
             $rootScope.$on("$stateChangeStart", function () {
                 if(!authService.isLoggedIn()){
                     window.location = "/#login";
                 }
                 else{
                     $rootScope.current_user = authService.getUser();
+                    var permissionList =
+                        $rootScope.current_user.all_permissions;
+                    permissionService.setPermissions(permissionList);
+                    //console.log(permissionList);
                 }
             });
         }
