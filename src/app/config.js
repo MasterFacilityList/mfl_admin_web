@@ -43,20 +43,20 @@ angular.module("mflAppConfig", ["ngCookies", "mfl.auth.permissions",
         });
     }])
 
-    .run(["mfl.auth.services.login",
-        function (authService) {
+    .run(["mfl.auth.services.login", "$window",
+        function (authService, $window) {
             if(!authService.isLoggedIn()) {
-                window.location = "/#login";
+                $window.location = "/#login";
             }
 
         }
     ])
     .run(["$rootScope", "mfl.auth.services.login",
-        "mfl.auth.permissions.permissionList",
-        function ($rootScope, authService, permissionService) {
+        "mfl.auth.permissions.permissionList", "$window",
+        function ($rootScope, authService, permissionService, $window) {
             $rootScope.$on("$stateChangeStart", function () {
                 if(!authService.isLoggedIn()){
-                    window.location = "/#login";
+                    $window.location = "/#login";
                 }
                 else{
                     $rootScope.current_user = authService.getUser();
