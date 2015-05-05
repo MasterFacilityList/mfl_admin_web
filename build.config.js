@@ -73,6 +73,7 @@ module.exports = {
             "vendor/angular-bootstrap/ui-bootstrap.js",
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
             "vendor/angular-ui-router/release/angular-ui-router.js",
+            "vendor/localforage/dist/localforage.js",
             "libs/api_wrapper.js",
             "libs/sil_grid_tpls.js",
             "libs/sil_grid.js"

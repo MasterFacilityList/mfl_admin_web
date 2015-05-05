@@ -277,7 +277,7 @@ angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
     }])
 
     .controller("mfl.facilities.controllers.manage_facilities", ["$scope",
-    "mfl.facilities.services.facilities", function ($scope, facilityService) {
+    function ($scope) {
         $scope.test = "Facilities";
         $scope.tooltip = {
             "title": "",
@@ -301,7 +301,8 @@ angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
         ];
         $scope.action = [
             {
-                func : "ui-sref='facilities.new_facility.basic' ",
+                func : "ui-sref='facilities.new_facility.basic' " +
+                        "has-permission='facilities.add_facility' ",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
                 tipmsg: "New Facility",
@@ -315,7 +316,6 @@ angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
                 icon: "fa-arrow-left"
             }
         ];
-        $scope.facilities = facilityService.getFacilities();
     }])
     .controller("mfl.facilities.controllers.facilitiesaction",
         ["$scope", "$stateParams","facilitiesApi",
