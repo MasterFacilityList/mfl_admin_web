@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("mfl.auth.services", [])
+angular.module("mfl.auth.services", ["mfl.common.services"])
 
     .service("mfl.auth.services.login", ["mfl.common.providers.requests",
         "mfl.common.services.localStorage",
