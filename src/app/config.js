@@ -32,6 +32,28 @@ angular.module("mflAppConfig", ["ngCookies",
         });
     }])
 
+    .run(["mfl.auth.services.login", "$state",
+        function (authService, $state) {
+            if(!authService.isLoggedIn()) {
+                $state.go("login");
+            }
+        }
+    ])
+
+    .run(["$rootScope", "$state", "mfl.auth.services.login",
+        function ($rootScope, $state, authService) {
+            $rootScope.$on("$stateChangeStart", function () {
+                if(!authService.isLoggedIn()){
+                    $state.go("login");
+                }
+                else{
+                    $rootScope.current_user = authService.getUser();
+                    console.log($rootScope.current_user);
+                }
+            });
+        }
+    ])
+
     .config(["silGridConfigProvider", function(silGridConfig){
             silGridConfig.apiMaps = {
                     practitioners: ["mfl.practitioners.wrapper", "practitionersApi"],

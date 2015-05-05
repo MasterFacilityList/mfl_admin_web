@@ -8,12 +8,16 @@ angular.module("mfl.auth.controllers", [])
             $scope.test = "Login";
             $scope.err = false;
             $scope.submitUser = function(obj) {
-                console.log(obj);
                 loginService.login(obj)
-                    .success(function (data) {
-                        console.log(data);
-                        loginService.saveUser(obj.username);
-                        $state.go("home");
+                    .success(function () {
+                        loginService.currentUser()
+                            .success(function (curr_usr) {
+                                loginService.saveUser(curr_usr);
+                                $state.go("home");
+                            })
+                            .error(function (e) {
+                                console.log(e);
+                            });
                     })
                     .error(function (e) {
                         console.log(e);
