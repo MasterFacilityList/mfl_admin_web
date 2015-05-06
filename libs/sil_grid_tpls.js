@@ -3,12 +3,12 @@ angular.module("sil.grid.pagination.tpl.html", []).run(["$templateCache",
         $templateCache.put("sil.grid.pagination.tpl.html",
             "<ul class=\"pager\" ng-if=\"pagination.active\">\n" +
             "<li ng-if=\"pagination.prev\" class=\"previous\">\n"+
-            "<a  ng-click=paginate(pagination.prev_page)>\n" +
+            "<a class=login-btn login-btn-primary ng-click=paginate(pagination.prev_page)>\n" +
             "<span aria-hidden=\"true\">&larr;</span> Previous</a>\n" +
             "</li>\n" +
             "<li>Page {{pagination.current_page}} / {{pagination.page_count}}</li>"+
             " <li class=\"next\" ng-if=\"pagination.next\">\n"+
-            "<a ng-click=paginate(pagination.next_page)>Next\n" +
+            "<a class=login-btn login-btn-primary ng-click=paginate(pagination.next_page)>Next\n" +
                 " <span aria-hidden=\"true\">&rarr;</span></a>\n" +
             "</li>\n" +
             "</ul>\n"

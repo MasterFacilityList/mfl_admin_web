@@ -1,88 +1,57 @@
+<style>
+    .home-cards > div:nth-of-type(4n+1){
+        clear:both;
+    }
+</style>
 <contentheader></contentheader>
-                <div class="content-body">
-                        <div class="col-lg-12 search-card">
-                            <form role="form">
-
-                                <div class="group">
-                                    <input type="text" ng-model="search.query" required>
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    <label><i class="fa fa-search"></i>&nbsp;Search Facilities</label>
-                                </div>
-                            </form>
-                        </div>
-
-                    <legend class="margin-l-10">New Facilities</legend>
-                    <div class="col-lg-6">
-                        <div class="card card-panel">
-                            <div class="card-heading-active">
-                                <div class="col-md-6">
-                                    <h4>00200</h4>
-                                </div>
-                                <div class="col-md-6">
-                                   <h5>Wed 15th May 2014</h5>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <h4>Bishop Owaga Clinic</h4>
-                                <div>Type: Medical Clinic</div>
-                                <div>County: Nakuru</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="card-panel">
-                            <div class="card-heading-active">
-                                <div class="col-md-6">
-                                   <h5>60240</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Tue 14th May 2014</h5>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <h4>AIC Eldoret Clinic</h4>
-                                <div>Type: Medical Clinic</div>
-                                <div>County: Eldoret</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card card-panel">
-                            <div class="card-heading-active">
-                                <div class="col-md-6">
-                                    <h5>18171</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Mon 13th May 2014</h5>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <h4>Administration Police Senior Staff College Dispensary</h4>
-                                <div>Type: Dispensary</div>
-                                <div>County: Emali</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="card-panel">
-                            <div class="card-heading-retired">
-                                <div class="col-md-6">
-                                    <h5>12456</h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Mon 13th May 2010</h5>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <h4>Catholic Mission Dispensary Makueni</h4>
-                                <div>Type: Medical Clinic</div>
-                                <div>County: Eldoret</div>
-                            </div>
-                        </div>
-                    </div>
+<div class="content-body">
+    <div class="col-lg-12 col-md-12">
+        <div class="col-lg-12 col-md-12 search-card">
+            <form role="form">
+                <div class="group">
+                    <input type="text" ng-model="search.query" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label><i class="fa fa-search"></i>&nbsp;Search Facilities</label>
                 </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <legend class="margin-l-10">New Facilities</legend>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6" ng-repeat="fac in latest_facilities">
+            <div class="card-panel">
+                <div class="content-heading">
+                    <h4>
+                        <span style="border-right: 1px solid #ddd;">{{fac.code}}&nbsp;</span>&nbsp; {{fac.name}}
+                        <span class="pull-right">
+                            {{fac.created | date : 'medium'}}
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <h4>Owned by: {{fac.owner}}</h4>
+                    <h4>
+                        Type: {{fac.facility_type}}
+                        <span pull-right>
+                            Ward: {{fac.ward}}
+                        </span>
+                    </h4>
+                    <h4>
+                        <label class="control-label"><b>Published: </b></label>
+                        <span ng-show="fac.is_published" class="text-success">
+                            <i class="fa fa-check-circle-o fa-1x"></i>
+                        </span>
+                        <span ng-hide="fac.is_published" class="text-danger">
+                            <i class="fa fa-times-circle-o fa-1x"></i>
+                        </span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <br ng-if="!(($index + 1) % 4)" />
     </div>
 </div>

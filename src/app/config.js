@@ -13,7 +13,10 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
                 constituencies: ["mfl.constituencies.wrapper", "constituenciesApi"],
                 wards: ["mfl.wards.wrapper", "wardsApi"],
                 towns: ["mfl.towns.wrapper", "townsApi"],
-                owners: ["mfl.facilities.wrapper", "ownersApi"]
+                owners: ["mfl.facilities.wrapper", "ownersApi"],
+                users : ["mfl.users.wrapper", "usersApi"],
+                roles : ["mfl.users.wrapper","rolesApi"],
+                permissions : ["mfl.users.wrapper", "permissionsApi"]
             };
         silGridConfig.appConfig = "mfl.settings";
     }])
@@ -29,13 +32,11 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
     .run(["$rootScope","$state","mfl.auth.services.login",
         "mfl.auth.permissions.permissionList",
         function ($rootScope,$state, authService, permissionService) {
-            $rootScope.$on("$stateChangeStart", function (event) {
+            $rootScope.$on("$stateChangeStart", function () {
                 if(!authService.isLoggedIn()){
                     $state.go("login");
                 }
                 else{
-                    console.log(event);
-                    console.log("logged in");
                     $rootScope.current_user = authService.getUser();
                     var permissionList =
                         $rootScope.current_user.all_permissions;

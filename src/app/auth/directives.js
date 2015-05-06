@@ -10,7 +10,6 @@ angular.module("mfl.auth.directives", ["mfl.auth.permissions"])
                         throw "has permissions value must be a string";
                     }
                     var value = attrs.hasPermission.trim();
-                    console.log(value);
                     var notPermissionFlag = value[0] === "!";
                     if(notPermissionFlag) {
                         value = value.slice(1).trim();

@@ -62,7 +62,7 @@ textarea.reg-input:active:focus, .reg-input.active:focus,
     margin-bottom:20px;
 }
 input[type=text],input[type=number],input[type=search],
-input[type=password], select , textarea{
+input[type=password], input[type=email], select , textarea{
     font-size:16px;
     padding:10px 10px 10px 5px;
     background-color: #fff;
@@ -72,7 +72,7 @@ input[type=password], select , textarea{
     border-bottom:1px solid #757575;
 }
 input[type=text]:focus,input[type=number]:focus,
-input[type=search]:focus, input[type=password],
+input[type=search]:focus, input[type=password],input[type=email],
  select:focus, textarea:focus { outline:none; }
 /* LABEL ======================================= */
 .group label          {
@@ -90,6 +90,7 @@ input[type=search]:focus, input[type=password],
 input[type=text]:focus ~ label, input[type=text]:valid ~ label ,
 input[type=number]:focus ~ label, input[type=number]:valid ~ label ,
 input[type=search]:focus ~ label, input[type=search]:valid ~ label ,
+input[type=email]:focus ~ label, input[type=email]:valid ~ label ,
 input[type=password]:focus ~ label, input[type=password]:valid ~ label ,
 select:focus ~ label, select:valid ~ label,
 textarea:focus ~ label, textarea:valid ~ label {
@@ -119,6 +120,7 @@ textarea:focus ~ label, textarea:valid ~ label {
 input[type=text]:focus ~ .bar:before, input[type=text]:focus ~ .bar:after,
 input[type=number]:focus ~ .bar:before, input[type=number]:focus ~ .bar:after,
 input[type=search]:focus ~ .bar:before, input[type=search]:focus ~ .bar:after,
+input[type=email]:focus ~ .bar:before, input[type=email]:focus ~ .bar:after,
 input[type=password]:focus ~ .bar:before,
 input[type=password]:focus ~ .bar:after,
 select:focus ~ .bar:before, select:focus ~ .bar:after,
@@ -138,7 +140,7 @@ textarea:focus ~ .bar:before, textarea:focus ~ .bar:after {
 
 /* active state */
 input[type=text]:focus ~ .highlight,
-input[type=number]:focus ~ .highlight,
+input[type=number]:focus ~ .highlight, input[type=email],
 input[type=search]:focus ~ .highlight, input[type=password],
 select:focus ~ .highlight, textarea:focus ~ .highlight {
     animation:inputHighlighter 0.3s ease;
@@ -154,6 +156,7 @@ select:focus ~ .highlight, textarea:focus ~ .highlight {
 input[type=text]:focus ~ label, input[type=text]:valid ~ label,
 input[type=number]:focus ~ label, input[type=number]:valid ~ label,
 input[type=search]:focus ~ label, input[type=search]:valid ~ label,
+input[type=email]:focus ~ label, input[type=email]:valid ~ label,
 input[type=password]:focus ~ label, input[type=password]:valid ~ label,
 select:focus ~ label, select:valid ~ label,
 textarea:focus ~ label, textarea:valid ~ label {
@@ -165,16 +168,17 @@ textarea:focus ~ label, textarea:valid ~ label {
 .btn:after,
 .nav a:after {
     content: "";
+    color: rgba(128, 128, 128, 0.7);
     background: rgba(255,255,255,0.3);
     display: block;
     position: absolute;
     border-radius: 50%;
-    padding-top: 240%;
+    /*padding-top: 240%;
     padding-left: 240%;
     margin-top: -120%;
-    margin-left: -120%;
+    margin-left: -120%;*/
     opacity: 0;
-    transition: all 1s;
+    /*transition: all 1s;*/
 }
 .btn:active:after,
 .nav a:active:after {
@@ -183,5 +187,5 @@ textarea:focus ~ label, textarea:valid ~ label {
     margin-top: 0;
     margin-left: 0;
     opacity: 1;
-    transition: 0s;
+    /*transition: 0s;*/
 }

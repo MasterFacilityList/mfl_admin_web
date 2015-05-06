@@ -5,5 +5,6 @@ angular.module("mfl.home", [
     //out stuff
     "mfl.home.controllers",
     "mfl.home.routes",
+    "mfl.home.services",
     "mfl.common.directives"
 ]);
