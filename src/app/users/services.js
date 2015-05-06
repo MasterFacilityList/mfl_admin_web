@@ -1,6 +1,39 @@
 "use strict";
 
-angular.module("mfl.users.services", [])
+angular.module("mfl.users.wrapper", ["sil.api.wrapper"])
+
+    .provider("usersApi", function(){
+        var self = this;
+        self.baseUrl = "api/users/";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
+            };
+        }];
+    })
+
+    .provider("rolesApi", function () {
+        var self = this;
+        self.baseUrl = "api/users/groups/";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
+            };
+        }];
+    })
+
+    .provider("permissionsApi", function () {
+        var self = this;
+        self.baseUrl = "api/users/permissions/";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
+            };
+        }];
+    })
 
     .service("mfl.users.services.uses", ["mfl.common.providers.requests",
     function (requests) {
@@ -9,26 +42,5 @@ angular.module("mfl.users.services", [])
         };
         this.getUsersBackend = function () {
             return requests.callApi("GET", url.users);
-        };
-        this.getUsers = function () {
-            var users = {
-                results : [
-                    {
-                        id: "1",
-                        code : "US001",
-                        name : "Brian Marika",
-                        role: "County Officer",
-                        date_created: "15/04/2015"
-                    },
-                    {
-                        id: "2",
-                        code : "US002",
-                        name : "Antony Sunday",
-                        role: "Subcounty officer",
-                        date_created: "15/04/2015"
-                    }
-                ]
-            };
-            return users;
         };
     }]);

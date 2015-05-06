@@ -13,7 +13,10 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
                 constituencies: ["mfl.constituencies.wrapper", "constituenciesApi"],
                 wards: ["mfl.wards.wrapper", "wardsApi"],
                 towns: ["mfl.towns.wrapper", "townsApi"],
-                owners: ["mfl.facilities.wrapper", "ownersApi"]
+                owners: ["mfl.facilities.wrapper", "ownersApi"],
+                users : ["mfl.users.wrapper", "usersApi"],
+                roles : ["mfl.users.wrapper","rolesApi"],
+                permissions : ["mfl.users.wrapper", "permissionsApi"]
             };
         silGridConfig.appConfig = "mfl.settings";
     }])
