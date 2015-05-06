@@ -10,7 +10,7 @@ angular.module("mfl.facilities.wrapper", ["sil.api.wrapper"])
                 baseUrl: self.baseUrl,
                 api: api.setBaseUrl(this.baseUrl)
             };
-        }];"rolesApi"
+        }];
     })
     .provider("facilitiesApi", function () {
         var self = this;

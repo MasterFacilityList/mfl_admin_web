@@ -249,8 +249,8 @@ angular.module("mfl.users.controllers", [])
         }
     ])
     .controller("mfl.users.controllers.new_role", ["$scope", "permissionsApi",
-        "rolesApi",
-        function ($scope, permissionsWrapper, roleswrapper) {
+        "rolesApi", "$state",
+        function ($scope, permissionsWrapper, roleswrapper, $state) {
             $scope.test = "New role";
             $scope.permissions = "";
             $scope.path = [
@@ -330,7 +330,14 @@ angular.module("mfl.users.controllers", [])
             //adding new permission
             $scope.addRole = function (new_role) {
                 new_role.permissions = $scope.set_permissions;
-                console.log(new_role);
+                roleswrapper.api.post(new_role)
+                    .success(function (role_result) {
+                        console.log(role_result);
+                        $state.go("users.manage_roles");
+                    })
+                    .error(function (e) {
+                        console.log(e);
+                    });
             };
             //end of adding new permission
         }
