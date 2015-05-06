@@ -330,7 +330,7 @@ angular.module("mfl.users.controllers", [])
             //adding new permission
             $scope.addRole = function (new_role) {
                 new_role.permissions = $scope.set_permissions;
-                roleswrapper.api.post(new_role)
+                roleswrapper.api.create(new_role)
                     .success(function (role_result) {
                         console.log(role_result);
                         $state.go("users.manage_roles");
