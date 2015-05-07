@@ -75,13 +75,16 @@ module.exports = {
             "vendor/angular-ui-router/release/angular-ui-router.js",
             "vendor/localforage/dist/localforage.js",
             "libs/api_wrapper.js",
-            "libs/sil_grid_tpls.js",
-            "libs/sil_grid.js"
+            "libs/sil_grid/sil_grid_tpls.js",
+            "libs/sil_grid/sil_grid.js"
         ],
         css: [
         ],
         assets: [
             "vendor/fontawesome/fonts/*"
+        ],
+        imgs: [
+            "libs/sil_grid/img/*"
         ]
     },
 

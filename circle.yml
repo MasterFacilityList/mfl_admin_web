@@ -1,7 +1,18 @@
 machine:
-  node:
-    version: 0.10.33
+    node:
+        version: 0.10.33
+
+
+dependencies:
+    override:
+        - npm install
+        - bower install:
+            environment:
+                PATH: "$(npm bin):$PATH"
+
 
 test:
   override:
-    - bash ci_test.sh
+    - grunt test:
+        environment:
+            PATH: "$(npm bin):$PATH"

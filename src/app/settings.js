@@ -1,14 +1,20 @@
-"use strict";
+(function (angular) {
+    "use strict";
 
-angular.module("mfl.settings", ["ngCookies","sil.api.wrapper",
-    "mfl.common.providers"])
+    angular.module("mfl.settings", [
+        "ngCookies","sil.api.wrapper",
+        "mfl.common.providers"
+    ])
 
     .constant("SERVER_URL", "http://localhost:8061/")
+
     .config(["SERVER_URL", "apiConfigProvider",
         function(SERVER_URL, apiConfig){
             apiConfig.SERVER_URL = SERVER_URL;
         }
-    ]).run(["$http","$cookies", function ($http, $cookies) {
+    ])
+
+    .run(["$http","$cookies", function ($http, $cookies) {
         // apparently the angular doesn"t do CSRF headers using
         // CORS across different domains thereby this hack
         var csrftoken = $cookies.csrftoken;
@@ -20,6 +26,7 @@ angular.module("mfl.settings", ["ngCookies","sil.api.wrapper",
             }
         });
     }])
+
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common = {
@@ -30,6 +37,8 @@ angular.module("mfl.settings", ["ngCookies","sil.api.wrapper",
     }])
 
     //beginning of configuring interceptor
-    .config(function($httpProvider) {
+    .config(["$httpProvider", function($httpProvider) {
         $httpProvider.interceptors.push("myCSRF");
-    });
+    }]);
+
+})(angular);
