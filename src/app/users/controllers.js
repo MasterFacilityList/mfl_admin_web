@@ -210,6 +210,36 @@ angular.module("mfl.users.controllers", [])
             return $scope.oneUser;
         };
     }])
+    .controller("mfl.users.controllers.permissions", ["$scope",
+        function ($scope) {
+            $scope.test = "Permissions";
+            $scope.path = [
+                {
+                    name: "Users",
+                    route: "users"
+                },
+                {
+                    name: "Manage permissions",
+                    route: "users.manage_permissions"
+                }
+            ];
+            $scope.title = [
+                {
+                    icon: "fa-sort-amount-asc",
+                    name: "Manage Permissions"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "onclick=window.history.back()",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go back",
+                    icon: "fa-arrow-left"
+                }
+            ];
+        }
+    ])
     .controller("mfl.users.controllers.role", ["$scope",
         function ($scope) {
             $scope.test = "Roles";

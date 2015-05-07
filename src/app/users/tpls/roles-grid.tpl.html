@@ -15,7 +15,7 @@
             <tr class="animate-repeat" ng-repeat="role in roles | filter: search.query">
                 <td data-title="#">{{$index + 1}}</td>
                 <td data-title="Title">{{role.name}}</td>
-                <td class="text-center">
+                <td data-title="Actions" class="text-center">
                     <a ui-sref="facilities.edit_facility.basic({fac_id : facility.id})" class="action-btn action-btn-grid action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Edit user">
                         <i class="fa fa-edit"></i>
                     </a>
