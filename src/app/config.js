@@ -16,7 +16,10 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
                 owners: ["mfl.facilities.wrapper", "ownersApi"],
                 users : ["mfl.users.wrapper", "usersApi"],
                 roles : ["mfl.users.wrapper","rolesApi"],
-                permissions : ["mfl.users.wrapper", "permissionsApi"]
+                permissions : ["mfl.users.wrapper", "permissionsApi"],
+                contactsApi : ["mfl.users.wrapper", "contactsApi"],
+                contact_type : ["mfl.users.wrapper", "contact_typeApi"],
+                user_contacts : ["mfl.users.wrapper", "user_contactsApi"]
             };
         silGridConfig.appConfig = "mfl.settings";
     }])

@@ -71,8 +71,9 @@ angular.module("mfl.users.controllers", [])
         ];
     }])
     .controller("mfl.users.controllers.new_user", ["$scope", "usersApi",
-    "$state",
-    function ($scope, userWrapper, $state) {
+    "$state", "contact_typeApi", "contactsApi", "user_contactsApi",
+    function ($scope, userWrapper, $state, contactTypeWrapper,
+        contactWrapper, user_contactWrapper) {
         $scope.test = "New user";
         $scope.new_user = true;
         $scope.path = [
@@ -127,9 +128,12 @@ angular.module("mfl.users.controllers", [])
                 $scope.user_contacts, obj);
         };
         $scope.usr_id = "";
+        $scope.user = {
+            other_names : " "
+        };
+        $scope.group = [];
         $scope.addUser = function (user) {
-            user.short_name = user.first_name;
-            user.full_name = user.first_name + " " + user.last_name;
+            user.groups = $scope.group;
             userWrapper.api.create(user)
                 .success(function (new_usr) {
                     $state.go(
@@ -139,9 +143,37 @@ angular.module("mfl.users.controllers", [])
                     console.log(e);
                 });
         };
+        contactTypeWrapper.api.list()
+            .success(function (cont_type) {
+                $scope.contact_type = cont_type.results;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
         $scope.addUserContacts = function () {
             console.log($scope.user_contacts);
-            $state.go("users.new_user.groups");
+            _.each($scope.user_contacts, function (contact) {
+                var user_id = $state.params.user_id;
+                contactWrapper.api.create(contact)
+                    .success(function (cont_result) {
+                        $scope.user_contact = {
+                            user : user_id,
+                            contact : cont_result.id
+                        };
+                        user_contactWrapper.api.create($scope.user_contact)
+                            .success(function (usr_cont) {
+                                console.log(usr_cont);
+                            })
+                            .error(function (e) {
+                                console.log(e);
+                            });
+                    })
+                    .error(function (e) {
+                        console.log(e);
+                    });
+            });
+            $state.go(
+                "users.new_user.groups", {user_id : $state.params.user_id});
         };
     }])
     .controller("mfl.users.controllers.edit_user", ["$scope",

@@ -35,6 +35,39 @@ angular.module("mfl.users.wrapper", ["sil.api.wrapper"])
         }];
     })
 
+    .provider("contactsApi", function () {
+        var self = this;
+        self.baseUrl = "api/common/contacts/";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
+            };
+        }];
+    })
+
+    .provider("contact_typeApi", function () {
+        var self = this;
+        self.baseUrl = "api/common/contact_types/";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
+            };
+        }];
+    })
+
+    .provider("user_contactsApi", function () {
+        var self = this;
+        self.baseUrl = "api/common/user_contacts/";
+        this.$get = ["api", function(api){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl)
+            };
+        }];
+    })
+
     .service("mfl.users.services.uses", ["mfl.common.providers.requests",
     function (requests) {
         var url = {

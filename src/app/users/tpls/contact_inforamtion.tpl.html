@@ -8,8 +8,7 @@
                    <div class="col-md-5 group">
                     <select type="text" ng-model="cont.contact_type" required>
                         <option value="">-Contact type-</option>
-                        <option value="PHONE">Phone no</option>
-                        <option value="EMAIL">Email</option>
+                        <option ng-repeat="type in contact_type" value="{{type.id}}">{{type.name}}</option>
                     </select>
                     <span class="highlight"></span>
                     <span class="bar"></span>
