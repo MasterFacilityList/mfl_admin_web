@@ -12,7 +12,7 @@ angular.module("mfl.services.routes", [])
                         templateUrl: "services/tpls/main.tpl.html"
                     },
                     "header@services": {
-                        controller: "mfl.services.controllers.services",
+                        controller: "mfl.home.controllers.home",
                         templateUrl: "home/tpls/header.tpl.html"
                     },
                     "sidebar@services": {

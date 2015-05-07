@@ -12,7 +12,7 @@ angular.module("mfl.admin_units.routes", [])
                         templateUrl: "admin_units/tpls/main.tpl.html"
                     },
                     "header@admin_units": {
-                        controller: "mfl.admin_units.controllers.admin_units",
+                        controller: "mfl.home.controllers.home",
                         templateUrl: "home/tpls/header.tpl.html"
                     },
                     "sidebar@admin_units": {

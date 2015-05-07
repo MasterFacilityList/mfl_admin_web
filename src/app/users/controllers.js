@@ -274,8 +274,8 @@ angular.module("mfl.users.controllers", [])
         ];
     }])
     .controller("mfl.users.controllers.view_user", ["$scope",
-    "mfl.users.services.uses", "$stateParams",
-    function ($scope, userService, $stateParams) {
+    "usersApi", "$stateParams", "user_contactsApi",
+    function ($scope, userswrapper, $stateParams, user_contactsApi) {
         $scope.test = "View user";
         $scope.path = [
             {
@@ -302,12 +302,24 @@ angular.module("mfl.users.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
-        $scope.users = userService.getUsers();
-        $scope.getOneUser = function () {
-            $scope.oneUser = _.findWhere(
-                $scope.users.results, {"id" : $stateParams.user_id});
-            return $scope.oneUser;
+        userswrapper.api.get($stateParams.user_id)
+            .success(function (data) {
+                $scope.oneUser = data;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
+        $scope.usr_cont = {
+            user : $stateParams.user_id
         };
+
+        user_contactsApi.api.filter($scope.usr_cont)
+            .success(function (answer) {
+                $scope.user_contacts = answer.results;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
     }])
     .controller("mfl.users.controllers.permissions", ["$scope",
         function ($scope) {
