@@ -74,9 +74,11 @@ module.exports = {
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
             "vendor/angular-ui-router/release/angular-ui-router.js",
             "vendor/localforage/dist/localforage.js",
+            "vendor/stacktrace-js/dist/stacktrace.js",
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",
-            "libs/sil_grid/sil_grid.js"
+            "libs/sil_grid/sil_grid.js",
+            "libs/sil_error_handler/error_handler.js"
         ],
         css: [
         ],
