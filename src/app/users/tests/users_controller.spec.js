@@ -1,17 +1,27 @@
 "use strict";
 
 describe("Test users controllers :", function () {
-    var controller, data, root, scope;
+    var controller, data, root, scope, SERVER_URL, httpBackend, state;
 
     beforeEach(function () {
         module("mflApp");
+        module("mfl.users.wrapper");
+        module("mfl.settings");
 
-        inject(["$rootScope", "$controller",
-            function ($rootScope, $controller) {
+        inject(["$rootScope", "$controller", "$httpBackend", "$state", "SERVER_URL", "usersApi",
+            function ($rootScope, $controller, $httpBackend, $state, url, usersApi) {
                 root = $rootScope;
                 scope = root.$new();
+                state = $state;
+                httpBackend = $httpBackend;
+                SERVER_URL = url;
+                usersApi = usersApi;
                 data = {
-                    $scope : scope
+                    $scope : scope,
+                    $state : $state,
+                    usersApi : usersApi,
+                    SERVER_URL : url
+
                 };
                 controller = function (cntrl) {
                     return $controller(cntrl, data);
@@ -61,5 +71,25 @@ describe("Test users controllers :", function () {
         scope.removeContact(cont_obj);
         expect(scope.user_contacts).toEqual(compr_obj);
     });
-
+    it("should test adding user function", inject(["$httpBackend", "$state",
+        function ($httpBackend, $state) {
+            controller("mfl.users.controllers.new_user");
+            spyOn($state, "go");
+            var user = {
+                groups: [],
+                email: "serikalindogo@mfltest.slade360.co.ke",
+                first_name: "Serikali",
+                last_name: "Ndogo",
+                other_names: "",
+                username: "serikalindogo",
+                is_national: false,
+                password : "password"
+            };
+            scope.user = user;
+            scope.addUser(user);
+            $httpBackend.expectPOST(SERVER_URL + "api/users/").respond(200, scope.user);
+            $httpBackend.flush();
+            expect($state.go).toHaveBeenCalled();
+        }
+    ]));
 });
