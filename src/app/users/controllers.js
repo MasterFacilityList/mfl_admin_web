@@ -75,7 +75,6 @@ angular.module("mfl.users.controllers", [])
     "rolesApi",
     function ($scope, userWrapper, $state, contactTypeWrapper,
         contactWrapper, user_contactWrapper, rolesWrapper) {
-        $scope.test = "New user";
         $scope.new_user = true;
         $scope.path = [
             {
