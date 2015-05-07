@@ -72,8 +72,9 @@ angular.module("mfl.users.controllers", [])
     }])
     .controller("mfl.users.controllers.new_user", ["$scope", "usersApi",
     "$state", "contact_typeApi", "contactsApi", "user_contactsApi",
+    "rolesApi",
     function ($scope, userWrapper, $state, contactTypeWrapper,
-        contactWrapper, user_contactWrapper) {
+        contactWrapper, user_contactWrapper, rolesWrapper) {
         $scope.test = "New user";
         $scope.new_user = true;
         $scope.path = [
@@ -143,6 +144,7 @@ angular.module("mfl.users.controllers", [])
                     console.log(e);
                 });
         };
+        //listing all the contact types wrapper implementation
         contactTypeWrapper.api.list()
             .success(function (cont_type) {
                 $scope.contact_type = cont_type.results;
@@ -150,6 +152,15 @@ angular.module("mfl.users.controllers", [])
             .error(function (e) {
                 console.log(e);
             });
+        //listing roles wrapper
+        rolesWrapper.api.list()
+            .success(function (roles_result) {
+                $scope.roles = roles_result.results;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
+
         $scope.addUserContacts = function () {
             console.log($scope.user_contacts);
             _.each($scope.user_contacts, function (contact) {
@@ -174,6 +185,62 @@ angular.module("mfl.users.controllers", [])
             });
             $state.go(
                 "users.new_user.groups", {user_id : $state.params.user_id});
+        };
+        $scope.is_set = false;
+        $scope.set_roles = [];
+        //setting params to change classes on click
+        $scope.clickedRole = function(item){
+            item.selected = !item.selected;
+            // other oeprations
+        };
+        $scope.setRole = function(set_item){
+            set_item.set_selected = !set_item.set_selected;
+            // other oeprations
+        };
+        //adding permissions to the role
+        $scope.addRoles = function () {
+            var selected_roles = _.where(
+                $scope.roles, {"selected": true}
+            );
+            _.each(selected_roles, function (a_role) {
+                a_role.set_selected = false;
+                $scope.set_roles.push(a_role);
+                $scope.is_set = true;
+                $scope.roles = _.without($scope.roles, a_role);
+                console.log($scope.set_roles);
+            });
+        };
+        //end of adding permissions to a role
+        //reverting permissions to the role
+        $scope.revertRoles = function () {
+            var reverted_roles = _.where(
+                $scope.set_roles, {"set_selected": true}
+            );
+            _.each(reverted_roles, function (a_set_role) {
+                a_set_role.selected = false;
+                $scope.roles.push(a_set_role);
+                $scope.set_roles = _.without($scope.set_roles, a_set_role);
+                console.log($scope.set_roles);
+            });
+        };
+        //end of reverting permissions to a role
+
+        //adding a users role
+        $scope.addUserRole = function () {
+            _.each($scope.set_roles, function (assigned_role) {
+                delete assigned_role.permissions;
+            });
+            var user = {
+                groups : []
+            };
+            user.groups = $scope.set_roles;
+            userWrapper.api.update($state.params.user_id, user)
+                .success(function () {
+                    $state.go("users.manage_users");
+                })
+                .error(function (e) {
+                    console.log(e);
+                });
         };
     }])
     .controller("mfl.users.controllers.edit_user", ["$scope",
