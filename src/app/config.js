@@ -24,6 +24,12 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
         silGridConfig.appConfig = "mfl.settings";
     }])
 
+    .config(["loggingConfigProvider", function(loggingConfig){
+        loggingConfig.LOG_TO_SERVER = false;
+        loggingConfig.LOG_SERVER_URL = undefined;
+        loggingConfig.LOG_TO_CONSOLE = false;
+    }])
+
     .run(["mfl.auth.services.login","$state",
         function (authService, $state) {
             if(!authService.isLoggedIn()) {

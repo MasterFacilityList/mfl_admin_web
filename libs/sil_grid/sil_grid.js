@@ -115,6 +115,7 @@
                     $scope.filters[name] = value;
                     if(_.has($scope.filters, "page")){
                         $scope.dump = {page: $scope.filters.page};
+                        $scope["q_dump"+name] = {page: $scope.filters.page};
                         delete $scope.filters.page;
                     }
                     self.getData();
@@ -123,7 +124,12 @@
                     if(_.has($scope.filters, name)){
                         delete $scope.filters[name];
                         if(_.has($scope.dump, "page")){
-                            $scope.filters.page = $scope.dump.page;
+                            if(name === "q_dump"+name){
+                                $scope.filters.page = $scope["q_dump"+name].page;
+                            }else{
+                                $scope.filters.page = $scope.dump.page;
+                            }
+
                         }
                         self.getData();
                     }
@@ -144,8 +150,6 @@
                                 else{
                                     $scope.pagination.prev_page = p[1];
                                 }
-                            }else{
-                                $scope.filters[p[0]] = p[1];
                             }
                         });
                     };
@@ -177,7 +181,8 @@
             },
             link: function(scope){
                 scope.$watch("filters", function(filters){
-                    if(_.has(filters, "page")||_.has(filters, "ordering")){
+                    if(_.has(filters, "page")||_.has(filters, "ordering")||_.has(filters, "q")){
+
                         delete filters.page;
                     }else{
                         scope.getData();
@@ -228,11 +233,9 @@
                 scope.silGridSearch = function(clear){
                     if(clear){
                         scope.silGrid.searchQuery = "";
-                        gridCtrl.getData();
+                        gridCtrl.removeFilter("q");
                     }else{
-                        gridCtrl.setLoading(true);
-                        gridCtrl.api.search(scope.silGrid.searchQuery).
-                        success(gridCtrl.setData).error(gridCtrl.setError);
+                         gridCtrl.addFilter("q", scope.silGrid.searchQuery);
                     }
 
                 };
