@@ -1,22 +1,25 @@
-angular.module("sil.grid.pagination.tpl.html", []).run(["$templateCache",
+(function(angular){
+    var pagination_tpl = "sil.grid.pagination.tpl.html";
+    var search_tpl = "sil.grid.search.tpl.html";
+    var bp_filter_tpl = "sil_grid_bpfilter.tpl.html";
+    angular.module(pagination_tpl, []).run(["$templateCache",
     function($templateCache){
         $templateCache.put("sil.grid.pagination.tpl.html",
             "<ul class=\"pager\" ng-if=\"pagination.active\">\n" +
             "<li ng-if=\"pagination.prev\" class=\"previous\">\n"+
-            "<a class=login-btn login-btn-primary ng-click=paginate(pagination.prev_page)>\n" +
+            "<a  ng-click=paginate(pagination.prev_page)>\n" +
             "<span aria-hidden=\"true\">&larr;</span> Previous</a>\n" +
             "</li>\n" +
             "<li>Page {{pagination.current_page}} / {{pagination.page_count}}</li>"+
             " <li class=\"next\" ng-if=\"pagination.next\">\n"+
-            "<a class=login-btn login-btn-primary ng-click=paginate(pagination.next_page)>Next\n" +
+            "<a ng-click=paginate(pagination.next_page)>Next\n" +
                 " <span aria-hidden=\"true\">&rarr;</span></a>\n" +
             "</li>\n" +
             "</ul>\n"
         );
-    }
-]);
-
-angular.module("sil.grid.search.tpl.html", []).run(["$templateCache", function($templateCache){
+        }
+    ]);
+    angular.module(search_tpl, []).run(["$templateCache", function($templateCache){
     $templateCache.put("sil.grid.search.tpl.html",
         "<div class=\"input-group input-group-in\">\n" +
         "<input type=\"text\" class=\"form-control helper-inline\" \n"+
@@ -30,11 +33,10 @@ angular.module("sil.grid.search.tpl.html", []).run(["$templateCache", function($
         "</button>\n" +
         "</span>\n" +
         "</div>\n"
-    );
-}]);
+        );
+    }]);
 
-
-angular.module("sil_grid_bpfilter.tpl.html", []).run(["$templateCache",
+    angular.module(bp_filter_tpl, []).run(["$templateCache",
     function($templateCache) {
       $templateCache.put("sil_grid_bpfilter.tpl.html",
         "<div class=\"input-group input-group-in\" style=\"width: 100%;\">\n" +
@@ -44,5 +46,7 @@ angular.module("sil_grid_bpfilter.tpl.html", []).run(["$templateCache",
         "{{bp.name}}</option></select>\n" +
         "</div>\n" +
         "");
-}]);
+    }]);
 
+    angular.module("sil.grid.tpls", [pagination_tpl, search_tpl, bp_filter_tpl]);
+})(angular);
