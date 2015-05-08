@@ -4,21 +4,10 @@ angular.module("mfl.setup.contacts.controllers",[
 ])
     .controller("mfl.setup.controller.contacts.list", ["$scope",
         function ($scope) {
-            $scope.test = "View administrative area";
-            $scope.path = [
-                {
-                    name: "Adminstrative area",
-                    route: "admin_units"
-                },
-                {
-                    name: "Wards",
-                    route: "admin_unit.wards"
-                }
-            ];
             $scope.title = [
                 {
-                    icon: "fa-map-marker",
-                    name: "View Wards"
+                    icon: "fa-phone",
+                    name: "Manage Contact Types"
                 }
             ];
             $scope.action = [

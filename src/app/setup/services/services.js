@@ -9,12 +9,15 @@
     ])
     .provider("adminApi", function(){
         this.$get = ["api","constituenciesApi","countiesApi","wardsApi", "townsApi",
-        function(constituenciesApi, countiesApi, wardsApi, townsApi){
+        "contactsApi",
+        function(constituenciesApi, countiesApi, wardsApi, townsApi,
+                 contactsApi){
             return {
                 constituencies: constituenciesApi.api,
                 wards: wardsApi.api,
                 counties: countiesApi.api,
-                towns: townsApi.api
+                towns: townsApi.api,
+                contacts: contactsApi.api
             };
         }];
     });

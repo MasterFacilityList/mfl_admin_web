@@ -2,7 +2,7 @@
 
 (function(angular){
     angular.module("mfl.setup.contacts.wrapper", ["sil.api.wrapper"])
-    .provider("townsApi", function(){
+    .provider("contactsApi", function(){
         var self = this;
         self.baseUrl = "api/common/contact_types";
         this.$get = ["api", function(api){
