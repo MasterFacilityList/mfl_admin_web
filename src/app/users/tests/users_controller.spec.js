@@ -163,16 +163,65 @@ describe("Test users controllers :", function () {
             contact_type : "26849c83-7d7b-49bb-bb91-16ff29def9c3"
         };
         scope.user_contact = [contact];
+
         $httpBackend.expectPOST(
             SERVER_URL + "api/common/contacts/").respond(
             200, scope.user_contact[0]);
+
+        scope.user_contact = {
+            user: 5,
+            contact : "26849c83-7d7b-49bb-bb91-16ff29def9c3"
+        };
+        $httpBackend.expectPOST(
+            SERVER_URL + "api/common/user_contacts/").respond(
+            200, scope.user_contact);
+
+        $httpBackend.flush();
     }]));
-    it("should add user contacts: fails", inject(["$httpBackend", function ($httpBackend) {
+    it("should add user contacts: succeed", inject(["$httpBackend", function ($httpBackend) {
         controller("mfl.users.controllers.new_user");
+        scope.addUserContacts();
+        state.params.user_id = 5;
+        var contact = {
+            contact : "+254722367009",
+            contact_type : "26849c83-7d7b-49bb-bb91-16ff29def9c3"
+        };
+        scope.user_contact = [contact];
+
         $httpBackend.expectPOST(
             SERVER_URL + "api/common/contacts/").respond(
-            400, {"name" : "value"});
+            200, scope.user_contact[0]);
+
+        scope.user_contact = {
+            user: 5,
+            contact : "26849c83-7d7b-49bb-bb91-16ff29def9c3"
+        };
+        $httpBackend.expectPOST(
+            SERVER_URL + "api/common/user_contacts/").respond(
+            400, {name: ""});
+        $httpBackend.flush();
     }]));
+    it("should add user_contact in through table: fail",
+        inject(["$httpBackend",
+        function ($httpBackend) {
+            controller("mfl.users.controllers.new_user");
+            scope.addUserContacts();
+            state.params.user_id = 5;
+            var contact = {
+                contact : "+254722367009",
+                contact_type : "26849c83-7d7b-49bb-bb91-16ff29def9c3"
+            };
+            scope.user_contact = {
+                user: 5,
+                contact : "26849c83-7d7b-49bb-bb91-16ff29def9c3"
+            };
+            scope.user_contact = [contact];
+            $httpBackend.expectPOST(
+                SERVER_URL + "api/common/contacts/").respond(
+                400, {name : ""});
+            $httpBackend.flush();
+        }
+    ]));
     it("should test clicked Role", function () {
         controller("mfl.users.controllers.new_user");
         var item = {selected : false};
@@ -274,12 +323,22 @@ describe("Test users controllers :", function () {
         expect(scope.test).toEqual("View user");
     });
     //test not working viewing a user
-    it("should test viewing one user", inject(["$httpBackend",
+    it("should test viewing one user : success", inject(["$httpBackend",
         function ($httpBackend) {
             controller("mfl.users.controllers.view_user");
             var data = "";
             $httpBackend.expectGET(
                 SERVER_URL + "api/users/5/").respond(200, data);
+            $httpBackend.flush();
+        }
+    ]));
+    it("should test viewing one user: fail", inject(["$httpBackend",
+        function ($httpBackend) {
+            controller("mfl.users.controllers.view_user");
+            var data = "";
+            $httpBackend.expectGET(
+                SERVER_URL + "api/users/5/").respond(400, data);
+            $httpBackend.flush();
         }
     ]));
     //test to test query parameters not done
@@ -289,6 +348,7 @@ describe("Test users controllers :", function () {
             $httpBackend.expectGET(
                 SERVER_URL + "api/common/user_contacts/?user=5").respond(
                 200, {});
+            $httpBackend.flush();
         }
     ]));
     it("should test permissions controller", function() {

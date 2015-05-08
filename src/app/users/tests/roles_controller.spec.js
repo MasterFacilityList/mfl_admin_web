@@ -62,6 +62,7 @@ describe("Test roles controllers :", function () {
             var data = "";
             $httpBackend.expectGET(
                 SERVER_URL + "api/users/permissions/").respond(200, data);
+            $httpBackend.flush();
         }
     ]));
     it("should test listing all permissions: fail", inject(["$httpBackend",
