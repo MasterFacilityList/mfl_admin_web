@@ -6,6 +6,7 @@ angular.module("mflApp", [
     "ui.router",
     //libs
     "sil.grid",
+    "sil.common.logging",
     //our stuff
     "templates-app",
     "templates-common",
