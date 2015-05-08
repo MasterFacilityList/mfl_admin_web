@@ -8,6 +8,7 @@
         "mfl.setup.routes.units",
         "mfl.setup.routes.wards",
         "mfl.setup.routes.contacts",
-        "mfl.setup.routes.jobTitles"
+        "mfl.setup.routes.jobTitles",
+        "mfl.setup.routes.facilityOwners"
     ]);
 })(angular);
