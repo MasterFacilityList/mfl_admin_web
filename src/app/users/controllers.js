@@ -149,7 +149,7 @@ angular.module("mfl.users.controllers", [])
                 $scope.contact_type = cont_type.results;
             })
             .error(function (e) {
-                console.log(e);
+                console.log(e.error);
             });
         //listing roles wrapper
         rolesWrapper.api.list()
@@ -157,7 +157,7 @@ angular.module("mfl.users.controllers", [])
                 $scope.roles = roles_result.results;
             })
             .error(function (e) {
-                console.log(e);
+                console.log(e.error);
             });
 
         $scope.addUserContacts = function () {
@@ -226,6 +226,8 @@ angular.module("mfl.users.controllers", [])
 
         //adding a users role
         $scope.addUserRole = function () {
+            console.log("adding user");
+            console.log($state.params.user_id);
             _.each($scope.set_roles, function (assigned_role) {
                 delete assigned_role.permissions;
             });
