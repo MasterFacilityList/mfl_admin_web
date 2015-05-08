@@ -34,11 +34,6 @@
             "Accept" : "application/json, */*"
         };
 
-    }])
-
-    //beginning of configuring interceptor
-    .config(["$httpProvider", function($httpProvider) {
-        $httpProvider.interceptors.push("myCSRF");
     }]);
 
 })(angular);
