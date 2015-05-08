@@ -5,10 +5,7 @@ angular.module("mfl.admin_units", [
     "ui.router",
     //our stuff
     "mfl.admin_units.controllers",
-    "mfl.admin_units.county_controllers",
-    "mfl.admin_units.constituency_controllers",
-    "mfl.admin_units.ward_controllers",
     "mfl.admin_units.routes",
-    "mfl.counties.wrapper",
+    "mfl.admin_units.api",
     "mfl.common.directives"
 ]);
