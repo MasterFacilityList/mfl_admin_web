@@ -8,7 +8,8 @@ angular.module("mfl.setup.controllers",[
     "mfl.setup.constituency.controllers",
     "mfl.setup.ward.controllers",
     "mfl.setup.contacts.controllers",
-    "mfl.setup.town.controllers"
+    "mfl.setup.town.controllers",
+    "mfl.setup.jobTitles.controllers"
 ])
     .controller("mfl.setup.controller.dashboard", ["$scope",
         function ($scope) {
