@@ -140,7 +140,7 @@ angular.module("mfl.users.controllers", [])
                         "users.new_user.contacts", {user_id : new_usr.id});
                 })
                 .error(function (e) {
-                    console.log(e);
+                    console.log(e.error);
                 });
         };
         //listing all the contact types wrapper implementation
