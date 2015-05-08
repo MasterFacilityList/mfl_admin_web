@@ -1,8 +1,12 @@
 <div>
-    <p>Category view</p>
 
-    <a ui-sref="service_mgmt.category_edit({category_id: category_id})">Edit</a>
-    <a ui-sref="service_mgmt.category_delete({category_id: category_id})">Delete</a>
+    <div>
+        <p>Name : {{category.name}}</p>
+        <p>Abbreviation : {{category.abbreviation}}</p>
+        <p>Description : {{category.description}}</p>
+    </div>
 
-    {{ category | json }}
+    <a class="btn btn-default" ui-sref="service_mgmt.category_edit({category_id: category_id})">Edit</a>
+    <a class="btn btn-default" ui-sref="service_mgmt.category_delete({category_id: category_id})">Delete</a>
+
 </div>

@@ -9,18 +9,18 @@
             url: "/services/",
             views: {
                 "main": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt",
+                    controller: "mfl.service_mgmt.controllers.main",
                     templateUrl: "service_mgmt/tpls/main.tpl.html"
                 },
                 "header@service_mgmt": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt",
+                    controller: "mfl.service_mgmt.controllers.main",
                     templateUrl: "home/tpls/header.tpl.html"
                 },
                 "sidebar@service_mgmt": {
                     templateUrl: "home/tpls/side_nav.tpl.html"
                 },
                 "main-content@service_mgmt": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt.toc",
+                    controller: "mfl.service_mgmt.controllers.main.toc",
                     templateUrl: "service_mgmt/tpls/main_toc.tpl.html"
                 }
             },
@@ -33,7 +33,7 @@
             url: "services/",
             views: {
                 "main-content": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt.service_list",
+                    controller: "mfl.service_mgmt.controllers.service_list",
                     templateUrl: "service_mgmt/tpls/service_list.tpl.html"
                 }
             }
@@ -43,7 +43,7 @@
             url: "services/:service_id/",
             views: {
                 "main-content": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt.service_view",
+                    controller: "mfl.service_mgmt.controllers.service_view",
                     templateUrl: "service_mgmt/tpls/service_view.tpl.html"
                 }
             }
@@ -53,7 +53,7 @@
             url: "services/:service_id/edit/",
             views: {
                 "main-content": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt.service_edit",
+                    controller: "mfl.service_mgmt.controllers.service_edit",
                     templateUrl: "service_mgmt/tpls/service_edit.tpl.html"
                 }
             }
@@ -63,7 +63,7 @@
             url: "services/:service_id/delete/",
             views: {
                 "main-content": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt.service_delete",
+                    controller: "mfl.service_mgmt.controllers.service_delete",
                     templateUrl: "service_mgmt/tpls/service_delete.tpl.html"
                 }
             }
@@ -74,8 +74,18 @@
             url: "categories/",
             views: {
                 "main-content": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt.category_list",
+                    controller: "mfl.service_mgmt.controllers.category_list",
                     templateUrl: "service_mgmt/tpls/category_list.tpl.html"
+                }
+            }
+        })
+
+        .state("service_mgmt.category_create", {
+            url: "categories/create/",
+            views: {
+                "main-content": {
+                    controller: "mfl.service_mgmt.controllers.category_create",
+                    templateUrl: "service_mgmt/tpls/category_edit.tpl.html"
                 }
             }
         })
@@ -84,7 +94,7 @@
             url: "categories/:category_id/",
             views: {
                 "main-content": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt.category_view",
+                    controller: "mfl.service_mgmt.controllers.category_view",
                     templateUrl: "service_mgmt/tpls/category_view.tpl.html"
                 }
             }
@@ -94,7 +104,7 @@
             url: "categories/:category_id/edit/",
             views: {
                 "main-content": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt.category_edit",
+                    controller: "mfl.service_mgmt.controllers.category_edit",
                     templateUrl: "service_mgmt/tpls/category_edit.tpl.html"
                 }
             }
@@ -104,7 +114,7 @@
             url: "categories/:category_id/delete/",
             views: {
                 "main-content": {
-                    controller: "mfl.service_mgmt.controllers.service_mgmt.category_delete",
+                    controller: "mfl.service_mgmt.controllers.category_delete",
                     templateUrl: "service_mgmt/tpls/category_delete.tpl.html"
                 }
             }

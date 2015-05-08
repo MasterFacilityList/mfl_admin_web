@@ -1,6 +1,6 @@
 <div>
-    <p>Category delete</p>
-    {{ category | json }}
+    <p>Are you sure you want to delete the category <strong>{{category.name}}</strong></p>
 
-    <a ui-sref="service_mgmt.category_view({category_id: category_id})">Cancel</a>
+    <button class="btn btn-danger" ng-click="save()">Yes</button>
+    <a class="btn btn-default" ui-sref="service_mgmt.category_view({category_id: category_id})">No</a>
 </div>
