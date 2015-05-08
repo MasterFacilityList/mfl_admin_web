@@ -9,14 +9,15 @@ describe("Test facilities controller :", function () {
         module("mfl.settings");
 
         inject(["$rootScope", "$controller", "$httpBackend", "$state",
-            "SERVER_URL", "facilitiesApi",
+            "SERVER_URL", "facilitiesApi", "officersApi",
             function ($rootScope, $controller, $httpBackend, $state,
-                url, facilitiesApi) {
+                url, facilitiesApi, officersApi) {
                 root = $rootScope;
                 scope = root.$new();
                 state = $state;
                 httpBackend = $httpBackend;
                 facilitiesApi = facilitiesApi;
+                officersApi = officersApi;
                 SERVER_URL = url;
                 scope.fakeStateParams = {
                     fac_id : 1
@@ -25,6 +26,7 @@ describe("Test facilities controller :", function () {
                     $scope : scope,
                     $state : $state,
                     facilitiesApi : facilitiesApi,
+                    officersApi : officersApi,
                     SERVER_URL : url,
                     $stateParams : scope.fakeStateParams
                 };
@@ -46,6 +48,14 @@ describe("Test facilities controller :", function () {
         controller("mfl.facilities.controllers.officers");
         expect(scope.test).toEqual("Services");
     });
+    it("should call backend and get list of officers",
+    inject(["$httpBackend", function ($httpBackend) {
+        controller("mfl.facilities.controllers.officers");
+        var data = "";
+        $httpBackend.expectGET(
+            SERVER_URL + "api/facilities/officers/").respond(200, data);
+        $httpBackend.flush();
+    }]));
     it("should test adding new services", function () {
         controller("mfl.facilities.controllers.new_service");
         expect(scope.test).toEqual("New service");
@@ -117,7 +127,42 @@ describe("Test facilities controller :", function () {
     });
     it("should test removing services from facility", function () {
         controller("mfl.facilities.controllers.new_facility");
+        var cont = {name: "1", type: "", level: ""};
+        scope.facility.contacts = [{contact_type: "", contact: ""}, cont];
+        scope.removeService(cont);
+        expect(scope.facility.services).not.toContain(cont);
+    });
+    it("should test editing a facility details", function () {
+        controller("mfl.facilities.controllers.edit_facility");
+        expect(scope.edit).toEqual(true);
+    });
+    //for facilities edit controller
+    it("should test new facilities controller", function () {
+        controller("mfl.facilities.controllers.edit_facility");
+        var cont = {contact_type: "", contact: ""};
+        var cont_obj = [cont, cont];
+        scope.facility.contacts = [{contact_type: "", contact: ""}];
+        scope.addContact();
+        expect(scope.facility.contacts).toEqual(cont_obj);
+    });
+    it("should test removing contact from facility", function () {
+        controller("mfl.facilities.controllers.edit_facility");
+        var cont = {contact_type: "1", contact: ""};
+        scope.facility.contacts = [{contact_type: "", contact: ""}, cont];
+        scope.removeContact(cont);
+        expect(scope.facility.contacts).not.toContain(cont);
+    });
+    it("should test new facilities controller services", function () {
+        controller("mfl.facilities.controllers.edit_facility");
         var cont = {name: "", type: "", level: ""};
+        var cont_obj = [cont, cont];
+        scope.facility.services = [{name: "", type: "", level: ""}];
+        scope.addService();
+        expect(scope.facility.services).toEqual(cont_obj);
+    });
+    it("should test removing services from facility", function () {
+        controller("mfl.facilities.controllers.edit_facility");
+        var cont = {name: "1", type: "", level: ""};
         scope.facility.contacts = [{contact_type: "", contact: ""}, cont];
         scope.removeService(cont);
         expect(scope.facility.services).not.toContain(cont);

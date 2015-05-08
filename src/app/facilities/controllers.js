@@ -83,8 +83,8 @@ angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
             }
         ];
     }])
-    .controller("mfl.facilities.controllers.officers", ["$scope",
-    function ($scope) {
+    .controller("mfl.facilities.controllers.officers",["$scope","officersApi",
+    function ($scope, officersApi) {
         $scope.test = "Services";
         $scope.tooltip = {
             "title": "",
@@ -122,6 +122,10 @@ angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
                 icon: "fa-arrow-left"
             }
         ];
+        officersApi.api.list()
+            .success(function (data) {
+                $scope.incharge = data.results;
+            });
     }])
     //start of new and edit services
     .controller("mfl.facilities.controllers.new_service", ["$scope", function ($scope) {
@@ -452,19 +456,18 @@ angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
         };
         //removing contacts
         $scope.removeService = function (obj) {
-            $scope.facility.services = _.without($scope.facility.services, obj);
+            $scope.facility.services =
+                _.without($scope.facility.services, obj);
         };
     }])
-    .controller("mfl.facilities.controllers.edit_facility", ["$scope", "$stateParams",
-    "mfl.facilities.services.facilities", function ($scope, $stateParams, facilityService) {
+    .controller("mfl.facilities.controllers.edit_facility", ["$scope",
+        function ($scope) {
         $scope.edit=true;
         $scope.tooltip = {
             "title": "",
             "checked": false
         };
         $scope.setter = true;
-        $scope.facilities = facilityService.getFacilities();
-        $scope.facility = _.findWhere($scope.facilities, {id : $stateParams.fac_id});
         $scope.path = [
             {
                 name: "Facilities",
@@ -520,7 +523,7 @@ angular.module("mfl.facilities.controllers", ["mfl.facilities.wrapper"])
         };
          //adding services
         $scope.addService = function () {
-            $scope.facility.services.push({type: "", name: ""});
+            $scope.facility.services.push({type: "", name: "", level: ""});
         };
         //removing contacts
         $scope.removeService = function (obj) {

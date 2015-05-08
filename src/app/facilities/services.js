@@ -21,15 +21,4 @@ angular.module("mfl.facilities.wrapper", ["sil.api.wrapper"])
                 api: api.setBaseUrl(this.baseUrl)
             };
         }];
-    })
-    .service("mfl.facilities.services.facilities", ["mfl.common.providers.requests",
-        function (requests) {
-            var url = {
-                    facilities : "api/v1/facilities",
-                    owners : "api/facilities/owners/"
-                };
-
-            this.getFacilitiesBackend = function () {
-                return requests.callApi("GET", url.facilities);
-            };
-        }]);
+    });

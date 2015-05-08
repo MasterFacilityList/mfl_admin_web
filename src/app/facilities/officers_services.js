@@ -4,7 +4,7 @@
     angular.module("mfl.officers.wrapper", ["sil.api.wrapper"])
     .provider("officersApi", function(){
         var self = this;
-        self.baseUrl = "api/facilities/officers";
+        self.baseUrl = "api/facilities/officers/";
         this.$get = ["api", function(api){
             return {
                 baseUrl: self.baseUrl,
