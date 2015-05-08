@@ -9,10 +9,10 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
                     "facilitiesApi"],
                 chul: ["mfl.chul.wrapper", "chulApi"],
                 officers: ["mfl.officers.wrapper", "officersApi"],
-                counties: ["mfl.counties.wrapper", "countiesApi"],
-                constituencies: ["mfl.constituencies.wrapper", "constituenciesApi"],
-                wards: ["mfl.wards.wrapper", "wardsApi"],
-                towns: ["mfl.towns.wrapper", "townsApi"],
+                counties: ["mfl.setup.counties.wrapper", "countiesApi"],
+                constituencies: ["mfl.setup.constituencies.wrapper", "constituenciesApi"],
+                wards: ["mfl.setup.wards.wrapper", "wardsApi"],
+                towns: ["mfl.setup.towns.wrapper", "townsApi"],
                 owners: ["mfl.facilities.wrapper", "ownersApi"],
                 users : ["mfl.users.wrapper", "usersApi"],
                 roles : ["mfl.users.wrapper","rolesApi"],
@@ -27,7 +27,7 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
     .config(["loggingConfigProvider", function(loggingConfig){
         loggingConfig.LOG_TO_SERVER = false;
         loggingConfig.LOG_SERVER_URL = undefined;
-        loggingConfig.LOG_TO_CONSOLE = false;
+        loggingConfig.LOG_TO_CONSOLE = true;
     }])
 
     .run(["mfl.auth.services.login","$state",

@@ -19,7 +19,7 @@ angular.module("mflApp", [
     "mfl.services",
     "mfl.chus",
     "mfl.users",
-    "mfl.admin_units",
+    "mfl.setup",
     "mfl.practitioners"
 ]);
 
