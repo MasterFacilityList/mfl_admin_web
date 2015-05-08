@@ -1,4 +1,4 @@
- <contentheader></contentheader>
+<contentheader></contentheader>
 <div class="row">
     <div class="col-lg-12">
         <div class="col-lg-12">
@@ -27,7 +27,7 @@
                         <th>Code</th>
                         <th class="col-md-4">Name</th>
                         <th>Abbreviation</th>
-                        <th class="col-md-4">Category</th>
+                        <th class="col-md-4">Description</th>
                         <th class="text-center">Actions</th>
                     </thead>
                     <tbody class="example-animate-container">
@@ -35,7 +35,7 @@
                             <td>{{service.code}}</td>
                             <td class="col-md-4">{{service.name}}</td>
                             <td>{{service.abbreviation}}</td>
-                            <td class="col-md-4">{{service.category}}</td>
+                            <td class="col-md-4">{{service.description}}</td>
                             <td class="text-center">
                                 <a ui-sref="services.edit_service({service_id : service.id})" class="action-btn action-btn-grid action-btn-primary">
                                     <i class="fa fa-edit"></i>

@@ -1,6 +1,7 @@
-"use strict";
+(function (angular) {
+    "use strict";
 
-angular.module("mfl.services.services", [])
+    angular.module("mfl.services.services", [])
 
     .service("mfl.services.services.services", [
         "mfl.common.providers.requests",
@@ -25,3 +26,5 @@ angular.module("mfl.services.services", [])
             };
         }
     ]);
+
+}) (angular);
