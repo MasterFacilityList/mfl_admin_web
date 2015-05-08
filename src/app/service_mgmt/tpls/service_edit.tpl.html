@@ -1,0 +1,11 @@
+<div>
+    <p>Service edit</p>
+    {{service | json}}
+
+    <a ui-sref="service_mgmt.service_view({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+        Cancel
+    </a>
+    <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+        Delete
+    </a>
+</div>
