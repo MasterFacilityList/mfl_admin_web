@@ -39,6 +39,16 @@
             }
         })
 
+        .state("service_mgmt.service_create", {
+            url: "services/create/",
+            views: {
+                "main-content": {
+                    controller: "mfl.service_mgmt.controllers.service_create",
+                    templateUrl: "service_mgmt/tpls/service_edit.tpl.html"
+                }
+            }
+        })
+
         .state("service_mgmt.service_view", {
             url: "services/:service_id/",
             views: {

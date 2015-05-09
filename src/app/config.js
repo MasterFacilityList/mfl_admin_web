@@ -55,4 +55,3 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
             });
         }
     ]);
-

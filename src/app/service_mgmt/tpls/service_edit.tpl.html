@@ -1,11 +1,23 @@
 <div>
     <p>Service edit</p>
-    {{service | json}}
 
-    <a ui-sref="service_mgmt.service_view({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+    <div>
+        <form name="service_frm">
+            <p>Name : <input type="text" name="name" ng-model="service.name" /> </p>
+            <p>Description : <textarea name="description" ng-model="service.description"></textarea> </p>
+            <p>Abbreviation : <input type="text" name="abbreviation" ng-model="service.abbreviation" /> </p>
+            <p>Category : <select name="description" ng-model="service.category"></select> </p>
+        </form>
+    </div>
+
+    <a ui-sref="service_mgmt.service_view({service_id: service.id})" class="btn btn-default">
         Cancel
     </a>
-    <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+    <a ui-sref="service_mgmt.service_list" class="btn btn-default">
+        Cancel (List)
+    </a>
+    <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="btn btn-danger">
         Delete
     </a>
+    <button ng-click="save(service_frm)" class="btn btn-primary">Save</button>
 </div>
