@@ -5,27 +5,18 @@ angular.module("mfl.auth.directives", ["mfl.auth.permissions"])
     .directive("hasPermission", ["mfl.auth.permissions.permissionList",
         function (authService) {
             return {
-                link : function (scope, element, attrs) {
-                    if(!_.isString(attrs.hasPermission)) {
-                        throw "has permissions value must be a string";
-                    }
-                    var value = attrs.hasPermission.trim();
-                    var notPermissionFlag = value[0] === "!";
-                    if(notPermissionFlag) {
-                        value = value.slice(1).trim();
-                    }
-                    function toggleVisibilityBasedOnPermissions() {
+                restrict : "A",
+                transclude : "element",
+                link : function (
+                    scope, element, attrs, controller, transclude) {
+                    //transclude function to clone element when condition met
+                    transclude(scope, function (clone) {
+                        var value = attrs.hasPermission;
                         var hasPermission = authService.hasPermission(value);
-                        if(hasPermission && !notPermissionFlag ||
-                            !hasPermission && notPermissionFlag) {
-                            element.show();
+                        if(hasPermission) {
+                            element.after(clone);
                         }
-                        else {
-                            element.hide();
-                        }
-                    }
-                    toggleVisibilityBasedOnPermissions();
-                    scope.$on("permissionsChanged", toggleVisibilityBasedOnPermissions);
+                    });
                 }
             };
         }
