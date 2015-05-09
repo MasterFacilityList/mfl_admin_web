@@ -1,6 +1,22 @@
-"use strict";
-angular.module("mflAppConfig", ["mfl.auth.permissions",
-    "sil.grid", "mfl.auth.services"])
+(function (angular) {
+
+    "use strict";
+
+    angular.module("mflAppConfig", [
+        "mfl.auth.permissions",
+        "sil.grid",
+        "mfl.auth.services"
+    ])
+
+    // avoid silent failures in angular
+    .config(["$provide", function($provide) {
+        $provide.decorator("$exceptionHandler", function($delegate, $injector) {
+            return function(exception, cause) {
+                var $log = $injector.get("$log");
+                $log.error(exception, cause);
+            };
+        });
+    }])
 
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
@@ -55,3 +71,5 @@ angular.module("mflAppConfig", ["mfl.auth.permissions",
             });
         }
     ]);
+
+})(angular);

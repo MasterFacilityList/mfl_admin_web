@@ -29,15 +29,18 @@
 
     .controller("mfl.service_mgmt.controllers.service_edit",
         ["$scope", "$stateParams", "$log",
-        "mfl.service_mgmt.services.services", "mfl.service_mgmt.forms.changes",
-        function ($scope, $stateParams, $log, services, forms) {
+        "mfl.service_mgmt.services.services", "mfl.service_mgmt.services.categories",
+        "mfl.service_mgmt.forms.changes",
+        function ($scope, $stateParams, $log, services, categories, forms) {
             $scope.service_id = $stateParams.service_id;
             services.getService($scope.service_id).success(function (data) {
                 $scope.service = data;
             }).error(function (data) {
                 $log.warn(data);
             });
-
+            categories.getCategories().success(function (data) {
+                $scope.categories = data.results;
+            });
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
 
@@ -56,9 +59,12 @@
 
     .controller("mfl.service_mgmt.controllers.service_create",
         ["$scope", "$state", "$stateParams", "$log",
-        "mfl.service_mgmt.services.services",
-        function ($scope, $state, $stateParams, $log, services) {
+        "mfl.service_mgmt.services.services", "mfl.service_mgmt.services.categories",
+        function ($scope, $state, $stateParams, $log, services, categories) {
             $scope.service = services.newService();
+            categories.getCategories().success(function (data) {
+                $scope.categories = data.results;
+            });
 
             $scope.save = function () {
                 services.createService($scope.service)

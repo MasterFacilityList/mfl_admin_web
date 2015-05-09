@@ -6,7 +6,11 @@
             <p>Name : <input type="text" name="name" ng-model="service.name" /> </p>
             <p>Description : <textarea name="description" ng-model="service.description"></textarea> </p>
             <p>Abbreviation : <input type="text" name="abbreviation" ng-model="service.abbreviation" /> </p>
-            <p>Category : <select name="description" ng-model="service.category"></select> </p>
+            <p>Category :
+            <select name="category" ng-model="service.category" required>
+                <option selected="selected" value="">Select a category</option>
+                <option ng-repeat="cat in categories" ng-value="cat.id">{{cat.name}}</option>
+            </select> </p>
         </form>
     </div>
 

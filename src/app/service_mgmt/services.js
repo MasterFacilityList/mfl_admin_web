@@ -28,6 +28,16 @@
         this.deleteService = function (service_id) {
             return rq.callApi("DELETE", url + service_id + "/");
         };
+
+        this.newService = function () {
+            return {
+                "name": "",
+                "description": "",
+                "abbreviation": "",
+                "category": ""
+            };
+        };
+
     }])
 
     .service("mfl.service_mgmt.services.categories",
