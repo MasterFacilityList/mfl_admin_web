@@ -1,7 +1,8 @@
 "use strict";
 (function(angular){
     angular.module("mfl.setup.chu.controllers",[
-        "mfl.setup.chu.wrapper"
+        "mfl.setup.api",
+        "mfl.common.forms"
     ])
     .controller("mfl.setup.controller.chuStatus.list", ["$scope",
         function ($scope) {
@@ -22,6 +23,63 @@
             ];
         }]
     )
+
+    .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state", "$stateParams",
+                "adminApi","mfl.common.forms.changes",
+        function($scope, $state, $stateParams, adminApi, formChanges){
+            $scope.title = [
+                {
+                    icon: "fa-phone",
+                    name: "Manage CHU Status"
+                }
+            ];
+            adminApi.chuStatus.get($stateParams.id).success(function(data){
+                $scope.chuStatus = data;
+                $scope.edit = true;
+            }).error(function(error){
+                $scope.alert = error.error;
+            });
+
+            $scope.updateChuStatus = function(id, frm){
+                var changes= formChanges.whatChanged(frm);
+                if(!_.isEmpty(changes)){
+                    adminApi.chuStatus.update(id, changes).success(function(){
+                        $state.go("setup.chu_status");
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                    });
+                }
+            };
+            $scope.deleteChuStatus = function(id){
+                adminApi.chuStatus.remove(id).success(function(){
+                    $state.go("setup.chu_status");
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            };
+        }]
+    )
+
+    .controller("mfl.setup.controller.chuStatus.create", ["$scope","$state", "$stateParams",
+                "adminApi",
+        function($scope, $state, $stateParams, adminApi){
+            $scope.title = [
+                {
+                    icon: "fa-phone",
+                    name: "Create CHUS Status"
+                }
+            ];
+            $scope.create = true;
+            $scope.createChuStatus = function(chuStatus){
+                adminApi.chuStatus.create(chuStatus).success(function(){
+                    $state.go("setup.chu_status");
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            };
+        }]
+    )
+
     .controller("mfl.setup.controller.chuApprover.list", ["$scope",
         function ($scope) {
             $scope.title = [

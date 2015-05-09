@@ -1,5 +1,7 @@
  <contentheader></contentheader>
 <div class="content-body">
+    <a ui-sref="setup.chu_status.create" class="btn btn-primary">Add New</a>
+
     <sil-grid template="setup/tpls/chu/status/status-grid.tpl.html" grid-for="chuStatus"
         data="statuses" filters="filters" error="alert">
     </sil-grid>

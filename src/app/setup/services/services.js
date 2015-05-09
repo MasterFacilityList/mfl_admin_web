@@ -11,7 +11,7 @@
         "mfl.setup.chu.wrapper"
     ])
     .provider("adminApi", function(){
-        this.$get = ["api","constituenciesApi","countiesApi","wardsApi", "townsApi",
+        this.$get = ["constituenciesApi","countiesApi","wardsApi", "townsApi",
         "contactsApi","facilityJobTitlesApi","facilityOwnerTypesApi","facilityOwnersApi",
         "facilityRegulatoryBodiesApi","chuStatusApi", "chuApproversApi",
         function(constituenciesApi, countiesApi, wardsApi, townsApi,
