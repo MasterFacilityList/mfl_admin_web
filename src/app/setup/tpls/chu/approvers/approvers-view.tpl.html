@@ -35,13 +35,13 @@
             <div class="form-group">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="status" data-ng-value="true" ng-model="chuApprovers.status">
+                        <input type="radio" name="active" data-ng-value="true" ng-model="chuApprovers.active">
                         Active
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input type="radio" name="status" data-ng-value="false" ng-model="chuApprovers.status">
+                        <input type="radio" name="active" data-ng-value="false" ng-model="chuApprovers.active">
                         In Active
                     </label>
                 </div>
@@ -58,7 +58,7 @@
                         <i class="fa fa-edit"></i> Update
                     </button>
                 </span>
-                <span ng-if="edi" class="pull-left margin-h-5">
+                <span ng-if="edit" class="pull-left margin-h-5">
                     <button ng-click="deleteChuApprovers(chuApprovers.id)" class="login-btn login-btn-info">
                        <i class="fa fa-remove"></i>Delete
                     </button>

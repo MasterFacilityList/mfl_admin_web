@@ -4,11 +4,11 @@
     <p ng-bind-html="alert"></p>
 </div>
 <div class="col-lg-12 margin-t-20">
-    <form role="form form-horizontal form-bordered" name="chu.status.form">
+    <form role="form form-horizontal form-bordered" name="chu.contacts.form">
         <!-- Start of dynamic form -->
         <div class="col-lg-6">
             <div class="group">
-                <input type="text" name="name" ng-model="chuStatus.name" required>
+                <input type="text" name="name" ng-model="contacts.name" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="control-label">
@@ -16,7 +16,7 @@
                 </label>
             </div>
             <div class="group">
-                <textarea type="text" name ="description" ng-model="chuStatus.description"></textarea>
+                <textarea type="text" name ="description" ng-model="contacts.description"></textarea>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>
@@ -27,13 +27,13 @@
             <div class="form-group">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="active" data-ng-value="true" ng-model="chuStatus.active">
+                        <input type="radio" name="active" data-ng-value="true" ng-model="contacts.active">
                         Active
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input type="radio" name="active" data-ng-value="false" ng-model="chuStatus.acrive">
+                        <input type="radio" name="active" data-ng-value="false" ng-model="contacts.status">
                         In Active
                     </label>
                 </div>
@@ -43,15 +43,15 @@
         <div class="col-md-12 form-group">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
                 <span class="pull-left margin-h-5">
-                    <button ng-if="create" ng-click="createChuStatus(chuStatus)" class="login-btn login-btn-default">
+                    <button ng-if="create" ng-click="createContacts(contacts)" class="login-btn login-btn-default">
                         <i class="fa fa-save"></i> Create
                     </button>
-                    <button ng-if="edit" ng-click="updateChuStatus(chuStatus.id, chu.status.form)" class="login-btn login-btn-default">
+                    <button ng-if="edit" ng-click="updateContacts(contacts.id, chu.contacts.form)" class="login-btn login-btn-default">
                         <i class="fa fa-edit"></i> Update
                     </button>
                 </span>
                 <span ng-if="edit" class="pull-left margin-h-5">
-                    <button ng-click="deleteChuStatus(chuStatus.id)" class="login-btn login-btn-info">
+                    <button ng-click="deleteContacts(contacts.id)" class="login-btn login-btn-info">
                        <i class="fa fa-remove"></i>Delete
                     </button>
                 </span>

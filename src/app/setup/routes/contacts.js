@@ -12,6 +12,24 @@
                         templateUrl: "setup/tpls/contacts/contacts-list.tpl.html"
                     }
                 }
+            })
+        .state("setup.contacts.view", {
+                url: "/contacts/:id",
+                views: {
+                    "main-content@setup": {
+                        controller: "mfl.setup.controller.contacts.view",
+                        templateUrl: "setup/tpls/contacts/contacts-view.tpl.html"
+                    }
+                }
+            })
+        .state("setup.contacts.create", {
+                url: "/contacts/create",
+                views: {
+                    "main-content@setup": {
+                        controller: "mfl.setup.controller.contacts.create",
+                        templateUrl: "setup/tpls/contacts/contacts-view.tpl.html"
+                    }
+                }
             });
     }]);
 })(angular);
