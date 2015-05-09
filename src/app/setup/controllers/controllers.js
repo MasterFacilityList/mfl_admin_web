@@ -1,16 +1,17 @@
 "use strict";
-
-angular.module("mfl.setup.controllers",[
-    "mfl.setup.counties.wrapper",
-    "mfl.setup.constituencies.wrapper",
-    "mfl.setup.wards.wrapper",
-    "mfl.setup.county.controllers",
-    "mfl.setup.constituency.controllers",
-    "mfl.setup.ward.controllers",
-    "mfl.setup.contacts.controllers",
-    "mfl.setup.town.controllers",
-    "mfl.setup.facilities.controllers"
-])
+(function(angular){
+    angular.module("mfl.setup.controllers",[
+        "mfl.setup.counties.wrapper",
+        "mfl.setup.constituencies.wrapper",
+        "mfl.setup.wards.wrapper",
+        "mfl.setup.county.controllers",
+        "mfl.setup.constituency.controllers",
+        "mfl.setup.ward.controllers",
+        "mfl.setup.contacts.controllers",
+        "mfl.setup.town.controllers",
+        "mfl.setup.facilities.controllers",
+        "mfl.setup.chu.controllers"
+    ])
     .controller("mfl.setup.controller.dashboard", ["$scope",
         function ($scope) {
             $scope.test = "Administrative areas";
@@ -35,5 +36,6 @@ angular.module("mfl.setup.controllers",[
                     icon: "fa-plus"
                 }
             ];
-        }])
-;
+        }]);
+})(angular);
+

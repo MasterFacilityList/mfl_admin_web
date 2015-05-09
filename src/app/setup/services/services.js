@@ -7,15 +7,16 @@
         "mfl.setup.towns.wrapper",
         "mfl.setup.wards.wrapper",
         "mfl.setup.contacts.wrapper",
-        "mfl.setup.facilities.wrapper"
+        "mfl.setup.facilities.wrapper",
+        "mfl.setup.chu.wrapper"
     ])
     .provider("adminApi", function(){
         this.$get = ["api","constituenciesApi","countiesApi","wardsApi", "townsApi",
         "contactsApi","facilityJobTitlesApi","facilityOwnerTypesApi","facilityOwnersApi",
-        "facilityRegulatoryBodiesApi",
+        "facilityRegulatoryBodiesApi","chuStatusApi", "chuApproversApi",
         function(constituenciesApi, countiesApi, wardsApi, townsApi,
                  contactsApi, facilityJobTitlesApi, facilityOwnersTypesApi, facilityOwnersApi,
-                 facilityRegulatoryBodiesApi){
+                 facilityRegulatoryBodiesApi, chuStatusApi, chuApproversApi){
             return {
                 constituencies: constituenciesApi.api,
                 wards: wardsApi.api,
@@ -25,7 +26,10 @@
                 facilityJobTitles: facilityJobTitlesApi.api,
                 facilityOwnerTypes: facilityOwnersTypesApi.api,
                 facilityOwners: facilityOwnersApi.api,
-                facilityRegulatoryBodies: facilityRegulatoryBodiesApi.api
+                facilityRegulatoryBodies: facilityRegulatoryBodiesApi.api,
+                chuStatus: chuStatusApi.api,
+                chuApprovers: chuApproversApi.api
+
             };
         }];
     });

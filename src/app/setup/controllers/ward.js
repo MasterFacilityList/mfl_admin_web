@@ -1,7 +1,9 @@
-angular.module("mfl.setup.ward.controllers",[
-    "mfl.setup.constituencies.wrapper",
-    "mfl.setup.wards.wrapper"
-])
+"use strict";
+(function(angular){
+    angular.module("mfl.setup.ward.controllers",[
+        "mfl.setup.constituencies.wrapper",
+        "mfl.setup.wards.wrapper"
+    ])
     .controller("mfl.setup.controller.ward.list", ["$scope",
         function ($scope) {
             $scope.test = "View administrative area";
@@ -32,3 +34,4 @@ angular.module("mfl.setup.ward.controllers",[
             ];
         }]
     );
+})(angular);

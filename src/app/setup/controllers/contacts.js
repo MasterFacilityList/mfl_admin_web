@@ -1,7 +1,9 @@
-angular.module("mfl.setup.contacts.controllers",[
-    "mfl.setup.constituencies.wrapper",
-    "mfl.setup.wards.wrapper"
-])
+"use strict";
+(function(angular){
+    angular.module("mfl.setup.contacts.controllers",[
+        "mfl.setup.constituencies.wrapper",
+        "mfl.setup.wards.wrapper"
+    ])
     .controller("mfl.setup.controller.contacts.list", ["$scope",
         function ($scope) {
             $scope.title = [
@@ -21,3 +23,5 @@ angular.module("mfl.setup.contacts.controllers",[
             ];
         }]
     );
+
+})(angular);

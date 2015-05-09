@@ -1,9 +1,9 @@
 "use strict";
-
-angular.module("mfl.setup.county.controllers",[
-    "mfl.setup.counties.wrapper",
-    "mfl.setup.constituencies.wrapper"
-])
+(function(angular){
+    angular.module("mfl.setup.county.controllers",[
+        "mfl.setup.counties.wrapper",
+        "mfl.setup.constituencies.wrapper"
+    ])
     .controller("mfl.setup.controller.county.list", ["$scope",
         function ($scope) {
             $scope.test = "View administrative area";
@@ -113,3 +113,5 @@ angular.module("mfl.setup.county.controllers",[
 
         }]
     );
+
+})(angular);

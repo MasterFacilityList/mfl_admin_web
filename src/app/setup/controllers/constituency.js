@@ -1,10 +1,10 @@
 "use strict";
-
-angular.module("mfl.setup.constituency.controllers",[
-    "mfl.setup.counties.wrapper",
-    "mfl.setup.constituencies.wrapper",
-    "mfl.setup.wards.wrapper"
-])
+(function(angular){
+    angular.module("mfl.setup.constituency.controllers",[
+        "mfl.setup.counties.wrapper",
+        "mfl.setup.constituencies.wrapper",
+        "mfl.setup.wards.wrapper"
+    ])
 
     .controller("mfl.setup.controller.constituency.list", ["$scope",
         function ($scope) {
@@ -79,3 +79,5 @@ angular.module("mfl.setup.constituency.controllers",[
             $scope.filters = {constituency: $stateParams.const_id};
         }]
     );
+
+})(angular);
