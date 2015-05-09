@@ -5,9 +5,9 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_list",
-        ["$scope", "$log", "mfl.service_mgmt.services.services",
-        function ($scope, $log, services) {
-            services.getServices().success(function (data) {
+        ["$scope", "$log", "mfl.service_mgmt.wrappers",
+        function ($scope, $log, wrappers) {
+            wrappers.services.list().success(function (data) {
                 $scope.services = data.results;
             }).error(function (data) {
                 $log.warn(data);
@@ -16,10 +16,10 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_view",
-        ["$scope", "$stateParams", "$log", "mfl.service_mgmt.services.services",
-        function ($scope, $stateParams, $log, services) {
+        ["$scope", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
+        function ($scope, $stateParams, $log, wrappers) {
             $scope.service_id = $stateParams.service_id;
-            services.getService($scope.service_id).success(function (data) {
+            wrappers.services.get($scope.service_id).success(function (data) {
                 $scope.service = data;
             }).error(function (data) {
                 $log.warn(data);
@@ -29,23 +29,22 @@
 
     .controller("mfl.service_mgmt.controllers.service_edit",
         ["$scope", "$stateParams", "$log",
-        "mfl.service_mgmt.services.services", "mfl.service_mgmt.services.categories",
-        "mfl.service_mgmt.forms.changes",
-        function ($scope, $stateParams, $log, services, categories, forms) {
+        "mfl.service_mgmt.wrappers", "mfl.service_mgmt.forms.changes",
+        function ($scope, $stateParams, $log, wrappers, forms) {
             $scope.service_id = $stateParams.service_id;
-            services.getService($scope.service_id).success(function (data) {
+            wrappers.services.get($scope.service_id).success(function (data) {
                 $scope.service = data;
             }).error(function (data) {
                 $log.warn(data);
             });
-            categories.getCategories(true).success(function (data) {
+            wrappers.categories.filter({page_size: 1000}).success(function (data) {
                 $scope.categories = data.results;
             });
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
 
                 if (! _.isEmpty(changed)) {
-                    services.updateService($scope.service_id, changed)
+                    wrappers.services.update($scope.service_id, changed)
                         .success(function () {
                             $state.go(
                                 "service_mgmt.service_view",
@@ -58,16 +57,15 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_create",
-        ["$scope", "$state", "$stateParams", "$log",
-        "mfl.service_mgmt.services.services", "mfl.service_mgmt.services.categories",
-        function ($scope, $state, $stateParams, $log, services, categories) {
+        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers"
+        function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.service = services.newService();
-            categories.getCategories(true).success(function (data) {
+            wrappers.categories.list({page_size: 1000}).success(function (data) {
                 $scope.categories = data.results;
             });
 
             $scope.save = function () {
-                services.createService($scope.service)
+                wrappers.services.create($scope.service)
                 .success(function (data) {
                     $state.go(
                         "service_mgmt.service_view",
@@ -79,17 +77,17 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_delete",
-        ["$scope", "$stateParams", "$log", "mfl.service_mgmt.services.services",
-        function ($scope, $stateParams, $log, services) {
+        ["$scope", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
+        function ($scope, $stateParams, $log, wrappers) {
             $scope.service_id = $stateParams.service_id;
-            services.getService($scope.service_id).success(function (data) {
+            wrappers.services.get($scope.service_id).success(function (data) {
                 $scope.service = data;
             }).error(function (data) {
                 $log.warn(data);
             });
 
             $scope.save = function () {
-                services.deleteService($scope.service_id)
+                wrappers.services.remove($scope.service_id)
                 .success(function () {
                     $state.go("sservice_mgmt.service_list");
                 });

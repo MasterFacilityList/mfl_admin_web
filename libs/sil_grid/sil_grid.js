@@ -1,23 +1,17 @@
-"use strict";
 (function(angular, _){
+    "use strict";
+
     var PAGINATION_TPL = "sil.grid.pagination.tpl.html";
     var SEARCH_TPL = "sil.grid.search.tpl.html";
+
     angular.module("sil.grid",[
             PAGINATION_TPL,
             SEARCH_TPL,
             "ui.bootstrap"
         ]
     )
-    .provider("silGridConfig", function(){
-        /**
-            apiMaps example:
-            this.apiMaps = {
-                claim: ["sil.claimApi.wrapper", "claimsApi"],
-                visit: ["sil.encountersApi.wrapper", "encountersApi"],
-                preauth: ["sil.preauthApi.wrapper", "preauthApi"]
-            };
 
-        **/
+    .provider("silGridConfig", function() {
         this.apiMaps = {};
         this.appConfig = "providerConfig";
         this.itemsPerPage = 25;
@@ -46,7 +40,8 @@
                 gridFor: "@",
                 data: "@",
                 error: "=",
-                actions: "="
+                actions: "=",
+                apiKey: "@"
             },
             replace: false,
             templateUrl:function(elem, attrs){
@@ -62,7 +57,12 @@
                 var api_conf = apiMaps[$scope.gridFor];
                 var api = angular.injector(
                     ["ng",silGridConfig.appConfig, api_conf[0]]).get(api_conf[1]);
+
                 self.api = api;
+                if(!_.isUndefined($scope.apiKey)) {
+                    self.api = api[$scope.apiKey];
+                }
+
                 self.setLoading = function(start){
                     if(start){
                         $scope.$emit("silGrid.loader.start");
@@ -73,10 +73,10 @@
                 self.getData = function(){
                     self.setLoading(true);
                     var promise;
-                    if(_.isUndefined($scope.filters)){
-                        promise = api.api.list();
+                    if(_.isUndefined($scope.filters)) {
+                        promise = self.api.list();
                     }else{
-                        promise = api.api.filter($scope.filters);
+                        promise = self.api.filter($scope.filters);
                     }
                     promise.success(self.setData).error(self.setError);
                 };

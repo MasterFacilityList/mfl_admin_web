@@ -21,8 +21,7 @@
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
                 practitioners: ["mfl.practitioners.wrapper", "practitionersApi"],
-                facilities : ["mfl.facilities.wrapper",
-                    "facilitiesApi"],
+                facilities : ["mfl.facilities.wrapper", "facilitiesApi"],
                 chul: ["mfl.chul.wrapper", "chulApi"],
                 officers: ["mfl.officers.wrapper", "officersApi"],
                 counties: ["mfl.counties.wrapper", "countiesApi"],
@@ -35,7 +34,8 @@
                 permissions : ["mfl.users.wrapper", "permissionsApi"],
                 contactsApi : ["mfl.users.wrapper", "contactsApi"],
                 contact_type : ["mfl.users.wrapper", "contact_typeApi"],
-                user_contacts : ["mfl.users.wrapper", "user_contactsApi"]
+                user_contacts : ["mfl.users.wrapper", "user_contactsApi"],
+                service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
             };
         silGridConfig.appConfig = "mfl.settings";
     }])
