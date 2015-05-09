@@ -32,6 +32,7 @@
         "_": true,
         "window": true,
         "spyOn": true,
+        "xit" : true,
         "printStackTrace": true
     }
 }

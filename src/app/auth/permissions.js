@@ -19,3 +19,21 @@ angular.module("mfl.auth.permissions", ["mfl.auth.services"])
             };
         }
     ]);
+
+    /*.service("mfl.auth.permissions.permissionList", ["$rootScope",
+        function ($rootScope) {
+            var permissionList = "";
+
+            this.setPermissions = function (permissions) {
+                permissionList = permissions;
+                $rootScope.$broadcast("permissionsChanged");
+            };
+
+            this.hasPermission = function (permission) {
+                permission = permission.trim();
+                var checker = "";
+                checker = _.contains(permissionList, permission);
+                return checker;
+            };
+        }
+    ]);*/
