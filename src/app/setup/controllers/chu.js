@@ -98,6 +98,61 @@
                 }
             ];
         }]
+    )
+    .controller("mfl.setup.controller.chuApprover.view", ["$scope","$state", "$stateParams",
+                "adminApi","mfl.common.forms.changes",
+        function($scope, $state, $stateParams, adminApi, formChanges){
+            $scope.title = [
+                {
+                    icon: "fa-phone",
+                    name: "Manage CHU Approvals"
+                }
+            ];
+            adminApi.chuApprovers.get($stateParams.id).success(function(data){
+                $scope.chuApprovers = data;
+                $scope.edit = true;
+            }).error(function(error){
+                $scope.alert = error.error;
+            });
+
+            $scope.updateChuApprovers = function(id, frm){
+                var changes= formChanges.whatChanged(frm);
+                if(!_.isEmpty(changes)){
+                    adminApi.chuApprovers.update(id, changes).success(function(){
+                        $state.go("setup.chu_approvers");
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                    });
+                }
+            };
+            $scope.deleteChuApprovers = function(id){
+                adminApi.chuApprovers.remove(id).success(function(){
+                    $state.go("setup.chu_approvers");
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            };
+        }]
+    )
+
+    .controller("mfl.setup.controller.chuApprover.create", ["$scope","$state", "$stateParams",
+                "adminApi",
+        function($scope, $state, $stateParams, adminApi){
+            $scope.title = [
+                {
+                    icon: "fa-phone",
+                    name: "Create CHUS Approver"
+                }
+            ];
+            $scope.create = true;
+            $scope.createChuApprovers = function(chuApprover){
+                adminApi.chuApprovers.create(chuApprover).success(function(){
+                    $state.go("setup.chu_approvers");
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            };
+        }]
     );
 
 })(angular);

@@ -39,7 +39,26 @@
                         templateUrl: "setup/tpls/chu/approvers/approvers-list.tpl.html"
                     }
                 }
-            });
+            })
+        .state("setup.chu_approvers.view", {
+                url: "/chu_approvers/:id",
+                views: {
+                    "main-content@setup": {
+                        controller: "mfl.setup.controller.chuApprover.view",
+                        templateUrl: "setup/tpls/chu/approvers/approvers-view.tpl.html"
+                    }
+                }
+            })
+        .state("setup.chu_approvers.create", {
+                url: "/chu_approvers/create",
+                views: {
+                    "main-content@setup": {
+                        controller: "mfl.setup.controller.chuApprover.create",
+                        templateUrl: "setup/tpls/chu/approvers/approvers-view.tpl.html"
+                    }
+                }
+            })
+        ;
     }]);
 })(angular);
 
