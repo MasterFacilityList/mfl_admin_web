@@ -426,7 +426,10 @@ angular.module("mfl.users.controllers", [])
             ];
             $scope.set_permissions = [];
             $scope.is_set = false;
-            permissionsWrapper.api.list()
+            $scope.all_permissions = {
+                page_size : 1500
+            };
+            permissionsWrapper.api.filter($scope.all_permissions)
                 .success(function (data) {
                     $scope.permissions = data.results;
                 })

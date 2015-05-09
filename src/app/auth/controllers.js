@@ -22,7 +22,6 @@ angular.module("mfl.auth.controllers", [])
                     .error(function (e) {
                         console.log(e);
                         $scope.login_err = e.non_field_errors[0];
-                        $scope.err = true;
                     });
             };
         }
