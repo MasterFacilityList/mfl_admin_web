@@ -38,7 +38,7 @@
             }).error(function (data) {
                 $log.warn(data);
             });
-            categories.getCategories().success(function (data) {
+            categories.getCategories(true).success(function (data) {
                 $scope.categories = data.results;
             });
             $scope.save = function (frm) {
@@ -62,7 +62,7 @@
         "mfl.service_mgmt.services.services", "mfl.service_mgmt.services.categories",
         function ($scope, $state, $stateParams, $log, services, categories) {
             $scope.service = services.newService();
-            categories.getCategories().success(function (data) {
+            categories.getCategories(true).success(function (data) {
                 $scope.categories = data.results;
             });
 

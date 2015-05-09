@@ -79,6 +79,16 @@
             }
         })
 
+        .state("service_mgmt.service_edit.options", {
+            url: "services/:service_id/edit/options/",
+            views: {
+                "options": {
+                    controller: "mfl.service_mgmt.controllers.service_options",
+                    templateUrl: "service_mgmt/tpls/service_options.tpl.html"
+                }
+            }
+        })
+
         // ============== categories ====================
         .state("service_mgmt.category_list", {
             url: "categories/",
@@ -126,6 +136,58 @@
                 "main-content": {
                     controller: "mfl.service_mgmt.controllers.category_delete",
                     templateUrl: "service_mgmt/tpls/category_delete.tpl.html"
+                }
+            }
+        })
+
+        // ============== options ====================
+
+        .state("service_mgmt.option_list", {
+            url: "options/",
+            views: {
+                "main-content": {
+                    controller: "mfl.service_mgmt.controllers.option_list",
+                    templateUrl: "service_mgmt/tpls/option_list.tpl.html"
+                }
+            }
+        })
+
+        .state("service_mgmt.option_create", {
+            url: "options/create/",
+            views: {
+                "main-content": {
+                    controller: "mfl.service_mgmt.controllers.option_create",
+                    templateUrl: "service_mgmt/tpls/option_edit.tpl.html"
+                }
+            }
+        })
+
+        .state("service_mgmt.option_view", {
+            url: "options/:option_id/",
+            views: {
+                "main-content": {
+                    controller: "mfl.service_mgmt.controllers.option_view",
+                    templateUrl: "service_mgmt/tpls/option_view.tpl.html"
+                }
+            }
+        })
+
+        .state("service_mgmt.option_edit", {
+            url: "options/:option_id/edit/",
+            views: {
+                "main-content": {
+                    controller: "mfl.service_mgmt.controllers.option_edit",
+                    templateUrl: "service_mgmt/tpls/option_edit.tpl.html"
+                }
+            }
+        })
+
+        .state("service_mgmt.option_delete", {
+            url: "options/:option_id/delete/",
+            views: {
+                "main-content": {
+                    controller: "mfl.service_mgmt.controllers.option_delete",
+                    templateUrl: "service_mgmt/tpls/option_delete.tpl.html"
                 }
             }
         })

@@ -3,25 +3,26 @@
 
     <div>
         <form name="service_frm">
-            <p>Name : <input type="text" name="name" ng-model="service.name" /> </p>
-            <p>Description : <textarea name="description" ng-model="service.description"></textarea> </p>
-            <p>Abbreviation : <input type="text" name="abbreviation" ng-model="service.abbreviation" /> </p>
+            <p>Name : <input type="text" name="name" ng-model="service.name" required /> </p>
+            <p>Description : <textarea name="description" ng-model="service.description" required /></textarea> </p>
+            <p>Abbreviation : <input type="text" name="abbreviation" ng-model="service.abbreviation" required/> </p>
             <p>Category :
-            <select name="category" ng-model="service.category" required>
-                <option selected="selected" value="">Select a category</option>
-                <option ng-repeat="cat in categories" ng-value="cat.id">{{cat.name}}</option>
-            </select> </p>
+                <select name="category" ng-model="service.category" required>
+                    <option value="">Select a category</option>
+                    <option ng-repeat="cat in categories" ng-value="cat.id">{{cat.name}}</option>
+                </select>
+            </p>
+
+            <a ui-sref="service_mgmt.service_view({service_id: service.id})" class="btn btn-default">
+                Cancel
+            </a>
+            <a ui-sref="service_mgmt.service_list" class="btn btn-default">
+                Cancel (List)
+            </a>
+            <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="btn btn-danger">
+                Delete
+            </a>
+            <button ng-click="save(service_frm)" class="btn btn-primary">Save</button>
         </form>
     </div>
-
-    <a ui-sref="service_mgmt.service_view({service_id: service.id})" class="btn btn-default">
-        Cancel
-    </a>
-    <a ui-sref="service_mgmt.service_list" class="btn btn-default">
-        Cancel (List)
-    </a>
-    <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="btn btn-danger">
-        Delete
-    </a>
-    <button ng-click="save(service_frm)" class="btn btn-primary">Save</button>
 </div>

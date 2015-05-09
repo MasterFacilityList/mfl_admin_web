@@ -1,0 +1,32 @@
+<div>
+    <a class="btn btn-success" ui-sref="service_mgmt.option_create">Create</a>
+    <table class="table content-card">
+        <thead>
+            <tr>
+                <th>Display Text</th>
+                <th>Value</th>
+                <th>Option Type</th>
+                <th>Is Exclusive Option</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="opt in options">
+                <td>{{opt.display_text}}</td>
+                <td>{{opt.value}}</td>
+                <td>{{opt.option_type}}</td>
+                <td>{{opt.is_exclusive_option}}</td>
+                <td>
+                    <a ui-sref="service_mgmt.option_view({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a ui-sref="service_mgmt.option_edit({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a ui-sref="service_mgmt.option_delete({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
