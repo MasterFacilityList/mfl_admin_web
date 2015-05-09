@@ -61,7 +61,7 @@ describe("Test roles controllers :", function () {
             controller("mfl.users.controllers.new_role");
             var data = "";
             $httpBackend.expectGET(
-                SERVER_URL + "api/users/permissions/").respond(200, data);
+                SERVER_URL + "api/users/permissions/?page_size=1500").respond(200, data);
             $httpBackend.flush();
         }
     ]));
@@ -70,7 +70,7 @@ describe("Test roles controllers :", function () {
             controller("mfl.users.controllers.new_role");
             var data = "";
             $httpBackend.expectGET(
-                SERVER_URL + "api/users/permissions/").respond(400, data);
+                SERVER_URL + "api/users/permissions/?page_size=1500").respond(400, data);
         }
     ]));
     it("should test clicked Role", function () {

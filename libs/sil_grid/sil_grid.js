@@ -233,9 +233,9 @@
                 scope.silGridSearch = function(clear){
                     if(clear){
                         scope.silGrid.searchQuery = "";
-                        gridCtrl.removeFilter("search");
+                        gridCtrl.removeFilter("q");
                     }else{
-                         gridCtrl.addFilter("search", scope.silGrid.searchQuery);
+                         gridCtrl.addFilter("q", scope.silGrid.searchQuery);
                     }
 
                 };
