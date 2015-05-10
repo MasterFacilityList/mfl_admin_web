@@ -3,9 +3,9 @@
 angular.module("mfl.auth.directives", ["mfl.auth.permissions"])
 
     .directive("hasPermission", ["mfl.auth.permissions.permissionList",
-        function (authService) {
+        "$compile", function (authService, $compile) {
             return {
-                restrict : "A",
+                //restrict : "A",
                 transclude : "element",
                 link : function (
                     scope, element, attrs, controller, transclude) {
@@ -14,7 +14,7 @@ angular.module("mfl.auth.directives", ["mfl.auth.permissions"])
                         var value = attrs.hasPermission;
                         var hasPermission = authService.hasPermission(value);
                         if(hasPermission) {
-                            element.after(clone);
+                            $compile(element.after(clone));
                         }
                     });
                 }
