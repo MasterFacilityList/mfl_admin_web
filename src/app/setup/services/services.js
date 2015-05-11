@@ -2,33 +2,22 @@
 
 (function(angular){
     angular.module("mfl.setup.api", [
-        "mfl.setup.constituencies.wrapper",
-        "mfl.setup.counties.wrapper",
-        "mfl.setup.towns.wrapper",
-        "mfl.setup.wards.wrapper",
-        "mfl.setup.contacts.wrapper",
-        "mfl.setup.facilities.wrapper",
-        "mfl.setup.chu.wrapper"
+        "sil.api.wrapper"
     ])
     .provider("adminApi", function(){
-        this.$get = ["constituenciesApi","countiesApi","wardsApi", "townsApi",
-        "contactsApi","facilityJobTitlesApi","facilityOwnerTypesApi","facilityOwnersApi",
-        "facilityRegulatoryBodiesApi","chuStatusApi", "chuApproversApi",
-        function(constituenciesApi, countiesApi, wardsApi, townsApi,
-                 contactsApi, facilityJobTitlesApi, facilityOwnersTypesApi, facilityOwnersApi,
-                 facilityRegulatoryBodiesApi, chuStatusApi, chuApproversApi){
+        this.$get = ["api",function(api){
             return {
-                constituencies: constituenciesApi.api,
-                wards: wardsApi.api,
-                counties: countiesApi.api,
-                towns: townsApi.api,
-                contacts: contactsApi.api,
-                facilityJobTitles: facilityJobTitlesApi.api,
-                facilityOwnerTypes: facilityOwnersTypesApi.api,
-                facilityOwners: facilityOwnersApi.api,
-                facilityRegulatoryBodies: facilityRegulatoryBodiesApi.api,
-                chuStatus: chuStatusApi.api,
-                chuApprovers: chuApproversApi.api
+                constituencies:api.setBaseUrl("api/common/constituencies"),
+                wards: api.setBaseUrl("api/common/counties"),
+                counties: api.setBaseUrl("api/common/wards"),
+                towns: api.setBaseUrl("api/common/towns"),
+                contacts: api.setBaseUrl("api/common/contact_types"),
+                facilityJobTitles: api.setBaseUrl("api/facilities/job_titles"),
+                facilityOwnerTypes: api.setBaseUrl("api/facilities/owner_types"),
+                facilityOwners: api.setBaseUrl("api/facilities/owners"),
+                facilityRegulatoryBodies: api.setBaseUrl("api/facilities/regulating_bodies"),
+                chuStatus: api.setBaseUrl("api/chul/statuses/"),
+                chuApprovers: api.setBaseUrl("api/chul/approvers/")
 
             };
         }];
