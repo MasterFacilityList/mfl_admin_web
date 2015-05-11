@@ -1,3 +1,4 @@
+<a ui-sref="setup.facility_job_titles.create" class="btn btn-primary">Add New</a>
 <div class="">
     <div class="col-md-5 col-sm-5 pull-right">
             <sil-grid-search> </sil-grid-search>
@@ -15,15 +16,9 @@
                 <td data-title="Name">{{jobTitle.name}}</td>
                 <td data-title="Name">{{jobTitle.active}}</td>
                 <td data-title="Actions" class="text-center">
-                    <a ui-sref="setup.job_titles.view({id : jobTitle.id})" class="action-btn action-btn-grid action-btn-primary">
+                    <a ui-sref="setup.facility_job_titles.view({id : jobTitle.id})" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-eye"></i>
                     </a>
-                    <a ui-sref="setup.job_titles.edit({id : jobTitle.id})" class="action-btn action-btn-grid action-btn-primary">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <button  ng-click="deleteJobTitle(jobTitle.id)" class="action-btn action-btn-grid action-btn-primary">
-                        <i class="fa fa-edit"></i>
-                    </button>
                 </td>
             </tr>
         </tbody>
