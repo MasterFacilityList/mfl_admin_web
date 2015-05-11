@@ -8,17 +8,26 @@
                      <h4>
                         <label class="control-lable">Name: </label>
                         {{oneUser.full_name}}
-                        <!-- <span class="pull-right">
-                            <label class="control-label">Role: </label>
-                            {{oneUser.role}}
-                        </span> -->
+                        <span class="pull-right">
+                            <label class="control-label">Email: </label>
+                            {{oneUser.email}}
+                        </span>
                     </h4>
                     <h4 class="margin-t-10">
                     <label class="control-label">Date created: </label>
                         {{oneUser.date_joined | date : 'fullDate'}}
+                        <span class="pull-right">
+                            <label class="control-label">Username: </label>
+                            {{oneUser.username}}
+                        </span>
                     </h4>
                     <hr style="border: 1px solid #f0f0f0;">
-                    <!-- /-TODO put smaller action area to the right of card and show details of facility being acted upon -->
+                    <h4><label><i class="fa fa-user"></i>  Role(s)</label></h4>
+                    <h4>
+                        <span class="col-lg-6 col-md-6" ng-repeat="role in oneUser.groups">
+                            {{role.name}}
+                        </span>
+                    </h4>
                 </div>
         </div>
 
@@ -42,6 +51,14 @@
                         <span ng-hide="oneUser.is_national" class="text-danger">
                             <i class="fa fa-times-circle-o fa-1x"></i>
                         </span>
+                    </span>
+                </h4>
+                <br>
+                <hr style="border: 1px solid #f0f0f0;">
+                <h4>
+                    <label> <i class="fa fa-phone"></i> Contacts</label>
+                    <span>
+                        {{user_contacts}}
                     </span>
                 </h4>
             </div>
