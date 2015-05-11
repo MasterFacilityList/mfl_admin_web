@@ -1,8 +1,7 @@
 "use strict";
 (function(angular){
     angular.module("mfl.setup.town.controllers",[
-        "mfl.setup.constituencies.wrapper",
-        "mfl.setup.wards.wrapper"
+        "mfl.setup.api"
     ])
     .controller("mfl.setup.controller.town.list", ["$scope",
         function ($scope) {

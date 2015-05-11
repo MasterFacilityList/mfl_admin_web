@@ -1,8 +1,7 @@
 "use strict";
 (function(angular){
     angular.module("mfl.setup.county.controllers",[
-        "mfl.setup.counties.wrapper",
-        "mfl.setup.constituencies.wrapper"
+        "mfl.setup.api"
     ])
     .controller("mfl.setup.controller.county.list", ["$scope",
         function ($scope) {
@@ -68,10 +67,10 @@
         }]
     )
     .controller("mfl.setup.controllers.county.constituency", ["$scope","$stateParams",
-        "constituenciesApi","countiesApi",
-        function ($scope, $stateParams,constituenciesApi, countiesApi) {
+        "adminApi",
+        function ($scope, $stateParams,adminApi) {
             $scope.count_id = $stateParams.count_id;
-            countiesApi.api
+            adminApi.counties
                 .get($stateParams.count_id)
                 .success(function (data){
                     $scope.county_name = data.name;

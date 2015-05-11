@@ -1,8 +1,7 @@
 "use strict";
 (function(angular){
     angular.module("mfl.setup.ward.controllers",[
-        "mfl.setup.constituencies.wrapper",
-        "mfl.setup.wards.wrapper"
+        "mfl.setup.api"
     ])
     .controller("mfl.setup.controller.ward.list", ["$scope",
         function ($scope) {

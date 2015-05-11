@@ -1,7 +1,7 @@
 "use strict";
 (function(angular){
     angular.module("mfl.setup.facilities.controllers",[
-        "mfl.setup.facilities.wrapper"
+        "mfl.setup.api"
     ])
     /**
         Facility OwnerTypes

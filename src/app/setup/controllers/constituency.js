@@ -1,9 +1,7 @@
 "use strict";
 (function(angular){
     angular.module("mfl.setup.constituency.controllers",[
-        "mfl.setup.counties.wrapper",
-        "mfl.setup.constituencies.wrapper",
-        "mfl.setup.wards.wrapper"
+        "mfl.setup.api"
     ])
 
     .controller("mfl.setup.controller.constituency.list", ["$scope",
@@ -35,11 +33,10 @@
             ];
         }]
     )
-    .controller("mfl.setup.controller.constituency.wards", ["$scope","constituenciesApi",
-                "wardsApi","$stateParams",
-        function ($scope, constituenciesApi, wardsApi, $stateParams) {
-            console.log(wardsApi);
-            constituenciesApi.api
+    .controller("mfl.setup.controller.constituency.wards", ["$scope","adminApi",
+                "$stateParams",
+        function ($scope, adminApi, $stateParams) {
+            adminApi.constituencies
                 .get($stateParams.const_id)
                 .success(function (data){
                     $scope.constituency_name = data.name;
