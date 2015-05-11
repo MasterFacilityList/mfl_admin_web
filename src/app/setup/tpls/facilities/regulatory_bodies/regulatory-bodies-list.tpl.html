@@ -1,7 +1,7 @@
  <contentheader></contentheader>
 <div class="content-body">
     <a ui-sref="setup.facility_regulatory_bodies.create" class="btn btn-primary">Add New</a>
-    <sil-grid template="setup/tpls/facilities/regulatory_bodies/regulatory-bodies-grid.tpl.html" grid-for="facilityRegulatoryBodies"
+    <sil-grid template="setup/tpls/facilities/regulatory_bodies/regulatory-bodies-grid.tpl.html" grid-for="admin" api-key="towns"
         data="regulatingBodies" filters="filters" error="alert">
     </sil-grid>
 </div>
