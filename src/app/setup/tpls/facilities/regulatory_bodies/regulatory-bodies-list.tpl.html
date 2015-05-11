@@ -1,9 +1,6 @@
  <contentheader></contentheader>
 <div class="content-body">
-
-    <div ng-if="alert" class="callout callout-danger fade in">
-        <p ng-bind-html="alert"></p>
-    </div>
+    <a ui-sref="setup.facility_regulatory_bodies.create" class="btn btn-primary">Add New</a>
     <sil-grid template="setup/tpls/facilities/regulatory_bodies/regulatory-bodies-grid.tpl.html" grid-for="facilityRegulatoryBodies"
         data="regulatingBodies" filters="filters" error="alert">
     </sil-grid>
