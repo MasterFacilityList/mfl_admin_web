@@ -10,5 +10,6 @@ angular.module("mfl.users", [
     "mfl.users.routes",
     "mfl.auth.directives",
     "mfl.users.wrapper",
-    "mfl.common.directives"
+    "mfl.common.directives",
+    "mfl.common.filters"
 ]);

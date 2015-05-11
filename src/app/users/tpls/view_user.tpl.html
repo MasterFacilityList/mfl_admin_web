@@ -55,12 +55,15 @@
                 </h4>
                 <br>
                 <hr style="border: 1px solid #f0f0f0;">
-                <h4>
-                    <label> <i class="fa fa-phone"></i> Contacts</label>
-                    <span>
-                        {{user_contacts}}
+                <h4><label> <i class="fa fa-phone"></i> Contacts</label></h4>
+                <h5>
+                    <span ng-repeat="cont in contacts">
+                        <div class="col-lg-12 col-md-12 margin-b-5">
+                                <p style="font-size: 16px"><b>{{cont.contact_type | contact_type : cont_types}}</b> :
+                                <span >{{cont.contact}}</span></p>
+                        </div>
                     </span>
-                </h4>
+                </h5>
             </div>
         </div>
 

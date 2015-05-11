@@ -275,8 +275,10 @@ angular.module("mfl.users.controllers", [])
         ];
     }])
     .controller("mfl.users.controllers.view_user", ["$scope",
-    "usersApi", "$stateParams", "user_contactsApi",
-    function ($scope, userswrapper, $stateParams, user_contactsApi) {
+    "usersApi", "$stateParams", "user_contactsApi", "contactsApi",
+    "contact_typeApi",
+    function ($scope, userswrapper, $stateParams,
+        user_contactsApi, contactsWrapper, contact_typeWrapper) {
         $scope.test = "View user";
         $scope.path = [
             {
@@ -313,10 +315,29 @@ angular.module("mfl.users.controllers", [])
         $scope.usr_cont = {
             user : $stateParams.user_id
         };
-
+        contact_typeWrapper.api.list()
+            .success(function (cont_type) {
+                $scope.cont_types = cont_type.results;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
+        //declaring the object to hold contacts for a user
+        $scope.contacts = [];
         user_contactsApi.api.filter($scope.usr_cont)
             .success(function (answer) {
                 $scope.user_contacts = answer.results;
+                _.each($scope.user_contacts, function (contacts) {
+                    var i = 0;
+                    contactsWrapper.api.get(contacts.contact)
+                        .success(function (usr_cont) {
+                            $scope.contacts.push(usr_cont);
+                        })
+                        .error(function (e) {
+                            console.log(e.error);
+                        });
+                    i++;
+                });
             })
             .error(function (e) {
                 console.log(e);
