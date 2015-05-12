@@ -34,7 +34,7 @@
             views: {
                 "main-content": {
                     controller: "mfl.service_mgmt.controllers.service_list",
-                    templateUrl: "service_mgmt/tpls/service_list.tpl.html"
+                    templateUrl: "service_mgmt/tpls/service_grid.tpl.html"
                 }
             }
         })

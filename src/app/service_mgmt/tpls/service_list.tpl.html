@@ -1,7 +1,34 @@
-<div>
-    <a class="btn btn-success" ui-sref="service_mgmt.service_create">Create</a>
-    <sil-grid template="service_mgmt/tpls/service_list.tpl.html" grid-for="service_mgmt" api-key="services"
-        data="services" filters="filters" error="alert">
-    </sil-grid>
-
-</div>
+<table class="table content-card">
+    <thead>
+        <tr>
+            <th sil-grid-sort field='code'>Code</th>
+            <th sil-grid-sort field='name'>Name</th>
+            <th>Abbreviation</th>
+            <th sil-grid-sort field='category'>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="service in services">
+            <td>{{service.code}}</td>
+            <td>{{service.name}}</td>
+            <td>{{service.abbreviation}}</td>
+            <td>
+                <a ui-sref="service_mgmt.category_view({category_id: service.category})">
+                    {{service.category_name}}
+                </a>
+            </td>
+            <td>
+                <a ui-sref="service_mgmt.service_view({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a ui-sref="service_mgmt.service_edit({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
