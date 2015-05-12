@@ -28,9 +28,9 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_edit",
-        ["$scope", "$stateParams", "$log",
+        ["$scope", "$state", "$stateParams", "$log",
         "mfl.service_mgmt.wrappers", "mfl.service_mgmt.forms.changes",
-        function ($scope, $stateParams, $log, wrappers, forms) {
+        function ($scope, $state, $stateParams, $log, wrappers, forms) {
             $scope.service_id = $stateParams.service_id;
             wrappers.services.get($scope.service_id).success(function (data) {
                 $scope.service = data;
@@ -57,9 +57,9 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_create",
-        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers"
+        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
         function ($scope, $state, $stateParams, $log, wrappers) {
-            $scope.service = services.newService();
+            $scope.service = wrappers.newService();
             wrappers.categories.list({page_size: 1000}).success(function (data) {
                 $scope.categories = data.results;
             });
@@ -77,8 +77,8 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_delete",
-        ["$scope", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $stateParams, $log, wrappers) {
+        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
+        function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.service_id = $stateParams.service_id;
             wrappers.services.get($scope.service_id).success(function (data) {
                 $scope.service = data;
@@ -89,7 +89,7 @@
             $scope.save = function () {
                 wrappers.services.remove($scope.service_id)
                 .success(function () {
-                    $state.go("sservice_mgmt.service_list");
+                    $state.go("service_mgmt.service_list");
                 });
             };
         }
