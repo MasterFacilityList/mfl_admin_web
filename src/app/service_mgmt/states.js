@@ -95,7 +95,7 @@
             views: {
                 "main-content": {
                     controller: "mfl.service_mgmt.controllers.category_list",
-                    templateUrl: "service_mgmt/tpls/category_list.tpl.html"
+                    templateUrl: "service_mgmt/tpls/category_grid.tpl.html"
                 }
             }
         })
@@ -147,7 +147,7 @@
             views: {
                 "main-content": {
                     controller: "mfl.service_mgmt.controllers.option_list",
-                    templateUrl: "service_mgmt/tpls/option_list.tpl.html"
+                    templateUrl: "service_mgmt/tpls/option_grid.tpl.html"
                 }
             }
         })
