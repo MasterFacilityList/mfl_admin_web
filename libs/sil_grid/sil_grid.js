@@ -58,7 +58,7 @@
                 var api = angular.injector(
                     ["ng",silGridConfig.appConfig, api_conf[0]]).get(api_conf[1]);
 
-                self.api = api;
+                self.api = api.api;
                 if(!_.isUndefined($scope.apiKey)) {
                     self.api = api[$scope.apiKey];
                 }

@@ -13,8 +13,13 @@
                         continue;
                     }
                     if (frm[f].$dirty === true) {
-                        vals[f] = frm[f].$modelValue.trim();
+                        try {
+                            vals[f] = frm[f].$modelValue.trim();
+                        } catch(err) {
+                            vals[f] = frm[f].$modelValue;
+                        }
                     }
+
                 }
             }
 
