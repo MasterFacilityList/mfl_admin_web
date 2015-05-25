@@ -7,6 +7,5 @@ angular.module("mfl.auth", [
     "mfl.auth.controllers",
     "mfl.auth.services",
     "mfl.auth.routers",
-    "mfl.auth.directives",
-    "mflApp.interceptors"
+    "mfl.auth.directives"
 ]);

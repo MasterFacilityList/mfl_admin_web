@@ -2,17 +2,6 @@
 
 angular.module("mfl.users.wrapper", ["sil.api.wrapper"])
 
-    .provider("usersApi", function(){
-        var self = this;
-        self.baseUrl = "api/users/";
-        this.$get = ["api", function(api){
-            return {
-                baseUrl: self.baseUrl,
-                api: api.setBaseUrl(this.baseUrl)
-            };
-        }];
-    })
-
     .provider("rolesApi", function () {
         var self = this;
         self.baseUrl = "api/users/groups/";
@@ -35,13 +24,15 @@ angular.module("mfl.users.wrapper", ["sil.api.wrapper"])
         }];
     })
 
-    .provider("contactsApi", function () {
+    .provider("usersApi", function(){
         var self = this;
-        self.baseUrl = "api/common/contacts/";
-        this.$get = ["api", function(api){
+        self.baseUrl = "api/users/";
+        this.$get = ["api","rolesApi", "permissionsApi",  function(api,rolesApi, permissionsApi){
             return {
                 baseUrl: self.baseUrl,
-                api: api.setBaseUrl(this.baseUrl)
+                api: api.setBaseUrl(this.baseUrl),
+                roles: rolesApi.api,
+                permissions: permissionsApi.api
             };
         }];
     })
@@ -68,12 +59,16 @@ angular.module("mfl.users.wrapper", ["sil.api.wrapper"])
         }];
     })
 
-    .service("mfl.users.services.uses", ["mfl.common.providers.requests",
-    function (requests) {
-        var url = {
-            users : "api/v1/users"
-        };
-        this.getUsersBackend = function () {
-            return requests.callApi("GET", url.users);
-        };
-    }]);
+    .provider("contactsApi", function () {
+        var self = this;
+        self.baseUrl = "api/common/contacts/";
+        this.$get = ["api", "contact_typeApi","user_contactsApi",
+        function(api, contactTypeApi, userContactsApi){
+            return {
+                baseUrl: self.baseUrl,
+                api: api.setBaseUrl(this.baseUrl),
+                contactType: contactTypeApi.api,
+                userContacts: userContactsApi.api
+            };
+        }];
+    });

@@ -25,7 +25,7 @@
                                 </label>
                             </div>
                             <h4>Permissions available</h4>
-                                <ul class="nav nav-pills nav-stacked perm-container margin-b-20" >
+                                <ul class="perm-container nav nav-pills nav-stacked margin-b-20" >
                                     <li ng-repeat="perm in permissions | filter : search.query"
                                     class="list-item" ng-class="{
                                     active : perm.selected}"  >
@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-5 margin-t-50">
                             <h4>Permissions assigned to role</h4>
-                                <ul class="nav nav-pills nav-stacked perm-container margin-b-20" >
+                                <ul class="perm-container nav nav-pills nav-stacked margin-b-20" >
                                     <span ng-hide="is_set">
                                         No permission selected
                                     </span>

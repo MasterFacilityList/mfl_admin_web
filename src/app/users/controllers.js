@@ -75,7 +75,6 @@ angular.module("mfl.users.controllers", [])
     "rolesApi",
     function ($scope, userWrapper, $state, contactTypeWrapper,
         contactWrapper, user_contactWrapper, rolesWrapper) {
-        $scope.test = "New user";
         $scope.new_user = true;
         $scope.path = [
             {
@@ -141,7 +140,7 @@ angular.module("mfl.users.controllers", [])
                         "users.new_user.contacts", {user_id : new_usr.id});
                 })
                 .error(function (e) {
-                    console.log(e);
+                    console.log(e.error);
                 });
         };
         //listing all the contact types wrapper implementation
@@ -150,7 +149,7 @@ angular.module("mfl.users.controllers", [])
                 $scope.contact_type = cont_type.results;
             })
             .error(function (e) {
-                console.log(e);
+                console.log(e.error);
             });
         //listing roles wrapper
         rolesWrapper.api.list()
@@ -158,7 +157,7 @@ angular.module("mfl.users.controllers", [])
                 $scope.roles = roles_result.results;
             })
             .error(function (e) {
-                console.log(e);
+                console.log(e.error);
             });
 
         $scope.addUserContacts = function () {
@@ -227,6 +226,8 @@ angular.module("mfl.users.controllers", [])
 
         //adding a users role
         $scope.addUserRole = function () {
+            console.log("adding user");
+            console.log($state.params.user_id);
             _.each($scope.set_roles, function (assigned_role) {
                 delete assigned_role.permissions;
             });
@@ -274,8 +275,10 @@ angular.module("mfl.users.controllers", [])
         ];
     }])
     .controller("mfl.users.controllers.view_user", ["$scope",
-    "mfl.users.services.uses", "$stateParams",
-    function ($scope, userService, $stateParams) {
+    "usersApi", "$stateParams", "user_contactsApi", "contactsApi",
+    "contact_typeApi",
+    function ($scope, userswrapper, $stateParams,
+        user_contactsApi, contactsWrapper, contact_typeWrapper) {
         $scope.test = "View user";
         $scope.path = [
             {
@@ -302,12 +305,41 @@ angular.module("mfl.users.controllers", [])
                 icon: "fa-arrow-left"
             }
         ];
-        $scope.users = userService.getUsers();
-        $scope.getOneUser = function () {
-            $scope.oneUser = _.findWhere(
-                $scope.users.results, {"id" : $stateParams.user_id});
-            return $scope.oneUser;
+        userswrapper.api.get($stateParams.user_id)
+            .success(function (data) {
+                $scope.oneUser = data;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
+        $scope.usr_cont = {
+            user : $stateParams.user_id
         };
+        contact_typeWrapper.api.list()
+            .success(function (cont_type) {
+                $scope.cont_types = cont_type.results;
+            })
+            .error(function (e) {
+                console.log(e);
+            });
+        //declaring the object to hold contacts for a user
+        $scope.contacts = [];
+        user_contactsApi.api.filter($scope.usr_cont)
+            .success(function (answer) {
+                $scope.user_contacts = answer.results;
+                _.each($scope.user_contacts, function (contacts) {
+                    contactsWrapper.api.get(contacts.contact)
+                        .success(function (usr_cont) {
+                            $scope.contacts.push(usr_cont);
+                        })
+                        .error(function (e) {
+                            console.log(e.error);
+                        });
+                });
+            })
+            .error(function (e) {
+                console.log(e);
+            });
     }])
     .controller("mfl.users.controllers.permissions", ["$scope",
         function ($scope) {
@@ -413,7 +445,10 @@ angular.module("mfl.users.controllers", [])
             ];
             $scope.set_permissions = [];
             $scope.is_set = false;
-            permissionsWrapper.api.list()
+            $scope.all_permissions = {
+                page_size : 1500
+            };
+            permissionsWrapper.api.filter($scope.all_permissions)
                 .success(function (data) {
                     $scope.permissions = data.results;
                 })

@@ -6,7 +6,7 @@ angular.module("mfl.auth.controllers", [])
         "mfl.auth.services.login",
         function ($scope, $state, loginService) {
             $scope.test = "Login";
-            $scope.err = false;
+            $scope.login_err = "";
             $scope.submitUser = function(obj) {
                 loginService.login(obj)
                     .success(function () {
@@ -20,9 +20,8 @@ angular.module("mfl.auth.controllers", [])
                             });
                     })
                     .error(function (e) {
-                        console.log(e);
-                        $scope.login_err = e.non_field_errors[0];
-                        $scope.err = true;
+                        $scope.login_err = e.error;
+                        console.log($scope.login_err);
                     });
             };
         }
