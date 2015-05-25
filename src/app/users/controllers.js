@@ -328,7 +328,6 @@ angular.module("mfl.users.controllers", [])
             .success(function (answer) {
                 $scope.user_contacts = answer.results;
                 _.each($scope.user_contacts, function (contacts) {
-                    var i = 0;
                     contactsWrapper.api.get(contacts.contact)
                         .success(function (usr_cont) {
                             $scope.contacts.push(usr_cont);
@@ -336,7 +335,6 @@ angular.module("mfl.users.controllers", [])
                         .error(function (e) {
                             console.log(e.error);
                         });
-                    i++;
                 });
             })
             .error(function (e) {
