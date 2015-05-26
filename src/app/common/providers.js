@@ -61,5 +61,24 @@ angular
 
             };
         }];
-    });
+    })
+
+    //begining of provider interceptor
+    .provider("myCSRF",[function(){
+        var headerName = "X-CSRFToken";
+        var cookieName = "csrftoken";
+        var allowedMethods = ["GET"];
+        this.$get = ["$cookies", function($cookies){
+            return {
+                "request": function(config) {
+                    if(allowedMethods.indexOf(config.method) === -1) {
+                        // do something on success
+                        config.headers[headerName] = $cookies[cookieName];
+                    }
+                    return config;
+                }
+            };
+        }];
+    }]);
+    //end of provider interceptor
 
