@@ -27,6 +27,11 @@
         });
     }])
 
+    //beginning of configuring interceptor
+    .config(function($httpProvider) {
+        $httpProvider.interceptors.push("myCSRF");
+    })
+
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common = {
@@ -34,11 +39,6 @@
             "Accept" : "application/json, */*"
         };
 
-    }])
-
-    //beginning of configuring interceptor
-    .config(["$httpProvider", function($httpProvider) {
-        $httpProvider.interceptors.push("myCSRF");
     }]);
 
 })(angular);

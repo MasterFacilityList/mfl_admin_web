@@ -23,7 +23,6 @@ angular.module("mfl.auth.services", ["mfl.common.services"])
             this.saveUser = function(user){
                 forageService.setItem(store_keys.user, user);
                 forageService.setItem(store_keys.is_logged_in, true);
-                return;
             };
             this.getUser = function(){
                 return forageService.getItem(store_keys.user);

@@ -5,5 +5,6 @@ angular.module("mfl.common", [
     "mfl.common.providers",
     "mfl.common.services",
     "mfl.common.directives",
-    "mfl.common.forms"
+    "mfl.common.forms",
+    "mfl.common.filters"
 ]);

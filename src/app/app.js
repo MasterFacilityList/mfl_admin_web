@@ -20,6 +20,7 @@ angular.module("mflApp", [
     "mfl.chus",
     "mfl.users",
     "mfl.setup",
-    "mfl.practitioners"
+    "mfl.practitioners",
+    "mfl.users"
 ]);
 

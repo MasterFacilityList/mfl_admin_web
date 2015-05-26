@@ -27,7 +27,7 @@
                         <tr class="animate-repeat" ng-repeat="service in services.results | filter: search.query">
                             <td>{{service.code}}</td>
                             <td>{{service.name}}</td>
-                            <td>{{service.category}}</td>
+                            <td>{{service.category_name}}</td>
                             <td class="text-center">
                                 <a ui-sref="facilities.edit_service({service_id : service.id})" class="action-btn action-btn-grid action-btn-primary">
                                     <i class="fa fa-edit"></i>

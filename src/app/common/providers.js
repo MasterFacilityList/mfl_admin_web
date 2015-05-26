@@ -68,16 +68,6 @@ angular
         var headerName = "X-CSRFToken";
         var cookieName = "csrftoken";
         var allowedMethods = ["GET"];
-
-        this.setHeaderName = function(n) {
-            headerName = n;
-        };
-        this.setCookieName = function(n) {
-            cookieName = n;
-        };
-        this.setAllowedMethods = function(n) {
-            allowedMethods = n;
-        };
         this.$get = ["$cookies", function($cookies){
             return {
                 "request": function(config) {
@@ -91,3 +81,4 @@ angular
         }];
     }]);
     //end of provider interceptor
+
