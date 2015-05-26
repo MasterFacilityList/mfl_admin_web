@@ -2,7 +2,6 @@
     "use strict";
 
     angular.module("mfl.service_mgmt.services", [
-        "mfl.service_mgmt.forms",
         "sil.api.wrapper"
     ])
 

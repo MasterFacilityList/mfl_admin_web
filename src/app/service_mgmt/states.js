@@ -1,6 +1,8 @@
 (function (angular) {
 
-    angular.module("mfl.service_mgmt.states", [])
+    angular.module("mfl.service_mgmt.states", [
+        "ui.router"
+    ])
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
@@ -80,7 +82,7 @@
         })
 
         .state("service_mgmt.service_edit.options", {
-            url: "services/:service_id/edit/options/",
+            url: "options/",
             views: {
                 "options": {
                     controller: "mfl.service_mgmt.controllers.service_options",
