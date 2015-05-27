@@ -4,16 +4,7 @@
         "mfl.service_mgmt.services"
     ])
 
-    .controller("mfl.service_mgmt.controllers.category_list",
-        ["$scope", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $log, wrappers) {
-            wrappers.categories.list().success(function (data) {
-                $scope.categories = data.results;
-            }).error(function (data) {
-                $log.warn(data);
-            });
-        }
-    ])
+    .controller("mfl.service_mgmt.controllers.category_list", [angular.noop])
 
     .controller("mfl.service_mgmt.controllers.category_view",
         ["$scope", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
@@ -29,7 +20,7 @@
 
     .controller("mfl.service_mgmt.controllers.category_edit",
         ["$scope", "$state", "$stateParams", "$log",
-        "mfl.service_mgmt.wrappers", "mfl.service_mgmt.forms.changes",
+        "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
         function ($scope, $state, $stateParams, $log, wrappers, forms) {
             $scope.category_id = $stateParams.category_id;
 

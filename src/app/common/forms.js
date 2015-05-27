@@ -1,9 +1,15 @@
 (function (angular) {
+
     angular.module("mfl.common.forms", [])
+
     .service("mfl.common.forms.changes", [function () {
 
         this.whatChanged = function (frm) {
             var vals = {};
+
+            if (_.isUndefined(frm)) {
+                return vals;
+            }
 
             if (frm.$dirty === true) {
                 for (var f in frm) {
@@ -11,12 +17,9 @@
                         continue;
                     }
                     if (frm[f].$dirty === true) {
-                        try{
-                            vals[f] = frm[f].$modelValue.trim();
-                        }catch(err){
-                            vals[f] = frm[f].$modelValue;
-                        }
+                        vals[f] = frm[f].$modelValue;
                     }
+
                 }
             }
 
@@ -26,3 +29,4 @@
     }]);
 
 })(angular);
+

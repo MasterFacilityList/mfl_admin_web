@@ -5,7 +5,6 @@
         var controller, data, root, scope, SERVER_URL, httpBackend;
         beforeEach(function () {
             module("mflApp");
-            module("mfl.settings");
             module("mfl.home.services");
             module("mfl.auth.services");
 

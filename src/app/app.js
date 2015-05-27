@@ -1,23 +1,24 @@
-"use strict";
+(function (angular) {
+    "use strict";
 
-angular.module("mflApp", [
-    //3rd party stuff
-    "ngAnimate",
-    "ui.router",
-    //libs
-    "sil.grid",
-    "sil.common.logging",
+    angular.module("mflApp", [
+        "ngAnimate",
+        "ui.router",
 
-    "templates-app",
-    "templates-common",
-    "mflAppConfig",
-    "mfl.common",
+        "sil.grid",
+        "sil.common.logging",
 
-    "mfl.home",
-    "mfl.auth",
-    "mfl.facilities",
-    "mfl.service_mgmt",
-    "mfl.users",
-    "mfl.setup"
-]);
+        "templates-app",
+        "templates-common",
+        "mflAppConfig",
+        "mfl.common",
 
+        "mfl.home",
+        "mfl.auth",
+        "mfl.facilities",
+        "mfl.service_mgmt",
+        "mfl.users",
+        "mfl.setup"
+    ]);
+
+})(angular);

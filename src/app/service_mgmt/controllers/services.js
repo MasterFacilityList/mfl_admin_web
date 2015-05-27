@@ -4,16 +4,7 @@
         "mfl.service_mgmt.services"
     ])
 
-    .controller("mfl.service_mgmt.controllers.service_list",
-        ["$scope", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $log, wrappers) {
-            wrappers.services.list().success(function (data) {
-                $scope.services = data.results;
-            }).error(function (data) {
-                $log.warn(data);
-            });
-        }
-    ])
+    .controller("mfl.service_mgmt.controllers.service_list", [angular.noop])
 
     .controller("mfl.service_mgmt.controllers.service_view",
         ["$scope", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
@@ -29,7 +20,7 @@
 
     .controller("mfl.service_mgmt.controllers.service_edit",
         ["$scope", "$state", "$stateParams", "$log",
-        "mfl.service_mgmt.wrappers", "mfl.service_mgmt.forms.changes",
+        "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
         function ($scope, $state, $stateParams, $log, wrappers, forms) {
             $scope.service_id = $stateParams.service_id;
             wrappers.services.get($scope.service_id).success(function (data) {

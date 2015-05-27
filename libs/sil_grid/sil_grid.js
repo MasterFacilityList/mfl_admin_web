@@ -93,10 +93,16 @@
                 };
 
                 self.showError = function(error){
+                    var msg = "An error occured while processing the request";
+                    if (! (_.isUndefined(error) || _.isNull(error)) ) {
+                        if(! _.isUndefined(error.error)) {
+                            msg = error.error;
+                        }
+                    }
                     return {
                         title: "Error",
                         type:"danger",
-                        msg: error.error
+                        msg: msg
                     };
                 };
                 self.setError = function(error){

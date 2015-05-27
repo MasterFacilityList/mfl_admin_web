@@ -5,8 +5,42 @@
     angular.module("mflAppConfig", [
         "mfl.auth.permissions",
         "sil.grid",
-        "mfl.auth.services"
+        "mfl.auth.services",
+        "ngCookies",
+        "sil.api.wrapper",
+        "mfl.common.providers"
     ])
+
+    .constant("SERVER_URL", "http://mfl.azure.slade360.co.ke/")
+
+    .config(["SERVER_URL", "apiConfigProvider",
+        function(SERVER_URL, apiConfig){
+            apiConfig.SERVER_URL = SERVER_URL;
+        }
+    ])
+
+    .run(["$http", "$cookies", function ($http, $cookies) {
+        // apparently the angular doesn"t do CSRF headers using
+        // CORS across different domains thereby this hack
+        var csrftoken = $cookies.csrftoken;
+        var header_name = "X-CSRFToken";
+        $http.defaults.headers.common[header_name] = csrftoken;
+        $.ajaxSetup({
+            xhrFields: {
+                withCredentials: true
+            }
+        });
+    }])
+
+    .config(["$httpProvider",function ($httpProvider) {
+        $httpProvider.interceptors.push("myCSRF");
+        $httpProvider.defaults.withCredentials = true;
+        $httpProvider.defaults.headers.common = {
+            "Content-Type":"application/json",
+            "Accept" : "application/json, */*"
+        };
+
+    }])
 
     // avoid silent failures in angular
     .config(["$provide", function($provide) {
@@ -34,7 +68,7 @@
                 user_contacts : ["mfl.users.wrapper", "user_contactsApi"],
                 service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
             };
-        silGridConfig.appConfig = "mfl.settings";
+        silGridConfig.appConfig = "mflAppConfig";
     }])
 
     .config(["loggingConfigProvider", function(loggingConfig){

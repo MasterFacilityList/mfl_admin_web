@@ -5,7 +5,9 @@ describe("Test requests provider", function () {
     var url;
 
     beforeEach(function () {
+        module("mflAppConfig");
         module("mfl.common.providers");
+
         inject(["mfl.common.providers.requests", function (r) {
             requests = r;
             url = requests.api_url;

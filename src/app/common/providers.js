@@ -1,7 +1,7 @@
 "use strict";
 
 angular
-    .module("mfl.common.providers", ["mfl.settings"])
+    .module("mfl.common.providers", [])
 
     .provider("mfl.common.providers.requests", function () {
         this.$get = ["$http", "SERVER_URL", function ($http, SERVER_URL) {

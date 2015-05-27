@@ -5,16 +5,7 @@
         "mfl.service_mgmt.services"
     ])
 
-    .controller("mfl.service_mgmt.controllers.option_list",
-        ["$scope", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $log, wrappers) {
-            wrappers.options.list().success(function (data) {
-                $scope.options = data.results;
-            }).error(function (data) {
-                $log.warn(data);
-            });
-        }
-    ])
+    .controller("mfl.service_mgmt.controllers.option_list", [angular.noop])
 
     .controller("mfl.service_mgmt.controllers.option_view",
         ["$scope", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
@@ -30,7 +21,7 @@
 
     .controller("mfl.service_mgmt.controllers.option_edit",
         ["$scope", "$state", "$stateParams", "$log",
-        "mfl.service_mgmt.wrappers", "mfl.service_mgmt.forms.changes",
+        "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
         function ($scope, $state, $stateParams, $log, wrappers, forms) {
             $scope.option_id = $stateParams.option_id;
             $scope.option_types = wrappers.OPTION_TYPES;
