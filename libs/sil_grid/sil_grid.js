@@ -46,7 +46,8 @@
                 gridFor: "@",
                 data: "@",
                 error: "=",
-                actions: "="
+                actions: "=",
+                apiKey: "@"
             },
             replace: false,
             templateUrl:function(elem, attrs){
@@ -62,7 +63,12 @@
                 var api_conf = apiMaps[$scope.gridFor];
                 var api = angular.injector(
                     ["ng",silGridConfig.appConfig, api_conf[0]]).get(api_conf[1]);
-                self.api = api;
+
+                if(!_.isUndefined($scope.apiKey)) {
+                        self.api = api[$scope.apiKey];
+                }else{
+                    self.api = api.api;
+                }
                 self.setLoading = function(start){
                     if(start){
                         $scope.$emit("silGrid.loader.start");
@@ -74,9 +80,9 @@
                     self.setLoading(true);
                     var promise;
                     if(_.isUndefined($scope.filters)){
-                        promise = api.api.list();
+                        promise = self.api.list();
                     }else{
-                        promise = api.api.filter($scope.filters);
+                        promise = self.api.filter($scope.filters);
                     }
                     promise.success(self.setData).error(self.setError);
                 };
@@ -181,7 +187,8 @@
             },
             link: function(scope){
                 scope.$watch("filters", function(filters){
-                    if(_.has(filters, "page")||_.has(filters, "ordering")||_.has(filters, "q")){
+                    if(_.has(filters, "page")||
+                       _.has(filters, "ordering")||_.has(filters, "search")){
 
                         delete filters.page;
                     }else{
@@ -233,9 +240,9 @@
                 scope.silGridSearch = function(clear){
                     if(clear){
                         scope.silGrid.searchQuery = "";
-                        gridCtrl.removeFilter("q");
+                        gridCtrl.removeFilter("search");
                     }else{
-                         gridCtrl.addFilter("q", scope.silGrid.searchQuery);
+                         gridCtrl.addFilter("search", scope.silGrid.searchQuery);
                     }
 
                 };
