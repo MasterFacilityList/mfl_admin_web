@@ -28,16 +28,16 @@
                     <h4>
                         <span style="border-right: 1px solid #ddd;">{{fac.code}}&nbsp;</span>&nbsp; {{fac.name}}
                         <span class="pull-right">
-                            {{fac.created | date : 'medium'}}
+                            {{fac.created | date : 'fullDate'}}
                         </span>
                     </h4>
                 </div>
                 <div class="panel-body">
-                    <h4>Owned by: {{fac.owner}}</h4>
+                    <h4>Owned by: {{fac.owner_name}}</h4>
                     <h4>
-                        Type: {{fac.facility_type}}
-                        <span pull-right>
-                            Ward: {{fac.ward}}
+                        Type: {{fac.facility_type_name}}
+                        <span class="pull-right">
+                            Ward: {{fac.ward_name}}
                         </span>
                     </h4>
                     <h4>
