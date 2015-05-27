@@ -16,6 +16,8 @@ angular.module("mflApp", [
     "mfl.home",
     "mfl.auth",
     "mfl.facilities",
+    "mfl.users",
+    "mfl.setup",
     "mfl.users"
 ]);
 
