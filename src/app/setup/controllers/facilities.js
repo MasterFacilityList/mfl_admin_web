@@ -8,6 +8,7 @@
     **/
     .controller("mfl.setup.controller.facilityOwnerType.list", ["$scope",
         function ($scope) {
+            $scope.test = "Facility owner";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -28,6 +29,7 @@
     .controller("mfl.setup.controller.facilityOwnerType.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
+            $scope.test = "Facility_type view";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -87,6 +89,7 @@
     **/
     .controller("mfl.setup.controller.facilityOwner.list", ["$scope",
         function ($scope) {
+            $scope.test = "New facility owner";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -108,6 +111,7 @@
     .controller("mfl.setup.controller.facilityOwner.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
+            $scope.test = "Facility owner view";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -155,6 +159,7 @@
     .controller("mfl.setup.controller.facilityOwner.create", ["$scope","$state",
                 "$stateParams","adminApi",
         function($scope, $state, $stateParams, adminApi){
+            $scope.test = "Facility owner create";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -182,6 +187,7 @@
     **/
     .controller("mfl.setup.controller.facilityJobTitle.list", ["$scope",
         function ($scope) {
+            $scope.test = "Facility job title";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -262,6 +268,7 @@
     **/
     .controller("mfl.setup.controller.facilityRegulatoryBody.list", ["$scope",
         function ($scope) {
+            $scope.test = "Regulatory body";
             $scope.title = [
                 {
                     icon: "fa-phone",

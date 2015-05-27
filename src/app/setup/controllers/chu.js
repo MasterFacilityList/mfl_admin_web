@@ -6,6 +6,7 @@
     ])
     .controller("mfl.setup.controller.chuStatus.list", ["$scope",
         function ($scope) {
+            $scope.test = "chuStatus";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -27,6 +28,7 @@
     .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
+            $scope.test = "chuStatus view";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -82,6 +84,7 @@
 
     .controller("mfl.setup.controller.chuApprover.list", ["$scope",
         function ($scope) {
+            $scope.test = "Approver";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -102,6 +105,7 @@
     .controller("mfl.setup.controller.chuApprover.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
+            $scope.test = "View chul Approver";
             $scope.title = [
                 {
                     icon: "fa-phone",

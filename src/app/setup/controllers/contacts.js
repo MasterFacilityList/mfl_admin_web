@@ -4,6 +4,7 @@
     ])
     .controller("mfl.setup.controller.contacts.list", ["$scope",
         function ($scope) {
+            $scope.test = "Contacts list";
             $scope.title = [
                 {
                     icon: "fa-phone",
@@ -24,6 +25,7 @@
     .controller("mfl.setup.controller.contacts.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
+            $scope.test = "Contacts view";
             $scope.title = [
                 {
                     icon: "fa-phone",

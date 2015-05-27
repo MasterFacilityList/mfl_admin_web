@@ -35,6 +35,7 @@
     )
     .controller("mfl.setup.controller.county.edit", ["$scope",
         function ($scope) {
+            $scope.test = "View administrative area";
             $scope.path = [
                 {
                     name: "Adminstrative area",

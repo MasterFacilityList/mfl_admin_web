@@ -6,6 +6,7 @@
 
     .controller("mfl.setup.controller.constituency.list", ["$scope",
         function ($scope) {
+            $scope.test = "Constituency list";
             $scope.path = [
                 {
                     name: "Adminstrative area",
