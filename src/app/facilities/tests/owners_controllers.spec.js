@@ -5,8 +5,8 @@ describe("Test facilities controller :", function () {
 
     beforeEach(function () {
         module("mflApp");
+        module("mflAppConfig");
         module("mfl.facilities.wrapper");
-        module("mfl.settings");
 
         inject(["$rootScope", "$controller", "$httpBackend", "$state",
             "SERVER_URL", "facilitiesApi", "ownersApi",

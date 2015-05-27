@@ -1,20 +1,19 @@
-"use strict";
+(function (angular) {
+    "use strict";
 
-angular.module("mfl.home.services", [])
+    angular.module("mfl.home.services", [
+        "sil.api.wrapper"
+    ])
 
-    .service("mfl.home.services.home", ["mfl.common.providers.requests",
-        function (requests) {
-            var url = {
-                facilities : "api/facilities/facilities/"
+    .service("mfl.home.services.home", ["api", function (api) {
+        var facilities_wrapper = api.setBaseUrl("api/facilities/facilities/");
+
+        this.getLatestFacilities = function () {
+            var params = {
+                "page_size": 4
             };
-            this.getLatestFacilities = function () {
-                var param = [
-                    {
-                        name : "page_size",
-                        value : 4
-                    }
-                ];
-                return requests.callApi("GET", url.facilities, param);
-            };
-        }
-    ]);
+            return facilities_wrapper.filter(params);
+        };
+    }]);
+
+})(angular);

@@ -5,8 +5,8 @@ describe("Test roles controllers :", function () {
 
     beforeEach(function () {
         module("mflApp");
+        module("mflAppConfig");
         module("mfl.users.wrapper");
-        module("mfl.settings");
 
         inject(["$rootScope", "$controller", "$httpBackend", "$state",
             "SERVER_URL", "usersApi", "contact_typeApi", "rolesApi",

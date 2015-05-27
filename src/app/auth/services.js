@@ -1,11 +1,14 @@
-"use strict";
+(function (angular, _) {
+    "use strict";
 
-angular.module("mfl.auth.services", ["mfl.common.services"])
+    angular.module("mfl.auth.services", [
+        "mfl.common.services",
+        "sil.api.wrapper"
+    ])
 
-    .service("mfl.auth.services.login", ["mfl.common.providers.requests",
-        "mfl.common.services.localStorage",
-        function (requests, forageService) {
-            var url = {
+    .service("mfl.auth.services.login", ["api", "mfl.common.services.localStorage",
+        function (api, forageService) {
+            var urls = {
                 login : "api/rest-auth/login/",
                 logout : "api/rest-auth/logout/",
                 curr_user : "api/rest-auth/user/"
@@ -14,11 +17,17 @@ angular.module("mfl.auth.services", ["mfl.common.services"])
                 user : "auth.user",
                 is_logged_in : "auth.logged"
             };
+            var api_wrapper = api.getApi();
+
+            var callApi = function (method, url_stub, data) {
+                var url = api_wrapper.makeUrl(urls.login);
+                return api_wrapper.callApi(method, url, data);
+            };
             this.login = function (user) {
-                return requests.callApi("POST", url.login, user);
+                return callApi("POST", urls.login, user);
             };
             this.currentUser = function () {
-                return requests.callApi("GET", url.curr_user);
+                return callApi("GET", urls.curr_user);
             };
             this.saveUser = function(user){
                 forageService.setItem(store_keys.user, user);
@@ -35,10 +44,10 @@ angular.module("mfl.auth.services", ["mfl.common.services"])
                 return logged_in;
             };
             this.logout = function () {
-                forageService.removeItem(store_keys.user);
-                forageService.removeItem(store_keys.logged_in);
                 forageService.clear();
-                return requests.callApi("POST", url.logout);
+                return callApi("POST", urls.logout);
             };
         }
     ]);
+
+})(angular, _);

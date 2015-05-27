@@ -1,18 +1,21 @@
-"use strict";
 (function () {
-    describe("Auth service test: ", function () {
+    "use strict";
+
+    xdescribe("Auth service test: ", function () {
         var url;
         beforeEach(function () {
             module("mflApp");
-            module("mfl.common.providers");
+            module("mflAppConfig");
+            module("sil.api.wrappers");
             module("mfl.common.services");
             module("mfl.auth.services");
         });
-        beforeEach(inject(["mfl.common.providers.requests",
-            function (requests) {
-                url = requests.api_url;
+
+        beforeEach(inject(["SERVER_URL", function (SERVER_URL) {
+                url = SERVER_URL;
             }
         ]));
+
         it("should have auth login service defeined",
         inject(["mfl.auth.services.login", function (loginService) {
             expect(loginService).toBeDefined();

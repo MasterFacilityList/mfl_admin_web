@@ -4,8 +4,8 @@
 
         beforeEach(function () {
             module("mflApp");
+            module("mflAppConfig");
             module("mfl.setup.api");
-            module("mfl.settings");
             module("mfl.common.forms");
 
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",

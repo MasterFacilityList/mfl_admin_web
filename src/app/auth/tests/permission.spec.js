@@ -1,6 +1,6 @@
-"use strict";
-
 (function () {
+    "use strict";
+
     describe("Testing passing permissions to RBAC directive", function () {
         var factory;
         beforeEach(function () {
