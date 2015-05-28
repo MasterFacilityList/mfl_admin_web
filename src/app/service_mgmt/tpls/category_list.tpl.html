@@ -1,0 +1,30 @@
+<div>
+    <table class="table content-card">
+        <thead>
+            <tr>
+                <th sil-grid-sort field='name'>Name</th>
+                <th>Abbreviation</th>
+                <th sil-grid-sort field='description'>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="category in categories">
+                <td>{{category.name}}</td>
+                <td>{{category.abbreviation}}</td>
+                <td>{{category.description}}</td>
+                <td>
+                    <a ui-sref="service_mgmt.category_view({category_id: category.id})" class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a ui-sref="service_mgmt.category_edit({category_id: category.id})" class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a ui-sref="service_mgmt.category_delete({category_id: category.id})" class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

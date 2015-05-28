@@ -6,7 +6,8 @@
         "templates-common",
         "mflAdminAppConfig",
         "mfl.common",
-        "mfl.auth"
+        "mfl.auth",
+        "mfl.service_mgmt"
     ]);
 
 })(angular);
