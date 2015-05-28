@@ -1,7 +1,7 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mflAdminWebConfig", [])
+    angular.module("mflAdminAppConfig", [])
 
     .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
 
