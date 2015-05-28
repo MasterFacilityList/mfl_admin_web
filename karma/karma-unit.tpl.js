@@ -43,7 +43,7 @@ module.exports = function ( karma ) {
         'mocha'
     ],
 
-            // reporter options
+    // reporter options
     mochaReporter: {
       output: 'autowatch'
     },
@@ -52,8 +52,8 @@ module.exports = function ( karma ) {
      * On which port should the browser connect, on which port is the test runner
      * operating, and what is the URL path for the browser to use.
      */
-    port: 9018,
-    runnerPort: 9100,
+    port: 9019,
+    runnerPort: 9110,
     urlRoot: '/',
 
     /**

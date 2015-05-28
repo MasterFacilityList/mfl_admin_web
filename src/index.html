@@ -1,26 +1,98 @@
 <!DOCTYPE html>
-<html ng-app="mflApp">
+<!--[if lt IE 10]>
+    <html lang="en" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7">
+        <div style="padding:100px 50px 50px 50px">
+            <h1><strong>MFLv2 Administration Website:</strong></h1>
+            <h1>Your browser is not supported. Please update your browser.</h1>
+               <h2>You may also install any of the following supported browsers:</h2>
+                <ul><a target="blank" href="http://google.com/chrome">Google Chrome</a></ul>
+                <ul><a target="blank" href="http://getfirefox.com">Firefox</a></ul>
+        </div>
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en" ng-app="mflAdminApp" >
+<!--<![endif]-->
   <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <title> Slade360 MFL</title>
-
+     <title ng-bind="$state.current.data.pageTitle"></title>
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="icon"  href="assets/img/kenya-coat-of-arms.png" />
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
   </head>
   <body>
-          <!-- <nav class="navbar navbar-default">
-              <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" ui-sref="home">
-                    MFL
-                  </a>
-                </div>
+      <div ui-view="header"></div>
+        <div ui-view="main" class="content margin-t--27">
+            <noscript>
+               <div style="padding:100px 50px 0 50px">
+                   <h1><strong>MFLv2 Administration Website:</strong></h1>
+                <h1>Your browser has JavaScript disabled or is not supported. Please enable Javascript or update your browser.</h1>
+               </div>
+            </noscript>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+              <div class="row">
+                <ul class="list-unstyled">
+                  <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h5 class="fs-18 fw-600" >Supported by: </h5>
+                  </li>
+                  <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
+                    <a href="http://www.usaid.gov/"><span style="border-radius: 50%;">
+                      <img src="assets/img/usaid.png">
+                    </span></a>
+                  </li>
+                  <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
+                    <a href="http://www.afyainfo.org/" target="_blank"><span style="border-radius: 50%;">
+                      <img src="assets/img/download.jpg">
+                    </span></a>
+                  </li>
+                  <li style="border-left: 1px solid #ccc;" class="col-lg-6 col-md-6 hidden-sm hidden-xs text-left" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
+                        <h5 class="fs-16 fw-600 text-white">
+                          <i class="fa fa-envelope"></i> Helpdesk email: helpdesk@ehealth.or.ke
+                        </h5>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <p class="text-left margin-t-20">
+                      &copy; Copyright
+                        <span ui-view="footer"></span>,
+                        <a href="http://health.go.ke/" target="_blank">
+                          Ministry of Health, Kenya
+                        </a>
+                        .Powered by
+                        <a href="http://savannahinformatics.com/" target="_blank">
+                          Savannah Informatics Limited
+                        </a>
+                      </p>
+                    </div>
+                  </li>
+                  <!-- Beginning of mobile view port -->
+                  <li  class="hidden-lg hidden-md col-sm-12 col-xs-12 text-left margin-t-20" >
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
+                          <h5 class="fs-16 fw-600 text-white">
+                            <i class="fa fa-envelope"></i> Helpdesk email: helpdesk@ehealth.or.ke
+                          </h5>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p class="text-left margin-t-20">
+                        &copy; Copyright
+                          <span ui-view="footer"></span>,
+                          <a href="http://health.go.ke/" target="_blank">
+                            Ministry of Health, Republic of Kenya
+                          </a>
+                          .Powered by
+                          <a href="http://savannahinformatics.com/" target="_blank">
+                            Savannah Informatics Limited
+                          </a>
+                        </p>
+                      </div>
+                    </li>
+
+                  <!-- End of mobile view port -->
+                </ul>
               </div>
-            </nav> -->
-        <!--End of header-->
-        <div ui-view="main"></div>
-        <footer>
-            <p class="text-center"> &copy; Copyright 2015 by <a href="index.html#">Savannah Informatics Limited</a> All Rights Reserved. </p>
+            </div>
         </footer>
     <!-- compiled JavaScript -->
     <% scripts.forEach( function ( file ) { %>

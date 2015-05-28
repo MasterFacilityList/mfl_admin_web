@@ -23,16 +23,12 @@
         "it": true,
         "browser": true,
         "localStorage":true,
-        "localforage" : true,
-        "History" : true,
         "protractor": true,
         "by": true,
         "module":true,
         "$": true,
         "_": true,
         "window": true,
-        "spyOn": true,
-        "xit" : true,
-        "printStackTrace": true
+        "spyOn": true
     }
 }

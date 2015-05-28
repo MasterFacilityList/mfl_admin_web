@@ -11,6 +11,11 @@ module.exports = {
     compile_dir: "bin",
 
     /**
+     * 'env' settings file
+     */
+    settings_file: "settings.js",
+
+    /**
      * This is a collection of file patterns that refer to our app code (the
      * stuff in `src/`). These file paths are used in the configuration of
      * build tasks. `js` is all project javascript, less tests. `ctpl` contains
@@ -20,16 +25,21 @@ module.exports = {
      * app"s unit tests.
      */
     app_files: {
-        js: [ "src/**/*.js", "!src/**/*.spec.js", "!src/assets/**/*.js" ],
-        jsunit: [ "src/**/*.spec.js" ],
+        js: [
+            "src/**/*.js",
+            "!src/**/*.spec.js",
+            "!src/assets/**/*.js",
+            "!src/<%= settings_file %>"
+        ],
+        jsunit: ["src/**/*.spec.js"],
 
-        coffee: [ "src/**/*.coffee", "!src/**/*.spec.coffee" ],
-        coffeeunit: [ "src/**/*.spec.coffee" ],
+        coffee: ["src/**/*.coffee", "!src/**/*.spec.coffee"],
+        coffeeunit: ["src/**/*.spec.coffee"],
 
-        atpl: [ "src/app/**/*.tpl.html" ],
-        ctpl: [ "src/common/**/*.tpl.html" ],
+        atpl: ["src/app/**/*.tpl.html"],
+        ctpl: ["src/common/**/*.tpl.html"],
 
-        html: [ "src/index.html" ],
+        html: ["src/index.html"],
         less: "src/less/main.less"
     },
 
@@ -38,7 +48,8 @@ module.exports = {
      */
     test_files: {
         js: [
-            "vendor/angular-mocks/angular-mocks.js"
+            "vendor/angular-mocks/angular-mocks.js",
+            "build/templates-common.js"
         ]
     },
 
@@ -67,15 +78,30 @@ module.exports = {
             "vendor/underscore/underscore.js",
             "vendor/bootstrap/dist/js/bootstrap.js",
             "vendor/angular/angular.js",
+            "vendor/spin.js/spin.js",
+            "vendor/leaflet/dist/leaflet-src.js",
+            "vendor/leaflet.markercluster/dist/leaflet.markercluster.js",
+            "vendor/Leaflet.label/dist/leaflet.label.js",
+            "vendor/leaflet-spin/leaflet.spin.js",
+            "src/assets/js/leaflet-heat.js",
             "vendor/angular-animate/angular-animate.js",
             "vendor/angular-cookies/angular-cookies.js",
             "vendor/angular-resource/angular-resource.js",
             "vendor/angular-bootstrap/ui-bootstrap.js",
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
             "vendor/angular-ui-router/release/angular-ui-router.js",
-            "vendor/localforage/dist/localforage.js",
+            "vendor/angular-sanitize/angular-sanitize.js",
+            "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
+            "vendor/modernizr/modernizr.js",
+            "vendor/typeahead.js/dist/bloodhound.js",
+            "vendor/typeahead.js/dist/typeahead.bundle.js",
+            "vendor/typeahead.js/dist/typeahead.jquery.js",
             "vendor/stacktrace-js/dist/stacktrace.js",
+            "vendor/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js",
+            "vendor/ng-tags-input/ng-tags-input.js",
+            "vendor/moment/moment.js",
             "libs/api_wrapper.js",
+            "libs/sil_typeahead_service/src/sil-typeahead.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
             "libs/sil_error_handler/error_handler.js"
@@ -90,9 +116,9 @@ module.exports = {
         ]
     },
 
-    connect : {
+    connect: {
         options: {
-            port: 8062,
+            port: 8063,
             hostname: "*",
             keepalive: true
         },
