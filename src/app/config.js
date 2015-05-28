@@ -6,10 +6,20 @@
         "sil.grid",
         "mfl.auth.services",
         "ngCookies",
-        "sil.api.wrapper"
+        "sil.api.wrapper",
+        "mfl.auth.oauth2"
     ])
 
-    .constant("SERVER_URL", "http://mfl.azure.slade360.co.ke/")
+    .constant("SERVER_URL", "http://localhost:8061/")
+    .constant("CREDZ", {
+        "client_id": "5O1KlpwBb96ANWe27ZQOpbWSF4DZDm4sOytwdzGv",
+        "client_secret": "PqV0dHbkjXAtJYhY9UOCgRVi5BzLhiDxGU91" +
+                         "kbt5EoayQ5SYOoJBYRYAYlJl2RetUeDMpSvh" +
+                         "e9DaQr0HKHan0B9ptVyoLvOqpekiOmEqUJ6H" +
+                         "ZKuIoma0pvqkkKDU9GPv",
+        "token_url": "http://localhost:8061/o/token/",
+        "revoke_url": "http://localhost:8061/o/revoke_token/"
+    })
 
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
@@ -36,12 +46,6 @@
                 user_contacts : ["mfl.users.wrapper", "user_contactsApi"]
             };
         silGridConfig.appConfig = "mflAppConfig";
-    }])
-
-    .config(["loggingConfigProvider", function(loggingConfig){
-        loggingConfig.LOG_TO_SERVER = false;
-        loggingConfig.LOG_SERVER_URL = undefined;
-        loggingConfig.LOG_TO_CONSOLE = true;
     }])
 
     .run(["$http","$cookies", function ($http, $cookies) {
@@ -77,10 +81,16 @@
                     var permissionList =
                         $rootScope.current_user.all_permissions;
                     permissionService.setPermissions(permissionList);
-                    //console.log(permissionList);
                 }
             });
         }
-    ]);
+    ])
+
+    .run(["api.oauth2", function (oauth2) {
+        var token = oauth2.getToken();
+        if (! _.isNull(token)) {
+            oauth2.setXHRToken(token);
+        }
+    }]);
 
 })(angular);

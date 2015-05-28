@@ -107,21 +107,30 @@
                 .respond(400, {});
             $httpBackend.flush();
         }]));
-        it("should test the updateChuApprovers method: success",
+        it("should test the updateChuApprovers method: success (View)",
         inject(["$httpBackend", "$state","mfl.common.forms.changes",
             function ($httpBackend, $state, formService) {
-            controller("mfl.setup.controller.contacts.view");
-            var form = {name : "POSTAL"};
-            spyOn(formService, "whatChanged").andReturn(form);
+            var form = {
+                "name" : {
+                    "$dirty": true,
+                    "$modelValue": "POSTAL"
+                }
+            };
+            spyOn(formService, "whatChanged").andCallThrough();
             spyOn($state, "go");
+
             var id = 1;
-            var wrapper = scope.updateContacts(id, form);
+            $httpBackend.expectGET(
+                SERVER_URL + "api/common/contact_types/1/").respond(200, {"name": "POSTAL"});
             $httpBackend.expectPATCH(
-                SERVER_URL + "api/common/contact_types/1/").respond(200, wrapper);
+                SERVER_URL + "api/common/contact_types/1/").respond(200, {"name": "POSTAL"});
+
+            controller("mfl.setup.controller.contacts.view");
+            scope.updateContacts(id, form);
             expect(formService.whatChanged).toHaveBeenCalled();
             $httpBackend.flush();
         }]));
-        it("should test the updateChuApprovers method: success",
+        it("should test the updateChuApprovers method: error",
         inject(["$httpBackend", "$state","mfl.common.forms.changes",
             function ($httpBackend, $state, formService) {
             controller("mfl.setup.controller.contacts.view");
