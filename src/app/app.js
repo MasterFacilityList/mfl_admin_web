@@ -2,7 +2,8 @@
     "use strict";
 
     angular.module("mflAdminApp", [
-        "mflAdminAppConfig"
+        "mflAdminAppConfig",
+        "mfl.common"
     ]);
 
 })(angular);
