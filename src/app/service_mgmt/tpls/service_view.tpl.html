@@ -1,0 +1,22 @@
+<div>
+    <p>Service view</p>
+    <div>
+        <p>Code : {{service.code}}</p>
+        <p>Name: {{service.name}}</p>
+        <p>Abbreviation : {{service.abbreviation}}</p>
+        <p>Description : {{service.description}}</p>
+        <p>Category : <a ui-sref="service_mgmt.category_view({category_id: service.category})">{{service.category_name}}</a></p>
+        <p>Options : </p>
+        <ul>
+            <li ng-repeat="opt in services.options">{{opt.name}}</li>
+        </ul>
+    </div>
+
+    <a ui-sref="service_mgmt.service_edit({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+        Edit
+    </a>
+    <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+        Delete
+    </a>
+    <div ui-view="options"></div>
+</div>

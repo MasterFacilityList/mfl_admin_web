@@ -1,0 +1,22 @@
+<div>
+    <p>Option edit</p>
+
+    <div>
+        <form name="option_frm">
+            <p>Display Text : <input name="display_text" type="text" ng-model="option.display_text" /></p>
+            <p>Option Type : </p>
+                <select name="option_type" ng-model="option.option_type">
+                    <option value="">Select an option type</option>
+                    <option ng-repeat="opt_type in option_types" value="{{opt_type}}">{{opt_type}}</option>
+                </select>
+            <p>Is Exclusive Option : </p><input type="checkbox" name="is_exclusive_option" ng-model="option.is_exclusive_option" />
+            <p>Value : </p><input type="text" name="value" ng-model="option.value" />
+        </form>
+    </div>
+
+    <a class="btn btn-default" ui-sref="service_mgmt.option_view({option_id: option_id})">Cancel</a>
+    <a class="btn btn-default" ui-sref="service_mgmt.option_list">Cancel (List)</a>
+    <a class="btn btn-default" ui-sref="service_mgmt.option_delete({option_id: option_id})">Delete</a>
+    <button ng-click="save(option_frm)" class="btn btn-primary">Save</button>
+
+</div>
