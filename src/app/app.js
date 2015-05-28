@@ -3,7 +3,8 @@
 
     angular.module("mflAdminApp", [
         "mflAdminAppConfig",
-        "mfl.common"
+        "mfl.common",
+        "mfl.service_mgmt"
     ]);
 
 })(angular);
