@@ -6,6 +6,7 @@
         var api;
 
         beforeEach(function () {
+            module("mflAdminAppConfig");
             module("sil.api.wrapper");
             module("mfl.service_mgmt.services");
 
