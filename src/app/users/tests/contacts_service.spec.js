@@ -5,7 +5,6 @@
         beforeEach(function(){
             module("mflApp");
             module("mfl.users.wrapper");
-            module("mfl.settings");
             inject(["contactsApi",function(_contactsApi){
                 contactsApi = _contactsApi;
             }]);
