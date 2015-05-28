@@ -38,15 +38,6 @@
             spyOn($state, "go");
             expect(scope.test).toEqual("Login");
         }]));
-        it("should call backend and login a user: success",
-        inject(["$httpBackend", function ($httpBackend) {
-            controller("mfl.auth.controllers.login");
-            var obj = {username : "owagaantony@gmail.com", password: "owaga"};
-            scope.submitUser(obj);
-            $httpBackend.expectPOST(
-                SERVER_URL + "api/rest-auth/login/").respond(200, obj);
-            $httpBackend.flush();
-        }]));
         it("should call backend and login and save user credentials: success",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.auth.controllers.login");
@@ -56,6 +47,17 @@
                 SERVER_URL + "api/rest-auth/login/").respond(200, obj);
             $httpBackend.expectGET(
                 SERVER_URL + "api/rest-auth/user/").respond(200, {email: ""});
+            $httpBackend.flush();
+        }]));
+        it("should call backend and login and save user credentials: fail",
+        inject(["$httpBackend", function ($httpBackend) {
+            controller("mfl.auth.controllers.login");
+            var obj = {username : "owagaantony@gmail.com", password: "owaga"};
+            scope.submitUser(obj);
+            $httpBackend.expectPOST(
+                SERVER_URL + "api/rest-auth/login/").respond(200, obj);
+            $httpBackend.expectGET(
+                SERVER_URL + "api/rest-auth/user/").respond(400, {email: ""});
             $httpBackend.flush();
         }]));
         it("should call backend and login a user: success",
