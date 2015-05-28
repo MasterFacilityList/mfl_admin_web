@@ -10,12 +10,12 @@
                              "e9DaQr0HKHan0B9ptVyoLvOqpekiOmEqUJ6H" +
                              "ZKuIoma0pvqkkKDU9GPv",
             "token_url": "o/token/",
-            "reset_url": "o/reset_token"
+            "revoke_url": "o/revoke_token"
         }
     };
 
     setts.CREDZ.token_url = setts.SERVER_URL + setts.CREDZ.token_url;
-    setts.CREDZ.reset_url = setts.SERVER_URL + setts.CREDZ.reset_url;
+    setts.CREDZ.revoke_url = setts.SERVER_URL + setts.CREDZ.revoke_url;
 
     window.MFL_SETTINGS = setts;
 
