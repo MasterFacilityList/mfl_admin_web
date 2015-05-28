@@ -1,20 +1,19 @@
 (function () {
     "use strict";
 
-    describe("tests for auth routes:", function() {
-
-        var $state;//initialize dependencies
+    describe("Tests for auth routes :", function() {
+        var $state;
 
         beforeEach(function() {
             module("mfl.auth.routes");
             module("ui.router");
 
-            inject(function ( _$state_) {
-                $state = _$state_;
-            });
+            inject(["$state", function (s) {
+                $state = s;
+            }]);
         });
         it("should go to /login url", function () {
-            expect($state.href("login", { id: 1 })).toEqual("#/login");
+            expect($state.href("login")).toEqual("#/login");
         });
     });
 })();

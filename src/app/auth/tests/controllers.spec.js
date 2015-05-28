@@ -8,6 +8,7 @@
             module("ui.router");
             module("mflAdminAppConfig");
             module("mfl.common.storage");
+            module("mfl.auth.oauth2");
             module("mfl.auth.controllers");
             module("mfl.auth.services");
 
