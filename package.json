@@ -30,7 +30,6 @@
     "grunt-html2js": "^0.1.9",
     "grunt-istanbul-coverage": "^0.1.0",
     "grunt-karma": "^0.8.2",
-    "grunt-ngmin": "0.0.2",
     "html-minifier": "^0.6.6",
     "istanbul": "^0.3.2",
     "jasmine-node": "^1.14.3",
