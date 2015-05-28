@@ -3,16 +3,6 @@
     angular.module("sil.api.wrapper", [])
     // CRUD API wrapper to be used by specific API wrappers
 
-    .provider("apiConfig", function(){
-        this.SERVER_URL = undefined;
-        this.SNOMED_URL = undefined;
-        this.$get = [function(){
-            return {
-                SERVER_URL: this.SERVER_URL,
-                SNOMED_URL: this.SNOMED_URL
-            };
-        }];
-    })
     .provider("api", function(){
         function Helpers(){}
         Helpers.prototype.hasTrailingSlash = function(url){
@@ -67,13 +57,11 @@
             return "?"+url_param;
         };
         this.helpers = new Helpers();
-        this.$get = ["$http","apiConfig",  function($http, apiConfig){
+        this.$get = ["$http","SERVER_URL",  function($http, SERVER_URL){
             var self = this;
-            self.SERVER_URL = apiConfig.SERVER_URL;
-            self.SNOMED_URL = apiConfig.SNOMED_URL;
+            self.SERVER_URL = SERVER_URL;
             function Api(){}
             Api.apiUrl = self.SERVER_URL;
-            Api.snomedUrl = self.SNOMED_URL;
             Api.apiBaseUrl = undefined;
             Api.prototype.setBaseUrl = function(url){
                 this.apiBaseUrl = url;
@@ -93,12 +81,9 @@
                 }
                 return $http(options);
             };
-            Api.prototype.makeUrl = function(url_fragment, is_snomed){
+            Api.prototype.makeUrl = function(url_fragment){
                 //createUrl
-                var base_url = _.isUndefined(is_snomed)?self.SERVER_URL: self.SNOMED_URL;
-                if(is_snomed && _.isUndefined(self.SNOMED_URL)){
-                    throw "SNOMED_URL not set";
-                }
+                var base_url = self.SERVER_URL;
                 if(_.isUndefined(self.SERVER_URL)){
                     throw ("SERVER_URL not set");
                 }
@@ -107,7 +92,6 @@
                     self.helpers.removeTrailingSlash(url_fragment)
                 ];
                 return urls.join("/")+"/";
-
             };
             Api.prototype.create = function(data){
                 return this.callApi("POST", this.makeUrl(this.apiBaseUrl), data);
@@ -148,15 +132,10 @@
                     self.helpers.makeGetParam(params_url_frag)]);
                 return this.callApi("GET", url);
             };
-            Api.prototype.snomedSearch = function(search_term){
-                var filter_param = self.helpers.makeParams({"q": search_term});
-                var url = self.helpers.joinUrl([
-                    this.makeUrl(this.apiBaseUrl, true),
-                    self.helpers.makeGetParam(filter_param)
-                ]);
-                return this.callApi("GET", url);
-            };
             return {
+                getApi: function () {
+                    return new Api();
+                },
                 setBaseUrl: function(url){
                     var api = new Api();
                     api.setBaseUrl(url);

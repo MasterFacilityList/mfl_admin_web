@@ -4,8 +4,8 @@
         var httpBackend, contactsApi, SERVER_URL;
         beforeEach(function(){
             module("mflApp");
+            module("mflAppConfig");
             module("mfl.users.wrapper");
-            module("mfl.settings");
             inject(["contactsApi",function(_contactsApi){
                 contactsApi = _contactsApi;
             }]);

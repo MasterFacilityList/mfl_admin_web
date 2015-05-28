@@ -1,6 +1,7 @@
-"use strict";
+(function (angular) {
+    "use strict";
 
-angular.module("mfl.common.services", [])
+    angular.module("mfl.common.services", [])
 
     .service("mfl.common.services.localStorage", ["$window",
         function ($window) {
@@ -19,3 +20,5 @@ angular.module("mfl.common.services", [])
             };
         }
     ]);
+
+})(angular);

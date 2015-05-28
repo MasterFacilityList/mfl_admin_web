@@ -1,11 +1,12 @@
-"use strict";
+(function (angular) {
+    "use strict";
 
-angular.module("mfl.auth", [
-    //3rd party stuff
-    "ui.router",
-    //our stuff
-    "mfl.auth.controllers",
-    "mfl.auth.services",
-    "mfl.auth.routers",
-    "mfl.auth.directives"
-]);
+    angular.module("mfl.auth", [
+        "mfl.auth.controllers",
+        "mfl.auth.services",
+        "mfl.auth.routers",
+        "mfl.auth.directives",
+        "mfl.auth.oauth2"
+    ]);
+
+})(angular);

@@ -1,5 +1,6 @@
-"use strict";
 (function () {
+    "use strict";
+
     describe("Test for RBAC directive: ", function () {
         var rootScope;
         var scope;

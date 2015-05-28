@@ -1,5 +1,7 @@
-"use strict";
-angular.module("mfl.home.controllers", [])
+(function (angular) {
+    "use strict";
+
+    angular.module("mfl.home.controllers", [])
 
     .controller("mfl.home.controllers.home", ["$scope",
         "mfl.auth.services.login", "$state", "mfl.home.services.home",
@@ -38,3 +40,5 @@ angular.module("mfl.home.controllers", [])
             };
         }
     ]);
+
+})(angular);
