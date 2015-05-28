@@ -11,7 +11,7 @@ This is the administration web application of the the [Kenyan MFL v2](https://gi
 The project's structure has been derived from [ng-boilerplate](https://github.com/ngbp/ngbp/blob/v0.3.2-release/README.md#overall-directory-structure)
 
 ```
-mfl_web/
+mfl_admin_web/
   |- coverage/    #  contains coverage output
   |- build/    # contains output of the build process, used to serve files in development
   |- bin/    # contains output of the compile process, used to serve files in production
