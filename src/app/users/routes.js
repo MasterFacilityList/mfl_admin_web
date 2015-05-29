@@ -20,8 +20,8 @@
                         templateUrl: "users/tpls/side_nav.tpl.html"
                     },
                     "main-content@users": {
-                        controller: "mfl.users.controllers.home",
-                        templateUrl: "users/tpls/user_index.tpl.html"
+                        controller: "mfl.users.controllers.users",
+                        templateUrl: "users/tpls/index.tpl.html"
                     }
                 },
                 data : { pageTitle: "Users" }
