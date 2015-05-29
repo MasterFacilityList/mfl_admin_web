@@ -2,7 +2,9 @@
     "use strict";
 
     angular.module("mflAdminAppConfig", [
-        "sil.common.logging"
+        "sil.common.logging",
+        "sil.api.wrapper",
+        "sil.grid"
     ])
 
     .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
@@ -13,6 +15,11 @@
         loggingConfig.LOG_TO_SERVER = false;
         loggingConfig.LOG_SERVER_URL = undefined;
         loggingConfig.LOG_TO_CONSOLE = true;
+    }])
+    .config(["silGridConfigProvider", function(silGridConfig){
+        silGridConfig.apiMaps = {
+        };
+        silGridConfig.appConfig = "mflAdminAppConfig";
     }]);
 
 })(angular);
