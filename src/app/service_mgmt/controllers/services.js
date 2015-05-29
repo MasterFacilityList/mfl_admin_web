@@ -54,7 +54,7 @@
                 wrappers.services.create($scope.service)
                 .success(function (data) {
                     $state.go(
-                        "service_mgmt.service_view",
+                        "service_mgmt.service_list",
                         {"service_id": data.id}
                     );
                 });
