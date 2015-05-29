@@ -6,8 +6,6 @@
 
     .controller("mfl.service_mgmt.controllers.category_list", [angular.noop])
 
-    .controller("mfl.service_mgmt.controllers.category_view", [angular.noop])
-
     .controller("mfl.service_mgmt.controllers.category_edit", [angular.noop])
 
     .controller("mfl.service_mgmt.controllers.category_create", [angular.noop])
