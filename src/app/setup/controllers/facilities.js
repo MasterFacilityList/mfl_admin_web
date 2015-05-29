@@ -158,7 +158,7 @@
             $scope.title = [
                 {
                     icon: "fa-phone",
-                    name: "Create Facility Owne"
+                    name: "Create Facility Owner"
                 }
             ];
             adminApi.facilityOwnerTypes.list().success(function(ownerTypes){
