@@ -19,6 +19,7 @@
     }])
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
+            admin: ["mfl.setup.api", "adminApi"]
         };
         silGridConfig.appConfig = "mflAdminAppConfig";
     }])

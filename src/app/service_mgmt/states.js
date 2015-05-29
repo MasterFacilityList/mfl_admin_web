@@ -1,5 +1,7 @@
 (function (angular) {
 
+    "use strict";
+
     angular.module("mfl.service_mgmt.states", [
         "ui.router"
     ])
@@ -51,18 +53,8 @@
             }
         })
 
-        .state("service_mgmt.service_view", {
-            url: "services/:service_id/",
-            views: {
-                "main-content": {
-                    controller: "mfl.service_mgmt.controllers.service_view",
-                    templateUrl: "service_mgmt/tpls/service_view.tpl.html"
-                }
-            }
-        })
-
         .state("service_mgmt.service_edit", {
-            url: "services/:service_id/edit/",
+            url: "services/:service_id/",
             views: {
                 "main-content": {
                     controller: "mfl.service_mgmt.controllers.service_edit",
@@ -112,16 +104,6 @@
             }
         })
 
-        .state("service_mgmt.category_view", {
-            url: "categories/:category_id/",
-            views: {
-                "main-content": {
-                    controller: "mfl.service_mgmt.controllers.category_view",
-                    templateUrl: "service_mgmt/tpls/category_view.tpl.html"
-                }
-            }
-        })
-
         .state("service_mgmt.category_edit", {
             url: "categories/:category_id/edit/",
             views: {
@@ -164,16 +146,6 @@
             }
         })
 
-        .state("service_mgmt.option_view", {
-            url: "options/:option_id/",
-            views: {
-                "main-content": {
-                    controller: "mfl.service_mgmt.controllers.option_view",
-                    templateUrl: "service_mgmt/tpls/option_view.tpl.html"
-                }
-            }
-        })
-
         .state("service_mgmt.option_edit", {
             url: "options/:option_id/edit/",
             views: {
@@ -192,9 +164,7 @@
                     templateUrl: "service_mgmt/tpls/option_delete.tpl.html"
                 }
             }
-        })
-
-        ;
+        });
 
     }]);
 
