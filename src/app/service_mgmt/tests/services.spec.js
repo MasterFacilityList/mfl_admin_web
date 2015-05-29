@@ -1,7 +1,7 @@
 (function (angular) {
     "use strict";
 
-    xdescribe("Test service management service", function () {
+    describe("Test service management service", function () {
 
         var api;
 
