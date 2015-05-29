@@ -208,7 +208,7 @@
                                             _.each(arrayErr, function(err){
                                                 if(_.isObject(err)){
                                                     handleObjErr(err, key);
-                                                }else{
+                                                } else {
                                                     parsedError[key] += "<li>"+err+"</li>";
                                                 }
                                             });
@@ -272,7 +272,7 @@
                                 error_msg = helpers.showError("An error occured");
                                 break;
                         }
-                        error.data = error_msg;
+                        error.error_msg = error_msg;
                         return $q.reject(error);
                     }
                 };

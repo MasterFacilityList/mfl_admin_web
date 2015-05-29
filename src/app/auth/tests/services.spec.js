@@ -22,20 +22,15 @@
             }]);
         });
 
-        it("should have auth login service defeined",
+        it("should have auth login service defined",
         inject(["mfl.auth.services.login", function (loginService) {
             expect(loginService).toBeDefined();
         }]));
 
         it("should have all the methods defined",
         inject(["mfl.auth.services.login", function (loginService) {
-            expect(loginService.login).toBeDefined();
-            expect(loginService.currentUser).toBeDefined();
-            expect(loginService.saveUser).toBeDefined();
-            expect(loginService.isLoggedIn).toBeDefined();
             expect(angular.isFunction (loginService.login)).toBeTruthy();
             expect(angular.isFunction (loginService.currentUser)).toBeTruthy();
-            expect(angular.isFunction (loginService.saveUser)).toBeTruthy();
             expect(angular.isFunction (loginService.isLoggedIn)).toBeTruthy();
         }]));
         it("should send user details to login Api: successfully",
@@ -70,16 +65,7 @@
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
         }]));
-        it("should call the saveUser function",
-            inject(["mfl.auth.services.login", "$window", function (loginService, $window) {
-                var user = {
-                    username : "owagaantony",
-                    email : "owagaantony@gmail.com"
-                };
-                loginService.saveUser(user);
-                expect(JSON.parse($window.localStorage.getItem("auth.user"))).toEqual(user);
-            }])
-        );
+
         it("should call isLoggedIn method",
         inject(["mfl.auth.services.login", "api.oauth2", "$window",
             function (loginService, oauth2, $window) {

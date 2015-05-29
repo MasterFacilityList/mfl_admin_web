@@ -6,8 +6,8 @@
         "mfl.auth.oauth2"
     ])
 
-    .service("mfl.auth.services.login", ["api", "$window", "api.oauth2",
-        function (API, $window, oauth2) {
+    .service("mfl.auth.services.login", ["api", "$window", "$q", "api.oauth2",
+        function (API, $window, $q, oauth2) {
             var url = {
                 curr_user : "api/rest-auth/user/"
             };
@@ -18,20 +18,24 @@
             this.login = function (user) {
                 return oauth2.fetchToken(user.username, user.password);
             };
+
             this.currentUser = function () {
-                return api.callApi("GET", api.makeUrl(url.curr_user));
+                return api.callApi("GET", api.makeUrl(url.curr_user))
+                    .success(function (data) {
+                        storage.setItem(store_key, JSON.stringify(data));
+                    });
             };
-            this.saveUser = function(user){
-                storage.setItem(store_key, JSON.stringify(user));
-            };
+
             this.getUser = function(){
                 return JSON.parse(storage.getItem(store_key));
             };
+
             this.isLoggedIn = function () {
                 var user = this.getUser();
                 var has_token = oauth2.getToken();
                 return (! _.isNull(user)) && (! _.isNull(has_token));
             };
+
             this.logout = function () {
                 storage.removeItem(store_key);
                 return oauth2.revokeToken();
