@@ -14,7 +14,7 @@
             });
         });
         it("should go to /login url", function () {
-            expect($state.href("login", { id: 1 })).toEqual("#/login");
+            expect($state.href("login")).toEqual("#/login");
         });
     });
 })();

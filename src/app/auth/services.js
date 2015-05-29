@@ -3,14 +3,14 @@
 
     angular.module("mfl.auth.services", [
         "mfl.common.storage",
-        "sil.api.wrapper"
+        "sil.api.wrapper",
+        "mfl.auth.oauth2"
     ])
 
-    .service("mfl.auth.services.login", ["api", "mfl.common.storage.localStorage",
-        function (API, storage) {
+    .service("mfl.auth.services.login", ["api",
+        "mfl.common.storage.localStorage", "api.oauth2",
+        function (API, storage, oauth2) {
             var url = {
-                login : "api/rest-auth/login/",
-                logout : "api/rest-auth/logout/",
                 curr_user : "api/rest-auth/user/"
             };
             var store_keys = {
@@ -21,7 +21,7 @@
             var api = API.getApi();
 
             this.login = function (user) {
-                return api.callApi("POST", api.makeUrl(url.login), user);
+                return oauth2.fetchToken(user.username, user.password);
             };
             this.currentUser = function () {
                 return api.callApi("GET", api.makeUrl(url.curr_user));
@@ -35,7 +35,8 @@
             };
             this.isLoggedIn = function () {
                 var logged_in = storage.getItem(store_keys.is_logged_in);
-                if(_.isNull(logged_in)) {
+                var has_token = oauth2.getToken();
+                if(_.isNull(logged_in) || _.isNull(has_token)) {
                     return false;
                 }
                 return logged_in;
@@ -44,7 +45,7 @@
                 storage.removeItem(store_keys.user);
                 storage.removeItem(store_keys.logged_in);
                 storage.clear();
-                return api.callApi("POST", api.makeUrl(url.logout));
+                return oauth2.revokeToken();
             };
         }
     ]);

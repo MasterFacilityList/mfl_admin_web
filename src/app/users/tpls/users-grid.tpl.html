@@ -1,0 +1,55 @@
+<div class="">
+    <div class="col-md-5 col-sm-5 pull-right">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+</div>
+<!-- Start of facilities grid -->
+<div id="no-more-tables" class="col-lg-12 margin-t-15">
+    <table class="table content-card cf">
+        <thead>
+            <th>#</th>
+            <th sil-grid-sort field='name'>Names</th>
+            <th>Email</th>
+            <th>User status</th>
+            <th>Last login</th>
+            <th class="text-center">Actions</th>
+        </thead>
+        <tbody class="example-animate-container">
+            <tr class="animate-repeat" ng-repeat="user in users | filter: search.query">
+                <td data-title="#">{{$index + 1}}</td>
+                <td data-title="Names">{{user.full_name}}</td>
+                <td data-title="Email">{{user.email}}</td>
+                <td data-title="User status">
+                    <span ng-show="user.is_active" class="text-success"
+                    data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="User is active">
+                        <i class="fa fa-check-circle-o fa-2x"></i>
+                    </span>
+                    <span ng-hide="user.is_active" class="text-danger"
+                    data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="User is deactivated">
+                        <i class="fa fa-times-circle-o fa-2x"></i>
+                    </span>
+                </td>
+                <td data-title="Last login">
+                    <p>
+                        <span ng-if="user.last_login !== null" class="label label-primary">
+                        {{user.last_login | date : 'medium'}}
+                        </span>
+                        <span ng-if="user.last_login === null" class="label label-primary">
+                        yet to login
+                        </span>
+                    </p>
+                </td>
+                <td class="text-center">
+                    <a ui-sref="users.edit_user({user_id : user.id})" class="action-btn action-btn-grid action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Edit user">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a ui-sref="users.view_user({user_id: user.id})" class="action-btn action-btn-grid action-btn-info" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="View user">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>
+<!-- End of facilities grid -->

@@ -1,0 +1,70 @@
+<contentheader></contentheader>
+<div class="row">
+    <div class="col-lg-12">
+            <div class="col-lg-10 col-lg-offset-1 margin-t-20 card-panel">
+                <!-- /- Start of tabbed multi-step form -->
+                <div class="row content-heading">
+                    <h4>
+                        <span style="border-right: 1px solid #ddd;"><i class="fa fa-user"></i> &nbsp;</span>&nbsp; {{oneUser.full_name}}
+                        <span class="pull-right">
+                            <span style="border-right: 1px solid #ddd;"><i class="fa fa-at"></i></span>
+                            {{oneUser.email}}
+                        </span>
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <h4 class="margin-t-10">
+                        <label class="control-label">Date created: </label>
+                        {{oneUser.date_joined | date : 'fullDate'}}
+                        <span class="pull-right">
+                            <label class="control-label">Username: </label>
+                            {{oneUser.username}}
+                        </span>
+                    </h4>
+                    <hr style="border: 1px solid #f0f0f0;">
+                    <h4><label><i class="fa fa-users"></i>  Role(s)</label></h4>
+                    <h4>
+                        <span class="col-lg-6 col-md-6" ng-repeat="role in oneUser.groups">
+                            {{role.name}}
+                        </span>
+                    </h4>
+                </div>
+            </div>
+
+            <div class="col-lg-10 col-lg-offset-1 margin-t-20 content-card">
+                <div class="col-lg-12">
+                    <h4>
+                        <span class="pull-left">
+                            <label class="control-label"><b>Active user: </b></label>
+                            <span ng-show="oneUser.is_active" class="text-success">
+                                <i class="fa fa-check-circle-o fa-1x"></i>
+                            </span>
+                            <span ng-hide="oneUser.is_active" class="text-danger">
+                                <i class="fa fa-times-circle-o fa-1x"></i>
+                            </span>
+                        </span>
+                        <span class="pull-right">
+                            <label class="control-label"><b>National user: </b></label>
+                            <span ng-show="oneUser.is_national" class="text-success">
+                                <i class="fa fa-check-circle-o fa-1x"></i>
+                            </span>
+                            <span ng-hide="oneUser.is_national" class="text-danger">
+                                <i class="fa fa-times-circle-o fa-1x"></i>
+                            </span>
+                        </span>
+                    </h4>
+                    <br>
+                    <hr style="border: 1px solid #f0f0f0;">
+                    <h4><label> <i class="fa fa-phone"></i> Contacts</label></h4>
+                    <h5>
+                        <span ng-repeat="cont in contacts">
+                            <div class="col-lg-12 col-md-12 margin-b-5">
+                                    <p style="font-size: 16px"><b>{{cont.contact_type | contact_type : cont_types}}</b> :
+                                    <span >{{cont.contact}}</span></p>
+                            </div>
+                        </span>
+                    </h5>
+                </div>
+            </div>
+    </div>
+</div>
