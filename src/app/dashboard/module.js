@@ -7,6 +7,7 @@
         "ui.bootstrap.tpls",
         //our stuff
         "mfl.dashboard.controllers",
-        "mfl.dashboard.states"
+        "mfl.dashboard.states",
+        "mfl.dashboard.wrapper"
     ]);
 })();
