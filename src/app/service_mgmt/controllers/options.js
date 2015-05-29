@@ -7,8 +7,6 @@
 
     .controller("mfl.service_mgmt.controllers.option_list", [angular.noop])
 
-    .controller("mfl.service_mgmt.controllers.option_view", [angular.noop])
-
     .controller("mfl.service_mgmt.controllers.option_edit", [angular.noop])
 
     .controller("mfl.service_mgmt.controllers.option_create", [angular.noop])
