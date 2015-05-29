@@ -12,6 +12,9 @@
             var request = null;
 
             var setXHRToken = function (token) {
+                if (_.isUndefined(token) || _.isNull(token)) {
+                    return;
+                }
                 var auth_token = token.token_type + " " + token.access_token;
                 $http.defaults.headers.common.Authorization = auth_token;
                 jQuery.ajaxSetup({
