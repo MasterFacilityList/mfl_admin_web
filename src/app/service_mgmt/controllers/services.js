@@ -31,7 +31,7 @@
                     wrappers.services.update($scope.service_id, changed)
                         .success(function () {
                             $state.go(
-                                "service_mgmt.service_view",
+                                "service_mgmt.service_list",
                                 {"service_id": $scope.service_id}
                             );
                         });
