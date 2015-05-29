@@ -3,8 +3,7 @@
     "use strict";
 
     angular.module("mfl.common", [
-        "mfl.common.forms",
-        "mfl.common.storage"
+        "mfl.common.forms"
     ]);
 
 })(angular);
