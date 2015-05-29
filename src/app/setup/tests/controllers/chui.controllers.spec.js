@@ -100,7 +100,7 @@
                 expect($scope.alert).toEqual(res.error);
             });
 
-        it("should delete chuStatus: success",function(){
+        it("should update chuStatus: success",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
@@ -118,7 +118,7 @@
                 expect($state.go).toHaveBeenCalledWith("setup.chu_status");
             });
 
-        it("should delete chuStatus: fail",function(){
+        it("should update chuStatus: fail",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
@@ -137,7 +137,7 @@
                 expect($scope.alert).toEqual(res.error);
             });
 
-        it("should delete chuStatus: no changes",function(){
+        it("should update chuStatus: no changes",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
@@ -154,7 +154,7 @@
                 expect($httpBackend.flush).toThrow();
                 expect($state.go).not.toHaveBeenCalledWith("setup.chu_status");
             });
-        it("should have `mfl.setup.controller.chuStatus.view` defined",
+        it("should have `mfl.setup.controller.chuStatus.create` defined",
            function(){
                 var ctrl = createController("mfl.setup.controller.chuStatus.create");
                 expect(ctrl).toBeDefined();
@@ -251,7 +251,7 @@
                 expect($scope.alert).toEqual(res.error);
             });
 
-        it("should delete chuApprover: success",function(){
+        it("should update chuApprover: success",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
@@ -269,7 +269,7 @@
                 expect($state.go).toHaveBeenCalledWith("setup.chu_approvers");
             });
 
-        it("should delete chuApprover: fail",function(){
+        it("should update chuApprover: fail",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
@@ -288,7 +288,7 @@
                 expect($scope.alert).toEqual(res.error);
             });
 
-        it("should delete chuApprover: no changes",function(){
+        it("should update chuApprover: no changes",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
