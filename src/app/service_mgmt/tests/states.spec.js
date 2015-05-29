@@ -26,14 +26,9 @@
             .toEqual("#/services/services/create/");
         });
 
-        it("should define service view url", function () {
-            expect(state.href("service_mgmt.service_view", {"service_id": "abcd"}))
-            .toEqual("#/services/services/abcd/");
-        });
-
         it("should define service edit url", function () {
             expect(state.href("service_mgmt.service_edit", {"service_id": "abcd"}))
-            .toEqual("#/services/services/abcd/edit/");
+            .toEqual("#/services/services/abcd/");
         });
 
         it("should define service delete url", function () {
@@ -43,7 +38,7 @@
 
         it("should define service options edit url", function () {
             expect(state.href("service_mgmt.service_edit.options", {"service_id": "abcd"}))
-            .toEqual("#/services/services/abcd/edit/options/");
+            .toEqual("#/services/services/abcd/options/");
         });
 
     });
