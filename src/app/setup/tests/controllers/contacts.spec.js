@@ -1,6 +1,6 @@
 (function(describe){
     "use strict";
-    describe("chu controllers test suite", function(){
+    describe("contacts controllers test suite", function(){
         var createController, $scope, $stateParams, $httpBackend, $state, adminApi;
         var formService, SERVER_URL;
 
