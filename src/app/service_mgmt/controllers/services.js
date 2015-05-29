@@ -1,7 +1,10 @@
 (function (angular) {
 
+    "use strict";
+
     angular.module("mfl.service_mgmt.controllers.services", [
-        "mfl.service_mgmt.services"
+        "mfl.service_mgmt.services",
+        "ui.router"
     ])
 
     .controller("mfl.service_mgmt.controllers.service_list", [angular.noop])
@@ -18,6 +21,8 @@
             });
             wrappers.categories.filter({page_size: 1000}).success(function (data) {
                 $scope.categories = data.results;
+            }).error(function (data) {
+                $log.warn(data);
             });
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
