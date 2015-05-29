@@ -10,23 +10,14 @@
             $scope.test = "Manage dashboard";
             $scope.path = [
                 {
-                    name: "dashboard",
+                    name: "Dashboard",
                     route: "dashboard"
                 }
             ];
             $scope.title = [
                 {
-                    icon: "fa-user",
+                    icon: "fa-desktop",
                     name: "dashboard"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "onclick=window.history.back()",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go back",
-                    icon: "fa-arrow-left"
                 }
             ];
         }
