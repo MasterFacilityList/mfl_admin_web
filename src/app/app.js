@@ -10,7 +10,8 @@
         "mfl.common",
         "mfl.auth",
         "mfl.users",
-        "mfl.service_mgmt"
+        "mfl.service_mgmt",
+        "mfl.dashboard"
     ]);
 
 })(angular);
