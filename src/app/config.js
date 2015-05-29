@@ -4,7 +4,8 @@
     angular.module("mflAdminAppConfig", [
         "sil.common.logging",
         "sil.api.wrapper",
-        "sil.grid"
+        "sil.grid",
+        "mfl.auth.oauth2"
     ])
 
     .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
@@ -21,6 +22,10 @@
             users : ["mfl.users.wrapper", "usersApi"]
         };
         silGridConfig.appConfig = "mflAdminAppConfig";
+    }])
+
+    .run(["api.oauth2", function (oauth2) {
+        oauth2.setXHRToken(oauth2.getToken());
     }]);
 
 })(angular);
