@@ -26,7 +26,6 @@
         });
 
         describe("Test service edit controller", function () {
-
             it("should get one service and all categories", function () {
                 var scope = rootScope.$new();
                 var data = {
@@ -195,9 +194,206 @@
             });
         });
 
+        describe("Test service delete controller", function () {
+            it("should get the service to delete", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        service_id: 1
+                    },
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/services/1/")
+                    .respond(200, {});
 
-        describe("Test service delete controller", function () {});
-        describe("Test service create controller", function () {});
+                ctrl("service_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.service).toEqual({});
+            });
+
+            it("should log errors on get one service failure", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        service_id: 1
+                    },
+                    "$scope": scope,
+                    "$log": log
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/services/1/")
+                    .respond(500, {"error": "a"});
+
+                spyOn(log, "warn");
+                ctrl("service_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.service).toBe(undefined);
+                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+            });
+
+            it("should delete the service", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        service_id: 1
+                    },
+                    "$state": state,
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/services/1/")
+                    .respond(200, {});
+
+                spyOn(state, "go");
+                ctrl("service_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/facilities/services/1/")
+                    .respond(204, {});
+                scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+
+            it("should show error on delete the service failure", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        service_id: 1
+                    },
+                    "$state": state,
+                    "$scope": scope,
+                    "$log": log
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/services/1/")
+                    .respond(200, {});
+
+                spyOn(state, "go");
+                spyOn(log, "warn");
+                ctrl("service_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/facilities/services/1/")
+                    .respond(404, {});
+
+                scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).not.toHaveBeenCalled();
+                expect(log.warn).toHaveBeenCalled();
+            });
+
+        });
+
+        describe("Test service create controller", function () {
+
+            it("should get all categories", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+
+                httpBackend
+                    .expectGET(server_url +
+                               "api/facilities/service_categories/?page_size=1000")
+                    .respond(200, {results: []});
+
+                ctrl("service_create", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.categories).toEqual([]);
+            });
+
+            it("should log errors on get categories failure", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope,
+                    "$log": log
+                };
+
+                httpBackend
+                    .expectGET(server_url +
+                               "api/facilities/service_categories/?page_size=1000")
+                    .respond(500, {"error": "a"});
+
+                spyOn(log, "warn");
+                ctrl("service_create", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.categories).toBe(undefined);
+                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+            });
+
+            it("should create the service", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$state": state,
+                    "$scope": scope
+                };
+
+                httpBackend
+                    .expectGET(server_url +
+                               "api/facilities/service_categories/?page_size=1000")
+                    .respond(200, {results: []});
+
+                spyOn(state, "go");
+                ctrl("service_create", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+                scope.service = {
+                    "name": "get"
+                };
+                httpBackend
+                    .expectPOST(server_url + "api/facilities/services/", {"name": "get"})
+                    .respond(200, {});
+                scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+        });
     });
 
 })();

@@ -44,8 +44,10 @@
         ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
         function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.service = wrappers.newService();
-            wrappers.categories.list({page_size: 1000}).success(function (data) {
+            wrappers.categories.filter({page_size: 1000}).success(function (data) {
                 $scope.categories = data.results;
+            }).error(function (data) {
+                $log.warn(data);
             });
 
             $scope.save = function () {
@@ -74,6 +76,9 @@
                 wrappers.services.remove($scope.service_id)
                 .success(function () {
                     $state.go("service_mgmt.service_list");
+                })
+                .error(function (data) {
+                    $log.warn(data);
                 });
             };
         }
