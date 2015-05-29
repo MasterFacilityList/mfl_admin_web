@@ -1,4 +1,7 @@
- <contentheader></contentheader>
+    <!-- <contentheader></contentheader> -->
+    <!-- <div class="content partial" ui-view="main-content"></div> -->
+    <div ui-view="sidebar"></div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="col-lg-12">
@@ -7,9 +10,7 @@
                 <a ui-sref="users.manage_users" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Manage facilities">
                     <div class="menu-wrapper col-lg-4 col-md-6 col-sm-6 col-xs-10" >
                         <div class="menu-icon col-lg-2 col-md-2 col-sm-3 col-xs-3 text-center" style="">
-                            <!-- <a ui-sref="yitch_loanees_business.register" class="btn btn-primary"> -->
                                 <i class="fa fa-user fa-3x"></i>
-                            <!-- </a> -->
                         </div>
                         <div class="menu-container col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4 class="text-left">Manage Users</h4></div>
                     </div>
@@ -18,9 +19,8 @@
                 <a ui-sref="users.manage_roles" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Manage facilities">
                     <div class="menu-wrapper col-lg-4 col-md-6 col-sm-6 col-xs-10" >
                         <div class="menu-icon col-lg-2 col-md-2 col-sm-3 col-xs-3 text-center" style="">
-                            <!-- <a ui-sref="yitch_loanees_business.register" class="btn btn-primary"> -->
+                            <a ui-sref="yitch_loanees_business.register" class="btn btn-primary">
                                 <i class="fa fa-group fa-3x"></i>
-                            <!-- </a> -->
                         </div>
                         <div class="menu-container col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4 class="text-left">Manage Roles</h4></div>
                     </div>
@@ -29,14 +29,12 @@
                 <a ui-sref="users.manage_permissions" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Manage permissions">
                     <div class="menu-wrapper col-lg-4 col-md-6 col-sm-6 col-xs-10" >
                         <div class="menu-icon col-lg-2 col-md-2 col-sm-3 col-xs-3 text-center" style="">
-                            <!-- <a ui-sref="yitch_loanees_business.register" class="btn btn-primary"> -->
                                 <i class="fa fa-sort-amount-asc fa-3x"></i>
-                            <!-- </a> -->
                         </div>
                         <div class="menu-container col-lg-6 col-md-6 col-sm-6 col-xs-6"><h4 class="text-left"> Permissions</h4></div>
                     </div>
                 </a>
-            </div><!-- /-End of action area -->
-        </div>
+            </div>
     </div>
 </div>
+

@@ -18,6 +18,7 @@
     }])
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
+            users : ["mfl.users.wrapper", "usersApi"]
         };
         silGridConfig.appConfig = "mflAdminAppConfig";
     }]);
