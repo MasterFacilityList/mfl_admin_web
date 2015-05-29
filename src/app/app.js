@@ -6,11 +6,13 @@
         "templates-common",
 
         "sil.common.logging",
+        "sil.api.wrapper",
         "mflAdminAppConfig",
         "mfl.common",
         "mfl.auth",
         "mfl.users",
-        "mfl.service_mgmt"
+        "mfl.service_mgmt",
+        "mfl.setup"
     ]);
 
 })(angular);
