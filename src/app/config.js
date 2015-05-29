@@ -3,7 +3,6 @@
 
     angular.module("mflAdminAppConfig", [
         "sil.common.logging",
-        "sil.api.wrapper",
         "sil.grid"
     ])
 
@@ -18,6 +17,7 @@
     }])
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
+            admin: ["mfl.setup.api", "adminApi"]
         };
         silGridConfig.appConfig = "mflAdminAppConfig";
     }]);
