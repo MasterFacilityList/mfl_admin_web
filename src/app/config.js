@@ -22,12 +22,9 @@
         };
         silGridConfig.appConfig = "mflAdminAppConfig";
     }])
-    
-    .run(["api.auth", function (auth) {
-        var token = auth.getToken();
-        if (! _.isNull(token)) {
-            auth.setXHRToken(token);
-        }
+
+    .run(["api.oauth2", function (oauth2) {
+        oauth2.setXHRToken(oauth2.getToken());
     }]);
 
 })(angular);
