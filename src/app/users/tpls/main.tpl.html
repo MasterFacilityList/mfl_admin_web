@@ -1,6 +1,11 @@
 <section class="section">
     <div ui-view="header"></div>
-    <contentheader></contentheader>
-    <div class="row" ui-view="main-content"></div>
+    <div class="content partial">
+        <contentheader></contentheader>
+        <div class="row">
+            <div class="new-sidebar col-lg-1"  ui-view="sidebar"></div>
+            <div class="main-content col-lg-11" ui-view="main-content"></div>
+        </div>
+    </div>
     <!-- <div class="content partial" ui-view="main-content"></div> -->
 </section>
