@@ -33,6 +33,12 @@
             store_key = "auth.token";
         });
 
+        afterEach(function () {
+            inject(["$window", function ($window) {
+                $window.localStorage.removeItem(store_key);
+            }]);
+        });
+
         it("should store get token from storage", function () {
             inject(["$window", "api.oauth2", function ($window, oauth2) {
                 access_token.expire_at = moment().add(1, "year");
@@ -130,7 +136,7 @@
         it("should refresh a token from oauth2 provider and store new token", function () {
             inject(["$window", "$httpBackend", "CREDZ", "api.oauth2",
                 function ($window, $httpBackend, credz, oauth2) {
-                    window.localStorage.setItem(store_key, JSON.stringify(access_token));
+                    $window.localStorage.setItem(store_key, JSON.stringify(access_token));
 
                     var payload =
                         "grant_type=" + "refresh_token" +
@@ -220,6 +226,30 @@
                     $httpBackend.flush();
                     $httpBackend.verifyNoOutstandingExpectation();
                     $httpBackend.verifyNoOutstandingRequest();
+                }
+            ]);
+        });
+
+        it("should revoke a token", function () {
+            inject(["$window", "$httpBackend", "CREDZ", "api.oauth2",
+                function ($window, $httpBackend, credz, oauth2) {
+                    $window.localStorage.setItem(store_key, JSON.stringify(access_token));
+                    var payload =
+                        "token=" + access_token.access_token +
+                        "&client_id=" + credz.client_id +
+                        "&client_secret=" + credz.client_secret;
+                    $httpBackend
+                        .expectPOST(credz.revoke_url, payload)
+                        .respond(200);
+
+                    oauth2.revokeToken(access_token);
+
+                    $httpBackend.flush();
+                    $httpBackend.verifyNoOutstandingRequest();
+                    $httpBackend.verifyNoOutstandingExpectation();
+
+                    var token = JSON.parse($window.localStorage.getItem(store_key));
+                    expect(token).toBe(null);
                 }
             ]);
         });

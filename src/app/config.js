@@ -1,7 +1,9 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mflAdminAppConfig", ["sil.grid"])
+    angular.module("mflAdminAppConfig", [
+        "sil.common.logging"
+    ])
 
     .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
 

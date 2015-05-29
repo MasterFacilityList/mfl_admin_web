@@ -1,4 +1,3 @@
-"use strict";
 /**
     Error logging service based on
     : http://engineering.talis.com/articles/client-side-error-logging/.
@@ -8,6 +7,8 @@
 
 */
 (function(jQuery, angular, _){
+    "use strict";
+
     angular.module("sil.common.logging", [])
 
     /**
@@ -73,9 +74,9 @@
     */
 
     .provider("$exceptionHandler", {
-        $get: function(exceptionLoggingService){
+        $get: ["exceptionLoggingService", function(exceptionLoggingService){
             return exceptionLoggingService;
-        }
+        }]
     })
 
     /**
@@ -156,6 +157,7 @@
                     }
                 };
             }])
+
     .factory("silResponseErrorInterceptor", ["$q",
      "applicationLoggingService", "helpers",
              function($q,loggingService, helpers){
@@ -206,7 +208,7 @@
                                             _.each(arrayErr, function(err){
                                                 if(_.isObject(err)){
                                                     handleObjErr(err, key);
-                                                }else{
+                                                } else {
                                                     parsedError[key] += "<li>"+err+"</li>";
                                                 }
                                             });
@@ -270,7 +272,7 @@
                                 error_msg = helpers.showError("An error occured");
                                 break;
                         }
-                        error.data = error_msg;
+                        error.error_msg = error_msg;
                         return $q.reject(error);
                     }
                 };
