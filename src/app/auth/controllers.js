@@ -19,7 +19,7 @@
                     $scope.login_err_html =  $sce.trustAsHtml($scope.login_err);
                 };
                 var success_fxn = function () {
-                    $state.go("home");
+                    $state.go("users");
                 };
                 loginService.login(obj)
                     .then(
