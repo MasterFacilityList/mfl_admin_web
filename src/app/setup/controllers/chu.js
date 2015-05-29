@@ -1,5 +1,5 @@
-"use strict";
 (function(angular){
+    "use strict";
     angular.module("mfl.setup.chu.controllers",[
         "mfl.setup.api",
         "mfl.common.forms"

@@ -1,5 +1,5 @@
-"use strict";
 (function(angular){
+    "use strict";
     angular.module("mfl.setup.county.controllers",[
         "mfl.setup.api"
     ])

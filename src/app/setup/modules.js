@@ -1,6 +1,6 @@
-"use strict";
-
-angular.module("mfl.setup", [
+(function(angular){
+    "use strict";
+    angular.module("mfl.setup", [
     //3rd part stuff
     "ui.router",
     //our stuff
@@ -9,3 +9,5 @@ angular.module("mfl.setup", [
     "mfl.setup.api",
     "mfl.common.directives"
 ]);
+})(angular);
+

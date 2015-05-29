@@ -1,5 +1,5 @@
-"use strict";
 (function(angular){
+    "use strict";
     angular.module("mfl.setup.routes.constituencies", ["mfl.setup.routes.dashboard"])
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider

@@ -1,6 +1,5 @@
-"use strict";
-
 (function(angular){
+    "use strict";
     angular.module("mfl.setup.api", [
         "sil.api.wrapper"
     ])

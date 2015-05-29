@@ -1,5 +1,5 @@
-"use strict";
 (function(angular){
+    "use strict";
     angular.module("mfl.setup.contacts.controllers",[
     ])
     .controller("mfl.setup.controller.contacts.list", ["$scope",
