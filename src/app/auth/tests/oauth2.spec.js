@@ -34,8 +34,9 @@
         });
 
         afterEach(function () {
-            inject(["$window", function ($window) {
+            inject(["$window", "$http", function ($window, $http) {
                 $window.localStorage.removeItem(store_key);
+                delete $http.defaults.headers.common.Authorization;
             }]);
         });
 
@@ -252,6 +253,16 @@
                     expect(token).toBe(null);
                 }
             ]);
+        });
+
+        it("should not set XHR authorization headers it token is not defined", function () {
+            inject(["$http", "api.oauth2", function ($http, oauth2) {
+                oauth2.setXHRToken();
+                expect($http.defaults.headers.common.Authorization).toBe(undefined);
+
+                oauth2.setXHRToken(null);
+                expect($http.defaults.headers.common.Authorization).toBe(undefined);
+            }]);
         });
     });
 
