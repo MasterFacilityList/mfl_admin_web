@@ -21,8 +21,12 @@
             <li><a ui-sref="facilities.list"><i class="fa fa-list"></i>List Facilities</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-exchange"></i> Services</a></li>
-        <li><a href="#"><i class="fa fa-sitemap"></i> CHUS</a></li>
+        <li ui-sref-active="active">
+          <a ui-sref="service_mgmt"><i class="fa fa-exchange"></i> Services</a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="#"><i class="fa fa-sitemap"></i> CHUS</a>
+        </li>
         <li ui-sref-active="active">
           <a ui-sref="users"><i class="fa fa-users"></i> Users</a>
         </li>

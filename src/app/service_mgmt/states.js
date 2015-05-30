@@ -21,11 +21,11 @@
                     templateUrl: "common/tpls/header.tpl.html"
                 },
                 "sidebar@service_mgmt": {
-                    templateUrl: "common/tpls/side_nav.tpl.html"
+                    templateUrl: "service_mgmt/tpls/side_nav.tpl.html"
                 },
                 "main-content@service_mgmt": {
-                    controller: "mfl.service_mgmt.controllers.main.toc",
-                    templateUrl: "service_mgmt/tpls/main_toc.tpl.html"
+                    controller: "mfl.service_mgmt.controllers.service_list",
+                    templateUrl: "service_mgmt/tpls/service_grid.tpl.html"
                 }
             },
             data : { pageTitle: "Service Management" }
