@@ -14,7 +14,7 @@
                     },
                     "header@users": {
                         controller: "mfl.users.controllers.home",
-                        templateUrl: "users/tpls/header.tpl.html"
+                        templateUrl: "common/tpls/header.tpl.html"
                     },
                     "sidebar@users": {
                         templateUrl: "users/tpls/side_nav.tpl.html"
