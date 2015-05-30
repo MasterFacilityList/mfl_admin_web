@@ -1,5 +1,9 @@
 <section class="section">
     <div ui-view="header"></div>
-    <div ui-view="sidebar"></div>
-    <div class="content partial" ui-view="main-content"></div>
+    <div class="content partial">
+        <div class="row">
+            <div class="col-lg-2 sidebar margin-t-20"  ui-view="sidebar"></div>
+            <div class="main-content col-lg-10" ui-view="main-content"></div>
+        </div>
+    </div>
 </section>

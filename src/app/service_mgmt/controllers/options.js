@@ -29,7 +29,7 @@
                     wrappers.options.update($scope.option_id, changed)
                         .success(function () {
                             $state.go(
-                                "service_mgmt.option_view",
+                                "service_mgmt.option_list",
                                 {"option_id": $scope.option_id}
                             );
                         });
@@ -49,7 +49,7 @@
                 wrappers.options.create($scope.option)
                 .success(function (data) {
                     $state.go(
-                        "service_mgmt.option_view",
+                        "service_mgmt.option_list",
                         {"option_id": data.id}
                     );
                 });

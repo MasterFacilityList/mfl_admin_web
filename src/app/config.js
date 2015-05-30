@@ -19,7 +19,14 @@
     }])
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
-            admin: ["mfl.setup.api", "adminApi"]
+            owners: ["mfl.facilities.wrapper", "ownersApi"],
+            users : ["mfl.users.wrapper", "usersApi"],
+            roles : ["mfl.users.wrapper","rolesApi"],
+            permissions : ["mfl.users.wrapper", "permissionsApi"],
+            contactsApi : ["mfl.users.wrapper", "contactsApi"],
+            contact_type : ["mfl.users.wrapper", "contact_typeApi"],
+            user_contacts : ["mfl.users.wrapper", "user_contactsApi"],
+            service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
         };
         silGridConfig.appConfig = "mflAdminAppConfig";
     }])

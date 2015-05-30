@@ -27,7 +27,7 @@
                     wrappers.categories.update($scope.category_id, changed)
                         .success(function () {
                             $state.go(
-                                "service_mgmt.category_view",
+                                "service_mgmt.category_list",
                                 {"category_id": $scope.category_id}
                             );
                         });
@@ -46,7 +46,7 @@
                 wrappers.categories.create($scope.category)
                 .success(function (data) {
                     $state.go(
-                        "service_mgmt.category_view",
+                        "service_mgmt.category_list",
                         {"category_id": data.id}
                     );
                 });

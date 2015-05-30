@@ -7327,7 +7327,7 @@ a:focus {
     overflow-x: hidden
 }
 .side-left {
-    position: absolute;
+    /*position: absolute;*/
     display: block;
     top: 0;
     bottom: 0;
@@ -7532,7 +7532,7 @@ a:focus {
 .content {
     position: relative;
     display: block;
-    margin-left: 92px;
+    /*margin-left: 92px;*/
     background-color: #F6F4F4;
     padding-bottom: 0;
     min-height: 100vh;

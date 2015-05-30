@@ -34,12 +34,59 @@ font-size: 2.3em;
 font-family: @sansAclonia;
 color: #fff;
 }
+.header-container {
+    height: 100%;
+}
+
 .navbar {
     margin-bottom: -8px !important;
+}
+
+.navbar-nav > li {
+    margin-top: 0px !important;
+    height: 100%;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 21px;
+}
+
+.navbar-nav > li:hover, .navbar-nav > li:active, .navbar-nav > li:focus {
+    border-bottom: solid 3px #fff;
+    color: #2196F3;
+}
+
+.navbar-nav > li:hover > a {
+    color: #2196F3;
+}
+
+.navbar-nav > li:hover > a:active {
+    color: #2196F3;
+}
+
+
+.navbar-default .navbar-nav > .active > a {
+    color: #2196F3 !important;
+    background-color: #fff !important;
 }
 .navbar-default .navbar-nav > li > a {
     color: #fff !important;
 }
+.navbar-default .navbar-nav > li > a:active {
+    color: #2196F3 !important;
+}
 .navbar-default .navbar-brand {
     color: #fff !important;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: #2196F3;
+    background-color: rgba(192, 192, 192, 0.8);
+}
+
+.dropdown-menu > li > a {
+
 }
