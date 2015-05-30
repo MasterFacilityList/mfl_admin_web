@@ -15,5 +15,8 @@
         it("should go to /login url", function () {
             expect($state.href("login")).toEqual("#/login");
         });
+        it("should go to /logout url", function () {
+            expect($state.href("logout")).toEqual("#/logout");
+        });
     });
 })();

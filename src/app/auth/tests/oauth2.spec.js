@@ -255,6 +255,22 @@
             ]);
         });
 
+        it("should not revoke an empty token", function () {
+            inject(["$window", "$httpBackend", "CREDZ", "api.oauth2", "$q",
+                function ($window, $httpBackend, credz, oauth2) {
+                    $window.localStorage.setItem(store_key, JSON.stringify(access_token));
+
+                    oauth2.revokeToken();
+
+                    $httpBackend.verifyNoOutstandingRequest();
+                    $httpBackend.verifyNoOutstandingExpectation();
+
+                    var token = JSON.parse($window.localStorage.getItem(store_key));
+                    expect(token).toBe(null);
+                }
+            ]);
+        });
+
         it("should not set XHR authorization headers it token is not defined", function () {
             inject(["$http", "api.oauth2", function ($http, oauth2) {
                 oauth2.setXHRToken();
