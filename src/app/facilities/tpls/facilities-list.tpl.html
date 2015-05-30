@@ -1,0 +1,39 @@
+<div class="">
+    <div class="col-md-5 col-sm-5 pull-right">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+</div>
+<!-- Start of facilities grid -->
+<div id="no-more-tables" class="col-lg-12 margin-t-15">
+    <table class="table content-card cf">
+        <thead>
+            <th>Facility Name</th>
+            <th>Owner</th>
+            <th>County</th>
+            <th>Rating</th>
+            <th class="text-center">Actions</th>
+        </thead>
+        <tbody class="example-animate-container">
+            <tr class="animate-repeat" ng-repeat="fac in facilities">
+                <td data-title="Facility Name">{{fac.name}}</td>
+                <td data-title="Owner">{{fac.owner_name}}</td>
+                <td data-title="County">
+                    {{fac.county}}
+                </td>
+                <td data-title="Rating">
+                    {{fac.average_rating}}
+                </td>
+                <td class="text-center" data-title="Actions">
+                    <a class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>
+<!-- End of facilities grid -->
