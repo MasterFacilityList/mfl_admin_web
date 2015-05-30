@@ -4,8 +4,8 @@
     angular.module("mfl.auth.oauth2", [])
 
     .service("api.oauth2",
-        ["$window", "$http", "$timeout", "CREDZ",
-        function ($window, $http, $timeout, credentials) {
+        ["$window", "$http", "$timeout", "CREDZ", "$q",
+        function ($window, $http, $timeout, credentials, $q) {
             var store_key = "auth.token";
             var storage = $window.localStorage;
             var token_timeout = 10 * 1000; // 10 seconds
@@ -56,12 +56,17 @@
             };
 
             var revokeToken = function (token) {
+                storage.removeItem(store_key);
+
+                if (! angular.isObject(token)) {
+                    return $q.when(null);
+                }
+
                 var payload =
                     "token=" + token.access_token +
                     "&client_id=" + credentials.client_id +
                     "&client_secret=" + credentials.client_secret;
 
-                storage.removeItem(store_key);
                 return $http({
                     url: credentials.revoke_url,
                     data: payload,

@@ -10,7 +10,7 @@
                              "e9DaQr0HKHan0B9ptVyoLvOqpekiOmEqUJ6H" +
                              "ZKuIoma0pvqkkKDU9GPv",
             "token_url": "o/token/",
-            "revoke_url": "o/revoke_token"
+            "revoke_url": "o/revoke_token/"
         }
     };
 

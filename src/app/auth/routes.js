@@ -15,6 +15,15 @@
                         templateUrl: "auth/tpls/main.tpl.html"
                     }
                 }
+            })
+            .state("logout", {
+                url: "/logout",
+                views: {
+                    "main": {
+                        controller: "mfl.auth.controllers.logout",
+                        templateUrl: "auth/tpls/main.tpl.html"
+                    }
+                }
             });
     }]);
 })(angular);

@@ -30,6 +30,15 @@
                     );
             };
         }
-    ]);
+    ])
+
+    .controller("mfl.auth.controllers.logout",
+        ["$state", "mfl.auth.services.login", function ($state, loginService) {
+            var callback = function () {
+                $state.go("login");
+            };
+            loginService.logout().then(callback, callback);
+        }]
+    );
 
 })(angular);

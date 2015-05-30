@@ -88,4 +88,60 @@
         }]));
     });
 
+    describe("Test logout controller", function () {
+
+        var controller, credz, httpBackend, state, payload;
+
+        beforeEach(function () {
+            module("ui.router");
+            module("mflAdminAppConfig");
+            module("mfl.auth.oauth2");
+            module("mfl.auth.services");
+            module("mfl.auth.controllers");
+
+            inject(["$controller", "$httpBackend", "CREDZ", "$window",
+                "mfl.auth.services.login", "$state", "api.oauth2",
+                function ($controller, $httpBackend, CREDZ, $window, loginService, $state, oauth2) {
+                    credz = CREDZ;
+                    state = $state;
+                    httpBackend = $httpBackend;
+                    loginService = loginService;
+                    var data = {
+                        $state : $state,
+                        "mfl.auth.controllers.logout" : loginService
+                    };
+                    spyOn(oauth2, "getToken").andReturn({"access_token": "token"});
+                    payload =
+                        "token=" + "token" +
+                        "&client_id=" + credz.client_id +
+                        "&client_secret=" + credz.client_secret;
+                    controller = function () {
+                        return $controller("mfl.auth.controllers.logout", data);
+                    };
+                }
+            ]);
+        });
+
+        it("should logout a user on successful revoke of token", function () {
+            httpBackend
+                .expectPOST(credz.revoke_url, payload)
+                .respond(200, {});
+            spyOn(state, "go");
+            controller();
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingExpectation();
+            httpBackend.verifyNoOutstandingRequest();
+            expect(state.go).toHaveBeenCalledWith("login");
+        });
+
+        it("should logout a user on failed revoke of token", function () {
+            httpBackend.expectPOST(credz.revoke_url, payload).respond(500, {"error": "a"});
+            spyOn(state, "go");
+            controller();
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingExpectation();
+            httpBackend.verifyNoOutstandingRequest();
+            expect(state.go).toHaveBeenCalledWith("login");
+        });
+    });
 })();

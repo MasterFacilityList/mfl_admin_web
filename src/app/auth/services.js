@@ -38,7 +38,7 @@
 
             this.logout = function () {
                 storage.removeItem(store_key);
-                return oauth2.revokeToken();
+                return oauth2.revokeToken(oauth2.getToken());
             };
         }
     ]);
