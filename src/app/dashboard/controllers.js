@@ -6,8 +6,6 @@
 
     .controller("mfl.dashboard.home", ["$scope",
         function ($scope) {
-            $scope.user = "Antony";
-            $scope.test = "Manage dashboard";
             $scope.path = [
                 {
                     name: "Dashboard",
@@ -22,7 +20,7 @@
             ];
         }
     ])
-    .controller("mfl.dashboard.content", ["$scope", "dashboardApi", 
+    .controller("mfl.dashboard.content", ["$scope", "dashboardApi",
         function ($scope, dashboardApi) {
             $scope.chart = null;
             var c3_generate = function (_payload){
@@ -37,7 +35,7 @@
                     angular.forEach(_dt.owner_types, function (item) {
                         var _item = [item.name, item.count];
                         _list[_list.length] = _item;
-                    });                    
+                    });
 
                     var obj = {
                         bindto: "#chartowners",
@@ -55,7 +53,7 @@
                     angular.forEach(_dt.status_summary, function (item) {
                         var _item = [item.name, item.count];
                         _list[_list.length] = _item;
-                    });                    
+                    });
 
                     var obj = {
                         bindto: "#chartfacility",
@@ -72,7 +70,7 @@
                     angular.forEach(_dt.county_summary, function (item) {
                         var _item = [item.name, item.count];
                         _list[_list.length] = _item;
-                    });                    
+                    });
 
                     var obj = {
                         bindto: "#facilitybar",
