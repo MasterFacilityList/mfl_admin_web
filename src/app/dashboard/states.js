@@ -15,7 +15,7 @@
                     },
                     "header@dashboard": {
                         controller: "mfl.users.controllers.home",
-                        templateUrl: "users/tpls/header.tpl.html"
+                        templateUrl: "common/tpls/header.tpl.html"
                     },
                     "main-content@dashboard": {
                         controller: "mfl.dashboard.content",
