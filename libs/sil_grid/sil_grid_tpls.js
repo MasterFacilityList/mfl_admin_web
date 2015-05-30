@@ -20,16 +20,13 @@
     ]);
     angular.module(search_tpl, []).run(["$templateCache", function($templateCache){
     $templateCache.put("sil.grid.search.tpl.html",
-        "<div class=\"input-group input-group-in\">\n" +
-        "<input type=\"text\" class=\"form-control helper-inline\" \n"+
-        "ng-model=\"silGrid.searchQuery\" placeholder=\"Search anything...\">\n" +
-        "<span class=\"input-group-btn\">\n" +
-        "<button class=\"btn btn-primary text-muted\" \n" +
-        "ng-click=\"silGridSearch(false)\"><i class=\"fa fa-search\"></i>\n" +
-        "</button>\n" +
-        "<button ng-show=\"silGrid.searchQuery\" class=\"btn btn-primary text-muted\"\n" +
-        "ng-click=\"silGridSearch(true)\"><i  class=\"fa fa-times\"></i>\n" +
-        "</button>\n" +
+        "<div class=\"input-group \">\n" +
+        "<input type=\"text\" class=\"search-input form-control \" \n"+
+        "helper-inline ng-model=\"silGrid.searchQuery\" placeholder=\"Search anything...\">\n" +
+        "<span class=\"search-addon input-group-addon ng-click=silGridSearch(false)\">\n" +
+        "<i ng-show=\"silGrid.searchQuery\" class=\"fa fa-close text-danger\"\n" +
+        "ng-click=\"silGridSearch(true)\">\n" +
+        "</i>\n <i class=\"fa fa-search\"></i>" +
         "</span>\n" +
         "</div>\n"
         );
