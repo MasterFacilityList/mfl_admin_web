@@ -12,7 +12,7 @@
                         templateUrl: "setup/tpls/dashboard/main.tpl.html"
                     },
                     "header@setup": {
-                        controller: "mfl.setup.controller.dashboard",
+                        controller: "mfl.users.controllers.home",
                         templateUrl: "common/tpls/header.tpl.html"
                     },
                     "sidebar@setup": {

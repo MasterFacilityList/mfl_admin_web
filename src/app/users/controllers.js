@@ -1,11 +1,13 @@
 (function (angular, _) {
     "use strict";
 
-    angular.module("mfl.users.controllers", [])
+    angular.module("mfl.users.controllers", [
+        "mfl.auth.services"
+    ])
 
-    .controller("mfl.users.controllers.home", ["$scope",
-        function ($scope) {
-            $scope.user = "Antony";
+    .controller("mfl.users.controllers.home", ["$scope", "mfl.auth.services.login",
+        function ($scope, loginService) {
+            $scope.user = loginService.getUser();
             $scope.test = "Manage users";
             $scope.path = [
                 {
