@@ -29,6 +29,7 @@
         "$": true,
         "_": true,
         "window": true,
-        "spyOn": true
+        "spyOn": true,
+        "c3": true
     }
 }
