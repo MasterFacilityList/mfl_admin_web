@@ -12,7 +12,7 @@
                     templateUrl: "facilities/tpls/main.tpl.html"
                 },
                 "header@facilities": {
-                    templateUrl: "users/tpls/header.tpl.html"
+                    templateUrl: "common/tpls/header.tpl.html"
                 },
                 "sidebar@facilities": {
                     templateUrl: "facilities/tpls/sidebar.tpl.html"
