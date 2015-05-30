@@ -18,10 +18,10 @@
                 },
                 "header@service_mgmt": {
                     controller: "mfl.service_mgmt.controllers.main",
-                    templateUrl: "home/tpls/header.tpl.html"
+                    templateUrl: "users/tpls/header.tpl.html"
                 },
                 "sidebar@service_mgmt": {
-                    templateUrl: "home/tpls/side_nav.tpl.html"
+                    templateUrl: "users/tpls/side_nav.tpl.html"
                 },
                 "main-content@service_mgmt": {
                     controller: "mfl.service_mgmt.controllers.main.toc",
