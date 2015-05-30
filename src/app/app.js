@@ -12,8 +12,9 @@
         "mfl.auth",
         "mfl.users",
         "mfl.service_mgmt",
-        "mfl.dashboard",
-        "mfl.setup"
+        "mfl.setup",
+        "mfl.facilities",
+        "mfl.dashboard"
     ]);
 
 })(angular);

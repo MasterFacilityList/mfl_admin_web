@@ -13,7 +13,7 @@
                     },
                     "header@setup": {
                         controller: "mfl.setup.controller.dashboard",
-                        templateUrl: "users/tpls/header.tpl.html"
+                        templateUrl: "common/tpls/header.tpl.html"
                     },
                     "sidebar@setup": {
                         templateUrl: "users/tpls/side_nav.tpl.html"
