@@ -14,14 +14,11 @@
             <td>{{service.name}}</td>
             <td>{{service.abbreviation}}</td>
             <td>
-                <a ui-sref="service_mgmt.category_view({category_id: service.category})">
+                <a ui-sref="service_mgmt.category_edit({category_id: service.category})">
                     {{service.category_name}}
                 </a>
             </td>
             <td>
-                <a ui-sref="service_mgmt.service_view({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
-                    <i class="fa fa-eye"></i>
-                </a>
                 <a ui-sref="service_mgmt.service_edit({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
                     <i class="fa fa-edit"></i>
                 </a>

@@ -26,6 +26,7 @@
             contactsApi : ["mfl.users.wrapper", "contactsApi"],
             contact_type : ["mfl.users.wrapper", "contact_typeApi"],
             user_contacts : ["mfl.users.wrapper", "user_contactsApi"],
+            facilities: ["mfl.facilities.services","mfl.facilities.wrappers"],
             service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
         };
         silGridConfig.appConfig = "mflAdminAppConfig";
