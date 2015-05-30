@@ -42,23 +42,19 @@
             {
                 name: "Users",
                 route: "users"
-            },
-            {
-                name: "Manage users",
-                route: "users.manage_users"
             }
         ];
         $scope.title = [
             {
                 icon: "fa-users",
-                name: "Manage Users"
+                name: "Users"
             }
         ];
         $scope.action = [
             {
                 func : "ui-sref='users.new_user.basic' " +
                         "has-permission='users.add_mfluser' ",
-                class: "action-btn action-btn-success action-btn-md",
+                class: "action-btn action-btn-info action-btn-md",
                 color: "blue",
                 tipmsg: "New User",
                 icon: "fa-user-plus"

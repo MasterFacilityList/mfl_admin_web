@@ -1,5 +1,26 @@
 /*Styling for sidebar links - sidebar.less*/
-
+.my-sidebar {
+    /*background-color: #9e9e9e ;*/
+    background-color: darken(#858d93, 5%);
+    padding: 0;
+}
+.my-sidebar > ul {
+    display: block;
+}
+.my-sidebar > ul > li {
+    border-bottom: 2px solid #ddd;
+}
+.my-sidebar > ul > li > a{
+    border-bottom: #bdbdbd;
+    color: #dddddd;
+    font-size: 14px;
+}
+.my-sidebar > ul > li > a:hover{
+    border-left: 3px solid #e53935;
+    color: #fff;
+    background-color: lighten(#858d93, 5%) !important;
+    cursor: pointer;
+}
 .new-sidebar {
     height: 100vh;
     border-right: 1px solid #000;
