@@ -22,6 +22,15 @@
                 }
             },
             data : { pageTitle: "Facility Management" }
+        })
+        .state("facilities.list", {
+            url: "/list",
+            views: {
+                "content@facilities": {
+                    templateUrl: "facilities/tpls/facilities-grid.tpl.html"
+                }
+            },
+            data : { pageTitle: "Facility Management" }
         });
     }]);
 })(angular);
