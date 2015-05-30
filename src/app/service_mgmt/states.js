@@ -17,7 +17,7 @@
                     templateUrl: "service_mgmt/tpls/main.tpl.html"
                 },
                 "header@service_mgmt": {
-                    controller: "mfl.service_mgmt.controllers.main",
+                    controller: "mfl.users.controllers.home",
                     templateUrl: "common/tpls/header.tpl.html"
                 },
                 "sidebar@service_mgmt": {
