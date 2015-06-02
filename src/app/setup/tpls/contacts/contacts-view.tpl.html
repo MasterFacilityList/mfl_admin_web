@@ -43,14 +43,14 @@
         <div class="col-md-12 form-group">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
                 <span class="pull-left margin-h-5">
-                    <button ng-if="create" ng-click="createContacts(contacts)" class="login-btn login-btn-default">
+                    <button ng-if="!contacts.id" ng-click="createContacts(contacts)" class="login-btn login-btn-default">
                         <i class="fa fa-save"></i> Create
                     </button>
-                    <button ng-if="edit" ng-click="updateContacts(contacts.id, chu.contacts.form)" class="login-btn login-btn-default">
+                    <button ng-if="contacts.id" ng-click="updateContacts(contacts.id, chu.contacts.form)" class="login-btn login-btn-default">
                         <i class="fa fa-edit"></i> Update
                     </button>
                 </span>
-                <span ng-if="edit" class="pull-left margin-h-5">
+                <span ng-if="contacts.id" class="pull-left margin-h-5">
                     <button ng-click="deleteContacts(contacts.id)" class="login-btn login-btn-info">
                        <i class="fa fa-remove"></i>Delete
                     </button>
