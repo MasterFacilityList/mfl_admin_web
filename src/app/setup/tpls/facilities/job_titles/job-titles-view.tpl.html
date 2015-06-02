@@ -36,14 +36,14 @@
         <div class="col-md-12 form-group">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
                 <span class="pull-left margin-h-5">
-                    <button ng-if="create" ng-click="createFacilityJobTitle(facilityJobTitles)" class="login-btn login-btn-default">
+                    <button ng-if="!facilityJobTitles.id" ng-click="createFacilityJobTitle(facilityJobTitles)" class="login-btn login-btn-default">
                         <i class="fa fa-save"></i> Create
                     </button>
-                    <button ng-if="edit" ng-click="updateFacilityJobTitle(facilityJobTitles.id, facilities.job_titles.form)" class="login-btn login-btn-default">
+                    <button ng-if="facilityJobTitles.id" ng-click="updateFacilityJobTitle(facilityJobTitles.id, facilities.job_titles.form)" class="login-btn login-btn-default">
                         <i class="fa fa-edit"></i> Update
                     </button>
                 </span>
-                <span ng-if="edit" class="pull-left margin-h-5">
+                <span ng-if="facilityJobTitles.id" class="pull-left margin-h-5">
                     <button ng-click="deleteFacilityJobTitle(facilityJobTitles.id)" class="login-btn login-btn-info">
                        <i class="fa fa-remove"></i>Delete
                     </button>
