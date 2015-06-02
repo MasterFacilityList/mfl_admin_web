@@ -14,7 +14,7 @@
                 }
             })
         .state("setup.contacts.view", {
-                url: "/contacts/:id",
+                url: "/:id",
                 views: {
                     "main-content@setup": {
                         controller: "mfl.setup.controller.contacts.view",
@@ -23,10 +23,10 @@
                 }
             })
         .state("setup.contacts.create", {
-                url: "/contacts/create",
+                url: "/create",
                 views: {
                     "main-content@setup": {
-                        controller: "mfl.setup.controller.contacts.create",
+                        controller: "mfl.setup.controller.contacts.view",
                         templateUrl: "setup/tpls/contacts/contacts-view.tpl.html"
                     }
                 }
