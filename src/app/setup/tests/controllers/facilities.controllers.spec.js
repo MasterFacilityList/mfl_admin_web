@@ -159,7 +159,7 @@
                 spyOn($state, "go");
                 $httpBackend.expectPOST(SERVER_URL+"api/facilities/owner_types/").respond(
                 200, {});
-                createController("mfl.setup.controller.facilityOwnerType.create", {});
+                createController("mfl.setup.controller.facilityOwnerType.view", {});
                 $scope.createFacilityOwnerTypes({name: "Testing"});
                 $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("setup.facility_owner_types");
@@ -169,7 +169,7 @@
                 spyOn($state, "go");
                 $httpBackend.expectPOST(SERVER_URL+"api/facilities/owner_types/").respond(
                 500, {error: "error"});
-                createController("mfl.setup.controller.facilityOwnerType.create", {});
+                createController("mfl.setup.controller.facilityOwnerType.view", {});
                 $scope.createFacilityOwnerTypes({name: "Testing"});
                 $httpBackend.flush();
                 expect($scope.alert).toEqual("error");
@@ -332,17 +332,12 @@
                 expect($httpBackend.flush).toThrow();
                 expect($state.go).not.toHaveBeenCalledWith("setup.facility_owners");
             });
-        it("should have `mfl.setup.controller.facilityOwner.create` defined",
-           function(){
-                var ctrl = createController("mfl.setup.controller.facilityOwner.create");
-                expect(ctrl).toBeDefined();
-            });
 
         it("should create facilityOwner: success",function(){
                 spyOn($state, "go");
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
                 200, {resutls: {msg:"ok"}});
-                createController("mfl.setup.controller.facilityOwner.create", {});
+                createController("mfl.setup.controller.facilityOwner.view", {});
                 $httpBackend.flush();
                 $httpBackend.expectPOST(SERVER_URL+"api/facilities/owners/").respond(
                 200, {});
@@ -355,7 +350,7 @@
                 spyOn($state, "go");
                 $httpBackend.expectPOST(SERVER_URL+"api/facilities/owners/").respond(
                 500, {error: "error"});
-                createController("mfl.setup.controller.facilityOwner.create", {});
+                createController("mfl.setup.controller.facilityOwner.view", {});
                 $scope.createFacilityOwner({name: "Testing"});
                 $httpBackend.flush();
                 expect($scope.alert).toEqual("error");
