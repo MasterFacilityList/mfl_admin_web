@@ -80,7 +80,7 @@
             })
 
         .state("setup.facility_job_titles.view", {
-                url: "/facility_job_titles/:id",
+                url: "/:id",
                 views: {
                     "main-content@setup": {
                         controller: "mfl.setup.controller.facilityJobTitle.view",
@@ -89,10 +89,10 @@
                 }
             })
         .state("setup.facility_job_titles.create", {
-                url: "/facility_job_titles/create",
+                url: "/create",
                 views: {
                     "main-content@setup": {
-                        controller: "mfl.setup.controller.facilityJobTitle.create",
+                        controller: "mfl.setup.controller.facilityJobTitle.view",
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
                 }
@@ -111,7 +111,7 @@
                 }
             })
         .state("setup.facility_regulatory_bodies.view", {
-                url: "/facility_regulatory_bodies/:id",
+                url: "/:id",
                 views: {
                     "main-content@setup": {
                         controller: "mfl.setup.controller.facilityRegulatoryBody.view",
@@ -121,10 +121,10 @@
                 }
             })
         .state("setup.facility_regulatory_bodies.create", {
-                url: "/facility_regulatory_bodies/create",
+                url: "/create",
                 views: {
                     "main-content@setup": {
-                        controller: "mfl.setup.controller.facilityRegulatoryBody.create",
+                        controller: "mfl.setup.controller.facilityRegulatoryBody.view",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
                     }
