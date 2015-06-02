@@ -184,13 +184,13 @@
                     name: "Manage Facility Job Title"
                 }
             ];
-            adminApi.facilityJobTitles.get($stateParams.id).success(function(data){
-                $scope.facilityJobTitles = data;
-                $scope.edit = true;
-            }).error(function(error){
-                $scope.alert = error.error;
-            });
-
+            if(!_.isUndefined($stateParams.id)){
+                adminApi.facilityJobTitles.get($stateParams.id).success(function(data){
+                    $scope.facilityJobTitles = data;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            }
             $scope.updateFacilityJobTitle = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
@@ -208,19 +208,7 @@
                     $scope.alert = error.error;
                 });
             };
-        }]
-    )
 
-    .controller("mfl.setup.controller.facilityJobTitle.create", ["$scope","$state",
-                "$stateParams","adminApi",
-        function($scope, $state, $stateParams, adminApi){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Create Facility Job Title"
-                }
-            ];
-            $scope.create = true;
             $scope.createFacilityJobTitle = function(title){
                 adminApi.facilityJobTitles.create(title).success(function(){
                     $state.go("setup.facility_job_titles");
@@ -264,12 +252,14 @@
                     name: "Manage Facility Regulatory Body"
                 }
             ];
-            adminApi.facilityRegulatoryBodies.get($stateParams.id).success(function(data){
-                $scope.facilityRegulatoryBodies = data;
-                $scope.edit = true;
-            }).error(function(error){
-                $scope.alert = error.error;
-            });
+            if(!_.isUndefined($stateParams.id)){
+                adminApi.facilityRegulatoryBodies.get($stateParams.id).success(function(data){
+                    $scope.facilityRegulatoryBodies = data;
+                    $scope.edit = true;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            }
 
             $scope.updateFacilityRegulatoryBody = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
@@ -288,20 +278,8 @@
                     $scope.alert = error.error;
                 });
             };
-        }]
-    )
 
-    .controller("mfl.setup.controller.facilityRegulatoryBody.create", ["$scope","$state",
-                "$stateParams","adminApi",
-        function($scope, $state, $stateParams, adminApi){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Create Facility Regulatory Body"
-                }
-            ];
-            $scope.create = true;
-            $scope.createfacilityRegulatoryBody = function(regulatoryBody){
+            $scope.createFacilityRegulatoryBody = function(regulatoryBody){
                 adminApi.facilityRegulatoryBodies.create(regulatoryBody).success(function(){
                     $state.go("setup.facility_regulatory_bodies");
                 }).error(function(error){
