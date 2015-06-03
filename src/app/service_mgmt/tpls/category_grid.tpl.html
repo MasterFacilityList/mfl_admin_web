@@ -1,6 +1,12 @@
-<contentheader></contentheader>
-<div>
-    <a class="btn btn-success" ui-sref="service_mgmt.category_create">Create</a>
+<div class="content-header">
+   <span class="content-title">
+        Categories
+   </span>
+   <div class="action-container content-header-extra">
+        <a class="action-btn action-btn-info action-btn-md" ui-sref="service_mgmt.category_create"><i class="fa fa-plus"></i></a>
+   </div>
+</div>
+<div class="content-body">
     <sil-grid template="service_mgmt/tpls/category_list.tpl.html" grid-for="service_mgmt" api-key="categories"
         data="categories" filters="filters" error="alert">
     </sil-grid>

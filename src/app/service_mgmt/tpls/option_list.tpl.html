@@ -1,20 +1,29 @@
-<div>
-    <table class="table content-card">
+<div class="content-card">
+    <div class="pull-left col-sm-4 col-xs-6">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-2">
+    <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
+    </div>
+    <table class="table table-hover" id="no-more-tables">
         <thead>
             <tr>
+               <th>#</th>
                 <th>Display Text</th>
                 <th>Value</th>
                 <th>Option Type</th>
                 <th>Is Exclusive Option</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="opt in options">
-                <td>{{opt.display_text}}</td>
-                <td>{{opt.value}}</td>
-                <td>{{opt.option_type}}</td>
-                <td>{{opt.is_exclusive_option}}</td>
-                <td>
+                <td data-title="#:"  class="pad-t-15">{{($index + 1 + ((pagination.current_page-1) * 25))}}</td>
+                <td data-title="Display Text:">{{opt.display_text}}</td>
+                <td data-title="Value:">{{opt.value}}</td>
+                <td data-title="Type:">{{opt.option_type}}</td>
+                <td data-title="Exclusive Option?">{{opt.is_exclusive_option}}</td>
+                <td data-title="Actions:">
                     <a ui-sref="service_mgmt.option_edit({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
                         <i class="fa fa-edit"></i>
                     </a>
@@ -25,4 +34,5 @@
             </tr>
         </tbody>
     </table>
+    <sil-grid-pagination> </sil-grid-pagination>
 </div>

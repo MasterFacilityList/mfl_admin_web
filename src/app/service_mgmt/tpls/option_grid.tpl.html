@@ -1,6 +1,12 @@
-<contentheader></contentheader>
-<div>
-    <a class="btn btn-success" ui-sref="service_mgmt.option_create">Create</a>
+<div class="content-header">
+   <span class="content-title">
+        Options
+   </span>
+   <div class="action-container content-header-extra">
+        <a class="action-btn action-btn-info action-btn-md" ui-sref="service_mgmt.option_create"><i class="fa fa-plus"></i></a>
+   </div>
+</div>
+<div class="content-body">
     <sil-grid template="service_mgmt/tpls/option_list.tpl.html" grid-for="service_mgmt" api-key="options"
         data="options" filters="filters" error="alert">
     </sil-grid>

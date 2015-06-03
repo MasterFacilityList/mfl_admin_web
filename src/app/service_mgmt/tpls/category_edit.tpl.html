@@ -1,16 +1,36 @@
-<div>
-    <p>Category edit</p>
+<div class="content-header">
+   <span class="content-title">
+       <i class="fa fa-plus"></i> New Category
+   </span>
+</div>
+<div class="content-body">
+    <form name="category_frm">
+        <div class="content-card">
+           <div class="pad-form">
+                <div class="group">
+                    <input type="text" name="name" ng-model="category.name" required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Name</label>
+                </div>
+                <div class="group">
+                    <input type="text" name="abbreviation" ng-model="category.abbreviation" required/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Abbreviation</label>
+                </div>
+                <div class="group">
+                    <textarea name="description" ng-model="category.description" required /></textarea>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Description</label>
+                </div>
+           </div>
+        </div>
+    </form>
 
-    <div>
-        <form name="category_frm">
-            <p>Name : <input name="name" type="text" ng-model="category.name" /></p>
-            <p>Abbreviation : <input type="text" name="abbreviation" ng-model="category.abbreviation" /></p>
-            <p>Description : </p><textarea name="description" ng-model="category.description"></textarea>
-        </form>
-    </div>
-
-    <a class="btn btn-default" ui-sref="service_mgmt.category_list">Cancel</a>
-    <a class="btn btn-default" ui-sref="service_mgmt.category_delete({category_id: category_id})">Delete</a>
+    <a class="btn btn-inverse" ui-sref="service_mgmt.category_list">Cancel</a>
+    <a class="btn btn-danger" ui-sref="service_mgmt.category_delete({category_id: category_id})">Delete</a>
     <button ng-click="save(category_frm)" class="btn btn-primary">Save</button>
 
 </div>

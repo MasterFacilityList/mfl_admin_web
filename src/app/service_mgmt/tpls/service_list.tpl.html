@@ -1,31 +1,40 @@
-<table class="table content-card table-hover">
-    <thead>
-        <tr>
-            <th sil-grid-sort field='code'>Code</th>
-            <th sil-grid-sort field='name'>Name</th>
-            <th>Abbreviation</th>
-            <th sil-grid-sort field='category'>Category</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="service in services">
-            <td>{{service.code}}</td>
-            <td>{{service.name}}</td>
-            <td>{{service.abbreviation}}</td>
-            <td>
-                <a ui-sref="service_mgmt.category_edit({category_id: service.category})">
-                    {{service.category_name}}
-                </a>
-            </td>
-            <td>
-                <a ui-sref="service_mgmt.service_edit({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
-                    <i class="fa fa-edit"></i>
-                </a>
-                <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
-                    <i class="fa fa-trash"></i>
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="content-card">
+    <div class="pull-left col-sm-4 col-xs-6">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-2">
+    <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
+    </div>
+    <table class="table table-hover" id="no-more-tables">
+        <thead>
+            <tr>
+                <th sil-grid-sort field='code'>Code</th>
+                <th sil-grid-sort field='name'>Name</th>
+                <th>Abbreviation</th>
+                <th sil-grid-sort field='category'>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="service in services">
+                <td data-title="Code:"  class="pad-t-15">{{service.code}}</td>
+                <td data-title="Name:" class="pad-t-15">{{service.name}}</td>
+                <td data-title="Abbreviation:" class="pad-t-15">{{service.abbreviation}}</td>
+                <td data-title="Category:" class="pad-t-15">
+                    <a ui-sref="service_mgmt.category_edit({category_id: service.category})">
+                        {{service.category_name}}
+                    </a>
+                </td>
+                <td data-title="Actions:">
+                    <a ui-sref="service_mgmt.service_edit({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>
