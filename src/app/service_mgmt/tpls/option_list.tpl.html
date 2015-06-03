@@ -8,6 +8,7 @@
     <table class="table table-hover" id="no-more-tables">
         <thead>
             <tr>
+               <th>#</th>
                 <th>Display Text</th>
                 <th>Value</th>
                 <th>Option Type</th>
@@ -17,6 +18,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="opt in options">
+                <td data-title="#:"  class="pad-t-15">{{($index + 1 + ((pagination.current_page-1) * 25))}}</td>
                 <td data-title="Display Text:">{{opt.display_text}}</td>
                 <td data-title="Value:">{{opt.value}}</td>
                 <td data-title="Type:">{{opt.option_type}}</td>
