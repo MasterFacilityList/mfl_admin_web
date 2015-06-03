@@ -15,7 +15,7 @@
         ];
         $scope.action = [
             {
-                func : "ui-sref='facilities.create' " +
+                func : "ui-sref='facilities.create.basic' " +
                         "has-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-info action-btn-md",
                 color: "blue",
