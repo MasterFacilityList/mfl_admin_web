@@ -16,7 +16,7 @@
                         templateUrl: "common/tpls/header.tpl.html"
                     },
                     "sidebar@setup": {
-                        templateUrl: "users/tpls/side_nav.tpl.html"
+                        templateUrl: "setup/tpls/dashboard/side_nav.tpl.html"
                     },
                     "main-content@setup": {
                         controller: "mfl.setup.controller.dashboard",
