@@ -2,7 +2,8 @@
     "use strict";
 
     angular.module("mfl.users.controllers.roles", [
-        "mfl.auth.services"
+        "mfl.auth.services",
+        "mfl.users.services"
     ])
 
     .controller("mfl.users.controllers.role", ["$scope",
@@ -34,9 +35,8 @@
         }
     ])
 
-    .controller("mfl.users.controllers.new_role", ["$scope", "permissionsApi",
-        "rolesApi", "$state",
-        function ($scope, permissionsWrapper, roleswrapper, $state) {
+    .controller("mfl.users.controllers.new_role", ["$scope", "mfl.users.wrappers", "$state",
+        function ($scope, wrappers, $state) {
             $scope.test = "New role";
             $scope.permissions = "";
             $scope.title = [
@@ -59,7 +59,7 @@
             $scope.all_permissions = {
                 page_size : 1500
             };
-            permissionsWrapper.api.filter($scope.all_permissions)
+            wrappers.permissions.filter($scope.all_permissions)
                 .success(function (data) {
                     $scope.permissions = data.results;
                 })
@@ -110,7 +110,7 @@
                     delete permission.content_type;
                 });
                 new_role.permissions = $scope.set_permissions;
-                roleswrapper.api.create(new_role)
+                wrappers.groups.create(new_role)
                     .success(function (role_result) {
                         console.log(role_result);
                         $state.go("users.manage_roles");

@@ -26,16 +26,6 @@
                 },
                 data : { pageTitle: "Users" }
             })
-            .state("users.manage_permissions", {
-                url : "/permissions",
-                views: {
-                    "main-content@users": {
-                        controller: "mfl.users.controllers.permissions",
-                        templateUrl: "users/tpls/permissions_index.tpl.html"
-                    }
-                },
-                data : { pageTitle: "Roles" }
-            })
             .state("users.manage_roles", {
                 url: "/roles",
                 views: {
@@ -118,4 +108,5 @@
                 }
             });
     }]);
+
 })(angular);

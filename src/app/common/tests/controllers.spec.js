@@ -21,6 +21,7 @@
                     });
 
                     expect(scope.user).toEqual({});
+                    expect(loginService.getUser).toHaveBeenCalled();
                 }
             ]);
         });
