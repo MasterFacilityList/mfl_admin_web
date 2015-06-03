@@ -12,6 +12,7 @@
                     templateUrl: "facilities/tpls/common/main.tpl.html"
                 },
                 "header@facilities": {
+                    controller: "mfl.common.controllers.header",
                     templateUrl: "common/tpls/header.tpl.html"
                 },
                 "sidebar@facilities": {
