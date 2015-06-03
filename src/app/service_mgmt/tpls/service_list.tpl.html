@@ -1,10 +1,14 @@
 <div class="content-card">
-    <div class="pad-search">
+    <div class="pull-left col-sm-4 col-xs-6">
             <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-2">
+    <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
     </div>
     <table class="table table-hover" id="no-more-tables">
         <thead>
             <tr>
+               <th>#</th>
                 <th sil-grid-sort field='code'>Code</th>
                 <th sil-grid-sort field='name'>Name</th>
                 <th>Abbreviation</th>
@@ -14,10 +18,11 @@
         </thead>
         <tbody>
             <tr ng-repeat="service in services">
-                <td data-title="Code:">{{service.code}}</td>
-                <td data-title="Name:">{{service.name}}</td>
-                <td data-title="Abbreviation:">{{service.abbreviation}}</td>
-                <td data-title="Category:">
+                <td data-title="#:"  class="pad-t-15">{{($index + 1 + (pagination.current_page * 25))}}</td>
+                <td data-title="Code:"  class="pad-t-15">{{service.code}}</td>
+                <td data-title="Name:" class="pad-t-15">{{service.name}}</td>
+                <td data-title="Abbreviation:" class="pad-t-15">{{service.abbreviation}}</td>
+                <td data-title="Category:" class="pad-t-15">
                     <a ui-sref="service_mgmt.category_edit({category_id: service.category})">
                         {{service.category_name}}
                     </a>
@@ -33,4 +38,5 @@
             </tr>
         </tbody>
     </table>
+    <sil-grid-pagination> </sil-grid-pagination>
 </div>

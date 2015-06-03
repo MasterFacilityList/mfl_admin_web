@@ -4,16 +4,16 @@
    </span>
 </div>
 <div class="content-body">
-   <div class="content-card">
-        <form name="option_frm">
-            <div class="content-card">
+    <form name="option_frm">
+        <div class="content-card">
+           <div class="pad-form">
                 <div class="group">
                     <input type="text" name="display_text" ng-model="option.display_text" required />
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Display Text</label>
                 </div>
-                <div>
+                <div class="pad-v-10">
                     <div class="checkbox-group margin-t-10">
                         <input type="checkbox" name="is_exclusive_option" ng-model="option.is_exclusive_option"  id="is_exclusive"/>
                         <label for="is_exclusive">
@@ -37,9 +37,9 @@
                     <span class="bar"></span>
                     <label>Value</label>
                 </div>
-            </div>
-        </form>
-   </div>
+           </div>
+        </div>
+    </form>
 
     <a class="btn btn-inverse" ui-sref="service_mgmt.option_list">Cancel</a>
     <a class="btn btn-danger" ui-sref="service_mgmt.option_delete({option_id: option_id})">Delete</a>
