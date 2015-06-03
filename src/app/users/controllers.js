@@ -12,7 +12,7 @@
             $scope.title = [
                 {
                     icon: "fa-user",
-                    name: "Users"
+                    name: "Manage users"
                 }
             ];
             $scope.action = [
@@ -37,7 +37,7 @@
         $scope.title = [
             {
                 icon: "fa-user",
-                name: "Users"
+                name: "Manage users"
             }
         ];
         $scope.action = [
@@ -351,7 +351,7 @@
             $scope.title = [
                 {
                     icon: "fa-users",
-                    name: "Roles"
+                    name: "Manage roles"
                 }
             ];
             $scope.action = [

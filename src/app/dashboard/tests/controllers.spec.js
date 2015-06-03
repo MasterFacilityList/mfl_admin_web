@@ -14,7 +14,6 @@
                         "$scope": $rootScope.$new()
                     };
                     $controller("mfl.dashboard.home", data);
-                    expect(angular.isObject(data.$scope.path)).toBe(true);
                     expect(angular.isObject(data.$scope.title)).toBe(true);
                 }]);
             });
