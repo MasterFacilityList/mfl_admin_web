@@ -9,12 +9,6 @@
         function ($scope, loginService) {
             $scope.user = loginService.getUser();
             $scope.test = "Manage users";
-            $scope.path = [
-                {
-                    name: "Users",
-                    route: "users"
-                }
-            ];
             $scope.title = [
                 {
                     icon: "fa-user",
@@ -40,15 +34,9 @@
             "title": "",
             "checked": false
         };
-        $scope.path = [
-            {
-                name: "Users",
-                route: "users"
-            }
-        ];
         $scope.title = [
             {
-                icon: "fa-users",
+                icon: "fa-user",
                 name: "Users"
             }
         ];
@@ -76,20 +64,6 @@
     function ($scope, userWrapper, $state, contactTypeWrapper,
         contactWrapper, user_contactWrapper, rolesWrapper) {
         $scope.new_user = true;
-        $scope.path = [
-            {
-                name: "Users",
-                route: "users"
-            },
-            {
-                name: "Manage users",
-                route: "users.manage_users"
-            },
-            {
-                name: "New user",
-                route: "users.new_user"
-            }
-        ];
         $scope.title = [
             {
                 icon: "fa-user-plus",
@@ -374,20 +348,10 @@
     .controller("mfl.users.controllers.role", ["$scope",
         function ($scope) {
             $scope.test = "Roles";
-            $scope.path = [
-                {
-                    name: "Users",
-                    route: "users"
-                },
-                {
-                    name: "Manage roles",
-                    route: "users.manage_roles"
-                }
-            ];
             $scope.title = [
                 {
                     icon: "fa-users",
-                    name: "Manage Roles"
+                    name: "Roles"
                 }
             ];
             $scope.action = [
@@ -414,20 +378,6 @@
         function ($scope, permissionsWrapper, roleswrapper, $state) {
             $scope.test = "New role";
             $scope.permissions = "";
-            $scope.path = [
-                {
-                    name: "Users",
-                    route: "users"
-                },
-                {
-                    name: "Manage roles",
-                    route: "users.manage_roles"
-                },
-                {
-                    name: "New role",
-                    route: "users.new_role"
-                }
-            ];
             $scope.title = [
                 {
                     icon: "fa-plus-circle",

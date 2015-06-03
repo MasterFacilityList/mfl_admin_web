@@ -54,11 +54,6 @@ color: #fff;
     padding-bottom: 21px;
 }
 
-.navbar-nav > li:hover, .navbar-nav > li:active, .navbar-nav > li:focus {
-    border-bottom: solid 3px #fff;
-    color: #2196F3;
-}
-
 .navbar-nav > li:hover > a {
     color: #2196F3;
 }
@@ -66,11 +61,26 @@ color: #fff;
 .navbar-nav > li:hover > a:active {
     color: #2196F3;
 }
+.navbar-nav > li:hover, .navbar-nav > li:active {
+    color: #FFF !important;
+    background-color: #2196F3 !important;
+    border-bottom: solid 3px #ddd;
+     -webkit-transition: border-bottom 70ms ease-out 70ms;
+    -moz-transition: border-bottom 70ms ease-out 70ms;
+    -o-transition: border-bottom 70ms ease-out 70ms;
+    transition: border-bottom 70ms ease-out 70ms;
+}
 
-
-.navbar-default .navbar-nav > .active > a {
+.navbar-nav > li:focus,.navbar-default .navbar-nav > .active > a {
     color: #2196F3 !important;
-    background-color: #fff !important;
+    background-color: #F0F0F0 !important;
+    -webkit-transition: background-color 70ms ease-out 70ms;
+    -moz-transition: background-color 70ms ease-out 70ms;
+    -o-transition: background-color 70ms ease-out 70ms;
+    transition: background-color 70ms ease-out 70ms;
+}
+.navbar-nav > li:focus,.navbar-default .navbar-nav > .active > a:hover{
+    color: lighten(#2196F3, 5%);
 }
 .navbar-default .navbar-nav > li > a {
     color: #fff !important;
