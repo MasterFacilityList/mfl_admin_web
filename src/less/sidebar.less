@@ -1,6 +1,6 @@
 /*Styling for sidebar links - sidebar.less*/
 .sidenav-container {
-    background-color: lighten(#2196F3, 5%);
+    background-color: #616161;
 }
 .nav .nav-sidebar > li:before, .nav .nav-sidebar > li:after {
     display: block;
@@ -8,19 +8,20 @@
 }
 .side-left {
     position: absolute;
+    padding-top: 8px;
     display: block;
-    width: 100%;
+    width: 94%;
     background: @sidebartwo-color;
     z-index: 98
 }
 .side-left ul > li:after {
     display: block;
     border-bottom: 1px solid #000;
-    background-color: rgba(192, 192, 192, 0.6) !important;
+    background-color: rgba(128, 128, 128, 0.6) !important;
     border-left: 3px solid #e53935 !important;
     width: 90% !important;
 }
-.side-left ul > li .active:after, .side-left ul > li .active:after {
+.side-left ul > li .active:before, .side-left ul > li .active:after {
     display: block;
     border-bottom: 1px solid #000;
     background-color: rgba(192, 192, 192, 0.6) !important;
@@ -28,14 +29,22 @@
     width: 90% !important;
 }
 .side-left  a {
-    color: #fff !important;
+    color: darken(#f0f0f0, 5%) !important;
+    background-color: #757575;
+    box-shadow: 0 0 1px #CCC;
     font-size: 14px;
 }
-.side-left a:hover, .side-left a:focus, .side-left a:active,
-.side-left a:visited {
-    background-color: rgba(192, 192, 192, 0.6) !important;
-    border-left: 3px solid #e53935 !important;
-    width: 90% !important;
+.side-left  a:hover{
+    color: #FFF;
+    background-color: #757575 !important;
+    border-left: 3px solid #e53935;
+    -webkit-transition: all .1s ease;
+    -ms-transition: all .1s ease;
+    transition: all .1s ease
+}
+.side-left .active a {
+    background-color: #9e9e9e;
+    border-left: 3px solid #e53935;
 }
 .my-sidebar {
     /*background-color: #9e9e9e ;*/
@@ -49,6 +58,19 @@
 .my-sidebar > ul > li {
     display: block;
 }
+/*=====Test sidebar styling*/
+.nav > li {
+    display: block;
+}
+
+.nav .nav-sidebar > .active > a {
+    border-left: 2px solid #fff;
+}
+
+.nav > li:before, .nav > li:after{
+    border-left: 2px solid red;
+}
+/*=====End of sidebar*/
 .my-sidebar > ul > li:hover, .my-sidebar > ul > li:active, .my-sidebar > ul > li:focus, .my-sidebar > ul > li .active > a {
     border-left: 3px solid #e53935 !important;
     color: lighten(#fff, 5%);
