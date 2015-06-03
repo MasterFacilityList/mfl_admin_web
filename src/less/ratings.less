@@ -1,0 +1,40 @@
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    font-size: 30px
+}
+.rating>span {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+    width: 1.1em;
+    font-style: normal;
+    font-weight: 400
+}
+.rating span.star:hover {
+    cursor: pointer
+}
+.rating span.star:before {
+    content: "\f006";
+    padding-right: 5px;
+    color: #95a5a6
+}
+.rating>span:hover:before, .rating>span:hover~span:before {
+    content: "\f005";
+    color: #394264
+}
+.rating.rating-primary>span:hover:before, .rating.rating-primary>span:hover~span:before {
+    color: #82CAFF
+}
+.rating.rating-success>span:hover:before, .rating.rating-success>span:hover~span:before {
+    color: #5BB75B
+}
+.rating.rating-info>span:hover:before, .rating.rating-info>span:hover~span:before {
+    color: #49AFCD
+}
+.rating.rating-warning>span:hover:before, .rating.rating-warning>span:hover~span:before {
+    color: #FAA732
+}
+.rating.rating-danger>span:hover:before, .rating.rating-danger>span:hover~span:before {
+    color: #DA4F49
+}

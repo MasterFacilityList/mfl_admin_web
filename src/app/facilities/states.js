@@ -31,7 +31,16 @@
                     templateUrl: "facilities/tpls/facilities-grid.tpl.html"
                 }
             },
-            data : { pageTitle: "Facility Management" }
+            data : { pageTitle: "Facility List" }
+        })
+        .state("facilities.create", {
+            url: "/list/create",
+            views: {
+                "content@facilities": {
+                    templateUrl: "facilities/tpls/facilities-create.tpl.html"
+                }
+            },
+            data : { pageTitle: "Create Facility" }
         });
     }]);
 })(angular);

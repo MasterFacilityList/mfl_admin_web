@@ -1,0 +1,58 @@
+.contacts-list li a {
+    margin: 0;
+    display: block;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 0 40px;
+    line-height: 30px;
+    color: #ecf0f1;
+    -webkit-transition: background-color .3s ease;
+    -ms-transition: background-color .3s ease;
+    transition: background-color .3s ease
+}
+.contacts-list li a:hover, .contacts-list li a:focus, .contacts-list li a:active {
+    color: #ecf0f1;
+    background-color: rgba(255, 255, 255, .1)
+}
+.contacts-list li a .fa, .contacts-list li a .icon {
+    width: 20px
+}
+.contacts-list li.online a .fa, .contacts-list li.online a .icon {
+    color: #82CAFF
+}
+.contacts-list li.offline a .fa, .contacts-list li.offline a .icon {
+    color: #DA4F49
+}
+.contacts-list li.idle a .fa, .contacts-list li.idle a .icon {
+    color: #FAA732
+}
+.contacts-list li.disable a .fa, .contacts-list li.disable a .icon {
+    color: #394264
+}
+.contact-heading {
+    margin: 0;
+    padding: 40px 40px 30px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, .25)
+}
+.contact-body {
+    border-top: 1px solid rgba(255, 255, 255, .1)
+}
+.contacts-list, .contacts-list li {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+.contacts-list {
+    margin-bottom: 40px
+}
+.contacts-list li {
+    position: relative
+}
+.contacts-list li.separate {
+    margin-top: 30px;
+    padding: 0 40px;
+    line-height: 32px;
+    font-size: 14px;
+    text-transform: uppercase
+}

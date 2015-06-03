@@ -1,0 +1,122 @@
+.dropdown-menu {
+    border-color: #E0E4E8;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .1)
+}
+.dropdown-menu>li>a {
+    font-size: 12px;
+    color: #394264
+}
+.dropdown-menu>li>a i.fa,
+.dropdown-menu>li>a i.icon {
+    width: 20px
+}
+.dropdown-menu>li>a:hover,
+.dropdown-menu>li>a:focus {
+    background-color: #82CAFF;
+    color: #ecf0f1
+}
+.dropdown-menu>.active>a,
+.dropdown-menu>.active>a:hover,
+.dropdown-menu>.active>a:focus {
+    background-color: #394264;
+    color: #ecf0f1
+}
+.dropdown-menu.dropdown-extend {
+    min-width: 280px;
+    max-width: 320px;
+    margin: 0;
+    padding: 0
+}
+.dropdown-menu.dropdown-extend:before {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    right: auto;
+    width: 0;
+    height: 0;
+    content: '';
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff
+}
+.dropdown-menu.dropdown-extend.pull-right:before {
+    right: 15px;
+    left: auto
+}
+.dropdown-menu.dropdown-extend>.dropdown-header {
+    position: relative;
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: #fff;
+    color: #232332
+}
+.dropdown-menu.dropdown-extend>.dropdown-footer {
+    position: relative;
+    font-size: 13px;
+    border-bottom: 0 none;
+    background-color: #fff;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+.dropdown-menu.dropdown-extend>.dropdown-footer a {
+    color: #232332
+}
+.dropdown-menu.dropdown-extend>.dropdown-footer:hover a {
+    background-color: inherit
+}
+.dropdown-menu.dropdown-extend>.dropdown-footer .btn {
+    margin: 10px 0;
+    display: inline-block
+}
+.dropdown-menu.dropdown-extend>.dropdown-footer .btn.pull-left {
+    margin-left: 10px
+}
+.dropdown-menu.dropdown-extend>.dropdown-footer .btn.pull-right {
+    margin-right: 10px
+}
+.dropdown-menu.dropdown-extend>.dropdown-footer>.view-all {
+    padding: 15px 10px
+}
+.dropdown-menu.dropdown-extend>.dropdown-footer i {
+    margin-top: 0;
+    font-size: 18px
+}
+.dropdown-menu.dropdown-extend>li {
+    border-bottom: 1px solid #E0E4E8;
+    text-align: left
+}
+.dropdown-menu.dropdown-extend>li>a {
+    white-space: normal;
+    text-align: left
+}
+.dropdown-menu.dropdown-extend .notif-media {
+    position: relative;
+    max-height: 360px;
+    overflow: auto
+}
+
+.dropdown-inline {
+    padding: 0;
+    padding-left: 5px;
+    min-width: 167px;
+    width: auto;
+    max-width: 187px
+}
+.dropdown-inline li {
+    margin: 5px 0 0 2px;
+    padding: 0;
+    display: inline-block
+}
+.dropdown-inline li .color-pick {
+    min-width: 10px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    line-height: 1em;
+    border: 0;
+    outline: 0;
+    background-color: inherit;
+    cursor: pointer
+}

@@ -1,0 +1,63 @@
+.demo-box {
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 11px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+.demo-box-loader {
+    position: relative;
+    margin-bottom: 20px;
+    min-height: 100px;
+    background-color: rgba(0, 0, 0, .02)
+}
+.demo-box-loader [class*=loader-] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
+}
+.demo-box-loader .loader-location-indicator {
+    top: 40%;
+    left: 40%
+}
+.demo-box-loader .loader-magnifier, .demo-box-loader .loader-help {
+    top: 40%;
+    left: 45%
+}
+.demo-box-loader .loader-eye, .demo-box-loader .loader-cloud {
+    left: 45%
+}
+.demo-box-loader .loader-spinner {
+    top: 45%;
+    left: 45%
+}
+td.demo-graph {
+    position: relative;
+    padding: 30px 0!important;
+    width: 50%
+}
+td.demo-flot {
+    position: relative;
+    padding: 40px 30px 20px!important;
+    width: 50%
+}
+td.demo-graph .demo-graph-caption, td.demo-flot .demo-flot-caption {
+    display: block;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    border: 1px solid #E0E4E8;
+    background-color: #ecf0f1;
+    padding: 3px 8px;
+    font-size: 12px
+}
