@@ -1,40 +1,83 @@
 /*Styling for sidebar links - sidebar.less*/
+.sidenav-container {
+    background-color: lighten(#2196F3, 5%);
+}
+.nav .nav-sidebar > li:before, .nav .nav-sidebar > li:after {
+    display: block;
+    background-color: #000 !important;
+}
+.side-left {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background: @sidebartwo-color;
+    z-index: 98
+}
+.side-left ul > li:after {
+    display: block;
+    border-bottom: 1px solid #000;
+    background-color: rgba(192, 192, 192, 0.6) !important;
+    border-left: 3px solid #e53935 !important;
+    width: 90% !important;
+}
+.side-left ul > li .active:after, .side-left ul > li .active:after {
+    display: block;
+    border-bottom: 1px solid #000;
+    background-color: rgba(192, 192, 192, 0.6) !important;
+    border-left: 3px solid #e53935 !important;
+    width: 90% !important;
+}
+.side-left  a {
+    color: #fff !important;
+    font-size: 14px;
+}
+.side-left a:hover, .side-left a:focus, .side-left a:active,
+.side-left a:visited {
+    background-color: rgba(192, 192, 192, 0.6) !important;
+    border-left: 3px solid #e53935 !important;
+    width: 90% !important;
+}
 .my-sidebar {
     /*background-color: #9e9e9e ;*/
-    background-color: lighten(#fff, 5%);
-    padding: 0;
-    box-shadow:  0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12);
+    background-color: lighten(#2196F3, 5%);
+    border-right:1px solid #F0F0F0;
+    /*min-height: 100vh;*/
 }
 .my-sidebar > ul {
     display: block;
 }
 .my-sidebar > ul > li {
-    border-bottom: 1px solid #ddd;
+    display: block;
 }
-.my-sidebar > ul > li > a{
-    border-bottom: #bdbdbd;
-    color: darken(#858d93, 5%);
-    font-size: 14px;
-}
-.my-sidebar > ul > li > .active ,
-.my-sidebar > ul > li > a:hover, .my-sidebar > ul > li > a:active
-.my-sidebar > ul > li > a:focus{
-    border-left: 3px solid #e53935;
+.my-sidebar > ul > li:hover, .my-sidebar > ul > li:active, .my-sidebar > ul > li:focus, .my-sidebar > ul > li .active > a {
+    border-left: 3px solid #e53935 !important;
     color: lighten(#fff, 5%);
     background-color: darken(#ddd, 5%) !important;
     cursor: pointer;
 }
+.my-sidebar > ul > li > a{
+    border-bottom: #bdbdbd;
+    color: #FFF;
+    font-size: 14px;
+}
+
+/*.my-sidebar > ul > li > a:hover, .my-sidebar > ul > li > a:active
+.my-sidebar > ul > li > a:focus{
+    border-left: 3px solid #e53935 !important;
+    color: lighten(#fff, 5%);
+    background-color: darken(#ddd, 5%) !important;
+    cursor: pointer;
+}
+*/
 .new-sidebar {
     height: 100vh;
     border-right: 1px solid #000;
 }
-
+/*
 .side-left {
     position: absolute;
     display: block;
     width: 100%;
-    bottom: 0;
-    /*================New sidebar color*/
     background: @sidebartwo-color;
     z-index: 98
 }
@@ -44,7 +87,7 @@
 .side-left a {
     color: inherit;
     text-decoration: none
-}
+}*/
 .sidebar {
     background-color: #ffffff;
     margin-bottom: 20px;

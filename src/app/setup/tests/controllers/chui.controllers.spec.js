@@ -154,17 +154,12 @@
                 expect($httpBackend.flush).toThrow();
                 expect($state.go).not.toHaveBeenCalledWith("setup.chu_status");
             });
-        it("should have `mfl.setup.controller.chuStatus.create` defined",
-           function(){
-                var ctrl = createController("mfl.setup.controller.chuStatus.create");
-                expect(ctrl).toBeDefined();
-            });
 
         it("should create chuStatus: success",function(){
                 spyOn($state, "go");
                 $httpBackend.expectPOST(SERVER_URL+"api/chul/statuses/").respond(
                 200, {});
-                createController("mfl.setup.controller.chuStatus.create", {});
+                createController("mfl.setup.controller.chuStatus.view", {});
                 $scope.createChuStatus({name: "Testing"});
                 $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("setup.chu_status");
@@ -174,7 +169,7 @@
                 spyOn($state, "go");
                 $httpBackend.expectPOST(SERVER_URL+"api/chul/statuses/").respond(
                 500, {error: "error"});
-                createController("mfl.setup.controller.chuStatus.create", {});
+                createController("mfl.setup.controller.chuStatus.view", {});
                 $scope.createChuStatus({name: "Testing"});
                 $httpBackend.flush();
                 expect($scope.alert).toEqual("error");
@@ -305,17 +300,12 @@
                 expect($httpBackend.flush).toThrow();
                 expect($state.go).not.toHaveBeenCalledWith("setup.chu_approvers");
             });
-        it("should have `mfl.setup.controller.chuApprover.create` defined",
-           function(){
-                var ctrl = createController("mfl.setup.controller.chuApprover.create");
-                expect(ctrl).toBeDefined();
-            });
 
         it("should create chuApprover: success",function(){
                 spyOn($state, "go");
                 $httpBackend.expectPOST(SERVER_URL+"api/chul/approvers/").respond(
                 200, {});
-                createController("mfl.setup.controller.chuApprover.create", {});
+                createController("mfl.setup.controller.chuApprover.view", {});
                 $scope.createChuApprovers({name: "Testing"});
                 $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("setup.chu_approvers");
@@ -325,7 +315,7 @@
                 spyOn($state, "go");
                 $httpBackend.expectPOST(SERVER_URL+"api/chul/approvers/").respond(
                 500, {error: "error"});
-                createController("mfl.setup.controller.chuApprover.create", {});
+                createController("mfl.setup.controller.chuApprover.view", {});
                 $scope.createChuApprovers({name: "Testing"});
                 $httpBackend.flush();
                 expect($scope.alert).toEqual("error");
