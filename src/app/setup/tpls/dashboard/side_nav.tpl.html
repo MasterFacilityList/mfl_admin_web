@@ -1,27 +1,31 @@
 <aside class="side-left partial">
- <ul class=" nav nav-sidebar sidebar-nav">
-   <li ui-sref-active="active">
-      <a href class="" >
-        <span class="sidebar-text">&nbsp;&nbsp;Administrative Units
-          <span class="caret"></span>
-        </span>
-      </a>
+ <ul class=" nav nav-list">
+    <li><label class="sidebar-label tree-toggle nav-header">Administrative units</label>
+      <ul class="nav nav-list tree">
+          <li><a href="#">Counties</a></li>
+          <li><a href="#">Constituencies</a></li>
+          <li><a href="#">Wards</a></li>
+          <li><a href="#">Towns</a></li>
+      </ul>
     </li>
-    <li ui-sref-active="active">
-      <a ui-sref="users.manage_roles">
-        <span class="sidebar-text">&nbsp;&nbsp;CHUS</span>
-      </a>
+    <li><label class="sidebar-label tree-toggle nav-header">CHU</label>
+      <ul class="nav nav-list tree">
+          <li><a href="#">CHU Status</a></li>
+          <li><a href="#">CHU Approvers</a></li>
+      </ul>
     </li>
-     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-          <li class="dropdown-header">Dropdown heading</li>
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li><a href="#">Separated link</a></li>
-          <li><a href="#">One more separated link</a></li>
-        </ul>
-      </li>
- </ul>
+    <li><label class="sidebar-label tree-toggle nav-header">Contact types</label>
+      <ul class="nav nav-list tree">
+          <li><a href="#">Contact type</a></li>
+      </ul>
+    </li>
+    <li><label class="sidebar-label tree-toggle nav-header">Facility details</label>
+      <ul class="nav nav-list tree">
+          <li><a href="#">Owners</a></li>
+          <li><a href="#">Owner types</a></li>
+          <li><a href="#">Job titles</a></li>
+          <li><a href="#">Regulatory bodies</a></li>
+      </ul>
+    </li>
+</ul>
  </aside>
