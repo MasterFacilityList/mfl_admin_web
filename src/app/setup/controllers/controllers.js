@@ -12,12 +12,6 @@
     .controller("mfl.setup.controller.dashboard", ["$scope",
         function ($scope) {
             $scope.test = "Administrative areas";
-            $scope.path = [
-                {
-                    name: "Administrative Units",
-                    route: "admin_units"
-                }
-            ];
             $scope.title = [
                 {
                     icon: "fa-map-marker",
