@@ -56,7 +56,7 @@
                 }
             })
             .state("users.manage_users", {
-                url: "/users",
+                url: "/",
                 views: {
                     "main-content@users": {
                         controller: "mfl.users.controllers.users",

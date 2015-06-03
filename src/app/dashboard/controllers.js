@@ -6,16 +6,10 @@
 
     .controller("mfl.dashboard.home", ["$scope",
         function ($scope) {
-            $scope.path = [
-                {
-                    name: "Dashboard",
-                    route: "dashboard"
-                }
-            ];
             $scope.title = [
                 {
-                    icon: "fa-desktop",
-                    name: "dashboard"
+                    icon: "fa-dashboard",
+                    name: "Dashboard"
                 }
             ];
         }
