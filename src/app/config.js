@@ -22,6 +22,7 @@
             owners: ["mfl.facilities.wrapper", "ownersApi"],
             users : ["mfl.users.wrapper", "usersApi"],
             roles : ["mfl.users.wrapper","rolesApi"],
+            admin: ["mfl.setup.api", "adminApi"],
             permissions : ["mfl.users.wrapper", "permissionsApi"],
             contactsApi : ["mfl.users.wrapper", "contactsApi"],
             contact_type : ["mfl.users.wrapper", "contact_typeApi"],

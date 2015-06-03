@@ -34,12 +34,13 @@
                     name: "Manage Facility Owner Types"
                 }
             ];
-            adminApi.facilityOwnerTypes.get($stateParams.id).success(function(data){
-                $scope.facilityOwnerTypes = data;
-                $scope.edit = true;
-            }).error(function(error){
-                $scope.alert = error.error;
-            });
+            if(!_.isUndefined($stateParams.id)){
+                adminApi.facilityOwnerTypes.get($stateParams.id).success(function(data){
+                    $scope.facilityOwnerTypes = data;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            }
 
             $scope.updateFacilityOwnerTypes = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
@@ -58,19 +59,7 @@
                     $scope.alert = error.error;
                 });
             };
-        }]
-    )
 
-    .controller("mfl.setup.controller.facilityOwnerType.create", ["$scope","$state",
-                "$stateParams","adminApi",
-        function($scope, $state, $stateParams, adminApi){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Create Facility Owner Type"
-                }
-            ];
-            $scope.create = true;
             $scope.createFacilityOwnerTypes = function(ownerType){
                 adminApi.facilityOwnerTypes.create(ownerType).success(function(){
                     $state.go("setup.facility_owner_types");
@@ -115,22 +104,25 @@
                 }
             ];
             adminApi.facilityOwnerTypes.list().success(function(ownerTypes){
-                adminApi.facilityOwners.get($stateParams.id).success(function(data){
-                    $scope.facilityOwners = data;
-                    $scope.ownerTypes = ownerTypes.results;
-                    $scope.$watch("facilityOwners.owner_type", function(id){
-                        $scope.ownerType = _.findWhere(
-                            $scope.ownerTypes, {id: id}
-                        );
-                    });
+                $scope.ownerTypes = ownerTypes.results;
+                if(!_.isUndefined($stateParams.id)){
+                    adminApi.facilityOwners.get($stateParams.id).success(function(data){
+                        $scope.facilityOwners = data;
+                        $scope.$watch("facilityOwners.owner_type", function(id){
+                            $scope.ownerType = _.findWhere(
+                                $scope.ownerTypes, {id: id}
+                            );
+                        });
 
-                    $scope.edit = true;
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
+                        $scope.edit = true;
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                    });
+                }
             }).error(function(error){
                 $scope.alert = error.error;
             });
+
 
             $scope.updateFacilityOwner = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
@@ -149,24 +141,7 @@
                     $scope.alert = error.error;
                 });
             };
-        }]
-    )
 
-    .controller("mfl.setup.controller.facilityOwner.create", ["$scope","$state",
-                "$stateParams","adminApi",
-        function($scope, $state, $stateParams, adminApi){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Create Facility Owner"
-                }
-            ];
-            adminApi.facilityOwnerTypes.list().success(function(ownerTypes){
-                    $scope.ownerTypes = ownerTypes.results;
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
-            $scope.create = true;
             $scope.createFacilityOwner = function(owner){
                 adminApi.facilityOwners.create(owner).success(function(){
                     $state.go("setup.facility_owners");
@@ -209,13 +184,13 @@
                     name: "Manage Facility Job Title"
                 }
             ];
-            adminApi.facilityJobTitles.get($stateParams.id).success(function(data){
-                $scope.facilityJobTitles = data;
-                $scope.edit = true;
-            }).error(function(error){
-                $scope.alert = error.error;
-            });
-
+            if(!_.isUndefined($stateParams.id)){
+                adminApi.facilityJobTitles.get($stateParams.id).success(function(data){
+                    $scope.facilityJobTitles = data;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            }
             $scope.updateFacilityJobTitle = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
@@ -233,19 +208,7 @@
                     $scope.alert = error.error;
                 });
             };
-        }]
-    )
 
-    .controller("mfl.setup.controller.facilityJobTitle.create", ["$scope","$state",
-                "$stateParams","adminApi",
-        function($scope, $state, $stateParams, adminApi){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Create Facility Job Title"
-                }
-            ];
-            $scope.create = true;
             $scope.createFacilityJobTitle = function(title){
                 adminApi.facilityJobTitles.create(title).success(function(){
                     $state.go("setup.facility_job_titles");
@@ -289,12 +252,14 @@
                     name: "Manage Facility Regulatory Body"
                 }
             ];
-            adminApi.facilityRegulatoryBodies.get($stateParams.id).success(function(data){
-                $scope.facilityRegulatoryBodies = data;
-                $scope.edit = true;
-            }).error(function(error){
-                $scope.alert = error.error;
-            });
+            if(!_.isUndefined($stateParams.id)){
+                adminApi.facilityRegulatoryBodies.get($stateParams.id).success(function(data){
+                    $scope.facilityRegulatoryBodies = data;
+                    $scope.edit = true;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            }
 
             $scope.updateFacilityRegulatoryBody = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
@@ -313,20 +278,8 @@
                     $scope.alert = error.error;
                 });
             };
-        }]
-    )
 
-    .controller("mfl.setup.controller.facilityRegulatoryBody.create", ["$scope","$state",
-                "$stateParams","adminApi",
-        function($scope, $state, $stateParams, adminApi){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Create Facility Regulatory Body"
-                }
-            ];
-            $scope.create = true;
-            $scope.createfacilityRegulatoryBody = function(regulatoryBody){
+            $scope.createFacilityRegulatoryBody = function(regulatoryBody){
                 adminApi.facilityRegulatoryBodies.create(regulatoryBody).success(function(){
                     $state.go("setup.facility_regulatory_bodies");
                 }).error(function(error){

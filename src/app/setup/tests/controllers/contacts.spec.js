@@ -154,17 +154,12 @@
                 expect($httpBackend.flush).toThrow();
                 expect($state.go).not.toHaveBeenCalledWith("setup.contacts");
             });
-        it("should have `mfl.setup.controller.contacts.create` defined",
-           function(){
-                var ctrl = createController("mfl.setup.controller.contacts.create");
-                expect(ctrl).toBeDefined();
-            });
 
         it("should create contacts: success",function(){
                 spyOn($state, "go");
                 $httpBackend.expectPOST(SERVER_URL+"api/common/contact_types/").respond(
                 200, {});
-                createController("mfl.setup.controller.contacts.create", {});
+                createController("mfl.setup.controller.contacts.view", {});
                 $scope.createContacts({name: "Testing"});
                 $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("setup.contacts");
@@ -174,7 +169,7 @@
                 spyOn($state, "go");
                 $httpBackend.expectPOST(SERVER_URL+"api/common/contact_types/").respond(
                 500, {error: "error"});
-                createController("mfl.setup.controller.contacts.create", {});
+                createController("mfl.setup.controller.contacts.view", {});
                 $scope.createContacts({name: "Testing"});
                 $httpBackend.flush();
                 expect($scope.alert).toEqual("error");

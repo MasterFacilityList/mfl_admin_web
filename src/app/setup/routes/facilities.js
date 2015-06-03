@@ -15,7 +15,7 @@
             })
 
         .state("setup.facility_owners.view", {
-                url: "/facility_owners/:id",
+                url: "/:id",
                 views: {
                     "main-content@setup": {
                         controller: "mfl.setup.controller.facilityOwner.view",
@@ -25,10 +25,10 @@
                 }
             })
         .state("setup.facility_owners.create", {
-                url: "/facility_owners/create",
+                url: "/create",
                 views: {
                     "main-content@setup": {
-                        controller: "mfl.setup.controller.facilityOwner.create",
+                        controller: "mfl.setup.controller.facilityOwner.view",
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owners-view.tpl.html"
                     }
@@ -48,7 +48,7 @@
             })
 
         .state("setup.facility_owner_types.view", {
-                url: "/facility_owner_types/:id",
+                url: "/:id",
                 views: {
                     "main-content@setup": {
                         controller: "mfl.setup.controller.facilityOwnerType.view",
@@ -58,10 +58,10 @@
                 }
             })
         .state("setup.facility_owner_types.create", {
-                url: "/facility_owner_types/create",
+                url: "/create",
                 views: {
                     "main-content@setup": {
-                        controller: "mfl.setup.controller.facilityOwnerType.create",
+                        controller: "mfl.setup.controller.facilityOwnerType.view",
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owner-types-view.tpl.html"
                     }
@@ -80,7 +80,7 @@
             })
 
         .state("setup.facility_job_titles.view", {
-                url: "/facility_job_titles/:id",
+                url: "/:id",
                 views: {
                     "main-content@setup": {
                         controller: "mfl.setup.controller.facilityJobTitle.view",
@@ -89,10 +89,10 @@
                 }
             })
         .state("setup.facility_job_titles.create", {
-                url: "/facility_job_titles/create",
+                url: "/create",
                 views: {
                     "main-content@setup": {
-                        controller: "mfl.setup.controller.facilityJobTitle.create",
+                        controller: "mfl.setup.controller.facilityJobTitle.view",
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
                 }
@@ -111,7 +111,7 @@
                 }
             })
         .state("setup.facility_regulatory_bodies.view", {
-                url: "/facility_regulatory_bodies/:id",
+                url: "/:id",
                 views: {
                     "main-content@setup": {
                         controller: "mfl.setup.controller.facilityRegulatoryBody.view",
@@ -121,10 +121,10 @@
                 }
             })
         .state("setup.facility_regulatory_bodies.create", {
-                url: "/facility_regulatory_bodies/create",
+                url: "/create",
                 views: {
                     "main-content@setup": {
-                        controller: "mfl.setup.controller.facilityRegulatoryBody.create",
+                        controller: "mfl.setup.controller.facilityRegulatoryBody.view",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
                     }

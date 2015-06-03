@@ -33,12 +33,13 @@
                     name: "Manage CHU Status"
                 }
             ];
-            adminApi.chuStatus.get($stateParams.id).success(function(data){
-                $scope.chuStatus = data;
-                $scope.edit = true;
-            }).error(function(error){
-                $scope.alert = error.error;
-            });
+            if(!_.isUndefined($stateParams.id)){
+                adminApi.chuStatus.get($stateParams.id).success(function(data){
+                    $scope.chuStatus = data;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            }
 
             $scope.updateChuStatus = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
@@ -57,19 +58,7 @@
                     $scope.alert = error.error;
                 });
             };
-        }]
-    )
 
-    .controller("mfl.setup.controller.chuStatus.create", ["$scope","$state", "$stateParams",
-                "adminApi",
-        function($scope, $state, $stateParams, adminApi){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Create CHUS Status"
-                }
-            ];
-            $scope.create = true;
             $scope.createChuStatus = function(chuStatus){
                 adminApi.chuStatus.create(chuStatus).success(function(){
                     $state.go("setup.chu_status");
@@ -108,12 +97,14 @@
                     name: "Manage CHU Approvals"
                 }
             ];
-            adminApi.chuApprovers.get($stateParams.id).success(function(data){
-                $scope.chuApprovers = data;
-                $scope.edit = true;
-            }).error(function(error){
-                $scope.alert = error.error;
-            });
+            if(!_.isUndefined($stateParams.id)){
+                adminApi.chuApprovers.get($stateParams.id).success(function(data){
+                    $scope.chuApprovers = data;
+                    $scope.edit = true;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            }
 
             $scope.updateChuApprovers = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
@@ -132,19 +123,7 @@
                     $scope.alert = error.error;
                 });
             };
-        }]
-    )
 
-    .controller("mfl.setup.controller.chuApprover.create", ["$scope","$state", "$stateParams",
-                "adminApi",
-        function($scope, $state, $stateParams, adminApi){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Create CHUS Approver"
-                }
-            ];
-            $scope.create = true;
             $scope.createChuApprovers = function(chuApprover){
                 adminApi.chuApprovers.create(chuApprover).success(function(){
                     $state.go("setup.chu_approvers");
