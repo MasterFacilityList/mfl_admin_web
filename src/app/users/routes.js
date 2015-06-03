@@ -13,7 +13,7 @@
                         templateUrl: "users/tpls/main.tpl.html"
                     },
                     "header@users": {
-                        controller: "mfl.users.controllers.home",
+                        controller: "mfl.common.controllers.header",
                         templateUrl: "common/tpls/header.tpl.html"
                     },
                     "sidebar@users": {
@@ -25,16 +25,6 @@
                     }
                 },
                 data : { pageTitle: "Users" }
-            })
-            .state("users.manage_permissions", {
-                url : "/permissions",
-                views: {
-                    "main-content@users": {
-                        controller: "mfl.users.controllers.permissions",
-                        templateUrl: "users/tpls/permissions_index.tpl.html"
-                    }
-                },
-                data : { pageTitle: "Roles" }
             })
             .state("users.manage_roles", {
                 url: "/roles",
@@ -118,4 +108,5 @@
                 }
             });
     }]);
+
 })(angular);

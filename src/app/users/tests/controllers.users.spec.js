@@ -6,41 +6,26 @@
 
         beforeEach(function () {
             module("mflAdminAppConfig");
-            module("mfl.users.wrapper");
+            module("mfl.users.services");
             module("sil.api.wrapper");
             module("ui.router");
-            module("mfl.users.controllers");
+            module("mfl.users.controllers.users");
 
-            inject(["$rootScope", "$controller", "$httpBackend", "$state",
-                "SERVER_URL", "usersApi", "contact_typeApi", "rolesApi",
-                "contactsApi", "user_contactsApi",
-                function ($rootScope, $controller, $httpBackend, $state,
-                    url, usersApi, contact_typesApi, rolesApi, contactsApi,
-                    user_contactsApi) {
+            inject(["$rootScope", "$controller", "$httpBackend", "$state", "SERVER_URL",
+                function ($rootScope, $controller, $httpBackend, $state, url) {
                     root = $rootScope;
                     scope = root.$new();
                     state = $state;
                     httpBackend = $httpBackend;
                     SERVER_URL = url;
-                    usersApi = usersApi;
-                    contact_typesApi = contact_typesApi;
-                    rolesApi = rolesApi;
-                    contactsApi = contactsApi;
-                    user_contactsApi = user_contactsApi;
                     scope.fakeStateParams = {
                         user_id : 6
                     };
                     data = {
                         $scope : scope,
                         $state : $state,
-                        usersApi : usersApi,
-                        contact_typesApi : contact_typesApi,
-                        rolesApi : rolesApi,
-                        contactsApi : contactsApi,
-                        user_contactsApi : user_contactsApi,
                         SERVER_URL : url,
                         $stateParams : scope.fakeStateParams
-                        //$state.params : scope.fakestate.params
                     };
                     controller = function (cntrl) {
                         return $controller(cntrl, data);
@@ -406,9 +391,5 @@
                 SERVER_URL + "api/common/contacts/3/").respond(400, {});
             $httpBackend.flush();
         }]));
-        it("should test permissions controller", function() {
-            controller("mfl.users.controllers.permissions");
-            expect(scope.test).toEqual("Permissions");
-        });
     });
 })();

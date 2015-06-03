@@ -17,16 +17,12 @@
         loggingConfig.LOG_SERVER_URL = undefined;
         loggingConfig.LOG_TO_CONSOLE = true;
     }])
+
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
             owners: ["mfl.facilities.wrapper", "ownersApi"],
-            users : ["mfl.users.wrapper", "usersApi"],
-            roles : ["mfl.users.wrapper","rolesApi"],
+            users : ["mfl.users.services", "mfl.users.wrappers"],
             admin: ["mfl.setup.api", "adminApi"],
-            permissions : ["mfl.users.wrapper", "permissionsApi"],
-            contactsApi : ["mfl.users.wrapper", "contactsApi"],
-            contact_type : ["mfl.users.wrapper", "contact_typeApi"],
-            user_contacts : ["mfl.users.wrapper", "user_contactsApi"],
             facilities: ["mfl.facilities.services","mfl.facilities.wrappers"],
             service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
         };

@@ -5,7 +5,8 @@
     angular.module("mfl.common", [
         "mfl.common.forms",
         "mfl.common.directives",
-        "mfl.common.filters"
+        "mfl.common.filters",
+        "mfl.common.controllers"
     ]);
 
 })(angular);
