@@ -100,6 +100,7 @@ module.exports = {
             "vendor/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js",
             "vendor/ng-tags-input/ng-tags-input.js",
             "vendor/moment/moment.js",
+            "vendor/modernizr/modernizr.js",
             "vendor/d3/d3.js",
             "vendor/c3/c3.js",
             "libs/api_wrapper.js",
