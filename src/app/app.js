@@ -13,8 +13,8 @@
         "mfl.users",
         "mfl.service_mgmt",
         "mfl.setup",
-        "mfl.facilities",
-        "mfl.dashboard"
+        "mfl.dashboard",
+        "mfl.facilities"
     ]);
 
 })(angular);
