@@ -8,7 +8,7 @@
             module("mflAdminAppConfig");
             module("mfl.users.wrapper");
             module("sil.api.wrapper");
-            module("mfl.users.controllers");
+            module("mfl.users.controllers.roles");
             module("ui.router");
 
             inject(["$rootScope", "$controller", "$httpBackend", "$state",

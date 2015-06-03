@@ -9,7 +9,7 @@
             module("mfl.users.wrapper");
             module("sil.api.wrapper");
             module("ui.router");
-            module("mfl.users.controllers");
+            module("mfl.users.controllers.users");
 
             inject(["$rootScope", "$controller", "$httpBackend", "$state",
                 "SERVER_URL", "usersApi", "contact_typeApi", "rolesApi",
@@ -47,11 +47,6 @@
                     };
                 }
             ]);
-        });
-        it("should test $scope.test === 'Manage users'", function () {
-            controller("mfl.users.controllers.home");
-            var test = "Manage users";
-            expect(scope.test).toEqual(test);
         });
         it("should test $scope.test === 'users'", function () {
             controller("mfl.users.controllers.users");
@@ -406,9 +401,5 @@
                 SERVER_URL + "api/common/contacts/3/").respond(400, {});
             $httpBackend.flush();
         }]));
-        it("should test permissions controller", function() {
-            controller("mfl.users.controllers.permissions");
-            expect(scope.test).toEqual("Permissions");
-        });
     });
 })();
