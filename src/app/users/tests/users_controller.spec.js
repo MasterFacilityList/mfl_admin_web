@@ -48,6 +48,11 @@
                 }
             ]);
         });
+        it("should test $scope.test === 'Manage users'", function () {
+            controller("mfl.users.controllers.home");
+            var test = "Manage users";
+            expect(scope.test).toEqual(test);
+        });
         it("should test $scope.test === 'users'", function () {
             controller("mfl.users.controllers.users");
             var test = "Users";

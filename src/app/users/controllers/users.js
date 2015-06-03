@@ -5,6 +5,26 @@
         "mfl.auth.services"
     ])
 
+    .controller("mfl.users.controllers.home", ["$scope", function ($scope) {
+            $scope.test = "Manage users";
+            $scope.title = [
+                {
+                    icon: "fa-user",
+                    name: "Manage users"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "onclick=window.history.back()",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go back",
+                    icon: "fa-arrow-left"
+                }
+            ];
+        }
+    ])
+
     .controller("mfl.users.controllers.users", ["$scope",
     function ($scope) {
         $scope.test = "Users";
