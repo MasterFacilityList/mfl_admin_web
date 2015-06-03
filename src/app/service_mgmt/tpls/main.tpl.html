@@ -1,9 +1,7 @@
 <section class="section">
     <div ui-view="header"></div>
-    <div>
-        <div ui-view="sidebar" class="col-sm-2"></div>
-        <div class="col-sm-10 pad-r-0">
-            <div class="content" ui-view="main-content"></div>
-        </div>
+    <div class="sidenav-container row">
+        <div ui-view="sidebar" class=" my-sidebar col-sm-2"></div>
+        <div class="content col-sm-10"  ui-view="main-content"></div>
     </div>
 </section>
