@@ -1,0 +1,14 @@
+<contentheader></contentheader>
+<div>
+    basic profile
+
+    <form name="basic_profile" ng-submit="save(basic_profile)">
+        <p>First Name: <input type="text" name="first_name" ng-model="profile.first_name" required placeholder="first name"/></p>
+        <p>Last Name: <input type="text" name="last_name" ng-model="profile.last_name" required placeholder="last name"/></p>
+        <p>Other Names: <input type="text" name="other_names" ng-model="profile.other_names" placeholder="other names"/></p>
+        <p>Email: <input type="email" name="email" ng-model="profile.email" required placeholder="email"/></p>
+        <p>Username: <input type="text" name="username" ng-model="profile.username" required placeholder="username"/></p>
+
+        <input type="submit" ng-click="save(basic_profile)" value="Save"/>
+    </form>
+</div>

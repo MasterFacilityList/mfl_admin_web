@@ -21,7 +21,7 @@
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
             owners: ["mfl.facilities.wrapper", "ownersApi"],
-            users : ["mfl.users.services", "mfl.users.wrappers"],
+            users : ["mfl.users.services", "mfl.users.services.wrappers"],
             admin: ["mfl.setup.api", "adminApi"],
             facilities: ["mfl.facilities.services","mfl.facilities.wrappers"],
             service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]

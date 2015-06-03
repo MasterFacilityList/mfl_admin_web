@@ -8,7 +8,7 @@
         "ui.bootstrap.tpls",
 
         "mfl.users.controllers",
-        "mfl.users.routes",
+        "mfl.users.states",
         "mfl.users.services"
     ]);
 

@@ -56,7 +56,8 @@
         ];
     }])
 
-    .controller("mfl.users.controllers.new_user", ["$scope", "$state", "mfl.users.wrappers",
+    .controller("mfl.users.controllers.new_user",
+        ["$scope", "$state", "mfl.users.services.wrappers",
         function ($scope, $state, wrappers) {
             $scope.new_user = true;
             $scope.title = [
@@ -207,8 +208,8 @@
                         console.log(e);
                     });
             };
-        }
-    ])
+        }]
+    )
 
     .controller("mfl.users.controllers.edit_user", ["$scope", function ($scope) {
         $scope.test = "Edit user";
@@ -240,7 +241,8 @@
         ];
     }])
 
-    .controller("mfl.users.controllers.view_user", ["$scope", "$stateParams", "mfl.users.wrappers",
+    .controller("mfl.users.controllers.view_user",
+        ["$scope", "$stateParams", "mfl.users.services.wrappers",
         function ($scope, $stateParams, wrappers) {
             $scope.test = "View user";
             $scope.path = [
@@ -303,7 +305,7 @@
                 .error(function (e) {
                     console.log(e);
                 });
-        }
-    ]);
+        }]
+    );
 
 })(angular, _);

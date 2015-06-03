@@ -1,12 +1,12 @@
 (function () {
     "use strict";
 
-    describe("Tests for users routes :", function() {
+    describe("Tests for users states :", function() {
         var $state;
 
         beforeEach(function() {
             module("ui.router");
-            module("mfl.users.routes");
+            module("mfl.users.states.users");
 
             inject(["$state", function (s) {
                 $state = s;

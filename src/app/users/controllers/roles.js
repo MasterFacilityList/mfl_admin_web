@@ -35,7 +35,8 @@
         }
     ])
 
-    .controller("mfl.users.controllers.new_role", ["$scope", "mfl.users.wrappers", "$state",
+    .controller("mfl.users.controllers.new_role",
+        ["$scope", "mfl.users.services.wrappers", "$state",
         function ($scope, wrappers, $state) {
             $scope.test = "New role";
             $scope.permissions = "";
@@ -120,7 +121,7 @@
                     });
             };
             //end of adding new permission
-        }
-    ]);
+        }]
+    );
 
 })(angular, _);
