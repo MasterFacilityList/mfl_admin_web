@@ -1,21 +1,47 @@
-<div>
-    <p>Option edit</p>
-
-    <div>
+<div class="content-header">
+   <span class="content-title">
+       <i class="fa fa-plus"></i> New Option
+   </span>
+</div>
+<div class="content-body">
+   <div class="content-card">
         <form name="option_frm">
-            <p>Display Text : <input name="display_text" type="text" ng-model="option.display_text" /></p>
-            <p>Option Type : </p>
-                <select name="option_type" ng-model="option.option_type">
-                    <option value="">Select an option type</option>
-                    <option ng-repeat="opt_type in option_types" value="{{opt_type}}">{{opt_type}}</option>
-                </select>
-            <p>Is Exclusive Option : </p><input type="checkbox" name="is_exclusive_option" ng-model="option.is_exclusive_option" />
-            <p>Value : </p><input type="text" name="value" ng-model="option.value" />
+            <div class="content-card">
+                <div class="group">
+                    <input type="text" name="display_text" ng-model="option.display_text" required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Display Text</label>
+                </div>
+                <div>
+                    <div class="checkbox-group margin-t-10">
+                        <input type="checkbox" name="is_exclusive_option" ng-model="option.is_exclusive_option"  id="is_exclusive"/>
+                        <label for="is_exclusive">
+                            <span class="check"></span>
+                            <span class="box"></span>
+                             Is Exclusive Option
+                         </label>
+                    </div>
+                </div>
+                <div class="group">
+                    <select name="category" ng-model="service.category" required>
+                        <option value="" disabled>Select an option type</option>
+                        <option ng-repeat="opt_type in option_types" value="{{opt_type}}">{{opt_type}}</option>
+                    </select>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="group">
+                    <input type="text" name="value" ng-model="option.value" required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Value</label>
+                </div>
+            </div>
         </form>
-    </div>
+   </div>
 
-    <a class="btn btn-default" ui-sref="service_mgmt.option_list">Cancel</a>
-    <a class="btn btn-default" ui-sref="service_mgmt.option_delete({option_id: option_id})">Delete</a>
+    <a class="btn btn-inverse" ui-sref="service_mgmt.option_list">Cancel</a>
+    <a class="btn btn-danger" ui-sref="service_mgmt.option_delete({option_id: option_id})">Delete</a>
     <button ng-click="save(option_frm)" class="btn btn-primary">Save</button>
-
 </div>

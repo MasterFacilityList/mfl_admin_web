@@ -7,7 +7,12 @@
         "ui.router"
     ])
 
-    .controller("mfl.service_mgmt.controllers.service_list", [angular.noop])
+    .controller("mfl.service_mgmt.controllers.service_list", ["$scope",function($scope){
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
+    }])
 
     .controller("mfl.service_mgmt.controllers.service_edit",
         ["$scope", "$state", "$stateParams", "$log",
