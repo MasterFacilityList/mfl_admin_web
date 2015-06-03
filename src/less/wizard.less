@@ -1,0 +1,279 @@
+
+.wizard {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px
+}
+.wizard a {
+    outline: 0
+}
+.wizard ul,
+.wizard ul>li {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+.wizard>.steps .current-info,
+.wizard>.content>.title {
+    display: none
+}
+.wizard>.steps {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #E0E4E8;
+    height: 46px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    *zoom: 1;
+    z-index: 4;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .05)
+}
+.wizard>.steps>ul {
+    position: relative;
+    width: 4000px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    list-style: none outside none;
+    border-radius: 3px
+}
+.wizard>.steps>ul>li {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0
+}
+.wizard>.steps .number {
+    float: left;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 6px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #95a5a6;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-top: 15px
+}
+.wizard>.steps .number:before {
+    position: absolute;
+    top: -1px;
+    right: -14px;
+    display: block;
+    z-index: 2;
+    border: 24px solid transparent;
+    border-right: 0;
+    border-left: 14px solid #ecf0f1;
+    content: " "
+}
+.wizard>.steps .number:after {
+    position: absolute;
+    top: -1px;
+    right: -15px;
+    display: block;
+    z-index: 1;
+    border: 24px solid transparent;
+    border-right: 0;
+    border-left: 14px solid #E0E4E8;
+    content: " "
+}
+.wizard>.steps a,
+.wizard>.steps a:hover,
+.wizard>.steps a:active {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    padding: 0 20px 0 30px;
+    font-size: 16px;
+    height: 46px;
+    line-height: 46px;
+    color: #95a5a6;
+    background: #ecf0f1;
+    cursor: default;
+    text-decoration: none
+}
+.wizard>.steps a:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px
+}
+.wizard>.steps .disabled a,
+.wizard>.steps .disabled a:hover,
+.wizard>.steps .disabled a:active {
+    background: #ecf0f1;
+    color: #95a5a6;
+    cursor: default
+}
+.wizard>.steps .disabled .number {
+    background-color: #95a5a6;
+    color: #ecf0f1
+}
+.wizard>.steps .current a,
+.wizard>.steps .current a:hover,
+.wizard>.steps .current a:active {
+    background: #82CAFF;
+    color: #ecf0f1;
+    cursor: default
+}
+.wizard>.steps .current .number:before {
+    border-left-color: #82CAFF
+}
+.wizard>.steps .current .number:after {
+    border-left-color: #82CAFF
+}
+.wizard>.steps .done a,
+.wizard>.steps .done a:hover,
+.wizard>.steps .done a:active {
+    background: #394264;
+    color: #ecf0f1;
+    cursor: pointer
+}
+.wizard>.steps .done .number:before {
+    border-left-color: #394264
+}
+.wizard>.steps .done .number:after {
+    border-left-color: #232332
+}
+.wizard>.steps .error a,
+.wizard>.steps .error a:hover,
+.wizard>.steps .error a:active {
+    background: #DA4F49;
+    color: #ecf0f1
+}
+.wizard>.steps .error .number:before {
+    border-left-color: #DA4F49
+}
+.wizard>.steps .error .number:after {
+    border-left-color: #DA4F49
+}
+.wizard>.content {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #E0E4E8;
+    border-top: 0;
+    background-color: #fff;
+    min-height: 100px;
+    height: auto;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px
+}
+.wizard>.content>.body {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px 15px 15px
+}
+.wizard>.actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    float: right;
+    padding-right: 15px;
+    padding-left: 15px;
+    height: 46px;
+    vertical-align: middle;
+    background-color: #E0E4E8;
+    border-left: 1px solid #E0E4E8;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+.wizard>.actions>ul {
+    display: inline-block;
+    text-align: right
+}
+.wizard>.actions>ul>li {
+    float: left;
+    padding: 8px 2px
+}
+.wizard>.actions a {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: #394264;
+    background-color: #fff;
+    border-color: #E0E4E8;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none
+}
+.wizard>.actions a:focus {
+    outline: thin dotted #394264;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px
+}
+.wizard>.actions a:focus,
+.wizard>.actions a:hover {
+    color: #394264;
+    text-decoration: none
+}
+.wizard>.actions a:active {
+    background-image: none;
+    outline: 0;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125)
+}
+.wizard>.actions a:focus,
+.wizard>.actions a:hover,
+.wizard>.actions a:active {
+    color: #394264;
+    background-color: #ecf0f1;
+    border-color: #E0E4E8
+}
+.wizard>.actions .disabled a,
+.wizard>.actions .disabled a:hover,
+.wizard>.actions .disabled a:active {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: .65;
+    background-color: #fff;
+    border-color: #E0E4E8;
+    -webkit-filter: alpha(opacity=65);
+    filter: alpha(opacity=65);
+    box-shadow: none
+}
+.wizard.vertical>.steps {
+    display: inline;
+    float: left;
+    width: 30%
+}
+.wizard.vertical>.steps>ul>li {
+    float: none;
+    width: 100%
+}
+.wizard.vertical>.content {
+    display: inline;
+    float: left;
+    margin: 0 2.5% .5em;
+    width: 65%
+}
+.wizard.vertical>.actions {
+    display: inline;
+    float: right;
+    margin: 0 2.5%;
+    width: 95%
+}
+.wizard.vertical>.actions>ul>li {
+    margin: 0 0 0 1em
+}

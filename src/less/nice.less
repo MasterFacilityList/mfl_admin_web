@@ -1,0 +1,102 @@
+.nice-checkbox {
+    position: relative;
+    min-height: 27px;
+    padding-top: 7px;
+    color: #394264
+}
+.nice-checkbox>[type=checkbox] {
+    display: none
+}
+.nice-checkbox>[type=checkbox]:not(:checked)+label, .nice-checkbox>[type=checkbox]:checked+label {
+    position: relative;
+    padding-left: 20px;
+    color: inherit;
+    font-size: 13px;
+    line-height: 14px;
+    z-index: 1
+}
+.nice-checkbox>label:before {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    font-family: FontAwesome;
+    font-size: 17px;
+    color: inherit;
+    -webkit-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease
+}
+.nice-checkbox:hover>label:before {
+    color: inherit;
+    cursor: default!important
+}
+.nice-checkbox>[type=checkbox]:not(:checked)+label:before, .nice-checkbox:hover>[type=checkbox]:disabled:not(:checked)+label:before {
+    content: '\f096'
+}
+.nice-checkbox:hover>[type=checkbox]:not(:checked)+label:before {
+    content: '\f147'
+}
+.nice-checkbox>[type=checkbox]:checked+label:before {
+    content: '\f14a';
+    color: inherit
+}
+.nice-checkbox>.checkbox-o[type=checkbox]:checked+label:before {
+    content: '\f046'
+}
+.nice-checkbox>[type=checkbox]:disabled:not(:checked)+label:before, .nice-checkbox>[type=checkbox]:disabled:checked+label:before {
+    color: #95a5a6
+}
+.nice-checkbox>[type=checkbox]:disabled+label, .nice-checkbox>[type=checkbox]:disabled+label>[class*=text-] {
+    color: #95a5a6!important
+}
+.nice-checkbox>[type=checkbox]:checked:focus+label:before, .nice-checkbox>[type=checkbox]:not(:checked):focus+label:before {
+    color: #49AFCD
+}
+.nice-radio {
+    position: relative;
+    min-height: 27px;
+    padding-top: 7px;
+    color: #394264
+}
+.nice-radio>[type=radio] {
+    display: none
+}
+.nice-radio>[type=radio]:not(:checked)+label, .nice-radio>[type=radio]:checked+label {
+    position: relative;
+    padding-left: 20px;
+    color: inherit;
+    font-size: 13px;
+    line-height: 14px;
+    z-index: 1
+}
+.nice-radio>label:before {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    font-family: FontAwesome;
+    font-size: 17px;
+    color: inherit;
+    -webkit-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease
+}
+.nice-radio:hover>label:before {
+    color: inherit;
+    cursor: default!important
+}
+.nice-radio>[type=radio]:not(:checked)+label:before, .nice-radio:hover>[type=radio]:disabled:not(:checked)+label:before {
+    content: '\f10c'
+}
+.nice-radio:hover>[type=radio]:not(:checked)+label:before {}.nice-radio>[type=radio]:checked+label:before {
+    content: '\f192';
+    color: inherit
+}
+.nice-radio>[type=radio]:disabled:not(:checked)+label:before, .nice-radio>[type=radio]:disabled:checked+label:before {
+    color: #95a5a6
+}
+.nice-radio>[type=radio]:disabled+label, .nice-radio>[type=radio]:disabled+label>[class*=text-] {
+    color: #95a5a6!important
+}
+.nice-radio>[type=radio]:checked:focus+label:before, .nice-radio>[type=radio]:not(:checked):focus+label:before {
+    color: #49AFCD
+}

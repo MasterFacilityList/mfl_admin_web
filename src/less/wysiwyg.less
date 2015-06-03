@@ -1,0 +1,138 @@
+
+ul.wysihtml5-toolbar {
+    margin: 0;
+    padding: 0;
+    display: block
+}
+ul.wysihtml5-toolbar::after {
+    clear: both;
+    display: table;
+    content: ""
+}
+ul.wysihtml5-toolbar>li {
+    float: left;
+    display: list-item;
+    list-style: none;
+    margin: 0 5px 10px 0
+}
+ul.wysihtml5-toolbar a[data-wysihtml5-command=bold] {
+    font-weight: 700
+}
+ul.wysihtml5-toolbar a[data-wysihtml5-command=italic] {
+    font-style: italic
+}
+ul.wysihtml5-toolbar a[data-wysihtml5-command=underline] {
+    text-decoration: underline
+}
+ul.wysihtml5-toolbar a.btn.wysihtml5-command-active {
+    background-color: #ecf0f1;
+    border-color: #E0E4E8;
+    outline: 0
+}
+ul.wysihtml5-commands-disabled .dropdown-menu {
+    display: none!important
+}
+ul.wysihtml5-toolbar div.wysihtml5-colors {
+    display: block;
+    width: 50px;
+    height: 20px;
+    margin-top: 2px;
+    margin-left: 5px;
+    position: absolute;
+    pointer-events: none
+}
+ul.wysihtml5-toolbar a.wysihtml5-colors-title {
+    padding-left: 70px
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=black] {
+    background: #000!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=silver] {
+    background: silver!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=gray] {
+    background: gray!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=maroon] {
+    background: maroon!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=red] {
+    background: red!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=purple] {
+    background: purple!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=green] {
+    background: green!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=olive] {
+    background: olive!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=navy] {
+    background: navy!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=blue] {
+    background: #00f!important
+}
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value=orange] {
+    background: orange!important
+}
+.wysihtml5-sandbox {
+    -webkit-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease
+}
+.wysihtml5-focus {
+    border-color: #82CAFF!important;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
+.md-editor {
+    display: block;
+    border: 1px solid #E0E4E8;
+    border-radius: 3px
+}
+.md-editor>.md-header {
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    margin-left: 0
+}
+.md-editor>.md-header,
+.md-editor .md-footer {
+    display: block;
+    padding: 6px 4px;
+    background: #fff
+}
+.md-editor>.md-preview {
+    background: #fff;
+    border-top: 1px dashed #E0E4E8;
+    border-bottom: 1px dashed #E0E4E8;
+    min-height: 10px
+}
+.md-editor>textarea {
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+    font-size: 14px;
+    outline: 0;
+    outline: thin dotted \9;
+    margin: 0;
+    display: block;
+    padding: 0;
+    width: 100%;
+    border: 0;
+    border-top: 1px dashed #E0E4E8;
+    border-bottom: 1px dashed #E0E4E8;
+    border-radius: 0;
+    box-shadow: none;
+    background: #ecf0f1
+}
+.md-editor>textarea:focus {
+    box-shadow: none;
+    background: #fff;
+    -webkit-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease
+}
+.md-editor.active {
+    border-color: #82CAFF;
+    outline: 0;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
