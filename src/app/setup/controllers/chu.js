@@ -8,17 +8,17 @@
         function ($scope) {
             $scope.title = [
                 {
-                    icon: "fa-phone",
+                    icon: "fa-tasks",
                     name: "Manage CHU Status"
                 }
             ];
             $scope.action = [
                 {
-                    func : "onclick=window.history.back()",
+                    func : "ui-sref='setup.chu_status.create'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
-                    tipmsg: "Go back",
-                    icon: "fa-arrow-left"
+                    tipmsg: "Add new CHU status",
+                    icon: "fa-plus"
                 }
             ];
         }]
@@ -29,8 +29,8 @@
         function($scope, $state, $stateParams, adminApi, formChanges){
             $scope.title = [
                 {
-                    icon: "fa-phone",
-                    name: "Manage CHU Status"
+                    icon: "fa-plus-circle",
+                    name: "New CHU Status"
                 }
             ];
             if(!_.isUndefined($stateParams.id)){
