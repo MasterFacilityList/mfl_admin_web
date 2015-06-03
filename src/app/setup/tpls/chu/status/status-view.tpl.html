@@ -1,9 +1,10 @@
-
+<contentheader></contentheader>
 <div ng-if="alert" class="callout callout-danger fade in">
     <h4>Some Errors On The Form</h4>
     <p ng-bind-html="alert"></p>
 </div>
-<div class="col-lg-12 margin-t-20">
+<div class="col-lg-12">
+<div class="col-lg-12 margin-t-20 text-center content-card">
     <form role="form form-horizontal form-bordered" name="chu.status.form">
         <!-- Start of dynamic form -->
         <div class="col-lg-6">
@@ -44,7 +45,7 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
                 <span class="pull-left margin-h-5">
                     <button ng-if="!chuStatus.id" ng-click="createChuStatus(chuStatus)" class="login-btn login-btn-default">
-                        <i class="fa fa-save"></i> Create
+                        <i class="fa fa-save"></i> Save
                     </button>
                     <button ng-if="chuStatus.id" ng-click="updateChuStatus(chuStatus.id, chu.status.form)" class="login-btn login-btn-default">
                         <i class="fa fa-edit"></i> Update
@@ -58,4 +59,5 @@
             </div>
         </div>
     </form>
+</div>
 </div>
