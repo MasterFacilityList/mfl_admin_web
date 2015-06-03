@@ -193,15 +193,109 @@
         });
 
         describe("Test password profile controller", function () {
-            it("should load base controller", function () {
+
+            it("should update user's password", function () {
                 inject(["$rootScope", function ($rootScope) {
                     var scope = $rootScope.$new();
                     var data = {
                         "$scope": scope
                     };
+
                     ctrl("password", data);
 
                     expect(scope.title).toEqual("Password");
+
+                    httpBackend
+                        .expectPOST(server_url+"api/rest-auth/password/change/", {
+                            "old_password": "b",
+                            "new_password1": "a",
+                            "new_password2": "a"
+                        })
+                        .respond(200, {});
+
+                    scope.save("b", "a", "a");
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }]);
+            });
+
+            it("should show error update user's password failure", function () {
+                inject(["$rootScope", function ($rootScope) {
+                    var scope = $rootScope.$new();
+                    var data = {
+                        "$scope": scope,
+                        "$log": log
+                    };
+
+                    spyOn(log, "error");
+
+                    ctrl("password", data);
+
+                    expect(scope.title).toEqual("Password");
+
+                    httpBackend
+                        .expectPOST(server_url+"api/rest-auth/password/change/", {
+                            "old_password": "b",
+                            "new_password1": "a",
+                            "new_password2": "a"
+                        })
+                        .respond(500, {});
+
+                    scope.save("b", "a", "a");
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+
+                    expect(log.error).toHaveBeenCalled();
+                }]);
+            });
+
+            it("should not update on validation failure (new != confirm)", function () {
+                inject(["$rootScope", function ($rootScope) {
+                    var scope = $rootScope.$new();
+                    var data = {
+                        "$scope": scope,
+                        "$log": log
+                    };
+                    spyOn(log, "error");
+
+                    ctrl("password", data);
+
+                    expect(scope.title).toEqual("Password");
+
+                    scope.save("c", "a", "b");
+
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+
+                    expect(log.error).toHaveBeenCalledWith({
+                        "detail": "The two passwords do not match"
+                    });
+                }]);
+            });
+
+            it("should not update on validation failure (old == new)", function () {
+                inject(["$rootScope", function ($rootScope) {
+                    var scope = $rootScope.$new();
+                    var data = {
+                        "$scope": scope,
+                        "$log": log
+                    };
+                    spyOn(log, "error");
+
+                    ctrl("password", data);
+
+                    expect(scope.title).toEqual("Password");
+
+                    scope.save("a", "a", "a");
+
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+
+                    expect(log.error).toHaveBeenCalledWith({
+                        "detail": "The current password is the same as the old password"
+                    });
                 }]);
             });
         });

@@ -38,14 +38,22 @@
     ])
 
     .controller("mfl.users.controllers.profile.password",
-        ["$scope", "mfl.users.services.profile",
-        function ($scope, profileService) {
+        ["$scope", "$log", "mfl.users.services.profile",
+        function ($scope, $log, profileService) {
             $scope.title = "Password";
+            $scope.pwds = {
+                "old_pwd": "",
+                "new_pwd": "",
+                "confirm_pwd": ""
+            };
 
-            $scope.save = function (pwd1, pwd2) {
-                profileService.updatePassword(pwd1, pwd2)
-                    .success(function () {})
-                    .error(function () {});
+            $scope.save = function (old, pwd1, pwd2) {
+                profileService.updatePassword(old, pwd1, pwd2).then(
+                    function () {},
+                    function (data) {
+                        $log.error(data);
+                    }
+                );
             };
         }
     ]);
