@@ -1,6 +1,6 @@
 /*Styling for sidebar links - sidebar.less*/
 .sidenav-container {
-    background-color: #616161;
+    background-color: #424242;
 }
 .nav .nav-sidebar > li:before, .nav .nav-sidebar > li:after {
     display: block;
@@ -29,13 +29,13 @@
     width: 90% !important;
 }
 .side-left  a {
-    color: darken(#f0f0f0, 5%) !important;
-    background-color: #757575;
+    color: #bdbdbd !important;
+    background-color: #616161;
     box-shadow: 0 0 1px #CCC;
     font-size: 14px;
 }
 .side-left  a:hover{
-    color: #FFF;
+    color: #FFF !important;
     background-color: #757575 !important;
     border-left: 3px solid #e53935;
     -webkit-transition: all .1s ease;
@@ -43,7 +43,8 @@
     transition: all .1s ease
 }
 .side-left .active a {
-    background-color: #9e9e9e;
+    color: #FFFFFF !important;
+    background-color: #757575 !important;
     border-left: 3px solid #e53935;
 }
 .my-sidebar {
@@ -81,6 +82,15 @@
     border-bottom: #bdbdbd;
     color: #FFF;
     font-size: 14px;
+}
+
+.sidebar-label {
+    color: rgba(192, 192, 192, 0.6);
+    background-color: #212121;
+    margin-bottom: -5px;
+    width: 100%;
+    font-size:14px;
+    padding: 6px 0 8px 2px;
 }
 
 /*.my-sidebar > ul > li > a:hover, .my-sidebar > ul > li > a:active
