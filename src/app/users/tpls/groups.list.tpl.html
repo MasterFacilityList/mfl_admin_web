@@ -14,15 +14,15 @@
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
-            <tr class="animate-repeat" ng-repeat="role in roles | filter: search.query">
+            <tr class="animate-repeat" ng-repeat="group in groups | filter: search.query">
                 <td data-title="#" class="pad-t-15">{{$index + 1}}</td>
-                <td data-title="Title" class="pad-t-15">{{role.name}}</td>
-                <td>{{role.permissions}}</td>
+                <td data-title="Title" class="pad-t-15">{{group.name}}</td>
+                <td>{{group.permissions.length}}</td>
                 <td data-title="Actions" class="text-right">
-                    <a ui-sref="facilities.edit_facility.basic({fac_id : facility.id})" class="action-btn action-btn-grid action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Edit role">
+                    <a ui-sref="groups.group_edit({group_id : group.id})" class="action-btn action-btn-grid action-btn-primary" bs-tooltip title="Edit group">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a ui-sref="facilities.facility_action({fac_id: facility.id})" class="action-btn action-btn-grid action-btn-danger" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Delete role">
+                    <a ui-sref="groups.group_delete({group_id: group.id})" class="action-btn action-btn-grid action-btn-danger"bs-tooltip title="Delete group">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
