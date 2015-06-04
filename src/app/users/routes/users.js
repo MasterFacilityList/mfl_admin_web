@@ -6,7 +6,7 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
             .state("users", {
-                url: "/users",
+                url: "/users/",
                 views: {
                     "main": {
                         controller: "mfl.users.controllers.home",
@@ -21,7 +21,7 @@
                     },
                     "main-content@users": {
                         controller: "mfl.users.controllers.users",
-                        templateUrl: "users/tpls/index.tpl.html"
+                        templateUrl: "users/tpls/users.grid.tpl.html"
                     }
                 },
                 data : { pageTitle: "Users" }

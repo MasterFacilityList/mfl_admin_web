@@ -12,8 +12,10 @@
                 $state = s;
             }]);
         });
+
         it("should go to /users url", function () {
-            expect($state.href("users")).toEqual("#/users");
+            expect($state.href("users")).toEqual("#/users/");
         });
+
     });
 })();
