@@ -26,82 +26,93 @@
                 },
                 data : { pageTitle: "Users" }
             })
-            .state("users.manage_roles", {
-                url: "/roles",
+
+            .state("users.user_create", {
+                url: "create/",
                 views: {
                     "main-content@users": {
                         controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/role_index.tpl.html"
+                        templateUrl: "users/tpls/users.create.tpl.html"
                     }
                 }
             })
-            .state("users.new_role", {
-                url : "/newrole",
-                views : {
-                    "main-content@users": {
-                        controller: "mfl.users.controllers.new_role",
-                        templateUrl: "users/tpls/new_role.tpl.html"
-                    }
-                }
-            })
-            .state("users.manage_users", {
-                url: "/",
+
+            .state("users.user_create.basic", {
+                url: "basic/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.users",
-                        templateUrl: "users/tpls/index.tpl.html"
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/users.create.tpl.html"
                     }
                 }
             })
-            .state("users.new_user", {
-                url: "/newuser",
+
+            .state("users.user_create.contacts", {
+                url: "contacts/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.new_user",
-                        templateUrl: "users/tpls/new_user.tpl.html"
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/users.create.tpl.html"
                     }
                 }
             })
-            //child states for adding a new facility
-            .state("users.new_user.basic", {
-                url: "/basicuserdetails",
-                views: {
-                    "form-view@users.new_user" : {
-                        templateUrl : "users/tpls/basic_details.tpl.html"
-                    }
-                }
-            })
-            .state("users.new_user.contacts", {
-                url : "/contactinformation/:user_id",
-                views: {
-                    "form-view@users.new_user" : {
-                        templateUrl : "users/tpls/contact_inforamtion.tpl.html"
-                    }
-                }
-            })
-            .state("users.new_user.groups", {
-                url : "/assignrole/:user_id",
-                views: {
-                    "form-view@users.new_user" : {
-                        templateUrl : "users/tpls/user_group.tpl.html"
-                    }
-                }
-            })
-            .state("users.edit_user", {
-                url: "/edituser/:user_id",
+
+            .state("users.user_create.groups", {
+                url: "groups/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.edit_user",
-                        templateUrl: "users/tpls/new_user.tpl.html"
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/users.create.tpl.html"
                     }
                 }
             })
-            .state("users.view_user", {
-                url: "/viewuser/:user_id",
+
+            .state("users.user_edit", {
+                url: "edit/:user_id/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.view_user",
-                        templateUrl: "users/tpls/view_user.tpl.html"
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/users.create.tpl.html"
+                    }
+                }
+            })
+
+            .state("users.user_edit.basic", {
+                url: "basic/",
+                views: {
+                    "main-content@users": {
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/users.create.tpl.html"
+                    }
+                }
+            })
+
+            .state("users.user_edit.contacts", {
+                url: "contacts/",
+                views: {
+                    "main-content@users": {
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/users.create.tpl.html"
+                    }
+                }
+            })
+
+            .state("users.user_edit.groups", {
+                url: "groups/",
+                views: {
+                    "main-content@users": {
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/users.create.tpl.html"
+                    }
+                }
+            })
+
+            .state("users.user_delete", {
+                url: "delete/:user_id/",
+                views: {
+                    "main-content@users": {
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/users.create.tpl.html"
                     }
                 }
             });
