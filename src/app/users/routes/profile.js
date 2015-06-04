@@ -21,7 +21,7 @@
                     },
                     "main-content@profile": {
                         controller: "mfl.users.controllers.profile.basic",
-                        templateUrl: "users/tpls/profile_container.tpl.html"
+                        templateUrl: "users/tpls/profile.container.tpl.html"
                     }
                 },
                 data : { pageTitle: "Basic Profile" }

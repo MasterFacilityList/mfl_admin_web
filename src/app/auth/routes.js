@@ -15,7 +15,7 @@
                         templateUrl: "auth/tpls/main.tpl.html"
                     }
                 },
-                data : { pageTitle: "MFL v2.0" }
+                data : { pageTitle: "Login" }
             })
             .state("logout", {
                 url: "/logout",
