@@ -24,10 +24,10 @@
                 <td data-title="Type:">{{opt.option_type}}</td>
                 <td data-title="Exclusive Option?">{{opt.is_exclusive_option}}</td>
                 <td data-title="Actions:">
-                    <a ui-sref="service_mgmt.option_edit({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
+                    <a ui-sref="service_mgmt.option_list.option_edit({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a ui-sref="service_mgmt.option_delete({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
+                    <a ui-sref="service_mgmt.option_list.option_delete({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
