@@ -21,10 +21,20 @@
                     },
                     "main-content@profile": {
                         controller: "mfl.users.controllers.profile.basic",
-                        templateUrl: "users/tpls/profile.basic.tpl.html"
+                        templateUrl: "users/tpls/profile.container.tpl.html"
                     }
                 },
                 data : { pageTitle: "Basic Profile" }
+            })
+
+            .state("profile.basic", {
+                url: "userdetails/",
+                views: {
+                    "main-content@profile": {
+                        controller: "mfl.users.controllers.profile.basic",
+                        templateUrl: "users/tpls/profile.basic.tpl.html"
+                    }
+                }
             })
 
             .state("profile.contacts", {

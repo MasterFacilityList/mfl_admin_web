@@ -57,7 +57,13 @@
         ["$scope", "$log", "mfl.users.services.profile", "mfl.common.forms.changes",
         "mfl.auth.services.login",
         function ($scope, $log, profileService, formService, loginService) {
-            $scope.title = "Basic Profile";
+            $scope.title = [
+                {
+                    icon: "fa-user",
+                    name: "Basic Details"
+                }
+            ];
+
             profileService.getProfile()
                 .success(function (data) {
                     $scope.profile = data;
@@ -85,7 +91,12 @@
     .controller("mfl.users.controllers.profile.password",
         ["$scope", "$log", "mfl.users.services.profile",
         function ($scope, $log, profileService) {
-            $scope.title = "Password";
+            $scope.title = [
+                {
+                    icon: "fa-lock",
+                    name: "User Password"
+                }
+            ];
             $scope.pwds = {
                 "old_pwd": "",
                 "new_pwd": "",
