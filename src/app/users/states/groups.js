@@ -41,7 +41,7 @@
                 url: "create/",
                 views: {
                     "main-content@groups": {
-                        controller: "mfl.users.controllers.role",
+                        controller: "mfl.users.controllers.group_create",
                         templateUrl: "users/tpls/groups.create.tpl.html"
                     }
                 }

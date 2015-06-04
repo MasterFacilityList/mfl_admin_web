@@ -17,7 +17,7 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='users.new_role' " +
+                    func : "ui-sref='groups.group_create' " +
                             "has-permission='users.add_mfluser' ",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
@@ -35,7 +35,7 @@
         }
     ])
 
-    .controller("mfl.users.controllers.new_role",
+    .controller("mfl.users.controllers.group_create",
         ["$scope", "mfl.users.services.wrappers", "$state",
         function ($scope, wrappers, $state) {
             $scope.test = "New role";

@@ -38,13 +38,13 @@
             expect(scope.test).toEqual("Roles");
         });
         it("should test the new_role controller", function () {
-            controller("mfl.users.controllers.new_role");
+            controller("mfl.users.controllers.group_create");
             expect(scope.test).toEqual("New role");
         });
         //test not getting list of permissions
         it("should test listing all permissions: success", inject(["$httpBackend",
             function ($httpBackend) {
-                controller("mfl.users.controllers.new_role");
+                controller("mfl.users.controllers.group_create");
                 var data = "";
                 $httpBackend.expectGET(
                     SERVER_URL + "api/users/permissions/?page_size=1500").respond(200, data);
@@ -53,26 +53,26 @@
         ]));
         it("should test listing all permissions: fail", inject(["$httpBackend",
             function ($httpBackend) {
-                controller("mfl.users.controllers.new_role");
+                controller("mfl.users.controllers.group_create");
                 var data = "";
                 $httpBackend.expectGET(
                     SERVER_URL + "api/users/permissions/?page_size=1500").respond(400, data);
             }
         ]));
         it("should test clicked Role", function () {
-            controller("mfl.users.controllers.new_role");
+            controller("mfl.users.controllers.group_create");
             var item = {selected : false};
             scope.clickedPermission(item);
             expect(item.selected).toBeTruthy();
         });
         it("should test clicked Role", function () {
-            controller("mfl.users.controllers.new_role");
+            controller("mfl.users.controllers.group_create");
             var item = {set_selected : false};
             scope.setPermission(item);
             expect(item.set_selected).toBeTruthy();
         });
         it("should test add roles : setting roles", function () {
-            controller("mfl.users.controllers.new_role");
+            controller("mfl.users.controllers.group_create");
             var permission = {
                 name : "",
                 code_name: "",
@@ -91,7 +91,7 @@
             expect(scope.set_permissions).toContain(permission);
         });
         it("should test add roles : reverting roles", function () {
-            controller("mfl.users.controllers.new_role");
+            controller("mfl.users.controllers.group_create");
             var permissions = {
                 name : "",
                 code_name: "",
@@ -111,7 +111,7 @@
         });
         it("should test add user role function ", inject(["$httpBackend", "$state",
             function ($httpBackend, $state) {
-                controller("mfl.users.controllers.new_role");
+                controller("mfl.users.controllers.group_create");
                 spyOn($state, "go");
                 scope.set_permissions = [
                     {
@@ -136,7 +136,7 @@
         ]));
         it("should test add role call : fail", inject(["$httpBackend", "$state",
             function($httpBackend, $state) {
-                controller("mfl.users.controllers.new_role");
+                controller("mfl.users.controllers.group_create");
                 spyOn($state, "go");
                 scope.addRole({name: ""});
                 $httpBackend.expectPOST(
