@@ -29,7 +29,14 @@
         silGridConfig.appConfig = "mflAdminAppConfig";
     }])
 
-    .run(["api.oauth2", function (oauth2) {
+    /*.run(["$rootScope", "$state", "$stateParams",
+        function ( $rootScope, $state, $stateParams) {
+            $rootScope.$state = $state;
+            $rootScope.$stateParams = $stateParams;
+        }
+    ])*/
+
+    .run(["api.oauth2",function (oauth2) {
         oauth2.setXHRToken(oauth2.getToken());
     }]);
 

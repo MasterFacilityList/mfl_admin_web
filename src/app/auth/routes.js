@@ -14,7 +14,8 @@
                         controller: "mfl.auth.controllers.login",
                         templateUrl: "auth/tpls/main.tpl.html"
                     }
-                }
+                },
+                data : { pageTitle: "MFL v2.0" }
             })
             .state("logout", {
                 url: "/logout",
