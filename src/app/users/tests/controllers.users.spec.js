@@ -392,4 +392,147 @@
             $httpBackend.flush();
         }]));
     });
+
+    describe("Test users controllers: ", function () {
+        var server_url, httpBackend, rootScope, ctrl, log, state;
+
+        beforeEach(function () {
+            module("mfl.users.controllers.users");
+            module("ui.router");
+            module("mflAdminAppConfig");
+
+            inject(["$controller", "$log", "$httpBackend", "$rootScope", "SERVER_URL", "$state",
+                function ($controller, $log, $httpBackend, $rootScope, SERVER_URL, $state) {
+                    httpBackend = $httpBackend;
+                    rootScope = $rootScope;
+                    log = $log;
+                    server_url = SERVER_URL;
+                    state = $state;
+                    ctrl = function (name, data) {
+                        return $controller("mfl.users.controllers."+name, data);
+                    };
+                }
+            ]);
+        });
+
+        describe("Test user delete controller", function () {
+
+            it("should fetch user data", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        user_id: 1
+                    },
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/users/1/")
+                    .respond(200, {});
+
+                ctrl("user_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.user).toEqual({});
+            });
+
+            it("should show error on fetch failure", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        user_id: 1
+                    },
+                    "$scope": scope,
+                    "$log": log
+                };
+                httpBackend
+                    .expectGET(server_url + "api/users/1/")
+                    .respond(500, {"error": "a"});
+
+                spyOn(log, "error");
+                ctrl("user_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.users).toBe(undefined);
+                expect(log.error).toHaveBeenCalledWith({"error": "a"});
+            });
+
+            it("should delete user", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        user_id: 1
+                    },
+                    "$state": state,
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/users/1/")
+                    .respond(200, {});
+
+                spyOn(state, "go");
+                ctrl("user_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/users/1/")
+                    .respond(204, {});
+                scope.remove();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+
+            it("should show error on delete user failure", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        user_id: 1
+                    },
+                    "$state": state,
+                    "$scope": scope,
+                    "$log": log
+                };
+                httpBackend
+                    .expectGET(server_url + "api/users/1/")
+                    .respond(200, {});
+
+                spyOn(state, "go");
+                spyOn(log, "error");
+                ctrl("user_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/users/1/")
+                    .respond(404, {});
+
+                scope.remove();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).not.toHaveBeenCalled();
+                expect(log.error).toHaveBeenCalled();
+            });
+        });
+    });
 })();

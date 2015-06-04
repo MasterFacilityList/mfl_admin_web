@@ -5,11 +5,11 @@
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
-            .state("roles", {
-                url: "/roles",
+            .state("groups", {
+                url: "/groups",
                 views: {
                     "main": {
-                        controller: "mfl.users.controllers.roles_list",
+                        controller: "mfl.users.controllers.group_list",
                         templateUrl: "users/tpls/main.tpl.html"
                     },
                     "header@users": {
@@ -21,10 +21,10 @@
                     },
                     "main-content@users": {
                         controller: "mfl.users.controllers.users",
-                        templateUrl: "users/tpls/roles.list.tpl.html"
+                        templateUrl: "users/tpls/groups.list.tpl.html"
                     }
                 },
-                data : { pageTitle: "Roles" }
+                data : { pageTitle: "Groups" }
             });
     }]);
 

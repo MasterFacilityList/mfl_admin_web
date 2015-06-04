@@ -13,8 +13,12 @@
             }]);
         });
 
-        it("should go to users listing page", function () {
+        it("should go to users home page", function () {
             expect($state.href("users")).toEqual("#/users/");
+        });
+
+        it("should go to users listing page", function () {
+            expect($state.href("users.user_list")).toEqual("#/users/users/");
         });
 
         it("should go to users creation page", function () {

@@ -27,6 +27,16 @@
                 data : { pageTitle: "Users" }
             })
 
+            .state("users.user_list", {
+                url: "users/",
+                views: {
+                    "main-content@users": {
+                        controller: "mfl.users.controllers.users",
+                        templateUrl: "users/tpls/users.grid.tpl.html"
+                    }
+                }
+            })
+
             .state("users.user_create", {
                 url: "create/",
                 views: {
@@ -111,8 +121,8 @@
                 url: "delete/:user_id/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                        controller: "mfl.users.controllers.user_delete",
+                        templateUrl: "users/tpls/users.delete.tpl.html"
                     }
                 }
             });
