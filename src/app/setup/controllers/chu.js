@@ -9,7 +9,7 @@
             $scope.title = [
                 {
                     icon: "fa-tasks",
-                    name: "Manage CHU Status"
+                    name: "Manage Communtiy Units Status"
                 }
             ];
             $scope.action = [
@@ -17,7 +17,7 @@
                     func : "ui-sref='setup.chu_status.create'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
-                    tipmsg: "Add new CHU status",
+                    tipmsg: "Add Communinty Unit status",
                     icon: "fa-plus"
                 }
             ];
@@ -27,18 +27,52 @@
     .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
-            $scope.title = [
-                {
-                    icon: "fa-plus-circle",
-                    name: "New CHU Status"
-                }
-            ];
-            if(!_.isUndefined($stateParams.id)){
+
+            if(!_.isUndefined($stateParams.id) && $stateParams.id !== "create"){
+                $scope.title = [
+                    {
+                        icon: "fa-edit",
+                        name: "Edit Community Unit Status"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func : "ng-click='deleteChuStatus(chuStatus.id)'",
+                        class: "action-btn action-btn-danger action-btn-md",
+                        color: "blue",
+                        tipmsg: "Delete Community Unity Status",
+                        icon: "fa-trash"
+                    },
+                    {
+                        func : "onclick='window.history.back()'",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Back",
+                        icon: "fa-arrow-left"
+                    }
+                ];
                 adminApi.chuStatus.get($stateParams.id).success(function(data){
                     $scope.chuStatus = data;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+            }
+            else if(!_.isUndefined($stateParams.id) && $stateParams.id === "create") {
+                $scope.title = [
+                    {
+                        icon: "fa-plus-circle",
+                        name: "New Community Unit Status"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func : "onclick='window.history.back()'",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Back",
+                        icon: "fa-arrow-left"
+                    }
+                ];
             }
 
             $scope.updateChuStatus = function(id, frm){
@@ -74,7 +108,7 @@
             $scope.title = [
                 {
                     icon: "fa-phone",
-                    name: "Manage CHU Approvers"
+                    name: "Manage Community Unit Approvers"
                 }
             ];
             $scope.action = [
@@ -94,7 +128,7 @@
             $scope.title = [
                 {
                     icon: "fa-phone",
-                    name: "Manage CHU Approvals"
+                    name: "Manage Commmunity Unit Approvals"
                 }
             ];
             if(!_.isUndefined($stateParams.id)){

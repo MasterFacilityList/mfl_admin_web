@@ -18,15 +18,6 @@
                     name: "Adminstrative Units"
                 }
             ];
-            $scope.action = [
-                {
-                    func : "ui-sref='admin_units.new_unit' ",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "New Adminsitrative Units",
-                    icon: "fa-plus"
-                }
-            ];
         }]);
 })(angular);
 
