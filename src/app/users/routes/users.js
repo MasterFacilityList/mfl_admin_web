@@ -1,7 +1,7 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mfl.users.states.users", [])
+    angular.module("mfl.users.states.users", ["ui.router"])
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
@@ -33,8 +33,7 @@
                         controller: "mfl.users.controllers.role",
                         templateUrl: "users/tpls/role_index.tpl.html"
                     }
-                },
-                data : { pageTitle: "Roles" }
+                }
             })
             .state("users.new_role", {
                 url : "/newrole",
@@ -52,8 +51,7 @@
                         controller: "mfl.users.controllers.users",
                         templateUrl: "users/tpls/index.tpl.html"
                     }
-                },
-                data : { pageTitle: "Users" }
+                }
             })
             .state("users.new_user", {
                 url: "/newuser",

@@ -30,7 +30,6 @@
                         "$scope": scope
                     };
                     ctrl("base", data);
-
                     expect(scope.title).toEqual("Profile");
                 }]);
             });
@@ -53,8 +52,6 @@
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
                     httpBackend.verifyNoOutstandingExpectation();
-
-                    expect(scope.title).toEqual("Basic Profile");
                     expect(scope.profile).toEqual({});
                 }]);
             });
@@ -76,8 +73,6 @@
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
                     httpBackend.verifyNoOutstandingExpectation();
-
-                    expect(scope.title).toEqual("Basic Profile");
                     expect(_.isUndefined(scope.profile)).toBe(true);
                     expect(log.error).toHaveBeenCalledWith({});
                 }]);
@@ -203,8 +198,6 @@
 
                     ctrl("password", data);
 
-                    expect(scope.title).toEqual("Password");
-
                     httpBackend
                         .expectPOST(server_url+"api/rest-auth/password/change/", {
                             "old_password": "b",
@@ -231,9 +224,6 @@
                     spyOn(log, "error");
 
                     ctrl("password", data);
-
-                    expect(scope.title).toEqual("Password");
-
                     httpBackend
                         .expectPOST(server_url+"api/rest-auth/password/change/", {
                             "old_password": "b",
@@ -262,8 +252,6 @@
 
                     ctrl("password", data);
 
-                    expect(scope.title).toEqual("Password");
-
                     scope.save("c", "a", "b");
 
                     httpBackend.verifyNoOutstandingExpectation();
@@ -285,8 +273,6 @@
                     spyOn(log, "error");
 
                     ctrl("password", data);
-
-                    expect(scope.title).toEqual("Password");
 
                     scope.save("a", "a", "a");
 
