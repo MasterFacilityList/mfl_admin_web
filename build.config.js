@@ -99,6 +99,7 @@ module.exports = {
             "vendor/stacktrace-js/dist/stacktrace.js",
             "vendor/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js",
             "vendor/ng-tags-input/ng-tags-input.js",
+            "vendor/acute-select/acute/acute.select/acute.select.js",
             "vendor/moment/moment.js",
             "vendor/d3/d3.js",
             "vendor/c3/c3.js",
@@ -109,13 +110,26 @@ module.exports = {
             "libs/error_handler.js"
         ],
         css: [
+
         ],
         assets: [
             "vendor/fontawesome/fonts/*"
         ],
-        imgs: [
-            "libs/sil_grid/img/*"
+        imgs: {
+            sil: [
+                "libs/sil_grid/img/*"
+            ],
+            acute_select: [
+                "vendor/acute-select/acute/acute.select/images/*"
+            ]
+        },
+        tpls:[
+            "vendor/acute-select/acute/acute.select/template/*"
+        ],
+        vendor_css: [
+            "vendor/acute-select/acute/acute.select/*.css"
         ]
+
     },
 
     connect: {
