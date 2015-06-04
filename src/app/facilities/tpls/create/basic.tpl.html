@@ -23,22 +23,36 @@
                         Description
                     </label>
                 </div>
+                <label>
+                    Select Facility Type:
+                </label>
                 <div class="group">
-                    <select type="text" ng-model="facility.facility_type" required>
-                        <option value="">-Select Facility Type-</option>
-                        <option ng-repeat="c in utils.data.county" value="{{c.id}}">{{c.name}}</option>
-                    </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+
+                    <ac-select ac-model="facility.facility_type" ac-options="item.name for item in getOptionsData.facilityType()"
+                        ac-settings='{loadOnOpen: true}'
+                    ></ac-select>
                 </div>
+                <label>
+                    Select Operation Status:
+                </label>
                 <div class="group">
-                    <select type="text" ng-model="facility.operation_status" required>
-                        <option value="">-Select Operation Status-</option>
-                        <option ng-repeat="c in utils.data.county" value="{{c.id}}">{{c.name}}</option>
-                    </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+
+                    <ac-select ac-model="facility.operation_status" ac-options="item.name for item in getOptionsData.operationStatus()"
+                        ac-settings='{loadOnOpen: true}'
+                    ></ac-select>
                 </div>
+
+                <label>
+                    Select Owner:
+                </label>
+                <div class="group">
+
+                    <ac-select ac-model="facility.owner" ac-options="item.name for item in getOptionsData.owner()"
+                        ac-settings='{loadOnOpen: true}'
+                    ></ac-select>
+                </div>
+
+
                 <div class="group">
                     <input type="number" ng-model="facility.number_of_beds" required>
                     <span class="highlight"></span>
@@ -50,6 +64,14 @@
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Number of Cots</label>
+                </div>
+                <div class="group">
+                    <textarea ng-model="facility.attributes"></textarea>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Attributes
+                    </label>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="checkbox-group">
@@ -83,58 +105,35 @@
                          </label>
                     </div>
                 </div>
-
-                <div class="group">
-                    <select type="text" ng-model="facility.owner" required>
-                        <option value="">-Select Owner-</option>
-                        <option ng-repeat="c in utils.data.county" value="{{c.id}}">{{c.name}}</option>
-                    </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                </div>
-
-                <div class="group">
-                    <select type="text" ng-model="facility.parent" required>
-                        <option value="">-Select Parent Facility-</option>
-                        <option ng-repeat="c in utils.data.county" value="{{c.id}}">{{c.name}}</option>
-                    </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                </div>
-
-                <div class="group">
-                    <textarea ng-model="facility.attributes"></textarea>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>
-                        Attributes
-                    </label>
-                </div>
             </div>
             <div class="col-lg-6">
+                <label>
+                    Select County:
+                </label>
                 <div class="group">
-                    <select type="text" ng-model="facility_utils.contact" required>
-                        <option value="">-Select County-</option>
-                        <option ng-repeat="c in utils.data.county" value="{{c.id}}">{{c.name}}</option>
-                    </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+
+                    <ac-select ac-model="facility_utils.facility_type" ac-options="item.name for item in getOptionsData.county()"
+                        ac-settings='{loadOnOpen: true}' ac-change="events.county(value)"
+                    ></ac-select>
                 </div>
+                <label>
+                    Select Constituency:{{filterData.constituency}}
+                </label>
                 <div class="group">
-                    <select type="text" ng-model="facility_utils.constituency" required>
-                        <option value="">-Select Constituency-</option>
-                        <option ng-repeat="c in utils.data.county" value="{{c.id}}">{{c.name}}</option>
-                    </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+
+                    <ac-select ac-model="facility_utils.facility_type" ac-options="item.name for item in filterData.constituency"
+                        ac-settings='{loadOnOpen: true}' ng-disabled="filterData.constituency"
+                    ></ac-select>
                 </div>
+
+                <label>
+                    Select Ward:
+                </label>
                 <div class="group">
-                    <select type="text" ng-model="facility.ward" required>
-                        <option value="">-Select Ward-</option>
-                        <option ng-repeat="c in utils.data.county" value="{{c.id}}">{{c.name}}</option>
-                    </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+
+                    <ac-select ac-model="facility_utils.facility_type" ac-options="item.name for item in getOptionsData.constituency()"
+                        ac-settings='{loadOnOpen: true}'
+                    ></ac-select>
                 </div>
                 <div class="group">
                     <textarea type="password" ng-model="facility.location_desc"></textarea>
