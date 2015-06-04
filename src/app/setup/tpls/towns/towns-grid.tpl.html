@@ -8,20 +8,11 @@
         <thead class="cf">
             <th>#</th>
             <th>Name</th>
-            <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="town in towns">
                 <td data-title="#" class="pad-t-15">{{$index + 1}}</td>
                 <td data-title="Name" class="pad-t-15">{{town.name}}</td>
-                <td data-title="Actions" class="text-right pad-t-15">
-                    <a ui-sref="admin_units.counties.edit_town({town_id : town.id})" class="action-btn action-btn-grid action-btn-primary">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <a ui-sref="admin_units.counties.view_town({town_id : town.id})" class="action-btn action-btn-grid action-btn-danger">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </td>
             </tr>
         </tbody>
     </table>

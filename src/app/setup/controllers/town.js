@@ -9,16 +9,7 @@
             $scope.title = [
                 {
                     icon: "fa-map-marker",
-                    name: "Manage Wards"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "onclick=window.history.back()",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Add new town",
-                    icon: "fa-plus"
+                    name: "Towns"
                 }
             ];
         }]

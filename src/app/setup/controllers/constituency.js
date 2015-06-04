@@ -12,15 +12,6 @@
                     name: "View Constituencies"
                 }
             ];
-            $scope.action = [
-                {
-                    func : "onclick=window.history.back()",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Add new constituency",
-                    icon: "fa-plus"
-                }
-            ];
         }]
     );
 
