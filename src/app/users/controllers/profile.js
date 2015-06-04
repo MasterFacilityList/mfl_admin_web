@@ -3,7 +3,8 @@
 
     angular.module("mfl.users.controllers.profile", [
         "mfl.users.services",
-        "mfl.common.forms"
+        "mfl.common.forms",
+        "mfl.auth.services"
     ])
 
     .controller("mfl.users.controllers.profile.base", ["$scope",
@@ -12,9 +13,50 @@
         }
     ])
 
+    .controller("mfl.users.controllers.profile.contacts",
+        ["$scope", "$log", "mfl.users.services.wrappers", "mfl.auth.services.login",
+        function ($scope, $log, wrappers, loginService) {
+            $scope.title = "Contacts";
+            $scope.user_id = loginService.getUser().id;
+
+            wrappers.contact_types.list()
+                .success(function (data) {
+                    $scope.contact_types = data;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            wrappers.user_contacts.filter({"user": $scope.user_id})
+                .success(function(data) {
+                    $scope.contacts = data;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            $scope.remove = function () {};
+            $scope.add = function () {
+                var payload = {
+                    "user": $scope.user_id,
+                    "contact_type": $scope.contact.contact_type,
+                    "contact": $scope.contact.contact
+                };
+                wrappers.user_contacts.add(payload)
+                    .success(function (data) {
+                        $scope.contacts.push(data);
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+            };
+        }
+    ])
+
     .controller("mfl.users.controllers.profile.basic",
         ["$scope", "$log", "mfl.users.services.profile", "mfl.common.forms.changes",
-        function ($scope, $log, profileService, formService) {
+        "mfl.auth.services.login",
+        function ($scope, $log, profileService, formService, loginService) {
             $scope.title = "Basic Profile";
             profileService.getProfile()
                 .success(function (data) {
@@ -28,7 +70,10 @@
                 var changed = formService.whatChanged(frm);
                 if(! _.isEmpty(changed)) {
                     profileService.updateProfile(changed)
-                        .success(function () {/* update auth service store */ })
+                        .success(function () {
+                            // update auth service store
+                            loginService.currentUser();
+                        })
                         .error(function (data) {
                             $log.error(data);
                         });
