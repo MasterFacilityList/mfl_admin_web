@@ -23,13 +23,6 @@
                     color: "blue",
                     tipmsg: "New Role",
                     icon: "fa-plus"
-                },
-                {
-                    func : "onclick=window.history.back()",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go back",
-                    icon: "fa-arrow-left"
                 }
             ];
         }

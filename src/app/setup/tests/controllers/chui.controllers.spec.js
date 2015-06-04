@@ -228,6 +228,20 @@
                 expect($scope.alert).toEqual(res.error);
             });
 
+        it("should navigate to creating new chuApprover", function () {
+            var dt = {
+                $stateParams : {id: "create"}
+            };
+            var test_title = [
+                {
+                    icon : "fa-plus-circle",
+                    name : "New Commmunity Unit Approver"
+                }
+            ];
+            createController("mfl.setup.controller.chuApprover.view", dt);
+            expect($scope.title).toEqual(test_title);
+        });
+
         it("should delete chuApprover: success",function(){
                 var dt = {
                     $stateParams: {id: 1}
