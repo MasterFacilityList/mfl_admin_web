@@ -234,8 +234,8 @@
             };
             var test_title = [
                 {
-                    icon: "fa-plus-circle",
-                    name: "New Community Unit Approver"
+                    icon : "fa-plus-circle",
+                    name : "New Commmunity Unit Approver"
                 }
             ];
             createController("mfl.setup.controller.chuApprover.view", dt);
