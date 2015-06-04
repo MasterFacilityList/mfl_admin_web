@@ -15,7 +15,6 @@
     .controller("mfl.users.controllers.profile.basic",
         ["$scope", "$log", "mfl.users.services.profile", "mfl.common.forms.changes",
         function ($scope, $log, profileService, formService) {
-            $scope.title = "Basic Profile";
             $scope.title = [
                 {
                     icon: "fa-user",
