@@ -22,10 +22,10 @@
                 <td data-title="Abbreviation:" class="pad-t-10">{{category.abbreviation}}</td>
                 <td data-title="Description:" class="pad-t-10">{{category.description}}</td>
                 <td data-title="Actions:">
-                    <a ui-sref="service_mgmt.category_edit({category_id: category.id})" class="action-btn action-btn-grid action-btn-info">
+                    <a ui-sref="service_mgmt.category_list.category_edit({category_id: category.id})" class="action-btn action-btn-grid action-btn-info">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a ui-sref="service_mgmt.category_delete({category_id: category.id})" class="action-btn action-btn-grid action-btn-info">
+                    <a ui-sref="service_mgmt.category_list.category_delete({category_id: category.id})" class="action-btn action-btn-grid action-btn-info">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>

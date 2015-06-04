@@ -9,6 +9,11 @@
         function ($scope, loginService) {
             $scope.user = loginService.getUser();
         }
+    ])
+    .controller("mfl.common.controllers.stateServices", ["$state",
+        function ($state) {
+            $state.go("service_mgmt.category_list");
+        }
     ]);
 
 })(angular);

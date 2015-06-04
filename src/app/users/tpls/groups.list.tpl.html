@@ -1,26 +1,28 @@
-<div class="">
-<div class="">
+<div>
+<div>
     <div class="col-lg-4 col-md-4 col-sm-6 margin-b--5 pull-right">
             <sil-grid-search> </sil-grid-search>
     </div>
 </div>
-<!-- Start of facilities grid -->
+
 <div id="no-more-tables" class="col-lg-12 margin-t-15">
     <table class="table table-hover fs-14">
         <thead>
             <th>#</th>
             <th>Title</th>
+            <th>Permissions</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
-            <tr class="animate-repeat" ng-repeat="role in roles | filter: search.query">
+            <tr class="animate-repeat" ng-repeat="group in groups | filter: search.query">
                 <td data-title="#" class="pad-t-15">{{$index + 1}}</td>
-                <td data-title="Title" class="pad-t-15">{{role.name}}</td>
+                <td data-title="Title" class="pad-t-15">{{group.name}}</td>
+                <td>{{group.permissions.length}}</td>
                 <td data-title="Actions" class="text-right">
-                    <a ui-sref="facilities.edit_facility.basic({fac_id : facility.id})" class="action-btn action-btn-grid action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Edit role">
+                    <a ui-sref="groups.group_edit({group_id : group.id})" class="action-btn action-btn-grid action-btn-primary" bs-tooltip title="Edit group">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a ui-sref="facilities.facility_action({fac_id: facility.id})" class="action-btn action-btn-grid action-btn-danger" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Delete role">
+                    <a ui-sref="groups.group_delete({group_id: group.id})" class="action-btn action-btn-grid action-btn-danger"bs-tooltip title="Delete group">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
@@ -30,4 +32,3 @@
     <sil-grid-pagination> </sil-grid-pagination>
 </div>
 </div>
-<!-- End of roles grid -->

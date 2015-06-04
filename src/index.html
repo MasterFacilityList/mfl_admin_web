@@ -5,13 +5,30 @@
             <h1><strong>MFLv2 Administration Website:</strong></h1>
             <h1>Your browser is not supported. Please update your browser.</h1>
                <h2>You may also install any of the following supported browsers:</h2>
-                <ul><a target="blank" href="http://google.com/chrome">Google Chrome</a></ul>
-                <ul><a target="blank" href="http://getfirefox.com">Firefox</a></ul>
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="col-sm-3 row-fluid">
+                           <a target="blank" href="http://www.google.com/chrome/"><i class="sprite sprite-chrome"></i></a>
+                            Chrome
+                        </div>
+                        <div class="col-sm-3 row-fluid">
+                           <a target="blank" href="https://www.mozilla.org/en-US/firefox/new/"><i class="sprite sprite-firefox"></i></a>
+                            Firefox
+                        </div>
+                        <div class="col-sm-3 row-fluid">
+                           <a target="blank" href="http://windows.microsoft.com/en-us/internet-explorer/download-ie"><i class="sprite sprite-ie"></i></a>
+                            Internet Explorer
+                        </div>
+                        <div class="col-sm-3 row-fluid">
+                           <a target="blank" href="http://www.opera.com/computer"><i class="sprite sprite-opera"></i></a>
+                            Opera
+                        </div>
+                    </div>
+                </div>
         </div>
 <![endif]-->
 <!--[if gt IE 9]><!-->
 <html class="no-js" lang="en" ng-app="mflAdminApp" >
-<!--<![endif]-->
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +37,7 @@
     <link rel="icon"  href="assets/img/kenya-coat-of-arms.png" />
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
   </head>
+<!--<![endif]-->
   <body>
         <div ui-view="main">
             <noscript>
