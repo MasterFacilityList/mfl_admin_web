@@ -4,7 +4,7 @@
     angular.module("mfl.users.controllers", [
         "mfl.users.controllers.profile",
         "mfl.users.controllers.users",
-        "mfl.users.controllers.roles"
+        "mfl.users.controllers.groups"
     ]);
 
 })(angular);

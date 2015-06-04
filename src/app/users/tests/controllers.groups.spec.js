@@ -1,14 +1,14 @@
 (function () {
     "use strict";
 
-    describe("Test roles controllers :", function () {
+    describe("Test groups controllers :", function () {
         var controller, data, root, scope, SERVER_URL, httpBackend, state;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.users.services");
             module("sil.api.wrapper");
-            module("mfl.users.controllers.roles");
+            module("mfl.users.controllers.groups");
             module("ui.router");
 
             inject(["$rootScope", "$controller", "$httpBackend", "$state", "SERVER_URL",
@@ -34,7 +34,7 @@
             ]);
         });
         it("should test Roles controller", function () {
-            controller("mfl.users.controllers.role");
+            controller("mfl.users.controllers.group_list");
             expect(scope.test).toEqual("Roles");
         });
         it("should test the new_role controller", function () {

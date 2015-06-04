@@ -6,25 +6,65 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
             .state("groups", {
-                url: "/groups",
+                url: "/groups/",
                 views: {
                     "main": {
                         controller: "mfl.users.controllers.group_list",
                         templateUrl: "users/tpls/main.tpl.html"
                     },
-                    "header@users": {
+                    "header@groups": {
                         controller: "mfl.common.controllers.header",
                         templateUrl: "common/tpls/header.tpl.html"
                     },
-                    "sidebar@users": {
+                    "sidebar@groups": {
                         templateUrl: "users/tpls/side_nav.tpl.html"
                     },
-                    "main-content@users": {
+                    "main-content@groups": {
                         controller: "mfl.users.controllers.users",
                         templateUrl: "users/tpls/groups.list.tpl.html"
                     }
                 },
                 data : { pageTitle: "Groups" }
+            })
+
+            .state("groups.group_list", {
+                url: "groups/",
+                views: {
+                    "main-content@groups": {
+                        controller: "mfl.users.controllers.group_list",
+                        templateUrl: "users/tpls/groups.grid.tpl.html"
+                    }
+                }
+            })
+
+            .state("groups.group_create", {
+                url: "create/",
+                views: {
+                    "main-content@groups": {
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/groups.create.tpl.html"
+                    }
+                }
+            })
+
+            .state("groups.group_edit", {
+                url: "edit/:group_id/",
+                views: {
+                    "main-content@groups": {
+                        controller: "mfl.users.controllers.role",
+                        templateUrl: "users/tpls/groups.create.tpl.html"
+                    }
+                }
+            })
+
+            .state("groups.group_delete", {
+                url: "delete/:group_id/",
+                views: {
+                    "main-content@groups": {
+                        controller: "mfl.users.controllers.group_delete",
+                        templateUrl: "users/tpls/groups.delete.tpl.html"
+                    }
+                }
             });
     }]);
 

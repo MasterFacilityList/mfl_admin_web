@@ -1,12 +1,12 @@
 (function (angular, _) {
     "use strict";
 
-    angular.module("mfl.users.controllers.roles", [
+    angular.module("mfl.users.controllers.groups", [
         "mfl.auth.services",
         "mfl.users.services"
     ])
 
-    .controller("mfl.users.controllers.role", ["$scope",
+    .controller("mfl.users.controllers.group_list", ["$scope",
         function ($scope) {
             $scope.test = "Roles";
             $scope.title = [
