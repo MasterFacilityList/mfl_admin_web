@@ -94,7 +94,7 @@
             $scope.title = [
                 {
                     icon: "fa-lock",
-                    name: "User Password"
+                    name: "Password"
                 }
             ];
             $scope.pwds = {

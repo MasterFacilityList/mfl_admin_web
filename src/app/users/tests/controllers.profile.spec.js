@@ -53,7 +53,7 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(scope.title).toEqual("Basic Profile");
+                expect(scope.title[0].name).toEqual("Basic Details");
                 expect(scope.profile).toEqual({});
             });
 
@@ -74,7 +74,7 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(scope.title).toEqual("Basic Profile");
+                expect(scope.title[0].name).toEqual("Basic Details");
                 expect(_.isUndefined(scope.profile)).toBe(true);
                 expect(log.error).toHaveBeenCalledWith({});
             });
@@ -190,7 +190,7 @@
 
                 ctrl("password", data);
 
-                expect(scope.title).toEqual("Password");
+                expect(scope.title[0].name).toEqual("Password");
 
                 httpBackend
                     .expectPOST(server_url+"api/rest-auth/password/change/", {
@@ -217,7 +217,7 @@
 
                 ctrl("password", data);
 
-                expect(scope.title).toEqual("Password");
+                expect(scope.title[0].name).toEqual("Password");
 
                 httpBackend
                     .expectPOST(server_url+"api/rest-auth/password/change/", {
@@ -245,7 +245,7 @@
 
                 ctrl("password", data);
 
-                expect(scope.title).toEqual("Password");
+                expect(scope.title[0].name).toEqual("Password");
 
                 scope.save("c", "a", "b");
 
@@ -267,7 +267,7 @@
 
                 ctrl("password", data);
 
-                expect(scope.title).toEqual("Password");
+                expect(scope.title[0].name).toEqual("Password");
 
                 scope.save("a", "a", "a");
 
