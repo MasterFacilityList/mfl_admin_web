@@ -9,7 +9,7 @@
             $scope.title = [
                 {
                     icon: "fa-map-marker",
-                    name: "View Constituencies"
+                    name: "Constituencies"
                 }
             ];
         }]

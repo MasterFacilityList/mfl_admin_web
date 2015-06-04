@@ -45,13 +45,6 @@
                 color: "blue",
                 tipmsg: "New User",
                 icon: "fa-user-plus"
-            },
-            {
-                func : "onclick=window.history.back()",
-                class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
-                tipmsg: "Go back",
-                icon: "fa-arrow-left"
             }
         ];
     }])

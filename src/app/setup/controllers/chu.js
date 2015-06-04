@@ -107,17 +107,17 @@
         function ($scope) {
             $scope.title = [
                 {
-                    icon: "fa-phone",
+                    icon: "fa-user-secret",
                     name: "Manage Community Unit Approvers"
                 }
             ];
             $scope.action = [
                 {
-                    func : "onclick=window.history.back()",
+                    func : "ui-sref='setup.chu_approvers.create'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
-                    tipmsg: "Go back",
-                    icon: "fa-arrow-left"
+                    tipmsg: "Add Community Unit Approver",
+                    icon: "fa-plus"
                 }
             ];
         }]
@@ -125,19 +125,56 @@
     .controller("mfl.setup.controller.chuApprover.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Manage Commmunity Unit Approvals"
-                }
-            ];
-            if(!_.isUndefined($stateParams.id)){
+
+            if(!_.isUndefined($stateParams.id) &&
+                $stateParams.id !== "create"){
+                $scope.title = [
+                    {
+                        icon: "fa-edit",
+                        name: "Edit Commmunity Unit Approver"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func : "ng-click='deleteChuApprovers(chuApprovers.id)'",
+                        class: "action-btn action-btn-danger action-btn-md",
+                        color: "blue",
+                        tipmsg: "Delete Community Unity Status",
+                        icon: "fa-trash"
+                    },
+                    {
+                        func : "onclick='window.history.back()'",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Back",
+                        icon: "fa-arrow-left"
+                    }
+                ];
                 adminApi.chuApprovers.get($stateParams.id).success(function(data){
                     $scope.chuApprovers = data;
                     $scope.edit = true;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+            }
+            else if(!_.isUndefined($stateParams.id) &&
+                $stateParams.id === "create") {
+                $scope.title = [
+                    {
+                        icon: "fa-plus-circle",
+                        name: "New Commmunity Unit Approver"
+                    }
+                ];
+                $scope.action = [
+
+                    {
+                        func : "onclick='window.history.back()'",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Back",
+                        icon: "fa-arrow-left"
+                    }
+                ];
             }
 
             $scope.updateChuApprovers = function(id, frm){
