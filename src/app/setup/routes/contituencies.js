@@ -6,7 +6,10 @@
             .state("setup.constituencies", {
                 url: "/constituencies",
                 views: {
-                    "main-content@setup": {
+                    "body@setup" : {
+                        templateUrl : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.constituencies": {
                         controller: "mfl.setup.controller.constituency.list",
                         templateUrl: "setup/tpls/constituencies/constituencies.tpl.html"
                     }

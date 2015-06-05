@@ -18,6 +18,7 @@
         function ($scope, dashboardApi) {
             $scope.chart = null;
             $scope.spinner = true;
+            $scope.county = false;
             var c3_generate = function (_payload){
                 c3.generate(_payload);
                 $scope.loading = false;
@@ -62,6 +63,7 @@
                 var top_ten = function (_dt) {
                     var _list = [];
                     if(!_.isEmpty(_dt.county_summary)) {
+                        $scope.county = true;
                         angular.forEach(_dt.county_summary, function (item) {
                             var _item = [item.name, item.count];
                             _list[_list.length] = _item;

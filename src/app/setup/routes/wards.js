@@ -7,7 +7,10 @@
             .state("setup.wards", {
                 url: "/wards",
                 views: {
-                    "main-content@setup": {
+                    "body@setup" : {
+                        templateUrl : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.wards": {
                         controller: "mfl.setup.controller.ward.list",
                         templateUrl: "setup/tpls/wards/wards.tpl.html"
                     }

@@ -7,7 +7,10 @@
             .state("setup.counties", {
                 url: "/counties",
                 views: {
-                    "main-content@setup": {
+                    "body@setup" : {
+                        templateUrl: "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.counties": {
                         controller: "mfl.setup.controller.county.list",
                         templateUrl: "setup/tpls/counties/counties.tpl.html"
                     }
