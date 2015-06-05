@@ -65,7 +65,7 @@
         ];
         $scope.action = [
             {
-                func : "ui-sref='users.new_user.basic' " +
+                func : "ui-sref='users.user_list.user_create.basic' " +
                         "has-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-info action-btn-md",
                 color: "blue",
@@ -79,7 +79,7 @@
         ["$scope", "$state", "mfl.users.services.wrappers",
         function ($scope, $state, wrappers) {
             $scope.new_user = true;
-            $scope.title = [
+            $scope.$parent.title = [
                 {
                     icon: "fa-user-plus",
                     name: "New user"

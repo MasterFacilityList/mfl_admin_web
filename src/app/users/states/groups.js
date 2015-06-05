@@ -27,40 +27,40 @@
                 data : { pageTitle: "Groups" }
             })
 
-            .state("groups.group_list", {
+            .state("users.group_list", {
                 url: "groups/",
                 views: {
-                    "main-content@groups": {
+                    "main-content@users": {
                         controller: "mfl.users.controllers.group_list",
                         templateUrl: "users/tpls/groups.grid.tpl.html"
                     }
                 }
             })
 
-            .state("groups.group_create", {
+            .state("users.group.group_create", {
                 url: "create/",
                 views: {
-                    "main-content@groups": {
+                    "main-content@users": {
                         controller: "mfl.users.controllers.group_create",
                         templateUrl: "users/tpls/groups.create.tpl.html"
                     }
                 }
             })
 
-            .state("groups.group_edit", {
+            .state("users.group_edit", {
                 url: "edit/:group_id/",
                 views: {
-                    "main-content@groups": {
+                    "main-content@users": {
                         controller: "mfl.users.controllers.role",
                         templateUrl: "users/tpls/groups.create.tpl.html"
                     }
                 }
             })
 
-            .state("groups.group_delete", {
+            .state("users.group_delete", {
                 url: "delete/:group_id/",
                 views: {
-                    "main-content@groups": {
+                    "main-content@users": {
                         controller: "mfl.users.controllers.group_delete",
                         templateUrl: "users/tpls/groups.delete.tpl.html"
                     }
