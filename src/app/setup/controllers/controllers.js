@@ -6,7 +6,6 @@
         "mfl.setup.ward.controllers",
         "mfl.setup.contacts.controllers",
         "mfl.setup.town.controllers",
-        "mfl.setup.facilities.controllers",
         "mfl.setup.chu.controllers"
     ])
     .controller("mfl.setup.controller.dashboard", ["$scope",

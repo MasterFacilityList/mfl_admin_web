@@ -10,17 +10,17 @@
         function ($scope) {
             $scope.title = [
                 {
-                    icon: "fa-phone",
+                    icon: "fa-dedent",
                     name: "Manage Facility Owner Types"
                 }
             ];
             $scope.action = [
                 {
-                    func : "onclick=window.history.back()",
+                    func : "ui-sref='setup.facility_owner_types.create'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
-                    tipmsg: "Go back",
-                    icon: "fa-arrow-left"
+                    tipmsg: "Add Facility Owner Type",
+                    icon: "fa-plus"
                 }
             ];
         }]
@@ -28,18 +28,54 @@
     .controller("mfl.setup.controller.facilityOwnerType.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Manage Facility Owner Types"
-                }
-            ];
-            if(!_.isUndefined($stateParams.id)){
+
+            if(!_.isUndefined($stateParams.id) &&
+                $stateParams.id !== "create"){
+                $scope.title = [
+                    {
+                        icon: "fa-edit",
+                        name: "Edit Facility Owner Types"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func : "delete='deleteFacilityOwnerTypes("+
+                            "facilityOwnerTypes.id)'",
+                        class: "action-btn action-btn-danger action-btn-md",
+                        color: "blue",
+                        tipmsg: "Delete Facility Owner Type",
+                        icon: "fa-trash"
+                    },
+                    {
+                        func : "onclick='window.history.back()'",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Bak",
+                        icon: "fa-arrow-left"
+                    }
+                ];
                 adminApi.facilityOwnerTypes.get($stateParams.id).success(function(data){
                     $scope.facilityOwnerTypes = data;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+            }
+            if(!_.isUndefined($stateParams) && $stateParams.id === "create") {
+                $scope.title = [
+                    {
+                        icon: "fa-plus-circle",
+                        name: "New Facility Owner Types"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func : "onclick='window.history.back()'",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Bak",
+                        icon: "fa-arrow-left"
+                    }
+                ];
             }
 
             $scope.updateFacilityOwnerTypes = function(id, frm){
@@ -97,7 +133,7 @@
     .controller("mfl.setup.controller.facilityOwner.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
-
+            console.log($stateParams);
             adminApi.facilityOwnerTypes.list().success(function(ownerTypes){
                 $scope.ownerTypes = ownerTypes.results;
                 if(!_.isUndefined($stateParams.id) && $stateParams.id !== "create"){
@@ -135,23 +171,6 @@
                     }).error(function(error){
                         $scope.alert = error.error;
                     });
-                }
-                if(!_.isUndefined($stateParams.id) && $stateParams.id === "create") {
-                    $scope.title = [
-                        {
-                            icon: "fa-plus-circle",
-                            name: "New Facility Owner"
-                        }
-                    ];
-                    $scope.action = [
-                        {
-                            func : "onclick=window.history.back()",
-                            class: "action-btn action-btn-primary action-btn-md",
-                            color: "blue",
-                            tipmsg: "Go Back",
-                            icon: "fa-arrow-left"
-                        }
-                    ];
                 }
             }).error(function(error){
                 $scope.alert = error.error;

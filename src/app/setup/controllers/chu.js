@@ -27,7 +27,7 @@
     .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
-
+            console.log($stateParams);
             if(!_.isUndefined($stateParams.id) && $stateParams.id !== "create"){
                 $scope.title = [
                     {
@@ -37,7 +37,7 @@
                 ];
                 $scope.action = [
                     {
-                        func : "ng-click='deleteChuStatus(chuStatus.id)'",
+                        func : "ng-click=deleteChuStatus('4813461e-452b-4d4e-a001-29222df4794f')",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Community Unity Status",
