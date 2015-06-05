@@ -5,7 +5,7 @@
     .controller("mfl.service_mgmt.controllers.main", ["$scope","$state",
         function($scope,$state){
         $scope.tooltip = {
-            "title": "",
+            "title": "tooltip",
             "checked": false
         };
         $scope.edit_view = (($state.current.name).indexOf("edit") > -1);
