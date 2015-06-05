@@ -18,10 +18,6 @@
                     },
                     "sidebar@profile": {
                         templateUrl: "users/tpls/profile.side_nav.tpl.html"
-                    },
-                    "main-content@profile": {
-                        controller: "mfl.users.controllers.profile.basic",
-                        templateUrl: "users/tpls/profile.container.tpl.html"
                     }
                 },
                 data : { pageTitle: "Basic Profile" }
