@@ -19,16 +19,13 @@
         <tbody>
             <tr ng-repeat="opt in options">
                 <td data-title="#:"  class="pad-t-15">{{($index + 1 + ((pagination.current_page-1) * 25))}}</td>
-                <td data-title="Display Text:">{{opt.display_text}}</td>
-                <td data-title="Value:">{{opt.value}}</td>
-                <td data-title="Type:">{{opt.option_type}}</td>
-                <td data-title="Exclusive Option?">{{opt.is_exclusive_option}}</td>
+                <td data-title="Display Text:"  class="pad-t-15">{{opt.display_text}}</td>
+                <td data-title="Value:"  class="pad-t-15">{{opt.value}}</td>
+                <td data-title="Type:"  class="pad-t-15">{{opt.option_type}}</td>
+                <td data-title="Exclusive Option?"  class="pad-t-15">{{opt.is_exclusive_option}}</td>
                 <td data-title="Actions:">
-                    <a ui-sref="service_mgmt.option_list.option_edit({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
+                    <a tooltip-placement="bottom" tooltip="edit option" ui-sref="service_mgmt.option_list.option_edit({option_id: opt.id})" ui-sref-opts="{reload:true}" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-edit"></i>
-                    </a>
-                    <a ui-sref="service_mgmt.option_list.option_delete({option_id: opt.id})" class="action-btn action-btn-grid action-btn-info">
-                        <i class="fa fa-trash"></i>
                     </a>
                 </td>
             </tr>

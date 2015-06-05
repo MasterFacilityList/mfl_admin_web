@@ -30,7 +30,8 @@
                         .success(function () {
                             $state.go(
                                 "service_mgmt.option_list",
-                                {"option_id": $scope.option_id}
+                                {"option_id": $scope.option_id},
+                                {reload: true}
                             );
                         });
                 }
@@ -50,7 +51,8 @@
                 .success(function (data) {
                     $state.go(
                         "service_mgmt.option_list",
-                        {"option_id": data.id}
+                        {"option_id": data.id},
+                        {reload: true}
                     );
                 });
             };
@@ -70,7 +72,7 @@
             $scope.save = function () {
                 wrappers.options.remove($scope.option_id)
                 .success(function () {
-                    $state.go("service_mgmt.option_list");
+                    $state.go("service_mgmt.option_list",{reload: true});
                 }).error(function (data) {
                     $log.warn(data);
                 });

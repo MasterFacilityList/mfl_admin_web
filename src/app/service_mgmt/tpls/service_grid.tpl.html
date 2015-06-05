@@ -1,10 +1,10 @@
 <div class="content-header">
-   <span class="content-title">
-        Services
-   </span>
    <div class="action-container content-header-extra">
-        <a class="action-btn action-btn-info action-btn-md" ui-sref="service_mgmt.service_list.service_create"><i class="fa fa-plus"></i></a>
+        <a  tooltip-placement="bottom" tooltip="new service" class="action-btn action-btn-info action-btn-md" ui-sref="service_mgmt.service_list.service_create" ui-sref-opts="{reload:true}"><i class="fa fa-plus"></i></a>
    </div>
+   <h2 class="content-title">
+        <span class="main-title">Services</span>
+   </h2>
 </div>
 <div class="content-body">
     <sil-grid template="service_mgmt/tpls/service_list.tpl.html" grid-for="service_mgmt" api-key="services"

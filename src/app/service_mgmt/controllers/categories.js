@@ -28,7 +28,8 @@
                         .success(function () {
                             $state.go(
                                 "service_mgmt.category_list",
-                                {"category_id": $scope.category_id}
+                                {"category_id": $scope.category_id},
+                                {reload: true}
                             );
                         });
                 }
@@ -47,7 +48,8 @@
                 .success(function (data) {
                     $state.go(
                         "service_mgmt.category_list",
-                        {"category_id": data.id}
+                        {"category_id": data.id},
+                        {reload: true}
                     );
                 });
             };
@@ -67,7 +69,7 @@
             $scope.save = function () {
                 wrappers.categories.remove($scope.category_id)
                 .success(function () {
-                    $state.go("service_mgmt.category_list");
+                    $state.go("service_mgmt.category_list",{reload: true});
                 })
                 .error(function (data) {
                     $log.warn(data);

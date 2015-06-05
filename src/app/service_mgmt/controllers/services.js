@@ -32,7 +32,8 @@
                         .success(function () {
                             $state.go(
                                 "service_mgmt.service_list",
-                                {"service_id": $scope.service_id}
+                                {"service_id": $scope.service_id},
+                                {reload: true}
                             );
                         });
                 }
@@ -55,7 +56,8 @@
                 .success(function (data) {
                     $state.go(
                         "service_mgmt.service_list",
-                        {"service_id": data.id}
+                        {"service_id": data.id},
+                        {reload: true}
                     );
                 });
             };
@@ -75,7 +77,7 @@
             $scope.save = function () {
                 wrappers.services.remove($scope.service_id)
                 .success(function () {
-                    $state.go("service_mgmt.service_list");
+                    $state.go("service_mgmt.service_list",{reload: true});
                 })
                 .error(function (data) {
                     $log.warn(data);
