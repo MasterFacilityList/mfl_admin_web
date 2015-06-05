@@ -3,7 +3,7 @@
     angular.module("mfl.setup.api", [
         "sil.api.wrapper"
     ])
-    .provider("adminApi", function(){
+    .provider("adminApi",[function(){
         this.$get = ["api",function(api){
             return {
                 constituencies:api.setBaseUrl("api/common/constituencies"),
@@ -20,5 +20,5 @@
 
             };
         }];
-    });
+    }]);
 })(angular);
