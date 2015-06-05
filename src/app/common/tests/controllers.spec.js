@@ -26,7 +26,15 @@
                 }
             ]);
         });
-
+        it("should test Setup State controller", function () {
+            inject(["$state","$controller",
+                function (state,$controller) {
+                    spyOn(state, "go");
+                    $controller("mfl.common.controllers.stateSetup", {});
+                    expect(state.go).toHaveBeenCalled();
+                }
+            ]);
+        });
         it("should test ServicesState controller", function () {
             inject(["$state","$controller",
                 function (state,$controller) {
