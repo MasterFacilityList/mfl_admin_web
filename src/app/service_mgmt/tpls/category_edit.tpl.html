@@ -5,32 +5,32 @@
 </div>
 <div class="content-body">
     <form name="category_frm">
-        <div class="content-card">
-           <div class="pad-form">
-                <div class="group">
-                    <input type="text" name="name" ng-model="category.name" required />
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Name</label>
-                </div>
-                <div class="group">
-                    <input type="text" name="abbreviation" ng-model="category.abbreviation" required/>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Abbreviation</label>
-                </div>
-                <div class="group">
-                    <textarea name="description" ng-model="category.description" required /></textarea>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Description</label>
-                </div>
-           </div>
-            <div class="pad-l-20p">
-                <a class="md-btn md-btn-clear" ui-sref="service_mgmt.category_list">Cancel</a>
-                    <a class="md-btn md-btn-danger pad-l-20p" ui-sref="service_mgmt.category_delete({category_id: category_id})">Delete</a>
-                    <button class="md-btn md-btn-primary pad-l-20p" ng-click="save(category_frm)">Save</button>
+            <div class="pad-form">
+               <div class="content-card pad-15">
+                    <div class="group">
+                        <input type="text" name="name" ng-model="category.name" required />
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Name</label>
+                    </div>
+                    <div class="group">
+                        <input type="text" name="abbreviation" ng-model="category.abbreviation" required/>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Abbreviation</label>
+                    </div>
+                    <div class="group">
+                        <textarea name="description" ng-model="category.description" required ></textarea>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Description</label>
+                    </div>
+                    <div class="margin-t-50">
+                        <a class="md-btn md-btn-clear" ui-sref="service_mgmt.category_list">Cancel</a>
+                            <a class="md-btn md-btn-danger" ui-sref="service_mgmt.category_delete({category_id: category_id})">Delete</a>
+                            <button class="md-btn md-btn-primary" ng-click="save(category_frm)">Save</button>
+                    </div>
+               </div>
             </div>
-        </div>
     </form>
 </div>

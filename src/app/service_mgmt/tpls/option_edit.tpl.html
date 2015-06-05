@@ -5,8 +5,8 @@
 </div>
 <div class="content-body">
     <form name="option_frm">
-        <div class="content-card">
-           <div class="pad-form">
+        <div class="pad-form">
+           <div class="content-card pad-15">
                 <div class="group">
                     <input type="text" name="display_text" ng-model="option.display_text" required />
                     <span class="highlight"></span>
@@ -37,12 +37,12 @@
                     <span class="bar"></span>
                     <label>Value</label>
                 </div>
+                <div class="margin-t-50">
+                    <a class="md-btn md-btn-clear" ui-sref="service_mgmt.option_list">Cancel</a>
+                    <a class="md-btn md-btn-danger pad-l-20p" ui-sref="service_mgmt.option_delete({option_id: option_id})">Delete</a>
+                    <button ng-click="save(option_frm)" class="md-btn md-btn-primary">Save</button>
+                </div>
            </div>
-            <div class="pad-l-20p">
-                <a class="md-btn md-btn-clear" ui-sref="service_mgmt.option_list">Cancel</a>
-                <a class="md-btn md-btn-danger pad-l-20p" ui-sref="service_mgmt.option_delete({option_id: option_id})">Delete</a>
-                <button ng-click="save(option_frm)" class="md-btn md-btn-primary">Save</button>
-            </div>
         </div>
     </form>
 </div>

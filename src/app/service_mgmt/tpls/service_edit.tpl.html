@@ -5,8 +5,8 @@
 </div>
 <div class="content-body">
     <form class="" name="service_frm">
-        <div class="content-card">
-           <div class="pad-form">
+        <div class="pad-form">
+           <div class="content-card pad-15">
                 <div class="group">
                     <input type="text" name="name" ng-model="service.name" required />
                     <span class="highlight"></span>
@@ -33,13 +33,13 @@
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
-           </div>
-           <div class="pad-l-20p">
-                <a class="md-btn md-btn-clear" ui-sref="service_mgmt.service_list">Cancel</a>
-                <a  class="md-btn md-btn-danger pad-l-20p" ui-sref="service_mgmt.service_delete({service_id: service.id})">
-                    Delete
-                </a>
-                <button class="md-btn md-btn-primary margin-l-5" ng-click="save(service_frm)">Save</button>
+               <div class="margin-t-50">
+                    <a class="md-btn md-btn-clear" ui-sref="service_mgmt.service_list">Cancel</a>
+                    <a  class="md-btn md-btn-danger pad-l-20p" ui-sref="service_mgmt.service_delete({service_id: service.id})">
+                        Delete
+                    </a>
+                    <button class="md-btn md-btn-primary margin-l-5" ng-click="save(service_frm)">Save</button>
+               </div>
            </div>
         </div>
     </form>
