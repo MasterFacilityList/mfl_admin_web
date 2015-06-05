@@ -187,13 +187,7 @@
             },
             link: function(scope){
                 scope.$watch("filters", function(filters){
-                    if(_.has(filters, "page")||
-                       _.has(filters, "ordering")||_.has(filters, "search")){
 
-                        delete filters.page;
-                    }else{
-                        scope.getData();
-                    }
                 });
                 $rootScope.$on("silGrid.data.refresh", function(event){
                     event.stopPropagation();
