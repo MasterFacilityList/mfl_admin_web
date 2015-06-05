@@ -55,7 +55,7 @@
         .state("service_mgmt.category_list.category_edit", {
             url: ":category_id/edit/",
             views: {
-                "main-content@service_mgmt": {
+                "main-content@service_mgmt.category_list": {
                     controller: "mfl.service_mgmt.controllers.category_edit",
                     templateUrl: "service_mgmt/tpls/category_edit.tpl.html"
                 }
@@ -65,7 +65,7 @@
         .state("service_mgmt.category_list.category_delete", {
             url: "categories/:category_id/delete/",
             views: {
-                "main-content@service_mgmt": {
+                "main-content@service_mgmt.category_list": {
                     controller: "mfl.service_mgmt.controllers.category_delete",
                     templateUrl: "service_mgmt/tpls/category_delete.tpl.html"
                 }

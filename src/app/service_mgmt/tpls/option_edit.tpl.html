@@ -1,6 +1,6 @@
 <div class="content-header">
    <span class="content-title">
-       <i class="fa fa-plus"></i> New Option
+       <i class="fa {{edit_view ? 'fa-edit' : 'fa-plus'}}"></i> {{edit_view ? 'Edit' : 'New'}} Option
    </span>
 </div>
 <div class="content-body">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="margin-t-50">
                     <a class="md-btn md-btn-clear" ui-sref="service_mgmt.option_list">Cancel</a>
-                    <a class="md-btn md-btn-danger pad-l-20p" ui-sref="service_mgmt.option_delete({option_id: option_id})">Delete</a>
+                    <a class="md-btn md-btn-danger {{edit_view ? '' : 'hidden'}}" ui-sref="service_mgmt.option_list.option_delete({option_id: option_id})">Delete</a>
                     <button ng-click="save(option_frm)" class="md-btn md-btn-primary">Save</button>
                 </div>
            </div>

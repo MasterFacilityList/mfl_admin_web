@@ -1,6 +1,6 @@
 <div class="content-header">
    <span class="content-title">
-       <i class="fa fa-plus"></i> New Category
+       <i class="fa {{edit_view ? 'fa-edit' : 'fa-plus'}}"></i> {{edit_view ? 'Edit' : 'New'}} Category
    </span>
 </div>
 <div class="content-body">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="margin-t-50">
                         <a class="md-btn md-btn-clear" ui-sref="service_mgmt.category_list">Cancel</a>
-                            <a class="md-btn md-btn-danger" ui-sref="service_mgmt.category_delete({category_id: category_id})">Delete</a>
+                            <a class="md-btn md-btn-danger {{edit_view ? '' : 'hidden'}}" ui-sref="service_mgmt.category_list.category_delete({category_id: category_id})">Delete</a>
                             <button class="md-btn md-btn-primary" ng-click="save(category_frm)">Save</button>
                     </div>
                </div>
