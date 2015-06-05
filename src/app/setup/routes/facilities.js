@@ -7,7 +7,10 @@
         .state("setup.facility_owners", {
                 url: "/facility_owners",
                 views: {
-                    "main-content@setup": {
+                    "body@setup" : {
+                        templateUrl : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.facility_owners": {
                         controller: "mfl.setup.controller.facilityOwner.list",
                         templateUrl: "setup/tpls/facilities/owners/facility-owners-list.tpl.html"
                     }
@@ -17,7 +20,7 @@
         .state("setup.facility_owners.view", {
                 url: "/:id",
                 views: {
-                    "main-content@setup": {
+                    "main-content@setup.facility_owners": {
                         controller: "mfl.setup.controller.facilityOwner.view",
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owners-view.tpl.html"
@@ -27,7 +30,7 @@
         .state("setup.facility_owners.create", {
                 url: "/create",
                 views: {
-                    "main-content@setup": {
+                    "main-content@setup.facility_owners": {
                         controller: "mfl.setup.controller.facilityOwner.view",
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owners-view.tpl.html"
