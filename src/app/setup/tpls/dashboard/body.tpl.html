@@ -1,0 +1,49 @@
+ <div class="my-sidebar col-lg-2" >
+    <aside class="side-left partial">
+    <ul class=" nav nav-list">
+        <li><label class="sidebar-label tree-toggle nav-header">Administrative units</label>
+          <ul class="nav nav-list tree">
+              <li ui-sref-active="active">
+                <a ui-sref="setup.counties">Counties</a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="setup.constituencies">Constituencies</a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="setup.wards">Wards</a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="setup.towns">Towns</a>
+              </li>
+          </ul>
+        </li>
+        <li><label class="sidebar-label tree-toggle nav-header">Community Units</label>
+          <ul class="nav nav-list tree">
+              <li ui-sref-active="active">
+                <a ui-sref="setup.chu_status">Community Units Status</a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="setup.chu_approvers">CU Approvers</a>
+              </li>
+          </ul>
+        </li>
+        <li><label class="sidebar-label tree-toggle nav-header">Contact types</label>
+          <ul class="nav nav-list tree">
+              <li ui-sref-active="active">
+                <a ui-sref="setup.contacts">Contact type</a>
+              </li>
+          </ul>
+        </li>
+        <li><label class="sidebar-label tree-toggle nav-header">Facility details</label>
+          <ul class="nav nav-list tree">
+              <li><a href="#">Owners</a></li>
+              <li><a href="#">Owner types</a></li>
+              <li><a href="#">Job titles</a></li>
+              <li><a href="#">Regulatory bodies</a></li>
+          </ul>
+        </li>
+    </ul>
+ </aside>
+
+ </div>
+ <div class="content partial col-lg-10" ui-view="main-content"></div>

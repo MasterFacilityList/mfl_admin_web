@@ -15,8 +15,8 @@
                         controller: "mfl.common.controllers.header",
                         templateUrl: "common/tpls/header.tpl.html"
                     },
-                    "sidebar@setup": {
-                        templateUrl: "setup/tpls/dashboard/side_nav.tpl.html"
+                    "body@setup": {
+                        controller: "mfl.common.controllers.stateSetup"
                     },
                     "main-content@setup": {
                         controller: "mfl.setup.controller.dashboard",
