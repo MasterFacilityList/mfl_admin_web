@@ -1,46 +1,76 @@
 <contentheader></contentheader>
-<div class="" style="margin-top:20px">
-    <div class="col-sm-6">
-        <div class="col-sm-8 content-cardtotals-card totals-card">
-            <h4>Recently Added Facilities:  <span>{{ summary.recently_created }}</span></h4>
+<div class="col-md-12" style="margin-top:20px">
+
+        <div class="col-sm-4 ">
+            <div class="col-lg-8 content-card totals-card-total">
+            <h4 class="text-center fw-600">Total Facilities</h4>
+            <h3 class="text-center text-white fw-700">
+                <span> {{summary.total_facilities }} </span>
+            </h3>
+            </div>
         </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="col-sm-8 content-card">
-            <h4>Total Facilities: <span> {{summary.total_facilities }} </span></h4>
+
+        <div class="col-sm-4">
+            <div class="col-lg-8 col-lg-offset-2 content-card totals-card">
+            <h4 class="text-center fw-600">Recently Added Facilities</h4>
+            <h3 class="text-center text-white fw-700">
+                <span>{{ summary.recently_created }}</span>
+            </h3>
+            </div>
         </div>
-    </div>
+
+        <div class="col-sm-4">
+            <div class="col-lg-8 pull-right  content-card totals-card-owners">
+            <h4 class="text-center fw-600">Total Facility Owners</h4>
+            <h3 class="text-center text-white fw-700">
+                <span> {{summary.owner_count }} </span>
+            </h3>
+            </div>
+        </div>
 </div>
 <div class="">
-    <div class="col-lg-6">
-        <div class="card card-panel">
-            <div class="card-heading-active">
-                <h4>Owner Types</h4>
+    <div class="col-md-12">
+        <div class="col-lg-6">
+            <div class="content-card">
+                <div class="">
+                    <h3 class="text-center fw-600">Facility Owner Types</h3>
+                </div>
+                <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
+                    <img src="assets/img/ajax-loader.gif" width="50px" height="50px">
+                </div>
+                <div class="panel-body">
+                    <div id="chartowners">
+                    </div>
+                </div>
             </div>
-            <div class="panel-body">
-                <div id="chartowners">
+        </div>
+        <div class="col-lg-6">
+            <div class="content-card">
+                <div class="">
+                    <h3 class="text-center fw-600">Facility Status</h3>
+                </div>
+                <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
+                    <img src="assets/img/ajax-loader.gif" width="50px" height="50px">
+                </div>
+                <div class="panel-body">
+                    <div id="chartfacility">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="card card-panel">
-            <div class="card-heading-active">
-                <h4>Facility Status</h4>
-            </div>
-            <div class="panel-body">
-                <div id="chartfacility">
+    <div class="col-lg-12" style="background-color: #f4f4f6;">
+        <div class="col-md-12">
+            <div class="content-card">
+                <div class="">
+                    <h3 class="text-center fw-600">Top 10 Areas with most Facilities</h3>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="card card-panel">
-            <div class="card-heading-active">
-                <h4>Top 10 Counties</h4>
-            </div>
-            <div class="panel-body">
-                <div id="facilitybar">
+                <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
+                    <img src="assets/img/ajax-loader.gif" width="50px" height="50px">
+                </div>
+                <div class="panel-body">
+                    <div id="facilitybar">
+                    </div>
                 </div>
             </div>
         </div>

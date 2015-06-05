@@ -26,7 +26,7 @@
                 }
             ]);
         });
-        
+
         it("should test ServicesState controller", function () {
             inject(["$state","$controller",
                 function (state,$controller) {
@@ -36,6 +36,5 @@
                 }
             ]);
         });
-        
     });
 })();
