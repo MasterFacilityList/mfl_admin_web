@@ -7,7 +7,10 @@
         .state("setup.contacts", {
                 url: "/contacts",
                 views: {
-                    "main-content@setup": {
+                    "body@setup" : {
+                        templateUrl: "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.contacts": {
                         controller: "mfl.setup.controller.contacts.list",
                         templateUrl: "setup/tpls/contacts/contacts-list.tpl.html"
                     }
@@ -16,7 +19,7 @@
         .state("setup.contacts.view", {
                 url: "/:id",
                 views: {
-                    "main-content@setup": {
+                    "main-content@setup.contacts": {
                         controller: "mfl.setup.controller.contacts.view",
                         templateUrl: "setup/tpls/contacts/contacts-view.tpl.html"
                     }
@@ -25,7 +28,7 @@
         .state("setup.contacts.create", {
                 url: "/create",
                 views: {
-                    "main-content@setup": {
+                    "main-content@setup.contacts": {
                         controller: "mfl.setup.controller.contacts.view",
                         templateUrl: "setup/tpls/contacts/contacts-view.tpl.html"
                     }
