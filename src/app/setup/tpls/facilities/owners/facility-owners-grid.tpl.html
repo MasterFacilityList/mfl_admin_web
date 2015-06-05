@@ -7,15 +7,15 @@
     <table class="table table-hover fs-14">
         <thead class="cf">
             <th>Code</th>
-            <th id-sort field='name'>Name</th>
-            <th id-sort field='abbreviation'>Abbreviation</th>
+            <th sil-grid-sort field='name'>Name</th>
+            <th sil-grid-sort field='abbreviation'>Abbreviation</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="owner in facilityOwners">
-                <td data-title="Code" class="pad-t-15">{{owner.code}}</td>
-                <td data-title="Name" class="pad-t-15">{{owner.name}}</td>
-                <td data-title="Abbreviation" class="pad-t-15">{{owner.abbreviation}}</td>
+                <td data-title="Code:" class="pad-t-15">{{owner.code}}</td>
+                <td data-title="Name:" class="pad-t-15">{{owner.name}}</td>
+                <td data-title="Abbreviation:" class="pad-t-15">{{owner.abbreviation}}</td>
                 <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.facility_owners.view({id : owner.id})" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-edit"></i>

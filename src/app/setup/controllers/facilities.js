@@ -50,7 +50,7 @@
                         func : "onclick='window.history.back()'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
-                        tipmsg: "Go Bak",
+                        tipmsg: "Go Back",
                         icon: "fa-arrow-left"
                     }
                 ];
