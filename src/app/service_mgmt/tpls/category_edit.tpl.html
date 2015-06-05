@@ -1,7 +1,11 @@
 <div class="content-header">
-   <span class="content-title">
-       <i class="fa {{edit_view ? 'fa-edit' : 'fa-plus'}}"></i> {{edit_view ? 'Edit' : 'New'}} Category
-   </span>
+   <div class="action-container content-header-extra">
+        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.category_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
+        <a tooltip="delete category" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} action-btn action-btn-danger action-btn-md"  ui-sref="service_mgmt.category_list.category_delete({category_id: category_id})" ui-sref-opts="{reload:true}"><i class="fa fa-trash"></i></a>
+   </div>
+   <h2 class="content-title">
+       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus'}}"></i> {{edit_view ? 'Edit' : 'New'}} Category</span>
+   </h2>
 </div>
 <div class="content-body">
     <form name="category_frm">
@@ -27,7 +31,6 @@
                     </div>
                     <div class="margin-t-50">
                         <a class="md-btn md-btn-clear" ui-sref="service_mgmt.category_list">Cancel</a>
-                            <a class="md-btn md-btn-danger {{edit_view ? '' : 'hidden'}}" ui-sref="service_mgmt.category_list.category_delete({category_id: category_id})">Delete</a>
                             <button class="md-btn md-btn-primary" ng-click="save(category_frm)">Save</button>
                     </div>
                </div>

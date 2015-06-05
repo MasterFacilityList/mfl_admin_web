@@ -39,7 +39,8 @@
                     controller: "mfl.service_mgmt.controllers.category_list",
                     templateUrl: "service_mgmt/tpls/category_grid.tpl.html"
                 }
-            }
+            },
+            cache:false
         })
 
         .state("service_mgmt.category_list.category_create", {
