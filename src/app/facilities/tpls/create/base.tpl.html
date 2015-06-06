@@ -5,12 +5,13 @@
                  <div class="container-fluid">
                     <ul class="form-tab margin-t--27">
                         <li ui-sref-active="active" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <a ui-sref=".basic">
+                            <a ui-sref=".basic({facilityId: facility.id})">
                                 <span class="fw-900">
                                     <i class="fa fa-building"></i> Facility Details
                                 </span>
                             </a>
                         </li>
+
                         <li ui-sref-active="facility.id"  class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <a ui-sref=".address({facilityId: facility.id})" mfl-active disabled="{{facility.id}}">
                                 <span class="fw-900 ">

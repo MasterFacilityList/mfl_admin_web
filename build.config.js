@@ -101,6 +101,7 @@ module.exports = {
             "vendor/ng-tags-input/ng-tags-input.js",
             "vendor/acute-select/acute/acute.select/acute.select.js",
             "vendor/moment/moment.js",
+            "vendor/modernizr/modernizr.js",
             "vendor/d3/d3.js",
             "vendor/c3/c3.js",
             "libs/api_wrapper.js",

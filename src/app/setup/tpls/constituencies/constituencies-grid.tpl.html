@@ -4,22 +4,15 @@
     </div>
 </div>
 <div id="no-more-tables" class="col-lg-12 margin-t-15">
-    <table class="table content-card cf">
+    <table class="table table-hover fs-14">
         <thead class="cf">
-            <th>Name</th>
-            <th class="text-center">Actions</th>
+            <th sil-grid-sort field='code'>Code</th>
+            <th sil-grid-sort field='name'>Name</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="const in consts | filter: search.query">
-                <td data-title="Name">{{const.name}}</td>
-                <td data-title="Actions" class="text-center">
-                    <a ui-sref="setup.constituencies.view_wards({const_id : const.id})" tooltip="View Wards" tooltip-placement="bottom" class="action-btn action-btn-grid action-btn-primary">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <a ui-sref="setup.constituencies.edit({const_id : const.id})" tooltip="Edit Constituency" tooltip-placement="bottom" class="action-btn action-btn-grid action-btn-primary">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                </td>
+                <td data-title="#" class="pad-t-15">{{const.code}}</td>
+                <td data-title="Name" class="pad-t-15">{{const.name}}</td>
             </tr>
         </tbody>
     </table>

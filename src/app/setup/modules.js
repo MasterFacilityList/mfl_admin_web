@@ -4,6 +4,7 @@
             "ui.router",
 
             "mfl.setup.controllers",
+            "mfl.setup.facilities.controllers",
             "mfl.setup.routes",
             "mfl.setup.api",
             "mfl.common.directives"

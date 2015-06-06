@@ -3,8 +3,34 @@
 
     angular.module("mfl.users.controllers.users", [
         "mfl.auth.services",
-        "mfl.users.services"
+        "mfl.users.services",
+        "ui.router"
     ])
+
+    .controller("mfl.users.controllers.user_delete",
+        ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
+        function ($scope, $log, $state, $stateParams, wrappers) {
+            $scope.user_id = $stateParams.user_id;
+
+            wrappers.users.get($scope.user_id)
+                .success(function (data) {
+                    $scope.user = data;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            $scope.remove = function () {
+                wrappers.users.remove($scope.user_id)
+                    .success(function () {
+                        $state.go("users");
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+            };
+        }]
+    )
 
     .controller("mfl.users.controllers.home", ["$scope", function ($scope) {
         $scope.test = "Manage users";
@@ -45,18 +71,12 @@
                 color: "blue",
                 tipmsg: "New User",
                 icon: "fa-user-plus"
-            },
-            {
-                func : "onclick=window.history.back()",
-                class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
-                tipmsg: "Go back",
-                icon: "fa-arrow-left"
             }
         ];
     }])
 
-    .controller("mfl.users.controllers.new_user", ["$scope", "$state", "mfl.users.wrappers",
+    .controller("mfl.users.controllers.new_user",
+        ["$scope", "$state", "mfl.users.services.wrappers",
         function ($scope, $state, wrappers) {
             $scope.new_user = true;
             $scope.title = [
@@ -207,8 +227,8 @@
                         console.log(e);
                     });
             };
-        }
-    ])
+        }]
+    )
 
     .controller("mfl.users.controllers.edit_user", ["$scope", function ($scope) {
         $scope.test = "Edit user";
@@ -240,7 +260,8 @@
         ];
     }])
 
-    .controller("mfl.users.controllers.view_user", ["$scope", "$stateParams", "mfl.users.wrappers",
+    .controller("mfl.users.controllers.view_user",
+        ["$scope", "$stateParams", "mfl.users.services.wrappers",
         function ($scope, $stateParams, wrappers) {
             $scope.test = "View user";
             $scope.path = [
@@ -303,7 +324,7 @@
                 .error(function (e) {
                     console.log(e);
                 });
-        }
-    ]);
+        }]
+    );
 
 })(angular, _);

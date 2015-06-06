@@ -1,21 +1,51 @@
-<div>
-    <p>Option edit</p>
-
-    <div>
-        <form name="option_frm">
-            <p>Display Text : <input name="display_text" type="text" ng-model="option.display_text" /></p>
-            <p>Option Type : </p>
-                <select name="option_type" ng-model="option.option_type">
-                    <option value="">Select an option type</option>
-                    <option ng-repeat="opt_type in option_types" value="{{opt_type}}">{{opt_type}}</option>
-                </select>
-            <p>Is Exclusive Option : </p><input type="checkbox" name="is_exclusive_option" ng-model="option.is_exclusive_option" />
-            <p>Value : </p><input type="text" name="value" ng-model="option.value" />
-        </form>
-    </div>
-
-    <a class="btn btn-default" ui-sref="service_mgmt.option_list">Cancel</a>
-    <a class="btn btn-default" ui-sref="service_mgmt.option_delete({option_id: option_id})">Delete</a>
-    <button ng-click="save(option_frm)" class="btn btn-primary">Save</button>
-
+<div class="content-header">
+   <div class="action-container content-header-extra">
+        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.category_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
+        <a tooltip="delete option" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} action-btn action-btn-danger action-btn-md"  ui-sref="service_mgmt.option_list.option_delete({category_id: category_id})"><i class="fa fa-trash"></i></a>
+   </div>
+   <h2 class="content-title">
+       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus'}}"></i> {{edit_view ? 'Edit' : 'New'}} Option</span>
+   </h2>
+</div>
+<div class="content-body">
+    <form name="option_frm">
+        <div class="pad-form">
+           <div class="content-card pad-15">
+                <div class="group">
+                    <input type="text" name="display_text" ng-model="option.display_text" required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Display Text</label>
+                </div>
+                <div class="pad-v-10">
+                    <div class="checkbox-group margin-t-10">
+                        <input type="checkbox" name="is_exclusive_option" ng-model="option.is_exclusive_option"  id="is_exclusive"/>
+                        <label for="is_exclusive">
+                            <span class="check"></span>
+                            <span class="box"></span>
+                             Is Exclusive Option
+                         </label>
+                    </div>
+                </div>
+                <div class="group">
+                    <select name="category" ng-model="service.category" required>
+                        <option value="" disabled>Select an option type</option>
+                        <option ng-repeat="opt_type in option_types" value="{{opt_type | titlecase}}">{{opt_type}}</option>
+                    </select>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="group">
+                    <input type="text" name="value" ng-model="option.value" required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Value</label>
+                </div>
+                <div class="margin-t-50">
+                    <a class="md-btn md-btn-clear" ui-sref="service_mgmt.option_list">Cancel</a>
+                    <button ng-click="save(option_frm)" class="md-btn md-btn-primary">Save</button>
+                </div>
+           </div>
+        </div>
+    </form>
 </div>

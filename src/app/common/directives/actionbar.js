@@ -6,9 +6,6 @@
         return {
             restrict: "E",
             replace: true,
-            scope:{
-                action:"="
-            },
             template: "<div class='action-container content-header-extra'></div>",
             link: function ($scope, $element) {
                 var action = "";

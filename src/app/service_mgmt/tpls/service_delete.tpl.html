@@ -1,9 +1,18 @@
-<div>
-    <p>Service delete</p>
-    <p>Are you sure you want to delete the service <strong>{{service.name}}</strong> ?</p>
-
-    <button class="btn btn-danger" ng-click="save()">Yes</button>
-    <a ui-sref="service_mgmt.service_list" class="btn btn-default">
-        Cancel
-    </a>
+<div class="content-header">
+   <span class="content-title">
+       <i class="fa fa-trash"></i> Delete Service
+   </span>
+</div>
+<div class="content-body">
+    <form name="category_frm">
+            <div class="pad-form">
+               <div class="content-card pad-15">
+                    <p>Are you sure you want to delete the service <strong>{{service.name}}</strong>?</p>
+                    <div class="margin-t-50">
+                            <a class="md-btn md-btn-primary" ui-sref="service_mgmt.service_list">No</a>
+                            <button class="md-btn md-btn-danger" ng-click="save()">Yes</button>
+                    </div>
+               </div>
+            </div>
+    </form>
 </div>

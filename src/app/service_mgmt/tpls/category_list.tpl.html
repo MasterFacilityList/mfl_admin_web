@@ -1,7 +1,14 @@
-<div>
-    <table class="table content-card">
+<div class="content-card">
+    <div class="pull-left col-sm-4 col-xs-6">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-2">
+    <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
+    </div>
+    <table class="table table-hover" id="no-more-tables">
         <thead>
             <tr>
+               <th>#</th>
                 <th sil-grid-sort field='name'>Name</th>
                 <th>Abbreviation</th>
                 <th sil-grid-sort field='description'>Description</th>
@@ -10,18 +17,17 @@
         </thead>
         <tbody>
             <tr ng-repeat="category in categories">
-                <td>{{category.name}}</td>
-                <td>{{category.abbreviation}}</td>
-                <td>{{category.description}}</td>
-                <td>
-                    <a ui-sref="service_mgmt.category_edit({category_id: category.id})" class="action-btn action-btn-grid action-btn-info">
+                <td data-title="#:"  class="pad-t-15">{{($index + 1 + ((pagination.current_page-1)  * 25))}}</td>
+                <td data-title="Name:" class="pad-t-15">{{category.name}}</td>
+                <td data-title="Abbreviation:" class="pad-t-15">{{category.abbreviation}}</td>
+                <td data-title="Description:" class="pad-t-15">{{category.description}}</td>
+                <td data-title="Actions:">
+                    <a tooltip-placement="bottom" tooltip="Edit category" ui-sref="service_mgmt.category_list.category_edit({category_id: category.id})"  ui-sref-opts="{reload:true}" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-edit"></i>
-                    </a>
-                    <a ui-sref="service_mgmt.category_delete({category_id: category.id})" class="action-btn action-btn-grid action-btn-info">
-                        <i class="fa fa-trash"></i>
                     </a>
                 </td>
             </tr>
         </tbody>
     </table>
+    <sil-grid-pagination> </sil-grid-pagination>
 </div>

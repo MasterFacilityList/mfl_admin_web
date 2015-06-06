@@ -17,7 +17,7 @@
             data : { pageTitle: "Facility Management" }
         })
         .state("facilities.create.basic", {
-                url: "/basicdetails",
+                url: "/basicdetails/:facilityId",
                 views: {
                     "form-view@facilities.create" : {
                         templateUrl : "facilities/tpls/create/basic.tpl.html",
