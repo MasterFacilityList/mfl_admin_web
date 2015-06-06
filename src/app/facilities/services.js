@@ -14,6 +14,9 @@
         this.wards = api.setBaseUrl("api/common/wards");
         this.counties = api.setBaseUrl("api/common/counties");
         this.towns = api.setBaseUrl("api/common/towns");
+        this.contact_types = api.setBaseUrl("api/common/contact_types/");
+        this.contacts = api.setBaseUrl("api/common/contacts/");
+        this.facility_contacts = api.setBaseUrl("api/facilities/contacts/");
         this.utils = function(){
             return {
                 cleanFormData : function(data){
@@ -23,6 +26,22 @@
                         }
                     });
                     return data;
+                },
+                createLock: function(stateParams, state){
+                    if(_.isEmpty(stateParams.facilityId)){
+                        state.go("facilities.create.basic");
+                    }
+                },
+                resolvePromise: function(scope,scopeObj, key, promise){
+                    promise.success(function(data){
+                        scopeObj[key] = data.results||data;
+                        safeApply(scope);
+                    }).error(function(error){
+                        scope.alert = error.error_msg;
+                    });
+                },
+                getError: function(error){
+                    return error.error_msg.error;
                 }
             };
         }();
