@@ -62,14 +62,7 @@
 
         $scope.events = {
             getData: function(filter, key,  api){
-                api.filter(filter).success(function(data){
-                    $scope.filterData[key] = [];
-                    $scope.filterData[key] = data.results;
-                    safeApply($scope);
-                }).error(function(error){
-                    $scope.alert = error.error_msg;
-                    $scope.filterData[key] = [];
-                });
+                facilityApi.utils.resolvePromise($scope,$scope.filterData, key, api.filter(filter));
             },
             county: function(value){
                 $scope.events.getData(
@@ -81,23 +74,26 @@
             }
         };
         if(!_.isEmpty($stateParams) || !_.isEmpty($stateParams.facilityId)){
-            facilityApi.facilities.get($stateParams.facilityId).success(function(data){
-                $scope.facility = data;
-            }).error(function(err){
-                $scope.alert = err.error_msg;
-            }) ;
+            facilityApi.utils.resolvePromise(
+                $scope,$scope, facilityApi.facilities.get($stateParams.facilityId));
         }
         $scope.saveFacility = function(facility){
             facilityApi.facilities.create(
                 facilityApi.utils.cleanFormData(facility)).success(function(data){
                 $scope.facility = data;
-                $state.go("facilities.create.address", {facilityId: $scope.facilityId});
+                $state.go("facilities.create.address", {facilityId: $scope.facility.id});
             }).error(function(error){
-                $scope.alert = error.error_msg;
+                $scope.alert = error.error_msg.error;
             });
         };
     }])
-    .controller("mfl.facilities.controllers.create.address", ["$scope", function($scope){
+    .controller("mfl.facilities.controllers.create.address", ["$scope","$state",
+    "$stateParams", "mfl.facilities.wrappers",
+    function($scope, $state, $stateParams, facilityApi){
+        facilityApi.utils.createLock($stateParams, $state);
+        $scope.facility= {
+            id : $stateParams.facilityId
+        };
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -117,12 +113,19 @@
                 icon: "fa-arrow-left"
             }
         ];
+
     }])
 
-    .controller("mfl.facilities.controllers.create.contacts", ["$scope", function($scope){
+    .controller("mfl.facilities.controllers.create.contacts", ["$scope",
+     "$stateParams","$state", "mfl.facilities.wrappers",
+     function($scope, $stateParams,$state, facilityApi){
+        facilityApi.utils.createLock($stateParams, $state);
         $scope.tooltip = {
             "title": "",
             "checked": false
+        };
+        $scope.facility= {
+            id : $stateParams.facilityId
         };
         $scope.title = [
             {
@@ -139,8 +142,51 @@
                 icon: "fa-arrow-left"
             }
         ];
+        $scope.getOptionsData = {
+            contactType: function(callback){
+                facilityApi.contact_types.list()
+                .success(function(data){
+                    callback(data.results);
+                }).error(function(error){
+                    callback([]);
+                    $scope.alert = facilityApi.utils.getError(error);
+                });
+            }
+        };
+        $scope.filters ={
+            facility: $scope.facility.id,
+            page_size: 3
+        };
+        $scope.saveContact = function(contact){
+            facilityApi.contacts.create(
+                facilityApi.utils.cleanFormData(contact))
+            .success(function(data){
+                var facilityContact = {
+                    contact: data.id,
+                    facility: $scope.facility.id
+                };
+                facilityApi.facility_contacts.create(facilityContact)
+                .success(function(){
+                    $scope.contact = {
+                        name: "",
+                        contact_type: ""
+                    };
+                    $scope.$emit("silGrid.data.refresh");
+                }).error(function(error){
+                    $scope.alert = facilityApi.utils.getError(error);
+                });
+            }).error(function(error){
+                $scope.alert = facilityApi.utils.getError(error);
+            });
+        };
     }])
-    .controller("mfl.facilities.controllers.create.services", ["$scope", function($scope){
+    .controller("mfl.facilities.controllers.create.services", ["$scope",
+     "$stateParams", "$state", "mfl.facilities.wrappers",
+    function($scope, $stateParams, $state,facilityApi){
+        facilityApi.utils.createLock($stateParams, $state);
+        $scope.facility= {
+            id : $stateParams.facilityId
+        };
         $scope.tooltip = {
             "title": "",
             "checked": false
