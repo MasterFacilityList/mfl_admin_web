@@ -33,15 +33,15 @@
 .sil-orderable  {
     cursor: pointer;
     padding-right: 20px;
-    background: url(../../assets/img/sil-arrow-inactive-up.png) right center no-repeat;
+    background: url(../../assets/img/sil-arrow-inactive-up.png) left center no-repeat;
 }
 .sil-orderable-asc  {
     cursor: pointer;
     padding-right: 20px;
-    background: url(../../assets/img/sil-arrow-active-up.png) right center no-repeat;
+    background: url(../../assets/img/sil-arrow-active-up.png) left center no-repeat;
 }
 .sil-orderable-desc  {
     cursor: pointer;
     padding-right: 20px;
-    background: url(../../assets/img/sil-arrow-active-down.png) right center no-repeat;
+    background: url(../../assets/img/sil-arrow-active-down.png) left center no-repeat;
 }
