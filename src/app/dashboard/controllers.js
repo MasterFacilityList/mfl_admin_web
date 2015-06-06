@@ -51,7 +51,6 @@
                     angular.forEach(_dt.status_summary, function (item) {
                         item.name = $filter("uppercase")(item.name);
                         item.name = item.name.replace(/_/g, " ");
-                        console.log(item.name);
                         var _item = [item.name, item.count];
                         _list[_list.length] = _item;
                     });
