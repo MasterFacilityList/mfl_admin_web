@@ -1,4 +1,4 @@
-(function (angular, _) {
+(function (angular) {
     "use strict";
 
     angular.module("mflAdminAppConfig", [
@@ -41,25 +41,8 @@
         oauth2.setXHRToken(oauth2.getToken());
     }])
 
-    .run(["$rootScope", "mfl.auth.services.login", "$state", "HOME_PAGE_NAME",
-        function ($rootScope, loginService, $state, HOME_PAGE_NAME) {
-            $rootScope.$on("$stateChangeStart", function (evt, toState) {
-                if (loginService.isLoggedIn()) {
-                    if (toState.name === "login") {
-                        evt.preventDefault();
-                        $state.go(HOME_PAGE_NAME);
-                    }
-                    return;
-                }
+    .run(["mfl.auth.services.statecheck", function (statecheck) {
+        statecheck.startListening();
+    }]);
 
-                if (_.contains(["login", "logout", ""], toState.name)) {
-                    return;
-                }
-
-                evt.preventDefault();
-                $state.go("login", {"next": toState.name});
-            });
-        }
-    ]);
-
-})(angular, _);
+})(angular);
