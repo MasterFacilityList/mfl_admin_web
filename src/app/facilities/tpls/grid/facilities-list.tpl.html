@@ -7,22 +7,22 @@
 <div id="no-more-tables" class="col-lg-12 margin-t-15">
     <table class="table content-card cf">
         <thead>
-            <th>Facility Name</th>
-            <th>Owner</th>
+            <th sil-grid-sort field='code'>Code</th>
+            <th sil-grid-sort field='name'>Name</th>
             <th>County</th>
-            <th>Rating</th>
+            <th>Constituency</th>
+            <th>Facility Type</th>
+            <th>Owner Type</th>
             <th class="text-center">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="fac in facilities">
-                <td data-title="Facility Name">{{fac.name}}</td>
-                <td data-title="Owner">{{fac.owner_name}}</td>
-                <td data-title="County">
-                    {{fac.county}}
-                </td>
-                <td data-title="Rating">
-                    {{fac.average_rating}}
-                </td>
+                <td data-title="Facility Name">{{fac.code}}</td>
+                <td data-title="Name">{{fac.name}}</td>
+                <td data-title="County">{{fac.county}}</td>
+                <td data-title="Constituency">{{fac.constituency}}</td>
+                <td data-title="Facility Type">{{fac.facility_type_name}}</td>
+                <td data-title="Ownery Type">{{fac.owner_type_name}}</td>
                 <td class="text-center" data-title="Actions">
                     <a class="action-btn action-btn-grid action-btn-info" tooltip="Edit" tooltip-placement="bottom">
                         <i class="fa fa-edit"></i>
