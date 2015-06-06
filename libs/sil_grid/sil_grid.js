@@ -288,36 +288,38 @@
             },
             link: function($scope, elem, attrs, gridCtrl){
                 elem.addClass("sil-orderable");
-                if(_.isUndefined($rootScope.sil_orderings)){
-                    $rootScope.sil_orderings  = {};
+                if(_.isUndefined($scope.sil_orderings)){
+                    $scope.sil_orderings  = [];
                 }
+                var addOrdering = function(item, order){
+                    order = order==="asc"?"":"-";
+                    $scope.sil_orderings = _.without($rootScope.sil_orderings, item);
+                    $scope.sil_orderings = _.without($rootScope.sil_orderings, order+item);
+                    $scope.sil_orderings.unshift(order+item);
+                };
                 elem.on("click", function(){
                     if(elem.hasClass("sil-orderable")){
                         // assume default ordering is asceding
                         elem.removeClass("sil-orderable");
                         elem.addClass("sil-orderable-desc");
                         //order desc
-                        $rootScope.sil_orderings[$scope.field] = "desc";
+                        addOrdering($scope.field, "desc");
                     }else{
                         //if ordered asc, order desc
                         if(elem.hasClass("sil-orderable-desc")){
                             elem.removeClass("sil-orderable-desc");
                             elem.addClass("sil-orderable-asc");
                             // order asc
-                            $rootScope.sil_orderings[$scope.field] = "asc";
+                            addOrdering($scope.field, "asc");
                         }else{
                             elem.removeClass("sil-orderable-asc");
                             elem.addClass("sil-orderable-desc");
                             //order desc
-                            $rootScope.sil_orderings[$scope.field] = "desc";
+                            addOrdering($scope.field, "desc");
+
                         }
                     }
-                    var orderings = [];
-                    _.each(_.keys($rootScope.sil_orderings), function(key){
-                        var sortkey = $rootScope.sil_orderings[key] === "asc"?key: "-"+key;
-                        orderings.unshift(sortkey);
-                    });
-                    gridCtrl.addFilter("ordering", orderings.join(","));
+                    gridCtrl.addFilter("ordering", $scope.sil_orderings.join(","));
                 });
             }
         };
