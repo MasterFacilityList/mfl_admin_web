@@ -312,16 +312,12 @@
                             $rootScope.sil_orderings[$scope.field] = "desc";
                         }
                     }
-                    var orderKeys="";
-                    _.each(_.keys($rootScope.sil_orderings), function(key, index){
+                    var orderings = [];
+                    _.each(_.keys($rootScope.sil_orderings), function(key){
                         var sortkey = $rootScope.sil_orderings[key] === "asc"?key: "-"+key;
-                        if(index===0){
-                            orderKeys = sortkey;
-                        }else{
-                            orderKeys += ","+sortkey;
-                        }
+                        orderings.unshift(sortkey);
                     });
-                    gridCtrl.addFilter("ordering", orderKeys);
+                    gridCtrl.addFilter("ordering", orderings.join(","));
                 });
             }
         };
