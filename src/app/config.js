@@ -1,11 +1,13 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
 
     angular.module("mflAdminAppConfig", [
         "sil.common.logging",
         "sil.api.wrapper",
         "sil.grid",
-        "mfl.auth.oauth2"
+        "mfl.auth.oauth2",
+        "ui.router",
+        "mfl.auth.services"
     ])
 
     .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
@@ -29,8 +31,36 @@
         silGridConfig.appConfig = "mflAdminAppConfig";
     }])
 
+    .config(["$urlRouterProvider", function($urlRouterProvider) {
+        $urlRouterProvider.otherwise(function($injector) {
+                var $state = $injector.get("$state");
+                $state.go("dashboard");
+            });
+    }])
+
     .run(["api.oauth2",function (oauth2) {
         oauth2.setXHRToken(oauth2.getToken());
-    }]);
+    }])
 
-})(angular);
+    .run(["$rootScope", "mfl.auth.services.login", "$state",
+        function ($rootScope, loginService, $state) {
+            $rootScope.$on("$stateChangeStart", function (evt, toState) {
+                if (loginService.isLoggedIn()) {
+                    if (toState.name === "login") {
+                        evt.preventDefault();
+                        $state.go("dashboard");
+                    }
+                    return;
+                }
+
+                if (_.contains(["login", "logout", ""], toState.name)) {
+                    return;
+                }
+
+                evt.preventDefault();
+                $state.go("login", {"next": toState.url});
+            });
+        }
+    ]);
+
+})(angular, _);

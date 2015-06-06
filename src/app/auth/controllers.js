@@ -7,8 +7,8 @@
     ])
 
     .controller("mfl.auth.controllers.login",
-        ["$scope", "$sce", "$state", "mfl.auth.services.login",
-        function ($scope, $sce, $state, loginService) {
+        ["$scope", "$sce", "$location", "$state", "$stateParams", "mfl.auth.services.login",
+        function ($scope, $sce, $location, $state, $stateParams, loginService) {
             $scope.test = "Login";
             $scope.login_err = "";
             $scope.login_err_html = "";
@@ -19,7 +19,8 @@
                     $scope.login_err_html =  $sce.trustAsHtml($scope.login_err);
                 };
                 var success_fxn = function () {
-                    $state.go("dashboard");
+                    var next_state = $stateParams.next || $state.href("dashboard");
+                    $location.path(next_state);
                 };
                 loginService.login(obj)
                     .then(
