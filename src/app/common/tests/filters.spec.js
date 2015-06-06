@@ -7,7 +7,7 @@
             inject(["$filter", function ($filter) {
                 contact_type_filter = $filter("contact_type");
                 titlecase_filter = $filter("titlecase");
-                bool_filter = $filter("boolean");
+                bool_filter = $filter("boolFilter");
             }]);
         });
         it("Should have contact_type filter defined", function(){
@@ -58,12 +58,12 @@
             expect( result ).toEqual( "" );
         });
         it("should have the boolean filter return 'Yes' given 'true'", inject(function () {
-            var string = "true", result;
+            var string = true, result;
             result = bool_filter(string, "boolean");
             expect(result).toEqual("Yes");
         }));
         it("should have the boolean filter return 'No' given 'false'", inject(function () {
-            var string = "false", result;
+            var string = false, result;
             result = bool_filter(string, "boolean");
             expect(result).toEqual("No");
         }));

@@ -17,17 +17,15 @@
             });
         };
     })
-    .filter("boolean", function() {
+    .filter("boolFilter", function() {
         return function(s) {
-            if (s === "true") {
+            if (s === true) {
                 return "Yes";
             }
-            if (s === "false") {
+            else if (s === false) {
                 return "No";
             }
-            else {
-                return s;
-            }
+            return s;
         };
     });
 })(angular, _);
