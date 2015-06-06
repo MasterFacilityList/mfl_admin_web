@@ -1,6 +1,18 @@
-<div>
-    <p>Are you sure you want to delete the option <strong>{{option.display_text}}</strong> ?</p>
-
-    <button class="btn btn-danger" ng-click="save()">Yes</button>
-    <a class="btn btn-default" ui-sref="service_mgmt.option_list">No</a>
+<div class="content-header">
+   <h2 class="content-title">
+       <span class="main-title"><i class="fa fa-trash"></i> Delete Option</span>
+   </h2>
+</div>
+<div class="content-body">
+    <form name="category_frm">
+            <div class="pad-form">
+               <div class="content-card pad-15">
+                    <p>Are you sure you want to delete the option <strong>{{option.display_text}}</strong>?</p>
+                    <div class="margin-t-50">
+                            <a class="md-btn md-btn-primary" ui-sref="service_mgmt.option_list">No</a>
+                            <button class="md-btn md-btn-danger" ng-click="save()">Yes</button>
+                    </div>
+               </div>
+            </div>
+    </form>
 </div>

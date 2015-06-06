@@ -45,6 +45,20 @@
                 var ctrl = createController("mfl.setup.controller.facilityOwnerType.view", dt);
                 expect(ctrl).toBeDefined();
             });
+        it("should navigate to creating new owner type", function () {
+            var dt = {
+                $stateParams : {id: "create"}
+            };
+            var test_title = [
+                {
+                    icon: "fa-plus-circle",
+                    name: "New Facility Owner Types"
+                }
+            ];
+            createController(
+                "mfl.setup.controller.facilityOwnerType.view", dt);
+            expect($scope.title).toEqual(test_title);
+        });
         it("should view a facilityOwnerType: success",function(){
                 var dt = {
                     $stateParams: {id: 1}

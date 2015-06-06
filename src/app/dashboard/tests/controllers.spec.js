@@ -43,7 +43,7 @@
                             "owner_types": [
                                 {
                                     "count": 0,
-                                    "name": "Other"
+                                    "name": "OTHER"
                                 }
                             ],
                             "owners_summary": [
@@ -56,7 +56,7 @@
                             "status_summary": [
                                 {
                                     "count": 0,
-                                    "name": "Facility_Gazette_By_ID"
+                                    "name": "FACILITY GAZETTE BY ID"
                                 }
                             ],
                             "total_facilities": 8361,
@@ -102,7 +102,7 @@
                             "owner_types": [
                                 {
                                     "count": 0,
-                                    "name": "Other"
+                                    "name": "OTHER"
                                 }
                             ],
                             "owners_summary": [
@@ -115,7 +115,7 @@
                             "status_summary": [
                                 {
                                     "count": 0,
-                                    "name": "Facility_Gazette_By_ID"
+                                    "name": "FACILITY GAZETTE BY ID"
                                 }
                             ],
                             "total_facilities": 8361,

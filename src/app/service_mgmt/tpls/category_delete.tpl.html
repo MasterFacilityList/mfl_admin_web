@@ -1,6 +1,18 @@
-<div>
-    <p>Are you sure you want to delete the category <strong>{{category.name}}</strong> ?</p>
-
-    <button class="btn btn-danger" ng-click="save()">Yes</button>
-    <a class="btn btn-default" ui-sref="service_mgmt.category_list">No</a>
+<div class="content-header">
+   <span class="content-title">
+       <i class="fa fa-trash"></i> Delete Category
+   </span>
+</div>
+<div class="content-body">
+    <form name="category_frm">
+            <div class="pad-form">
+               <div class="content-card pad-15">
+                    <p>Are you sure you want to delete the category <strong>{{category.name}}</strong>?</p>
+                    <div class="margin-t-50">
+                            <a class="md-btn md-btn-primary" ui-sref="service_mgmt.category_list" ui-sref-opts="{reload:true}">No</a>
+                            <button class="md-btn md-btn-danger" ng-click="save()">Yes</button>
+                    </div>
+               </div>
+            </div>
+    </form>
 </div>

@@ -168,6 +168,9 @@
                     }
                     if(url_prev){
                         $scope.pagination.prev = true;
+                        if(url_prev.indexOf("page")=== -1){
+                            url_prev = url_prev+"?page=1";
+                        }
                         makeParams(url_prev, false);
                     }else{
                         $scope.pagination.prev = false;
@@ -235,6 +238,7 @@
             restrict: "EA",
             require: "^silGrid",
             templateUrl: SEARCH_TPL,
+            controller: function(){},
             link: function(scope, elem, attrs, gridCtrl){
                 scope.silGrid = {searchQuery:""};
                 scope.silGridSearch = function(clear){
@@ -250,6 +254,31 @@
         };
 
     })
+    .directive("silGridKeyPress", function () {
+        return {
+            restrict: "A",
+            require: "^silGridSearch",
+            link: function(scope, element){
+                element.bind("keydown keypress", function (event) {
+                //enter key press
+                if(event.which === 13) {
+                    scope.$apply(function (){
+                        scope.silGridSearch(false);
+                    });
+                    event.preventDefault();
+                }
+                //esc key press
+                if(event.which === 27) {
+                    scope.$apply(function (){
+                        scope.silGridSearch(true);
+                    });
+                    event.preventDefault();
+                }
+
+            });
+            }
+        };
+    })
     .directive("silGridSort",["$rootScope", function($rootScope){
         return {
             restrict : "A",
@@ -259,40 +288,38 @@
             },
             link: function($scope, elem, attrs, gridCtrl){
                 elem.addClass("sil-orderable");
-                if(_.isUndefined($rootScope.sil_orderings)){
-                    $rootScope.sil_orderings  = {};
+                if(_.isUndefined($scope.sil_orderings)){
+                    $scope.sil_orderings  = [];
                 }
+                var addOrdering = function(item, order){
+                    order = order==="asc"?"":"-";
+                    $scope.sil_orderings = _.without($rootScope.sil_orderings, item);
+                    $scope.sil_orderings = _.without($rootScope.sil_orderings, order+item);
+                    $scope.sil_orderings.unshift(order+item);
+                };
                 elem.on("click", function(){
                     if(elem.hasClass("sil-orderable")){
                         // assume default ordering is asceding
                         elem.removeClass("sil-orderable");
                         elem.addClass("sil-orderable-desc");
                         //order desc
-                        $rootScope.sil_orderings[$scope.field] = "desc";
+                        addOrdering($scope.field, "desc");
                     }else{
                         //if ordered asc, order desc
                         if(elem.hasClass("sil-orderable-desc")){
                             elem.removeClass("sil-orderable-desc");
                             elem.addClass("sil-orderable-asc");
                             // order asc
-                            $rootScope.sil_orderings[$scope.field] = "asc";
+                            addOrdering($scope.field, "asc");
                         }else{
                             elem.removeClass("sil-orderable-asc");
                             elem.addClass("sil-orderable-desc");
                             //order desc
-                            $rootScope.sil_orderings[$scope.field] = "desc";
+                            addOrdering($scope.field, "desc");
+
                         }
                     }
-                    var orderKeys="";
-                    _.each(_.keys($rootScope.sil_orderings), function(key, index){
-                        var sortkey = $rootScope.sil_orderings[key] === "asc"?key: "-"+key;
-                        if(index===0){
-                            orderKeys = sortkey;
-                        }else{
-                            orderKeys += ","+sortkey;
-                        }
-                    });
-                    gridCtrl.addFilter("ordering", orderKeys);
+                    gridCtrl.addFilter("ordering", $scope.sil_orderings.join(","));
                 });
             }
         };
