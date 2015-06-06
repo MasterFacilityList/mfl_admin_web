@@ -1,4 +1,4 @@
-(function () {
+(function (angular, _) {
     "use strict";
 
     angular.module("mfl.auth.services", [
@@ -41,6 +41,44 @@
                 return oauth2.revokeToken(oauth2.getToken());
             };
         }
+    ])
+
+    .service("mfl.auth.services.statecheck",
+        ["$rootScope", "mfl.auth.services.login", "$state", "HOME_PAGE_NAME",
+        function ($rootScope, loginService, $state, HOME_PAGE_NAME) {
+            var cancel_listen;
+
+            var start = function () {
+                cancel_listen = $rootScope.$on("$stateChangeStart", function (evt, toState) {
+                    if (loginService.isLoggedIn()) {
+                        if (toState.name === "login") {
+                            evt.preventDefault();
+                            $state.go(HOME_PAGE_NAME);
+                        }
+                        return;
+                    }
+
+                    if (_.contains(["login", "logout", ""], toState.name)) {
+                        return;
+                    }
+
+                    evt.preventDefault();
+                    $state.go("login", {"next": toState.name});
+                });
+            };
+
+            var stop = function () {
+                try {
+                    cancel_listen();
+                } catch (e) {
+                }
+            };
+
+            return {
+                "startListening": start,
+                "stopListening": stop
+            };
+        }
     ]);
 
-})(angular);
+})(angular, _);

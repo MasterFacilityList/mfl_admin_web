@@ -1,14 +1,14 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mfl.auth.routes", [
+    angular.module("mfl.auth.states", [
         "ui.router"
     ])
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
             .state("login", {
-                url: "/login",
+                url: "/login?next",
                 views: {
                     "main": {
                         controller: "mfl.auth.controllers.login",
