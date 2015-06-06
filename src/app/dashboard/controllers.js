@@ -15,7 +15,8 @@
         }
     ])
     .controller("mfl.dashboard.content", ["$scope", "dashboardApi",
-        function ($scope, dashboardApi) {
+        "$filter",
+        function ($scope, dashboardApi, $filter) {
             $scope.chart = null;
             $scope.spinner = true;
             $scope.county = false;
@@ -29,6 +30,7 @@
                     var _list = [];
 
                     angular.forEach(_dt.owner_types, function (item) {
+                        item.name = $filter("uppercase")(item.name);
                         var _item = [item.name, item.count];
                         _list[_list.length] = _item;
                     });
@@ -47,6 +49,8 @@
                     var _list = [];
 
                     angular.forEach(_dt.status_summary, function (item) {
+                        item.name = $filter("uppercase")(item.name);
+                        item.name = item.name.replace(/_/g, " ");
                         var _item = [item.name, item.count];
                         _list[_list.length] = _item;
                     });
