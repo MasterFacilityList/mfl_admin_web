@@ -47,6 +47,7 @@
         ["$rootScope", "mfl.auth.services.login", "$state", "HOME_PAGE_NAME",
         function ($rootScope, loginService, $state, HOME_PAGE_NAME) {
             var cancel_listen;
+
             var start = function () {
                 cancel_listen = $rootScope.$on("$stateChangeStart", function (evt, toState) {
                     if (loginService.isLoggedIn()) {
