@@ -91,11 +91,16 @@
                         },
                         axis: {
                             x: {
-                                padding: {
-                                    left: 5,
-                                    right: 5
+                                tick: {
+                                    padding: {
+                                        left: 5,
+                                        right: 5
+                                    }
                                 }
                             }
+                        },
+                        tooltip: {
+                            grouped: false
                         }
                     };
                     return obj;
