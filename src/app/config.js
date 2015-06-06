@@ -5,7 +5,8 @@
         "sil.common.logging",
         "sil.api.wrapper",
         "sil.grid",
-        "mfl.auth.oauth2"
+        "mfl.auth.oauth2",
+        "ui.router"
     ])
 
     .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
@@ -27,6 +28,10 @@
             service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
         };
         silGridConfig.appConfig = "mflAdminAppConfig";
+    }])
+
+    .config(["$urlRouterProvider", function($urlRouterProvider) {
+        $urlRouterProvider.otherwise("/");
     }])
 
     .run(["api.oauth2",function (oauth2) {
