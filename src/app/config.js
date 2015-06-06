@@ -44,24 +44,22 @@
 
     .run(["$rootScope", "mfl.auth.services.login", "$state",
         function ($rootScope, loginService, $state) {
-            $rootScope.$on("$stateChangeStart",
-                function (evt, toState, toParams, fromState, fromParams) {
-                    if (loginService.isLoggedIn()) {
-                        if (toState.name === "login") {
-                            evt.preventDefault();
-                            $state.go("dashboard");
-                        }
-                        return;
+            $rootScope.$on("$stateChangeStart", function (evt, toState) {
+                if (loginService.isLoggedIn()) {
+                    if (toState.name === "login") {
+                        evt.preventDefault();
+                        $state.go("dashboard");
                     }
-
-                    if (_.contains(["login", "logout", ""], toState.name)) {
-                        return;
-                    }
-
-                    evt.preventDefault();
-                    $state.go("login", {"next": toState.url});
+                    return;
                 }
-            );
+
+                if (_.contains(["login", "logout", ""], toState.name)) {
+                    return;
+                }
+
+                evt.preventDefault();
+                $state.go("login", {"next": toState.url});
+            });
         }
     ]);
 
