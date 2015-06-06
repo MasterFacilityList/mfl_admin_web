@@ -124,7 +124,6 @@
                         $scope["q_dump"+name] = {page: $scope.filters.page};
                         delete $scope.filters.page;
                     }
-                    console.log(name, value);
                     self.getData();
                 };
                 self.removeFilter = function(name){
