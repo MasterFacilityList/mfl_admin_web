@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
 
     angular.module("mflAdminAppConfig", [
@@ -6,12 +6,15 @@
         "sil.api.wrapper",
         "sil.grid",
         "mfl.auth.oauth2",
-        "ui.router"
+        "ui.router",
+        "mfl.auth.services"
     ])
 
     .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
 
     .constant("CREDZ", window.MFL_SETTINGS.CREDZ)
+
+    .constant("HOME_PAGE_NAME", "dashboard")
 
     .config(["loggingConfigProvider", function(loggingConfig){
         loggingConfig.LOG_TO_SERVER = false;
@@ -36,6 +39,27 @@
 
     .run(["api.oauth2",function (oauth2) {
         oauth2.setXHRToken(oauth2.getToken());
-    }]);
+    }])
 
-})(angular);
+    .run(["$rootScope", "mfl.auth.services.login", "$state", "HOME_PAGE_NAME",
+        function ($rootScope, loginService, $state, HOME_PAGE_NAME) {
+            $rootScope.$on("$stateChangeStart", function (evt, toState) {
+                if (loginService.isLoggedIn()) {
+                    if (toState.name === "login") {
+                        evt.preventDefault();
+                        $state.go(HOME_PAGE_NAME);
+                    }
+                    return;
+                }
+
+                if (_.contains(["login", "logout", ""], toState.name)) {
+                    return;
+                }
+
+                evt.preventDefault();
+                $state.go("login", {"next": toState.name});
+            });
+        }
+    ]);
+
+})(angular, _);
