@@ -47,7 +47,8 @@
                 data: "@",
                 error: "=",
                 actions: "=",
-                apiKey: "@"
+                apiKey: "@",
+                showLoader: "@"
             },
             replace: false,
             templateUrl:function(elem, attrs){
@@ -77,7 +78,9 @@
                     }
                 };
                 self.getData = function(){
-                    self.setLoading(true);
+                    if($scope.showLoader){
+                        self.setLoading(true);
+                    }
                     var promise;
                     if(_.isUndefined($scope.filters)){
                         promise = self.api.list();
@@ -87,7 +90,9 @@
                     promise.success(self.setData).error(self.setError);
                 };
                 self.setData = function(data){
-                    self.setLoading(false);
+                    if($scope.showLoader){
+                        self.setLoading(false);
+                    }
                     if(_.has(data, "results")){
                         $scope[$scope.data] = data.results;
                         addPagination(data.count, data.next, data.previous);
@@ -144,8 +149,10 @@
                 $scope.setLoading = self.setLoading;
                 var addPagination = function(page_count, url_next, url_prev){
                     $scope.pagination.active = true;
-                    $scope.pagination.page_count = Math.ceil(page_count/silGridConfig.itemsPerPage);
+                    var page_size = $scope.filters.page_size || silGridConfig.itemsPerPage;
+                    $scope.pagination.page_count = Math.ceil(page_count/page_size);
                     var makeParams = function(url, next){
+                        url = url.replace("page_size", "");
                         var params = url.substring(url.indexOf("?")+1, url.length).split("&");
                         _.each(params, function(param){
                             var p = param.split("=");
@@ -211,20 +218,21 @@
                 var modal;
                 $rootScope.$on("silGrid.loader.start", function(event){
                     modal = $modal.open(
-                        {
-                            template:"<div>"+
-                                    "<div class='modal-body'>Please wait.."+
-                                    "<div class='panel-loader'>"+
-                                    "<div class='loader-container'>"+
-                                        "<div class='loader-spinner'></div>"+
-                                    "</div>"+
-                                    "</div>"+
-                            "</div></div>",
-                            backdrop: "static",
-                            keyboard: false,
-                            size: "sm",
-                            windowClass: "sil-grid-loader"
-                        });
+                    {
+                        template:"<div>"+
+                                "<div class='modal-body'>Please wait.."+
+                                "<div class='panel-loader'>"+
+                                "<div class='loader-container'>"+
+                                    "<div class='loader-spinner'></div>"+
+                                "</div>"+
+                                "</div>"+
+                        "</div></div>",
+                        backdrop: "static",
+                        keyboard: false,
+                        size: "sm",
+                        windowClass: "sil-grid-loader"
+                    });
+
                     event.stopPropagation();
                 });
 
