@@ -170,8 +170,11 @@
                         $scope.pagination.prev = true;
                         if(url_prev.indexOf("page")=== -1){
                             url_prev = url_prev+"?page=1";
+                            $scope.pagination.prev_page = 1;
+                        }else{
+                            makeParams(url_prev, false);
                         }
-                        makeParams(url_prev, false);
+
                     }else{
                         $scope.pagination.prev = false;
                         $scope.pagination.current_page = 1;
