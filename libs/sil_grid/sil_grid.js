@@ -238,6 +238,7 @@
             restrict: "EA",
             require: "^silGrid",
             templateUrl: SEARCH_TPL,
+            controller: function(){},
             link: function(scope, elem, attrs, gridCtrl){
                 scope.silGrid = {searchQuery:""};
                 scope.silGridSearch = function(clear){
@@ -252,6 +253,31 @@
             }
         };
 
+    })
+    .directive("silGridKeyPress", function () {
+        return {
+            restrict: "A",
+            require: "^silGridSearch",
+            link: function(scope, element){
+                element.bind("keydown keypress", function (event) {
+                //enter key press
+                if(event.which === 13) {
+                    scope.$apply(function (){
+                        scope.silGridSearch(false);
+                    });
+                    event.preventDefault();
+                }
+                //esc key press
+                if(event.which === 27) {
+                    scope.$apply(function (){
+                        scope.silGridSearch(true);
+                    });
+                    event.preventDefault();
+                }
+
+            });
+            }
+        };
     })
     .directive("silGridSort",["$rootScope", function($rootScope){
         return {
