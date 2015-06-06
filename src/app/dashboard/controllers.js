@@ -40,14 +40,6 @@
                         data: {
                             columns: _list,
                             type : "pie"
-                        },
-                        legend: {
-                            inset: {
-                                anchor: "top-right",
-                                x: 20,
-                                y: 10,
-                                step: 2
-                            }
                         }
                     };
                     return obj;
@@ -109,14 +101,6 @@
                         },
                         tooltip: {
                             grouped: false
-                        },
-                        legend: {
-                            inset: {
-                                anchor: "top-right",
-                                x: 20,
-                                y: 10,
-                                step: 2
-                            }
                         }
                     };
                     return obj;
