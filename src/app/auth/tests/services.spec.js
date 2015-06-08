@@ -138,19 +138,21 @@
     });
 
     describe("Test auth statecheck service: ", function () {
-        var statecheck, rootScope, loginService, state, homestate;
+        var statecheck, rootScope, loginService, permChecker, state, homestate;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.auth.services");
             module("mfl.dashboard.states");
             module("mfl.auth.states");
+            module("mfl.auth.permissions");
 
-            inject(["$state", "mfl.auth.services.statecheck",
+            inject(["$state", "mfl.auth.services.statecheck", "mfl.auth.permissions.checker",
                 "mfl.auth.services.login", "$rootScope", "HOME_PAGE_NAME",
-                function (s, sc, ls, rs, hs) {
+                function (s, sc, pc, ls, rs, hs) {
                     statecheck = sc;
                     loginService = ls;
+                    permChecker = pc;
                     rootScope = rs;
                     state = s;
                     homestate = hs;
@@ -188,6 +190,16 @@
 
             var last_call = state.go.calls[state.go.calls.length-1];
             expect(last_call.args[0]).toEqual(homestate);
+        });
+
+        it("should stop users without permission from going to a state", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(state, "go").andCallThrough();
+            spyOn(permChecker, "hasPermission").andReturn(false);
+
+            statecheck.startListening();
+
+            expect(state.go("dashboard").$$state.status).toEqual(2);
         });
 
         it("should allow loggedin users to logout", function () {
