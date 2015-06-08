@@ -87,8 +87,10 @@
                 }
             };
 
-            this.startListening = start;
-            this.stopListening =  stop;
+            return {
+                "startListening": start,
+                "stopListening":  stop
+            };
         }
     ]);
 
