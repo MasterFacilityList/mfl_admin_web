@@ -9,7 +9,7 @@
         ["mfl.auth.services.login", function (loginService) {
 
             var hasPermission =  function (permission) {
-                if (! angular.isString(permission) || permission === "") {
+                if ((! angular.isString(permission)) || permission === "") {
                     return true;
                 }
 
