@@ -16,7 +16,12 @@
         this.towns = api.setBaseUrl("api/common/towns");
         this.contact_types = api.setBaseUrl("api/common/contact_types/");
         this.contacts = api.setBaseUrl("api/common/contacts/");
+        this.physical_address = api.setBaseUrl("api/common/address/");
         this.facility_contacts = api.setBaseUrl("api/facilities/contacts/");
+        this.services = api.setBaseUrl("api/facilities/services/");
+        this.option = api.setBaseUrl("api/facilities/options/");
+        this.service_option = api.setBaseUrl("api/facilities/service_options/");
+        this.facility_service = api.setBaseUrl("api/facilities/facility_services/");
         this.utils = function(){
             return {
                 cleanFormData : function(data){
@@ -35,7 +40,6 @@
                 resolvePromise: function(scope,scopeObj, key, promise){
                     promise.success(function(data){
                         scopeObj[key] = data.results||data;
-                        safeApply(scope);
                     }).error(function(error){
                         scope.alert = error.error_msg;
                     });
