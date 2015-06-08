@@ -1,24 +1,25 @@
-<div class="">
-    <div class="col-md-5 col-sm-5 pull-right">
-            <sil-grid-search> </sil-grid-search>
-    </div>
+<div class="pull-left col-sm-4 col-xs-6">
+    <sil-grid-search> </sil-grid-search>
+</div>
+<div class="pull-right col-xs-2">
+    <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
 </div>
 <div id="no-more-tables" class="col-lg-12 margin-t-15">
-    <table class="table content-card cf">
+    <table class="table table-hover fs-14">
         <thead class="cf">
-            <th>Name</th>
-            <th>Abbreviation</th>
-            <th>Status</th>
-            <th class="text-center">Actions</th>
+            <th>#</th>
+            <th id-sort field='name'>Name</th>
+            <th id-sort field='abbreviation'>Abbreviation</th>
+            <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="approver in approvers">
+                <td>{{$index + 1}}</td>
                 <td >{{approver.name}}</td>
                 <td >{{approver.abbreviation}}</td>
-                <td >{{approver.active}}</td>
-                <td data-title="Actions" class="text-center">
+                <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.chu_approvers.view({id : approver.id})" class="action-btn action-btn-grid action-btn-primary">
-                        <i class="fa fa-eye"></i>
+                        <i class="fa fa-edit"></i>
                     </a>
                 </td>
             </tr>

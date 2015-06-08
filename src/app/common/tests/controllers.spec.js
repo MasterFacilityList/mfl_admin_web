@@ -7,6 +7,7 @@
             module("mflAdminAppConfig");
             module("mfl.auth.services");
             module("mfl.common.controllers");
+            module("ui.router");
         });
 
         it("should test header controller", function () {
@@ -22,6 +23,24 @@
 
                     expect(scope.user).toEqual({});
                     expect(loginService.getUser).toHaveBeenCalled();
+                }
+            ]);
+        });
+        it("should test Setup State controller", function () {
+            inject(["$state","$controller",
+                function (state,$controller) {
+                    spyOn(state, "go");
+                    $controller("mfl.common.controllers.stateSetup", {});
+                    expect(state.go).toHaveBeenCalled();
+                }
+            ]);
+        });
+        it("should test ServicesState controller", function () {
+            inject(["$state","$controller",
+                function (state,$controller) {
+                    spyOn(state, "go");
+                    $controller("mfl.common.controllers.stateServices", {});
+                    expect(state.go).toHaveBeenCalled();
                 }
             ]);
         });

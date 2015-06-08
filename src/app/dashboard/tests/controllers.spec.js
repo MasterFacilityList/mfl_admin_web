@@ -43,7 +43,7 @@
                             "owner_types": [
                                 {
                                     "count": 0,
-                                    "name": "Other"
+                                    "name": "OTHER"
                                 }
                             ],
                             "owners_summary": [
@@ -56,7 +56,7 @@
                             "status_summary": [
                                 {
                                     "count": 0,
-                                    "name": "Facility_Gazette_By_ID"
+                                    "name": "FACILITY GAZETTE BY ID"
                                 }
                             ],
                             "total_facilities": 8361,
@@ -72,6 +72,67 @@
                             .respond(200, payload);
 
                         $controller("mfl.dashboard.content", data);
+
+                        //testing calling
+
+                        $httpBackend.flush();
+                        $httpBackend.verifyNoOutstandingRequest();
+                        $httpBackend.verifyNoOutstandingExpectation();
+
+                        expect(data.$scope.summary).toEqual(payload);
+                        expect(data.$scope.loading).toBe(false);
+                    }
+                ]);
+            });
+
+            it("should fetch dashboard info with constituency data", function () {
+                inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
+                    function ($controller, $rootScope, $httpBackend, SERVER_URL) {
+                        var data = {
+                            "$scope": $rootScope.$new()
+                        };
+                        var payload = {
+                            "constituencies_summary": [
+                                {
+                                    "count" : 256,
+                                    "name" : "MOMBASA"
+                                }
+                            ],
+                            "county_summary": [],
+                            "owner_types": [
+                                {
+                                    "count": 0,
+                                    "name": "OTHER"
+                                }
+                            ],
+                            "owners_summary": [
+                                {
+                                    "count": 5,
+                                    "name": "State Coorporation"
+                                }
+                            ],
+                            "recently_created": 8361,
+                            "status_summary": [
+                                {
+                                    "count": 0,
+                                    "name": "FACILITY GAZETTE BY ID"
+                                }
+                            ],
+                            "total_facilities": 8361,
+                            "types_summary": [
+                                {
+                                    "count": 119,
+                                    "name": "District Hospital"
+                                }
+                            ]
+                        };
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/")
+                            .respond(200, payload);
+
+                        $controller("mfl.dashboard.content", data);
+
+                        //testing calling
 
                         $httpBackend.flush();
                         $httpBackend.verifyNoOutstandingRequest();

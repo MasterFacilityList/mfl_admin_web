@@ -3,12 +3,12 @@
     angular.module("mfl.setup.api", [
         "sil.api.wrapper"
     ])
-    .provider("adminApi", function(){
+    .provider("adminApi",[function(){
         this.$get = ["api",function(api){
             return {
                 constituencies:api.setBaseUrl("api/common/constituencies"),
-                wards: api.setBaseUrl("api/common/counties"),
-                counties: api.setBaseUrl("api/common/wards"),
+                wards: api.setBaseUrl("api/common/wards"),
+                counties: api.setBaseUrl("api/common/counties"),
                 towns: api.setBaseUrl("api/common/towns"),
                 contacts: api.setBaseUrl("api/common/contact_types"),
                 facilityJobTitles: api.setBaseUrl("api/facilities/job_titles"),
@@ -20,5 +20,5 @@
 
             };
         }];
-    });
+    }]);
 })(angular);

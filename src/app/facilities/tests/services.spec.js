@@ -15,11 +15,11 @@
             }]);
         });
 
-        it("should define facilties manageement api wrappers", function () {
+        it("should define facilties management api wrappers", function () {
             spyOn(api, "setBaseUrl").andReturn({});
             inject(["mfl.facilities.wrappers", function (wrapper) {
                 expect(wrapper.facilities).toEqual({});
-                expect(api.setBaseUrl.calls.length).toBe(1);
+                expect(api.setBaseUrl.calls.length).toBe(2);
                 expect(api.setBaseUrl.calls[0].args[0]).toEqual("api/facilities/facilities/");
             }]);
         });

@@ -56,6 +56,19 @@
                 $httpBackend.flush();
                 expect($scope.chuStatus).toEqual(res);
             });
+        it("should navigate to creating new chuStatus", function () {
+            var dt = {
+                $stateParams : {id: "create"}
+            };
+            var test_title = [
+                {
+                    icon: "fa-plus-circle",
+                    name: "New Community Unit Status"
+                }
+            ];
+            createController("mfl.setup.controller.chuStatus.view", dt);
+            expect($scope.title).toEqual(test_title);
+        });
 
         it("should view a chuStatus: error",function(){
                 var dt = {
@@ -214,6 +227,20 @@
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
+
+        it("should navigate to creating new chuApprover", function () {
+            var dt = {
+                $stateParams : {id: "create"}
+            };
+            var test_title = [
+                {
+                    icon : "fa-plus-circle",
+                    name : "New Commmunity Unit Approver"
+                }
+            ];
+            createController("mfl.setup.controller.chuApprover.view", dt);
+            expect($scope.title).toEqual(test_title);
+        });
 
         it("should delete chuApprover: success",function(){
                 var dt = {

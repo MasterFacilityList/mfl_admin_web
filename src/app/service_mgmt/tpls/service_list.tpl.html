@@ -2,7 +2,7 @@
     <div class="pull-left col-sm-4 col-xs-6">
             <sil-grid-search> </sil-grid-search>
     </div>
-    <div class="pull-right col-xs-2">
+    <div class="pull-right col-xs-4">
     <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
     </div>
     <table class="table table-hover" id="no-more-tables">
@@ -21,16 +21,13 @@
                 <td data-title="Name:" class="pad-t-15">{{service.name}}</td>
                 <td data-title="Abbreviation:" class="pad-t-15">{{service.abbreviation}}</td>
                 <td data-title="Category:" class="pad-t-15">
-                    <a ui-sref="service_mgmt.category_edit({category_id: service.category})">
+                    <a ui-sref="service_mgmt.category_list.category_edit({category_id: service.category})">
                         {{service.category_name}}
                     </a>
                 </td>
                 <td data-title="Actions:">
-                    <a ui-sref="service_mgmt.service_edit({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
+                    <a tooltip-placement="bottom" tooltip="edit service" ui-sref="service_mgmt.service_list.service_edit({service_id: service.id})" ui-sref-opts="{reload:true}" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-edit"></i>
-                    </a>
-                    <a ui-sref="service_mgmt.service_delete({service_id: service.id})" class="action-btn action-btn-grid action-btn-info">
-                        <i class="fa fa-trash"></i>
                     </a>
                 </td>
             </tr>

@@ -4,7 +4,7 @@
     angular.module("mfl.auth", [
         "mfl.auth.controllers",
         "mfl.auth.services",
-        "mfl.auth.routes",
+        "mfl.auth.states",
         "mfl.auth.oauth2"
     ]);
 

@@ -34,14 +34,17 @@
     cursor: pointer;
     padding-right: 20px;
     background: url(../../assets/img/sil-arrow-inactive-up.png) right center no-repeat;
+    text-indent: 8px;
 }
 .sil-orderable-asc  {
     cursor: pointer;
     padding-right: 20px;
     background: url(../../assets/img/sil-arrow-active-up.png) right center no-repeat;
+    text-indent: 8px;
 }
 .sil-orderable-desc  {
     cursor: pointer;
     padding-right: 20px;
     background: url(../../assets/img/sil-arrow-active-down.png) right center no-repeat;
+    text-indent: 8px;
 }

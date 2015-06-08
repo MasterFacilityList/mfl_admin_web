@@ -2,7 +2,7 @@
 
     "use strict";
 
-    describe("Auth service test: ", function () {
+    describe("Test auth login service: ", function () {
         var url;
 
         beforeEach(function () {
@@ -135,5 +135,128 @@
                 expect(JSON.parse($window.localStorage.getItem("auth.user"))).toBe(null);
             }
         ]));
+    });
+
+    describe("Test auth statecheck service: ", function () {
+        var statecheck, rootScope, loginService, permChecker, state, homestate;
+
+        beforeEach(function () {
+            module("mflAdminAppConfig");
+            module("mfl.auth.services");
+            module("mfl.dashboard.states");
+            module("mfl.auth.states");
+            module("mfl.auth.permissions");
+
+            inject(["$state", "mfl.auth.services.statecheck", "mfl.auth.permissions.checker",
+                "mfl.auth.services.login", "$rootScope", "HOME_PAGE_NAME",
+                function (s, sc, pc, ls, rs, hs) {
+                    statecheck = sc;
+                    loginService = ls;
+                    permChecker = pc;
+                    rootScope = rs;
+                    state = s;
+                    homestate = hs;
+                }
+            ]);
+        });
+
+        afterEach(function () {
+            statecheck.stopListening();
+        });
+
+        it("should listen to state changes", function () {
+            spyOn(rootScope, "$on").andCallThrough();
+            statecheck.startListening();
+            expect(rootScope.$on).toHaveBeenCalled();
+            expect(rootScope.$on.calls[0].args[0]).toEqual("$stateChangeStart");
+            expect(angular.isFunction(
+                rootScope.$on.calls[0].args[1])).toBe(true);
+        });
+
+        it("should allow loggedin users to access states", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            statecheck.startListening();
+            expect(state.go("dashboard").$$state.status).toBe(0);
+            expect(state.go("dashboard").$$state.value).toBe(undefined);
+        });
+
+        it("should redirect loggedin users from login state to home", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(state, "go").andCallThrough();
+
+            statecheck.startListening();
+
+            state.go("login");
+
+            var last_call = state.go.calls[state.go.calls.length-1];
+            expect(last_call.args[0]).toEqual(homestate);
+        });
+
+        it("should stop users without permission from going to a state", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(state, "go").andCallThrough();
+            spyOn(permChecker, "hasPermission").andReturn(false);
+
+            statecheck.startListening();
+
+            expect(state.go("dashboard").$$state.status).toEqual(2);
+        });
+
+        it("should allow loggedin users to logout", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(state, "go").andCallThrough();
+
+            statecheck.startListening();
+
+            state.go("logout");
+
+            var last_call = state.go.calls[state.go.calls.length-1];
+            expect(last_call.args[0]).toEqual("logout");
+        });
+
+        it("should allow non-loggedin users to logout", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(false);
+            spyOn(state, "go").andCallThrough();
+
+            statecheck.startListening();
+
+            state.go("logout");
+
+            var last_call = state.go.calls[state.go.calls.length-1];
+            expect(last_call.args[0]).toEqual("logout");
+        });
+
+        it("should redirect non-loggedin users to login state", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(false);
+            spyOn(state, "go").andCallThrough();
+
+            statecheck.startListening();
+
+            state.go("dashboard");
+
+            var last_call = state.go.calls[state.go.calls.length-1];
+            expect(last_call.args[0]).toEqual("login");
+            expect(last_call.args[1]).toEqual({"next": "dashboard"});
+        });
+
+        it("should be able to stop listening", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(state, "go").andCallThrough();
+
+            statecheck.startListening();
+            statecheck.stopListening();
+
+            state.go("dashboard");
+
+            var last_call = state.go.calls[state.go.calls.length-1];
+            expect(last_call.args[0]).toEqual("dashboard");
+        });
+
+        it("should fail silently if stop is called repeatedly", function () {
+            statecheck.startListening();
+            statecheck.stopListening();
+
+            expect(statecheck.stopListening).not.toThrow();
+        });
     });
 })();

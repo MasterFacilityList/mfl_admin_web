@@ -15,8 +15,11 @@
         }
     ])
     .controller("mfl.dashboard.content", ["$scope", "dashboardApi",
-        function ($scope, dashboardApi) {
+        "$filter",
+        function ($scope, dashboardApi, $filter) {
             $scope.chart = null;
+            $scope.spinner = true;
+            $scope.county = false;
             var c3_generate = function (_payload){
                 c3.generate(_payload);
                 $scope.loading = false;
@@ -27,6 +30,7 @@
                     var _list = [];
 
                     angular.forEach(_dt.owner_types, function (item) {
+                        item.name = $filter("uppercase")(item.name);
                         var _item = [item.name, item.count];
                         _list[_list.length] = _item;
                     });
@@ -45,6 +49,8 @@
                     var _list = [];
 
                     angular.forEach(_dt.status_summary, function (item) {
+                        item.name = $filter("uppercase")(item.name);
+                        item.name = item.name.replace(/_/g, " ");
                         var _item = [item.name, item.count];
                         _list[_list.length] = _item;
                     });
@@ -60,20 +66,39 @@
                 };
                 var top_ten = function (_dt) {
                     var _list = [];
-
-                    angular.forEach(_dt.county_summary, function (item) {
-                        var _item = [item.name, item.count];
-                        _list[_list.length] = _item;
-                    });
+                    if(!_.isEmpty(_dt.county_summary)) {
+                        $scope.county = true;
+                        angular.forEach(_dt.county_summary, function (item) {
+                            var _item = [item.name, item.count];
+                            _list[_list.length] = _item;
+                        });
+                    }
+                    if(!_.isEmpty(_dt.constituencies_summary)) {
+                        angular.forEach(_dt.constituencies_summary, function (item) {
+                            var _item = [item.name, item.count];
+                            _list[_list.length] = _item;
+                        });
+                    }
 
                     var obj = {
                         bindto: "#facilitybar",
+                        axis: {
+                            x: {
+                                padding: {
+                                    left: 0,
+                                    right: 0
+                                }
+                            }
+                        },
                         data: {
                             columns: _list,
                             bar: {
                                 width: 10
                             },
                             type : "bar"
+                        },
+                        tooltip: {
+                            grouped: false
                         }
                     };
                     return obj;
@@ -87,11 +112,13 @@
             //dashboardApi
             dashboardApi.api.list()
                 .success(function (data) {
+                    $scope.spinner = false;
                     $scope.summary = data;
                     $scope.loading = true;
                     $scope.showGraph(data);
                 })
                 .error(function (err) {
+                    $scope.spinner = false;
                     $scope.loading = false;
                     $scope.chart_err = err.error;
                 });
