@@ -46,16 +46,21 @@
     ])
 
     .service("mfl.auth.services.statecheck",
-        ["$rootScope", "mfl.auth.services.login", "mfl.auth.permissions.checker",
-        "$state", "HOME_PAGE_NAME",
-        function ($rootScope, loginService, permChecker, $state, HOME_PAGE_NAME) {
+        ["$rootScope", "$injector", "mfl.auth.services.login",
+        "mfl.auth.permissions.checker", "HOME_PAGE_NAME",
+        function ($rootScope, $injector, loginService, permChecker, HOME_PAGE_NAME) {
             var cancel_listen;
+
+            var change_state = function (name, args) {
+                var $state = $injector.get("$state");
+                $state.go(name, args);
+            };
 
             var page_check = function (evt, toState) {
                 if (loginService.isLoggedIn()) {
                     if (toState.name === "login") {
                         evt.preventDefault();
-                        $state.go(HOME_PAGE_NAME);
+                        change_state(HOME_PAGE_NAME);
                     } else if (! permChecker.hasPermission(toState.permission)) {
                         evt.preventDefault();
                         window.alert("You don't have permission to access the page.");
@@ -68,7 +73,7 @@
                 }
 
                 evt.preventDefault();
-                $state.go("login", {"next": toState.name});
+                change_state("login", {"next": toState.name});
             };
 
             var start = function () {
