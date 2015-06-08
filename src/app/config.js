@@ -39,7 +39,7 @@
 
     .run(["api.oauth2",function (oauth2) {
         oauth2.setXHRToken(oauth2.getToken());
-    }]);
+    }])
 
     .run(["mfl.auth.services.statecheck", function (statecheck) {
         statecheck.startListening();

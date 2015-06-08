@@ -1,29 +1,25 @@
 (function () {
     "use strict";
     describe("Testing detailed view of controller", function () {
-        var controller, data, root, scope, SERVER_URL, httpBackend, state;
+        var controller, data, root, scope, SERVER_URL;
 
         beforeEach(function () {
-            module("mflAdmin");
+            module("mflAdminApp");
             module("mflAdminAppConfig");
-            module("mfl.facilities.wrappers");
-            module("ui.router");
-            module("mfl.facilities.controllers.home");
 
-            inject(["$rootScope", "$controller", "$httpBackend", "$stateParams", "SERVER_URL",
-                function ($rootScope, $controller, $httpBackend, $stateParams, url) {
+            inject(["$rootScope", "$controller", "SERVER_URL", "$httpBackend",
+                function ($rootScope, $controller, url, $httpBackend) {
                     root = $rootScope;
                     scope = root.$new();
-                    state = $state;
-                    httpBackend = $httpBackend;
                     SERVER_URL = url;
                     scope.fakeStateParams = {
-                        id : 1
+                        facilityId : 6
                     };
+                    $httpBackend = $httpBackend;
                     data = {
                         $scope : scope,
-                        $state : $state,
-                        SERVER_URL : url,
+                        SERVER_URL : SERVER_URL,
+                        $httpBackend : $httpBackend,
                         $stateParams : scope.fakeStateParams
                     };
                     controller = function (cntrl) {
@@ -32,18 +28,31 @@
                 }
             ]);
         });
-        it("should test getting details of one facility: successfully ",
-        inject(["$httpBackend",
-            function ($httpBackend) {
+        it("should test controller ",
+        inject([
+            function () {
                 controller("mfl.facilities.controllers.home.detail");
-                var fac_details = {
-                    name: "Endebess District Hospital",
-                    number_of_beds: 20
-                };
-                $httpBackend.expectGET(
-                    SERVER_URL + "api/facilities/facilities/1").respond(200, fac_details);
-                $httpBackend.flush();
+                expect(scope.tooltip).toBeDefined();
             }
         ]));
+        it("should test for fetching one facility, success",
+        inject(["$httpBackend", function($httpBackend) {
+            controller("mfl.facilities.controllers.home.detail");
+            var fac_detailed = {
+                name : "Endebess"
+            };
+            $httpBackend.expectGET(
+                SERVER_URL + "api/facilities/facilities/6/").respond(
+                200, fac_detailed);
+            $httpBackend.flush();
+        }]));
+        it("should test for fetching one facility,  fail",
+        inject(["$httpBackend", function($httpBackend) {
+            controller("mfl.facilities.controllers.home.detail");
+            $httpBackend.expectGET(
+                SERVER_URL + "api/facilities/facilities/6/").respond(
+                400, {});
+            $httpBackend.flush();
+        }]));
     });
 })();
