@@ -77,7 +77,8 @@
                 );
                 compile(element)(rootscope);
                 expect(element.html()).toEqual(
-                    "<div id=\"r\"><!-- requiresPermission:  --><p class=\"ng-scope\" requires-permission=\"\">asd</p></div>"
+                    "<div id=\"r\"><!-- requiresPermission:  -->" +
+                    "<p class=\"ng-scope\" requires-permission=\"\">asd</p></div>"
                 );
 
                 element = angular.element(
@@ -85,7 +86,8 @@
                 );
                 compile(element)(rootscope);
                 expect(element.html()).toEqual(
-                    "<div id=\"r\"><!-- requiresPermission:  --><p class=\"ng-scope\" requires-permission=\"\">asd</p></div>"
+                    "<div id=\"r\"><!-- requiresPermission:  -->" +
+                    "<p class=\"ng-scope\" requires-permission=\"\">asd</p></div>"
                 );
 
                 element = angular.element(
@@ -105,30 +107,39 @@
                     "<div id='r'><p requires-permission='view_counties'>asd</p></div>"
                 );
                 compile(element)(rootscope);
-                expect(element.html()).toEqual("<!-- requiresPermission: view_counties --><p class=\"ng-scope\" requires-permission=\"view_counties\">asd</p>");
+                expect(element.html()).toEqual("<!-- requiresPermission: view_counties -->" +
+                    "<p class=\"ng-scope\" requires-permission=\"view_counties\">asd</p>");
             });
 
             it("should remove element if not logged in", function () {
-                var tags = ["requires-permission", "x-requires-permission", "data-requires-permission"];
+                var tags = [
+                    "requires-permission",
+                    "x-requires-permission",
+                    "data-requires-permission"
+                ];
                 tags.forEach(function (tag) {
                     var element = angular.element(
                         "<div><div id='r'><p " + tag + "='view_counties'>YEAH</p></div></div>"
                     );
                     compile(element)(rootscope);
-                    expect(element.html()).toEqual("<div id=\"r\"><!-- requiresPermission: view_counties --></div>");
+                    expect(element.html()).toEqual(
+                        "<div id=\"r\"><!-- requiresPermission: view_counties --></div>");
                 });
             });
 
             it("should remove element if logged in but without permission", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
                 spyOn(loginService, "getUser").andReturn({all_permissions: []});
-                var tags = ["requires-permission", "x-requires-permission", "data-requires-permission"];
+                var tags = [
+                    "requires-permission", "x-requires-permission", "data-requires-permission"
+                ];
                 tags.forEach(function (tag) {
                     var element = angular.element(
                         "<div><div id='r'><p " + tag + "='view_counties'>YEAH</p></div></div>"
                     );
                     compile(element)(rootscope);
-                    expect(element.html()).toEqual("<div id=\"r\"><!-- requiresPermission: view_counties --></div>");
+                    expect(element.html()).toEqual(
+                        "<div id=\"r\"><!-- requiresPermission: view_counties --></div>");
                 });
             });
 
