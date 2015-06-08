@@ -26,8 +26,9 @@
                 },
                 data : { pageTitle: "Basic Profile" }
             })
-            .state("profile.details", {
-                url: "userdetails/",
+
+            .state("profile.basic", {
+                url: "basic/",
                 views: {
                     "main-content@profile": {
                         controller: "mfl.users.controllers.profile.basic",
@@ -35,6 +36,18 @@
                     }
                 }
             })
+
+            .state("profile.contacts", {
+                url: "contacts/",
+                views: {
+                    "main-content@profile": {
+                        controller: "mfl.users.controllers.profile.contacts",
+                        templateUrl: "users/tpls/profile.contacts.tpl.html"
+                    }
+                },
+                data : { pageTitle: "Contacts" }
+            })
+
             .state("profile.password", {
                 url: "password/",
                 views: {
