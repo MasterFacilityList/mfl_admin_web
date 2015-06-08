@@ -9,7 +9,7 @@
             $scope.title = [
                 {
                     icon: "fa-tasks",
-                    name: "Manage Communtiy Units Status"
+                    name: "Manage Community Units Status"
                 }
             ];
             $scope.action = [
@@ -17,7 +17,7 @@
                     func : "ui-sref='setup.chu_status.create'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
-                    tipmsg: "Add Communinty Unit status",
+                    tipmsg: "Add community unit status",
                     icon: "fa-plus"
                 }
             ];
