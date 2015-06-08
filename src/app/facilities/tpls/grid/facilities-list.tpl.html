@@ -7,8 +7,8 @@
 <div id="no-more-tables" class="col-lg-12 margin-t-15">
     <table class="table content-card cf">
         <thead>
-            <th sil-grid-sort field='code'>Code</th>
-            <th sil-grid-sort field='name'>Name</th>
+            <th>Code</th>
+            <th>Name</th>
             <th>County</th>
             <th>Constituency</th>
             <th>Facility Type</th>
@@ -24,8 +24,8 @@
                 <td data-title="Facility Type">{{fac.facility_type_name}}</td>
                 <td data-title="Ownery Type">{{fac.owner_type_name}}</td>
                 <td class="text-center" data-title="Actions">
-                    <a class="action-btn action-btn-grid action-btn-info" tooltip="Edit" tooltip-placement="bottom">
-                        <i class="fa fa-edit"></i>
+                    <a class="action-btn action-btn-grid action-btn-info" ui-sref="facilities.view({facilityId: fac.id})" tooltip="View" tooltip-placement="bottom">
+                        <i class="fa fa-eye"></i>
                     </a>
                 </td>
             </tr>
