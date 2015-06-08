@@ -78,9 +78,8 @@
                     }
                 };
                 self.getData = function(){
-                    if($scope.showLoader){
-                        self.setLoading(true);
-                    }
+
+                    self.setLoading(true);
                     var promise;
                     if(_.isUndefined($scope.filters)){
                         promise = self.api.list();
@@ -90,9 +89,7 @@
                     promise.success(self.setData).error(self.setError);
                 };
                 self.setData = function(data){
-                    if($scope.showLoader){
-                        self.setLoading(false);
-                    }
+                    self.setLoading(false);
                     if(_.has(data, "results")){
                         $scope[$scope.data] = data.results;
                         addPagination(data.count, data.next, data.previous);
@@ -149,6 +146,7 @@
                 $scope.setLoading = self.setLoading;
                 var addPagination = function(page_count, url_next, url_prev){
                     $scope.pagination.active = true;
+                    $scope.filters = $scope.filters || {};
                     var page_size = $scope.filters.page_size || silGridConfig.itemsPerPage;
                     $scope.pagination.page_count = Math.ceil(page_count/page_size);
                     var makeParams = function(url, next){
@@ -217,27 +215,30 @@
                 });
                 var modal;
                 $rootScope.$on("silGrid.loader.start", function(event){
-                    modal = $modal.open(
-                    {
-                        template:"<div>"+
-                                "<div class='modal-body'>Please wait.."+
-                                "<div class='panel-loader'>"+
-                                "<div class='loader-container'>"+
-                                    "<div class='loader-spinner'></div>"+
-                                "</div>"+
-                                "</div>"+
-                        "</div></div>",
-                        backdrop: "static",
-                        keyboard: false,
-                        size: "sm",
-                        windowClass: "sil-grid-loader"
-                    });
-
+                    if(_.isUndefined(scope.showLoader)){
+                        modal = $modal.open(
+                        {
+                            template:"<div>"+
+                                    "<div class='modal-body'>Please wait.."+
+                                    "<div class='panel-loader'>"+
+                                    "<div class='loader-container'>"+
+                                        "<div class='loader-spinner'></div>"+
+                                    "</div>"+
+                                    "</div>"+
+                            "</div></div>",
+                            backdrop: "static",
+                            keyboard: false,
+                            size: "sm",
+                            windowClass: "sil-grid-loader"
+                        });
+                    }
                     event.stopPropagation();
                 });
 
                 $rootScope.$on("silGrid.loader.stop", function(event){
-                    modal.close();
+                    try{
+                        modal.close();
+                    }catch(err){}
                     event.stopPropagation();
                 });
 
