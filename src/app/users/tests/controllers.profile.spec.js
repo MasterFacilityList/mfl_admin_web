@@ -297,7 +297,7 @@
                     .respond(500, {"error": "e"});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
-                    .respond(200, {});
+                    .respond(200, {results: []});
 
                 var data = {
                     "$scope": rootScope.$new(),
@@ -312,7 +312,7 @@
 
                 expect(log.error).toHaveBeenCalled();
                 expect(_.isUndefined(data.$scope.contact_types)).toBe(true);
-                expect(data.$scope.contacts).toEqual({});
+                expect(data.$scope.contacts).toEqual([]);
             });
 
             it("should show error on load contacts error", function () {
@@ -320,7 +320,7 @@
                 spyOn(log, "error");
                 httpBackend
                     .expectGET(server_url + "api/common/contact_types/")
-                    .respond(200, {});
+                    .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
                     .respond(500, {"error": "e"});
@@ -337,7 +337,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(log.error).toHaveBeenCalled();
-                expect(data.$scope.contact_types).toEqual({});
+                expect(data.$scope.contact_types).toEqual([]);
                 expect(_.isUndefined(data.$scope.contacts)).toBe(true);
             });
 
@@ -345,10 +345,10 @@
                 spyOn(loginService, "getUser").andReturn({"id": 3});
                 httpBackend
                     .expectGET(server_url + "api/common/contact_types/")
-                    .respond(200, {});
+                    .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
-                    .respond(200, {});
+                    .respond(200, {results: []});
 
                 var data = {
                     "$scope": rootScope.$new()
@@ -360,11 +360,256 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.contact_types).toEqual({});
-                expect(data.$scope.contacts).toEqual({});
+                expect(data.$scope.contact_types).toEqual([]);
+                expect(data.$scope.contacts).toEqual([]);
             });
 
-        });
+            it("should add a new contact to the current user", function () {
+                spyOn(loginService, "getUser").andReturn({"id": 3});
+                httpBackend
+                    .expectGET(server_url + "api/common/contact_types/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url + "api/common/user_contacts/?user=3")
+                    .respond(200, {results: []});
 
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+
+                ctrl("contacts", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.contact = {
+                    "contact": "ccc",
+                    "contact_type": "123"
+                };
+                httpBackend
+                    .expectPOST(server_url + "api/common/contacts/", data.$scope.contact)
+                    .respond(201, {"id": 3});
+
+                httpBackend
+                    .expectPOST(server_url + "api/common/user_contacts/", {"user": 3, "contact": 3})
+                    .respond(201, {"id": 4});
+
+                data.$scope.add();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                console.log(data.$scope.contacts);
+                expect(data.$scope.contacts).toEqual([{"id": 4}]);
+            });
+
+            it("should show error if add a new contact fails", function () {
+                spyOn(loginService, "getUser").andReturn({"id": 3});
+                spyOn(log, "error");
+
+                httpBackend
+                    .expectGET(server_url + "api/common/contact_types/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url + "api/common/user_contacts/?user=3")
+                    .respond(200, {results: []});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+
+                ctrl("contacts", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.contact = {
+                    "contact": "ccc",
+                    "contact_type": "123"
+                };
+                httpBackend
+                    .expectPOST(server_url + "api/common/contacts/", data.$scope.contact)
+                    .respond(400, {"error_code": 3});
+
+                data.$scope.add();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.contacts).toEqual([]);
+                expect(log.error).toHaveBeenCalled();
+            });
+
+            it("should show error if associate new contact to user fails", function () {
+                spyOn(loginService, "getUser").andReturn({"id": 3});
+                spyOn(log, "error");
+
+                httpBackend
+                    .expectGET(server_url + "api/common/contact_types/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url + "api/common/user_contacts/?user=3")
+                    .respond(200, {results: []});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+
+                ctrl("contacts", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.contact = {
+                    "contact": "ccc",
+                    "contact_type": "123"
+                };
+                httpBackend
+                    .expectPOST(server_url + "api/common/contacts/", data.$scope.contact)
+                    .respond(201, {"id": 3});
+
+                httpBackend
+                    .expectPOST(server_url + "api/common/user_contacts/", {"user": 3, "contact": 3})
+                    .respond(400, {"error_code": 4});
+
+                data.$scope.add();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.contacts).toEqual([]);
+                expect(log.error).toHaveBeenCalled();
+            });
+
+            it("should remove a contact from the current user", function () {
+                spyOn(loginService, "getUser").andReturn({"id": 3});
+                httpBackend
+                    .expectGET(server_url + "api/common/contact_types/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url + "api/common/user_contacts/?user=3")
+                    .respond(200, {results: [{"contact": "123", "id": "456"}]});
+
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+
+                ctrl("contacts", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/common/user_contacts/456/")
+                    .respond(204);
+                httpBackend
+                    .expectDELETE(server_url + "api/common/contacts/123/")
+                    .respond(204);
+
+                data.$scope.contacts = [{"contact": "123", "id": "456"}];
+                data.$scope.remove(data.$scope.contacts[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.contacts).toEqual([]);
+            });
+
+            it("should show an error if delete user_contact failed", function () {
+                spyOn(loginService, "getUser").andReturn({"id": 3});
+                spyOn(log, "error");
+
+                httpBackend
+                    .expectGET(server_url + "api/common/contact_types/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url + "api/common/user_contacts/?user=3")
+                    .respond(200, {results: [{"contact": "123", "id": "456"}]});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+
+                ctrl("contacts", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/common/user_contacts/456/")
+                    .respond(500);
+
+                data.$scope.contacts = [{"contact": "123", "id": "456"}];
+                data.$scope.remove(data.$scope.contacts[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.contacts).toEqual([{"contact": "123", "id": "456"}]);
+            });
+
+            it("should show an error if delete contact failed", function () {
+                spyOn(loginService, "getUser").andReturn({"id": 3});
+                spyOn(log, "error");
+
+                httpBackend
+                    .expectGET(server_url + "api/common/contact_types/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url + "api/common/user_contacts/?user=3")
+                    .respond(200, {results: [{"contact": "123", "id": "456"}]});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+
+                ctrl("contacts", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/common/user_contacts/456/")
+                    .respond(204);
+                httpBackend
+                    .expectDELETE(server_url + "api/common/contacts/123/")
+                    .respond(500);
+
+                data.$scope.contacts = [{"contact": "123", "id": "456"}];
+                data.$scope.remove(data.$scope.contacts[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.contacts).toEqual([{"contact": "123", "id": "456"}]);
+            });
+        });
     });
 })(_);

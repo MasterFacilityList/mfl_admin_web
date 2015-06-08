@@ -28,7 +28,7 @@
             })
 
             .state("profile.basic", {
-                url: "userdetails/",
+                url: "basic/",
                 views: {
                     "main-content@profile": {
                         controller: "mfl.users.controllers.profile.basic",

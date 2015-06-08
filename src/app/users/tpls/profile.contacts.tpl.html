@@ -1,17 +1,25 @@
 <contentheader></contentheader>
 <div>
+    <form ng-submit="add()">
+        <select name="contact_type" ng-model="contact.contact_type" required>
+            <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
+        </select>
+        <input type="text" name="contact" ng-model="contact.contact" required />
+        <input type="submit" value="Add" />
+    </form>
     <table>
         <thead>
             <tr>
                 <th>Type</th>
                 <th>Contact</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="contact in contacts">
-                <td>
-
-                </td>
+                <td>{{contact.contact_type_text}}</td>
+                <td>{{contact.contact_text}}</td>
+                <td><button ng-click="remove(contact)">Delete</button></td>
             </tr>
         </tbody>
     </table>

@@ -13,8 +13,12 @@
             }]);
         });
 
-        it("should go to basic profile state", function () {
+        it("should go to home profile state", function () {
             expect(state.href("profile")).toEqual("#/profile/");
+        });
+
+        it("should go to basic profile state", function () {
+            expect(state.href("profile.basic")).toEqual("#/profile/basic/");
         });
 
         it("should go to password change state", function () {
