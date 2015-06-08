@@ -70,7 +70,7 @@
             ]));
 
             it("should not do anything without permission", function () {
-               spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "isLoggedIn").andReturn(true);
 
                 var element = angular.element(
                     "<div><div id='r'><p requires-permission=''>asd</p></div></div>"
