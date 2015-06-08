@@ -1,7 +1,8 @@
 (function(angular){
     "use strict";
     angular.module("mfl.facilities.controllers.create", [
-        "mfl.facilities.services"
+        "mfl.facilities.services",
+        "mfl.common.forms"
     ])
     .controller("mfl.facilities.controllers.create.base", ["$scope","$state",
         "$stateParams", "safeApply",
@@ -73,9 +74,12 @@
                     {constituency:value.id}, "ward", facilityApi.wards);
             }
         };
-        if(!_.isEmpty($stateParams) || !_.isEmpty($stateParams.facilityId)){
-            facilityApi.utils.resolvePromise(
-                $scope,$scope, facilityApi.facilities.get($stateParams.facilityId));
+        if(!_.isEmpty($stateParams) && !_.isEmpty($stateParams.facilityId)){
+            facilityApi.facilities.get($stateParams.facilityId).success(function(data){
+                $scope.facility = data;
+            }).error(function(error){
+                $scope.alert = facilityApi.utils.getError(error);
+            });
         }
         $scope.saveFacility = function(facility){
             facilityApi.facilities.create(
@@ -88,12 +92,9 @@
         };
     }])
     .controller("mfl.facilities.controllers.create.address", ["$scope","$state",
-    "$stateParams", "mfl.facilities.wrappers",
-    function($scope, $state, $stateParams, facilityApi){
+    "$stateParams", "mfl.facilities.wrappers", "mfl.common.forms.changes",
+    function($scope, $state, $stateParams, facilityApi, formChanges){
         facilityApi.utils.createLock($stateParams, $state);
-        $scope.facility= {
-            id : $stateParams.facilityId
-        };
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -113,6 +114,55 @@
                 icon: "fa-arrow-left"
             }
         ];
+        $scope.facility= {
+            id : $stateParams.facilityId
+        };
+        $scope.filters ={
+            facility: $scope.facility.id,
+            page_size: 3
+        };
+        $scope.saveAddress = function(address){
+            facilityApi.physical_address.create(
+                facilityApi.utils.cleanFormData(address))
+            .success(function(data){
+                var facilityAddress = {
+                    physical_address: data.id
+                };
+                $scope.address.id = data.id;
+                facilityApi.facilities.update($stateParams.facilityId,facilityAddress)
+                .success(function(){
+                    $state.go("facilities.create.contacts");
+                }).error(function(error){
+                    $scope.alert = facilityApi.utils.getError(error);
+                });
+            }).error(function(error){
+                $scope.alert = facilityApi.utils.getError(error);
+            });
+        };
+
+        $scope.updateAddress = function(id, frm){
+            var changes= formChanges.whatChanged(frm);
+            if(!_.isEmpty(changes)){
+                facilityApi.physical_address.update(id, changes).success(function(data){
+                    $scope.address = data;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            }
+        };
+        facilityApi.facilities.get($scope.facility.id).success(function(data){
+                $scope.address = {id: data.physical_address};
+                if(!_.isEmpty($scope.address.id)){
+                    facilityApi.physical_address.get($scope.address.id)
+                    .success(function(data){
+                        $scope.address = data;
+                    }).error(function(error){
+                        $scope.alert = facilityApi.utils.getError(error);
+                    });
+                }
+            }).error(function(error){
+                $scope.alert = facilityApi.utils.getError(error);
+            });
 
     }])
 
@@ -206,5 +256,50 @@
                 icon: "fa-arrow-left"
             }
         ];
+        $scope.getOptionsData = {
+            getData: function(api, callback, what){
+                api.list()
+                .success(function(data){
+                    callback(data[what]);
+                }).error(function(error){
+                    callback([]);
+                    $scope.alert = error.error;
+                });
+            },
+            service: function(callback){
+                $scope.getOptionsData.getData(
+                    facilityApi.services, callback, "results");
+            },
+            option: function(callback){
+                $scope.getOptionsData.getData(
+                    facilityApi.option, callback, "results");
+            }
+
+        };
+        $scope.filters ={
+            facility: $scope.facility.id
+        };
+        $scope.saveService = function(service){
+            facilityApi.service_option.create(
+                facilityApi.utils.cleanFormData(service))
+            .success(function(data){
+                var facilityService = {
+                    selected_option: data.id,
+                    facility: $scope.facility.id
+                };
+                facilityApi.facility_service.create(facilityService)
+                .success(function(){
+                    $scope.service = {
+                        service: "",
+                        option: ""
+                    };
+                    $scope.$emit("silGrid.data.refresh");
+                }).error(function(error){
+                    $scope.alert = facilityApi.utils.getError(error);
+                });
+            }).error(function(error){
+                $scope.alert = facilityApi.utils.getError(error);
+            });
+        };
     }]);
 })(angular);
