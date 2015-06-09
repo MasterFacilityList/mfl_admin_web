@@ -209,9 +209,7 @@
                 var dt = {
                     $stateParams: {id: 1}
                 };
-                var res = {msg: "ok"};
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
-                200, {results: res});
+                var res = {name: "State Coorporation"};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
 
@@ -219,14 +217,50 @@
                 $httpBackend.flush();
                 expect($scope.facilityOwners).toEqual(res);
             });
-
+        it("should navigate to creating new chuStatus", function () {
+            var dt = {
+                $stateParams : {id: "create"}
+            };
+            var test_title = [
+                {
+                    icon: "fa-plus-circle",
+                    name: "New Facility Owner"
+                }
+            ];
+            createController("mfl.setup.controller.facilityOwner.view", dt);
+            expect($scope.title).toEqual(test_title);
+        });
+        it("should navigate to creating new facilityRegulatoryBody", function () {
+            var dt = {
+                $stateParams : {id: "create"}
+            };
+            var test_title = [
+                {
+                    icon: "fa-plus-circle",
+                    name: "New Regulatory Body"
+                }
+            ];
+            createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
+            expect($scope.title).toEqual(test_title);
+        });
+        it("should navigate to creating new facilityJobTitle", function () {
+            var dt = {
+                $stateParams : {id: "create"}
+            };
+            var test_title = [
+                {
+                    icon: "fa-plus-circle",
+                    name: "New Job Title"
+                }
+            ];
+            createController("mfl.setup.controller.facilityJobTitle.view", dt);
+            expect($scope.title).toEqual(test_title);
+        });
         it("should view a facilityOwner: error",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
                 var res = {error: "error"};
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
-                200, {resutls: res});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.facilityOwner.view", dt);
@@ -252,8 +286,6 @@
                 };
                 spyOn($state, "go");
                 var res = {mgs: "ok"};
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
-                200, {resutls: res});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityOwner.view", dt);
@@ -270,8 +302,6 @@
                     $stateParams: {id: 1}
                 };
                 var res = {error: "error"};
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
-                200, {resutls: res});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityOwner.view", dt);
@@ -282,7 +312,6 @@
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
-
         it("should update facilityOwner: success",function(){
                 var dt = {
                     $stateParams: {id: 1}
@@ -291,8 +320,6 @@
                 var form = {name : "Antony"};
                 spyOn($state, "go");
                 spyOn(formService, "whatChanged").andReturn(form);
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
-                200, {resutls: res});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityOwner.view", dt);
@@ -312,8 +339,6 @@
                 var form = {name : "Antony"};
                 spyOn($state, "go");
                 spyOn(formService, "whatChanged").andReturn(form);
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
-                200, {resutls: res});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityOwner.view", dt);
@@ -334,8 +359,6 @@
                 var form = {};
                 spyOn($state, "go");
                 spyOn(formService, "whatChanged").andReturn(form);
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
-                200, {results: res});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityOwner.view", dt);
