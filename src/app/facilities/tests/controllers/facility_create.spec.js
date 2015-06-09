@@ -30,7 +30,7 @@
             $httpBackend.verifyNoOutstandingRequest();
         });
 
-        it("should have `mfl.facilities.controllers.create.basic` defined",
+        xit("should have `mfl.facilities.controllers.create.basic` defined",
            function(){
                 var ctrl = createController("mfl.facilities.controllers.create.basic", {});
                 expect(ctrl).toBeDefined();

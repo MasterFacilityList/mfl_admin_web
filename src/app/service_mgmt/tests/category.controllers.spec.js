@@ -70,7 +70,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.category).toBe(undefined);
-                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should save updated category", function () {
@@ -196,7 +196,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.category).toBe(undefined);
-                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should delete the category", function () {
