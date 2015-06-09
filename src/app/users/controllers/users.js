@@ -72,8 +72,7 @@
 
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
-                console.log(frm);
-                console.log(changes);
+
                 if (! _.isEmpty(changes)) {
                     wrappers.users.update($scope.user_id, changes)
                     .success(function () {

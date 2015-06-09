@@ -398,6 +398,7 @@
             module("mfl.users.controllers.users");
             module("ui.router");
             module("mflAdminAppConfig");
+            module("mfl.common.forms");
 
             inject(["$controller", "$log", "$httpBackend", "$rootScope", "SERVER_URL", "$state",
                 function ($controller, $log, $httpBackend, $rootScope, SERVER_URL, $state) {
@@ -564,7 +565,7 @@
 
                 ctrl("user_create.basic", data);
 
-                data.$scope.addUser();
+                data.$scope.save();
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -597,7 +598,7 @@
 
                 ctrl("user_create.basic", data);
 
-                data.$scope.addUser();
+                data.$scope.save();
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -656,7 +657,6 @@
                 expect(scope.user).toEqual(undefined);
                 expect(log.error).toHaveBeenCalled();
             });
-
         });
 
         describe("Test user edit groups controller", function () {
@@ -664,7 +664,6 @@
             it("should load", function () {
                 ctrl("user_edit.groups");
             });
-
         });
 
         describe("Test user edit contacts controller", function () {
@@ -991,10 +990,40 @@
         });
 
         describe("Test user edit basic controller", function () {
-            it("should load", function () {
-                ctrl("user_edit.basic");
+            var controller;
+
+            beforeEach(function () {
+                inject(["$controller", function (c) {
+                    controller = c;
+                }]);
+            });
+
+            it("should update user changes", function () {
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$modelValue": "ASD",
+                        "$dirty": true
+                    }
+                };
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                data.$scope.user_id = 3;
+
+                controller("mfl.users.controllers.user_edit.basic", data);
+
+                httpBackend
+                    .expectPOST(server_url + "api/users/3/", {"name": "ASD"})
+                    .respond(200);
+
+                data.$scope.save(frm);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
             });
         });
-
     });
 })();
