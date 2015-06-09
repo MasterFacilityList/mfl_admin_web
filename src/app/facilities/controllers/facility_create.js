@@ -131,7 +131,7 @@
                 $scope.address.id = data.id;
                 facilityApi.facilities.update($stateParams.facilityId,facilityAddress)
                 .success(function(){
-                    $state.go("facilities.create.contacts");
+                    $state.go("facilities.create.contacts", {facilityId: $scope.facility.id});
                 }).error(function(error){
                     $scope.alert = facilityApi.utils.getError(error);
                 });
