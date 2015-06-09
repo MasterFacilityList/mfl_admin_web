@@ -4,7 +4,8 @@
     angular.module("mfl.users.controllers.users", [
         "mfl.auth.services",
         "mfl.users.services",
-        "ui.router"
+        "ui.router",
+        "mfl.common.forms"
     ])
 
     .controller("mfl.users.controllers.user_delete",
@@ -38,7 +39,7 @@
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
         function ($scope, $log, $state, wrappers) {
 
-            $scope.addUser = function () {
+            $scope.save = function () {
                 wrappers.users.create($scope.user)
                 .success(function (data) {
                     $state.go("users.user_edit.basic", {user_id: data.id});
@@ -65,7 +66,26 @@
         }]
     )
 
-    .controller("mfl.users.controllers.user_edit.basic", [function () {}])
+    .controller("mfl.users.controllers.user_edit.basic",
+        ["$scope", "$log", "mfl.common.forms.changes", "mfl.users.services.wrappers",
+        function ($scope, $log, formChanges, wrappers) {
+
+            $scope.save = function (frm) {
+                var changes = formChanges.whatChanged(frm);
+                console.log(frm);
+                console.log(changes);
+                if (! _.isEmpty(changes)) {
+                    wrappers.users.update($scope.user_id, changes)
+                    .success(function () {
+
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                }
+            };
+        }]
+    )
 
     .controller("mfl.users.controllers.user_edit.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers",
