@@ -27,7 +27,7 @@
 
         it("should go to reset password page", function () {
             expect($state.href("reset_pwd_confirm", {uid: "2", token: "3"}))
-                .toEqual("#/reset_pwd_confirm?uid=2&token=3");
+                .toEqual("#/reset_pwd_confirm/2/3");
         });
     });
 })();

@@ -58,7 +58,7 @@
 
             var page_check = function (evt, toState) {
                 if (loginService.isLoggedIn()) {
-                    if (toState.name === "login") {
+                    if (_.contains(["reset_pwd", "reset_pwd_confirm", "login"], toState.name)) {
                         evt.preventDefault();
                         change_state(HOME_PAGE_NAME);
                     } else if (! permChecker.hasPermission(toState.permission)) {
@@ -68,7 +68,8 @@
                     return;
                 }
 
-                if (_.contains(["login", "logout", ""], toState.name)) {
+                if (_.contains(["login", "logout", "reset_pwd", "reset_pwd_confirm", ""],
+                        toState.name)) {
                     return;
                 }
 

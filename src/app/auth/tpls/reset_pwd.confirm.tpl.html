@@ -2,8 +2,8 @@
     <h1>Password reset confirmation</h1>
 
     <form ng-submit="reset_confirm()">
-        <p><input name="new_password1" type="password" required/></p>
-        <p><input name="new_password2" type="password" required/></p>
+        <p><input name="new_password1" type="password" ng-model="new_password1" required/></p>
+        <p><input name="new_password2" type="password" ng-model="new_password2" required/></p>
 
         <input type="submit" value="Confirm Reset Password" />
 

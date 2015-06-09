@@ -144,4 +144,11 @@
             expect(state.go).toHaveBeenCalledWith("login");
         });
     });
+
+    describe("Test reset pwd controller", function () {
+
+    });
+
+    describe("Test reset pwd confirm controller", function () {});
+
 })();

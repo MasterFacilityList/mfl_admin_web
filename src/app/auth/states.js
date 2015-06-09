@@ -42,7 +42,7 @@
             })
 
             .state("reset_pwd_confirm", {
-                url: "/reset_pwd_confirm?uid&token",
+                url: "/reset_pwd_confirm/:uid/:token",
                 views: {
                     "main": {
                         controller: "mfl.auth.controller.reset_pwd_confirm",
