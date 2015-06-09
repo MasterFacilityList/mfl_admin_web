@@ -39,7 +39,7 @@
                 },
                 resolvePromise: function(scope,scopeObj, key, promise){
                     promise.success(function(data){
-                        scopeObj[key] = data.results||data;
+                        scopeObj[key] = data.results;
                     }).error(function(error){
                         scope.alert = error.error_msg;
                     });
