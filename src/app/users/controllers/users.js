@@ -32,13 +32,23 @@
         }]
     )
 
-    .controller("mfl.users.controllers.user_create", [])
+    .controller("mfl.users.controllers.user_create", [function () {}])
 
-    .controller("mfl.users.controllers.user_create_basic", [])
+    .controller("mfl.users.controllers.user_create.basic", [function () {}])
 
-    .controller("mfl.users.controllers.user_create_contacts", [])
+    .controller("mfl.users.controllers.user_create.contacts", [function () {}])
 
-    .controller("mfl.users.controllers.user_create_groups", [])
+    .controller("mfl.users.controllers.user_create.groups", [function () {}])
+
+    .controller("mfl.users.controllers.user_edit", [function () {}])
+
+    .controller("mfl.users.controllers.user_edit.basic", [function () {}])
+
+    .controller("mfl.users.controllers.user_edit.contacts", [function () {}])
+
+    .controller("mfl.users.controllers.user_edit.groups", [function () {}])
+
+    // ====================================================================== //
 
     .controller("mfl.users.controllers.home", ["$scope", function ($scope) {
         $scope.test = "Manage users";
@@ -73,7 +83,7 @@
         ];
         $scope.action = [
             {
-                func : "ui-sref='users.new_user.basic' " +
+                func : "ui-sref='users.user_create.basic' " +
                         "has-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-info action-btn-md",
                 color: "blue",

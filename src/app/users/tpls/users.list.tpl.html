@@ -25,7 +25,7 @@
                     <i ng-if="!user.is_national" class="fa fa-times-circle-o fa-2x text-danger"></i>
                 </td>
                 <td class="text-center">
-                    <a ui-sref="users.user_edit({user_id : user.id})" class="action-btn action-btn-grid action-btn-primary" tooltip="Edit user">
+                    <a ui-sref="users.user_edit.basic({user_id : user.id})" class="action-btn action-btn-grid action-btn-primary" tooltip="Edit user">
                         <i class="fa fa-edit"></i>
                     </a>
                     <a ui-sref="users.user_delete({user_id: user.id})" class="action-btn action-btn-grid action-btn-danger" tooltip="Delete user">
