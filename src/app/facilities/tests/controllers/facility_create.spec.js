@@ -243,7 +243,7 @@
             createController("mfl.facilities.controllers.create.address", dt);
             $scope.saveAddress({name: "test"});
             $httpBackend.flush();
-            expect($state.go).toHaveBeenCalledWith("facilities.create.contacts");
+            expect($state.go).toHaveBeenCalled();
         });
 
         it("should create a facility address: fail, saving saveAddress ", function(){
