@@ -458,5 +458,107 @@
             $httpBackend.flush();
             expect($scope.alert).toBeTruthy();
         });
+
+
+        it("should have `mfl.facilities.controllers.create.services` defined",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var ctrl = createController("mfl.facilities.controllers.create.services", dt);
+                expect(ctrl).toBeDefined();
+            });
+
+        it("should get options data, `service`: success, in facility service ", function(){
+            var res = {county: "testing"};
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            spyOn(testFunc, "callback");
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/services/")
+            .respond(200, res);
+            createController("mfl.facilities.controllers.create.services", dt);
+            $scope.getOptionsData.service(testFunc.callback);
+            $httpBackend.flush();
+            expect(testFunc.callback).toHaveBeenCalled();
+        });
+
+        it("should get options data, `service`: fail, in facility service ", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            spyOn(testFunc, "callback");
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/services/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.services", dt);
+            $scope.getOptionsData.service(testFunc.callback);
+            $httpBackend.flush();
+            expect($scope.alert).toBeDefined();
+        });
+
+        it("should get options data, `option`: success, in facility service ", function(){
+            var res = {county: "testing"};
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            spyOn(testFunc, "callback");
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/options/")
+            .respond(200, res);
+            createController("mfl.facilities.controllers.create.services", dt);
+            $scope.getOptionsData.option(testFunc.callback);
+            $httpBackend.flush();
+            expect(testFunc.callback).toHaveBeenCalled();
+        });
+
+        it("should create a facility service : success", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var form = {name : "Antony"};
+            spyOn($state, "go");
+            spyOn(formService, "whatChanged").andReturn(form);
+            $httpBackend.expectPOST(SERVER_URL+"api/facilities/service_options/")
+            .respond(200, {id: 1});
+            $httpBackend.expectPOST(SERVER_URL+"api/facilities/facility_services/")
+            .respond(200, {});
+            createController("mfl.facilities.controllers.create.services", dt);
+            $scope.saveService(1, form);
+            $httpBackend.flush();
+            expect($scope.service).toEqual({service:"", option:""});
+        });
+
+
+        it("should create a facility service : fail, when saving service option", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var form = {name : "Antony"};
+            spyOn($state, "go");
+            spyOn(formService, "whatChanged").andReturn(form);
+            $httpBackend.expectPOST(SERVER_URL+"api/facilities/service_options/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.services", dt);
+            $scope.saveService(1, form);
+            $httpBackend.flush();
+            expect($scope.alert).toBeTruthy();
+        });
+
+
+        it("should create a facility contact : fail, when saving facility contact", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var form = {name : "Antony"};
+            spyOn($state, "go");
+            spyOn(formService, "whatChanged").andReturn(form);
+            $httpBackend.expectPOST(SERVER_URL+"api/facilities/service_options/")
+            .respond(200, {id:1});
+            $httpBackend.expectPOST(SERVER_URL+"api/facilities/facility_services/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.services", dt);
+            $scope.saveService(1, form);
+            $httpBackend.flush();
+            expect($scope.alert).toBeTruthy();
+        });
     });
 })(describe);
