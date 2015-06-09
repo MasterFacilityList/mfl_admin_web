@@ -42,7 +42,7 @@
                 views: {
                     "main-content@users": {
                         controller: "mfl.users.controllers.user_create",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                        templateUrl: "users/tpls/users.edit.tpl.html"
                     }
                 }
             })
@@ -52,27 +52,7 @@
                 views: {
                     "form-view@users.user_create": {
                         controller: "mfl.users.controllers.user_create.basic",
-                        templateUrl: "users/tpls/users.create.basic.tpl.html"
-                    }
-                }
-            })
-
-            .state("users.user_create.contacts", {
-                url: "contacts/",
-                views: {
-                    "form-view@users.user_create": {
-                        controller: "mfl.users.controllers.user_create.contacts",
-                        templateUrl: "users/tpls/users.create.contacts.tpl.html"
-                    }
-                }
-            })
-
-            .state("users.user_create.groups", {
-                url: "groups/",
-                views: {
-                    "form-view@users.user_create": {
-                        controller: "mfl.users.controllers.user_create.groups",
-                        templateUrl: "users/tpls/users.create.groups.tpl.html"
+                        templateUrl: "users/tpls/users.edit.basic.tpl.html"
                     }
                 }
             })
@@ -82,7 +62,7 @@
                 views: {
                     "main-content@users": {
                         controller: "mfl.users.controllers.user_edit",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                        templateUrl: "users/tpls/users.edit.tpl.html"
                     }
                 }
             })
@@ -92,7 +72,7 @@
                 views: {
                     "form-view@users.user_edit": {
                         controller: "mfl.users.controllers.user_edit.basic",
-                        templateUrl: "users/tpls/users.create.basic.tpl.html"
+                        templateUrl: "users/tpls/users.edit.basic.tpl.html"
                     }
                 }
             })
@@ -102,7 +82,7 @@
                 views: {
                     "form-view@users.user_edit": {
                         controller: "mfl.users.controllers.user_edit.contacts",
-                        templateUrl: "users/tpls/users.create.contacts.tpl.html"
+                        templateUrl: "users/tpls/users.edit.contacts.tpl.html"
                     }
                 }
             })
@@ -112,7 +92,7 @@
                 views: {
                     "form-view@users.user_edit": {
                         controller: "mfl.users.controllers.user_edit.groups",
-                        templateUrl: "users/tpls/users.create.groups.tpl.html"
+                        templateUrl: "users/tpls/users.edit.groups.tpl.html"
                     }
                 }
             })

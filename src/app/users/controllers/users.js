@@ -36,15 +36,90 @@
 
     .controller("mfl.users.controllers.user_create.basic", [function () {}])
 
-    .controller("mfl.users.controllers.user_create.contacts", [function () {}])
+    .controller("mfl.users.controllers.user_edit",
+        ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
+        function ($scope, $stateParams, $log, wrappers) {
+            $scope.user_id = $stateParams.user_id;
 
-    .controller("mfl.users.controllers.user_create.groups", [function () {}])
-
-    .controller("mfl.users.controllers.user_edit", [function () {}])
+            wrappers.users.get($scope.user_id)
+                .success(function (data) {
+                    $scope.user = data;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+        }]
+    )
 
     .controller("mfl.users.controllers.user_edit.basic", [function () {}])
 
-    .controller("mfl.users.controllers.user_edit.contacts", [function () {}])
+    .controller("mfl.users.controllers.user_edit.contacts",
+        ["$scope", "$log", "mfl.users.services.wrappers",
+        function ($scope, $log, wrappers) {
+            $scope.contact = {
+                contact_type: "",
+                contact: ""
+            };
+
+            wrappers.contact_types.list()
+                .success(function (data) {
+                    $scope.contact_types = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            wrappers.user_contacts.filter({"user": $scope.user_id})
+                .success(function(data) {
+                    $scope.contacts = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            $scope.remove = function (obj) {
+                wrappers.user_contacts.remove(obj.id)
+                .success(function () {
+                    wrappers.contacts.remove(obj.contact)
+                    .success(function () {
+                        $scope.contacts = _.without($scope.contacts, obj);
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+
+            $scope.add = function () {
+                wrappers.contacts.create({
+                    "contact_type": $scope.contact.contact_type,
+                    "contact": $scope.contact.contact
+                })
+                .success(function (data) {
+                    wrappers.user_contacts.create({
+                        "user": $scope.user_id,
+                        "contact": data.id
+                    })
+                    .success(function (data) {
+                        $scope.contacts.push(data);
+                        $scope.contact = {
+                            contact_type: "",
+                            contact: ""
+                        };
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }
+    ])
 
     .controller("mfl.users.controllers.user_edit.groups", [function () {}])
 
