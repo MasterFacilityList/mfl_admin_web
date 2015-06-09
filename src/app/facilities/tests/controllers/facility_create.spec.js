@@ -369,5 +369,94 @@
             $httpBackend.flush();
             expect($scope.address.id).toBeFalsy();
         });
+
+
+        it("should have `mfl.facilities.controllers.create.contacts` defined",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var ctrl = createController("mfl.facilities.controllers.create.contacts", dt);
+                expect(ctrl).toBeDefined();
+            });
+
+        it("should get options data, `contactType`: success, in facility contacts ", function(){
+            var res = {county: "testing"};
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            spyOn(testFunc, "callback");
+            $httpBackend.expectGET(SERVER_URL+"api/common/contact_types/")
+            .respond(200, res);
+            createController("mfl.facilities.controllers.create.contacts", dt);
+            $scope.getOptionsData.contactType(testFunc.callback);
+            $httpBackend.flush();
+            expect(testFunc.callback).toHaveBeenCalled();
+        });
+
+        it("should get options data, `contactType`: fail, in facility contacts ", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            spyOn(testFunc, "callback");
+            $httpBackend.expectGET(SERVER_URL+"api/common/contact_types/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.contacts", dt);
+            $scope.getOptionsData.contactType(testFunc.callback);
+            $httpBackend.flush();
+            expect(testFunc.callback).toHaveBeenCalledWith([]);
+            expect($scope.alert).toBeTruthy();
+        });
+
+        it("should create a facility contact : success", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var form = {name : "Antony"};
+            spyOn($state, "go");
+            spyOn(formService, "whatChanged").andReturn(form);
+            $httpBackend.expectPOST(SERVER_URL+"api/common/contacts/")
+            .respond(200, {id: 1});
+            $httpBackend.expectPOST(SERVER_URL+"api/facilities/contacts/")
+            .respond(200, {});
+            createController("mfl.facilities.controllers.create.contacts", dt);
+            $scope.saveContact(1, form);
+            $httpBackend.flush();
+            expect($scope.contact).toEqual({name:"", contact_type:""});
+        });
+
+
+        it("should create a facility contact : fail, when saving contact", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var form = {name : "Antony"};
+            spyOn($state, "go");
+            spyOn(formService, "whatChanged").andReturn(form);
+            $httpBackend.expectPOST(SERVER_URL+"api/common/contacts/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.contacts", dt);
+            $scope.saveContact(1, form);
+            $httpBackend.flush();
+            expect($scope.alert).toBeTruthy();
+        });
+
+
+        it("should create a facility contact : fail, when saving facility contact", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var form = {name : "Antony"};
+            spyOn($state, "go");
+            spyOn(formService, "whatChanged").andReturn(form);
+            $httpBackend.expectPOST(SERVER_URL+"api/common/contacts/")
+            .respond(200, {id:1});
+            $httpBackend.expectPOST(SERVER_URL+"api/facilities/contacts/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.contacts", dt);
+            $scope.saveContact(1, form);
+            $httpBackend.flush();
+            expect($scope.alert).toBeTruthy();
+        });
     });
 })(describe);
