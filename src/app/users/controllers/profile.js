@@ -84,7 +84,7 @@
     ])
 
     .controller("mfl.users.controllers.profile.basic",
-        ["$scope", "$log", "$window", "mfl.users.services.profile", "mfl.common.forms.changes",
+        ["$scope", "$log", "$window", "mfl.auth.services.profile", "mfl.common.forms.changes",
         function ($scope, $log, $window, profileService, formService) {
             $scope.title = [
                 {
@@ -120,7 +120,7 @@
     ])
 
     .controller("mfl.users.controllers.profile.password",
-        ["$scope", "$log", "mfl.users.services.profile", "mfl.auth.services.login",
+        ["$scope", "$log", "mfl.auth.services.profile", "mfl.auth.services.login",
         function ($scope, $log, profileService, loginService) {
             $scope.title = [
                 {
