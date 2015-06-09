@@ -1,6 +1,8 @@
 (function(angular){
     "use strict";
-    angular.module("mfl.facilities.controllers.home", [])
+    angular.module("mfl.facilities.controllers.home", [
+        "mfl.facilities.services"
+    ])
     .controller("mfl.facilities.controllers.home.list", ["$scope", function($scope){
         console.log("at home controller");
         $scope.tooltip = {
@@ -21,14 +23,31 @@
                 color: "blue",
                 tipmsg: "New User",
                 icon: "fa-user-plus"
-            },
-            {
-                func : "onclick=window.history.back()",
-                class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
-                tipmsg: "Go back",
-                icon: "fa-arrow-left"
             }
         ];
-    }]);
+    }])
+
+    .controller("mfl.facilities.controllers.home.detail", ["$scope",
+    "$stateParams",
+    "mfl.facilities.wrappers", function($scope,$stateParams, facilityApi){
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
+        $scope.title = [
+            {
+                icon: "fa-building",
+                name: "Facitilites Details"
+            }
+        ];
+
+
+        facilityApi.facilities.get($stateParams.facilityId)
+        .success(function(data){
+            $scope.facility = data;
+        }).error(function(err){
+            $scope.alert = err.error.error_msg;
+        });
+    }])
+    ;
 })(angular);

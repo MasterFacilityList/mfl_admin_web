@@ -82,22 +82,20 @@
 
                     var obj = {
                         bindto: "#facilitybar",
+                        axis: {
+                            x: {
+                                padding: {
+                                    left: 0,
+                                    right: 0
+                                }
+                            }
+                        },
                         data: {
                             columns: _list,
                             bar: {
                                 width: 10
                             },
                             type : "bar"
-                        },
-                        axis: {
-                            x: {
-                                tick: {
-                                    padding: {
-                                        left: 5,
-                                        right: 5
-                                    }
-                                }
-                            }
                         },
                         tooltip: {
                             grouped: false

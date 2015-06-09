@@ -3,7 +3,8 @@
 
     angular.module("mfl.users.controllers.profile", [
         "mfl.users.services",
-        "mfl.common.forms"
+        "mfl.common.forms",
+        "mfl.auth.services"
     ])
 
     .controller("mfl.users.controllers.profile.base", ["$scope",
@@ -12,15 +13,86 @@
         }
     ])
 
+    .controller("mfl.users.controllers.profile.contacts",
+        ["$scope", "$log", "mfl.users.services.wrappers", "mfl.auth.services.login",
+        function ($scope, $log, wrappers, loginService) {
+            $scope.title = "Contacts";
+            $scope.user_id = loginService.getUser().id;
+            $scope.contact = {
+                contact_type: "",
+                contact: ""
+            };
+
+            wrappers.contact_types.list()
+                .success(function (data) {
+                    $scope.contact_types = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            wrappers.user_contacts.filter({"user": $scope.user_id})
+                .success(function(data) {
+                    $scope.contacts = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            $scope.remove = function (obj) {
+                wrappers.user_contacts.remove(obj.id)
+                .success(function () {
+                    wrappers.contacts.remove(obj.contact)
+                    .success(function () {
+                        $scope.contacts = _.without($scope.contacts, obj);
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+
+            $scope.add = function () {
+                wrappers.contacts.create({
+                    "contact_type": $scope.contact.contact_type,
+                    "contact": $scope.contact.contact
+                })
+                .success(function (data) {
+                    wrappers.user_contacts.create({
+                        "user": $scope.user_id,
+                        "contact": data.id
+                    })
+                    .success(function (data) {
+                        $scope.contacts.push(data);
+                        $scope.contact = {
+                            contact_type: "",
+                            contact: ""
+                        };
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }
+    ])
+
     .controller("mfl.users.controllers.profile.basic",
-        ["$scope", "$log", "mfl.users.services.profile", "mfl.common.forms.changes",
-        function ($scope, $log, profileService, formService) {
+        ["$scope", "$log", "$window", "mfl.users.services.profile", "mfl.common.forms.changes",
+        function ($scope, $log, $window, profileService, formService) {
             $scope.title = [
                 {
                     icon: "fa-user",
-                    name: "User Details"
+                    name: "Basic Details"
                 }
             ];
+
             profileService.getProfile()
                 .success(function (data) {
                     $scope.profile = data;
@@ -30,10 +102,15 @@
                 });
 
             $scope.save = function (frm) {
+                var storage = $window.localStorage;
                 var changed = formService.whatChanged(frm);
+                var store_key = "auth.user";
+
                 if(! _.isEmpty(changed)) {
                     profileService.updateProfile(changed)
-                        .success(function () {/* update auth service store */ })
+                        .success(function (data) {
+                            storage.setItem(store_key, JSON.stringify(data));
+                        })
                         .error(function (data) {
                             $log.error(data);
                         });
@@ -43,12 +120,12 @@
     ])
 
     .controller("mfl.users.controllers.profile.password",
-        ["$scope", "$log", "mfl.users.services.profile",
-        function ($scope, $log, profileService) {
+        ["$scope", "$log", "mfl.users.services.profile", "mfl.auth.services.login",
+        function ($scope, $log, profileService, loginService) {
             $scope.title = [
                 {
                     icon: "fa-lock",
-                    name: "User Password"
+                    name: "Password"
                 }
             ];
             $scope.pwds = {
@@ -59,7 +136,9 @@
 
             $scope.save = function (old, pwd1, pwd2) {
                 profileService.updatePassword(old, pwd1, pwd2).then(
-                    function () {},
+                    function () {
+                        loginService.logout();
+                    },
                     function (data) {
                         $log.error(data);
                     }
