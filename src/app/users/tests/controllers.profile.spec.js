@@ -76,7 +76,7 @@
 
                 expect(scope.title[0].name).toEqual("Basic Details");
                 expect(_.isUndefined(scope.profile)).toBe(true);
-                expect(log.error).toHaveBeenCalledWith({});
+                expect(log.error).toHaveBeenCalled();
             });
 
             it("should update current user details", function () {
@@ -176,7 +176,7 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-                expect(log.error).toHaveBeenCalledWith({});
+                expect(log.error).toHaveBeenCalled();
             });
         });
 

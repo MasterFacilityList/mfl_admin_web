@@ -15,6 +15,16 @@
                 name: "Manage Facilities"
             }
         ];
+        $scope.action = [
+            {
+                func : "ui-sref='facilities.create.basic' " +
+                        "has-permission='users.add_mfluser' ",
+                class: "action-btn action-btn-info action-btn-md",
+                color: "blue",
+                tipmsg: "New User",
+                icon: "fa-user-plus"
+            }
+        ];
     }])
 
     .controller("mfl.facilities.controllers.home.detail", ["$scope",

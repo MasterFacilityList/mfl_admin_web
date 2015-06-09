@@ -140,8 +140,29 @@ module.exports = function ( grunt ) {
                         flatten: true
                     },
                     {
-                        src: [ "<%= vendor_files.imgs %>" ],
+                        src: [ "<%= vendor_files.imgs.sil %>" ],
                         dest: "<%= build_dir %>/assets/img/",
+                        cwd: ".",
+                        expand: true,
+                        flatten: true
+                    },
+                    {
+                        src: [ "<%= vendor_files.tpls %>" ],
+                        dest: "<%= build_dir %>/assets/tpls/",
+                        cwd: ".",
+                        expand: true,
+                        flatten: true
+                    },
+                    {
+                        src: [ "<%= vendor_files.vendor_css %>" ],
+                        dest: "<%= build_dir %>/assets/css/",
+                        cwd: ".",
+                        expand: true,
+                        flatten: true
+                    },
+                    {
+                        src: [ "<%= vendor_files.imgs.acute_select %>" ],
+                        dest: "<%= build_dir %>/assets/css/images/",
                         cwd: ".",
                         expand: true,
                         flatten: true
