@@ -32,6 +32,14 @@
         }]
     )
 
+    .controller("mfl.users.controllers.user_create", [])
+
+    .controller("mfl.users.controllers.user_create_basic", [])
+
+    .controller("mfl.users.controllers.user_create_contacts", [])
+
+    .controller("mfl.users.controllers.user_create_groups", [])
+
     .controller("mfl.users.controllers.home", ["$scope", function ($scope) {
         $scope.test = "Manage users";
         $scope.title = [

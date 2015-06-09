@@ -342,7 +342,6 @@
         function ($httpBackend, $stateParams) {
             $stateParams.user_id = 6;
             controller("mfl.users.controllers.view_user");
-            console.log($httpBackend);
             var usr_conts = {
                 results : [
                     {
@@ -373,7 +372,6 @@
         function ($httpBackend, $stateParams) {
             $stateParams.user_id = 6;
             controller("mfl.users.controllers.view_user");
-            console.log($httpBackend);
             var usr_conts = {
                 results : [
                     {

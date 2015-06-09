@@ -2,7 +2,6 @@
     "use strict";
     angular.module("mfl.facilities.controllers.create", [])
     .controller("mfl.facilities.controllers.create.basic", ["$scope", function($scope){
-        console.log("at home controller");
         $scope.tooltip = {
             "title": "",
             "checked": false

@@ -41,7 +41,7 @@
                 url: "create/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.role",
+                        controller: "mfl.users.controllers.user_create",
                         templateUrl: "users/tpls/users.create.tpl.html"
                     }
                 }
@@ -51,8 +51,8 @@
                 url: "basic/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                        controller: "mfl.users.controllers.user_create_basic",
+                        templateUrl: "users/tpls/users.create.basic.tpl.html"
                     }
                 }
             })
@@ -61,8 +61,8 @@
                 url: "contacts/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                        controller: "mfl.users.controllers.user_create_contacts",
+                        templateUrl: "users/tpls/users.create.contacts.tpl.html"
                     }
                 }
             })
@@ -71,8 +71,8 @@
                 url: "groups/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                        controller: "mfl.users.controllers.user_create_groups",
+                        templateUrl: "users/tpls/users.create.groups.tpl.html"
                     }
                 }
             })
