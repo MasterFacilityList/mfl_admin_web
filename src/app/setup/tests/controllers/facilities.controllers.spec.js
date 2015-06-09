@@ -151,7 +151,7 @@
                 expect($scope.alert).toEqual(res.error);
             });
 
-        it("should update facilityOwner: no changes",function(){
+        it("should update facilityOwnerType: no changes",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
@@ -211,7 +211,7 @@
                 };
                 var res = {msg: "ok"};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
-                200, {resutls: res});
+                200, {results: res});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
 
@@ -335,7 +335,7 @@
                 spyOn($state, "go");
                 spyOn(formService, "whatChanged").andReturn(form);
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
-                200, {resutls: res});
+                200, {results: res});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityOwner.view", dt);
