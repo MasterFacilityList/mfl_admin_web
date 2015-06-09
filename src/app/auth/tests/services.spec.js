@@ -354,7 +354,50 @@
             rootScope.$apply();
             httpBackend.verifyNoOutstandingExpectation();
             httpBackend.verifyNoOutstandingRequest();
+        });
 
+        it("should send a password reset request", function () {
+            var data = {
+                "email": "mail@domain.com"
+            };
+            httpBackend.expectPOST(server_url + "api/rest-auth/password/reset/", data).respond(200);
+
+            profileService.resetPassword("mail@domain.com");
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+        });
+
+        it("should reject password reset request if both passwords don't match", function () {
+            profileService.resetPasswordConfirm(1, 2, "b", "a")
+                .then(null, function (data) {
+                    expect(data).toEqual({
+                        "detail": "The two passwords do not match"
+                    });
+                });
+
+            rootScope.$apply();
+            httpBackend.verifyNoOutstandingExpectation();
+            httpBackend.verifyNoOutstandingRequest();
+        });
+
+        it("should reset a user's password", function () {
+            var data = {
+                "uid": 1,
+                "token": 2,
+                "new_password1": "b",
+                "new_password2": "b"
+            };
+
+            httpBackend
+                .expectPOST(server_url+"api/rest-auth/password/reset/confirm/", data)
+                .respond(200);
+            profileService.resetPasswordConfirm(1, 2, "b", "b");
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
         });
     });
 })();

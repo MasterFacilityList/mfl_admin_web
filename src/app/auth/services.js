@@ -131,6 +131,9 @@
         };
 
         var resetPasswordConfirm = function (uid, token, pwd1, pwd2) {
+            if (pwd1 !== pwd2) {
+                return $q.reject({"detail": "The two passwords do not match"});
+            }
             var data = {
                 "uid": uid,
                 "token": token,
