@@ -16,7 +16,12 @@
     .controller("mfl.users.controllers.profile.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers", "mfl.auth.services.login",
         function ($scope, $log, wrappers, loginService) {
-            $scope.title = "Contacts";
+            $scope.title = [
+                {
+                    icon: "fa-envelope",
+                    name: "Manage Users Contacts"
+                }
+            ];
             $scope.user_id = loginService.getUser().id;
             $scope.contact = {
                 contact_type: "",
