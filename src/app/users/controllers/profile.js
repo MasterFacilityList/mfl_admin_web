@@ -13,15 +13,86 @@
         }
     ])
 
+    .controller("mfl.users.controllers.profile.contacts",
+        ["$scope", "$log", "mfl.users.services.wrappers", "mfl.auth.services.login",
+        function ($scope, $log, wrappers, loginService) {
+            $scope.title = "Contacts";
+            $scope.user_id = loginService.getUser().id;
+            $scope.contact = {
+                contact_type: "",
+                contact: ""
+            };
+
+            wrappers.contact_types.list()
+                .success(function (data) {
+                    $scope.contact_types = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            wrappers.user_contacts.filter({"user": $scope.user_id})
+                .success(function(data) {
+                    $scope.contacts = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            $scope.remove = function (obj) {
+                wrappers.user_contacts.remove(obj.id)
+                .success(function () {
+                    wrappers.contacts.remove(obj.contact)
+                    .success(function () {
+                        $scope.contacts = _.without($scope.contacts, obj);
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+
+            $scope.add = function () {
+                wrappers.contacts.create({
+                    "contact_type": $scope.contact.contact_type,
+                    "contact": $scope.contact.contact
+                })
+                .success(function (data) {
+                    wrappers.user_contacts.create({
+                        "user": $scope.user_id,
+                        "contact": data.id
+                    })
+                    .success(function (data) {
+                        $scope.contacts.push(data);
+                        $scope.contact = {
+                            contact_type: "",
+                            contact: ""
+                        };
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }
+    ])
+
     .controller("mfl.users.controllers.profile.basic",
         ["$scope", "$log", "$window", "mfl.users.services.profile", "mfl.common.forms.changes",
         function ($scope, $log, $window, profileService, formService) {
             $scope.title = [
                 {
                     icon: "fa-user",
-                    name: "User Details"
+                    name: "Basic Details"
                 }
             ];
+
             profileService.getProfile()
                 .success(function (data) {
                     $scope.profile = data;
@@ -54,7 +125,7 @@
             $scope.title = [
                 {
                     icon: "fa-lock",
-                    name: "User Password"
+                    name: "Password"
                 }
             ];
             $scope.pwds = {
