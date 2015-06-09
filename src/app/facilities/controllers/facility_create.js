@@ -37,7 +37,7 @@
                     callback(data[what]);
                 }).error(function(error){
                     callback([]);
-                    $scope.alert = error.error;
+                    $scope.alert = facilityApi.utils.getError(error);
                 });
             },
             county: function(callback){
@@ -74,7 +74,7 @@
                     {constituency:value.id}, "ward", facilityApi.wards);
             }
         };
-        if(!_.isEmpty($stateParams) && !_.isEmpty($stateParams.facilityId)){
+        if(_.has($stateParams, "facilityId")){
             facilityApi.facilities.get($stateParams.facilityId).success(function(data){
                 $scope.facility = data;
             }).error(function(error){
@@ -87,7 +87,7 @@
                 $scope.facility = data;
                 $state.go("facilities.create.address", {facilityId: $scope.facility.id});
             }).error(function(error){
-                $scope.alert = error.error_msg.error;
+                $scope.alert = facilityApi.utils.getError(error);
             });
         };
     }])
