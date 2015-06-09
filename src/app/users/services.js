@@ -15,7 +15,9 @@
     .service("mfl.users.services.profile", ["$q", "api", function ($q, API) {
         var urls = {
             user_profile: "api/rest-auth/user/",
-            password_change: "api/rest-auth/password/change/"
+            password_change: "api/rest-auth/password/change/",
+            reset_password: "api/rest-auth/password/reset/",
+            reset_password_confirm: "api/rest-auth/password/reset/confirm/"
         };
         var api = API.getApi();
 
@@ -41,10 +43,27 @@
             });
         };
 
+        var resetPassword = function (email) {
+            var data = {"email": email};
+            return api.callApi("POST", api.makeUrl(urls.reset_password), data);
+        };
+
+        var resetPasswordConfirm = function (uid, token, pwd1, pwd2) {
+            var data = {
+                "uid": uid,
+                "token": token,
+                "new_password1": pwd1,
+                "new_password2": pwd2
+            }
+            return api.callApi("POST", api.makeUrl(urls.reset_password_confirm), data);
+        };
+
         return {
             "getProfile": getProfile,
             "updateProfile": updateProfile,
-            "updatePassword": updatePassword
+            "updatePassword": updatePassword,
+            "resetPassword": resetPassword,
+            "resetPasswordConfirm": resetPasswordConfirm
         };
     }]);
 

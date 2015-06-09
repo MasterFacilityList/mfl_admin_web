@@ -6,6 +6,11 @@
         "ui.router"
     ])
 
+    .controller("mfl.auth.controller.reset_pwd", [angular.noop])
+
+    .controller("mfl.auth.controller.reset_pwd_confirm", [angular.noop]
+    )
+
     .controller("mfl.auth.controllers.login",
         ["$scope", "$sce", "$state", "$stateParams", "mfl.auth.services.login", "HOME_PAGE_NAME",
         function ($scope, $sce, $state, $stateParams, loginService, HOME_PAGE_NAME) {
