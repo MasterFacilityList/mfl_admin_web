@@ -469,6 +469,16 @@
                 expect(ctrl).toBeDefined();
             });
 
+        it("should try creating service for non-existing facility: fail",
+           function(){
+                spyOn($state, "go");
+                var dt = {
+                    $stateParams: {facilityId: "1"}
+                };
+                createController("mfl.facilities.controllers.create.services", dt);
+                expect($state.go).not.toHaveBeenCalledWith("facilities.create.basic");
+            });
+
         it("should get options data, `service`: success, in facility service ", function(){
             var res = {county: "testing"};
             var dt = {
