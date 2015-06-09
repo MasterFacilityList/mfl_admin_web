@@ -13,7 +13,7 @@
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="status in statuses">
-                <td class="pad-t-15">{{$index + 1}}</td>
+                <td class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td class="pad-t-15">{{status.name}}</td>
                 <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.chu_status.view({id : status.id})" class="action-btn action-btn-grid action-btn-primary">

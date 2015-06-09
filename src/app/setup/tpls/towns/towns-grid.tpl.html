@@ -12,7 +12,7 @@
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="town in towns">
-                <td data-title="#" class="pad-t-15">{{$index + 1}}</td>
+                <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td data-title="Name" class="pad-t-15">{{town.name}}</td>
             </tr>
         </tbody>
