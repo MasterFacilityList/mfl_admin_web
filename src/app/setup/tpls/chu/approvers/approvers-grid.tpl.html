@@ -14,7 +14,7 @@
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="approver in approvers">
-                <td>{{$index + 1}}</td>
+                <td>{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td >{{approver.name}}</td>
                 <td >{{approver.abbreviation}}</td>
                 <td data-title="Actions" class="text-right">

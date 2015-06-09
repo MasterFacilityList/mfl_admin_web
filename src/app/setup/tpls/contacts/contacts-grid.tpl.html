@@ -13,7 +13,7 @@
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="contact in contacts">
-                <td data-title="#" class="pad-t-15">{{$index + 1}}</td>
+                <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td data-title="Name" class="pad-t-15">{{contact.name}}</td>
                 <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.contacts.view({id : contact.id})" class="action-btn action-btn-grid action-btn-primary">
