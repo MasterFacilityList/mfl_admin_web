@@ -219,5 +219,155 @@
             $httpBackend.flush();
             expect($scope.filterData.ward).toEqual(res.results);
         });
+
+        it("should have `mfl.facilities.controllers.create.address` defined",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var ctrl = createController("mfl.facilities.controllers.create.address", dt);
+                expect(ctrl).toBeDefined();
+            });
+        it("should create a facility address : success saving address", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var res = {county: "testing"};
+            spyOn($state, "go");
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(200, {physical_address:1});
+            $httpBackend.expectPOST(SERVER_URL+"api/common/address/")
+            .respond(200, {id: 1});
+            $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(200, res);
+            createController("mfl.facilities.controllers.create.address", dt);
+            $scope.saveAddress({name: "test"});
+            $httpBackend.flush();
+            expect($state.go).toHaveBeenCalledWith("facilities.create.contacts");
+        });
+
+        it("should create a facility address: fail, saving saveAddress ", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(200, {physical_address:1});
+            $httpBackend.expectPOST(SERVER_URL+"api/common/address/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.address", dt);
+            $scope.saveAddress({name: "test"});
+            $httpBackend.flush();
+            expect($scope.alert).toBeTruthy();
+        });
+
+        it("should create a facility address : fail patching facility address", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            spyOn($state, "go");
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(200, {physical_address:1});
+            $httpBackend.expectPOST(SERVER_URL+"api/common/address/")
+            .respond(200, {id: 1});
+            $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.address", dt);
+            $scope.saveAddress({name: "test"});
+            $httpBackend.flush();
+            expect($state.go).not.toHaveBeenCalledWith("facilities.create.contacts");
+        });
+
+
+        it("should update a facility address : success", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var form = {name : "Antony"};
+            spyOn($state, "go");
+            spyOn(formService, "whatChanged").andReturn(form);
+
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(200, {physical_address:1});
+            $httpBackend.expectPATCH(SERVER_URL+"api/common/address/1/")
+            .respond(200, {id: 1});
+            createController("mfl.facilities.controllers.create.address", dt);
+            $scope.updateAddress(1, form);
+            $httpBackend.flush();
+            expect($scope.address).toEqual({id:1});
+        });
+
+        it("should update a facility address : no form changes", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var form = {};
+            spyOn($state, "go");
+            spyOn(formService, "whatChanged").andReturn(form);
+
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(200, {physical_address:1});
+            $httpBackend.expectPATCH(SERVER_URL+"api/common/address/1/")
+            .respond(200, {id: 1});
+            createController("mfl.facilities.controllers.create.address", dt);
+            $scope.updateAddress(1, form);
+            expect($httpBackend.flush).toThrow();
+        });
+
+
+        it("should update a facility address : fail", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+            var form = {name : "Antony"};
+            spyOn($state, "go");
+            spyOn(formService, "whatChanged").andReturn(form);
+
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(200, {physical_address:1});
+            $httpBackend.expectPATCH(SERVER_URL+"api/common/address/1/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.address", dt);
+            $scope.updateAddress(1, form);
+            $httpBackend.flush();
+            expect($scope.alert).toBeDefined();
+        });
+
+        it("it should get facility: creating fac address : success", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(200, {physical_address:1});
+            $httpBackend.expectGET(SERVER_URL+"api/common/address/1/")
+            .respond(200, {id: 1});
+            createController("mfl.facilities.controllers.create.address", dt);
+            $httpBackend.flush();
+            expect($scope.address).toEqual({id:1});
+        });
+
+        it("it should get facility: creating fac address : fail", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.create.address", dt);
+            $httpBackend.flush();
+            expect($scope.alert).toBeDefined();
+        });
+
+        it("it should get facility: creating fac address : no address", function(){
+            var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+
+            $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(200, {});
+            createController("mfl.facilities.controllers.create.address", dt);
+            $httpBackend.flush();
+            expect($scope.address.id).toBeFalsy();
+        });
     });
 })(describe);
