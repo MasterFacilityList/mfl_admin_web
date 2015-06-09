@@ -541,8 +541,70 @@
 
         describe("Test user create basic controller", function () {
 
-            it("should load", function () {
-                ctrl("user_create.basic");
+            it("should save a new user", function () {
+                var scope = rootScope.$new();
+                spyOn(state, "go");
+
+                var data = {
+                    "$scope": scope,
+                    "$state": state
+                };
+                data.$scope.user = {
+                    "first_name":"qwe",
+                    "username":"qwe",
+                    "password":"qwe",
+                    "confirm_password":"qwe",
+                    "last_name":"qwe",
+                    "other_names":"qwe",
+                    "email":"qwe@mail.com"
+                };
+                httpBackend
+                    .expectPOST(server_url + "api/users/", data.$scope.user)
+                    .respond(201, {"id": 3});
+
+                ctrl("user_create.basic", data);
+
+                data.$scope.addUser();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(state.go).toHaveBeenCalledWith("users.user_edit.basic", {"user_id": 3});
+            });
+
+            it("should show an error on save a new user", function () {
+                var scope = rootScope.$new();
+                spyOn(state, "go");
+                spyOn(log, "error");
+
+                var data = {
+                    "$scope": scope,
+                    "$state": state,
+                    "$log": log
+                };
+                data.$scope.user = {
+                    "first_name":"qwe",
+                    "username":"qwe",
+                    "password":"qwe",
+                    "confirm_password":"qwe",
+                    "last_name":"qwe",
+                    "other_names":"qwe",
+                    "email":"qwe@mail.com"
+                };
+                httpBackend
+                    .expectPOST(server_url + "api/users/", data.$scope.user)
+                    .respond(500, {});
+
+                ctrl("user_create.basic", data);
+
+                data.$scope.addUser();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(state.go).not.toHaveBeenCalled();
+                expect(log.error).toHaveBeenCalled();
             });
         });
 

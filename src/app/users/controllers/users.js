@@ -32,9 +32,23 @@
         }]
     )
 
-    .controller("mfl.users.controllers.user_create", [function () {}])
+    .controller("mfl.users.controllers.user_create", [angular.noop])
 
-    .controller("mfl.users.controllers.user_create.basic", [function () {}])
+    .controller("mfl.users.controllers.user_create.basic",
+        ["$scope", "$log", "$state", "mfl.users.services.wrappers",
+        function ($scope, $log, $state, wrappers) {
+
+            $scope.addUser = function () {
+                wrappers.users.create($scope.user)
+                .success(function (data) {
+                    $state.go("users.user_edit.basic", {user_id: data.id});
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }]
+    )
 
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
