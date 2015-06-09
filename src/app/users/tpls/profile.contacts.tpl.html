@@ -41,15 +41,6 @@
     <table class="table content-card margin-t-20 margin-b-10">
         <tbody>
             <tr ng-repeat="contact in contacts">
-                <td class="contact-td col-md-1">
-                    <span class="fs-18 ">
-                        <i ng-if="contact.contact_type_text === 'MOBILE'" class="fa fa-mobile-phone  margin-t-10"></i>
-                        <i ng-if="contact.contact_type_text === 'LANDLINE'" class="fa fa-phone  margin-t-10"></i>
-                        <i ng-if="contact.contact_type_text === 'EMAIL'" class="fa fa-envelope  margin-t-10"></i>
-                        <i ng-if="contact.contact_type_text === 'POSTAL'" class="fa fa-envelope  margin-t-10"></i>
-                        <i ng-if="contact.contact_type_text === 'FAX'" class="fa fa-fax  margin-t-10"></i>
-                    </span>
-                </td>
                 <td class="pad-t-15 fs-16 fw-500">{{contact.contact_type_text}}</td>
                 <td class="pad-t-15 fs-16 fw-500">{{contact.contact_text}}</td>
                 <td class="text-right">
