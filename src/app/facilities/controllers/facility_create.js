@@ -152,7 +152,7 @@
         };
         facilityApi.facilities.get($scope.facility.id).success(function(data){
                 $scope.address = {id: data.physical_address};
-                if(!_.isEmpty($scope.address.id)){
+                if(!_.isUndefined($scope.address.id)){
                     facilityApi.physical_address.get($scope.address.id)
                     .success(function(data){
                         $scope.address = data;
