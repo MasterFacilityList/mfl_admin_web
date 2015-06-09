@@ -21,7 +21,7 @@
                         "has-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-info action-btn-md",
                 color: "blue",
-                tipmsg: "New User",
+                tipmsg: "New Facility",
                 icon: "fa-user-plus"
             }
         ];
