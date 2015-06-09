@@ -12,7 +12,7 @@
         $scope.title = [
             {
                 icon: "fa-building",
-                name: "Manage Facitilites"
+                name: "Manage Facilities"
             }
         ];
     }])
@@ -27,7 +27,7 @@
         $scope.title = [
             {
                 icon: "fa-building",
-                name: "Facitilites Details"
+                name: "Facilities Details"
             }
         ];
 
