@@ -16,7 +16,12 @@
     .controller("mfl.users.controllers.profile.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers", "mfl.auth.services.login",
         function ($scope, $log, wrappers, loginService) {
-            $scope.title = "Contacts";
+            $scope.title = [
+                {
+                    icon: "fa-envelope",
+                    name: "Manage Users Contacts"
+                }
+            ];
             $scope.user_id = loginService.getUser().id;
             $scope.contact = {
                 contact_type: "",
@@ -40,10 +45,12 @@
                 });
 
             $scope.remove = function (obj) {
+                obj.delete_spinner = true;
                 wrappers.user_contacts.remove(obj.id)
                 .success(function () {
                     wrappers.contacts.remove(obj.contact)
                     .success(function () {
+                        obj.delete_spinner = false;
                         $scope.contacts = _.without($scope.contacts, obj);
                     })
                     .error(function (data) {
@@ -56,6 +63,7 @@
             };
 
             $scope.add = function () {
+                $scope.spinner = true;
                 wrappers.contacts.create({
                     "contact_type": $scope.contact.contact_type,
                     "contact": $scope.contact.contact
@@ -71,6 +79,7 @@
                             contact_type: "",
                             contact: ""
                         };
+                        $scope.spinner = false;
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -102,6 +111,7 @@
                 });
 
             $scope.save = function (frm) {
+                $scope.spinner = true;
                 var storage = $window.localStorage;
                 var changed = formService.whatChanged(frm);
                 var store_key = "auth.user";
@@ -109,6 +119,7 @@
                 if(! _.isEmpty(changed)) {
                     profileService.updateProfile(changed)
                         .success(function (data) {
+                            $scope.spinner = false;
                             storage.setItem(store_key, JSON.stringify(data));
                         })
                         .error(function (data) {

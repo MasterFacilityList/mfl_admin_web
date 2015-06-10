@@ -77,7 +77,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.service).toBe(undefined);
-                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should log errors on get categories failure", function () {
@@ -106,7 +106,7 @@
 
                 expect(scope.service).toEqual({});
                 expect(scope.categories).toBe(undefined);
-                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should save updated service", function () {
@@ -237,7 +237,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.service).toBe(undefined);
-                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should delete the service", function () {
@@ -356,7 +356,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.categories).toBe(undefined);
-                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should create the service", function () {

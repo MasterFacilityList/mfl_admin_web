@@ -76,7 +76,7 @@
 
                 expect(scope.title[0].name).toEqual("Basic Details");
                 expect(_.isUndefined(scope.profile)).toBe(true);
-                expect(log.error).toHaveBeenCalledWith({});
+                expect(log.error).toHaveBeenCalled();
             });
 
             it("should update current user details", function () {
@@ -176,7 +176,7 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-                expect(log.error).toHaveBeenCalledWith({});
+                expect(log.error).toHaveBeenCalled();
             });
         });
 
@@ -402,7 +402,6 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-                console.log(data.$scope.contacts);
                 expect(data.$scope.contacts).toEqual([{"id": 4}]);
             });
 
@@ -567,7 +566,14 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.contacts).toEqual([{"contact": "123", "id": "456"}]);
+                expect(data.$scope.contacts).toEqual(
+                    [
+                        {
+                            "contact": "123",
+                            "id": "456",
+                            "delete_spinner" : true
+                        }
+                    ]);
             });
 
             it("should show an error if delete contact failed", function () {
@@ -608,7 +614,14 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.contacts).toEqual([{"contact": "123", "id": "456"}]);
+                expect(data.$scope.contacts).toEqual(
+                    [
+                        {
+                            "contact": "123",
+                            "id": "456",
+                            "delete_spinner" : true
+                        }
+                    ]);
             });
         });
     });

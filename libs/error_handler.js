@@ -272,7 +272,8 @@
                                 error_msg = helpers.showError("An error occured");
                                 break;
                         }
-                        error.error_msg = error_msg;
+                        error.data = error.data || {};
+                        error.data.error_msg = error_msg;
                         return $q.reject(error);
                     }
                 };

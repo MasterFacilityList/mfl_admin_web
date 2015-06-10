@@ -1,23 +1,16 @@
-"use strict";
 (function(angular, _){
+    "use strict";
+
     var PAGINATION_TPL = "sil.grid.pagination.tpl.html";
     var SEARCH_TPL = "sil.grid.search.tpl.html";
+
     angular.module("sil.grid",[
             PAGINATION_TPL,
             SEARCH_TPL,
             "ui.bootstrap"
         ]
     )
-    .provider("silGridConfig", function(){
-        /**
-            apiMaps example:
-            this.apiMaps = {
-                claim: ["sil.claimApi.wrapper", "claimsApi"],
-                visit: ["sil.encountersApi.wrapper", "encountersApi"],
-                preauth: ["sil.preauthApi.wrapper", "preauthApi"]
-            };
-
-        **/
+    .provider("silGridConfig", function() {
         this.apiMaps = {};
         this.appConfig = "providerConfig";
         this.itemsPerPage = 25;
@@ -47,13 +40,14 @@
                 data: "@",
                 error: "=",
                 actions: "=",
-                apiKey: "@"
+                apiKey: "@",
+                showLoader: "@"
             },
             replace: false,
             templateUrl:function(elem, attrs){
                 return attrs.template;
             },
-            controller: function($scope){
+            controller: ["$scope", function($scope) {
                 var self = this;
                 $scope.pagination = {};
                 var apiMaps = silGridConfig.apiMaps;
@@ -77,6 +71,7 @@
                     }
                 };
                 self.getData = function(){
+
                     self.setLoading(true);
                     var promise;
                     if(_.isUndefined($scope.filters)){
@@ -144,8 +139,11 @@
                 $scope.setLoading = self.setLoading;
                 var addPagination = function(page_count, url_next, url_prev){
                     $scope.pagination.active = true;
-                    $scope.pagination.page_count = Math.ceil(page_count/silGridConfig.itemsPerPage);
+                    $scope.filters = $scope.filters || {};
+                    var page_size = $scope.filters.page_size || silGridConfig.itemsPerPage;
+                    $scope.pagination.page_count = Math.ceil(page_count/page_size);
                     var makeParams = function(url, next){
+                        url = url.replace("page_size", "");
                         var params = url.substring(url.indexOf("?")+1, url.length).split("&");
                         _.each(params, function(param){
                             var p = param.split("=");
@@ -190,7 +188,7 @@
                     $scope.filters.page = page_count;
                     $scope.getData();
                 };
-            },
+            }],
             link: function(scope){
                 scope.$watch("filters", function(filters){
                     if(_.has(filters, "page")||
@@ -210,7 +208,8 @@
                 });
                 var modal;
                 $rootScope.$on("silGrid.loader.start", function(event){
-                    modal = $modal.open(
+                    if(_.isUndefined(scope.showLoader)){
+                        modal = $modal.open(
                         {
                             template:"<div>"+
                                     "<div class='modal-body'>Please wait.."+
@@ -225,11 +224,14 @@
                             size: "sm",
                             windowClass: "sil-grid-loader"
                         });
+                    }
                     event.stopPropagation();
                 });
 
                 $rootScope.$on("silGrid.loader.stop", function(event){
-                    modal.close();
+                    try{
+                        modal.close();
+                    }catch(err){}
                     event.stopPropagation();
                 });
 

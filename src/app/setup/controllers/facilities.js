@@ -132,46 +132,64 @@
 
     .controller("mfl.setup.controller.facilityOwner.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
-        function($scope, $state, $stateParams, adminApi, formChanges){
-            console.log($stateParams);
+        function($scope, $state, $stateParams, adminApi, formChanges) {
+            if(!_.isUndefined($stateParams.id)&&
+                $stateParams.id !== "create"){
+                $scope.title = [
+                    {
+                        icon: "fa-edit",
+                        name: "Edit Facility Owner"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func : "ng-click='deleteFacilityOwner(" +
+                            "facilityOwners.id)'",
+                        class : "action-btn action-btn-danger action-btn-md",
+                        tipmsg: "Delete Facility Owner",
+                        icon : "fa-trash"
+                    },
+                    {
+                        func : "onclick=window.history.back()",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Back",
+                        icon: "fa-arrow-left"
+                    }
+                ];
+                adminApi.facilityOwners.get($stateParams.id).success(function(data){
+                    $scope.facilityOwners = data;
+                    $scope.$watch("facilityOwners.owner_type", function(id){
+                        $scope.ownerType = _.findWhere(
+                            $scope.ownerTypes, {id: id}
+                        );
+                    });
+
+                    $scope.edit = true;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            }
+            if(!_.isUndefined($stateParams) && $stateParams.id === "create") {
+                $scope.title = [
+                    {
+                        icon: "fa-plus-circle",
+                        name: "New Facility Owner"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func : "onclick='window.history.back()'",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Bak",
+                        icon: "fa-arrow-left"
+                    }
+                ];
+            }
+
             adminApi.facilityOwnerTypes.list().success(function(ownerTypes){
                 $scope.ownerTypes = ownerTypes.results;
-                if(!_.isUndefined($stateParams.id) && $stateParams.id !== "create"){
-                    $scope.title = [
-                        {
-                            icon: "fa-edit",
-                            name: "Edit Facility Owner"
-                        }
-                    ];
-                    $scope.action = [
-                        {
-                            func : "ng-click='deleteFacilityOwner(" +
-                                "facilityOwners.id)'",
-                            class : "action-btn action-btn-danger action-btn-md",
-                            tipmsg: "Delete Facility Owner",
-                            icon : "fa-trash"
-                        },
-                        {
-                            func : "onclick=window.history.back()",
-                            class: "action-btn action-btn-primary action-btn-md",
-                            color: "blue",
-                            tipmsg: "Go Back",
-                            icon: "fa-arrow-left"
-                        }
-                    ];
-                    adminApi.facilityOwners.get($stateParams.id).success(function(data){
-                        $scope.facilityOwners = data;
-                        $scope.$watch("facilityOwners.owner_type", function(id){
-                            $scope.ownerType = _.findWhere(
-                                $scope.ownerTypes, {id: id}
-                            );
-                        });
-
-                        $scope.edit = true;
-                    }).error(function(error){
-                        $scope.alert = error.error;
-                    });
-                }
             }).error(function(error){
                 $scope.alert = error.error;
             });
@@ -210,19 +228,23 @@
     **/
     .controller("mfl.setup.controller.facilityJobTitle.list", ["$scope",
         function ($scope) {
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
+            };
             $scope.title = [
                 {
-                    icon: "fa-phone",
+                    icon: "fa-list-alt",
                     name: "Manage Job Titles"
                 }
             ];
             $scope.action = [
                 {
-                    func : "onclick=window.history.back()",
+                    func : "ui-sref='setup.facility_job_titles.create'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
-                    tipmsg: "Go back",
-                    icon: "fa-arrow-left"
+                    tipmsg: "Add Job Title",
+                    icon: "fa-plus"
                 }
             ];
         }]
@@ -231,18 +253,56 @@
     .controller("mfl.setup.controller.facilityJobTitle.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Manage Facility Job Title"
-                }
-            ];
-            if(!_.isUndefined($stateParams.id)){
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
+            };
+
+            if(!_.isUndefined($stateParams.id)  && $stateParams.id !== "create"){
+                $scope.title = [
+                    {
+                        icon: "fa-edit",
+                        name: "Edit Facility Job Title"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func :  "ng-click='deleteFacilityJobTitle"+
+                                "(facilityJobTitles.id)'",
+                        class : "action-btn action-btn-danger action-btn-md",
+                        tipmsg: "Delete Job Title",
+                        icon :  "fa-trash"
+                    },
+                    {
+                        func : "onclick=window.history.back()",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Back",
+                        icon: "fa-arrow-left"
+                    }
+                ];
                 adminApi.facilityJobTitles.get($stateParams.id).success(function(data){
                     $scope.facilityJobTitles = data;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+            }
+            if(!_.isUndefined($stateParams) && $stateParams.id === "create") {
+                $scope.title = [
+                    {
+                        icon: "fa-plus-circle",
+                        name: "New Job Title"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func : "onclick='window.history.back()'",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Bak",
+                        icon: "fa-arrow-left"
+                    }
+                ];
             }
             $scope.updateFacilityJobTitle = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
@@ -280,17 +340,17 @@
         function ($scope) {
             $scope.title = [
                 {
-                    icon: "fa-phone",
-                    name: "Manage Facility Regulatory Body"
+                    icon: "fa-institution",
+                    name: "Manage Facility Regulatory Bodies"
                 }
             ];
             $scope.action = [
                 {
-                    func : "onclick=window.history.back()",
+                    func : "ui-sref='setup.facility_regulatory_bodies.create'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
-                    tipmsg: "Go back",
-                    icon: "fa-arrow-left"
+                    tipmsg: "Add Regulatory Body",
+                    icon: "fa-plus"
                 }
             ];
         }]
@@ -305,7 +365,29 @@
                     name: "Manage Facility Regulatory Body"
                 }
             ];
-            if(!_.isUndefined($stateParams.id)){
+            if(!_.isUndefined($stateParams.id) && $stateParams.id !== "create"){
+                $scope.title = [
+                    {
+                        icon: "fa-edit",
+                        name: "Edit Facility Regulatory Body"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func :  "ng-click='deleteFacilityRegulatoryBody("+
+                            "facilityRegulatoryBodies.id)'",
+                        class : "action-btn action-btn-danger action-btn-md",
+                        tipmsg: "Delete Regulatory body",
+                        icon :  "fa-trash"
+                    },
+                    {
+                        func : "onclick=window.history.back()",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Back",
+                        icon: "fa-arrow-left"
+                    }
+                ];
                 adminApi.facilityRegulatoryBodies.get($stateParams.id).success(function(data){
                     $scope.facilityRegulatoryBodies = data;
                     $scope.edit = true;
@@ -313,7 +395,23 @@
                     $scope.alert = error.error;
                 });
             }
-
+            if(!_.isUndefined($stateParams) && $stateParams.id === "create") {
+                $scope.title = [
+                    {
+                        icon: "fa-plus-circle",
+                        name: "New Regulatory Body"
+                    }
+                ];
+                $scope.action = [
+                    {
+                        func : "onclick='window.history.back()'",
+                        class: "action-btn action-btn-primary action-btn-md",
+                        color: "blue",
+                        tipmsg: "Go Bak",
+                        icon: "fa-arrow-left"
+                    }
+                ];
+            }
             $scope.updateFacilityRegulatoryBody = function(id, frm){
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){

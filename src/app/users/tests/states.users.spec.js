@@ -29,14 +29,6 @@
             expect($state.href("users.user_create.basic")).toEqual("#/users/create/basic/");
         });
 
-        it("should go to user contacts creation page", function () {
-            expect($state.href("users.user_create.contacts")).toEqual("#/users/create/contacts/");
-        });
-
-        it("should go to user groups assignment creation page", function () {
-            expect($state.href("users.user_create.groups")).toEqual("#/users/create/groups/");
-        });
-
         it("should go to users editing page", function () {
             expect($state.href("users.user_edit", {"user_id": 3}))
                 .toEqual("#/users/edit/3/");

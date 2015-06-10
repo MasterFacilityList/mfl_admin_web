@@ -78,7 +78,10 @@
         .state("setup.facility_job_titles", {
                 url: "/facility_job_titles",
                 views: {
-                    "main-content@setup": {
+                    "body@setup" : {
+                        "templateUrl" : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.facility_job_titles": {
                         controller: "mfl.setup.controller.facilityJobTitle.list",
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-list.tpl.html"
                     }
@@ -88,7 +91,7 @@
         .state("setup.facility_job_titles.view", {
                 url: "/:id",
                 views: {
-                    "main-content@setup": {
+                    "main-content@setup.facility_job_titles": {
                         controller: "mfl.setup.controller.facilityJobTitle.view",
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
@@ -97,7 +100,7 @@
         .state("setup.facility_job_titles.create", {
                 url: "/create",
                 views: {
-                    "main-content@setup": {
+                    "main-content@setup.facility_job_titles": {
                         controller: "mfl.setup.controller.facilityJobTitle.view",
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
@@ -109,7 +112,10 @@
         .state("setup.facility_regulatory_bodies", {
                 url: "/facility_regulatory_bodies",
                 views: {
-                    "main-content@setup": {
+                    "body@setup" : {
+                        "templateUrl" : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.facility_regulatory_bodies": {
                         controller: "mfl.setup.controller.facilityRegulatoryBody.list",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-list.tpl.html"
@@ -119,7 +125,7 @@
         .state("setup.facility_regulatory_bodies.view", {
                 url: "/:id",
                 views: {
-                    "main-content@setup": {
+                    "main-content@setup.facility_regulatory_bodies": {
                         controller: "mfl.setup.controller.facilityRegulatoryBody.view",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
@@ -129,7 +135,7 @@
         .state("setup.facility_regulatory_bodies.create", {
                 url: "/create",
                 views: {
-                    "main-content@setup": {
+                    "main-content@setup.facility_regulatory_bodies": {
                         controller: "mfl.setup.controller.facilityRegulatoryBody.view",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"

@@ -69,7 +69,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.option).toBe(undefined);
-                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should save updated option", function () {
@@ -194,7 +194,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.opton).toBe(undefined);
-                expect(log.warn).toHaveBeenCalledWith({"error": "a"});
+                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should delete the option", function () {
