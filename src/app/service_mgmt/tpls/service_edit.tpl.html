@@ -31,11 +31,11 @@
                 </div>
                 <div class="group">
                     <select name="category" ng-model="service.category" required>
-                        <option value="" disabled>Select a category</option>
                         <option ng-repeat="cat in categories" ng-value="cat.id">{{cat.name}}</option>
                     </select>
                     <span class="highlight"></span>
                     <span class="bar"></span>
+                    <label>Category</label>
                 </div>
                <div class="margin-t-50">
                     <a class="md-btn md-btn-clear" ui-sref="service_mgmt.service_list">Cancel</a>
