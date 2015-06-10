@@ -141,6 +141,20 @@
                                     "regulatory-bodies-view.tpl.html"
                     }
                 }
+            })
+        /*---------------------------------------------------*/
+        .state("setup.facility_regualtory_body_contacts", {
+                url: "/regulatorybodycontacts",
+                views: {
+                    "body@setup" : {
+                        "templateUrl" : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.facility_regualtory_body_contacts": {
+                        controller: "mfl.setup.controller.RegulatoryBodyContacts.list",
+                        templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
+                                    "regulatory-body-contacts.tpl.html"
+                    }
+                }
             });
     }]);
 })(angular);

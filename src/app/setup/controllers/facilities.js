@@ -438,7 +438,26 @@
                 });
             };
         }]
-    );
+    )
+    .controller("mfl.setup.controller.RegulatoryBodyContacts.list", ["$scope",
+        function ($scope) {
+            $scope.title = [
+                {
+                    icon: "fa-envelope",
+                    name: "Regulatory Body Contacts"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "ui-sref='setup.facility_regulatory_bodies.create'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Add Regulatory Body Contact",
+                    icon: "fa-plus"
+                }
+            ];
+        }
+    ]);
 
 })(angular);
 
