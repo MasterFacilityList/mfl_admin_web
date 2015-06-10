@@ -65,5 +65,51 @@
             expect($scope.facility).toEqual(res);
         });
 
+        it("should have mfl.facilities.controllers.view.approve` defined",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var ctrl = createController("mfl.facilities.controllers.view.approve", dt);
+                expect(ctrl).toBeDefined();
+            });
+        it("should approve facility: success",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var res = {name: "KNHH"};
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+                .respond(200, res);
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/facilitiy_approvals/?facility=1")
+                .respond(200, res);
+                $httpBackend.expectPOST(SERVER_URL+"api/facilities/facilitiy_approvals/")
+                .respond(200, {msg: "ok"});
+                createController("mfl.facilities.controllers.view.approve", dt);
+                $scope.approveFacility(res);
+                $httpBackend.flush();
+                expect($scope.facility_approvals).toEqual(res);
+
+            });
+
+        it("should approve facility: success",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var res = {name: "KNHH"};
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
+                .respond(200, res);
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/facilitiy_approvals/?facility=1")
+                .respond(200, res);
+                $httpBackend.expectPOST(SERVER_URL+"api/facilities/facilitiy_approvals/")
+                .respond(500, errorRes);
+                createController("mfl.facilities.controllers.view.approve", dt);
+                $scope.approveFacility(res);
+                $httpBackend.flush();
+                expect($scope.alert).toBeDefined();
+
+            });
+
     });
 })(describe);
