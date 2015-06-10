@@ -9,6 +9,7 @@
         this.users = api.setBaseUrl("api/users/");
         this.contact_types = api.setBaseUrl("api/common/contact_types/");
         this.user_contacts = api.setBaseUrl("api/common/user_contacts/");
+        this.user_counties = api.setBaseUrl("api/common/user_counties/");
         this.contacts = api.setBaseUrl("api/common/contacts/");
     }]);
 
