@@ -1,5 +1,6 @@
 (function(angular){
     "use strict";
+
     angular.module("mfl.facilities.controllers.create", [
         "mfl.facilities.services",
         "mfl.common.forms"
@@ -7,6 +8,7 @@
     .controller("mfl.facilities.controllers.create.base", ["$scope","$state",
         "$stateParams", "safeApply",
         "mfl.facilities.wrappers", function($scope, $state, $stateParams, safeApply,facilityApi){
+
         $scope.tooltip = {
             "title": "",
             "checked": false

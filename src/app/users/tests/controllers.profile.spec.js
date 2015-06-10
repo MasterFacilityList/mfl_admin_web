@@ -402,7 +402,6 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-                console.log(data.$scope.contacts);
                 expect(data.$scope.contacts).toEqual([{"id": 4}]);
             });
 
