@@ -235,12 +235,10 @@
             };
 
             $scope.facility_statuses = [];
-            facilityApi.facility_operation_status.filter({facility: $stateParams.facilityId})
-            .success(function(data){
-                $scope.facility_statuses = data.results;
-            }).error(function(error){
-                $scope.alert = facilityApi.utils.getError(error);
-            });
+            facilityApi.utils.resolvePromise(
+                $scope, $scope, "facility_statuses",
+                facilityApi.facility_operation_status.filter({facility: $stateParams.facilityId})
+            );
             $scope.changeOperationStatus = function(status){
                 status.facility = $stateParams.facilityId;
                 var patch_data = {
