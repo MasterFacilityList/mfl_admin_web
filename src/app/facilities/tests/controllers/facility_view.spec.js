@@ -64,6 +64,7 @@
             createController("mfl.facilities.controllers.view.base", dt);
             $httpBackend.flush();
             expect($scope.facility).toEqual(res);
+            testFunc.callback();
         });
 
         it("should have mfl.facilities.controllers.view.approve` defined",
@@ -284,6 +285,93 @@
                 .respond(500, {msg: "ok"});
                 createController("mfl.facilities.controllers.view.upgrade", dt);
                 $scope.upgradeFacility(res);
+                $httpBackend.flush();
+                expect($scope.alert).toBeDefined();
+            });
+
+        it("should have mfl.facilities.controllers.view.mutate_op_status` defined",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var ctrl = createController("mfl.facilities.controllers.view.mutate_op_status", dt);
+                expect(ctrl).toBeDefined();
+            });
+
+        it("should get options data, `operationStatus` in facility op status: fail ", function(){
+            spyOn(testFunc, "callback");
+            var dt = {
+                $stateParams: {facilityId: 1}
+            };
+
+            $httpBackend.expectGET(
+                SERVER_URL+"api/common/filtering_summaries/?fields=operation_status")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.view.mutate_op_status", dt);
+            $scope.getOptionsData.operationStatus(testFunc.callback);
+            $httpBackend.flush();
+            expect($scope.alert).toBeDefined();
+        });
+
+        it("should get options data, `operation status`: facility op status: success ", function(){
+            spyOn(testFunc, "callback");
+            var dt = {
+                $stateParams: {facilityId: 1}
+            };
+            var res = {operation_status: {name: "KNHH"}};
+
+            $httpBackend.expectGET(
+                SERVER_URL+"api/common/filtering_summaries/?fields=operation_status")
+            .respond(200, res);
+            createController("mfl.facilities.controllers.view.mutate_op_status", dt);
+            $scope.getOptionsData.operationStatus(testFunc.callback);
+            $httpBackend.flush();
+            expect(testFunc.callback).toHaveBeenCalledWith(res.operation_status);
+        });
+
+        it("should change operation status: success, patching facility",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var res = {name: "KNHH", operation_status:{id:1}};
+                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facilities/1/")
+                .respond(200, res);
+                $httpBackend.expectPOST(SERVER_URL+"api/facilities/facility_operation_state/")
+                .respond(200, {msg: "ok"});
+                createController("mfl.facilities.controllers.view.mutate_op_status", dt);
+                $scope.changeOperationStatus(res);
+                $httpBackend.flush();
+                expect($scope.facility_statuses).toEqual([{msg: "ok"}]);
+
+            });
+
+        it("should change operation status: error, patching facility",function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var res = {name: "KNHH", operation_status:{id:1}};
+                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facilities/1/")
+                .respond(500, res);
+                createController("mfl.facilities.controllers.view.mutate_op_status", dt);
+                $scope.changeOperationStatus(res);
+                $httpBackend.flush();
+                expect($scope.alert).toBeDefined();
+
+            });
+
+        it("should change operation status:: error, changing operation status",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var res = {name: "KNHH", operation_status:{id:1}};
+                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facilities/1/")
+                .respond(200, res);
+                $httpBackend.expectPOST(SERVER_URL+"api/facilities/facility_operation_state/")
+                .respond(500, {msg: "ok"});
+                createController("mfl.facilities.controllers.view.mutate_op_status", dt);
+                $scope.changeOperationStatus(res);
                 $httpBackend.flush();
                 expect($scope.alert).toBeDefined();
             });
