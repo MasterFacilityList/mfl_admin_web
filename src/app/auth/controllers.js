@@ -6,10 +6,9 @@
         "ui.router"
     ])
 
-    .controller("mfl.auth.controller.reset_pwd",
-        ["$scope", "$log", "mfl.auth.services.profile", function ($scope, $log, profileService) {
-            $scope.email = "";
-
+    .controller("mfl.auth.controllers.reset_pwd",
+        ["$scope", "$state", "$log", "mfl.auth.services.profile",
+        function ($scope, $state, $log, profileService) {
             $scope.reset_pwd = function () {
                 profileService.resetPassword($scope.email)
                 .then(function () {
@@ -22,7 +21,7 @@
         }]
     )
 
-    .controller("mfl.auth.controller.reset_pwd_confirm",
+    .controller("mfl.auth.controllers.reset_pwd_confirm",
         ["$scope", "$state", "$stateParams", "$log", "mfl.auth.services.profile",
         function ($scope, $state, $stateParams, $log, profileService) {
             $scope.reset_pwd_confirm = function () {

@@ -146,9 +146,171 @@
     });
 
     describe("Test reset pwd controller", function () {
+        var controller, rootScope, SERVER_URL, httpBackend, state, log;
 
+        beforeEach(function () {
+            module("ui.router");
+            module("mflAdminAppConfig");
+            module("mfl.auth.services");
+            module("mfl.auth.controllers");
+
+            inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
+                "$state", "$log",
+                function ($rootScope, $controller, $httpBackend, url, $state, $log) {
+                    rootScope = $rootScope,
+                    SERVER_URL = url;
+                    state = $state;
+                    httpBackend = $httpBackend;
+                    log = $log;
+
+                    controller = function (data) {
+                        return $controller("mfl.auth.controllers.reset_pwd", data);
+                    };
+                }
+            ]);
+        });
+
+        it("should request for a password reset", function () {
+            httpBackend.expectPOST(SERVER_URL + "api/rest-auth/password/reset/", {
+                "email": "mail@domain.com"
+            }).respond(200);
+
+            spyOn(log, "error");
+            spyOn(state, "go");
+            var data = {
+                "$scope": rootScope.$new(),
+                "$state": state,
+                "$log": log
+            };
+            data.$scope.email = "mail@domain.com";
+
+            controller(data);
+            data.$scope.reset_pwd();
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+
+            expect(state.go).toHaveBeenCalledWith("login");
+            expect(log.error).not.toHaveBeenCalled();
+        });
+
+        it("should show an error on fail to request for a password reset", function () {
+            httpBackend.expectPOST(SERVER_URL + "api/rest-auth/password/reset/", {
+                "email": "mail@domain.com"
+            }).respond(500);
+
+            spyOn(state, "go");
+            spyOn(log, "error");
+
+            var data = {
+                "$scope": rootScope.$new(),
+                "$state": state
+            };
+            data.$scope.email = "mail@domain.com";
+
+            controller(data);
+            data.$scope.reset_pwd();
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+
+            expect(log.error).toHaveBeenCalled();
+            expect(state.go).not.toHaveBeenCalledWith();
+        });
     });
 
-    describe("Test reset pwd confirm controller", function () {});
+    describe("Test reset pwd confirm controller", function () {
+        var controller, rootScope, SERVER_URL, httpBackend, state, log;
+
+        beforeEach(function () {
+            module("ui.router");
+            module("mflAdminAppConfig");
+            module("mfl.auth.services");
+            module("mfl.auth.controllers");
+
+            inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
+                "$state", "$log",
+                function ($rootScope, $controller, $httpBackend, url, $state, $log) {
+                    rootScope = $rootScope,
+                    SERVER_URL = url;
+                    state = $state;
+                    httpBackend = $httpBackend;
+                    log = $log;
+
+                    controller = function (data) {
+                        return $controller("mfl.auth.controllers.reset_pwd_confirm", data);
+                    };
+                }
+            ]);
+        });
+
+        it("should reset a password", function () {
+            httpBackend.expectPOST(SERVER_URL + "api/rest-auth/password/reset/confirm/", {
+                "uid": "123",
+                "token": "456",
+                "new_password1": "pass",
+                "new_password2": "pass"
+            }).respond(200);
+
+            spyOn(log, "error");
+            spyOn(state, "go");
+            var data = {
+                "$scope": rootScope.$new(),
+                "$state": state,
+                "$log": log,
+                "$stateParams": {
+                    "uid": "123",
+                    "token": "456"
+                }
+            };
+            data.$scope.new_password1 = "pass";
+            data.$scope.new_password2 = "pass";
+
+            controller(data);
+            data.$scope.reset_pwd_confirm();
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+
+            expect(state.go).toHaveBeenCalledWith("login");
+            expect(log.error).not.toHaveBeenCalled();
+        });
+
+        it("should show an error on fail to reset a password", function () {
+            httpBackend.expectPOST(SERVER_URL + "api/rest-auth/password/reset/confirm/", {
+                "uid": "123",
+                "token": "456",
+                "new_password1": "pass",
+                "new_password2": "pass"
+            }).respond(500);
+
+            spyOn(log, "error");
+            spyOn(state, "go");
+            var data = {
+                "$scope": rootScope.$new(),
+                "$state": state,
+                "$log": log,
+                "$stateParams": {
+                    "uid": "123",
+                    "token": "456"
+                }
+            };
+            data.$scope.new_password1 = "pass";
+            data.$scope.new_password2 = "pass";
+
+            controller(data);
+            data.$scope.reset_pwd_confirm();
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+
+            expect(state.go).not.toHaveBeenCalled();
+            expect(log.error).toHaveBeenCalled();
+        });
+    });
 
 })();

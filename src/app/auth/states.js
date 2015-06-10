@@ -34,7 +34,7 @@
                 url: "/reset_pwd",
                 views: {
                     "main": {
-                        controller: "mfl.auth.controller.reset_pwd",
+                        controller: "mfl.auth.controllers.reset_pwd",
                         templateUrl: "auth/tpls/reset_pwd.tpl.html"
                     }
                 },
@@ -45,7 +45,7 @@
                 url: "/reset_pwd_confirm/:uid/:token",
                 views: {
                     "main": {
-                        controller: "mfl.auth.controller.reset_pwd_confirm",
+                        controller: "mfl.auth.controllers.reset_pwd_confirm",
                         templateUrl: "auth/tpls/reset_pwd_confirm.tpl.html"
                     }
                 },
