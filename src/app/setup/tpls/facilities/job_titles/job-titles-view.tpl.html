@@ -1,12 +1,13 @@
-
+<contentheader></contentheader>
 <div ng-if="alert" class="callout callout-danger fade in">
     <h4>Some Errors On The Form</h4>
     <p ng-bind-html="alert"></p>
 </div>
-<div class="col-lg-12 margin-t-20">
+<div class="col-lg-12">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
     <form role="form form-horizontal form-bordered" name="facilities.job_titles.form">
         <!-- Start of dynamic form -->
-        <div class="col-lg-6">
+        <div class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-20">
             <div class="group">
                 <input type="text" name="name" ng-model="facilityJobTitles.name" required>
                 <span class="highlight"></span>
@@ -23,32 +24,30 @@
                     Description
                 </label>
             </div>
-            <div class="group">
-                <input type="checkbox" name="active" data-ng-value="true" ng-model="facilityJobTitles.active">
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label>
-                    Status
-                </label>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 margin-t-10 margin-b-10 text-left">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="active" name="active"     ng-model="facilityJobTitles.active">
+                    <label for="active">
+                        <span class="check"></span>
+                        <span class="box"></span>
+                         Is Active?
+                     </label>
+                </div>
             </div>
         </div>
         <!-- End of the dynamic form -->
-        <div class="col-md-12 form-group">
+        <div class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-10 margin-b-20 text-left">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
                 <span class="pull-left margin-h-5">
-                    <button ng-if="!facilityJobTitles.id" ng-click="createFacilityJobTitle(facilityJobTitles)" class="login-btn login-btn-default">
-                        <i class="fa fa-save"></i> Create
+                    <button ng-if="!facilityJobTitles.id" ng-click="createFacilityJobTitle(facilityJobTitles)" class="login-btn login-btn-primary">
+                        <i class="fa fa-save"></i> Save
                     </button>
-                    <button ng-if="facilityJobTitles.id" ng-click="updateFacilityJobTitle(facilityJobTitles.id, facilities.job_titles.form)" class="login-btn login-btn-default">
-                        <i class="fa fa-edit"></i> Update
-                    </button>
-                </span>
-                <span ng-if="facilityJobTitles.id" class="pull-left margin-h-5">
-                    <button ng-click="deleteFacilityJobTitle(facilityJobTitles.id)" class="login-btn login-btn-info">
-                       <i class="fa fa-remove"></i>Delete
+                    <button ng-if="facilityJobTitles.id" ng-click="updateFacilityJobTitle(facilityJobTitles.id, facilities.job_titles.form)" class="login-btn login-btn-primary">
+                        <i class="fa fa-save"></i> Save
                     </button>
                 </span>
             </div>
         </div>
     </form>
+</div>
 </div>

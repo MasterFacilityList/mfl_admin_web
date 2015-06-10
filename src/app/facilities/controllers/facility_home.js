@@ -11,7 +11,17 @@
         $scope.title = [
             {
                 icon: "fa-building",
-                name: "Manage Facitilites"
+                name: "Manage Facilities"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "ui-sref='facilities.create.basic' " +
+                        "has-permission='users.add_mfluser' ",
+                class: "action-btn action-btn-info action-btn-md",
+                color: "blue",
+                tipmsg: "New Facility",
+                icon: "fa-user-plus"
             }
         ];
     }])
@@ -26,7 +36,7 @@
         $scope.title = [
             {
                 icon: "fa-building",
-                name: "Facitilites Details"
+                name: "Facilities Details"
             }
         ];
 
