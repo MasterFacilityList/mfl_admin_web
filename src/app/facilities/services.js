@@ -22,6 +22,12 @@
         this.option = api.setBaseUrl("api/facilities/options/");
         this.service_option = api.setBaseUrl("api/facilities/service_options/");
         this.facility_service = api.setBaseUrl("api/facilities/facility_services/");
+        this.regulating_body = api.setBaseUrl("api/facilities/regulating_bodies/");
+        this.regulation_status = api.setBaseUrl("api/facilities/regulation_status/");
+        this.facility_unit = api.setBaseUrl("api/facilities/facility_units/");
+        this.facility_upgrade = api.setBaseUrl("api/facilities/facility_upgrade/");
+        this.facility_approval = api.setBaseUrl("api/facilities/facilitiy_approvals/");
+        this.facility_operation_status = api.setBaseUrl("api/facilities/facility_operation_state/");
         this.utils = function(){
             return {
                 cleanFormData : function(data){
@@ -39,7 +45,7 @@
                 },
                 resolvePromise: function(scope,scopeObj, key, promise){
                     promise.success(function(data){
-                        scopeObj[key] = data.results;
+                        scopeObj[key] = data.results||data;
                     }).error(function(error){
                         scope.alert = error.error_msg;
                     });

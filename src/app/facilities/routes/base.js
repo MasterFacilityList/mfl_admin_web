@@ -15,23 +15,9 @@
                     controller: "mfl.common.controllers.header",
                     templateUrl: "common/tpls/header.tpl.html"
                 },
-                "sidebar@facilities": {
-                    templateUrl: "facilities/tpls/common/sidebar.tpl.html"
-                },
                 "main-content@facilities": {
                     templateUrl: "facilities/tpls/grid/index.tpl.html",
                     controller: "mfl.facilities.controllers.home.list"
-                }
-            },
-            data : { pageTitle: "Facility Management" }
-        })
-        .state("facilities.details", {
-            url: "/detail/:facilityId",
-            views: {
-                "main-content@facilities": {
-                    templateUrl: "facilities/tpls/grid/"+
-                    "facility-detail.tpl.html",
-                    controller: "mfl.facilities.controllers.home.detail"
                 }
             },
             data : { pageTitle: "Facility Management" }

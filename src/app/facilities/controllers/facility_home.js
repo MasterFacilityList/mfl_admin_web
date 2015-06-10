@@ -24,29 +24,5 @@
                 icon: "fa-user-plus"
             }
         ];
-    }])
-
-    .controller("mfl.facilities.controllers.home.detail", ["$scope",
-    "$stateParams",
-    "mfl.facilities.wrappers", function($scope,$stateParams, facilityApi){
-        $scope.tooltip = {
-            "title": "",
-            "checked": false
-        };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Facilities Details"
-            }
-        ];
-
-
-        facilityApi.facilities.get($stateParams.facilityId)
-        .success(function(data){
-            $scope.facility = data;
-        }).error(function(err){
-            $scope.alert = err.error.error_msg;
-        });
-    }])
-    ;
+    }]);
 })(angular);
