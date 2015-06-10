@@ -12,24 +12,28 @@
 
             $scope.reset_pwd = function () {
                 profileService.resetPassword($scope.email)
-                    .success(angular.noop)
-                    .error(function (data) {
-                        $log.error(data);
-                    });
+                .then(function () {
+                    $state.go("login");
+                },
+                function (data) {
+                    $log.error(data);
+                });
             };
         }]
     )
 
     .controller("mfl.auth.controller.reset_pwd_confirm",
-        ["$scope", "$stateParams", "$log", "mfl.auth.services.profile",
-        function ($scope, $stateParams, $log, profileService) {
+        ["$scope", "$state", "$stateParams", "$log", "mfl.auth.services.profile",
+        function ($scope, $state, $stateParams, $log, profileService) {
             $scope.reset_pwd_confirm = function () {
                 profileService.resetPasswordConfirm(
                     $stateParams.uid, $stateParams.token,
                     $scope.new_password1, $scope.new_password2
                 )
-                .success(angular.noop)
-                .error(function (data) {
+                .then(function () {
+                    $state.go("login");
+                },
+                function (data) {
                     $log.error(data);
                 });
             };

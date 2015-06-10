@@ -13,7 +13,7 @@
                 views: {
                     "main": {
                         controller: "mfl.auth.controllers.login",
-                        templateUrl: "auth/tpls/main.tpl.html"
+                        templateUrl: "auth/tpls/login.tpl.html"
                     }
                 },
                 requireUser: false
@@ -24,7 +24,7 @@
                 views: {
                     "main": {
                         controller: "mfl.auth.controllers.logout",
-                        templateUrl: "auth/tpls/main.tpl.html"
+                        templateUrl: "auth/tpls/login.tpl.html"
                     }
                 },
                 requireUser: false
@@ -35,7 +35,7 @@
                 views: {
                     "main": {
                         controller: "mfl.auth.controller.reset_pwd",
-                        templateUrl: "auth/reset_pwd.tpl.html"
+                        templateUrl: "auth/tpls/reset_pwd.tpl.html"
                     }
                 },
                 requireUser: false
@@ -46,7 +46,7 @@
                 views: {
                     "main": {
                         controller: "mfl.auth.controller.reset_pwd_confirm",
-                        templateUrl: "auth/reset_pwd_confirm.tpl.html"
+                        templateUrl: "auth/tpls/reset_pwd_confirm.tpl.html"
                     }
                 },
                 requireUser: false
