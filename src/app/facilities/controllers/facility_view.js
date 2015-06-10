@@ -116,12 +116,10 @@
 
             };
             $scope.facility_units = [];
-            facilityApi.facility_unit.filter({facility: $stateParams.facilityId})
-            .success(function(data){
-                $scope.facility_units = data.results;
-            }).error(function(error){
-                $scope.alert = facilityApi.utils.getError(error);
-            });
+            facilityApi.utils.resolvePromise(
+                $scope, $scope, "facility_units",
+                facilityApi.facility_unit.filter({facility: $stateParams.facilityId})
+            );
             $scope.saveFacilityUnit = function(unit){
                 unit.facility = $stateParams.facilityId;
                 facilityApi.facility_unit.create(facilityApi.utils.cleanFormData(unit))
