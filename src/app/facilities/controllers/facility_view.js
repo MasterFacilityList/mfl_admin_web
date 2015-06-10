@@ -169,12 +169,10 @@
             };
 
             $scope.facility_upgrades = [];
-            facilityApi.facility_upgrade.filter({facility: $stateParams.facilityId})
-            .success(function(data){
-                $scope.facility_upgrades = data.results;
-            }).error(function(error){
-                $scope.alert = facilityApi.utils.getError(error);
-            });
+            facilityApi.utils.resolvePromise(
+                $scope, $scope, "facility_upgrades",
+                facilityApi.facility_upgrade.filter({facility: $stateParams.facilityId})
+            );
             $scope.upgradeFacility = function(upgrade){
                 upgrade.facility = $stateParams.facilityId;
                 var patch_data = {
