@@ -567,7 +567,14 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.contacts).toEqual([{"contact": "123", "id": "456"}]);
+                expect(data.$scope.contacts).toEqual(
+                    [
+                        {
+                            "contact": "123",
+                            "id": "456",
+                            "delete_spinner" : true
+                        }
+                    ]);
             });
 
             it("should show an error if delete contact failed", function () {
@@ -608,7 +615,14 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.contacts).toEqual([{"contact": "123", "id": "456"}]);
+                expect(data.$scope.contacts).toEqual(
+                    [
+                        {
+                            "contact": "123",
+                            "id": "456",
+                            "delete_spinner" : true
+                        }
+                    ]);
             });
         });
     });
