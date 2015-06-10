@@ -154,8 +154,47 @@
         }
     ])
 
-    .controller("mfl.users.controllers.user_edit.groups", [function () {}])
+    .controller("mfl.users.controllers.user_edit.groups",
+        ["mfl.users.services.wrappers", "$log", "$scope", function (wrappers, $log, $scope) {
+            wrappers.groups.filter({page_size: 100, ordering: "name"})
+            .success(function (data) {
+                $scope.groups = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            $scope.new_grp = "";
 
+            var updateGroups = function (new_grps) {
+                var grps = _.map(new_grps, function (grp) {
+                    return {"id": grp.id, "name": grp.name};
+                });
+
+                wrappers.users.update($scope.user_id, {"groups": grps})
+                .success(function (data) {
+                    $scope.user = data;
+                    $scope.new_grp = "";
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+
+            $scope.add = function () {
+                var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
+                var update = angular.copy($scope.user.groups);
+                update.push(grp);
+                updateGroups(update);
+            };
+
+            $scope.remove = function (grp) {
+                var update = _.without($scope.user.groups, grp);
+                updateGroups(update);
+            };
+        }]
+    )
+
+    .controller("mfl.users.controllers.user_edit.counties", [function () {}])
 
     // ====================================================================== //
 
