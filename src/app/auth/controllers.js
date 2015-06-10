@@ -6,6 +6,39 @@
         "ui.router"
     ])
 
+    .controller("mfl.auth.controllers.reset_pwd",
+        ["$scope", "$state", "$log", "mfl.auth.services.profile",
+        function ($scope, $state, $log, profileService) {
+            $scope.reset_pwd = function () {
+                profileService.resetPassword($scope.email)
+                .then(function () {
+                    $state.go("login");
+                },
+                function (data) {
+                    $log.error(data);
+                });
+            };
+        }]
+    )
+
+    .controller("mfl.auth.controllers.reset_pwd_confirm",
+        ["$scope", "$state", "$stateParams", "$log", "mfl.auth.services.profile",
+        function ($scope, $state, $stateParams, $log, profileService) {
+            $scope.reset_pwd_confirm = function () {
+                profileService.resetPasswordConfirm(
+                    $stateParams.uid, $stateParams.token,
+                    $scope.new_password1, $scope.new_password2
+                )
+                .then(function () {
+                    $state.go("login");
+                },
+                function (data) {
+                    $log.error(data);
+                });
+            };
+        }]
+    )
+
     .controller("mfl.auth.controllers.login",
         ["$scope", "$sce", "$state", "$stateParams", "mfl.auth.services.login", "HOME_PAGE_NAME",
         function ($scope, $sce, $state, $stateParams, loginService, HOME_PAGE_NAME) {
