@@ -50,28 +50,21 @@
                 }
             ];
             $scope.facility = {facilityId: $stateParams.facilityId};
-            facilityApi.facilities.get($stateParams.facilityId)
-            .success(function(data){
-                $scope.facility_data = data;
-            }).error(function(error){
-                $scope.alert = facilityApi.utils.getError(error);
-            });
-
+            var promise = facilityApi.facilities.get($stateParams.facilityId);
+            facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);
             $scope.facility_approvals = [];
-            facilityApi.facility_approval.filter({facility: $stateParams.facilityId})
-            .success(function(data){
-                $scope.facility_approvals = data.results;
-            }).error(function(error){
-                $scope.alert = facilityApi.utils.getError(error);
-            });
+            facilityApi.utils.resolvePromise(
+                $scope, $scope, "facility_approvals",
+                facilityApi.facility_approval.filter({facility: $stateParams.facilityId})
+            );
             $scope.approveFacility = function(approval){
                 approval.facility = $stateParams.facilityId;
                 facilityApi.facility_approval.create(facilityApi.utils.cleanFormData(approval))
                 .success(function(data){
-                    $scope.facility_approvals.push(data);
                     $scope.approval = {
                         comment: ""
                     };
+                    $scope.facility_approvals.push(data);
                 }).error(function(error){
                     $scope.alert = facilityApi.utils.getError(error);
                 });
@@ -100,12 +93,8 @@
                 }
             ];
             $scope.facility = {facilityId: $stateParams.facilityId};
-            facilityApi.facilities.get($stateParams.facilityId)
-            .success(function(data){
-                $scope.facility_data = data;
-            }).error(function(error){
-                $scope.alert = facilityApi.utils.getError(error);
-            });
+            var promise = facilityApi.facilities.get($stateParams.facilityId);
+            facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);
             $scope.getOptionsData = {
                 getData: function(api, callback, what){
                     api.list()
@@ -164,12 +153,8 @@
                 }
             ];
             $scope.facility = {facilityId: $stateParams.facilityId};
-            facilityApi.facilities.get($stateParams.facilityId)
-            .success(function(data){
-                $scope.facility_data = data;
-            }).error(function(error){
-                $scope.alert = facilityApi.utils.getError(error);
-            });
+            var promise = facilityApi.facilities.get($stateParams.facilityId);
+            facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);
             $scope.getOptionsData = {
                 getData: function(callback, what){
                     facilityApi.filterOptions.filter({fields: what})
@@ -236,12 +221,8 @@
                 }
             ];
             $scope.facility = {facilityId: $stateParams.facilityId};
-            facilityApi.facilities.get($stateParams.facilityId)
-            .success(function(data){
-                $scope.facility_data = data;
-            }).error(function(error){
-                $scope.alert = facilityApi.utils.getError(error);
-            });
+            var promise = facilityApi.facilities.get($stateParams.facilityId);
+            facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);
             $scope.getOptionsData = {
                 getData: function(callback, what){
                     facilityApi.filterOptions.filter({fields: what})
