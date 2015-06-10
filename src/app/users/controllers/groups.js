@@ -105,8 +105,7 @@
                 });
                 new_role.permissions = $scope.set_permissions;
                 wrappers.groups.create(new_role)
-                    .success(function (role_result) {
-                        console.log(role_result);
+                    .success(function () {
                         $state.go("users.manage_roles");
                     })
                     .error(function (e) {

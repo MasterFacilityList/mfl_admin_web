@@ -1015,7 +1015,7 @@
                 controller("mfl.users.controllers.user_edit.basic", data);
 
                 httpBackend
-                    .expectPOST(server_url + "api/users/3/", {"name": "ASD"})
+                    .expectPATCH(server_url + "api/users/3/", {"name": "ASD"})
                     .respond(200);
 
                 data.$scope.save(frm);
@@ -1023,6 +1023,59 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it("should not update user if no changes are made", function () {
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$modelValue": "ASD",
+                        "$dirty": false
+                    }
+                };
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                data.$scope.user_id = 3;
+
+                controller("mfl.users.controllers.user_edit.basic", data);
+
+                data.$scope.save(frm);
+
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it("should show error on fail to update user changes", function () {
+                spyOn(log, "error");
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$modelValue": "ASD",
+                        "$dirty": true
+                    }
+                };
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope,
+                    "$log": log
+                };
+                data.$scope.user_id = 3;
+
+                controller("mfl.users.controllers.user_edit.basic", data);
+
+                httpBackend
+                    .expectPATCH(server_url + "api/users/3/", {"name": "ASD"})
+                    .respond(400);
+
+                data.$scope.save(frm);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
             });
         });
     });
