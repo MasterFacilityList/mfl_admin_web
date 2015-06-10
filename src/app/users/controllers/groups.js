@@ -8,11 +8,11 @@
 
     .controller("mfl.users.controllers.group_list", ["$scope",
         function ($scope) {
-            $scope.test = "Roles";
+            $scope.test = "Groups";
             $scope.title = [
                 {
                     icon: "fa-users",
-                    name: "Manage roles"
+                    name: "Manage groups"
                 }
             ];
             $scope.action = [
@@ -21,7 +21,7 @@
                             "has-permission='users.add_mfluser' ",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
-                    tipmsg: "New Role",
+                    tipmsg: "New Group",
                     icon: "fa-plus"
                 }
             ];
@@ -31,7 +31,7 @@
     .controller("mfl.users.controllers.group_create",
         ["$scope", "mfl.users.services.wrappers", "$state",
         function ($scope, wrappers, $state) {
-            $scope.test = "New role";
+            $scope.test = "New group";
             $scope.permissions = "";
             $scope.title = [
                 {
@@ -105,8 +105,7 @@
                 });
                 new_role.permissions = $scope.set_permissions;
                 wrappers.groups.create(new_role)
-                    .success(function (role_result) {
-                        console.log(role_result);
+                    .success(function () {
                         $state.go("users.manage_roles");
                     })
                     .error(function (e) {

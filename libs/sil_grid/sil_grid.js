@@ -1,23 +1,16 @@
-"use strict";
 (function(angular, _){
+    "use strict";
+
     var PAGINATION_TPL = "sil.grid.pagination.tpl.html";
     var SEARCH_TPL = "sil.grid.search.tpl.html";
+
     angular.module("sil.grid",[
             PAGINATION_TPL,
             SEARCH_TPL,
             "ui.bootstrap"
         ]
     )
-    .provider("silGridConfig", function(){
-        /**
-            apiMaps example:
-            this.apiMaps = {
-                claim: ["sil.claimApi.wrapper", "claimsApi"],
-                visit: ["sil.encountersApi.wrapper", "encountersApi"],
-                preauth: ["sil.preauthApi.wrapper", "preauthApi"]
-            };
-
-        **/
+    .provider("silGridConfig", function() {
         this.apiMaps = {};
         this.appConfig = "providerConfig";
         this.itemsPerPage = 25;
@@ -54,7 +47,7 @@
             templateUrl:function(elem, attrs){
                 return attrs.template;
             },
-            controller: function($scope){
+            controller: ["$scope", function($scope) {
                 var self = this;
                 $scope.pagination = {};
                 var apiMaps = silGridConfig.apiMaps;
@@ -195,7 +188,7 @@
                     $scope.filters.page = page_count;
                     $scope.getData();
                 };
-            },
+            }],
             link: function(scope){
                 scope.$watch("filters", function(filters){
                     if(_.has(filters, "page")||

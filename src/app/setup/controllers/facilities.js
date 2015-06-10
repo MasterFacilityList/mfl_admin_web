@@ -132,8 +132,7 @@
 
     .controller("mfl.setup.controller.facilityOwner.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
-        function($scope, $state, $stateParams, adminApi, formChanges){
-            console.log($stateParams);
+        function($scope, $state, $stateParams, adminApi, formChanges) {
             if(!_.isUndefined($stateParams.id)&&
                 $stateParams.id !== "create"){
                 $scope.title = [
@@ -188,6 +187,7 @@
                     }
                 ];
             }
+
             adminApi.facilityOwnerTypes.list().success(function(ownerTypes){
                 $scope.ownerTypes = ownerTypes.results;
             }).error(function(error){

@@ -41,8 +41,8 @@
                 url: "create/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                        controller: "mfl.users.controllers.user_create",
+                        templateUrl: "users/tpls/users.edit.tpl.html"
                     }
                 }
             })
@@ -50,29 +50,9 @@
             .state("users.user_create.basic", {
                 url: "basic/",
                 views: {
-                    "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
-                    }
-                }
-            })
-
-            .state("users.user_create.contacts", {
-                url: "contacts/",
-                views: {
-                    "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
-                    }
-                }
-            })
-
-            .state("users.user_create.groups", {
-                url: "groups/",
-                views: {
-                    "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                    "form-view@users.user_create": {
+                        controller: "mfl.users.controllers.user_create.basic",
+                        templateUrl: "users/tpls/users.edit.basic.tpl.html"
                     }
                 }
             })
@@ -81,8 +61,8 @@
                 url: "edit/:user_id/",
                 views: {
                     "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                        controller: "mfl.users.controllers.user_edit",
+                        templateUrl: "users/tpls/users.edit.tpl.html"
                     }
                 }
             })
@@ -90,9 +70,9 @@
             .state("users.user_edit.basic", {
                 url: "basic/",
                 views: {
-                    "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                    "form-view@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.basic",
+                        templateUrl: "users/tpls/users.edit.basic.tpl.html"
                     }
                 }
             })
@@ -100,9 +80,9 @@
             .state("users.user_edit.contacts", {
                 url: "contacts/",
                 views: {
-                    "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                    "form-view@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.contacts",
+                        templateUrl: "users/tpls/users.edit.contacts.tpl.html"
                     }
                 }
             })
@@ -110,9 +90,9 @@
             .state("users.user_edit.groups", {
                 url: "groups/",
                 views: {
-                    "main-content@users": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/users.create.tpl.html"
+                    "form-view@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.groups",
+                        templateUrl: "users/tpls/users.edit.groups.tpl.html"
                     }
                 }
             })
