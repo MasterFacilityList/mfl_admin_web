@@ -1,0 +1,76 @@
+<!-- /- Start of tabbed multi-step form -->
+<contentheader></contentheader>
+<div class="col-lg-12 margin-t-20 content-card margin-h-5">
+    <div class="col-lg-12 margin-t-20 ">
+    <div class="col-lg-12 margin-t-20">
+        <div ng-if="alert" class="callout callout-danger fade in">
+            <h4>Some Errors On The Form</h4>
+            <p ng-bind-html="alert"></p>
+        </div>
+            <form role="form" name="facilities.form.upgrade">
+                <div class="col-lg-6">
+                    <label>
+                        Select Operation Status:
+                    </label>
+                    <div class="group">
+
+                        <ac-select ac-model="status.operation_status" name="operation_status" ac-options="item.name for item in getOptionsData.operationStatus()"
+                            ac-settings='{loadOnOpen: true}'
+                        ></ac-select>
+                    </div>
+                    <div class="group">
+                        <textarea name="reason" ng-model="status.reason"></textarea>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>
+                            Reason
+                        </label>
+                    </div>
+                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                        <div class="col-lg-4 col-md-5 col-sm-10 col-xs-12 margin-t-10 pull-left">
+                            <span class="pull-left margin-h-5">
+                                <button ng-click="changeOperationStatus(status)" ng-if="!status.id" class="login-btn login-btn-info">
+                                    Change Status
+                                </button>
+                            </span>
+                            <span class="pull-left margin-h-5">
+                                <button type="submit" ng-click="updateOperationStatus(status.id, facilities.form.status)" ng-if="status.id" class="login-btn login-btn-info">
+                                    Update Status
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div id="no-more-tables" class="col-lg-12 margin-t-15">
+                    <h4>Previous Facility Operation Status </h4>
+                        <table class="table content-card cf">
+                            <thead>
+                                <th >Status</th>
+                                <th >Reason</th>
+                                <th >Changed On</th>
+                                <th class="text-center">Actions</th>
+                            </thead>
+                            <tbody class="example-animate-container">
+                                <tr class="animate-repeat" ng-repeat="item in facility_statuses">
+                                    <td data-title="Name">{{item.operation_status}}</td>
+                                    <td data-title="Name">{{item.reason}}</td>
+                                    <td data-title="Name">{{item.created}}</td>
+                                    <td class="text-center" data-title="Actions">
+                                        <a class="action-btn action-btn-grid action-btn-info" tooltip="Edit" tooltip-placement="bottom">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div ng-include src="'facilities/tpls/view/view_basic.tpl.html'"></div>
+             </div>
+
+        </form>
+    </div>
+    </div>
+</div>
+
