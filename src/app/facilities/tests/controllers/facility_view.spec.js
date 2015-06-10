@@ -200,5 +200,92 @@
             expect(testFunc.callback).toHaveBeenCalledWith(res.results);
         });
 
+        it("should have mfl.facilities.controllers.view.upgrade` defined",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var ctrl = createController("mfl.facilities.controllers.view.upgrade", dt);
+                expect(ctrl).toBeDefined();
+            });
+
+        it("should get options data, `facilityType` in facility upgrade: fail ", function(){
+            spyOn(testFunc, "callback");
+            var dt = {
+                $stateParams: {facilityId: 1}
+            };
+
+            $httpBackend.expectGET(
+                SERVER_URL+"api/common/filtering_summaries/?fields=facility_type")
+            .respond(500, errorRes);
+            createController("mfl.facilities.controllers.view.upgrade", dt);
+            $scope.getOptionsData.facilityType(testFunc.callback);
+            $httpBackend.flush();
+            expect($scope.alert).toBeDefined();
+        });
+
+        it("should get options data, `facility type` in facility upgrade: success ", function(){
+            spyOn(testFunc, "callback");
+            var dt = {
+                $stateParams: {facilityId: 1}
+            };
+            var res = {facilit_type: {name: "KNHH"}};
+
+            $httpBackend.expectGET(
+                SERVER_URL+"api/common/filtering_summaries/?fields=facility_type")
+            .respond(200, res);
+            createController("mfl.facilities.controllers.view.upgrade", dt);
+            $scope.getOptionsData.facilityType(testFunc.callback);
+            $httpBackend.flush();
+            expect(testFunc.callback).toHaveBeenCalledWith(res.facility_type);
+        });
+
+
+        it("should upgrade facility: success, patching facility",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var res = {name: "KNHH", facility_type:{id:1}};
+                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facilities/1/")
+                .respond(200, res);
+                $httpBackend.expectPOST(SERVER_URL+"api/facilities/facility_upgrade/")
+                .respond(200, {msg: "ok"});
+                createController("mfl.facilities.controllers.view.upgrade", dt);
+                $scope.upgradeFacility(res);
+                $httpBackend.flush();
+                expect($scope.facility_upgrades).toEqual([{msg: "ok"}]);
+
+            });
+
+        it("should upgrade facility: error, patching facility",function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var res = {name: "KNHH", facility_type:{id:1}};
+                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facilities/1/")
+                .respond(500, res);
+                createController("mfl.facilities.controllers.view.upgrade", dt);
+                $scope.upgradeFacility(res);
+                $httpBackend.flush();
+                expect($scope.alert).toBeDefined();
+
+            });
+
+        it("should upgrade facility: error, upgrading",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var res = {name: "KNHH", facility_type:{id:1}};
+                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facilities/1/")
+                .respond(200, res);
+                $httpBackend.expectPOST(SERVER_URL+"api/facilities/facility_upgrade/")
+                .respond(500, {msg: "ok"});
+                createController("mfl.facilities.controllers.view.upgrade", dt);
+                $scope.upgradeFacility(res);
+                $httpBackend.flush();
+                expect($scope.alert).toBeDefined();
+            });
     });
 })(describe);
