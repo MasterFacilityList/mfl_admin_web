@@ -156,6 +156,7 @@
 
     .controller("mfl.users.controllers.user_edit.groups", [function () {}])
 
+    .controller("mfl.users.controllers.user_edit.counties", [function () {}])
 
     // ====================================================================== //
 

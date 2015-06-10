@@ -44,9 +44,14 @@
                 .toEqual("#/users/edit/3/contacts/");
         });
 
-        it("should go to user groups assignment creation page", function () {
+        it("should go to user groups assignment page", function () {
             expect($state.href("users.user_edit.groups", {"user_id": 3}))
                 .toEqual("#/users/edit/3/groups/");
+        });
+
+        it("should go to county assignment page", function () {
+            expect($state.href("users.user_edit.counties", {"user_id": 3}))
+                .toEqual("#/users/edit/3/counties/");
         });
 
         it("should go to users delete page", function () {

@@ -658,13 +658,6 @@
             });
         });
 
-        describe("Test user edit groups controller", function () {
-
-            it("should load", function () {
-                ctrl("user_edit.groups");
-            });
-        });
-
         describe("Test user edit contacts controller", function () {
 
             it("should show error on load contact types error", function () {
@@ -1075,6 +1068,20 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(log.error).toHaveBeenCalled();
+            });
+        });
+
+        describe("Test user edit groups controller", function () {
+
+            it("should load", function () {
+                ctrl("user_edit.groups");
+            });
+        });
+
+        describe("Test user edit counties controller", function () {
+
+            it("should load", function () {
+                ctrl("user_edit.counties");
             });
         });
     });

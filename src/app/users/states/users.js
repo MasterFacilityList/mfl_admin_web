@@ -97,6 +97,16 @@
                 }
             })
 
+            .state("users.user_edit.counties", {
+                url: "counties/",
+                views: {
+                    "form-view@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.counties",
+                        templateUrl: "users/tpls/users.edit.counties.tpl.html"
+                    }
+                }
+            })
+
             .state("users.user_delete", {
                 url: "delete/:user_id/",
                 views: {
