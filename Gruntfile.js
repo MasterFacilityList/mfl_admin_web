@@ -263,7 +263,8 @@ module.exports = function ( grunt ) {
             compile: {
                 options: {
                     banner: "<%= meta.banner %>",
-                    mangle: false
+                    screwIE8: true,
+                    drop_console: true
                 },
                 files: {
                     "<%= concat.compile_js.dest %>": "<%= concat.compile_js.dest %>"

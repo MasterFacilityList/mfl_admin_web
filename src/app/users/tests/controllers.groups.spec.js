@@ -33,13 +33,13 @@
                 }
             ]);
         });
-        it("should test Roles controller", function () {
+        it("should test groups controller", function () {
             controller("mfl.users.controllers.group_list");
-            expect(scope.test).toEqual("Roles");
+            expect(scope.test).toEqual("Groups");
         });
         it("should test the new_role controller", function () {
             controller("mfl.users.controllers.group_create");
-            expect(scope.test).toEqual("New role");
+            expect(scope.test).toEqual("New group");
         });
         //test not getting list of permissions
         it("should test listing all permissions: success", inject(["$httpBackend",
@@ -71,7 +71,7 @@
             scope.setPermission(item);
             expect(item.set_selected).toBeTruthy();
         });
-        it("should test add roles : setting roles", function () {
+        it("should test add groups : setting groups", function () {
             controller("mfl.users.controllers.group_create");
             var permission = {
                 name : "",
@@ -90,7 +90,7 @@
             scope.addPermissions();
             expect(scope.set_permissions).toContain(permission);
         });
-        it("should test add roles : reverting roles", function () {
+        it("should test add groups : reverting groups", function () {
             controller("mfl.users.controllers.group_create");
             var permissions = {
                 name : "",
