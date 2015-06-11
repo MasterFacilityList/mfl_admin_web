@@ -16,7 +16,7 @@
             <tr class="animate-repeat" ng-repeat="contact in contacts">
                 <td data-title="#:" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td data-title="Contact:" class="pad-t-15">{{contact.contact}}</td>
-                <td data-title="Contact Type:" class="pad-t-15">{{contact.contact_type}}</td>
+                <td data-title="Contact Type:" class="pad-t-15">{{contact.contact_type_name}}</td>
                 <td data-title="Actions:" class="text-right">
                     <a ui-sref="setup.contacts.edit({id : contact.id})" ui-sref-opts="{reload:true}" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-edit"></i>
