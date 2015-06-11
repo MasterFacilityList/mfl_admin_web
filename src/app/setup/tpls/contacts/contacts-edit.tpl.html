@@ -1,0 +1,51 @@
+<contentheader></contentheader>
+<div ng-if="alert" class="callout callout-danger fade in">
+    <h4>Some Errors On The Form</h4>
+    <p ng-bind-html="alert"></p>
+</div>
+<div class="content-body">
+    <div class="pad-form">
+        <div class="content-card pad-15">
+            <form role="form" name="contact.form">
+                <!-- Start of dynamic form -->
+                <div class="">
+                    <div class="group">
+                        <input type="text" name="contact" ng-model="contacts.contact" required>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="control-label">
+                            Contact
+                        </label>
+                    </div>
+                <div class="group">
+                    <select name="contact_type" ng-model="contacts.contact_type" required>
+                        <option value="" disabled>Select an option type</option>
+                        <option ng-repeat="cat_type in contact_types" value="{{cat_type.id}}">{{cat_type.name}}</option>
+                    </select>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                    <div class="">
+                        <div class="checkbox-group margin-t-10">
+                            <input type="checkbox" id="active" name="active" ng-model="contacts.active">
+                            <label for="active">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Is Active?
+                             </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of the dynamic form -->
+                <div class="">
+                    <button ng-if="!contacts.id" ng-click="createContacts(contacts)" class="md-btn md-btn-primary">
+                        Save
+                    </button>
+                    <button ng-if="contacts.id" ng-click="updateContact(contacts.id, contact.form)" class="md-btn md-btn-primary">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

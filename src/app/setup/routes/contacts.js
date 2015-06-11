@@ -4,36 +4,42 @@
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+        
+        /*Contacts*/
+        
         .state("setup.contacts", {
                 url: "/contacts",
                 views: {
                     "body@setup" : {
                         templateUrl: "setup/tpls/dashboard/body.tpl.html"
                     },
-                    "main-content@setup.contact_types": {
+                    "main-content@setup.contacts": {
                         controller: "mfl.setup.controller.contacts.list",
-                        templateUrl: "setup/tpls/contacts/contact-types-list.tpl.html"
+                        templateUrl: "setup/tpls/contacts/contacts-list.tpl.html"
                     }
                 }
             })
-        .state("setup.contacts.view", {
-                url: "/:id",
+        .state("setup.contacts.edit", {
+                url: "/:id/edit",
                 views: {
-                    "main-content@setup.contact_types": {
-                        controller: "mfl.setup.controller.contacts.view",
-                        templateUrl: "setup/tpls/contacts/contact-types-view.tpl.html"
+                    "main-content@setup.contacts": {
+                        controller: "mfl.setup.controller.contacts.edit",
+                        templateUrl: "setup/tpls/contacts/contacts-edit.tpl.html"
                     }
                 }
             })
         .state("setup.contacts.create", {
                 url: "/create",
                 views: {
-                    "main-content@setup.contact_types": {
-                        controller: "mfl.setup.controller.contacts.view",
-                        templateUrl: "setup/tpls/contacts/contact-types-view.tpl.html"
+                    "main-content@setup.contacts": {
+                        controller: "mfl.setup.controller.contacts.edit",
+                        templateUrl: "setup/tpls/contacts/contacts-edit.tpl.html"
                     }
                 }
             })
+        
+        /*Contact Types*/
+        
         .state("setup.contact_types", {
                 url: "/contact-types",
                 views: {
