@@ -8,20 +8,19 @@
     <table class="table table-hover fs-14">
         <thead class="cf">
             <th>#</th>
-            <th sil-grid-sort field='name'>Name</th>
-            <th>Status</th>
+            <th>Regulating Body</th>
+            <th>Contact</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
-            <tr class="animate-repeat" ng-repeat="body in regulatingBodies">
+            <tr class="animate-repeat" ng-repeat="regbodycontact in regulatingBodyContacts">
                 <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
-                <td data-title="Name" class="pad-t-15">{{body.name}}</td>
+                <td data-title="Name" class="pad-t-15">{{regbodycontact.regulating_body}}</td>
                 <td data-title="Status" class="pad-t-15">
-                    <i ng-if="body.active" class="fa fa-check-circle-o fa-2x text-success" tooltip="Is Active"></i>
-                    <i ng-if="!body.active" class="fa fa-times-circle-o fa-2x text-danger" tooltip-placement="bottom" tooltip="Is Inactive"></i>
+                    {{regbodycontact.contact}}
                 </td>
                 <td data-title="Actions" class="text-right">
-                    <a ui-sref="setup.facility_regulatory_bodies.edit.basic({id : body.id})" class="action-btn action-btn-grid action-btn-primary" tooltip-placement="bottom" tooltip="Edit Regulatory body">
+                    <a ui-sref="setup.facility_regulatory_bodies.view({id : body.id})" class="action-btn action-btn-grid action-btn-primary" tooltip-placement="bottom" tooltip="Edit Regulatory body">
                         <i class="fa fa-edit"></i>
                     </a>
                 </td>

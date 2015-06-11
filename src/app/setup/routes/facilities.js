@@ -122,13 +122,31 @@
                     }
                 }
             })
-        .state("setup.facility_regulatory_bodies.view", {
+        .state("setup.facility_regulatory_bodies.edit", {
                 url: "/:id",
                 views: {
                     "main-content@setup.facility_regulatory_bodies": {
-                        controller: "mfl.setup.controller.facilityRegulatoryBody.view",
+                        controller: "mfl.setup.controller.facilityRegulatoryBody.edit",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
+                    }
+                }
+            })
+        .state("setup.facility_regulatory_bodies.edit.basic", {
+                url: "/basicdetails",
+                views: {
+                    "form-view@setup.facility_regulatory_bodies.edit" : {
+                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
+                        "regulatory-body-main-form.tpl.html"
+                    }
+                }
+            })
+        .state("setup.facility_regulatory_bodies.edit.contacts", {
+                url: "/contacts",
+                views: {
+                    "form-view@setup.facility_regulatory_bodies.edit" : {
+                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
+                        "regulatory-body-contacts-form.tpl.html"
                     }
                 }
             })
@@ -136,9 +154,27 @@
                 url: "/create",
                 views: {
                     "main-content@setup.facility_regulatory_bodies": {
-                        controller: "mfl.setup.controller.facilityRegulatoryBody.view",
+                        controller: "mfl.setup.controller.facilityRegulatoryBody.create",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
+                    }
+                }
+            })
+        .state("setup.facility_regulatory_bodies.create.basic", {
+                url: "/basicdetails",
+                views: {
+                    "form-view@setup.facility_regulatory_bodies.create" : {
+                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
+                        "regulatory-body-main-form.tpl.html"
+                    }
+                }
+            })
+        .state("setup.facility_regulatory_bodies.create.contacts", {
+                url: "/:reg_cont_id/contacts",
+                views: {
+                    "form-view@setup.facility_regulatory_bodies.create" : {
+                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
+                        "regulatory-body-contacts-form.tpl.html"
                     }
                 }
             });
