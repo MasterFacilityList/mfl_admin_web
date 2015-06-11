@@ -1,0 +1,93 @@
+<div class="">
+    <div class="fs-24">
+    {{facility_data.name}}
+    </div>
+    <h5 class="margin-t-10">
+        <span><strong>Facility Type:</strong> {{facility_data.facility_type_name}}</span>
+        <span class="pull-right"><strong>Facility Code:</strong> {{facility_data.code}}</span>
+    </h5>
+    <hr>
+    <h5 class="margini-b-5">
+        <label>Status</label>
+        <span class="label label-warning">
+            {{facility_data.regulatory_status_name}}
+        </span>
+        <span class="pull-right">
+            <label>Operational status</label>
+            <span class="label label-primary">{{facility_data.operation_status_name}}</span>
+        </span>
+    </h5>
+    <h5>
+        <span>
+           <label>Open whole day </label>
+            <span ng-show="facility_data.open_whole_day" class="text-success">
+                <i class="fa fa-check-circle-o fa-1x"></i>
+            </span>
+            <span ng-hide="facility_data.open_whole_day" class="text-danger">
+                <i class="fa fa-times-circle-o fa-1x"></i>
+            </span>
+        </span>
+        <span class="pull-right">
+            <span class="pull-right fs-13">
+            <label>Open whole week </label>
+            <span ng-show="facility_data.open_whole_week" class="text-success">
+                <i class="fa fa-check-circle-o fa-1x"></i>
+            </span>
+            <span ng-hide="facility_data.open_whole_week" class="text-danger">
+                <i class="fa fa-times-circle-o fa-1x"></i>
+            </span>
+        </span>
+        </span>
+    </h5>
+    <h5>
+        <span>
+           <label>Published: </label>
+            <span ng-show="facility_data.is_published" class="text-success">
+                <i class="fa fa-check-circle-o fa-1x"></i>
+            </span>
+            <span ng-hide="facility_data.is_published" class="text-danger">
+                <i class="fa fa-times-circle-o fa-1x"></i>
+            </span>
+        </span>
+        <span class="pull-right">
+            <span class="pull-right fs-13">
+            <label>Classified: </label>
+            <span ng-show="facility_data.is_classified" class="text-success">
+                <i class="fa fa-check-circle-o fa-1x"></i>
+            </span>
+            <span ng-hide="facility_data.is_classified" class="text-danger">
+                <i class="fa fa-times-circle-o fa-1x"></i>
+            </span>
+        </span>
+        </span>
+    </h5>
+    <h5>
+        <span>
+            <label>Beds: </label>
+            {{facility_data.number_of_beds}}
+        </span>
+        <span class="pull-right">
+            <label>Cots:</label>
+            {{facility_data.number_of_cots}}
+        </span>
+    </h5>
+    <h5 class="margin-b-10">
+        <label>Facility Rating:</label>
+        <span class="text-warning">{{facility_data.average_rating | number : 2}}</span>
+    </h5>
+    <hr>
+    <h5 class="fs-14">
+        <span>{{facility_data.county | titlecase}}  County</span>
+        <span class="pull-right">{{facility_data.constituency | titlecase}} Constituency</span>
+    </h5>
+    <h5>
+        <span>{{facility_data.ward_name | titlecase}} Ward</span>
+        <span class="pull-right">
+            {{facility_data.facility_physical_address.town}} Town
+        </span>
+    </h5>
+    <p>
+        <label>Location Description: </label>
+        {{facility_data.location_desc}}
+    </p>
+</div>
