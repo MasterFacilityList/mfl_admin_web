@@ -2,7 +2,7 @@
     "use strict";
     angular.module("mfl.setup.contacts.controllers",[
     ])
-    .controller("mfl.setup.controller.contacts.list", ["$scope",
+    .controller("mfl.setup.controller.contact_types.list", ["$scope",
         function ($scope) {
             $scope.title = [
                 {
@@ -12,7 +12,7 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='setup.contacts.create'",
+                    func : "ui-sref='setup.contact_types.create'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
                     tipmsg: "Add Contact type",
@@ -21,7 +21,7 @@
             ];
         }]
     )
-    .controller("mfl.setup.controller.contacts.view", ["$scope","$state", "$stateParams",
+    .controller("mfl.setup.controller.contact_types.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
 
@@ -75,7 +75,7 @@
             }
             $scope.createContacts = function(chuApprover){
                 adminApi.contacts.create(chuApprover).success(function(){
-                    $state.go("setup.contacts");
+                    $state.go("setup.contact_types",{},{reload:true});
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
@@ -84,7 +84,7 @@
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.contacts.update(id, changes).success(function(){
-                        $state.go("setup.contacts");
+                        $state.go("setup.contact_types",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
                     });
@@ -92,7 +92,7 @@
             };
             $scope.deleteContacts = function(id){
                 adminApi.contacts.remove(id).success(function(){
-                    $state.go("setup.contacts");
+                    $state.go("setup.contact_types",{},{reload:true});
                 }).error(function(error){
                     $scope.alert = error.error;
                 });

@@ -1,0 +1,53 @@
+<contentheader></contentheader>
+<div ng-if="alert" class="callout callout-danger fade in">
+    <h4>Some Errors On The Form</h4>
+    <p ng-bind-html="alert"></p>
+</div>
+<div class="col-lg-12 margin-t-20">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
+    <form role="form form-horizontal form-bordered" name="chu.contacts.form">
+        <!-- Start of dynamic form -->
+        <div class="col-lg-10 col-md-offset-1 col-md-10 col-md-offset-1 margin-t-10">
+            <div class="group">
+                <input type="text" name="name" ng-model="contacts.name" required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="control-label">
+                    Name
+                </label>
+            </div>
+            <div class="group">
+                <textarea type="text" name ="description" ng-model="contacts.description"></textarea>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Description
+                </label>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 margin-t-10 margin-b-20 text-left">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="active" name="active"     ng-model="contacts.active">
+                    <label for="active">
+                        <span class="check"></span>
+                        <span class="box"></span>
+                         Is Active?
+                     </label>
+                </div>
+            </div>
+        </div>
+        <!-- End of the dynamic form -->
+        <div class="col-md-11 col-md-offset-1 form-group">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 margin-b-20">
+                <span class="pull-left margin-h-5">
+                    <button ng-if="!contacts.id" ng-click="createContacts(contacts)" class="login-btn login-btn-primary">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                    <button ng-if="contacts.id" ng-click="updateContacts(contacts.id, chu.contacts.form)" class="login-btn login-btn-primary">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </span>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
