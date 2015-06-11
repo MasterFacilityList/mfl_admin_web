@@ -36,10 +36,14 @@
                 ];
                 $scope.action = [
                     {
-                        func : "ng-click=deleteChuStatus(chu.id)",
+                        func : ""+
+                        " mfl-delete api='adminApi' api-key='chuStatus'"+
+                        " resource-id='"+$stateParams.id+"' "+
+                        "resource-name='CHU Status'"+
+                        " on-success-url='setup.chu_status'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
-                        tipmsg: "Delete Community Unity Status",
+                        tipmsg: "Delete CHU Status",
                         icon: "fa-trash"
                     },
                     {
@@ -135,10 +139,14 @@
                 ];
                 $scope.action = [
                     {
-                        func : "ng-click='deleteChuApprovers(chuApprovers.id)'",
+                        func : ""+
+                        " mfl-delete api='adminApi' api-key='chuApprovers'"+
+                        " resource-id='"+$stateParams.id+"' "+
+                        "resource-name='CHU Approver'"+
+                        " on-success-url='setup.chu_approvers'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
-                        tipmsg: "Delete Community Unity Status",
+                        tipmsg: "Delete CHU Approver",
                         icon: "fa-trash"
                     },
                     {
