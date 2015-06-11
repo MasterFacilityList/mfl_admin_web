@@ -34,7 +34,7 @@
                 }
             ];
             $scope.spinner = true;
-            adminApi.county_slim.get($stateParams.count_id)
+            adminApi.counties.get($stateParams.count_id)
                 .success(function (data) {
                     $scope.county_details = data;
                     $scope.spinner = false;

@@ -43,7 +43,7 @@
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.county.view");
             $httpBackend.expectGET(
-                SERVER_URL + "api/counties/slim_detail/1/").respond(
+                SERVER_URL + "api/common/counties/1/").respond(
                 200, {"code": 1});
             $httpBackend.expectGET(
                 SERVER_URL + "api/common/constituencies/?county=1").respond(
@@ -53,11 +53,11 @@
                 200, {"email": "owaga@owaga.com"});
             $httpBackend.flush();
         }]));
-        it("should test county detailed view controller: fail",
+        it("should test county detailed view controller: success",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.county.view");
             $httpBackend.expectGET(
-                SERVER_URL + "api/counties/slim_detail/1/").respond(
+                SERVER_URL + "api/common/counties/1/").respond(
                 400, {"code": 1});
             $httpBackend.expectGET(
                 SERVER_URL + "api/common/constituencies/?county=1").respond(
