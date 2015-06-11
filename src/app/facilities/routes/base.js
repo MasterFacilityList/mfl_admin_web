@@ -11,6 +11,9 @@
                 "main": {
                     templateUrl: "facilities/tpls/common/main.tpl.html"
                 },
+                "sidenav@facilities": {
+                    templateUrl: "facilities/tpls/common/sidenav.tpl.html"
+                },
                 "header@facilities": {
                     controller: "mfl.common.controllers.header",
                     templateUrl: "common/tpls/header.tpl.html"
@@ -21,6 +24,25 @@
                 }
             },
             data : { pageTitle: "Facility Management" }
-        });
+        })
+        .state("facilities.facility_type", {
+                url: "/facility_type",
+                views: {
+                    "main-content@facilities" : {
+                        templateUrl : "facilities/tpls/home/facility_type_grid.tpl.html",
+                        controller: "mfl.facilities.controllers.home.facility_type"
+                    }
+                }
+            })
+
+        .state("facilities.facility_status", {
+                url: "/facility_status",
+                views: {
+                    "main-content@facilities" : {
+                        templateUrl : "facilities/tpls/home/facility_status_grid.tpl.html",
+                        controller: "mfl.facilities.controllers.home.facility_status"
+                    }
+                }
+            });
     }]);
 })(angular);
