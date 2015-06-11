@@ -15,6 +15,7 @@
                 facilityJobTitles: api.setBaseUrl("api/facilities/job_titles"),
                 facilityOwnerTypes: api.setBaseUrl("api/facilities/owner_types"),
                 facilityOwners: api.setBaseUrl("api/facilities/owners"),
+                regulatoryBodyContacts: api.setBaseUrl("api/common/contacts/"),
                 facilityRegulatoryBodies: api.setBaseUrl("api/facilities/regulating_bodies"),
                 RegulatoryBodyContacts: api.setBaseUrl("api/facilities/regulating_body_contacts"),
                 chuStatus: api.setBaseUrl("api/chul/statuses/"),

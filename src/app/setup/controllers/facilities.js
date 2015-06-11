@@ -374,7 +374,7 @@
                     icon: "fa-arrow-left"
                 }
             ];
-            adminApi.contacts.list()
+            adminApi.contact_types.list()
                 .success(function (data) {
                     $scope.contact_types = data.results;
                 })
@@ -447,7 +447,7 @@
             $scope.contacts = {
                 items : []
             };
-            adminApi.contacts.list()
+            adminApi.contact_types.list()
                 .success(function (data) {
                     $scope.contact_types = data.results;
                 })

@@ -32,8 +32,7 @@
             }).error(function(error){
                 $scope.alert = error.error;
             });
-            if(!_.isUndefined($stateParams.id) &&
-                $stateParams.id !== "create"){
+            if(!_.isUndefined($stateParams.id)){
                 $scope.title = [
                     {
                         icon: "fa-edit",
@@ -62,7 +61,7 @@
                     $scope.alert = error.error;
                 });
             }
-            else if(_.isUndefined($stateParams.id)) {
+            else {
                 $scope.title = [
                     {
                         icon : "fa-plus-circle",
