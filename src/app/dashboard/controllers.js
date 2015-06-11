@@ -47,19 +47,27 @@
 
                 var facility_chart = function(_dt) {
                     var _list = [];
-
-                    angular.forEach(_dt.status_summary, function (item) {
+                    angular.forEach(_dt.types_summary, function (item) {
                         item.name = $filter("uppercase")(item.name);
                         item.name = item.name.replace(/_/g, " ");
                         var _item = [item.name, item.count];
                         _list[_list.length] = _item;
                     });
-
+                    angular.forEach(_dt.types_summary, function (item) {
+                        var _item = [item.name, item.count];
+                        _list[_list.length] = _item;
+                    });
                     var obj = {
                         bindto: "#chartfacility",
                         data: {
                             columns: _list,
-                            type : "pie"
+                            bar: {
+                                width: 10
+                            },
+                            type : "bar"
+                        },
+                        tooltip: {
+                            grouped: false
                         }
                     };
                     return obj;
