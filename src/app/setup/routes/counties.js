@@ -17,14 +17,30 @@
                 }
             })
             .state("setup.counties.view_consts", {
-                url: "/constituencies/:count_id",
+                url: "/:count_id",
                 views: {
-                    "main-content@setup": {
-                        templateUrl: "setups/tpls/constituencies/constituencies.tpl.html"
+                    "main-content@setup.counties": {
+                        controller: "mfl.setup.controller.county.view",
+                        templateUrl: "setup/tpls/counties/edit_county.tpl.html"
                     }
                 }
             })
-            ;
+            .state("setup.counties.view_consts.constituencies", {
+                url: "/constituencies",
+                views: {
+                    "form-view@setup.counties.view_consts" : {
+                        templateUrl: "setup/tpls/counties/constituencies.tpl.html"
+                    }
+                }
+            })
+            .state("setup.counties.view_consts.users", {
+                url: "/users",
+                views: {
+                    "form-view@setup.counties.view_consts" : {
+                        templateUrl: "setup/tpls/counties/users-list.tpl.html"
+                    }
+                }
+            });
     }]);
 
 })(angular);
