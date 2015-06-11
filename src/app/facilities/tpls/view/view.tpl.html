@@ -1,17 +1,16 @@
 <contentheader></contentheader>
-<div class="col-lg-12">
-    <div class="col-lg-12 margin-l-5 margin-b-20 margin-t-20">
+<div class="content-body">
+    <div class="row-fluid">
         <div class="col-lg-8  content-card">
-            <h2>
-                <span>
-                    {{facility.code}} | {{facility.name}}
-                </span>
-            </h2>
-            <h3>
-                <label></label>
-                <span>{{facility.facility_type_name}}</span>
-            </h3>
-            <h4 class="margini-b-5">
+            <div class="fs-24">
+            {{facility.name}}
+            </div>
+            <h5 class="margin-t-10">
+                <span><strong>Facility Type:</strong> {{facility.facility_type_name}}</span>
+                <span class="pull-right"><strong>Facility Code:</strong> {{facility.code}}</span>
+            </h5>
+            <hr>
+            <h5 class="margin-b-5">
                 <label>Status</label>
                 <span class="label label-warning">
                     {{facility.regulatory_status_name}}
@@ -20,8 +19,8 @@
                     <label>Operational status</label>
                     <span class="label label-primary">{{facility.operation_status_name}}</span>
                 </span>
-            </h4>
-            <h4>
+            </h5>
+            <h5>
                 <span>
                    <label>Open whole day </label>
                     <span ng-show="facility.open_whole_day" class="text-success">
@@ -42,8 +41,8 @@
                     </span>
                 </span>
                 </span>
-            </h4>
-            <h4>
+            </h5>
+            <h5>
                 <span>
                    <label>Published: </label>
                     <span ng-show="facility.is_published" class="text-success">
@@ -64,8 +63,8 @@
                     </span>
                 </span>
                 </span>
-            </h4>
-            <h4>
+            </h5>
+            <h5>
                 <span>
                     <label>Beds: </label>
                     {{facility.number_of_beds}}
@@ -74,12 +73,12 @@
                     <label>Cots:</label>
                     {{facility.number_of_cots}}
                 </span>
-            </h4>
-            <h4 class="margin-b-10">
+            </h5>
+            <h5 class="margin-b-10">
                 <label>Facility Rating:</label>
                 <span class="text-warning">{{facility.average_rating | number : 2}}</span>
-            </h4>
-            <h3 class="fw-700 margin-t-10">Location</h3>
+            </h5>
+            <hr>
             <h4 class="fs-14">
                 <span >{{facility.county}}  COUNTY</span>
                 <span class="pull-right">{{facility.constituency}} CONSTITUENCY</span>
@@ -91,62 +90,45 @@
                 </span>
             </h5>
             <p>
-                <label>Location description: </label>
+                <label>Location Description: </label>
                 {{facility.location_desc}}
             </p>
         </div>
-        <div class="col-lg-3 pull-right ">
+        <div class="col-lg-4 pad-r-0">
             <div class="col-md-12 content-card margin-b-10">
-                <h4 class="fs-18 text-blue fw-700 hidden-xs">
-                    <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-user-secret fa-1x"></i>
-                    Ownership status
+                <h4 class="fs-18 text-blue fw-700">
+                    Ownership Status:
                 </h4>
-                <h5 class="fs-16 text-blue fw-500 visible-xs">
-                    <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-user-secret fa-1x"></i>
-                    Ownership status
-                </h5>
-                <h4 class="fw-500 hidden-xs">
+                <h5 class="fw-500">
                     <span class="pad-t-5">
-                        <h5 class="fs-16 fw-600"><label>Owner: </label> {{facility.owner_name}}</h5>
-                        <h5 class="fs-14 fw-500"><label>Category: </label> {{facility.owner_type_name}}</h5>
-                    </span>
-                </h4>
-                <h4 class="fw-500 visible-xs">
-                    <span class="pad-t-5">
-                        <h5 class="fs-14 fw-600"><label>Owner: </label> {{facility.owner_name}}</h5>
+                        <h5 class="fs-13 fw-500"><label>Owner: </label> {{facility.owner_name}}</h5>
                         <h5 class="fs-13 fw-500"><label>Category: </label> {{facility.owner_type_name}}</h5>
                     </span>
-                </h4>
+                </h5>
             </div>
-            <br><br>
             <div class="col-md-12 content-card">
-                <h4 class="fs-18 text-blue fw-700 hidden-xs">
-                    <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
-                    Contacts
+                <h4 class="fs-18 margin-t--5 text-blue fw-600">
+                    Contacts:
                 </h4>
-                <h4 class="fs-16 margin-t--5 text-blue fw-600 visible-xs">
-                    <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
-                    Contacts
-                </h4>
-                <h4 ng-repeat="cont in facility.facility_contacts" class="fw-500">
+                <h5 ng-repeat="cont in facility.facility_contacts" class="fw-500">
                     <span  class="margin-b-10 fs-14 hidden-xs">
                         <label>
-                            {{cont.contact_type_name}} :
+                            {{cont.contact_type_name | titlecase}} :
                         </label>
                         {{cont.contact}}
                     </span>
                     <span  class="margin-b-10 fs-13 visible-xs">
                         <label>
-                            {{cont.contact_type_name}} :
+                            {{cont.contact_type_name | titlecase}} :
                         </label>
                         {{cont.contact}}
                     </span>
-                </h4>
+                </h5>
             </div>
         </div>
     </div>
-    <div class="col-lg-12 margin-t-10">
-        <div class="col-lg-12 content-card">
+    <div class="col-lg-12 content-card">
+        <div class="">
             <h4>Facility Services</h4>
             <table class="table table-hover fs-14">
                 <thead>
@@ -164,7 +146,6 @@
                     </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

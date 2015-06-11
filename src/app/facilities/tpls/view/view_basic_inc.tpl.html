@@ -1,14 +1,13 @@
-<div class="col-lg-8  content-card">
-    <h2>
-        <span>
-            {{facility_data.code}} | {{facility_data.name}}
-        </span>
-    </h2>
-    <h3>
-        <label></label>
-        <span>{{facility_data.facility_type_name}}</span>
-    </h3>
-    <h4 class="margini-b-5">
+<div class="">
+    <div class="fs-24">
+    {{facility_data.name}}
+    </div>
+    <h5 class="margin-t-10">
+        <span><strong>Facility Type:</strong> {{facility_data.facility_type_name}}</span>
+        <span class="pull-right"><strong>Facility Code:</strong> {{facility_data.code}}</span>
+    </h5>
+    <hr>
+    <h5 class="margini-b-5">
         <label>Status</label>
         <span class="label label-warning">
             {{facility_data.regulatory_status_name}}
@@ -17,8 +16,8 @@
             <label>Operational status</label>
             <span class="label label-primary">{{facility_data.operation_status_name}}</span>
         </span>
-    </h4>
-    <h4>
+    </h5>
+    <h5>
         <span>
            <label>Open whole day </label>
             <span ng-show="facility_data.open_whole_day" class="text-success">
@@ -39,8 +38,8 @@
             </span>
         </span>
         </span>
-    </h4>
-    <h4>
+    </h5>
+    <h5>
         <span>
            <label>Published: </label>
             <span ng-show="facility_data.is_published" class="text-success">
@@ -61,8 +60,8 @@
             </span>
         </span>
         </span>
-    </h4>
-    <h4>
+    </h5>
+    <h5>
         <span>
             <label>Beds: </label>
             {{facility_data.number_of_beds}}
@@ -71,24 +70,24 @@
             <label>Cots:</label>
             {{facility_data.number_of_cots}}
         </span>
-    </h4>
-    <h4 class="margin-b-10">
+    </h5>
+    <h5 class="margin-b-10">
         <label>Facility Rating:</label>
         <span class="text-warning">{{facility_data.average_rating | number : 2}}</span>
-    </h4>
-    <h3 class="fw-700 margin-t-10">Location</h3>
-    <h4 class="fs-14">
-        <span >{{facility_data.county}}  COUNTY</span>
-        <span class="pull-right">{{facility_data.constituency}} CONSTITUENCY</span>
-    </h4>
+    </h5>
+    <hr>
+    <h5 class="fs-14">
+        <span>{{facility_data.county | titlecase}}  County</span>
+        <span class="pull-right">{{facility_data.constituency | titlecase}} Constituency</span>
+    </h5>
     <h5>
-        <span>{{facility_data.ward_name}} WARD</span>
+        <span>{{facility_data.ward_name | titlecase}} Ward</span>
         <span class="pull-right">
             {{facility_data.facility_physical_address.town}} Town
         </span>
     </h5>
     <p>
-        <label>Location description: </label>
+        <label>Location Description: </label>
         {{facility_data.location_desc}}
     </p>
 </div>
