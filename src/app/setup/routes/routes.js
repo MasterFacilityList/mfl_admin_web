@@ -9,6 +9,7 @@
         "mfl.setup.routes.wards",
         "mfl.setup.routes.contacts",
         "mfl.setup.routes.facilities",
-        "mfl.setup.routes.chu"
+        "mfl.setup.routes.chu",
+        "mfl.setup.routes.gis"
     ]);
 })(angular);

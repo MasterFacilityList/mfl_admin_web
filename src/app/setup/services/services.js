@@ -18,8 +18,9 @@
                 facilityRegulatoryBodies: api.setBaseUrl("api/facilities/regulating_bodies"),
                 RegulatoryBodyContacts: api.setBaseUrl("api/facilities/regulating_body_contacts"),
                 chuStatus: api.setBaseUrl("api/chul/statuses/"),
-                chuApprovers: api.setBaseUrl("api/chul/approvers/")
-
+                chuApprovers: api.setBaseUrl("api/chul/approvers/"),
+                geocode_methods: api.setBaseUrl("api/gis/geo_code_methods/"),
+                geocode_sources: api.setBaseUrl("api/gis/geo_code_sources/")
             };
         }];
     }]);
