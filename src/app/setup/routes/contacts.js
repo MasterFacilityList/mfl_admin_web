@@ -4,6 +4,9 @@
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+        
+        /*Contacts*/
+        
         .state("setup.contacts", {
                 url: "/contacts",
                 views: {
@@ -16,12 +19,12 @@
                     }
                 }
             })
-        .state("setup.contacts.view", {
-                url: "/:id",
+        .state("setup.contacts.edit", {
+                url: "/:id/edit",
                 views: {
                     "main-content@setup.contacts": {
-                        controller: "mfl.setup.controller.contacts.view",
-                        templateUrl: "setup/tpls/contacts/contacts-view.tpl.html"
+                        controller: "mfl.setup.controller.contacts.edit",
+                        templateUrl: "setup/tpls/contacts/contacts-edit.tpl.html"
                     }
                 }
             })
@@ -29,8 +32,41 @@
                 url: "/create",
                 views: {
                     "main-content@setup.contacts": {
-                        controller: "mfl.setup.controller.contacts.view",
-                        templateUrl: "setup/tpls/contacts/contacts-view.tpl.html"
+                        controller: "mfl.setup.controller.contacts.edit",
+                        templateUrl: "setup/tpls/contacts/contacts-edit.tpl.html"
+                    }
+                }
+            })
+        
+        /*Contact Types*/
+        
+        .state("setup.contact_types", {
+                url: "/contact-types",
+                views: {
+                    "body@setup" : {
+                        templateUrl: "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.contact_types": {
+                        controller: "mfl.setup.controller.contact_types.list",
+                        templateUrl: "setup/tpls/contacts/contact-types-list.tpl.html"
+                    }
+                }
+            })
+        .state("setup.contact_types.view", {
+                url: "/:id",
+                views: {
+                    "main-content@setup.contact_types": {
+                        controller: "mfl.setup.controller.contact_types.view",
+                        templateUrl: "setup/tpls/contacts/contact-types-view.tpl.html"
+                    }
+                }
+            })
+        .state("setup.contact_types.create", {
+                url: "/create",
+                views: {
+                    "main-content@setup.contact_types": {
+                        controller: "mfl.setup.controller.contact_types.view",
+                        templateUrl: "setup/tpls/contacts/contact-types-view.tpl.html"
                     }
                 }
             });

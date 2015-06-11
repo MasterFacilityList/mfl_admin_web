@@ -8,17 +8,15 @@
     <table class="table table-hover fs-14">
         <thead class="cf">
             <th>#</th>
-            <th sil-grid-sort field='contact'>Contact</th>
-            <th sil-grid-sort field='contact_type'>Contact Type</th>
+            <th sil-grid-sort field='name'>Name</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
-            <tr class="animate-repeat" ng-repeat="contact in contacts">
-                <td data-title="#:" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
-                <td data-title="Contact:" class="pad-t-15">{{contact.contact}}</td>
-                <td data-title="Contact Type:" class="pad-t-15">{{contact.contact_type_name}}</td>
-                <td data-title="Actions:" class="text-right">
-                    <a ui-sref="setup.contacts.edit({id : contact.id})" ui-sref-opts="{reload:true}" class="action-btn action-btn-grid action-btn-primary">
+            <tr class="animate-repeat" ng-repeat="contact_type in contact_types">
+                <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
+                <td data-title="Name" class="pad-t-15">{{contact_type.name}}</td>
+                <td data-title="Actions" class="text-right">
+                    <a ui-sref="setup.contact_types.view({id : contact_type.id})" ui-sref-opts="{reload:true}" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-edit"></i>
                     </a>
                 </td>
