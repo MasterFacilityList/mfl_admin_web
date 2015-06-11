@@ -5,7 +5,6 @@
     ])
     .controller("mfl.setup.controller.county.list", ["$scope",
         function ($scope) {
-            $scope.test = "View administrative area";
             $scope.title = [
                 {
                     icon: "fa-map-marker",

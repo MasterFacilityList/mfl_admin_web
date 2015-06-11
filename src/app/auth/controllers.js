@@ -42,7 +42,6 @@
     .controller("mfl.auth.controllers.login",
         ["$scope", "$sce", "$state", "$stateParams", "mfl.auth.services.login", "HOME_PAGE_NAME",
         function ($scope, $sce, $state, $stateParams, loginService, HOME_PAGE_NAME) {
-            $scope.test = "Login";
             $scope.login_err = "";
             $scope.login_err_html = "";
 

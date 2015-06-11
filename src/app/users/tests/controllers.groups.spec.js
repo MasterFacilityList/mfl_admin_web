@@ -141,5 +141,16 @@
                 expect(log.error).toHaveBeenCalled();
             });
         });
+
+        describe("Test group edit controller", function () {
+        });
+
+        describe("Test group list controller", function () {
+            it("should ");
+        });
+
+        describe("Test group create controller", function () {
+
+        });
     });
 })();

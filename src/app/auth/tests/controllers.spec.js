@@ -37,7 +37,6 @@
         inject(["$state", function ($state) {
             controller("mfl.auth.controllers.login");
             spyOn($state, "go");
-            expect(scope.test).toEqual("Login");
         }]));
 
         it("should call backend and login and save user credentials: success",

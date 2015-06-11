@@ -8,7 +8,6 @@
 
     .controller("mfl.users.controllers.group_list", ["$scope",
         function ($scope) {
-            $scope.test = "Groups";
             $scope.title = [
                 {
                     icon: "fa-users",
