@@ -6,7 +6,8 @@
         "mfl.setup.ward.controllers",
         "mfl.setup.contacts.controllers",
         "mfl.setup.town.controllers",
-        "mfl.setup.chu.controllers"
+        "mfl.setup.chu.controllers",
+        "mfl.setup.gis.controllers"
     ])
     .controller("mfl.setup.controller.dashboard", ["$scope",
         function ($scope) {
