@@ -41,7 +41,11 @@
                 ];
                 $scope.action = [
                     {
-                        func : "ng-click='deleteContacts(contacts.id)'",
+                        func : ""+
+                        " mfl-delete api='adminApi' api-key='contacts'"+
+                        " resource-id='"+$stateParams.id+"' "+
+                        "resource-name='Contact'"+
+                        " on-success-url='setup.contacts'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Contact",
@@ -139,7 +143,11 @@
                 ];
                 $scope.action = [
                     {
-                        func : "ng-click='deleteContacts(contact_types.id)'",
+                        func : ""+
+                        " mfl-delete api='adminApi' api-key='contact_types'"+
+                        " resource-id='"+$stateParams.id+"' "+
+                        "resource-name='Contact'"+
+                        " on-success-url='setup.contact_types'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Contact Type",

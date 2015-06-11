@@ -1,0 +1,38 @@
+<div class="col-lg-12">
+    <div class="col-lg-12 margin-t-20">
+        <input type="text" ng-model="group.name" required />
+    </div>
+
+    <div class="col-lg-12 margin-t-20">
+        <div class="row">
+            <select name="permission" ng-model="new_perm" class="col-lg-10">
+                <option value="">Select Permission</option>
+                <option ng-repeat="perm in permissions" ng-value="perm.id">{{perm.name}}</option>
+            </select>
+            <button ng-disabled="new_perm===''" class="col-lg-2" ng-click="addPerm(new_perm)">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+
+        <div class="row">
+            <h4>Group permissions</h4>
+            <div class="col-lg-3" ng-repeat="perm in group.permissions">
+                <div class="col-lg-10">
+                    <strong>{{perm.name}}</strong>
+                </div>
+
+                <div class="col-lg-1">
+                    <button class="action-btn action-btn-danger action-btn-md" ng-click="removePerm(perm)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <i ng-if="spinner" class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 margin-t-20">
+        <button ng-click="save()">Save</button>
+        <a ui-sref="groups.group_list">Cancel</a>
+    </div>
+</div>

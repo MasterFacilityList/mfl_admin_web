@@ -10,7 +10,6 @@
     ])
     .controller("mfl.setup.controller.dashboard", ["$scope",
         function ($scope) {
-            $scope.test = "Administrative areas";
             $scope.title = [
                 {
                     icon: "fa-map-marker",

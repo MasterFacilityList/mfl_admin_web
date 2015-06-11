@@ -39,8 +39,11 @@
                 ];
                 $scope.action = [
                     {
-                        func : "delete='deleteFacilityOwnerTypes("+
-                            "facilityOwnerTypes.id)'",
+                        func : ""+
+                        " mfl-delete api='adminApi' api-key='facilityOwnerTypes'"+
+                        " resource-id='"+$stateParams.id+"' "+
+                        "resource-name='Facility Owner Type'"+
+                        " on-success-url='setup.facility_owner_types'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Facility Owner Type",
@@ -143,11 +146,15 @@
                 ];
                 $scope.action = [
                     {
-                        func : "ng-click='deleteFacilityOwner(" +
-                            "facilityOwners.id)'",
-                        class : "action-btn action-btn-danger action-btn-md",
+                        func : ""+
+                        " mfl-delete api='adminApi' api-key='facilityOwners'"+
+                        " resource-id='"+$stateParams.id+"' "+
+                        "resource-name='Facility Owner'"+
+                        " on-success-url='setup.facility_owners'",
+                        class: "action-btn action-btn-danger action-btn-md",
+                        color: "blue",
                         tipmsg: "Delete Facility Owner",
-                        icon : "fa-trash"
+                        icon: "fa-trash"
                     },
                     {
                         func : "onclick=window.history.back()",
@@ -267,12 +274,17 @@
                 ];
                 $scope.action = [
                     {
-                        func :  "ng-click='deleteFacilityJobTitle"+
-                                "(facilityJobTitles.id)'",
-                        class : "action-btn action-btn-danger action-btn-md",
-                        tipmsg: "Delete Job Title",
-                        icon :  "fa-trash"
+                        func : ""+
+                        " mfl-delete api='adminApi' api-key='facilityJobTitles'"+
+                        " resource-id='"+$stateParams.id+"' "+
+                        "resource-name='Facility Job Title'"+
+                        " on-success-url='setup.facility_job_titles'",
+                        class: "action-btn action-btn-danger action-btn-md",
+                        color: "blue",
+                        tipmsg: "Delete Facility Job Title",
+                        icon: "fa-trash"
                     },
+
                     {
                         func : "onclick=window.history.back()",
                         class: "action-btn action-btn-primary action-btn-md",
@@ -474,11 +486,15 @@
                 ];
                 $scope.action = [
                     {
-                        func :  "ng-click='deleteFacilityRegulatoryBody("+
-                            "facilityRegulatoryBodies.id)'",
-                        class : "action-btn action-btn-danger action-btn-md",
-                        tipmsg: "Delete Regulatory body",
-                        icon :  "fa-trash"
+                        func : ""+
+                        " mfl-delete api='adminApi' api-key='facilityRegulatoryBodies'"+
+                        " resource-id='"+$stateParams.id+"' "+
+                        "resource-name='Facility Regulatory Body'"+
+                        " on-success-url='setup.facility_regulatory_bodies'",
+                        class: "action-btn action-btn-danger action-btn-md",
+                        color: "blue",
+                        tipmsg: "Delete Facility Regulatory Body",
+                        icon: "fa-trash"
                     },
                     {
                         func : "onclick=window.history.back()",
