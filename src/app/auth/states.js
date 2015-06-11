@@ -51,7 +51,7 @@
                         controller: "mfl.auth.controllers.reset_pwd_confirm",
                         templateUrl: "auth/tpls/reset_pwd_confirm.tpl.html"
                     },
-                    "header@reset_pwd":{
+                    "header@reset_pwd_confirm":{
                         templateUrl: "common/tpls/header-no-login.tpl.html"
                     }
                 },
