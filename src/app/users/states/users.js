@@ -9,7 +9,6 @@
                 url: "/users/",
                 views: {
                     "main": {
-                        controller: "mfl.users.controllers.home",
                         templateUrl: "users/tpls/main.tpl.html"
                     },
                     "header@users": {
