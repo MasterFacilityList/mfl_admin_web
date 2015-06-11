@@ -83,10 +83,12 @@
                     })
                     .error(function (data) {
                         $log.error(data);
+                        $scope.spinner = false;
                     });
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.spinner = false;
                 });
             };
         }

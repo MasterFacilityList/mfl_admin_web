@@ -11,6 +11,7 @@
                 counties: api.setBaseUrl("api/common/counties"),
                 towns: api.setBaseUrl("api/common/towns"),
                 contacts: api.setBaseUrl("api/common/contact_types"),
+                regulatoryBodyContacts: api.setBaseUrl("api/common/contacts/"),
                 facilityJobTitles: api.setBaseUrl("api/facilities/job_titles"),
                 facilityOwnerTypes: api.setBaseUrl("api/facilities/owner_types"),
                 facilityOwners: api.setBaseUrl("api/facilities/owners"),

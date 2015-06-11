@@ -230,19 +230,6 @@
             createController("mfl.setup.controller.facilityOwner.view", dt);
             expect($scope.title).toEqual(test_title);
         });
-        it("should navigate to creating new facilityRegulatoryBody", function () {
-            var dt = {
-                $stateParams : {id: "create"}
-            };
-            var test_title = [
-                {
-                    icon: "fa-plus-circle",
-                    name: "New Regulatory Body"
-                }
-            ];
-            createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
-            expect($scope.title).toEqual(test_title);
-        });
         it("should navigate to creating new facilityJobTitle", function () {
             var dt = {
                 $stateParams : {id: "create"}
@@ -544,15 +531,6 @@
                 var ctrl = createController("mfl.setup.controller.facilityRegulatoryBody.list", {});
                 expect(ctrl).toBeDefined();
             });
-
-        it("should have `mfl.setup.controller.facilityRegulatoryBody.view` defined",
-           function(){
-                var dt = {
-                    $stateParams: {id: 1}
-                };
-                var ctrl = createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
-                expect(ctrl).toBeDefined();
-            });
         it("should view a facilityRegulatoryBody: success",function(){
                 var dt = {
                     $stateParams: {id: 1}
@@ -560,7 +538,7 @@
                 var res = {msg: "ok"};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
-                createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
                 $httpBackend.flush();
                 expect($scope.facilityRegulatoryBodies).toEqual(res);
             });
@@ -572,7 +550,7 @@
                 var res = {error: "error"};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 500, res);
-                createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
@@ -587,10 +565,9 @@
                 200, res);
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
-                createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
                 $scope.deleteFacilityRegulatoryBody(1);
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("setup.facility_regulatory_bodies");
             });
 
         it("should delete facilityRegulatoryBody: error",function(){
@@ -602,7 +579,7 @@
                 200, res);
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 500, res);
-                createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
                 $scope.deleteFacilityRegulatoryBody(1);
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
@@ -620,10 +597,9 @@
                 200, res);
                 $httpBackend.expectPATCH(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
-                createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
                 $scope.updateFacilityRegulatoryBody(1, form);
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("setup.facility_regulatory_bodies");
             });
 
         it("should update facilityRegulatoryBody: fail",function(){
@@ -638,7 +614,7 @@
                 200, res);
                 $httpBackend.expectPATCH(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 500, res);
-                createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
                 $scope.updateFacilityRegulatoryBody(1, form);
                 $httpBackend.flush();
                 expect($state.go).not.toHaveBeenCalledWith("setup.facility_regulatory_bodies");
@@ -656,32 +632,10 @@
                 200, res);
                 $httpBackend.expectPATCH(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 500, res);
-                createController("mfl.setup.controller.facilityRegulatoryBody.view", dt);
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
                 $scope.updateFacilityRegulatoryBody(1, form);
                 expect($httpBackend.flush).toThrow();
                 expect($state.go).not.toHaveBeenCalledWith("setup.facility_regulatory_bodies");
             });
-
-        it("should create facilityRegulatoryBody: success",function(){
-                spyOn($state, "go");
-                $httpBackend.expectPOST(SERVER_URL+"api/facilities/regulating_bodies/").respond(
-                200, {});
-                createController("mfl.setup.controller.facilityRegulatoryBody.view", {});
-                $scope.createFacilityRegulatoryBody({name: "Testing"});
-                $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("setup.facility_regulatory_bodies");
-            });
-
-        it("should create facilityRegulatoryBody: fail",function(){
-                spyOn($state, "go");
-                $httpBackend.expectPOST(SERVER_URL+"api/facilities/regulating_bodies/").respond(
-                500, {error: "error"});
-                createController("mfl.setup.controller.facilityRegulatoryBody.view", {});
-                $scope.createFacilityRegulatoryBody({name: "Testing"});
-                $httpBackend.flush();
-                expect($scope.alert).toEqual("error");
-                expect($state.go).not.toHaveBeenCalledWith("setup.facility_regulatory_bodies");
-            });
-
     });
 })(describe);
