@@ -63,7 +63,7 @@
                             "types_summary": [
                                 {
                                     "count": 119,
-                                    "name": "District Hospital"
+                                    "name": "DISTRICT HOSPITAL"
                                 }
                             ]
                         };
@@ -122,7 +122,7 @@
                             "types_summary": [
                                 {
                                     "count": 119,
-                                    "name": "District Hospital"
+                                    "name": "DISTRICT HOSPITAL"
                                 }
                             ]
                         };
