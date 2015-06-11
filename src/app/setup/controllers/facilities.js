@@ -72,7 +72,7 @@
                         func : "onclick='window.history.back()'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
-                        tipmsg: "Go Bak",
+                        tipmsg: "Go Back",
                         icon: "fa-arrow-left"
                     }
                 ];
@@ -182,7 +182,7 @@
                         func : "onclick='window.history.back()'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
-                        tipmsg: "Go Bak",
+                        tipmsg: "Go Back",
                         icon: "fa-arrow-left"
                     }
                 ];
@@ -299,7 +299,7 @@
                         func : "onclick='window.history.back()'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
-                        tipmsg: "Go Bak",
+                        tipmsg: "Go Back",
                         icon: "fa-arrow-left"
                     }
                 ];
@@ -370,7 +370,7 @@
                     func : "onclick='window.history.back()'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
-                    tipmsg: "Go Bak",
+                    tipmsg: "Go Back",
                     icon: "fa-arrow-left"
                 }
             ];
@@ -404,7 +404,6 @@
                             contact_type : "",
                             contact : ""
                         };
-                        console.log(data);
                         $scope.contacts.items.push(data);
                         $scope.spinner = false;
                     })
@@ -463,7 +462,6 @@
                 .error(function (err) {
                     $scope.alert = err.error;
                 });
-            console.log($stateParams);
 
             if($stateParams.id !== "create") {
                 $scope.regulatory_body = true;
@@ -509,7 +507,7 @@
                         func : "onclick='window.history.back()'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
-                        tipmsg: "Go Bak",
+                        tipmsg: "Go Back",
                         icon: "fa-arrow-left"
                     }
                 ];
@@ -561,7 +559,6 @@
                             contact_type : "",
                             contact : ""
                         };
-                        console.log(data);
                         $scope.contacts.items.push(data);
                         $scope.spinner = false;
                     })
