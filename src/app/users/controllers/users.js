@@ -54,6 +54,28 @@
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
         function ($scope, $stateParams, $log, wrappers) {
+            $scope.title = [
+                {
+                    icon: "fa-edit",
+                    name: "Edit User"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "ui-sref='users.user_delete({user_id: user.id})'",
+                    class: "action-btn action-btn-danger action-btn-md",
+                    color: "blue",
+                    tipmsg: "Delete User",
+                    icon: "fa-trash"
+                },
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
             $scope.user_id = $stateParams.user_id;
 
             wrappers.users.get($scope.user_id)
