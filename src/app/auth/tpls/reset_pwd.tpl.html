@@ -1,7 +1,33 @@
-<div>
-    <h1>Request password reset</h1>
-    <form ng-submit="reset_pwd()" name="frm_reset_pwd">
-        <p>Email address : <input type="email" name="email" ng-model="email" required /> </p>
-        <input type="submit" value="Send request" />
-    </form>
-</div>
+<section class="section">
+    <div ui-view="header"></div>
+    <div>
+
+    </div>
+    <div class="content">
+        <div class="content-header">
+           <div class="action-container content-header-extra">
+                <a tooltip="back" href="/#/login" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
+           </div>
+           <h2 class="content-title">
+               <span class="main-title"><i class="fa fa-lock"></i> Request Password Reset</span>
+           </h2>
+        </div>
+        <div class="content-body">
+           <div class="pad-form">
+                <div class="content-card">
+                   <div class="pad-form">
+                        <form ng-submit="reset_pwd()" name="frm_reset_pwd">
+                            <div class="group">
+                                <input type="email" name="email" ng-model="email" required />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Email Address</label>
+                            </div>
+                            <input type="submit" class="md-btn md-btn-primary" value="Send Request" />
+                        </form>
+                   </div>
+                </div>
+           </div>
+        </div>
+   </div>
+</section>

@@ -36,6 +36,9 @@
                     "main": {
                         controller: "mfl.auth.controllers.reset_pwd",
                         templateUrl: "auth/tpls/reset_pwd.tpl.html"
+                    },
+                    "header@reset_pwd":{
+                        templateUrl: "common/tpls/header-no-login.tpl.html"
                     }
                 },
                 requireUser: false
@@ -47,6 +50,9 @@
                     "main": {
                         controller: "mfl.auth.controllers.reset_pwd_confirm",
                         templateUrl: "auth/tpls/reset_pwd_confirm.tpl.html"
+                    },
+                    "header@reset_pwd_confirm":{
+                        templateUrl: "common/tpls/header-no-login.tpl.html"
                     }
                 },
                 requireUser: false
