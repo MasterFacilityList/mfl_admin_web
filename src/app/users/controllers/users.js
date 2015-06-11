@@ -111,22 +111,27 @@
                 });
 
             $scope.remove = function (obj) {
+                obj.delete_spinner = true;
                 wrappers.user_contacts.remove(obj.id)
                 .success(function () {
                     wrappers.contacts.remove(obj.contact)
                     .success(function () {
                         $scope.contacts = _.without($scope.contacts, obj);
+                        obj.delete_spinner = false;
                     })
                     .error(function (data) {
                         $log.error(data);
+                        obj.delete_spinner = false;
                     });
                 })
                 .error(function (data) {
                     $log.error(data);
+                    obj.delete_spinner = false;
                 });
             };
 
             $scope.add = function () {
+                $scope.spinner = true;
                 wrappers.contacts.create({
                     "contact_type": $scope.contact.contact_type,
                     "contact": $scope.contact.contact
@@ -142,13 +147,16 @@
                             contact_type: "",
                             contact: ""
                         };
+                        $scope.spinner = false;
                     })
                     .error(function (data) {
                         $log.error(data);
+                        $scope.spinner = false;
                     });
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.spinner = false;
                 });
             };
         }

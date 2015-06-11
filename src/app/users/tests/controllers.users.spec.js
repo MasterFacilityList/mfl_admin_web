@@ -781,7 +781,8 @@
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
-                    .respond(200, {results: [{"contact": "123", "id": "456"}]});
+                    .respond(
+                        200, {results: [{"contact": "123","id": "456"}]});
 
                 var data = {
                     "$scope": rootScope.$new(),
@@ -808,7 +809,8 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.contacts).toEqual([{"contact": "123", "id": "456"}]);
+                expect(data.$scope.contacts)
+                .toEqual([{"contact": "123", "id": "456", "delete_spinner" :false}]);
             });
 
             it("should show an error if delete contact failed", function () {
@@ -849,7 +851,8 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.contacts).toEqual([{"contact": "123", "id": "456"}]);
+                expect(data.$scope.contacts)
+                .toEqual([{"contact": "123", "id": "456", "delete_spinner" : false}]);
             });
 
             it("should add a new contact to the user", function () {
