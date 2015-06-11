@@ -143,6 +143,159 @@
         });
 
         describe("Test group edit controller", function () {
+
+            it("should fetch all permissions and the group to view", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(200, {});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, {"results": []});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {group_id: 3}
+                };
+
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.permissions).toEqual([]);
+                expect(data.$scope.group).toEqual({});
+            });
+
+            it("should show error on fail to fetch all permissions or group", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(500, {"error": "e"});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(500, {"error": "e"});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {group_id: 3},
+                    "$log": log
+                };
+                spyOn(log, "error");
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.permissions).toEqual(undefined);
+                expect(data.$scope.group).toEqual(undefined);
+                expect(log.error).toHaveBeenCalled();
+            });
+
+            it("should manipulate group permissions", function () {
+                var perms = {"results": [{"id": 4, "name": "perm"}]};
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(200, {permissions: [], name:"name"});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, perms);
+                spyOn(state, "go");
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {group_id: 3}
+                };
+
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                data.$scope.group.name = "ASD";
+
+                data.$scope.addPerm("4");
+                expect(data.$scope.group.permissions[0]).toEqual(perms.results[0]);
+
+                data.$scope.removePerm(data.$scope.group.permissions[0]);
+                expect(data.$scope.group.permissions).toEqual([]);
+            });
+
+            it("should update a group", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(200, {"name": "ASD", "permissions": []});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, {"results": []});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {group_id: 3}
+                };
+
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(
+                        server_url+"api/users/groups/3/", {"name": "ASD", "permissions": []})
+                    .respond(200);
+
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should show errors on fail to update a group", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(200, {"name": "ASD", "permissions": []});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, {"results": []});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {group_id: 3},
+                    "$log": log
+                };
+                spyOn(log, "error");
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(
+                        server_url+"api/users/groups/3/", {"name": "ASD", "permissions": []})
+                    .respond(500);
+
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(log.error).toHaveBeenCalled();
+            });
         });
 
         describe("Test group list controller", function () {
@@ -293,9 +446,8 @@
 
                 data.$scope.removePerm(data.$scope.group.permissions[0]);
                 expect(data.$scope.group.permissions).toEqual([]);
-
             });
-
         });
+
     });
 })();

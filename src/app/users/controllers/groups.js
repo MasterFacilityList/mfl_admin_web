@@ -83,7 +83,9 @@
                 .success(function (data) {
                     $scope.permissions = data.results;
                 })
-                .error();
+                .error(function (data) {
+                    $log.error(data);
+                });
 
             $scope.addPerm = function (perm_id) {
                 $scope.new_perm = "";
