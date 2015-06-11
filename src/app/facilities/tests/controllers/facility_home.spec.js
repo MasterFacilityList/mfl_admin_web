@@ -35,5 +35,17 @@
                 var ctrl = createController("mfl.facilities.controllers.home.list", {});
                 expect(ctrl).toBeDefined();
             });
+
+        it("should have `mfl.facilities.controllers.home.facility_status` defined",
+           function(){
+                var ctrl = createController("mfl.facilities.controllers.home.facility_status", {});
+                expect(ctrl).toBeDefined();
+            });
+
+        it("should have `mfl.facilities.controllers.home.facility_type` defined",
+           function(){
+                var ctrl = createController("mfl.facilities.controllers.home.facility_type", {});
+                expect(ctrl).toBeDefined();
+            });
     });
 })(describe);

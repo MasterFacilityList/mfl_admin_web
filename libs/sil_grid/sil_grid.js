@@ -35,11 +35,11 @@
         return {
             restrict: "EA",
             scope: {
-                filters:"=",
+                filters:"=?filters",
                 gridFor: "@",
                 data: "@",
-                error: "=",
-                actions: "=",
+                error: "=?error",
+                actions: "=?actions",
                 apiKey: "@",
                 showLoader: "@"
             },
