@@ -25,50 +25,85 @@
 
         describe("Test geocode method list controller", function () {
             it("should load", function () {
-                ctrl("geocode_methods_list");
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                ctrl("geocode_methods_list", data);
             });
         });
 
         describe("Test geocode method create controller", function () {
             it("should load", function () {
-                ctrl("geocode_methods_create");
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+
+                ctrl("geocode_methods_create", data);
             });
         });
 
         describe("Test geocode method edit controller", function () {
             it("should load", function () {
-                ctrl("geocode_methods_edit");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {}
+                };
+
+                ctrl("geocode_methods_edit", data);
             });
         });
 
         describe("Test geocode method delete controller", function () {
             it("should load", function () {
-                ctrl("geocode_methods_delete");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {}
+                };
+
+                ctrl("geocode_methods_delete", data);
             });
         });
 
 
         describe("Test geocode sources list controller", function () {
             it("should load", function () {
-                ctrl("geocode_sources_list");
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+
+                ctrl("geocode_sources_list", data);
             });
         });
 
         describe("Test geocode sources create controller", function () {
             it("should load", function () {
-                ctrl("geocode_sources_create");
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+
+                ctrl("geocode_sources_create", data);
             });
         });
 
         describe("Test geocode sources edit controller", function () {
             it("should load", function () {
-                ctrl("geocode_sources_edit");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {}
+                };
+
+                ctrl("geocode_sources_edit", data);
             });
         });
 
         describe("Test geocode sources delete controller", function () {
             it("should load", function () {
-                ctrl("geocode_sources_delete");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {}
+                };
+
+                ctrl("geocode_sources_delete", data);
             });
         });
 
