@@ -35,7 +35,11 @@
                 ];
                 $scope.action = [
                     {
-                        func : "ng-click='deleteContacts(contacts.id)'",
+                        func : ""+
+                        " mfl-delete api='adminApi' api-key='contacts'"+
+                        " resource-id='"+$stateParams.id+"' "+
+                        "resource-name='Contact'"+
+                        " on-success-url='setup.contacts'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Contact Type",

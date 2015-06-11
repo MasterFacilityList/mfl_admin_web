@@ -1,0 +1,19 @@
+<section class="section">
+    <div ui-view="header"></div>
+    <div class="content-body">
+        <form name="category_frm">
+                <div class="pad-form">
+                   <div class="content-card pad-15">
+                        <p>Are you sure you want to delete <strong>{{resourceName}}</strong>?</p>
+                        <div class="margin-t-50">
+                                <a class="md-btn md-btn-primary" ng-click="cancel()">No</a>
+                                <button class="md-btn md-btn-danger" ng-click="remove()">Yes</button>
+                        </div>
+                   </div>
+                </div>
+        </form>
+    </div>
+</section>
+
+
+
