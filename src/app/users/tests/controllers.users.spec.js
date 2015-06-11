@@ -1049,7 +1049,14 @@
                     "$log": log
                 };
                 data.$scope.user_id = 3;
-                var user_counties = {"results": [{"id": 4}]};
+                var user_counties = {
+                    "results": [
+                        {
+                            "id": 4,
+                            "delete_spinner": false
+                        }
+                    ]
+                };
 
                 httpBackend
                     .expectGET(server_url+"api/common/counties/?page_size=50&ordering=name")
