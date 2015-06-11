@@ -28,21 +28,30 @@
 
     <div class="col-lg-12 margin-t-20">
         <h4> Current Groups</h4>
-
-        <div class="row">
-            <div class="col-lg-3" ng-repeat="group in user.groups">
-                <div class="col-lg-10">
-                    <strong>{{group.name}}</strong>
-                    <p> {{group.permissions.length}} permissions</p>
-                </div>
-
-                <div class="col-lg-2">
-                    <button class="action-btn action-btn-danger action-btn-md" ng-click="remove(group)">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                    <i ng-if="spinner" class="fa fa-spin fa-circle-o-notch fa-2x"></i>
-                </div>
-            </div>
-        </div>
+        <table class="table content-card">
+            <tbody>
+                <tr ng-repeat="group in user.groups">
+                    <td class="pad-t-15 fs-18 fw-700">
+                        {{group.name}}
+                    </td>
+                    <td class="pad-t-15 fs-16 fw-500">
+                        {{group.permissions.length}} permissions
+                    </td>
+                    <td class="text-right">
+                        <span ng-if="group.delete_spinner">
+                            <i class="fa fa-spin fa-circle-o-notch"></i>
+                        </span>
+                        <button class="action-btn action-btn-danger action-btn-grid" ng-click="remove(group)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="spinner">
+                        <td colspan="3" class="text-center">
+                            <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
     </div>
 </div>

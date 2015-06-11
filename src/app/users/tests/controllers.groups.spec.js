@@ -1,149 +1,453 @@
 (function () {
     "use strict";
 
-    describe("Test groups controllers :", function () {
-        var controller, data, root, scope, SERVER_URL, httpBackend, state;
+    describe("Test groups controllers: ", function () {
+        var server_url, httpBackend, rootScope, ctrl, log, state;
 
         beforeEach(function () {
-            module("mflAdminAppConfig");
-            module("mfl.users.services");
-            module("sil.api.wrapper");
             module("mfl.users.controllers.groups");
             module("ui.router");
+            module("mflAdminAppConfig");
 
-            inject(["$rootScope", "$controller", "$httpBackend", "$state", "SERVER_URL",
-                function ($rootScope, $controller, $httpBackend, $state, url) {
-                    root = $rootScope;
-                    scope = root.$new();
-                    state = $state;
+            inject(["$controller", "$log", "$httpBackend", "$rootScope", "SERVER_URL", "$state",
+                function ($controller, $log, $httpBackend, $rootScope, SERVER_URL, $state) {
                     httpBackend = $httpBackend;
-                    SERVER_URL = url;
-                    scope.fakeStateParams = {
-                        user_id : 5
-                    };
-                    data = {
-                        $scope : scope,
-                        $state : $state,
-                        SERVER_URL : url,
-                        $stateParams : scope.fakeStateParams
-                    };
-                    controller = function (cntrl) {
-                        return $controller(cntrl, data);
+                    rootScope = $rootScope;
+                    log = $log;
+                    server_url = SERVER_URL;
+                    state = $state;
+                    ctrl = function (name, data) {
+                        return $controller("mfl.users.controllers."+name, data);
                     };
                 }
             ]);
         });
-        it("should test groups controller", function () {
-            controller("mfl.users.controllers.group_list");
-            expect(scope.test).toEqual("Groups");
-        });
-        it("should test the new_role controller", function () {
-            controller("mfl.users.controllers.group_create");
-            expect(scope.test).toEqual("New group");
-        });
-        //test not getting list of permissions
-        it("should test listing all permissions: success", inject(["$httpBackend",
-            function ($httpBackend) {
-                controller("mfl.users.controllers.group_create");
-                var data = "";
-                $httpBackend.expectGET(
-                    SERVER_URL + "api/users/permissions/?page_size=1500").respond(200, data);
-                $httpBackend.flush();
-            }
-        ]));
-        it("should test listing all permissions: fail", inject(["$httpBackend",
-            function ($httpBackend) {
-                controller("mfl.users.controllers.group_create");
-                var data = "";
-                $httpBackend.expectGET(
-                    SERVER_URL + "api/users/permissions/?page_size=1500").respond(400, data);
-            }
-        ]));
-        it("should test clicked Role", function () {
-            controller("mfl.users.controllers.group_create");
-            var item = {selected : false};
-            scope.clickedPermission(item);
-            expect(item.selected).toBeTruthy();
-        });
-        it("should test clicked Role", function () {
-            controller("mfl.users.controllers.group_create");
-            var item = {set_selected : false};
-            scope.setPermission(item);
-            expect(item.set_selected).toBeTruthy();
-        });
-        it("should test add groups : setting groups", function () {
-            controller("mfl.users.controllers.group_create");
-            var permission = {
-                name : "",
-                code_name: "",
-                selected : true,
-                set_selected : false
-            };
-            scope.permissions = [
-                {
-                    name : "",
-                    code_name: "",
-                    selected : true
-                }
-            ];
-            scope.set_permissions = [];
-            scope.addPermissions();
-            expect(scope.set_permissions).toContain(permission);
-        });
-        it("should test add groups : reverting groups", function () {
-            controller("mfl.users.controllers.group_create");
-            var permissions = {
-                name : "",
-                code_name: "",
-                selected : false,
-                set_selected : true
-            };
-            scope.set_permissions = [
-                {
-                    name : "",
-                    code_name: "",
-                    set_selected : true
-                }
-            ];
-            scope.permissions = [];
-            scope.revertPermissions();
-            expect(scope.permissions).toContain(permissions);
-        });
-        it("should test add user role function ", inject(["$httpBackend", "$state",
-            function ($httpBackend, $state) {
-                controller("mfl.users.controllers.group_create");
-                spyOn($state, "go");
-                scope.set_permissions = [
-                    {
-                        name : "",
-                        permissions: "",
-                        selected : false,
-                        set_selected : true
-                    }
-                ];
-                var new_role = {
-                    name: "Group admin",
-                    permissions: [
-                        {id: "", name : "", code_name : ""}
-                    ]
+
+        describe("Test group delete controller", function () {
+
+            it("should fetch group data", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        group_id: 1
+                    },
+                    "$scope": scope
                 };
-                scope.addRole(new_role);
-                $httpBackend.expectPOST(
-                    SERVER_URL + "api/users/groups/").respond(
-                    200,{});
-                $httpBackend.flush();
-            }
-        ]));
-        it("should test add role call : fail", inject(["$httpBackend", "$state",
-            function($httpBackend, $state) {
-                controller("mfl.users.controllers.group_create");
-                spyOn($state, "go");
-                scope.addRole({name: ""});
-                $httpBackend.expectPOST(
-                    SERVER_URL + "api/users/groups/").respond(
-                    400,{});
-                $httpBackend.flush();
-            }
-        ]));
+                httpBackend
+                    .expectGET(server_url + "api/users/groups/1/")
+                    .respond(200, {});
+
+                ctrl("group_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.group).toEqual({});
+            });
+
+            it("should show error on fetch failure", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        group_id: 1
+                    },
+                    "$scope": scope,
+                    "$log": log
+                };
+                httpBackend
+                    .expectGET(server_url + "api/users/groups/1/")
+                    .respond(500, {"error": "a"});
+
+                spyOn(log, "error");
+                ctrl("group_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.group).toBe(undefined);
+            });
+
+            it("should delete a group", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        group_id: 1
+                    },
+                    "$state": state,
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/users/groups/1/")
+                    .respond(200, {});
+
+                spyOn(state, "go");
+                ctrl("group_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/users/groups/1/")
+                    .respond(204, {});
+                scope.remove();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+
+            it("should show error on delete group failure", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$stateParams": {
+                        group_id: 1
+                    },
+                    "$state": state,
+                    "$scope": scope,
+                    "$log": log
+                };
+                httpBackend
+                    .expectGET(server_url + "api/users/groups/1/")
+                    .respond(200, {});
+
+                spyOn(state, "go");
+                spyOn(log, "error");
+                ctrl("group_delete", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/users/groups/1/")
+                    .respond(404, {});
+
+                scope.remove();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).not.toHaveBeenCalled();
+                expect(log.error).toHaveBeenCalled();
+            });
+        });
+
+        describe("Test group edit controller", function () {
+
+            it("should fetch all permissions and the group to view", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(200, {});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, {"results": []});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {group_id: 3}
+                };
+
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.permissions).toEqual([]);
+                expect(data.$scope.group).toEqual({});
+            });
+
+            it("should show error on fail to fetch all permissions or group", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(500, {"error": "e"});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(500, {"error": "e"});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {group_id: 3},
+                    "$log": log
+                };
+                spyOn(log, "error");
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.permissions).toEqual(undefined);
+                expect(data.$scope.group).toEqual(undefined);
+                expect(log.error).toHaveBeenCalled();
+            });
+
+            it("should manipulate group permissions", function () {
+                var perms = {"results": [{"id": 4, "name": "perm"}]};
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(200, {permissions: [], name:"name"});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, perms);
+                spyOn(state, "go");
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {group_id: 3}
+                };
+
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                data.$scope.group.name = "ASD";
+
+                data.$scope.addPerm("4");
+                expect(data.$scope.group.permissions[0]).toEqual(perms.results[0]);
+
+                data.$scope.removePerm(data.$scope.group.permissions[0]);
+                expect(data.$scope.group.permissions).toEqual([]);
+            });
+
+            it("should update a group", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(200, {"name": "ASD", "permissions": []});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, {"results": []});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {group_id: 3}
+                };
+
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(
+                        server_url+"api/users/groups/3/", {"name": "ASD", "permissions": []})
+                    .respond(200);
+
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should show errors on fail to update a group", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/3/")
+                    .respond(200, {"name": "ASD", "permissions": []});
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, {"results": []});
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {group_id: 3},
+                    "$log": log
+                };
+                spyOn(log, "error");
+                ctrl("group_edit", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(
+                        server_url+"api/users/groups/3/", {"name": "ASD", "permissions": []})
+                    .respond(500);
+
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(log.error).toHaveBeenCalled();
+            });
+        });
+
+        describe("Test group list controller", function () {
+
+            it("should list groups", function () {
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                ctrl("group_list", data);
+
+            });
+        });
+
+        describe("Test group create controller", function () {
+
+            it("should fetch all permissions", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, {"results": []});
+
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+
+                ctrl("group_create", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.permissions).toEqual([]);
+            });
+
+            it("should show error on fail to fetch all permissions", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(500);
+
+                spyOn(log, "error");
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+
+                ctrl("group_create", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.permissions).toEqual(undefined);
+                expect(log.error).toHaveBeenCalled();
+            });
+
+            it("should create a new group", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, {"results": [{"id": 4, "name": "perm"}]});
+                spyOn(state, "go");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state
+                };
+
+                ctrl("group_create", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                var payload = {"name": "ASD", "permissions": [{"id": 4, "name": "perm"}]};
+                httpBackend
+                    .expectPOST(server_url+"api/users/groups/", payload)
+                    .respond(201, {"id": 4});
+
+                data.$scope.group.name = "ASD";
+
+                data.$scope.addPerm("4");
+                expect(data.$scope.group.permissions[0]).toEqual(payload.permissions[0]);
+
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+
+            it("should show errors on fail to create a new group", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, {"results": [{"id": 4, "name": "perm"}]});
+                spyOn(state, "go");
+                spyOn(log, "error");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$log": log
+                };
+
+                ctrl("group_create", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                httpBackend
+                    .expectPOST(server_url+"api/users/groups/",
+                        {"name": "ASD", "permissions": [{"id": 4, "name": "perm"}]})
+                    .respond(400, {"id": 4});
+                data.$scope.group.name = "ASD";
+                data.$scope.addPerm("4");
+                expect(data.$scope.group.permissions[0]).toEqual({"id": 4, "name": "perm"});
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(state.go).not.toHaveBeenCalled();
+                expect(log.error).toHaveBeenCalled();
+            });
+
+            it("should manipulate group permissions", function () {
+                var perms = {"results": [{"id": 4, "name": "perm"}]};
+
+                httpBackend
+                    .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
+                    .respond(200, perms);
+                spyOn(state, "go");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state
+                };
+
+                ctrl("group_create", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                data.$scope.group.name = "ASD";
+
+                data.$scope.addPerm("4");
+                expect(data.$scope.group.permissions[0]).toEqual(perms.results[0]);
+
+                data.$scope.removePerm(data.$scope.group.permissions[0]);
+                expect(data.$scope.group.permissions).toEqual([]);
+            });
+        });
+
     });
 })();

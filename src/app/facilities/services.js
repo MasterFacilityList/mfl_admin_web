@@ -28,6 +28,8 @@
         this.facility_upgrade = api.setBaseUrl("api/facilities/facility_upgrade/");
         this.facility_approval = api.setBaseUrl("api/facilities/facilitiy_approvals/");
         this.facility_operation_status = api.setBaseUrl("api/facilities/facility_operation_state/");
+        this.facility_type = api.setBaseUrl("api/facilities/facility_types/");
+        this.facility_status = api.setBaseUrl("api/facilities/facility_status/");
         this.utils = function(){
             return {
                 cleanFormData : function(data){

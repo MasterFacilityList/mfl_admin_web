@@ -1,1 +1,36 @@
 <contentheader></contentheader>
+<div class="col-md-12">
+    <div ng-if="spinner" class="colmd-12 margin-t-30 content-card text-center">
+        <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
+    </div>
+    <h2 ng-if="!spinner" class="fw-500 margin-t-20 margin-b-30">
+        {{county_details.code}} | {{county_details.name}} COUNTY
+    </h2>
+    <div ng-if="!spinner" class="col-md-12 content-card">
+    <div  class="col-md-12 margin-t-20 margin-b-20 ">
+        <!-- Start of tabbed multi step form  -->
+        <div class="container-fluid">
+            <ul class="form-tab margin-t--27">
+                <li ui-sref-active="active" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <a ui-sref=".constituencies">
+                        <span class="fw-900">
+                            Constituencies
+                        </span>
+                    </a>
+                </li>
+                <li ui-sref-active="active" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <a ui-sref=".users">
+                        <span class="fw-900 ">
+                            County Users
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content margin-t-20">
+                <div class="" ui-view="form-view"></div>
+            </div><!-- /tab-content -->
+        </div>
+        <!-- end of tabbed multistep form -->
+    </div>
+    </div>
+</div>

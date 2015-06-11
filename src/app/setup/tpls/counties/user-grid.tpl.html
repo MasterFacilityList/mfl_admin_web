@@ -1,0 +1,25 @@
+<div class="pull-left col-sm-4 col-xs-6 margin-t-20">
+    <sil-grid-search> </sil-grid-search>
+</div>
+<div class="pull-right col-xs-2 margin-t-20">
+    <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
+</div>
+<table class="table table-hover fs-14">
+    <thead>
+        <th class="fs-16" colspan="2">User</th>
+        <th class="fs-16">Email</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in county_users">
+            <td class="col-md-1 col-sm-1">
+                <i class="fa fa-user fa-2x"></i>
+            </td>
+            <td class="pad-t-15">
+                {{user.user_full_name}}
+            </td>
+            <td class="pad-t-15">
+                {{user.user_email}}
+            </td>
+        </tr>
+    </tbody>
+</table>
