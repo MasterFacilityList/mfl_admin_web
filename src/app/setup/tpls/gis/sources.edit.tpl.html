@@ -1,4 +1,10 @@
 <contentheader></contentheader>
 <div>
-
+    <form ng-submit="save()">
+        <input type="text" ng-model="geocode_source.name" required name="name" placeholder="Name"/>
+        <input type="text" ng-model="geocode_source.abbreviation" name="abbreviation" placeholder="Abbreviation"/>
+        <textarea type="text" ng-model="geocode_source.description" required name="description" placeholder="Description"></textarea>
+        <input type="submit" value="Save" />
+        <a ui-sref="setup.geocode_sources_list">Cancel</a>
+    </form>
 </div>

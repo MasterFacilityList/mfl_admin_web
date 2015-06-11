@@ -15,7 +15,7 @@
             <tr class="animate-repeat" ng-repeat="gm in geocode_methods">
                 <td data-title="Name" class="pad-t-15">{{gm.name}}</td>
                 <td data-title="Description" class="pad-t-15">{{gm.description}}</td>
-                <td><a ui-sref="setup.geocode_methods_edit({method_id:gm.id})">Edit</a></td>
+                <td><a ui-sref="setup.geocode_methods_edit({geocode_method_id:gm.id})">Edit</a></td>
             </tr>
         </tbody>
     </table>
