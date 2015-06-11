@@ -3,28 +3,62 @@
     <div class="col-lg-12 margin-t-20">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
             <form ng-submit="add()">
-                <select name="contact_type" ng-model="contact.contact_type" required>
-                    <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
-                </select>
-                <input type="text" name="contact" ng-model="contact.contact" required />
-                <input type="submit" value="Add" />
+                <table class="table content-card margin-b-10">
+                    <tr>
+                        <td class="pad-t-15">
+                            <div class="group">
+                                <select name="contact_type" ng-model="contact.contact_type" required>
+                                    <option value="">Select Contact Type</option>
+                                    <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
+                                </select>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </td>
+                        <td class="pad-t-15">
+                            <div class="group">
+                                <input type="text" name="contact" ng-model="contact.contact" required />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>
+                                    Contact Details
+                                </label>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <button type="submit" class="action-btn action-btn-primary action-btn-primary action-btn-md margin-t-10" tooltip="Add contact" >
+                            <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
             </form>
         </div>
 
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Contact</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-t-20">
+        <h4 class="fw-500">Current Contacts</h4>
+            <table class="table content-card">
                 <tbody>
                     <tr ng-repeat="contact in contacts">
-                        <td>{{contact.contact_type_text}}</td>
-                        <td>{{contact.contact_text}}</td>
-                        <td><button ng-click="remove(contact)">Delete</button></td>
+                        <td class="pad-t-15 fs-16 fw-500">
+                            {{contact.contact_type_text}}
+                        </td>
+                        <td class="pad-t-15 fs-16 fw-500">
+                            {{contact.contact_text}}
+                        </td>
+                        <td class="text-right">
+                            <span ng-if="contact.delete_spinner">
+                                <i class="fa fa-spin fa-circle-o-notch"></i>
+                            </span>
+                            <button class="action-btn action-btn-danger action-btn-grid" ng-click="remove(contact)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr ng-if="spinner">
+                        <td colspan="3" class="text-center">
+                            <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                        </td>
                     </tr>
                 </tbody>
             </table>
