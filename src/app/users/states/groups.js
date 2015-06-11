@@ -9,7 +9,6 @@
                 url: "/groups/",
                 views: {
                     "main": {
-                        controller: "mfl.users.controllers.group_list",
                         templateUrl: "users/tpls/main.tpl.html"
                     },
                     "header@groups": {
@@ -20,7 +19,7 @@
                         templateUrl: "users/tpls/side_nav.tpl.html"
                     },
                     "main-content@groups": {
-                        controller: "mfl.users.controllers.users",
+                        controller: "mfl.users.controllers.group_list",
                         templateUrl: "users/tpls/groups.list.tpl.html"
                     }
                 },
@@ -42,7 +41,7 @@
                 views: {
                     "main-content@groups": {
                         controller: "mfl.users.controllers.group_create",
-                        templateUrl: "users/tpls/groups.create.tpl.html"
+                        templateUrl: "users/tpls/groups.edit.tpl.html"
                     }
                 }
             })
@@ -51,8 +50,8 @@
                 url: "edit/:group_id/",
                 views: {
                     "main-content@groups": {
-                        controller: "mfl.users.controllers.role",
-                        templateUrl: "users/tpls/groups.create.tpl.html"
+                        controller: "mfl.users.controllers.group_edit",
+                        templateUrl: "users/tpls/groups.edit.tpl.html"
                     }
                 }
             })

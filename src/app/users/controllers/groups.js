@@ -8,7 +8,6 @@
 
     .controller("mfl.users.controllers.group_list", ["$scope",
         function ($scope) {
-            $scope.test = "Groups";
             $scope.title = [
                 {
                     icon: "fa-users",
@@ -29,90 +28,109 @@
     ])
 
     .controller("mfl.users.controllers.group_create",
-        ["$scope", "mfl.users.services.wrappers", "$state",
-        function ($scope, wrappers, $state) {
-            $scope.test = "New group";
-            $scope.permissions = "";
-            $scope.title = [
-                {
-                    icon: "fa-plus-circle",
-                    name: "New Role"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "onclick=window.history.back()",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go back",
-                    icon: "fa-arrow-left"
-                }
-            ];
-            $scope.set_permissions = [];
-            $scope.is_set = false;
-            $scope.all_permissions = {
-                page_size : 1500
-            };
-            wrappers.permissions.filter($scope.all_permissions)
+        ["$scope", "$log", "$state", "mfl.users.services.wrappers",
+        function ($scope, $log, $state, wrappers) {
+            wrappers.permissions.filter({page_size: 500, ordering: "name"})
                 .success(function (data) {
                     $scope.permissions = data.results;
                 })
-                .error(function (e) {
-                    console.log(e);
+                .error(function (data) {
+                    $log.error(data);
                 });
-            //setting params to change classes on click
-            $scope.clickedPermission = function(item){
-                item.selected = !item.selected;
-                // other oeprations
-            };
-            $scope.setPermission = function(set_item){
-                set_item.set_selected = !set_item.set_selected;
-                // other oeprations
-            };
-            //end of setting up ng-click classes
-            //adding permissions to the role
-            $scope.addPermissions = function () {
-                var selected_perms = _.where(
-                    $scope.permissions, {"selected": true}
-                );
-                _.each(selected_perms, function (a_perm) {
-                    a_perm.set_selected = false;
-                    $scope.set_permissions.push(a_perm);
-                    $scope.is_set = true;
-                    $scope.permissions = _.without($scope.permissions, a_perm);
-                });
-            };
-            //end of adding permissions to a role
-            //reverting permissions to the role
-            $scope.revertPermissions = function () {
-                var reverted_perms = _.where(
-                    $scope.set_permissions, {"set_selected": true}
-                );
-                _.each(reverted_perms, function (a_set_perm) {
-                    a_set_perm.selected = false;
-                    $scope.permissions.push(a_set_perm);
-                    $scope.set_permissions = _.without($scope.set_permissions, a_set_perm);
-                });
-            };
-            //end of reverting permissions to a role
 
-            //adding new permission
-            $scope.addRole = function (new_role) {
-                _.each($scope.set_permissions, function (permission) {
-                    delete permission.selected;
-                    delete permission.set_selected;
-                    delete permission.content_type;
+            $scope.group = {
+                name: "",
+                permissions: []
+            };
+
+            $scope.addPerm = function (perm_id) {
+                $scope.new_perm = "";
+                var perm = _.findWhere($scope.permissions, {id: parseInt(perm_id, 10)});
+                $scope.group.permissions.push(perm);
+            };
+
+            $scope.removePerm = function (perm) {
+                $scope.group.permissions = _.without($scope.group.permissions, perm);
+            };
+
+            $scope.save = function () {
+                wrappers.groups.create($scope.group)
+                .success(function (data) {
+                    $state.go("groups.group_edit", {"group_id": data.id});
+                })
+                .error(function (data) {
+                    $log.error(data);
                 });
-                new_role.permissions = $scope.set_permissions;
-                wrappers.groups.create(new_role)
+            };
+
+        }]
+    )
+
+    .controller("mfl.users.controllers.group_edit",
+        ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
+        function ($scope, $log, $state, $stateParams, wrappers) {
+            $scope.group_id = $stateParams.group_id;
+
+            wrappers.groups.get($scope.group_id)
+                .success(function (data) {
+                    $scope.group = data;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            wrappers.permissions.filter({page_size: 500, ordering: "name"})
+                .success(function (data) {
+                    $scope.permissions = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            $scope.addPerm = function (perm_id) {
+                $scope.new_perm = "";
+                var perm = _.findWhere($scope.permissions, {id: parseInt(perm_id, 10)});
+                $scope.group.permissions.push(perm);
+            };
+
+            $scope.removePerm = function (perm) {
+                $scope.group.permissions = _.without($scope.group.permissions, perm);
+            };
+
+            $scope.save = function () {
+                wrappers.groups.update($scope.group_id, $scope.group)
+                .success(function () {
+                    $state.go("groups.group_list");
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }]
+    )
+
+    .controller("mfl.users.controllers.group_delete",
+        ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
+        function ($scope, $log, $state, $stateParams, wrappers) {
+            $scope.group_id = $stateParams.group_id;
+
+            wrappers.groups.get($scope.group_id)
+                .success(function (data) {
+                    $scope.group = data;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
+            $scope.remove = function () {
+                wrappers.groups.remove($scope.group_id)
                     .success(function () {
-                        $state.go("users.manage_roles");
+                        $state.go("groups.group_list");
                     })
-                    .error(function (e) {
-                        console.log(e);
+                    .error(function (data) {
+                        $log.error(data);
                     });
             };
-            //end of adding new permission
         }]
     );
 
