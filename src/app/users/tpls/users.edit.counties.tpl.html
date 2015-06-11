@@ -28,20 +28,27 @@
 
     <div class="col-lg-12 margin-t-20">
         <h4> Current County</h4>
-
-        <div class="row">
-            <div class="col-lg-3" ng-repeat="uc in user_counties">
-                <div class="col-lg-10">
-                    <strong>{{uc.county_name}}</strong>
-                </div>
-
-                <div class="col-lg-2">
-                    <button class="action-btn action-btn-danger action-btn-md" ng-click="remove(uc)">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                    <i ng-if="spinner" class="fa fa-spin fa-circle-o-notch fa-2x"></i>
-                </div>
-            </div>
-        </div>
+        <table class="table content-card">
+            <tbody>
+                <tr ng-repeat="uc in user_counties">
+                    <td class="pad-t-15 fs-18 fw-600 text-left">
+                        {{uc.county_name}}
+                    </td>
+                    <td class="text-right">
+                        <span ng-if="uc.delete_spinner">
+                            <i class="fa fa-spin fa-circle-o-notch"></i>
+                        </span>
+                        <button class="action-btn action-btn-danger action-btn-grid" ng-click="remove(uc)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="spinner">
+                    <td colspan="3" class="text-center">
+                        <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

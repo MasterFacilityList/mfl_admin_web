@@ -174,6 +174,7 @@
             $scope.new_grp = "";
 
             var updateGroups = function (new_grps) {
+                $scope.spinner = true;
                 var grps = _.map(new_grps, function (grp) {
                     return {"id": grp.id, "name": grp.name};
                 });
@@ -182,9 +183,11 @@
                 .success(function (data) {
                     $scope.user = data;
                     $scope.new_grp = "";
+                    $scope.spinner = false;
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.spinner = false;
                 });
             };
 
@@ -221,6 +224,7 @@
             $scope.new_county = "";
 
             $scope.add = function (county_id) {
+                $scope.spinner = true;
                 var payload = {
                     "user": $scope.user_id,
                     "county": county_id
@@ -228,18 +232,23 @@
                 wrappers.user_counties.create(payload)
                 .success(function (data) {
                     $scope.user_counties.push(data);
+                    $scope.spinner = false;
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.spinner = false;
                 });
             };
             $scope.remove = function (user_county) {
+                user_county.delete_spinner = true;
                 wrappers.user_counties.remove(user_county.id)
                 .success(function () {
                     $scope.user_counties = _.without($scope.user_counties, user_county);
+                    user_county.delete_spinner = false;
                 })
                 .error(function (data) {
                     $log.error(data);
+                    user_county.delete_spinner = false;
                 });
             };
         }]
