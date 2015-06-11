@@ -13,6 +13,52 @@
                 }
             ];
         }]
-    );
+    )
+    .controller("mfl.setup.controller.county.view", ["$scope", "$stateParams",
+        "adminApi",
+        function ($scope, $stateParams, adminApi) {
+            $scope.test = "View county";
+            $scope.title = [
+                {
+                    icon : "fa-eye",
+                    name : "View County"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
+            $scope.spinner = true;
+            adminApi.county_slim.get($stateParams.count_id)
+                .success(function (data) {
+                    $scope.county_details = data;
+                    $scope.spinner = false;
+                })
+                .error(function (err) {
+                    $scope.alert = err.error;
+                });
+             //getting counties of particular county
+            adminApi.constituencies.filter({"county" : $stateParams.count_id})
+                .success(function (data) {
+                    $scope.county_constituencies = data.results;
+                })
+                .error(function (err) {
+                    $scope.alert = err.error;
+                });
+            $scope.filter = {"county" : $stateParams.count_id};
+            adminApi.county_users.filter({"county" : $stateParams.count_id})
+                .success(function (data) {
+                    $scope.county_users = data.results;
+                })
+                .error(function (err) {
+                    $scope.alert = err.error;
+                });
+        }
+    ]);
 
 })(angular);

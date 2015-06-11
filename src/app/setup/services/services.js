@@ -18,8 +18,9 @@
                 facilityRegulatoryBodies: api.setBaseUrl("api/facilities/regulating_bodies"),
                 RegulatoryBodyContacts: api.setBaseUrl("api/facilities/regulating_body_contacts"),
                 chuStatus: api.setBaseUrl("api/chul/statuses/"),
-                chuApprovers: api.setBaseUrl("api/chul/approvers/")
-
+                chuApprovers: api.setBaseUrl("api/chul/approvers/"),
+                county_users : api.setBaseUrl("api/common/user_counties/"),
+                county_slim : api.setBaseUrl("api/counties/slim_detail/")
             };
         }];
     }]);
