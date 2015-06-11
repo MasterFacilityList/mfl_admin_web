@@ -864,13 +864,220 @@
 
                 expect(data.$scope.user).toEqual({"groups": []});
             });
-
         });
 
         describe("Test user edit counties controller", function () {
 
-            it("should load", function () {
-                ctrl("user_edit.counties");
+            it("should load all counties and the user's counties", function () {
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/common/counties/?page_size=50&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_counties/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.counties", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.counties).toEqual([]);
+                expect(data.$scope.user_counties).toEqual([]);
+            });
+
+            it("should show errors on fail to load counties", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                spyOn(log, "error");
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/common/counties/?page_size=50&ordering=name")
+                    .respond(500, {"error": "e"});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_counties/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.counties", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.counties).toBe(undefined);
+                expect(data.$scope.user_counties).toEqual([]);
+            });
+
+            it("should show errors on fail to load user's counties", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                spyOn(log, "error");
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/common/counties/?page_size=50&ordering=name")
+                    .respond(200, {"results": []});
+
+                httpBackend
+                    .expectGET(server_url+"api/common/user_counties/?user=3")
+                    .respond(500, {"error": "e"});
+
+                ctrl("user_edit.counties", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.counties).toEqual([]);
+                expect(data.$scope.user_counties).toBe(undefined);
+            });
+
+            it("should assign a county to a user", function () {
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/common/counties/?page_size=50&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_counties/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.counties", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/common/user_counties/", {"user":3,"county":1})
+                    .respond(201, {"id": 4});
+
+                data.$scope.add(1);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.user_counties).toEqual([{"id": 4}]);
+            });
+
+            it("should show an error when failing to assign a county to a user", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                spyOn(log, "error");
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/common/counties/?page_size=50&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_counties/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.counties", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/common/user_counties/", {"user":3,"county":1})
+                    .respond(401);
+
+                data.$scope.add(1);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+            });
+
+            it("should remove a county from a user", function () {
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                var user_counties = {"results": [{"id": 4}]};
+
+                httpBackend
+                    .expectGET(server_url+"api/common/counties/?page_size=50&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_counties/?user=3")
+                    .respond(200, user_counties);
+
+                ctrl("user_edit.counties", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/common/user_counties/4/")
+                    .respond(204);
+
+                data.$scope.remove(user_counties.results[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it("should show error if fails to remove a county from a user", function () {
+                spyOn(log, "error");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                data.$scope.user_id = 3;
+                var user_counties = {"results": [{"id": 4}]};
+
+                httpBackend
+                    .expectGET(server_url+"api/common/counties/?page_size=50&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_counties/?user=3")
+                    .respond(200, user_counties);
+
+                ctrl("user_edit.counties", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/common/user_counties/4/")
+                    .respond(404);
+
+                data.$scope.remove(user_counties.results[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.user_counties).toEqual(user_counties.results);
             });
         });
     });

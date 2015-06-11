@@ -1,0 +1,47 @@
+<div class="col-lg-12">
+    <div class="col-lg-12 margin-t-20">
+        <h4>Assign County</h4>
+        <form ng-submit="add(new_county)">
+            <table class="table content-card  margin-b-10">
+                <tbody>
+                    <tr class="">
+                        <td class="pad-t-15">
+                            <div class="group">
+                            <select name="county" ng-model="new_county" class="pad-t-15" required>
+                                <option value="">Select County</option>
+                                <option ng-repeat="cty in counties" ng-value="cty.id">{{cty.name}}</option>
+                            </select>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            </div>
+                        </td>
+                        <td class="text-right pad-t-15">
+                            <button ng-disabled="new_county===''" type="submit" class="action-btn action-btn-primary action-btn-md margin-t-10" tooltip="Assign County">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div class="col-lg-12 margin-t-20">
+        <h4> Current County</h4>
+
+        <div class="row">
+            <div class="col-lg-3" ng-repeat="uc in user_counties">
+                <div class="col-lg-10">
+                    <strong>{{uc.county_name}}</strong>
+                </div>
+
+                <div class="col-lg-2">
+                    <button class="action-btn action-btn-danger action-btn-md" ng-click="remove(uc)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <i ng-if="spinner" class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

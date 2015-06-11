@@ -202,7 +202,48 @@
         }]
     )
 
-    .controller("mfl.users.controllers.user_edit.counties", [function () {}])
+    .controller("mfl.users.controllers.user_edit.counties",
+        ["mfl.users.services.wrappers", "$log", "$scope", function (wrappers, $log, $scope) {
+            wrappers.counties.filter({page_size: 50, ordering: "name"})
+            .success(function (data) {
+                $scope.counties = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            wrappers.user_counties.filter({user: $scope.user_id})
+            .success(function (data) {
+                $scope.user_counties = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            $scope.new_county = "";
+
+            $scope.add = function (county_id) {
+                var payload = {
+                    "user": $scope.user_id,
+                    "county": county_id
+                };
+                wrappers.user_counties.create(payload)
+                .success(function (data) {
+                    $scope.user_counties.push(data);
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+            $scope.remove = function (user_county) {
+                wrappers.user_counties.remove(user_county.id)
+                .success(function () {
+                    $scope.user_counties = _.without($scope.user_counties, user_county);
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }]
+    )
 
     .controller("mfl.users.controllers.users", ["$scope", function ($scope) {
         $scope.test = "Users";
