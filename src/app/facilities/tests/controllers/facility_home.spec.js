@@ -88,5 +88,39 @@
                 $scope.createFacilityType(form);
                 expect($state.go).not.toHaveBeenCalledWith("facilities.facility_type");
             });
+
+
+        it("should have `mfl.facilities.controllers.home.facility_status.create` defined",
+           function(){
+                var ctrl = createController(
+                    "mfl.facilities.controllers.home.facility_status.create", {});
+                expect(ctrl).toBeDefined();
+            });
+        it("should update facility Status: fail",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                var res = {msg: "Ok"};
+                var form = {name : "Antony"};
+                spyOn($state, "go");
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/facility_status/1/").respond(
+                200, res);
+                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facility_status/1/").respond(
+                500, res);
+                createController("mfl.facilities.controllers.home.facility_status.create", dt);
+                $scope.updateFacilityStatus(1, form);
+                expect($state.go).not.toHaveBeenCalledWith("facilities.facility_status");
+            });
+
+        it("should create facility Status: sucess",function(){
+                var res = {msg: "Ok"};
+                var form = {name : "Antony"};
+                spyOn($state, "go");
+                $httpBackend.expectPOST(SERVER_URL+"api/facilities/facility_status/1/").respond(
+                200, res);
+                createController("mfl.facilities.controllers.home.facility_status.create");
+                $scope.createFacilityStatus(form);
+                expect($state.go).not.toHaveBeenCalledWith("facilities.facility_status");
+            });
     });
 })(describe);
