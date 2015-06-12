@@ -44,13 +44,39 @@
             };
         }]
     )
-    .controller("mfl.setup.gis.controllers.geocode_methods_edit", ["$scope", function ($scope) {
-        $scope.title = [
-            {
-                name: "Edit GeoCode Method"
-            }
-        ];
-    }])
+    .controller("mfl.setup.gis.controllers.geocode_methods_edit",
+        ["$scope", "$state", "$log", "$stateParams", "adminApi",
+        function ($scope, $state, $log, $stateParams, adminApi) {
+            $scope.geocode_method_id = $stateParams.geocode_method_id;
+            $scope.title = [
+                {
+                    name: "Edit GeoCode Method"
+                }
+            ];
+
+            adminApi.geocode_methods.get($scope.geocode_method_id)
+            .success(function (data) {
+                $scope.geocode_method = data;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
+            $scope.save = function () {
+                var p = {
+                    name: $scope.geocode_method.name,
+                    description: $scope.geocode_method.description
+                };
+                adminApi.geocode_methods.update($scope.geocode_method_id, p)
+                .success(function () {
+                    $state.go("setup.geocode_methods_list");
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }]
+    )
     .controller("mfl.setup.gis.controllers.geocode_methods_delete", ["$scope", function ($scope) {
         $scope.title = [
             {
@@ -90,7 +116,7 @@
             $scope.save = function () {
                 adminApi.geocode_sources.create($scope.geocode_source)
                 .success(function (data) {
-                    $state.go("setup.geocode_sources_edit", {"source_id": data.id});
+                    $state.go("setup.geocode_sources_edit", {"geocode_source_id": data.id});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -98,13 +124,40 @@
             };
         }]
     )
-    .controller("mfl.setup.gis.controllers.geocode_sources_edit", ["$scope", function ($scope) {
-        $scope.title = [
-            {
-                name: "Edit GeoCode Source"
-            }
-        ];
-    }])
+    .controller("mfl.setup.gis.controllers.geocode_sources_edit",
+        ["$scope", "$state", "$log", "$stateParams", "adminApi",
+        function ($scope, $state, $log, $stateParams, adminApi) {
+            $scope.geocode_source_id = $stateParams.geocode_source_id;
+            $scope.title = [
+                {
+                    name: "Edit GeoCode Source"
+                }
+            ];
+
+            adminApi.geocode_sources.get($scope.geocode_source_id)
+            .success(function (data) {
+                $scope.geocode_source = data;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
+            $scope.save = function () {
+                var p = {
+                    "name": $scope.geocode_source.name,
+                    "description": $scope.geocode_source.description,
+                    "abbreviation": $scope.geocode_source.abbreviation
+                };
+                adminApi.geocode_sources.update($scope.geocode_source_id, p)
+                .success(function () {
+                    $state.go("setup.geocode_methods_list");
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }]
+    )
     .controller("mfl.setup.gis.controllers.geocode_sources_delete", ["$scope", function ($scope) {
         $scope.title = [
             {
