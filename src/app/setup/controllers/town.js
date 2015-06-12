@@ -15,7 +15,7 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.town_create' ",
-                    class: "action-btn action-btn-info action-btn-md",
+                    class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
                     tipmsg: "New Town",
                     icon: "fa-plus"
@@ -25,6 +25,21 @@
     )
     .controller("mfl.setup.controller.town.create",
         ["$scope", "$state", "$log", "adminApi", function ($scope, $state, $log, adminApi) {
+            $scope.title = [
+                {
+                    icon: "fa-plus-circle",
+                    name: "New Town"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
             $scope.town = {
                 name: ""
             };
@@ -44,6 +59,28 @@
     .controller("mfl.setup.controller.town.edit",
         ["$scope", "$stateParams", "$state", "$log", "adminApi",
         function ($scope, $stateParams, $state, $log, adminApi) {
+            $scope.title = [
+                {
+                    icon: "fa-edit",
+                    name: "Edit Town"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "ui-sref='setup.town_delete({town_id:town.id})'",
+                    class: "action-btn action-btn-danger action-btn-md",
+                    color: "blue",
+                    tipmsg: "Delete Town",
+                    icon: "fa-trash"
+                },
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
             $scope.town_id = $stateParams.town_id;
 
             adminApi.towns.get($scope.town_id)
