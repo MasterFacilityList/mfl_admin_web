@@ -34,6 +34,14 @@
             $httpBackend.verifyNoOutstandingRequest();
         });
 
+        it("should have `mfl.facilities.controllers.view.id`and 'state.go' called defined",
+           function(){
+                spyOn($state, "go");
+                var ctrl = createController("mfl.facilities.controllers.view.id", {});
+                expect(ctrl).toBeDefined();
+                expect($state.go).toHaveBeenCalledWith("facilities.list.id.view");
+            });
+
         it("should have `mfl.facilities.controllers.view.base` defined",
            function(){
                 var dt = {

@@ -1,0 +1,35 @@
+<!-- Begining of bootstrap header -->
+<nav class="header text-white navbar navbar-inverse inner-nav">
+  <div class="clearfix">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#facility">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse pull-left" id="facility">
+      <ul class="nav navbar-nav inner inner-nav-color">
+        <li ui-sref-active="active">
+          <a ui-sref="facilities.list.id.view" class="pad-b-10"> Facility Details</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="facilities.list.id.approve" class="pad-b-10"> Approve</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="facilities.list.id.add_unit" class="pad-b-10">Add Facility Unit</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="facilities.list.id.upgrade" class="pad-b-10"> Upgrade</a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="facilities.list.id.mutate_op_status" class="pad-b-10"> Change Operation Status</a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!-- End of bootstrap header -->

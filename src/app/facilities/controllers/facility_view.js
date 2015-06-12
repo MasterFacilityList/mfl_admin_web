@@ -3,6 +3,10 @@
     angular.module("mfl.facilities.controllers.view", [
         "mfl.facilities.services"
     ])
+    .controller("mfl.facilities.controllers.view.id", ["$state", function($state){
+            $state.go("facilities.list.id.view");
+        }]
+        )
     .controller("mfl.facilities.controllers.view.base", ["$scope",
         "$stateParams", "mfl.facilities.wrappers",
         "mfl.facilities.wrappers", function($scope, $stateParams, facilityApi){

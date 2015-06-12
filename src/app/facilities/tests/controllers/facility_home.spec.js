@@ -30,6 +30,13 @@
             $httpBackend.verifyNoOutstandingRequest();
         });
 
+        it("should have `mfl.facilities.controllers.home.base``and 'state.go' defined",
+           function(){
+                spyOn($state, "go");
+                var ctrl = createController("mfl.facilities.controllers.home.base", {});
+                expect(ctrl).toBeDefined();
+                expect($state.go).toHaveBeenCalledWith("facilities.list");
+            });
         it("should have `mfl.facilities.controllers.home.list` defined",
            function(){
                 var ctrl = createController("mfl.facilities.controllers.home.list", {});

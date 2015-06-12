@@ -3,6 +3,9 @@
     angular.module("mfl.facilities.controllers.home", [
         "mfl.facilities.services"
     ])
+    .controller("mfl.facilities.controllers.home.base", ["$state", function($state){
+        $state.go("facilities.list");
+    }])
     .controller("mfl.facilities.controllers.home.list", ["$scope", function($scope){
         $scope.tooltip = {
             "title": "",
