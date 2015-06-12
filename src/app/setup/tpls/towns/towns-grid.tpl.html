@@ -9,11 +9,13 @@
         <thead class="cf">
             <th>#</th>
             <th sil-grid-sort field='name'>Name</th>
+            <th>Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="town in towns">
                 <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td data-title="Name" class="pad-t-15">{{town.name}}</td>
+                <td><a ui-sref="setup.town_edit({town_id:town.id})">Edit</a></td>
             </tr>
         </tbody>
     </table>

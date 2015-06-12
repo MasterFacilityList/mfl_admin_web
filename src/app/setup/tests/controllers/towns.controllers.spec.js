@@ -29,12 +29,117 @@
 
         afterEach(function(){
             $httpBackend.verifyNoOutstandingRequest();
+            $httpBackend.verifyNoOutstandingExpectation();
         });
 
-        it("should have `mfl.setup.controller.chuStatus.town` defined",
-           function(){
-                var ctrl = createController("mfl.setup.controller.town.list", {});
-                expect(ctrl).toBeDefined();
-            });
+        it("should have `mfl.setup.controller.chuStatus.town` defined", function() {
+            var ctrl = createController("mfl.setup.controller.town.list", {});
+            expect(ctrl).toBeDefined();
+        });
+
+        it("should create a new town", function () {
+            $httpBackend
+                .expectPOST(SERVER_URL+"api/common/towns/")
+                .respond(201);
+
+            createController("mfl.setup.controller.town.create");
+
+            $scope.save();
+            $httpBackend.flush();
+        });
+
+        it("should catch errors on create a new town", function () {
+            $httpBackend
+                .expectPOST(SERVER_URL+"api/common/towns/")
+                .respond(500);
+
+            createController("mfl.setup.controller.town.create");
+
+            $scope.save();
+            $httpBackend.flush();
+        });
+
+        it("should edit a town", function () {
+            $httpBackend
+                .expectGET(SERVER_URL+"api/common/towns/4/")
+                .respond(200, {"name": ""});
+
+            createController("mfl.setup.controller.town.edit", {"$stateParams": {"town_id": 4}});
+
+            $httpBackend.flush();
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+
+            expect($scope.town).toEqual({"name": ""});
+
+            $httpBackend
+                .expectPATCH(SERVER_URL+"api/common/towns/4/")
+                .respond(200);
+
+            $scope.save();
+            $httpBackend.flush();
+        });
+
+        it("should handle errors on edit a town", function () {
+            $httpBackend
+                .expectGET(SERVER_URL+"api/common/towns/4/")
+                .respond(500, {"name": ""});
+
+            createController("mfl.setup.controller.town.edit", {"$stateParams": {"town_id": 4}});
+
+            $httpBackend.flush();
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+
+            $scope.town = {"name": ""};
+            $httpBackend
+                .expectPATCH(SERVER_URL+"api/common/towns/4/")
+                .respond(500);
+
+            $scope.save();
+            $httpBackend.flush();
+        });
+
+        it("should delete a town", function () {
+            $httpBackend
+                .expectGET(SERVER_URL+"api/common/towns/4/")
+                .respond(200, {"name": ""});
+
+            createController("mfl.setup.controller.town.delete", {"$stateParams": {"town_id": 4}});
+
+            $httpBackend.flush();
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+
+            expect($scope.town).toEqual({"name": ""});
+
+            $httpBackend
+                .expectDELETE(SERVER_URL+"api/common/towns/4/")
+                .respond(200);
+
+            $scope.remove();
+            $httpBackend.flush();
+        });
+
+        it("should handle errors on delete a town", function () {
+            $httpBackend
+                .expectGET(SERVER_URL+"api/common/towns/4/")
+                .respond(500, {"name": ""});
+
+            createController("mfl.setup.controller.town.delete",
+                {"$stateParams": {"town_id": 4}});
+
+            $httpBackend.flush();
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+
+            $scope.town = {"name": ""};
+            $httpBackend
+                .expectDELETE(SERVER_URL+"api/common/towns/4/")
+                .respond(500);
+
+            $scope.remove();
+            $httpBackend.flush();
+        });
     });
 })(describe);
