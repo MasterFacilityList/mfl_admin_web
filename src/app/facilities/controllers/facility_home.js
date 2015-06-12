@@ -98,7 +98,8 @@
                 adminApi.utils.update(
                     id, frm,
                     adminApi.facility_type,
-                    $scope, $state, "facilities.facility_type"
+                    $scope, $state, "facilities.facility_type",
+                    formChanges
                 );
             };
 
