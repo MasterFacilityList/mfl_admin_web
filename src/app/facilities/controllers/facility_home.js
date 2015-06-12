@@ -4,6 +4,9 @@
         "mfl.facilities.services",
         "mfl.common.forms"
     ])
+    .controller("mfl.facilities.controllers.home.base", ["$state", function($state){
+        $state.go("facilities.list");
+    }])
     .controller("mfl.facilities.controllers.home.list", ["$scope", function($scope){
         $scope.tooltip = {
             "title": "",

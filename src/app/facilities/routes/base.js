@@ -17,6 +17,9 @@
                 "header@facilities": {
                     controller: "mfl.common.controllers.header",
                     templateUrl: "common/tpls/header.tpl.html"
+                },
+                "main-content@facilities":{
+                    controller: "mfl.facilities.controllers.home.base"
                 }
             },
             data : { pageTitle: "Facility Management"}
