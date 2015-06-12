@@ -30,6 +30,21 @@
     .controller("mfl.users.controllers.group_create",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
         function ($scope, $log, $state, wrappers) {
+            $scope.title = [
+                {
+                    icon : "fa-plus-circle",
+                    name : "New Group"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
             wrappers.permissions.filter({page_size: 500, ordering: "name"})
                 .success(function (data) {
                     $scope.permissions = data.results;
@@ -46,7 +61,9 @@
             $scope.addPerm = function (perm_id) {
                 $scope.new_perm = "";
                 var perm = _.findWhere($scope.permissions, {id: parseInt(perm_id, 10)});
-                $scope.group.permissions.push(perm);
+                if (! _.contains($scope.group.permissions, perm)) {
+                    $scope.group.permissions.push(perm);
+                }
             };
 
             $scope.removePerm = function (perm) {
@@ -70,7 +87,28 @@
         ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
         function ($scope, $log, $state, $stateParams, wrappers) {
             $scope.group_id = $stateParams.group_id;
-
+            $scope.title = [
+                {
+                    icon : "fa-edit",
+                    name : "Edit Group"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "ui-sref='groups.group_delete({group_id: group.id})'",
+                    class: "action-btn action-btn-danger action-btn-md",
+                    color: "blue",
+                    tipmsg: "Delete User",
+                    icon: "fa-trash"
+                },
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
             wrappers.groups.get($scope.group_id)
                 .success(function (data) {
                     $scope.group = data;
@@ -90,7 +128,9 @@
             $scope.addPerm = function (perm_id) {
                 $scope.new_perm = "";
                 var perm = _.findWhere($scope.permissions, {id: parseInt(perm_id, 10)});
-                $scope.group.permissions.push(perm);
+                if (! _.contains($scope.group.permissions, perm)) {
+                    $scope.group.permissions.push(perm);
+                }
             };
 
             $scope.removePerm = function (perm) {
@@ -98,12 +138,15 @@
             };
 
             $scope.save = function () {
+                $scope.spinner = true;
                 wrappers.groups.update($scope.group_id, $scope.group)
                 .success(function () {
+                    $scope.spinner = false;
                     $state.go("groups.group_list");
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.spinner = false;
                 });
             };
         }]
