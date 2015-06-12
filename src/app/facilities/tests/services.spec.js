@@ -53,12 +53,23 @@
             $httpBackend.expectGET(SERVER_URL+"api/facilities/facilities/1/")
             .respond(200, res);
             facApi.utils.setActions(
-                $scope, {id:"create"}, facApi.facilities,
+                $scope, {id:""}, facApi.facilities,
                 {edit:[]},
                 {defaults:[], edit:[]});
             expect($httpBackend.flush).toThrow();
         });
 
+
+        it("should call create: success", function(){
+            var res = {county: "testing"};
+            spyOn($state, "go");
+            $httpBackend.expectPOST(SERVER_URL+"api/facilities/facilities/")
+            .respond(200, res);
+            facApi.utils.create(
+                res,facApi.facilities, $scope, $state,"home");
+            $httpBackend.flush();
+            expect($state.go).toHaveBeenCalledWith("home");
+        });
 
         it("should call create: success", function(){
             var res = {county: "testing"};
@@ -106,6 +117,18 @@
                 1,{name:"test"},facApi.facilities, $scope, $state,"home", formService);
             $httpBackend.flush();
             expect($state.go).not.toHaveBeenCalledWith("home");
+        });
+
+        it("should call update: no changes", function(){
+            var res = {county: "testing"};
+            var frm = {};
+            spyOn(formService, "whatChanged").andReturn(frm);
+            spyOn($state, "go");
+            $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facilities/1/")
+            .respond(500, res);
+            facApi.utils.update(
+                1,{name:"test"},facApi.facilities, $scope, $state,"home", formService);
+            expect($httpBackend.flush).toThrow();
         });
     });
 })();

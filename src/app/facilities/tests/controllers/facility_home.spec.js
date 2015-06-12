@@ -56,71 +56,48 @@
                 expect(ctrl).toBeDefined();
             });
 
-        it("should have `mfl.facilities.controllers.home.facility_type.create` defined",
-           function(){
-                var ctrl = createController(
-                    "mfl.facilities.controllers.home.facility_type.create", {});
-                expect(ctrl).toBeDefined();
-            });
-        it("should update facility Type: fail",function(){
+        it("should update facility Type",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
-                var res = {msg: "Ok"};
-                var form = {name : "Antony"};
-                spyOn($state, "go");
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/facility_types/1/").respond(
-                200, res);
-                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facility_types/1/").respond(
-                200, res);
+                spyOn(facilitiesApi.utils, "setActions");
+                spyOn(facilitiesApi.utils, "update");
                 createController("mfl.facilities.controllers.home.facility_type.create", dt);
-                $scope.updateFacilityType(1, form);
-                expect($state.go).not.toHaveBeenCalledWith("facilities.facility_type");
+                $scope.updateFacilityType(1, {"name": "testing"});
+                expect(facilitiesApi.utils.update).toHaveBeenCalled();
             });
 
-        it("should create facility Type: sucess",function(){
-                var res = {msg: "Ok"};
-                var form = {name : "Antony"};
-                spyOn($state, "go");
-                $httpBackend.expectPOST(SERVER_URL+"api/facilities/facility_types/1/").respond(
-                200, res);
-                createController("mfl.facilities.controllers.home.facility_type.create");
-                $scope.createFacilityType(form);
-                expect($state.go).not.toHaveBeenCalledWith("facilities.facility_type");
-            });
-
-
-        it("should have `mfl.facilities.controllers.home.facility_status.create` defined",
-           function(){
-                var ctrl = createController(
-                    "mfl.facilities.controllers.home.facility_status.create", {});
-                expect(ctrl).toBeDefined();
-            });
-        it("should update facility Status: fail",function(){
+        it("should create facility Type",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
-                var res = {msg: "Ok"};
-                var form = {name : "Antony"};
-                spyOn($state, "go");
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/facility_status/1/").respond(
-                200, res);
-                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/facility_status/1/").respond(
-                500, res);
-                createController("mfl.facilities.controllers.home.facility_status.create", dt);
-                $scope.updateFacilityStatus(1, form);
-                expect($state.go).not.toHaveBeenCalledWith("facilities.facility_status");
+                spyOn(facilitiesApi.utils, "setActions");
+                spyOn(facilitiesApi.utils,   "create");
+                createController("mfl.facilities.controllers.home.facility_type.create", dt);
+                $scope.createFacilityType({"name": "testing"});
+                expect(facilitiesApi.utils.create).toHaveBeenCalled();
             });
 
-        it("should create facility Status: sucess",function(){
-                var res = {msg: "Ok"};
-                var form = {name : "Antony"};
-                spyOn($state, "go");
-                $httpBackend.expectPOST(SERVER_URL+"api/facilities/facility_status/1/").respond(
-                200, res);
-                createController("mfl.facilities.controllers.home.facility_status.create");
-                $scope.createFacilityStatus(form);
-                expect($state.go).not.toHaveBeenCalledWith("facilities.facility_status");
+        it("should update facility status",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                spyOn(facilitiesApi.utils, "setActions");
+                spyOn(facilitiesApi.utils, "update");
+                createController("mfl.facilities.controllers.home.facility_status.create", dt);
+                $scope.updateFacilityStatus(1, {"name": "testing"});
+                expect(facilitiesApi.utils.update).toHaveBeenCalled();
+            });
+
+        it("should create facility status",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                spyOn(facilitiesApi.utils, "setActions");
+                spyOn(facilitiesApi.utils,   "create");
+                createController("mfl.facilities.controllers.home.facility_status.create", dt);
+                $scope.createFacilityStatus({"name": "testing"});
+                expect(facilitiesApi.utils.create).toHaveBeenCalled();
             });
     });
 })(describe);
