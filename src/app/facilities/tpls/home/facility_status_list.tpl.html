@@ -14,7 +14,7 @@
             <tr class="animate-repeat" ng-repeat="item in status">
                 <td data-title="Facility Name" class="pad-t-15">{{item.name}}</td>
                 <td class="text-center" data-title="Actions">
-                    <a class="action-btn action-btn-grid action-btn-info" tooltip="View" tooltip-placement="bottom" href="#">
+                    <a class="action-btn action-btn-grid action-btn-info" tooltip="View" tooltip-placement="bottom" ui-sref="facilities.facility_status_create({id:item.id})">
                         <i class="fa fa-eye"></i>
                     </a>
                 </td>
