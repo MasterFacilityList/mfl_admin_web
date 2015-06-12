@@ -11,36 +11,51 @@
                 "main": {
                     templateUrl: "facilities/tpls/common/main.tpl.html"
                 },
-                "sidenav@facilities": {
+                "body@facilities": {
                     templateUrl: "facilities/tpls/common/sidenav.tpl.html"
                 },
                 "header@facilities": {
                     controller: "mfl.common.controllers.header",
                     templateUrl: "common/tpls/header.tpl.html"
+                }
+            },
+            data : { pageTitle: "Facility Management"}
+        })
+        .state("facilities.list", {
+            url: "/list",
+            views: {
+                "body@facilities": {
+                    templateUrl: "facilities/tpls/common/sidenav.tpl.html"
                 },
-                "main-content@facilities": {
+                "main-content@facilities.list": {
                     templateUrl: "facilities/tpls/grid/index.tpl.html",
                     controller: "mfl.facilities.controllers.home.list"
                 }
             },
             data : { pageTitle: "Facility Management" }
         })
-        .state("facilities.facility_type", {
-                url: "/facility_type",
-                views: {
-                    "main-content@facilities" : {
-                        templateUrl : "facilities/tpls/home/facility_type_grid.tpl.html",
-                        controller: "mfl.facilities.controllers.home.facility_type"
-                    }
-                }
-            })
 
         .state("facilities.facility_status", {
                 url: "/facility_status",
                 views: {
-                    "main-content@facilities" : {
+                    "body@facilities": {
+                        templateUrl: "facilities/tpls/common/sidenav.tpl.html"
+                    },
+                    "main-content@facilities.facility_status" : {
                         templateUrl : "facilities/tpls/home/facility_status_grid.tpl.html",
                         controller: "mfl.facilities.controllers.home.facility_status"
+                    }
+                }
+            })
+        .state("facilities.facility_type", {
+                url: "/facility_type",
+                views: {
+                    "body@facilities": {
+                        templateUrl: "facilities/tpls/common/sidenav.tpl.html"
+                    },
+                    "main-content@facilities.facility_type" : {
+                        templateUrl : "facilities/tpls/home/facility_type_grid.tpl.html",
+                        controller: "mfl.facilities.controllers.home.facility_type"
                     }
                 }
             });
