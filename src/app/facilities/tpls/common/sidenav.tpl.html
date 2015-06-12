@@ -1,21 +1,24 @@
-<aside class="side-left">
-     <ul class=" nav nav-sidebar">
-        <li ui-sref-active="active">
-          <a ui-sref="facilities">
-            <span class="sidebar-text">Facility List</span>
-          </a>
-        </li>
-        <li>
-          <a ui-sref=".facility_status">
-            <span class="sidebar-text">Facility Status</span>
-          </a>
-        </li>
-       <li ui-sref-active="active">
-          <a ui-sref=".facility_type">
-            <span class="sidebar-text">Facility Type</span>
-          </a>
-        </li>
-     </ul>
- </aside>
+<div class="col-lg-2 pad-r-0">
+    <aside class="side-left">
+         <ul class=" nav nav-sidebar">
+            <li ui-sref-active="active">
+              <a ui-sref="facilities.list">
+                <span class="sidebar-text">Facility List</span>
+              </a>
+            </li>
+            <li  ui-sref-active="active">
+              <a ui-sref="facilities.facility_status">
+                <span class="sidebar-text">Facility Status</span>
+              </a>
+            </li>
+           <li ui-sref-active="active">
+              <a ui-sref="facilities.facility_type">
+                <span class="sidebar-text">Facility Type</span>
+              </a>
+            </li>
+         </ul>
+    </aside>
+</div>
+<div class="col-lg-10 content" ui-view="main-content"></div>
 
 
