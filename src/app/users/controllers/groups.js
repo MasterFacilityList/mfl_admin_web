@@ -126,7 +126,9 @@
             $scope.addPerm = function (perm_id) {
                 $scope.new_perm = "";
                 var perm = _.findWhere($scope.permissions, {id: parseInt(perm_id, 10)});
-                $scope.group.permissions.push(perm);
+                if (! _.contains($scope.group.permissions, perm)) {
+                    $scope.group.permissions.push(perm);
+                }
             };
 
             $scope.removePerm = function (perm) {
