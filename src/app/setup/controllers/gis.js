@@ -71,7 +71,7 @@
                         "geocode_method_id:geocode_method.id})'",
                     class: "action-btn action-btn-danger action-btn-md",
                     color: "blue",
-                    tipmsg: "Delete Town",
+                    tipmsg: "Delete Geocode Method",
                     icon: "fa-trash"
                 },
                 {
@@ -152,7 +152,7 @@
         ];
         $scope.action = [
             {
-                func : "ui-sref='setup.geocode_sources_create'",
+                func : "ui-sref='setup.geocode_sources_list.geocode_sources_create'",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
                 tipmsg: "Add geocode sources",
@@ -204,6 +204,14 @@
                 }
             ];
             $scope.action = [
+                {
+                    func : "ui-sref='setup.geocode_sources_list.geocode_sources_delete({"+
+                        "geocode_source_id:geocode_source.id})'",
+                    class: "action-btn action-btn-danger action-btn-md",
+                    color: "blue",
+                    tipmsg: "Delete Geocode Source",
+                    icon: "fa-trash"
+                },
                 {
                     func : "onclick='window.history.back()'",
                     class: "action-btn action-btn-primary action-btn-md",
