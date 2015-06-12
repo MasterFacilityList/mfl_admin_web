@@ -445,6 +445,9 @@
                 data.$scope.addPerm("4");
                 expect(data.$scope.group.permissions[0]).toEqual(perms.results[0]);
 
+                data.$scope.addPerm("4");
+                expect(data.$scope.group.permissions[0]).toEqual(perms.results[0]);
+
                 data.$scope.removePerm(data.$scope.group.permissions[0]);
                 expect(data.$scope.group.permissions).toEqual([]);
             });
