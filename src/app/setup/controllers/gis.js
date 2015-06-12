@@ -9,12 +9,13 @@
     .controller("mfl.setup.gis.controllers.geocode_methods_list", ["$scope", function ($scope) {
         $scope.title = [
             {
+                icon: "fa-crosshairs",
                 name: "GeoCode Methods"
             }
         ];
         $scope.action = [
             {
-                func : "ui-sref='setup.geocode_methods_create'",
+                func : "ui-sref='setup.geocode_methods_list.geocode_methods_create'",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
                 tipmsg: "Add geocode method",
@@ -26,7 +27,17 @@
         ["$scope", "adminApi", "$log", "$state", function ($scope, adminApi, $log, $state) {
             $scope.title = [
                 {
-                    name: "Create GeoCode Method"
+                    icon: "fa-plus-circle",
+                    name: "New GeoCode Method"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
                 }
             ];
             $scope.geocode_method = {
@@ -50,10 +61,27 @@
             $scope.geocode_method_id = $stateParams.geocode_method_id;
             $scope.title = [
                 {
+                    icon: "fa-edit",
                     name: "Edit GeoCode Method"
                 }
             ];
-
+            $scope.action = [
+                {
+                    func : "ui-sref='setup.geocode_methods_list.geocode_methods_delete({"+
+                        "geocode_method_id:geocode_method.id})'",
+                    class: "action-btn action-btn-danger action-btn-md",
+                    color: "blue",
+                    tipmsg: "Delete Town",
+                    icon: "fa-trash"
+                },
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
             adminApi.geocode_methods.get($scope.geocode_method_id)
             .success(function (data) {
                 $scope.geocode_method = data;
@@ -86,7 +114,15 @@
                     name: "Delete GeoCode Method"
                 }
             ];
-
+            $scope.action = [
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
             adminApi.geocode_methods.get($scope.geocode_method_id)
             .success(function (data) {
                 $scope.geocode_method = data;
@@ -110,6 +146,7 @@
     .controller("mfl.setup.gis.controllers.geocode_sources_list", ["$scope", function ($scope) {
         $scope.title = [
             {
+                icon : "fa-compass",
                 name: "GeoCode Sources"
             }
         ];
@@ -127,7 +164,17 @@
         ["$scope", "adminApi", "$log", "$state", function ($scope, adminApi, $log, $state) {
             $scope.title = [
                 {
-                    name: "Create GeoCode Source"
+                    icon: "fa-plus-circle",
+                    name: "New GeoCode Source"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
                 }
             ];
             $scope.geocode_source = {
@@ -152,10 +199,19 @@
             $scope.geocode_source_id = $stateParams.geocode_source_id;
             $scope.title = [
                 {
+                    icon: "fa-edit",
                     name: "Edit GeoCode Source"
                 }
             ];
-
+            $scope.action = [
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
             adminApi.geocode_sources.get($scope.geocode_source_id)
             .success(function (data) {
                 $scope.geocode_source = data;
