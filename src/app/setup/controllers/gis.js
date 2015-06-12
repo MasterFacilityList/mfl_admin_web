@@ -77,13 +77,35 @@
             };
         }]
     )
-    .controller("mfl.setup.gis.controllers.geocode_methods_delete", ["$scope", function ($scope) {
-        $scope.title = [
-            {
-                name: "Delete GeoCode Method"
-            }
-        ];
-    }])
+    .controller("mfl.setup.gis.controllers.geocode_methods_delete",
+        ["$scope", "$state", "$log", "$stateParams", "adminApi",
+        function ($scope, $state, $log, $stateParams, adminApi) {
+            $scope.geocode_method_id = $stateParams.geocode_method_id;
+            $scope.title = [
+                {
+                    name: "Delete GeoCode Method"
+                }
+            ];
+
+            adminApi.geocode_methods.get($scope.geocode_method_id)
+            .success(function (data) {
+                $scope.geocode_method = data;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
+            $scope.remove = function () {
+                adminApi.geocode_methods.remove($scope.geocode_method_id)
+                .success(function () {
+                    $state.go("setup.geocode_methods_list");
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }]
+    )
 
     .controller("mfl.setup.gis.controllers.geocode_sources_list", ["$scope", function ($scope) {
         $scope.title = [
@@ -150,7 +172,7 @@
                 };
                 adminApi.geocode_sources.update($scope.geocode_source_id, p)
                 .success(function () {
-                    $state.go("setup.geocode_methods_list");
+                    $state.go("setup.geocode_sources_list");
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -158,13 +180,35 @@
             };
         }]
     )
-    .controller("mfl.setup.gis.controllers.geocode_sources_delete", ["$scope", function ($scope) {
-        $scope.title = [
-            {
-                name: "Delete GeoCode Source"
-            }
-        ];
-    }])
+    .controller("mfl.setup.gis.controllers.geocode_sources_delete",
+        ["$scope", "$state", "$log", "$stateParams", "adminApi",
+        function ($scope, $state, $log, $stateParams, adminApi) {
+            $scope.geocode_source_id = $stateParams.geocode_source_id;
+            $scope.title = [
+                {
+                    name: "Delete GeoCode Source"
+                }
+            ];
+
+            adminApi.geocode_sources.get($scope.geocode_source_id)
+            .success(function (data) {
+                $scope.geocode_source = data;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
+            $scope.remove = function () {
+                adminApi.geocode_sources.remove($scope.geocode_source_id)
+                .success(function () {
+                    $state.go("setup.geocode_sources_list");
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+        }]
+    )
     ;
 
 })(angular);

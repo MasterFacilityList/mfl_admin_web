@@ -4,6 +4,7 @@
         <input type="text" ng-model="geocode_method.name" required name="name" placeholder="Name"/>
         <textarea type="text" ng-model="geocode_method.description" required name="description" placeholder="Description"></textarea>
         <input type="submit" value="Save" />
+        <a ui-sref="setup.geocode_methods_delete({geocode_method_id:geocode_method.id})">Delete</a>
         <a ui-sref="setup.geocode_methods_list">Cancel</a>
     </form>
 </div>
