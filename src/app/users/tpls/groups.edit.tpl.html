@@ -1,38 +1,68 @@
+<contentheader></contentheader>
 <div class="col-lg-12">
     <div class="col-lg-12 margin-t-20">
-        <input type="text" ng-model="group.name" required />
-    </div>
-
-    <div class="col-lg-12 margin-t-20">
-        <div class="row">
-            <select name="permission" ng-model="new_perm" class="col-lg-10">
-                <option value="">Select Permission</option>
-                <option ng-repeat="perm in permissions" ng-value="perm.id">{{perm.name}}</option>
-            </select>
-            <button ng-disabled="new_perm===''" class="col-lg-2" ng-click="addPerm(new_perm)">
-                <i class="fa fa-plus"></i>
-            </button>
-        </div>
-
-        <div class="row">
-            <h4>Group permissions</h4>
-            <div class="col-lg-3" ng-repeat="perm in group.permissions">
-                <div class="col-lg-10">
-                    <strong>{{perm.name}}</strong>
-                </div>
-
-                <div class="col-lg-1">
-                    <button class="action-btn action-btn-danger action-btn-md" ng-click="removePerm(perm)">
-                        <i class="fa fa-trash"></i>
+        <h4>Add Group</h4>
+        <table class="table content-card margin-b-10">
+            <tr>
+                <td class="pad-t-15 col-md-6">
+                    <div class="group">
+                        <input type="text" ng-model="group.name" required />
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>
+                            Group Name
+                        </label>
+                    </div>
+                </td>
+                <td class="pad-t-15 col-md-5">
+                    <div class="group">
+                        <select name="permission" ng-model="new_perm" required>
+                            <option value="">Select Permission</option>
+                            <option ng-repeat="perm in permissions" ng-value="perm.id">{{perm.name}}</option>
+                        </select>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                    </div>
+                </td>
+                <td class="text-right col-md-1">
+                    <button ng-disabled="new_perm===''" class="action-btn action-btn-primary action-btn-md margin-t-10" ng-click="addPerm(new_perm)">
+                        <i class="fa fa-plus"></i>
                     </button>
-                    <i ng-if="spinner" class="fa fa-spin fa-circle-o-notch fa-2x"></i>
-                </div>
-            </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="col-md-12 col-sm-12 col-xs-12 margin-h--5 margin-t-20">
+            <h4 class="fw-500">Group permissions</h4>
+            <table class="table content-card">
+                <tr ng-repeat="perm in group.permissions">
+                    <td class="pad-t-15 fs-16 fw-500">
+                        {{perm.name}}
+                    </td>
+                    <td class="text-right">
+                        <span ng-if="perm.delete_spinner">
+                            <i class="fa fa-spin fa-circle-o-notch"></i>
+                        </span>
+                        <button class="action-btn action-btn-danger action-btn-grid" ng-click="removePerm(perm)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="spinner">
+                    <td colspan="3" class="text-center">
+                        <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
     <div class="col-lg-12 margin-t-20">
-        <button ng-click="save()">Save</button>
-        <a ui-sref="groups.group_list">Cancel</a>
+        <button class="margin-h-5 login-btn login-btn-default" ui-sref="groups.group_list">
+            Cancel
+        </button>
+        <button ng-click="save()" class="margin-h-5 login-btn login-btn-primary">
+            <i class="fa fa-save"></i> Save
+        </button>
     </div>
 </div>

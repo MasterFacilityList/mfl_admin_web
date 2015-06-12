@@ -38,7 +38,21 @@
     .controller("mfl.users.controllers.user_create.basic",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
         function ($scope, $log, $state, wrappers) {
-
+            $scope.title = [
+                {
+                    icon : "fa-plus-circle",
+                    name : "New User"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
             $scope.save = function () {
                 wrappers.users.create($scope.user)
                 .success(function (data) {
