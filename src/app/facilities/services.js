@@ -77,8 +77,8 @@
                         scope.alert = this.getError(error);
                     });
                 },
-                update: function(id, frm, api, scope, state, redirect_url){
-                    var changes= formChanges.whatChanged(frm);
+                update: function(id, frm, api, scope, state, redirect_url, formService){
+                    var changes= formService.whatChanged(frm);
                     if(!_.isEmpty(changes)){
                         api.update(id, changes).success(function(){
                             state.go(redirect_url);
