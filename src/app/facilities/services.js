@@ -31,6 +31,9 @@
         this.facility_type = api.setBaseUrl("api/facilities/facility_types/");
         this.facility_status = api.setBaseUrl("api/facilities/facility_status/");
         this.officers = api.setBaseUrl("api/facilities/officers/");
+        var getError =  function(error){
+            return error.error_msg.error;
+        };
         this.utils = function(){
             return {
                 cleanFormData : function(data){
@@ -53,9 +56,7 @@
                         scope.alert = error.error_msg;
                     });
                 },
-                getError: function(error){
-                    return error.error_msg.error;
-                },
+                getError: getError,
                 setActions: function(scope, stateParams, api, titles, actions){
                     if(!_.isUndefined(stateParams.id) && stateParams.id !== "create"){
                         scope.title = titles.edit;
@@ -63,7 +64,7 @@
                         api.get(stateParams.id).success(function(data){
                             scope.data = data;
                         }).error(function(error){
-                            scope.alert = this.getError(error);
+                            scope.alert = getError(error);
                         });
                     }
                     else if(!_.isUndefined(stateParams.id) &&stateParams.id === "create") {
@@ -75,7 +76,7 @@
                     api.create(data).success(function(){
                         state.go(redirect_url);
                     }).error(function(error){
-                        scope.alert = this.getError(error);
+                        scope.alert = getError(error);
                     });
                 },
                 update: function(id, frm, api, scope, state, redirect_url, formService){
