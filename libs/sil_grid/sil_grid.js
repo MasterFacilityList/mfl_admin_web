@@ -74,7 +74,7 @@
 
                     self.setLoading(true);
                     var promise;
-                    if(_.isUndefined($scope.filters)){
+                    if(_.isEmpty($scope.filters)){
                         promise = self.api.list();
                     }else{
                         promise = self.api.filter($scope.filters);
@@ -188,6 +188,9 @@
                     $scope.filters.page = page_count;
                     $scope.getData();
                 };
+                if(_.isUndefined($scope.filters)){
+                    $scope.filters = {};
+                }
             }],
             link: function(scope){
                 scope.$watch("filters", function(filters){
@@ -196,7 +199,7 @@
 
                         delete filters.page;
                     }else{
-                        scope.getData();
+                         scope.getData();
                     }
                 });
                 $rootScope.$on("silGrid.data.refresh", function(event){
