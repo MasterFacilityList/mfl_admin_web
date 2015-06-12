@@ -155,13 +155,69 @@
         });
 
         describe("Test geocode method delete controller", function () {
-            it("should load", function () {
+
+            it("should delete a geocode method", function () {
+
                 var data = {
                     "$scope": rootScope.$new(),
-                    "$stateParams": {}
+                    "$stateParams": {geocode_method_id: 1}
                 };
 
                 ctrl("geocode_methods_delete", data);
+
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_methods/1/")
+                    .respond(200, {});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.geocode_method).toEqual({});
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/gis/geo_code_methods/1/")
+                    .respond(200, {});
+
+                data.$scope.remove();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should show errors on delete a geocode method", function () {
+                spyOn(log, "error");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {geocode_method_id: 1},
+                    "$log": log
+                };
+
+                ctrl("geocode_methods_delete", data);
+
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_methods/1/")
+                    .respond(500, {});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/gis/geo_code_methods/1/")
+                    .respond(500, {});
+
+                data.$scope.remove();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(log.error).toHaveBeenCalled();
             });
         });
 
@@ -293,13 +349,69 @@
         });
 
         describe("Test geocode sources delete controller", function () {
-            it("should load", function () {
+
+            it("should delete a geocode source", function () {
+
                 var data = {
                     "$scope": rootScope.$new(),
-                    "$stateParams": {}
+                    "$stateParams": {geocode_source_id: 1}
                 };
 
                 ctrl("geocode_sources_delete", data);
+
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_sources/1/")
+                    .respond(200, {});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.geocode_source).toEqual({});
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/gis/geo_code_sources/1/")
+                    .respond(204);
+
+                data.$scope.remove();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should show errors on delete or fetch a geocode source", function () {
+                spyOn(log, "error");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {geocode_source_id: 1},
+                    "$log": log
+                };
+
+                ctrl("geocode_sources_delete", data);
+
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_sources/1/")
+                    .respond(500, {});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/gis/geo_code_sources/1/")
+                    .respond(500, {});
+
+                data.$scope.remove();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(log.error).toHaveBeenCalled();
             });
         });
 
