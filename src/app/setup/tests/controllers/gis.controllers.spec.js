@@ -84,13 +84,73 @@
         });
 
         describe("Test geocode method edit controller", function () {
-            it("should load", function () {
+
+            it("should update a geocode method", function () {
+
                 var data = {
                     "$scope": rootScope.$new(),
-                    "$stateParams": {}
+                    "$stateParams": {geocode_method_id: 1}
                 };
 
                 ctrl("geocode_methods_edit", data);
+
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_methods/1/")
+                    .respond(200, {});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.geocode_method).toEqual({});
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(server_url+"api/gis/geo_code_methods/1/")
+                    .respond(200, {});
+
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should show errors on update or fetch a geocode method", function () {
+                spyOn(log, "error");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {geocode_method_id: 1},
+                    "$log": log
+                };
+
+                ctrl("geocode_methods_edit", data);
+
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_methods/1/")
+                    .respond(500, {});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                data.$scope.geocode_method = {
+                    name: "",
+                    description: ""
+                };
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(server_url+"api/gis/geo_code_methods/1/")
+                    .respond(500, {});
+
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(log.error).toHaveBeenCalled();
             });
         });
 
@@ -161,13 +221,74 @@
         });
 
         describe("Test geocode sources edit controller", function () {
-            it("should load", function () {
+
+            it("should update a geocode source", function () {
+
                 var data = {
                     "$scope": rootScope.$new(),
-                    "$stateParams": {}
+                    "$stateParams": {geocode_source_id: 1}
                 };
 
                 ctrl("geocode_sources_edit", data);
+
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_sources/1/")
+                    .respond(200, {});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(data.$scope.geocode_source).toEqual({});
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(server_url+"api/gis/geo_code_sources/1/")
+                    .respond(200, {});
+
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should show errors on update or fetch a geocode source", function () {
+                spyOn(log, "error");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {geocode_source_id: 1},
+                    "$log": log
+                };
+
+                ctrl("geocode_sources_edit", data);
+
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_sources/1/")
+                    .respond(500, {});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                data.$scope.geocode_source = {
+                    name: "",
+                    description: "",
+                    abbreviation: ""
+                };
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(server_url+"api/gis/geo_code_sources/1/")
+                    .respond(500, {});
+
+                data.$scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(log.error).toHaveBeenCalled();
             });
         });
 
