@@ -61,6 +61,18 @@
                         controller: "mfl.facilities.controllers.home.facility_type"
                     }
                 }
+            })
+        .state("facilities.facility_type_create", {
+                url: "/facility_type/:id",
+                views: {
+                    "body@facilities": {
+                        templateUrl: "facilities/tpls/common/sidenav.tpl.html"
+                    },
+                    "main-content@facilities.facility_type_create" : {
+                        templateUrl : "facilities/tpls/home/facility_type_create.tpl.html",
+                        controller: "mfl.facilities.controllers.home.facility_type.create"
+                    }
+                }
             });
     }]);
 })(angular);
