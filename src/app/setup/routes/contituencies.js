@@ -15,11 +15,12 @@
                     }
                 }
             })
-            .state("setup.constituencies.view_wards", {
-                url: "/wards/:const_id",
+            .state("setup.constituencies.view_const", {
+                url: "/details/:const_id",
                 views: {
-                    "main-content@setup": {
-                        templateUrl: "setup/tpls/wards/wards.tpl.html"
+                    "main-content@setup.constituencies": {
+                        templateUrl: "setup/tpls/constituencies/constituency.details.tpl.html",
+                        controller :"mfl.setup.controller.constituency.details"
                     }
                 }
             })

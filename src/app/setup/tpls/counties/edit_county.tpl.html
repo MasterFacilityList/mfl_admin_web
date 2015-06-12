@@ -1,11 +1,24 @@
-<contentheader></contentheader>
+<!-- Contentheader by hand -->
+<div class="content-header margin-b-20">
+    <div class="action-container content-header-extra">
+        <a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+    </div>
+    <h2 class="content-title">
+        <span ng-if="spinner" class="colmd-12 margin-t-30 content-card text-center">
+            <i class="fa fa-spin fa-circle-o-notch fa-1x"></i>
+        </span>
+        <span ng-if="!spinner" class="main-title">
+            {{county_details.code}} | {{county_details.name}} COUNTY
+        </span>
+    </h2>
+</div>
+<!-- End of content header -->
 <div class="col-md-12">
     <div ng-if="spinner" class="colmd-12 margin-t-30 content-card text-center">
         <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
     </div>
-    <h2 ng-if="!spinner" class="fw-500 margin-t-20 margin-b-30">
-        {{county_details.code}} | {{county_details.name}} COUNTY
-    </h2>
     <div ng-if="!spinner" class="col-md-12 content-card">
     <div  class="col-md-12 margin-t-20 margin-b-20 ">
         <!-- Start of tabbed multi step form  -->

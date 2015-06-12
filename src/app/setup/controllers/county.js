@@ -16,13 +16,6 @@
     .controller("mfl.setup.controller.county.view", ["$scope", "$stateParams",
         "adminApi",
         function ($scope, $stateParams, adminApi) {
-            $scope.test = "View county";
-            $scope.title = [
-                {
-                    icon : "fa-eye",
-                    name : "View County"
-                }
-            ];
             $scope.action = [
                 {
                     func : "onclick='window.history.back()'",
@@ -36,6 +29,12 @@
             adminApi.counties.get($stateParams.count_id)
                 .success(function (data) {
                     $scope.county_details = data;
+                    $scope.title = [
+                        {
+                            icon: "fa-map-marker",
+                            name : $scope.county_details.name
+                        }
+                    ];
                     $scope.spinner = false;
                 })
                 .error(function (err) {
