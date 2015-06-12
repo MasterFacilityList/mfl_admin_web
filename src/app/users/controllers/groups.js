@@ -137,8 +137,8 @@
                 $scope.spinner = true;
                 wrappers.groups.update($scope.group_id, $scope.group)
                 .success(function () {
-                    $state.go("groups.group_list");
                     $scope.spinner = false;
+                    $state.go("groups.group_list");
                 })
                 .error(function (data) {
                     $log.error(data);

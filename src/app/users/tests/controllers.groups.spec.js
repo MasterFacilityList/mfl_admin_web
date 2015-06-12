@@ -254,7 +254,7 @@
                     .respond(200);
 
                 data.$scope.save();
-
+                expect(data.$scope.spinner).toBeTruthy();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
