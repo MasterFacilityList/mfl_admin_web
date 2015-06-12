@@ -16,37 +16,28 @@
                     }
                 }
             })
-            .state("setup.town_edit", {
-                url: "/towns/edit/:town_id",
+            .state("setup.towns.town_edit", {
+                url: "/edit/:town_id",
                 views: {
-                    "body@setup" : {
-                        templateUrl: "setup/tpls/dashboard/body.tpl.html"
-                    },
-                    "main-content@setup.town_edit": {
+                    "main-content@setup.towns": {
                         controller: "mfl.setup.controller.town.edit",
                         templateUrl: "setup/tpls/towns/towns.edit.tpl.html"
                     }
                 }
             })
-            .state("setup.town_create", {
-                url: "/towns/create",
+            .state("setup.towns.town_create", {
+                url: "/create",
                 views: {
-                    "body@setup" : {
-                        templateUrl: "setup/tpls/dashboard/body.tpl.html"
-                    },
-                    "main-content@setup.town_create": {
+                    "main-content@setup.towns": {
                         controller: "mfl.setup.controller.town.create",
                         templateUrl: "setup/tpls/towns/towns.edit.tpl.html"
                     }
                 }
             })
-            .state("setup.town_delete", {
+            .state("setup.towns.town_delete", {
                 url: "/towns/delete/:town_id",
                 views: {
-                    "body@setup" : {
-                        templateUrl: "setup/tpls/dashboard/body.tpl.html"
-                    },
-                    "main-content@setup.town_delete": {
+                    "main-content@setup.towns": {
                         controller: "mfl.setup.controller.town.delete",
                         templateUrl: "setup/tpls/towns/towns.delete.tpl.html"
                     }

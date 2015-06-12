@@ -14,7 +14,7 @@
 
             $scope.action = [
                 {
-                    func : "ui-sref='setup.town_create' ",
+                    func : "ui-sref='setup.towns.town_create' ",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
                     tipmsg: "New Town",
@@ -67,7 +67,7 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='setup.town_delete({town_id:town.id})'",
+                    func : "ui-sref='setup.towns.town_delete({town_id:town.id})'",
                     class: "action-btn action-btn-danger action-btn-md",
                     color: "blue",
                     tipmsg: "Delete Town",
