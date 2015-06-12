@@ -50,6 +50,19 @@
                     }
                 }
             })
+
+        .state("facilities.facility_status_create", {
+                url: "/facility_status/:id",
+                views: {
+                    "body@facilities": {
+                        templateUrl: "facilities/tpls/common/sidenav.tpl.html"
+                    },
+                    "main-content@facilities.facility_status_create" : {
+                        templateUrl : "facilities/tpls/home/facility_status_create.tpl.html",
+                        controller: "mfl.facilities.controllers.home.facility_status.create"
+                    }
+                }
+            })
         .state("facilities.facility_type", {
                 url: "/facility_type",
                 views: {
