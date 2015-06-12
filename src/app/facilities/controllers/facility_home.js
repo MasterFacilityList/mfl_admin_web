@@ -43,24 +43,26 @@
         ];
         $scope.action = [
             {
-                func : "ui-sref='facilities.create.basic' " +
+                func : "ui-sref='facilities.facility_type_create' " +
                         "has-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-info action-btn-md",
                 color: "blue",
                 tipmsg: "New Facility",
-                icon: "fa-user-plus"
+                icon: "fa-plus"
             }
         ];
     }])
 
-    .controller("mfl.facilities.controllers.home.facility_type.view", ["$scope","$state",
-     "$stateParams","adminApi","mfl.common.forms.changes",
-        function($scope, $state, $stateParams, adminApi, formChanges){
+    .controller("mfl.facilities.controllers.home.facility_type.create", ["$scope","$state",
+     "$stateParams","mfl.facilities.wrappers","mfl.common.forms.changes",
+        function($scope, $state, $stateParams, facilityApi, formChanges){
             var titles = {
-                edit: [{
+                edit: [
+                    {
                         icon: "fa-edit",
                         name: "Edit Facility Type"
-                    }],
+                    }
+                ],
                 create:  [
                     {
                         icon: "fa-plus-circle",
@@ -82,7 +84,7 @@
                 edit:[
                     {
                         func : ""+
-                        " mfl-delete api='adminApi' api-key='facility_type'"+
+                        " mfl-delete api='mfl.facilities.wrappers' api-key='facility_type'"+
                         " resource-id='"+$stateParams.id+"' "+
                         "resource-name='Facility Type'"+
                         " on-success-url='facilities.facility_type'",
@@ -93,23 +95,20 @@
                     }
                 ]
             };
-            adminApi.utils.setActions($scope, $stateParams,adminApi.facility_type, titles, actions);
-
-
-
+            facilityApi.utils.setActions(
+                $scope, $stateParams,facilityApi.facility_type, titles,actions);
             $scope.updateFacilityType = function(id, frm){
-                adminApi.utils.update(
+                facilityApi.utils.update(
                     id, frm,
-                    adminApi.facility_type,
+                    facilityApi.facility_type,
                     $scope, $state, "facilities.facility_type",
                     formChanges
                 );
             };
-
             $scope.createFacilityType = function(facilityType){
-                adminApi.utils.create(
+                facilityApi.utils.create(
                     facilityType,
-                    adminApi.facility_type,
+                    facilityApi.facility_type,
                     $scope, $state, "facilities.facility_type"
                 );
             };
