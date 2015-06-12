@@ -59,7 +59,7 @@
                 getError: getError,
                 setActions: function(scope, stateParams, api, titles, actions){
                     if(!_.isUndefined(stateParams.id) && stateParams.id !== "create"){
-                        scope.title = titles.edit;
+                        scope.title = titles.create;
                         scope.action = _.union(actions.defaults,actions.edit);
                         api.get(stateParams.id).success(function(data){
                             scope.data = data;
