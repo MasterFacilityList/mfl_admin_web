@@ -28,7 +28,7 @@
     "angular-sanitize": "~1.3.15",
     "modernizr": "~2.8.3",
     "c3": "~0.4.10",
-    "acute-select": "~0.1.0"
+    "acute-select": "https://github.com/liyocee/acute-select.git"
   },
   "resolutions": {
     "angular": "~1.3.15",
