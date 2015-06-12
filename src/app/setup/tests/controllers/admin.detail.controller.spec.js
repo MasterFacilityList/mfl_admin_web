@@ -21,7 +21,8 @@
                     httpBackend = $httpBackend;
                     SERVER_URL = url;
                     scope.fakeStateParams = {
-                        count_id : 1
+                        count_id : 1,
+                        const_id : 1
                     };
                     adminApi = adminApi;
                     formService = frm;
@@ -65,6 +66,28 @@
             $httpBackend.expectGET(
                 SERVER_URL + "api/common/user_counties/?county=1").respond(
                 400, {"email": "owaga@owaga.com"});
+            $httpBackend.flush();
+        }]));
+        it("should test county detailed view controller: success",
+        inject(["$httpBackend", function ($httpBackend) {
+            controller("mfl.setup.controller.constituency.details");
+            $httpBackend.expectGET(
+                SERVER_URL + "api/common/constituencies/1/").respond(
+                200, {"code": 1});
+            $httpBackend.expectGET(
+                SERVER_URL + "api/common/wards/?constituency=1").respond(
+                200, {"code": 1});
+            $httpBackend.flush();
+        }]));
+        it("should test county detailed view controller: success",
+        inject(["$httpBackend", function ($httpBackend) {
+            controller("mfl.setup.controller.constituency.details");
+            $httpBackend.expectGET(
+                SERVER_URL + "api/common/constituencies/1/").respond(
+                400, {"code": 1});
+            $httpBackend.expectGET(
+                SERVER_URL + "api/common/wards/?constituency=1").respond(
+                400, {"code": 1});
             $httpBackend.flush();
         }]));
     });

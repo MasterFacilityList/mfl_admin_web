@@ -1,16 +1,16 @@
 <div class="row">
     <table class="table table-hover content-card fs-14 margin-t-20">
         <thead>
-            <th class="fs-16">Code</th>
             <th class="fs-16">Name</th>
+            <th class="fs-16 text-right">Code</th>
         </thead>
         <tbody>
             <tr ng-repeat="const in county_constituencies">
-                <td class"text-left pad-t-15">
-                    {{const.code}}
-                </td>
-                <td class="pad-t-15">
+                <td >
                     {{const.name}}
+                </td>
+                <td class="text-right">
+                    {{const.code}}
                 </td>
             </tr>
         </tbody>

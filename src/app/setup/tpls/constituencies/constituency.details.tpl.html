@@ -1,0 +1,37 @@
+<!-- Contentheader by hand -->
+<div class="content-header margin-b-20">
+    <div class="action-container content-header-extra">
+        <a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+    </div>
+    <h2 class="content-title">
+        <span ng-if="spinner" class="colmd-12 margin-t-30 content-card text-center">
+            <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
+        </span>
+        <span ng-if="!spinner" class="main-title">
+            {{const_details.code}} | {{const_details.name}} CONSTITUENCY
+        </span>
+    </h2>
+</div>
+<!-- End of content header -->
+<div class="col-md-12">
+    <div class="col-md-12 col-sm-12 content-card">
+        <table class="table table-hover ">
+            <thead>
+                <th class="fs-16">Name</th>
+                <th class="fs-16 text-right">Code</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ward in const_wards">
+                    <td class="pad-t-15 fs-14">
+                        {{ward.name}} WARD
+                    </td>
+                    <td class="pad-t-15 fs-14 text-right">
+                        {{ward.code}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
