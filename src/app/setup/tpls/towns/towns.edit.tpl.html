@@ -1,10 +1,21 @@
 <contentheader></contentheader>
-<div>
-
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 content-card margin-t-20">
     <form ng-submit="save()" >
-        <input type="text" ng-model="town.name" required />
-        <input type="submit" value="Save" />
-        <a ui-sref="setup.towns">Cancel</a>
-        <a ng-if="town.id" ui-sref="setup.town_delete({town_id:town.id})">Delete</a>
+        <div class="col-lg-10 col-lg-offset-1 margin-t-20">
+            <div class="group">
+                <input type="text" ng-model="town.name" required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Town Name
+                </label>
+            </div>
+            <div class="col-md-12 margin-b-20">
+                <button class="login-btn login-btn-default margin-h-5" ui-sref="setup.towns">Cancel</button>
+                <button class="login-btn login-btn-primary margin-h-5" type="submit" value="Save">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
+        </div>
     </form>
 </div>
