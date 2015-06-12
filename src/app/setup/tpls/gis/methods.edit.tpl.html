@@ -1,10 +1,33 @@
 <contentheader></contentheader>
-<div>
-    <form ng-submit="save()">
-        <input type="text" ng-model="geocode_method.name" required name="name" placeholder="Name"/>
-        <textarea type="text" ng-model="geocode_method.description" required name="description" placeholder="Description"></textarea>
-        <input type="submit" value="Save" />
-        <a ui-sref="setup.geocode_methods_delete({geocode_method_id:geocode_method.id})">Delete</a>
-        <a ui-sref="setup.geocode_methods_list">Cancel</a>
-    </form>
+<div class="col-lg-12 col-md-12 margin-t-20">
+    <div class="col-md-10 col-md-offset-1 content-card margin-t-20">
+        <form ng-submit="save()">
+        <div class="col-lg-10 col-lg-offset-1 margin-t-20">
+            <div class="group">
+                <input type="text" ng-model="geocode_method.name" required name="name" />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Geocode Method Name
+                </label>
+            </div>
+            <div class="group">
+                <textarea type="text" ng-model="geocode_method.description" required name="description" ></textarea>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>
+                    Description
+                </label>
+            </div>
+            <div class="col-md-12 margin-b-20 margin-t-20">
+                <button class="login-btn login-btn-default margin-h-5" ui-sref="setup.geocode_methods_list">
+                    Cancel
+                </button>
+                <button class="login-btn login-btn-primary margin-h-5" type="submit" >
+                <i class="fa fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
 </div>

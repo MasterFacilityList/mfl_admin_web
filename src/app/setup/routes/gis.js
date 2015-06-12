@@ -18,37 +18,28 @@
                 }
             }
         })
-        .state("setup.geocode_methods_create", {
+        .state("setup.geocode_methods_list.geocode_methods_create", {
             url: "/geocode_methods/create",
             views: {
-                "body@setup" : {
-                    templateUrl: "setup/tpls/dashboard/body.tpl.html"
-                },
-                "main-content@setup.geocode_methods_create": {
+                "main-content@setup.geocode_methods_list": {
                     templateUrl: "setup/tpls/gis/methods.edit.tpl.html",
                     controller: "mfl.setup.gis.controllers.geocode_methods_create"
                 }
             }
         })
-        .state("setup.geocode_methods_edit", {
+        .state("setup.geocode_methods_list.geocode_methods_edit", {
             url: "/geocode_methods/edit/:geocode_method_id",
             views: {
-                "body@setup" : {
-                    templateUrl: "setup/tpls/dashboard/body.tpl.html"
-                },
-                "main-content@setup.geocode_methods_edit": {
+                "main-content@setup.geocode_methods_list": {
                     templateUrl: "setup/tpls/gis/methods.edit.tpl.html",
                     controller: "mfl.setup.gis.controllers.geocode_methods_edit"
                 }
             }
         })
-        .state("setup.geocode_methods_delete", {
+        .state("setup.geocode_methods_list.geocode_methods_delete", {
             url: "/geocode_methods/delete/:geocode_method_id",
             views: {
-                "body@setup" : {
-                    templateUrl: "setup/tpls/dashboard/body.tpl.html"
-                },
-                "main-content@setup.geocode_methods_delete": {
+                "main-content@setup.geocode_methods_list": {
                     templateUrl: "setup/tpls/gis/methods.delete.tpl.html",
                     controller: "mfl.setup.gis.controllers.geocode_methods_delete"
                 }
