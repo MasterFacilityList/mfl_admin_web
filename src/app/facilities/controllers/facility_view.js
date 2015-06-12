@@ -203,7 +203,7 @@
 
     .controller("mfl.facilities.controllers.view.mutate_op_status", ["$scope",
         "$stateParams", "mfl.facilities.wrappers",
-        "mfl.facilities.wrappers", function($scope, $stateParams, facilityApi){
+           function($scope, $stateParams, facilityApi){
             $scope.title = [
                 {
                     icon: "fa-building",
@@ -265,6 +265,34 @@
                 });
             };
         }]
+        )
+    .controller("mfl.facilities.controllers.view.officers",
+        ["$scope","$stateParams","mfl.facilities.wrappers",
+        function ($scope,$stateParams,facilityApi) {
+        $scope.title = [
+            {
+                icon: "",
+                name: "Add Officers"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "ui-sref='facilities.list.id.view' " +
+                        "has-permission='users.add_mfluser' ",
+                class: "action-btn action-btn-info action-btn-md",
+                color: "blue",
+                tipmsg: "Go Back",
+                icon: "fa-arrow-left"
+            }
+        ];
+        $scope.facility = {facilityId: $stateParams.facilityId};
+        var promise = facilityApi.facilities.get($stateParams.facilityId);
+        facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);
+        $scope.facility_officers = [];
+        facilityApi.utils.resolvePromise(
+            $scope, $scope, "facility_officers",
+            facilityApi.officers.filter({facility: $stateParams.facilityId})
         );
+    }]);
 })(angular);
 

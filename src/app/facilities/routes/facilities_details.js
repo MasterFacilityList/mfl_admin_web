@@ -82,6 +82,18 @@
                     }
                 }
             })
+        .state("facilities.list.id.officers", {
+                url: "/officers/",
+                views: {
+                    "main-content@facilities.list" : {
+                        templateUrl : "facilities/tpls/view/officers.tpl.html",
+                        controller: "mfl.facilities.controllers.view.officers"
+                    },
+                    "header@facilities.list.id.officers":{
+                        templateUrl: "facilities/tpls/common/facility_nav.tpl.html"
+                    }
+                }
+            })
         ;
     }]);
 })(angular);

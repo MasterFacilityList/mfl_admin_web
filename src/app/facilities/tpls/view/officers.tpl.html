@@ -1,0 +1,55 @@
+<div ui-view="header"></div>
+<!-- /- Start of tabbed multi-step form -->
+<contentheader></contentheader>
+<div class="content-body">
+    <div class="col-lg-12 content-card margin-t-20">
+        <div ng-if="alert" class="callout callout-danger fade in">
+            <h4>Some Errors On The Form</h4>
+            <p ng-bind-html="alert"></p>
+        </div>
+            <form role="form" name="facilities.form.officer">
+                <div class="col-lg-6">
+                    <h4>Current Officer: [TODO]</h4>
+                        <label>
+                            Change Officer:
+                        </label>
+                        <div class="group">
+                            <select>
+                                <option value=""></option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    <button input="submit" class="md-btn md-btn-primary">Save</button>
+                </div>
+                <div class="col-lg-6">
+                    <div ng-include src="'facilities/tpls/view/view_basic_inc.tpl.html'"></div>
+                </div>
+            </form>
+    </div>
+    <div class="=margin-t-20">
+        <div id="no-more-tables" class="margin-t-15">
+        <h4>Facility Officers </h4>
+            <div class="content-card">
+                <table class="table table-hover cf">
+                    <thead>
+                        <th >Name</th>
+                        <th >ID Number</th>
+                        <th class="text-center">Actions</th>
+                    </thead>
+                    <tbody class="example-animate-container">
+                        <tr class="animate-repeat" ng-repeat="officer in facility_officers">
+                            <td data-title="Name">{{officer.name}}</td>
+                            <td data-title="ID Number">{{officer.id_number}}</td>
+                            <td class="text-center" data-title="Actions">
+                                <a class="action-btn action-btn-grid action-btn-info" tooltip="Edit" tooltip-placement="bottom">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

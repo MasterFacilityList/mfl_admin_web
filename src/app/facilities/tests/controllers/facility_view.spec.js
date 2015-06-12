@@ -83,6 +83,7 @@
                 var ctrl = createController("mfl.facilities.controllers.view.approve", dt);
                 expect(ctrl).toBeDefined();
             });
+
         it("should approve facility: success",
            function(){
                 var dt = {
@@ -383,5 +384,15 @@
                 $httpBackend.flush();
                 expect($scope.alert).toBeDefined();
             });
+
+        it("should have mfl.facilities.controllers.view.officers` defined",
+           function(){
+                var dt = {
+                    $stateParams: {facilityId: 1}
+                };
+                var ctrl = createController("mfl.facilities.controllers.view.officers", dt);
+                expect(ctrl).toBeDefined();
+            });
+
     });
 })(describe);
