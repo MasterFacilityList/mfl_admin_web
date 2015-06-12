@@ -54,6 +54,38 @@
                 },
                 getError: function(error){
                     return error.error_msg.error;
+                },
+                setActions: function(scope, stateParams, api, titles, actions){
+                    if(!_.isUndefined(stateParams.id) && stateParams.id !== "create"){
+                    scope.title = titles.edit;
+                    scope.action = _.union(actions.defaults,edit);
+                    api.get(stateParams.id).success(function(data){
+                        scope.data = data;
+                    }).error(function(error){
+                        scope.alert = this.getError(error);
+                    });
+                }
+                else if(!_.isUndefined(stateParams.id) &&stateParams.id === "create") {
+                    scope.title = titles.create;
+                    $scope.actions = _.union(actions.defaults, actions.create);
+                    }
+                },
+                create: function(data, api, scope, state, redirect_url){
+                    api.create(data).success(function(){
+                        state.go(redirect_url);
+                    }).error(function(error){
+                        scope.alert = this.getError(error);
+                    });
+                },
+                update: function(id, frm, api, scope, state, redirect_url){
+                    var changes= formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        api.update(id, changes).success(function(){
+                            state.go(redirect_url);
+                        }).error(function(error){
+                            scope.alert = this.getError(error);
+                        });
+                    }
                 }
             };
         }();
