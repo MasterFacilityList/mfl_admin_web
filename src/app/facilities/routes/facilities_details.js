@@ -11,7 +11,7 @@
             views: {
                 "main-content@facilities.list": {
                     templateUrl: "facilities/tpls/view/view.tpl.html",
-                    controller: "mfl.facilities.controllers.view.base"
+                    controller: "mfl.facilities.controllers.view.id"
                 },
                 "header@facilities.list.id":{
                     templateUrl: "facilities/tpls/common/facility_nav.tpl.html"
