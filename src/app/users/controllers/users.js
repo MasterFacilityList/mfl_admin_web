@@ -125,6 +125,10 @@
     .controller("mfl.users.controllers.user_edit.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers",
         function ($scope, $log, wrappers) {
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
+            };
             $scope.contact = {
                 contact_type: "",
                 contact: ""
@@ -306,10 +310,10 @@
             {
                 func : "ui-sref='users.user_create.basic' " +
                         "has-permission='users.add_mfluser' ",
-                class: "action-btn action-btn-info action-btn-md",
+                class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
                 tipmsg: "New User",
-                icon: "fa-user-plus"
+                icon: "fa-plus"
             }
         ];
     }]);

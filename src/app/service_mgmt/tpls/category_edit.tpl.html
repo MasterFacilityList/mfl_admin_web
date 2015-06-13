@@ -1,16 +1,16 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.category_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
         <a tooltip="delete category" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} action-btn action-btn-danger action-btn-md"  ui-sref="service_mgmt.category_list.category_delete({category_id: category_id})" ui-sref-opts="{reload:true}"><i class="fa fa-trash"></i></a>
+        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.category_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
    </div>
    <h2 class="content-title">
-       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus'}}"></i> {{edit_view ? 'Edit' : 'New'}} Category</span>
+       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{edit_view ? 'Edit' : 'New'}} Category</span>
    </h2>
 </div>
-<div class="content-body">
-    <form name="category_frm">
-            <div class="pad-form">
-               <div class="content-card pad-15">
+<div class="col-md-12 col-sm-12">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
+    <form name="category_frm" novalidate>
+               <div class="col-lg-10 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-20">
                     <div class="group">
                         <input type="text" name="name" ng-model="category.name" required />
                         <span class="highlight"></span>
@@ -29,11 +29,11 @@
                         <span class="bar"></span>
                         <label>Description</label>
                     </div>
-                    <div class="margin-t-50">
-                        <a class="md-btn md-btn-clear" ui-sref="service_mgmt.category_list">Cancel</a>
-                            <button class="md-btn md-btn-primary" ng-click="save(category_frm)">Save</button>
+                    <div class="col-md-4 text-left margin-t-20 margin-b-20">
+                        <button class="login-btn login-btn-primary" ng-click="save(category_frm)"><i class="fa fa-save"></i> Save</button>
+                        <a class="margin-h-5 login-btn login-btn-default" ui-sref="service_mgmt.category_list">Cancel</a>
                     </div>
                </div>
-            </div>
     </form>
+</div>
 </div>

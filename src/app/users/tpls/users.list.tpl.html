@@ -20,9 +20,9 @@
                 <td data-title="Name" class="pad-t-15">{{user.first_name}}&nbsp;{{user.last_name}}</td>
                 <td data-title="Username" class="pad-t-15">{{user.username}}</td>
                 <td data-title="Email" class="pad-t-15">{{user.email}}</td>
-                <td data-title="National User" class="pad-t-15">
-                    <i ng-if="user.is_national" class="fa fa-check-circle-o fa-2x text-success"></i>
-                    <i ng-if="!user.is_national" class="fa fa-times-circle-o fa-2x text-danger"></i>
+                <td data-title="National User" class="pad-t-15 fs-13">
+                    <i ng-if="user.is_national" class="fa fa-user fa-2x text-success"></i>
+                    <i ng-if="!user.is_national" class="fa fa-user-times fa-2x text-danger"></i>
                 </td>
                 <td class="text-center">
                     <a ui-sref="users.user_edit.basic({user_id : user.id})" class="action-btn action-btn-grid action-btn-primary" tooltip="Edit user">

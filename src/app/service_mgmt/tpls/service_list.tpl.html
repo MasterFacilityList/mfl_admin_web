@@ -5,14 +5,14 @@
     <div class="pull-right col-xs-4">
     <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
     </div>
-    <table class="table table-hover" id="no-more-tables">
+    <table class="table table-hover fs-14" id="no-more-tables">
         <thead>
             <tr>
                 <th sil-grid-sort field='code'>Code</th>
                 <th sil-grid-sort field='name'>Name</th>
                 <th sil-grid-sort field='abbreviation'>Abbreviation</th>
                 <th sil-grid-sort field='category'>Category</th>
-                <th>Actions</th>
+                <th class="text-right">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +25,7 @@
                         {{service.category_name}}
                     </a>
                 </td>
-                <td data-title="Actions:">
+                <td data-title="Actions:" class="text-right">
                     <a tooltip-placement="bottom" tooltip="edit service" ui-sref="service_mgmt.service_list.service_edit({service_id: service.id})" ui-sref-opts="{reload:true}" class="action-btn action-btn-grid action-btn-primary">
                         <i class="fa fa-edit"></i>
                     </a>

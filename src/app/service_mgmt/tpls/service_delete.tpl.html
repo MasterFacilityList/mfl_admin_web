@@ -3,16 +3,16 @@
        <i class="fa fa-trash"></i> Delete Service
    </span>
 </div>
-<div class="content-body">
+<div class="col-md-12 col-sm-12">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
     <form name="category_frm">
-            <div class="pad-form">
-               <div class="content-card pad-15">
-                    <p>Are you sure you want to delete the service <strong>{{service.name}}</strong>?</p>
-                    <div class="margin-t-50">
-                            <a class="md-btn md-btn-primary" ui-sref="service_mgmt.service_list">No</a>
-                            <button class="md-btn md-btn-danger" ng-click="save()">Yes</button>
+            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20">
+                    <p class="lead">Are you sure you want to delete the service <strong>{{service.name}}</strong>?</p>
+                    <div class="margin-t-20 margin-b-20">
+                            <button class="login-btn login-btn-success margin-h-5" ng-click="save()">Yes</button>
+                            <a class="login-btn login-btn-default margin-l-5" ui-sref="service_mgmt.service_list">No</a>
                     </div>
-               </div>
             </div>
     </form>
+</div>
 </div>

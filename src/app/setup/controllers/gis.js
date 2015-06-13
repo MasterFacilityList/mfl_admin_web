@@ -47,7 +47,9 @@
             $scope.save = function () {
                 adminApi.geocode_methods.create($scope.geocode_method)
                 .success(function (data) {
-                    $state.go("setup.geocode_methods_edit", {"method_id": data.id});
+                    $state.go(
+                        "setup.geocode_methods_list.geocode_methods_edit",
+                        {"method_id": data.id});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -185,7 +187,9 @@
             $scope.save = function () {
                 adminApi.geocode_sources.create($scope.geocode_source)
                 .success(function (data) {
-                    $state.go("setup.geocode_sources_edit", {"geocode_source_id": data.id});
+                    $state.go(
+                        "setup.geocode_sources_list.geocode_sources_edit",
+                        {"geocode_source_id": data.id});
                 })
                 .error(function (data) {
                     $log.error(data);
