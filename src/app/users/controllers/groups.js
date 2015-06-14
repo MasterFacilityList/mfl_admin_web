@@ -16,7 +16,7 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='groups.group_create' " +
+                    func : "ui-sref='users.group_list.group_create' " +
                             "has-permission='users.add_mfluser' ",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
@@ -73,7 +73,7 @@
             $scope.save = function () {
                 wrappers.groups.create($scope.group)
                 .success(function (data) {
-                    $state.go("groups.group_edit", {"group_id": data.id});
+                    $state.go("users.group_list.group_edit", {"group_id": data.id});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -95,7 +95,7 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='groups.group_delete({group_id: group.id})'",
+                    func : "ui-sref='users.group_list.group_delete({group_id: group.id})'",
                     class: "action-btn action-btn-danger action-btn-md",
                     color: "blue",
                     tipmsg: "Delete User",
@@ -156,6 +156,12 @@
         ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
         function ($scope, $log, $state, $stateParams, wrappers) {
             $scope.group_id = $stateParams.group_id;
+            $scope.title = [
+                {
+                    icon : "fa-trash",
+                    name : "Delete Group"
+                }
+            ];
 
             wrappers.groups.get($scope.group_id)
                 .success(function (data) {
