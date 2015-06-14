@@ -6,7 +6,7 @@
         <table class="table content-card  margin-b-10">
             <tbody>
                 <tr class="">
-                    <td class="pad-t-15">
+                    <td class="">
                         <div class="group">
                         <select name="contact_type" ng-model="contact.contact_type" class="pad-t-15" required>
                             <option value="">Select Contact Type</option>
@@ -16,7 +16,7 @@
                         <span class="bar"></span>
                         </div>
                     </td>
-                    <td class="pad-t-15">
+                    <td class="">
                         <div class="group">
                             <input type="text" name="contact" ng-model="contact.contact"  required />
                             <span class="highlight"></span>
@@ -27,8 +27,8 @@
                         </div>
                     </td>
                     <td class="text-right">
-                        <button type="submit" class="action-btn action-btn-primary action-btn-md margin-t-10" tooltip="Add Contact">
-                            <i class="fa fa-plus"></i>
+                        <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add Contact">
+                            <i class="fa fa-plus-circle"></i> Add
                         </button>
                     </td>
                 </tr>
@@ -36,20 +36,20 @@
         </table>
     </form>
     </div>
-    <div class="col-lg-12 margin-t-20">
+    <div  class="col-lg-12 margin-t-20">
     <h4> Current Contacts</h4>
     <table class="table content-card margin-t-20 margin-b-10">
         <tbody>
             <tr ng-repeat="contact in contacts">
                 <td class="pad-t-15 fs-16 fw-500">{{contact.contact_type_text}}</td>
                 <td class="pad-t-15 fs-16 fw-500">{{contact.contact_text}}</td>
-                <td class="text-right">
+                <td class="pad-t-10 text-right">
                 <span ng-if="contact.delete_spinner">
                     <i class="fa fa-spin fa-circle-o-notch"></i>
                 </span>
-                    <button class="action-btn action-btn-danger action-btn-md" ng-click="remove(contact)">
-                        <i class="fa fa-trash"></i>
-                    </button>
+                    <a class="remove-icon text-danger" ng-click="remove(contact)" tooltip="Remove Contact">
+                        <i class="fa fa-times-circle fa-2x fw-500"></i>
+                    </a>
                 </td>
             </tr>
             <tr ng-if="spinner">
