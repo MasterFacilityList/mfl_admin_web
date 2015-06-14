@@ -10,13 +10,14 @@
             <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
         </span>
         <span ng-if="!spinner" class="main-title">
-            {{const_details.code}} | {{const_details.name}} CONSTITUENCY
+            {{const_details.name}} CONSTITUENCY
         </span>
     </h2>
 </div>
 <!-- End of content header -->
 <div class="col-md-12">
     <div class="col-md-12 col-sm-12 content-card">
+        <h4>LISTED WARDS</h4>
         <table class="table table-hover ">
             <thead>
                 <th class="fs-16">Name</th>
@@ -25,7 +26,7 @@
             <tbody>
                 <tr ng-repeat="ward in const_wards">
                     <td class="pad-t-15 fs-14">
-                        {{ward.name}} WARD
+                        {{ward.name}}
                     </td>
                     <td class="pad-t-15 fs-14 text-right">
                         {{ward.code}}
