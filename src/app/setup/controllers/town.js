@@ -107,6 +107,12 @@
         ["$scope", "$stateParams", "$state", "$log", "adminApi",
         function ($scope, $stateParams, $state, $log, adminApi) {
             $scope.town_id = $stateParams.town_id;
+            $scope.title = [
+                {
+                    icon : "fa-trash",
+                    name : "Delete Town"
+                }
+            ];
 
             adminApi.towns.get($scope.town_id)
             .success(function (data) {

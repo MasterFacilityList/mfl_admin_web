@@ -4,10 +4,10 @@
     <p ng-bind-html="alert"></p>
 </div>
 <div class="col-lg-12 margin-t-20">
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
     <form role="form form-horizontal form-bordered" name="chu.approvers.form">
         <!-- Start of dynamic form -->
-        <div class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-20">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
             <div class="group">
                 <input type="text" name="name" ng-model="chuApprovers.name" required>
                 <span class="highlight"></span>
@@ -32,31 +32,25 @@
                     Abbreviation
                 </label>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 margin-t-10 margin-b-10 text-left">
-                <div class="checkbox-group">
-                    <input type="checkbox" id="active" name="active"     ng-model="chuApprovers.active">
-                    <label for="active">
-                        <span class="check"></span>
-                        <span class="box"></span>
-                         Is Active?
-                     </label>
-                </div>
+            <div class="checkbox-group margin-b-20">
+                <input type="checkbox" id="active" name="active"     ng-model="chuApprovers.active">
+                <label for="active">
+                    <span class="check"></span>
+                    <span class="box"></span>
+                     Is Active?
+                 </label>
             </div>
+            <button ng-if="!chuApprovers.id" ng-click="createChuApprovers(chuApprovers)" class="login-btn login-btn-primary">
+                <i class="fa fa-save"></i> Save
+            </button>
+            <button ng-if="chuApprovers.id" ng-click="updateChuApprovers(chuApprovers.id, chu.approvers.form)" class="login-btn login-btn-primary">
+                <i class="fa fa-save"></i> Save
+            </button>
+            <button class="login-btn login-btn-default margin-l-10" ui-sref="setup.chu_approvers">
+                Cancel
+            </button>
         </div>
         <!-- End of the dynamic form -->
-        <div class="col-md-11 col-md-offset-1 margin-t-10 margin-b-20">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
-                <span class="pull-left margin-h-5">
-                    <button ng-if="!chuApprovers.id" ng-click="createChuApprovers(chuApprovers)" class="login-btn login-btn-primary">
-                        <i class="fa fa-save"></i> Save
-                    </button>
-                    <button ng-if="chuApprovers.id" ng-click="updateChuApprovers(chuApprovers.id, chu.approvers.form)" class="login-btn login-btn-primary">
-                        <i class="fa fa-save"></i> Save
-                    </button>
-                </span>
-                </span>
-            </div>
-        </div>
     </form>
     </div>
 </div>
