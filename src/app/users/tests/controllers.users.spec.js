@@ -185,7 +185,18 @@
 
         describe("Test user create main controller", function () {
             it("should load", function () {
-                ctrl("user_create");
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                ctrl("user_create", data);
+                var test_title = [
+                    {
+                        icon : "fa-plus-circle",
+                        name : "New User"
+                    }
+                ];
+                expect(data.$scope.title).toEqual(test_title);
             });
         });
 
@@ -219,7 +230,8 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
-                expect(state.go).toHaveBeenCalledWith("users.user_edit.basic", {"user_id": 3});
+                expect(state.go).toHaveBeenCalledWith("users.user_list."+
+                    "user_edit.basic", {"user_id": 3});
             });
 
             it("should show an error on save a new user", function () {
