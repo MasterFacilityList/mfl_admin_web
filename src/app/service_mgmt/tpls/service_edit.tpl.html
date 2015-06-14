@@ -10,7 +10,7 @@
 <div class="col-md-12 col-sm-12">
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
     <form class="" name="service_frm">
-        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
                 <div class="group">
                     <input type="text" name="name" ng-model="service.name" required />
                     <span class="highlight"></span>
@@ -37,11 +37,9 @@
                     <span class="bar"></span>
                     <label>Category</label>
                 </div>
-               <div class="col-md-4 text-left margin-t-20 margin-b-20">
-                    <button class="login-btn login-btn-primary" ng-click="save(service_frm)"><i class="fa fa-save"></i> Save</button>
-                    <a class="login-btn login-btn-default margin-l-5" ui-sref="service_mgmt.service_list">&nbsp;Cancel</a>
-               </div>
-        </div>
+                <button class="login-btn login-btn-primary pull-left" ng-click="save(service_frm)"><i class="fa fa-save"></i> Save</button>
+                <a class="login-btn login-btn-default pull-left margin-l-10" ui-sref="service_mgmt.service_list">&nbsp;Cancel</a>
+    </div>
     </form>
 </div>
 </div>

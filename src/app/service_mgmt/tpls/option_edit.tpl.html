@@ -8,9 +8,9 @@
    </h2>
 </div>
 <div class="col-md-12">
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20  content-card">
     <form name="option_frm" novalidate>
-        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
                 <div class="group">
                     <input type="text" name="display_text" ng-model="option.display_text" required />
                     <span class="highlight"></span>
@@ -31,7 +31,7 @@
                     <span class="bar"></span>
                     <label>Value</label>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 margin-b-10 text-left">
+                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 margin-b-10 text-left"> -->
                     <div class="checkbox-group">
                         <input type="checkbox" name="is_exclusive_option" ng-model="option.is_exclusive_option"  id="is_exclusive"/>
                         <label for="is_exclusive">
@@ -40,11 +40,10 @@
                              Is Exclusive Option
                          </label>
                     </div>
-                </div>
-                <div class="col-md-12 col-sm-12 text-left margin-t-20 margin-b-20">
-                    <button ng-click="save(option_frm)" class="login-btn login-btn-primary margin-h-5"><i class="fa fa-save"></i> Save</button>
-                    <a class="login-btn login-btn-default margin-l-5" ui-sref="service_mgmt.option_list">Cancel</a>
-                </div>
+                    <br>
+                <!-- </div> -->
+                <button ng-click="save(option_frm)" class="login-btn login-btn-primary pull-left"><i class="fa fa-save"></i> Save</button>
+                <a class="login-btn login-btn-default margin-l-10 pull-left" ui-sref="service_mgmt.option_list">Cancel</a>
         </div>
     </form>
 </div>

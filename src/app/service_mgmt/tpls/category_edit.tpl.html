@@ -10,7 +10,7 @@
 <div class="col-md-12 col-sm-12">
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
     <form name="category_frm" novalidate>
-               <div class="col-lg-10 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-20">
+               <div class="col-lg-10 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-20 margin-b-20">
                     <div class="group">
                         <input type="text" name="name" ng-model="category.name" required />
                         <span class="highlight"></span>
@@ -29,10 +29,8 @@
                         <span class="bar"></span>
                         <label>Description</label>
                     </div>
-                    <div class="col-md-4 text-left margin-t-20 margin-b-20">
-                        <button class="login-btn login-btn-primary" ng-click="save(category_frm)"><i class="fa fa-save"></i> Save</button>
-                        <a class="margin-h-5 login-btn login-btn-default" ui-sref="service_mgmt.category_list">Cancel</a>
-                    </div>
+                    <button class="login-btn login-btn-primary pull-left" ng-click="save(category_frm)"><i class="fa fa-save"></i> Save</button>
+                    <a class="margin-l-10 login-btn login-btn-default margin-l-5 pull-left" ui-sref="service_mgmt.category_list">Cancel</a>
                </div>
     </form>
 </div>
