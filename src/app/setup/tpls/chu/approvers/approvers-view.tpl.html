@@ -5,7 +5,7 @@
 </div>
 <div class="col-lg-12 margin-t-20">
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
-    <form role="form form-horizontal form-bordered" name="chu.approvers.form">
+    <form role="form form-horizontal form-bordered" name="chu.approvers.form" novalidate>
         <!-- Start of dynamic form -->
         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
             <div class="group">
@@ -17,7 +17,7 @@
                 </label>
             </div>
             <div class="group">
-                <textarea type="text" name ="description" ng-model="chuApprovers.description"></textarea>
+                <textarea type="text" name ="description" ng-model="chuApprovers.description" required></textarea>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>
