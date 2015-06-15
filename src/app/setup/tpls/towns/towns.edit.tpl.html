@@ -1,7 +1,7 @@
 <contentheader></contentheader>
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 content-card margin-t-20">
     <form ng-submit="save()" >
-        <div class="col-lg-10 col-lg-offset-1 margin-t-20">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
             <div class="group">
                 <input type="text" ng-model="town.name" required />
                 <span class="highlight"></span>
@@ -10,12 +10,10 @@
                     Town Name
                 </label>
             </div>
-            <div class="col-md-12 margin-b-20">
-                <button class="login-btn login-btn-default margin-h-5" ui-sref="setup.towns">Cancel</button>
-                <button class="login-btn login-btn-primary margin-h-5" type="submit" value="Save">
-                    <i class="fa fa-save"></i> Save
-                </button>
-            </div>
+            <button class="login-btn login-btn-primary" type="submit" value="Save">
+                <i class="fa fa-save"></i> Save
+            </button>
+            <button class="login-btn login-btn-default margin-l-10" ui-sref="setup.towns">Cancel</button>
         </div>
     </form>
 </div>

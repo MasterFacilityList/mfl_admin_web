@@ -1,16 +1,16 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.category_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
         <a tooltip="delete service" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} action-btn action-btn-danger action-btn-md"  ui-sref="service_mgmt.service_list.service_delete({service_id: service.id})" ui-sref-opts="{reload:true}"><i class="fa fa-trash"></i></a>
+        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.category_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
    </div>
    <h2 class="content-title">
-       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus'}}"></i> {{edit_view ? 'Edit' : 'New'}} Service</span>
+       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{edit_view ? 'Edit' : 'New'}} Service</span>
    </h2>
 </div>
-<div class="content-body">
+<div class="col-md-12 col-sm-12">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
     <form class="" name="service_frm">
-        <div class="pad-form">
-           <div class="content-card pad-15">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
                 <div class="group">
                     <input type="text" name="name" ng-model="service.name" required />
                     <span class="highlight"></span>
@@ -30,18 +30,16 @@
                     <label>Abbreviation</label>
                 </div>
                 <div class="group">
-                    <select name="category" ng-model="service.category" required>
+                    <select name="category" ng-model="service.category_name" required>
                         <option ng-repeat="cat in categories" ng-value="cat.id">{{cat.name}}</option>
                     </select>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Category</label>
                 </div>
-               <div class="margin-t-50">
-                    <a class="md-btn md-btn-clear" ui-sref="service_mgmt.service_list">Cancel</a>
-                    <button class="md-btn md-btn-primary margin-l-5" ng-click="save(service_frm)">Save</button>
-               </div>
-           </div>
-        </div>
+                <button class="login-btn login-btn-primary pull-left" ng-click="save(service_frm)"><i class="fa fa-save"></i> Save</button>
+                <a class="login-btn login-btn-default pull-left margin-l-10" ui-sref="service_mgmt.service_list">&nbsp;Cancel</a>
+    </div>
     </form>
+</div>
 </div>

@@ -1,7 +1,10 @@
 <contentheader></contentheader>
-<div>
-    <p>Are you sure you want to delete the town <strong>{{town.name}}</strong> ?</p>
+<div class="col-md-12">
+<div class="col-md-10 col-md-offset-1 col-sm-10 content-card text-center col-sm-offset-1 margin-t-20">
+    <div class="col-md-10 col-md-offset-1 margin-b-20 margin-t-20">
+    <p class="lead">Are you sure you want to delete the town <strong>{{town.name}}</strong> ?</p>
 
-    <button class="btn btn-danger" ng-click="remove()">Yes</button>
-    <a class="btn btn-default" ui-sref="setup.towns.town_edit({town_id: town.id})">No</a>
+    <button class="login-btn login-btn-success margin-h-5" ng-click="remove()">Yes</button>
+    <a class="login-btn login-btn-default margin-h-5" ui-sref="setup.towns.town_edit({town_id: town.id})">No</a>
+</div>
 </div>

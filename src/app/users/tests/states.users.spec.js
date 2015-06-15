@@ -18,45 +18,22 @@
         });
 
         it("should go to users listing page", function () {
-            expect($state.href("users.user_list")).toEqual("#/users/users/");
-        });
-
-        it("should go to users creation page", function () {
-            expect($state.href("users.user_create")).toEqual("#/users/create/");
-        });
-
-        it("should go to users basic details creation page", function () {
-            expect($state.href("users.user_create.basic")).toEqual("#/users/create/basic/");
-        });
-
-        it("should go to users editing page", function () {
-            expect($state.href("users.user_edit", {"user_id": 3}))
-                .toEqual("#/users/edit/3/");
+            expect($state.href("users.user_list")).toEqual("#/users/list/");
         });
 
         it("should go to users basic details editing page", function () {
-            expect($state.href("users.user_edit.basic", {"user_id": 3}))
-                .toEqual("#/users/edit/3/basic/");
-        });
-
-        it("should go to user contacts editing page", function () {
-            expect($state.href("users.user_edit.contacts", {"user_id": 3}))
-                .toEqual("#/users/edit/3/contacts/");
-        });
-
-        it("should go to user groups assignment page", function () {
-            expect($state.href("users.user_edit.groups", {"user_id": 3}))
-                .toEqual("#/users/edit/3/groups/");
+            expect($state.href("users.user_list.user_edit.basic", {"user_id": 3}))
+                .toEqual("#/users/list/edit/3/basic/");
         });
 
         it("should go to county assignment page", function () {
-            expect($state.href("users.user_edit.counties", {"user_id": 3}))
-                .toEqual("#/users/edit/3/counties/");
+            expect($state.href("users.user_list.user_edit.counties", {"user_id": 3}))
+                .toEqual("#/users/list/edit/3/counties/");
         });
 
         it("should go to users delete page", function () {
-            expect($state.href("users.user_delete", {"user_id": 3}))
-                .toEqual("#/users/delete/3/");
+            expect($state.href("users.user_list.user_delete", {"user_id": 3}))
+                .toEqual("#/users/list/delete/3/");
         });
 
     });

@@ -1,6 +1,11 @@
-<div>
-    <p>Are you sure you want to delete the user <strong>{{user.full_name}}</strong> ?</p>
+<contentheader></contentheader>
+<div class="col-md-12 col-sm-12">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20 text-center content-card">
+    <div class="col-md-10 col-md-offset-1 margin-b-20 margin-t-20">
+        <p class="lead margin-b-10">Are you sure you want to delete the user <strong>{{user.full_name}}</strong> ?</p>
 
-    <button class="btn btn-danger" ng-click="remove()">Yes</button>
-    <a class="btn btn-default" ui-sref="users.user_edit.basic({user_id: user.id})">No</a>
+        <button class="login-btn login-btn-success margin-h-5" ng-click="remove()">Yes</button>
+        <a class="login-btn login-btn-default margin-h-5" ui-sref="users.user_list.user_edit.basic({user_id: user.id})">No</a>
+    </div>
+    </div>
 </div>

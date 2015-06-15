@@ -1,13 +1,25 @@
 <contentheader></contentheader>
 <div class="col-lg-12">
-    <div class="col-lg-12 content-card margin-t-20">
-        <form name="basic_profile" ng-submit="save(basic_profile)">
-            <div class="col-lg-6 col-md-6 margin-t-20">
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 content-card margin-t-20">
+        <form name="basic_profile" ng-submit="save(basic_profile)" novalidate>
+            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
                 <div class="group">
                     <input type="text" name="first_name" ng-model="profile.first_name" required />
                     <span class="higlight"></span>
                     <span class="bar"></span>
                     <label>First name</label>
+                </div>
+                <div class="group">
+                    <input type="text" name="last_name" ng-model="profile.last_name" required />
+                    <span class="higlight"></span>
+                    <span class="bar"></span>
+                    <label>Last name</label>
+                </div>
+                <div class="group">
+                    <input type="text" name="other_names" ng-model="profile.other_names" required/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Other names</label>
                 </div>
                 <div class="group">
                     <input type="email" name="email" ng-model="profile.email" required />
@@ -21,29 +33,10 @@
                     <span class="bar"></span>
                     <label>Username</label>
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-6 margin-t-20">
-                <div class="group">
-                    <input type="text" name="last_name" ng-model="profile.last_name" required />
-                    <span class="higlight"></span>
-                    <span class="bar"></span>
-                    <label>Last name</label>
-                </div>
-                <div class="group">
-                    <input type="text" name="other_names" ng-model="profile.other_names" />
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Other names</label>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 margin-t-10 margin-b-10">
-            <div class="col-md-1">
                 <button type="submit" class="login-btn login-btn-primary" ng-click="save(basic_profile)" value="Save">
                     <i class="fa fa-save"></i> Save
                 </button>
-            </div>
-            <div class="col-md-1">
-                <span ng-if="spinner">
+                <span ng-if="spinner" style="display: inline-block;">
                     <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
                 </span>
             </div>

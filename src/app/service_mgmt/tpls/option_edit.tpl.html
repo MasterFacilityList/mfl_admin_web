@@ -1,31 +1,21 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.option_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
         <a tooltip="delete option" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} action-btn action-btn-danger action-btn-md"  ui-sref="service_mgmt.option_list.option_delete({option_id: option_id})"><i class="fa fa-trash"></i></a>
+        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.option_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
    </div>
    <h2 class="content-title">
-       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus'}}"></i> {{edit_view ? 'Edit' : 'New'}} Option</span>
+       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{edit_view ? 'Edit' : 'New'}} Option</span>
    </h2>
 </div>
-<div class="content-body">
-    <form name="option_frm">
-        <div class="pad-form">
-           <div class="content-card pad-15">
+<div class="col-md-12">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20  content-card">
+    <form name="option_frm" novalidate>
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
                 <div class="group">
                     <input type="text" name="display_text" ng-model="option.display_text" required />
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>Display Text</label>
-                </div>
-                <div class="pad-v-10">
-                    <div class="checkbox-group margin-t-10">
-                        <input type="checkbox" name="is_exclusive_option" ng-model="option.is_exclusive_option"  id="is_exclusive"/>
-                        <label for="is_exclusive">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                             Is Exclusive Option
-                         </label>
-                    </div>
                 </div>
                 <div class="group">
                     <select name="option_type" ng-model="option.option_type" required>
@@ -41,11 +31,20 @@
                     <span class="bar"></span>
                     <label>Value</label>
                 </div>
-                <div class="margin-t-50">
-                    <a class="md-btn md-btn-clear" ui-sref="service_mgmt.option_list">Cancel</a>
-                    <button ng-click="save(option_frm)" class="md-btn md-btn-primary">Save</button>
-                </div>
-           </div>
+                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 margin-b-10 text-left"> -->
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="is_exclusive_option" ng-model="option.is_exclusive_option"  id="is_exclusive"/>
+                        <label for="is_exclusive">
+                            <span class="check"></span>
+                            <span class="box"></span>
+                             Is Exclusive Option
+                         </label>
+                    </div>
+                    <br>
+                <!-- </div> -->
+                <button ng-click="save(option_frm)" class="login-btn login-btn-primary pull-left"><i class="fa fa-save"></i> Save</button>
+                <a class="login-btn login-btn-default margin-l-10 pull-left" ui-sref="service_mgmt.option_list">Cancel</a>
         </div>
     </form>
+</div>
 </div>

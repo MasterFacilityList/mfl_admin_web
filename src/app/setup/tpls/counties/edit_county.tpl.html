@@ -10,7 +10,7 @@
             <i class="fa fa-spin fa-circle-o-notch fa-1x"></i>
         </span>
         <span ng-if="!spinner" class="main-title">
-            {{county_details.code}} | {{county_details.name}} COUNTY
+            {{county_details.name}} COUNTY
         </span>
     </h2>
 </div>
@@ -24,14 +24,14 @@
         <!-- Start of tabbed multi step form  -->
         <div class="container-fluid">
             <ul class="form-tab margin-t--27">
-                <li ui-sref-active="active" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <li ui-sref-active="active" class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
                     <a ui-sref=".constituencies">
                         <span class="fw-900">
                             Constituencies
                         </span>
                     </a>
                 </li>
-                <li ui-sref-active="active" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <li ui-sref-active="active" class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
                     <a ui-sref=".users">
                         <span class="fw-900 ">
                             County Users

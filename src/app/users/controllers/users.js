@@ -11,6 +11,12 @@
     .controller("mfl.users.controllers.user_delete",
         ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
         function ($scope, $log, $state, $stateParams, wrappers) {
+            $scope.title = [
+                {
+                    icon : "fa fa-trash",
+                    name : "Delete User"
+                }
+            ];
             $scope.user_id = $stateParams.user_id;
 
             wrappers.users.get($scope.user_id)
@@ -33,7 +39,25 @@
         }]
     )
 
-    .controller("mfl.users.controllers.user_create", [angular.noop])
+    .controller("mfl.users.controllers.user_create", ["$scope",
+        function ($scope) {
+            $scope.title = [
+                {
+                    icon : "fa-plus-circle",
+                    name : "New User"
+                }
+            ];
+            $scope.action = [
+                {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go Back",
+                    icon: "fa-arrow-left"
+                }
+            ];
+        }
+    ])
 
     .controller("mfl.users.controllers.user_create.basic",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
@@ -56,7 +80,7 @@
             $scope.save = function () {
                 wrappers.users.create($scope.user)
                 .success(function (data) {
-                    $state.go("users.user_edit.basic", {user_id: data.id});
+                    $state.go("users.user_list.user_edit.basic", {user_id: data.id});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -76,7 +100,7 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='users.user_delete({user_id: user.id})'",
+                    func : "ui-sref='users.user_list.user_delete({user_id: user.id})'",
                     class: "action-btn action-btn-danger action-btn-md",
                     color: "blue",
                     tipmsg: "Delete User",
@@ -125,6 +149,10 @@
     .controller("mfl.users.controllers.user_edit.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers",
         function ($scope, $log, wrappers) {
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
+            };
             $scope.contact = {
                 contact_type: "",
                 contact: ""
@@ -304,12 +332,12 @@
         ];
         $scope.action = [
             {
-                func : "ui-sref='users.user_create.basic' " +
+                func : "ui-sref='users.user_list.user_create.basic' " +
                         "has-permission='users.add_mfluser' ",
-                class: "action-btn action-btn-info action-btn-md",
+                class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
                 tipmsg: "New User",
-                icon: "fa-user-plus"
+                icon: "fa-plus"
             }
         ];
     }]);
