@@ -152,8 +152,15 @@
                         color: "blue",
                         tipmsg: "Delete Contact Type",
                         icon: "fa-trash"
-                    },
-                    {
+                    },{
+                        func : "popover-placement='bottom' " +
+                        "popover-template='del_popover.templateUrl'"+
+                        " tooltip-placement='top'",
+                        class: "action-btn action-btn-danger action-btn-md",
+                        tipmsg:"Delete",
+                        color: "blue",
+                        icon: "fa-trash"
+                    },{
                         func : "onclick='window.history.back()'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
@@ -161,6 +168,10 @@
                         icon: "fa-arrow-left"
                     }
                 ];
+                $scope.del_popover = {
+                    content: "Hello, World!",
+                    templateUrl:"common/tpls/del_pop.tpl.html"
+                };
                 adminApi.contact_types.get($stateParams.id).success(function(data){
                     $scope.contact_types = data;
                 }).error(function(error){
