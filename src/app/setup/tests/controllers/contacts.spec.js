@@ -95,13 +95,13 @@
                 createController("mfl.setup.controller.contacts.edit", dt);
                 $scope.remove();
                 $scope.cancel();
-                expect($httpBackend.flush).toThrow();
+                $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($state.go).toHaveBeenCalledWith("setup.contacts", {  },
                                                        { reload : true });
             });
         it("should delete a contact: fail",function(){
-                var res = {msg: "ok"};
+                var res = {"detail":"Authentication credentials were not provided."};
                 var dt = {
                     $stateParams: {id: 1}
                 };
@@ -112,7 +112,6 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($scope.alert).toEqual(res.error);
                 expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($state.go).toHaveBeenCalledWith("setup.contacts", {  },
                                                        { reload : true });
