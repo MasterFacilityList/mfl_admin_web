@@ -1,5 +1,5 @@
 <div class="col-lg-12">
-    <div class="col-lg-12 margin-t-20">
+    <div class="col-lg-12 margin-t-20" requires-permission="users.change_mfluser" >
         <h4>Assign Group</h4>
         <form ng-submit="add()">
             <table class="table content-card  margin-b-10">
@@ -41,7 +41,7 @@
                         <span ng-if="group.delete_spinner">
                             <i class="fa fa-spin fa-circle-o-notch"></i>
                         </span>
-                        <button class="action-btn action-btn-danger action-btn-grid" ng-click="remove(group)">
+                        <button class="action-btn action-btn-danger action-btn-grid" ng-click="remove(group)" requires-permission="users.change_mfluser" >
                             <i class="fa fa-trash"></i>
                         </button>
                     </td>
