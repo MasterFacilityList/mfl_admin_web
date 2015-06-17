@@ -30,7 +30,7 @@
             $scope.remove = function () {
                 wrappers.users.remove($scope.user_id)
                     .success(function () {
-                        $state.go("users");
+                        $state.go("users.user_list");
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -266,6 +266,9 @@
             $scope.remove = function (grp) {
                 var update = _.without($scope.user.groups, grp);
                 updateGroups(update);
+            };
+            $scope.updateUserGroups = function () {
+                updateGroups($scope.user.groups);
             };
         }]
     )

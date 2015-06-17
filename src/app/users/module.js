@@ -9,7 +9,8 @@
 
         "mfl.users.controllers",
         "mfl.users.states",
-        "mfl.users.services"
+        "mfl.users.services",
+        "mfl.common.directives"
     ]);
 
 })(angular);
