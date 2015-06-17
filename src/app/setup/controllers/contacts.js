@@ -152,17 +152,14 @@
                 ];
                 $scope.action = [
                     {
-                        func : ""+
-                        " mfl-delete api='adminApi' api-key='contact_types'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Contact'"+
-                        " on-success-url='setup.contact_types'",
+                        func : "popover-placement='bottom' " +
+                        "popover-template='del_popover.templateUrl'"+
+                        " tooltip-placement='top'",
                         class: "action-btn action-btn-danger action-btn-md",
+                        tipmsg:"Delete",
                         color: "blue",
-                        tipmsg: "Delete Contact Type",
                         icon: "fa-trash"
-                    },
-                    {
+                    },{
                         func : "onclick='window.history.back()'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
@@ -170,11 +167,26 @@
                         icon: "fa-arrow-left"
                     }
                 ];
+                $scope.del_popover = {
+                    content: "Hello, World!",
+                    templateUrl:"common/tpls/del_pop.tpl.html"
+                };
                 adminApi.contact_types.get($stateParams.id).success(function(data){
                     $scope.contact_types = data;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+                $scope.remove = function () {
+                    adminApi.contact_types.remove($stateParams.id).success(function(){
+                        $state.go("setup.contact_types",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $state.go("setup.contact_types",{},{reload:true});
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.contact_types.view",{},{reload:true});
+                };
             }
             else if(!_.isUndefined($stateParams.id) &&
                 $stateParams.id === "create") {
