@@ -47,21 +47,7 @@
                     </button>
                 </span>
             </div>
-            <button popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" class="btn btn-default">Popover With Template</button>
         </div>
     </form>
     </div>
 </div>
-<script type="text/ng-template" id="temp.html">
-    <form name="category_frm">
-            <div class="pad-form">
-               <div class="content-card pad-15">
-                    <p>Are you sure you want to delete <strong>{{resourceName}}</strong>?</p>
-                    <div class="margin-t-50">
-                            <a class="md-btn md-btn-primary" ng-click="cancel()">No</a>
-                            <button class="md-btn md-btn-danger" ng-click="remove()">Yes</button>
-                    </div>
-               </div>
-            </div>
-    </form>
-</script>
