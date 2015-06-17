@@ -59,19 +59,20 @@
                 adminApi.contacts.get($stateParams.id).success(function(data){
                     $scope.contacts = data;
                     $scope.deleteText = $scope.contacts.contact;
-                    $scope.remove = function () {
-                        adminApi.contacts.remove($stateParams.id).success(function(){
-                            $state.go("setup.contacts",{},{reload:true});
-                        }).error(function(error){
-                            $scope.alert = error.error;
-                        });
-                    };
-                    $scope.cancel = function () {
-                        $state.go("setup.contacts.edit");
-                    };
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+                $scope.remove = function () {
+                    adminApi.contacts.remove($stateParams.id).success(function(){
+                        $state.go("setup.contacts",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $state.go("setup.contacts",{},{reload:true});
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.contacts.edit");
+                };
             }
             else {
                 $scope.title = [
