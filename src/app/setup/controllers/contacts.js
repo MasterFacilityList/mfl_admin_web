@@ -49,7 +49,7 @@
                         icon: "fa-trash"
                     },
                     {
-                        func : "onclick='window.history.back()'",
+                        func : "ui-sref='setup.contacts'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
                         tipmsg: "Go Back",

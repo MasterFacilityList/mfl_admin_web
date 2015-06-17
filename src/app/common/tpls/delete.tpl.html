@@ -6,12 +6,16 @@
    ">
     <form name="category_frm" style="">
             <div class="pad-form">
-               <div class="content-card margin-t-50">
-                    <p>Are you sure you want to delete <strong>{{deleteText}}</strong>?</p>
-                    <div class="margin-t-10">
-                            <a class="md-btn md-btn-primary" ng-click="cancel()">No</a>
-                            <button class="md-btn md-btn-danger" ng-click="remove()">Yes</button>
-                    </div>
+               <div class="margin-t-50 pad-10">
+                   <div class="center-pad">
+                       <div class="content-card center-pad">
+                            <h5>Are you sure you want to delete <strong>{{deleteText}}</strong>?</h5>
+                            <div class="margin-t-10">
+                                    <button class="login-btn login-btn-danger" ng-click="remove()">Yes</button>
+                                    <a class="margin-10" ng-click="cancel()">No</a>
+                            </div>
+                       </div>
+                   </div>
                </div>
             </div>
     </form>
