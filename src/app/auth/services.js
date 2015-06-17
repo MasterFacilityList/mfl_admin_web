@@ -64,6 +64,7 @@
                     } else if (! permChecker.hasPermission(toState.permission)) {
                         evt.preventDefault();
                         window.alert("You don't have permission to access the page.");
+                        change_state(HOME_PAGE_NAME);
                     }
                     return;
                 }
