@@ -41,18 +41,15 @@
                 ];
                 $scope.action = [
                     {
-                        func : ""+
-                        " mfl-delete api='adminApi' api-key='contacts'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Contact'"+
-                        " on-success-url='setup.contacts'",
+                        func : "ui-sref="+
+                        "setup.contacts.edit.delete",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Contact",
                         icon: "fa-trash"
                     },
                     {
-                        func : "onclick='window.history.back()'",
+                        func : "ui-sref='setup.contacts'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
                         tipmsg: "Go Back",
@@ -61,9 +58,21 @@
                 ];
                 adminApi.contacts.get($stateParams.id).success(function(data){
                     $scope.contacts = data;
+                    $scope.deleteText = $scope.contacts.contact;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+                $scope.remove = function () {
+                    adminApi.contacts.remove($stateParams.id).success(function(){
+                        $state.go("setup.contacts",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $state.go("setup.contacts",{},{reload:true});
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.contacts.edit");
+                };
             }
             else {
                 $scope.title = [
