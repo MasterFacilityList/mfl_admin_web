@@ -84,6 +84,38 @@
                 $httpBackend.flush();
                 expect($scope.contacts).toEqual(res);
             });
+        it("should delete a contact: success",function(){
+                var res = {msg: "ok"};
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                spyOn($state, "go");
+                $httpBackend.expectDELETE(SERVER_URL+"api/common/contacts/1/").respond(
+                200, res);
+                createController("mfl.setup.controller.contacts.edit", dt);
+                $scope.remove();
+                $scope.cancel();
+                $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("setup.contacts", {  },
+                                                       { reload : true });
+            });
+        it("should delete a contact: fail",function(){
+                var res = {"detail":"Authentication credentials were not provided."};
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                spyOn($state, "go");
+                $httpBackend.expectDELETE(SERVER_URL+"api/common/contacts/1/").respond(
+                500, res);
+                createController("mfl.setup.controller.contacts.edit", dt);
+                $scope.remove();
+                $scope.cancel();
+                $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("setup.contacts", {  },
+                                                       { reload : true });
+            });
         it("should edit a contact type: success",function(){
                 var dt = {
                     $stateParams: {id: 1}
@@ -336,6 +368,38 @@
                 $httpBackend.flush();
                 expect($scope.alert).toEqual("error");
                 expect($state.go).not.toHaveBeenCalledWith("setup.contact_types");
+            });
+        it("should delete a contact type: success",function(){
+                var res = {msg: "ok"};
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                spyOn($state, "go");
+                $httpBackend.expectDELETE(SERVER_URL+"api/common/contact_types/1/").respond(
+                200, res);
+                createController("mfl.setup.controller.contact_types.view", dt);
+                $scope.remove();
+                $scope.cancel();
+                $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
+                                                       { reload : true });
+            });
+        it("should delete a contact type: fail",function(){
+                var res = {"detail":"Authentication credentials were not provided."};
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                spyOn($state, "go");
+                $httpBackend.expectDELETE(SERVER_URL+"api/common/contact_types/1/").respond(
+                500, res);
+                createController("mfl.setup.controller.contact_types.view", dt);
+                $scope.remove();
+                $scope.cancel();
+                $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
+                                                       { reload : true });
             });
     });
 })(describe);

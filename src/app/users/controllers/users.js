@@ -100,7 +100,8 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='users.user_list.user_delete({user_id: user.id})'",
+                    func : "ui-sref='users.user_list.user_delete({user_id: user.id})' " +
+                           "requires-permission='users.delete_mfluser'",
                     class: "action-btn action-btn-danger action-btn-md",
                     color: "blue",
                     tipmsg: "Delete User",
@@ -336,7 +337,7 @@
         $scope.action = [
             {
                 func : "ui-sref='users.user_list.user_create.basic' " +
-                        "has-permission='users.add_mfluser' ",
+                        "requires-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",
                 tipmsg: "New User",

@@ -1,21 +1,25 @@
-<section class="section">
-   <div class="content">
-        <div ui-view="header"></div>
-        <div class="content-body">
-            <form name="category_frm">
-                    <div class="pad-form">
-                       <div class="content-card pad-15">
-                            <p>Are you sure you want to delete <strong>{{resourceName}}</strong>?</p>
-                            <div class="margin-t-50">
-                                    <a class="md-btn md-btn-primary" ng-click="cancel()">No</a>
-                                    <button class="md-btn md-btn-danger" ng-click="remove()">Yes</button>
+<div class="" style="z-index: 10;height:inherit;position:fixed;background-color:rgba(0, 0, 0, 0.4);display: block;
+   top:0;
+   bottom:0;
+   left:0;
+   right:0;
+   ">
+    <form name="category_frm" style="">
+            <div class="pad-form">
+               <div class="margin-t-50 pad-10">
+                   <div class="center-pad">
+                       <div class="content-card center-pad">
+                            <h5>Are you sure you want to delete <strong>{{deleteText}}</strong>?</h5>
+                            <div class="margin-t-10">
+                                    <button class="login-btn login-btn-danger" ng-click="remove()">Yes</button>
+                                    <a class="margin-10" ng-click="cancel()">No</a>
                             </div>
                        </div>
-                    </div>
-            </form>
-        </div>
-   </div>
-</section>
+                   </div>
+               </div>
+            </div>
+    </form>
+</div>
 
 
 

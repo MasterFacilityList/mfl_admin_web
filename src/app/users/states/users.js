@@ -46,7 +46,8 @@
                         controller: "mfl.users.controllers.user_create",
                         templateUrl: "users/tpls/users.edit.tpl.html"
                     }
-                }
+                },
+                permission: "users.add_mfluser"
             })
 
             .state("users.user_list.user_create.basic", {
@@ -56,7 +57,8 @@
                         controller: "mfl.users.controllers.user_create.basic",
                         templateUrl: "users/tpls/users.edit.basic.tpl.html"
                     }
-                }
+                },
+                permission: "users.add_mfluser"
             })
 
             .state("users.user_list.user_edit", {
@@ -116,9 +118,10 @@
                         controller: "mfl.users.controllers.user_delete",
                         templateUrl: "users/tpls/users.delete.tpl.html"
                     }
-                }
+                },
+                permission: "users.delete_mfluser"
             })
-            /*====================Beginning of group states*/
+
             .state("users.group_list", {
                 url: "groups/",
                 views: {
