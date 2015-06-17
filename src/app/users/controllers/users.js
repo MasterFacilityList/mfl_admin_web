@@ -30,7 +30,7 @@
             $scope.remove = function () {
                 wrappers.users.remove($scope.user_id)
                     .success(function () {
-                        $state.go("users");
+                        $state.go("users.user_list");
                     })
                     .error(function (data) {
                         $log.error(data);
