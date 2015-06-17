@@ -266,6 +266,9 @@
                 var update = _.without($scope.user.groups, grp);
                 updateGroups(update);
             };
+            $scope.updateUserGroups = function () {
+                updateGroups($scope.user.groups);
+            };
         }]
     )
 
