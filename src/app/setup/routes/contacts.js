@@ -28,6 +28,15 @@
                     }
                 }
             })
+        .state("setup.contacts.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.contacts.edit": {
+                        templateUrl: "common/tpls/delete.tpl.html",
+                        controller: "mfl.setup.controller.contacts.edit"
+                    }
+                }
+            })
         .state("setup.contacts.create", {
                 url: "/create",
                 views: {
