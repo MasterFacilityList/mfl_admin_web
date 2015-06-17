@@ -43,7 +43,8 @@
                         controller: "mfl.users.controllers.group_create",
                         templateUrl: "users/tpls/groups.edit.tpl.html"
                     }
-                }
+                },
+                permission: "auth.add_group"
             })
 
             .state("users.group_list.group_edit", {
@@ -63,7 +64,8 @@
                         controller: "mfl.users.controllers.group_delete",
                         templateUrl: "users/tpls/groups.delete.tpl.html"
                     }
-                }
+                },
+                permission: "auth.delete_group"
             });
     }]);
 

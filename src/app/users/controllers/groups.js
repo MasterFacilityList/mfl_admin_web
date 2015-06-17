@@ -17,7 +17,7 @@
             $scope.action = [
                 {
                     func : "ui-sref='users.group_list.group_create' " +
-                            "has-permission='users.add_mfluser' ",
+                            "requires-permission='auth.add_group' ",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
                     tipmsg: "New Group",
@@ -95,7 +95,8 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='users.group_list.group_delete({group_id: group.id})'",
+                    func : "ui-sref='users.group_list.group_delete({group_id: group.id})' " +
+                           "requires-permission='auth.delete_group'" ,
                     class: "action-btn action-btn-danger action-btn-md",
                     color: "blue",
                     tipmsg: "Delete User",
