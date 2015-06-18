@@ -220,13 +220,6 @@
                     });
                 }
             };
-            $scope.deleteContacts = function(id){
-                adminApi.contact_types.remove(id).success(function(){
-                    $state.go("setup.contact_types",{},{reload:true});
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
-            };
         }]
     );
 
