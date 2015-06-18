@@ -152,9 +152,8 @@
                 ];
                 $scope.action = [
                     {
-                        func : "popover-placement='bottom' " +
-                        "popover-template='del_popover.templateUrl'"+
-                        " tooltip-placement='top'",
+                        func : "ui-sref="+
+                        "'setup.contact_types.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
                         tipmsg:"Delete",
                         color: "blue",
@@ -173,6 +172,7 @@
                 };
                 adminApi.contact_types.get($stateParams.id).success(function(data){
                     $scope.contact_types = data;
+                    $scope.deleteText = $scope.contact_types.name;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
@@ -222,13 +222,6 @@
                         $scope.alert = error.error;
                     });
                 }
-            };
-            $scope.deleteContacts = function(id){
-                adminApi.contact_types.remove(id).success(function(){
-                    $state.go("setup.contact_types",{},{reload:true});
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
             };
         }]
     );
