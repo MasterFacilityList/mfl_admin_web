@@ -25,6 +25,15 @@
                     }
                 }
             })
+            .state("setup.towns.town_edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.towns.town_edit": {
+                        templateUrl: "common/tpls/delete.tpl.html",
+                        controller: "mfl.setup.controller.town.edit"
+                    }
+                }
+            })
             .state("setup.towns.town_create", {
                 url: "/create",
                 views: {

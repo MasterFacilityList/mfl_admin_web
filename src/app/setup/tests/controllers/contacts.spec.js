@@ -147,6 +147,8 @@
                 $httpBackend.expectGET(SERVER_URL+"api/common/contact_types/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.contact_types.view", dt);
+                $scope.remove();
+                $scope.cancel();
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
@@ -179,7 +181,9 @@
                 $httpBackend.expectDELETE(SERVER_URL+"api/common/contact_types/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.contact_types.view", dt);
-                $scope.deleteContacts(1);
+
+                $scope.remove();
+                $scope.cancel();
                 $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
@@ -197,6 +201,8 @@
                 500, res);
                 createController("mfl.setup.controller.contacts.edit", dt);
                 $scope.deleteContacts(1);
+                $scope.remove();
+                $scope.cancel();
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
@@ -204,14 +210,19 @@
                 var dt = {
                     $stateParams: {id: 1}
                 };
+                spyOn($state, "go");
                 var res = {error: "error"};
                 $httpBackend.expectGET(SERVER_URL+"api/common/contact_types/1/").respond(
                 200, res);
                 $httpBackend.expectDELETE(SERVER_URL+"api/common/contact_types/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.contact_types.view", dt);
-                $scope.deleteContacts(1);
+                $scope.remove();
+                $scope.cancel();
                 $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
+                                                       { reload : true });
+                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($scope.alert).toEqual(res.error);
             });
 
