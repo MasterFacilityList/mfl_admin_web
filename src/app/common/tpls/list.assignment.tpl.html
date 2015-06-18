@@ -1,13 +1,13 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-b-20 margin-t-20">
 
-    <div class="col-md-5">
-        <h4>Listed {{title}}</h4>
+    <div id="lst-available" class="col-md-5">
+        <h4>Available {{title}}</h4>
         <div class="group margin-t-20 margin-b-20">
             <input type="search" ng-model="search.query">
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>
-                Search Listed {{title}}
+                Search Available {{title}}
             </label>
         </div>
 
@@ -18,7 +18,7 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-2 perm-divider">
+    <div id="lst-divider" class="col-md-2 perm-divider">
         <span class="text-primary" ng-click="addRoles()">
             <i class="fa fa-long-arrow-right fa-2x"></i>
         </span>
@@ -27,7 +27,7 @@
             <i class="fa fa-long-arrow-left fa-2x"></i>
         </span>
     </div>
-    <div class="col-md-5">
+    <div id="lst-assigned" class="col-md-5">
         <h4>Assigned {{title}}</h4>
         <div class="group margin-t-20 margin-b-20">
             <input type="search" ng-model="search.query">
