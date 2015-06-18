@@ -36,11 +36,8 @@
                 ];
                 $scope.action = [
                     {
-                        func : ""+
-                        " mfl-delete api='adminApi' api-key='chuStatus'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='CHU Status'"+
-                        " on-success-url='setup.chu_status'",
+                        func : "ui-sref="+
+                        "'setup.chu_status.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete CHU Status",
@@ -56,9 +53,21 @@
                 ];
                 adminApi.chuStatus.get($stateParams.id).success(function(data){
                     $scope.chuStatus = data;
+                    $scope.deleteText = $scope.chuStatus.name;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+                $scope.remove = function () {
+                    adminApi.chuStatus.remove($stateParams.id).success(function(){
+                        $state.go("setup.chu_approvers",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $state.go("setup.chu_approvers",{},{reload:true});
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.chu_approvers.view");
+                };
             }
             else if(!_.isUndefined($stateParams.id) && $stateParams.id === "create") {
                 $scope.title = [
@@ -139,11 +148,8 @@
                 ];
                 $scope.action = [
                     {
-                        func : ""+
-                        " mfl-delete api='adminApi' api-key='chuApprovers'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='CHU Approver'"+
-                        " on-success-url='setup.chu_approvers'",
+                        func : "ui-sref="+
+                        "'setup.chu_approvers.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete CHU Approver",
@@ -163,6 +169,17 @@
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+                $scope.remove = function () {
+                    adminApi.chuApprovers.remove($stateParams.id).success(function(){
+                        $state.go("setup.chu_approvers",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $state.go("setup.chu_approvers",{},{reload:true});
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.chu_approvers.view");
+                };
             }
             else if(!_.isUndefined($stateParams.id) &&
                 $stateParams.id === "create") {
