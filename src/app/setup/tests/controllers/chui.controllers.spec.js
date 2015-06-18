@@ -93,9 +93,13 @@
                 $httpBackend.expectDELETE(SERVER_URL+"api/chul/statuses/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.chuStatus.view", dt);
+                $scope.remove();
+                $scope.cancel();
                 $scope.deleteChuStatus(1);
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("setup.chu_status");
+                expect($state.go).toHaveBeenCalledWith("setup.chu_status.view");
+                expect($state.go).toHaveBeenCalledWith("login",{next:"dashboard"});
+                expect($state.go).toHaveBeenCalledWith("setup.chu_status",{},{reload:true});
             });
 
         it("should delete chuStatus: error",function(){
@@ -108,6 +112,8 @@
                 $httpBackend.expectDELETE(SERVER_URL+"api/chul/statuses/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.chuStatus.view", dt);
+                $scope.remove();
+                $scope.cancel();
                 $scope.deleteChuStatus(1);
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
