@@ -217,7 +217,7 @@
                 contact: ""
             };
             $scope.edit_conts = (! _.isUndefined($scope.user_id));
-            $scope.user_id = $state.params.user_id;
+            $scope.user_id = $scope.user_id || $state.params.user_id;
 
             wrappers.contact_types.list()
                 .success(function (data) {
@@ -304,7 +304,7 @@
             };
 
             $scope.edit_groups = (! _.isUndefined($scope.user_id));
-            $scope.user_id = $state.params.user_id;
+            $scope.user_id = $scope.user_id || $state.params.user_id;
 
             var updateGroups = function (new_grps) {
                 $scope.spinner = true;

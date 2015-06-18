@@ -7,9 +7,11 @@
         </span>
     </h3>
     </div>
-    <mfl-list-assignment title="Roles" assigneditems="user.groups" listeditems="groups">
+
+    <mfl-list-assignment title="Groups" assigneditems="user.groups" listeditems="groups" write-perm="users.change_mfluser">
     </mfl-list-assignment>
-    <div class="col-md-12 margin-b-20 margin-l-10">
+
+    <div class="col-md-12 margin-b-20 margin-l-10" requires-permission="users.change_mfluser">
         <a class="login-btn login-btn-primary" ng-click="updateUserGroups()">
             <i class="fa fa-save"></i> Save
         </a>
