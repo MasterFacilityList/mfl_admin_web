@@ -82,7 +82,7 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-  background-color: #ffffff;
+  background-color: #e2e2e2;
   border-color: #cccccc;
 }
 .btn-default .badge {
@@ -452,7 +452,7 @@ button.md-btn{
 }
 .md-btn-clear{
     color: #5c5c5c;
-    background-color: #ffffff;
+    background-color: #e8e8e8;
     border-color: #155ffd;
     border: solid #cbcbcb 1px;
 }
@@ -482,6 +482,14 @@ button.md-btn{
 .md-btn-clear:active,
 .md-btn-clear.active{
     color: #205bfc;
-    background-color: lighten(#fcfcfc, 5%);
-    border-color: #205bfc;
+    background-color: darken(#fcfcfc, 5%);
+    border-color: #cbcbcb;
+}
+.md-btn-default:hover,
+.md-btn-default:focus,
+.md-btn-default:active,
+.md-btn-default.active{
+    color: #205bfc;
+    background-color: darken(#fcfcfc, 5%);
+    border-color: #cbcbcb;
 }
