@@ -52,7 +52,6 @@
         return {
             templateUrl : "common/tpls/list.assignment.tpl.html",
             restrict: "EA",
-            priority: 1600,
             scope : {
                 listeditems : "=",
                 assigneditems : "="
