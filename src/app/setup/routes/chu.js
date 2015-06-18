@@ -28,7 +28,7 @@
         .state("setup.chu_status.view.delete", {
                 url: "/delete",
                 views: {
-                    "delete@setup.chu_status": {
+                    "delete@setup.chu_status.view": {
                         controller: "mfl.setup.controller.chuStatus.view",
                         templateUrl: "common/tpls/delete.tpl.html"
                     }

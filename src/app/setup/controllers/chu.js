@@ -59,14 +59,14 @@
                 });
                 $scope.remove = function () {
                     adminApi.chuStatus.remove($stateParams.id).success(function(){
-                        $state.go("setup.chu_approvers",{},{reload:true});
+                        $state.go("setup.chu_status",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
-                        $state.go("setup.chu_approvers",{},{reload:true});
+                        $state.go("setup.chu_status",{},{reload:true});
                     });
                 };
                 $scope.cancel = function () {
-                    $state.go("setup.chu_approvers.view");
+                    $state.go("setup.chu_status.view");
                 };
             }
             else if(!_.isUndefined($stateParams.id) && $stateParams.id === "create") {
@@ -165,6 +165,7 @@
                 ];
                 adminApi.chuApprovers.get($stateParams.id).success(function(data){
                     $scope.chuApprovers = data;
+                    $scope.deleteText = $scope.chuApprovers.name;
                     $scope.edit = true;
                 }).error(function(error){
                     $scope.alert = error.error;
