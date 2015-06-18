@@ -181,6 +181,7 @@
                 $httpBackend.expectDELETE(SERVER_URL+"api/common/contact_types/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.contact_types.view", dt);
+
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
@@ -199,6 +200,7 @@
                 $httpBackend.expectDELETE(SERVER_URL+"api/common/contacts/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.contacts.edit", dt);
+                $scope.deleteContacts(1);
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
