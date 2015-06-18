@@ -1,57 +1,9 @@
-<div class="col-lg-12">
-    <div class="col-lg-12 margin-t-20" requires-permission="users.change_mfluser" >
-        <h4>Assign Group</h4>
-        <form ng-submit="add()">
-            <table class="table content-card  margin-b-10">
-                <tbody>
-                    <tr class="">
-                        <td class="pad-t-15">
-                            <div class="group">
-                            <select name="group" ng-model="new_grp" class="pad-t-15" required>
-                                <option value="">Select Group</option>
-                                <option ng-repeat="grp in groups" ng-value="grp.id">{{grp.name}}</option>
-                            </select>
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            </div>
-                        </td>
-                        <td class="text-right pad-t-15">
-                            <button ng-disabled="new_grp===''" type="submit" class="action-btn action-btn-primary action-btn-md margin-t-10" tooltip="Assign Group">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
-
-    <div class="col-lg-12 margin-t-20">
-        <h4> Current Groups</h4>
-        <table class="table content-card">
-            <tbody>
-                <tr ng-repeat="group in user.groups">
-                    <td class="pad-t-15 fs-18 fw-700">
-                        {{group.name}}
-                    </td>
-                    <td class="pad-t-15 fs-16 fw-500">
-                        {{group.permissions.length}} permissions
-                    </td>
-                    <td class="text-right">
-                        <span ng-if="group.delete_spinner">
-                            <i class="fa fa-spin fa-circle-o-notch"></i>
-                        </span>
-                        <button class="action-btn action-btn-danger action-btn-grid" ng-click="remove(group)" requires-permission="users.change_mfluser" >
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr ng-if="spinner">
-                        <td colspan="3" class="text-center">
-                            <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
+<mfl-list-assignment title="Groups" assigneditems="user.groups" listeditems="groups" write-perm="users.change_mfluser">
+</mfl-list-assignment>
+<div class="col-lg-12 col-md-12 col-sm-12" requires-permission="users.change_mfluser">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+    <a class="login-btn login-btn-primary margin-l-10" ng-click="updateUserGroups()">
+        <i class="fa fa-save"></i> Save
+    </a>
     </div>
 </div>

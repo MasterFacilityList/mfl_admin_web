@@ -155,11 +155,10 @@
                         func : "ui-sref="+
                         "'setup.contact_types.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
+                        tipmsg:"Delete",
                         color: "blue",
-                        tipmsg: "Delete Contact Type",
                         icon: "fa-trash"
-                    },
-                    {
+                    },{
                         func : "onclick='window.history.back()'",
                         class: "action-btn action-btn-primary action-btn-md",
                         color: "blue",
@@ -167,6 +166,10 @@
                         icon: "fa-arrow-left"
                     }
                 ];
+                $scope.del_popover = {
+                    content: "Hello, World!",
+                    templateUrl:"common/tpls/del_pop.tpl.html"
+                };
                 adminApi.contact_types.get($stateParams.id).success(function(data){
                     $scope.contact_types = data;
                     $scope.deleteText = $scope.contact_types.name;
@@ -182,7 +185,7 @@
                     });
                 };
                 $scope.cancel = function () {
-                    $state.go("setup.contacts.edit");
+                    $state.go("setup.contact_types.view",{},{reload:true});
                 };
             }
             else if(!_.isUndefined($stateParams.id) &&

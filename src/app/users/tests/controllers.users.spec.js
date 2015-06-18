@@ -799,6 +799,8 @@
 
                 data.$scope.new_grp = "2";
                 data.$scope.add("3");
+                //testing adding roles using listing directive
+                data.$scope.updateUserGroups();
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
