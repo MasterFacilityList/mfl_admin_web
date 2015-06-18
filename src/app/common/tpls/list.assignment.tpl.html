@@ -3,7 +3,7 @@
     <div id="lst-available" class="col-md-5">
         <h4>Available {{title}}</h4>
         <div class="group margin-t-20 margin-b-20">
-            <input type="search" ng-model="search.query">
+            <input type="search" ng-model="search.available_query">
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>
@@ -12,7 +12,7 @@
         </div>
 
         <ul class="nav nav-pills nav-stacked perm-container margin-b-20" >
-            <li ng-repeat="role in filtered_items | filter: search.query"
+            <li ng-repeat="role in filtered_items | filter: search.available_query"
                 class="list-item" ng-class="{active : role.selected}"  >
                 <a href ng-click="clickedRole(role)">{{role[displayAttr]}}</a>
             </li>
@@ -30,7 +30,7 @@
     <div id="lst-assigned" class="col-md-5">
         <h4>Assigned {{title}}</h4>
         <div class="group margin-t-20 margin-b-20">
-            <input type="search" ng-model="search.query">
+            <input type="search" ng-model="search.assigned_query">
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>
@@ -41,7 +41,7 @@
             <span ng-hide="assigneditems.length">
                 Nothing assigned yet
             </span>
-            <li ng-repeat="set_role in assigneditems" class="list-item"
+            <li ng-repeat="set_role in assigneditems | filter: search.assigned_query" class="list-item"
             ng-class="{active : set_role.set_selected}">
                 <a href ng-click="setRole(set_role)">{{set_role.name}}</a>
             </li>
