@@ -25,6 +25,15 @@
                     }
                 }
             })
+        .state("setup.chu_status.view.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.chu_status.view": {
+                        controller: "mfl.setup.controller.chuStatus.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                }
+            })
         .state("setup.chu_status.create", {
                 url: "/create",
                 views: {
@@ -52,6 +61,15 @@
                     "main-content@setup.chu_approvers": {
                         controller: "mfl.setup.controller.chuApprover.view",
                         templateUrl: "setup/tpls/chu/approvers/approvers-view.tpl.html"
+                    }
+                }
+            })
+        .state("setup.chu_approvers.view.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.chu_approvers.view": {
+                        controller: "mfl.setup.controller.chuApprover.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
                     }
                 }
             })

@@ -93,8 +93,9 @@
                 $httpBackend.expectDELETE(SERVER_URL+"api/chul/statuses/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.chuStatus.view", dt);
-                $scope.deleteChuStatus(1);
+                $scope.remove();
                 $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("login",{next:"dashboard"});
                 expect($state.go).toHaveBeenCalledWith("setup.chu_status");
             });
 
@@ -102,13 +103,17 @@
                 var dt = {
                     $stateParams: {id: 1}
                 };
+                spyOn($state, "go");
                 var res = {error: "error"};
                 $httpBackend.expectGET(SERVER_URL+"api/chul/statuses/1/").respond(
                 200, res);
                 $httpBackend.expectDELETE(SERVER_URL+"api/chul/statuses/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.chuStatus.view", dt);
-                $scope.deleteChuStatus(1);
+                $scope.cancel();
+                expect($state.go).toHaveBeenCalledWith("setup.chu_status.view");
+                $scope.remove();
+                expect($state.go).toHaveBeenCalledWith("setup.chu_status.view");
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
@@ -246,29 +251,30 @@
                 var dt = {
                     $stateParams: {id: 1}
                 };
-                spyOn($state, "go");
                 var res = {mgs: "ok"};
-                $httpBackend.expectGET(SERVER_URL+"api/chul/approvers/1/").respond(
-                200, res);
+                spyOn($state,"go");
                 $httpBackend.expectDELETE(SERVER_URL+"api/chul/approvers/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.chuApprover.view", dt);
-                $scope.deleteChuApprovers(1);
+                $scope.remove();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("setup.chu_approvers");
             });
 
         it("should delete chuApprover: error",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
+                spyOn($state,"go");
                 var res = {error: "error"};
                 $httpBackend.expectGET(SERVER_URL+"api/chul/approvers/1/").respond(
                 200, res);
                 $httpBackend.expectDELETE(SERVER_URL+"api/chul/approvers/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.chuApprover.view", dt);
-                $scope.deleteChuApprovers(1);
+                $scope.cancel();
+                expect($state.go).toHaveBeenCalledWith("setup.chu_approvers.view");
+                $scope.remove();
+                expect($state.go).toHaveBeenCalledWith("setup.chu_approvers.view");
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
