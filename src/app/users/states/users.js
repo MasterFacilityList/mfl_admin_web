@@ -64,9 +64,8 @@
                 url: ":user_id/contacts/",
                 views: {
                     "form-view@users.user_list.user_create": {
-                        controller: "mfl.users.controllers.user_create.contacts",
-                        templateUrl:
-                                    "users/tpls/users.create.contacts.tpl.html"
+                        controller: "mfl.users.controllers.user_edit.contacts",
+                        templateUrl: "users/tpls/users.edit.contacts.tpl.html"
                     }
                 },
                 permission: "users.add_mfluser"
@@ -75,8 +74,8 @@
                 url: ":user_id/groups/",
                 views: {
                     "form-view@users.user_list.user_create": {
-                        controller: "mfl.users.controllers.user_create.groups",
-                        templateUrl: "users/tpls/users.create.groups.tpl.html"
+                        controller: "mfl.users.controllers.user_edit.groups",
+                        templateUrl: "users/tpls/users.edit.groups.tpl.html"
                     }
                 }
             })

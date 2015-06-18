@@ -646,7 +646,7 @@
             });
         });
         //Beginning of new tests
-        describe("Test user create contacts controller", function () {
+        xdescribe("Test user create contacts controller", function () {
             var controller;
 
             beforeEach(function () {

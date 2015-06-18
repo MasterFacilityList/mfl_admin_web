@@ -88,70 +88,7 @@
             };
         }]
     )
-    //beggining of creating new user contacts
-    .controller("mfl.users.controllers.user_create.contacts",
-        ["$scope", "$log", "mfl.users.services.wrappers", "$state",
-        function ($scope, $log, wrappers, $state) {
-            $scope.contacts = {
-                items : []
-            };
-            $scope.edit_conts = false;
-            $scope.user_id = $state.params.user_id;
-            console.log($scope.user_id);
 
-        }
-    ])
-    //end of creating user contacts
-    .controller("mfl.users.controllers.user_create.groups",
-        ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        function (wrappers, $log, $scope, $state) {
-            wrappers.groups.filter({page_size: 100, ordering: "name"})
-            .success(function (data) {
-                $scope.groups = data.results;
-            })
-            .error(function (data) {
-                $log.error(data);
-            });
-            $scope.new_grp = "";
-            $scope.user = {
-                groups : []
-            };
-            $scope.user_id = $state.params.user_id;
-            var updateGroups = function (new_grps) {
-                $scope.spinner = true;
-                var grps = _.map(new_grps, function (grp) {
-                    return {"id": grp.id, "name": grp.name};
-                });
-
-                wrappers.users.update($scope.user_id, {"groups": grps})
-                .success(function (data) {
-                    $scope.user = data;
-                    $scope.new_grp = "";
-                    $state.go("users.user_list.user_create.counties",
-                        {user_id : $state.params.user_id});
-                })
-                .error(function (data) {
-                    $log.error(data);
-                    $scope.spinner = false;
-                });
-            };
-
-            $scope.add = function () {
-                var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
-                var update = angular.copy($scope.user.groups);
-                update.push(grp);
-                updateGroups(update);
-            };
-
-            $scope.remove = function (grp) {
-                var update = _.without($scope.user.groups, grp);
-                updateGroups(update);
-            };
-            $scope.updateUserGroups = function () {
-                updateGroups($scope.user.groups);
-            };
-        }]
-    )
     //end of assigning roles to user
     .controller("mfl.users.controllers.user_create.details", ["$scope",
         function ($scope) {
@@ -268,17 +205,20 @@
     )
 
     .controller("mfl.users.controllers.user_edit.contacts",
-        ["$scope", "$log", "mfl.users.services.wrappers",
-        function ($scope, $log, wrappers) {
+        ["$scope", "$log", "mfl.users.services.wrappers", "$state",
+        function ($scope, $log, wrappers, $state) {
             $scope.tooltip = {
                 "title": "",
                 "checked": false
             };
+            $scope.contacts = [];
             $scope.contact = {
                 contact_type: "",
                 contact: ""
             };
-            $scope.edit_conts = true;
+            $scope.edit_conts = (! _.isUndefined($scope.user_id));
+            $scope.user_id = $state.params.user_id;
+
             wrappers.contact_types.list()
                 .success(function (data) {
                     $scope.contact_types = data.results;
@@ -348,7 +288,8 @@
     ])
 
     .controller("mfl.users.controllers.user_edit.groups",
-        ["mfl.users.services.wrappers", "$log", "$scope", function (wrappers, $log, $scope) {
+        ["mfl.users.services.wrappers", "$log", "$scope", "$state",
+        function (wrappers, $log, $scope, $state) {
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.groups = data.results;
@@ -358,13 +299,20 @@
             });
             $scope.new_grp = "";
 
+            $scope.user = {
+                groups : []
+            };
+
+            $scope.edit_groups = (! _.isUndefined($scope.user_id));
+            $scope.user_id = $state.params.user_id;
+
             var updateGroups = function (new_grps) {
                 $scope.spinner = true;
                 var grps = _.map(new_grps, function (grp) {
                     return {"id": grp.id, "name": grp.name};
                 });
 
-                wrappers.users.update($scope.user_id, {"groups": grps})
+                return wrappers.users.update($scope.user_id, {"groups": grps})
                 .success(function (data) {
                     $scope.user = data;
                     $scope.new_grp = "";
@@ -388,7 +336,13 @@
                 updateGroups(update);
             };
             $scope.updateUserGroups = function () {
-                updateGroups($scope.user.groups);
+                updateGroups($scope.user.groups)
+                .success(function () {
+                    if (! $scope.edit_groups) {
+                        $state.go("users.user_list.user_create.counties",
+                            {"user_id": $scope.user_id});
+                    }
+                });
             };
         }]
     )

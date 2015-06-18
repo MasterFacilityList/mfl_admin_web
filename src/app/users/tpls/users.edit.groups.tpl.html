@@ -1,9 +1,17 @@
-<mfl-list-assignment title="Roles" assigneditems="user.groups" listeditems="groups">
-</mfl-list-assignment>
-<div class="col-lg-12 col-md-12 col-sm-12 margin-b-20">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-    <a class="login-btn login-btn-primary " ng-click="updateUserGroups()">
-        <i class="fa fa-save"></i> Save
-    </a>
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 margin-t-20">
+    <div class="col-md-12 margin-l-10">
+    <h3 ng-if="!edit_groups">
+        <span class="fw-500">User Groups</span>
+        <span class="pull-right" >
+            Step 3 of 4
+        </span>
+    </h3>
+    </div>
+    <mfl-list-assignment title="Roles" assigneditems="user.groups" listeditems="groups">
+    </mfl-list-assignment>
+    <div class="col-md-12 margin-b-20 margin-l-10">
+        <a class="login-btn login-btn-primary" ng-click="updateUserGroups()">
+            <i class="fa fa-save"></i> Save
+        </a>
     </div>
 </div>
