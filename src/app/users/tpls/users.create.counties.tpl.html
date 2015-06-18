@@ -1,0 +1,73 @@
+<div class="tab-content">
+    <div class="col-lg-12 margin-t-20">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12">
+            <h3 class="">
+                <span class="fw-500">User Administrative Areas</span>
+                <span class="pull-right">
+                    Step 4 of 4
+                </span>
+            </h3>
+            </div>
+            <div class="col-lg-12 margin-t-20" >
+            <!-- requires-permission="users.add_usercounty" > -->
+                <h4>Assign County</h4>
+                <form ng-submit="add(new_county)">
+                    <table class="table content-card  margin-b-10">
+                        <tbody>
+                            <tr class="">
+                                <td class="pad-t-15">
+                                    <div class="group">
+                                    <select name="county" ng-model="new_county" class="pad-t-15" required>
+                                        <option value="">Select County</option>
+                                        <option ng-repeat="cty in counties" ng-value="cty.id">{{cty.name}}</option>
+                                    </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    </div>
+                                </td>
+                                <td class="text-right pad-t-15">
+                                    <button ng-disabled="new_county===''" type="submit" class="action-btn action-btn-primary action-btn-md margin-t-10" tooltip="Assign County">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+            <div class="col-lg-12 margin-t-20">
+                <h4> Current County</h4>
+                <table class="table content-card">
+                    <tbody>
+                        <tr ng-repeat="uc in user_counties">
+                            <td class="pad-t-15 fs-18 fw-600 text-left">
+                                {{uc.county_name}}
+                            </td>
+                            <td class="text-right">
+                                <span ng-if="uc.delete_spinner">
+                                    <i class="fa fa-spin fa-circle-o-notch"></i>
+                                </span>
+                                <a class="remove-icon text-danger" ng-click="remove(uc)" tooltip="Remove county">
+                                <!-- requires-permission="users.delete_usercounty" > -->
+                                    <i class="fa fa-times-circle fa-2x fw-500"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="spinner">
+                            <td colspan="3" class="text-center">
+                                <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12 margin-b-20">
+                <a ui-sref="users.user_list.user_create.details({user_id : user_id})" class="login-btn login-btn-primary">
+                    <i class="fa fa-save"></i> Save
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

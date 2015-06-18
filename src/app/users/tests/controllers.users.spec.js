@@ -231,7 +231,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 expect(state.go).toHaveBeenCalledWith("users.user_list."+
-                    "user_edit.basic", {"user_id": 3});
+                    "user_create.contacts", {"user_id": 3});
             });
 
             it("should show an error on save a new user", function () {
@@ -644,6 +644,159 @@
                 expect(data.$scope.contacts).toEqual([]);
                 expect(log.error).toHaveBeenCalled();
             });
+        });
+        //Beginning of new tests
+        describe("Test user create contacts controller", function () {
+            var controller;
+
+            beforeEach(function () {
+                inject(["$controller", function (c) {
+                    controller = c;
+                }]);
+            });
+
+            it("should load all groups", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
+                    .respond(200, {"results": []});
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                ctrl("user_create.groups", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.groups).toEqual([]);
+            });
+
+            it("should show an error on fail to load all groups", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
+                    .respond(500, {"error": "e"});
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                spyOn(log,"error");
+                ctrl("user_create.groups", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.groups).toBe(undefined);
+                expect(log.error).toHaveBeenCalled();
+            });
+
+            it("should add a group to the user", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
+                    .respond(200, {"results": [{"id": 2, "name": "grp2"}]});
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                data.$scope.user = {
+                    "groups": []
+                };
+                ctrl("user_create.groups", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(
+                        server_url+"api/users/3/", {"groups": [{"id": 2, "name": "grp2"}]})
+                    .respond(200, {"groups": [{"id": 2, "name": "grp2"}]});
+
+                data.$scope.new_grp = "2";
+                data.$scope.add("3");
+                //testing adding roles using listing directive
+                data.$scope.updateUserGroups();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.user).toEqual({"groups": [{"id": 2, "name": "grp2"}]});
+            });
+
+            it("should show an error on failure to add a group to the user", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
+                    .respond(200, {"results": [{"id": 2, "name": "grp2"}]});
+                spyOn(log, "error");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                data.$scope.user_id = 3;
+                data.$scope.user = {
+                    "groups": []
+                };
+                ctrl("user_create.groups", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(
+                        server_url+"api/users/3/", {"groups": [{"id": 2, "name": "grp2"}]})
+                    .respond(400, {"error": "e"});
+
+                data.$scope.new_grp = "2";
+                data.$scope.add("3");
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.user).toEqual({"groups": []});
+            });
+
+            it("should remove a group from the user", function () {
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
+                    .respond(200, {"results": [{"id": 2, "name": "grp2"}]});
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                state.params.user_id = 3;
+                data.$scope.user_id = 3;
+                data.$scope.user = {
+                    "groups": [{"id": 2, "name": "grp2"}]
+                };
+                ctrl("user_create.groups", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(
+                        server_url+"api/users/3/", {"groups": [{"id": 2, "name": "grp2"}]})
+                    .respond(200, {"groups": []});
+
+                data.$scope.remove({"id": 2, "name": "grp2"});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.user).toEqual({"groups": []});
+            });
+        //end of new user tests
         });
 
         describe("Test user edit basic controller", function () {

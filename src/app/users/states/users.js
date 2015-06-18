@@ -44,7 +44,7 @@
                 views: {
                     "main-content@users.user_list": {
                         controller: "mfl.users.controllers.user_create",
-                        templateUrl: "users/tpls/users.edit.tpl.html"
+                        templateUrl: "users/tpls/user.create.tpl.html"
                     }
                 },
                 permission: "users.add_mfluser"
@@ -59,6 +59,46 @@
                     }
                 },
                 permission: "users.add_mfluser"
+            })
+            .state("users.user_list.user_create.contacts", {
+                url: ":user_id/contacts/",
+                views: {
+                    "form-view@users.user_list.user_create": {
+                        controller: "mfl.users.controllers.user_create.contacts",
+                        templateUrl:
+                                    "users/tpls/users.create.contacts.tpl.html"
+                    }
+                },
+                permission: "users.add_mfluser"
+            })
+            .state("users.user_list.user_create.groups", {
+                url: ":user_id/groups/",
+                views: {
+                    "form-view@users.user_list.user_create": {
+                        controller: "mfl.users.controllers.user_create.groups",
+                        templateUrl: "users/tpls/users.create.groups.tpl.html"
+                    }
+                }
+            })
+
+            .state("users.user_list.user_create.counties", {
+                url: ":user_id/counties/",
+                views: {
+                    "form-view@users.user_list.user_create": {
+                        controller: "mfl.users.controllers.user_create.counties",
+                        templateUrl: "users/tpls/users.create.counties.tpl.html"
+                    }
+                }
+            })
+
+            .state("users.user_list.user_create.details", {
+                url: ":user_id/confirm/",
+                views: {
+                    "form-view@users.user_list.user_create": {
+                        controller : "mfl.users.controllers.user_create.details",
+                        templateUrl: "users/tpls/users.create.details.tpl.html"
+                    }
+                }
             })
 
             .state("users.user_list.user_edit", {
