@@ -59,10 +59,10 @@
                 });
                 $scope.remove = function () {
                     adminApi.chuStatus.remove($stateParams.id).success(function(){
-                        $state.go("setup.chu_status",{},{reload:true});
+                        $state.go("setup.chu_status");
                     }).error(function(error){
                         $scope.alert = error.error;
-                        $state.go("setup.chu_status",{},{reload:true});
+                        $state.go("setup.chu_status");
                     });
                 };
                 $scope.cancel = function () {
@@ -172,10 +172,10 @@
                 });
                 $scope.remove = function () {
                     adminApi.chuApprovers.remove($stateParams.id).success(function(){
-                        $state.go("setup.chu_approvers",{},{reload:true});
+                        $state.go("setup.chu_approvers");
                     }).error(function(error){
                         $scope.alert = error.error;
-                        $state.go("setup.chu_approvers",{},{reload:true});
+                        $state.go("setup.chu_approvers");
                     });
                 };
                 $scope.cancel = function () {
