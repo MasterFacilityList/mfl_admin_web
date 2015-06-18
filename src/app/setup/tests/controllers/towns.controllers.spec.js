@@ -63,9 +63,11 @@
             $httpBackend
                 .expectGET(SERVER_URL+"api/common/towns/4/")
                 .respond(200, {"name": ""});
-
+            $httpBackend
+                .expectDELETE(SERVER_URL+"api/common/towns/4/")
+                .respond(200, {"name": ""});
             createController("mfl.setup.controller.town.edit", {"$stateParams": {"town_id": 4}});
-
+            $scope.remove();
             $httpBackend.flush();
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
@@ -84,18 +86,23 @@
             $httpBackend
                 .expectGET(SERVER_URL+"api/common/towns/4/")
                 .respond(500, {"name": ""});
-
+            $httpBackend
+                .expectDELETE(SERVER_URL+"api/common/towns/4/")
+                .respond(500, {"name": ""});
+            spyOn($state, "go");
             createController("mfl.setup.controller.town.edit", {"$stateParams": {"town_id": 4}});
-
+            $scope.remove();
+            $scope.cancel();
             $httpBackend.flush();
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
-
             $scope.town = {"name": ""};
             $httpBackend
                 .expectPATCH(SERVER_URL+"api/common/towns/4/")
                 .respond(500);
-
+            expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+            expect($state.go).toHaveBeenCalledWith("setup.towns", { },
+                                                   { reload : true });
             $scope.save();
             $httpBackend.flush();
         });
@@ -106,7 +113,6 @@
                 .respond(200, {"name": ""});
 
             createController("mfl.setup.controller.town.delete", {"$stateParams": {"town_id": 4}});
-
             $httpBackend.flush();
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
@@ -116,7 +122,6 @@
             $httpBackend
                 .expectDELETE(SERVER_URL+"api/common/towns/4/")
                 .respond(200);
-
             $scope.remove();
             $httpBackend.flush();
         });

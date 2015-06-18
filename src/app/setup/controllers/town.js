@@ -47,7 +47,7 @@
             $scope.save = function () {
                 adminApi.towns.create($scope.town)
                 .success(function (data) {
-                    $state.go("setup.town_edit", {"town_id": data.id});
+                    $state.go("setup.towns.town_edit", {"town_id": data.id});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -67,14 +67,14 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='setup.towns.town_delete({town_id:town.id})'",
+                    func : "ui-sref='setup.towns.town_edit.delete'",
                     class: "action-btn action-btn-danger action-btn-md",
                     color: "blue",
                     tipmsg: "Delete Town",
                     icon: "fa-trash"
                 },
                 {
-                    func : "onclick='window.history.back()'",
+                    func : "ui-sref='setup.towns'",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
                     tipmsg: "Go Back",
@@ -86,11 +86,22 @@
             adminApi.towns.get($scope.town_id)
             .success(function (data) {
                 $scope.town = data;
+                $scope.deleteText = $scope.town.name;
             })
             .error(function (data) {
                 $log.error(data);
             });
-
+            $scope.remove = function () {
+                adminApi.towns.remove($stateParams.town_id).success(function(){
+                    $state.go("setup.towns",{},{reload:true});
+                }).error(function(error){
+                    $scope.alert = error.error;
+                    $state.go("setup.towns",{},{reload:true});
+                });
+            };
+            $scope.cancel = function () {
+                $state.go("setup.towns",{},{reload:true});
+            };
             $scope.save = function () {
                 adminApi.towns.update($scope.town_id, {"name": $scope.town.name})
                 .success(function () {
