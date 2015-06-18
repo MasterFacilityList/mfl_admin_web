@@ -70,6 +70,15 @@
                     }
                 }
             })
+        .state("setup.contact_types.view.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.contact_types.view": {
+                        controller: "mfl.setup.controller.contact_types.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                }
+            })
         .state("setup.contact_types.create", {
                 url: "/create",
                 views: {
