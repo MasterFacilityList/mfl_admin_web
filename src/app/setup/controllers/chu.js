@@ -97,13 +97,6 @@
                     });
                 }
             };
-            $scope.deleteChuStatus = function(id){
-                adminApi.chuStatus.remove(id).success(function(){
-                    $state.go("setup.chu_status");
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
-            };
 
             $scope.createChuStatus = function(chuStatus){
                 adminApi.chuStatus.create(chuStatus).success(function(){
@@ -211,13 +204,6 @@
                         $scope.alert = error.error;
                     });
                 }
-            };
-            $scope.deleteChuApprovers = function(id){
-                adminApi.chuApprovers.remove(id).success(function(){
-                    $state.go("setup.chu_approvers");
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
             };
 
             $scope.createChuApprovers = function(chuApprover){
