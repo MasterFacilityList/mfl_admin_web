@@ -53,17 +53,20 @@
 
             var change_state = function (name, args) {
                 var $state = $injector.get("$state");
-                $state.go(name, args);
+                return $state.go(name, args);
             };
 
-            var page_check = function (evt, toState) {
+            var page_check = function (evt, toState, toParams, fromState, fromParams) {
                 if (loginService.isLoggedIn()) {
                     if (_.contains(["reset_pwd", "reset_pwd_confirm", "login"], toState.name)) {
                         evt.preventDefault();
                         change_state(HOME_PAGE_NAME);
                     } else if (! permChecker.hasPermission(toState.permission)) {
                         evt.preventDefault();
-                        window.alert("You don't have permission to access the page.");
+                        var show_alert = function () {
+                            window.alert("You don't have permission to access the page.");
+                        };
+                        change_state(fromState.name, fromParams).then(show_alert, show_alert);
                     }
                     return;
                 }
