@@ -66,18 +66,16 @@
             },
             permission: "facilities.view_category"
         })
-
-        .state("service_mgmt.category_list.category_delete", {
-            url: "categories/:category_id/delete/",
+        .state("service_mgmt.category_list.category_edit.delete", {
+            url: ":delete/",
             views: {
-                "main-content@service_mgmt.category_list": {
-                    controller: "mfl.service_mgmt.controllers.category_delete",
-                    templateUrl: "service_mgmt/tpls/category_delete.tpl.html"
+                "delete@service_mgmt.category_list.category_edit": {
+                    controller: "mfl.service_mgmt.controllers.category_edit",
+                    templateUrl: "common/tpls/delete.tpl.html"
                 }
             },
             permission: "facilities.delete_servicecategory"
         })
-
         // ============== services ====================
 
         .state("service_mgmt.service_list", {
@@ -115,18 +113,16 @@
             },
             permission: "facilities.view_service"
         })
-
-        .state("service_mgmt.service_list.service_delete", {
-            url: ":service_id/delete/",
+        .state("service_mgmt.service_list.service_edit.delete", {
+            url: "delete/",
             views: {
                 "main-content@service_mgmt.service_list": {
-                    controller: "mfl.service_mgmt.controllers.service_delete",
-                    templateUrl: "service_mgmt/tpls/service_delete.tpl.html"
+                    controller: "mfl.service_mgmt.controllers.service_edit",
+                    templateUrl: "common/tpls/delete.tpl.html"
                 }
             },
             permission: "facilities.delete_service"
         })
-
         .state("service_mgmt.service_list.service_edit.options", {
             url: "options/",
             views: {
@@ -163,6 +159,17 @@
                 }
             },
             permission: "facilities.add_option"
+        })
+
+        .state("service_mgmt.option_list.option_edit", {
+            url: ":option_id/edit/",
+            views: {
+                "main-content@service_mgmt.option_list": {
+                    controller: "mfl.service_mgmt.controllers.option_edit",
+                    templateUrl: "service_mgmt/tpls/option_edit.tpl.html"
+                }
+            },
+            permission: "facilities.view_option"
         })
 
         .state("service_mgmt.option_list.option_edit", {
