@@ -14,7 +14,8 @@
                         controller: "mfl.setup.controller.town.list",
                         templateUrl: "setup/tpls/towns/towns.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_town"
             })
             .state("setup.towns.town_edit", {
                 url: "/edit/:town_id",
@@ -23,7 +24,8 @@
                         controller: "mfl.setup.controller.town.edit",
                         templateUrl: "setup/tpls/towns/towns.edit.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_town"
             })
             .state("setup.towns.town_edit.delete", {
                 url: "/delete",
@@ -32,7 +34,8 @@
                         templateUrl: "common/tpls/delete.tpl.html",
                         controller: "mfl.setup.controller.town.edit"
                     }
-                }
+                },
+                permission: "common.delete_town"
             })
             .state("setup.towns.town_create", {
                 url: "/create",
@@ -41,7 +44,8 @@
                         controller: "mfl.setup.controller.town.create",
                         templateUrl: "setup/tpls/towns/towns.edit.tpl.html"
                     }
-                }
+                },
+                permission: "common.add_town"
             })
             .state("setup.towns.town_delete", {
                 url: "/towns/delete/:town_id",
@@ -50,7 +54,8 @@
                         controller: "mfl.setup.controller.town.delete",
                         templateUrl: "setup/tpls/towns/towns.delete.tpl.html"
                     }
-                }
+                },
+                permission: "common.delete_town"
             })
             ;
     }]);

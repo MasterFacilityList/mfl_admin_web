@@ -14,8 +14,7 @@
                     controller: "mfl.common.controllers.header",
                     templateUrl: "common/tpls/header.tpl.html"
                 }
-            },
-            data : { pageTitle: "Service Management" }
+            }
         });
     }])
 

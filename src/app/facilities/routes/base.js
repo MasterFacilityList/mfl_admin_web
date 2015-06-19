@@ -22,7 +22,8 @@
                     controller: "mfl.facilities.controllers.home.base"
                 }
             },
-            data : { pageTitle: "Facility Management"}
+            data : { pageTitle: "Facility Management"},
+            permission: "facilities.view_facility"
         })
         .state("facilities.list", {
             url: "/list",
@@ -35,7 +36,8 @@
                     controller: "mfl.facilities.controllers.home.list"
                 }
             },
-            data : { pageTitle: "Facility Management" }
+            data : { pageTitle: "Facility Management" },
+            permission: "facilities.view_facility"
         })
 
         .state("facilities.facility_status", {
@@ -48,7 +50,8 @@
                         templateUrl : "facilities/tpls/home/facility_status_grid.tpl.html",
                         controller: "mfl.facilities.controllers.home.facility_status"
                     }
-                }
+                },
+                permission: "facilities.view_facilitystatus"
             })
 
         .state("facilities.facility_status_create", {
@@ -61,7 +64,8 @@
                         templateUrl : "facilities/tpls/home/facility_status_create.tpl.html",
                         controller: "mfl.facilities.controllers.home.facility_status.create"
                     }
-                }
+                },
+                permission: "facilities.add_facilitystatus"
             })
         .state("facilities.facility_type", {
                 url: "/facility_type",
@@ -73,7 +77,8 @@
                         templateUrl : "facilities/tpls/home/facility_type_grid.tpl.html",
                         controller: "mfl.facilities.controllers.home.facility_type"
                     }
-                }
+                },
+                permission: "facilities.view_facilitytype"
             })
         .state("facilities.facility_type_create", {
                 url: "/facility_type/:id",
@@ -85,7 +90,8 @@
                         templateUrl : "facilities/tpls/home/facility_type_create.tpl.html",
                         controller: "mfl.facilities.controllers.home.facility_type.create"
                     }
-                }
+                },
+                permission: "facilities.add_facilitytype"
             });
     }]);
 })(angular);

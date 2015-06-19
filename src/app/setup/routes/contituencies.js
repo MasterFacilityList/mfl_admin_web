@@ -13,7 +13,8 @@
                         controller: "mfl.setup.controller.constituency.list",
                         templateUrl: "setup/tpls/constituencies/constituencies.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_constituency"
             })
             .state("setup.constituencies.view_const", {
                 url: "/details/:const_id",
@@ -22,7 +23,8 @@
                         templateUrl: "setup/tpls/constituencies/constituency.details.tpl.html",
                         controller :"mfl.setup.controller.constituency.details"
                     }
-                }
+                },
+                permission: "common.view_constituency"
             })
             .state("setup.constituencies.edit", {
                 url: "/edit/:const_id",
@@ -30,7 +32,8 @@
                     "main-content@setup": {
                         templateUrl: "admin_units/tpls/constituencies/constituencies.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_constituency"
             });
     }]);
 
