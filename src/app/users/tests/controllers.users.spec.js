@@ -11,12 +11,15 @@
             module("ui.router");
             module("mfl.users.controllers.users");
 
-            inject(["$rootScope", "$controller", "$httpBackend", "$state", "SERVER_URL",
-                function ($rootScope, $controller, $httpBackend, $state, url) {
+            inject(["$rootScope", "$controller", "$httpBackend", "$state",
+                "SERVER_URL", "mfl.users.services.wrappers",
+                function ($rootScope, $controller, $httpBackend,
+                    $state, url, userApi) {
                     root = $rootScope;
                     scope = root.$new();
                     state = $state;
                     httpBackend = $httpBackend;
+                    userApi = userApi;
                     SERVER_URL = url;
                     scope.fakeStateParams = {
                         user_id : 6
@@ -25,6 +28,7 @@
                         $scope : scope,
                         $state : $state,
                         SERVER_URL : url,
+                        userApi : userApi,
                         $stateParams : scope.fakeStateParams
                     };
                     controller = function (cntrl) {
@@ -38,11 +42,44 @@
             var test = "Users";
             expect(scope.test).toEqual(test);
         });
-        it("should test $scope in create user controller", function () {
-            controller("mfl.users.controllers.user_create.details");
-            var test = "Confirm";
-            expect(scope.context).toEqual(test);
-        });
+        it("should test $scope in create user controller take two",
+        inject(["$httpBackend", "$state","$controller",
+            function ($httpBackend, $state, $controller) {
+            $state = {
+                params : {
+                    user_id : 18
+                }
+            };
+            $httpBackend.expectGET(
+                SERVER_URL + "api/users/18/").respond(200, scope.detail_user);
+
+            $controller("mfl.users.controllers.user_create.details", {
+                "$state": $state,
+                "$scope": scope
+            });
+
+            $httpBackend.flush();
+
+        }]));
+        it("should test $scope in create user controller take two: fail",
+        inject(["$httpBackend", "$state","$controller",
+            function ($httpBackend, $state, $controller) {
+            $state = {
+                params : {
+                    user_id : 18
+                }
+            };
+            $httpBackend.expectGET(
+                SERVER_URL + "api/users/18/").respond(400, scope.detail_user);
+
+            $controller("mfl.users.controllers.user_create.details", {
+                "$state": $state,
+                "$scope": scope
+            });
+
+            $httpBackend.flush();
+
+        }]));
         it("should test $state param user id in adding user contacts",
         inject(["$state", function ($state) {
             $state = {
