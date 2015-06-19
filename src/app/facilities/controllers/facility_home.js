@@ -25,7 +25,7 @@
                 class: "action-btn action-btn-info action-btn-md",
                 color: "blue",
                 tipmsg: "New Facility",
-                icon: "fa-user-plus"
+                icon: "fa-plus"
             }
         ];
     }])
