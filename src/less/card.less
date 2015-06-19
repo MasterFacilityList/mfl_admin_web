@@ -77,6 +77,30 @@
   font-size : 15px;
   padding-left: 5px;
 }
+.content-card-edit-icon {
+  font-size: 20px;
+  color: #2196F3;
+}
+.content-card-edit-icon:hover {
+  cursor: pointer;
+}
+.results-card {
+  padding: 5px 10px 8px 10px;
+  background-color: @card-container-bg;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #CCC;
+  box-sizing: border-box;
+  border-radius: @content-card-border-radius;
+}
+.results-card .content-card-edit-icon {
+  font-size: 20px;
+  color: #666;
+}
+
+.results-card:hover .content-card-edit-icon {
+  color: darken(#2196F3, 10%);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
 
 .search-card {
   margin-bottom: @line-height-computed;
