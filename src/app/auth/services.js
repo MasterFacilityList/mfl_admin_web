@@ -56,17 +56,14 @@
                 return $state.go(name, args);
             };
 
-            var page_check = function (evt, toState, toParams, fromState, fromParams) {
+            var page_check = function (evt, toState) {
                 if (loginService.isLoggedIn()) {
                     if (_.contains(["reset_pwd", "reset_pwd_confirm", "login"], toState.name)) {
                         evt.preventDefault();
                         change_state(HOME_PAGE_NAME);
                     } else if (! permChecker.hasPermission(toState.permission)) {
                         evt.preventDefault();
-                        var show_alert = function () {
-                            window.alert("You don't have permission to access the page.");
-                        };
-                        change_state(fromState.name, fromParams).then(show_alert, show_alert);
+                        change_state("common_403");
                     }
                     return;
                 }
