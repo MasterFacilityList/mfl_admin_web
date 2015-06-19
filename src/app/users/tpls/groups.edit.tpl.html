@@ -1,5 +1,6 @@
 <contentheader></contentheader>
 <div class="col-lg-12">
+<div class="col-md-12 content-card margin-t-20 margin-b-20">
     <div class="col-lg-12 margin-t-20">
         <h4 requires-permission="auth.add_group" >Add Group</h4>
         <table class="table content-card margin-b-10" requires-permission="auth.add_group" >
@@ -22,12 +23,13 @@
         write-perm="auth.change_group">
     </mfl-list-assignment>
 
-    <div class="col-lg-12 margin-t-20">
-        <button class="margin-h-5 login-btn login-btn-default" ui-sref="groups">
-            Cancel
-        </button>
+    <div class="col-lg-12 margin-t-20 margin-b-20">
         <button ng-click="save()" class="margin-h-5 login-btn login-btn-primary" requires-permission="auth.add_group" >
             <i class="fa fa-save"></i> Save
         </button>
+        <button class="margin-h-5 login-btn login-btn-default" ui-sref="groups">
+            Cancel
+        </button>
     </div>
+</div>
 </div>
