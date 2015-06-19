@@ -32,8 +32,9 @@
         });
 
         it("should define service delete url", function () {
-            expect(state.href("service_mgmt.service_list.service_delete", {"service_id": "abcd"}))
-            .toEqual("#/services/services/abcd/delete/");
+            expect(state.href("service_mgmt.service_list.service_edit.delete",
+                              {"service_id": "abcd"}))
+            .toEqual("#/services/services/abcd/edit/delete/");
         });
 
         it("should define service options edit url", function () {

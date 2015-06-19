@@ -34,6 +34,16 @@
                         });
                 }
             };
+            $scope.remove = function () {
+                wrappers.categories.remove($scope.category_id).success(function(){
+                    $state.go("service_mgmt.category_list",{},{reload:true});
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            };
+            $scope.cancel = function () {
+                $state.go("service_mgmt.category_list.category_edit");
+            };
         }
     ])
 

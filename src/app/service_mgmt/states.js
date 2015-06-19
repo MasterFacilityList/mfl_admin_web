@@ -172,17 +172,6 @@
             permission: "facilities.view_option"
         })
 
-        .state("service_mgmt.option_list.option_edit", {
-            url: ":option_id/edit/",
-            views: {
-                "main-content@service_mgmt.option_list": {
-                    controller: "mfl.service_mgmt.controllers.option_edit",
-                    templateUrl: "service_mgmt/tpls/option_edit.tpl.html"
-                }
-            },
-            permission: "facilities.view_option"
-        })
-
         .state("service_mgmt.option_list.option_delete", {
             url: ":option_id/delete/",
             views: {
