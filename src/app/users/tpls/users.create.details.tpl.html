@@ -1,12 +1,88 @@
-<div class="col-md-12">
+<div class="col-md-12 margin-t-20">
     <h3>
-        <div class="col-md-10 col-md-offset-1 margin-t-20">
-            <h3>
-                <span class="fw-500">User Details</span>
-                <span class="pull-right">
-                    {{context}} Creating User
-                </span>
-            </h3>
-        </div>
+        <span class="fw-500">Confirm User Details</span>
     </h3>
+    <div class="col-md-12 results-card">
+    <h4>
+        <label>
+            Names:
+        </label>
+        {{detail_user.full_name}}
+        <span class="pull-right">
+            <label>Username: </label>
+            {{detail_user.username}}
+        </span>
+    </h4>
+    <h4>
+        <label>Email: </label>
+        {{detail_user.email}}
+    </h4>
+    <h4>
+        <label>
+            National User:
+        </label>
+        <i ng-if="detail_user.is_national" class="fa fa-check-circle text-succes"></i>
+        <i ng-if="!detail_user.is_national" class="fa fa-times-circle text-danger"></i>
+        <span class="pull-right content-card-edit-icon" tooltip="Edit User Basic Details">
+            <a ui-sref="users.user_list.user_create.basic ({user_id : detail_user.id})">
+                <i class="fa fa-pencil"></i>
+            </a>
+        </span>
+    </h4>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-5 margin-t-20 results-card" >
+        <h4>Contact Details</h4>
+        <div class="col-md-10">
+            <h5 ng-repeat="cont in detail_user.user_contacts" class="margin-l--15">
+                <label class="fs-14">{{$index + 1}}. {{cont.contact_type_text}}:</label>&nbsp;
+                {{cont.contact_text}}
+            </h5>
+        </div>
+        <div class="col-md-2">
+            <span class="pull-right content-card-edit-icon" tooltip="Edit User Contact Details">
+                <a ui-sref="users.user_list.user_create.contacts ({user_id : detail_user.id})">
+                    <i class="fa fa-pencil"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-5 pull-right margin-t-20 results-card">
+        <h4>User Roles</h4>
+        <div class="col-md-10">
+            <h5 ng-repeat="group in detail_user.groups" class="margin-l--15">
+                {{$index + 1}}. {{group.name}} Role
+            </h5>
+        </div>
+        <div class="col-md-2">
+            <span class="pull-right content-card-edit-icon" tooltip="Edit User Groups">
+                <a ui-sref="users.user_list.user_create.groups ({user_id : detail_user.id})">
+                    <i class="fa fa-pencil"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 margin-t-20">
+    <div class="col-md-5 results-card">
+        <h4>User Administrative Areas</h4>
+        <div class="col-md-10">
+            <h5 ng-repeat="county in detail_user.user_counties" class="margin-l--15 fs-14">
+                {{county.county_name}} COUNTY
+            </h5>
+        </div>
+        <div class="col-md-2">
+            <span class="pull-right content-card-edit-icon" tooltip="Edit User Counties">
+                <a ui-sref="users.user_list.user_create.counties ({user_id : detail_user.id})">
+                    <i class="fa fa-pencil "></i>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 margin-t-20 margin-b-20">
+    <a ui-sref="users.user_list" class="login-btn login-btn-primary">
+        &nbsp;Submit User
+    </a>
 </div>

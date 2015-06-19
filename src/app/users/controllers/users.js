@@ -91,8 +91,20 @@
 
     //end of assigning roles to user
     .controller("mfl.users.controllers.user_create.details", ["$scope",
-        function ($scope) {
+        "mfl.users.services.wrappers", "$state",
+        function ($scope, wrappers, $state) {
             $scope.context = "Confirm";
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
+            };
+            wrappers.users.get($state.params.user_id)
+                .success(function (data) {
+                    $scope.detail_user = data;
+                })
+                .error(function (err) {
+                    $scope.alert = err.error;
+                });
         }
     ])
     //end of assigning admininstrative areas to users
@@ -166,9 +178,12 @@
                 contact_type: "",
                 contact: ""
             };
+            //putting checks to determine if a create or edit is happening
+            if(_.isUndefined($scope.user_id)) {
+                $scope.create = true;
+            }
             $scope.edit_conts = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
-
             wrappers.contact_types.list()
                 .success(function (data) {
                     $scope.contact_types = data.results;
@@ -240,6 +255,10 @@
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
+            //putting checks to determine if a create or edit is happening
+            if(_.isUndefined($scope.user_id)) {
+                $scope.create = true;
+            }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.groups = data.results;
@@ -298,6 +317,10 @@
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
+            //putting checks to determine if a create or edit is happening
+            if(_.isUndefined($scope.user_id)) {
+                $scope.create = true;
+            }
             $scope.edit_counties = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
