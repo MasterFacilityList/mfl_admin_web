@@ -27,6 +27,15 @@
                     }
                 }
             })
+            .state("setup.facility_owners.view.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_owners.view": {
+                        controller: "mfl.setup.controller.facilityOwner.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                }
+            })
         .state("setup.facility_owners.create", {
                 url: "/create",
                 views: {
@@ -60,6 +69,15 @@
                         controller: "mfl.setup.controller.facilityOwnerType.view",
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owner-types-view.tpl.html"
+                    }
+                }
+            })
+        .state("setup.facility_owner_types.view.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_owner_types.view": {
+                        controller: "mfl.setup.controller.facilityOwnerType.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
                     }
                 }
             })
@@ -97,6 +115,15 @@
                     }
                 }
             })
+        .state("setup.facility_job_titles.view.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_job_titles.view": {
+                        controller: "mfl.setup.controller.facilityJobTitle.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                }
+            })
         .state("setup.facility_job_titles.create", {
                 url: "/create",
                 views: {
@@ -129,6 +156,15 @@
                         controller: "mfl.setup.controller.facilityRegulatoryBody.edit",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
+                    }
+                }
+            })
+        .state("setup.facility_regulatory_bodies.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_regulatory_bodies.edit": {
+                        controller: "mfl.setup.controller.facilityRegulatoryBody.edit",
+                        templateUrl: "common/tpls/delete.tpl.html"
                     }
                 }
             })

@@ -39,11 +39,8 @@
                 ];
                 $scope.action = [
                     {
-                        func : ""+
-                        " mfl-delete api='adminApi' api-key='facilityOwnerTypes'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Facility Owner Type'"+
-                        " on-success-url='setup.facility_owner_types'",
+                        func : "ui-sref="+
+                        "'setup.facility_owner_types.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Facility Owner Type",
@@ -59,9 +56,21 @@
                 ];
                 adminApi.facilityOwnerTypes.get($stateParams.id).success(function(data){
                     $scope.facilityOwnerTypes = data;
+                    $scope.deleteText = $scope.facilityOwnerTypes.name;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+                $scope.remove = function () {
+                    adminApi.facilityOwnerTypes.remove($stateParams.id).success(function(){
+                        $state.go("setup.facility_owner_types",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $state.go("setup.facility_owner_types",{},{reload:true});
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.facility_owner_types.view");
+                };
             }
             if(!_.isUndefined($stateParams) && $stateParams.id === "create") {
                 $scope.title = [
@@ -90,13 +99,6 @@
                         $scope.alert = error.error;
                     });
                 }
-            };
-            $scope.deleteFacilityOwnerTypes = function(id){
-                adminApi.facilityOwnerTypes.remove(id).success(function(){
-                    $state.go("setup.facility_owner_types");
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
             };
 
             $scope.createFacilityOwnerTypes = function(ownerType){
@@ -146,11 +148,7 @@
                 ];
                 $scope.action = [
                     {
-                        func : ""+
-                        " mfl-delete api='adminApi' api-key='facilityOwners'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Facility Owner'"+
-                        " on-success-url='setup.facility_owners'",
+                        func : "ui-sref='setup.facility_owners.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Facility Owner",
@@ -166,6 +164,7 @@
                 ];
                 adminApi.facilityOwners.get($stateParams.id).success(function(data){
                     $scope.facilityOwners = data;
+                    $scope.deleteText = $scope.facilityOwners.name;
                     $scope.$watch("facilityOwners.owner_type", function(id){
                         $scope.ownerType = _.findWhere(
                             $scope.ownerTypes, {id: id}
@@ -176,6 +175,17 @@
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+                $scope.remove = function () {
+                    adminApi.facilityOwners.remove($stateParams.id).success(function(){
+                        $state.go("setup.facility_owners",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $state.go("setup.facility_owners",{},{reload:true});
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.facility_owners.view");
+                };
             }
             if(!_.isUndefined($stateParams) && $stateParams.id === "create") {
                 $scope.title = [
@@ -211,13 +221,6 @@
                         $scope.alert = error.error;
                     });
                 }
-            };
-            $scope.deleteFacilityOwner = function(id){
-                adminApi.facilityOwners.remove(id).success(function(){
-                    $state.go("setup.facility_owners");
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
             };
 
             $scope.createFacilityOwner = function(owner){
@@ -274,11 +277,7 @@
                 ];
                 $scope.action = [
                     {
-                        func : ""+
-                        " mfl-delete api='adminApi' api-key='facilityJobTitles'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Facility Job Title'"+
-                        " on-success-url='setup.facility_job_titles'",
+                        func : "ui-sref='setup.facility_job_titles.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Facility Job Title",
@@ -295,9 +294,21 @@
                 ];
                 adminApi.facilityJobTitles.get($stateParams.id).success(function(data){
                     $scope.facilityJobTitles = data;
+                    $scope.deleteText = $scope.facilityJobTitles.name;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+                $scope.remove = function () {
+                    adminApi.facilityJobTitles.remove($stateParams.id).success(function(){
+                        $state.go("setup.facility_job_titles",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $state.go("setup.facility_job_titles",{},{reload:true});
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.facility_job_titles.view");
+                };
             }
             if(!_.isUndefined($stateParams) && $stateParams.id === "create") {
                 $scope.title = [
@@ -326,14 +337,6 @@
                     });
                 }
             };
-            $scope.deleteFacilityJobTitle = function(id){
-                adminApi.facilityJobTitles.remove(id).success(function(){
-                    $state.go("setup.facility_job_titles");
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
-            };
-
             $scope.createFacilityJobTitle = function(title){
                 adminApi.facilityJobTitles.create(title).success(function(){
                     $state.go("setup.facility_job_titles");
@@ -429,7 +432,7 @@
                     $scope.spinner = false;
                 });
             };
-            $scope.remove = function (obj) {
+            $scope.remove_contact = function (obj) {
                 obj.delete_spinner = true;
                 adminApi.RegulatoryBodyContacts.remove(obj.id)
                     .success(function () {
@@ -486,11 +489,8 @@
                 ];
                 $scope.action = [
                     {
-                        func : ""+
-                        " mfl-delete api='adminApi' api-key='facilityRegulatoryBodies'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Facility Regulatory Body'"+
-                        " on-success-url='setup.facility_regulatory_bodies'",
+                        func : "ui-sref="+
+                        "'setup.facility_regulatory_bodies.edit.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Facility Regulatory Body",
@@ -506,10 +506,22 @@
                 ];
                 adminApi.facilityRegulatoryBodies.get($stateParams.id).success(function(data){
                     $scope.facilityRegulatoryBodies = data;
+                    $scope.deleteText = $scope.facilityRegulatoryBodies.name;
                     $scope.edit = true;
                 }).error(function(error){
                     $scope.alert = error.error;
                 });
+                $scope.remove = function () {
+                    adminApi.facilityRegulatoryBodies.remove($stateParams.id).success(function(){
+                        $state.go("setup.facility_regulatory_bodies",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $state.go("setup.facility_regulatory_bodies",{},{reload:true});
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.facility_regulatory_bodies.edit.basic");
+                };
             }
             else {
                 $scope.title = [
@@ -537,13 +549,6 @@
                         $scope.alert = error.error;
                     });
                 }
-            };
-            $scope.deleteFacilityRegulatoryBody = function(id){
-                adminApi.facilityRegulatoryBodies.remove(id).success(function(){
-                    $state.go("setup.facility_regulatory_bodies");
-                }).error(function(error){
-                    $scope.alert = error.error;
-                });
             };
             $scope.createFacilityRegulatoryBody = function(regulatoryBody){
                 adminApi.facilityRegulatoryBodies.create(regulatoryBody).success(function(data){
@@ -588,7 +593,7 @@
                     $scope.spinner = false;
                 });
             };
-            $scope.remove = function (obj) {
+            $scope.remove_contact = function (obj) {
                 obj.delete_spinner = true;
                 adminApi.RegulatoryBodyContacts.remove(obj.id)
                     .success(function () {
