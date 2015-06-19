@@ -33,11 +33,6 @@
                 }
             ]);
         });
-        it("should test $scope.test === 'users'", function () {
-            controller("mfl.users.controllers.users");
-            var test = "Users";
-            expect(scope.test).toEqual(test);
-        });
         it("should test $scope in create user controller", function () {
             controller("mfl.users.controllers.user_create.details");
             var test = "Confirm";
@@ -112,6 +107,19 @@
                     };
                 }
             ]);
+        });
+
+        describe("Test user listing controller", function () {
+
+            it("should set scope", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                ctrl("user_list", data);
+                expect(scope.title).not.toBe(undefined);
+                expect(scope.action).not.toBe(undefined);
+            });
         });
 
         describe("Test user delete controller", function () {
@@ -281,7 +289,7 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
-                expect(state.go).toHaveBeenCalledWith("users.user_list."+
+                expect(state.go).toHaveBeenCalledWith("users."+
                     "user_create.contacts", {"user_id": 3});
             });
 

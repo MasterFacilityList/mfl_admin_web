@@ -45,7 +45,7 @@
         it("should test that regulatory body view is defined: success",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.facilityRegulatoryBody.edit");
-            expect(scope.test).toEqual("Regulatory body");
+
             $httpBackend.expectGET(
                 SERVER_URL + "api/common/contact_types/").respond(200, {});
             $httpBackend.expectGET(
@@ -222,7 +222,7 @@
         it("should test that regulatory body contact_list fetch: success",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.facilityRegulatoryBody.create");
-            expect(scope.test).toEqual("Regulatory body");
+
             $httpBackend.expectGET(
                 SERVER_URL + "api/common/contact_types/").respond(200, {});
             $httpBackend.flush();
