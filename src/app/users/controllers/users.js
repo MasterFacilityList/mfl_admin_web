@@ -95,56 +95,6 @@
             $scope.context = "Confirm";
         }
     ])
-    .controller("mfl.users.controllers.user_create.counties",
-        ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        function (wrappers, $log, $scope, $state) {
-            $scope.user_id = $state.params.user_id;
-            wrappers.counties.filter({page_size: 50, ordering: "name"})
-            .success(function (data) {
-                $scope.counties = data.results;
-            })
-            .error(function (data) {
-                $log.error(data);
-            });
-            wrappers.user_counties.filter({user: $scope.user_id})
-            .success(function (data) {
-                $scope.user_counties = data.results;
-            })
-            .error(function (data) {
-                $log.error(data);
-            });
-            $scope.new_county = "";
-
-            $scope.add = function (county_id) {
-                $scope.spinner = true;
-                var payload = {
-                    "user": $scope.user_id,
-                    "county": county_id
-                };
-                wrappers.user_counties.create(payload)
-                .success(function (data) {
-                    $scope.user_counties.push(data);
-                    $scope.spinner = false;
-                })
-                .error(function (data) {
-                    $log.error(data);
-                    $scope.spinner = false;
-                });
-            };
-            $scope.remove = function (user_county) {
-                user_county.delete_spinner = true;
-                wrappers.user_counties.remove(user_county.id)
-                .success(function () {
-                    $scope.user_counties = _.without($scope.user_counties, user_county);
-                    user_county.delete_spinner = false;
-                })
-                .error(function (data) {
-                    $log.error(data);
-                    user_county.delete_spinner = false;
-                });
-            };
-        }]
-    )
     //end of assigning admininstrative areas to users
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
@@ -348,7 +298,11 @@
     )
 
     .controller("mfl.users.controllers.user_edit.counties",
-        ["mfl.users.services.wrappers", "$log", "$scope", function (wrappers, $log, $scope) {
+        ["mfl.users.services.wrappers", "$log", "$scope", "$state",
+        function (wrappers, $log, $scope, $state) {
+            $scope.edit_counties = (! _.isUndefined($scope.user_id));
+            $scope.user_id = $scope.user_id || $state.params.user_id;
+
             wrappers.counties.filter({page_size: 50, ordering: "name"})
             .success(function (data) {
                 $scope.counties = data.results;

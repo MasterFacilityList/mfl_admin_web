@@ -84,8 +84,8 @@
                 url: ":user_id/counties/",
                 views: {
                     "form-view@users.user_list.user_create": {
-                        controller: "mfl.users.controllers.user_create.counties",
-                        templateUrl: "users/tpls/users.create.counties.tpl.html"
+                        controller: "mfl.users.controllers.user_edit.counties",
+                        templateUrl: "users/tpls/users.edit.counties.tpl.html"
                     }
                 }
             })
