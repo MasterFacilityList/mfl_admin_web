@@ -5,7 +5,6 @@
         "templates-app",
         "templates-common",
         "acute.select",
-
         "sil.common.logging",
         "sil.api.wrapper",
         "mflAdminAppConfig",

@@ -23,7 +23,8 @@
                         templateUrl: "users/tpls/users.grid.tpl.html"
                     }
                 },
-                data : { pageTitle: "Users" }
+                data : { pageTitle: "Users" },
+                permission: "users.view_mfluser"
             })
 
             .state("users.user_list", {
@@ -36,7 +37,8 @@
                         controller: "mfl.users.controllers.users",
                         templateUrl: "users/tpls/users.grid.tpl.html"
                     }
-                }
+                },
+                permission: "users.view_mfluser"
             })
 
             .state("users.user_list.user_create", {
@@ -68,7 +70,8 @@
                         controller: "mfl.users.controllers.user_edit",
                         templateUrl: "users/tpls/users.edit.tpl.html"
                     }
-                }
+                },
+                permission: "users.view_mfluser"
             })
 
             .state("users.user_list.user_edit.basic", {
@@ -78,7 +81,8 @@
                         controller: "mfl.users.controllers.user_edit.basic",
                         templateUrl: "users/tpls/users.edit.basic.tpl.html"
                     }
-                }
+                },
+                permission: "users.view_mfluser"
             })
 
             .state("users.user_list.user_edit.contacts", {
@@ -88,7 +92,8 @@
                         controller: "mfl.users.controllers.user_edit.contacts",
                         templateUrl: "users/tpls/users.edit.contacts.tpl.html"
                     }
-                }
+                },
+                permission: "users.view_mfluser"
             })
 
             .state("users.user_list.user_edit.groups", {
@@ -98,7 +103,8 @@
                         controller: "mfl.users.controllers.user_edit.groups",
                         templateUrl: "users/tpls/users.edit.groups.tpl.html"
                     }
-                }
+                },
+                permission: "users.view_mfluser"
             })
 
             .state("users.user_list.user_edit.counties", {
@@ -108,7 +114,8 @@
                         controller: "mfl.users.controllers.user_edit.counties",
                         templateUrl: "users/tpls/users.edit.counties.tpl.html"
                     }
-                }
+                },
+                permission: "users.view_mfluser"
             })
 
             .state("users.user_list.user_delete", {
@@ -132,7 +139,8 @@
                         controller: "mfl.users.controllers.group_list",
                         templateUrl: "users/tpls/groups.grid.tpl.html"
                     }
-                }
+                },
+                permission: "users.view_mfluser"
             });
     }]);
 

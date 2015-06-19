@@ -4,9 +4,9 @@
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
-        
+
         /*Contacts*/
-        
+
         .state("setup.contacts", {
                 url: "/contacts",
                 views: {
@@ -17,7 +17,8 @@
                         controller: "mfl.setup.controller.contacts.list",
                         templateUrl: "setup/tpls/contacts/contacts-list.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_contact"
             })
         .state("setup.contacts.edit", {
                 url: "/:id/edit",
@@ -26,7 +27,8 @@
                         controller: "mfl.setup.controller.contacts.edit",
                         templateUrl: "setup/tpls/contacts/contacts-edit.tpl.html"
                     }
-                }
+                },
+                permission: "common.edit_contact"
             })
         .state("setup.contacts.edit.delete", {
                 url: "/delete",
@@ -35,7 +37,8 @@
                         templateUrl: "common/tpls/delete.tpl.html",
                         controller: "mfl.setup.controller.contacts.edit"
                     }
-                }
+                },
+                permission: "common.delete_contact"
             })
         .state("setup.contacts.create", {
                 url: "/create",
@@ -44,11 +47,12 @@
                         controller: "mfl.setup.controller.contacts.edit",
                         templateUrl: "setup/tpls/contacts/contacts-edit.tpl.html"
                     }
-                }
+                },
+                permission: "common.add_contact"
             })
-        
+
         /*Contact Types*/
-        
+
         .state("setup.contact_types", {
                 url: "/contact-types",
                 views: {
@@ -59,7 +63,8 @@
                         controller: "mfl.setup.controller.contact_types.list",
                         templateUrl: "setup/tpls/contacts/contact-types-list.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_contacttype"
             })
         .state("setup.contact_types.view", {
                 url: "/:id",
@@ -68,7 +73,8 @@
                         controller: "mfl.setup.controller.contact_types.view",
                         templateUrl: "setup/tpls/contacts/contact-types-view.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_contacttype"
             })
         .state("setup.contact_types.view.delete", {
                 url: "/delete",
@@ -77,7 +83,8 @@
                         controller: "mfl.setup.controller.contact_types.view",
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
-                }
+                },
+                permission: "common.delete_contacttype"
             })
         .state("setup.contact_types.create", {
                 url: "/create",
@@ -86,7 +93,8 @@
                         controller: "mfl.setup.controller.contact_types.view",
                         templateUrl: "setup/tpls/contacts/contact-types-view.tpl.html"
                     }
-                }
+                },
+                permission: "common.add_contacttype"
             });
     }]);
 })(angular);

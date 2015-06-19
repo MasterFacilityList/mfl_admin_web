@@ -14,7 +14,8 @@
                         controller: "mfl.setup.controller.ward.list",
                         templateUrl: "setup/tpls/wards/wards.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_ward"
             });
     }]);
 })(angular);

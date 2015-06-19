@@ -23,7 +23,8 @@
                         templateUrl: "users/tpls/groups.list.tpl.html"
                     }
                 },
-                data : { pageTitle: "Groups" }
+                data : { pageTitle: "Groups" },
+                permission: "auth.view_group"
             })
 
             .state("groups.group_list", {
@@ -33,7 +34,8 @@
                         controller: "mfl.users.controllers.group_list",
                         templateUrl: "users/tpls/groups.grid.tpl.html"
                     }
-                }
+                },
+                permission: "auth.view_group"
             })
 
             .state("users.group_list.group_create", {
@@ -54,7 +56,8 @@
                         controller: "mfl.users.controllers.group_edit",
                         templateUrl: "users/tpls/groups.edit.tpl.html"
                     }
-                }
+                },
+                permission: "auth.view_group"
             })
 
             .state("users.group_list.group_delete", {

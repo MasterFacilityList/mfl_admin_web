@@ -24,7 +24,8 @@
                     controller:"mfl.common.controllers.stateServices"
                 }
             },
-            data : { pageTitle: "Service Management" }
+            data : { pageTitle: "Service Management" },
+            permission: "facilities.view_service"
         })
 
         // ============== categories ====================
@@ -40,7 +41,8 @@
                     templateUrl: "service_mgmt/tpls/category_grid.tpl.html"
                 }
             },
-            cache: false
+            cache: false,
+            permission: "facilities.view_category"
         })
 
         .state("service_mgmt.category_list.category_create", {
@@ -61,7 +63,8 @@
                     controller: "mfl.service_mgmt.controllers.category_edit",
                     templateUrl: "service_mgmt/tpls/category_edit.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.view_category"
         })
 
         .state("service_mgmt.category_list.category_delete", {
@@ -87,7 +90,8 @@
                     controller: "mfl.service_mgmt.controllers.service_list",
                     templateUrl: "service_mgmt/tpls/service_grid.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.view_service"
         })
 
         .state("service_mgmt.service_list.service_create", {
@@ -108,7 +112,8 @@
                     controller: "mfl.service_mgmt.controllers.service_edit",
                     templateUrl: "service_mgmt/tpls/service_edit.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.view_service"
         })
 
         .state("service_mgmt.service_list.service_delete", {
@@ -129,7 +134,8 @@
                     controller: "mfl.service_mgmt.controllers.service_options",
                     templateUrl: "service_mgmt/tpls/service_options.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.view_serviceoption"
         })
 
         // ============== options ====================
@@ -144,7 +150,8 @@
                     controller: "mfl.service_mgmt.controllers.option_list",
                     templateUrl: "service_mgmt/tpls/option_grid.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.view_option"
         })
 
         .state("service_mgmt.option_list.option_create", {
@@ -165,7 +172,8 @@
                     controller: "mfl.service_mgmt.controllers.option_edit",
                     templateUrl: "service_mgmt/tpls/option_edit.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.view_option"
         })
 
         .state("service_mgmt.option_list.option_delete", {

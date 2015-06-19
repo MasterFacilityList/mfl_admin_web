@@ -17,7 +17,8 @@
                     templateUrl: "facilities/tpls/common/facility_nav.tpl.html"
                 }
             },
-            data : { pageTitle: "Facility Details" }
+            data : { pageTitle: "Facility Details" },
+            permission: "facilities.view_facility"
         })
         .state("facilities.list.id.view", {
             url: "/view/",
