@@ -64,28 +64,6 @@
                 });
             };
         }
-    ])
-
-    .controller("mfl.service_mgmt.controllers.category_delete",
-        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $state, $stateParams, $log, wrappers) {
-            $scope.category_id = $stateParams.category_id;
-            wrappers.categories.get($scope.category_id).success(function (data) {
-                $scope.category = data;
-            }).error(function (data) {
-                $log.warn(data);
-            });
-
-            $scope.save = function () {
-                wrappers.categories.remove($scope.category_id)
-                .success(function () {
-                    $state.go("service_mgmt.category_list",{reload: true});
-                })
-                .error(function (data) {
-                    $log.warn(data);
-                });
-            };
-        }
     ]);
 
 })(angular, _);

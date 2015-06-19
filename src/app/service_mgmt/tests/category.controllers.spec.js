@@ -160,43 +160,21 @@
                     "$stateParams": {
                         category_id: 1
                     },
-                    "$scope": scope
+                    "$scope": scope,
+                    "$state": state
                 };
                 httpBackend
                     .expectGET(server_url + "api/facilities/service_categories/1/")
                     .respond(200, {});
-
-                ctrl("category_delete", data);
+                spyOn(state,"go");
+                ctrl("category_edit", data);
+                scope.remove();
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.category).toEqual({});
-            });
-
-            it("should log errors on get one category failure", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        category_id: 1
-                    },
-                    "$scope": scope,
-                    "$log": log
-                };
-                httpBackend
-                    .expectGET(server_url + "api/facilities/service_categories/1/")
-                    .respond(500, {"error": "a"});
-
-                spyOn(log, "warn");
-                ctrl("category_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.category).toBe(undefined);
-                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should delete the category", function () {
@@ -213,7 +191,7 @@
                     .respond(200, {});
 
                 spyOn(state, "go");
-                ctrl("category_delete", data);
+                ctrl("category_edit", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -224,51 +202,17 @@
                 httpBackend
                     .expectDELETE(server_url + "api/facilities/service_categories/1/")
                     .respond(204, {});
-                scope.save();
+                scope.remove();
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
+                expect(state.go).toHaveBeenCalledWith("service_mgmt.category_list",
+                    {},{reload:true});
+                scope.cancel();
+                expect(state.go).toHaveBeenCalledWith("service_mgmt.category_list.category_edit");
                 expect(state.go).toHaveBeenCalled();
-            });
-
-            it("should show error on delete the category failure", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        category_id: 1
-                    },
-                    "$state": state,
-                    "$scope": scope,
-                    "$log": log
-                };
-                httpBackend
-                    .expectGET(server_url + "api/facilities/service_categories/1/")
-                    .respond(200, {});
-
-                spyOn(state, "go");
-                spyOn(log, "warn");
-                ctrl("category_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                httpBackend.resetExpectations();
-
-                httpBackend
-                    .expectDELETE(server_url + "api/facilities/service_categories/1/")
-                    .respond(404, {});
-
-                scope.save();
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(state.go).not.toHaveBeenCalled();
-                expect(log.warn).toHaveBeenCalled();
             });
         });
 
