@@ -194,51 +194,7 @@
             });
         });
 
-        describe("Test service delete controller", function () {
-            it("should get the service to delete", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        service_id: 1
-                    },
-                    "$scope": scope
-                };
-                httpBackend
-                    .expectGET(server_url + "api/facilities/services/1/")
-                    .respond(200, {});
-
-                ctrl("service_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.service).toEqual({});
-            });
-
-            it("should log errors on get one service failure", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        service_id: 1
-                    },
-                    "$scope": scope,
-                    "$log": log
-                };
-                httpBackend
-                    .expectGET(server_url + "api/facilities/services/1/")
-                    .respond(500, {"error": "a"});
-
-                spyOn(log, "warn");
-                ctrl("service_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.service).toBe(undefined);
-                expect(log.warn).toHaveBeenCalled();
-            });
+        describe("Test service delete on edit controller", function () {
 
             it("should delete the service", function () {
                 var scope = rootScope.$new();
@@ -254,7 +210,7 @@
                     .respond(200, {});
 
                 spyOn(state, "go");
-                ctrl("service_delete", data);
+                ctrl("service_edit", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -265,7 +221,7 @@
                 httpBackend
                     .expectDELETE(server_url + "api/facilities/services/1/")
                     .respond(204, {});
-                scope.save();
+                scope.remove();
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -290,7 +246,7 @@
 
                 spyOn(state, "go");
                 spyOn(log, "warn");
-                ctrl("service_delete", data);
+                ctrl("service_edit", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -302,13 +258,14 @@
                     .expectDELETE(server_url + "api/facilities/services/1/")
                     .respond(404, {});
 
-                scope.save();
+                scope.remove();
+                scope.cancel();
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(state.go).not.toHaveBeenCalled();
+                expect(state.go).toHaveBeenCalled();
                 expect(log.warn).toHaveBeenCalled();
             });
 

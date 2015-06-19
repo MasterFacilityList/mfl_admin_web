@@ -16,6 +16,7 @@
             $scope.service_id = $stateParams.service_id;
             wrappers.services.get($scope.service_id).success(function (data) {
                 $scope.service = data;
+                $scope.deleteText = $scope.service.name;
             }).error(function (data) {
                 $log.warn(data);
             });
@@ -38,6 +39,16 @@
                         });
                 }
             };
+            $scope.remove = function () {
+                wrappers.services.remove($scope.service_id).success(function(){
+                    $state.go("service_mgmt.service_list",{},{reload:true});
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            };
+            $scope.cancel = function () {
+                $state.go("service_mgmt.service_list.service_edit");
+            };
         }
     ])
 
@@ -59,28 +70,6 @@
                         {"service_id": data.id},
                         {reload: true}
                     );
-                });
-            };
-        }
-    ])
-
-    .controller("mfl.service_mgmt.controllers.service_delete",
-        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $state, $stateParams, $log, wrappers) {
-            $scope.service_id = $stateParams.service_id;
-            wrappers.services.get($scope.service_id).success(function (data) {
-                $scope.service = data;
-            }).error(function (data) {
-                $log.warn(data);
-            });
-
-            $scope.save = function () {
-                wrappers.services.remove($scope.service_id)
-                .success(function () {
-                    $state.go("service_mgmt.service_list",{reload: true});
-                })
-                .error(function (data) {
-                    $log.warn(data);
                 });
             };
         }
