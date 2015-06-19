@@ -14,7 +14,8 @@
                         controller: "mfl.setup.controller.county.list",
                         templateUrl: "setup/tpls/counties/counties.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_county"
             })
             .state("setup.counties.view_consts", {
                 url: "/:count_id",
@@ -23,7 +24,8 @@
                         controller: "mfl.setup.controller.county.view",
                         templateUrl: "setup/tpls/counties/edit_county.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_county"
             })
             .state("setup.counties.view_consts.constituencies", {
                 url: "/constituencies",
@@ -31,7 +33,8 @@
                     "form-view@setup.counties.view_consts" : {
                         templateUrl: "setup/tpls/counties/constituencies.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_constituency"
             })
             .state("setup.counties.view_consts.users", {
                 url: "/users",
@@ -39,7 +42,8 @@
                     "form-view@setup.counties.view_consts" : {
                         templateUrl: "setup/tpls/counties/users-list.tpl.html"
                     }
-                }
+                },
+                permission: "common.view_usercounty"
             });
     }]);
 

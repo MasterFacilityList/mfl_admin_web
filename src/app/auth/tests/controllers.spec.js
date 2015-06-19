@@ -1,7 +1,6 @@
 (function () {
     "use strict";
 
-
     describe("Testing the auth login controller: ", function () {
         var controller, data, root, scope, SERVER_URL, httpBackend, state;
 

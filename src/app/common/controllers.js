@@ -9,11 +9,6 @@
             $scope.user = loginService.getUser();
         }
     ])
-    .controller("mfl.common.controller.stateUsers", ["$state",
-        function ($state) {
-            $state.go("users.user_list");
-        }
-    ])
     .controller("mfl.common.controllers.stateSetup", ["$state",
         function ($state) {
             $state.go("setup.counties");

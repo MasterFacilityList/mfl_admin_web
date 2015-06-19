@@ -14,7 +14,8 @@
                         controller: "mfl.setup.controller.chuStatus.list",
                         templateUrl: "setup/tpls/chu/status/status-list.tpl.html"
                     }
-                }
+                },
+                permission: "chul.view_status"
             })
         .state("setup.chu_status.view", {
                 url: "/:id",
@@ -23,7 +24,8 @@
                         controller: "mfl.setup.controller.chuStatus.view",
                         templateUrl: "setup/tpls/chu/status/status-view.tpl.html"
                     }
-                }
+                },
+                permission: "chul.view_status"
             })
         .state("setup.chu_status.view.delete", {
                 url: "/delete",
@@ -32,7 +34,8 @@
                         controller: "mfl.setup.controller.chuStatus.view",
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
-                }
+                },
+                permission: "chul.delete_status"
             })
         .state("setup.chu_status.create", {
                 url: "/create",
@@ -41,7 +44,8 @@
                         controller: "mfl.setup.controller.chuStatus.view",
                         templateUrl: "setup/tpls/chu/status/status-view.tpl.html"
                     }
-                }
+                },
+                permission: "chul.create_status"
             })
         .state("setup.chu_approvers", {
                 url: "/chu_approvers",
@@ -53,7 +57,8 @@
                         controller: "mfl.setup.controller.chuApprover.list",
                         templateUrl: "setup/tpls/chu/approvers/approvers-list.tpl.html"
                     }
-                }
+                },
+                permission: "chul.view_approver"
             })
         .state("setup.chu_approvers.view", {
                 url: "/:id",
@@ -62,7 +67,8 @@
                         controller: "mfl.setup.controller.chuApprover.view",
                         templateUrl: "setup/tpls/chu/approvers/approvers-view.tpl.html"
                     }
-                }
+                },
+                permission: "chul.view_approver"
             })
         .state("setup.chu_approvers.view.delete", {
                 url: "/delete",
@@ -71,7 +77,8 @@
                         controller: "mfl.setup.controller.chuApprover.view",
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
-                }
+                },
+                permission: "chul.delete_approver"
             })
         .state("setup.chu_approvers.create", {
                 url: "/create",
@@ -80,7 +87,8 @@
                         controller: "mfl.setup.controller.chuApprover.view",
                         templateUrl: "setup/tpls/chu/approvers/approvers-view.tpl.html"
                     }
-                }
+                },
+                permission: "chul.create_approver"
             })
         ;
     }]);

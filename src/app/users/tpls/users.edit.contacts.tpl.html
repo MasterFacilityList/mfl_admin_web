@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="col-lg-12 margin-t-20">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " requires-permission="users.add_usercontact">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " requires-permission="common.add_usercontact">
         <h4 class="fw-500">Add Contact</h4>
             <form ng-submit="add()">
                 <table class="table content-card margin-b-10">
@@ -59,8 +59,7 @@
                             <span ng-if="contact.delete_spinner">
                                 <i class="fa fa-spin fa-circle-o-notch"></i>
                             </span>
-                            <a class="remove-icon text-danger" ng-click="remove(contact)" tooltip="Remove contact"
-                            requires-permission="users.delete_usercontact" >
+                            <a class="remove-icon text-danger" ng-click="remove(contact)" tooltip="Remove contact" requires-permission="common.delete_usercontact" >
                                 <i class="fa fa-times-circle fa-2x fw-500"></i>
                             </a>
                         </td>
@@ -74,7 +73,7 @@
             </table>
         </div>
         <div class="col-md-12 margin-b-20 margin-t-20">
-            <a ng-if="create" ui-sref="users.user_list.user_create.groups ({user_id : user_id})" class="login-btn login-btn-primary">
+            <a ng-if="create" ui-sref="users.user_create.groups ({user_id : user_id})" class="login-btn login-btn-primary">
                 <i class="fa fa-save"></i> Save
             </a>
         </div>

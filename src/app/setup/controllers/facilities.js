@@ -370,7 +370,6 @@
     .controller("mfl.setup.controller.facilityRegulatoryBody.create",["$scope",
         "$stateParams", "$state", "adminApi",
         function ($scope, $stateParams, $state, adminApi) {
-            $scope.test = "Regulatory body";
             $scope.title = [
                 {
                     icon: "fa-plus-circle",
@@ -455,7 +454,6 @@
     .controller("mfl.setup.controller.facilityRegulatoryBody.edit", ["$scope",
         "$stateParams", "adminApi", "mfl.common.forms.changes", "$state",
         function ($scope, $stateParams, adminApi, formChanges, $state) {
-            $scope.test = "Regulatory body";
             $scope.contacts = {
                 items : []
             };
@@ -477,7 +475,6 @@
 
             if($stateParams.id !== "create") {
                 $scope.regulatory_body = true;
-                $scope.test = "Regulatory body";
                 $scope.title = [
                     {
                         icon: "fa-edit",

@@ -30,7 +30,7 @@
             $scope.remove = function () {
                 wrappers.users.remove($scope.user_id)
                     .success(function () {
-                        $state.go("users.user_list");
+                        $state.go("users");
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -80,7 +80,7 @@
             $scope.save = function () {
                 wrappers.users.create($scope.user)
                 .success(function (data) {
-                    $state.go("users.user_list.user_create.contacts", {user_id: data.id});
+                    $state.go("users.user_create.contacts", {user_id: data.id});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -119,7 +119,7 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='users.user_list.user_delete({user_id: user.id})' " +
+                    func : "ui-sref='users.user_delete({user_id: user.id})' " +
                            "requires-permission='users.delete_mfluser'",
                     class: "action-btn action-btn-danger action-btn-md",
                     color: "blue",
@@ -289,7 +289,7 @@
                     $scope.new_grp = "";
                     $scope.spinner = false;
                     if (! $scope.edit_groups) {
-                        $state.go("users.user_list.user_create.counties",
+                        $state.go("users.user_create.counties",
                             {"user_id": $scope.user_id});
                     }
                 })
@@ -373,8 +373,7 @@
         }]
     )
 
-    .controller("mfl.users.controllers.users", ["$scope", function ($scope) {
-        $scope.test = "Users";
+    .controller("mfl.users.controllers.user_list", ["$scope", function ($scope) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -387,7 +386,7 @@
         ];
         $scope.action = [
             {
-                func : "ui-sref='users.user_list.user_create.basic' " +
+                func : "ui-sref='users.user_create.basic' " +
                         "requires-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-primary action-btn-md",
                 color: "blue",

@@ -14,7 +14,8 @@
                         controller: "mfl.setup.controller.facilityOwner.list",
                         templateUrl: "setup/tpls/facilities/owners/facility-owners-list.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_owner"
             })
 
         .state("setup.facility_owners.view", {
@@ -25,7 +26,8 @@
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owners-view.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_owner"
             })
         .state("setup.facility_owners.create", {
                 url: "/create",
@@ -35,7 +37,8 @@
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owners-view.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.add_owner"
             })
 
         /** -----------------------------------------------------------**/
@@ -50,7 +53,8 @@
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owner-types-list.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_ownertype"
             })
 
         .state("setup.facility_owner_types.view", {
@@ -61,7 +65,8 @@
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owner-types-view.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_ownertype"
             })
         .state("setup.facility_owner_types.create", {
                 url: "/create",
@@ -71,7 +76,8 @@
                         templateUrl: "setup/tpls/facilities/owners/"+
                                         "facility-owner-types-view.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.add_ownertype"
             })
 
          /** -----------------------------------------------------------**/
@@ -85,7 +91,8 @@
                         controller: "mfl.setup.controller.facilityJobTitle.list",
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-list.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_jobtitle"
             })
 
         .state("setup.facility_job_titles.view", {
@@ -95,7 +102,8 @@
                         controller: "mfl.setup.controller.facilityJobTitle.view",
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_jobtitle"
             })
         .state("setup.facility_job_titles.create", {
                 url: "/create",
@@ -104,7 +112,8 @@
                         controller: "mfl.setup.controller.facilityJobTitle.view",
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.add_jobtitle"
             })
 
          /** -----------------------------------------------------------**/
@@ -120,7 +129,8 @@
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-list.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_regulatingbody"
             })
         .state("setup.facility_regulatory_bodies.edit", {
                 url: "/:id",
@@ -130,7 +140,8 @@
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_regulatingbody"
             })
         .state("setup.facility_regulatory_bodies.edit.basic", {
                 url: "/basicdetails",
@@ -139,7 +150,8 @@
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
                         "regulatory-body-main-form.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_regulatingbody"
             })
         .state("setup.facility_regulatory_bodies.edit.contacts", {
                 url: "/contacts",
@@ -148,7 +160,8 @@
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
                         "regulatory-body-contacts-form.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.view_regulatingbodycontact"
             })
         .state("setup.facility_regulatory_bodies.create", {
                 url: "/create",
@@ -158,7 +171,8 @@
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.add_regulatingbody"
             })
         .state("setup.facility_regulatory_bodies.create.basic", {
                 url: "/basicdetails",
@@ -167,7 +181,8 @@
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
                         "regulatory-body-main-form.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.add_regulatingbody"
             })
         .state("setup.facility_regulatory_bodies.create.contacts", {
                 url: "/:reg_cont_id/contacts",
@@ -176,7 +191,8 @@
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
                         "regulatory-body-contacts-form.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.add_regulatingbodycontact"
             });
     }]);
 })(angular);
