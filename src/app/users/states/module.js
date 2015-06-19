@@ -10,7 +10,6 @@
         function ($stateProvider) {
             $stateProvider
                 .state("usermgmt", {
-                    abstract: true,
                     views: {
                         "main": {
                             templateUrl: "users/tpls/main.tpl.html"
