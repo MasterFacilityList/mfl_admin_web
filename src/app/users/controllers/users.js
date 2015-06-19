@@ -184,8 +184,6 @@
             }
             $scope.edit_conts = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
-
-            console.log(    $state.params);
             wrappers.contact_types.list()
                 .success(function (data) {
                     $scope.contact_types = data.results;
