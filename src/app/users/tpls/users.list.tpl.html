@@ -1,38 +1,37 @@
 <div>
     <div class="pull-left col-sm-4 col-xs-6">
-            <sil-grid-search> </sil-grid-search>
+        <sil-grid-search> </sil-grid-search>
     </div>
     <div class="pull-right col-xs-2">
         <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
     </div>
-<!-- Start of facilities grid -->
-<div id="no-more-tables" class="col-lg-12 margin-t-15">
-    <table class="table table-hover fs-14">
-        <thead>
-            <th sil-grid-sort field='first_name'>Name</th>
-            <th sil-grid-sort field='username'>Username</th>
-            <th sil-grid-sort field='email'>Email</th>
-            <th class="text-center">National User</th>
-            <th class="text-right">Actions</th>
-        </thead>
-        <tbody class="example-animate-container">
-            <tr class="animate-repeat" ng-repeat="user in users | filter: search.query">
-                <td data-title="Name" class="pad-t-15">{{user.first_name}}&nbsp;{{user.last_name}}</td>
-                <td data-title="Username" class="pad-t-15">{{user.username}}</td>
-                <td data-title="Email" class="pad-t-15">{{user.email}}</td>
-                <td data-title="National User" class="pad-t-15 text-center fs-18">
-                    <i ng-if="user.is_national" class="fa fa-user fa-1x text-success"></i>
-                    <i ng-if="!user.is_national" class="fa fa-user-times fa-1x text-danger"></i>
-                </td>
-                <td class="text-right">
-                    <a ui-sref="users.user_edit.basic({user_id : user.id})" class="action-btn action-btn-grid action-btn-primary" tooltip="Edit user">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <sil-grid-pagination> </sil-grid-pagination>
+
+    <div id="no-more-tables" class="col-lg-12 margin-t-15">
+        <table class="table table-hover fs-14">
+            <thead>
+                <th sil-grid-sort field='first_name'>Name</th>
+                <th sil-grid-sort field='username'>Username</th>
+                <th sil-grid-sort field='email'>Email</th>
+                <th class="text-center">National User</th>
+                <th class="text-right">Actions</th>
+            </thead>
+            <tbody class="example-animate-container">
+                <tr class="animate-repeat" ng-repeat="user in users | filter: search.query">
+                    <td data-title="Name" class="pad-t-15">{{user.first_name}}&nbsp;{{user.last_name}}</td>
+                    <td data-title="Username" class="pad-t-15">{{user.username}}</td>
+                    <td data-title="Email" class="pad-t-15">{{user.email}}</td>
+                    <td data-title="National User" class="pad-t-15 text-center fs-18">
+                        <i ng-if="user.is_national" class="fa fa-user fa-1x text-success"></i>
+                        <i ng-if="!user.is_national" class="fa fa-user-times fa-1x text-danger"></i>
+                    </td>
+                    <td class="text-right">
+                        <a ui-sref="users.user_edit.basic({user_id : user.id})" class="action-btn action-btn-grid action-btn-primary" tooltip="Edit user">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <sil-grid-pagination> </sil-grid-pagination>
+    </div>
 </div>
-</div>
-<!-- End of facilities grid -->

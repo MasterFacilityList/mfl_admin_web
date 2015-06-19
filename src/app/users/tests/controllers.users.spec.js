@@ -109,6 +109,19 @@
             ]);
         });
 
+        describe("Test user listing controller", function () {
+
+            it("should set scope", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                ctrl("user_list", data);
+                expect(scope.title).not.toBe(undefined);
+                expect(scope.action).not.toBe(undefined);
+            });
+        });
+
         describe("Test user delete controller", function () {
 
             it("should fetch user data", function () {

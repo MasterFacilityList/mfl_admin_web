@@ -16,7 +16,7 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='users.group_list.group_create' " +
+                    func : "ui-sref='groups.group_create' " +
                             "requires-permission='auth.add_group' ",
                     class: "action-btn action-btn-primary action-btn-md",
                     color: "blue",
@@ -73,7 +73,7 @@
             $scope.save = function () {
                 wrappers.groups.create($scope.group)
                 .success(function (data) {
-                    $state.go("users.group_list.group_edit", {"group_id": data.id});
+                    $state.go("groups.group_edit", {"group_id": data.id});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -95,7 +95,7 @@
             ];
             $scope.action = [
                 {
-                    func : "ui-sref='users.group_list.group_delete({group_id: group.id})' " +
+                    func : "ui-sref='groups.group_delete({group_id: group.id})' " +
                            "requires-permission='auth.delete_group'" ,
                     class: "action-btn action-btn-danger action-btn-md",
                     color: "blue",
@@ -143,7 +143,7 @@
                 wrappers.groups.update($scope.group_id, $scope.group)
                 .success(function () {
                     $scope.spinner = false;
-                    $state.go("groups.group_list");
+                    $state.go("groups");
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -175,7 +175,7 @@
             $scope.remove = function () {
                 wrappers.groups.remove($scope.group_id)
                     .success(function () {
-                        $state.go("groups.group_list");
+                        $state.go("groups");
                     })
                     .error(function (data) {
                         $log.error(data);

@@ -152,20 +152,6 @@
                     }
                 },
                 permission: "users.delete_mfluser"
-            })
-
-            .state("users.group_list", {
-                url: "groups/",
-                views: {
-                    "body@users" : {
-                        templateUrl : "users/tpls/body.tpl.html"
-                    },
-                    "main-content@users.group_list": {
-                        controller: "mfl.users.controllers.group_list",
-                        templateUrl: "users/tpls/groups.grid.tpl.html"
-                    }
-                },
-                permission: "users.view_mfluser"
             });
     }]);
 

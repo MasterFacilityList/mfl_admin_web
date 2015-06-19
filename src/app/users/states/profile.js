@@ -16,15 +16,10 @@
                         controller: "mfl.common.controllers.header",
                         templateUrl: "common/tpls/header.tpl.html"
                     },
-                    "sidebar@profile": {
-                        templateUrl: "users/tpls/profile.side_nav.tpl.html"
-                    },
-                    "main-content@profile": {
-                        controller: "mfl.users.controllers.profile.basic",
-                        templateUrl: "users/tpls/profile.container.tpl.html"
+                    "body@profile": {
+                        templateUrl: "users/tpls/profile.body.tpl.html"
                     }
-                },
-                data : { pageTitle: "Basic Profile" }
+                }
             })
 
             .state("profile.basic", {
