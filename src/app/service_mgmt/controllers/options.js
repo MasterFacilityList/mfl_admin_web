@@ -18,6 +18,7 @@
 
             wrappers.options.get($scope.option_id).success(function (data) {
                 $scope.option = data;
+                $scope.deleteText = $scope.option.display_text;
             }).error(function (data) {
                 $log.warn(data);
             });
@@ -35,6 +36,16 @@
                             );
                         });
                 }
+            };
+            $scope.remove = function () {
+                wrappers.options.remove($scope.option_id).success(function(){
+                    $state.go("service_mgmt.option_list",{},{reload:true});
+                }).error(function(error){
+                    $log.warn(error);
+                });
+            };
+            $scope.cancel = function () {
+                $state.go("service_mgmt.option_list.option_edit");
             };
         }
     ])
@@ -54,27 +65,6 @@
                         {"option_id": data.id},
                         {reload: true}
                     );
-                });
-            };
-        }
-    ])
-
-    .controller("mfl.service_mgmt.controllers.option_delete",
-        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $state, $stateParams, $log, wrappers) {
-            $scope.option_id = $stateParams.option_id;
-            wrappers.options.get($scope.option_id).success(function (data) {
-                $scope.option = data;
-            }).error(function (data) {
-                $log.warn(data);
-            });
-
-            $scope.save = function () {
-                wrappers.options.remove($scope.option_id)
-                .success(function () {
-                    $state.go("service_mgmt.option_list",{reload: true});
-                }).error(function (data) {
-                    $log.warn(data);
                 });
             };
         }

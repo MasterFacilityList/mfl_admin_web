@@ -172,12 +172,12 @@
             permission: "facilities.view_option"
         })
 
-        .state("service_mgmt.option_list.option_delete", {
-            url: ":option_id/delete/",
+        .state("service_mgmt.option_list.option_edit.delete", {
+            url: "delete/",
             views: {
-                "main-content@service_mgmt.option_list": {
-                    controller: "mfl.service_mgmt.controllers.option_delete",
-                    templateUrl: "service_mgmt/tpls/option_delete.tpl.html"
+                "delete@service_mgmt.option_list.option_edit": {
+                    controller: "mfl.service_mgmt.controllers.option_edit",
+                    templateUrl: "common/tpls/delete.tpl.html"
                 }
             },
             permission: "facilities.delete_option"

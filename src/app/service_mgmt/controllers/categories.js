@@ -16,6 +16,7 @@
 
             wrappers.categories.get($scope.category_id).success(function (data) {
                 $scope.category = data;
+                $scope.deleteText = $scope.category.name;
             }).error(function (data) {
                 $log.warn(data);
             });
