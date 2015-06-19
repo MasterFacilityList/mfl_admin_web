@@ -94,9 +94,12 @@
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/owner_types/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityOwnerType.view", dt);
-                $scope.deleteFacilityOwnerTypes(1);
+                $scope.remove();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("setup.facility_owner_types");
+                expect($state.go).toHaveBeenCalledWith("login",
+                                                       {next:"dashboard"});
+                expect($state.go).toHaveBeenCalledWith("setup.facility_owner_types",
+                                                       {},{reload:true});
             });
 
         it("should delete facilityOwnerType: error",function(){
@@ -104,12 +107,15 @@
                     $stateParams: {id: 1}
                 };
                 var res = {error: "error"};
+                spyOn($state, "go");
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/1/").respond(
                 200, res);
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/owner_types/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.facilityOwnerType.view", dt);
-                $scope.deleteFacilityOwnerTypes(1);
+                $scope.remove();
+                $scope.cancel();
+                expect($state.go).toHaveBeenCalledWith("setup.facility_owner_types.view");
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
@@ -275,27 +281,31 @@
                 var res = {mgs: "ok"};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
-                createController("mfl.setup.controller.facilityOwner.view", dt);
-                $httpBackend.flush();
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
-                $scope.deleteFacilityOwner(1);
+                createController("mfl.setup.controller.facilityOwner.view", dt);
+                $scope.remove();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("setup.facility_owners");
+                expect($state.go).toHaveBeenCalledWith("login",
+                                                       {next:"dashboard"});
+                expect($state.go).toHaveBeenCalledWith("setup.facility_owners",
+                                                       {},{reload:true});
             });
 
         it("should delete facilityOwner: error",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
+                spyOn($state, "go");
                 var res = {error: "error"};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/owners/1/").respond(
                 200, res);
-                createController("mfl.setup.controller.facilityOwner.view", dt);
-                $httpBackend.flush();
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/owners/1/").respond(
                 500, res);
-                $scope.deleteFacilityOwner(1);
+                createController("mfl.setup.controller.facilityOwner.view", dt);
+                $scope.remove();
+                $scope.cancel();
+                expect($state.go).toHaveBeenCalledWith("setup.facility_owners.view");
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
@@ -411,10 +421,14 @@
                 var dt = {
                     $stateParams: {id: 1}
                 };
+                spyOn($state, "go");
                 var res = {error: "error"};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/job_titles/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.facilityJobTitle.view", dt);
+                $scope.remove();
+                $scope.cancel();
+                expect($state.go).not.toHaveBeenCalledWith("setup.facility_job_titlesq");
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
@@ -430,24 +444,30 @@
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/job_titles/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityJobTitle.view", dt);
-                $scope.deleteFacilityJobTitle(1);
+                $scope.remove();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("setup.facility_job_titles");
+                expect($state.go).toHaveBeenCalledWith("login",
+                                                       {next:"dashboard"});
+                expect($state.go).toHaveBeenCalledWith("setup.facility_job_titles",{},
+                                                       {reload:true});
             });
 
         it("should delete facilityJobTitle: error",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
+                spyOn($state, "go");
                 var res = {error: "error"};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/job_titles/1/").respond(
                 200, res);
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/job_titles/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.facilityJobTitle.view", dt);
-                $scope.deleteFacilityJobTitle(1);
+                $scope.remove();
+//                expect($scope.alert).toEqual(res.error);
+                $scope.cancel();
+                expect($state.go).toHaveBeenCalledWith("setup.facility_job_titles.view");
                 $httpBackend.flush();
-                expect($scope.alert).toEqual(res.error);
             });
 
         it("should update facilityJobTitle: success",function(){
@@ -566,7 +586,7 @@
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
-                $scope.deleteFacilityRegulatoryBody(1);
+                $scope.remove();
                 $httpBackend.flush();
             });
 
@@ -574,13 +594,17 @@
                 var dt = {
                     $stateParams: {id: 1}
                 };
+                spyOn($state, "go");
                 var res = {error: "error"};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
                 $httpBackend.expectDELETE(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 500, res);
                 createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
-                $scope.deleteFacilityRegulatoryBody(1);
+                $scope.remove();
+                $scope.cancel();
+                expect($state.go)
+                    .toHaveBeenCalledWith("setup.facility_regulatory_bodies.edit.basic");
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });

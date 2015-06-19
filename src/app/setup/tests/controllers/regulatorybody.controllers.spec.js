@@ -181,7 +181,7 @@
                 delete_spinner : true,
                 contact : 1
             };
-            scope.remove(obj);
+            scope.remove_contact(obj);
             $httpBackend.expectDELETE(
                 SERVER_URL + "api/facilities/regulating_body_contacts/1/")
                 .respond(200, {});
@@ -197,7 +197,7 @@
                 delete_spinner : true,
                 contact : 1
             };
-            scope.remove(obj);
+            scope.remove_contact(obj);
             $httpBackend.expectDELETE(
                 SERVER_URL + "api/facilities/regulating_body_contacts/1/")
                 .respond(200, {});
@@ -213,7 +213,7 @@
                 delete_spinner : true,
                 contact : 1
             };
-            scope.remove(obj);
+            scope.remove_contact(obj);
             $httpBackend.expectDELETE(
                 SERVER_URL + "api/facilities/regulating_body_contacts/1/")
                 .respond(400, {});
@@ -283,18 +283,18 @@
         }]));
         it("should test deleting reg_body contact: success",
         inject(["$httpBackend", function ($httpBackend) {
+            $httpBackend.expectDELETE(
+                SERVER_URL + "api/facilities/regulating_body_contacts/1/")
+                .respond(200, {});
+            $httpBackend.expectDELETE(
+                SERVER_URL + "api/common/contacts/1/").respond(200, {});
             controller("mfl.setup.controller.facilityRegulatoryBody.edit");
             var obj = {
                 id : 1,
                 delete_spinner : true,
                 contact : 1
             };
-            scope.remove(obj);
-            $httpBackend.expectDELETE(
-                SERVER_URL + "api/facilities/regulating_body_contacts/1/")
-                .respond(200, {});
-            $httpBackend.expectDELETE(
-                SERVER_URL + "api/common/contacts/1/").respond(200, {});
+            scope.remove_contact(obj);
             $httpBackend.flush();
         }]));
         it("should test deleting reg_body contact: one failure",
@@ -305,7 +305,7 @@
                 delete_spinner : true,
                 contact : 1
             };
-            scope.remove(obj);
+            scope.remove_contact(obj);
             $httpBackend.expectDELETE(
                 SERVER_URL + "api/facilities/regulating_body_contacts/1/")
                 .respond(200, {});
@@ -321,7 +321,7 @@
                 delete_spinner : true,
                 contact : 1
             };
-            scope.remove(obj);
+            scope.remove_contact(obj);
             $httpBackend.expectDELETE(
                 SERVER_URL + "api/facilities/regulating_body_contacts/1/")
                 .respond(400, {});

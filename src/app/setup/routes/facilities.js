@@ -29,6 +29,15 @@
                 },
                 permission: "facilities.view_owner"
             })
+            .state("setup.facility_owners.view.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_owners.view": {
+                        controller: "mfl.setup.controller.facilityOwner.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                }
+            })
         .state("setup.facility_owners.create", {
                 url: "/create",
                 views: {
@@ -68,6 +77,15 @@
                 },
                 permission: "facilities.view_ownertype"
             })
+        .state("setup.facility_owner_types.view.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_owner_types.view": {
+                        controller: "mfl.setup.controller.facilityOwnerType.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                }
+            })
         .state("setup.facility_owner_types.create", {
                 url: "/create",
                 views: {
@@ -104,6 +122,15 @@
                     }
                 },
                 permission: "facilities.view_jobtitle"
+            })
+        .state("setup.facility_job_titles.view.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_job_titles.view": {
+                        controller: "mfl.setup.controller.facilityJobTitle.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                }
             })
         .state("setup.facility_job_titles.create", {
                 url: "/create",
@@ -142,6 +169,15 @@
                     }
                 },
                 permission: "facilities.view_regulatingbody"
+            })
+        .state("setup.facility_regulatory_bodies.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_regulatory_bodies.edit": {
+                        controller: "mfl.setup.controller.facilityRegulatoryBody.edit",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                }
             })
         .state("setup.facility_regulatory_bodies.edit.basic", {
                 url: "/basicdetails",
