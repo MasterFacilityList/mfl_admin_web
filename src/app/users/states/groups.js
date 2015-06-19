@@ -6,24 +6,14 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
             .state("groups", {
-                url: "/groups/",
+                parent: "usermgmt",
+                url: "^/groups/",
                 views: {
-                    "main": {
-                        templateUrl: "users/tpls/main.tpl.html"
-                    },
-                    "header@groups": {
-                        controller: "mfl.common.controllers.header",
-                        templateUrl: "common/tpls/header.tpl.html"
-                    },
-                    "body@groups": {
-                        templateUrl: "users/tpls/body.tpl.html"
-                    },
-                    "main-content@groups": {
+                    "main-content@usermgmt": {
                         controller: "mfl.users.controllers.group_list",
                         templateUrl: "users/tpls/groups.grid.tpl.html"
                     }
-                },
-                data : { pageTitle: "Groups" }
+                }
             })
 
             .state("groups.group_create", {
