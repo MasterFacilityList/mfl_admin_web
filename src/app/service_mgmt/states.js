@@ -116,7 +116,7 @@
         .state("service_mgmt.service_list.service_edit.delete", {
             url: "delete/",
             views: {
-                "main-content@service_mgmt.service_list": {
+                "delete@service_mgmt.service_list.service_edit": {
                     controller: "mfl.service_mgmt.controllers.service_edit",
                     templateUrl: "common/tpls/delete.tpl.html"
                 }
