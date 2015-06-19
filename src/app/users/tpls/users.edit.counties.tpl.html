@@ -7,8 +7,7 @@
                     Step 4 of 4
                 </span>
             </div>
-            <div class="col-lg-12 margin-t-20"
-            requires-permission="users.add_usercounty" >
+            <div class="col-lg-12 margin-t-20" requires-permission="common.add_usercounty" >
                 <h4>Assign County</h4>
                 <form ng-submit="add(new_county)">
                     <table class="table content-card  margin-b-10">
@@ -48,7 +47,7 @@
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
                                 </span>
                                 <a class="remove-icon text-danger" ng-click="remove(uc)" tooltip="Remove county"
-                                requires-permission="users.delete_usercounty" >
+                                requires-permission="common.delete_usercounty" >
                                     <i class="fa fa-times-circle fa-2x fw-500"></i>
                                 </a>
                             </td>

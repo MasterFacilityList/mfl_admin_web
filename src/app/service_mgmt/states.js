@@ -42,7 +42,7 @@
                 }
             },
             cache: false,
-            permission: "facilities.view_category"
+            permission: "facilities.view_servicecategory"
         })
 
         .state("service_mgmt.category_list.category_create", {
@@ -64,7 +64,7 @@
                     templateUrl: "service_mgmt/tpls/category_edit.tpl.html"
                 }
             },
-            permission: "facilities.view_category"
+            permission: "facilities.view_servicecategory"
         })
 
         .state("service_mgmt.category_list.category_delete", {
@@ -184,7 +184,7 @@
                     templateUrl: "service_mgmt/tpls/option_delete.tpl.html"
                 }
             },
-            permission: "facilities.delete_service"
+            permission: "facilities.delete_option"
         });
 
     }]);
