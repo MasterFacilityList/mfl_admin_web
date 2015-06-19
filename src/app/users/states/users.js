@@ -20,7 +20,7 @@
             .state("users.user_create", {
                 url: "create/",
                 views: {
-                    "main-content@users": {
+                    "main-content@usermgmt": {
                         controller: "mfl.users.controllers.user_create",
                         templateUrl: "users/tpls/user.create.tpl.html"
                     }
@@ -81,7 +81,7 @@
             .state("users.user_edit", {
                 url: "edit/:user_id/",
                 views: {
-                    "main-content@users": {
+                    "main-content@usermgmt": {
                         controller: "mfl.users.controllers.user_edit",
                         templateUrl: "users/tpls/users.edit.tpl.html"
                     }
@@ -136,7 +136,7 @@
             .state("users.user_delete", {
                 url: "delete/:user_id/",
                 views: {
-                    "main-content@users": {
+                    "main-content@usermgmt": {
                         controller: "mfl.users.controllers.user_delete",
                         templateUrl: "users/tpls/users.delete.tpl.html"
                     }
