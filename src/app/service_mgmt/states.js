@@ -40,7 +40,7 @@
                     templateUrl: "service_mgmt/tpls/category_grid.tpl.html"
                 }
             },
-            cache:false
+            cache: false
         })
 
         .state("service_mgmt.category_list.category_create", {
@@ -50,7 +50,8 @@
                     controller: "mfl.service_mgmt.controllers.category_create",
                     templateUrl: "service_mgmt/tpls/category_edit.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.add_servicecategory"
         })
 
         .state("service_mgmt.category_list.category_edit", {
@@ -70,7 +71,8 @@
                     controller: "mfl.service_mgmt.controllers.category_delete",
                     templateUrl: "service_mgmt/tpls/category_delete.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.delete_servicecategory"
         })
 
         // ============== services ====================
@@ -95,7 +97,8 @@
                     controller: "mfl.service_mgmt.controllers.service_create",
                     templateUrl: "service_mgmt/tpls/service_edit.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.add_service"
         })
 
         .state("service_mgmt.service_list.service_edit", {
@@ -115,7 +118,8 @@
                     controller: "mfl.service_mgmt.controllers.service_delete",
                     templateUrl: "service_mgmt/tpls/service_delete.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.delete_service"
         })
 
         .state("service_mgmt.service_list.service_edit.options", {
@@ -150,7 +154,8 @@
                     controller: "mfl.service_mgmt.controllers.option_create",
                     templateUrl: "service_mgmt/tpls/option_edit.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.add_option"
         })
 
         .state("service_mgmt.option_list.option_edit", {
@@ -170,7 +175,8 @@
                     controller: "mfl.service_mgmt.controllers.option_delete",
                     templateUrl: "service_mgmt/tpls/option_delete.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.delete_service"
         });
 
     }]);
