@@ -6,24 +6,14 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
             .state("users", {
-                url: "/users/",
+                parent: "usermgmt",
+                url: "^/users/",
                 views: {
-                    "main": {
-                        templateUrl: "users/tpls/main.tpl.html"
-                    },
-                    "header@users": {
-                        controller: "mfl.common.controllers.header",
-                        templateUrl: "common/tpls/header.tpl.html"
-                    },
-                    "body@users" : {
-                        templateUrl : "users/tpls/body.tpl.html"
-                    },
-                    "main-content@users": {
+                    "main-content@usermgmt": {
                         controller: "mfl.users.controllers.user_list",
                         templateUrl: "users/tpls/users.grid.tpl.html"
                     }
                 },
-                data : { pageTitle: "Users" },
                 permission: "users.view_mfluser"
             })
 

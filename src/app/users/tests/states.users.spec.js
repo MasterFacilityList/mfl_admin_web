@@ -6,7 +6,7 @@
 
         beforeEach(function() {
             module("ui.router");
-            module("mfl.users.states.users");
+            module("mfl.users.states");
 
             inject(["$state", function (s) {
                 $state = s;
