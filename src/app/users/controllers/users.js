@@ -80,7 +80,7 @@
             $scope.save = function () {
                 wrappers.users.create($scope.user)
                 .success(function (data) {
-                    $state.go("users.user_list.user_edit.basic", {user_id: data.id});
+                    $state.go("users.user_list.user_create.contacts", {user_id: data.id});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -89,6 +89,13 @@
         }]
     )
 
+    //end of assigning roles to user
+    .controller("mfl.users.controllers.user_create.details", ["$scope",
+        function ($scope) {
+            $scope.context = "Confirm";
+        }
+    ])
+    //end of assigning admininstrative areas to users
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
         function ($scope, $stateParams, $log, wrappers) {
@@ -148,16 +155,19 @@
     )
 
     .controller("mfl.users.controllers.user_edit.contacts",
-        ["$scope", "$log", "mfl.users.services.wrappers",
-        function ($scope, $log, wrappers) {
+        ["$scope", "$log", "mfl.users.services.wrappers", "$state",
+        function ($scope, $log, wrappers, $state) {
             $scope.tooltip = {
                 "title": "",
                 "checked": false
             };
+            $scope.contacts = [];
             $scope.contact = {
                 contact_type: "",
                 contact: ""
             };
+            $scope.edit_conts = (! _.isUndefined($scope.user_id));
+            $scope.user_id = $scope.user_id || $state.params.user_id;
 
             wrappers.contact_types.list()
                 .success(function (data) {
@@ -228,7 +238,8 @@
     ])
 
     .controller("mfl.users.controllers.user_edit.groups",
-        ["mfl.users.services.wrappers", "$log", "$scope", function (wrappers, $log, $scope) {
+        ["mfl.users.services.wrappers", "$log", "$scope", "$state",
+        function (wrappers, $log, $scope, $state) {
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.groups = data.results;
@@ -237,6 +248,13 @@
                 $log.error(data);
             });
             $scope.new_grp = "";
+
+            $scope.user = {
+                groups : []
+            };
+
+            $scope.edit_groups = (! _.isUndefined($scope.user_id));
+            $scope.user_id = $scope.user_id || $state.params.user_id;
 
             var updateGroups = function (new_grps) {
                 $scope.spinner = true;
@@ -249,6 +267,10 @@
                     $scope.user = data;
                     $scope.new_grp = "";
                     $scope.spinner = false;
+                    if (! $scope.edit_groups) {
+                        $state.go("users.user_list.user_create.counties",
+                            {"user_id": $scope.user_id});
+                    }
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -274,7 +296,11 @@
     )
 
     .controller("mfl.users.controllers.user_edit.counties",
-        ["mfl.users.services.wrappers", "$log", "$scope", function (wrappers, $log, $scope) {
+        ["mfl.users.services.wrappers", "$log", "$scope", "$state",
+        function (wrappers, $log, $scope, $state) {
+            $scope.edit_counties = (! _.isUndefined($scope.user_id));
+            $scope.user_id = $scope.user_id || $state.params.user_id;
+
             wrappers.counties.filter({page_size: 50, ordering: "name"})
             .success(function (data) {
                 $scope.counties = data.results;

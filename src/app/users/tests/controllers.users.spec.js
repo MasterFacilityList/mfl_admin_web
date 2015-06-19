@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("Test users controllers :", function () {
+    describe("Test users controllers (old):", function () {
         var controller, data, root, scope, SERVER_URL, httpBackend, state;
 
         beforeEach(function () {
@@ -38,6 +38,57 @@
             var test = "Users";
             expect(scope.test).toEqual(test);
         });
+        it("should test $scope in create user controller", function () {
+            controller("mfl.users.controllers.user_create.details");
+            var test = "Confirm";
+            expect(scope.context).toEqual(test);
+        });
+        it("should test $state param user id in adding user contacts",
+        inject(["$state", function ($state) {
+            $state = {
+                params : {
+                    user_id : 3
+                }
+            };
+            controller("mfl.users.controllers.user_edit.contacts");
+        }]));
+        it("should test $state param user id in adding user counties",
+        inject(["$state", function ($state) {
+            $state = {
+                params : {
+                    user_id : 3
+                }
+            };
+            controller("mfl.users.controllers.user_edit.counties");
+        }]));
+        it("should update user groups",
+        inject(["$httpBackend", "$state", function ($httpBackend, $state) {
+            spyOn($state, "go");
+            $state = {
+                params : {
+                    user_id : 1
+                }
+            };
+            controller("mfl.users.controllers.user_edit.groups");
+            scope.user_id = 1;
+            scope.user = {
+                id: 1,
+                groups : [
+                    {
+                        name: "SCRIO",
+                        permissions : [
+                            {
+                                name : "adding facility"
+                            }
+                        ]
+                    }
+                ]
+            };
+            scope.updateUserGroups();
+            $httpBackend.expectPATCH(
+                SERVER_URL + "api/users/1/").respond(200, scope.user.group);
+            $httpBackend.flush();
+        }]));
     });
 
     describe("Test users controllers: ", function () {
@@ -231,7 +282,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 expect(state.go).toHaveBeenCalledWith("users.user_list."+
-                    "user_edit.basic", {"user_id": 3});
+                    "user_create.contacts", {"user_id": 3});
             });
 
             it("should show an error on save a new user", function () {
@@ -371,7 +422,7 @@
 
                 expect(log.error).toHaveBeenCalled();
                 expect(data.$scope.contact_types).toEqual([]);
-                expect(_.isUndefined(data.$scope.contacts)).toBe(true);
+                expect(data.$scope.contacts).toEqual([]);
             });
 
             it("should load user contacts", function () {
@@ -853,11 +904,11 @@
                 var data = {
                     "$scope": rootScope.$new()
                 };
+                ctrl("user_edit.groups", data);
                 data.$scope.user_id = 3;
                 data.$scope.user = {
                     "groups": [{"id": 2, "name": "grp2"}]
                 };
-                ctrl("user_edit.groups", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
