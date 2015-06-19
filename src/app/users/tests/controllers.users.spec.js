@@ -37,11 +37,6 @@
                 }
             ]);
         });
-        it("should test $scope.test === 'users'", function () {
-            controller("mfl.users.controllers.users");
-            var test = "Users";
-            expect(scope.test).toEqual(test);
-        });
         it("should test $scope in create user controller take two",
         inject(["$httpBackend", "$state","$controller",
             function ($httpBackend, $state, $controller) {
