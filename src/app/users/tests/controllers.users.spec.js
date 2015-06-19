@@ -38,6 +38,57 @@
             var test = "Users";
             expect(scope.test).toEqual(test);
         });
+        it("should test $scope in create user controller", function () {
+            controller("mfl.users.controllers.user_create.details");
+            var test = "Confirm";
+            expect(scope.context).toEqual(test);
+        });
+        it("should test $state param user id in adding user contacts",
+        inject(["$state", function ($state) {
+            $state = {
+                params : {
+                    user_id : 3
+                }
+            };
+            controller("mfl.users.controllers.user_edit.contacts");
+        }]));
+        it("should test $state param user id in adding user counties",
+        inject(["$state", function ($state) {
+            $state = {
+                params : {
+                    user_id : 3
+                }
+            };
+            controller("mfl.users.controllers.user_edit.counties");
+        }]));
+        it("should update user groups",
+        inject(["$httpBackend", "$state", function ($httpBackend, $state) {
+            spyOn($state, "go");
+            $state = {
+                params : {
+                    user_id : 1
+                }
+            };
+            controller("mfl.users.controllers.user_edit.groups");
+            scope.user_id = 1;
+            scope.user = {
+                id: 1,
+                groups : [
+                    {
+                        name: "SCRIO",
+                        permissions : [
+                            {
+                                name : "adding facility"
+                            }
+                        ]
+                    }
+                ]
+            };
+            scope.updateUserGroups();
+            $httpBackend.expectPATCH(
+                SERVER_URL + "api/users/1/").respond(200, scope.user.group);
+            $httpBackend.flush();
+        }]));
     });
 
     describe("Test users controllers: ", function () {

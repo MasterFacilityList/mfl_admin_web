@@ -262,11 +262,15 @@
                     return {"id": grp.id, "name": grp.name};
                 });
 
-                return wrappers.users.update($scope.user_id, {"groups": grps})
+                wrappers.users.update($scope.user_id, {"groups": grps})
                 .success(function (data) {
                     $scope.user = data;
                     $scope.new_grp = "";
                     $scope.spinner = false;
+                    if (! $scope.edit_groups) {
+                        $state.go("users.user_list.user_create.counties",
+                            {"user_id": $scope.user_id});
+                    }
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -286,13 +290,7 @@
                 updateGroups(update);
             };
             $scope.updateUserGroups = function () {
-                updateGroups($scope.user.groups)
-                .success(function () {
-                    if (! $scope.edit_groups) {
-                        $state.go("users.user_list.user_create.counties",
-                            {"user_id": $scope.user_id});
-                    }
-                });
+                updateGroups($scope.user.groups);
             };
         }]
     )
