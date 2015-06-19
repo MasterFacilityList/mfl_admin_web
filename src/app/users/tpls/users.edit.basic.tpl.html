@@ -71,6 +71,14 @@
                          User is National user?
                      </label>
                 </div>
+                <div class="checkbox-group margin-b-20">
+                    <input type="checkbox" id="is_staff" ng-model="user.is_staff" name="is_staff">
+                    <label for="is_staff">
+                        <span class="check"></span>
+                        <span class="box"></span>
+                         User is an administrator?
+                     </label>
+                </div>
                 <button type="submit" class="login-btn login-btn-primary" requires-permission="users.change_mfluser" >
                     <i class="fa fa-save"></i> Save
                 </button>
