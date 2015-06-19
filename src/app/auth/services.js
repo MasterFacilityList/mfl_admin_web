@@ -53,7 +53,7 @@
 
             var change_state = function (name, args) {
                 var $state = $injector.get("$state");
-                $state.go(name, args);
+                return $state.go(name, args);
             };
 
             var page_check = function (evt, toState) {
@@ -63,7 +63,7 @@
                         change_state(HOME_PAGE_NAME);
                     } else if (! permChecker.hasPermission(toState.permission)) {
                         evt.preventDefault();
-                        window.alert("You don't have permission to access the page.");
+                        change_state("common_403");
                     }
                     return;
                 }
