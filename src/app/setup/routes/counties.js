@@ -12,7 +12,12 @@
                     },
                     "main-content@setup.counties": {
                         controller: "mfl.setup.controller.county.list",
-                        templateUrl: "setup/tpls/counties/counties.tpl.html"
+                        templateUrl: "setup/tpls/counties/counties.tpl.html",
+                        resolve: {
+                            collapsed : function () {
+                                return false;
+                            }
+                        }
                     }
                 },
                 permission: "common.view_county"
