@@ -59,12 +59,18 @@
 
             var page_check = function (evt, toState, toParams) {
                 if (loginService.isLoggedIn()) {
+                    if (toState.name === "logout") {
+                        return;
+                    }
                     if (toState.redirectTo) {
                         change_state(evt, toState.redirectTo, toParams);
                     } else if (toState.requireUser === false) {
                         change_state(evt, HOME_PAGE_NAME);
                     } else if (! permChecker.hasPermission(toState.permission)) {
                         change_state(evt, "common_403");
+                    } else if (loginService.getUser().requires_password_change &&
+                               toState.name !== "profile.password") {
+                        change_state(evt, "profile.password", {"required": true});
                     }
                     return;
                 }

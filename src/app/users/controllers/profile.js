@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
 
     angular.module("mfl.users.controllers.profile", [
@@ -133,8 +133,9 @@
     ])
 
     .controller("mfl.users.controllers.profile.password",
-        ["$scope", "$log", "mfl.auth.services.profile", "mfl.auth.services.login",
-        function ($scope, $log, profileService, loginService) {
+        ["$scope", "$log", "$state", "$stateParams", "mfl.auth.services.profile",
+        "mfl.auth.services.login",
+        function ($scope, $log, $state, $stateParams, profileService, loginService) {
             $scope.title = [
                 {
                     icon: "fa-lock",
@@ -146,11 +147,13 @@
                 "new_pwd": "",
                 "confirm_pwd": ""
             };
+            $scope.change_required = (! _.isUndefined($stateParams.required));
 
             $scope.save = function (old, pwd1, pwd2) {
                 profileService.updatePassword(old, pwd1, pwd2).then(
                     function () {
                         loginService.logout();
+                        $state.go("logout");
                     },
                     function (data) {
                         $log.error(data);
@@ -160,4 +163,4 @@
         }
     ]);
 
-})(angular);
+})(angular, _);

@@ -44,7 +44,7 @@
             })
 
             .state("profile.password", {
-                url: "password/",
+                url: "password/?required",
                 views: {
                     "main-content@profile": {
                         controller: "mfl.users.controllers.profile.password",

@@ -273,6 +273,34 @@
 
             expect(state.go).toHaveBeenCalledWith("child", toParams);
         });
+
+        it("should roadblock user until password is changed", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(loginService, "getUser").andReturn({requires_password_change: true});
+            spyOn(state, "go");
+
+            statecheck.startListening();
+            var toState = {
+                name: "homepage"
+            };
+            rootScope.$broadcast("$stateChangeStart", toState);
+
+            expect(state.go).toHaveBeenCalledWith("profile.password", {required: true});
+        });
+
+        it("should not roadblock user if page is password change", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(loginService, "getUser").andReturn({requires_password_change: true});
+            spyOn(state, "go");
+
+            statecheck.startListening();
+            var toState = {
+                name: "profile.password"
+            };
+            rootScope.$broadcast("$stateChangeStart", toState);
+
+            expect(state.go).not.toHaveBeenCalled();
+        });
     });
 
     describe("Test profile service", function () {
