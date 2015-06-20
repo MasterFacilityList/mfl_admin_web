@@ -258,6 +258,21 @@
 
             expect(statecheck.stopListening).not.toThrow();
         });
+
+        it("should redirect to specified state", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(state, "go");
+
+            statecheck.startListening();
+            var toState = {
+                name: "parent",
+                redirectTo: "child"
+            };
+            var toParams = {};
+            rootScope.$broadcast("$stateChangeStart", toState, toParams);
+
+            expect(state.go).toHaveBeenCalledWith("child", toParams);
+        });
     });
 
     describe("Test profile service", function () {

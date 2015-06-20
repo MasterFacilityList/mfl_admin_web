@@ -51,30 +51,29 @@
         function ($rootScope, $injector, loginService, permChecker, HOME_PAGE_NAME) {
             var cancel_listen;
 
-            var change_state = function (name, args) {
+            var change_state = function (evt, name, args) {
                 var $state = $injector.get("$state");
+                evt.preventDefault();
                 return $state.go(name, args);
             };
 
-            var page_check = function (evt, toState) {
+            var page_check = function (evt, toState, toParams) {
                 if (loginService.isLoggedIn()) {
-                    if (_.contains(["reset_pwd", "reset_pwd_confirm", "login"], toState.name)) {
-                        evt.preventDefault();
-                        change_state(HOME_PAGE_NAME);
+                    if (toState.redirectTo) {
+                        change_state(evt, toState.redirectTo, toParams);
+                    } else if (toState.requireUser === false) {
+                        change_state(evt, HOME_PAGE_NAME);
                     } else if (! permChecker.hasPermission(toState.permission)) {
-                        evt.preventDefault();
-                        change_state("common_403");
+                        change_state(evt, "common_403");
                     }
                     return;
                 }
 
-                if (_.contains(["login", "logout", "reset_pwd", "reset_pwd_confirm", ""],
-                        toState.name)) {
+                if ((toState.requireUser === false) || (toState.name === "logout")) {
                     return;
                 }
 
-                evt.preventDefault();
-                change_state("login", {"next": toState.name});
+                change_state(evt, "login", {"next": toState.name});
             };
 
             var start = function () {

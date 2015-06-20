@@ -25,7 +25,8 @@
                 }
             },
             data : { pageTitle: "Service Management" },
-            permission: "facilities.view_service"
+            permission: "facilities.view_service",
+            redirectTo: "service_mgmt.category_list"
         })
 
         // ============== categories ====================

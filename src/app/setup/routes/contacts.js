@@ -28,7 +28,7 @@
                         templateUrl: "setup/tpls/contacts/contacts-edit.tpl.html"
                     }
                 },
-                permission: "common.edit_contact"
+                permission: "common.view_contact"
             })
         .state("setup.contacts.edit.delete", {
                 url: "/delete",
