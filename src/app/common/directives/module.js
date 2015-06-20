@@ -2,7 +2,7 @@
     "use strict";
 
     angular.module("mfl.common.directives", [
-        "mfl.common.directives.delete",
-        "mfl.common.list.assignment.directive"
+        "mfl.common.directives.listassignment",
+        "mfl.common.directives.contentheader"
     ]);
 })(angular);

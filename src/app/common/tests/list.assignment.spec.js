@@ -9,7 +9,6 @@
 
         beforeEach(function () {
             module("mfl.common.directives");
-            module("mfl.common.list.assignment.directive");
             module("templates-app");
             module("templates-common");
 

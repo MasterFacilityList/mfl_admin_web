@@ -83,11 +83,7 @@
                 }],
                 edit:[
                     {
-                        func : ""+
-                        " mfl-delete api='mfl.facilities.wrappers' api-key='facility_type'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Facility Type'"+
-                        " on-success-url='facilities.facility_type'",
+                        func : "",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Facility Type",
@@ -168,11 +164,7 @@
                 }],
                 edit:[
                     {
-                        func : ""+
-                        " mfl-delete api='mfl.facilities.wrappers' api-key='facility_status'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Facility Status'"+
-                        " on-success-url='facilities.facility_status'",
+                        func : "",
                         class: "action-btn action-btn-danger action-btn-md",
                         color: "blue",
                         tipmsg: "Delete Facility Status",

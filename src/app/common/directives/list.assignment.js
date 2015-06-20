@@ -1,7 +1,7 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mfl.common.list.assignment.directive", [])
+    angular.module("mfl.common.directives.listassignment", [])
 
     .directive("mflListAssignment", [function () {
         var link_fxn = function (scope, element, attributes) {
