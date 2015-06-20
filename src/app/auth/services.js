@@ -58,10 +58,10 @@
             };
 
             var page_check = function (evt, toState, toParams) {
+                if (toState.name === "logout") {
+                    return;
+                }
                 if (loginService.isLoggedIn()) {
-                    if (toState.name === "logout") {
-                        return;
-                    }
                     if (toState.redirectTo) {
                         change_state(evt, toState.redirectTo, toParams);
                     } else if (toState.requireUser === false) {
@@ -75,7 +75,7 @@
                     return;
                 }
 
-                if ((toState.requireUser === false) || (toState.name === "logout")) {
+                if (toState.requireUser === false) {
                     return;
                 }
 
