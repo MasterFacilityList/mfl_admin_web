@@ -17,10 +17,9 @@
                     icon: "fa-arrow-left"
                 };
                 var link_to_html = function (link) {
-                    return "<a " + link.func+ " class=' " + link.class +" '" +
-                        link.color +
-                        "' tooltip-placement='bottom' tooltip='"+link.tipmsg+"'><i class=' fa "+
-                        link.icon+"'></i></a>";
+                    return "<a " + link.func + " class='" + link.class +"' " +
+                        "tooltip-placement='bottom' tooltip='"+link.tipmsg+"'>" +
+                        "<i class='fa " + link.icon + "'></i></a>";
                 };
 
                 var html = _.reduce(scope.action, function (memo, val) {

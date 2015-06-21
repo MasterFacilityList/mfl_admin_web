@@ -20,7 +20,7 @@
             {
                 func : "ui-sref='facilities.create.basic' ",
                 class: "action-btn action-btn-info action-btn-md",
-                color: "blue",
+
                 tipmsg: "New Facility",
                 icon: "fa-plus"
             }
@@ -40,7 +40,7 @@
             {
                 func : "ui-sref='facilities.facility_type_create' ",
                 class: "action-btn action-btn-info action-btn-md",
-                color: "blue",
+
                 tipmsg: "New Facility",
                 icon: "fa-plus"
             }
@@ -67,7 +67,7 @@
                     {
                         func : "",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Facility Type",
                         icon: "fa-trash"
                     }
@@ -106,7 +106,7 @@
             {
                 func : "ui-sref='facilities.facility_status_create' ",
                 class: "action-btn action-btn-info action-btn-md",
-                color: "blue",
+
                 tipmsg: "New Facility Status",
                 icon: "fa-plus"
             }
@@ -133,7 +133,7 @@
                     {
                         func : "",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Facility Status",
                         icon: "fa-trash"
                     }

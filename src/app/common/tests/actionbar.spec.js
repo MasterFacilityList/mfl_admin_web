@@ -4,7 +4,7 @@
     describe("Directives: Test the Action Bar directive", function() {
         var $compile, $rootScope, action;
         //We"ll use this template for our tests
-        var directiveTpl = "<actionbar action='action'></actionbar>";
+        var directiveTpl = "<actionbar action='action' hide-back-button></actionbar>";
 
         beforeEach(function() {
             //Require the module our directive is attached to
@@ -18,12 +18,10 @@
             //We want to set this before each test, so we can manipulate it
             action = [
                 {
-                    func: "fa-user",
                     class: "btn",
                     color: ""
                 },
                 {
-                    func: "fa-user-md",
                     class:"btn-primary",
                     color:""
                 }
@@ -60,7 +58,7 @@
             $scope.$digest();
             //the jQLite wrapper provided by angular can only find elements by tag name.
             var $links = $element.find("a");
-            expect($links.length).toEqual(action.length + 1); // plus back button
+            expect($links.length).toEqual(action.length);
             //Testing the genarated link names
 
             expect($links.eq(0).attr("class")).toContain("btn");
@@ -69,9 +67,9 @@
 
         it("should optionally exclude the back button", function () {
             var scope = $rootScope.$new();
-            var element = $compile("<actionbar hide-back-button></actionbar>")(scope);
+            var element = $compile("<actionbar></actionbar>")(scope);
             scope.$digest();
-            expect(element.html()).toEqual("");
+            expect(element.html()).not.toEqual("");
         });
     });
 })();

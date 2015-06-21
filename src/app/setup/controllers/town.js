@@ -14,7 +14,7 @@
                 {
                     func : "ui-sref='setup.towns.town_create' ",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "New Town",
                     icon: "fa-plus"
                 }
@@ -54,7 +54,7 @@
                 {
                     func : "ui-sref='setup.towns.town_edit.delete'",
                     class: "action-btn action-btn-danger action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Delete Town",
                     icon: "fa-trash"
                 }

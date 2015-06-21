@@ -14,7 +14,7 @@
                 {
                     func : "ui-sref='setup.chu_status.create'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add community unit status",
                     icon: "fa-plus"
                 }
@@ -35,7 +35,7 @@
                         func : "ui-sref="+
                         "'setup.chu_status.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete CHU Status",
                         icon: "fa-trash"
                     }
@@ -96,7 +96,7 @@
                 {
                     func : "ui-sref='setup.chu_approvers.create'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add Community Unit Approver",
                     icon: "fa-plus"
                 }
@@ -118,7 +118,7 @@
                         func : "ui-sref="+
                         "'setup.chu_approvers.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete CHU Approver",
                         icon: "fa-trash"
                     }

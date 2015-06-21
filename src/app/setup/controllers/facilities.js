@@ -16,7 +16,7 @@
                 {
                     func : "ui-sref='setup.facility_owner_types.create'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add Facility Owner Type",
                     icon: "fa-plus"
                 }
@@ -35,10 +35,9 @@
                 };
                 $scope.action = [
                     {
-                        func : "ui-sref="+
-                        "'setup.facility_owner_types.view.delete'",
+                        func : "ui-sref='setup.facility_owner_types.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Facility Owner Type",
                         icon: "fa-trash"
                     }
@@ -103,7 +102,7 @@
                 {
                     func : "ui-sref='setup.facility_owners.create'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add Facility Owner",
                     icon: "fa-plus"
                 }
@@ -124,7 +123,7 @@
                     {
                         func : "ui-sref='setup.facility_owners.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Facility Owner",
                         icon: "fa-trash"
                     }
@@ -206,7 +205,7 @@
                 {
                     func : "ui-sref='setup.facility_job_titles.create'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add Job Title",
                     icon: "fa-plus"
                 }
@@ -231,7 +230,7 @@
                     {
                         func : "ui-sref='setup.facility_job_titles.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Facility Job Title",
                         icon: "fa-trash"
                     }
@@ -294,7 +293,7 @@
                 {
                     func : "ui-sref='setup.facility_regulatory_bodies.create.basic'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add Regulatory Body",
                     icon: "fa-plus"
                 }
@@ -407,7 +406,7 @@
                         func : "ui-sref="+
                         "'setup.facility_regulatory_bodies.edit.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Facility Regulatory Body",
                         icon: "fa-trash"
                     }

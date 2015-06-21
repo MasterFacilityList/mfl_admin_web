@@ -17,7 +17,7 @@
                     func : "ui-sref='groups.group_create' " +
                             "requires-permission='auth.add_group' ",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "New Group",
                     icon: "fa-plus"
                 }
@@ -83,7 +83,7 @@
                     func : "ui-sref='groups.group_delete({group_id: group.id})' " +
                            "requires-permission='auth.delete_group'" ,
                     class: "action-btn action-btn-danger action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Delete User",
                     icon: "fa-trash"
                 }

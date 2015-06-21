@@ -15,7 +15,7 @@
                 {
                     func : "ui-sref='setup.contacts.create'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add Contact",
                     icon: "fa-plus"
                 }
@@ -40,7 +40,7 @@
                         func : "ui-sref="+
                         "setup.contacts.edit.delete",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Contact",
                         icon: "fa-trash"
                     }
@@ -107,7 +107,7 @@
                 {
                     func : "ui-sref='setup.contact_types.create'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add Contact type",
                     icon: "fa-plus"
                 }
@@ -130,7 +130,7 @@
                         "'setup.contact_types.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
                         tipmsg:"Delete",
-                        color: "blue",
+
                         icon: "fa-trash"
                     }
                 ];

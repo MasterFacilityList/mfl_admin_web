@@ -15,7 +15,7 @@
             {
                 func : "ui-sref='setup.geocode_methods_list.geocode_methods_create'",
                 class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
+
                 tipmsg: "Add geocode method",
                 icon: "fa-plus"
             }
@@ -57,7 +57,7 @@
                     func : "ui-sref='setup.geocode_methods_list.geocode_methods_delete({"+
                         "geocode_method_id:geocode_method.id})'",
                     class: "action-btn action-btn-danger action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Delete Geocode Method",
                     icon: "fa-trash"
                 }
@@ -121,7 +121,7 @@
             {
                 func : "ui-sref='setup.geocode_sources_list.geocode_sources_create'",
                 class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
+
                 tipmsg: "Add geocode sources",
                 icon: "fa-plus"
             }
@@ -164,7 +164,7 @@
                     func : "ui-sref='setup.geocode_sources_list.geocode_sources_delete({"+
                         "geocode_source_id:geocode_source.id})'",
                     class: "action-btn action-btn-danger action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Delete Geocode Source",
                     icon: "fa-trash"
                 }
