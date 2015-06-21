@@ -1,4 +1,9 @@
 {
+    "immed": true,
+    "newcap": true,
+    "noarg": true,
+    "sub": true,
+    "boss": true,
     "bitwise": true,
     "node": true,
     "esnext": true,
@@ -13,23 +18,17 @@
     "maxlen": 100,
     "eqnull": true,
     "globals": {
-        "jQuery": true,
-        "angular": true,
         "beforeEach": true,
         "afterEach": true,
         "describe": true,
+        "xdescribe": true,
         "expect": true,
         "inject": true,
         "it": true,
+        "xit": true,
         "browser": true,
-        "localStorage":true,
-        "protractor": true,
-        "by": true,
         "module":true,
-        "$": true,
-        "_": true,
         "window": true,
-        "spyOn": true,
-        "c3": true
+        "spyOn": true
     }
 }

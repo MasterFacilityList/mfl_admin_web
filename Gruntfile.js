@@ -283,13 +283,6 @@ module.exports = function ( grunt ) {
                 ".jshintrc", "bower.json","package.json", ".bowerrc", "src/<%= settings_file %>"
             ],
             options: {
-                curly: true,
-                immed: true,
-                newcap: true,
-                noarg: true,
-                sub: true,
-                boss: true,
-                eqnull: true,
                 jshintrc: ".jshintrc"
             },
             globals: {}
