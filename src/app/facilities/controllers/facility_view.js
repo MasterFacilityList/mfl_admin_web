@@ -10,22 +10,10 @@
     .controller("mfl.facilities.controllers.view.base", ["$scope",
         "$stateParams", "mfl.facilities.wrappers",
         "mfl.facilities.wrappers", function($scope, $stateParams, facilityApi){
-            $scope.title = [
-                {
-                    icon: "fa-building",
-                    name: "Facility Details"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "ui-sref='facilities_view' " +
-                            "has-permission='users.add_mfluser' ",
-                    class: "action-btn action-btn-info action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-building",
+                name: "Facility Details"
+            };
             facilityApi.facilities.get($stateParams.facilityId)
             .success(function(data){
                 $scope.facility = data;
@@ -37,22 +25,10 @@
     .controller("mfl.facilities.controllers.view.approve", ["$scope",
         "$stateParams", "mfl.facilities.wrappers",
         "mfl.facilities.wrappers", function($scope, $stateParams, facilityApi){
-            $scope.title = [
-                {
-                    icon: "fa-check",
-                    name: "Approve Facility"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "ui-sref='facilities' " +
-                            "has-permission='users.add_mfluser' ",
-                    class: "action-btn action-btn-info action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-check",
+                name: "Approve Facility"
+            };
             $scope.facility = {facilityId: $stateParams.facilityId};
             var promise = facilityApi.facilities.get($stateParams.facilityId);
             facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);
@@ -79,23 +55,11 @@
     .controller("mfl.facilities.controllers.view.add_unit", ["$scope",
         "$stateParams", "mfl.facilities.wrappers",
         "mfl.facilities.wrappers", function($scope, $stateParams, facilityApi){
-            $scope.title = [
-                {
-                    icon: "fa-plus",
-                    name: "Add Facility Unit"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-plus",
+                name: "Add Facility Unit"
+            };
             $scope.facility = $stateParams.facilityId;
-            $scope.action = [
-                {
-                    func : "ui-sref='facilities' " +
-                            "has-permission='users.add_mfluser' ",
-                    class: "action-btn action-btn-info action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }
-            ];
             $scope.facility = {facilityId: $stateParams.facilityId};
             var promise = facilityApi.facilities.get($stateParams.facilityId);
             facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);
@@ -138,22 +102,10 @@
     .controller("mfl.facilities.controllers.view.upgrade", ["$scope",
         "$stateParams", "mfl.facilities.wrappers",
         "mfl.facilities.wrappers", function($scope, $stateParams, facilityApi){
-            $scope.title = [
-                {
-                    icon: "fa-up",
-                    name: "Upgrade Facility"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "ui-sref='facilities' " +
-                            "has-permission='users.add_mfluser' ",
-                    class: "action-btn action-btn-info action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-up",
+                name: "Upgrade Facility"
+            };
             $scope.facility = {facilityId: $stateParams.facilityId};
             var promise = facilityApi.facilities.get($stateParams.facilityId);
             facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);
@@ -204,22 +156,10 @@
     .controller("mfl.facilities.controllers.view.mutate_op_status", ["$scope",
         "$stateParams", "mfl.facilities.wrappers",
            function($scope, $stateParams, facilityApi){
-            $scope.title = [
-                {
-                    icon: "fa-building",
-                    name: "Change Operation Status"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "ui-sref='facilities' " +
-                            "has-permission='users.add_mfluser' ",
-                    class: "action-btn action-btn-info action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-building",
+                name: "Change Operation Status"
+            };
             $scope.facility = {facilityId: $stateParams.facilityId};
             var promise = facilityApi.facilities.get($stateParams.facilityId);
             facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);
@@ -269,22 +209,10 @@
     .controller("mfl.facilities.controllers.view.officers",
         ["$scope","$stateParams","mfl.facilities.wrappers",
         function ($scope,$stateParams,facilityApi) {
-        $scope.title = [
-            {
-                icon: "",
-                name: "Add Officers"
-            }
-        ];
-        $scope.action = [
-            {
-                func : "ui-sref='facilities.list.id.view' " +
-                        "has-permission='users.add_mfluser' ",
-                class: "action-btn action-btn-info action-btn-md",
-                color: "blue",
-                tipmsg: "Go Back",
-                icon: "fa-arrow-left"
-            }
-        ];
+        $scope.title = {
+            icon: "",
+            name: "Add Officers"
+        };
         $scope.facility = {facilityId: $stateParams.facilityId};
         var promise = facilityApi.facilities.get($stateParams.facilityId);
         facilityApi.utils.resolvePromise($scope, $scope, "facility_data", promise);

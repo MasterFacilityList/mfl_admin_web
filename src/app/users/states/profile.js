@@ -9,7 +9,6 @@
                 url: "/profile/",
                 views: {
                     "main": {
-                        controller: "mfl.users.controllers.profile.base",
                         templateUrl: "users/tpls/main.tpl.html"
                     },
                     "header@profile": {

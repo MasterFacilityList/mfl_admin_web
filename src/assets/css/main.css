@@ -60,12 +60,6 @@ img {
   background-color: #e84c3d;
   color: #fff;
 }
-.breadcrumb {
-  background: none;
-}
-.breadcrumb > li {
-  font-size: 12px;
-}
 .btn {
   border: none;
   font-size: 15px;

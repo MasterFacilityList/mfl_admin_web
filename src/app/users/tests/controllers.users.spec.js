@@ -286,12 +286,10 @@
                     "$scope": scope
                 };
                 ctrl("user_create", data);
-                var test_title = [
-                    {
-                        icon : "fa-plus-circle",
-                        name : "New User"
-                    }
-                ];
+                var test_title = {
+                    icon : "fa-plus-circle",
+                    name : "New User"
+                };
                 expect(data.$scope.title).toEqual(test_title);
             });
         });

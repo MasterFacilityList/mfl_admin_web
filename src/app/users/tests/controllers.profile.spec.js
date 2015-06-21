@@ -23,19 +23,6 @@
             ]);
         });
 
-        describe("Test base profile controller", function () {
-
-            it("should load base controller", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$scope": scope
-                };
-                ctrl("base", data);
-
-                expect(scope.title).toEqual("Profile");
-            });
-        });
-
         describe("Test basic profile controller", function () {
 
             it("should load current user details", function () {
@@ -53,7 +40,7 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(scope.title[0].name).toEqual("Basic Details");
+                expect(scope.title.name).toEqual("Basic Details");
                 expect(scope.profile).toEqual({});
             });
 
@@ -74,7 +61,7 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(scope.title[0].name).toEqual("Basic Details");
+                expect(scope.title.name).toEqual("Basic Details");
                 expect(_.isUndefined(scope.profile)).toBe(true);
                 expect(log.error).toHaveBeenCalled();
             });
@@ -190,7 +177,7 @@
 
                 ctrl("password", data);
 
-                expect(scope.title[0].name).toEqual("Password");
+                expect(scope.title.name).toEqual("Password");
 
                 httpBackend
                     .expectPOST(server_url+"api/rest-auth/password/change/", {
@@ -217,7 +204,7 @@
 
                 ctrl("password", data);
 
-                expect(scope.title[0].name).toEqual("Password");
+                expect(scope.title.name).toEqual("Password");
 
                 httpBackend
                     .expectPOST(server_url+"api/rest-auth/password/change/", {
@@ -245,7 +232,7 @@
 
                 ctrl("password", data);
 
-                expect(scope.title[0].name).toEqual("Password");
+                expect(scope.title.name).toEqual("Password");
 
                 scope.save("c", "a", "b");
 
@@ -267,7 +254,7 @@
 
                 ctrl("password", data);
 
-                expect(scope.title[0].name).toEqual("Password");
+                expect(scope.title.name).toEqual("Password");
 
                 scope.save("a", "a", "a");
 

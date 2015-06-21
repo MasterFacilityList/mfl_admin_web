@@ -3,12 +3,12 @@
 
     angular.module("mfl.common.directives.contentheader", [])
 
-    .directive("actionbar", ["$compile", function ($compile) {
+    .directive("actionbar", [function () {
         return {
             restrict: "E",
             replace: true,
             template: "<div class='action-container content-header-extra'></div>",
-            link: function ($scope, $element, attrs) {
+            link: function (scope, element, attrs) {
                 var backbutton = {
                     func : "onclick='window.history.back()'",
                     class: "action-btn action-btn-primary action-btn-md",
@@ -23,63 +23,35 @@
                         link.icon+"'></i></a>";
                 };
 
-                var html = _.reduce($scope.action, function (memo, val) {
+                var html = _.reduce(scope.action, function (memo, val) {
                     return memo + link_to_html(val);
                 }, "");
                 if (_.isUndefined(attrs.hideBackButton)) {
                     html += link_to_html(backbutton);
                 }
-                $element.html(html);
-                $compile($element)($scope);
+                element.html(html);
             }
         };
     }])
 
-    .directive("silContTitle", ["$compile", function ($compile) {  //Generates title
-        return {
-            restrict: "E",
-            replace: true,
-            template: "<span class='main-title'></span>",
-            link: function ($scope, $element) {
-                var title = "";
-                _.each($scope.title, function (link) {
-                    title = title + "<i class='sidebar-icon fa "+
-                        link.icon + "'> </i> " + link.name;
-                });
-                $element.html(title);
-                $compile($element)($scope);
-            }
-        };
-    }])
-
-    .directive("breadcrumbs", ["$compile", function ($compile) {  //Generates breadcrumbs
-        return {
-            restrict: "EA",
-            replace: true,
-            scope:{
-                path:"="
-            },
-            template: "<ul class='breadcrumb'></ul>",
-            link: function ($scope, $element) {
-                var path = "";
-                _.each($scope.path, function (link) {
-                    path = path + "<li><a ui-sref='"+link.route+"'> "+link.name+" </a></li>";
-                });
-                $element.html(path);
-                $compile($element)($scope);
-            }
-        };
-    }])
-
-    .directive("contentheader", [ function () {
+    .directive("contentheader", [function () {
         return {
             restrict:"E",
             replace:true,
-            template: "<div class='content-header'>"+
-                "<actionbar action='action'></actionbar>"+
+            template: "<div class='content-header'>" +
+                "<actionbar action='action'></actionbar>" +
                 "<h2 class='content-title'>"+
-                "<sil-cont-title title='title'></sil-cont-title></h2>"+
-                "<breadcrumbs path='path'></breadcrumbs></div>"
+                "<span class='main-title'>"+
+                "<i class='sidebar-icon fa {{title.icon}}'>{{title.name}}</i>"+
+                "</span></contenttitle></h2>" +
+                "</div>",
+            compile: function (elem, attrs) {
+                if(angular.isDefined(attrs.hideBackButton)) {
+                    elem.find("actionbar").attr("hide-back-button", "");
+                }
+                return angular.noop;
+            }
         };
     }]);
+
 })(angular, _);

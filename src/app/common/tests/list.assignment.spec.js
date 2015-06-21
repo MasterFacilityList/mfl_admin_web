@@ -8,7 +8,7 @@
                            "</mfl-list-assignment>";
 
         beforeEach(function () {
-            module("mfl.common.directives");
+            module("mfl.common.directives.listassignment");
             module("templates-app");
             module("templates-common");
 

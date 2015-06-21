@@ -60,12 +60,10 @@
             var dt = {
                 $stateParams : {id: "create"}
             };
-            var test_title = [
-                {
-                    icon: "fa-plus-circle",
-                    name: "New Community Unit Status"
-                }
-            ];
+            var test_title = {
+                icon: "fa-plus-circle",
+                name: "New Community Unit Status"
+            };
             createController("mfl.setup.controller.chuStatus.view", dt);
             expect($scope.title).toEqual(test_title);
         });
@@ -237,12 +235,10 @@
             var dt = {
                 $stateParams : {id: "create"}
             };
-            var test_title = [
-                {
-                    icon : "fa-plus-circle",
-                    name : "New Commmunity Unit Approver"
-                }
-            ];
+            var test_title = {
+                icon : "fa-plus-circle",
+                name : "New Commmunity Unit Approver"
+            };
             createController("mfl.setup.controller.chuApprover.view", dt);
             expect($scope.title).toEqual(test_title);
         });

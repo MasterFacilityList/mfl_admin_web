@@ -13,21 +13,10 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Create Facility: Facility Details"
-            }
-        ];
-        $scope.action = [
-            {
-                func : "onclick=window.history.back()",
-                class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
-                tipmsg: "Go back",
-                icon: "fa-arrow-left"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Create Facility: Facility Details"
+        };
         $scope.filterData = {
             constituency: [],
             ward: []
@@ -101,21 +90,10 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Create Facility: Address Details"
-            }
-        ];
-        $scope.action = [
-            {
-                func : "onclick=window.history.back()",
-                class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
-                tipmsg: "Go back",
-                icon: "fa-arrow-left"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Create Facility: Address Details"
+        };
         $scope.facility= {
             id : $stateParams.facilityId
         };
@@ -179,21 +157,10 @@
         $scope.facility= {
             id : $stateParams.facilityId
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Create Facility: Contacts Details"
-            }
-        ];
-        $scope.action = [
-            {
-                func : "onclick=window.history.back()",
-                class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
-                tipmsg: "Go back",
-                icon: "fa-arrow-left"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Create Facility: Contacts Details"
+        };
         $scope.getOptionsData = {
             contactType: function(callback){
                 facilityApi.contact_types.list()
@@ -243,21 +210,10 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Create Facility: Services"
-            }
-        ];
-        $scope.action = [
-            {
-                func : "onclick=window.history.back()",
-                class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
-                tipmsg: "Go back",
-                icon: "fa-arrow-left"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Create Facility: Services"
+        };
         $scope.getOptionsData = {
             getData: function(api, callback, what){
                 api.list()

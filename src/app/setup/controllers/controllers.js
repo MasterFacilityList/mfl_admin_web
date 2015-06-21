@@ -11,12 +11,10 @@
     ])
     .controller("mfl.setup.controller.dashboard", ["$scope",
         function ($scope) {
-            $scope.title = [
-                {
-                    icon: "fa-map-marker",
-                    name: "Adminstrative Units"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-map-marker",
+                name: "Adminstrative Units"
+            };
         }]);
 })(angular);
 

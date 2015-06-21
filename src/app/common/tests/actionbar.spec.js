@@ -8,7 +8,7 @@
 
         beforeEach(function() {
             //Require the module our directive is attached to
-            module("mfl.common.directives");
+            module("mfl.common.directives.contentheader");
 
             inject(function (_$compile_, _$rootScope_) {
                 $compile = _$compile_;

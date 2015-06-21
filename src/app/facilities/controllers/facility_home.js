@@ -12,16 +12,13 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Manage Facilities"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Manage Facilities"
+        };
         $scope.action = [
             {
-                func : "ui-sref='facilities.create.basic' " +
-                        "has-permission='users.add_mfluser' ",
+                func : "ui-sref='facilities.create.basic' ",
                 class: "action-btn action-btn-info action-btn-md",
                 color: "blue",
                 tipmsg: "New Facility",
@@ -35,16 +32,13 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Manage Facility Type"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Manage Facility Type"
+        };
         $scope.action = [
             {
-                func : "ui-sref='facilities.facility_type_create' " +
-                        "has-permission='users.add_mfluser' ",
+                func : "ui-sref='facilities.facility_type_create' ",
                 class: "action-btn action-btn-info action-btn-md",
                 color: "blue",
                 tipmsg: "New Facility",
@@ -57,30 +51,18 @@
      "$stateParams","mfl.facilities.wrappers","mfl.common.forms.changes",
         function($scope, $state, $stateParams, facilityApi, formChanges){
             var titles = {
-                edit: [
-                    {
-                        icon: "fa-edit",
-                        name: "Edit Facility Type"
-                    }
-                ],
-                create:  [
-                    {
-                        icon: "fa-plus-circle",
-                        name: "New Facility Type"
-                    }
-                ]
+                edit: {
+                    icon: "fa-edit",
+                    name: "Edit Facility Type"
+                },
+                create: {
+                    icon: "fa-plus-circle",
+                    name: "New Facility Type"
+                }
             };
             var actions = {
-                defaults: [{
-                    func : "onclick='window.history.back()'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }],
-                create: [{
-
-                }],
+                defaults: [],
+                create: [{}],
                 edit:[
                     {
                         func : "",
@@ -116,16 +98,13 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Manage Facility Status"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Manage Facility Status"
+        };
         $scope.action = [
             {
-                func : "ui-sref='facilities.facility_status_create' " +
-                        "has-permission='users.add_mfluser' ",
+                func : "ui-sref='facilities.facility_status_create' ",
                 class: "action-btn action-btn-info action-btn-md",
                 color: "blue",
                 tipmsg: "New Facility Status",
@@ -138,30 +117,18 @@
      "$stateParams","mfl.facilities.wrappers","mfl.common.forms.changes",
         function($scope, $state, $stateParams, facilityApi, formChanges){
             var titles = {
-                edit: [
-                    {
-                        icon: "fa-edit",
-                        name: "Edit Facility Status"
-                    }
-                ],
-                create:  [
-                    {
-                        icon: "fa-plus-circle",
-                        name: "New Facility Status"
-                    }
-                ]
+                edit: {
+                    icon: "fa-edit",
+                    name: "Edit Facility Status"
+                },
+                create: {
+                    icon: "fa-plus-circle",
+                    name: "New Facility Status"
+                }
             };
             var actions = {
-                defaults: [{
-                    func : "onclick='window.history.back()'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }],
-                create: [{
-
-                }],
+                defaults: [{}],
+                create: [{}],
                 edit:[
                     {
                         func : "",
