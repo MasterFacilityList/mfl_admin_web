@@ -7,7 +7,7 @@
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.users.services");
-            module("sil.api.wrapper");
+            module("api.wrapper");
             module("ui.router");
             module("mfl.users.controllers.users");
 

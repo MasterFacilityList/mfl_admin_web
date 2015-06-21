@@ -6,7 +6,7 @@
         beforeEach(function () {
             module("mflAdminApp");
             module("mflAdminAppConfig");
-            module("sil.api.wrapper");
+            module("api.wrapper");
             module("ui.router");
             module("mfl.setup.api");
             module("mfl.setup.facilities.controllers");

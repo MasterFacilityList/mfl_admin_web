@@ -2,7 +2,7 @@
     "use strict";
 
     angular.module("mfl.facilities.services", [
-        "sil.api.wrapper"
+        "api.wrapper"
     ])
 
     .service("mfl.facilities.wrappers", ["api", function (api) {

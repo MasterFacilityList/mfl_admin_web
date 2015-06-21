@@ -7,7 +7,7 @@
 
         beforeEach(function () {
             module("mflAdminAppConfig");
-            module("sil.api.wrapper");
+            module("api.wrapper");
             module("mfl.service_mgmt.services");
 
             inject(["api", function (a) {

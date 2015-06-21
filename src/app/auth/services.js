@@ -2,7 +2,7 @@
     "use strict";
 
     angular.module("mfl.auth.services", [
-        "sil.api.wrapper",
+        "api.wrapper",
         "mfl.auth.oauth2",
         "mfl.auth.permissions",
         "ui.router"

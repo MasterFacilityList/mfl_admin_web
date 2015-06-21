@@ -7,7 +7,7 @@
 
         beforeEach(function () {
             module("mflAdminAppConfig");
-            module("sil.api.wrapper");
+            module("api.wrapper");
             module("mfl.auth.services");
         });
 
@@ -308,7 +308,7 @@
 
         beforeEach(function () {
             module("mflAdminAppConfig");
-            module("sil.api.wrapper");
+            module("api.wrapper");
             module("mfl.auth.services");
 
             inject(["$httpBackend", "$rootScope", "mfl.auth.services.profile", "SERVER_URL",

@@ -2,8 +2,8 @@
     "use strict";
 
     angular.module("mflAdminAppConfig", [
-        "sil.common.logging",
-        "sil.api.wrapper",
+        "common.logging",
+        "api.wrapper",
         "sil.grid",
         "mfl.auth.oauth2",
         "ui.router",

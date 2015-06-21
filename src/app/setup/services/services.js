@@ -1,7 +1,7 @@
 (function(angular){
     "use strict";
     angular.module("mfl.setup.api", [
-        "sil.api.wrapper"
+        "api.wrapper"
     ])
     .provider("adminApi",[function(){
         this.$get = ["api",function(api){
