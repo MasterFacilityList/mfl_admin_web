@@ -3,7 +3,7 @@
 
     angular.module("mfl.common.directives.contentheader", [])
 
-    .directive("actionbar", [function () {
+    .directive("actionbar", ["$compile", function ($compile) {
         return {
             restrict: "E",
             replace: true,
@@ -29,6 +29,7 @@
                     html += link_to_html(backbutton);
                 }
                 element.html(html);
+                $compile(element)(scope);
             }
         };
     }])
