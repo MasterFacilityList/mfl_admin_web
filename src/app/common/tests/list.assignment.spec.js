@@ -32,7 +32,7 @@
 
             expect(templateAsHtml).toContain("National");
         }]));
-        it("should test clickedRole function",
+        it("should test clickedItem function",
         inject(["$rootScope", "$compile",function($rootScope, $compile) {
             var scope = $rootScope.$new();
             var $element = $compile(directiveTpl)(scope);
@@ -41,11 +41,11 @@
             var test_obj = {
                 selected : false
             };
-            isolatedScope.clickedRole(test_obj);
+            isolatedScope.clickedItem(test_obj);
 
             expect(test_obj.selected).toBeTruthy();
         }]));
-        it("should test setRole function",
+        it("should test setItem function",
         inject(["$rootScope", "$compile",function($rootScope, $compile) {
             var scope = $rootScope.$new();
             var $element = $compile(directiveTpl)(scope);
@@ -54,11 +54,11 @@
             var test_obj = {
                 set_selected : false
             };
-            isolatedScope.setRole(test_obj);
+            isolatedScope.setItem(test_obj);
 
             expect(test_obj.set_selected).toBeTruthy();
         }]));
-        it("should test addRoles function",
+        it("should test addItems function",
         inject(["$rootScope", "$compile",function($rootScope, $compile) {
             var scope = $rootScope.$new();
             scope.listeditems = [{id: "1", name: "National"}];
@@ -90,9 +90,9 @@
                     name : "test_two"
                 }
             ];
-            isolatedScope.addRoles();
+            isolatedScope.addItems();
         }]));
-        it("should test revertRoles function",
+        it("should test revertItems function",
         inject(["$rootScope", "$compile",function($rootScope, $compile) {
             var scope = $rootScope.$new();
             scope.listeditems = [{id: "1", name: "National"}];
@@ -114,7 +114,7 @@
             scope.$digest();
             var isolatedScope = $element.isolateScope();
 
-            isolatedScope.revertRoles();
+            isolatedScope.revertItems();
 
         }]));
     });

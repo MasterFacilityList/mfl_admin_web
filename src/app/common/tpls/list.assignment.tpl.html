@@ -12,18 +12,18 @@
         </div>
 
         <ul class="nav nav-pills nav-stacked perm-container margin-b-20" >
-            <li ng-repeat="role in filtered_items | filter: search.available_query"
-                class="list-item" ng-class="{active : role.selected}"  >
-                <a href ng-click="clickedRole(role)">{{role[displayAttr]}}</a>
+            <li ng-repeat="item in filtered_items | filter: search.available_query"
+                class="list-item" ng-class="{active : item.selected}"  >
+                <a href ng-click="clickedItem(item)">{{item[displayAttr]}}</a>
             </li>
         </ul>
     </div>
     <div id="lst-divider" class="col-md-2 perm-divider">
-        <span class="text-primary" ng-click="addRoles()">
+        <span class="text-primary" ng-click="addItems()">
             <i class="fa fa-long-arrow-right fa-2x"></i>
         </span>
         <br>
-        <span class="text-primary" ng-click="revertRoles()">
+        <span class="text-primary" ng-click="revertItems()">
             <i class="fa fa-long-arrow-left fa-2x"></i>
         </span>
     </div>
@@ -41,9 +41,9 @@
             <span ng-hide="assigneditems.length">
                 Nothing assigned yet
             </span>
-            <li ng-repeat="set_role in assigneditems | filter: search.assigned_query" class="list-item"
-            ng-class="{active : set_role.set_selected}">
-                <a href ng-click="setRole(set_role)">{{set_role.name}}</a>
+            <li ng-repeat="set_item in assigneditems | filter: search.assigned_query" class="list-item"
+            ng-class="{active : set_item.set_selected}">
+                <a href ng-click="setItem(set_item)">{{set_item.name}}</a>
             </li>
         </ul>
     </div>
