@@ -30,7 +30,6 @@
             facilities: ["mfl.facilities.services","mfl.facilities.wrappers"],
             service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
         };
-        silGridConfig.appConfig = "mflAdminAppConfig";
     }])
 
     .config(["$urlRouterProvider", function($urlRouterProvider) {

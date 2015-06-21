@@ -12,7 +12,7 @@
     )
     .provider("silGridConfig", function() {
         this.apiMaps = {};
-        this.appConfig = "providerConfig";
+        this.appConfig = "mflAdminAppConfig";
         this.itemsPerPage = 25;
         this.$get = [function(){
             return {
@@ -30,8 +30,8 @@
             templateUrl: PAGINATION_TPL
         };
     }])
-    .directive("silGrid",["$parse","$rootScope","$modal", "silGridConfig",
-               function($parse, $rootScope, $modal, silGridConfig){
+    .directive("silGrid",["$parse","$rootScope","$modal", "$injector", "silGridConfig",
+               function($parse, $rootScope, $modal, $injector, silGridConfig){
         return {
             restrict: "EA",
             scope: {
@@ -55,8 +55,7 @@
                     throw "Must specify the grid for";
                 }
                 var api_conf = apiMaps[$scope.gridFor];
-                var api = angular.injector(
-                    ["ng",silGridConfig.appConfig, api_conf[0]]).get(api_conf[1]);
+                var api = $injector.get(api_conf[1]);
 
                 if(!_.isUndefined($scope.apiKey)) {
                         self.api = api[$scope.apiKey];
@@ -86,11 +85,10 @@
                     if(_.has(data, "results")){
                         $scope[$scope.data] = data.results;
                         addPagination(data.count, data.next, data.previous);
-                    }else{
+                    } else{
                         $scope[$scope.data] = data;
                         $scope.pagination.active = false;
                     }
-                    $scope.$apply();
                 };
 
                 self.showError = function(error){
@@ -103,7 +101,6 @@
                 self.setError = function(error){
                     self.setLoading(false);
                     $scope.error = self.showError(error);
-                    $scope.$apply();
                 };
 
                 var initFilters = function(){
