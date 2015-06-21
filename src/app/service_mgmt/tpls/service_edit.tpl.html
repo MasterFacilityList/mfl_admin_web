@@ -9,38 +9,11 @@
 </div>
 <div ui-view="delete"></div>
 <div class="col-md-12 col-sm-12">
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
-    <form class="" name="service_frm">
-        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
-                <div class="group">
-                    <input type="text" name="name" ng-model="service.name" required />
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Name</label>
-                </div>
-                <div class="group">
-                    <textarea name="description" ng-model="service.description" required></textarea>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Description</label>
-                </div>
-                <div class="group">
-                    <input type="text" name="abbreviation" ng-model="service.abbreviation" required/>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Abbreviation</label>
-                </div>
-                <div class="group">
-                    <select name="category" ng-model="service.category_name" required>
-                        <option ng-repeat="cat in categories" ng-value="cat.id">{{cat.name}}</option>
-                    </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Category</label>
-                </div>
-                <button class="login-btn login-btn-primary pull-left" ng-click="save(service_frm)"><i class="fa fa-save"></i> Save</button>
-                <a class="login-btn login-btn-default pull-left margin-l-10" ui-sref="service_mgmt.service_list">&nbsp;Cancel</a>
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
+        <div>
+            <a ui-sref=".basic" class="login-btn login-btn-default" ui-sref-active="disabled">Basic service details</a>
+            <a ui-sref=".options" class="login-btn login-btn-default" ui-sref-active="disabled">Service options</a>
+        </div>
+        <div ui-view="form-view"></div>
     </div>
-    </form>
-</div>
 </div>

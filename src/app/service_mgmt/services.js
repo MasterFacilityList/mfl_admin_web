@@ -12,6 +12,8 @@
 
         this.options = api.setBaseUrl("api/facilities/options/");
 
+        this.service_options = api.setBaseUrl("api/facilities/service_options/");
+
         this.OPTION_TYPES = [
             "BOOLEAN", "INTEGER", "DECIMAL", "TEXT"
         ];

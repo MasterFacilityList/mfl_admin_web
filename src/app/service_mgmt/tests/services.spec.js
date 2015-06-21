@@ -23,7 +23,7 @@
                 expect(w.options).toEqual({});
                 expect(angular.isArray(w.OPTION_TYPES)).toBe(true);
 
-                expect(api.setBaseUrl.calls.length).toBe(3);
+                expect(api.setBaseUrl.calls.length).toBe(4);
                 expect(api.setBaseUrl.calls[0].args[0]).toEqual("api/facilities/services/");
                 expect(api.setBaseUrl.calls[1].args[0])
                     .toEqual("api/facilities/service_categories/");
