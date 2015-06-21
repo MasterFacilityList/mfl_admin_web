@@ -1,4 +1,5 @@
 module.exports = function ( grunt ) {
+    "use strict";
 
     /**
      * Load required Grunt tasks. These are installed based on the versions listed
@@ -577,7 +578,7 @@ module.exports = function ( grunt ) {
         "copy:compile_app_settings", "uglify", "index:compile"
     ]);
 
-    grunt.registerTask("test", ["build", "karma"]);
+    grunt.registerTask("test", ["build", "karma:continuous"]);
 
     /**
      * A utility function to get all app JavaScript sources.
