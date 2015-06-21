@@ -25,10 +25,10 @@ module.exports = function ( karma ) {
         plugins: [
             "karma-jasmine",
             "karma-firefox-launcher",
+            "karma-chrome-launcher",
             "karma-coverage",
             "karma-threshold-reporter",
-            "karma-coffee-preprocessor",
-            "karma-mocha-reporter"
+            "karma-coffee-preprocessor"
         ],
         preprocessors: {
             "**/*.coffee": "coffee",
@@ -41,14 +41,8 @@ module.exports = function ( karma ) {
         reporters: [
             "progress",
             "coverage",
-            "threshold",
-            "mocha"
+            "threshold"
         ],
-
-        // reporter options
-        mochaReporter: {
-          output: "autowatch"
-        },
 
         /**
          * On which port should the browser connect, on which port is the test runner
@@ -77,7 +71,8 @@ module.exports = function ( karma ) {
          * the aesthetic advantage of not launching a browser every time you save.
          */
         browsers: [
-          "Firefox"
+          "Firefox",
+          "Chrome"
         ],
 
         coverageReporter: {
