@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
 
     angular.module("mfl.common.directives.contentheader", [])
@@ -8,15 +8,28 @@
             restrict: "E",
             replace: true,
             template: "<div class='action-container content-header-extra'></div>",
-            link: function ($scope, $element) {
-                var action = "";
-                _.each($scope.action, function (link) {
-                    action = action + "<a " + link.func+ " class=' " + link.class +" '" +
+            link: function ($scope, $element, attrs) {
+                var backbutton = {
+                    func : "onclick='window.history.back()'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Back",
+                    icon: "fa-arrow-left"
+                };
+                var link_to_html = function (link) {
+                    return "<a " + link.func+ " class=' " + link.class +" '" +
                         link.color +
                         "' tooltip-placement='bottom' tooltip='"+link.tipmsg+"'><i class=' fa "+
                         link.icon+"'></i></a>";
-                });
-                $element.html(action);
+                };
+
+                var html = _.reduce($scope.action, function (memo, val) {
+                    return memo + link_to_html(val);
+                }, "");
+                if (_.isUndefined(attrs.hideBackButton)) {
+                    html += link_to_html(backbutton);
+                }
+                $element.html(html);
                 $compile($element)($scope);
             }
         };
@@ -69,4 +82,4 @@
                 "<breadcrumbs path='path'></breadcrumbs></div>"
         };
     }]);
-})(angular);
+})(angular, _);

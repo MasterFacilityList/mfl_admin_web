@@ -60,11 +60,18 @@
             $scope.$digest();
             //the jQLite wrapper provided by angular can only find elements by tag name.
             var $links = $element.find("a");
-            expect($links.length).toEqual(action.length);
+            expect($links.length).toEqual(action.length + 1); // plus back button
             //Testing the genarated link names
 
             expect($links.eq(0).attr("class")).toContain("btn");
             expect($links.eq(1).attr("class")).toContain("btn-primary");
+        });
+
+        it("should optionally exclude the back button", function () {
+            var scope = $rootScope.$new();
+            var element = $compile("<actionbar hide-back-button></actionbar>")(scope);
+            scope.$digest();
+            expect(element.html()).toEqual("");
         });
     });
 })();
