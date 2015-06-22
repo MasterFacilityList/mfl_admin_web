@@ -363,7 +363,7 @@
             $scope.removeBody = function (reg) {
                 wrappers.regulatory_body_users.remove(reg.id)
                 .success(function () {
-                    $scope.user_bodies = _.without(reg);
+                    $scope.user_bodies = _.without($scope.user_bodies, reg);
                 })
                 .error(function (data) {
                     $log.error(data);
