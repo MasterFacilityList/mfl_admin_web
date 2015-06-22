@@ -340,7 +340,7 @@
                     .expectDELETE(server_url+"api/facilities/service_options/2/")
                     .respond(204);
 
-                scope.removeOption(2);
+                scope.removeChild(2);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
@@ -372,7 +372,7 @@
                     .expectDELETE(server_url+"api/facilities/service_options/2/")
                     .respond(500);
 
-                scope.removeOption(2);
+                scope.removeChild(2);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
