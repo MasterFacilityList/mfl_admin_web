@@ -1,8 +1,8 @@
  <div class="col-sm-2 pad-r-0" >
     <aside class="side-left partial">
     <ul class=" nav nav-list">
-        <li><label class="sidebar-label tree-toggle nav-header">Administrative Units</label>
-          <ul class="nav nav-list tree">
+        <li ng-model="collapsed.one" ng-click="collapsed.one=!collapsed.one"><label class="sidebar-label tree-toggle nav-header">Administrative Units</label>
+          <ul class="nav nav-list tree" content-slide-in="collapsed.one" slide-show-duration="1000">
               <li ui-sref-active="active">
                 <a ui-sref="setup.counties">Counties</a>
               </li>
@@ -17,8 +17,8 @@
               </li>
           </ul>
         </li>
-        <li><label class="sidebar-label tree-toggle nav-header">Community Units</label>
-          <ul class="nav nav-list tree">
+        <li ng-model="collapsed.two" ng-click="collapsed.two=!collapsed.two"><label class="sidebar-label tree-toggle nav-header">Community Units</label>
+          <ul class="nav nav-list tree" content-slide-in="collapsed.two" slide-show-duration="1000">
               <li ui-sref-active="active">
                 <a ui-sref="setup.chu_status">Community Units Status</a>
               </li>
@@ -27,8 +27,8 @@
               </li>
           </ul>
         </li>
-        <li><label class="sidebar-label tree-toggle nav-header">Contacts</label>
-          <ul class="nav nav-list tree">
+        <li ng-model="collapsed.three" ng-click="collapsed.three=!collapsed.three"><label class="sidebar-label tree-toggle nav-header">Contacts</label>
+          <ul class="nav nav-list tree" content-slide-in="collapsed.three" slide-show-duration="1000">
               <li ui-sref-active="active">
                 <a ui-sref="setup.contacts">Contacts</a>
               </li>
@@ -37,8 +37,8 @@
               </li>
           </ul>
         </li>
-        <li><label class="sidebar-label tree-toggle nav-header">Facility Details</label>
-          <ul class="nav nav-list tree">
+        <li ng-model="collapsed.four" ng-click="collapsed.four=!collapsed.four"><label class="sidebar-label tree-toggle nav-header">Facility Details</label>
+          <ul class="nav nav-list tree" content-slide-in="collapsed.four" slide-show-duration="1000">
               <li ui-sref-active="active">
                 <a ui-sref="setup.facility_owners">Facility Owners</a>
               </li>
@@ -56,8 +56,8 @@
               </li>
           </ul>
         </li>
-        <li><label class="sidebar-label tree-toggle nav-header">Geo Codes</label>
-        <ul class="nav nav-list tree">
+        <li ng-model="collapsed.five" ng-click="collapsed.five=!collapsed.five"><label class="sidebar-label tree-toggle nav-header">Geo Codes</label>
+        <ul class="nav nav-list tree" content-slide-in="collapsed.five" slide-show-duration="1000">
             <li ui-sref-active="active">
               <a ui-sref="setup.geocode_methods_list">Geo Code Methods</a>
             </li>
