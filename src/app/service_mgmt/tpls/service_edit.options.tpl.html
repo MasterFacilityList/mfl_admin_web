@@ -1,4 +1,4 @@
-<div>
+<div class="margin-t-50">
     <div>
         <h4>Available options</h4>
         <div>
@@ -6,12 +6,12 @@
                 <select ng-model="new_option_id" required>
                     <option ng-repeat="opt in options" ng-value="opt.id">{{opt.display_text}}</option>
                 </select>
-                <input type="submit" value="Add Option" class="btn btn-info" />
+                <input type="submit" value="Add Option" class="login-btn login-btn-info margin-t-10" />
             </form>
         </div>
     </div>
 
-    <div>
+    <div class="margin-t-50">
         <h4>Options tied to the service</h4>
         <table class="table table-hover fs-14">
             <thead>
@@ -29,7 +29,7 @@
                     <td>{{opt.value}}</td>
                     <td>{{opt.option_type | titlecase}}</td>
                     <td>{{opt.is_exclusive_option | boolFilter}}</td>
-                    <td><a class="btn btn-danger" ng-click="removeOption(opt.id)">Remove</a></td>
+                    <td><a popover-template="del_popover.templateUrl" popover-placement="left" class="action-btn action-btn-grid action-btn-danger"><i class="fa fa-trash"></i></td>
                 </tr>
             </tbody>
         </table>

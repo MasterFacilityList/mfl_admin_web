@@ -29,6 +29,10 @@
             $scope.cancel = function () {
                 $state.go("service_mgmt.service_list.service_edit");
             };
+            $scope.del_popover = {
+                content: "Hello, World!",
+                templateUrl:"common/tpls/del_pop.tpl.html"
+            };
         }
     ])
 
@@ -91,7 +95,7 @@
                     $log.warn(data);
                 });
             };
-            $scope.removeOption = function (service_opt_id) {
+            $scope.removeChild = function (service_opt_id) {
                 wrappers.service_options.remove(service_opt_id)
                 .success(function () {
                     var a = _.findWhere($scope.service_options, {"id": service_opt_id});
@@ -100,6 +104,9 @@
                 .error(function (data) {
                     $log.warn(data);
                 });
+            };
+            $scope.cancel= function(){
+                $state.go("service_mgmt.service_list.service_edit.options");
             };
         }
     ])
