@@ -17,6 +17,9 @@
                     name: "Adminstrative Units"
                 }
             ];
+            $scope.collapsed = {
+                one: true
+            };
         }]);
 })(angular);
 

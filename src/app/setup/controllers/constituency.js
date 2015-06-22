@@ -12,6 +12,9 @@
                     name: "Constituencies"
                 }
             ];
+            $scope.$parent.collapsed = {
+                one : true
+            };
         }]
     )
 

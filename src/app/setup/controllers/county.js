@@ -3,16 +3,16 @@
     angular.module("mfl.setup.county.controllers",[
         "mfl.setup.api"
     ])
-    .controller("mfl.setup.controller.county.list", ["$scope", "collapsed",
-        function ($scope, collapsed) {
+    .controller("mfl.setup.controller.county.list", ["$scope",
+        function ($scope) {
             $scope.title = [
                 {
                     icon: "fa-map-marker",
                     name: "Counties"
                 }
             ];
-            $scope.collapsed = {
-                one : collapsed
+            $scope.$parent.collapsed = {
+                one : true
             };
         }]
     )
