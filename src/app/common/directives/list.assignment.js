@@ -1,7 +1,7 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mfl.common.list.assignment.directive", [])
+    angular.module("mfl.common.directives.listassignment", [])
 
     .directive("mflListAssignment", [function () {
         var link_fxn = function (scope, element, attributes) {
@@ -16,37 +16,35 @@
                 });
             });
 
-            //setting params to change classes on click
-            scope.clickedRole = function(item){
+            scope.clickedItem = function(item){
                 item.selected = !item.selected;
             };
-            scope.setRole = function(set_item){
+
+            scope.setItem = function(set_item){
                 set_item.set_selected = !set_item.set_selected;
             };
-            //adding permissions to the role
-            scope.addRoles = function () {
-                var selected_roles = _.where(
+
+            scope.addItems = function () {
+                var selected_items = _.where(
                     scope.filtered_items, {"selected": true}
                 );
-                _.each(selected_roles, function (a_role) {
-                    a_role.set_selected = false;
-                    scope.assigneditems.push(a_role);
-                    scope.filtered_items = _.without(scope.filtered_items, a_role);
+                _.each(selected_items, function (a_item) {
+                    a_item.set_selected = false;
+                    scope.assigneditems.push(a_item);
+                    scope.filtered_items = _.without(scope.filtered_items, a_item);
                 });
             };
-            //end of adding permissions to a role
-            //reverting permissions to the role
-            scope.revertRoles = function () {
-                var reverted_roles = _.where(
+
+            scope.revertItems = function () {
+                var reverted_items = _.where(
                     scope.assigneditems, {"set_selected": true}
                 );
-                _.each(reverted_roles, function (a_set_role) {
-                    a_set_role.selected = false;
-                    scope.filtered_items.push(a_set_role);
-                    scope.assigneditems = _.without(scope.assigneditems, a_set_role);
+                _.each(reverted_items, function (a_set_item) {
+                    a_set_item.selected = false;
+                    scope.filtered_items.push(a_set_item);
+                    scope.assigneditems = _.without(scope.assigneditems, a_set_item);
                 });
             };
-            //end of reverting permissions to a role
         };
 
         return {

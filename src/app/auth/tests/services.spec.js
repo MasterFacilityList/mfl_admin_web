@@ -7,7 +7,7 @@
 
         beforeEach(function () {
             module("mflAdminAppConfig");
-            module("sil.api.wrapper");
+            module("api.wrapper");
             module("mfl.auth.services");
         });
 
@@ -258,6 +258,49 @@
 
             expect(statecheck.stopListening).not.toThrow();
         });
+
+        it("should redirect to specified state", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(state, "go");
+
+            statecheck.startListening();
+            var toState = {
+                name: "parent",
+                redirectTo: "child"
+            };
+            var toParams = {};
+            rootScope.$broadcast("$stateChangeStart", toState, toParams);
+
+            expect(state.go).toHaveBeenCalledWith("child", toParams);
+        });
+
+        it("should roadblock user until password is changed", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(loginService, "getUser").andReturn({requires_password_change: true});
+            spyOn(state, "go");
+
+            statecheck.startListening();
+            var toState = {
+                name: "homepage"
+            };
+            rootScope.$broadcast("$stateChangeStart", toState);
+
+            expect(state.go).toHaveBeenCalledWith("profile.password", {required: true});
+        });
+
+        it("should not roadblock user if page is password change", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(loginService, "getUser").andReturn({requires_password_change: true});
+            spyOn(state, "go");
+
+            statecheck.startListening();
+            var toState = {
+                name: "profile.password"
+            };
+            rootScope.$broadcast("$stateChangeStart", toState);
+
+            expect(state.go).not.toHaveBeenCalled();
+        });
     });
 
     describe("Test profile service", function () {
@@ -265,7 +308,7 @@
 
         beforeEach(function () {
             module("mflAdminAppConfig");
-            module("sil.api.wrapper");
+            module("api.wrapper");
             module("mfl.auth.services");
 
             inject(["$httpBackend", "$rootScope", "mfl.auth.services.profile", "SERVER_URL",

@@ -26,8 +26,7 @@
                         controller: "mfl.auth.controllers.logout",
                         templateUrl: "auth/tpls/login.tpl.html"
                     }
-                },
-                requireUser: false
+                }
             })
 
             .state("reset_pwd", {

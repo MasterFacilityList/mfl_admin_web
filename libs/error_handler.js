@@ -9,7 +9,7 @@
 (function(jQuery, angular, _){
     "use strict";
 
-    angular.module("sil.common.logging", [])
+    angular.module("common.logging", [])
 
     /**
        Logging Config Provider - for configuring angular js app whether to send logs

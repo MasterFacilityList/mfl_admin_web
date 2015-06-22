@@ -6,12 +6,10 @@
 
     .controller("mfl.setup.controller.constituency.list", ["$scope",
         function ($scope) {
-            $scope.title = [
-                {
-                    icon: "fa-map-marker",
-                    name: "Constituencies"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-map-marker",
+                name: "Constituencies"
+            };
             $scope.$parent.collapsed = {
                 one : true
             };

@@ -6,12 +6,10 @@
 
     .controller("mfl.dashboard.home", ["$scope",
         function ($scope) {
-            $scope.title = [
-                {
-                    icon: "fa-dashboard",
-                    name: "Dashboard"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-dashboard",
+                name: "Dashboard"
+            };
         }
     ])
     .controller("mfl.dashboard.content", ["$scope", "dashboardApi",

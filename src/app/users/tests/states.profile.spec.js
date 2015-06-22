@@ -25,6 +25,11 @@
             expect(state.href("profile.password")).toEqual("#/profile/password/");
         });
 
+        it("should go to password change state (required)", function () {
+            expect(state.href("profile.password", {"required": true}))
+                .toEqual("#/profile/password/?required=true");
+        });
+
         it("should go to contacts state", function () {
             expect(state.href("profile.contacts")).toEqual("#/profile/contacts/");
         });

@@ -5,12 +5,10 @@
     ])
     .controller("mfl.setup.controller.county.list", ["$scope",
         function ($scope) {
-            $scope.title = [
-                {
-                    icon: "fa-map-marker",
-                    name: "Counties"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-map-marker",
+                name: "Counties"
+            };
             $scope.$parent.collapsed = {
                 one : true
             };
@@ -19,25 +17,14 @@
     .controller("mfl.setup.controller.county.view", ["$scope", "$stateParams",
         "adminApi",
         function ($scope, $stateParams, adminApi) {
-            $scope.action = [
-                {
-                    func : "onclick='window.history.back()'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }
-            ];
             $scope.spinner = true;
             adminApi.counties.get($stateParams.count_id)
                 .success(function (data) {
                     $scope.county_details = data;
-                    $scope.title = [
-                        {
-                            icon: "fa-map-marker",
-                            name : $scope.county_details.name
-                        }
-                    ];
+                    $scope.title = {
+                        icon: "fa-map-marker",
+                        name : $scope.county_details.name
+                    };
                     $scope.spinner = false;
                 })
                 .error(function (err) {

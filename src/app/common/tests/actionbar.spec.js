@@ -4,11 +4,11 @@
     describe("Directives: Test the Action Bar directive", function() {
         var $compile, $rootScope, action;
         //We"ll use this template for our tests
-        var directiveTpl = "<actionbar action='action'></actionbar>";
+        var directiveTpl = "<actionbar action='action' hide-back-button></actionbar>";
 
         beforeEach(function() {
             //Require the module our directive is attached to
-            module("mfl.common.directives");
+            module("mfl.common.directives.contentheader");
 
             inject(function (_$compile_, _$rootScope_) {
                 $compile = _$compile_;
@@ -18,12 +18,10 @@
             //We want to set this before each test, so we can manipulate it
             action = [
                 {
-                    func: "fa-user",
                     class: "btn",
                     color: ""
                 },
                 {
-                    func: "fa-user-md",
                     class:"btn-primary",
                     color:""
                 }
@@ -65,6 +63,13 @@
 
             expect($links.eq(0).attr("class")).toContain("btn");
             expect($links.eq(1).attr("class")).toContain("btn-primary");
+        });
+
+        it("should optionally exclude the back button", function () {
+            var scope = $rootScope.$new();
+            var element = $compile("<actionbar></actionbar>")(scope);
+            scope.$digest();
+            expect(element.html()).not.toEqual("");
         });
     });
 })();

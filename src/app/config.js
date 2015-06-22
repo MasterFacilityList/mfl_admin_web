@@ -2,8 +2,8 @@
     "use strict";
 
     angular.module("mflAdminAppConfig", [
-        "sil.common.logging",
-        "sil.api.wrapper",
+        "common.logging",
+        "api.wrapper",
         "sil.grid",
         "mfl.auth.oauth2",
         "ui.router",
@@ -30,7 +30,6 @@
             facilities: ["mfl.facilities.services","mfl.facilities.wrappers"],
             service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
         };
-        silGridConfig.appConfig = "mflAdminAppConfig";
     }])
 
     .config(["$urlRouterProvider", function($urlRouterProvider) {

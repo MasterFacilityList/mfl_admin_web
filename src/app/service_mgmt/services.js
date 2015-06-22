@@ -2,7 +2,7 @@
     "use strict";
 
     angular.module("mfl.service_mgmt.services", [
-        "sil.api.wrapper"
+        "api.wrapper"
     ])
 
     .service("mfl.service_mgmt.wrappers", ["api", function (api) {
@@ -11,6 +11,8 @@
         this.categories = api.setBaseUrl("api/facilities/service_categories/");
 
         this.options = api.setBaseUrl("api/facilities/options/");
+
+        this.service_options = api.setBaseUrl("api/facilities/service_options/");
 
         this.OPTION_TYPES = [
             "BOOLEAN", "INTEGER", "DECIMAL", "TEXT"

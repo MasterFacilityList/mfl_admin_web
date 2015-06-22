@@ -62,12 +62,10 @@
             var dt = {
                 $stateParams : {id: "create"}
             };
-            var test_title = [
-                {
-                    icon: "fa-plus-circle",
-                    name: "New Contact Type"
-                }
-            ];
+            var test_title = {
+                icon: "fa-plus-circle",
+                name: "New Contact Type"
+            };
             createController("mfl.setup.controller.contact_types.view", dt);
             expect($scope.title).toEqual(test_title);
         });

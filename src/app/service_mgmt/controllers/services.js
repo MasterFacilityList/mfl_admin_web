@@ -10,15 +10,31 @@
     .controller("mfl.service_mgmt.controllers.service_list", [angular.noop])
 
     .controller("mfl.service_mgmt.controllers.service_edit",
-        ["$scope", "$state", "$stateParams", "$log",
-        "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
-        function ($scope, $state, $stateParams, $log, wrappers, forms) {
+        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
+        function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.service_id = $stateParams.service_id;
             wrappers.services.get($scope.service_id).success(function (data) {
                 $scope.service = data;
+                $scope.deleteText = $scope.service.name;
             }).error(function (data) {
                 $log.warn(data);
             });
+            $scope.remove = function () {
+                wrappers.services.remove($scope.service_id).success(function(){
+                    $state.go("service_mgmt.service_list",{},{reload:true});
+                }).error(function(error){
+                    $scope.alert = error.error;
+                });
+            };
+            $scope.cancel = function () {
+                $state.go("service_mgmt.service_list.service_edit");
+            };
+        }
+    ])
+
+    .controller("mfl.service_mgmt.controllers.service_edit.basic",
+        ["$scope", "$state", "$log", "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
+        function ($scope, $state, $log, wrappers, forms) {
             wrappers.categories.filter({page_size: 1000}).success(function (data) {
                 $scope.categories = data.results;
             }).error(function (data) {
@@ -41,6 +57,53 @@
         }
     ])
 
+    .controller("mfl.service_mgmt.controllers.service_edit.options",
+        ["$scope", "$state", "$log", "mfl.service_mgmt.wrappers",
+        function ($scope, $state, $log, wrappers) {
+            $scope.service_options = [];
+            $scope.options = [];
+            $scope.new_option_id = "";
+
+            wrappers.options.filter({page_size: 1000}).success(function (data) {
+                $scope.options = data.results;
+            }).error(function (data) {
+                $log.warn(data);
+            });
+            wrappers.service_options.filter({page_size: 1000, service: $scope.service_id})
+            .success(function (data) {
+                $scope.service_options = data.results;
+            })
+            .error(function (data) {
+                $log.warn(data);
+            });
+
+            $scope.addOption = function () {
+                var data = {
+                    "service": $scope.service_id,
+                    "option": $scope.new_option_id
+                };
+                wrappers.service_options.create(data)
+                .success(function (data) {
+                    $scope.service_options.push(data);
+                    $scope.new_option_id = "";
+                })
+                .error(function (data) {
+                    $log.warn(data);
+                });
+            };
+            $scope.removeOption = function (service_opt_id) {
+                wrappers.service_options.remove(service_opt_id)
+                .success(function () {
+                    var a = _.findWhere($scope.service_options, {"id": service_opt_id});
+                    $scope.service_options = _.without($scope.service_options, a);
+                })
+                .error(function (data) {
+                    $log.warn(data);
+                });
+            };
+        }
+    ])
+
     .controller("mfl.service_mgmt.controllers.service_create",
         ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
         function ($scope, $state, $stateParams, $log, wrappers) {
@@ -59,28 +122,6 @@
                         {"service_id": data.id},
                         {reload: true}
                     );
-                });
-            };
-        }
-    ])
-
-    .controller("mfl.service_mgmt.controllers.service_delete",
-        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $state, $stateParams, $log, wrappers) {
-            $scope.service_id = $stateParams.service_id;
-            wrappers.services.get($scope.service_id).success(function (data) {
-                $scope.service = data;
-            }).error(function (data) {
-                $log.warn(data);
-            });
-
-            $scope.save = function () {
-                wrappers.services.remove($scope.service_id)
-                .success(function () {
-                    $state.go("service_mgmt.service_list",{reload: true});
-                })
-                .error(function (data) {
-                    $log.warn(data);
                 });
             };
         }

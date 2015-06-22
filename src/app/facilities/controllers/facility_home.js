@@ -12,18 +12,15 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Manage Facilities"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Manage Facilities"
+        };
         $scope.action = [
             {
-                func : "ui-sref='facilities.create.basic' " +
-                        "has-permission='users.add_mfluser' ",
+                func : "ui-sref='facilities.create.basic' ",
                 class: "action-btn action-btn-info action-btn-md",
-                color: "blue",
+
                 tipmsg: "New Facility",
                 icon: "fa-plus"
             }
@@ -35,18 +32,15 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Manage Facility Type"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Manage Facility Type"
+        };
         $scope.action = [
             {
-                func : "ui-sref='facilities.facility_type_create' " +
-                        "has-permission='users.add_mfluser' ",
+                func : "ui-sref='facilities.facility_type_create' ",
                 class: "action-btn action-btn-info action-btn-md",
-                color: "blue",
+
                 tipmsg: "New Facility",
                 icon: "fa-plus"
             }
@@ -57,39 +51,23 @@
      "$stateParams","mfl.facilities.wrappers","mfl.common.forms.changes",
         function($scope, $state, $stateParams, facilityApi, formChanges){
             var titles = {
-                edit: [
-                    {
-                        icon: "fa-edit",
-                        name: "Edit Facility Type"
-                    }
-                ],
-                create:  [
-                    {
-                        icon: "fa-plus-circle",
-                        name: "New Facility Type"
-                    }
-                ]
+                edit: {
+                    icon: "fa-edit",
+                    name: "Edit Facility Type"
+                },
+                create: {
+                    icon: "fa-plus-circle",
+                    name: "New Facility Type"
+                }
             };
             var actions = {
-                defaults: [{
-                    func : "onclick='window.history.back()'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }],
-                create: [{
-
-                }],
+                defaults: [],
+                create: [{}],
                 edit:[
                     {
-                        func : ""+
-                        " mfl-delete api='mfl.facilities.wrappers' api-key='facility_type'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Facility Type'"+
-                        " on-success-url='facilities.facility_type'",
+                        func : "",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Facility Type",
                         icon: "fa-trash"
                     }
@@ -120,18 +98,15 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-building",
-                name: "Manage Facility Status"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-building",
+            name: "Manage Facility Status"
+        };
         $scope.action = [
             {
-                func : "ui-sref='facilities.facility_status_create' " +
-                        "has-permission='users.add_mfluser' ",
+                func : "ui-sref='facilities.facility_status_create' ",
                 class: "action-btn action-btn-info action-btn-md",
-                color: "blue",
+
                 tipmsg: "New Facility Status",
                 icon: "fa-plus"
             }
@@ -142,39 +117,23 @@
      "$stateParams","mfl.facilities.wrappers","mfl.common.forms.changes",
         function($scope, $state, $stateParams, facilityApi, formChanges){
             var titles = {
-                edit: [
-                    {
-                        icon: "fa-edit",
-                        name: "Edit Facility Status"
-                    }
-                ],
-                create:  [
-                    {
-                        icon: "fa-plus-circle",
-                        name: "New Facility Status"
-                    }
-                ]
+                edit: {
+                    icon: "fa-edit",
+                    name: "Edit Facility Status"
+                },
+                create: {
+                    icon: "fa-plus-circle",
+                    name: "New Facility Status"
+                }
             };
             var actions = {
-                defaults: [{
-                    func : "onclick='window.history.back()'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }],
-                create: [{
-
-                }],
+                defaults: [{}],
+                create: [{}],
                 edit:[
                     {
-                        func : ""+
-                        " mfl-delete api='mfl.facilities.wrappers' api-key='facility_status'"+
-                        " resource-id='"+$stateParams.id+"' "+
-                        "resource-name='Facility Status'"+
-                        " on-success-url='facilities.facility_status'",
+                        func : "",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Facility Status",
                         icon: "fa-trash"
                     }

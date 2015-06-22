@@ -1,7 +1,7 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mfl.dashboard.wrapper", ["sil.api.wrapper"])
+    angular.module("mfl.dashboard.wrapper", ["api.wrapper"])
 
     .provider("dashboardApi", function () {
         var self = this;

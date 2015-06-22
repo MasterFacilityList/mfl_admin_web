@@ -4,7 +4,7 @@
     describe("Test user module services", function () {
         beforeEach(function(){
             module("mflAdminAppConfig");
-            module("sil.api.wrapper");
+            module("api.wrapper");
             module("mfl.users.services");
             module("mfl.auth.services");
         });

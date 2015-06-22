@@ -151,52 +151,7 @@
             });
         });
 
-        describe("Test option delete controller", function () {
-            it("should get the option to delete", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        option_id: 1
-                    },
-                    "$scope": scope
-                };
-                httpBackend
-                    .expectGET(server_url + "api/facilities/options/1/")
-                    .respond(200, {});
-
-                ctrl("option_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.option).toEqual({});
-            });
-
-            it("should log errors on get one option failure", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        option_id: 1
-                    },
-                    "$scope": scope,
-                    "$log": log
-                };
-                httpBackend
-                    .expectGET(server_url + "api/facilities/options/1/")
-                    .respond(500, {"error": "a"});
-
-                spyOn(log, "warn");
-                ctrl("option_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.opton).toBe(undefined);
-                expect(log.warn).toHaveBeenCalled();
-            });
-
+        describe("Test option edit controller delete function", function () {
             it("should delete the option", function () {
                 var scope = rootScope.$new();
                 var data = {
@@ -211,35 +166,27 @@
                     .respond(200, {});
 
                 spyOn(state, "go");
-                ctrl("option_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                httpBackend.resetExpectations();
+                ctrl("option_edit", data);
 
                 httpBackend
                     .expectDELETE(server_url + "api/facilities/options/1/")
                     .respond(204, {});
-                scope.save();
-
+                scope.remove();
+                scope.cancel();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(state.go).toHaveBeenCalled();
+                expect(state.go).toHaveBeenCalledWith("service_mgmt.option_list.option_edit");
             });
-
-            it("should show error on delete the option failure", function () {
+            it("should show error when deleting the option", function () {
                 var scope = rootScope.$new();
                 var data = {
                     "$stateParams": {
                         option_id: 1
                     },
                     "$state": state,
-                    "$scope": scope,
-                    "$log": log
+                    "$scope": scope
                 };
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/1/")
@@ -247,26 +194,18 @@
 
                 spyOn(state, "go");
                 spyOn(log, "warn");
-                ctrl("option_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                httpBackend.resetExpectations();
+                ctrl("option_edit", data);
 
                 httpBackend
                     .expectDELETE(server_url + "api/facilities/options/1/")
                     .respond(404, {});
-
-                scope.save();
-
+                scope.remove();
+                scope.cancel();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(state.go).not.toHaveBeenCalled();
-                expect(log.warn).toHaveBeenCalled();
+                expect(state.go).toHaveBeenCalledWith("service_mgmt.option_list.option_edit");
             });
         });
 

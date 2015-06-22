@@ -2,7 +2,7 @@
     "use strict";
 
     angular.module("mfl.auth.services", [
-        "sil.api.wrapper",
+        "api.wrapper",
         "mfl.auth.oauth2",
         "mfl.auth.permissions",
         "ui.router"
@@ -51,30 +51,35 @@
         function ($rootScope, $injector, loginService, permChecker, HOME_PAGE_NAME) {
             var cancel_listen;
 
-            var change_state = function (name, args) {
+            var change_state = function (evt, name, args) {
                 var $state = $injector.get("$state");
-                $state.go(name, args);
+                evt.preventDefault();
+                return $state.go(name, args);
             };
 
-            var page_check = function (evt, toState) {
+            var page_check = function (evt, toState, toParams) {
+                if (toState.name === "logout") {
+                    return;
+                }
                 if (loginService.isLoggedIn()) {
-                    if (_.contains(["reset_pwd", "reset_pwd_confirm", "login"], toState.name)) {
-                        evt.preventDefault();
-                        change_state(HOME_PAGE_NAME);
+                    if (toState.redirectTo) {
+                        change_state(evt, toState.redirectTo, toParams);
+                    } else if (toState.requireUser === false) {
+                        change_state(evt, HOME_PAGE_NAME);
                     } else if (! permChecker.hasPermission(toState.permission)) {
-                        evt.preventDefault();
-                        window.alert("You don't have permission to access the page.");
+                        change_state(evt, "common_403");
+                    } else if (loginService.getUser().requires_password_change &&
+                               toState.name !== "profile.password") {
+                        change_state(evt, "profile.password", {"required": true});
                     }
                     return;
                 }
 
-                if (_.contains(["login", "logout", "reset_pwd", "reset_pwd_confirm", ""],
-                        toState.name)) {
+                if (toState.requireUser === false) {
                     return;
                 }
 
-                evt.preventDefault();
-                change_state("login", {"next": toState.name});
+                change_state(evt, "login", {"next": toState.name});
             };
 
             var start = function () {

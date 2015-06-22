@@ -1,7 +1,7 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mfl.users.services", ["sil.api.wrapper"])
+    angular.module("mfl.users.services", ["api.wrapper"])
 
     .service("mfl.users.services.wrappers", ["api", function (api) {
         this.groups = api.setBaseUrl("api/users/groups/");
