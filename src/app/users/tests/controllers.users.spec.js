@@ -1195,5 +1195,205 @@
                 expect(data.$scope.user_counties).toEqual(user_counties.results);
             });
         });
+
+        describe("Test user edit regulatory body controller", function () {
+
+            it("should load all bodies and the user's regulatory body", function () {
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/regulating_bodies/?page_size=100&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulatory_body_users/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.regulatory_body", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.bodies).toEqual([]);
+                expect(data.$scope.user_bodies).toEqual([]);
+            });
+
+            it("should show errors on fail to load bodies", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                spyOn(log, "error");
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/regulating_bodies/?page_size=100&ordering=name")
+                    .respond(500, {"error": "e"});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulatory_body_users/?user=3")
+                    .respond(500, {"results": []});
+
+                ctrl("user_edit.regulatory_body", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.bodies).toBe(undefined);
+                expect(data.$scope.user_bodies).toBe(undefined);
+            });
+
+            it("should assign a body to a user", function () {
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/regulating_bodies/?page_size=100&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulatory_body_users/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.regulatory_body", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/regulatory_body_users/",
+                        {"regulatory_body":1,"user":3})
+                    .respond(201, {"id": 4});
+
+                data.$scope.new_body = 1;
+                data.$scope.addBody();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.user_bodies).toEqual([{"id": 4}]);
+                expect(data.$scope.new_body).toEqual("");
+            });
+
+            it("should show an error when failing to assign a body to a user", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                spyOn(log, "error");
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/regulating_bodies/?page_size=100&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulatory_body_users/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.regulatory_body", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/regulatory_body_users/",
+                        {"regulatory_body":1,"user":3})
+                    .respond(400);
+
+                data.$scope.new_body = 1;
+                data.$scope.addBody();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.user_bodies).toEqual([]);
+            });
+
+            it("should remove a body from a user", function () {
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                var user_bodies = {"results": [{"id": 4}]};
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/regulating_bodies/?page_size=100&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulatory_body_users/?user=3")
+                    .respond(200, user_bodies);
+
+                ctrl("user_edit.regulatory_body", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/regulatory_body_users/4/")
+                    .respond(204);
+
+                data.$scope.removeBody(user_bodies.results[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it("should show error if fails to remove a county from a user", function () {
+                spyOn(log, "error");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                data.$scope.user_id = 3;
+
+                var user_bodies = {"results": [{"id": 4}]};
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/regulating_bodies/?page_size=100&ordering=name")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulatory_body_users/?user=3")
+                    .respond(200, user_bodies);
+
+                ctrl("user_edit.regulatory_body", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/regulatory_body_users/4/")
+                    .respond(500);
+
+                data.$scope.removeBody(user_bodies.results[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.user_bodies).toEqual(user_bodies.results);
+            });
+        });
     });
 })();
