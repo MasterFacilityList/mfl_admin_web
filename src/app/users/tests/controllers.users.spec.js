@@ -474,7 +474,7 @@
                     .respond(204);
 
                 data.$scope.contacts = [{"contact": "123", "id": "456"}];
-                data.$scope.remove(data.$scope.contacts[0]);
+                data.$scope.removeChild(data.$scope.contacts[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -513,7 +513,7 @@
                     .respond(500);
 
                 data.$scope.contacts = [{"contact": "123", "id": "456"}];
-                data.$scope.remove(data.$scope.contacts[0]);
+                data.$scope.removeChild(data.$scope.contacts[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -555,7 +555,7 @@
                     .respond(500);
 
                 data.$scope.contacts = [{"contact": "123", "id": "456"}];
-                data.$scope.remove(data.$scope.contacts[0]);
+                data.$scope.removeChild(data.$scope.contacts[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();

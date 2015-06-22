@@ -24,12 +24,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="opt in service_options">
-                    <td>{{opt.display_text}}</td>
-                    <td>{{opt.value}}</td>
-                    <td>{{opt.option_type | titlecase}}</td>
-                    <td>{{opt.is_exclusive_option | boolFilter}}</td>
-                    <td><a popover-template="'common/tpls/del_pop.tpl.html'" popover-placement="left" class="action-btn action-btn-grid action-btn-danger"><i class="fa fa-trash"></i></a></td>
+                <tr ng-repeat="child in service_options">
+                    <td>{{child.display_text}}</td>
+                    <td>{{child.value}}</td>
+                    <td>{{child.option_type | titlecase}}</td>
+                    <td>{{child.is_exclusive_option | boolFilter}}</td>
+                    <td><a popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" class="action-btn action-btn-grid action-btn-danger"><i class="fa fa-trash"></i></a></td>
                 </tr>
             </tbody>
         </table>

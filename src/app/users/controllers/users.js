@@ -149,7 +149,7 @@
                     $log.error(data);
                 });
 
-            $scope.remove = function (obj) {
+            $scope.removeChild = function (obj) {
                 obj.delete_spinner = true;
                 wrappers.user_contacts.remove(obj.id)
                 .success(function () {
