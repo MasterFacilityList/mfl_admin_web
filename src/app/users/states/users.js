@@ -144,6 +144,17 @@
                 permission: "users.view_mfluser"
             })
 
+            .state("users.user_edit.constituency", {
+                url: "constituency/",
+                views: {
+                    "form-view@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.constituency",
+                        templateUrl: "users/tpls/users.edit.constituencies.tpl.html"
+                    }
+                },
+                permission: "users.view_mfluser"
+            })
+
             .state("users.user_edit.regulatory_body", {
                 url: "regulatory_body/",
                 views: {

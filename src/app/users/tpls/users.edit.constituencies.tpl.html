@@ -1,0 +1,70 @@
+<div class="tab-content">
+    <div class="col-lg-12 margin-t-20">
+        <div class="col-md-10 col-md-offset-1">
+            <div ng-if="create" class="col-md-12 margin-t-20">
+                <span class="fs-20 fw-700">User Administrative Areas</span>
+                <span class="fs-16 pull-right">
+                    Step 4 of 4
+                </span>
+            </div>
+            <div class="col-lg-12 margin-t-20" requires-permission="common.add_userconstituency" >
+                <h4>Assign Constituency</h4>
+                <form ng-submit="add(new_constituency)">
+                    <table class="table content-card  margin-b-10">
+                        <tbody>
+                            <tr class="">
+                                <td class="pad-t-15">
+                                    <div class="group">
+                                    <select name="constituency" ng-model="new_constituency" class="pad-t-15" required>
+                                        <option value="">Select Constituency</option>
+                                        <option ng-repeat="cnst in constituencies" ng-value="cnst.id">{{cnst.name}}</option>
+                                    </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    </div>
+                                </td>
+                                <td class="text-right pad-t-15">
+                                    <button ng-disabled="new_constituency===''" type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Assign Constituency">
+                                        <i class="fa fa-plus-circle"></i> Add
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+            <div class="col-lg-12 margin-t-20">
+                <h4> User Constituencies</h4>
+                <table class="table content-card">
+                    <tbody>
+                        <tr ng-repeat="uc in user_constituencies">
+                            <td class="pad-t-15 fs-18 fw-600 text-left">
+                                {{uc.constituency_name}}
+                            </td>
+                            <td class="text-right">
+                                <span ng-if="uc.delete_spinner">
+                                    <i class="fa fa-spin fa-circle-o-notch"></i>
+                                </span>
+                                <a class="remove-icon text-danger" ng-click="remove(uc)" tooltip="Remove constituency"
+                                requires-permission="common.delete_userconstituency" >
+                                    <i class="fa fa-times-circle fa-2x fw-500"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="spinner">
+                            <td colspan="3" class="text-center">
+                                <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="create" class="col-md-12 margin-b-20 margin-t-20">
+                <a ui-sref="users.user_create.details({user_id : user_id})" class="login-btn login-btn-primary">
+                    <i class="fa fa-save"></i> Save
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,9 @@
                 icon: "fa-map-marker",
                 name: "Adminstrative Units"
             };
+            $scope.collapsed = {
+                one: true
+            };
         }]);
 })(angular);
 

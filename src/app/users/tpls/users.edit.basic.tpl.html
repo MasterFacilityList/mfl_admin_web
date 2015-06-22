@@ -1,90 +1,114 @@
 <!-- /- Start of tabbed multi-step form -->
 <div class="tab-content">
-    <div class="col-lg-12">
-        <div ng-if="user.id === undefined" class="col-md-10 col-md-offset-1 margin-t-20">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div ng-if="user.id === undefined" class="col-sm-12 margin-t-20">
+            <div class="col-sm-12">
             <h3>
-                <span class="fw-600">Basic Details</span>
-                <span class="pull-right">
-                    Step 1 of 4
+                <span class="fw-600">
+                Step 1
                 </span>
             </h3>
             <h4><span class="label label-default">Items with <span class="text-danger">*</span> are reqired</h4>
+            </div>
         </div>
         <form role="form" ng-submit="save(user_frm)" name="user_frm" novalidate>
-            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
-                <div class="group">
-                    <input name="first_name" type="text" ng-model="user.first_name" ng-required="user.id === undefined">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>First Name</label>
+            <div class="col-sm-12 margin-t-20 margin-b-20">
+                <div class="col-sm-12">
+                    <div class="group">
+                        <input name="first_name" type="text" ng-model="user.first_name" ng-required="user.id === undefined">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>First Name</label>
+                    </div>
                 </div>
-                <div class="group">
-                    <input type="text" name="last_name" ng-model="user.last_name" ng-required="user.id === undefined">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Last Name</label>
+                <div class="col-sm-12">
+                    <div class="group">
+                        <input type="text" name="last_name" ng-model="user.last_name" ng-required="user.id === undefined">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Last Name</label>
+                    </div>
                 </div>
-                <div class="group">
-                    <input type="text" name="other_names" ng-model="user.other_names" required>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Other Names</label>
+                <div class="col-sm-12">
+                    <div class="group">
+                        <input type="text" name="other_names" ng-model="user.other_names" required>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Other Names</label>
+                    </div>
                 </div>
-                <div class="group">
-                    <input type="email" ng-model="user.email" name="email" ng-required="user.id === undefined">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Email</label>
+                <div class="col-sm-12">
+                    <div class="group">
+                        <input type="email" ng-model="user.email" name="email" ng-required="user.id === undefined">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Email</label>
+                    </div>
                 </div>
-                <div class="group">
-                    <input name="username" type="text" ng-model="user.username" ng-required="user.id === undefined">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Username</label>
+                <div class="col-sm-12">
+                    <div class="group">
+                        <input name="username" type="text" ng-model="user.username" ng-required="user.id === undefined">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Username</label>
+                    </div>
                 </div>
-                <div class="group">
-                    <input type="password" name="password" ng-model="user.password" ng-required="user.id === undefined">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>
-                        Password
-                    </label>
+                <div class="col-sm-12">
+                    <div class="group">
+                        <input type="password" name="password" ng-model="user.password" ng-required="user.id === undefined">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>
+                            Password
+                        </label>
+                    </div>
                 </div>
-                <div class="group">
-                    <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-blur="confirmPassword(user.password, user.confirm_password)"  ng-required="user.id === undefined">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>
-                        Confirm Password
-                    </label>
+                <div class="col-sm-12">
+                    <div class="group">
+                        <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-blur="confirmPassword(user.password, user.confirm_password)"  ng-required="user.id === undefined">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>
+                            Confirm Password
+                        </label>
+                    </div>
                 </div>
                 <div ng-if="confirm" class="err_class">
                     The two passwords did not match
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
-                <div class="checkbox-group margin-b-20">
-                    <input type="checkbox" id="is_national" ng-model="user.is_national" name="is_national">
-                    <label for="is_national">
-                        <span class="check"></span>
-                        <span class="box"></span>
-                         User is National user?
-                     </label>
+                <div class="col-sm-12">
+                    <div class="checkbox-group margin-b-20">
+                        <input type="checkbox" id="is_national" ng-model="user.is_national" name="is_national">
+                        <label for="is_national">
+                            <span class="check"></span>
+                            <span class="box"></span>
+                             User is National user?
+                         </label>
+                    </div>
                 </div>
-                <div class="checkbox-group margin-b-20">
-                    <input type="checkbox" id="is_staff" ng-model="user.is_staff" name="is_staff">
-                    <label for="is_staff">
-                        <span class="check"></span>
-                        <span class="box"></span>
-                         User is an administrator?
-                     </label>
+                <div class="col-sm-12">
+                    <div class="checkbox-group margin-b-20">
+                        <input type="checkbox" id="is_staff" ng-model="user.is_staff" name="is_staff">
+                        <label for="is_staff">
+                            <span class="check"></span>
+                            <span class="box"></span>
+                             User is an administrator?
+                         </label>
+                    </div>
                 </div>
-                <button type="submit" class="login-btn login-btn-primary" requires-permission="users.change_mfluser" >
+                <button ng-if="user.id !== undefined" type="submit" class="login-btn login-btn-primary" requires-permission="users.change_mfluser" >
                     <i class="fa fa-save"></i> Save
                 </button>
-                <button ui-sref="users" class="login-btn login-btn-default margin-l-10">
+                <button ng-if="user.id !== undefined" ui-sref="users" class="login-btn login-btn-default margin-l-10">
                     Cancel
                 </button>
+                <div class="col-sm-12" ng-if="user.id === undefined">
+                <button  requires-permission="users.change_mfluser" type="submit" class="login-btn login-btn-primary pull-right">
+                    &nbsp;User Contacts <i class="fa fa-angle-double-right"></i>
+                </button>
+                </div>
             </div>
         </form>
     </div>

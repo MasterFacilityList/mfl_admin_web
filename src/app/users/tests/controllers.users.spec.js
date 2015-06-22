@@ -1350,5 +1350,217 @@
                 expect(data.$scope.user_bodies).toEqual(user_bodies.results);
             });
         });
+
+        describe("Test user edit constituency controller", function () {
+
+            it("should load all constituencies and the user's constituency", function () {
+
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                data.$scope.login_user = {"county": 1};
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/constituencies/?page_size=20&ordering=name&county=1")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_constituencies/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.constituency", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.constituencies).toEqual([]);
+                expect(data.$scope.user_constituencies).toEqual([]);
+            });
+
+            it("should show errors on fail to load constituency", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                spyOn(log, "error");
+                data.$scope.login_user = {"county": 1};
+                data.$scope.user_id = 3;
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/constituencies/?page_size=20&ordering=name&county=1")
+                    .respond(500);
+                httpBackend
+                    .expectGET(server_url+"api/common/user_constituencies/?user=3")
+                    .respond(500);
+
+                ctrl("user_edit.constituency", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.constituencies).toBe(undefined);
+                expect(data.$scope.user_constituencies).toBe(undefined);
+            });
+
+            it("should assign a county to a user", function () {
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                data.$scope.login_user = {"county": 1};
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/constituencies/?page_size=20&ordering=name&county=1")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_constituencies/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.constituency", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(
+                        server_url+"api/common/user_constituencies/", {"user":3,"constituency":1})
+                    .respond(201, {"id": 4});
+
+                data.$scope.add(1);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.user_constituencies).toEqual([{"id": 4}]);
+            });
+
+            it("should show an error when failing to assign a county to a user", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                spyOn(log, "error");
+                data.$scope.user_id = 3;
+                data.$scope.login_user = {"county": 1};
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/constituencies/?page_size=20&ordering=name&county=1")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_constituencies/?user=3")
+                    .respond(200, {"results": []});
+
+                ctrl("user_edit.constituency", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(
+                        server_url+"api/common/user_constituencies/", {"user":3,"constituency":1})
+                    .respond(401);
+
+                data.$scope.add(1);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.user_constituencies).toEqual([]);
+            });
+
+            it("should remove a county from a user", function () {
+                var data = {
+                    "$scope": rootScope.$new()
+                };
+                data.$scope.user_id = 3;
+                var user_constituencies = {"results": [{"id": 4}]};
+
+                data.$scope.login_user = {"county": 1};
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/constituencies/?page_size=20&ordering=name&county=1")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_constituencies/?user=3")
+                    .respond(200, user_constituencies);
+
+                ctrl("user_edit.constituency", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/common/user_constituencies/4/")
+                    .respond(204);
+
+                data.$scope.remove(user_constituencies.results[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it("should show error if fails to remove a county from a user", function () {
+                spyOn(log, "error");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$log": log
+                };
+                data.$scope.user_id = 3;
+                var user_constituencies = {
+                    "results": [
+                        {
+                            "id": 4,
+                            "delete_spinner": false
+                        }
+                    ]
+                };
+
+                data.$scope.login_user = {"county": 1};
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/constituencies/?page_size=20&ordering=name&county=1")
+                    .respond(200, {"results": []});
+                httpBackend
+                    .expectGET(server_url+"api/common/user_constituencies/?user=3")
+                    .respond(200, user_constituencies);
+
+                ctrl("user_edit.constituency", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/common/user_constituencies/4/")
+                    .respond(404);
+
+                data.$scope.remove(user_constituencies.results[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.user_constituencies).toEqual(user_constituencies.results);
+            });
+        });
     });
 })();
