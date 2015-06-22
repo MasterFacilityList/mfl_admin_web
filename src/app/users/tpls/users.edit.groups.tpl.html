@@ -1,19 +1,24 @@
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 margin-t-20">
+<div class="col-sm-12 margin-t-20">
     <div ng-if="create" class="col-md-12 margin-t-20">
         <div class="col-md-12">
-        <span class="fs-20 fw-700">User Groups</span>
-        <span class="fs-16 pull-right">
-            Step 3 of 4
-        </span>
+        <span class="fs-20 fw-700">Step 3</span>
         </div>
     </div>
 
     <mfl-list-assignment title="Groups" assigneditems="user.groups" listeditems="groups" write-perm="users.change_mfluser">
     </mfl-list-assignment>
 
-    <div class="col-md-12 margin-b-20 margin-t-20 margin-l-10" requires-permission="users.change_mfluser">
+    <div ng-if="!create" class="col-md-12 margin-b-20 margin-t-20 margin-l-10" requires-permission="users.change_mfluser">
         <a class="login-btn login-btn-primary" ng-click="updateUserGroups()">
             <i class="fa fa-save"></i> Save
+        </a>
+    </div>
+    <div ng-if="create" class="col-md-12 margin-b-20 margin-t-20 margin-l-10" requires-permission="users.change_mfluser">
+        <a class="login-btn login-btn-primary" ng-click="updateUserGroups()">
+            &nbsp;<i class="fa fa-angle-double-left"></i> User Contacts
+        </a>
+        <a class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
+             &nbsp;Admin Areas <i class="fa fa-angle-double-right"></i>
         </a>
     </div>
 </div>

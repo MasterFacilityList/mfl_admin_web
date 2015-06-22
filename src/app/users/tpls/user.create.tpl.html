@@ -3,54 +3,70 @@
     <div class="col-sm-11 col-sm-offset-1 margin-t-20 text-center">
         <div class="col-sm-3">
             <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="progress-badge progress-badge-active">
-                    1
-                </div>
+                <a ui-sref="users.user_create.basic ({user_id : new_user})">
+                    <div class="progress-badge" ng-class="{'progress-badge-active': tab === 1 || tab === 2 || tab === 3 || tab === 4}">
+                        1
+                    </div>
+                </a>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-6">
-                <span>Basic Details</span>
-                <div class="lateral-divider lateral-divider-active hidden-sm">
+                <a ui-sref="users.user_create.basic ({user_id : user_id})">
+                    <span>Basic Details</span>
+                    <div class="lateral-divider hidden-sm" ng-class="{'lateral-divider-active' : tab === 1 || tab === 2 || tab === 3 || tab === 4}">
 
-                </div>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="col-sm-3 margin-l--60">
             <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="progress-badge">
+                <a ui-sref="users.user_create.contacts ({user_id : new_user})">
+                <div class="progress-badge" ng-class="{'progress-badge-active': tab === 2 || tab === 3 || tab === 4}">
                     2
                 </div>
+                </a>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-6">
-                <span>Contact Details</span>
-                <div class="lateral-divider hidden-sm">
+                <a ui-sref="users.user_create.contacts ({user_id : new_user})">
+                    <span>Contact Details</span>
+                    <div class="lateral-divider hidden-sm " ng-class="{'lateral-divider-active' : tab === 2 || tab === 3 || tab === 4}">
 
-                </div>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="col-sm-3 margin-l--60">
             <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="progress-badge">
-                    3
-                </div>
+                <a ui-sref="users.user_create.groups ({user_id : new_user})">
+                    <div class="progress-badge" ng-class="{'progress-badge-active': tab === 3 || tab === 4}">
+                        3
+                    </div>
+                </a>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-6">
-                <span>User Roles</span>
-                <div class="lateral-divider hidden-sm">
+                <a ui-sref="users.user_create.groups ({user_id : new_user})">
+                    <span>User Roles</span>
+                    <div class="lateral-divider hidden-sm" ng-class="{'lateral-divider-active' : tab === 3 || tab === 4}">
 
-                </div>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="col-sm-3 margin-l--60">
             <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="progress-badge">
-                    4
-                </div>
+                <a ui-sref="users.user_create.counties({user_id : new_user})">
+                    <div class="progress-badge" ng-class="{'progress-badge-active': tab === 4}">
+                        4
+                    </div>
+                </a>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-6">
-                <span>Admin Areas</span>
-                <div class="lateral-divider hidden-sm">
+                <a ui-sref="users.user_create.counties({user_id : new_user})">
+                    <span>Admin Areas</span>
+                    <div class="lateral-divider hidden-sm" ng-class="{'lateral-divider-active': tab === 4}">
 
-                </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
