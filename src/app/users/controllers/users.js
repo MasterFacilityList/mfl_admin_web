@@ -37,12 +37,16 @@
         }]
     )
 
-    .controller("mfl.users.controllers.user_create", ["$scope",
-        function ($scope) {
+    .controller("mfl.users.controllers.user_create", ["$scope", "$state",
+        function ($scope, $state) {
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
             };
+            $scope.tab = 0;
+            $scope.create = true;
+            $scope.new_user = $state.params.user_id;
+            console.log($scope.new_user);
         }
     ])
 
@@ -50,6 +54,7 @@
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
         function ($scope, $log, $state, wrappers) {
             $scope.create = true;
+            $scope.$parent.tab = 1;
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
@@ -143,12 +148,12 @@
                 "title": "",
                 "checked": false
             };
+            $scope.$parent.tab = 2;
             $scope.contacts = [];
             $scope.contact = {
                 contact_type: "",
                 contact: ""
             };
-            $scope.edit_conts = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
             wrappers.contact_types.list()
                 .success(function (data) {
@@ -221,6 +226,7 @@
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
+            $scope.$parent.tab = 3;
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.groups = data.results;
@@ -279,6 +285,7 @@
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
+            $scope.$parent.tab = 4;
             $scope.edit_counties = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
@@ -332,6 +339,7 @@
     .controller("mfl.users.controllers.user_edit.regulatory_body",
         ["mfl.users.services.wrappers", "$log", "$scope",
         function (wrappers, $log, $scope) {
+            $scope.$parent.tab = 4;
             wrappers.regulatory_bodies.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.bodies = data.results;
@@ -377,6 +385,7 @@
     .controller("mfl.users.controllers.user_edit.constituency",
         ["mfl.users.services.wrappers", "$log", "$scope",
         function (wrappers, $log, $scope) {
+            $scope.$parent.tab = 4;
             wrappers.constituencies.filter(
                 {"page_size": 20, "ordering": "name", "county": $scope.login_user.county})
             .success(function (data) {
