@@ -25,15 +25,15 @@
                             </span>
                         </a>
                     </li>
-                    <li ng-if="user.id && (!user.is_national)" ui-sref-active="active" class="col-xs-3">
+                    <li ng-if="user.id && (!user.is_national) && (! login_user.county)" ui-sref-active="active" class="col-xs-3">
                         <a ui-sref=".counties">
                             <span class="fw-900 ">
                                 Assign county
                             </span>
                         </a>
                     </li>
-                    <li ng-if="user.id && user.is_national" ui-sref-active="active" class="col-xs-3">
-                        <a ui-sref=".counties">
+                    <li ng-if="user.id && (!user.is_national) && login_user.county" ui-sref-active="active" class="col-xs-3">
+                        <a ui-sref=".constituency">
                             <span class="fw-900 ">
                                 Assign constituency
                             </span>
