@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("Directive: Testing the rating directive", function () {
+    describe("Directive: Testing the list assign directive", function () {
         var rootScope, compile;
         var directiveTpl = "<mfl-list-assignment " +
                                 "listeditems='listeditems' assigneditems='assigneditems'>" +

@@ -9,9 +9,6 @@
                 icon: "fa-map-marker",
                 name: "Counties"
             };
-            $scope.$parent.collapsed = {
-                one : true
-            };
         }]
     )
     .controller("mfl.setup.controller.county.view", ["$scope", "$stateParams",

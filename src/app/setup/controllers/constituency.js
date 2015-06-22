@@ -10,9 +10,6 @@
                 icon: "fa-map-marker",
                 name: "Constituencies"
             };
-            $scope.$parent.collapsed = {
-                one : true
-            };
         }]
     )
 

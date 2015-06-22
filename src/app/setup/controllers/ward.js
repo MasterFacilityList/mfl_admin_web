@@ -9,9 +9,6 @@
                 icon: "fa-map-marker",
                 name: "Wards"
             };
-            $scope.$parent.collapsed = {
-                one: true
-            };
         }]
     );
 })(angular);

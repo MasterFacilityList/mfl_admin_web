@@ -3,7 +3,6 @@
 
     angular.module("mfl.common.directives", [
         "mfl.common.directives.listassignment",
-        "mfl.common.directives.contentheader",
-        "mfl.common.content.slide.in.directive"
+        "mfl.common.directives.contentheader"
     ]);
 })(angular);

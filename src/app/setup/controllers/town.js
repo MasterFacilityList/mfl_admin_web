@@ -19,10 +19,6 @@
                     icon: "fa-plus"
                 }
             ];
-
-            $scope.$parent.collapsed = {
-                one : true
-            };
         }]
     )
     .controller("mfl.setup.controller.town.create",
