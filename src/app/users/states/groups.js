@@ -36,6 +36,16 @@
                     }
                 }
             })
+            .state("groups.group_edit.delete", {
+                url: "delete/",
+                views: {
+                    "delete@groups.group_edit": {
+                        controller: "mfl.users.controllers.group_edit",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                },
+                permission: "auth.delete_group"
+            })
 
             .state("groups.group_delete", {
                 url: "delete/:group_id/",

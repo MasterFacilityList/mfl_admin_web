@@ -8,35 +8,6 @@
         "mfl.common.forms"
     ])
 
-    .controller("mfl.users.controllers.user_delete",
-        ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
-        function ($scope, $log, $state, $stateParams, wrappers) {
-            $scope.title = {
-                icon : "fa fa-trash",
-                name : "Delete User"
-            };
-            $scope.user_id = $stateParams.user_id;
-
-            wrappers.users.get($scope.user_id)
-                .success(function (data) {
-                    $scope.user = data;
-                })
-                .error(function (data) {
-                    $log.error(data);
-                });
-
-            $scope.remove = function () {
-                wrappers.users.remove($scope.user_id)
-                    .success(function () {
-                        $state.go("users");
-                    })
-                    .error(function (data) {
-                        $log.error(data);
-                    });
-            };
-        }]
-    )
-
     .controller("mfl.users.controllers.user_create", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -87,16 +58,15 @@
     //end of assigning admininstrative areas to users
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
-        "mfl.auth.services.login",
-        function ($scope, $stateParams, $log, wrappers, loginService) {
+         "$state","mfl.auth.services.login",
+        function ($scope, $stateParams, $log, wrappers,$state, loginService) {
             $scope.title = {
                 icon: "fa-edit",
                 name: "Edit User"
             };
             $scope.action = [
                 {
-                    func : "ui-sref='users.user_delete({user_id: user.id})' " +
-                           "requires-permission='users.delete_mfluser'",
+                    func : "ui-sref='users.user_edit.delete'",
                     class: "action-btn action-btn-danger action-btn-md",
 
                     tipmsg: "Delete User",
@@ -105,9 +75,22 @@
             ];
             $scope.user_id = $stateParams.user_id;
             $scope.create = false;
+            $scope.remove = function () {
+                wrappers.users.remove($scope.user_id)
+                    .success(function () {
+                        $state.go("users");
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+            };
+            $scope.cancel = function(){
+                $state.go("users.user_edit.basic");
+            };
             wrappers.users.get($scope.user_id)
                 .success(function (data) {
                     $scope.user = data;
+                    $scope.deleteText = $scope.user.full_name;
                 })
                 .error(function (data) {
                     $log.error(data);
