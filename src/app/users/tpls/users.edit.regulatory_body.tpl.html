@@ -1,0 +1,33 @@
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 margin-t-20">
+    <div ng-if="create" class="col-md-12 margin-t-20">
+        <div class="col-md-12">
+        <span class="fs-20 fw-700">Regulatory Body</span>
+        <span class="fs-16 pull-right">
+            Step 4 of 5
+        </span>
+        </div>
+    </div>
+    <div>
+        <form name="frm_regulatory_body" ng-submit="addBody()">
+            <select ng-model="new_body">
+                <option value="">Select a regulatory body</option>
+                <option value="{{reg.id}}" ng-repeat="reg in bodies">{{reg.name}}</option>
+            </select>
+            <input type="submit" value="Assign" class="btn btn-info" />
+        </form>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="reg in user_bodies">
+                    <th>{{reg.regulatory_body_name}}</th>
+                    <th><button class="btn btn-danger" ng-click="removeBody(reg)">Remove</button></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -133,6 +133,17 @@
                 permission: "users.view_mfluser"
             })
 
+            .state("users.user_edit.regulatory_body", {
+                url: "regulatory_body/",
+                views: {
+                    "form-view@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.regulatory_body",
+                        templateUrl: "users/tpls/users.edit.regulatory_body.tpl.html"
+                    }
+                },
+                permission: "users.view_mfluser"
+            })
+
             .state("users.user_delete", {
                 url: "delete/:user_id/",
                 views: {

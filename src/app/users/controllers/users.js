@@ -49,6 +49,7 @@
     .controller("mfl.users.controllers.user_create.basic",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
         function ($scope, $log, $state, wrappers) {
+            $scope.create = true;
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
@@ -102,7 +103,7 @@
                 }
             ];
             $scope.user_id = $stateParams.user_id;
-
+            $scope.create = false;
             wrappers.users.get($scope.user_id)
                 .success(function (data) {
                     $scope.user = data;
@@ -145,10 +146,6 @@
                 contact_type: "",
                 contact: ""
             };
-            //putting checks to determine if a create or edit is happening
-            if(_.isUndefined($scope.user_id)) {
-                $scope.create = true;
-            }
             $scope.edit_conts = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
             wrappers.contact_types.list()
@@ -222,10 +219,6 @@
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
-            //putting checks to determine if a create or edit is happening
-            if(_.isUndefined($scope.user_id)) {
-                $scope.create = true;
-            }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.groups = data.results;
@@ -284,10 +277,6 @@
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
-            //putting checks to determine if a create or edit is happening
-            if(_.isUndefined($scope.user_id)) {
-                $scope.create = true;
-            }
             $scope.edit_counties = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
@@ -333,6 +322,51 @@
                 .error(function (data) {
                     $log.error(data);
                     user_county.delete_spinner = false;
+                });
+            };
+        }]
+    )
+
+    .controller("mfl.users.controllers.user_edit.regulatory_body",
+        ["mfl.users.services.wrappers", "$log", "$scope",
+        function (wrappers, $log, $scope) {
+            wrappers.regulatory_bodies.filter({page_size: 100, ordering: "name"})
+            .success(function (data) {
+                $scope.bodies = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            wrappers.regulatory_body_users.filter({"user": $scope.user_id})
+            .success(function (data) {
+                $scope.user_bodies = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
+            $scope.new_body = "";
+            $scope.addBody = function () {
+                var payload = {
+                    "regulatory_body": $scope.new_body,
+                    "user": $scope.user_id
+                };
+                wrappers.regulatory_body_users.create(payload)
+                .success(function (data) {
+                    $scope.user_bodies.push(data);
+                    $scope.new_body = "";
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+            $scope.removeBody = function (reg) {
+                wrappers.regulatory_body_users.remove(reg.id)
+                .success(function () {
+                    $scope.user_bodies = _.without(reg);
+                })
+                .error(function (data) {
+                    $log.error(data);
                 });
             };
         }]

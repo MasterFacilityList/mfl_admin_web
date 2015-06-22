@@ -12,6 +12,8 @@
         this.user_counties = api.setBaseUrl("api/common/user_counties/");
         this.counties = api.setBaseUrl("api/common/counties/");
         this.contacts = api.setBaseUrl("api/common/contacts/");
+        this.regulatory_bodies = api.setBaseUrl("api/facilities/regulating_bodies/");
+        this.regulatory_body_users = api.setBaseUrl("api/facilities/regulatory_body_users/");
     }]);
 
 })(angular);
