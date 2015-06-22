@@ -28,7 +28,8 @@ module.exports = function ( karma ) {
             "karma-chrome-launcher",
             "karma-coverage",
             "karma-threshold-reporter",
-            "karma-coffee-preprocessor"
+            "karma-coffee-preprocessor",
+            "karma-mocha-reporter"
         ],
         preprocessors: {
             "**/*.coffee": "coffee",
@@ -41,7 +42,8 @@ module.exports = function ( karma ) {
         reporters: [
             "progress",
             "coverage",
-            "threshold"
+            "threshold",
+            "mocha"
         ],
 
         /**

@@ -375,10 +375,8 @@
     )
 
     .controller("mfl.users.controllers.user_edit.constituency",
-        ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        function (wrappers, $log, $scope, $state) {
-            $scope.user_id = $scope.user_id || $state.params.user_id;
-
+        ["mfl.users.services.wrappers", "$log", "$scope",
+        function (wrappers, $log, $scope) {
             wrappers.constituencies.filter(
                 {"page_size": 20, "ordering": "name", "county": $scope.login_user.county})
             .success(function (data) {
