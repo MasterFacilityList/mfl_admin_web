@@ -87,7 +87,8 @@
     //end of assigning admininstrative areas to users
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
-        function ($scope, $stateParams, $log, wrappers) {
+        "mfl.auth.services.login",
+        function ($scope, $stateParams, $log, wrappers, loginService) {
             $scope.title = {
                 icon: "fa-edit",
                 name: "Edit User"
@@ -111,6 +112,7 @@
                 .error(function (data) {
                     $log.error(data);
                 });
+            $scope.login_user = loginService.getUser();
         }]
     )
 
@@ -367,6 +369,58 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                });
+            };
+        }]
+    )
+
+    .controller("mfl.users.controllers.user_edit.constituency",
+        ["mfl.users.services.wrappers", "$log", "$scope",
+        function (wrappers, $log, $scope) {
+            wrappers.constituencies.filter(
+                {"page_size": 20, "ordering": "name", "county": $scope.login_user.county})
+            .success(function (data) {
+                $scope.constituencies = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            wrappers.user_constituencies.filter({user: $scope.user_id})
+            .success(function (data) {
+                $scope.user_constituencies = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            $scope.new_constituency = "";
+
+            $scope.add = function (const_id) {
+                $scope.spinner = true;
+                var payload = {
+                    "user": $scope.user_id,
+                    "constituency": const_id
+                };
+                wrappers.user_constituencies.create(payload)
+                .success(function (data) {
+                    $scope.user_constituencies.push(data);
+                    $scope.spinner = false;
+                    $scope.new_constituency = "";
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    $scope.spinner = false;
+                });
+            };
+            $scope.remove = function (user_const) {
+                user_const.delete_spinner = true;
+                wrappers.user_constituencies.remove(user_const.id)
+                .success(function () {
+                    $scope.user_constituencies = _.without($scope.user_constituencies, user_const);
+                    user_const.delete_spinner = false;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    user_const.delete_spinner = false;
                 });
             };
         }]
