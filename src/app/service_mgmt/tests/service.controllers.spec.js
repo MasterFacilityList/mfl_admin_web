@@ -343,11 +343,11 @@
                     .expectDELETE(server_url+"api/facilities/service_options/2/")
                     .respond(204);
 
-                scope.removeChild(2);
+                scope.removeChild({id:2});
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
-                expect(scope.service_options).toEqual([]);
+                expect(scope.service_options).toEqual([{id:2}]);
             });
 
             it("should show errors on fail to remove an option from a service", function () {
@@ -362,7 +362,7 @@
                 httpBackend
                     .expectGET(
                         server_url + "api/facilities/service_options/?page_size=1000&service=1")
-                    .respond(200, {results: [{"id": 2}]});
+                    .respond(200, {results: []});
 
                 data.$scope.service_id = 1;
 
@@ -375,11 +375,11 @@
                     .expectDELETE(server_url+"api/facilities/service_options/2/")
                     .respond(500);
 
-                scope.removeChild(2);
+                scope.removeChild({id:2});
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
-                expect(scope.service_options).toEqual([{"id": 2}]);
+                expect(scope.service_options).toEqual([]);
             });
         });
 

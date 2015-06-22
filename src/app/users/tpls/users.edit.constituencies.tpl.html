@@ -38,16 +38,16 @@
                 <h4> User Constituencies</h4>
                 <table class="table content-card">
                     <tbody>
-                        <tr ng-repeat="uc in user_constituencies">
+                        <tr ng-repeat="child in user_constituencies">
                             <td class="pad-t-15 fs-18 fw-600 text-left">
-                                {{uc.constituency_name}}
+                                {{child.constituency_name}}
                             </td>
                             <td class="text-right">
-                                <span ng-if="uc.delete_spinner">
+                                <span ng-if="child.delete_spinner">
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
                                 </span>
-                                <a class="remove-icon text-danger" ng-click="remove(uc)" tooltip="Remove constituency"
-                                requires-permission="common.delete_userconstituency" >
+                                <a class="remove-icon text-danger" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" tooltip="Remove constituency"
+                                requires-permission="common.delete_userconstituency">
                                     <i class="fa fa-times-circle fa-2x fw-500"></i>
                                 </a>
                             </td>

@@ -45,18 +45,18 @@
         <h4 class="fw-500">Current User Contacts</h4>
             <table class="table content-card">
                 <tbody>
-                    <tr ng-repeat="contact in contacts">
+                    <tr ng-repeat="child in contacts">
                         <td class="pad-t-15 fs-16 fw-500">
-                            {{contact.contact_type_text}}
+                            {{child.contact_type_text}}
                         </td>
                         <td class="pad-t-15 fs-16 fw-500">
-                            {{contact.contact_text}}
+                            {{child.contact_text}}
                         </td>
                         <td class="pad-t-15 text-right">
-                            <span ng-if="contact.delete_spinner">
+                            <span ng-if="child.delete_spinner">
                                 <i class="fa fa-spin fa-circle-o-notch"></i>
                             </span>
-                            <a class="remove-icon text-danger" ng-click="remove(contact)" tooltip="Remove contact" requires-permission="common.delete_usercontact" >
+                            <a class="remove-icon text-danger" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" tooltip="Remove contact" requires-permission="common.delete_usercontact" >
                                 <i class="fa fa-times-circle fa-2x fw-500"></i>
                             </a>
                         </td>

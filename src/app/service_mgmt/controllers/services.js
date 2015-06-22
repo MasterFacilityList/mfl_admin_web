@@ -91,11 +91,10 @@
                     $log.warn(data);
                 });
             };
-            $scope.removeChild = function (service_opt_id) {
-                wrappers.service_options.remove(service_opt_id)
+            $scope.removeChild = function (service_opt) {
+                wrappers.service_options.remove(service_opt.id)
                 .success(function () {
-                    var a = _.findWhere($scope.service_options, {"id": service_opt_id});
-                    $scope.service_options = _.without($scope.service_options, a);
+                    $scope.service_options = _.without($scope.service_options, service_opt);
                 })
                 .error(function (data) {
                     $log.warn(data);

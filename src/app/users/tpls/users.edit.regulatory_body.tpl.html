@@ -23,9 +23,9 @@
                 <th>Action</th>
             </thead>
             <tbody>
-                <tr ng-repeat="reg in user_bodies">
-                    <th>{{reg.regulatory_body_name}}</th>
-                    <th><button class="btn btn-danger" ng-click="removeBody(reg)">Remove</button></th>
+                <tr ng-repeat="child in user_bodies">
+                    <th>{{child.regulatory_body_name}}</th>
+                    <th><button class="btn btn-danger" popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'">Remove</button></th>
                 </tr>
             </tbody>
         </table>
