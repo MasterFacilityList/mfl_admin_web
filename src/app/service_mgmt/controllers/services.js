@@ -29,10 +29,6 @@
             $scope.cancel = function () {
                 $state.go("service_mgmt.service_list.service_edit");
             };
-            $scope.del_popover = {
-                content: "Hello, World!",
-                templateUrl:"common/tpls/del_pop.tpl.html"
-            };
         }
     ])
 
