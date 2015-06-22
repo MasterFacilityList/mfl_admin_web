@@ -89,6 +89,17 @@
                 permission: "users.view_mfluser"
             })
 
+            .state("users.user_edit.delete", {
+                url: "delete/",
+                views: {
+                    "delete@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                },
+                permission: "users.view_mfluser"
+            })
+
             .state("users.user_edit.basic", {
                 url: "basic/",
                 views: {
