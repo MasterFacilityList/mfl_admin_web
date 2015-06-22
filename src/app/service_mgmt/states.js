@@ -25,7 +25,8 @@
                 }
             },
             data : { pageTitle: "Service Management" },
-            permission: "facilities.view_service"
+            permission: "facilities.view_service",
+            redirectTo: "service_mgmt.category_list"
         })
 
         // ============== categories ====================
@@ -67,7 +68,7 @@
             permission: "facilities.view_servicecategory"
         })
         .state("service_mgmt.category_list.category_edit.delete", {
-            url: ":delete/",
+            url: "delete/",
             views: {
                 "delete@service_mgmt.category_list.category_edit": {
                     controller: "mfl.service_mgmt.controllers.category_edit",
@@ -111,8 +112,32 @@
                     templateUrl: "service_mgmt/tpls/service_edit.tpl.html"
                 }
             },
+            permission: "facilities.view_service",
+            redirectTo: "service_mgmt.service_list.service_edit.basic"
+        })
+
+        .state("service_mgmt.service_list.service_edit.basic", {
+            url: "basic/",
+            views: {
+                "form-view@service_mgmt.service_list.service_edit": {
+                    controller: "mfl.service_mgmt.controllers.service_edit.basic",
+                    templateUrl: "service_mgmt/tpls/service_edit.basic.tpl.html"
+                }
+            },
             permission: "facilities.view_service"
         })
+
+        .state("service_mgmt.service_list.service_edit.options", {
+            url: "options/",
+            views: {
+                "form-view@service_mgmt.service_list.service_edit": {
+                    controller: "mfl.service_mgmt.controllers.service_edit.options",
+                    templateUrl: "service_mgmt/tpls/service_edit.options.tpl.html"
+                }
+            },
+            permission: "facilities.view_service"
+        })
+
         .state("service_mgmt.service_list.service_edit.delete", {
             url: "delete/",
             views: {
@@ -122,16 +147,6 @@
                 }
             },
             permission: "facilities.delete_service"
-        })
-        .state("service_mgmt.service_list.service_edit.options", {
-            url: "options/",
-            views: {
-                "options": {
-                    controller: "mfl.service_mgmt.controllers.service_options",
-                    templateUrl: "service_mgmt/tpls/service_options.tpl.html"
-                }
-            },
-            permission: "facilities.view_serviceoption"
         })
 
         // ============== options ====================

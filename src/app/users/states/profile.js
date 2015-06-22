@@ -9,7 +9,6 @@
                 url: "/profile/",
                 views: {
                     "main": {
-                        controller: "mfl.users.controllers.profile.base",
                         templateUrl: "users/tpls/main.tpl.html"
                     },
                     "header@profile": {
@@ -44,7 +43,7 @@
             })
 
             .state("profile.password", {
-                url: "password/",
+                url: "password/?required",
                 views: {
                     "main-content@profile": {
                         controller: "mfl.users.controllers.profile.password",

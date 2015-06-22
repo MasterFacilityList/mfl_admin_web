@@ -49,12 +49,10 @@
             var dt = {
                 $stateParams : {id: "create"}
             };
-            var test_title = [
-                {
-                    icon: "fa-plus-circle",
-                    name: "New Facility Owner Types"
-                }
-            ];
+            var test_title = {
+                icon: "fa-plus-circle",
+                name: "New Facility Owner Types"
+            };
             createController(
                 "mfl.setup.controller.facilityOwnerType.view", dt);
             expect($scope.title).toEqual(test_title);
@@ -227,12 +225,10 @@
             var dt = {
                 $stateParams : {id: "create"}
             };
-            var test_title = [
-                {
-                    icon: "fa-plus-circle",
-                    name: "New Facility Owner"
-                }
-            ];
+            var test_title = {
+                icon: "fa-plus-circle",
+                name: "New Facility Owner"
+            };
             createController("mfl.setup.controller.facilityOwner.view", dt);
             expect($scope.title).toEqual(test_title);
         });
@@ -240,12 +236,10 @@
             var dt = {
                 $stateParams : {id: "create"}
             };
-            var test_title = [
-                {
-                    icon: "fa-plus-circle",
-                    name: "New Job Title"
-                }
-            ];
+            var test_title = {
+                icon: "fa-plus-circle",
+                name: "New Job Title"
+            };
             createController("mfl.setup.controller.facilityJobTitle.view", dt);
             expect($scope.title).toEqual(test_title);
         });

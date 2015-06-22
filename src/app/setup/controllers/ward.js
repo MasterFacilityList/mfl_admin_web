@@ -5,12 +5,10 @@
     ])
     .controller("mfl.setup.controller.ward.list", ["$scope",
         function ($scope) {
-            $scope.title = [
-                {
-                    icon: "fa-map-marker",
-                    name: "Wards"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-map-marker",
+                name: "Wards"
+            };
         }]
     );
 })(angular);

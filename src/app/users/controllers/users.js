@@ -11,12 +11,10 @@
     .controller("mfl.users.controllers.user_delete",
         ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
         function ($scope, $log, $state, $stateParams, wrappers) {
-            $scope.title = [
-                {
-                    icon : "fa fa-trash",
-                    name : "Delete User"
-                }
-            ];
+            $scope.title = {
+                icon : "fa fa-trash",
+                name : "Delete User"
+            };
             $scope.user_id = $stateParams.user_id;
 
             wrappers.users.get($scope.user_id)
@@ -41,42 +39,20 @@
 
     .controller("mfl.users.controllers.user_create", ["$scope",
         function ($scope) {
-            $scope.title = [
-                {
-                    icon : "fa-plus-circle",
-                    name : "New User"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "onclick='window.history.back()'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }
-            ];
+            $scope.title = {
+                icon : "fa-plus-circle",
+                name : "New User"
+            };
         }
     ])
 
     .controller("mfl.users.controllers.user_create.basic",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
         function ($scope, $log, $state, wrappers) {
-            $scope.title = [
-                {
-                    icon : "fa-plus-circle",
-                    name : "New User"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "onclick='window.history.back()'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }
-            ];
+            $scope.title = {
+                icon : "fa-plus-circle",
+                name : "New User"
+            };
             $scope.save = function () {
                 wrappers.users.create($scope.user)
                 .success(function (data) {
@@ -111,27 +87,18 @@
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
         function ($scope, $stateParams, $log, wrappers) {
-            $scope.title = [
-                {
-                    icon: "fa-edit",
-                    name: "Edit User"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-edit",
+                name: "Edit User"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='users.user_delete({user_id: user.id})' " +
                            "requires-permission='users.delete_mfluser'",
                     class: "action-btn action-btn-danger action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Delete User",
                     icon: "fa-trash"
-                },
-                {
-                    func : "onclick='window.history.back()'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
                 }
             ];
             $scope.user_id = $stateParams.user_id;
@@ -376,18 +343,16 @@
             "title": "",
             "checked": false
         };
-        $scope.title = [
-            {
-                icon: "fa-user",
-                name: "Manage users"
-            }
-        ];
+        $scope.title = {
+            icon: "fa-user",
+            name: "Manage users"
+        };
         $scope.action = [
             {
-                func : "ui-sref='users.user_create.basic' " +
+                func: "ui-sref='users.user_create.basic' " +
                         "requires-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
+
                 tipmsg: "New User",
                 icon: "fa-plus"
             }

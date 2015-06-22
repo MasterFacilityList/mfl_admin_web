@@ -1,0 +1,37 @@
+<div>
+    <div>
+        <h4>Available options</h4>
+        <div>
+            <form ng-submit="addOption()">
+                <select ng-model="new_option_id" required>
+                    <option ng-repeat="opt in options" ng-value="opt.id">{{opt.display_text}}</option>
+                </select>
+                <input type="submit" value="Add Option" class="btn btn-info" />
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <h4>Options tied to the service</h4>
+        <table class="table table-hover fs-14">
+            <thead>
+                <tr>
+                    <th >Display Text</th>
+                    <th >Value</th>
+                    <th >Option Type</th>
+                    <th >Is Exclusive Option</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="opt in service_options">
+                    <td>{{opt.display_text}}</td>
+                    <td>{{opt.value}}</td>
+                    <td>{{opt.option_type | titlecase}}</td>
+                    <td>{{opt.is_exclusive_option | boolFilter}}</td>
+                    <td><a class="btn btn-danger" ng-click="removeOption(opt.id)">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

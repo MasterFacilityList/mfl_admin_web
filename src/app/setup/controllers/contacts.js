@@ -2,22 +2,20 @@
     "use strict";
     angular.module("mfl.setup.contacts.controllers",[
     ])
-    
+
     /*Contacts*/
-    
+
     .controller("mfl.setup.controller.contacts.list", ["$scope",
         function ($scope) {
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Manage Contacts"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-phone",
+                name: "Manage Contacts"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='setup.contacts.create'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add Contact",
                     icon: "fa-plus"
                 }
@@ -33,27 +31,18 @@
                 $scope.alert = error.error;
             });
             if(!_.isUndefined($stateParams.id)){
-                $scope.title = [
-                    {
-                        icon: "fa-edit",
-                        name: "Edit Contact"
-                    }
-                ];
+                $scope.title = {
+                    icon: "fa-edit",
+                    name: "Edit Contact"
+                };
                 $scope.action = [
                     {
                         func : "ui-sref="+
                         "setup.contacts.edit.delete",
                         class: "action-btn action-btn-danger action-btn-md",
-                        color: "blue",
+
                         tipmsg: "Delete Contact",
                         icon: "fa-trash"
-                    },
-                    {
-                        func : "ui-sref='setup.contacts'",
-                        class: "action-btn action-btn-primary action-btn-md",
-                        color: "blue",
-                        tipmsg: "Go Back",
-                        icon: "fa-arrow-left"
                     }
                 ];
                 adminApi.contacts.get($stateParams.id).success(function(data){
@@ -75,21 +64,10 @@
                 };
             }
             else {
-                $scope.title = [
-                    {
-                        icon : "fa-plus-circle",
-                        name: "New Contact"
-                    }
-                ];
-                $scope.action = [
-                    {
-                        func : "onclick='window.history.back()'",
-                        class: "action-btn action-btn-primary action-btn-md",
-                        color: "blue",
-                        tipmsg: "Go Back",
-                        icon: "fa-arrow-left"
-                    }
-                ];
+                $scope.title = {
+                    icon : "fa-plus-circle",
+                    name: "New Contact"
+                };
             }
             $scope.createContacts = function(chuApprover){
                 adminApi.contacts.create(chuApprover).success(function(){
@@ -118,20 +96,18 @@
         }]
     )
     /*Contact Types*/
-    
+
     .controller("mfl.setup.controller.contact_types.list", ["$scope",
         function ($scope) {
-            $scope.title = [
-                {
-                    icon: "fa-phone",
-                    name: "Manage Contact Types"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-phone",
+                name: "Manage Contact Types"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='setup.contact_types.create'",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Add Contact type",
                     icon: "fa-plus"
                 }
@@ -144,26 +120,18 @@
 
             if(!_.isUndefined($stateParams.id) &&
                 $stateParams.id !== "create"){
-                $scope.title = [
-                    {
-                        icon: "fa-edit",
-                        name: "Edit Contact Type"
-                    }
-                ];
+                $scope.title = {
+                    icon: "fa-edit",
+                    name: "Edit Contact Type"
+                };
                 $scope.action = [
                     {
                         func : "ui-sref="+
                         "'setup.contact_types.view.delete'",
                         class: "action-btn action-btn-danger action-btn-md",
                         tipmsg:"Delete",
-                        color: "blue",
+
                         icon: "fa-trash"
-                    },{
-                        func : "onclick='window.history.back()'",
-                        class: "action-btn action-btn-primary action-btn-md",
-                        color: "blue",
-                        tipmsg: "Go Back",
-                        icon: "fa-arrow-left"
                     }
                 ];
                 $scope.del_popover = {
@@ -190,21 +158,10 @@
             }
             else if(!_.isUndefined($stateParams.id) &&
                 $stateParams.id === "create") {
-                $scope.title = [
-                    {
-                        icon : "fa-plus-circle",
-                        name: "New Contact Type"
-                    }
-                ];
-                $scope.action = [
-                    {
-                        func : "onclick='window.history.back()'",
-                        class: "action-btn action-btn-primary action-btn-md",
-                        color: "blue",
-                        tipmsg: "Go Back",
-                        icon: "fa-arrow-left"
-                    }
-                ];
+                $scope.title = {
+                    icon : "fa-plus-circle",
+                    name: "New Contact Type"
+                };
             }
             $scope.createContacts = function(chuApprover){
                 adminApi.contact_types.create(chuApprover).success(function(){

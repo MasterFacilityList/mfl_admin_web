@@ -1,8 +1,8 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
 
     angular.module("mfl.facilities.services", [
-        "sil.api.wrapper"
+        "api.wrapper"
     ])
 
     .service("mfl.facilities.wrappers", ["api", function (api) {
@@ -34,7 +34,7 @@
         var getError =  function(error){
             return error.error_msg.error;
         };
-        this.utils = function(){
+        this.utils = (function(){
             return {
                 cleanFormData : function(data){
                     _.each(data, function(val, key){
@@ -90,7 +90,7 @@
                     }
                 }
             };
-        }();
+        })();
     }]);
 
-})(angular);
+})(angular, _);

@@ -8,7 +8,7 @@
 
         describe("Test dashboard home controller", function () {
 
-            it("should assign title and breadcrumbs", function () {
+            it("should assign title", function () {
                 inject(["$controller", "$rootScope", function ($controller, $rootScope) {
                     var data =  {
                         "$scope": $rootScope.$new()
@@ -168,5 +168,4 @@
             });
         });
     });
-
 })();

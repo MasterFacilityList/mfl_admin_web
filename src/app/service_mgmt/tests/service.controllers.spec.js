@@ -26,7 +26,7 @@
         });
 
         describe("Test service edit controller", function () {
-            it("should get one service and all categories", function () {
+            it("should get one service", function () {
                 var scope = rootScope.$new();
                 var data = {
                     "$stateParams": {
@@ -37,10 +37,6 @@
                 httpBackend
                     .expectGET(server_url + "api/facilities/services/1/")
                     .respond(200, {});
-                httpBackend
-                    .expectGET(server_url +
-                               "api/facilities/service_categories/?page_size=1000")
-                    .respond(200, {results: []});
 
                 ctrl("service_edit", data);
 
@@ -49,7 +45,6 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.service).toEqual({});
-                expect(scope.categories).toEqual([]);
             });
 
             it("should log errors on get one service failure", function () {
@@ -64,10 +59,6 @@
                 httpBackend
                     .expectGET(server_url + "api/facilities/services/1/")
                     .respond(500, {"error": "a"});
-                httpBackend
-                    .expectGET(server_url +
-                               "api/facilities/service_categories/?page_size=1000")
-                    .respond(200, {results: []});
 
                 spyOn(log, "warn");
                 ctrl("service_edit", data);
@@ -79,32 +70,48 @@
                 expect(scope.service).toBe(undefined);
                 expect(log.warn).toHaveBeenCalled();
             });
+        });
+
+        describe("Test service edit basic controller", function () {
+            it("should get all categories", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url +
+                               "api/facilities/service_categories/?page_size=1000")
+                    .respond(200, {results: []});
+
+                ctrl("service_edit.basic", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.categories).toEqual([]);
+            });
 
             it("should log errors on get categories failure", function () {
                 var scope = rootScope.$new();
                 var data = {
-                    "$stateParams": {
-                        service_id: 1
-                    },
                     "$scope": scope,
                     "$log": log
                 };
-                httpBackend
-                    .expectGET(server_url + "api/facilities/services/1/")
-                    .respond(200, {});
+
                 httpBackend
                     .expectGET(server_url +
                                "api/facilities/service_categories/?page_size=1000")
                     .respond(500, {"error": "a"});
 
                 spyOn(log, "warn");
-                ctrl("service_edit", data);
+
+                ctrl("service_edit.basic", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(scope.service).toEqual({});
                 expect(scope.categories).toBe(undefined);
                 expect(log.warn).toHaveBeenCalled();
             });
@@ -114,16 +121,11 @@
                     function (formChanges) {
                         var scope = rootScope.$new();
                         var data = {
-                            "$stateParams": {
-                                service_id: 1
-                            },
                             "$state": state,
                             "$scope": scope,
                             "mfl.common.forms.changes": formChanges
                         };
-                        httpBackend
-                            .expectGET(server_url + "api/facilities/services/1/")
-                            .respond(200, {});
+
                         httpBackend
                             .expectGET(server_url +
                                        "api/facilities/service_categories/?page_size=1000")
@@ -131,7 +133,9 @@
 
                         spyOn(formChanges, "whatChanged").andReturn({"name": "get"});
                         spyOn(state, "go");
-                        ctrl("service_edit", data);
+                        data.$scope.service = {};
+                        data.$scope.service_id = 1;
+                        ctrl("service_edit.basic", data);
 
                         httpBackend.flush();
                         httpBackend.verifyNoOutstandingRequest();
@@ -158,16 +162,11 @@
                     function (formChanges) {
                         var scope = rootScope.$new();
                         var data = {
-                            "$stateParams": {
-                                service_id: 1
-                            },
                             "$state": state,
                             "$scope": scope,
                             "mfl.common.forms.changes": formChanges
                         };
-                        httpBackend
-                            .expectGET(server_url + "api/facilities/services/1/")
-                            .respond(200, {});
+
                         httpBackend
                             .expectGET(server_url +
                                        "api/facilities/service_categories/?page_size=1000")
@@ -175,7 +174,9 @@
 
                         spyOn(formChanges, "whatChanged").andReturn({});
                         spyOn(state, "go");
-                        ctrl("service_edit", data);
+                        data.$scope.service_id = 1;
+                        data.$scope.service = {};
+                        ctrl("service_edit.basic", data);
 
                         httpBackend.flush();
                         httpBackend.verifyNoOutstandingRequest();
@@ -191,6 +192,191 @@
                         expect(state.go).not.toHaveBeenCalled();
                     }
                 ]);
+            });
+        });
+
+        describe("Test service edit options controller", function () {
+
+            it("should load all options and service options", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/options/?page_size=1000")
+                    .respond(200, {results: [{"id": 2}, {"id": 1}]});
+
+                httpBackend
+                    .expectGET(
+                        server_url + "api/facilities/service_options/?page_size=1000&service=1")
+                    .respond(200, {results: [{"id": 2}]});
+
+                data.$scope.service_id = 1;
+
+                ctrl("service_edit.options", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.options).toEqual([{"id": 2}, {"id": 1}]);
+                expect(scope.service_options).toEqual([{"id": 2}]);
+            });
+
+            it("should show errors on fail to load options and service options", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope,
+                    "$log": log
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/options/?page_size=1000")
+                    .respond(500, {"error": "e"});
+
+                httpBackend
+                    .expectGET(
+                        server_url + "api/facilities/service_options/?page_size=1000&service=1")
+                    .respond(500, {"error": "e"});
+
+                data.$scope.service_id = 1;
+                spyOn(log, "warn");
+                ctrl("service_edit.options", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.options).toEqual([]);
+                expect(scope.service_options).toEqual([]);
+                expect(log.warn).toHaveBeenCalled();
+            });
+
+            it("should add an option to a service", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/options/?page_size=1000")
+                    .respond(200, {results: [{"id": 2}, {"id": 1}]});
+
+                httpBackend
+                    .expectGET(
+                        server_url + "api/facilities/service_options/?page_size=1000&service=1")
+                    .respond(200, {results: [{"id": 2}]});
+
+                data.$scope.service_id = 1;
+
+                ctrl("service_edit.options", data);
+
+                httpBackend.flush();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/service_options/")
+                    .respond(201, {"id": 1});
+                scope.new_option_id = "2";
+                scope.addOption();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(scope.service_options[1]).toEqual({"id": 1});
+            });
+
+            it("should show error on fail to add an option to a service", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/options/?page_size=1000")
+                    .respond(200, {results: [{"id": 2}, {"id": 1}]});
+
+                httpBackend
+                    .expectGET(
+                        server_url + "api/facilities/service_options/?page_size=1000&service=1")
+                    .respond(200, {results: [{"id": 2}]});
+
+                data.$scope.service_id = 1;
+
+                ctrl("service_edit.options", data);
+
+                httpBackend.flush();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/service_options/")
+                    .respond(400, {"error": "q"});
+                scope.new_option_id = "2";
+                scope.addOption();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(scope.service_options).toEqual([{"id": 2}]);
+            });
+
+            it("should remove an option from a service", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/options/?page_size=1000")
+                    .respond(200, {results: [{"id": 2}, {"id": 1}]});
+
+                httpBackend
+                    .expectGET(
+                        server_url + "api/facilities/service_options/?page_size=1000&service=1")
+                    .respond(200, {results: [{"id": 2}]});
+
+                data.$scope.service_id = 1;
+
+                ctrl("service_edit.options", data);
+
+                httpBackend.flush();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/service_options/2/")
+                    .respond(204);
+
+                scope.removeOption(2);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(scope.service_options).toEqual([]);
+            });
+
+            it("should show errors on fail to remove an option from a service", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope
+                };
+                httpBackend
+                    .expectGET(server_url + "api/facilities/options/?page_size=1000")
+                    .respond(200, {results: [{"id": 2}, {"id": 1}]});
+
+                httpBackend
+                    .expectGET(
+                        server_url + "api/facilities/service_options/?page_size=1000&service=1")
+                    .respond(200, {results: [{"id": 2}]});
+
+                data.$scope.service_id = 1;
+
+                ctrl("service_edit.options", data);
+
+                httpBackend.flush();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/service_options/2/")
+                    .respond(500);
+
+                scope.removeOption(2);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(scope.service_options).toEqual([{"id": 2}]);
             });
         });
 
@@ -237,15 +423,13 @@
                         service_id: 1
                     },
                     "$state": state,
-                    "$scope": scope,
-                    "$log": log
+                    "$scope": scope
                 };
                 httpBackend
                     .expectGET(server_url + "api/facilities/services/1/")
                     .respond(200, {});
 
                 spyOn(state, "go");
-                spyOn(log, "warn");
                 ctrl("service_edit", data);
 
                 httpBackend.flush();
@@ -266,9 +450,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(state.go).toHaveBeenCalled();
-                expect(log.warn).toHaveBeenCalled();
             });
-
         });
 
         describe("Test service create controller", function () {

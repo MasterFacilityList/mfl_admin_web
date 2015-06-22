@@ -14,16 +14,10 @@
                     "header@setup": {
                         controller: "mfl.common.controllers.header",
                         templateUrl: "common/tpls/header.tpl.html"
-                    },
-                    "body@setup": {
-                        controller: "mfl.common.controllers.stateSetup"
-                    },
-                    "main-content@setup": {
-                        controller: "mfl.setup.controller.dashboard",
-                        templateUrl: "setup/tpls/dashboard/index.tpl.html"
                     }
                 },
-                data : { pageTitle: "System Setup"}
+                data : { pageTitle: "System Setup"},
+                redirectTo: "setup.towns"
             });
     }]);
 })(angular);

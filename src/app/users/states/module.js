@@ -23,7 +23,8 @@
                             templateUrl : "users/tpls/body.tpl.html"
                         }
                     },
-                    data : { pageTitle: "User Management" }
+                    data : { pageTitle: "User Management" },
+                    redirectTo: "users"
                 });
         }
     ]);

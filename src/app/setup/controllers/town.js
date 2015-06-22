@@ -5,18 +5,16 @@
     ])
     .controller("mfl.setup.controller.town.list", ["$scope",
         function ($scope) {
-            $scope.title = [
-                {
-                    icon: "fa-map-marker",
-                    name: "Towns"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-map-marker",
+                name: "Towns"
+            };
 
             $scope.action = [
                 {
                     func : "ui-sref='setup.towns.town_create' ",
                     class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
+
                     tipmsg: "New Town",
                     icon: "fa-plus"
                 }
@@ -25,21 +23,10 @@
     )
     .controller("mfl.setup.controller.town.create",
         ["$scope", "$state", "$log", "adminApi", function ($scope, $state, $log, adminApi) {
-            $scope.title = [
-                {
-                    icon: "fa-plus-circle",
-                    name: "New Town"
-                }
-            ];
-            $scope.action = [
-                {
-                    func : "onclick='window.history.back()'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-plus-circle",
+                name: "New Town"
+            };
             $scope.town = {
                 name: ""
             };
@@ -59,26 +46,17 @@
     .controller("mfl.setup.controller.town.edit",
         ["$scope", "$stateParams", "$state", "$log", "adminApi",
         function ($scope, $stateParams, $state, $log, adminApi) {
-            $scope.title = [
-                {
-                    icon: "fa-edit",
-                    name: "Edit Town"
-                }
-            ];
+            $scope.title = {
+                icon: "fa-edit",
+                name: "Edit Town"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='setup.towns.town_edit.delete'",
                     class: "action-btn action-btn-danger action-btn-md",
-                    color: "blue",
+
                     tipmsg: "Delete Town",
                     icon: "fa-trash"
-                },
-                {
-                    func : "ui-sref='setup.towns'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go Back",
-                    icon: "fa-arrow-left"
                 }
             ];
             $scope.town_id = $stateParams.town_id;
@@ -118,12 +96,10 @@
         ["$scope", "$stateParams", "$state", "$log", "adminApi",
         function ($scope, $stateParams, $state, $log, adminApi) {
             $scope.town_id = $stateParams.town_id;
-            $scope.title = [
-                {
-                    icon : "fa-trash",
-                    name : "Delete Town"
-                }
-            ];
+            $scope.title = {
+                icon : "fa-trash",
+                name : "Delete Town"
+            };
 
             adminApi.towns.get($scope.town_id)
             .success(function (data) {
