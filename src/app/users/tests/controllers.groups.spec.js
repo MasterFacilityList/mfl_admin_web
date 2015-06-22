@@ -23,51 +23,7 @@
             ]);
         });
 
-        describe("Test group delete controller", function () {
-
-            it("should fetch group data", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        group_id: 1
-                    },
-                    "$scope": scope
-                };
-                httpBackend
-                    .expectGET(server_url + "api/users/groups/1/")
-                    .respond(200, {});
-
-                ctrl("group_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.group).toEqual({});
-            });
-
-            it("should show error on fetch failure", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        group_id: 1
-                    },
-                    "$scope": scope,
-                    "$log": log
-                };
-                httpBackend
-                    .expectGET(server_url + "api/users/groups/1/")
-                    .respond(500, {"error": "a"});
-
-                spyOn(log, "error");
-                ctrl("group_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.group).toBe(undefined);
-            });
+        describe("Test group edit controller while deleting", function () {
 
             it("should delete a group", function () {
                 var scope = rootScope.$new();
@@ -83,7 +39,7 @@
                     .respond(200, {});
 
                 spyOn(state, "go");
-                ctrl("group_delete", data);
+                ctrl("group_edit", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -119,7 +75,7 @@
 
                 spyOn(state, "go");
                 spyOn(log, "error");
-                ctrl("group_delete", data);
+                ctrl("group_edit", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -145,6 +101,7 @@
         describe("Test group edit controller", function () {
 
             it("should fetch all permissions and the group to view", function () {
+                var scope = rootScope.$new();
                 httpBackend
                     .expectGET(server_url+"api/users/groups/3/")
                     .respond(200, {});
@@ -153,18 +110,23 @@
                     .expectGET(server_url+"api/users/permissions/?page_size=500&ordering=name")
                     .respond(200, {"results": []});
 
+
                 var data = {
-                    "$scope": rootScope.$new(),
-                    "$stateParams": {group_id: 3}
+                    "$scope": scope,
+                    "$stateParams": {group_id: 3},
+                    "$state": state
                 };
+                
+                spyOn(state,"go");
 
                 ctrl("group_edit", data);
-
+                scope.cancel();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
 
                 expect(data.$scope.permissions).toEqual([]);
+                expect(state.go).toHaveBeenCalled();
                 expect(data.$scope.group).toEqual({});
             });
 
