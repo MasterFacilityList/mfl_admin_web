@@ -297,7 +297,7 @@
                     $scope.spinner = false;
                 });
             };
-            $scope.remove = function (user_county) {
+            $scope.removeChild = function (user_county) {
                 user_county.delete_spinner = true;
                 wrappers.user_counties.remove(user_county.id)
                 .success(function () {
@@ -345,7 +345,7 @@
                     $log.error(data);
                 });
             };
-            $scope.removeBody = function (reg) {
+            $scope.removeChild = function (reg) {
                 wrappers.regulatory_body_users.remove(reg.id)
                 .success(function () {
                     $scope.user_bodies = _.without($scope.user_bodies, reg);
@@ -394,7 +394,7 @@
                     $scope.spinner = false;
                 });
             };
-            $scope.remove = function (user_const) {
+            $scope.removeChild = function (user_const) {
                 user_const.delete_spinner = true;
                 wrappers.user_constituencies.remove(user_const.id)
                 .success(function () {

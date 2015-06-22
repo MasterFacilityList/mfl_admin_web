@@ -1098,7 +1098,7 @@
                     .expectDELETE(server_url+"api/common/user_counties/4/")
                     .respond(204);
 
-                data.$scope.remove(user_counties.results[0]);
+                data.$scope.removeChild(user_counties.results[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -1140,7 +1140,7 @@
                     .expectDELETE(server_url+"api/common/user_counties/4/")
                     .respond(404);
 
-                data.$scope.remove(user_counties.results[0]);
+                data.$scope.removeChild(user_counties.results[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -1304,7 +1304,7 @@
                     .expectDELETE(server_url+"api/facilities/regulatory_body_users/4/")
                     .respond(204);
 
-                data.$scope.removeBody(user_bodies.results[0]);
+                data.$scope.removeChild(user_bodies.results[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -1340,7 +1340,7 @@
                     .expectDELETE(server_url+"api/facilities/regulatory_body_users/4/")
                     .respond(500);
 
-                data.$scope.removeBody(user_bodies.results[0]);
+                data.$scope.removeChild(user_bodies.results[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -1508,7 +1508,7 @@
                     .expectDELETE(server_url+"api/common/user_constituencies/4/")
                     .respond(204);
 
-                data.$scope.remove(user_constituencies.results[0]);
+                data.$scope.removeChild(user_constituencies.results[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -1552,7 +1552,7 @@
                     .expectDELETE(server_url+"api/common/user_constituencies/4/")
                     .respond(404);
 
-                data.$scope.remove(user_constituencies.results[0]);
+                data.$scope.removeChild(user_constituencies.results[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
