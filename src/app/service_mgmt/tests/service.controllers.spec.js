@@ -200,8 +200,10 @@
             it("should load all options and service options", function () {
                 var scope = rootScope.$new();
                 var data = {
-                    "$scope": scope
+                    "$scope": scope,
+                    "$state": state
                 };
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/?page_size=1000")
                     .respond(200, {results: [{"id": 2}, {"id": 1}]});
@@ -214,11 +216,12 @@
                 data.$scope.service_id = 1;
 
                 ctrl("service_edit.options", data);
-
+                scope.cancel();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
+                expect(state.go).toHaveBeenCalled();
                 expect(scope.options).toEqual([{"id": 2}, {"id": 1}]);
                 expect(scope.service_options).toEqual([{"id": 2}]);
             });
@@ -340,7 +343,7 @@
                     .expectDELETE(server_url+"api/facilities/service_options/2/")
                     .respond(204);
 
-                scope.removeOption(2);
+                scope.removeChild(2);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
@@ -372,7 +375,7 @@
                     .expectDELETE(server_url+"api/facilities/service_options/2/")
                     .respond(500);
 
-                scope.removeOption(2);
+                scope.removeChild(2);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
