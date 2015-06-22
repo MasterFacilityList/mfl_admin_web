@@ -8,35 +8,6 @@
         "mfl.common.forms"
     ])
 
-    .controller("mfl.users.controllers.user_delete",
-        ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
-        function ($scope, $log, $state, $stateParams, wrappers) {
-            $scope.title = {
-                icon : "fa fa-trash",
-                name : "Delete User"
-            };
-            $scope.user_id = $stateParams.user_id;
-
-            wrappers.users.get($scope.user_id)
-                .success(function (data) {
-                    $scope.user = data;
-                })
-                .error(function (data) {
-                    $log.error(data);
-                });
-
-            $scope.remove = function () {
-                wrappers.users.remove($scope.user_id)
-                    .success(function () {
-                        $state.go("users");
-                    })
-                    .error(function (data) {
-                        $log.error(data);
-                    });
-            };
-        }]
-    )
-
     .controller("mfl.users.controllers.user_create", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -104,10 +75,9 @@
             ];
             $scope.user_id = $stateParams.user_id;
             $scope.create = false;
-            $scope.remove = function(){
+            $scope.remove = function () {
                 wrappers.users.remove($scope.user_id)
-                    .success(function (data) {
-                        $log.success(data);
+                    .success(function () {
                         $state.go("users");
                     })
                     .error(function (data) {

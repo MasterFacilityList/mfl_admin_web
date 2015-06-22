@@ -97,7 +97,7 @@
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
                 },
-                permission: "users.view_mfluser"
+                permission: "users.delete_mfluser"
             })
 
             .state("users.user_edit.basic", {

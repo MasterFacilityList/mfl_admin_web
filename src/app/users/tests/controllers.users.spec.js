@@ -159,52 +159,7 @@
             });
         });
 
-        describe("Test user delete controller", function () {
-
-            it("should fetch user data", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        user_id: 1
-                    },
-                    "$scope": scope
-                };
-                httpBackend
-                    .expectGET(server_url + "api/users/1/")
-                    .respond(200, {});
-
-                ctrl("user_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.user).toEqual({});
-            });
-
-            it("should show error on fetch failure", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$stateParams": {
-                        user_id: 1
-                    },
-                    "$scope": scope,
-                    "$log": log
-                };
-                httpBackend
-                    .expectGET(server_url + "api/users/1/")
-                    .respond(500, {"error": "a"});
-
-                spyOn(log, "error");
-                ctrl("user_delete", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.users).toBe(undefined);
-                // toHaveBeenCalled();
-            });
+        describe("Test user edit controller while deleting", function () {
 
             it("should delete user", function () {
                 var scope = rootScope.$new();
@@ -220,8 +175,8 @@
                     .respond(200, {});
 
                 spyOn(state, "go");
-                ctrl("user_delete", data);
-
+                ctrl("user_edit", data);
+                scope.cancel();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -256,7 +211,7 @@
 
                 spyOn(state, "go");
                 spyOn(log, "error");
-                ctrl("user_delete", data);
+                ctrl("user_edit", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();

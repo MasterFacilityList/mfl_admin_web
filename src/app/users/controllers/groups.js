@@ -80,7 +80,7 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='groups.group_delete({group_id: group.id})' " +
+                    func : "ui-sref='groups.group_edit.delete' " +
                            "requires-permission='auth.delete_group'" ,
                     class: "action-btn action-btn-danger action-btn-md",
 
@@ -91,11 +91,24 @@
             wrappers.groups.get($scope.group_id)
                 .success(function (data) {
                     $scope.group = data;
+                    $scope.deleteText = $scope.group.name;
                 })
                 .error(function (data) {
                     $log.error(data);
                 });
 
+            $scope.remove = function () {
+                wrappers.groups.remove($scope.group_id)
+                    .success(function () {
+                        $state.go("groups");
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+            };
+            $scope.cancel = function () {
+                $state.go("groups");
+            };
             wrappers.permissions.filter({page_size: 500, ordering: "name"})
                 .success(function (data) {
                     $scope.permissions = data.results;
@@ -127,35 +140,6 @@
                     $log.error(data);
                     $scope.spinner = false;
                 });
-            };
-        }]
-    )
-
-    .controller("mfl.users.controllers.group_delete",
-        ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
-        function ($scope, $log, $state, $stateParams, wrappers) {
-            $scope.group_id = $stateParams.group_id;
-            $scope.title = {
-                icon : "fa-trash",
-                name : "Delete Group"
-            };
-
-            wrappers.groups.get($scope.group_id)
-                .success(function (data) {
-                    $scope.group = data;
-                })
-                .error(function (data) {
-                    $log.error(data);
-                });
-
-            $scope.remove = function () {
-                wrappers.groups.remove($scope.group_id)
-                    .success(function () {
-                        $state.go("groups");
-                    })
-                    .error(function (data) {
-                        $log.error(data);
-                    });
             };
         }]
     );
