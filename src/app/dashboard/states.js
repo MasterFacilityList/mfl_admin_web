@@ -11,13 +11,13 @@
                 views: {
                     "main": {
                         controller: "mfl.dashboard.home",
-                        templateUrl: "dashboard/tpls/main.tpl.html"
+                        templateUrl: "common/tpls/main-no-sidenav.tpl.html"
                     },
                     "header@dashboard": {
                         controller: "mfl.common.controllers.header",
                         templateUrl: "common/tpls/header.tpl.html"
                     },
-                    "main-content@dashboard": {
+                    "body@dashboard": {
                         controller: "mfl.dashboard.content",
                         templateUrl: "dashboard/tpls/content.tpl.html"
                     }

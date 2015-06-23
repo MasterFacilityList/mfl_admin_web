@@ -41,7 +41,7 @@
                 "<actionbar action='action'></actionbar>" +
                 "<h2 class='content-title'>"+
                 "<span class='main-title'>"+
-                "<i class='sidebar-icon fa {{title.icon}}'>{{title.name}}</i>"+
+                "<i class='sidebar-icon fa {{title.icon}}'> {{title.name}}</i>"+
                 "</span></contenttitle></h2>" +
                 "</div>",
             compile: function (elem, attrs) {

@@ -1,0 +1,33 @@
+<div class="pull-left col-sm-4 col-xs-6 margin-t-20">
+    <sil-grid-search> </sil-grid-search>
+</div>
+<div class="pull-right col-xs-2 margin-t-20">
+    <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
+</div>
+<table class="table table-hover fs-14">
+    <thead>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Ward</th>
+        <th>Constituency</th>
+        <th>County</th>
+        <th>Owner</th>
+        <th>Facility Type</th>
+        <th>Published</th>
+        <th>Regulatory Status</th>
+        <th>Actions</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="fac in facilities">
+            <td>{{fac.code}}</td>
+            <td>{{fac.name}}</td>
+            <td>{{fac.ward_name}}</td>
+            <td>{{fac.constituency}}</td>
+            <td>{{fac.county}}</td>
+            <td>{{fac.facility_type_name}}</td>
+            <td>{{fac.published | boolFilter}}</td>
+            <td>{{fac.regulatory_status_name}}</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

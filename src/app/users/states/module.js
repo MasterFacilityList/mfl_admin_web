@@ -1,5 +1,7 @@
 (function (angular) {
 
+    "use strict";
+
     angular.module("mfl.users.states", [
         "mfl.users.states.users",
         "mfl.users.states.profile",
@@ -13,7 +15,7 @@
                     url: "/usermgmt",
                     views: {
                         "main": {
-                            templateUrl: "users/tpls/main.tpl.html"
+                            templateUrl: "common/tpls/main.tpl.html"
                         },
                         "header@usermgmt": {
                             controller: "mfl.common.controllers.header",

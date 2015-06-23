@@ -9,7 +9,7 @@
             url: "/facilities",
             views: {
                 "main": {
-                    templateUrl: "facilities/tpls/common/main.tpl.html"
+                    templateUrl: "common/tpls/main.tpl.html"
                 },
                 "body@facilities": {
                     templateUrl: "facilities/tpls/common/sidenav.tpl.html"
