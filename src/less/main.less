@@ -11,11 +11,17 @@
  */
 /*Adds bootstrap less files*/
 @import '../../vendor/bootstrap/less/bootstrap.less';
+/*End of bootstrap less files*/
 
 /*Adds fontawesome less files*/
 @import '../../vendor/fontawesome/less/font-awesome.less';
+/*End of fontawesome less files*/
+
+/*Adds c3 css file*/
 @import (less) '../../vendor/c3/c3.min.css';
-/*Adds ng-table less files*/
+/*End of c3 css file*/
+
+
 /**
  * This is our main variables file. We must include it last so we can overwrite any variable
  * definitions in our imported stylesheets.
@@ -32,14 +38,14 @@
 
 
    /*contains the thematic css*/
+/*Start of style css*/
 @import  (less) '../assets/css/style.css';
+/*End of style css*/
+/*Start of main css*/
 @import  (less) '../assets/css/main.css';
+/*End of main css*/
 @import 'basic.less';   // contains basic css classes for minor adjustments
 @import 'theme.less';   //imports all the less files used for the theme
-
-/**
- * Typography
- */
 
 /**
  * Typography
@@ -59,7 +65,7 @@
 html, body{
   font-family: 'Lato', sans-serif;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.5px;
 }
  h1, h2, h3, h4, h5, h6{
