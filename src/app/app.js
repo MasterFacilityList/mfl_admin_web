@@ -14,6 +14,7 @@
         "mfl.service_mgmt",
         "mfl.setup",
         "mfl.dashboard",
+        "mfl.facility_mgmt",
         "mfl.facilities"
     ]);
 

@@ -27,7 +27,7 @@
             owners: ["mfl.facilities.wrapper", "ownersApi"],
             users : ["mfl.users.services", "mfl.users.services.wrappers"],
             admin: ["mfl.setup.api", "adminApi"],
-            facilities: ["mfl.facilities.services","mfl.facilities.wrappers"],
+            facilities: ["mfl.facility_mgmt.services","mfl.facility_mgmt.services.wrappers"],
             service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
         };
     }])

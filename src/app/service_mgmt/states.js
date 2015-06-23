@@ -14,7 +14,7 @@
             views: {
                 "main": {
                     controller: "mfl.service_mgmt.controllers.main",
-                    templateUrl: "service_mgmt/tpls/main.tpl.html"
+                    templateUrl: "common/tpls/main.tpl.html"
                 },
                 "header@service_mgmt": {
                     controller: "mfl.common.controllers.header",

@@ -9,7 +9,7 @@
                 views: {
                     "main": {
                         controller: "mfl.setup.controller.dashboard",
-                        templateUrl: "setup/tpls/dashboard/main.tpl.html"
+                        templateUrl: "common/tpls/main.tpl.html"
                     },
                     "header@setup": {
                         controller: "mfl.common.controllers.header",
