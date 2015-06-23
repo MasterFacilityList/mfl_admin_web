@@ -11,7 +11,7 @@
         <th>Ward</th>
         <th>Constituency</th>
         <th>County</th>
-        <th>Owner</th>
+        <th>Owner Type</th>
         <th>Facility Type</th>
         <th>Published</th>
         <th>Regulatory Status</th>
@@ -24,10 +24,11 @@
             <td>{{fac.ward_name}}</td>
             <td>{{fac.constituency}}</td>
             <td>{{fac.county}}</td>
+            <td>{{fac.owner_type_name}}</td>
             <td>{{fac.facility_type_name}}</td>
             <td>{{fac.published | boolFilter}}</td>
             <td>{{fac.regulatory_status_name}}</td>
-            <td></td>
+            <td><a ui-sref="facilities.facility_edit({facility_id: fac.id})" class="btn btn-info">View</a></td>
         </tr>
     </tbody>
 </table>

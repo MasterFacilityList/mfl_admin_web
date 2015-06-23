@@ -1,0 +1,64 @@
+<div>
+    <form name="frm_facility_basic" ng-submit="save()">
+        <div class="form-group">
+            <label for="name">Facility Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Facility name" ng-model="facility.name" required />
+        </div>
+        <div class="form-group">
+            <label for="abbreviation">Abbreviation</label>
+            <input type="text" class="form-control" name="abbreviation" placeholder="Abbreviation" ng-models="facility.abbreviation" required>
+        </div>
+        <div class="form-group" ng-if="facility.id">
+            <label for="facility_type">Facility Type</label>
+            <select ng-model="facility.facility_type" name="facility_type" class="form-control" required>
+                <option value=""></option>
+                <option ng-repeat="factype in facility_types" ng-value="factype.id">{{factype.name}}</option>
+            </select>
+            <p class="help-block">Not present on editing.</p>
+        </div>
+        <div class="form-group" ng-if="facility.id">
+            <label for="facility_type_name">Facility Type</label>
+            <input name="facility_type_name" class="form-control" type="text" ng-model="::facility.facility_type_name" readonly/>
+            <p class="help-block">Readonly on editing.</p>
+        </div>
+        <div class="form-group" ng-if="facility.id">
+            <label for="operation_status_name">Operation Type</label>
+            <input name="operation_status_name"  class="form-control" type="text" ng-model="::facility.operation_status_name" readonly required/>
+        </div>
+        <div class="form-group">
+            <label for="owner">Owner</label>
+            <select name="owner" class="form-control" ng-model="facility.owner" required>
+                <option>Select an Owner</option>
+                <option ng-repeat="facowner in facility_owners" ng-value="facowner.id">{{facowner.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="ward">Ward</label>
+            <select name="ward" ng-model="facility.ward" class="form-control">
+                <option>Select a ward</option>
+                <option ng-repeat="w in wards" ng-value="w.id">{{w.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="physical_address.town">Town</label>
+            <select name="ward" name="physical_address.town" ng-model="facility.physical_address.plot_number" class="form-control">
+                <option>Select a town</option>
+                <option ng-repeat="t in towns" ng-value="t.id">{{t.name}}</option>
+            </select>
+            <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
+        </div>
+        <div class="form-group">
+            <label for="physical_address.plot_number">Plot Number</label>
+            <input type="text" ng-model="facility.physical_address.plot_number" name="physical_address.plot_number" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="physical_address.nearest_landmark">Nearest Landmark</label>
+            <input type="text" ng-model="facility.physical_address.nearest_landmark" name="physical_address.nearest_landmark" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="location_description">Location Description</label>
+            <input type="text" ng-model="facility.location_description" name="location_description" class="form-control" />
+        </div>
+    </form>
+</div>
