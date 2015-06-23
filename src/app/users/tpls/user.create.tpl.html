@@ -3,36 +3,28 @@
     <div class="col-sm-11 col-sm-offset-1 margin-t-20 text-center">
         <div class="col-sm-3">
             <div class="col-lg-3 col-md-4 col-sm-6">
-                <a ui-sref="users.user_create.basic ({user_id : new_user})">
-                    <div class="progress-badge" ng-class="{'progress-badge-active': tab === 1 || tab === 2 || tab === 3 || tab === 4}">
+                    <div ng-click="tabState(1)" class="progress-badge" ng-class="{'progress-badge-active': tab === 1 || tab === 2 || tab === 3 || tab === 4}">
                         1
                     </div>
-                </a>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-6">
-                <a ui-sref="users.user_create.basic ({user_id : user_id})">
-                    <span>Basic Details</span>
+                    <span ng-click="tabState(1)" class="text-primary">Basic Details</span>
                     <div class="lateral-divider hidden-sm" ng-class="{'lateral-divider-active' : tab === 1 || tab === 2 || tab === 3 || tab === 4}">
 
                     </div>
-                </a>
             </div>
         </div>
         <div class="col-sm-3 margin-l--60">
             <div class="col-lg-3 col-md-4 col-sm-6">
-                <a ui-sref="users.user_create.contacts ({user_id : new_user})">
-                <div class="progress-badge" ng-class="{'progress-badge-active': tab === 2 || tab === 3 || tab === 4}">
+                <div ng-click="tabState(2)" class="progress-badge" ng-class="{'progress-badge-active': tab === 2 || tab === 3 || tab === 4}">
                     2
                 </div>
-                </a>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-6">
-                <a ui-sref="users.user_create.contacts ({user_id : new_user})">
-                    <span>Contact Details</span>
+                    <span ng-click="tabState(2)" class="text-primary">Contact Details</span>
                     <div class="lateral-divider hidden-sm " ng-class="{'lateral-divider-active' : tab === 2 || tab === 3 || tab === 4}">
 
                     </div>
-                </a>
             </div>
         </div>
         <div class="col-sm-3 margin-l--60">

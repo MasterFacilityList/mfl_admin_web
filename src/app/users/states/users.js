@@ -29,7 +29,7 @@
             })
 
             .state("users.user_create.basic", {
-                url: "basic/",
+                url: "basic/:user_id",
                 views: {
                     "form-view@users.user_create": {
                         controller: "mfl.users.controllers.user_create.basic",
