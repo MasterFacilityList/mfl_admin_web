@@ -17,26 +17,69 @@
             $scope.tab = 0;
             $scope.create = true;
             $scope.new_user = $state.params.user_id;
+            $scope.tabState = function (val) {
+                if(!_.isUndefined($state.params.user_id) ||
+                    $scope.tab >= val && val === 2) {
+                    $scope.tab = val;
+                    $state.go("users.user_create.contacts",
+                        {user_id : $scope.new_user});
+                }
+                if($scope.tab <= val && val === 1) {
+                    $scope.tab = val;
+                    $state.go("users.user_create.basic",
+                        {user_id : $scope.new_user});
+                }
+            };
         }
     ])
 
     .controller("mfl.users.controllers.user_create.basic",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
-        function ($scope, $log, $state, wrappers) {
+        "mfl.common.forms.changes",
+        function ($scope, $log, $state, wrappers, formChanges) {
             $scope.create = true;
             $scope.$parent.tab = 1;
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
             };
-            $scope.save = function () {
-                wrappers.users.create($scope.user)
+            if(!_.isUndefined($state.params.user_id)) {
+                wrappers.users.get($state.params.user_id)
                 .success(function (data) {
-                    $state.go("users.user_create.contacts", {user_id: data.id});
+                    $scope.user = data;
                 })
                 .error(function (data) {
                     $log.error(data);
                 });
+            }
+            $scope.save = function (frm) {
+                if(!_.isUndefined($state.params.user_id)) {
+                    var changes = formChanges.whatChanged(frm);
+
+                    if (! _.isEmpty(changes)) {
+                        wrappers.users.update($state.params.user_id, changes)
+                        .success(function () {
+                            $state.go("users.user_create.contacts",
+                                {user_id : $state.params.user_id});
+                        })
+                        .error(function (data) {
+                            $log.error(data);
+                        });
+                    }
+                    else {
+                        $state.go("users.user_create.contacts",
+                                {user_id : $state.params.user_id});
+                    }
+                }
+                else {
+                    wrappers.users.create($scope.user)
+                    .success(function (data) {
+                        $state.go("users.user_create.contacts", {user_id: data.id});
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                }
             };
         }]
     )

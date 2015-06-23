@@ -13,13 +13,15 @@
 
             inject(["$rootScope", "$controller", "$httpBackend", "$state",
                 "SERVER_URL", "mfl.users.services.wrappers",
+                "mfl.common.forms.changes",
                 function ($rootScope, $controller, $httpBackend,
-                    $state, url, userApi) {
+                    $state, url, userApi, formChanges) {
                     root = $rootScope;
                     scope = root.$new();
                     state = $state;
                     httpBackend = $httpBackend;
                     userApi = userApi;
+                    formChanges = formChanges;
                     SERVER_URL = url;
                     scope.fakeStateParams = {
                         user_id : 6
@@ -29,6 +31,7 @@
                         $state : $state,
                         SERVER_URL : url,
                         userApi : userApi,
+                        formChanges : formChanges,
                         $stateParams : scope.fakeStateParams
                     };
                     controller = function (cntrl) {
@@ -37,6 +40,139 @@
                 }
             ]);
         });
+        it("should test parent user create controller: tab = 2",
+        inject(["$state", function ($state) {
+            spyOn($state, "go");
+            $state = {
+                params : {
+                    user_id : 18
+                }
+            };
+            controller("mfl.users.controllers.user_create");
+            var val = 2;
+            scope.tab = 2;
+            scope.tabState(val);
+            expect(scope.tab).toEqual(val);
+        }]));
+        it("should test parent user create controller : tab = 1",
+        inject(["$state", function ($state) {
+            spyOn($state, "go");
+            $state = {
+                params : {
+                    user_id : 18
+                }
+            };
+            controller("mfl.users.controllers.user_create");
+            var val = 1;
+            scope.tab = 1;
+            scope.tabState(val);
+            expect(scope.tab).toEqual(val);
+        }]));
+        it("should test create basic details user: success",
+        inject(["$httpBackend", "$state", "$controller",
+            function ($httpBackend, $state, $controller) {
+            spyOn($state, "go");
+            $state = {
+                params : {
+                    user_id : 18
+                }
+            };
+            $httpBackend.expectGET(SERVER_URL +
+                "api/users/18/").respond(200, {"name" : "Antony"});
+            $controller("mfl.users.controllers.user_create.basic",
+                {
+                    "$state": $state,
+                    "$scope": scope
+                }
+            );
+            $httpBackend.flush();
+        }]));
+        it("should test create basic details user: success",
+        inject(["$httpBackend", "$state", "$controller",
+            function ($httpBackend, $state, $controller) {
+            $state = {
+                params : {
+                    user_id : 18
+                }
+            };
+            $httpBackend.expectGET(SERVER_URL +
+                "api/users/18/").respond(500, {});
+            $controller("mfl.users.controllers.user_create.basic",
+                {
+                    "$state": $state,
+                    "$scope": scope
+                }
+            );
+            $httpBackend.flush();
+        }]));
+        it("should test saving basic user details : success",
+        inject(["$httpBackend", "$state", "$controller",
+            function ($httpBackend, $state, $controller) {
+            $state = {
+                params : {
+                    user_id : 18
+                }
+            };
+            var form = {
+                "$dirty": true,
+                "name": {
+                    "$modelValue": "ASD",
+                    "$dirty": true
+                }
+            };
+            $httpBackend.expectPATCH(SERVER_URL +
+                "api/users/18/").respond(200, {"name" : "Antony"});
+            $controller("mfl.users.controllers.user_create.basic",
+                {
+                    "$state": $state,
+                    "$scope": scope
+                }
+            );
+            scope.save(form);
+            $httpBackend.flush();
+        }]));
+        it("should test saving basic user details : fail",
+        inject(["$state", "$controller",
+            function ($state, $controller) {
+            spyOn(state, "go");
+            $state.params.user_id = 18;
+            var form = {};
+            $controller("mfl.users.controllers.user_create.basic",
+                {
+                    "$state": $state,
+                    "$scope": scope
+                }
+            );
+            scope.save(form);
+            expect(state.go).toHaveBeenCalledWith("users."+
+                    "user_create.contacts", {"user_id": 18});
+        }]));
+        it("should test saving basic user details : fail on valid form",
+        inject(["$httpBackend", "$state", "$controller",
+            function ($httpBackend, $state, $controller) {
+            $state = {
+                params : {
+                    user_id : 18
+                }
+            };
+            var form = {
+                "$dirty": true,
+                "name": {
+                    "$modelValue": "ASD",
+                    "$dirty": true
+                }
+            };
+            $httpBackend.expectPATCH(SERVER_URL +
+                "api/users/18/").respond(500, {});
+            $controller("mfl.users.controllers.user_create.basic",
+                {
+                    "$state": $state,
+                    "$scope": scope
+                }
+            );
+            scope.save(form);
+            $httpBackend.flush();
+        }]));
         it("should test $scope in create user controller take two",
         inject(["$httpBackend", "$state","$controller",
             function ($httpBackend, $state, $controller) {
