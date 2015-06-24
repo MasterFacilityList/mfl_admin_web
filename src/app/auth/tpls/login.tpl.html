@@ -37,6 +37,9 @@
                                 <a ui-sref="reset_pwd">Forgot password</a>
                             </span>
                             <span class="pull-right">
+                                <span ng-if="spinner" style="display: inline-block;" class="margin-r-10 margin-t-5">
+                                    <i class="fa fa-spin fa-circle-o-notch"></i>
+                                </span>
                                 <button type="submit" class="login-btn login-btn-primary pull-right">
                                     &nbsp; Login
                                 </button>

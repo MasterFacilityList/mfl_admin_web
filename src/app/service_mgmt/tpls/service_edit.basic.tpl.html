@@ -1,4 +1,9 @@
-<div class="content-card">
+<div class="">
+    <div class="col-sm-10 col-sm-offset-1 margin-t-20">
+        <h3 ng-if="create">
+            Step 1
+        </h3>
+    </div>
     <form name="service_frm">
         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
             <div class="group">
@@ -20,15 +25,19 @@
                 <label>Abbreviation</label>
             </div>
             <div class="group">
-                <select name="category" ng-model="service.category_name" required>
+                <select name="category" ng-model="service.category" required>
                     <option ng-repeat="cat in categories" ng-value="cat.id">{{cat.name}}</option>
                 </select>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>Category</label>
             </div>
-            <button class="login-btn login-btn-primary pull-left" ng-click="save(service_frm)"><i class="fa fa-save"></i> Save</button>
-            <a class="login-btn login-btn-default pull-left margin-l-10" ui-sref="service_mgmt.service_list">&nbsp;Cancel</a>
+            <button ng-if="!create" class="login-btn login-btn-primary pull-left" ng-click="save(service_frm)"><i class="fa fa-save"></i> Save</button>
+            <a ng-if="!create" class="login-btn login-btn-default pull-left margin-l-10" ui-sref="service_mgmt.service_list">&nbsp;Cancel</a>
+
+            <button ng-if="create" class="login-btn login-btn-primary" ng-click="save(service_frm)">
+                &nbsp;Service Options <i class="fa fa-angle-double-right"></i>
+            </button>
         </div>
     </form>
 </div>
