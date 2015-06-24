@@ -6,7 +6,6 @@
 
         beforeEach(function () {
             module("ui.router");
-            module("mflAdminApp");
             module("mflAdminAppConfig");
             module("mfl.common.forms");
             module("mfl.service_mgmt.services");
@@ -190,7 +189,6 @@
                         httpBackend.verifyNoOutstandingRequest();
                         httpBackend.verifyNoOutstandingExpectation();
                         expect(formChanges.whatChanged).toHaveBeenCalled();
-                        //expect(state.go).not.toHaveBeenCalled();
                     }
                 ]);
             });
