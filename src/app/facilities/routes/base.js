@@ -5,7 +5,7 @@
     ])
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
-        .state("facilities", {
+        .state("facilities_old", {
             url: "/facilities",
             views: {
                 "main": {

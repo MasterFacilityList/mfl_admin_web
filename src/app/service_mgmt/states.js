@@ -104,6 +104,28 @@
             permission: "facilities.add_service"
         })
 
+        //nested created state for service details
+        .state("service_mgmt.service_list.service_create.basic", {
+            url: "basic/:service_id",
+            views: {
+                "form-view@service_mgmt.service_list.service_create" : {
+                    controller: "mfl.service_mgmt.controllers.service_cre"+
+                                "ate.basic",
+                    templateUrl: "service_mgmt/tpls/service_edit.basic.tpl.html"
+                }
+            }
+        })
+        .state("service_mgmt.service_list.service_create.options", {
+            url: ":service_id/options/",
+            views: {
+                "form-view@service_mgmt.service_list.service_create" : {
+                    controller: "mfl.service_mgmt.controllers.service_edit"+
+                                ".options",
+                    templateUrl: "service_mgmt/tpls/service_edit.options.tpl.html"
+                }
+            }
+        })
+
         .state("service_mgmt.service_list.service_edit", {
             url: ":service_id/edit/",
             views: {
