@@ -1,14 +1,7 @@
 (function () {
     "use strict";
 
-    describe("Test facility_mgmt controller module", function () {
-
-        it("should load facility_mgmt controller successfully", function () {
-            expect(function () {module("mfl.facility_mgmt.controllers");}).not.toThrow();
-        });
-    });
-
-    describe("Test facility controllers", function () {
+    describe("Test facility edit controllers", function () {
         var rootScope, ctrl, httpBackend, server_url, loginService, log, yusa;
 
         beforeEach(function () {
@@ -20,7 +13,7 @@
                 "mfl.auth.services.login", "$log",
                 function (c, r, h, s, ls, lg) {
                     ctrl = function (name, data) {
-                        return c("mfl.facility_mgmt.controllers."+name, data);
+                        return c("mfl.facility_mgmt.controllers.facility_edit"+name, data);
                     };
                     rootScope = r;
                     httpBackend = h;
@@ -33,18 +26,6 @@
                     log = lg;
                 }
             ]);
-        });
-
-        describe("Test facility list controller", function () {
-
-            it("should load facility list controller", function () {
-                var data = {
-                    "$scope": rootScope.$new()
-                };
-
-                ctrl("facility_list", data);
-                expect(data.$scope.title.name).toEqual("Facility Management");
-            });
         });
 
         describe("Test facility edit controller", function () {
@@ -60,7 +41,7 @@
                     .expectGET(server_url+"api/facilities/facilities/3/")
                     .respond(200, {});
 
-                ctrl("facility_edit", data);
+                ctrl("", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -83,7 +64,7 @@
                     .respond(400, {});
 
                 spyOn(log, "error");
-                ctrl("facility_edit", data);
+                ctrl("", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -120,7 +101,7 @@
                     .expectGET(
                         server_url+"api/common/towns/?page_size=50000&ordering=name")
                     .respond(200, {results: []});
-                ctrl("facility_edit.basic", data);
+                ctrl(".basic", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -159,7 +140,7 @@
                         server_url+"api/common/towns/?page_size=50000&ordering=name")
                     .respond(500, {});
 
-                ctrl("facility_edit.basic", data);
+                ctrl(".basic", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -197,7 +178,7 @@
                         server_url+"api/common/towns/?page_size=50000&ordering=name")
                     .respond(200, {results: []});
 
-                ctrl("facility_edit.basic", data);
+                ctrl(".basic", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();

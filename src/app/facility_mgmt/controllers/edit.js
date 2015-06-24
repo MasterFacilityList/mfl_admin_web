@@ -34,7 +34,7 @@
                 {
                     func: "require-permission='facilities.change_facility' " +
                           "ng-if='login_user.is_national' " +
-                          "ui-sref='facilities.facility_edit({facility_id: facility.id})'",
+                          "ui-sref='.publish({facility_id: facility.id})'",
                     class: "action-btn action-btn-md action-btn-primary",
                     icon: "fa-upload",
                     tipmsg: "Publish"
