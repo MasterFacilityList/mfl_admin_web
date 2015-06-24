@@ -43,6 +43,7 @@
     "karma-threshold-reporter": "^0.1.12",
     "sinon": "~1.15.3",
     "karma-sinon": "~1.0.4",
-    "bardjs": "~0.1.4"
+    "bardjs": "~0.1.4",
+    "grunt-uncss": "~0.4.3"
   }
 }

@@ -3,9 +3,9 @@
 
     angular.module("mfl.common.directives.uipopoverclose", ["ui.bootstrap"])
 
-    .config(function($tooltipProvider) {
+    .config(["$tooltipProvider", function($tooltipProvider) {
         $tooltipProvider.setTriggers({"open": "close"});
-    })
+    }])
 
     .directive("popoverToggle",["$timeout",function($timeout) {
         return {
