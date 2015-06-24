@@ -15,6 +15,7 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks("grunt-coffeelint");
     grunt.loadNpmTasks("grunt-karma");
+    grunt.loadNpmTasks("grunt-purifycss");
     grunt.loadNpmTasks("grunt-html2js");
 
     grunt.loadNpmTasks("grunt-istanbul-coverage");
@@ -259,6 +260,23 @@ module.exports = function ( grunt ) {
                     cleancss: true,
                     compress: true
                 }
+            }
+        },
+
+        /**
+        * Meant to clean up css and produce what is being used
+        **/
+        
+        purifycss: {
+            options: {},
+            target: {
+                src: ["build/templates-app.js",
+                      "build/libs/sil_grid/sil_grid_tpls.js",
+                      "build/index.html",
+                      "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
+                      "build/templates-common.js"],
+                css: ["build/assets/mfl-admin-frontend-0.0.1a1.css"],
+                dest: "build/assets/purestyles.css"
             }
         },
 
@@ -563,7 +581,7 @@ module.exports = function ( grunt ) {
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask( "build", [
-        "clean", "html2js", "jshint", "coffeelint", "coffee", "less:build",
+        "clean", "html2js", "jshint", "coffeelint", "coffee", "less:build","purifycss",
         "concat:build_css", "copy:build_app_assets", "copy:build_vendor_assets",
         "copy:build_app_settings",
         "copy:build_appjs", "copy:build_vendorjs", "index:build", "karmaconfig"
