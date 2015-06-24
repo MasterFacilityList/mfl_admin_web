@@ -63,7 +63,7 @@
 
             wrappers.towns.filter({page_size: 50000, "ordering": "name"})
             .success(function (data) {
-                $scope.wards = data.results;
+                $scope.towns = data.results;
             })
             .error(function (data) {
                 $log.error(data);
