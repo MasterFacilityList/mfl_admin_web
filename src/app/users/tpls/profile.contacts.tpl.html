@@ -40,15 +40,15 @@
     <h4> Current Contacts</h4>
     <table class="table content-card margin-t-20 margin-b-10">
         <tbody>
-            <tr ng-repeat="contact in contacts">
-                <td class="pad-t-15 fs-16 fw-500">{{contact.contact_type_text}}</td>
-                <td class="pad-t-15 fs-16 fw-500">{{contact.contact_text}}</td>
+            <tr ng-repeat="child in contacts">
+                <td class="pad-t-15 fs-16 fw-500">{{child.contact_type_text}}</td>
+                <td class="pad-t-15 fs-16 fw-500">{{child.contact_text}}</td>
                 <td class="pad-t-10 text-right">
-                <span ng-if="contact.delete_spinner">
+                <span ng-if="child.delete_spinner">
                     <i class="fa fa-spin fa-circle-o-notch"></i>
                 </span>
-                    <a class="remove-icon text-danger" ng-click="remove(contact)" tooltip="Remove Contact">
-                        <i class="fa fa-trash fa-2x fw-500"></i>
+                    <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Remove Contact">
+                        <i class="fa fa-trash fw-500"></i>
                     </a>
                 </td>
             </tr>
