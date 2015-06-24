@@ -4,7 +4,7 @@
         <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.category_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
    </div>
    <h2 class="content-title">
-       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{edit_view ? 'Edit' : 'New'}} Service</span>
+       <span class="main-title"> <span ng-if="!create"><i class="fa fa-edit"></i> Edit</span><span ng-if="create"><i class="fa fa-plus-circle"></i> New</span> Service</span>
    </h2>
 </div>
 <div ui-view="delete"></div>

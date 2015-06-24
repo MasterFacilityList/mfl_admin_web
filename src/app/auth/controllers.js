@@ -46,11 +46,14 @@
             $scope.login_err_html = "";
 
             $scope.submitUser = function(obj) {
+                $scope.spinner = true;
                 var error_fxn = function (data) {
+                    $scope.spinner = false;
                     $scope.login_err = data.data.error_description || data.data.detail;
                     $scope.login_err_html =  $sce.trustAsHtml($scope.login_err);
                 };
                 var success_fxn = function () {
+                    $scope.spinner = false;
                     var next_state = $stateParams.next || HOME_PAGE_NAME;
                     $state.go(next_state);
                 };

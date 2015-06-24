@@ -1,37 +1,72 @@
-<div class="margin-t-50">
-    <div>
-        <h4>Available options</h4>
-        <div>
-            <form ng-submit="addOption()">
-                <select ng-model="new_option_id" required>
-                    <option ng-repeat="opt in options" ng-value="opt.id">{{opt.display_text}}</option>
-                </select>
-                <input type="submit" value="Add Option" class="login-btn login-btn-info margin-t-10" />
-            </form>
+<div class="col-sm-12 margin-t-20">
+    <div class="col-sm-12">
+        <div class="col-sm-12">
+            <h3 ng-if="create">
+                Step 2 of 2 Service Options
+            </h3>
         </div>
     </div>
+    <div class="col-sm-12 margin-t-30">
+        <div class="col-sm-12">
+            <h4>Available options</h4>
+                <form ng-submit="addOption()">
+                    <table class="table content-card margin-b-10">
+                        <tr>
+                        <td colspan="2">
+                            <div class="group">
+                                <select ng-model="new_option_id" required>
+                                    <option value="">Select Option</option>
+                                    <option ng-repeat="opt in options" ng-value="opt.id">{{opt.display_text}}</option>
+                                </select>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <button type="submit" class="login-btn login-btn-info margin-t-10" >
+                                <i class="fa fa-plus-circle"></i> Add Option
+                            </button>
+                        </td>
+                        </tr>
+                    </table>
+                </form>
+        </div>
 
-    <div class="margin-t-50">
-        <h4>Options tied to the service</h4>
-        <table class="table table-hover fs-14">
-            <thead>
-                <tr>
-                    <th >Display Text</th>
-                    <th >Value</th>
-                    <th >Option Type</th>
-                    <th >Is Exclusive Option</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="child in service_options">
-                    <td>{{child.display_text}}</td>
-                    <td>{{child.value}}</td>
-                    <td>{{child.option_type | titlecase}}</td>
-                    <td>{{child.is_exclusive_option | boolFilter}}</td>
-                    <td><a popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" class="action-btn action-btn-grid action-btn-danger"><i class="fa fa-trash"></i></a></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-sm-12 margin-t-30">
+            <h4>Options tied to the service</h4>
+            <table class="table table-hover fs-14">
+                <thead>
+                    <tr>
+                        <th >Display Text</th>
+                        <th >Value</th>
+                        <th >Option Type</th>
+                        <th >Is Exclusive Option</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="child in service_options">
+                        <td>{{child.display_text}}</td>
+                        <td>{{child.value}}</td>
+                        <td>{{child.option_type | titlecase}}</td>
+                        <td>{{child.is_exclusive_option | boolFilter}}</td>
+                        <td><a popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" class="remove-icon text-danger"><i class="fa fa-times-circle fa-2x fw-500"></i></a></td>
+                    </tr>
+                    <tr ng-if="spinner">
+                        <td class="text-center" colspan="5">
+                            <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-if="create" class="col-sm-12 margin-b-20 margin-t-20">
+            <button class="login-btn login-btn-primary" ui-sref="service_mgmt.service_list.service_create.basic ({service_id : service_id})">
+                &nbsp;<i class="fa fa-angle-double-left"></i> Service Details
+            </button>
+            <button class="login-btn login-btn-primary pull-right" ui-sref="service_mgmt.service_list">
+                &nbsp;Submit Details <i class="fa fa-angle-double-right"></i>
+            </button>
+        </div>
     </div>
 </div>
