@@ -21,6 +21,5 @@
             el.trigger("click");
             $timeout.flush();
         });
-        
     });
 })();
