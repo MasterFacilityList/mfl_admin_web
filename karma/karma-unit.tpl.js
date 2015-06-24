@@ -20,10 +20,12 @@ module.exports = function ( karma ) {
           "src/assets/**/*.js"
         ],
         frameworks: [
-            "jasmine"
+            "jasmine",
+            "sinon"
         ],
         plugins: [
             "karma-jasmine",
+            "karma-sinon",
             "karma-firefox-launcher",
             "karma-chrome-launcher",
             "karma-coverage",

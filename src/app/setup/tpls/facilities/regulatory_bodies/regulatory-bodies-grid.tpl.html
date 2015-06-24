@@ -18,7 +18,7 @@
                 <td data-title="Name" class="pad-t-15">{{body.name}}</td>
                 <td data-title="Status" class="pad-t-15">
                     <i ng-if="body.active" class="fa fa-check-circle-o fa-2x text-success" tooltip="Is Active"></i>
-                    <i ng-if="!body.active" class="fa fa-times-circle-o fa-2x text-danger" tooltip-placement="bottom" tooltip="Is Inactive"></i>
+                    <i ng-if="!body.active" class="fa fa-trash fa-2x text-danger" tooltip-placement="bottom" tooltip="Is Inactive"></i>
                 </td>
                 <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.facility_regulatory_bodies.edit.basic({id : body.id})" class="action-btn action-btn-grid action-btn-primary" tooltip-placement="bottom" tooltip="Edit Regulatory body">

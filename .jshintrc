@@ -29,6 +29,7 @@
         "browser": true,
         "module":true,
         "window": true,
-        "spyOn": true
+        "spyOn": true,
+        "bard": true
     }
 }
