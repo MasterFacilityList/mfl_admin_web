@@ -8,24 +8,24 @@
 </div>
 <div class="col-sm-11 margin-l-50 margin-t-20 content-card ">
     <div class="col-sm-11 col-sm-offset-1 margin-t-20 text-center">
-        <div class="col-sm-4">
-            <div class="col-lg-5 col-md-5 col-sm-5">
-                    <div ng-click="tabState(1)" class="progress-badge margin-l-25" ng-class="{'progress-badge-active': tab === 1 || tab === 2 }">
+        <div class="col-sm-7">
+            <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                    <div ng-click="tabState(1)" class="progress-badge" ng-class="{'progress-badge-active': tab === 1 || tab === 2 }">
                         1
                     </div>
+                    <br>
+                    <p class="text-center step-label" ng-class="{'step-label-active': tab === 1 || tab === 2 }">Service Details</p>
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-6 text-left margin-l--10">
-                    <span ng-click="tabState(1)" class="step-label" ng-class="{'step-label-active': tab === 1 || tab === 2 }">Service Details</span>
+            <div class="col-lg-6 col-md-6 col-sm-6 text-left margin-t-20" style="border: 2px solid #666666;">
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="col-lg-5 col-md-5 col-sm-5 margin-l--10">
+        <div class="col-sm-5">
+            <div class="col-lg-6 col-md-6 col-sm-6">
                 <div ng-click="tabState(2)" class="progress-badge margin-l-10" ng-class="{'progress-badge-active': tab === 2}">
                     2
                 </div>
-            </div>
-            <div class="col-lg-5 col-md-5 col-sm-6 text-left margin-l--10">
-                    <span ng-click="tabState(2)" class="step-label" ng-class="{'step-label-active': tab === 2 }">Service Options</span>
+                <br>
+                 <p class="text-center step-label" ng-class="{'step-label-active': tab === 2 }">Service Options</p>
             </div>
         </div>
     </div>
