@@ -14,16 +14,20 @@ module.exports = function ( karma ) {
         files: [
           <% scripts.forEach( function ( file ) { %>"<%= file %>",
           <% }); %>
-          "src/**/*.js"
+          "src/**/*.js",
+          "node_modules/bardjs/dist/bard.js",
+          "node_modules/sinon/lib/sinon.js"
         ],
         exclude: [
           "src/assets/**/*.js"
         ],
         frameworks: [
-            "jasmine"
+            "jasmine",
+            "sinon"
         ],
         plugins: [
             "karma-jasmine",
+            "karma-sinon",
             "karma-firefox-launcher",
             "karma-chrome-launcher",
             "karma-coverage",
