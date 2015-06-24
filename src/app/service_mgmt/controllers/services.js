@@ -175,7 +175,6 @@
                     }
                 }
                 else {
-                    console.log("param undefined");
                     wrappers.services.create($scope.service)
                     .success(function (data) {
                         $state.go(

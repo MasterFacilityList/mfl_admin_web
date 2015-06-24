@@ -6,6 +6,7 @@
 
         beforeEach(function () {
             module("ui.router");
+            module("mflAdminApp");
             module("mflAdminAppConfig");
             module("mfl.common.forms");
             module("mfl.service_mgmt.services");
@@ -189,7 +190,7 @@
                         httpBackend.verifyNoOutstandingRequest();
                         httpBackend.verifyNoOutstandingExpectation();
                         expect(formChanges.whatChanged).toHaveBeenCalled();
-                        expect(state.go).not.toHaveBeenCalled();
+                        //expect(state.go).not.toHaveBeenCalled();
                     }
                 ]);
             });
@@ -500,41 +501,216 @@
                 expect(scope.categories).toBe(undefined);
                 expect(log.warn).toHaveBeenCalled();
             });
+        });
 
-            it("should create the service", function () {
+        describe("Test service edit option controller", function () {
+            it("should set $state param", function () {
                 var scope = rootScope.$new();
                 var data = {
-                    "$state": state,
-                    "$scope": scope
+                    "$scope" : scope,
+                    "$state" : state
                 };
+                state.params.service_id = 1;
 
-                httpBackend
-                    .expectGET(server_url +
-                               "api/facilities/service_categories/?page_size=1000")
-                    .respond(200, {results: []});
+                ctrl("service_edit.options", data);
+            });
+        });
 
+        describe("Testing creation controller val = 1",function () {
+            it("Should call tabState method val = 2", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope" : scope,
+                    "$state" : state
+                };
+                spyOn(state, "go");
+                state.params.service_id = 1;
+                ctrl("service_create", data);
+                var val = 2;
+                scope.tab = 2;
+                scope.tabState(val);
+                expect(scope.tab).toEqual(val);
+            });
+            it("Should call tabState method", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope" : scope,
+                    "$state" : state
+                };
                 spyOn(state, "go");
                 ctrl("service_create", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                httpBackend.resetExpectations();
-                scope.service = {
-                    "name": "get"
-                };
-                httpBackend
-                    .expectPOST(server_url + "api/facilities/services/", {"name": "get"})
-                    .respond(200, {});
-                scope.save();
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(state.go).toHaveBeenCalled();
+                var val = 1;
+                scope.tabState(val);
+                expect(scope.tab).toEqual(val);
             });
+            it("Should call tabState method val = 0", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope" : scope,
+                    "$state" : state
+                };
+                spyOn(state, "go");
+                ctrl("service_create", data);
+                var val = 2;
+                scope.tabState(val);
+                var val_rstl = 0;
+                expect(scope.tab).toEqual(val_rstl);
+            });
+
+        });
+        describe("This tests create basic service controller", function () {
+            it("should test getting details of new service created",
+            inject(["mfl.common.forms.changes", "$controller", "$state",
+                function (formChanges, $controller, $state) {
+                    var scope = rootScope.$new();
+                    var data = {
+                        "$scope" : scope,
+                        "$state" : $state,
+                        "mfl.common.forms.changes": formChanges
+                    };
+
+                    $state.params.service_id = "1";
+                    httpBackend.expectGET(server_url +
+                        "api/facilities/services/1/").respond(
+                        200, {});
+                    $controller(
+                        "mfl.service_mgmt.controllers.service_create.basic",data);
+                    httpBackend.flush();
+                }
+            ]));
+            it("should test getting details of new service created: success",
+            inject(["mfl.common.forms.changes", "$controller", "$state",
+                function (formChanges, $controller, $state) {
+                    var scope = rootScope.$new();
+                    var data = {
+                        "$scope" : scope,
+                        "$state" : $state,
+                        "mfl.common.forms.changes": formChanges
+                    };
+                    $state.params.service_id = "";
+                    $controller(
+                        "mfl.service_mgmt.controllers.service_create.basic",data);
+                }
+            ]));
+            it("should test getting details of new service created: fail",
+            inject(["mfl.common.forms.changes", "$controller", "$state",
+                function (formChanges, $controller, $state) {
+                    var scope = rootScope.$new();
+                    var data = {
+                        "$scope" : scope,
+                        "$state" : $state,
+                        "mfl.common.forms.changes": formChanges
+                    };
+
+                    $state.params.service_id = "1";
+                    httpBackend.expectGET(server_url +
+                        "api/facilities/services/1/").respond(
+                        500, {});
+                    $controller(
+                        "mfl.service_mgmt.controllers.service_create.basic",data);
+                    httpBackend.flush();
+                }
+            ]));
+            //failing test should update
+            it("should test updating service in save method:pass",
+            inject(["mfl.common.forms.changes", "$state",
+                function (formChanges, $state) {
+                    var scope = rootScope.$new();
+                    var data = {
+                        "$scope" : scope,
+                        "mfl.common.forms.changes": formChanges,
+                        "$state" : $state
+                    };
+                    $state.params.service_id = "1";
+                    var form = {
+                        "$dirty": true,
+                        "name": {
+                            "$modelValue": "ASD",
+                            "$dirty": true
+                        }
+                    };
+                    httpBackend.expectPATCH(server_url +
+                        "api/facilities/services/1/").respond(
+                        200, {"name" : "ASD"});
+                    spyOn(state, "go");
+                    ctrl("service_create.basic", data);
+                    scope.save(form);
+                    httpBackend.flush();
+                }
+            ]));
+            it("should test updating service in save method:pass",
+            inject(["mfl.common.forms.changes", "$state",
+                function (formChanges, $state) {
+                    var scope = rootScope.$new();
+                    var data = {
+                        "$scope" : scope,
+                        "mfl.common.forms.changes": formChanges,
+                        "$state" : $state
+                    };
+                    $state.params.service_id = "1";
+                    var form = {
+                        "$dirty": true,
+                        "name": {
+                            "$modelValue": "ASD",
+                            "$dirty": true
+                        }
+                    };
+                    httpBackend.expectPATCH(server_url +
+                        "api/facilities/services/1/").respond(
+                        500, {"name" : "ASD"});
+                    spyOn(state, "go");
+                    ctrl("service_create.basic", data);
+                    scope.save(form);
+                    httpBackend.flush();
+                }
+            ]));
+            it("should test getting details of new service save: invalid form",
+            inject(["mfl.common.forms.changes", "$state",
+                function (formChanges, $state) {
+                    var scope = rootScope.$new();
+                    var data = {
+                        "$scope" : scope,
+                        "mfl.common.forms.changes": formChanges,
+                        "$state" : $state
+                    };
+                    $state.params.service_id = "1";
+                    var form = {};
+                    httpBackend.expectGET(server_url +
+                        "api/facilities/services/1/").respond(
+                        200, {});
+                    spyOn(state, "go");
+                    ctrl("service_create.basic", data);
+                    scope.save(form);
+                    httpBackend.flush();
+                }
+            ]));
+            //failing coverage
+            it("should test getting details of new service save method: fail",
+            inject(["mfl.common.forms.changes", "$state",
+                function (formChanges, $state) {
+                    var scope = rootScope.$new();
+                    var data = {
+                        "$scope" : scope,
+                        "mfl.common.forms.changes": formChanges,
+                        "$state" : $state
+                    };
+                    spyOn($state, "go");
+                    $state.params.service_id = "";
+                    var form = {
+                        "$dirty": true,
+                        "name": {
+                            "$modelValue": "ASD",
+                            "$dirty": true
+                        }
+                    };
+                    httpBackend.expectPOST(server_url +
+                        "api/facilities/services/").respond(
+                        201, {"name" : "ASD"});
+                    ctrl("service_create.basic", data);
+                    scope.save(form);
+                    httpBackend.flush();
+                }
+            ]));
         });
     });
 
