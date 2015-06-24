@@ -30,9 +30,6 @@
             <td>{{fac.regulatory_status_name}}</td>
             <td>
                 <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})" class="btn btn-info">View </a>
-                <a require-permission="facilities.add_facilityapproval" ng-if="!fac.is_approved || fac.has_edits" ui-sref="facilities.facility_edit({facility_id: fac.id})" class="btn btn-info">Approve</a>
-                <a require-permission="facilities.change_facility" ng-if="login_user" ui-sref="facilities.facility_edit({facility_id: fac.id})" class="btn btn-info">Publish</a>
-                <a require-permission="facilities.add_facilityregulationstatus" ng-if="login_user.regulator" ui-sref="facilities.facility_edit({facility_id: fac.id})" class="btn btn-info">Regulate</a>
             </td>
         </tr>
     </tbody>
