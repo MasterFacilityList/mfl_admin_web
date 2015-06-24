@@ -56,8 +56,8 @@
                             <span ng-if="child.delete_spinner">
                                 <i class="fa fa-spin fa-circle-o-notch"></i>
                             </span>
-                            <a class="remove-icon text-danger" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" tooltip="Remove contact" requires-permission="common.delete_usercontact" >
-                                <i class="fa fa-trash fa-2x fw-500"></i>
+                            <a class="action-btn action-btn-grid action-btn-danger" popover-toggle popover-trigger="open" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" tooltip="Remove contact" requires-permission="common.delete_usercontact" >
+                                <i class="fa fa-trash fw-500"></i>
                             </a>
                         </td>
                     </tr>
