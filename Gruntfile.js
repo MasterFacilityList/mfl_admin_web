@@ -16,7 +16,6 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-coffeelint");
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-purifycss");
-    grunt.loadNpmTasks("grunt-processhtml");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-html2js");
 
@@ -248,10 +247,9 @@ module.exports = function ( grunt ) {
             target: {
                 files: [{
                     expand: true,
-                    cwd: "bin/assets/",
+                    cwd: "<%= build_dir %>/assets/",
                     src: ["*.css", "!*.min.css"],
-                    dest: "bin/assets/",
-                    ext: ".css"
+                    dest: "<%= compile_dir %>/assets/"
                 }]
             }
         },
@@ -281,35 +279,18 @@ module.exports = function ( grunt ) {
         },
 
         /**
-        * Meant to clean up css and produce what is being used
+        * Meant to clean up css and produce what is being used from less file
         **/
 
         purifycss: {
             target: {
                 src: ["vendor/angular-bootstrap/ui-bootstrap-tpls.js",
-                      "build/libs/sil_grid/sil_grid_tpls.js",
-                      "build/index.html",
-                      "build/templates-common.js",
-                      "build/templates-app.js"],
-                css: ["build/assets/mfl-admin-frontend-0.0.1a1.css"],
-                dest: "build/assets/purestyles.css"
-            }
-        },
-
-        /**
-        * Meant to add cleaned up css into index.html and remove bulky css
-        **/
-
-        processhtml: {
-            build: {
-                files: {
-                    "build/index.html" : ["build/index.html"]
-                }
-            },
-            compile: {
-                files: {
-                    "bin/index.html" : ["bin/index.html"]
-                }
+                      "<%= build_dir %>/libs/sil_grid/sil_grid_tpls.js",
+                      "<%= build_dir %>/index.html",
+                      "<%= build_dir %>/templates-common.js",
+                      "<%= build_dir %>/templates-app.js"],
+                css: ["<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css"],
+                dest: "<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css"
             }
         },
 
@@ -618,7 +599,7 @@ module.exports = function ( grunt ) {
         "concat:build_css", "copy:build_app_assets", "copy:build_vendor_assets",
         "copy:build_app_settings",
         "copy:build_appjs", "copy:build_vendorjs", "index:build",
-        "purifycss", "processhtml","cssmin",
+        "purifycss",
         "karmaconfig"
     ]);
 
@@ -629,7 +610,7 @@ module.exports = function ( grunt ) {
     grunt.registerTask( "compile", [
         "less:compile", "copy:compile_assets", "concat:compile_js",
         "copy:compile_app_settings", "uglify", "index:compile",
-        "purifycss", "processhtml","cssmin"
+        "purifycss","cssmin"
     ]);
 
     grunt.registerTask("test", ["build", "karma:continuous"]);
