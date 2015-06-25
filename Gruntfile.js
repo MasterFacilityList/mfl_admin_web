@@ -17,6 +17,7 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-purifycss");
     grunt.loadNpmTasks("grunt-processhtml");
+    grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-html2js");
 
     grunt.loadNpmTasks("grunt-istanbul-coverage");
@@ -241,6 +242,21 @@ module.exports = function ( grunt ) {
         },
 
         /**
+         * Minify the css
+         */
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: "bin/assets/",
+                    src: ["*.css", "!*.min.css"],
+                    dest: "bin/assets/",
+                    ext: ".css"
+                }]
+            }
+        },
+
+        /**
          * `grunt-contrib-less` handles our LESS compilation and uglification automatically.
          * Only our `main.less` file is included in compilation; all other files
          * must be imported from this file.
@@ -269,7 +285,6 @@ module.exports = function ( grunt ) {
         **/
 
         purifycss: {
-            options: {},
             target: {
                 src: ["vendor/angular-bootstrap/ui-bootstrap-tpls.js",
                       "build/libs/sil_grid/sil_grid_tpls.js",
@@ -277,8 +292,30 @@ module.exports = function ( grunt ) {
                       "build/templates-common.js",
                       "build/templates-app.js"],
                 css: ["build/assets/mfl-admin-frontend-0.0.1a1.css"],
-                dest: "build/assets/purestyles.css"
+                dest: "bin/assets/purestyles.css"
             }
+//            build:{
+//                target: {
+//                    src: ["vendor/angular-bootstrap/ui-bootstrap-tpls.js",
+//                          "build/libs/sil_grid/sil_grid_tpls.js",
+//                          "build/index.html",
+//                          "build/templates-common.js",
+//                          "build/templates-app.js"],
+//                    css: ["build/assets/mfl-admin-frontend-0.0.1a1.css"],
+//                    dest: "build/assets/purestyles.css"
+//                }
+//            },
+//            compile:{
+//                target: {
+//                    src: ["vendor/angular-bootstrap/ui-bootstrap-tpls.js",
+//                          "build/libs/sil_grid/sil_grid_tpls.js",
+//                          "build/index.html",
+//                          "build/templates-common.js",
+//                          "build/templates-app.js"],
+//                    css: ["bin/assets/mfl-admin-frontend-0.0.1a1.css"],
+//                    dest: "bin/assets/purestyles.css"
+//                }
+//            }
         },
 
         /**
@@ -289,6 +326,11 @@ module.exports = function ( grunt ) {
             build: {
                 files: {
                     "build/index.html" : ["build/index.html"]
+                }
+            },
+            compile: {
+                files: {
+                    "bin/index.html" : ["bin/index.html"]
                 }
             }
         },
@@ -598,7 +640,7 @@ module.exports = function ( grunt ) {
         "concat:build_css", "copy:build_app_assets", "copy:build_vendor_assets",
         "copy:build_app_settings",
         "copy:build_appjs", "copy:build_vendorjs", "index:build",
-        "purifycss", "processhtml",
+        "purifycss", "processhtml","cssmin",
         "karmaconfig"
     ]);
 
@@ -608,7 +650,8 @@ module.exports = function ( grunt ) {
      */
     grunt.registerTask( "compile", [
         "less:compile", "copy:compile_assets", "concat:compile_js",
-        "copy:compile_app_settings", "uglify", "index:compile"
+        "copy:compile_app_settings", "uglify", "index:compile",
+        "purifycss", "processhtml","cssmin"
     ]);
 
     grunt.registerTask("test", ["build", "karma:continuous"]);
