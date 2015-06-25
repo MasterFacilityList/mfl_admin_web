@@ -1,62 +1,62 @@
 <div class="col-lg-12">
-    <div class="col-lg-12 margin-t-20">
-    <h4> Add Contact</h4>
-    <form ng-submit="add()">
-        <table class="table content-card  margin-b-10">
-            <tbody>
-                <tr class="">
-                    <td class="">
-                        <div class="group">
-                        <select name="contact_type" ng-model="contact.contact_type" class="pad-t-15" required>
-                            <option value="">Select Contact Type</option>
-                            <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
-                        </select>
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        </div>
-                    </td>
-                    <td class="">
-                        <div class="group">
-                            <input type="text" name="contact" ng-model="contact.contact"  required />
+    <div class="pad-t-20">
+        <h4> Add Contact</h4>
+        <form ng-submit="add()">
+            <table class="table content-card  margin-b-10">
+                <tbody>
+                    <tr class="">
+                        <td class="">
+                            <div class="group">
+                            <select name="contact_type" ng-model="contact.contact_type" class="pad-t-15" required>
+                                <option value="">Select Contact Type</option>
+                                <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
+                            </select>
                             <span class="highlight"></span>
                             <span class="bar"></span>
-                            <label>
-                                Contact Details
-                            </label>
-                        </div>
+                            </div>
+                        </td>
+                        <td class="">
+                            <div class="group">
+                                <input type="text" name="contact" ng-model="contact.contact"  required />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>
+                                    Contact Details
+                                </label>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add Contact">
+                                <i class="fa fa-plus-circle"></i> Add
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div  class="col-lg-12 margin-t-20">
+        <h4> Current Contacts</h4>
+        <table class="table content-card margin-t-20 margin-b-10">
+            <tbody>
+                <tr ng-repeat="child in fac_contacts">
+                    <td class="pad-t-15 fs-16 fw-500">{{child.contact_type}}</td>
+                    <td class="pad-t-15 fs-16 fw-500">{{child.actual_contact}}</td>
+                    <td class="pad-t-10 text-right">
+                    <span ng-if="child.delete_spinner">
+                        <i class="fa fa-spin fa-circle-o-notch"></i>
+                    </span>
+                        <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Remove Contact">
+                            <i class="fa fa-trash fw-500"></i>
+                        </a>
                     </td>
-                    <td class="text-right">
-                        <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add Contact">
-                            <i class="fa fa-plus-circle"></i> Add
-                        </button>
+                </tr>
+                <tr ng-if="spinner">
+                    <td colspan="3" class="text-center">
+                        <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
                     </td>
                 </tr>
             </tbody>
         </table>
-    </form>
-    </div>
-    <div  class="col-lg-12 margin-t-20">
-    <h4> Current Contacts</h4>
-    <table class="table content-card margin-t-20 margin-b-10">
-        <tbody>
-            <tr ng-repeat="child in contacts">
-                <td class="pad-t-15 fs-16 fw-500">{{child.contact_type_text}}</td>
-                <td class="pad-t-15 fs-16 fw-500">{{child.contact_text}}</td>
-                <td class="pad-t-10 text-right">
-                <span ng-if="child.delete_spinner">
-                    <i class="fa fa-spin fa-circle-o-notch"></i>
-                </span>
-                    <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Remove Contact">
-                        <i class="fa fa-trash fw-500"></i>
-                    </a>
-                </td>
-            </tr>
-            <tr ng-if="spinner">
-                <td colspan="3" class="text-center">
-                    <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     </div>
 </div>
