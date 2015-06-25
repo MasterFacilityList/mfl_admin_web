@@ -30,7 +30,8 @@
     user-select: none;
 }
 .progress-badge-active {
-    color: #FFF;
+    color: #FFF !important;
+    border: 2px solid darken(#2196F3, 5%) !important;
     background-color: #2196F3 !important;
     -webkit-transition: background-color 100ms ease-in 100ms;
     -moz-transition: background-color 100ms ease-in 100ms;
@@ -66,7 +67,16 @@
 }
 .step-label-active {
     font-family : 'Lato', sans-serif;
-    color: #2196F3;
+    color: #2196F3 !important;
+    font-weight: 900;
+    -webkit-transition: color 100ms ease-in 100ms;
+    -moz-transition: color 100ms ease-in 100ms;
+    -o-transition: color 100ms ease-in 100ms;
+    transition: color 100ms ease-in 100ms;
+}
+.step-label-done {
+    color: #009688;
+    font-family : 'Lato', sans-serif;
     font-weight: 900;
     -webkit-transition: color 100ms ease-in 100ms;
     -moz-transition: color 100ms ease-in 100ms;

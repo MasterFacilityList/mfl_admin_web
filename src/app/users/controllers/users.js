@@ -8,8 +8,8 @@
         "mfl.common.forms"
     ])
 
-    .controller("mfl.users.controllers.user_create", ["$scope", "$state",
-        function ($scope, $state) {
+    .controller("mfl.users.controllers.user_create", ["$scope", "$state", "$stateParams",
+        function ($scope, $state, $stateParams) {
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
@@ -17,19 +17,63 @@
             $scope.tab = 0;
             $scope.create = true;
             $scope.new_user = $state.params.user_id;
-            $scope.tabState = function (val) {
-                if(!_.isUndefined($state.params.user_id) ||
-                    $scope.tab >= val && val === 2) {
-                    $scope.tab = val;
-                    $state.go("users.user_create.contacts",
-                        {user_id : $scope.new_user});
+            $scope.furthest = $stateParams.furthest;
+            $scope.steps = [
+                {
+                    name : "basic",
+                    prev : [],
+                    count: "1"
+                },
+                {
+                    name : "contacts",
+                    prev : ["basic"],
+                    count: "2"
+                },
+                {
+                    name : "groups",
+                    prev : ["basic", "contacts"],
+                    count: "3"
+                },
+                {
+                    name : "counties",
+                    prev : ["basic", "contacts", "groups"],
+                    count: "4"
                 }
-                if($scope.tab <= val && val === 1) {
-                    $scope.tab = val;
-                    $state.go("users.user_create.basic",
-                        {user_id : $scope.new_user});
+            ];
+            $scope.isActive = function (curr) {
+                _.each($scope.steps, function (step) {
+                    step.active = (step.name === curr);
+                });
+            };
+
+            $scope.setFurthest = function () {
+                _.each($scope.steps, function (step) {
+                    if(step.count === $stateParams.furthest) {
+                        step.furthest = true;
+                        _.each(step.prev, function (prev_state) {
+                            _.each($scope.steps, function (a_step) {
+                                if(a_step.name === prev_state) {
+                                    a_step.done = true;
+                                }
+                            });
+                        });
+                    }
+                });
+            };
+            $scope.nextState = function () {
+                var curr = $state.current.name;
+                curr = curr.split(".", 3).pop();
+                $scope.isActive(curr);
+                $scope.setFurthest();
+            };
+            $scope.tabState = function (obj) {
+                if(obj.active || obj.done || obj.furthest) {
+                    $scope.nextState();
+                    $state.go("users.user_create."+ obj.name,
+                    {furthest: $scope.furthest, user_id : $scope.new_user});
                 }
             };
+
         }
     ])
 
@@ -43,7 +87,8 @@
                 icon : "fa-plus-circle",
                 name : "New User"
             };
-            if(!_.isUndefined($state.params.user_id)) {
+            $scope.nextState();
+            if(!_.isEmpty($state.params.user_id)) {
                 wrappers.users.get($state.params.user_id)
                 .success(function (data) {
                     $scope.user = data;
@@ -53,14 +98,14 @@
                 });
             }
             $scope.save = function (frm) {
-                if(!_.isUndefined($state.params.user_id)) {
+                if(!_.isEmpty($state.params.user_id)) {
                     var changes = formChanges.whatChanged(frm);
 
                     if (! _.isEmpty(changes)) {
                         wrappers.users.update($state.params.user_id, changes)
                         .success(function () {
                             $state.go("users.user_create.contacts",
-                                {user_id : $state.params.user_id});
+                                {user_id : $state.params.user_id, furthest : 2});
                         })
                         .error(function (data) {
                             $log.error(data);
@@ -74,7 +119,8 @@
                 else {
                     wrappers.users.create($scope.user)
                     .success(function (data) {
-                        $state.go("users.user_create.contacts", {user_id: data.id});
+                        $state.go("users.user_create.contacts",
+                            {user_id: data.id, furthest : 2});
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -179,6 +225,7 @@
                 contact_type: "",
                 contact: ""
             };
+            $scope.nextState();
             $scope.user_id = $scope.user_id || $state.params.user_id;
             wrappers.contact_types.list()
                 .success(function (data) {
@@ -252,6 +299,7 @@
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
             $scope.$parent.tab = 3;
+            $scope.nextState();
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.groups = data.results;
@@ -281,7 +329,7 @@
                     $scope.spinner = false;
                     if (! $scope.edit_groups) {
                         $state.go("users.user_create.counties",
-                            {"user_id": $scope.user_id});
+                            {"user_id": $scope.user_id, furthest : 4});
                     }
                 })
                 .error(function (data) {
@@ -311,6 +359,7 @@
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
             $scope.$parent.tab = 4;
+            $scope.nextState();
             $scope.edit_counties = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
@@ -471,7 +520,7 @@
         };
         $scope.action = [
             {
-                func: "ui-sref='users.user_create.basic' " +
+                func: "ui-sref='users.user_create.basic ({furthest : 1})'" +
                         "requires-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-primary action-btn-md",
 

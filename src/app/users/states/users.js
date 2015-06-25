@@ -18,7 +18,7 @@
             })
 
             .state("users.user_create", {
-                url: "create/",
+                url: "create/?furthest",
                 views: {
                     "main-content@usermgmt": {
                         controller: "mfl.users.controllers.user_create",
