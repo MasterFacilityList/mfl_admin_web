@@ -26,7 +26,7 @@
                 {
                     func: "require-permission='facilities.add_facilityapproval' " +
                           "ng-if='!facility.is_approved || facility.has_edits' " +
-                          "ui-sref='facilities.facility_edit({facility_id: facility.id})'",
+                          "ui-sref='facilities.facility_edit({facility_id: facility_id})'",
                     class: "action-btn action-btn-md action-btn-primary",
                     icon: "fa-check",
                     tipmsg: "Approve"
@@ -34,7 +34,7 @@
                 {
                     func: "require-permission='facilities.change_facility' " +
                           "ng-if='login_user.is_national' " +
-                          "ui-sref='.publish({facility_id: facility.id})'",
+                          "ui-sref='.publish({facility_id: facility_id})'",
                     class: "action-btn action-btn-md action-btn-primary",
                     icon: "fa-upload",
                     tipmsg: "Publish"
@@ -42,19 +42,19 @@
                 {
                     func: "require-permission='facilities.add_facilityregulationstatus' " +
                           "ng-if='login_user.regulator' " +
-                          "ui-sref='facilities.facility_edit({facility_id: facility.id})'",
+                          "ui-sref='facilities.facility_edit({facility_id: facility_id})'",
                     class: "action-btn action-btn-md action-btn-primary",
                     icon: "fa-legal",
                     tipmsg: "Regulate"
                 },
                 {
-                    func: "ui-sref='facilities.facility_edit({facility_id: facility.id})'",
+                    func: "ui-sref='facilities.facility_edit({facility_id: facility_id})'",
                     class: "action-btn action-btn-md action-btn-primary",
                     icon: "fa-level-up",
                     tipmsg: "Upgrade"
                 },
                 {
-                    func: "ui-sref='facilities.facility_edit({facility_id: facility.id})'",
+                    func: "ui-sref='facilities.facility_edit({facility_id: facility_id})'",
                     class: "action-btn action-btn-md action-btn-primary",
                     icon: "fa-level-down",
                     tipmsg: "Downgrade"

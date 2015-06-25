@@ -9,7 +9,7 @@
         $stateProvider.state("facilities.facility_edit.publish", {
             url: "publish/",
             views: {
-                "main-content@facility_mgmt": {
+                "publish@facilities.facility_edit": {
                     templateUrl: "facility_mgmt/tpls/facility_publish.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_publish"
                 }
