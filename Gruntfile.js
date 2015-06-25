@@ -15,6 +15,8 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks("grunt-coffeelint");
     grunt.loadNpmTasks("grunt-karma");
+    grunt.loadNpmTasks("grunt-purifycss");
+    grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-html2js");
 
     grunt.loadNpmTasks("grunt-istanbul-coverage");
@@ -239,6 +241,20 @@ module.exports = function ( grunt ) {
         },
 
         /**
+         * Minify the css
+         */
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: "<%= build_dir %>/assets/",
+                    src: ["*.css", "!*.min.css"],
+                    dest: "<%= compile_dir %>/assets/"
+                }]
+            }
+        },
+
+        /**
          * `grunt-contrib-less` handles our LESS compilation and uglification automatically.
          * Only our `main.less` file is included in compilation; all other files
          * must be imported from this file.
@@ -259,6 +275,22 @@ module.exports = function ( grunt ) {
                     cleancss: true,
                     compress: true
                 }
+            }
+        },
+
+        /**
+        * Meant to clean up css and produce what is being used from less file
+        **/
+
+        purifycss: {
+            target: {
+                src: ["vendor/angular-bootstrap/ui-bootstrap-tpls.js",
+                      "<%= build_dir %>/libs/sil_grid/sil_grid_tpls.js",
+                      "<%= build_dir %>/index.html",
+                      "<%= build_dir %>/templates-common.js",
+                      "<%= build_dir %>/templates-app.js"],
+                css: ["<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css"],
+                dest: "<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css"
             }
         },
 
@@ -566,7 +598,9 @@ module.exports = function ( grunt ) {
         "clean", "html2js", "jshint", "coffeelint", "coffee", "less:build",
         "concat:build_css", "copy:build_app_assets", "copy:build_vendor_assets",
         "copy:build_app_settings",
-        "copy:build_appjs", "copy:build_vendorjs", "index:build", "karmaconfig"
+        "copy:build_appjs", "copy:build_vendorjs", "index:build",
+        "purifycss",
+        "karmaconfig"
     ]);
 
     /**
@@ -575,7 +609,8 @@ module.exports = function ( grunt ) {
      */
     grunt.registerTask( "compile", [
         "less:compile", "copy:compile_assets", "concat:compile_js",
-        "copy:compile_app_settings", "uglify", "index:compile"
+        "copy:compile_app_settings", "uglify", "index:compile",
+        "purifycss","cssmin"
     ]);
 
     grunt.registerTask("test", ["build", "karma:continuous"]);

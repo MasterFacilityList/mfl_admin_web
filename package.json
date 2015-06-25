@@ -44,6 +44,10 @@
     "karma-sinon": "~1.0.4",
     "karma-spec-reporter": "0.0.13",
     "karma-threshold-reporter": "^0.1.12",
-    "sinon": "~1.15.3"
+    "sinon": "~1.15.3",
+    "karma-sinon": "~1.0.4",
+    "bardjs": "~0.1.4",
+    "grunt-purifycss": "~0.1.0",
+    "grunt-contrib-cssmin": "~0.12.3"
   }
 }

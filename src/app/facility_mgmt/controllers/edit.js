@@ -104,7 +104,87 @@
         }]
     )
 
-    .controller("mfl.facility_mgmt.controllers.facility_edit.contacts", [angular.noop])
+    .controller("mfl.facility_mgmt.controllers.facility_edit.contacts",
+        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
+        function($scope,$log,$stateParams,wrappers){
+
+            $scope.contacts = [];
+            $scope.contact = {
+                contact_type: "",
+                contact: ""
+            };
+
+            /*contact types*/
+            wrappers.contact_types.list()
+            .success(function(data){
+                $scope.contact_types = data.results;
+            })
+            .error(function(error){
+                $log.error(error);
+            });
+
+            /*facility contacts*/
+            wrappers.facility_contacts.filter({facility:$stateParams.facility_id})
+            .success(function(data){
+                $scope.fac_contacts = data.results;
+            })
+            .error(function(error){
+                $log.error(error);
+            });
+
+            /*remove contact*/
+            $scope.removeChild = function (obj) {
+                obj.delete_spinner = true;
+                wrappers.facility_contacts.remove(obj.id)
+                .success(function () {
+                    wrappers.contacts.remove(obj.contact)
+                    .success(function () {
+                        $scope.fac_contacts = _.without($scope.fac_contacts, obj);
+                        obj.delete_spinner = false;
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                        obj.delete_spinner = false;
+                    });
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    obj.delete_spinner = false;
+                });
+            };
+
+            /*add contact*/
+            $scope.add = function () {
+                $scope.spinner = true;
+                wrappers.contacts.create({
+                    "contact_type": $scope.contact.contact_type,
+                    "contact": $scope.contact.contact
+                })
+                .success(function (data) {
+                    wrappers.facility_contacts.create({
+                        "facility": $stateParams.facility_id,
+                        "contact": data.id
+                    })
+                    .success(function (data) {
+                        $scope.fac_contacts.push(data);
+                        $scope.contact = {
+                            contact_type: "",
+                            contact: ""
+                        };
+                        $scope.spinner = false;
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                        $scope.spinner = false;
+                    });
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    $scope.spinner = false;
+                });
+            };
+        }]
+    )
     .controller("mfl.facility_mgmt.controllers.facility_edit.services", [angular.noop])
     .controller("mfl.facility_mgmt.controllers.facility_edit.units", [angular.noop])
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers", [angular.noop])

@@ -1,11 +1,20 @@
 <contentheader></contentheader>
 <div ui-view="delete"></div>
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
-    <div class="col-lg-12 margin-t-20 ">
+<div class="col-sm-10 col-sm-offset-1 margin-t-20 content-card">
+    <h4>{{facility.name | uppercase}}</h4>
+   <div class="row">
+        <div class="col-sm-6"><span>Facility Code: <strong>{{facility.code}}</strong></span></div>
+        <div class="col-sm-6"><span class="pull-right">Regulation Status: <strong>{{facility.regulatory_status_name}}</strong></span></div>
+        <div class="col-sm-6"><span>Operation Status: <strong>{{facility.operation_status_name | titlecase}}</strong></span></div>
+        <div class="col-sm-6"><span class="pull-right">Facility Type: <strong>{{facility.facility_type_name}}</strong></span></div>
+   </div>
+</div>
+<div class="col-sm-10 col-sm-offset-1 margin-t-20 content-card">
+    <div class="margin-t-20 ">
         <div class="container-fluid">
             <ul class="form-tab margin-t--27">
                 <li ui-sref-active="active" class="col-xs-2">
-                    <a ui-sref=".basic"><span >Basic details</span></a>
+                    <a ui-sref=".basic"><span >Basic Details</span></a>
                 </li>
                 <li ui-sref-active="active" class="col-xs-2">
                     <a ui-sref=".contacts"><span >Contacts</span></a>
