@@ -1,27 +1,7 @@
-<div class="" style="z-index: 10;height:inherit;position:fixed;background-color:rgba(0, 0, 0, 0.4);display: block;
-   top:0;
-   bottom:0;
-   left:0;
-   right:0;
-   ">
-    <form name="category_frm">
-            <div class="col-md-12 margin-t-50">
-               <div class="margin-t-50 pad-form">
-                   <div class="col-md-12 text-center center-pad">
-                       <div class="margin-t-20p">
-                           <div class="content-card">
-                                <h4>Are you sure you want to delete <strong>{{deleteText}}</strong>?</h4>
-                                <div class="margin-t-20">
-                                        <button class="md-btn md-btn-danger" ng-click="remove()">Delete</button>
-                                        <a class="md-btn md-btn-clear" ng-click="cancel()">Cancel</a>
-                                </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-            </div>
-    </form>
-</div>
-
-
-
+<statemodal>
+  <h4>Are you sure you want to delete <strong>{{deleteText}}</strong>?</h4>
+  <div class="margin-t-20">
+    <button class="md-btn md-btn-danger" ng-click="remove()">Delete</button>
+    <a class="md-btn md-btn-clear" ng-click="cancel()">Cancel</a>
+  </div>
+</statemodal>
