@@ -87,7 +87,7 @@
                 icon : "fa-plus-circle",
                 name : "New User"
             };
-            $scope.nextState();
+
             if(!_.isEmpty($state.params.user_id)) {
                 wrappers.users.get($state.params.user_id)
                 .success(function (data) {
@@ -97,6 +97,7 @@
                     $log.error(data);
                 });
             }
+            $scope.nextState();
             $scope.save = function (frm) {
                 if(!_.isEmpty($state.params.user_id)) {
                     var changes = formChanges.whatChanged(frm);

@@ -24,7 +24,8 @@
                     formChanges = formChanges;
                     SERVER_URL = url;
                     scope.fakeStateParams = {
-                        user_id : 6
+                        user_id : 6,
+                        furthest : 1
                     };
                     data = {
                         $scope : scope,
@@ -40,6 +41,63 @@
                 }
             ]);
         });
+        //testing new implementation of new multistep implementation
+        it("should test create basic details user.id is empty: fail",
+        inject(["$httpBackend", "$state",
+            function ($httpBackend, $state) {
+            $state.params.user_id = "";
+            scope.nextState = angular.noop;
+            controller("mfl.users.controllers.user_create.basic");
+        }]));
+        it("should test create basic details user: success",
+        inject(["$httpBackend", "$state",
+            function ($httpBackend, $state) {
+            $state.params.user_id = "18";
+            scope.nextState = angular.noop;
+            controller("mfl.users.controllers.user_create.basic");
+            $httpBackend.expectGET(SERVER_URL +
+                "api/users/18/").respond(200, {"name" : "Antony"});
+            $httpBackend.flush();
+        }]));
+        it("should test isActive method", function () {
+            controller("mfl.users.controllers.user_create");
+            var curr = "basic";
+            scope.steps = [{name : "basic", prev : []}];
+            scope.isActive(curr);
+            expect(scope.steps[0].name).toEqual(curr);
+        });
+        it("should test setFurthest method", function () {
+            controller("mfl.users.controllers.user_create");
+            scope.steps = [
+                {
+                    name : "basic",
+                    furthest : false,
+                    prev : ["contacts"],
+                    count : 1
+                },
+                {
+                    name : "contacts",
+                    done : false
+                }
+            ];
+            scope.setFurthest();
+            expect(scope.steps[0].furthest).toBeTruthy();
+            expect(scope.steps[1].done).toBeTruthy();
+        });
+        it("should test nextState method",
+        inject(["$state", function ($state) {
+            $state.current.name = "users.user_create.basic";
+            controller("mfl.users.controllers.user_create");
+            scope.nextState();
+        }]));
+        it("should test nextState method",
+        inject(["$state", function ($state) {
+            spyOn($state, "go");
+            controller("mfl.users.controllers.user_create");
+            var obj = {"active" : true};
+            scope.tabState(obj);
+        }]));
+        //end of test implementation
         it("should test parent user create controller: tab = 2",
         inject(["$state", function ($state) {
             spyOn($state, "go");
@@ -68,51 +126,10 @@
             scope.tabState(val);
             expect(scope.tab).toEqual(val);
         }]));
-        it("should test create basic details user: success",
-        inject(["$httpBackend", "$state", "$controller",
-            function ($httpBackend, $state, $controller) {
-            spyOn($state, "go");
-            $state = {
-                params : {
-                    user_id : 18
-                }
-            };
-            $httpBackend.expectGET(SERVER_URL +
-                "api/users/18/").respond(200, {"name" : "Antony"});
-            $controller("mfl.users.controllers.user_create.basic",
-                {
-                    "$state": $state,
-                    "$scope": scope
-                }
-            );
-            $httpBackend.flush();
-        }]));
-        it("should test create basic details user: success",
-        inject(["$httpBackend", "$state", "$controller",
-            function ($httpBackend, $state, $controller) {
-            $state = {
-                params : {
-                    user_id : 18
-                }
-            };
-            $httpBackend.expectGET(SERVER_URL +
-                "api/users/18/").respond(500, {});
-            $controller("mfl.users.controllers.user_create.basic",
-                {
-                    "$state": $state,
-                    "$scope": scope
-                }
-            );
-            $httpBackend.flush();
-        }]));
         it("should test saving basic user details : success",
         inject(["$httpBackend", "$state", "$controller",
             function ($httpBackend, $state, $controller) {
-            $state = {
-                params : {
-                    user_id : 18
-                }
-            };
+            $state.params.user_id = "18";
             var form = {
                 "$dirty": true,
                 "name": {
@@ -122,6 +139,7 @@
             };
             $httpBackend.expectPATCH(SERVER_URL +
                 "api/users/18/").respond(200, {"name" : "Antony"});
+            scope.nextState = angular.noop;
             $controller("mfl.users.controllers.user_create.basic",
                 {
                     "$state": $state,
@@ -135,8 +153,9 @@
         inject(["$state", "$controller",
             function ($state, $controller) {
             spyOn(state, "go");
-            $state.params.user_id = 18;
+            $state.params.user_id = "18";
             var form = {};
+            scope.nextState = angular.noop;
             $controller("mfl.users.controllers.user_create.basic",
                 {
                     "$state": $state,
@@ -145,14 +164,14 @@
             );
             scope.save(form);
             expect(state.go).toHaveBeenCalledWith("users."+
-                    "user_create.contacts", {"user_id": 18});
+                    "user_create.contacts", {"user_id": "18"});
         }]));
         it("should test saving basic user details : fail on valid form",
         inject(["$httpBackend", "$state", "$controller",
             function ($httpBackend, $state, $controller) {
             $state = {
                 params : {
-                    user_id : 18
+                    user_id : "18"
                 }
             };
             var form = {
@@ -164,6 +183,7 @@
             };
             $httpBackend.expectPATCH(SERVER_URL +
                 "api/users/18/").respond(500, {});
+            scope.nextState = angular.noop;
             $controller("mfl.users.controllers.user_create.basic",
                 {
                     "$state": $state,
@@ -218,6 +238,7 @@
                     user_id : 3
                 }
             };
+            scope.nextState = angular.noop;
             controller("mfl.users.controllers.user_edit.contacts");
         }]));
         it("should test $state param user id in adding user counties",
@@ -227,6 +248,7 @@
                     user_id : 3
                 }
             };
+            scope.nextState = angular.noop;
             controller("mfl.users.controllers.user_edit.counties");
         }]));
         it("should update user groups",
@@ -237,6 +259,7 @@
                     user_id : 1
                 }
             };
+            scope.nextState = angular.noop;
             controller("mfl.users.controllers.user_edit.groups");
             scope.user_id = 1;
             scope.user = {
@@ -407,7 +430,7 @@
                 httpBackend
                     .expectPOST(server_url + "api/users/", data.$scope.user)
                     .respond(201, {"id": 3});
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_create.basic", data);
 
                 data.$scope.save();
@@ -416,7 +439,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 expect(state.go).toHaveBeenCalledWith("users."+
-                    "user_create.contacts", {"user_id": 3});
+                    "user_create.contacts", {"user_id": 3, "furthest" : 2});
             });
 
             it("should show an error on save a new user", function () {
@@ -441,7 +464,7 @@
                 httpBackend
                     .expectPOST(server_url + "api/users/", data.$scope.user)
                     .respond(500, {});
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_create.basic", data);
 
                 data.$scope.save();
@@ -468,7 +491,7 @@
                 httpBackend
                     .expectGET(server_url + "api/users/3/")
                     .respond(200, {});
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit", data);
 
                 httpBackend.flush();
@@ -493,7 +516,7 @@
                 httpBackend
                     .expectGET(server_url + "api/users/3/")
                     .respond(404, {});
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit", data);
 
                 httpBackend.flush();
@@ -521,7 +544,7 @@
                     "$log": log
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
                 httpBackend.flush();
@@ -547,7 +570,7 @@
                     "$log": log
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
                 httpBackend.flush();
@@ -571,6 +594,7 @@
                     "$scope": rootScope.$new()
                 };
                 data.$scope.user_id = 3;
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
                 httpBackend.flush();
@@ -593,7 +617,7 @@
                     "$scope": rootScope.$new()
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
                 httpBackend.flush();
@@ -635,7 +659,7 @@
                     "$log": log
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
                 httpBackend.flush();
@@ -674,7 +698,7 @@
                     "$log": log
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
                 httpBackend.flush();
@@ -713,7 +737,7 @@
                     "$scope": rootScope.$new()
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
                 httpBackend.flush();
@@ -757,7 +781,7 @@
                     "$log": log
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
                 httpBackend.flush();
@@ -799,7 +823,7 @@
                     "$log": log
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
                 httpBackend.flush();
@@ -853,7 +877,7 @@
                     "$scope": scope
                 };
                 data.$scope.user_id = 3;
-
+                scope.nextState = angular.noop;
                 controller("mfl.users.controllers.user_edit.basic", data);
 
                 httpBackend
@@ -880,7 +904,7 @@
                     "$scope": scope
                 };
                 data.$scope.user_id = 3;
-
+                scope.nextState = angular.noop;
                 controller("mfl.users.controllers.user_edit.basic", data);
 
                 data.$scope.save(frm);
@@ -904,7 +928,7 @@
                     "$log": log
                 };
                 data.$scope.user_id = 3;
-
+                scope.nextState = angular.noop;
                 controller("mfl.users.controllers.user_edit.basic", data);
 
                 httpBackend
@@ -930,6 +954,7 @@
                 var data = {
                     "$scope": rootScope.$new()
                 };
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.groups", data);
 
                 httpBackend.flush();
@@ -948,6 +973,7 @@
                     "$log": log
                 };
                 spyOn(log,"error");
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.groups", data);
 
                 httpBackend.flush();
@@ -969,6 +995,7 @@
                 data.$scope.user = {
                     "groups": []
                 };
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.groups", data);
 
                 httpBackend.flush();
@@ -1007,6 +1034,7 @@
                 data.$scope.user = {
                     "groups": []
                 };
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.groups", data);
 
                 httpBackend.flush();
@@ -1038,6 +1066,7 @@
                 var data = {
                     "$scope": rootScope.$new()
                 };
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.groups", data);
                 data.$scope.user_id = 3;
                 data.$scope.user = {
@@ -1078,7 +1107,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/user_counties/?user=3")
                     .respond(200, {"results": []});
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.counties", data);
 
                 httpBackend.flush();
@@ -1102,7 +1131,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/user_counties/?user=3")
                     .respond(200, {"results": []});
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.counties", data);
 
                 httpBackend.flush();
@@ -1128,7 +1157,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/user_counties/?user=3")
                     .respond(500, {"error": "e"});
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.counties", data);
 
                 httpBackend.flush();
@@ -1151,7 +1180,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/user_counties/?user=3")
                     .respond(200, {"results": []});
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.counties", data);
 
                 httpBackend.flush();
@@ -1186,7 +1215,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/user_counties/?user=3")
                     .respond(200, {"results": []});
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.counties", data);
 
                 httpBackend.flush();
@@ -1221,7 +1250,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/user_counties/?user=3")
                     .respond(200, user_counties);
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.counties", data);
 
                 httpBackend.flush();
@@ -1263,7 +1292,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/user_counties/?user=3")
                     .respond(200, user_counties);
-
+                data.$scope.nextState = angular.noop;
                 ctrl("user_edit.counties", data);
 
                 httpBackend.flush();
@@ -1592,7 +1621,6 @@
                 httpBackend
                     .expectGET(server_url+"api/common/user_constituencies/?user=3")
                     .respond(200, {"results": []});
-
                 ctrl("user_edit.constituency", data);
 
                 httpBackend.flush();
