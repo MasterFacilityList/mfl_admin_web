@@ -105,7 +105,6 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.contacts",
         ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-         "mfl.common.forms.changes",
         function($scope,$log,$stateParams,wrappers){
 
             $scope.contacts = [];
