@@ -2,7 +2,7 @@ module.exports = function ( karma ) {
 
     "use strict";
 
-    karma.set({
+    var karma_config = {
         /**
          * From where to look for files, starting with the location of this file.
          */
@@ -16,23 +16,30 @@ module.exports = function ( karma ) {
           <% }); %>
           "src/**/*.js"
         ],
+
         exclude: [
           "src/assets/**/*.js"
         ],
+
         frameworks: [
             "jasmine",
             "sinon"
         ],
+
+        logLevel: karma.LOG_INFO,
+
         plugins: [
             "karma-jasmine",
             "karma-sinon",
             "karma-firefox-launcher",
             "karma-chrome-launcher",
+            "karma-sauce-launcher",
             "karma-coverage",
             "karma-threshold-reporter",
             "karma-coffee-preprocessor",
             "karma-mocha-reporter"
         ],
+
         preprocessors: {
             "**/*.coffee": "coffee",
             "src/app/**/*.js": ["coverage"]
@@ -75,8 +82,8 @@ module.exports = function ( karma ) {
          * the aesthetic advantage of not launching a browser every time you save.
          */
         browsers: [
-          "Firefox",
-          "Chrome"
+            "Firefox",
+            "Chrome"
         ],
 
         coverageReporter: {
@@ -101,5 +108,55 @@ module.exports = function ( karma ) {
             lines: 100,
             functions: 100
         }
-    });
+    };
+
+    var run_sauce_tests = process.env.RUN_SAUCE_TESTS === "true";
+
+    if (run_sauce_tests) {
+        if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
+            throw new Error("SauceLabs credentials not set");
+        }
+
+        karma_config.customLaunchers = {
+            SL_Chrome: {
+                base: "SauceLabs",
+                browserName: "chrome",
+                version: "35",
+                platform: "Windows 7"
+            },
+            SL_Firefox: {
+                base: "SauceLabs",
+                browserName: "firefox",
+                version: "30",
+                platform: "Windows 7"
+            },
+            SL_IE_11: {
+                base: "SauceLabs",
+                browserName: "internet explorer",
+                version: "11"
+            },
+            SL_IE_10: {
+                base: "SauceLabs",
+                browserName: "internet explorer",
+                version: "10"
+            },
+            SL_Opera: {
+                base: "SauceLabs",
+                browserName: "opera",
+                version: "11",
+                platform: "Windows 7"
+            }
+        };
+
+        karma_config.captureTimeout = 120000;
+        karma_config.sauceLabs = {
+            testName: "MFL Admin App JS Unit Testing"
+        };
+        karma_config.browsers = karma.browsers.concat(
+            Object.keys(karma_config.customLaunchers)
+        );
+        karma_config.reporters.push("saucelabs");
+    }
+
+    karma.set(karma_config);
 };

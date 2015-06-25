@@ -6,6 +6,7 @@ This is the administration web application of the the [Kenyan MFL v2](https://gi
 
 ![Grunt](https://cdn.gruntjs.com/builtwith.png)
 
+[![Sauce Test Status](https://saucelabs.com/buildstatus/ngash-gh)](https://saucelabs.com/u/ngash-gh)
 
 ## Project organization
 The project's structure has been derived from [ng-boilerplate](https://github.com/ngbp/ngbp/blob/v0.3.2-release/README.md#overall-directory-structure)

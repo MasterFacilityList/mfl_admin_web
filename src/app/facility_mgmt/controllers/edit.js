@@ -26,7 +26,8 @@
                 {
                     func: "require-permission='facilities.add_facilityapproval' " +
                           "ng-if='!facility.is_approved || facility.has_edits' " +
-                          "ui-sref='facilities.facility_edit({facility_id: facility_id})'",
+                          "ui-sref='.approve({facility_id: facility_id, " +
+                          "update_id: fac.latest_update})'",
                     class: "action-btn action-btn-md action-btn-primary",
                     icon: "fa-check",
                     tipmsg: "Approve"
