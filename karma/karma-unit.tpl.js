@@ -133,20 +133,20 @@ module.exports = function ( karma ) {
                 version: "30",
                 platform: "Windows 7"
             },
-            SL_Safari: {
-                base: "SauceLabs",
-                browserName: "safari",
-                version: "8"
-            },
-            SL_IE: {
+            SL_IE_11: {
                 base: "SauceLabs",
                 browserName: "internet explorer",
                 version: "11"
             },
+            SL_IE_10: {
+                base: "SauceLabs",
+                browserName: "internet explorer",
+                version: "10"
+            },
             SL_Opera: {
                 base: "SauceLabs",
                 browserName: "opera",
-                version: "10",
+                version: "11",
                 platform: "Windows 7"
             }
         };
