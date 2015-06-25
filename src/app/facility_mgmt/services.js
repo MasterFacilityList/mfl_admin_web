@@ -17,6 +17,7 @@
         this.facility_contacts = api.setBaseUrl("api/facilities/contacts/");
         this.service_options = api.setBaseUrl("api/facilities/service_options/");
         this.facility_service = api.setBaseUrl("api/facilities/facility_services/");
+        this.facility_updates = api.setBaseUrl("api/facilities/facility_updates/");
     }]);
 
 })(angular);

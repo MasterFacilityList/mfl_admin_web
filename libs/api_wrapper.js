@@ -113,6 +113,14 @@
                 var url_frag = self.helpers.joinUrl([this.apiBaseUrl, id]);
                 return this.callApi("DELETE", this.makeUrl(url_frag));
             };
+            Api.prototype.metadata = function (id) {
+                if (! _.isUndefined()) {
+                    return this.callApi(
+                        "OPTIONS", self.helpers.joinUrl([this.apiBaseUrl, id])
+                    );
+                }
+                return this.callApi("OPTIONS", this.makeUrl(this.apiBaseUrl));
+            };
             /**
                 filter params in the format:
                 {key: value, key2: value2}
