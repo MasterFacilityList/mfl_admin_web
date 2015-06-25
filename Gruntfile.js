@@ -292,30 +292,8 @@ module.exports = function ( grunt ) {
                       "build/templates-common.js",
                       "build/templates-app.js"],
                 css: ["build/assets/mfl-admin-frontend-0.0.1a1.css"],
-                dest: "bin/assets/purestyles.css"
+                dest: "build/assets/purestyles.css"
             }
-//            build:{
-//                target: {
-//                    src: ["vendor/angular-bootstrap/ui-bootstrap-tpls.js",
-//                          "build/libs/sil_grid/sil_grid_tpls.js",
-//                          "build/index.html",
-//                          "build/templates-common.js",
-//                          "build/templates-app.js"],
-//                    css: ["build/assets/mfl-admin-frontend-0.0.1a1.css"],
-//                    dest: "build/assets/purestyles.css"
-//                }
-//            },
-//            compile:{
-//                target: {
-//                    src: ["vendor/angular-bootstrap/ui-bootstrap-tpls.js",
-//                          "build/libs/sil_grid/sil_grid_tpls.js",
-//                          "build/index.html",
-//                          "build/templates-common.js",
-//                          "build/templates-app.js"],
-//                    css: ["bin/assets/mfl-admin-frontend-0.0.1a1.css"],
-//                    dest: "bin/assets/purestyles.css"
-//                }
-//            }
         },
 
         /**
