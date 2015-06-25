@@ -44,6 +44,7 @@
     "sinon": "~1.15.3",
     "karma-sinon": "~1.0.4",
     "bardjs": "~0.1.4",
-    "grunt-purifycss": "~0.1.0"
+    "grunt-purifycss": "~0.1.0",
+    "grunt-processhtml": "~0.3.8"
   }
 }
