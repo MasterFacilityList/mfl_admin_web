@@ -164,7 +164,7 @@
             );
             scope.save(form);
             expect(state.go).toHaveBeenCalledWith("users."+
-                    "user_create.contacts", {"user_id": "18"});
+                    "user_create.contacts", {"user_id": "18", "furthest" : 2});
         }]));
         it("should test saving basic user details : fail on valid form",
         inject(["$httpBackend", "$state", "$controller",
