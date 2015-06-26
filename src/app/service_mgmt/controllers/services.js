@@ -62,7 +62,6 @@
         ["$scope", "$state", "$log", "mfl.service_mgmt.wrappers",
         function ($scope, $state, $log, wrappers) {
             $scope.service_options = [];
-            $scope.$parent.tab = 2;
             if($scope.create) {
                 $scope.nextState();
             }
@@ -115,8 +114,9 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_create",
-        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $state, $stateParams, $log, wrappers) {
+        ["$scope", "$state", "$stateParams", "$log",
+        "mfl.service_mgmt.wrappers", "mfl.common.services.multistep",
+        function ($scope, $state, $stateParams, $log, wrappers, multistepService) {
             $scope.create = true;
             $scope.tab = 0;
             $scope.furthest = $stateParams.furthest;
@@ -140,31 +140,11 @@
                     count: "2"
                 }
             ];
-            $scope.isActive = function (curr) {
-                _.each($scope.steps, function (step) {
-                    step.active = (step.name === curr);
-                });
-            };
-
-            $scope.setFurthest = function () {
-                _.each($scope.steps, function (step) {
-                    if(step.count === $stateParams.furthest) {
-                        step.furthest = true;
-                        _.each(step.prev, function (prev_state) {
-                            _.each($scope.steps, function (a_step) {
-                                if(a_step.name === prev_state) {
-                                    a_step.done = true;
-                                }
-                            });
-                        });
-                    }
-                });
-            };
             $scope.nextState = function () {
                 var curr = $state.current.name;
                 curr = curr.split(".", 4).pop();
-                $scope.isActive(curr);
-                $scope.setFurthest();
+                multistepService.nextState($scope, $stateParams ,
+                    $scope.steps, curr);
             };
             $scope.tabState = function (obj) {
                 if(obj.active || obj.done || obj.furthest) {

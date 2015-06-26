@@ -78,7 +78,7 @@
             <button class="login-btn login-btn-primary" ui-sref="users.user_create.basic ({user_id : user_id})">
                 &nbsp;<i class="fa fa-angle-double-left"></i> User Details
             </button>
-            <button class="login-btn login-btn-primary pull-right" ui-sref="users.user_create.groups ({user_id : user_id, furthest : furthest})">
+            <button class="login-btn login-btn-primary pull-right" ng-click="goToGroups()">
                 &nbsp;User Roles <i class="fa fa-angle-double-right"></i>
             </button>
         </div>
