@@ -49,7 +49,7 @@
                         <td>{{child.value}}</td>
                         <td>{{child.option_type | titlecase}}</td>
                         <td>{{child.is_exclusive_option | boolFilter}}</td>
-                        <td><a popover-trigger="open" popover-toggle popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" class="action-btn action-btn-grid action-btn-danger"><i class="fa fa-trash"></i></a></td>
+                        <td><a tooltip="Delete Option" popover-trigger="open" popover-toggle popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" class="action-btn action-btn-grid action-btn-danger"><i class="fa fa-trash fw-500"></i></a></td>
                     </tr>
                     <tr ng-if="spinner">
                         <td class="text-center" colspan="5">

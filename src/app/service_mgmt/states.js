@@ -94,7 +94,7 @@
         })
 
         .state("service_mgmt.service_list.service_create", {
-            url: "create/",
+            url: "create/?furthest",
             views: {
                 "main-content@service_mgmt.service_list": {
                     controller: "mfl.service_mgmt.controllers.service_create",
