@@ -8,8 +8,9 @@
         "mfl.common.forms"
     ])
 
-    .controller("mfl.users.controllers.user_create", ["$scope", "$state", "$stateParams",
-        function ($scope, $state, $stateParams) {
+    .controller("mfl.users.controllers.user_create", ["$scope", "$state",
+        "$stateParams", "mfl.common.services.multistep",
+        function ($scope, $state, $stateParams, multistepService) {
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
@@ -40,31 +41,12 @@
                     count: "4"
                 }
             ];
-            $scope.isActive = function (curr) {
-                _.each($scope.steps, function (step) {
-                    step.active = (step.name === curr);
-                });
-            };
 
-            $scope.setFurthest = function () {
-                _.each($scope.steps, function (step) {
-                    if(step.count === $stateParams.furthest) {
-                        step.furthest = true;
-                        _.each(step.prev, function (prev_state) {
-                            _.each($scope.steps, function (a_step) {
-                                if(a_step.name === prev_state) {
-                                    a_step.done = true;
-                                }
-                            });
-                        });
-                    }
-                });
-            };
             $scope.nextState = function () {
                 var curr = $state.current.name;
                 curr = curr.split(".", 3).pop();
-                $scope.isActive(curr);
-                $scope.setFurthest();
+                multistepService.nextState($scope, $stateParams ,
+                    $scope.steps, curr);
             };
             $scope.tabState = function (obj) {
                 if(obj.active || obj.done || obj.furthest) {
@@ -82,9 +64,6 @@
         "mfl.common.forms.changes",
         function ($scope, $log, $state, wrappers, formChanges) {
             $scope.create = true;
-            if($scope.$parent.furthest < 2) {
-                $scope.$parent.furthest = 2;
-            }
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
@@ -101,6 +80,9 @@
             }
             $scope.nextState();
             $scope.save = function (frm) {
+                if($scope.$parent.furthest < 2) {
+                    $scope.$parent.furthest = 2;
+                }
                 if(!_.isEmpty($state.params.user_id)) {
                     var changes = formChanges.whatChanged(frm);
 
@@ -224,9 +206,13 @@
                 "title": "",
                 "checked": false
             };
-            if($scope.$parent.furthest < 3) {
-                $scope.$parent.furthest = 3;
-            }
+            $scope.goToGroups = function () {
+                if($scope.$parent.furthest < 3) {
+                    $scope.$parent.furthest = 3;
+                }
+                $state.go("users.user_create.groups",
+                    {user_id : $state.params.user_id, furthest : $scope.furthest});
+            };
             $scope.contacts = [];
             $scope.contact = {
                 contact_type: "",
@@ -307,9 +293,6 @@
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
-            if($scope.$parent.furthest < 4) {
-                $scope.$parent.furthest = 4;
-            }
             if($scope.create) {
                 $scope.nextState();
             }
@@ -331,6 +314,9 @@
 
             var updateGroups = function (new_grps) {
                 $scope.spinner = true;
+                if($scope.$parent.furthest < 4) {
+                    $scope.$parent.furthest = 4;
+                }
                 var grps = _.map(new_grps, function (grp) {
                     return {"id": grp.id, "name": grp.name};
                 });

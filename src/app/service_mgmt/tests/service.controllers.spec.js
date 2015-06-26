@@ -8,6 +8,7 @@
             module("ui.router");
             module("mflAdminAppConfig");
             module("mfl.common.forms");
+            module("mfl.common.services");
             module("mfl.service_mgmt.services");
             module("mfl.service_mgmt.controllers.services");
 
@@ -455,14 +456,17 @@
         });
 
         describe("Test service create controller", function () {
-            it("should get all categories & test methods", function () {
+            it("should get all categories & test methods",
+            inject(["mfl.common.services.multistep",
+            function (multistepService) {
                 var scope = rootScope.$new();
                 var data = {
                     "$scope": scope,
                     "$state" : state,
                     "$stateParams": {
                         furthest : 1
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 spyOn(state, "go");
                 httpBackend
@@ -471,7 +475,6 @@
                     .respond(200, {results: []});
 
                 ctrl("service_create", data);
-                var curr = "basic";
                 scope.steps = [
                     {
                         name : "basic",
@@ -486,8 +489,6 @@
                     }
                 ];
                 var obj = {active : true};
-                scope.isActive(curr);
-                scope.setFurthest();
                 scope.nextState();
                 scope.tabState(obj);
                 expect(scope.steps[0].active).toEqual(false);
@@ -498,7 +499,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.categories).toEqual([]);
-            });
+            }]));
 
             it("should log errors on get categories failure", function () {
                 var scope = rootScope.$new();

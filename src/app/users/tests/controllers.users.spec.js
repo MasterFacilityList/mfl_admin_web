@@ -10,18 +10,20 @@
             module("api.wrapper");
             module("ui.router");
             module("mfl.users.controllers.users");
+            module("mfl.common.services");
 
             inject(["$rootScope", "$controller", "$httpBackend", "$state",
                 "SERVER_URL", "mfl.users.services.wrappers",
-                "mfl.common.forms.changes",
+                "mfl.common.forms.changes", "mfl.common.services.multistep",
                 function ($rootScope, $controller, $httpBackend,
-                    $state, url, userApi, formChanges) {
+                    $state, url, userApi, formChanges, multistepService) {
                     root = $rootScope;
                     scope = root.$new();
                     state = $state;
                     httpBackend = $httpBackend;
                     userApi = userApi;
                     formChanges = formChanges;
+                    multistepService = multistepService;
                     SERVER_URL = url;
                     scope.fakeStateParams = {
                         user_id : 6,
@@ -33,6 +35,7 @@
                         SERVER_URL : url,
                         userApi : userApi,
                         formChanges : formChanges,
+                        multistepService : multistepService,
                         $stateParams : scope.fakeStateParams
                     };
                     controller = function (cntrl) {
@@ -49,7 +52,7 @@
             scope.nextState = angular.noop;
             scope.$parent.furthest = 1;
             controller("mfl.users.controllers.user_create.basic");
-            expect(scope.$parent.furthest).toEqual(2);
+            expect(scope.$parent.furthest).toEqual(1);
         }]));
         it("should test create basic details user: success",
         inject(["$httpBackend", "$state",
@@ -61,31 +64,6 @@
                 "api/users/18/").respond(200, {"name" : "Antony"});
             $httpBackend.flush();
         }]));
-        it("should test isActive method", function () {
-            controller("mfl.users.controllers.user_create");
-            var curr = "basic";
-            scope.steps = [{name : "basic", prev : []}];
-            scope.isActive(curr);
-            expect(scope.steps[0].name).toEqual(curr);
-        });
-        it("should test setFurthest method", function () {
-            controller("mfl.users.controllers.user_create");
-            scope.steps = [
-                {
-                    name : "basic",
-                    furthest : false,
-                    prev : ["contacts"],
-                    count : 1
-                },
-                {
-                    name : "contacts",
-                    done : false
-                }
-            ];
-            scope.setFurthest();
-            expect(scope.steps[0].furthest).toBeTruthy();
-            expect(scope.steps[1].done).toBeTruthy();
-        });
         it("should test nextState method",
         inject(["$state", function ($state) {
             $state.current.name = "users.user_create.basic";
@@ -142,6 +120,7 @@
             $httpBackend.expectPATCH(SERVER_URL +
                 "api/users/18/").respond(200, {"name" : "Antony"});
             scope.nextState = angular.noop;
+            scope.$parent.furthest = 1;
             $controller("mfl.users.controllers.user_create.basic",
                 {
                     "$state": $state,
@@ -149,6 +128,7 @@
                 }
             );
             scope.save(form);
+            expect(scope.$parent.furthest).toEqual(2);
             $httpBackend.flush();
         }]));
         it("should test saving basic user details : fail",
@@ -236,13 +216,31 @@
         }]));
         it("should test $state param user id in adding user contacts",
         inject(["$state", function ($state) {
+            spyOn($state, "go");
             $state = {
                 params : {
                     user_id : 3
                 }
             };
+            scope.$parent.furthest = 2;
             scope.nextState = angular.noop;
             controller("mfl.users.controllers.user_edit.contacts");
+            scope.goToGroups();
+            expect(scope.$parent.furthest).toEqual(3);
+        }]));
+        it("should test $state param user id in adding user contacts",
+        inject(["$state", function ($state) {
+            spyOn($state, "go");
+            $state = {
+                params : {
+                    user_id : 3
+                }
+            };
+            scope.$parent.furthest = 3;
+            scope.nextState = angular.noop;
+            controller("mfl.users.controllers.user_edit.contacts");
+            scope.goToGroups();
+            expect(scope.$parent.furthest).toEqual(3);
         }]));
         it("should test $state param user id in adding user counties",
         inject(["$state", function ($state) {
@@ -254,7 +252,7 @@
             scope.nextState = angular.noop;
             controller("mfl.users.controllers.user_edit.counties");
         }]));
-        it("should update user groups",
+        it("should update user groups: with furthest less than 4",
         inject(["$httpBackend", "$state", function ($httpBackend, $state) {
             spyOn($state, "go");
             $state = {
@@ -262,6 +260,7 @@
                     user_id : 1
                 }
             };
+            scope.$parent.furthest = 3;
             scope.nextState = angular.noop;
             controller("mfl.users.controllers.user_edit.groups");
             scope.user_id = 1;
@@ -279,6 +278,38 @@
                 ]
             };
             scope.updateUserGroups();
+            expect(scope.$parent.furthest).toEqual(4);
+            $httpBackend.expectPATCH(
+                SERVER_URL + "api/users/1/").respond(200, scope.user.group);
+            $httpBackend.flush();
+        }]));
+        it("should update user groups: with furthest equal 4",
+        inject(["$httpBackend", "$state", function ($httpBackend, $state) {
+            spyOn($state, "go");
+            $state = {
+                params : {
+                    user_id : 1
+                }
+            };
+            scope.$parent.furthest = 4;
+            scope.nextState = angular.noop;
+            controller("mfl.users.controllers.user_edit.groups");
+            scope.user_id = 1;
+            scope.user = {
+                id: 1,
+                groups : [
+                    {
+                        name: "SCRIO",
+                        permissions : [
+                            {
+                                name : "adding facility"
+                            }
+                        ]
+                    }
+                ]
+            };
+            scope.updateUserGroups();
+            expect(scope.$parent.furthest).toEqual(4);
             $httpBackend.expectPATCH(
                 SERVER_URL + "api/users/1/").respond(200, scope.user.group);
             $httpBackend.flush();
@@ -393,21 +424,6 @@
 
                 expect(state.go).not.toHaveBeenCalled();
                 expect(log.error).toHaveBeenCalled();
-            });
-        });
-
-        describe("Test user create main controller", function () {
-            it("should load", function () {
-                var scope = rootScope.$new();
-                var data = {
-                    "$scope": scope
-                };
-                ctrl("user_create", data);
-                var test_title = {
-                    icon : "fa-plus-circle",
-                    name : "New User"
-                };
-                expect(data.$scope.title).toEqual(test_title);
             });
         });
 
@@ -557,7 +573,7 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.$parent.furthest).toEqual(3);
+                expect(data.$scope.$parent.furthest).toEqual(2);
                 expect(log.error).toHaveBeenCalled();
                 expect(_.isUndefined(data.$scope.contact_types)).toBe(true);
                 expect(data.$scope.contacts).toEqual([]);
@@ -966,7 +982,7 @@
                 data.$scope.nextState = angular.noop;
                 ctrl("user_edit.groups", data);
 
-                expect(data.$scope.$parent.furthest).toEqual(4);
+                expect(data.$scope.$parent.furthest).toEqual(3);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();

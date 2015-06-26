@@ -7,7 +7,8 @@
         "mfl.service_mgmt.controllers",
         "ui.bootstrap",
         "ui.bootstrap.tpls",
-        "mfl.common.filters"
+        "mfl.common.filters",
+        "mfl.common.services"
     ]);
 
 })(angular);

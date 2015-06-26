@@ -7,7 +7,8 @@
         "mfl.common.directives",
         "mfl.common.filters",
         "mfl.common.controllers",
-        "mfl.common.states"
+        "mfl.common.states",
+        "mfl.common.services"
     ]);
 
 })(angular);
