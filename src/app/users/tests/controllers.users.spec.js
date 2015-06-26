@@ -47,7 +47,9 @@
             function ($httpBackend, $state) {
             $state.params.user_id = "";
             scope.nextState = angular.noop;
+            scope.$parent.furthest = 1;
             controller("mfl.users.controllers.user_create.basic");
+            expect(scope.$parent.furthest).toEqual(2);
         }]));
         it("should test create basic details user: success",
         inject(["$httpBackend", "$state",
@@ -155,6 +157,7 @@
             spyOn(state, "go");
             $state.params.user_id = "18";
             var form = {};
+            scope.$parent.furthest = 2;
             scope.nextState = angular.noop;
             $controller("mfl.users.controllers.user_create.basic",
                 {
@@ -430,6 +433,7 @@
                 httpBackend
                     .expectPOST(server_url + "api/users/", data.$scope.user)
                     .respond(201, {"id": 3});
+                data.$scope.$parent.furthest = 2;
                 data.$scope.nextState = angular.noop;
                 ctrl("user_create.basic", data);
 
@@ -544,6 +548,8 @@
                     "$log": log
                 };
                 data.$scope.user_id = 3;
+                data.$scope.$parent.furthest = 2;
+                data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
 
@@ -551,6 +557,7 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
+                expect(data.$scope.$parent.furthest).toEqual(3);
                 expect(log.error).toHaveBeenCalled();
                 expect(_.isUndefined(data.$scope.contact_types)).toBe(true);
                 expect(data.$scope.contacts).toEqual([]);
@@ -954,9 +961,12 @@
                 var data = {
                     "$scope": rootScope.$new()
                 };
+                data.$scope.$parent.furthest = 3;
+                data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
                 ctrl("user_edit.groups", data);
 
+                expect(data.$scope.$parent.furthest).toEqual(4);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -1107,6 +1117,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/user_counties/?user=3")
                     .respond(200, {"results": []});
+                data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
                 ctrl("user_edit.counties", data);
 

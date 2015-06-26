@@ -82,7 +82,9 @@
         "mfl.common.forms.changes",
         function ($scope, $log, $state, wrappers, formChanges) {
             $scope.create = true;
-            $scope.$parent.tab = 1;
+            if($scope.$parent.furthest < 2) {
+                $scope.$parent.furthest = 2;
+            }
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
@@ -106,7 +108,8 @@
                         wrappers.users.update($state.params.user_id, changes)
                         .success(function () {
                             $state.go("users.user_create.contacts",
-                                {user_id : $state.params.user_id, furthest : 2});
+                                {user_id : $state.params.user_id,
+                                    furthest : $scope.furthest});
                         })
                         .error(function (data) {
                             $log.error(data);
@@ -114,14 +117,15 @@
                     }
                     else {
                         $state.go("users.user_create.contacts",
-                                {user_id : $state.params.user_id, furthest : 2});
+                                {user_id : $state.params.user_id,
+                                    furthest : $scope.furthest});
                     }
                 }
                 else {
                     wrappers.users.create($scope.user)
                     .success(function (data) {
                         $state.go("users.user_create.contacts",
-                            {user_id: data.id, furthest : 2});
+                            {user_id: data.id, furthest : $scope.furthest});
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -220,13 +224,17 @@
                 "title": "",
                 "checked": false
             };
-            $scope.$parent.tab = 2;
+            if($scope.$parent.furthest < 3) {
+                $scope.$parent.furthest = 3;
+            }
             $scope.contacts = [];
             $scope.contact = {
                 contact_type: "",
                 contact: ""
             };
-            $scope.nextState();
+            if($scope.create) {
+                $scope.nextState();
+            }
             $scope.user_id = $scope.user_id || $state.params.user_id;
             wrappers.contact_types.list()
                 .success(function (data) {
@@ -299,8 +307,12 @@
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
-            $scope.$parent.tab = 3;
-            $scope.nextState();
+            if($scope.$parent.furthest < 4) {
+                $scope.$parent.furthest = 4;
+            }
+            if($scope.create) {
+                $scope.nextState();
+            }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.groups = data.results;
@@ -330,7 +342,7 @@
                     $scope.spinner = false;
                     if (! $scope.edit_groups) {
                         $state.go("users.user_create.counties",
-                            {"user_id": $scope.user_id, furthest : 4});
+                            {"user_id": $scope.user_id, furthest : $scope.furthest});
                     }
                 })
                 .error(function (data) {
@@ -359,8 +371,9 @@
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
-            $scope.$parent.tab = 4;
-            $scope.nextState();
+            if($scope.create) {
+                $scope.nextState();
+            }
             $scope.edit_counties = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
