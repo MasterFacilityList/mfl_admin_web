@@ -114,7 +114,7 @@
                     }
                     else {
                         $state.go("users.user_create.contacts",
-                                {user_id : $state.params.user_id});
+                                {user_id : $state.params.user_id, furthest : 2});
                     }
                 }
                 else {

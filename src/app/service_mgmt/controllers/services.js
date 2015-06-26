@@ -63,6 +63,9 @@
         function ($scope, $state, $log, wrappers) {
             $scope.service_options = [];
             $scope.$parent.tab = 2;
+            if($scope.create) {
+                $scope.nextState();
+            }
             $scope.options = [];
             $scope.new_option_id = "";
             $scope.service_id = $scope.service_id || $state.params.service_id;
@@ -116,6 +119,7 @@
         function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.create = true;
             $scope.tab = 0;
+            $scope.furthest = $stateParams.furthest;
             $scope.service = wrappers.newService();
             wrappers.categories.filter({page_size: 1000}).success(function (data) {
                 $scope.categories = data.results;
@@ -124,17 +128,50 @@
             });
 
             $scope.new_service = $state.params.service_id;
-            $scope.tabState = function (val) {
-                if(!_.isEmpty($state.params.service_id) ||
-                    $scope.tab >= val && val === 2) {
-                    $scope.tab = val;
-                    $state.go("service_mgmt.service_list.service_create.options",
-                        {service_id : $scope.new_service});
+            $scope.steps = [
+                {
+                    name : "basic",
+                    prev : [],
+                    count: "1"
+                },
+                {
+                    name : "options",
+                    prev : ["basic"],
+                    count: "2"
                 }
-                if($scope.tab <= val && val === 1) {
-                    $scope.tab = val;
-                    $state.go("service_mgmt.service_list.service_create.basic",
-                        {service_id : $scope.new_service});
+            ];
+            $scope.isActive = function (curr) {
+                _.each($scope.steps, function (step) {
+                    step.active = (step.name === curr);
+                });
+            };
+
+            $scope.setFurthest = function () {
+                _.each($scope.steps, function (step) {
+                    if(step.count === $stateParams.furthest) {
+                        step.furthest = true;
+                        _.each(step.prev, function (prev_state) {
+                            _.each($scope.steps, function (a_step) {
+                                if(a_step.name === prev_state) {
+                                    a_step.done = true;
+                                }
+                            });
+                        });
+                    }
+                });
+            };
+            $scope.nextState = function () {
+                var curr = $state.current.name;
+                curr = curr.split(".", 4).pop();
+                $scope.isActive(curr);
+                $scope.setFurthest();
+            };
+            $scope.tabState = function (obj) {
+                if(obj.active || obj.done || obj.furthest) {
+                    $scope.nextState();
+                    $state.go(
+                        "service_mgmt.service_list.service_create."+ obj.name,
+                    {furthest: $scope.furthest, service_id : $scope.new_service});
                 }
             };
         }
@@ -145,6 +182,7 @@
         "mfl.common.forms.changes",
         function ($scope, $state, wrappers, formChanges) {
             $scope.$parent.tab = 1;
+            $scope.nextState();
             if(!_.isEmpty($state.params.service_id)) {
                 wrappers.services.get($state.params.service_id)
                 .success(function (data) {
@@ -163,7 +201,7 @@
                             $state.params.service_id, changes)
                         .success(function () {
                             $state.go("service_mgmt.service_list.service_create.options",
-                                {service_id : $state.params.service_id});
+                                {service_id : $state.params.service_id, furthest : 2});
                         })
                         .error (function (err) {
                             $scope.alert = err.error;
@@ -171,7 +209,7 @@
                     }
                     else {
                         $state.go("service_mgmt.service_list.service_create.options",
-                                {user_id : $state.params.user_id});
+                                {service_id : $state.params.service_id, furthest : 2});
                     }
                 }
                 else {
@@ -179,7 +217,7 @@
                     .success(function (data) {
                         $state.go(
                             "service_mgmt.service_list.service_create.options",
-                            {"service_id": data.id},
+                            {"service_id": data.id, furthest : 2},
                             {reload: true}
                         );
                     });
