@@ -49,13 +49,13 @@
                     tipmsg: "Regulate"
                 },
                 {
-                    func: "ui-sref='facilities.facility_edit({facility_id: facility_id})'",
+                    func: "ui-sref='.upgrade({facility_id: facility_id})'",
                     class: "action-btn action-btn-md action-btn-primary",
                     icon: "fa-level-up",
                     tipmsg: "Upgrade"
                 },
                 {
-                    func: "ui-sref='facilities.facility_edit({facility_id: facility_id})'",
+                    func: "ui-sref='.downgrade({facility_id: facility_id})'",
                     class: "action-btn action-btn-md action-btn-primary",
                     icon: "fa-level-down",
                     tipmsg: "Downgrade"

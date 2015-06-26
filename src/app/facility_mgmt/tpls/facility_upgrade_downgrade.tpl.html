@@ -1,0 +1,24 @@
+<div>
+    <h3>{{ (upgrade) ? 'Upgrade' : 'Downgrade' }}</h3>
+    <form ng-submit="updateType()">
+        <div class="form-group">
+            <label class="control-label col-xs-2">Current Facility Type</label>
+            <div class="col-xs-10">
+                <p class="form-control-static">{{facility.facility_type_name}}</p>
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="facility_type">New Facility Type</label>
+            <select ng-model="new_type.facility_type" name="facility_type" class="form-control col-xs-10" required>
+                <option value=""></option>
+                <option ng-repeat="factype in facility_types" ng-value="factype.id">{{factype.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="reason">Reason for {{(upgrade) ? 'Upgrade' : 'Downgrade'}}</label>
+            <textarea ng-model="new_type.reason" name="reason" required class="form-control"></textarea>
+        </div>
+        <input class="btn" ng-class="{'btn-danger': !upgrade, 'btn-success': upgrade}" ng-value="(upgrade)?'Upgrade':'Downgrade'" type="submit" ng-disabled="new_type.id"/>
+    </form>
+</div>
