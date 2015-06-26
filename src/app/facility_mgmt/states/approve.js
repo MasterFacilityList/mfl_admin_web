@@ -8,16 +8,16 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
         .state("facilities.facility_edit.approve", {
-            url: "approve/",
+            url: ":update_id/approve/",
             views: {
-                "main-content@facility_mgmt": {
+                "form-view@facilities.facility_edit": {
                     templateUrl: "facility_mgmt/tpls/facility_approve.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_approve"
                 }
             }
         })
         .state("facilities.facility_edit.approve.confirm", {
-            url: "approve/confirm/",
+            url: "confirm/",
             views: {
                 "confirm@facilities.facility_edit.approve": {
                     templateUrl: "facility_mgmt/tpls/facility_approve.confirm.tpl.html",
