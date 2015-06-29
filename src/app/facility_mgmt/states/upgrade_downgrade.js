@@ -19,6 +19,18 @@
                 }
             }
         })
+        .state("facilities.facility_edit.update_services", {
+            url: "update_services/",
+            views: {
+                "tab-header@facilities.facility_edit": {
+                    templateUrl: "facility_mgmt/tpls/facility_upgrade_downgrade.tabheaders.tpl.html"
+                },
+                "form-view@facilities.facility_edit": {
+                    templateUrl: "facility_mgmt/tpls/facility_edit.services.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.update_services"
+                }
+            }
+        })
         .state("facilities.facility_edit.downgrade", {
             url: "downgrade/",
             views: {

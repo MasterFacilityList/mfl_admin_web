@@ -130,5 +130,20 @@
                 expect(c.bootstrap).toHaveBeenCalled();
             });
         });
+
+        describe("Test update services controller", function () {
+            it("should bootstrap from helper controller", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$controller": null
+                };
+                var helper = {"bootstrap": angular.noop};
+                spyOn(data, "$controller").andReturn(helper);
+                spyOn(helper, "bootstrap");
+                ctrl("update_services", data);
+                expect(helper.bootstrap).toHaveBeenCalledWith(data.$scope);
+            });
+        });
+
     });
 })(angular);

@@ -2,7 +2,8 @@
     "use strict";
 
     angular.module("mfl.facility_mgmt.controllers.upgrade_downgrade", [
-        "mfl.facility_mgmt.services"
+        "mfl.facility_mgmt.services",
+        "mfl.facility_mgmt.controllers.edit"
     ])
 
     .controller("mfl.facility_mgmt.controllers.updown_helper",
@@ -57,6 +58,13 @@
         function ($scope, $controller) {
             var helper = $controller("mfl.facility_mgmt.controllers.updown_helper");
             helper.bootstrap($scope, false);
+        }]
+    )
+
+    .controller("mfl.facility_mgmt.controllers.update_services",
+        ["$scope", "$controller", function ($scope, $controller) {
+            var helper = $controller("mfl.facility_mgmt.controllers.services_helper");
+            helper.bootstrap($scope);
         }]
     );
 

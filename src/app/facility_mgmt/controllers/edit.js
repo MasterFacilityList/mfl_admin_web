@@ -1,10 +1,76 @@
-(function(angular){
+(function(angular, _){
     "use strict";
 
     angular.module("mfl.facility_mgmt.controllers.edit", [
         "mfl.facility_mgmt.services",
         "mfl.auth.services"
     ])
+
+    .controller("mfl.facility_mgmt.controllers.services_helper",
+        ["$log", "mfl.facility_mgmt.services.wrappers",
+        function ($log, wrappers) {
+            var loadData = function ($scope) {
+                wrappers.services.filter({page_size: 100, ordering: "name"})
+                .success(function (data) {
+                    $scope.services = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+
+            var addServiceOption = function ($scope, so) {
+                var payload = {
+                    facility: $scope.facility_id,
+                    selected_option: so
+                };
+                wrappers.facility_services.create(payload)
+                .success(function(data) {
+                    $scope.facility.facility_services.push(data);
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
+
+            var removeServiceOption = function ($scope, fs) {
+                wrappers.facility_services.remove(fs.id)
+                .success(function () {
+                    $scope.facility.facility_services = _.without(
+                        $scope.facility.facility_services, fs
+                    );
+                })
+                .error(function(data){
+                    $log.error(data);
+                });
+            };
+
+            this.bootstrap = function($scope) {
+                loadData($scope);
+                $scope.new_service = {
+                    service: "",
+                    option: ""
+                };
+                $scope.services = [];
+                $scope.service_options = [];
+
+                $scope.addServiceOption = function (a) {
+                    addServiceOption($scope, a);
+                };
+                $scope.removeChild = function (a) {
+                    removeServiceOption($scope, a);
+                };
+                $scope.$watch("new_service.service", function (newVal) {
+                    var s = _.findWhere($scope.services, {"id": newVal});
+                    if (angular.isDefined(s) && _.isArray(s.service_options)) {
+                        $scope.service_options = s.service_options;
+                    } else {
+                        $scope.service_options = [];
+                    }
+                });
+            };
+        }]
+    )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit",
         ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
@@ -185,11 +251,12 @@
             };
         }]
     )
+
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
         ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
         function($scope, $log, $stateParams, wrappers){
             $scope.fac_officers = [];
-            
+
             /*officers*/
             wrappers.officers.list()
             .success(function(data){
@@ -236,6 +303,14 @@
                 });
             };
         }])
+
+    .controller("mfl.facility_mgmt.controllers.facility_edit.services",
+        ["$scope", "$controller", function ($scope, $controller) {
+            var helper = $controller("mfl.facility_mgmt.controllers.services_helper");
+            helper.bootstrap($scope);
+        }]
+    )
+
     .controller("mfl.facility_mgmt.controllers.facility_edit.units",
         ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
         function ($scope, $log, $stateParams, wrappers) {
@@ -291,9 +366,8 @@
                 });
             };
         }
-        ])
-    .controller("mfl.facility_mgmt.controllers.facility_edit.services", [angular.noop])
-    .controller("mfl.facility_mgmt.controllers.facility_edit.setup", [angular.noop])
-;
+    ])
 
-})(angular);
+    .controller("mfl.facility_mgmt.controllers.facility_edit.setup", [angular.noop]);
+
+})(angular, _);
