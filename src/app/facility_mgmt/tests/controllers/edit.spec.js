@@ -8,7 +8,6 @@
             module("mflAdminAppConfig");
             module("mfl.auth.services");
             module("mfl.facility_mgmt.controllers");
-
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$log",
                 function (c, r, h, s, ls, lg) {
@@ -209,10 +208,6 @@
                 httpBackend.verifyNoOutstandingExpectation();
             });
 
-
-
-
-
             it("should fail to load the required data", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -281,7 +276,6 @@
                 expect(data.$scope.fac_contacts).toEqual([{"id": 4}]);
             });
 
-
             it("should show error if add a new contact fails", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -325,8 +319,6 @@
                 expect(data.$scope.fac_contacts).toEqual([]);
                 expect(log.error).toHaveBeenCalled();
             });
-
-
 
             it("should show error if add a new contact fails", function () {
                 spyOn(log, "error");
@@ -378,8 +370,6 @@
                 expect(log.error).toHaveBeenCalled();
             });
 
-
-
             it("should show error if associate new contact to facility fails", function () {
                 spyOn(log, "error");
 
@@ -430,7 +420,6 @@
                 expect(data.$scope.fac_contacts).toEqual([]);
                 expect(log.error).toHaveBeenCalled();
             });
-
 
             it("should remove a contact from the current facility", function () {
                 httpBackend
@@ -517,8 +506,6 @@
                 .toEqual([{"contact": "123", "id": "456", "delete_spinner" :false}]);
             });
 
-
-
             it("should show an error if delete contact failed", function () {
                 spyOn(log, "error");
 
@@ -562,10 +549,204 @@
 
                 expect(data.$scope.fac_contacts)
                 .toEqual([{"contact": "123", "id": "456", "delete_spinner" : false}]);
+            });
+        });
+        describe("Test facility edit officer controller", function () {
+            it("should load data from facility officers edit controller", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/officers/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
+                    .respond(200, {results: []});
+                ctrl(".officers", data);
 
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should fail to load data from facility officers edit controller", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/officers/")
+                    .respond(500, {results: []});
+                ctrl(".officers", data);
 
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should successfully add an officer to a facility", function () {
 
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/officers/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".officers", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.officer = {
+                    "id": "3"
+                };
+                data.$scope.facility_id = "3";
+
+                httpBackend
+                    .expectPOST(server_url + "api/facilities/facility_officers/", {"facility": "3",
+                      "officer": "3"})
+                    .respond(201, {"id": 5});
+
+                data.$scope.add();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                expect(data.$scope.fac_officers).toEqual([{"id": 5}]);
+            });
+            it("should fail to add an officer to a facility", function () {
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/officers/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".officers", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.officer = {
+                    "id": "3"
+                };
+                data.$scope.facility_id = "3";
+
+                httpBackend
+                    .expectPOST(server_url + "api/facilities/facility_officers/", {"facility": "3",
+                      "officer": "3"})
+                    .respond(500, {"id": 5});
+
+                data.$scope.add();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                expect(data.$scope.fac_officers).toEqual([]);
+            });
+            it("should remove an officer from the current facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/officers/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".officers", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/facilities/facility_officers/456/")
+                    .respond(204);
+
+                data.$scope.fac_officers = [{"facility": "123", "id": "456"}];
+                data.$scope.removeChild(data.$scope.fac_officers[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.fac_officers).toEqual([]);
+            });
+            it("should fail to remove an officer from the current facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/officers/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".officers", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/facilities/facility_officers/456/")
+                    .respond(500);
+
+                data.$scope.fac_officers = [{"facility": "123", "id": "456"}];
+                data.$scope.removeChild(data.$scope.fac_officers[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.fac_officers).toEqual([{"facility":"123",
+                   "id":"456",delete_spinner:false}]);
             });
         });
     });
 })();
+

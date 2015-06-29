@@ -15,7 +15,12 @@
                     expect(wrappers.facilities.apiBaseUrl)
                         .toEqual("api/facilities/facilities_list/");
                 }]);
-
+            });
+            it("should have facility officers wrapper defined", function() {
+                inject(["mfl.facility_mgmt.services.wrappers",function(wrappers){
+                    expect(wrappers.officers.apiBaseUrl)
+                        .toEqual("api/facilities/officers/");
+                }]);
             });
         });
     });
