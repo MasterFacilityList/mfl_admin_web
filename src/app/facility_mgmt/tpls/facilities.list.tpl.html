@@ -29,7 +29,7 @@
             <td>{{fac.is_published | boolFilter}}</td>
             <td>{{fac.regulatory_status_name}}</td>
             <td>
-                <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})" class="btn btn-info">View </a>
+                <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})" class="action-btn action-btn-grid action-btn-primary"><i class="fa fa-eye"></i> </a>
             </td>
         </tr>
     </tbody>

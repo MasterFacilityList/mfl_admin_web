@@ -76,9 +76,6 @@
         ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
         "mfl.auth.services.login",
         function ($scope, $log, $stateParams, wrappers, loginService) {
-            $scope.title = {
-                "name": "Edit Facility"
-            };
             $scope.facility_id = $stateParams.facility_id;
             wrappers.facility_detail.get($scope.facility_id)
                 .success(function(data){
@@ -88,45 +85,6 @@
                     $log.error(data);
                 });
             $scope.login_user = loginService.getUser();
-            $scope.action = [
-                {
-                    func: "require-permission='facilities.add_facilityapproval' " +
-                          "ng-if='!facility.is_approved || facility.has_edits' " +
-                          "ui-sref='.approve({facility_id: facility_id, " +
-                          "update_id: fac.latest_update})'",
-                    class: "action-btn action-btn-md action-btn-primary",
-                    icon: "fa-check",
-                    tipmsg: "Approve"
-                },
-                {
-                    func: "require-permission='facilities.change_facility' " +
-                          "ng-if='login_user.is_national' " +
-                          "ui-sref='.publish({facility_id: facility_id})'",
-                    class: "action-btn action-btn-md action-btn-primary",
-                    icon: "fa-upload",
-                    tipmsg: "Publish"
-                },
-                {
-                    func: "require-permission='facilities.add_facilityregulationstatus' " +
-                          "ng-if='login_user.regulator' " +
-                          "ui-sref='facilities.facility_edit({facility_id: facility_id})'",
-                    class: "action-btn action-btn-md action-btn-primary",
-                    icon: "fa-legal",
-                    tipmsg: "Regulate"
-                },
-                {
-                    func: "ui-sref='.upgrade({facility_id: facility_id})'",
-                    class: "action-btn action-btn-md action-btn-primary",
-                    icon: "fa-level-up",
-                    tipmsg: "Upgrade"
-                },
-                {
-                    func: "ui-sref='.downgrade({facility_id: facility_id})'",
-                    class: "action-btn action-btn-md action-btn-primary",
-                    icon: "fa-level-down",
-                    tipmsg: "Downgrade"
-                }
-            ];
         }]
     )
 
