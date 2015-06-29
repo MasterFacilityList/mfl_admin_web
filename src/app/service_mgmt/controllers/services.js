@@ -97,8 +97,10 @@
             if($scope.create) {
                 $scope.nextState();
             }
-            $scope.steps[0].active = false;
-            $scope.steps[1].active = true;
+            if(!$scope.create) {
+                $scope.steps[0].active = false;
+                $scope.steps[1].active = true;
+            }
             $scope.options = [];
             $scope.new_option_id = "";
             $scope.service_id = $scope.service_id || $state.params.service_id;
