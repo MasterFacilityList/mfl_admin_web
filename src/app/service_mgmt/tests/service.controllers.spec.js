@@ -33,14 +33,28 @@
                     "$stateParams": {
                         service_id: 1
                     },
-                    "$scope": scope
+                    "$scope": scope,
+                    "$state" : state
                 };
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url + "api/facilities/services/1/")
                     .respond(200, {});
 
                 ctrl("service_edit", data);
-
+                scope.steps = [
+                    {
+                        name: "basic",
+                        active: false
+                    },
+                    {
+                        name : "options",
+                        active: true
+                    }
+                ];
+                var obj = {name : "basic"};
+                scope.tabState(obj);
+                expect(scope.steps[0].active).toBeTruthy();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -79,6 +93,10 @@
                 var data = {
                     "$scope": scope
                 };
+                data.$scope.steps = [
+                    {active : true},
+                    {active : false}
+                ];
                 httpBackend
                     .expectGET(server_url +
                                "api/facilities/service_categories/?page_size=1000")
@@ -99,7 +117,10 @@
                     "$scope": scope,
                     "$log": log
                 };
-
+                data.$scope.steps = [
+                    {active: true},
+                    {active: false}
+                ];
                 httpBackend
                     .expectGET(server_url +
                                "api/facilities/service_categories/?page_size=1000")
@@ -126,7 +147,10 @@
                             "$scope": scope,
                             "mfl.common.forms.changes": formChanges
                         };
-
+                        data.$scope.steps = [
+                            {active : true},
+                            {active : false}
+                        ];
                         httpBackend
                             .expectGET(server_url +
                                        "api/facilities/service_categories/?page_size=1000")
@@ -167,7 +191,10 @@
                             "$scope": scope,
                             "mfl.common.forms.changes": formChanges
                         };
-
+                        data.$scope.steps = [
+                            {active : true},
+                            {active : false}
+                        ];
                         httpBackend
                             .expectGET(server_url +
                                        "api/facilities/service_categories/?page_size=1000")
@@ -203,6 +230,11 @@
                     "$scope": scope,
                     "$state": state
                 };
+                data.$scope.create = false;
+                data.$scope.steps = [
+                    {active : false},
+                    {active : true}
+                ];
                 spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/?page_size=1000")
@@ -231,6 +263,11 @@
                     "$scope": scope,
                     "$log": log
                 };
+                data.$scope.create = false;
+                data.$scope.steps = [
+                    {active : false},
+                    {active : true}
+                ];
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/?page_size=1000")
                     .respond(500, {"error": "e"});
@@ -258,6 +295,11 @@
                 var data = {
                     "$scope": scope
                 };
+                data.$scope.create = false;
+                data.$scope.steps = [
+                    {active : false},
+                    {active : true}
+                ];
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/?page_size=1000")
                     .respond(200, {results: [{"id": 2}, {"id": 1}]});
@@ -290,6 +332,11 @@
                 var data = {
                     "$scope": scope
                 };
+                data.$scope.create = false;
+                data.$scope.steps = [
+                    {active : false},
+                    {active : true}
+                ];
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/?page_size=1000")
                     .respond(200, {results: [{"id": 2}, {"id": 1}]});
@@ -322,6 +369,11 @@
                 var data = {
                     "$scope": scope
                 };
+                data.$scope.create = false;
+                data.$scope.steps = [
+                    {active : false},
+                    {active : true}
+                ];
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/?page_size=1000")
                     .respond(200, {results: [{"id": 2}, {"id": 1}]});
@@ -354,6 +406,11 @@
                 var data = {
                     "$scope": scope
                 };
+                data.$scope.create = false;
+                data.$scope.steps = [
+                    {active : false},
+                    {active : true}
+                ];
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/?page_size=1000")
                     .respond(200, {results: [{"id": 2}, {"id": 1}]});
@@ -532,6 +589,11 @@
                     "$scope" : scope,
                     "$state" : state
                 };
+                data.$scope.create = false;
+                data.$scope.steps = [
+                    {active : false},
+                    {active : true}
+                ];
                 state.params.service_id = 1;
 
                 ctrl("service_edit.options", data);
@@ -599,7 +661,6 @@
                         "$state" : $state,
                         "mfl.common.forms.changes": formChanges
                     };
-
                     $state.params.service_id = "1";
                     httpBackend.expectGET(server_url +
                         "api/facilities/services/1/").respond(

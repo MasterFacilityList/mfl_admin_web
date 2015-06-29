@@ -13,7 +13,33 @@
         ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
         function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.create = false;
+            $scope.steps = [
+                {
+                    name : "basic",
+                    prev : [],
+                    count: "1"
+                },
+                {
+                    name : "options",
+                    prev : ["basic"],
+                    count: "2"
+                }
+            ];
+
             $scope.service_id = $stateParams.service_id;
+            $scope.tabState = function(obj) {
+                _.each($scope.steps, function (step) {
+                    if(step.name === obj.name) {
+                        step.active = true;
+                    }
+                    else {
+                        step.active = false;
+                    }
+                });
+                $state.go(
+                        "service_mgmt.service_list.service_edit."+ obj.name,
+                        {service_id : $scope.service_id});
+            };
             wrappers.services.get($scope.service_id).success(function (data) {
                 $scope.service = data;
                 $scope.deleteText = $scope.service.name;
@@ -36,6 +62,8 @@
     .controller("mfl.service_mgmt.controllers.service_edit.basic",
         ["$scope", "$state", "$log", "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
         function ($scope, $state, $log, wrappers, forms) {
+            $scope.steps[0].active = true;
+            $scope.steps[1].active = false;
             wrappers.categories.filter({page_size: 1000}).success(function (data) {
                 $scope.categories = data.results;
             }).error(function (data) {
@@ -48,11 +76,15 @@
                     wrappers.services.update($scope.service_id, changed)
                         .success(function () {
                             $state.go(
-                                "service_mgmt.service_list",
-                                {"service_id": $scope.service_id},
-                                {reload: true}
+                            "service_mgmt.service_list.service_edit.options",
+                            {"service_id": $scope.service_id},
+                            {reload: true}
                             );
                         });
+                }
+                else {
+                    $state.go("service_mgmt.service_list.service_edit.options",
+                        {"service_id": $scope.service_id}, {reload: true});
                 }
             };
         }
@@ -64,6 +96,10 @@
             $scope.service_options = [];
             if($scope.create) {
                 $scope.nextState();
+            }
+            if(!$scope.create) {
+                $scope.steps[0].active = false;
+                $scope.steps[1].active = true;
             }
             $scope.options = [];
             $scope.new_option_id = "";
