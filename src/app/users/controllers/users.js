@@ -10,13 +10,23 @@
 
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
         "$stateParams", "mfl.common.services.multistep",
-        function ($scope, $state, $stateParams, multistepService) {
+        "mfl.users.services.wrappers",
+        function ($scope, $state, $stateParams, multistepService, wrappers) {
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
             };
             $scope.tab = 0;
             $scope.create = true;
+            if(!_.isEmpty($state.params.user_id)) {
+                wrappers.users.get($state.params.user_id)
+                .success(function (data) {
+                    $scope.user = data;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            }
             $scope.new_user = $state.params.user_id;
             $scope.furthest = $stateParams.furthest;
             $scope.steps = [
@@ -68,16 +78,6 @@
                 icon : "fa-plus-circle",
                 name : "New User"
             };
-
-            if(!_.isEmpty($state.params.user_id)) {
-                wrappers.users.get($state.params.user_id)
-                .success(function (data) {
-                    $scope.user = data;
-                })
-                .error(function (data) {
-                    $log.error(data);
-                });
-            }
             $scope.nextState();
             $scope.save = function (frm) {
                 if($scope.$parent.furthest < 2) {
@@ -294,6 +294,9 @@
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
             if($scope.create) {
+                /*$scope.user = {
+                    groups : []
+                };*/
                 $scope.nextState();
             }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
@@ -304,9 +307,6 @@
                 $log.error(data);
             });
             $scope.new_grp = "";
-            /*$scope.user = {
-                groups : []
-            };*/
             $scope.edit_groups = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 

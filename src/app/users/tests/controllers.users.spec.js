@@ -58,11 +58,25 @@
         inject(["$httpBackend", "$state",
             function ($httpBackend, $state) {
             $state.params.user_id = "18";
-            scope.nextState = angular.noop;
-            controller("mfl.users.controllers.user_create.basic");
+            controller("mfl.users.controllers.user_create");
             $httpBackend.expectGET(SERVER_URL +
                 "api/users/18/").respond(200, {"name" : "Antony"});
             $httpBackend.flush();
+        }]));
+        it("should test create basic details user: fail",
+        inject(["$httpBackend", "$state",
+            function ($httpBackend, $state) {
+            $state.params.user_id = "18";
+            controller("mfl.users.controllers.user_create");
+            $httpBackend.expectGET(SERVER_URL +
+                "api/users/18/").respond(500, {"name" : "Antony"});
+            $httpBackend.flush();
+        }]));
+        it("should test create basic details user: undefined",
+        inject(["$httpBackend", "$state",
+            function ($httpBackend, $state) {
+            $state.params.user_id = " ";
+            controller("mfl.users.controllers.user_create");
         }]));
         it("should test nextState method",
         inject(["$state", function ($state) {
