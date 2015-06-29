@@ -551,7 +551,7 @@
                 .toEqual([{"contact": "123", "id": "456", "delete_spinner" : false}]);
             });
         });
-        describe("Test facility edit officer controller", function () {
+        describe("Test facility edit officers controller", function () {
             it("should load data from facility officers edit controller", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -744,6 +744,214 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(data.$scope.fac_officers).toEqual([{"facility":"123",
+                   "id":"456",delete_spinner:false}]);
+            });
+        });
+
+        describe("Test facility edit facility units controller", function () {
+            it("should load data from facility units edit controller", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 4
+                    }
+                };
+                data.$scope.facility_id = 4;
+
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=4")
+                    .respond(200, {results: []});
+                ctrl(".units", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should fail to load data from facility units edit controller", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.facility_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .respond(500, {results: []});
+                ctrl(".units", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should successfully add a facility unit to the current facility", function () {
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.facility_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".units", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.facility_unit = {
+                    "regulating_body": "3",
+                    "name": "name",
+                    "description": "description"
+                };
+                data.$scope.facility_id = "3";
+
+                httpBackend
+                    .expectPOST(server_url + "api/facilities/facility_units/", {"facility": "3",
+                      "regulating_body": "3","name":"name","description":"description"})
+                    .respond(201, {"id": 5});
+
+                data.$scope.add();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                expect(data.$scope.fac_units).toEqual([{"id": 5}]);
+            });
+            it("should fail to add facility unit to the current facility", function () {
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.facility_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".units", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.facility_unit = {
+                    "regulating_body": "3",
+                    "name": "name",
+                    "description": "description"
+                };
+                data.$scope.facility_id = "3";
+
+                httpBackend
+                    .expectPOST(server_url + "api/facilities/facility_units/", {"facility": "3",
+                      "regulating_body": "3","name":"name","description":"description"})
+                    .respond(500, {"id": 5});
+
+                data.$scope.add();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                expect(data.$scope.fac_units).toEqual([]);
+            });
+            it("should remove a facility unit from the current facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.facility_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".units", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/facilities/facility_units/456/")
+                    .respond(204);
+
+                data.$scope.fac_units = [{"facility": "123", "id": "456"}];
+                data.$scope.removeChild(data.$scope.fac_units[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.fac_units).toEqual([]);
+            });
+            it("should fail to remove a facility unit from the current facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.facility_id = 3;
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".units", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectDELETE(server_url + "api/facilities/facility_units/456/")
+                    .respond(500);
+
+                data.$scope.fac_units = [{"facility": "123", "id": "456"}];
+                data.$scope.removeChild(data.$scope.fac_units[0]);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.fac_units).toEqual([{"facility":"123",
                    "id":"456",delete_spinner:false}]);
             });
         });

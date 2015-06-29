@@ -8,6 +8,7 @@
         this.facility_detail = api.setBaseUrl("api/facilities/facilities/");
         this.facility_types = api.setBaseUrl("api/facilities/facility_types/");
         this.facility_owners = api.setBaseUrl("api/facilities/owners/");
+        this.regulating_bodies = api.setBaseUrl("api/facilities/regulating_bodies/");
         this.wards = api.setBaseUrl("api/common/wards/");
         this.towns = api.setBaseUrl("api/common/towns");
         this.officers = api.setBaseUrl("api/facilities/officers/");
@@ -20,5 +21,6 @@
         this.facility_updates = api.setBaseUrl("api/facilities/facility_updates/");
         this.facility_officers = api.setBaseUrl("api/facilities/facility_officers/");
         this.facility_upgrade = api.setBaseUrl("api/facilities/facility_upgrade/");
+        this.facility_units = api.setBaseUrl("api/facilities/facility_units/");
     }]);
 })(angular);

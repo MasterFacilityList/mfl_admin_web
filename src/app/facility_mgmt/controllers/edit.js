@@ -187,7 +187,7 @@
     )
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
         ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        function($scope,$log,$stateParams,wrappers){
+        function($scope, $log, $stateParams, wrappers){
             $scope.fac_officers = [];
             
             /*officers*/
@@ -236,8 +236,63 @@
                 });
             };
         }])
+    .controller("mfl.facility_mgmt.controllers.facility_edit.units",
+        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
+        function ($scope, $log, $stateParams, wrappers) {
+
+            /*regulating bodies*/
+            wrappers.regulating_bodies.list()
+            .success(function(data){
+                $scope.regbodies = data.results;
+            })
+            .error(function(error){
+                $log.error(error);
+            });
+
+            /*facility units*/
+            wrappers.facility_units.filter({facility:$scope.facility_id})
+            .success(function(data){
+                $scope.fac_units = data.results;
+            })
+            .error(function(error){
+                $log.error(error);
+            });
+
+            /*add existing regulatory to facility*/
+            $scope.add = function () {
+                $scope.spinner = true;
+                wrappers.facility_units.create({
+                        "facility": $scope.facility_id,
+                        "regulating_body": $scope.facility_unit.regulating_body,
+                        "name": $scope.facility_unit.name,
+                        "description": $scope.facility_unit.description
+                    })
+                    .success(function (data) {
+                        $scope.fac_units.push(data);
+                        $scope.spinner = false;
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                        $scope.spinner = false;
+                    });
+            };
+
+            /*remove facility unit*/
+            $scope.removeChild = function (obj) {
+                obj.delete_spinner = true;
+                wrappers.facility_units.remove(obj.id)
+                .success(function () {
+                    $scope.fac_units = _.without($scope.fac_units, obj);
+                    obj.delete_spinner = false;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    obj.delete_spinner = false;
+                });
+            };
+        }
+        ])
     .controller("mfl.facility_mgmt.controllers.facility_edit.services", [angular.noop])
-    .controller("mfl.facility_mgmt.controllers.facility_edit.units", [angular.noop])
     .controller("mfl.facility_mgmt.controllers.facility_edit.setup", [angular.noop])
 ;
 
