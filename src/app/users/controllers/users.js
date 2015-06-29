@@ -305,10 +305,6 @@
             });
             $scope.new_grp = "";
 
-            $scope.user = {
-                groups : []
-            };
-
             $scope.edit_groups = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
