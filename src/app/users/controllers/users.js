@@ -9,7 +9,8 @@
     ])
 
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
-        function ($scope, $state) {
+        "$stateParams", "mfl.common.services.multistep",
+        function ($scope, $state, $stateParams, multistepService) {
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
@@ -17,19 +18,44 @@
             $scope.tab = 0;
             $scope.create = true;
             $scope.new_user = $state.params.user_id;
-            $scope.tabState = function (val) {
-                if(!_.isUndefined($state.params.user_id) ||
-                    $scope.tab >= val && val === 2) {
-                    $scope.tab = val;
-                    $state.go("users.user_create.contacts",
-                        {user_id : $scope.new_user});
+            $scope.furthest = $stateParams.furthest;
+            $scope.steps = [
+                {
+                    name : "basic",
+                    prev : [],
+                    count: "1"
+                },
+                {
+                    name : "contacts",
+                    prev : ["basic"],
+                    count: "2"
+                },
+                {
+                    name : "groups",
+                    prev : ["basic", "contacts"],
+                    count: "3"
+                },
+                {
+                    name : "counties",
+                    prev : ["basic", "contacts", "groups"],
+                    count: "4"
                 }
-                if($scope.tab <= val && val === 1) {
-                    $scope.tab = val;
-                    $state.go("users.user_create.basic",
-                        {user_id : $scope.new_user});
+            ];
+
+            $scope.nextState = function () {
+                var curr = $state.current.name;
+                curr = curr.split(".", 3).pop();
+                multistepService.nextState($scope, $stateParams ,
+                    $scope.steps, curr);
+            };
+            $scope.tabState = function (obj) {
+                if(obj.active || obj.done || obj.furthest) {
+                    $scope.nextState();
+                    $state.go("users.user_create."+ obj.name,
+                    {furthest: $scope.furthest, user_id : $scope.new_user});
                 }
             };
+
         }
     ])
 
@@ -38,12 +64,12 @@
         "mfl.common.forms.changes",
         function ($scope, $log, $state, wrappers, formChanges) {
             $scope.create = true;
-            $scope.$parent.tab = 1;
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
             };
-            if(!_.isUndefined($state.params.user_id)) {
+
+            if(!_.isEmpty($state.params.user_id)) {
                 wrappers.users.get($state.params.user_id)
                 .success(function (data) {
                     $scope.user = data;
@@ -52,15 +78,20 @@
                     $log.error(data);
                 });
             }
+            $scope.nextState();
             $scope.save = function (frm) {
-                if(!_.isUndefined($state.params.user_id)) {
+                if($scope.$parent.furthest < 2) {
+                    $scope.$parent.furthest = 2;
+                }
+                if(!_.isEmpty($state.params.user_id)) {
                     var changes = formChanges.whatChanged(frm);
 
                     if (! _.isEmpty(changes)) {
                         wrappers.users.update($state.params.user_id, changes)
                         .success(function () {
                             $state.go("users.user_create.contacts",
-                                {user_id : $state.params.user_id});
+                                {user_id : $state.params.user_id,
+                                    furthest : $scope.furthest});
                         })
                         .error(function (data) {
                             $log.error(data);
@@ -68,13 +99,15 @@
                     }
                     else {
                         $state.go("users.user_create.contacts",
-                                {user_id : $state.params.user_id});
+                                {user_id : $state.params.user_id,
+                                    furthest : $scope.furthest});
                     }
                 }
                 else {
                     wrappers.users.create($scope.user)
                     .success(function (data) {
-                        $state.go("users.user_create.contacts", {user_id: data.id});
+                        $state.go("users.user_create.contacts",
+                            {user_id: data.id, furthest : $scope.furthest});
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -173,12 +206,21 @@
                 "title": "",
                 "checked": false
             };
-            $scope.$parent.tab = 2;
+            $scope.goToGroups = function () {
+                if($scope.$parent.furthest < 3) {
+                    $scope.$parent.furthest = 3;
+                }
+                $state.go("users.user_create.groups",
+                    {user_id : $state.params.user_id, furthest : $scope.furthest});
+            };
             $scope.contacts = [];
             $scope.contact = {
                 contact_type: "",
                 contact: ""
             };
+            if($scope.create) {
+                $scope.nextState();
+            }
             $scope.user_id = $scope.user_id || $state.params.user_id;
             wrappers.contact_types.list()
                 .success(function (data) {
@@ -251,7 +293,9 @@
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
-            $scope.$parent.tab = 3;
+            if($scope.create) {
+                $scope.nextState();
+            }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.groups = data.results;
@@ -270,6 +314,9 @@
 
             var updateGroups = function (new_grps) {
                 $scope.spinner = true;
+                if($scope.$parent.furthest < 4) {
+                    $scope.$parent.furthest = 4;
+                }
                 var grps = _.map(new_grps, function (grp) {
                     return {"id": grp.id, "name": grp.name};
                 });
@@ -281,7 +328,7 @@
                     $scope.spinner = false;
                     if (! $scope.edit_groups) {
                         $state.go("users.user_create.counties",
-                            {"user_id": $scope.user_id});
+                            {"user_id": $scope.user_id, furthest : $scope.furthest});
                     }
                 })
                 .error(function (data) {
@@ -310,7 +357,9 @@
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
-            $scope.$parent.tab = 4;
+            if($scope.create) {
+                $scope.nextState();
+            }
             $scope.edit_counties = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
@@ -471,7 +520,7 @@
         };
         $scope.action = [
             {
-                func: "ui-sref='users.user_create.basic' " +
+                func: "ui-sref='users.user_create.basic ({furthest : 1})'" +
                         "requires-permission='users.add_mfluser' ",
                 class: "action-btn action-btn-primary action-btn-md",
 

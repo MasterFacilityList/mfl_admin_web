@@ -8,6 +8,7 @@
             module("ui.router");
             module("mflAdminAppConfig");
             module("mfl.common.forms");
+            module("mfl.common.services");
             module("mfl.service_mgmt.services");
             module("mfl.service_mgmt.controllers.services");
 
@@ -213,7 +214,6 @@
                     .respond(200, {results: [{"id": 2}]});
 
                 data.$scope.service_id = 1;
-
                 ctrl("service_edit.options", data);
                 scope.cancel();
                 httpBackend.flush();
@@ -456,26 +456,50 @@
         });
 
         describe("Test service create controller", function () {
-
-            it("should get all categories", function () {
+            it("should get all categories & test methods",
+            inject(["mfl.common.services.multistep",
+            function (multistepService) {
                 var scope = rootScope.$new();
                 var data = {
-                    "$scope": scope
+                    "$scope": scope,
+                    "$state" : state,
+                    "$stateParams": {
+                        furthest : 1
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
-
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url +
                                "api/facilities/service_categories/?page_size=1000")
                     .respond(200, {results: []});
 
                 ctrl("service_create", data);
-
+                scope.steps = [
+                    {
+                        name : "basic",
+                        active: false ,
+                        furthest: false,
+                        prev: ["options"],
+                        count : 1
+                    },
+                    {
+                        name : "options",
+                        done : false
+                    }
+                ];
+                var obj = {active : true};
+                scope.nextState();
+                scope.tabState(obj);
+                expect(scope.steps[0].active).toEqual(false);
+                expect(scope.steps[0].furthest).toBeTruthy();
+                expect(scope.steps[1].done).toEqual(true);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.categories).toEqual([]);
-            });
+            }]));
 
             it("should log errors on get categories failure", function () {
                 var scope = rootScope.$new();
@@ -512,6 +536,15 @@
 
                 ctrl("service_edit.options", data);
             });
+            it("should set create anf nextState method", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope" : scope
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                ctrl("service_edit.options", data);
+            });
         });
 
         describe("Testing creation controller val = 1",function () {
@@ -537,7 +570,7 @@
                 };
                 spyOn(state, "go");
                 ctrl("service_create", data);
-                var val = 1;
+                var val = 0;
                 scope.tabState(val);
                 expect(scope.tab).toEqual(val);
             });
@@ -571,6 +604,8 @@
                     httpBackend.expectGET(server_url +
                         "api/facilities/services/1/").respond(
                         200, {});
+                    data.$scope.create = true;
+                    data.$scope.nextState = angular.noop;
                     $controller(
                         "mfl.service_mgmt.controllers.service_create.basic",data);
                     httpBackend.flush();
@@ -586,6 +621,8 @@
                         "mfl.common.forms.changes": formChanges
                     };
                     $state.params.service_id = "";
+                    data.$scope.create = true;
+                    data.$scope.nextState = angular.noop;
                     $controller(
                         "mfl.service_mgmt.controllers.service_create.basic",data);
                 }
@@ -604,6 +641,8 @@
                     httpBackend.expectGET(server_url +
                         "api/facilities/services/1/").respond(
                         500, {});
+                    data.$scope.create = true;
+                    data.$scope.nextState = angular.noop;
                     $controller(
                         "mfl.service_mgmt.controllers.service_create.basic",data);
                     httpBackend.flush();
@@ -631,6 +670,7 @@
                         "api/facilities/services/1/").respond(
                         200, {"name" : "ASD"});
                     spyOn(state, "go");
+                    data.$scope.nextState = angular.noop;
                     ctrl("service_create.basic", data);
                     scope.save(form);
                     httpBackend.flush();
@@ -657,6 +697,7 @@
                         "api/facilities/services/1/").respond(
                         500, {"name" : "ASD"});
                     spyOn(state, "go");
+                    data.$scope.nextState = angular.noop;
                     ctrl("service_create.basic", data);
                     scope.save(form);
                     httpBackend.flush();
@@ -677,6 +718,7 @@
                         "api/facilities/services/1/").respond(
                         200, {});
                     spyOn(state, "go");
+                    data.$scope.nextState = angular.noop;
                     ctrl("service_create.basic", data);
                     scope.save(form);
                     httpBackend.flush();
@@ -704,6 +746,7 @@
                     httpBackend.expectPOST(server_url +
                         "api/facilities/services/").respond(
                         201, {"name" : "ASD"});
+                    data.$scope.nextState = angular.noop;
                     ctrl("service_create.basic", data);
                     scope.save(form);
                     httpBackend.flush();
