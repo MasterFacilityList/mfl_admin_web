@@ -185,9 +185,59 @@
             };
         }]
     )
+    .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
+        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
+        function($scope,$log,$stateParams,wrappers){
+            $scope.fac_officers = [];
+            
+            /*officers*/
+            wrappers.officers.list()
+            .success(function(data){
+                $scope.officers = data.results;
+            })
+            .error(function(error){
+                $log.error(error);
+            });
+            /*facility officers*/
+            wrappers.facility_officers.filter({facility:$stateParams.facility_id})
+            .success(function(data){
+                $scope.fac_officers = data.results;
+            })
+            .error(function(error){
+                $log.error(error);
+            });
+            /*add existing officer to facility*/
+            $scope.add = function () {
+                $scope.spinner = true;
+                wrappers.facility_officers.create({
+                        "facility": $scope.facility_id,
+                        "officer": $scope.officer.id
+                    })
+                    .success(function (data) {
+                        $scope.fac_officers.push(data);
+                        $scope.spinner = false;
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                        $scope.spinner = false;
+                    });
+            };
+            /*remove officer*/
+            $scope.removeChild = function (obj) {
+                obj.delete_spinner = true;
+                wrappers.facility_officers.remove(obj.id)
+                .success(function () {
+                    $scope.fac_officers = _.without($scope.fac_officers, obj);
+                    obj.delete_spinner = false;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    obj.delete_spinner = false;
+                });
+            };
+        }])
     .controller("mfl.facility_mgmt.controllers.facility_edit.services", [angular.noop])
     .controller("mfl.facility_mgmt.controllers.facility_edit.units", [angular.noop])
-    .controller("mfl.facility_mgmt.controllers.facility_edit.officers", [angular.noop])
     .controller("mfl.facility_mgmt.controllers.facility_edit.setup", [angular.noop])
 ;
 
