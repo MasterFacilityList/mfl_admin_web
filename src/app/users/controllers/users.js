@@ -294,9 +294,6 @@
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         function (wrappers, $log, $scope, $state) {
             if($scope.create) {
-                /*$scope.user = {
-                    groups : []
-                };*/
                 $scope.nextState();
             }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
