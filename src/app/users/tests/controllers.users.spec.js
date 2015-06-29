@@ -228,7 +228,7 @@
             $httpBackend.flush();
 
         }]));
-        it("should test $state param user id in adding user contacts",
+        it("should test $state param user id in adding user contacts: first",
         inject(["$state", function ($state) {
             spyOn($state, "go");
             $state = {
@@ -238,6 +238,7 @@
             };
             scope.$parent.furthest = 2;
             scope.nextState = angular.noop;
+            scope.steps = [{name : "basic"}, {name : "contacts"}];
             controller("mfl.users.controllers.user_edit.contacts");
             scope.goToGroups();
             expect(scope.$parent.furthest).toEqual(3);
@@ -252,11 +253,12 @@
             };
             scope.$parent.furthest = 3;
             scope.nextState = angular.noop;
+            scope.steps = [{name : "basic"}, {name : "contacts"}];
             controller("mfl.users.controllers.user_edit.contacts");
             scope.goToGroups();
             expect(scope.$parent.furthest).toEqual(3);
         }]));
-        it("should test $state param user id in adding user counties",
+        it("should test $state param user id in adding user counties: true",
         inject(["$state", function ($state) {
             $state = {
                 params : {
@@ -264,6 +266,29 @@
                 }
             };
             scope.nextState = angular.noop;
+            scope.create = true;
+            scope.steps = [{name : "basic"}, {name : "contacts"}];
+            controller("mfl.users.controllers.user_edit.counties");
+        }]));
+        it("should test $state param user id in adding user counties: false",
+        inject(["$state", "mfl.common.services.multistep",
+            function ($state, multistepService) {
+            $state = {
+                params : {
+                    user_id : "3"
+                }
+            };
+            var result = [
+                {
+                    name : "basic"
+                },
+                {
+                    name : "contacts"
+                }
+            ];
+            spyOn(multistepService, "userMultistep").andReturn(result);
+            scope.nextState = angular.noop;
+            scope.create = false;
             controller("mfl.users.controllers.user_edit.counties");
         }]));
         it("should update user groups: with furthest less than 4",
@@ -276,6 +301,7 @@
             };
             scope.$parent.furthest = 3;
             scope.nextState = angular.noop;
+            scope.steps = [{name : "basic"}, {name : "contacts"}];
             controller("mfl.users.controllers.user_edit.groups");
             scope.user_id = 1;
             scope.user = {
@@ -307,6 +333,7 @@
             };
             scope.$parent.furthest = 4;
             scope.nextState = angular.noop;
+            scope.steps = [{name : "basic"}, {name : "contacts"}];
             controller("mfl.users.controllers.user_edit.groups");
             scope.user_id = 1;
             scope.user = {
@@ -338,6 +365,7 @@
             module("ui.router");
             module("mflAdminAppConfig");
             module("mfl.common.forms");
+            module("mfl.common.services");
 
             inject(["$controller", "$log", "$httpBackend", "$rootScope", "SERVER_URL", "$state",
                 function ($controller, $log, $httpBackend, $rootScope, SERVER_URL, $state) {
@@ -367,22 +395,38 @@
         });
 
         describe("Test user edit controller while deleting", function () {
-
-            it("should delete user", function () {
+            //piggy backing on prev test
+            it("should delete user",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var scope = rootScope.$new();
                 var data = {
                     "$stateParams": {
                         user_id: 1
                     },
                     "$state": state,
-                    "$scope": scope
+                    "$scope": scope,
+                    "mfl.common.services.multistep" : multistepService
+
                 };
                 httpBackend
                     .expectGET(server_url + "api/users/1/")
                     .respond(200, {});
 
                 spyOn(state, "go");
+                data.$scope.steps = [
+                    {
+                        name: "basic",
+                        active : false
+                    },
+                    {
+                        name : "contacts",
+                        active : true
+                    }
+                ];
                 ctrl("user_edit", data);
+                var obj = {name : "basic"};
+                scope.tabState(obj);
                 scope.cancel();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -400,7 +444,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(state.go).toHaveBeenCalled();
-            });
+            }]));
 
             it("should show error on delete user failure", function () {
                 var scope = rootScope.$new();
@@ -618,8 +662,10 @@
                 expect(data.$scope.contact_types).toEqual([]);
                 expect(data.$scope.contacts).toEqual([]);
             });
-
-            it("should load user contacts", function () {
+            //another piggy back test
+            it("should load user contacts",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 httpBackend
                     .expectGET(server_url + "api/common/contact_types/")
                     .respond(200, {results: []});
@@ -628,8 +674,11 @@
                     .respond(200, {results: []});
 
                 var data = {
-                    "$scope": rootScope.$new()
+                    "$scope": rootScope.$new(),
+                    "mfl.common.services.multistep": multistepService
                 };
+                data.$scope.create = false;
+                data.$scope.steps = [{name : "basic"}, {name : "contacts"}];
                 data.$scope.user_id = 3;
                 data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
@@ -640,9 +689,11 @@
 
                 expect(data.$scope.contact_types).toEqual([]);
                 expect(data.$scope.contacts).toEqual([]);
-            });
+            }]));
 
-            it("should remove a contact from the current user", function () {
+            it("should remove a contact from the current user",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 httpBackend
                     .expectGET(server_url + "api/common/contact_types/")
                     .respond(200, {results: []});
@@ -651,8 +702,11 @@
                     .respond(200, {results: [{"contact": "123", "id": "456"}]});
 
                 var data = {
-                    "$scope": rootScope.$new()
+                    "$scope": rootScope.$new(),
+                    "mfl.common.services.multistep" : multistepService
                 };
+                data.$scope.create = false;
+                data.$scope.steos = [{name: "basic"}, {name : "contacts"}];
                 data.$scope.user_id = 3;
                 data.$scope.nextState = angular.noop;
                 ctrl("user_edit.contacts", data);
@@ -678,7 +732,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(data.$scope.contacts).toEqual([]);
-            });
+            }]));
 
             it("should show an error if delete user_contact failed", function () {
                 spyOn(log, "error");
@@ -900,8 +954,10 @@
                     controller = c;
                 }]);
             });
-
-            it("should update user changes", function () {
+            //another test to piggy back on
+            it("should update user changes",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var frm = {
                     "$dirty": true,
                     "name": {
@@ -911,8 +967,10 @@
                 };
                 var scope = rootScope.$new();
                 var data = {
-                    "$scope": scope
+                    "$scope": scope,
+                    "mfl.common.services.multistep" : multistepService
                 };
+                data.$scope.steps = [{name : "basic"}, {name : "contacts"}];
                 data.$scope.user_id = 3;
                 scope.nextState = angular.noop;
                 controller("mfl.users.controllers.user_edit.basic", data);
@@ -926,9 +984,11 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-            });
+            }]));
 
-            it("should not update user if no changes are made", function () {
+            it("should not update user if no changes are made",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var frm = {
                     "$dirty": true,
                     "name": {
@@ -938,9 +998,11 @@
                 };
                 var scope = rootScope.$new();
                 var data = {
-                    "$scope": scope
+                    "$scope": scope,
+                    "mfl.common.services.multistep" : multistepService
                 };
                 data.$scope.user_id = 3;
+                data.$scope.steps = [{name : "basic"},{name : "contacts"}];
                 scope.nextState = angular.noop;
                 controller("mfl.users.controllers.user_edit.basic", data);
 
@@ -948,9 +1010,11 @@
 
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-            });
+            }]));
 
-            it("should show error on fail to update user changes", function () {
+            it("should show error on fail to update user changes",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 spyOn(log, "error");
                 var frm = {
                     "$dirty": true,
@@ -962,9 +1026,11 @@
                 var scope = rootScope.$new();
                 var data = {
                     "$scope": scope,
-                    "$log": log
+                    "$log": log,
+                    "mfl.common.services.multistep" : multistepService
                 };
                 data.$scope.user_id = 3;
+                data.$scope.steps = [{name : "basic"}, {name : "contacts"}];
                 scope.nextState = angular.noop;
                 controller("mfl.users.controllers.user_edit.basic", data);
 
@@ -979,7 +1045,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(log.error).toHaveBeenCalled();
-            });
+            }]));
         });
 
         describe("Test user edit groups controller", function () {
