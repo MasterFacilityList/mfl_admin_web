@@ -1,25 +1,30 @@
 <div>
-    <form name="frm_facility_services" ng-submit="addServiceOption(new_service.option)">
-        <div class="form-group">
-            <label for="service">Service</label>
-            <select name="service" ng-model="new_service.service" required class="form-control">
-                <option >Select a service</option>
-                <option ng-repeat="serv in services" ng-value="serv.id">{{serv.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="service_option">Service Option</label>
-            <select name="service_option" ng-model="new_service.option" required class="form-control">
-                <option value="">Select an option</option>
-                <option ng-repeat="serv_opt in service_options" ng-value="serv_opt.id">{{serv_opt.display_text}}</option>
-            </select>
-        </div>
-
-        <input value="Add Service" type="submit" class="btn btn-primary"/>
-    </form>
-
-    <div>
-        <table class="table table-bordered table-hover">
+    <div class="pad-t-20 margin-b-20">
+       <h4>Add service with its options</h4>
+        <form name="frm_facility_services" ng-submit="addServiceOption(new_service.option)">
+           <div class="row">
+                <div class="form-group col-sm-4">
+                    <select name="service" ng-model="new_service.service" required class="form-control">
+                        <option >Select a service</option>
+                        <option ng-repeat="serv in services" ng-value="serv.id">{{serv.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-sm-5">
+                    <select name="service_option" ng-model="new_service.option" required class="form-control">
+                        <option value="">Select an option</option>
+                        <option ng-repeat="serv_opt in service_options" ng-value="serv_opt.id">{{serv_opt.display_text}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <input value="Add Service" type="submit" class="btn btn-primary"/>
+                </div>
+           </div>
+        </form>
+    </div>
+    <hr>
+    <div class="pad-t-20">
+       <h4>Current Services</h4>
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Name</th>

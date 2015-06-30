@@ -8,7 +8,6 @@
     <thead>
         <th>Code</th>
         <th>Name</th>
-        <th>Ward</th>
         <th>Constituency</th>
         <th>County</th>
         <th>Owner Type</th>
@@ -21,7 +20,6 @@
         <tr ng-repeat="fac in facilities">
             <td>{{fac.code}}</td>
             <td>{{fac.name}}</td>
-            <td>{{fac.ward_name}}</td>
             <td>{{fac.constituency}}</td>
             <td>{{fac.county}}</td>
             <td>{{fac.owner_type_name}}</td>
@@ -34,3 +32,4 @@
         </tr>
     </tbody>
 </table>
+<sil-grid-pagination> </sil-grid-pagination>

@@ -45,66 +45,107 @@
 
                 var facility_chart = function(_dt) {
                     var _list = [];
+                    var _facility_names = [];
                     angular.forEach(_dt.types_summary, function (item) {
                         item.name = $filter("uppercase")(item.name);
                         item.name = item.name.replace(/_/g, " ");
-                        var _item = [item.name, item.count];
-                        _list[_list.length] = _item;
+                        _list.push(item.count);
+                        _facility_names.push(item.name);
                     });
                     angular.forEach(_dt.types_summary, function (item) {
-                        var _item = [item.name, item.count];
-                        _list[_list.length] = _item;
+                        _list.push(item.count);
+                        _facility_names.push(item.name);
                     });
+                    _list.unshift("Facility");
+                    
                     var obj = {
                         bindto: "#chartfacility",
                         data: {
-                            columns: _list,
+                            columns: [ 
+                                _list
+                            ],
                             bar: {
                                 width: 10
                             },
-                            type : "bar"
+                            type : "bar",
+                            color: function () {
+                                return "#ed9c28";
+                            }
                         },
                         tooltip: {
                             grouped: false
+                        },
+                        axis: {
+                            x: {
+                                type: "categorized",
+                                categories: _facility_names,
+                                tick: {
+                                    rotate: 90,
+                                    multiline: false
+                                },
+                                height: 140
+                            },
+                            y: {
+                                label: {
+                                    text: "Facility count",
+                                    position: "outer-middle"
+                                }
+                            }
+
                         }
                     };
                     return obj;
                 };
                 var top_ten = function (_dt) {
                     var _list = [];
+                    var _names_list = [];
+
                     if(!_.isEmpty(_dt.county_summary)) {
                         $scope.county = true;
                         angular.forEach(_dt.county_summary, function (item) {
-                            var _item = [item.name, item.count];
-                            _list[_list.length] = _item;
+                            _list.push(item.count);
+                            _names_list.push(item.name);
                         });
+                        _list.unshift("county");
                     }
                     if(!_.isEmpty(_dt.constituencies_summary)) {
                         angular.forEach(_dt.constituencies_summary, function (item) {
-                            var _item = [item.name, item.count];
-                            _list[_list.length] = _item;
+                            _list.push(item.count);
+                            _names_list.push(item.name);
                         });
+                        _list.unshift("constituency");
                     }
-
                     var obj = {
                         bindto: "#facilitybar",
-                        axis: {
-                            x: {
-                                padding: {
-                                    left: 0,
-                                    right: 0
-                                }
-                            }
-                        },
                         data: {
-                            columns: _list,
+                            columns:[
+                                _list
+                            ],
                             bar: {
                                 width: 10
                             },
-                            type : "bar"
+                            type : "bar",
+                            color: function () {
+                                return "#0390b2";
+                            }
                         },
-                        tooltip: {
-                            grouped: false
+                        axis: {
+                            x: {
+                                type: "categorized",
+                                categories: _names_list,
+                                tick: {
+                                    rotate: 90,
+                                    multiline: false
+                                },
+                                height: 100
+                            },
+                            y: {
+                                label: {
+                                    text: "Facility Count",
+                                    position: "outer-middle"
+                                }
+                            }
+
                         }
                     };
                     return obj;
