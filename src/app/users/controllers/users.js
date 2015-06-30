@@ -355,7 +355,12 @@
                     $scope.user = data;
                     $scope.new_grp = "";
                     $scope.spinner = false;
-                    if (! $scope.edit_groups) {
+
+                    if(!$scope.create) {
+                        $state.go("users.user_edit.counties",
+                            {"user_id": $scope.user_id});
+                    }
+                    else {
                         $state.go("users.user_create.counties",
                             {"user_id": $scope.user_id, furthest : $scope.furthest});
                     }
