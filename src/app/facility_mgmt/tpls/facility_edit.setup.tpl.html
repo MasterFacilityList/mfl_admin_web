@@ -62,7 +62,7 @@
             <div class="content-card">
                <div class="row">
                     <div class="group col-sm-7">
-                        <input type="text" name="longitude" ng-model="latitude"  required />
+                        <input type="text" name="longitude" ng-model="geo.coordinates.coordinates[0]"  required />
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label class="pad-l-10">
@@ -70,7 +70,7 @@
                         </label>
                     </div>
                     <div class="group col-sm-7">
-                        <input type="text" name="latitude" ng-model="longitude"  required />
+                        <input type="text" name="latitude" ng-model="geo.coordinates.coordinates[1]"  required />
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label class="pad-l-10">
@@ -78,7 +78,7 @@
                         </label>
                     </div>
                     <div class="group col-sm-7">
-                        <select name="contact_type" ng-model="geo_code_source">
+                        <select name="contact_type" ng-model="geo.source">
                             <option value="" disabled>Geocode source</option>
                             <option ng-repeat="gcs in geo_code_sources" ng-value="gcs.id">{{gcs.name}}</option>
                         </select>
@@ -86,7 +86,7 @@
                                 <span class="bar"></span>
                     </div>
                     <div class="group col-sm-7">
-                        <select name="contact_type" ng-model="geo_code_method">
+                        <select name="contact_type" ng-model="geo.method">
                             <option value="" disabled>Geocode method</option>
                             <option ng-repeat="gcm in geo_code_methods" ng-value="gcm.id">{{gcm.name}}</option>
                         </select>
