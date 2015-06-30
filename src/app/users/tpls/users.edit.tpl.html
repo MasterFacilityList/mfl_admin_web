@@ -34,7 +34,7 @@
                     <br>
                     <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[2].active}"  ng-click="tabState(steps[2])">User Groups</p>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 margin-t-20" style="border: 2px solid #666666;">
+            <div class="col-lg-6 col-md-6 col-sm-6 margin-t-20" style="border: 2px solid #666666;" ng-if="(user.id && (!user.is_national) && (! login_user.county)) || (user.id && (!user.is_national) && login_user.county) || (user.id && (login_user.is_national) && !user.regulator === null)">
             </div>
         </div>
         <!-- To assign county -->

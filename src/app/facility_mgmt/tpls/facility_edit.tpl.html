@@ -1,24 +1,24 @@
 <div class="content-header">
    <div class="action-container content-header-extra pad-r-20">
-        <a class="md-btn md-btn-info" require-permission="facilities.add_facilityapproval"
+        <a class="login-btn login-btn-primary margin-h-5" require-permission="facilities.add_facilityapproval"
             ng-if="!facility.is_approved || facility.has_edits"
             ui-sref=".approve({facility_id: facility_id,update_id: fac.latest_update})"
-            ui-sref-opts="{reload:true}">Approve</a>
-        <a class="md-btn md-btn-info" require-permission="facilities.change_facility"
+            ui-sref-opts="{reload:true}">&nbsp;&nbsp;Approve</a>
+        <a class="login-btn login-btn-primary margin-h-5" require-permission="facilities.change_facility"
             ng-if="login_user.is_national"
             ui-sref=".publish({facility_id: facility_id})"
-            ui-sref-opts="{reload:true}">Publish</a>
-        <a class="md-btn md-btn-info" require-permission="facilities.add_facilityregulationstatus"
+            ui-sref-opts="{reload:true}">&nbsp;&nbsp;Publish</a>
+        <a class="login-btn login-btn-primary margin-h-5" require-permission="facilities.add_facilityregulationstatus"
             ng-if="login_user.regulator"
             ui-sref="facilities.facility_edit({facility_id: facility_id})"
-            ui-sref-opts="{reload:true}">Regulate</a>
-        <a class="md-btn md-btn-info"
+            ui-sref-opts="{reload:true}">&nbsp;&nbsp;Regulate</a>
+        <a class="login-btn login-btn-primary margin-h-5"
             ui-sref=".upgrade({facility_id: facility_id})"
-            ui-sref-opts="{reload:true}">Upgrade</a>
-        <a class="md-btn md-btn-info"
+            ui-sref-opts="{reload:true}">&nbsp;&nbsp;Upgrade</a>
+        <a class="login-btn login-btn-primary margin-h-5"
             ui-sref=".downgrade({facility_id: facility_id})"
-            ui-sref-opts="{reload:true}">Downgrade</a>
-<a onclick="window.history.back()" class="action-btn action-btn-info action-btn-md" tooltip-placement="bottom" tooltip="Back"><i class="fa fa-arrow-left"></i></a>
+            ui-sref-opts="{reload:true}">&nbsp;&nbsp;Downgrade</a>
+<a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md" tooltip-placement="bottom" tooltip="Back"><i class="fa fa-arrow-left"></i></a>
    </div>
    <h2 class="content-title">
         <span class="main-title"> Edit Facility</span>
