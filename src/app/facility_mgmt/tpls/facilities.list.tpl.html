@@ -8,24 +8,20 @@
     <thead>
         <th>Code</th>
         <th>Name</th>
-        <th>Constituency</th>
         <th>County</th>
-        <th>Owner Type</th>
+        <th>Constituency</th>
+        <th>Owner</th>
         <th>Facility Type</th>
-        <th>Published</th>
-        <th>Regulatory Status</th>
         <th>Actions</th>
     </thead>
     <tbody>
         <tr ng-repeat="fac in facilities">
             <td>{{fac.code}}</td>
             <td>{{fac.name}}</td>
-            <td>{{fac.constituency}}</td>
             <td>{{fac.county}}</td>
-            <td>{{fac.owner_type_name}}</td>
+            <td>{{fac.constituency}}</td>
+            <td>{{fac.owner_name}}</td>
             <td>{{fac.facility_type_name}}</td>
-            <td>{{fac.is_published | boolFilter}}</td>
-            <td>{{fac.regulatory_status_name}}</td>
             <td>
                 <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})" class="action-btn action-btn-grid action-btn-primary"><i class="fa fa-eye"></i> </a>
             </td>
