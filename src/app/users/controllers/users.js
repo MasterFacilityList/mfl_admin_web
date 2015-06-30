@@ -138,8 +138,10 @@
     //end of assigning admininstrative areas to users
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
-         "$state","mfl.auth.services.login",
-        function ($scope, $stateParams, $log, wrappers,$state, loginService) {
+         "$state","mfl.auth.services.login", "mfl.common.services.multistep",
+        function ($scope, $stateParams, $log, wrappers,$state, loginService,
+            multistepService) {
+            $scope.steps = multistepService.userMultistep();
             $scope.title = {
                 icon: "fa-edit",
                 name: "Edit User"
@@ -155,6 +157,19 @@
             ];
             $scope.user_id = $stateParams.user_id;
             $scope.create = false;
+            $scope.tabState = function(obj) {
+                _.each($scope.steps, function (step) {
+                    if(step.name === obj.name) {
+                        step.active = true;
+                    }
+                    else {
+                        step.active = false;
+                    }
+                });
+                $state.go(
+                        "users.user_edit."+ obj.name,
+                        {user_id : $scope.user_id});
+            };
             $scope.remove = function () {
                 wrappers.users.remove($scope.user_id)
                     .success(function () {
@@ -180,20 +195,29 @@
     )
 
     .controller("mfl.users.controllers.user_edit.basic",
-        ["$scope", "$log", "mfl.common.forms.changes", "mfl.users.services.wrappers",
-        function ($scope, $log, formChanges, wrappers) {
-
+        ["$scope", "$log", "mfl.common.forms.changes",
+        "mfl.users.services.wrappers", "mfl.common.services.multistep",
+        "$state",
+        function ($scope, $log, formChanges, wrappers, multistepService,
+            $state) {
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[0]);
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
 
                 if (! _.isEmpty(changes)) {
                     wrappers.users.update($scope.user_id, changes)
                     .success(function () {
-
+                        $state.go("users.user_edit.contacts",
+                            {user_id : $scope.user_id});
                     })
                     .error(function (data) {
                         $log.error(data);
                     });
+                }
+                else {
+                    $state.go("users.user_edit.contacts",
+                            {user_id : $scope.user_id});
                 }
             };
         }]
@@ -201,7 +225,8 @@
 
     .controller("mfl.users.controllers.user_edit.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers", "$state",
-        function ($scope, $log, wrappers, $state) {
+        "mfl.common.services.multistep",
+        function ($scope, $log, wrappers, $state, multistepService) {
             $scope.tooltip = {
                 "title": "",
                 "checked": false
@@ -220,6 +245,10 @@
             };
             if($scope.create) {
                 $scope.nextState();
+            }
+            if(!$scope.create) {
+                multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[1]);
             }
             $scope.user_id = $scope.user_id || $state.params.user_id;
             wrappers.contact_types.list()
@@ -292,9 +321,14 @@
 
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        function (wrappers, $log, $scope, $state) {
+        "mfl.common.services.multistep",
+        function (wrappers, $log, $scope, $state, multistepService) {
             if($scope.create) {
                 $scope.nextState();
+            }
+            if(!$scope.create) {
+                multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[2]);
             }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
@@ -351,9 +385,14 @@
 
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        function (wrappers, $log, $scope, $state) {
+        "mfl.common.services.multistep",
+        function (wrappers, $log, $scope, $state, multistepService) {
             if($scope.create) {
                 $scope.nextState();
+            }
+            if(!$scope.create) {
+                multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[3]);
             }
             $scope.edit_counties = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
@@ -407,8 +446,13 @@
 
     .controller("mfl.users.controllers.user_edit.regulatory_body",
         ["mfl.users.services.wrappers", "$log", "$scope",
-        function (wrappers, $log, $scope) {
+        "mfl.common.services.multistep",
+        function (wrappers, $log, $scope, multistepService) {
             $scope.$parent.tab = 4;
+            if(!$scope.create) {
+                multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[5]);
+            }
             wrappers.regulatory_bodies.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.bodies = data.results;
@@ -453,8 +497,13 @@
 
     .controller("mfl.users.controllers.user_edit.constituency",
         ["mfl.users.services.wrappers", "$log", "$scope",
-        function (wrappers, $log, $scope) {
+        "mfl.common.services.multistep",
+        function (wrappers, $log, $scope, multistepService) {
             $scope.$parent.tab = 4;
+            if(!$scope.create) {
+                multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[4]);
+            }
             wrappers.constituencies.filter(
                 {"page_size": 20, "ordering": "name", "county": $scope.login_user.county})
             .success(function (data) {

@@ -98,11 +98,11 @@
                          </label>
                     </div>
                 </div>
-                <button ng-if="!create" type="submit" class="login-btn login-btn-primary" requires-permission="users.change_mfluser" >
-                    <i class="fa fa-save"></i> Save
+                <button ng-if="!create" ui-sref="users.user_list" class="login-btn login-btn-default margin-l-10">
+                    &nbsp;<i class="fa fa-angle-double-left"></i> Cancel
                 </button>
-                <button ng-if="!create" ui-sref="users" class="login-btn login-btn-default margin-l-10">
-                    Cancel
+                <button ng-if="!create" type="submit" class="login-btn login-btn-primary pull-right" requires-permission="users.change_mfluser" >
+                    &nbsp; Contacts <i class="fa fa-angle-double-right"></i>
                 </button>
                 <div class="col-sm-12 margin-t-10" ng-if="create">
                 <button  requires-permission="users.change_mfluser" type="submit" class="login-btn login-btn-primary">
