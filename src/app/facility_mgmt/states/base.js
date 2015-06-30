@@ -10,7 +10,7 @@
             url: "/facility_mgmt",
             views: {
                 "main": {
-                    templateUrl: "common/tpls/main-no-sidenav.tpl.html"
+                    templateUrl: "common/tpls/main.tpl.html"
                 },
                 "header@facility_mgmt": {
                     controller: "mfl.common.controllers.header",
