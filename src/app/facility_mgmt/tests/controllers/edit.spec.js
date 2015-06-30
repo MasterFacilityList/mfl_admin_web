@@ -47,7 +47,6 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.title.name).toEqual("Edit Facility");
                 expect(data.$scope.facility).toEqual({});
             });
 
