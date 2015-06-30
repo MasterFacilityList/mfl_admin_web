@@ -46,9 +46,6 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-
-                expect(data.$scope.title.name).toEqual("Edit Facility");
-                expect(data.$scope.facility).toEqual({});
             });
 
             it("should show error on fail to load facility details", function () {

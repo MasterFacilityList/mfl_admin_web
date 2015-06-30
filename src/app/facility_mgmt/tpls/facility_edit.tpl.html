@@ -1,24 +1,24 @@
 <div class="content-header">
    <div class="action-container content-header-extra pad-r-20">
-        <a class="btn btn-primary" require-permission="facilities.add_facilityapproval"
+        <a class="btn btn-info" require-permission="facilities.add_facilityapproval"
             ng-if="!facility.is_approved || facility.has_edits"
             ui-sref=".approve({facility_id: facility_id,update_id: fac.latest_update})"
             ui-sref-opts="{reload:true}">Approve</a>
-        <a class="btn btn-primary" require-permission="facilities.change_facility"
+        <a class="btn btn-info" require-permission="facilities.change_facility"
             ng-if="login_user.is_national"
             ui-sref=".publish({facility_id: facility_id})"
             ui-sref-opts="{reload:true}">Publish</a>
-        <a class="btn btn-primary" require-permission="facilities.add_facilityregulationstatus"
+        <a class="btn btn-info" require-permission="facilities.add_facilityregulationstatus"
             ng-if="login_user.regulator"
             ui-sref="facilities.facility_edit({facility_id: facility_id})"
             ui-sref-opts="{reload:true}">Regulate</a>
-        <a class="btn btn-primary"
+        <a class="btn btn-info"
             ui-sref=".upgrade({facility_id: facility_id})"
             ui-sref-opts="{reload:true}">Upgrade</a>
-        <a class="btn btn-primary"
+        <a class="btn btn-info"
             ui-sref=".downgrade({facility_id: facility_id})"
             ui-sref-opts="{reload:true}">Downgrade</a>
-<a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md" tooltip-placement="bottom" tooltip="Back"><i class="fa fa-arrow-left"></i></a>
+<a onclick="window.history.back()" class="action-btn action-btn-info action-btn-md" tooltip-placement="bottom" tooltip="Back"><i class="fa fa-arrow-left"></i></a>
    </div>
    <h2 class="content-title">
         <span class="main-title"> Edit Facility</span>
@@ -26,13 +26,18 @@
 </div>
 <div ui-view="delete"></div>
 <div class="col-sm-10 col-sm-offset-1 margin-t-20 content-card">
-    <h4>{{facility.name | uppercase}}</h4>
-   <div class="row">
-        <div class="col-sm-6"><span>Facility Code: <strong>{{facility.code}}</strong></span></div>
-        <div class="col-sm-6"><span class="pull-right">Regulation Status: <strong>{{facility.regulatory_status_name}}</strong></span></div>
-        <div class="col-sm-6"><span>Operation Status: <strong>{{facility.operation_status_name | titlecase}}</strong></span></div>
-        <div class="col-sm-6"><span class="pull-right">Facility Type: <strong>{{facility.facility_type_name}}</strong></span></div>
-   </div>
+    <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
+        <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+    </div>
+    <div ng-if="!spinner">
+        <h4>{{facility.name | uppercase}}</h4>
+        <div class="row">
+            <div class="col-sm-6"><span>Facility Code: <strong>{{facility.code}}</strong></span></div>
+            <div class="col-sm-6"><span class="pull-right">Regulation Status: <strong>{{facility.regulatory_status_name}}</strong></span></div>
+            <div class="col-sm-6"><span>Operation Status: <strong>{{facility.operation_status_name | titlecase}}</strong></span></div>
+            <div class="col-sm-6"><span class="pull-right">Facility Type: <strong>{{facility.facility_type_name}}</strong></span></div>
+       </div>
+    </div>
 </div>
 <div class="col-sm-10 col-sm-offset-1 margin-t-20 content-card">
     <div class="margin-t-20 ">
