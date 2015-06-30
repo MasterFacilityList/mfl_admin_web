@@ -23,5 +23,7 @@
         this.facility_officers = api.setBaseUrl("api/facilities/facility_officers/");
         this.facility_upgrade = api.setBaseUrl("api/facilities/facility_upgrade/");
         this.facility_units = api.setBaseUrl("api/facilities/facility_units/");
+        this.geo_code_methods = api.setBaseUrl("api/gis/geo_code_methods/");
+        this.geo_code_sources = api.setBaseUrl("api/gis/geo_code_sources/");
     }]);
 })(angular);
