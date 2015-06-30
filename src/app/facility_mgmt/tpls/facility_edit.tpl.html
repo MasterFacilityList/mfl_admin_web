@@ -2,7 +2,7 @@
    <div class="action-container content-header-extra pad-r-20">
         <a class="md-btn md-btn-info" require-permission="facilities.add_facilityapproval"
             ng-if="!facility.is_approved || facility.has_edits"
-            ui-sref=".approve({facility_id: facility_id,update_id: fac.latest_update})"
+            ui-sref=".approve({facility_id: facility_id,update_id: facility.latest_update})"
             ui-sref-opts="{reload:true}">Approve</a>
         <a class="md-btn md-btn-info" require-permission="facilities.change_facility"
             ng-if="login_user.is_national"
