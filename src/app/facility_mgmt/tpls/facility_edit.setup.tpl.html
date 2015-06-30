@@ -79,7 +79,7 @@
                     </div>
                     <div class="group col-sm-7">
                         <select name="contact_type" ng-model="geo_code_source">
-                            <option value="">Geocode source</option>
+                            <option value="" disabled>Geocode source</option>
                             <option ng-repeat="gcs in geo_code_sources" ng-value="gcs.id">{{gcs.name}}</option>
                         </select>
                                 <span class="highlight"></span>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="group col-sm-7">
                         <select name="contact_type" ng-model="geo_code_method">
-                            <option value="">Geocode method</option>
+                            <option value="" disabled>Geocode method</option>
                             <option ng-repeat="gcm in geo_code_methods" ng-value="gcm.id">{{gcm.name}}</option>
                         </select>
                                 <span class="highlight"></span>
