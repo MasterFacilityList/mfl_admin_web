@@ -77,8 +77,10 @@
         "mfl.auth.services.login",
         function ($scope, $log, $stateParams, wrappers, loginService) {
             $scope.facility_id = $stateParams.facility_id;
+            $scope.spinner = true;
             wrappers.facility_detail.get($scope.facility_id)
                 .success(function(data){
+                    $scope.spinner = false;
                     $scope.facility = data;
                 })
                 .error(function (data) {
