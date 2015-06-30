@@ -77,8 +77,10 @@
         "mfl.auth.services.login",
         function ($scope, $log, $stateParams, wrappers, loginService) {
             $scope.facility_id = $stateParams.facility_id;
+            $scope.spinner = true;
             wrappers.facility_detail.get($scope.facility_id)
                 .success(function(data){
+                    $scope.spinner = false;
                     $scope.facility = data;
                 })
                 .error(function (data) {
@@ -326,6 +328,27 @@
         }
     ])
 
-    .controller("mfl.facility_mgmt.controllers.facility_edit.setup", [angular.noop]);
+    .controller("mfl.facility_mgmt.controllers.facility_edit.setup",
+        ["$scope","mfl.facility_mgmt.services.wrappers",
+        function ($scope,wrappers) {
+
+            /*geo_code_sources*/
+            wrappers.geo_code_sources.list()
+            .success(function (data) {
+                $scope.geo_code_sources = data.results;
+            })
+            .error(function (error) {
+                $log.error(error);
+            });
+
+            /*geo_code_methods*/
+            wrappers.geo_code_methods.list()
+            .success(function (data) {
+                $scope.geo_code_methods = data.results;
+            })
+            .error(function (error) {
+                $log.error(error);
+            });
+        }]);
 
 })(angular, _);

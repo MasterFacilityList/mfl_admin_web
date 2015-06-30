@@ -8,13 +8,16 @@
     </mfl-list-assignment>
 
     <div ng-if="!create" class="col-md-12 margin-b-20 margin-t-20 margin-l-10" requires-permission="users.change_mfluser">
-        <a class="login-btn login-btn-primary" ng-click="updateUserGroups()">
-            <i class="fa fa-save"></i> Save
+        <a class="login-btn login-btn-primary" ui-sref="users.user_edit.contacts ({user_id : user_id})">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
+        </a>
+        <a class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
+             &nbsp;Admin Areas <i class="fa fa-angle-double-right"></i>
         </a>
     </div>
     <div ng-if="create" class="col-md-12 margin-b-20 margin-t-20 margin-l-10" requires-permission="users.change_mfluser">
         <a class="login-btn login-btn-primary" ui-sref="users.user_create.contacts ({user_id : user_id})">
-            &nbsp;<i class="fa fa-angle-double-left"></i> User Contacts
+            &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
         </a>
         <a class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
              &nbsp;Admin Areas <i class="fa fa-angle-double-right"></i>
