@@ -4,17 +4,13 @@
 
     angular.module("mfl.dashboard.controllers", ["mfl.dashboard.wrapper"])
 
-    .controller("mfl.dashboard.home", ["$scope",
-        function ($scope) {
+    .controller("mfl.dashboard.content", ["$scope", "dashboardApi",
+        "$filter",
+        function ($scope, dashboardApi, $filter) {
             $scope.title = {
                 icon: "fa-dashboard",
                 name: "Dashboard"
             };
-        }
-    ])
-    .controller("mfl.dashboard.content", ["$scope", "dashboardApi",
-        "$filter",
-        function ($scope, dashboardApi, $filter) {
             $scope.chart = null;
             $scope.spinner = true;
             $scope.county = false;
@@ -57,11 +53,11 @@
                         _facility_names.push(item.name);
                     });
                     _list.unshift("Facility");
-                    
+
                     var obj = {
                         bindto: "#chartfacility",
                         data: {
-                            columns: [ 
+                            columns: [
                                 _list
                             ],
                             bar: {

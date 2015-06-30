@@ -1,22 +1,11 @@
-(function () {
+(function (angular) {
+
+    "use strict";
 
     describe("Test dashboard controllers ", function () {
 
         beforeEach(function () {
             module("mfl.dashboard.controllers");
-        });
-
-        describe("Test dashboard home controller", function () {
-
-            it("should assign title", function () {
-                inject(["$controller", "$rootScope", function ($controller, $rootScope) {
-                    var data =  {
-                        "$scope": $rootScope.$new()
-                    };
-                    $controller("mfl.dashboard.home", data);
-                    expect(angular.isObject(data.$scope.title)).toBe(true);
-                }]);
-            });
         });
 
         describe("Test dashboard content controller", function () {
@@ -168,4 +157,4 @@
             });
         });
     });
-})();
+})(angular);
