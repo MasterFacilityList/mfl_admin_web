@@ -1319,53 +1319,6 @@
 
         describe("Test facility edit facility setup controller", function () {
 
-            it("should load the data required by the setup controller",function () {
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "$stateParams": {
-                        facility_id: 4
-                    }
-                };
-                data.$scope.facility_id = 4;
-
-                httpBackend
-                    .expectGET(server_url+"api/gis/facility_coordinates/?facility=4")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_sources/")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_methods/")
-                    .respond(200, {results: []});
-                ctrl(".setup", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-            });
-
-            it("should fail to load the data required by the setup controller", function () {
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "$stateParams": {
-                        facility_id: 4
-                    }
-                };
-                data.$scope.facility_id = 4;
-
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_sources/")
-                    .respond(500, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_methods/")
-                    .respond(500, {results: []});
-                ctrl(".setup", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-            });
-
             it("should reload state if no changes to facility operation setup", function () {
                 bard.inject(this, "$state");
                 var data = {
@@ -1374,23 +1327,9 @@
                         facility_id: 4
                     }
                 };
-                data.$scope.facility_id = 4;
-
-                httpBackend
-                    .expectGET(server_url+"api/gis/facility_coordinates/?facility=4")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_sources/")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_methods/")
-                    .respond(200, {results: []});
+                
 
                 ctrl(".setup", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
 
                 httpBackend.resetExpectations();
 
@@ -1421,28 +1360,12 @@
                             },
                             "mfl.common.forms.changes": formChanges
                         };
-                        data.$scope.facility_id = 4;
 
                         spyOn(formChanges, "whatChanged").andReturn({number_of_beds : 4,
                                                                      number_of_cots : 3});
 
-                        httpBackend
-                            .expectGET(server_url+"api/gis/facility_coordinates/?facility=4")
-                            .respond(200, {results: []});
-                        httpBackend
-                            .expectGET(server_url+"api/gis/geo_code_sources/")
-                            .respond(200, {results: []});
-                        httpBackend
-                            .expectGET(server_url+"api/gis/geo_code_methods/")
-                            .respond(200, {results: []});
 
                         ctrl(".setup", data);
-
-                        httpBackend.flush();
-                        httpBackend.verifyNoOutstandingRequest();
-                        httpBackend.verifyNoOutstandingExpectation();
-
-                        httpBackend.resetExpectations();
 
                         var opFrm = {
                             number_of_beds : 4,
@@ -1491,28 +1414,12 @@
                             },
                             "mfl.common.forms.changes": formChanges
                         };
-                        data.$scope.facility_id = 4;
+                        data.$scope.coordinates = 4;
 
                         spyOn(formChanges, "whatChanged").andReturn({number_of_beds : 4,
                                                                      number_of_cots : 3});
 
-                        httpBackend
-                            .expectGET(server_url+"api/gis/facility_coordinates/?facility=4")
-                            .respond(200, {results: []});
-                        httpBackend
-                            .expectGET(server_url+"api/gis/geo_code_sources/")
-                            .respond(200, {results: []});
-                        httpBackend
-                            .expectGET(server_url+"api/gis/geo_code_methods/")
-                            .respond(200, {results: []});
-
                         ctrl(".setup", data);
-
-                        httpBackend.flush();
-                        httpBackend.verifyNoOutstandingRequest();
-                        httpBackend.verifyNoOutstandingExpectation();
-
-                        httpBackend.resetExpectations();
 
                         var opFrm = {
                             number_of_beds : 4,
