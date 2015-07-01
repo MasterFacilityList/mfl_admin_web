@@ -7,61 +7,66 @@
                     </div>
                     <div ng-if="!spinner1">
                         <div class="content-card">
-                           <div class="row">
-                                <div class="group col-sm-7">
-                                    <input type="text" name="number_of_beds" ng-model="facility.number_of_beds"  required />
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    <label class="pad-l-10">
-                                        Beds
-                                    </label>
-                                </div>
+                           <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true">
+                              <h4><strong><i class="fa fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
                            </div>
-                           <div class="row">
-                                <div class="group col-sm-7">
-                                    <input type="text" name="number_of_cots" ng-model="facility.number_of_cots"  required />
-                                    <label class="pad-l-10" for="number_of_cots">
+                           <div ng-if="facility.has_edits===false">
+                               <div class="row">
+                                    <div class="group col-sm-7">
+                                        <input type="text" name="number_of_beds" ng-model="facility.number_of_beds"  required />
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
-                                        Cots
-                                    </label>
+                                        <label class="pad-l-10">
+                                            Beds
+                                        </label>
+                                    </div>
+                               </div>
+                               <div class="row">
+                                    <div class="group col-sm-7">
+                                        <input type="text" name="number_of_cots" ng-model="facility.number_of_cots"  required />
+                                        <label class="pad-l-10" for="number_of_cots">
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            Cots
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-group margin-t-10">
+                                    <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day">
+                                    <label for="open_whole_day">
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                         Open 24 hours
+                                     </label>
+                                </div>
+                                <div class="checkbox-group margin-t-10">
+                                    <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="facility.open_public_holidays">
+                                    <label for="open_public_holidays">
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                         Open on public holidays
+                                     </label>
+                                </div>
+                                <div class="checkbox-group margin-t-10">
+                                    <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="facility.open_weekends">
+                                    <label for="open_weekends">
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                         Open during weekends
+                                     </label>
+                                </div>
+                                <div class="checkbox-group margin-t-10">
+                                    <input type="checkbox" id="is_classified" name="is_classified" ng-model="facility.is_classified">
+                                    <label for="is_classified">
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                         Classified facility
+                                     </label>
                                 </div>
                             </div>
-                            <div class="checkbox-group margin-t-10">
-                                <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day">
-                                <label for="open_whole_day">
-                                    <span class="check"></span>
-                                    <span class="box"></span>
-                                     Open 24 hours
-                                 </label>
-                            </div>
-                            <div class="checkbox-group margin-t-10">
-                                <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="facility.open_public_holidays">
-                                <label for="open_public_holidays">
-                                    <span class="check"></span>
-                                    <span class="box"></span>
-                                     Open on public holidays
-                                 </label>
-                            </div>
-                            <div class="checkbox-group margin-t-10">
-                                <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="facility.open_weekends">
-                                <label for="open_weekends">
-                                    <span class="check"></span>
-                                    <span class="box"></span>
-                                     Open during weekends
-                                 </label>
-                            </div>
-                            <div class="checkbox-group margin-t-10">
-                                <input type="checkbox" id="is_classified" name="is_classified" ng-model="facility.is_classified">
-                                <label for="is_classified">
-                                    <span class="check"></span>
-                                    <span class="box"></span>
-                                     Classified facility
-                                 </label>
-                            </div>
                         </div>
-                        <div class="margin-t-20 margin-b-20">
-                            <button type="submit" class="md-btn md-btn-primary" ng-click="update(operation_setup)">Save operation setup</button>
+                        <div class="margin-t-20 margin-b-20" ng-if="facility.has_edits===false">
+                            <button type="submit" class="md-btn md-btn-primary" ng-click="updateOp(operation_setup)">Save operation setup</button>
                         </div>
                     </div>
                 </form>
@@ -107,21 +112,17 @@
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                         </div>
-                        <div class="col-sm-7" style="min-height:290px;">
-                            <label for="collection date"><h5>Collection date: <input type="date" name="collection_date" ng-model="dt" disabled/></h5></label>
-                            <div>
-                              <datepicker ng-model="dt" min-date="minDate" show-weeks="true" custom-class="getDayClass(date, mode)"></datepicker>
-                            </div>
-                        </div>
-                        <div class="group col-sm-7">
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label class="pad-l-10"></label>
+                        <div class="col-sm-7" style="min-height:150px;">
+                            <label for="collection date">
+                                <h5>Collection date:
+                                    <date-picker placeholder="collection date" name="collection_date" ng-model="geo.collection_date" show-weeks="true" custom-class="getDayClass(date, mode)"></date-picker>
+                                </h5>
+                            </label>
                         </div>
                     </div>
                 </div>
                 <div class="margin-t-20 margin-b-20">
-                    <button type="submit" class="md-btn md-btn-primary" ng-click="save(gis_setup)">Save geolocation setup</button>
+                    <button type="submit" class="md-btn md-btn-primary" ng-click="saveGis(gis_setup)">Save geolocation setup</button>
                 </div>
             </div>
         </form>

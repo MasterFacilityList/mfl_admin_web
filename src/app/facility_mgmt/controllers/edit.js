@@ -3,7 +3,9 @@
 
     angular.module("mfl.facility_mgmt.controllers.edit", [
         "mfl.facility_mgmt.services",
-        "mfl.auth.services"
+        "mfl.auth.services",
+        "datePicker",
+        "ui.bootstrap.tpls"
     ])
 
     .controller("mfl.facility_mgmt.controllers.services_helper",
@@ -329,8 +331,9 @@
     ])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.setup",
-        ["$scope","mfl.facility_mgmt.services.wrappers","$log",
-        function ($scope,wrappers,$log) {
+        ["$scope","mfl.facility_mgmt.services.wrappers","$log", "mfl.common.forms.changes",
+         "$state",
+        function ($scope,wrappers,$log, formChanges,$state) {
 
             /*facility gis data*/
             wrappers.facility_coordinates.filter({facility:$scope.facility_id})
@@ -359,33 +362,50 @@
                 $log.error(error);
             });
 
-
-            $scope.update = function (gisFrm) {
-                $scope.spinner1 = true;
-                wrappers.facility_detail.update($scope.facility_id, gisFrm)
-                    .success(function (data) {
-                        $scope.spinner1 = false;
-                        $scope.facility =  data.results;
-                    })
-                    .error(function (error) {
-                        $scope.spinner1 = false;
-                        $log.error(error);
-                    });
-            };
-            $scope.save = function (opFrm) {
+            /*Update operation setup details*/
+            $scope.updateOp = function (opFrm) {
+                var changed = formChanges.whatChanged(opFrm);
                 opFrm.facility = $scope.facility_id;
-                $scope.spinner2 = true;
-                wrappers.facility_coordinates.update($scope.facility_id, opFrm)
-                    .success(function (data) {
-                        $scope.spinner2 = false;
-                        $scope.geo = data.results;
-                    })
-                    .error(function (error) {
-                        $scope.spinner2 = false;
-                        $log.error(error);
-                    });
+                $scope.spinner1 = true; //show spinner
+                if (! _.isEmpty(changed)) {
+                    wrappers.facility_detail.update($scope.facility_id, changed)
+                        .success(function (data) {
+                            $scope.spinner1 = false;
+                            $scope.geo = data.results;
+                        })
+                        .error(function (error) {
+                            $scope.spinner1 = false;
+                            $log.error(error);
+                        });
+                }
+                else {
+                    $state.go("facilities.facility_edit.setup",
+                        {"facility_id": $scope.facility_id}, {reload: true});
+                }
             };
-            
+
+            /*Update gis setup details*/
+            $scope.saveGis = function (gisFrm) {
+                var changed = formChanges.whatChanged(gisFrm);
+                gisFrm.facility = $scope.facility_id;
+                $scope.spinner2 = true; //show spinner
+                if (! _.isEmpty(changed)) {
+                    wrappers.facility_coordinates.update($scope.facility_id, changed)
+                        .success(function (data) {
+                            $scope.spinner2 = false;
+                            $scope.geo = data.results;
+                        })
+                        .error(function (error) {
+                            $scope.spinner2 = false;
+                            $log.error(error);
+                        });
+                }
+                else {
+                    $state.go("facilities.facility_edit.setup",
+                        {"facility_id": $scope.facility_id}, {reload: true});
+                }
+            };
+
         }]);
 
 })(angular, _);

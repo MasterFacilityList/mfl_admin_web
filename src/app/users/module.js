@@ -4,8 +4,6 @@
 
     angular.module("mfl.users", [
         "ui.router",
-        "ui.bootstrap",
-        "ui.bootstrap.tpls",
 
         "mfl.users.controllers",
         "mfl.users.states",

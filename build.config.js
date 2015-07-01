@@ -99,7 +99,8 @@ module.exports = {
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
-            "libs/error_handler.js"
+            "libs/error_handler.js",
+            "libs/datepicker.js"
         ],
         css: [
 
