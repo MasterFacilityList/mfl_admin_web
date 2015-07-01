@@ -152,6 +152,50 @@
                 expect(log.error).toHaveBeenCalled();
             });
 
+            it("should not save if no changes made", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.facility = {};
+                data.$scope.login_user = yusa;
+                httpBackend
+                    .expectGET(server_url+"api/facilities/owners/?page_size=100&ordering=name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/wards/?page_size=500&ordering=name&county=123")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/towns/?page_size=50000&ordering=name")
+                    .respond(200, {results: []});
+
+                ctrl(".basic", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                var frm = {
+                    "$dirty": false,
+                    "name": {
+                        "$dirty": false,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.save(frm);
+
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
             it("should save facility basic details", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -183,7 +227,71 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                data.$scope.save();
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(204);
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$dirty": true,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.save(frm);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should show error on fail to edit facility basic details", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.facility = {};
+                data.$scope.login_user = yusa;
+                httpBackend
+                    .expectGET(server_url+"api/facilities/owners/?page_size=100&ordering=name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/wards/?page_size=500&ordering=name&county=123")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/common/towns/?page_size=50000&ordering=name")
+                    .respond(200, {results: []});
+
+                ctrl(".basic", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(404);
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$dirty": true,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.save(frm);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
             });
         });
 

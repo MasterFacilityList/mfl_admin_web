@@ -5,7 +5,8 @@
         "mfl.facility_mgmt.services",
         "mfl.auth.services",
         "datePicker",
-        "ui.bootstrap.tpls"
+        "ui.bootstrap.tpls",
+        "mfl.common.forms"
     ])
 
     .controller("mfl.facility_mgmt.controllers.services_helper",
@@ -93,8 +94,9 @@
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.basic",
-        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        function ($scope, $log, $stateParams, wrappers) {
+        ["$scope", "$log", "$state", "$stateParams",
+        "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
+        function ($scope, $log, $state, $stateParams, wrappers, formChanges) {
             wrappers.facility_owners.filter({page_size: 100, "ordering": "name"})
             .success(function(data) {
                 $scope.facility_owners = data.results;
@@ -128,7 +130,19 @@
                 $log.error(data);
             });
 
-            $scope.save = function () {};
+            $scope.save = function (frm) {
+                var changes = formChanges.whatChanged(frm);
+                if (_.isEmpty(changes)) {
+                    return;
+                }
+                wrappers.facility_detail.update($scope.facility_id, changes)
+                .success(function () {
+                    $state.go("facilities");
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
         }]
     )
 

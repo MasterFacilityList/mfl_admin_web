@@ -76,10 +76,10 @@
                                 type: "categorized",
                                 categories: _facility_names,
                                 tick: {
-                                    rotate: 90,
+                                    rotate: -60,
                                     multiline: false
                                 },
-                                height: 140
+                                height: 130
                             },
                             y: {
                                 label: {
@@ -130,10 +130,10 @@
                                 type: "categorized",
                                 categories: _names_list,
                                 tick: {
-                                    rotate: 90,
+                                    rotate: -60,
                                     multiline: false
                                 },
-                                height: 100
+                                height: 150
                             },
                             y: {
                                 label: {
