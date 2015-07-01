@@ -348,7 +348,6 @@
         ["$scope","mfl.facility_mgmt.services.wrappers","$log", "mfl.common.forms.changes",
          "$state",
         function ($scope,wrappers,$log, formChanges,$state) {
-
             /*facility gis data*/
             wrappers.facility_coordinates.filter({facility:$scope.facility_id})
             .success(function (data) {

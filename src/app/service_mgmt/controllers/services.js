@@ -61,8 +61,7 @@
 
     .controller("mfl.service_mgmt.controllers.service_edit.basic",
         ["$scope", "$state", "$log", "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
-         "$window",
-        function ($scope, $state, $log, wrappers, forms,$window) {
+        function ($scope, $state, $log, wrappers, forms) {
             $scope.steps[0].active = true;
             $scope.steps[1].active = false;
             wrappers.categories.filter({page_size: 1000}).success(function (data) {
@@ -76,11 +75,19 @@
                 if (! _.isEmpty(changed)) {
                     wrappers.services.update($scope.service_id, changed)
                         .success(function () {
-                            $window.location.reload();
+                            $state.go(
+                            "service_mgmt.service_list.service_edit.options",
+                            {"service_id": $scope.service_id},
+                            {reload: true}
+                            );
                         });
                 }
                 else {
-                    $window.location.reload();
+                    $state.go(
+                    "service_mgmt.service_list.service_edit.options",
+                    {"service_id": $scope.service_id},
+                    {reload: true}
+                    );
                 }
             };
         }
