@@ -371,30 +371,6 @@
                         {"facility_id": $scope.facility_id}, {reload: true});
                 }
             };
-
-
-            /*Update gis setup details*/
-//            $scope.saveGis = function (gisFrm) {
-//                var changed = formChanges.whatChanged(gisFrm);
-//                gisFrm.facility = $scope.facility_id;
-//                $scope.spinner2 = true; //show spinner
-//                if (! _.isEmpty(changed)) {
-//                    wrappers.facility_coordinates.update($scope.facility.coordinates, changed)
-//                        .success(function (data) {
-//                            $scope.spinner2 = false;
-//                            $scope.geo = data.results;
-//                        })
-//                        .error(function (error) {
-//                            $scope.spinner2 = false;
-//                            $log.error(error);
-//                        });
-//                }
-//                else {
-//                    $state.go("facilities.facility_edit.setup",
-//                        {"facility_id": $scope.facility_id}, {reload: true});
-//                }
-//            };
-
         }]);
 
 })(angular, _);
