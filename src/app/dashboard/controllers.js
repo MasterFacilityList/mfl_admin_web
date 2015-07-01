@@ -34,6 +34,11 @@
                         data: {
                             columns: _list,
                             type : "pie"
+                        },
+                        empty: {
+                            label:{
+                                text: "no data"
+                            }
                         }
                     };
                     return obj;
@@ -42,12 +47,6 @@
                 var facility_chart = function(_dt) {
                     var _list = [];
                     var _facility_names = [];
-                    angular.forEach(_dt.types_summary, function (item) {
-                        item.name = $filter("uppercase")(item.name);
-                        item.name = item.name.replace(/_/g, " ");
-                        _list.push(item.count);
-                        _facility_names.push(item.name);
-                    });
                     angular.forEach(_dt.types_summary, function (item) {
                         _list.push(item.count);
                         _facility_names.push(item.name);
@@ -65,7 +64,12 @@
                             },
                             type : "bar",
                             color: function () {
-                                return "#ed9c28";
+                                return "#4caf50";
+                            },
+                            empty: {
+                                label:{
+                                    text: "no data"
+                                }
                             }
                         },
                         tooltip: {
@@ -76,8 +80,8 @@
                                 type: "categorized",
                                 categories: _facility_names,
                                 tick: {
-                                    rotate: -60,
-                                    multiline: false
+                                    rotate: -30,//rotates graph labels
+                                    multiline: true
                                 },
                                 height: 130
                             },
@@ -122,7 +126,12 @@
                             },
                             type : "bar",
                             color: function () {
-                                return "#0390b2";
+                                return "#03a9f4";
+                            },
+                            empty: {
+                                label:{
+                                    text: "no data"
+                                }
                             }
                         },
                         axis: {
@@ -130,7 +139,7 @@
                                 type: "categorized",
                                 categories: _names_list,
                                 tick: {
-                                    rotate: -60,
+                                    rotate: -30,//rotates graph labels
                                     multiline: false
                                 },
                                 height: 150
