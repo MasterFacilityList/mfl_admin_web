@@ -333,6 +333,7 @@
                     user_id : 1
                 }
             };
+            scope.create = true;
             scope.$parent.furthest = 4;
             scope.nextState = angular.noop;
             scope.steps = [
