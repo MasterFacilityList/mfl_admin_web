@@ -113,8 +113,7 @@
                 $log.error(data);
             });
 
-            wrappers.wards.filter(
-                {page_size: 500, "ordering": "name", "county": $scope.login_user.county})
+            wrappers.wards.filter({page_size: 500, "ordering": "name"})
             .success(function (data) {
                 $scope.wards = data.results;
             })
@@ -122,11 +121,11 @@
                 $log.error(data);
             });
 
-            wrappers.towns.filter({page_size: 50000, "ordering": "name"})
-            .success(function (data) {
-                $scope.towns = data.results;
+            wrappers.operation_status.filter({page_size: 100, "ordering": "name"})
+            .success(function(data) {
+                $scope.operation_status = data.results;
             })
-            .error(function (data) {
+            .error(function(data) {
                 $log.error(data);
             });
 
