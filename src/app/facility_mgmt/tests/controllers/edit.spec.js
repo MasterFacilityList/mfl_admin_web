@@ -1319,50 +1319,141 @@
 
         describe("Test facility edit facility setup controller", function () {
 
-            it("should load the data required by the setup controler", function () {
+            it("should reload state if no changes to facility operation setup", function () {
+                bard.inject(this, "$state");
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 4
                     }
                 };
-                data.$scope.facility_id = 4;
+                
 
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_sources/")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_methods/")
-                    .respond(200, {results: []});
                 ctrl(".setup", data);
 
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-            });
+                httpBackend.resetExpectations();
 
-            it("should fail to load the data required by the setup controler", function () {
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "$stateParams": {
-                        facility_id: 4
-                    }
+                spyOn($state, "go");
+                data.$scope.facility_id = 4;
+                var opFrm = {
+                    number_of_beds : 4,
+                    number_of_cotss : 3
                 };
-                data.$scope.facility_id = 4;
+                var changed = [];
 
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_sources/")
-                    .respond(500, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_methods/")
-                    .respond(500, {results: []});
-                ctrl(".setup", data);
+                data.$scope.updateOp(opFrm);
+                expect(changed).toEqual([]);
+                expect($state.go).toHaveBeenCalled();
 
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
+            });
+            
+            it("should successfully edit facility operation setup", function () {
+                inject(["mfl.common.forms.changes","$state",
+                    function (formChanges, st) {
+                        var scope = rootScope.$new();
+                        var state = st;
+                        var data = {
+                            "$state": state,
+                            "$scope": scope,
+                            "$stateParams": {
+                                facility_id: 4
+                            },
+                            "mfl.common.forms.changes": formChanges
+                        };
+
+                        spyOn(formChanges, "whatChanged").andReturn({number_of_beds : 4,
+                                                                     number_of_cots : 3});
+
+
+                        ctrl(".setup", data);
+
+                        var opFrm = {
+                            number_of_beds : 4,
+                            number_of_cots : 3
+                        };
+                        var changed = {
+                            number_of_beds : 4,
+                            number_of_cots : 3
+                        };
+
+                        spyOn(state, "go");
+
+                        httpBackend
+                            .expectPATCH(server_url + "api/facilities/facilities/4/",changed)
+                            .respond(200);
+
+                        data.$scope.facility_id = 4;
+
+                        data.$scope.facility = {
+                            number_of_beds : 3,
+                            number_of_cots : 4
+                        };
+
+                        data.$scope.updateOp(opFrm);
+                        expect(changed).not.toBeNull();
+
+
+                        httpBackend.flush();
+                        httpBackend.verifyNoOutstandingRequest();
+                        httpBackend.verifyNoOutstandingExpectation();
+                        expect(state.go).not.toHaveBeenCalled();
+                    }
+                ]);
             });
 
+            it("should fail to edit facility operation setup", function () {
+                    inject(["mfl.common.forms.changes","$state",
+                    function (formChanges, st) {
+                        var scope = rootScope.$new();
+                        var state = st;
+                        var data = {
+                            "$state": state,
+                            "$scope": scope,
+                            "$stateParams": {
+                                facility_id: 4
+                            },
+                            "mfl.common.forms.changes": formChanges
+                        };
+                        data.$scope.coordinates = 4;
+
+                        spyOn(formChanges, "whatChanged").andReturn({number_of_beds : 4,
+                                                                     number_of_cots : 3});
+
+                        ctrl(".setup", data);
+
+                        var opFrm = {
+                            number_of_beds : 4,
+                            number_of_cots : 3
+                        };
+                        var changed = {
+                            number_of_beds : 4,
+                            number_of_cots : 3
+                        };
+
+                        spyOn(log, "error");
+
+                        httpBackend
+                            .expectPATCH(server_url + "api/facilities/facilities/4/",changed)
+                            .respond(500);
+
+                        data.$scope.facility_id = 4;
+
+                        data.$scope.facility = {
+                            number_of_beds : 3,
+                            number_of_cots : 4
+                        };
+
+                        data.$scope.updateOp(opFrm);
+                        expect(changed).not.toBeNull();
+
+
+                        httpBackend.flush();
+                        httpBackend.verifyNoOutstandingRequest();
+                        httpBackend.verifyNoOutstandingExpectation();
+                        expect(log.error).toHaveBeenCalled();
+                    }
+                ]);
+                });
         });
     });
 })(angular);

@@ -4,6 +4,8 @@
     angular.module("mfl.facility_mgmt.controllers.edit", [
         "mfl.facility_mgmt.services",
         "mfl.auth.services",
+        "datePicker",
+        "ui.bootstrap.tpls",
         "mfl.common.forms"
     ])
 
@@ -343,26 +345,32 @@
     ])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.setup",
-        ["$scope","mfl.facility_mgmt.services.wrappers",
-        function ($scope,wrappers) {
+        ["$scope","mfl.facility_mgmt.services.wrappers","$log", "mfl.common.forms.changes",
+         "$state",
+        function ($scope,wrappers,$log, formChanges,$state) {
 
-            /*geo_code_sources*/
-            wrappers.geo_code_sources.list()
-            .success(function (data) {
-                $scope.geo_code_sources = data.results;
-            })
-            .error(function (error) {
-                $log.error(error);
-            });
 
-            /*geo_code_methods*/
-            wrappers.geo_code_methods.list()
-            .success(function (data) {
-                $scope.geo_code_methods = data.results;
-            })
-            .error(function (error) {
-                $log.error(error);
-            });
+            /*Update operation setup details*/
+            $scope.updateOp = function (opFrm) {
+                var changed = formChanges.whatChanged(opFrm);
+                opFrm.facility = $scope.facility_id;
+                $scope.spinner1 = true; //show spinner
+                if (! _.isEmpty(changed)) {
+                    wrappers.facility_detail.update($scope.facility_id, changed)
+                        .success(function (data) {
+                            $scope.spinner1 = false;
+                            $scope.geo = data.results;
+                        })
+                        .error(function (error) {
+                            $scope.spinner1 = false;
+                            $log.error(error);
+                        });
+                }
+                else {
+                    $state.go("facilities.facility_edit.setup",
+                        {"facility_id": $scope.facility_id}, {reload: true});
+                }
+            };
         }]);
 
 })(angular, _);

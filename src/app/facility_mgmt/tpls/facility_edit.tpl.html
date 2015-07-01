@@ -4,7 +4,7 @@
             ng-if="!facility.is_approved || facility.has_edits"
             ui-sref=".approve({facility_id: facility_id,update_id: facility.latest_update})"
             ui-sref-opts="{reload:true}">&nbsp;&nbsp;Approve</a>
-        <a class="md-btn md-btn-info" require-permission="facilities.change_facility"
+        <a class="login-btn login-btn-primary" require-permission="facilities.change_facility"
             ng-if="login_user.is_national"
             ui-sref=".publish({facility_id: facility_id})"
             ui-sref-opts="{reload:true}">&nbsp;&nbsp;Publish</a>
@@ -18,7 +18,10 @@
         <a class="login-btn login-btn-primary margin-h-5"
             ui-sref=".downgrade({facility_id: facility_id})"
             ui-sref-opts="{reload:true}">&nbsp;&nbsp;Downgrade</a>
-<a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md" tooltip-placement="bottom" tooltip="Back"><i class="fa fa-arrow-left"></i></a>
+        <a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md"
+           tooltip-placement="bottom" tooltip="Back">
+               <i class="fa fa-arrow-left"></i>
+        </a>
    </div>
    <h2 class="content-title">
         <span class="main-title"> Edit Facility</span>
@@ -49,6 +52,7 @@
 <div class="margin-20 content-card">
     <div class="margin-t-20 ">
         <div class="container-fluid">
+            <state-loader></state-loader>
             <div ui-view="tab-header"></div>
             <div class="tab-content margin-t-20">
                 <div ui-view="publish"></div>

@@ -7,7 +7,7 @@
     angular.module("sil.grid",[
             PAGINATION_TPL,
             SEARCH_TPL,
-            "ui.bootstrap"
+            "ui.bootstrap.modal"
         ]
     )
     .provider("silGridConfig", function() {

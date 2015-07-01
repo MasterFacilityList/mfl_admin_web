@@ -5,8 +5,6 @@
         "mfl.service_mgmt.states",
         "mfl.service_mgmt.services",
         "mfl.service_mgmt.controllers",
-        "ui.bootstrap",
-        "ui.bootstrap.tpls",
         "mfl.common.filters",
         "mfl.common.services"
     ]);

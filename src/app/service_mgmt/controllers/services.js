@@ -83,8 +83,11 @@
                         });
                 }
                 else {
-                    $state.go("service_mgmt.service_list.service_edit.options",
-                        {"service_id": $scope.service_id}, {reload: true});
+                    $state.go(
+                    "service_mgmt.service_list.service_edit.options",
+                    {"service_id": $scope.service_id},
+                    {reload: true}
+                    );
                 }
             };
         }

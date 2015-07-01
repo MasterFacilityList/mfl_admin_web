@@ -1,7 +1,7 @@
 (function(angular){
     "use strict";
 
-    angular.module("mfl.common.directives.uipopoverclose", ["ui.bootstrap"])
+    angular.module("mfl.common.directives.uipopoverclose", ["ui.bootstrap.popover"])
 
     .config(["$tooltipProvider", function($tooltipProvider) {
         $tooltipProvider.setTriggers({"open": "close"});
