@@ -384,6 +384,7 @@
                 }
             };
 
+
             /*Update gis setup details*/
             $scope.saveGis = function (gisFrm) {
                 var changed = formChanges.whatChanged(gisFrm);

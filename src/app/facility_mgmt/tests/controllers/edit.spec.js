@@ -1211,7 +1211,13 @@
 
         describe("Test facility edit facility setup controller", function () {
 
-            it("should load the data required by the setup controler", function () {
+            beforeEach(function () {
+                inject(["mfl.common.forms.changes", function (fc) {
+                    formChanges = fc;
+                }]);
+            });
+
+            it("should load the data required by the setup controller",function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
