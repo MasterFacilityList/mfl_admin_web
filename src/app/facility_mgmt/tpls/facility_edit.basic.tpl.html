@@ -1,32 +1,44 @@
 <div class="pad-t-20">
     <form name="frm_facility_basic" ng-submit="save(frm_facility_basic)">
-        <div class="form-group">
-            <label for="name">Facility Name</label>
-            <input type="text" class="form-control" name="name" placeholder="Facility name" ng-model="facility.name" required />
+        <div class="row">
+            <div class="form-group col-xs-9">
+                <label for="name">Facility Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Facility name" ng-model="facility.name" required />
+            </div>
+            <div class="form-group col-xs-3">
+                <label for="abbreviation">Abbreviation</label>
+                <input type="text" class="form-control" name="abbreviation" placeholder="Abbreviation" ng-models="facility.abbreviation" >
+            </div>
         </div>
         <div class="form-group">
-            <label for="abbreviation">Abbreviation</label>
-            <input type="text" class="form-control" name="abbreviation" placeholder="Abbreviation" ng-models="facility.abbreviation" >
-        </div>
-        <div class="form-group" ng-if="facility.id">
             <label for="facility_type">Facility Type</label>
-            <select ng-model="facility.facility_type" name="facility_type" class="form-control" required>
+
+            <p class="form-control-static" >{{::facility.facility_type_name}}</p>
+
+            <select ng-model="facility.facility_type" name="facility_type" class="form-control" required >
                 <option value=""></option>
                 <option ng-repeat="factype in facility_types" ng-value="factype.id">{{factype.name}}</option>
             </select>
-            <p class="help-block">Not present on editing.</p>
         </div>
-        <div class="form-group" ng-if="facility.id">
-            <label for="facility_type_name">Facility Type</label>
-            <input name="facility_type_name" class="form-control" type="text" ng-model="::facility.facility_type_name" readonly/>
-            <p class="help-block">Readonly on editing.</p>
+        <div class="form-group">
+            <label for="facility_type">Facility Owner</label>
+            <p class="form-control-static">{{::facility.owner_name}}</p>
+            <select ng-model="facility.owner">
+                <option value=""></option>
+                <option ng-repeat="facowner in facility_owners" ng-value="facowner.id">{{facowner.name}}</option>
+            </select>
         </div>
-        <div class="form-group" ng-if="facility.id">
-            <label for="operation_status_name">Operation Type</label>
-            <input name="operation_status_name"  class="form-control" type="text" ng-model="::facility.operation_status_name" readonly required/>
+        <div class="form-group">
+            <label for="operation_status">Operation Status</label>
+            <p class="form-control-static">{{::facility.operation_status_name}}</p>
+            <select ng-model="facility.operation_status" name="operation_status">
+                <option value=""></option>
+                <option ng-repeat="os in operation_status" ng-value="os.id">{{os.name}}</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="owner">Owner</label>
+            <p class="form-control-static">{{::facility.owner_name}}</p>
             <select name="owner" class="form-control" ng-model="facility.owner" required>
                 <option>Select an Owner</option>
                 <option ng-repeat="facowner in facility_owners" ng-value="facowner.id">{{facowner.name}}</option>
@@ -35,30 +47,11 @@
 
         <div class="form-group">
             <label for="ward">Ward</label>
+            <p class="form-control-static">{{::facility.ward_name}}</p>
             <select name="ward" ng-model="facility.ward" class="form-control">
                 <option>Select a ward</option>
                 <option ng-repeat="w in wards" ng-value="w.id">{{w.name}}</option>
             </select>
-        </div>
-        <div class="form-group">
-            <label for="physical_address.town">Town</label>
-            <select name="ward" name="physical_address.town" ng-model="facility.physical_address.plot_number" class="form-control">
-                <option>Select a town</option>
-                <option ng-repeat="t in towns" ng-value="t.id">{{t.name}}</option>
-            </select>
-            <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
-        </div>
-        <div class="form-group">
-            <label for="physical_address.plot_number">Plot Number</label>
-            <input type="text" ng-model="facility.physical_address.plot_number" name="physical_address.plot_number" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label for="physical_address.nearest_landmark">Nearest Landmark</label>
-            <input type="text" ng-model="facility.physical_address.nearest_landmark" name="physical_address.nearest_landmark" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label for="location_description">Location Description</label>
-            <input type="text" ng-model="facility.location_description" name="location_description" class="form-control" />
         </div>
 
         <input type="submit" value="Update Facility" class="btn btn-primary" />

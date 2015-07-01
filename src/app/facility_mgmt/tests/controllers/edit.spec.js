@@ -94,11 +94,11 @@
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name&county=123")
+                        server_url+"api/common/wards/?page_size=500&ordering=name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/towns/?page_size=50000&ordering=name")
+                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
                     .respond(200, {results: []});
                 ctrl(".basic", data);
 
@@ -109,7 +109,7 @@
                 expect(data.$scope.facility_owners).toEqual([]);
                 expect(data.$scope.facility_types).toEqual([]);
                 expect(data.$scope.wards).toEqual([]);
-                expect(data.$scope.towns).toEqual([]);
+                expect(data.$scope.operation_status).toEqual([]);
             });
 
             it("should show errors on load", function () {
@@ -132,11 +132,11 @@
                     .respond(500, {});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name&county=123")
+                        server_url+"api/common/wards/?page_size=500&ordering=name")
                     .respond(500, {});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/towns/?page_size=50000&ordering=name")
+                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
                     .respond(500, {});
 
                 ctrl(".basic", data);
@@ -148,7 +148,7 @@
                 expect(data.$scope.facility_owners).toEqual(undefined);
                 expect(data.$scope.facility_types).toEqual(undefined);
                 expect(data.$scope.wards).toEqual(undefined);
-                expect(data.$scope.towns).toEqual(undefined);
+                expect(data.$scope.operation_status).toEqual(undefined);
                 expect(log.error).toHaveBeenCalled();
             });
 
@@ -170,11 +170,11 @@
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name&county=123")
+                        server_url+"api/common/wards/?page_size=500&ordering=name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/towns/?page_size=50000&ordering=name")
+                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
                     .respond(200, {results: []});
 
                 ctrl(".basic", data);
@@ -214,11 +214,11 @@
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name&county=123")
+                        server_url+"api/common/wards/?page_size=500&ordering=name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/towns/?page_size=50000&ordering=name")
+                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
                     .respond(200, {results: []});
 
                 ctrl(".basic", data);
@@ -263,11 +263,11 @@
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name&county=123")
+                        server_url+"api/common/wards/?page_size=500&ordering=name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
-                        server_url+"api/common/towns/?page_size=50000&ordering=name")
+                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
                     .respond(200, {results: []});
 
                 ctrl(".basic", data);

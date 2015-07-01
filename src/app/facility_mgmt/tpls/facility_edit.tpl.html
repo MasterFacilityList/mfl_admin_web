@@ -1,10 +1,10 @@
 <div class="content-header">
    <div class="action-container content-header-extra pad-r-20">
-        <a class="login-btn login-btn-primary margin-h-5" require-permission="facilities.add_facilityapproval"
+        <a class="md-btn md-btn-primary margin-h-5" require-permission="facilities.add_facilityapproval"
             ng-if="!facility.is_approved || facility.has_edits"
             ui-sref=".approve({facility_id: facility_id,update_id: facility.latest_update})"
             ui-sref-opts="{reload:true}">&nbsp;&nbsp;Approve</a>
-        <a class="md-btn md-btn-info" require-permission="facilities.change_facility"
+        <a class="login-btn login-btn-primary" require-permission="facilities.change_facility"
             ng-if="login_user.is_national"
             ui-sref=".publish({facility_id: facility_id})"
             ui-sref-opts="{reload:true}">&nbsp;&nbsp;Publish</a>
