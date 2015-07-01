@@ -105,7 +105,7 @@ module.exports = {
 
         ],
         assets: [
-            "vendor/fontawesome/fonts/*"
+            "vendor/fontawesome/fonts/fontawesome-webfont.woff2"
         ],
         imgs: {
             sil: [

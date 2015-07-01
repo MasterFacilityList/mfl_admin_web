@@ -1219,6 +1219,9 @@
                 data.$scope.facility_id = 4;
 
                 httpBackend
+                    .expectGET(server_url+"api/gis/facility_coordinates/?facility=4")
+                    .respond(200, {results: []});
+                httpBackend
                     .expectGET(server_url+"api/gis/geo_code_sources/")
                     .respond(200, {results: []});
                 httpBackend
@@ -1231,7 +1234,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
             });
 
-            it("should fail to load the data required by the setup controler", function () {
+            it("should fail to load the data required by the setup controller", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
@@ -1253,6 +1256,35 @@
                 httpBackend.verifyNoOutstandingExpectation();
             });
 
+            it("should edit facility operation setup details", function () {
+                var payload = {results: [{"id": 3}]};
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/")
+                    .respond(200, payload);
+
+                var c = ctrl();
+                var scope = rootScope.$new();
+                c.bootstrap(scope);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/facility_services/")
+                    .respond(201, {"id": 4});
+
+                scope.facility = {
+                    facility_services: []
+                };
+                scope.addServiceOption(payload.results[0]);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(scope.facility.facility_services[0]).toEqual({"id": 4});
+            });
         });
     });
 })(angular);

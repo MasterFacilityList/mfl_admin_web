@@ -329,8 +329,17 @@
     ])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.setup",
-        ["$scope","mfl.facility_mgmt.services.wrappers",
-        function ($scope,wrappers) {
+        ["$scope","mfl.facility_mgmt.services.wrappers","$log",
+        function ($scope,wrappers,$log) {
+
+            /*facility gis data*/
+            wrappers.facility_coordinates.filter({facility:$scope.facility_id})
+            .success(function (data) {
+                $scope.geo = data.results;
+            })
+            .error(function (error) {
+                $log.error(error);
+            });
 
             /*geo_code_sources*/
             wrappers.geo_code_sources.list()
@@ -349,6 +358,34 @@
             .error(function (error) {
                 $log.error(error);
             });
+
+
+            $scope.update = function (gisFrm) {
+                $scope.spinner1 = true;
+                wrappers.facility_detail.update($scope.facility_id, gisFrm)
+                    .success(function (data) {
+                        $scope.spinner1 = false;
+                        $scope.facility =  data.results;
+                    })
+                    .error(function (error) {
+                        $scope.spinner1 = false;
+                        $log.error(error);
+                    });
+            };
+            $scope.save = function (opFrm) {
+                opFrm.facility = $scope.facility_id;
+                $scope.spinner2 = true;
+                wrappers.facility_coordinates.update($scope.facility_id, opFrm)
+                    .success(function (data) {
+                        $scope.spinner2 = false;
+                        $scope.geo = data.results;
+                    })
+                    .error(function (error) {
+                        $scope.spinner2 = false;
+                        $log.error(error);
+                    });
+            };
+            
         }]);
 
 })(angular, _);

@@ -1,109 +1,129 @@
 <div class="col-lg-12">
-   <form name="facility_setup">
         <div class="pad-t-20">
             <h4>Operation setup</h4>
-                <div class="content-card">
-                   <div class="row">
-                        <div class="group col-sm-7">
-                            <input type="text" name="beds" ng-model="facility.number_of_beds"  required />
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label class="pad-l-10">
-                                Beds
-                            </label>
+                <form name="operation_setup">
+                    <div ng-if="spinner1" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
+                        <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+                    </div>
+                    <div ng-if="!spinner1">
+                        <div class="content-card">
+                           <div class="row">
+                                <div class="group col-sm-7">
+                                    <input type="text" name="number_of_beds" ng-model="facility.number_of_beds"  required />
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label class="pad-l-10">
+                                        Beds
+                                    </label>
+                                </div>
+                           </div>
+                           <div class="row">
+                                <div class="group col-sm-7">
+                                    <input type="text" name="number_of_cots" ng-model="facility.number_of_cots"  required />
+                                    <label class="pad-l-10" for="number_of_cots">
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        Cots
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="checkbox-group margin-t-10">
+                                <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day">
+                                <label for="open_whole_day">
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                     Open 24 hours
+                                 </label>
+                            </div>
+                            <div class="checkbox-group margin-t-10">
+                                <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="facility.open_public_holidays">
+                                <label for="open_public_holidays">
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                     Open on public holidays
+                                 </label>
+                            </div>
+                            <div class="checkbox-group margin-t-10">
+                                <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="facility.open_weekends">
+                                <label for="open_weekends">
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                     Open during weekends
+                                 </label>
+                            </div>
+                            <div class="checkbox-group margin-t-10">
+                                <input type="checkbox" id="is_classified" name="is_classified" ng-model="facility.is_classified">
+                                <label for="is_classified">
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                     Classified facility
+                                 </label>
+                            </div>
                         </div>
-                   </div>
-                   <div class="row">
-                        <div class="group col-sm-7">
-                            <input type="text" name="cots" ng-model="facility.number_of_cots"  required />
-                            <span class="highlight"></span>
-                            <span class="bar"></span>
-                            <label class="pad-l-10">
-                                Cots
-                            </label>
+                        <div class="margin-t-20 margin-b-20">
+                            <button type="submit" class="md-btn md-btn-primary" ng-click="update(operation_setup)">Save operation setup</button>
                         </div>
-                   </div>
-                    <div class="checkbox-group margin-t-10">
-                        <input type="checkbox" id="wholeday" name="wholeday" ng-model="facility.open_whole_day">
-                        <label for="active">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                             Open 24 hours
-                         </label>
                     </div>
-                    <div class="checkbox-group margin-t-10">
-                        <input type="checkbox" id="publicholidays" name="publicholidays" ng-model="facility.open_public_holidays">
-                        <label for="active">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                             Open on public holidays
-                         </label>
-                    </div>
-                    <div class="checkbox-group margin-t-10">
-                        <input type="checkbox" id="weekends" name="24hr" ng-model="facility.open_weekends">
-                        <label for="active">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                             Open during weekends
-                         </label>
-                    </div>
-                    <div class="checkbox-group margin-t-10">
-                        <input type="checkbox" id="" name="24hr" ng-model="facility.open_whole_day">
-                        <label for="active">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                             Classified facility
-                         </label>
-                    </div>
-                </div>
+                </form>
         </div>
         <div class="pad-t-20">
            <h4>Geolocation setup</h4>
-            <div class="content-card">
-               <div class="row">
-                    <div class="group col-sm-7">
-                        <input type="text" name="longitude" ng-model="geo.coordinates.coordinates[0]"  required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label class="pad-l-10">
-                            Longitude
-                        </label>
-                    </div>
-                    <div class="group col-sm-7">
-                        <input type="text" name="latitude" ng-model="geo.coordinates.coordinates[1]"  required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label class="pad-l-10">
-                            Latitude
-                        </label>
-                    </div>
-                    <div class="group col-sm-7">
-                        <select name="contact_type" ng-model="geo.source">
-                            <option value="" disabled>Geocode source</option>
-                            <option ng-repeat="gcs in geo_code_sources" ng-value="gcs.id">{{gcs.name}}</option>
-                        </select>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                    </div>
-                    <div class="group col-sm-7">
-                        <select name="contact_type" ng-model="geo.method">
-                            <option value="" disabled>Geocode method</option>
-                            <option ng-repeat="gcm in geo_code_methods" ng-value="gcm.id">{{gcm.name}}</option>
-                        </select>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                    </div>
-                    <div class="group col-sm-7">
-                        <input type="date" name="collectiondate" ng-model="collection_date"/>
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label class="pad-l-10"></label>
-                    </div>
-               </div>
+                <form name="gis_setup">
+            <div ng-if="spinner2" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
+                <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
             </div>
+            <div ng-if="!spinner2">
+                <div class="content-card">
+                    <div class="row">
+                        <div class="group col-sm-7">
+                            <input type="text" name="longitude" ng-model="geo.coordinates.coordinates[0]"  required />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="pad-l-10">
+                                Longitude
+                            </label>
+                        </div>
+                        <div class="group col-sm-7">
+                            <input type="text" name="latitude" ng-model="geo.coordinates.coordinates[1]"  required />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="pad-l-10">
+                                Latitude
+                            </label>
+                        </div>
+                        <div class="group col-sm-7">
+                            <select name="source" ng-model="geo.source">
+                                <option value="" disabled>Geocode source</option>
+                                <option ng-repeat="gcs in geo_code_sources" ng-value="gcs.id">{{gcs.name}}</option>
+                            </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                        </div>
+                        <div class="group col-sm-7">
+                            <select name="method" ng-model="geo.method">
+                                <option value="" disabled>Geocode method</option>
+                                <option ng-repeat="gcm in geo_code_methods" ng-value="gcm.id">{{gcm.name}}</option>
+                            </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                        </div>
+                        <div class="col-sm-7" style="min-height:290px;">
+                            <label for="collection date"><h5>Collection date: <input type="date" name="collection_date" ng-model="dt" disabled/></h5></label>
+                            <div>
+                              <datepicker ng-model="dt" min-date="minDate" show-weeks="true" custom-class="getDayClass(date, mode)"></datepicker>
+                            </div>
+                        </div>
+                        <div class="group col-sm-7">
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="pad-l-10"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="margin-t-20 margin-b-20">
+                    <button type="submit" class="md-btn md-btn-primary" ng-click="save(gis_setup)">Save geolocation setup</button>
+                </div>
+            </div>
+        </form>
         </div>
-        <div class="margin-t-20 margin-b-20">
-            <button type="submit" class="md-btn md-btn-primary">Save</button>
-        </div>
-    </form>
 </div>
