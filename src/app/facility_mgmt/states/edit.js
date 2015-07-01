@@ -89,12 +89,6 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.setup.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.setup"
                     }
-                },
-                resolve: {
-                    fac : ["mfl.facility_mgmt.services.wrappers","$stateParams",
-                                function (wrappers, $stateParams){
-                                    return wrappers.facility_detail.get($stateParams.facility_id);
-                                }]
                 }
             })
             ;

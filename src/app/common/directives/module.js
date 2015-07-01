@@ -5,7 +5,6 @@
         "mfl.common.directives.listassignment",
         "mfl.common.directives.contentheader",
         "mfl.common.directives.uipopoverclose",
-        "mfl.common.directives.statemodal",
-        "mfl.common.directives.stateloading"
+        "mfl.common.directives.statemodal"
     ]);
 })(angular);
