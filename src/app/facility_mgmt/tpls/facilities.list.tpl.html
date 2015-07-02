@@ -6,7 +6,7 @@
         <p class="text-right margin-t-5">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
     </div>
 </div>
-<table class="table table-hover fs-14 margin-t-20">
+<table class="table table-hover fs-14 margin-t-20" id="no-more-tables">
     <thead>
         <th>Code</th>
         <th>Name</th>
@@ -18,13 +18,13 @@
     </thead>
     <tbody>
         <tr ng-repeat="fac in facilities">
-            <td>{{fac.code}}</td>
-            <td>{{fac.name}}</td>
-            <td>{{fac.county}}</td>
-            <td>{{fac.constituency}}</td>
-            <td>{{fac.owner_name}}</td>
-            <td>{{fac.facility_type_name}}</td>
-            <td>
+            <td data-title="Code:" >{{fac.code}}</td>
+            <td data-title="Name:" >{{fac.name}}</td>
+            <td data-title="County:"> {{fac.county}}</td>
+            <td data-title="Constituency:" >{{fac.constituency}}</td>
+            <td data-title="Owner:" >{{fac.owner_name}}</td>
+            <td data-title="Facility Type:" >{{fac.facility_type_name}}</td>
+            <td data-title="Actions:" >
                 <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})" class="action-btn action-btn-grid action-btn-primary"><i class="fa fa-eye"></i> </a>
             </td>
         </tr>

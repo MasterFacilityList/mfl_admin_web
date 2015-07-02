@@ -113,8 +113,7 @@
                 $log.error(data);
             });
 
-            wrappers.wards.filter(
-                {page_size: 500, "ordering": "name", "county": $scope.login_user.county})
+            wrappers.wards.filter({page_size: 500, "ordering": "name"})
             .success(function (data) {
                 $scope.wards = data.results;
             })
@@ -122,11 +121,11 @@
                 $log.error(data);
             });
 
-            wrappers.towns.filter({page_size: 50000, "ordering": "name"})
-            .success(function (data) {
-                $scope.towns = data.results;
+            wrappers.operation_status.filter({page_size: 100, "ordering": "name"})
+            .success(function(data) {
+                $scope.operation_status = data.results;
             })
-            .error(function (data) {
+            .error(function(data) {
                 $log.error(data);
             });
 
@@ -371,30 +370,6 @@
                         {"facility_id": $scope.facility_id}, {reload: true});
                 }
             };
-
-
-            /*Update gis setup details*/
-//            $scope.saveGis = function (gisFrm) {
-//                var changed = formChanges.whatChanged(gisFrm);
-//                gisFrm.facility = $scope.facility_id;
-//                $scope.spinner2 = true; //show spinner
-//                if (! _.isEmpty(changed)) {
-//                    wrappers.facility_coordinates.update($scope.facility.coordinates, changed)
-//                        .success(function (data) {
-//                            $scope.spinner2 = false;
-//                            $scope.geo = data.results;
-//                        })
-//                        .error(function (error) {
-//                            $scope.spinner2 = false;
-//                            $log.error(error);
-//                        });
-//                }
-//                else {
-//                    $state.go("facilities.facility_edit.setup",
-//                        {"facility_id": $scope.facility_id}, {reload: true});
-//                }
-//            };
-
         }]);
 
 })(angular, _);

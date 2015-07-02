@@ -20,6 +20,7 @@
         this.service_options = api.setBaseUrl("api/facilities/service_options/");
         this.facility_services = api.setBaseUrl("api/facilities/facility_services/");
         this.facility_updates = api.setBaseUrl("api/facilities/facility_updates/");
+        this.operation_status = api.setBaseUrl("api/facilities/facility_status/");
         this.facility_approvals = api.setBaseUrl("api/facilities/facility_approvals/");
         this.facility_officers = api.setBaseUrl("api/facilities/facility_officers/");
         this.facility_upgrade = api.setBaseUrl("api/facilities/facility_upgrade/");
