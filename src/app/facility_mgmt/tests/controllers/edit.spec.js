@@ -2,7 +2,8 @@
     "use strict";
 
     describe("Test facility edit controllers", function () {
-        var rootScope, ctrl, httpBackend, server_url, loginService, log, yusa, controller;
+        var rootScope, ctrl, httpBackend, server_url, loginService, log,
+        yusa, controller, facObjService, state;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
@@ -10,7 +11,8 @@
             module("mfl.facility_mgmt.controllers");
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$log",
-                function (c, r, h, s, ls, lg) {
+                "mfl.facility.multistep.service", "$state",
+                function (c, r, h, s, ls, lg, fmS, st) {
                     ctrl = function (name, data) {
                         return c("mfl.facility_mgmt.controllers.facility_edit"+name, data);
                     };
@@ -19,6 +21,8 @@
                     httpBackend = h;
                     server_url = s;
                     loginService = ls;
+                    facObjService = fmS;
+                    state = st;
                     yusa = {
                         county: "123"
                     };
@@ -30,54 +34,71 @@
 
         describe("Test facility edit controller", function () {
 
-            it("should load facility details", function () {
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "$stateParams": {
-                        facility_id: 3
-                    }
-                };
-                var f = {
-                    ward_name: "ward",
-                    ward: "1",
-                    facility_type: "2",
-                    facility_type_name: "type",
-                    owner: "3",
-                    owner_name: "owner",
-                    operation_status: "4",
-                    operation_status_name: "opstatus"
-                };
-                httpBackend
-                    .expectGET(server_url+"api/facilities/facilities/3/")
-                    .respond(200, f);
+            it("should load facility details",
+                inject(["mfl.facility.multistep.service", function (facObjService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "mfl.facility.multistep.service" : facObjService,
+                        "$stateParams": {
+                            facility_id: 3
+                        }
+                    };
 
-                ctrl("", data);
+                    var f = {
+                        ward_name: "ward",
+                        ward: "1",
+                        facility_type: "2",
+                        facility_type_name: "type",
+                        owner: "3",
+                        owner_name: "owner",
+                        operation_status: "4",
+                        operation_status_name: "opstatus"
+                    };
+                    spyOn(state, "go");
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/3/")
+                        .respond(200, f);
+                    //piggy back on test
+                    data.$scope.steps = [
+                        {
+                            name : "basic",
+                            active : false
+                        },
+                        {
+                            name : "contacts",
+                            active : false
+                        }
+                    ];
 
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
+                    ctrl("", data);
+                    var obj = {name : "basic", active : false};
+                    data.$scope.tabState(obj);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.facility).toEqual(f);
-                expect(data.$scope.select_values).toEqual({
-                    ward: {
-                        "id": "1",
-                        "name": "ward"
-                    },
-                    facility_type: {
-                        "id": "2",
-                        "name": "type"
-                    },
-                    owner: {
-                        "id": "3",
-                        "name": "owner"
-                    },
-                    operation_status: {
-                        "id": "4",
-                        "name": "opstatus"
-                    }
-                });
-            });
-
+                    expect(data.$scope.facility).toEqual(f);
+                    expect(data.$scope.select_values).toEqual({
+                        ward: {
+                            "id": "1",
+                            "name": "ward"
+                        },
+                        facility_type: {
+                            "id": "2",
+                            "name": "type"
+                        },
+                        owner: {
+                            "id": "3",
+                            "name": "owner"
+                        },
+                        operation_status: {
+                            "id": "4",
+                            "name": "opstatus"
+                        }
+                    });
+                }])
+            );
 
             it("should not reload on invalid search term", function () {
                 var data = {
