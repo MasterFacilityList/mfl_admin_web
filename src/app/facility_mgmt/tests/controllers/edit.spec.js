@@ -37,9 +37,19 @@
                         facility_id: 3
                     }
                 };
+                var f = {
+                    ward_name: "ward",
+                    ward: "1",
+                    facility_type: "2",
+                    facility_type_name: "type",
+                    owner: "3",
+                    owner_name: "owner",
+                    operation_status: "4",
+                    operation_status_name: "opstatus"
+                };
                 httpBackend
                     .expectGET(server_url+"api/facilities/facilities/3/")
-                    .respond(200, {});
+                    .respond(200, f);
 
                 ctrl("", data);
 
@@ -47,7 +57,48 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.facility).toEqual({});
+                expect(data.$scope.facility).toEqual(f);
+                expect(data.$scope.select_values).toEqual({
+                    ward: {
+                        "id": "1",
+                        "name": "ward"
+                    },
+                    facility_type: {
+                        "id": "2",
+                        "name": "type"
+                    },
+                    owner: {
+                        "id": "3",
+                        "name": "owner"
+                    },
+                    operation_status: {
+                        "id": "4",
+                        "name": "opstatus"
+                    }
+                });
+            });
+
+
+            it("should not reload on invalid search term", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facilities/3/")
+                    .respond(200, {});
+
+                ctrl("", data);
+
+                data.$scope.selectReload();
+                data.$scope.selectReload(null, null, 3);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
             });
 
             it("should show error on fail to load facility details", function () {
@@ -72,11 +123,85 @@
                 expect(data.$scope.facility).toBe(undefined);
                 expect(log.error).toHaveBeenCalled();
             });
+
+            it("should reload facilities", function () {
+                inject(["mfl.facility_mgmt.services.wrappers", function (wrappers) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 3
+                        }
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/3/")
+                        .respond(200, {});
+
+                    ctrl("", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                    httpBackend.resetExpectations();
+
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/" +
+                                   "?page_size=20&ordering=name&search_auto=kitale")
+                        .respond(200, {results : []});
+
+                    data.$scope.selectReload(
+                        wrappers.facility_detail, "name", "kitale", "facilities"
+                    );
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                    expect(data.$scope.facilities).toEqual([]);
+                }]);
+            });
+
+            it("should show errors on fail to reload facilities", function () {
+                inject(["mfl.facility_mgmt.services.wrappers", function (wrappers) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 3
+                        }
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/3/")
+                        .respond(200, {});
+
+                    ctrl("", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                    httpBackend.resetExpectations();
+
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/" +
+                                   "?page_size=20&ordering=name&search_auto=kitale")
+                        .respond(400);
+
+                    data.$scope.selectReload(
+                        wrappers.facility_detail, "name", "kitale", "facilities"
+                    );
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                    expect(data.$scope.facilities).toEqual(undefined);
+                }]);
+            });
         });
 
         describe("Test facility edit basic controller", function () {
 
-            it("should load required data", function () {
+            it("should reload required data", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
@@ -85,71 +210,17 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-                httpBackend
-                    .expectGET(server_url+"api/facilities/owners/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-                ctrl(".basic", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                expect(data.$scope.facility_owners).toEqual([]);
-                expect(data.$scope.facility_types).toEqual([]);
-                expect(data.$scope.wards).toEqual([]);
-                expect(data.$scope.operation_status).toEqual([]);
-            });
-
-            it("should show errors on load", function () {
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "$stateParams": {
-                        facility_id: 3
-                    },
-                    "$log": log
-                };
-                spyOn(log, "error");
-                data.$scope.facility = {};
-                data.$scope.login_user = yusa;
-                httpBackend
-                    .expectGET(server_url+"api/facilities/owners/?page_size=100&ordering=name")
-                    .respond(500, {});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
-                    .respond(500, {});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name")
-                    .respond(500, {});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
-                    .respond(500, {});
 
                 ctrl(".basic", data);
+                data.$scope.selectReload = angular.noop;
+                spyOn(data.$scope, "selectReload");
 
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
+                data.$scope.reloadOwners("yeah");
+                data.$scope.reloadFacilityTypes("yeah");
+                data.$scope.reloadOperationStatus("yeah");
+                data.$scope.reloadWards("yeah");
 
-                expect(data.$scope.facility_owners).toEqual(undefined);
-                expect(data.$scope.facility_types).toEqual(undefined);
-                expect(data.$scope.wards).toEqual(undefined);
-                expect(data.$scope.operation_status).toEqual(undefined);
-                expect(log.error).toHaveBeenCalled();
+                expect(data.$scope.selectReload).toHaveBeenCalled();
             });
 
             it("should not save if no changes made", function () {
@@ -161,27 +232,8 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-                httpBackend
-                    .expectGET(server_url+"api/facilities/owners/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
 
                 ctrl(".basic", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
 
                 var frm = {
                     "$dirty": false,
@@ -205,27 +257,8 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-                httpBackend
-                    .expectGET(server_url+"api/facilities/owners/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
 
                 ctrl(".basic", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
 
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facilities/3/")
@@ -254,27 +287,8 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-                httpBackend
-                    .expectGET(server_url+"api/facilities/owners/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/common/wards/?page_size=500&ordering=name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(
-                        server_url+"api/facilities/facility_status/?page_size=100&ordering=name")
-                    .respond(200, {results: []});
-
                 ctrl(".basic", data);
 
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
 
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facilities/3/")
@@ -1327,7 +1341,7 @@
                         facility_id: 4
                     }
                 };
-                
+
 
                 ctrl(".setup", data);
 
@@ -1346,7 +1360,7 @@
                 expect($state.go).toHaveBeenCalled();
 
             });
-            
+
             it("should successfully edit facility operation setup", function () {
                 inject(["mfl.common.forms.changes","$state",
                     function (formChanges, st) {
