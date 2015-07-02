@@ -371,22 +371,24 @@
         }])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
-        ["$scope","mfl.facility_mgmt.services.wrappers","$log","facil",
-        function ($scope,wrappers,$log,facility) {
+        ["$scope", "mfl.facility_mgmt.services.wrappers", "$log",
+        function ($scope,wrappers,$log) {
             $scope.spinner = true;
-            $scope.facility = facility.data;
-
-            /*facility's coordinates*/
-            wrappers.facility_coordinates.get($scope.facility.coordinates)
-            .success(function(data){
-                $scope.spinner = false;
-                $scope.geo = data;
-            })
-            .error(function(error){
-                $scope.spinner = false;
-                $log.error(error);
+            $scope.$watch("facility", function (f) {
+                if (_.isUndefined(f)){
+                    return;
+                }
+                /*facility's coordinates*/
+                wrappers.facility_coordinates.get(f.coordinates)
+                .success(function(data){
+                    $scope.spinner = false;
+                    $scope.geo = data;
+                })
+                .error(function(error){
+                    $scope.spinner = false;
+                    $log.error(error);
+                });
             });
-
         }]);
 
 })(angular, _);
