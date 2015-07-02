@@ -76,58 +76,77 @@
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit",
-        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
+        ["$scope", "$q", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
         "mfl.auth.services.login",
-        function ($scope, $log, $stateParams, wrappers, loginService) {
+        function ($scope, $q, $log, $stateParams, wrappers, loginService) {
             $scope.facility_id = $stateParams.facility_id;
             $scope.spinner = true;
             wrappers.facility_detail.get($scope.facility_id)
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.facility = data;
+                    $scope.select_values = {
+                        ward: {
+                            "id": $scope.facility.ward,
+                            "name": $scope.facility.ward_name
+                        },
+                        facility_type: {
+                            "id": $scope.facility.facility_type,
+                            "name": $scope.facility.facility_type_name
+                        },
+                        owner: {
+                            "id": $scope.facility.owner,
+                            "name": $scope.facility.owner_name
+                        },
+                        operation_status: {
+                            "id": $scope.facility.operation_status,
+                            "name": $scope.facility.operation_status_name
+                        }
+                    };
                 })
                 .error(function (data) {
                     $log.error(data);
                 });
             $scope.login_user = loginService.getUser();
+            $scope.selectReload = function (wrapper, order_field, search_term, scope_var) {
+                if (_.isEmpty(search_term) || (! _.isString(search_term))) {
+                    return $q.reject();
+                }
+                return wrapper.filter(
+                    {page_size: 20, "ordering": order_field, "search_auto": search_term}
+                )
+                .success(function (data) {
+                    $scope[scope_var] = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+            };
         }]
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.basic",
-        ["$scope", "$log", "$state", "$stateParams",
+        ["$scope", "$q", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
-        function ($scope, $log, $state, $stateParams, wrappers, formChanges) {
-            wrappers.facility_owners.filter({page_size: 100, "ordering": "name"})
-            .success(function(data) {
-                $scope.facility_owners = data.results;
-            })
-            .error(function(data) {
-                $log.error(data);
-            });
+        function ($scope, $q, $log, $state, $stateParams, wrappers, formChanges) {
 
-            wrappers.facility_types.filter({page_size: 100, "ordering": "name"})
-            .success(function(data) {
-                $scope.facility_types = data.results;
-            })
-            .error(function(data) {
-                $log.error(data);
-            });
+            $scope.reloadOwners = function (s) {
+                return $scope.selectReload(wrappers.facility_owners, "name", s, "owners");
+            };
 
-            wrappers.wards.filter({page_size: 500, "ordering": "name"})
-            .success(function (data) {
-                $scope.wards = data.results;
-            })
-            .error(function (data) {
-                $log.error(data);
-            });
+            $scope.reloadFacilityTypes = function (s) {
+                return $scope.selectReload(wrappers.facility_types, "name", s, "facility_types");
+            };
 
-            wrappers.operation_status.filter({page_size: 100, "ordering": "name"})
-            .success(function(data) {
-                $scope.operation_status = data.results;
-            })
-            .error(function(data) {
-                $log.error(data);
-            });
+            $scope.reloadOperationStatus = function (s) {
+                return $scope.selectReload(
+                    wrappers.operation_status, "name", s, "operation_status"
+                );
+            };
+
+            $scope.reloadWards = function (s) {
+                return $scope.selectReload(wrappers.wards, "name", s, "wards");
+            };
 
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
