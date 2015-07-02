@@ -68,7 +68,7 @@
                             },
                             empty: {
                                 label:{
-                                    text: "Sorry,Data is Currently Unavailabel"
+                                    text: "Sorry, data is currently unavailable"
                                 }
                             }
                         },
@@ -130,7 +130,7 @@
                             },
                             empty: {
                                 label:{
-                                    text: "Sorry, Data is Currently Unavailable"
+                                    text: "Sorry, data is currently unavailable"
                                 }
                             }
                         },
