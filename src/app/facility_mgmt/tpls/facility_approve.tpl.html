@@ -45,9 +45,9 @@
                     </tr>
                 </tbody>
             </table>
-            <form ng-submit="approveUpdate()">
-                <input class="btn btn-primary" value="Approve Updates" type="submit" />
-            </form>
+
+            <button ng-click="approveUpdate(true)" class="btn btn-success">Approve Updates</button>
+            <button ng-click="approveUpdate(false)" class="btn btn-danger">Decline Updates</button>
         </div>
         <div ng-if="!facility.latest_update">
             <p>No facility updates pending approval</p>

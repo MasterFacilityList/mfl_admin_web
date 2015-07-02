@@ -40,11 +40,12 @@
                 });
             };
 
-            $scope.approveUpdate = function () {
+            $scope.approveUpdate = function (approved) {
                 if (! update_id) {
                     return;
                 }
-                wrappers.facility_updates.update(update_id, {"approved": true})
+                var payload = (approved) ? {"approved": true} : {"cancelled": true};
+                wrappers.facility_updates.update(update_id, payload)
                 .success(function () {
                     $state.go("facilities");
                 })
