@@ -1,4 +1,4 @@
-(function (angular, _) {
+(function (angular) {
 
     angular.module("mfl.service_mgmt.controllers.categories", [
         "ui.router",
@@ -10,8 +10,8 @@
 
     .controller("mfl.service_mgmt.controllers.category_edit",
         ["$scope", "$state", "$stateParams", "$log",
-        "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
-        function ($scope, $state, $stateParams, $log, wrappers, forms) {
+        "mfl.service_mgmt.wrappers",
+        function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.category_id = $stateParams.category_id;
 
             wrappers.categories.get($scope.category_id).success(function (data) {
@@ -21,19 +21,15 @@
                 $log.warn(data);
             });
 
-            $scope.save = function (frm) {
-                var changed = forms.whatChanged(frm);
-
-                if (! _.isEmpty(changed)) {
-                    wrappers.categories.update($scope.category_id, changed)
-                        .success(function () {
-                            $state.go(
-                                "service_mgmt.category_list",
-                                {"category_id": $scope.category_id},
-                                {reload: true}
-                            );
-                        });
-                }
+            $scope.save = function (data) {
+                wrappers.categories.update($scope.category_id, data)
+                    .success(function () {
+                        $state.go(
+                            "service_mgmt.category_list",
+                            {"category_id": $scope.category_id},
+                            {reload: true}
+                        );
+                    });
             };
             $scope.remove = function () {
                 wrappers.categories.remove($scope.category_id).success(function(){
@@ -45,6 +41,38 @@
             $scope.cancel = function () {
                 $state.go("service_mgmt.category_list.category_edit");
             };
+            $scope.categoryFields = [
+                {
+                    key: "name",
+                    type: "input",
+                    templateOptions: {
+                        type: "text",
+                        label: "Category name",
+                        placeholder: "Enter the category name",
+                        required: true
+                    }
+                },
+                {
+                    key: "abbreviation",
+                    type: "input",
+                    templateOptions: {
+                        type: "text",
+                        label: "Abbreviation",
+                        placeholder: "Enter the category abbreviation",
+                        required: true
+                    }
+                },
+                {
+                    key: "description",
+                    type: "textarea",
+                    templateOptions: {
+                        type: "text",
+                        label: "Description",
+                        placeholder: "Enter category description",
+                        required: false
+                    }
+                }
+            ];
         }
     ])
 
@@ -67,4 +95,4 @@
         }
     ]);
 
-})(angular, _);
+})(angular);
