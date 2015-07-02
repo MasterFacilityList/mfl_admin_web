@@ -113,10 +113,7 @@ module.exports = {
             ]
         },
         tpls:[
-        ],
-        vendor_css: [
         ]
-
     },
 
     connect: {

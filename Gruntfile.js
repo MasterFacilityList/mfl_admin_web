@@ -120,13 +120,6 @@ module.exports = function ( grunt ) {
                         cwd: ".",
                         expand: true,
                         flatten: true
-                    },
-                    {
-                        src: [ "<%= vendor_files.vendor_css %>" ],
-                        dest: "<%= build_dir %>/assets/css/",
-                        cwd: ".",
-                        expand: true,
-                        flatten: true
                     }
                 ]
             },
