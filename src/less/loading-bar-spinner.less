@@ -20,7 +20,7 @@
 #loading-bar.ng-leave.ng-leave-active,
 #loading-bar-spinner.ng-enter,
 #loading-bar-spinner.ng-leave.ng-leave-active {
-  opacity: 0;
+  opacity: 1;
 }
 
 #loading-bar.ng-enter.ng-enter-active,
@@ -36,7 +36,7 @@
   -o-transition: width 350ms;
   transition: width 350ms;
 
-  background: yellow;
+  background: #e53935;
   position: fixed;
   z-index: 10002;
   top: 0;
@@ -55,10 +55,10 @@
   top: 0;
   height: 2px;
   opacity: .45;
-  -moz-box-shadow: yellow 1px 0 6px 1px;
-  -ms-box-shadow: yellow 1px 0 6px 1px;
-  -webkit-box-shadow: yellow 1px 0 6px 1px;
-  box-shadow: yellow 1px 0 6px 1px;
+  -moz-box-shadow: #e53935 1px 0 6px 1px;
+  -ms-box-shadow: #e53935 1px 0 6px 1px;
+  -webkit-box-shadow: #e53935 1px 0 6px 1px;
+  box-shadow: #e53935 1px 0 6px 1px;
   -moz-border-radius: 100%;
   -webkit-border-radius: 100%;
   border-radius: 100%;
@@ -77,8 +77,8 @@
   height: 14px;
 
   border:  solid 2px transparent;
-  border-top-color:  #fff500;
-  border-left-color: #fff500;
+  border-top-color:  #e53935;
+  border-left-color: #e53935;
   border-radius: 50%;
 
   -webkit-animation: loading-bar-spinner 400ms linear infinite;
