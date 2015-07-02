@@ -100,7 +100,30 @@
                 .expectPATCH(server_url+"api/facilities/facility_updates/3/")
                 .respond(200);
 
-            data.$scope.approveUpdate();
+            data.$scope.approveUpdate(true);
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+
+            expect(state.go).toHaveBeenCalled();
+        });
+
+        it("should reject a facility update", function () {
+            var data = {
+                "$scope": rootScope.$new(),
+                "$state": state,
+                "$stateParams": {update_id: 3}
+            };
+            data.$scope.facility_id = 3;
+
+            ctrl(data);
+
+            httpBackend
+                .expectPATCH(server_url+"api/facilities/facility_updates/3/")
+                .respond(200);
+
+            data.$scope.approveUpdate(false);
 
             httpBackend.flush();
             httpBackend.verifyNoOutstandingRequest();
