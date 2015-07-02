@@ -347,7 +347,6 @@
         ["$scope","mfl.facility_mgmt.services.wrappers","$log", "mfl.common.forms.changes",
          "$state",
         function ($scope,wrappers,$log, formChanges,$state) {
-
             /*Update operation setup details*/
             $scope.updateOp = function (opFrm) {
                 var changed = formChanges.whatChanged(opFrm);
@@ -372,9 +371,22 @@
         }])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
-        ["$scope",
-        function ($scope) {
-            $scope.test = "data";
+        ["$scope","mfl.facility_mgmt.services.wrappers","$log","facil",
+        function ($scope,wrappers,$log,facility) {
+            $scope.spinner = true;
+            $scope.facility = facility.data;
+
+            /*facility's coordinates*/
+            wrappers.facility_coordinates.get($scope.facility.coordinates)
+            .success(function(data){
+                $scope.spinner = false;
+                $scope.geo = data;
+            })
+            .error(function(error){
+                $scope.spinner = false;
+                $log.error(error);
+            });
+
         }]);
 
 })(angular, _);

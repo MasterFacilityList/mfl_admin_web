@@ -2,16 +2,6 @@
     <div>
         <h4><strong>Physical details</strong></h4>
         <div class="row">
-            <div class="group col-md-6">
-                <select name="source" ng-model="geo.source">
-                    <option value="" disabled>Choose ward</option>
-                    <option ng-repeat="ward in wards" ng-value="ward.id">{{ward.name}}</option>
-                </select>
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-            </div>
-        </div>
-        <div class="row">
            <div class=" col-md-6">
                 <div class="group">
                     <input type="text" name="contact" ng-model="town"  required />
@@ -50,7 +40,7 @@
         <div class="row">
            <div class="col-md-6">
                 <div class="group">
-                    <input type="text" name="contact" ng-model="town"  required />
+                    <input type="text" name="contact" ng-model="facility.location_desc"  required />
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>
@@ -77,7 +67,7 @@
         <div class="row">
            <div class="col-md-6">
                 <div class="group">
-                    <input type="text" name="coordinates.coordinates[1]" ng-model="town"  required />
+                    <input type="text" name="coordinates.coordinates[1]" ng-model="geo.coordinates.coordinates[1]"  required />
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>
