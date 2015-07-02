@@ -2,7 +2,8 @@
     "use strict";
 
     describe("Test facility edit controllers", function () {
-        var rootScope, ctrl, httpBackend, server_url, loginService, log, yusa, controller;
+        var rootScope, ctrl, httpBackend, server_url, loginService, log,
+        yusa, controller, facObjService, state;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
@@ -10,7 +11,8 @@
             module("mfl.facility_mgmt.controllers");
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$log",
-                function (c, r, h, s, ls, lg) {
+                "mfl.facility.multistep.service", "$state",
+                function (c, r, h, s, ls, lg, fmS, st) {
                     ctrl = function (name, data) {
                         return c("mfl.facility_mgmt.controllers.facility_edit"+name, data);
                     };
@@ -19,6 +21,8 @@
                     httpBackend = h;
                     server_url = s;
                     loginService = ls;
+                    facObjService = fmS;
+                    state = st;
                     yusa = {
                         county: "123"
                     };
@@ -30,25 +34,41 @@
 
         describe("Test facility edit controller", function () {
 
-            it("should load facility details", function () {
+            it("should load facility details",
+            inject(["mfl.facility.multistep.service",
+                function (facObjService) {
                 var data = {
                     "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "mfl.facility.multistep.service" : facObjService,
                     "$stateParams": {
                         facility_id: 3
                     }
                 };
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url+"api/facilities/facilities/3/")
                     .respond(200, {});
-
+                //piggy back on test
+                data.$scope.steps = [
+                    {
+                        name : "basic",
+                        active : false
+                    },
+                    {
+                        name : "contacts",
+                        active : false
+                    }
+                ];
                 ctrl("", data);
-
+                var obj = {name : "basic", active : false};
+                data.$scope.tabState(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(data.$scope.facility).toEqual({});
-            });
+            }]));
 
             it("should show error on fail to load facility details", function () {
                 var data = {
@@ -1327,7 +1347,7 @@
                         facility_id: 4
                     }
                 };
-                
+
 
                 ctrl(".setup", data);
 
@@ -1346,7 +1366,7 @@
                 expect($state.go).toHaveBeenCalled();
 
             });
-            
+
             it("should successfully edit facility operation setup", function () {
                 inject(["mfl.common.forms.changes","$state",
                     function (formChanges, st) {

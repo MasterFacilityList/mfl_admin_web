@@ -77,10 +77,25 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit",
         ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        "mfl.auth.services.login",
-        function ($scope, $log, $stateParams, wrappers, loginService) {
+        "mfl.auth.services.login","mfl.facility.multistep.service", "$state",
+        function ($scope, $log, $stateParams, wrappers, loginService,
+            facilityMultistepService, $state) {
             $scope.facility_id = $stateParams.facility_id;
             $scope.spinner = true;
+            $scope.steps = facilityMultistepService.facilityObject();
+            $scope.tabState = function(obj) {
+                _.each($scope.steps, function (step) {
+                    if(step.name === obj.name) {
+                        step.active = true;
+                    }
+                    else {
+                        step.active = false;
+                    }
+                });
+                $state.go(
+                        "facilities.facility_edit."+ obj.name,
+                        {facility_id : $scope.facility_id});
+            };
             wrappers.facility_detail.get($scope.facility_id)
                 .success(function(data){
                     $scope.spinner = false;
