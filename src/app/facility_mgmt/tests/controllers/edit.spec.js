@@ -1491,4 +1491,79 @@
                 });
         });
     });
+    describe("Edit facility", function () {
+        var rootScope, ctrl, httpBackend, server_url, loginService, log,
+            yusa, controller;
+
+        beforeEach(function () {
+            module("mflAdminAppConfig");
+            module("mfl.auth.services");
+            module("mfl.facility_mgmt.controllers");
+            inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
+                "mfl.auth.services.login", "$log",
+                function (c, r, h, s, ls, lg) {
+                    ctrl = function (name, data) {
+                        return c("mfl.facility_mgmt.controllers.facility_edit"+name, data);
+                    };
+                    controller = c;
+                    rootScope = r;
+                    httpBackend = h;
+                    server_url = s;
+                    loginService = ls;
+                    yusa = {
+                        county: "123"
+                    };
+                    spyOn(loginService, "getUser").andReturn();
+                    log = lg;
+                }
+            ]);
+        });
+        describe("location controller: ", function () {
+            it("should load the data required by controller", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 4
+                    }
+                };
+                
+                httpBackend
+                    .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                    .respond(200, {results: []});
+                ctrl(".location", data);
+                data.$scope.$apply();
+                data.$scope.facility={
+                    coordinates : "3"
+                };
+                data.$scope.$apply();
+                
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should fail to load the data required by controller", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 4
+                    }
+                };
+                
+                httpBackend
+                    .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                    .respond(500, {results: []});
+                ctrl(".location", data);
+                data.$scope.$apply();
+                data.$scope.facility={
+                    coordinates : "3"
+                };
+                data.$scope.$apply();
+                
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+             
+        });
+    });
 })(angular);
