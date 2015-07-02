@@ -348,7 +348,6 @@
          "$state",
         function ($scope,wrappers,$log, formChanges,$state) {
 
-
             /*Update operation setup details*/
             $scope.updateOp = function (opFrm) {
                 var changed = formChanges.whatChanged(opFrm);
@@ -370,6 +369,12 @@
                         {"facility_id": $scope.facility_id}, {reload: true});
                 }
             };
+        }])
+
+    .controller("mfl.facility_mgmt.controllers.facility_edit.location",
+        ["$scope",
+        function ($scope) {
+            $scope.test = "data";
         }]);
 
 })(angular, _);
