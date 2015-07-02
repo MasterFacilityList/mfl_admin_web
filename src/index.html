@@ -39,20 +39,22 @@
 <![endif]-->
 <!--[if gt IE 9]><!-->
 <html class="no-js indexeddb" lang="en" ng-app="mflAdminApp" >
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-     <title>MFL v2.0 Admin</title>
-     <% styles.forEach( function ( file ) { %>
-    <link rel="icon"  href="assets/img/kenya-coat-of-arms.png" />
-    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
-  </head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <title>MFL v2.0 Admin</title>
+         <% styles.forEach( function ( file ) { %>
+        <link rel="icon"  href="assets/img/kenya-coat-of-arms.png" />
+        <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+        <style>
+        </style>
+    </head>
     <noscript>
         <section class="section">
             <div style="padding:50px 50px 50px 50px;height:100vh">
                 <h1><strong>MFLv2.0 Administration Website:</strong></h1>
                 <h2>The browser has JavaScript disabled or is not supported. Please enable Javascript or update your browser.</h2>
-                   <h3>You may install any of the latest versions of the following browsers:</h3>
+                    <h3>You may install any of the latest versions of the following browsers:</h3>
                     <div class="container-fluid" style="margin-top:30px">
                         <div class="row-fluid">
                             <div class="col-xs-3">
@@ -77,25 +79,32 @@
         </section>
     </noscript>
 <!--<![endif]-->
-  <body>
-        <div ui-view="main">
+    <body>
+        <div ui-view="main" style="margin-top:1px">
+            <div style="margin-top:45vh;margin-bottom:60vh;margin-left:30vw;margin-right:30vw;" >
+                <div>
+                     <div class="spinner"></div>
+                </div>
+            </div>
         </div>
         <footer>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <p class="text-center margin-t-10">
-          &copy; Copyright 2015,
-            <span ui-view="footer"></span>
-            <a href="http://health.go.ke/" target="_blank">
-              Ministry of Health, Republic of Kenya.
-            </a> Powered by
-            <a href="http://savannahinformatics.com/" target="_blank">
-              Savannah Informatics Limited
-            </a>
-          </p>
-        </div>
+            <div class="col-xs-12">
+                <p class="text-center margin-t-10">
+                    <span>
+                        &copy; Copyright 2015,
+                            <a href="http://health.go.ke/" target="_blank">
+                              Ministry of Health, Republic of Kenya.
+                            </a>
+                        Powered by
+                            <a href="http://savannahinformatics.com/" target="_blank">
+                              Savannah Informatics Limited
+                            </a>
+                    </span>
+                </p>
+            </div>
         </footer>
     <!-- compiled JavaScript -->
     <% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
-  </body>
+    </body>
 </html>

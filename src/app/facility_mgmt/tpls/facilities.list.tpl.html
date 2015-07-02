@@ -1,10 +1,12 @@
-<div class="pull-left col-sm-4 col-xs-6 margin-t-20">
-    <sil-grid-search> </sil-grid-search>
+<div class="row">
+    <div class="pull-left col-sm-4 col-xs-6">
+        <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-2">
+        <p class="text-right margin-t-5">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
+    </div>
 </div>
-<div class="pull-right col-xs-2 margin-t-20">
-    <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
-</div>
-<table class="table table-hover fs-14">
+<table class="table table-hover fs-14 margin-t-20">
     <thead>
         <th>Code</th>
         <th>Name</th>

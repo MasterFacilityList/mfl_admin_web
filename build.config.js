@@ -96,6 +96,7 @@ module.exports = {
             "vendor/modernizr/modernizr.js",
             "vendor/d3/d3.js",
             "vendor/c3/c3.js",
+            "vendor/angular-loading-bar/build/loading-bar.js",
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
