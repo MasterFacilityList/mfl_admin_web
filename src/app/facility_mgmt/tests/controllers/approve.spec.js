@@ -100,7 +100,7 @@
                 .expectPATCH(server_url+"api/facilities/facility_updates/3/")
                 .respond(200);
 
-            data.$scope.approveUpdate();
+            data.$scope.approveUpdate(true);
 
             httpBackend.flush();
             httpBackend.verifyNoOutstandingRequest();
