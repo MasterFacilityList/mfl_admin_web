@@ -4,7 +4,6 @@
     angular.module("mflAdminApp", [
         "templates-app",
         "templates-common",
-        "acute.select",
         "common.logging",
         "api.wrapper",
         "mflAdminAppConfig",
@@ -14,8 +13,7 @@
         "mfl.service_mgmt",
         "mfl.setup",
         "mfl.dashboard",
-        "mfl.facility_mgmt",
-        "mfl.facilities"
+        "mfl.facility_mgmt"
     ]);
 
 })(angular);
