@@ -5,6 +5,7 @@
         "common.logging",
         "api.wrapper",
         "sil.grid",
+        "angular-loading-bar",
         "mfl.auth.oauth2",
         "ui.router",
         "mfl.auth.services"
