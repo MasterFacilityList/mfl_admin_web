@@ -1,21 +1,93 @@
-<section class="pad-t-20">
+<section class="col-xs-12 pad-t-20">
     <div>
-        <h4>Physical details</h4>
+        <h4><strong>Physical details</strong></h4>
         <div class="row">
-            <div class="group col-sm-4">
+            <div class="group col-md-6">
                 <select name="source" ng-model="geo.source">
                     <option value="" disabled>Choose ward</option>
-                    <option ng-repeat="gcs in geo_code_sources" ng-value="gcs.id">{{gcs.name}}</option>
+                    <option ng-repeat="ward in wards" ng-value="ward.id">{{ward.name}}</option>
                 </select>
                         <span class="highlight"></span>
                         <span class="bar"></span>
             </div>
         </div>
-    </div>
-    <div>
-        <h4>Geolocation details</h4>
         <div class="row">
-            <div class="group col-sm-4">
+           <div class=" col-md-6">
+                <div class="group">
+                    <input type="text" name="contact" ng-model="town"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Town
+                    </label>
+                </div>
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-md-6">
+                <div class="group">
+                    <input type="text" name="contact" ng-model="town"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Plot number
+                    </label>
+                </div>
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-md-6">
+                <div class="group">
+                    <input type="text" name="contact" ng-model="town"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Nearest landmark
+                    </label>
+                </div>
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-md-6">
+                <div class="group">
+                    <input type="text" name="contact" ng-model="town"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Location description
+                    </label>
+                </div>
+           </div>
+        </div>
+    </div>
+    <div class="margin-t-50">
+        <h4><strong>Geolocation details</strong></h4>
+        <div class="row">
+           <div class="col-md-6">
+                <div class="group">
+                    <input type="text" name="geo." ng-model="town"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Longitude
+                    </label>
+                </div>
+           </div>
+        </div>
+        <div class="row">
+           <div class="col-md-6">
+                <div class="group">
+                    <input type="text" name="contact" ng-model="town"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Latitude
+                    </label>
+                </div>
+           </div>
+        </div>
+        <div class="row">
+            <div class="group col-md-6">
                 <select name="source" ng-model="geo.source">
                     <option value="" disabled>Geocode source</option>
                     <option ng-repeat="gcs in geo_code_sources" ng-value="gcs.id">{{gcs.name}}</option>
@@ -25,7 +97,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="group col-sm-4">
+            <div class="group col-md-6">
                 <select name="method" ng-model="geo.method">
                     <option value="" disabled>Geocode method</option>
                     <option ng-repeat="gcm in geo_code_methods" ng-value="gcm.id">{{gcm.name}}</option>
@@ -35,17 +107,21 @@
             </div>
         </div>
         <div class="row margin-t-10">
-            <div class="col-sm-4">
-                <label for="collection date">
+            <div class="col-md-6">
+                <label for="collection date" style="min-height:220px">
                     <span class="fs-16">Collection date:</span>
                         <date-picker
                             placeholder="collection date"
                             ng-model="geo.collection_date"
                             min-date="minDate"
                             show-weeks="true"
-                            custom-class="getDayClass(date, mode)"></date-picker>
+                            custom-class="getDayClass(date, mode)">
+                        </date-picker>
                 </label>
             </div>
         </div>
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary" />
     </div>
 </section>
