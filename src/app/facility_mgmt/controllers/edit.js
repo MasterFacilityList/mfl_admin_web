@@ -141,9 +141,9 @@
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.basic",
-        ["$scope", "$q", "$log", "$state", "$stateParams",
+        ["$scope", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
-        function ($scope, $q, $log, $state, $stateParams, wrappers, formChanges) {
+        function ($scope, $log, $state, $stateParams, wrappers, formChanges) {
 
             $scope.reloadOwners = function (s) {
                 return $scope.selectReload(wrappers.facility_owners, "name", s, "owners");
@@ -380,9 +380,7 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.setup",
         ["$scope","mfl.facility_mgmt.services.wrappers","$log", "mfl.common.forms.changes",
          "$state",
-        function ($scope,wrappers,$log, formChanges,$state) {
-
-
+        function ($scope, wrappers, $log, formChanges, $state) {
             /*Update operation setup details*/
             $scope.updateOp = function (opFrm) {
                 var changed = formChanges.whatChanged(opFrm);
