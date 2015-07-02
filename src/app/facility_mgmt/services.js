@@ -3,6 +3,51 @@
 
     angular.module("mfl.facility_mgmt.services", ["api.wrapper"])
 
+    .service("mfl.facility.multistep.service", [function () {
+        this.facilityObject = function () {
+            var result = [
+                {
+                    name : "basic",
+                    prev : [],
+                    count: "1"
+                },
+                {
+                    name : "contacts",
+                    prev : ["basic"],
+                    count: "2"
+                },
+                {
+                    name : "services",
+                    prev : ["basic", "contacts"],
+                    count: "3"
+                },
+                {
+                    name : "setup",
+                    prev : ["basic", "contacts", "services"],
+                    count: "4"
+                },
+                {
+                    name : "officers",
+                    prev : ["basic", "contacts", "services", "setup"],
+                    count: "5"
+                },
+                {
+                    name : "units",
+                    prev : ["basic", "contacts",  "services", "setup",
+                            "officers"],
+                    count: "6"
+                },
+                {
+                    name : "location",
+                    prev : ["basic", "contacts",  "services", "setup",
+                            "officers", "units"],
+                    count: "7"
+                }
+            ];
+            return result;
+        };
+    }])
+
     .service("mfl.facility_mgmt.services.wrappers", ["api", function (api) {
         this.facilities = api.setBaseUrl("api/facilities/facilities_list/");
         this.facility_detail = api.setBaseUrl("api/facilities/facilities/");
