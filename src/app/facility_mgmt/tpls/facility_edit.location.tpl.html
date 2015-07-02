@@ -65,7 +65,7 @@
         <div class="row">
            <div class="col-md-6">
                 <div class="group">
-                    <input type="text" name="geo." ng-model="town"  required />
+                    <input type="text" name="coordinates.coordinates[0]" ng-model="geo.coordinates.coordinates[0]"  required />
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>
@@ -77,7 +77,7 @@
         <div class="row">
            <div class="col-md-6">
                 <div class="group">
-                    <input type="text" name="contact" ng-model="town"  required />
+                    <input type="text" name="coordinates.coordinates[1]" ng-model="town"  required />
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     <label>
@@ -112,6 +112,7 @@
                     <span class="fs-16">Collection date:</span>
                         <date-picker
                             placeholder="collection date"
+                            name="collection_date"
                             ng-model="geo.collection_date"
                             min-date="minDate"
                             show-weeks="true"
