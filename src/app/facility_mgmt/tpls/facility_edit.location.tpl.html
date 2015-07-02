@@ -1,1 +1,36 @@
-location
+<section class="pad-t-50">
+    <div class="row">
+        <div class="group col-sm-4">
+            <select name="source" ng-model="geo.source">
+                <option value="" disabled>Geocode source</option>
+                <option ng-repeat="gcs in geo_code_sources" ng-value="gcs.id">{{gcs.name}}</option>
+            </select>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="group col-sm-4">
+            <select name="method" ng-model="geo.method">
+                <option value="" disabled>Geocode method</option>
+                <option ng-repeat="gcm in geo_code_methods" ng-value="gcm.id">{{gcm.name}}</option>
+            </select>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="collection date">
+                <h5>Collection date:
+                    <date-picker
+                        placeholder="collection date"
+                        ng-model="geo.collection_date"
+                        min-date="minDate"
+                        show-weeks="true"
+                        custom-class="getDayClass(date, mode)"></date-picker>
+                </h5>
+            </label>
+        </div>
+    </div>
+</section>
