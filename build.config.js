@@ -91,7 +91,6 @@ module.exports = {
             "vendor/stacktrace-js/dist/stacktrace.js",
             "vendor/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js",
             "vendor/ng-tags-input/ng-tags-input.js",
-            "vendor/acute-select/acute/acute.select/acute.select.js",
             "vendor/moment/moment.js",
             "vendor/modernizr/modernizr.js",
             "vendor/d3/d3.js",
@@ -111,18 +110,10 @@ module.exports = {
         imgs: {
             sil: [
                 "libs/sil_grid/img/*"
-            ],
-            acute_select: [
-                "vendor/acute-select/acute/acute.select/images/*"
             ]
         },
         tpls:[
-            "vendor/acute-select/acute/acute.select/template/*"
-        ],
-        vendor_css: [
-            "vendor/acute-select/acute/acute.select/*.css"
         ]
-
     },
 
     connect: {
