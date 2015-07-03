@@ -29,7 +29,7 @@
         };
         this.whatChangedFormly = function (frm) {
             var vals = {};
-//            var regexString = new RegExp("formly_[\d]_[]_");
+//            var regexString = new RegExp("formly_[\d]");
             if (_.isUndefined(frm)) {
                 return vals;
             }
@@ -40,11 +40,14 @@
                         continue;
                     }
                     if (frm[f].$dirty === true) {
-                        vals[f] = frm[f].$modelValue;
+                        var k;
+                        k = f.replace(/^formly_\d+_[a-z]+_/g, "");
+                        k = k.replace(/_[\d]$/g, "");
+                        vals[k] = frm[f].$modelValue;
+
                     }
 
                 }
-                console.log(_.allKeys(vals));
             }
 
             return vals;

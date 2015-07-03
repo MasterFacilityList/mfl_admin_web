@@ -10,8 +10,8 @@
 
     .controller("mfl.service_mgmt.controllers.category_edit",
         ["$scope", "$state", "$stateParams", "$log",
-        "mfl.service_mgmt.wrappers",
-        function ($scope, $state, $stateParams, $log, wrappers) {
+        "mfl.service_mgmt.wrappers","mfl.common.forms.changes",
+        function ($scope, $state, $stateParams, $log, wrappers, formChanges) {
             $scope.category_id = $stateParams.category_id;
 
             wrappers.categories.get($scope.category_id).success(function (data) {
@@ -21,8 +21,9 @@
                 $log.warn(data);
             });
 
-            $scope.save = function (data) {
-                wrappers.categories.update($scope.category_id, data)
+            $scope.save = function (frm) {
+                var changes = formChanges.whatChangedFormly(frm);
+                wrappers.categories.update($scope.category_id, changes)
                     .success(function () {
                         $state.go(
                             "service_mgmt.category_list",

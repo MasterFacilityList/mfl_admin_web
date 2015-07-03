@@ -43,12 +43,21 @@
 <div class="content-body">
    <div class="pad-form">
         <form novalidate class="content-card" style="padding:20px">
-            <formly-form model="category" fields="categoryFields" form="categoryForm">
+            <formly-form model="category" fields="categoryFields" option="options" form="categoryForm">
                <div class="margin-t-50">
-                    <button class="login-btn login-btn-primary" ng-click="save(category)" ng-disabled="categoryForm.$invalid"> Save</button>
+                    <button class="login-btn login-btn-primary" ng-click="save(categoryForm)" ng-disabled="categoryForm.$invalid"> Save</button>
                     <a class="margin-l-10 login-btn login-btn-default margin-l-5" ui-sref="service_mgmt.category_list">Cancel</a>
                </div>
             </formly-form>
         </form>
    </div>
 </div>
+<pre>{{categoryForm.$dirty}}</pre>
+<pre>{{categoryForm | json}}</pre>
+
+<script type="text/ng-template" id="error-messages.html">
+  <formly-transclude></formly-transclude>
+  <div ng-messages="fc.$error" ng-if="categoryForm.$submitted || options.formControl.$touched" class="error-messages">
+    <div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}</div>
+  </div>
+</script>
