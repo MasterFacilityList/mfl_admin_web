@@ -26,6 +26,9 @@
 @import 'loading-bar-spinner.less';
 /*End of loading bar css*/
 
+/* ui-select css */
+@import (less) 'vendor/angular-ui-select/dist/select.css';
+
 /**
  * This is our main variables file. We must include it last so we can overwrite any variable
  * definitions in our imported stylesheets.
@@ -106,9 +109,8 @@ h2 {
 
 
 footer {
-  position: relative;
-  height: 50px;
-  padding: 10px 20px;
+  position:static;
+  height: 60px;
   background-color: #212121;
   color: #bdc3c7;
   z-index: 1000;

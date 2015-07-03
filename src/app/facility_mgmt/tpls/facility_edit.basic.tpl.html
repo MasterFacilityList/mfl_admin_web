@@ -10,48 +10,53 @@
                 <input type="text" class="form-control" name="abbreviation" placeholder="Abbreviation" ng-models="facility.abbreviation" >
             </div>
         </div>
-        <div class="form-group">
-            <label for="facility_type">Facility Type</label>
 
-            <p class="form-control-static" >{{::facility.facility_type_name}}</p>
-
-            <select ng-model="facility.facility_type" name="facility_type" class="form-control" required >
-                <option value=""></option>
-                <option ng-repeat="factype in facility_types" ng-value="factype.id">{{factype.name}}</option>
-            </select>
-        </div>
         <div class="form-group">
-            <label for="facility_type">Facility Owner</label>
-            <p class="form-control-static">{{::facility.owner_name}}</p>
-            <select ng-model="facility.owner">
-                <option value=""></option>
-                <option ng-repeat="facowner in facility_owners" ng-value="facowner.id">{{facowner.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="operation_status">Operation Status</label>
-            <p class="form-control-static">{{::facility.operation_status_name}}</p>
-            <select ng-model="facility.operation_status" name="operation_status">
-                <option value=""></option>
-                <option ng-repeat="os in operation_status" ng-value="os.id">{{os.name}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="owner">Owner</label>
-            <p class="form-control-static">{{::facility.owner_name}}</p>
-            <select name="owner" class="form-control" ng-model="facility.owner" required>
-                <option>Select an Owner</option>
-                <option ng-repeat="facowner in facility_owners" ng-value="facowner.id">{{facowner.name}}</option>
-            </select>
+            <label>Facility Type</label>
+            <ui-select ng-model="select_values.facility_type" class="form-control" required ng-disabled="facility.id">
+                <ui-select-match placeholder="Select a facility type...">
+                    <span>{{$select.selected.name}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="ft in facility_types" refresh-delay="500" refresh="reloadFacilityTypes($select.search)">
+                    <span>{{ft.name}}</span>
+                </ui-select-choices>
+            </ui-select>
         </div>
 
         <div class="form-group">
-            <label for="ward">Ward</label>
-            <p class="form-control-static">{{::facility.ward_name}}</p>
-            <select name="ward" ng-model="facility.ward" class="form-control">
-                <option>Select a ward</option>
-                <option ng-repeat="w in wards" ng-value="w.id">{{w.name}}</option>
-            </select>
+            <label>Operation Status</label>
+            <ui-select ng-model="select_values.operation_status" class="form-control" required ng-disabled="facility.id">
+                <ui-select-match placeholder="Select an operation status...">
+                    <span>{{$select.selected.name}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="os in operation_status" refresh-delay="500" refresh="reloadOperationStatus($select.search)">
+                    <span>{{os.name}}</span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+
+        <div class="form-group">
+            <label>Owner</label>
+            <ui-select ng-model="select_values.owner" class="form-control" required ng-disabled="facility.id">
+                <ui-select-match placeholder="Select an owner...">
+                    <span>{{$select.selected.name}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="owner in owners" refresh-delay="500" refresh="reloadOwners($select.search)">
+                    <span>{{owner.name}}</span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+
+        <div class="form-group">
+            <label>Ward</label>
+            <ui-select ng-model="select_values.ward" class="form-control" required>
+                <ui-select-match placeholder="Select a ward...">
+                    <span>{{$select.selected.name}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="ward in wards" refresh-delay="500" refresh="reloadWards($select.search)">
+                    <span>{{ward.name}}</span>
+                </ui-select-choices>
+            </ui-select>
         </div>
 
         <input type="submit" value="Update Facility" class="btn btn-primary" />
