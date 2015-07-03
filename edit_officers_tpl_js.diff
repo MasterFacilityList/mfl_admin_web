@@ -1,0 +1,60 @@
+1,3c1,5
+< <div class="col-lg-12">
+<     <div class="pad-t-20">
+<         <h4> Add Officers</h4>
+---
+> <div class="col-sm-12 detail-content">
+>     <div class="col-sm-12 content-card form-card margin-t-20">
+>         <div class="col-sm-12">
+>             <h4 class="fw-600 fs-18"> Add Officers</h4>
+>         </div>
+5,26c7,19
+<             <table class="table content-card margin-b-10">
+<                 <tbody class="form-pad">
+<                     <tr class="">
+<                         <td class="">
+<                             <div class="group">
+<                             <select name="officer" ng-model="officer.id" class="pad-t-15" required>
+<                                 <option value="">Select Officer</option>
+<                                 <option ng-repeat="off in officers" ng-value="off.id">{{off.name}}</option>
+<                             </select>
+<                             <span class="highlight"></span>
+<                             <span class="bar"></span>
+<                             </div>
+<                         </td>
+< 
+<                         <td class="text-right">
+<                             <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add Officer">
+<                                 <i class="fa fa-plus-circle"></i> Add
+<                             </button>
+<                         </td>
+<                     </tr>
+<                 </tbody>
+<             </table>
+---
+>             <div class="group col-sm-10">
+>             <select name="officer" ng-model="officer.id" class="pad-t-15" required>
+>                 <option value="">Select Officer</option>
+>                 <option ng-repeat="off in officers" ng-value="off.id">{{off.name}}</option>
+>             </select>
+>             <span class="highlight"></span>
+>             <span class="bar"></span>
+>             </div>
+>             <div class="col-sm-12 margin-b-10">
+>                 <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add Officer">
+>                     <i class="fa fa-plus-circle"></i> Add
+>                 </button>
+>             </div>
+29,30c22,23
+<     <div  class="col-lg-12 margin-t-20">
+<         <h4> Current Officer(s)</h4>
+---
+>     <div class="col-sm-12 content-card margin-b-20 margin-t-20">
+>         <h4 class="fw-600 fs-18"> Current Officer(s)</h4>
+53a47,52
+>     <a ui-sref="facilities.facility_edit.setup" ng-if="!create" ui-sref="users.user_list" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+>         &nbsp;<i class="fa fa-angle-double-left"></i> Setup
+>     </a>
+>     <a ui-sref="facilities.facility_edit.units" ng-if="!create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+>         &nbsp; Units <i class="fa fa-angle-double-right"></i>
+>     </a>

@@ -1,0 +1,130 @@
+1,3c1,3
+< <div class="col-lg-12">
+<         <div class="pad-t-20">
+<                 <form name="operation_setup">
+---
+> <div class="col-sm-12 detail-content">
+>         <div class="col-sm-12 content-card form-card margin-t-20">
+>                 <form name="operation_setup" ng-submit="updateOp(operation_setup)">
+7,8c7
+<                     <div ng-if="!spinner1">
+<                         <div class="content-card">
+---
+>                     <div ng-if="!spinner1" class="margin-t-20">
+13,15c12,22
+<                                <div class="row">
+<                                     <div class="group col-sm-7">
+<                                         <input type="text" name="number_of_beds" ng-model="facility.number_of_beds"  required />
+---
+>                                 <div class="group col-sm-10">
+>                                     <input type="text" name="number_of_beds" ng-model="facility.number_of_beds"  required />
+>                                     <span class="highlight"></span>
+>                                     <span class="bar"></span>
+>                                     <label class="pad-l-10">
+>                                         Beds
+>                                     </label>
+>                                 </div>
+>                                 <div class="group col-sm-10">
+>                                     <input type="text" name="number_of_cots" ng-model="facility.number_of_cots"  required />
+>                                     <label class="pad-l-10" for="number_of_cots">
+18,63c25,66
+<                                         <label class="pad-l-10">
+<                                             Beds
+<                                         </label>
+<                                     </div>
+<                                </div>
+<                                <div class="row">
+<                                     <div class="group col-sm-7">
+<                                         <input type="text" name="number_of_cots" ng-model="facility.number_of_cots"  required />
+<                                         <label class="pad-l-10" for="number_of_cots">
+<                                             <span class="highlight"></span>
+<                                             <span class="bar"></span>
+<                                             Cots
+<                                         </label>
+<                                     </div>
+<                                 </div>
+<                                 <div class="checkbox-group margin-t-10">
+<                                     <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day">
+<                                     <label for="open_whole_day">
+<                                         <span class="check"></span>
+<                                         <span class="box"></span>
+<                                          Open 24 hours
+<                                      </label>
+<                                 </div>
+<                                 <div class="checkbox-group margin-t-10">
+<                                     <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="facility.open_public_holidays">
+<                                     <label for="open_public_holidays">
+<                                         <span class="check"></span>
+<                                         <span class="box"></span>
+<                                          Open on public holidays
+<                                      </label>
+<                                 </div>
+<                                 <div class="checkbox-group margin-t-10">
+<                                     <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="facility.open_weekends">
+<                                     <label for="open_weekends">
+<                                         <span class="check"></span>
+<                                         <span class="box"></span>
+<                                          Open during weekends
+<                                      </label>
+<                                 </div>
+<                                 <div class="checkbox-group margin-t-10">
+<                                     <input type="checkbox" id="is_classified" name="is_classified" ng-model="facility.is_classified">
+<                                     <label for="is_classified">
+<                                         <span class="check"></span>
+<                                         <span class="box"></span>
+<                                          Classified facility
+<                                      </label>
+---
+>                                         Cots
+>                                     </label>
+>                                 </div>
+>                                 <div class="col-sm-12">
+>                                   <div class="checkbox-group margin-t-10">
+>                                       <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day">
+>                                       <label for="open_whole_day">
+>                                           <span class="check"></span>
+>                                           <span class="box"></span>
+>                                            Open 24 hours
+>                                        </label>
+>                                   </div>
+>                                 </div>
+>                                 <div class="col-sm-12">
+>                                   <div class="checkbox-group margin-t-10">
+>                                       <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="facility.open_public_holidays">
+>                                       <label for="open_public_holidays">
+>                                           <span class="check"></span>
+>                                           <span class="box"></span>
+>                                            Open on public holidays
+>                                        </label>
+>                                      </div>
+>                                 </div>
+>                                 <div class="col-sm-12">
+>                                   <div class="checkbox-group margin-t-10">
+>                                       <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="facility.open_weekends">
+>                                       <label for="open_weekends">
+>                                           <span class="check"></span>
+>                                           <span class="box"></span>
+>                                            Open during weekends
+>                                        </label>
+>                                   </div>
+>                                 </div>
+>                                 <div class="col-sm-12">
+>                                   <div class="checkbox-group margin-t-10">
+>                                       <input type="checkbox" id="is_classified" name="is_classified" ng-model="facility.is_classified">
+>                                       <label for="is_classified">
+>                                           <span class="check"></span>
+>                                           <span class="box"></span>
+>                                            Classified facility
+>                                        </label>
+>                                   </div>
+66,68c69,74
+<                         </div>
+<                         <div class="margin-t-20 margin-b-20" ng-if="facility.has_edits===false">
+<                             <button type="submit" class="md-btn md-btn-primary" ng-click="updateOp(operation_setup)">Save operation setup</button>
+---
+>                         <div class="col-sm-12 margin-t-30 margin-b-20" ng-if="facility.has_edits===false">
+>                             <a class="login-btn login-btn-primary pull-left"
+>                             ui-sref="facilities.facility_edit.services">
+>                               &nbsp;<i class="fa fa-angle-double-left"></i>
+>                                Services</a>
+>                             <button type="submit" class="login-btn login-btn-primary pull-right" ng-click="updateOp(operation_setup)">&nbsp;Officers <i class="fa fa-angle-double-right"></i></button>

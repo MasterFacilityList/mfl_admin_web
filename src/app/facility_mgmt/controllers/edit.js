@@ -270,8 +270,11 @@
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
-        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        function($scope, $log, $stateParams, wrappers){
+        ["$scope", "$log", "$stateParams",
+        "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
+        function($scope, $log, $stateParams, wrappers, multistepService){
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[4]);
             $scope.fac_officers = [];
 
             /*officers*/
@@ -389,10 +392,13 @@
     ])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.setup",
-        ["$scope","mfl.facility_mgmt.services.wrappers","$log", "mfl.common.forms.changes",
-         "$state",
-        function ($scope, wrappers, $log, formChanges, $state) {
+        ["$scope","mfl.facility_mgmt.services.wrappers","$log",
+        "mfl.common.forms.changes","$state", "mfl.common.services.multistep",
+        function ($scope, wrappers, $log, formChanges, $state,
+            multistepService) {
             /*Update operation setup details*/
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[3]);
             $scope.updateOp = function (opFrm) {
                 var changed = formChanges.whatChanged(opFrm);
                 opFrm.facility = $scope.facility_id;
@@ -409,7 +415,7 @@
                         });
                 }
                 else {
-                    $state.go("facilities.facility_edit.setup",
+                    $state.go("facilities.facility_edit.officers",
                         {"facility_id": $scope.facility_id}, {reload: true});
                 }
             };
