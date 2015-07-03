@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular,_) {
 
     angular.module("mfl.service_mgmt.controllers.categories", [
         "ui.router",
@@ -98,4 +98,4 @@
         }
     ]);
 
-})(angular);
+})(angular,_);
