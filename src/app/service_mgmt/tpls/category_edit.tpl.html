@@ -8,37 +8,6 @@
    </h2>
 </div>
 <div ui-view="delete"></div>
-<!--
-<div class="col-md-12 col-sm-12">
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
-    <form name="category_frm" novalidate>
-               <div class="col-lg-10 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-20 margin-b-20">
-                    <div class="group">
-                        <input type="text" name="name" ng-model="category.name" required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>Name</label>
-                    </div>
-                    <div class="group">
-                        <input type="text" name="abbreviation" ng-model="category.abbreviation" required/>
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>Abbreviation</label>
-                    </div>
-                    <div class="group">
-                        <textarea name="description" ng-model="category.description" required ></textarea>
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>Description</label>
-                    </div>
-                    <button class="login-btn login-btn-primary pull-left" ng-click="save(category_frm)"><i class="fa fa-save"></i> Save</button>
-                    <a class="margin-l-10 login-btn login-btn-default margin-l-5 pull-left" ui-sref="service_mgmt.category_list">Cancel</a>
-               </div>
-    </form>
-</div>
-</div>
--->
-
 
 <div class="content-body">
    <div class="pad-form">
@@ -52,12 +21,3 @@
         </form>
    </div>
 </div>
-<pre>{{categoryForm.$dirty}}</pre>
-<pre>{{categoryForm | json}}</pre>
-
-<script type="text/ng-template" id="error-messages.html">
-  <formly-transclude></formly-transclude>
-  <div ng-messages="fc.$error" ng-if="categoryForm.$submitted || options.formControl.$touched" class="error-messages">
-    <div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}</div>
-  </div>
-</script>
