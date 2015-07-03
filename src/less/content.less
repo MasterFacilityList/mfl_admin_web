@@ -291,6 +291,63 @@ overflow-x: hidden;
 .detail-content {
     background-color: #F6F4F4;
 }
+.slide-content {
+  -moz-animation-duration: 3s;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -moz-animation-name: slidein;
+  -webkit-animation-name: slidein;
+  animation-name: slidein;
+  /*-moz-animation-iteration-count: 3;
+  -webkit-animation-iteration-count: 3;
+  animation-iteration-count: 3;
+  -moz-animation-direction: alternate;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;*/
+}
+
+@-moz-keyframes slidein {
+  from {
+    margin-left:100%;
+    width:300%
+  }
+
+  to {
+    margin-left:0%;
+    width:100%;
+  }
+}
+
+@-webkit-keyframes slidein {
+  from {
+    margin-left:100%;
+    width:300%
+  }
+
+  to {
+   margin-left:0%;
+   width:100%;
+ }
+}
+
+@keyframes slidein {
+  from {
+    margin-left:100%;
+    width:300%
+  }
+
+  to {
+   margin-left:0%;
+   width:100%;
+ }
+}
+.fade-content {
+    -webkit-animation: fadein 1.2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 1.2s; /* Firefox < 16 */
+    -ms-animation: fadein 1.2s; /* Internet Explorer */
+    -o-animation: fadein 1.2s; /* Opera < 12.1 */
+    animation: fadein 1.2s;
+}
 
 .tab-content {
     -webkit-animation: fadein 1.2s; /* Safari, Chrome and Opera > 12.1 */

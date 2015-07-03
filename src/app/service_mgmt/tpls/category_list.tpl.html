@@ -15,8 +15,8 @@
                 <th class="text-right">Actions</th>
             </tr>
         </thead>
-        <tbody>
-            <tr ng-repeat="category in categories">
+        <tbody class="fade-content">
+            <tr  ng-repeat="category in categories">
                 <td data-title="#:"  class="pad-t-15">{{($index + 1 + ((pagination.current_page-1)  * 25))}}</td>
                 <td data-title="Name:" class="pad-t-15">{{category.name}}</td>
                 <td data-title="Abbreviation:" class="pad-t-15">{{category.abbreviation}}</td>
