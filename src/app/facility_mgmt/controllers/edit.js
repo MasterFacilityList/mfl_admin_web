@@ -411,19 +411,21 @@
             $scope.spinner = true;
             angular.extend($scope, {
                 defaults: {
-                    scrollWheelZoom: false,
-                    tileLayer: "",
-                    dragging:false
+                    scrollWheelZoom: false
                 },
-                layers:{}
+                layers:{},
+                tiles:{
+                    openstreetmap: {
+                        url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        options: {
+                            opacity: 0.7,
+                            attribution: "&copy; <a href='http://www.openstreetmap.org/"+
+                            "copyright'>OpenStreetMap</a> contributors"
+                        }
+                    }
+                }
             });
-//            $scope.markers = {
-//                mainMarker : {
-//                    layer:"facilities",
-//                    lat: 0,
-//                    lng: 0
-//                }
-//            };
+            
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
                     return;
@@ -471,7 +473,7 @@
                                 opacity: 1,
                                 color: "rgba(0, 0, 0, 0.52)",
                                 dashArray: "3",
-                                fillOpacity: 0.7
+                                fillOpacity: 0.8
                             }
                         },
                         layers:{
