@@ -29,7 +29,6 @@
         };
         this.whatChangedFormly = function (frm) {
             var vals = {};
-//            var regexString = new RegExp("formly_[\d]");
             if (_.isUndefined(frm)) {
                 return vals;
             }
