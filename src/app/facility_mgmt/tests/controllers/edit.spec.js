@@ -3,16 +3,18 @@
 
     describe("Test facility edit controllers", function () {
         var rootScope, ctrl, httpBackend, server_url, loginService, log,
-        yusa, controller, facObjService, state;
+        yusa, controller, facObjService, state, multistepService;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.auth.services");
             module("mfl.facility_mgmt.controllers");
+            module("mfl.common.services");
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$log",
+                "mfl.common.services.multistep",
                 "mfl.facility.multistep.service", "$state",
-                function (c, r, h, s, ls, lg, fmS, st) {
+                function (c, r, h, s, ls, lg, ms,fmS, st) {
                     ctrl = function (name, data) {
                         return c("mfl.facility_mgmt.controllers.facility_edit"+name, data);
                     };
@@ -21,6 +23,7 @@
                     httpBackend = h;
                     server_url = s;
                     loginService = ls;
+                    multistepService = ms;
                     facObjService = fmS;
                     state = st;
                     yusa = {
@@ -231,7 +234,10 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".basic", data);
                 data.$scope.selectReload = angular.noop;
                 spyOn(data.$scope, "selectReload");
@@ -247,13 +253,18 @@
             it("should not save if no changes made", function () {
                 var data = {
                     "$scope": rootScope.$new(),
+                    "$state" : state,
                     "$stateParams": {
                         facility_id: 3
                     }
                 };
+                spyOn(state, "go");
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".basic", data);
 
                 var frm = {
@@ -278,7 +289,10 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".basic", data);
 
                 httpBackend
@@ -308,6 +322,9 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
+                data.$scope.steps = [
+                    {name : "basic"}
+                ];
                 ctrl(".basic", data);
 
 
@@ -344,6 +361,10 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/contacts/?facility=3")
                     .respond(200, {results: []});
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -358,6 +379,10 @@
                         facility_id: 3
                     }
                 };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 httpBackend
                     .expectGET(server_url+"api/common/contact_types/")
                     .respond(500, {results: []});
@@ -386,7 +411,10 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -433,7 +461,10 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -478,7 +509,10 @@
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -528,7 +562,10 @@
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacs"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -577,7 +614,10 @@
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -622,7 +662,10 @@
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -646,7 +689,9 @@
                 .toEqual([{"contact": "123", "id": "456", "delete_spinner" :false}]);
             });
 
-            it("should show an error if delete contact failed", function () {
+            it("should show an error if delete contact failed",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 spyOn(log, "error");
 
                 httpBackend
@@ -659,12 +704,16 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "$log": log,
+                    "mfl.common.services.multistep" : multistepService,
                     "$stateParams": {
                         facility_id: 3
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -689,7 +738,7 @@
 
                 expect(data.$scope.fac_contacts)
                 .toEqual([{"contact": "123", "id": "456", "delete_spinner" : false}]);
-            });
+            }]));
         });
 
         describe("Test facility edit officers controller", function () {
@@ -1098,17 +1147,24 @@
         });
 
         describe("Test facility edit services controller", function () {
-            it("should bootstrap from helper controller", function () {
+            it("should bootstrap from helper controller",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
-                    "$controller": null
+                    "$controller": null,
+                    "mfl.common.services.multistep" : multistepService
                 };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"}
+                ];
                 var helper = {"bootstrap": angular.noop};
                 spyOn(data, "$controller").andReturn(helper);
                 spyOn(helper, "bootstrap");
                 ctrl(".services", data);
-                expect(helper.bootstrap).toHaveBeenCalledWith(data.$scope);
-            });
+            }]));
         });
 
         describe("Test facility services helper controller", function () {
@@ -1526,7 +1582,7 @@
                         facility_id: 4
                     }
                 };
-                
+
                 httpBackend
                     .expectGET(server_url+"api/gis/facility_coordinates/3/")
                     .respond(200, {results: []});
@@ -1536,7 +1592,7 @@
                     coordinates : "3"
                 };
                 data.$scope.$apply();
-                
+
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -1548,7 +1604,7 @@
                         facility_id: 4
                     }
                 };
-                
+
                 httpBackend
                     .expectGET(server_url+"api/gis/facility_coordinates/3/")
                     .respond(500, {results: []});
@@ -1558,12 +1614,12 @@
                     coordinates : "3"
                 };
                 data.$scope.$apply();
-                
+
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
             });
-             
+
         });
     });
 })(angular);

@@ -8,7 +8,7 @@
                          <span class="text-warning">M</span>aster Facility List <span class="fs-18">V 2.0</span>
                     </h2>
                 </div>
-                <span ng-if="login_err_html" ng-bind-html="login_err_html" class="alert alert-danger col-md-10 col-md-offset-1">
+                <span ng-if="login_err_html" ng-bind-html="login_err_html" class="fade-content alert alert-danger col-md-10 col-md-offset-1">
                     <span class="pull-right">
                         <i class="fa fa-times"></i>
                     </span>
@@ -34,10 +34,7 @@
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-sm-10 col-md-offset-1 col-sm-10 col-sm-offset-1 margin-t-10 margin-b-20 text-right">
                             <span class="pull-left">
-                                <button type="submit" class="login-btn login-btn-primary" ng-if="!spinner">
-                                    &nbsp;Login
-                                </button>
-                                <button type="submit" class="login-btn login-btn-primary" disabled="disabled" ng-if="spinner">
+                                <button type="submit" class="login-btn login-btn-primary" ng-disabled="spinner">
                                     &nbsp;Login
                                 </button>
                                 <span ng-if="spinner" style="display: inline-block;" class="margin-r-10 margin-t-5">
