@@ -1,0 +1,25 @@
+273,274c273,277
+<         ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
+<         function($scope, $log, $stateParams, wrappers){
+---
+>         ["$scope", "$log", "$stateParams",
+>         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
+>         function($scope, $log, $stateParams, wrappers, multistepService){
+>             multistepService.filterActive(
+>                 $scope, $scope.steps, $scope.steps[4]);
+392,394c395,398
+<         ["$scope","mfl.facility_mgmt.services.wrappers","$log", "mfl.common.forms.changes",
+<          "$state",
+<         function ($scope, wrappers, $log, formChanges, $state) {
+---
+>         ["$scope","mfl.facility_mgmt.services.wrappers","$log",
+>         "mfl.common.forms.changes","$state", "mfl.common.services.multistep",
+>         function ($scope, wrappers, $log, formChanges, $state,
+>             multistepService) {
+395a400,401
+>             multistepService.filterActive(
+>                 $scope, $scope.steps, $scope.steps[3]);
+412c418
+<                     $state.go("facilities.facility_edit.setup",
+---
+>                     $state.go("facilities.facility_edit.officers",
