@@ -84,7 +84,7 @@
                            "requires-permission='auth.delete_group'" ,
                     class: "action-btn action-btn-danger action-btn-md",
 
-                    tipmsg: "Delete User",
+                    tipmsg: "Delete Group",
                     icon: "fa-trash"
                 }
             ];
