@@ -417,6 +417,13 @@
                 },
                 layers:{}
             });
+//            $scope.markers = {
+//                mainMarker : {
+//                    layer:"facilities",
+//                    lat: 0,
+//                    lng: 0
+//                }
+//            };
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
                     return;
@@ -426,6 +433,16 @@
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.geo = data;
+                    angular.extend($scope,{
+                        markers: {
+                            mainMarker: {
+                                layer:"facility",
+                                lat: data.coordinates.coordinates[1],
+                                lng: data.coordinates.coordinates[0],
+                                message: "Facility location"
+                            }
+                        }
+                    });
                 })
                 .error(function(error){
                     $scope.spinner = false;
@@ -449,22 +466,12 @@
                         geojson: {
                             data: gis,
                             style: {
-                                fillColor: "rgba(0, 157, 255, 0)",
+                                fillColor: "rgb(255, 135, 32)",
                                 weight: 2,
                                 opacity: 1,
                                 color: "rgba(0, 0, 0, 0.52)",
                                 dashArray: "3",
                                 fillOpacity: 0.7
-                            }
-                        },
-                        markers: {
-                            mainMarker: {
-                                lat: 0.427,
-                                lng: 34.548
-                            },
-                            subMarker:{
-                                lat: 0.427,
-                                lng: 34.548
                             }
                         },
                         layers:{
@@ -476,9 +483,9 @@
                                 }
                             },
                             overlays:{
-                                facilities:{
-                                    name:"Facilities",
-                                    type:"markercluster",
+                                facility:{
+                                    name:"Facility Location",
+                                    type:"group",
                                     visible: true
                                 }
                             }
@@ -489,7 +496,19 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
-                
+                $scope.checkLocation = function  (coords) {
+                    angular.extend($scope,{
+                        markers : {
+                            mainMarker : {
+                                layer:"facility",
+                                lat:coords.coordinates[1],
+                                lng:coords.coordinates[0],
+                                message:"facility location"
+                            }
+                        }
+                    });
+                };
+                /*update marker position*/
             });
         }]);
 
