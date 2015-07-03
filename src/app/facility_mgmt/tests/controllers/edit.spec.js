@@ -1530,12 +1530,17 @@
                 httpBackend
                     .expectGET(server_url+"api/gis/facility_coordinates/3/")
                     .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/common/wards/3/")
+                    .respond(200, {results: []});
                 ctrl(".location", data);
                 data.$scope.$apply();
                 data.$scope.facility={
-                    coordinates : "3"
+                    coordinates : "3",
+                    ward : "3"
                 };
                 data.$scope.$apply();
+                data.$scope.$digest();
                 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -1552,12 +1557,17 @@
                 httpBackend
                     .expectGET(server_url+"api/gis/facility_coordinates/3/")
                     .respond(500, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/common/ward/3/")
+                    .respond(500, {results: []});
                 ctrl(".location", data);
                 data.$scope.$apply();
                 data.$scope.facility={
-                    coordinates : "3"
+                    coordinates : "3",
+                    ward : "3"
                 };
                 data.$scope.$apply();
+                data.$scope.$digest();
                 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
