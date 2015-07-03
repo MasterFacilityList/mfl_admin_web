@@ -23,14 +23,16 @@
 
             $scope.save = function (frm) {
                 var changes = formChanges.whatChangedFormly(frm);
-                wrappers.categories.update($scope.category_id, changes)
-                    .success(function () {
-                        $state.go(
-                            "service_mgmt.category_list",
-                            {"category_id": $scope.category_id},
-                            {reload: true}
-                        );
-                    });
+                if(!_.isEmpty(changes)){
+                    wrappers.categories.update($scope.category_id, changes)
+                        .success(function () {
+                            $state.go(
+                                "service_mgmt.category_list",
+                                {"category_id": $scope.category_id},
+                                {reload: true}
+                            );
+                        });
+                }
             };
             $scope.remove = function () {
                 wrappers.categories.remove($scope.category_id).success(function(){
