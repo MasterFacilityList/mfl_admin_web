@@ -6,7 +6,8 @@
         "mfl.auth.services",
         "datePicker",
         "ui.bootstrap.tpls",
-        "mfl.common.forms"
+        "mfl.common.forms",
+        "leaflet-directive"
     ])
 
     .controller("mfl.facility_mgmt.controllers.services_helper",
@@ -405,9 +406,17 @@
         }])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
-        ["$scope", "mfl.facility_mgmt.services.wrappers", "$log",
-        function ($scope,wrappers,$log) {
+        ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
+        function ($scope,wrappers,$log,leafletData) {
             $scope.spinner = true;
+            angular.extend($scope, {
+                defaults: {
+                    scrollWheelZoom: false,
+                    tileLayer: "",
+                    dragging:false
+                },
+                layers:{}
+            });
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
                     return;
@@ -422,6 +431,65 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
+                /*ward coordinates*/
+                wrappers.wards.get(f.ward)
+                .success(function(data){
+                    $scope.spinner = false;
+                    $scope.ward_gis = data.ward_boundary;
+                    leafletData.getMap("wardmap")
+                        .then(function (map) {
+                            var coords = data.ward_boundary.properties.bound.coordinates[0];
+                            var bounds = _.map(coords, function(c) {
+                                return [c[1], c[0]];
+                            });
+                            map.fitBounds(bounds);
+                        });
+                    var gis = data.ward_boundary;
+                    angular.extend($scope, {
+                        geojson: {
+                            data: gis,
+                            style: {
+                                fillColor: "rgba(0, 157, 255, 0)",
+                                weight: 2,
+                                opacity: 1,
+                                color: "rgba(0, 0, 0, 0.52)",
+                                dashArray: "3",
+                                fillOpacity: 0.7
+                            }
+                        },
+                        markers: {
+                            mainMarker: {
+                                lat: 0.427,
+                                lng: 34.548
+                            },
+                            subMarker:{
+                                lat: 0.427,
+                                lng: 34.548
+                            }
+                        },
+                        layers:{
+                            baselayers:{
+                                Constituency: {
+                                    name: "Constituency",
+                                    url: "/assets/img/transparent.png",
+                                    type:"xyz"
+                                }
+                            },
+                            overlays:{
+                                facilities:{
+                                    name:"Facilities",
+                                    type:"markercluster",
+                                    visible: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .error(function(error){
+                    $scope.spinner = false;
+                    $log.error(error);
+                });
+                
             });
         }]);
 

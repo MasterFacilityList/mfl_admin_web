@@ -49,6 +49,17 @@
 @import  (less) '../assets/css/main.css';
 /*End of main css*/
 @import 'basic.less';   // contains basic css classes for minor adjustments
+/*import for leaflet css*/
+@import (less) '../../vendor/leaflet/dist/leaflet.css';
+/*end of import for leflet css*/
+/*start of leaflet overrides*/
+@import 'map.less';
+/*end of leaflet overrides*/
+
+@import (less) '../../vendor/leaflet.markercluster/dist/MarkerCluster.css';
+@import (less) '../../vendor/leaflet.markercluster/dist/MarkerCluster.Default.css';
+
+/*start of themes less import*/
 @import 'theme.less';   //imports all the less files used for the theme
 
 /**
