@@ -1,13 +1,21 @@
 <div class="pad-t-20">
     <form name="frm_facility_basic" ng-submit="save(frm_facility_basic)">
         <div class="row">
-            <div class="form-group col-xs-9">
-                <label for="name">Facility Name</label>
-                <input type="text" class="form-control" name="name" placeholder="Facility name" ng-model="facility.name" required />
+            <div class="group col-xs-6">
+                <input type="text" name="name" ng-model="facility.name" required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="margin-l-10">
+                    Facility Name
+                </label>
             </div>
-            <div class="form-group col-xs-3">
-                <label for="abbreviation">Abbreviation</label>
-                <input type="text" class="form-control" name="abbreviation" placeholder="Abbreviation" ng-models="facility.abbreviation" >
+            <div class="group col-xs-6">
+                <input type="text" name="abbreviation" ng-models="facility.abbreviation">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="margin-l-10">
+                    Abbreviation
+                </label>
             </div>
         </div>
 
@@ -58,7 +66,11 @@
                 </ui-select-choices>
             </ui-select>
         </div>
-
-        <input type="submit" value="Update Facility" class="btn btn-primary" />
+        <button ng-if="!create" ui-sref="facilities" class="login-btn login-btn-default margin-t-20 margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Cancel
+        </button>
+        <button ng-if="!create" type="submit" class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+            &nbsp; Contacts <i class="fa fa-angle-double-right"></i>
+        </button>
     </form>
 </div>

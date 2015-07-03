@@ -15,7 +15,7 @@
     font-weight: normal;
     text-align: center;
     vertical-align: middle;
-    cursor: pointer;
+    cursor: default;
     background-image: none;
     border: 1px solid transparent;
     white-space: nowrap;
@@ -38,6 +38,17 @@
     -o-transition: background-color 100ms ease-in 100ms;
     transition: background-color 100ms ease-in 100ms;
 }
+.progress-badge-active:hover {
+    cursor: pointer;
+    border: 2px solid darken(#2196F3, 8%) !important;
+    box-shadow: 0px 1px 2px 0 rgba(0, 0, 0, 0.86);
+    transform: scale(1.1);
+    .step-label-active {
+        text-decoration: underline;
+        -webkit-animation:swing 3600ms ease-in-out 6000s;
+        -webkit-transform-origin:top;
+    }
+}
 .progress-badge-done {
     color: #000;
     border: 2px solid #009688;
@@ -45,6 +56,16 @@
     -moz-transition: background-color 100ms ease-in 100ms;
     -o-transition: background-color 100ms ease-in 100ms;
     transition: background-color 100ms ease-in 100ms;
+}
+.progress-badge-done:hover + .step-label-done {
+    transform: scale(1.1);
+    animation: pulse 1s ease infinite;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+}
+.progress-badge-done:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 .progress-badge-sm {
     width: 15%;
@@ -77,6 +98,9 @@
     -o-transition: color 100ms ease-in 100ms;
     transition: color 100ms ease-in 100ms;
 }
+.step-label-active:hover {
+    cursor: pointer;
+}
 .step-label-done {
     color: #009688;
     font-family : 'Lato', sans-serif;
@@ -86,10 +110,17 @@
     -o-transition: color 100ms ease-in 100ms;
     transition: color 100ms ease-in 100ms;
 }
+.step-label-done:hover {
+    cursor: pointer;
+}
 .progress-container {
     margin-left: 0px !important;
     width: 100%;
     display: inline-flex;
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    transition: 1s ease-in-out;
 }
 .margin-l--10 {
     margin-left: -10px;
@@ -102,4 +133,18 @@
 }
 .margin-l-50 {
     margin-left: 50px;
+}
+/*pulse animation*/
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
