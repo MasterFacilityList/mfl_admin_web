@@ -35,8 +35,11 @@
     <div ng-if="!spinner">
         <h4 class="fw-400">{{facility.code}} | {{facility.name | uppercase}}</h4>
         <div class="row">
-            <div class="col-sm-12 margin-b-10 fs-16">
+            <div class="col-sm-8 margin-b-10 fs-16">
                 <span>Facility Type: <strong>{{facility.facility_type_name}}</strong></span>
+            </div>
+            <div class="col-sm-4 margin-b-10">
+                <a ui-sref="facilities.facility_edit" class="pull-right"> <i class="fa fa-edit"></i></a>
             </div>
             <div class="col-sm-6">
                 <span>Regulation Status:
