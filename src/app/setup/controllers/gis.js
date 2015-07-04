@@ -13,9 +13,10 @@
         };
         $scope.action = [
             {
-                func : "ui-sref='setup.geocode_methods_list.geocode_methods_create'",
+                func : "ui-sref='setup.geocode_methods_list.geocode_methods_create'" +
+                       " requires-user-feature='is_staff'" +
+                       " requires-permission='mfl_gis.add_geocodemethod'",
                 class: "action-btn action-btn-primary action-btn-md",
-
                 tipmsg: "Add geocode method",
                 icon: "fa-plus"
             }
@@ -55,7 +56,9 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.geocode_methods_list.geocode_methods_delete({"+
-                        "geocode_method_id:geocode_method.id})'",
+                        "geocode_method_id:geocode_method.id})'" +
+                       " requires-user-feature='is_staff'" +
+                       " requires-permission='mfl_gis.delete_geocodemethod'",
                     class: "action-btn action-btn-danger action-btn-md",
 
                     tipmsg: "Delete Geocode Method",
@@ -119,7 +122,9 @@
         };
         $scope.action = [
             {
-                func : "ui-sref='setup.geocode_sources_list.geocode_sources_create'",
+                func : "ui-sref='setup.geocode_sources_list.geocode_sources_create'" +
+                       " requires-user-feature='is_staff'" +
+                       " requires-permission='mfl_gis.add_geocodesource'",
                 class: "action-btn action-btn-primary action-btn-md",
 
                 tipmsg: "Add geocode sources",
@@ -162,7 +167,9 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.geocode_sources_list.geocode_sources_delete({"+
-                        "geocode_source_id:geocode_source.id})'",
+                        "geocode_source_id:geocode_source.id})'" +
+                       " requires-user-feature='is_staff'" +
+                       " requires-permission='mfl_gis.delete_geocodesource'",
                     class: "action-btn action-btn-danger action-btn-md",
 
                     tipmsg: "Delete Geocode Source",

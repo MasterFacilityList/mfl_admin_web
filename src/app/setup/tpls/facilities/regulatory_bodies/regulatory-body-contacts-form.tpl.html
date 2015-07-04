@@ -1,6 +1,6 @@
 <div class="row margin-t-20">
     <h4 class="fs-13 fw-500 margin-t-20"> Add Contacts</h4>
-    <form ng-submit="add()">
+    <form ng-submit="add()" requires-user-feature="is_staff">
         <table class="table content-card  margin-b-10">
             <tbody>
                 <tr class="">
@@ -33,8 +33,8 @@
             </tbody>
         </table>
     </form>
-    </div>
-    <div class="row margin-t-20">
+</div>
+<div class="row margin-t-20">
     <h4 class="fs-13 fw-500"> Current Contacts</h4>
     <table class="table content-card margin-t-20 margin-b-10">
         <tbody>
@@ -42,10 +42,10 @@
                 <td class="pad-t-15 fs-16 fw-500">{{contact.contact_type}}</td>
                 <td class="pad-t-15 fs-16 fw-500">{{contact.contact_text}}</td>
                 <td class="text-right">
-                <span ng-if="contact.delete_spinner">
-                    <i class="fa fa-spin fa-circle-o-notch"></i>
-                </span>
-                    <button class="action-btn action-btn-danger action-btn-grid" ng-click="remove_contact(contact)">
+                    <span ng-if="contact.delete_spinner">
+                        <i class="fa fa-spin fa-circle-o-notch"></i>
+                    </span>
+                    <button class="action-btn action-btn-danger action-btn-grid" ng-click="remove_contact(contact)" requires-user-feature="is_staff">
                         <i class="fa fa-trash"></i>
                     </button>
                 </td>
@@ -57,4 +57,4 @@
             </tr>
         </tbody>
     </table>
-    </div>
+</div>

@@ -1,5 +1,7 @@
-(function(angular){
+(function(angular, _){
+
     "use strict";
+
     angular.module("mfl.setup.facilities.controllers",[
         "mfl.setup.api"
     ])
@@ -14,9 +16,10 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.facility_owner_types.create'",
+                    func : "ui-sref='setup.facility_owner_types.create'" +
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='facilities.add_ownertype'",
                     class: "action-btn action-btn-primary action-btn-md",
-
                     tipmsg: "Add Facility Owner Type",
                     icon: "fa-plus"
                 }
@@ -35,9 +38,10 @@
                 };
                 $scope.action = [
                     {
-                        func : "ui-sref='setup.facility_owner_types.view.delete'",
+                        func : "ui-sref='setup.facility_owner_types.view.delete'" +
+                               " requires-user-feature='is_staff'" +
+                           " requires-permission='facilities.delete_ownertype'",
                         class: "action-btn action-btn-danger action-btn-md",
-
                         tipmsg: "Delete Facility Owner Type",
                         icon: "fa-trash"
                     }
@@ -100,9 +104,10 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.facility_owners.create'",
+                    func : "ui-sref='setup.facility_owners.create'" +
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='facilities.add_owner'",
                     class: "action-btn action-btn-primary action-btn-md",
-
                     tipmsg: "Add Facility Owner",
                     icon: "fa-plus"
                 }
@@ -121,9 +126,10 @@
                 };
                 $scope.action = [
                     {
-                        func : "ui-sref='setup.facility_owners.view.delete'",
+                        func : "ui-sref='setup.facility_owners.view.delete'" +
+                               " requires-user-feature='is_staff'" +
+                           " requires-permission='facilities.delete_owner'",
                         class: "action-btn action-btn-danger action-btn-md",
-
                         tipmsg: "Delete Facility Owner",
                         icon: "fa-trash"
                     }
@@ -203,9 +209,10 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.facility_job_titles.create'",
+                    func : "ui-sref='setup.facility_job_titles.create'" +
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='facilities.add_jobtitle'",
                     class: "action-btn action-btn-primary action-btn-md",
-
                     tipmsg: "Add Job Title",
                     icon: "fa-plus"
                 }
@@ -228,9 +235,10 @@
                 };
                 $scope.action = [
                     {
-                        func : "ui-sref='setup.facility_job_titles.view.delete'",
+                        func : "ui-sref='setup.facility_job_titles.view.delete'" +
+                               " requires-user-feature='is_staff'" +
+                           " requires-permission='facilities.delete_jobtitle'",
                         class: "action-btn action-btn-danger action-btn-md",
-
                         tipmsg: "Delete Facility Job Title",
                         icon: "fa-trash"
                     }
@@ -291,9 +299,10 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.facility_regulatory_bodies.create.basic'",
+                    func : "ui-sref='setup.facility_regulatory_bodies.create.basic'" +
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='facilities.add_regulatingbody'",
                     class: "action-btn action-btn-primary action-btn-md",
-
                     tipmsg: "Add Regulatory Body",
                     icon: "fa-plus"
                 }
@@ -404,7 +413,9 @@
                 $scope.action = [
                     {
                         func : "ui-sref="+
-                        "'setup.facility_regulatory_bodies.edit.delete'",
+                        "'setup.facility_regulatory_bodies.edit.delete'" +
+                        " requires-user-feature='is_staff'" +
+                           " requires-permission='facilities.delete_regulatingbody'",
                         class: "action-btn action-btn-danger action-btn-md",
 
                         tipmsg: "Delete Facility Regulatory Body",
@@ -513,5 +524,4 @@
         }
     ]);
 
-})(angular);
-
+})(angular, _);

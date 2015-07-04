@@ -35,7 +35,8 @@
                         controller: "mfl.setup.controller.town.edit"
                     }
                 },
-                permission: "common.delete_town"
+                permission: "common.delete_town",
+                feature: "is_staff"
             })
             .state("setup.towns.town_create", {
                 url: "/create",
@@ -45,19 +46,9 @@
                         templateUrl: "setup/tpls/towns/towns.edit.tpl.html"
                     }
                 },
-                permission: "common.add_town"
-            })
-            .state("setup.towns.town_delete", {
-                url: "/towns/delete/:town_id",
-                views: {
-                    "main-content@setup.towns": {
-                        controller: "mfl.setup.controller.town.delete",
-                        templateUrl: "setup/tpls/towns/towns.delete.tpl.html"
-                    }
-                },
-                permission: "common.delete_town"
-            })
-            ;
+                permission: "common.add_town",
+                feature: "is_staff"
+            });
     }]);
 })(angular);
 

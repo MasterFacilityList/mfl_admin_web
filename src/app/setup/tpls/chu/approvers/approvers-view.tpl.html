@@ -41,10 +41,10 @@
                      Is Active?
                  </label>
             </div>
-            <button ng-if="!chuApprovers.id" ng-click="createChuApprovers(chuApprovers)" class="login-btn login-btn-primary">
+            <button ng-if="!chuApprovers.id" ng-click="createChuApprovers(chuApprovers)" class="login-btn login-btn-primary" requires-user-feature="is_staff">
                 <i class="fa fa-save"></i> Save
             </button>
-            <button ng-if="chuApprovers.id" ng-click="updateChuApprovers(chuApprovers.id, chu.approvers.form)" class="login-btn login-btn-primary">
+            <button ng-if="chuApprovers.id" ng-click="updateChuApprovers(chuApprovers.id, chu.approvers.form)" class="login-btn login-btn-primary" requires-user-feature="is_staff">
                 <i class="fa fa-save"></i> Save
             </button>
             <button class="login-btn login-btn-default margin-l-10" ui-sref="setup.chu_approvers">
