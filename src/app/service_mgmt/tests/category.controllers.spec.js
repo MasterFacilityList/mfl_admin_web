@@ -90,7 +90,7 @@
                                        "api/facilities/service_categories/1/")
                             .respond(200, {});
 
-                        spyOn(formChanges, "whatChanged").andReturn({"name": "get"});
+                        spyOn(formChanges, "whatChangedFormly").andReturn({"name": "get"});
                         spyOn(state, "go");
                         ctrl("category_edit", data);
 
@@ -110,7 +110,7 @@
                         httpBackend.flush();
                         httpBackend.verifyNoOutstandingRequest();
                         httpBackend.verifyNoOutstandingExpectation();
-                        expect(formChanges.whatChanged).toHaveBeenCalled();
+                        expect(formChanges.whatChangedFormly).toHaveBeenCalled();
                         expect(state.go).toHaveBeenCalled();
                     }
                 ]);
@@ -132,7 +132,7 @@
                             .expectGET(server_url + "api/facilities/service_categories/1/")
                             .respond(200, {});
 
-                        spyOn(formChanges, "whatChanged").andReturn({});
+                        spyOn(formChanges, "whatChangedFormly").andReturn({});
                         spyOn(state, "go");
                         ctrl("category_edit", data);
 
@@ -141,12 +141,14 @@
                         httpBackend.verifyNoOutstandingExpectation();
 
                         httpBackend.resetExpectations();
-
+                        /* Else path */
+                        var changes = {};
                         scope.save();
+                        expect(changes).toEqual({});
 
                         httpBackend.verifyNoOutstandingRequest();
                         httpBackend.verifyNoOutstandingExpectation();
-                        expect(formChanges.whatChanged).toHaveBeenCalled();
+                        expect(formChanges.whatChangedFormly).toHaveBeenCalled();
                         expect(state.go).not.toHaveBeenCalled();
                     }
                 ]);
