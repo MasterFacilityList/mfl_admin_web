@@ -1835,8 +1835,8 @@
                     };
                     spyOn(map, "fitBounds");
                     then_fxn(map);
-                    expect(map.fitBounds).toHaveBeenCalledWith([[2,3],
-                                                                [3,4]]);
+                    expect(map.fitBounds).toHaveBeenCalledWith([[3,2],
+                                                                [4,3]]);
                 });
 
             it("should fail to load the data required by controller",
