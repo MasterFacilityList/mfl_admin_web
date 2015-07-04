@@ -66,7 +66,13 @@
                         change_state(evt, toState.redirectTo, toParams);
                     } else if (toState.requireUser === false) {
                         change_state(evt, HOME_PAGE_NAME);
-                    } else if (! permChecker.hasPermission(toState.permission)) {
+                    } else if (toState.permission &&
+                              (! permChecker.hasPermission(toState.permission))
+                            ) {
+                        change_state(evt, "common_403");
+                    } else if (toState.feature &&
+                              (! permChecker.hasUserFeature(toState.feature))
+                            ) {
                         change_state(evt, "common_403");
                     } else if (loginService.getUser().requires_password_change &&
                                toState.name !== "profile.password") {

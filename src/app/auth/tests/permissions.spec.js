@@ -22,6 +22,7 @@
                 spyOn(loginService, "isLoggedIn").andReturn(false);
                 inject(["mfl.auth.permissions.checker", function (permChecker) {
                     expect(permChecker.hasPermission("hello")).toBe(false);
+                    expect(permChecker.hasUserFeature("county")).toBe(false);
                 }]);
             });
 
@@ -34,6 +35,15 @@
                 }]);
             });
 
+            it("should not allow loggedin users without feature", function () {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "getUser").andReturn({});
+
+                inject(["mfl.auth.permissions.checker", function (permChecker) {
+                    expect(permChecker.hasUserFeature("county")).toBe(false);
+                }]);
+            });
+
             it("should allow loggedin users with permission", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
                 spyOn(loginService, "getUser").andReturn({all_permissions: ["hello"]});
@@ -43,14 +53,23 @@
                 }]);
             });
 
-            it("should allow if permission is not a valid string", function () {
+            it("should allow loggedin users with feature", function () {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "getUser").andReturn({county: "meru"});
+
+                inject(["mfl.auth.permissions.checker", function (permChecker) {
+                    expect(permChecker.hasUserFeature("county")).toBe(true);
+                }]);
+            });
+
+            it("should not allow if permission is not a valid string", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
                 spyOn(loginService, "getUser").andReturn({all_permissions: []});
 
                 inject(["mfl.auth.permissions.checker", function (permChecker) {
-                    expect(permChecker.hasPermission()).toBe(true);
-                    expect(permChecker.hasPermission("")).toBe(true);
-                    expect(permChecker.hasPermission({})).toBe(true);
+                    expect(permChecker.hasPermission()).toBe(false);
+                    expect(permChecker.hasPermission("")).toBe(false);
+                    expect(permChecker.hasPermission({})).toBe(false);
                 }]);
             });
 
@@ -69,20 +88,20 @@
                 }
             ]));
 
-            it("should not do anything without permission", function () {
+            it("should disallow element without permission", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
 
                 var element = angular.element(
                     "<div><div id='r'><p requires-permission=''>asd</p></div></div>"
                 );
                 compile(element)(rootscope);
-                expect(element.html()).toContain("asd");
+                expect(element.html()).not.toContain("asd");
 
                 element = angular.element(
                     "<div><div id='r'><p requires-permission>asd</p></div></div>"
                 );
                 compile(element)(rootscope);
-                expect(element.html()).toContain("asd");
+                expect(element.html()).not.toContain("asd");
             });
 
             it("should allow element", function () {

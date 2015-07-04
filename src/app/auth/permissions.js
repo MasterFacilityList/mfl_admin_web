@@ -10,7 +10,7 @@
 
             var hasPermission =  function (permission) {
                 if ((! angular.isString(permission)) || permission === "") {
-                    return true;
+                    return false;
                 }
 
                 if (! loginService.isLoggedIn()) {
@@ -21,8 +21,20 @@
                 return _.contains(user_perms, permission.toLowerCase());
             };
 
+            var hasUserFeature = function (feature) {
+                if ((! angular.isString(feature)) || feature === "") {
+                    return false;
+                }
+
+                if (! loginService.isLoggedIn()) {
+                    return false;
+                }
+                return (loginService.getUser()[feature]) ? true : false;
+            };
+
             return {
-                "hasPermission": hasPermission
+                "hasPermission": hasPermission,
+                "hasUserFeature": hasUserFeature
             };
         }
     ])
@@ -45,18 +57,15 @@
         }
     ])
 
-    .directive("requiresUserFeature", ["mfl.auth.services.login",
-        function (loginService) {
-            var isLoggedIn = loginService.isLoggedIn();
-            var user = loginService.getUser();
+    .directive("requiresUserFeature", ["mfl.auth.permissions.checker",
+        function (permChecker) {
             return {
                 restrict: "A",
                 transclude: "element",
                 priority: 1600,
                 link: function (scope, element, attrs, controller, transclude) {
                     transclude(scope, function (clone) {
-                        var feature = attrs.requiresUserFeature;
-                        if (isLoggedIn && user[feature]) {
+                        if (permChecker.hasUserFeature(attrs.requiresUserFeature)) {
                             element.after(clone);
                         }
                     });
