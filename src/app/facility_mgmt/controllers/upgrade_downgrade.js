@@ -50,7 +50,6 @@
         ["$scope", "$controller", function ($scope, $controller) {
             var helper = $controller("mfl.facility_mgmt.controllers.updown_helper");
             helper.bootstrap($scope, true);
-            $scope.upgrade = true;
         }]
     )
 
@@ -59,7 +58,6 @@
         function ($scope, $controller) {
             var helper = $controller("mfl.facility_mgmt.controllers.updown_helper");
             helper.bootstrap($scope, false);
-            $scope.upgrade = false;
         }]
     )
 
