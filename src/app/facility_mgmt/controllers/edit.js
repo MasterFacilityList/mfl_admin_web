@@ -335,9 +335,11 @@
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.units",
-        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        function ($scope, $log, $stateParams, wrappers) {
-
+        ["$scope", "$log", "$stateParams",
+        "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
+        function ($scope, $log, $stateParams, wrappers, multistepService) {
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[5]);
             /*regulating bodies*/
             wrappers.regulating_bodies.list()
             .success(function(data){
@@ -423,7 +425,10 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log",
-        function ($scope,wrappers,$log) {
+        "mfl.common.services.multistep",
+        function ($scope,wrappers,$log, multistepService) {
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[6]);
             $scope.spinner = true;
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
