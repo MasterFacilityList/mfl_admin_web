@@ -12,21 +12,19 @@
             </form>
         </div>
         <div ng-if="facility.is_approved">
-            <p>Facility has already been approved</p>
+            <span class="fs-16">Facility has already been approved</span>
         </div>
     </div>
 
-    <div class="well" ng-class="{'alert-success':!facility.latest_update}">
-        <div ng-if="facility.latest_update">
-            <h4>Approve facility updates</h4>
+    <div class="detail-content pad-20" ng-class="{'alert-success':!facility.latest_update}">
+        <div ng-if="facility.latest_update" class="content-card">
+            <span class="fs-16"><strong>Approve facility updates</strong></span>
             <div class="row">
-                <div class="form-group col-xs-5">
-                    <label>Updates made by</label>
-                    <p class="form-control-static">{{facility_update.created_by_name}}</p>
+                <div class="form-group col-sm-6">
+                    <p class="form-control-static">Updates made by:{{facility_update.created_by_name}}</p>
                 </div>
-                <div class="form-group col-xs-5">
-                    <label>Updates made on</label>
-                    <p class="form-control-static">{{facility_update.created | date}}</p>
+                <div class="form-group col-sm-6">
+                    <p class="form-control-static">Updates made on:{{facility_update.created | date}}</p>
                 </div>
             </div>
             <table class="table table-hover">
@@ -45,9 +43,10 @@
                     </tr>
                 </tbody>
             </table>
-
-            <button ng-click="approveUpdate(true)" class="btn btn-success">Approve Updates</button>
-            <button ng-click="approveUpdate(false)" class="btn btn-danger">Decline Updates</button>
+        <div class="margin-t-20 margin-b-10">
+            <button ng-click="approveUpdate(true)" class="login-btn login-btn-success">Approve Updates</button>
+            <button ng-click="approveUpdate(false)" class="login-btn login-btn-danger">Decline Updates</button>
+        </div>
         </div>
         <div ng-if="!facility.latest_update">
             <p>No facility updates pending approval</p>

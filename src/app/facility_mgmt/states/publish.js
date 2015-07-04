@@ -10,7 +10,7 @@
             url: "publish/",
             views: {
                 "tab-header@facilities.facility_edit": {
-                    templateUrl: "facility_mgmt/tpls/publish.tabheaders.tpl.html"
+                    templateUrl: "facility_mgmt/tpls/facility_publish.tabheaders.tpl.html"
                 },
                 "publish@facilities.facility_edit": {
                     templateUrl: "facility_mgmt/tpls/facility_publish.tpl.html",
