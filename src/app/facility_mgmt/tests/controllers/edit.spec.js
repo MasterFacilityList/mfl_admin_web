@@ -1493,20 +1493,22 @@
     });
     describe("Edit facility", function () {
         var rootScope, ctrl, httpBackend, server_url, loginService, log,
-            yusa, controller;
+            yusa, controller, leafletData;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.auth.services");
             module("mfl.facility_mgmt.controllers");
+            module("leaflet-directive");
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
-                "mfl.auth.services.login", "$log",
-                function (c, r, h, s, ls, lg) {
+                "mfl.auth.services.login", "$log","leafletData",
+                function (c, r, h, s, ls, lg, ld) {
                     ctrl = function (name, data) {
                         return c("mfl.facility_mgmt.controllers.facility_edit"+name, data);
                     };
                     controller = c;
                     rootScope = r;
+                    leafletData = ld;
                     httpBackend = h;
                     server_url = s;
                     loginService = ls;
@@ -1526,7 +1528,10 @@
                         facility_id: 4
                     }
                 };
-                
+
+                var coords = {
+                    coordinates : [0,1]
+                };
                 httpBackend
                     .expectGET(server_url+"api/gis/facility_coordinates/3/")
                     .respond(200, {results: []});
@@ -1541,11 +1546,76 @@
                 };
                 data.$scope.$apply();
                 data.$scope.$digest();
-                
+                data.$scope.checkLocation(coords);
+
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
             });
+
+            it("should expect map data to be loaded", function () {
+                var data = {
+                    ward_boundary:{
+                        geometry:{
+                            coordinates : [
+                                [
+                                    [1,2],
+                                    [3,4]
+                                ]
+                            ]
+                        },
+                        properties : {
+                            bound: {
+                                coordinates : [
+                                    [3,4],
+                                    [4,5]
+                                ]
+                            }
+                        }
+                    }
+                };
+                var obj = {
+                    then: angular.noop
+                };
+                var scope = rootScope.$new();
+                scope.facility = {
+                    ward : "3",
+                    coordinates: "3"
+                };
+                spyOn(scope, "$on").andCallThrough();
+                spyOn(leafletData, "getMap").andReturn(obj);
+                spyOn(obj, "then");
+
+                ctrl(".location",{
+                    "$scope": scope,
+                    "leafletData": leafletData
+                });
+
+                httpBackend
+                    .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/common/wards/3/")
+                    .respond(200, data);
+
+                scope.$apply();
+                scope.$digest();
+
+                httpBackend.flush();
+
+                expect(leafletData.getMap).toHaveBeenCalled();
+                expect(obj.then).toHaveBeenCalled();
+
+                var then_fxn = obj.then.calls[0].args[0];
+                expect(angular.isFunction(then_fxn)).toBe(true);
+                var map = {
+                    fitBounds: angular.noop
+                };
+                spyOn(map, "fitBounds");
+                then_fxn(map);
+                expect(map.fitBounds).toHaveBeenCalledWith([[3,4],[4,5]]);
+            });
+
             it("should fail to load the data required by controller", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -1553,22 +1623,29 @@
                         facility_id: 4
                     }
                 };
-                
+
                 httpBackend
                     .expectGET(server_url+"api/gis/facility_coordinates/3/")
                     .respond(500, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/common/ward/3/")
-                    .respond(500, {results: []});
+
                 ctrl(".location", data);
+
                 data.$scope.$apply();
+                data.$scope.$digest();
                 data.$scope.facility={
                     coordinates : "3",
                     ward : "3"
                 };
+
+                data.$scope.markers = {
+                    mainMarker :{
+                        lat: 2,
+                        lng: 3
+                    }
+                };
                 data.$scope.$apply();
                 data.$scope.$digest();
-                
+
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
