@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
 
     angular.module("mfl.common.directives.listassignment", [])
@@ -56,12 +56,10 @@
             },
             compile: function (tElem, tAttrs) {
                 var write_perm = tAttrs.writePerm || "";
-                var read_perm = tAttrs.readPerm || "";
                 tElem.find("#lst-available").attr("requires-permission", write_perm);
                 tElem.find("#lst-divider").attr("requires-permission", write_perm);
-                tElem.find("#lst-assigned").attr("requires-permission", read_perm);
                 return link_fxn;
             }
         };
     }]);
-})(angular);
+})(angular, _);
