@@ -6,7 +6,8 @@
         "mfl.auth.services",
         "datePicker",
         "ui.bootstrap.tpls",
-        "mfl.common.forms"
+        "mfl.common.forms",
+        "leaflet-directive"
     ])
 
     .controller("mfl.facility_mgmt.controllers.services_helper",
@@ -424,12 +425,29 @@
         }])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
-        ["$scope", "mfl.facility_mgmt.services.wrappers", "$log",
+        ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep",
-        function ($scope,wrappers,$log, multistepService) {
+        function ($scope,wrappers,$log, leafletData,multistepService) {
             multistepService.filterActive(
                 $scope, $scope.steps, $scope.steps[6]);
             $scope.spinner = true;
+            angular.extend($scope, {
+                defaults: {
+                    scrollWheelZoom: false
+                },
+                layers:{},
+                tiles:{
+                    openstreetmap: {
+                        url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        options: {
+                            opacity: 0.7,
+                            attribution: "&copy; <a href='http://www.openstreetmap.org/"+
+                            "copyright'>OpenStreetMap</a> contributors"
+                        }
+                    }
+                }
+            });
+            
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
                     return;
@@ -439,11 +457,82 @@
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.geo = data;
+                    angular.extend($scope,{
+                        markers: {
+                            mainMarker: {
+                                layer:"facility",
+                                lat: data.coordinates.coordinates[1],
+                                lng: data.coordinates.coordinates[0],
+                                message: "Facility location"
+                            }
+                        }
+                    });
                 })
                 .error(function(error){
                     $scope.spinner = false;
                     $log.error(error);
                 });
+                /*ward coordinates*/
+                wrappers.wards.get(f.ward)
+                .success(function(data){
+                    $scope.spinner = false;
+                    $scope.ward_gis = data.ward_boundary;
+                    leafletData.getMap("wardmap")
+                        .then(function (map) {
+                            var coords = data.ward_boundary.properties.bound.coordinates[0];
+                            var bounds = _.map(coords, function(c) {
+                                return [c[1], c[0]];
+                            });
+                            map.fitBounds(bounds);
+                        });
+                    var gis = data.ward_boundary;
+                    angular.extend($scope, {
+                        geojson: {
+                            data: gis,
+                            style: {
+                                fillColor: "rgb(255, 135, 32)",
+                                weight: 2,
+                                opacity: 1,
+                                color: "rgba(0, 0, 0, 0.52)",
+                                dashArray: "3",
+                                fillOpacity: 0.8
+                            }
+                        },
+                        layers:{
+                            baselayers:{
+                                Constituency: {
+                                    name: "Constituency",
+                                    url: "/assets/img/transparent.png",
+                                    type:"xyz"
+                                }
+                            },
+                            overlays:{
+                                facility:{
+                                    name:"Facility Location",
+                                    type:"group",
+                                    visible: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .error(function(error){
+                    $scope.spinner = false;
+                    $log.error(error);
+                });
+                $scope.checkLocation = function  (coords) {
+                    angular.extend($scope,{
+                        markers : {
+                            mainMarker : {
+                                layer:"facility",
+                                lat:coords.coordinates[1],
+                                lng:coords.coordinates[0],
+                                message:"facility location"
+                            }
+                        }
+                    });
+                };
+                /*update marker position*/
             });
         }]);
 

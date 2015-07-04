@@ -51,68 +51,89 @@
         </div>
     </div>
     <div class="margin-t-50">
-        <h4><strong>Geolocation details</strong></h4>
-        <div class="row">
-           <div class="col-md-6">
-                <div class="group">
-                    <input type="text" name="coordinates.coordinates[0]" ng-model="geo.coordinates.coordinates[0]"  required />
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>
-                        Longitude
-                    </label>
+        <form name="geoForm">
+            <h4><strong>Geolocation details</strong></h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                       <div class="col-md-6">
+                            <div class="group">
+                                <input type="number" step="0.00000001" name="coordinates.coordinates[0]" ng-model="geo.coordinates.coordinates[0]"/>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>
+                                    Longitude
+                                </label>
+                            </div>
+                       </div>
+                       <div class="col-md-6">
+                            <div class="group">
+                                <input type="number" step="0.00000001" name="coordinates.coordinates[1]" ng-model="geo.coordinates.coordinates[1]" />
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>
+                                    Latitude
+                                </label>
+                            </div>
+                       </div>
+                       <div class="col-md-12">
+                           <button class="login-btn login-btn-primary" ng-click="checkLocation(geo.coordinates)"> Show facility location on map</button>
+                       </div>
+                    </div>
+                    <div class="row margin-t-20">
+                        <div class="group col-md-12">
+                            <select name="source" ng-model="geo.source">
+                                <option value="" disabled>Geocode source</option>
+                                <option ng-repeat="gcs in geo_code_sources" ng-value="gcs.id">{{gcs.name}}</option>
+                            </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="group col-md-12">
+                            <select name="method" ng-model="geo.method">
+                                <option value="" disabled>Geocode method</option>
+                                <option ng-repeat="gcm in geo_code_methods" ng-value="gcm.id">{{gcm.name}}</option>
+                            </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                        </div>
+                    </div>
+                    <div class="row margin-t-10">
+                        <div class="col-md-12">
+                            <label for="collection date" style="min-height:220px">
+                                <span class="fs-16">Collection date:</span>
+                                    <date-picker
+                                        placeholder="collection date"
+                                        name="collection_date"
+                                        ng-model="geo.collection_date"
+                                        min-date="minDate"
+                                        show-weeks="true"
+                                        custom-class="getDayClass(date, mode)">
+                                    </date-picker>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-           </div>
-        </div>
-        <div class="row">
-           <div class="col-md-6">
-                <div class="group">
-                    <input type="text" name="coordinates.coordinates[1]" ng-model="geo.coordinates.coordinates[1]"  required />
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>
-                        Latitude
-                    </label>
+                <div class="col-md-6">
+                   <div>
+    <p>Marker position (lng/lat): <strong ng-bind="markers.mainMarker.lat"></strong> / <strong ng-bind="markers.mainMarker.lng"></strong></p>
+                   </div>
+                    <leaflet id="wardmap"
+                        defaults="defaults"
+                        markers="markers"
+                        layers="layers"
+                        tiles="tiles"
+                        width="100%"
+                        height="300px"
+                        geojson="geojson">
+                     </leaflet>
                 </div>
-           </div>
-        </div>
-        <div class="row">
-            <div class="group col-md-6">
-                <select name="source" ng-model="geo.source">
-                    <option value="" disabled>Geocode source</option>
-                    <option ng-repeat="gcs in geo_code_sources" ng-value="gcs.id">{{gcs.name}}</option>
-                </select>
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
             </div>
-        </div>
-        <div class="row">
-            <div class="group col-md-6">
-                <select name="method" ng-model="geo.method">
-                    <option value="" disabled>Geocode method</option>
-                    <option ng-repeat="gcm in geo_code_methods" ng-value="gcm.id">{{gcm.name}}</option>
-                </select>
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-            </div>
-        </div>
-        <div class="row margin-t-10">
-            <div class="col-md-6">
-                <label for="collection date" style="min-height:220px">
-                    <span class="fs-16">Collection date:</span>
-                        <date-picker
-                            placeholder="collection date"
-                            name="collection_date"
-                            ng-model="geo.collection_date"
-                            min-date="minDate"
-                            show-weeks="true"
-                            custom-class="getDayClass(date, mode)">
-                        </date-picker>
-                </label>
-            </div>
-        </div>
+        </form>
     </div>
     <div>
-        <input type="submit" class="btn btn-primary" />
+        <input type="submit" class="login-btn login-btn-primary" />
     </div>
 </section>
