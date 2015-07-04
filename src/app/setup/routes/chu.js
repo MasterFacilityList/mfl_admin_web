@@ -35,7 +35,8 @@
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
                 },
-                permission: "chul.delete_status"
+                permission: "chul.delete_status",
+                feature: "is_staff"
             })
         .state("setup.chu_status.create", {
                 url: "/create",
@@ -45,7 +46,8 @@
                         templateUrl: "setup/tpls/chu/status/status-view.tpl.html"
                     }
                 },
-                permission: "chul.create_status"
+                permission: "chul.create_status",
+                feature: "is_staff"
             })
         .state("setup.chu_approvers", {
                 url: "/chu_approvers",
@@ -78,7 +80,8 @@
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
                 },
-                permission: "chul.delete_approver"
+                permission: "chul.delete_approver",
+                feature: "is_staff"
             })
         .state("setup.chu_approvers.create", {
                 url: "/create",
@@ -88,7 +91,8 @@
                         templateUrl: "setup/tpls/chu/approvers/approvers-view.tpl.html"
                     }
                 },
-                permission: "chul.create_approver"
+                permission: "chul.add_approver",
+                feature: "is_staff"
             })
         ;
     }]);

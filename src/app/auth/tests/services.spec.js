@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     "use strict";
 
@@ -143,9 +143,27 @@
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.auth.services");
-            module("mfl.dashboard.states");
             module("mfl.auth.states");
             module("mfl.auth.permissions");
+            module("ui.router");
+
+            angular.module("test_states", ["ui.router"])
+            .config(["$stateProvider", function ($stateProvider) {
+                $stateProvider
+                .state("testperm", {
+                    permission: "perm"
+                })
+                .state("testfeature", {
+                    feature: "feat"
+                })
+                .state("testboth", {
+                    feature: "feat",
+                    permission: "perm"
+                })
+                .state("none", {});
+            }]);
+
+            module("test_states");
 
             inject(["$state", "mfl.auth.services.statecheck", "mfl.auth.permissions.checker",
                 "mfl.auth.services.login", "$rootScope", "HOME_PAGE_NAME",
@@ -176,8 +194,8 @@
         it("should allow loggedin users to access states", function () {
             spyOn(loginService, "isLoggedIn").andReturn(true);
             statecheck.startListening();
-            expect(state.go("dashboard").$$state.status).toBe(0);
-            expect(state.go("dashboard").$$state.value).toBe(undefined);
+            expect(state.go("none").$$state.status).toBe(0);
+            expect(state.go("none").$$state.value).toBe(undefined);
         });
 
         it("should redirect loggedin users from login state to home", function () {
@@ -199,7 +217,17 @@
 
             statecheck.startListening();
 
-            expect(state.go("dashboard").$$state.status).toEqual(2);
+            expect(state.go("testperm").$$state.status).toEqual(2);
+        });
+
+        it("should stop users without feature from going to a state", function () {
+            spyOn(loginService, "isLoggedIn").andReturn(true);
+            spyOn(state, "go").andCallThrough();
+            spyOn(permChecker, "hasUserFeature").andReturn(false);
+
+            statecheck.startListening();
+
+            expect(state.go("testfeature").$$state.status).toEqual(2);
         });
 
         it("should allow loggedin users to logout", function () {
@@ -232,11 +260,11 @@
 
             statecheck.startListening();
 
-            state.go("dashboard");
+            state.go("none");
 
             var last_call = state.go.calls[state.go.calls.length-1];
             expect(last_call.args[0]).toEqual("login");
-            expect(last_call.args[1]).toEqual({"next": "dashboard"});
+            expect(last_call.args[1]).toEqual({"next": "none"});
         });
 
         it("should be able to stop listening", function () {
@@ -246,10 +274,10 @@
             statecheck.startListening();
             statecheck.stopListening();
 
-            state.go("dashboard");
+            state.go("none");
 
             var last_call = state.go.calls[state.go.calls.length-1];
-            expect(last_call.args[0]).toEqual("dashboard");
+            expect(last_call.args[0]).toEqual("none");
         });
 
         it("should fail silently if stop is called repeatedly", function () {
@@ -443,4 +471,4 @@
             httpBackend.verifyNoOutstandingExpectation();
         });
     });
-})();
+})(angular);
