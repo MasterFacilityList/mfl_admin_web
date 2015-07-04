@@ -90,35 +90,6 @@
                 });
             };
         }]
-    )
+    );
 
-    .controller("mfl.setup.controller.town.delete",
-        ["$scope", "$stateParams", "$state", "$log", "adminApi",
-        function ($scope, $stateParams, $state, $log, adminApi) {
-            $scope.town_id = $stateParams.town_id;
-            $scope.title = {
-                icon : "fa-trash",
-                name : "Delete Town"
-            };
-
-            adminApi.towns.get($scope.town_id)
-            .success(function (data) {
-                $scope.town = data;
-            })
-            .error(function (data) {
-                $log.error(data);
-            });
-
-            $scope.remove = function () {
-                adminApi.towns.remove($scope.town_id)
-                .success(function () {
-                    $state.go("setup.towns");
-                })
-                .error(function (data) {
-                    $log.error(data);
-                });
-            };
-        }]
-    )
-    ;
 })(angular);

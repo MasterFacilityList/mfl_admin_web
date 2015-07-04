@@ -146,7 +146,7 @@
             });
         });
 
-        describe("Testing require-user-feature directive :", function () {
+        describe("Testing requires-user-feature directive :", function () {
             var compile, rootscope, loginService;
 
             beforeEach(inject(["$compile", "$rootScope", "mfl.auth.services.login",
