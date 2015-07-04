@@ -43,6 +43,26 @@
                 }
             };
         }
+    ])
+
+    .directive("requiresUserFeature", ["mfl.auth.services.login",
+        function (loginService) {
+            var isLoggedIn = loginService.isLoggedIn();
+            var user = loginService.getUser();
+            return {
+                restrict: "A",
+                transclude: "element",
+                priority: 1600,
+                link: function (scope, element, attrs, controller, transclude) {
+                    transclude(scope, function (clone) {
+                        var feature = attrs.requiresUserFeature;
+                        if (isLoggedIn && user[feature]) {
+                            element.after(clone);
+                        }
+                    });
+                }
+            };
+        }
     ]);
 
 })(angular, _);
