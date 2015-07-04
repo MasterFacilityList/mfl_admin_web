@@ -13,7 +13,8 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.chu_status.create'" +
-                           " requires-user-feature='is_staff'",
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='chul.add_status'",
                     class: "action-btn action-btn-primary action-btn-md",
 
                     tipmsg: "Add community unit status",
@@ -34,7 +35,8 @@
                 $scope.action = [
                     {
                         func : "ui-sref='setup.chu_status.view.delete'" +
-                               " requires-user-feature='is_staff'",
+                               " requires-user-feature='is_staff'" +
+                               " requires-permission='chul.delete_status'",
                         class: "action-btn action-btn-danger action-btn-md",
 
                         tipmsg: "Delete CHU Status",
@@ -96,9 +98,9 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.chu_approvers.create'" +
-                           " requires-user-feature='is_staff'",
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='chul.add_approver'",
                     class: "action-btn action-btn-primary action-btn-md",
-
                     tipmsg: "Add Community Unit Approver",
                     icon: "fa-plus"
                 }
@@ -118,7 +120,8 @@
                 $scope.action = [
                     {
                         func : "ui-sref='setup.chu_approvers.view.delete'" +
-                               " requires-user-feature='is_staff'",
+                               " requires-user-feature='is_staff'" +
+                           " requires-permission='chul.delete_approver'",
                         class: "action-btn action-btn-danger action-btn-md",
                         tipmsg: "Delete CHU Approver",
                         icon: "fa-trash"

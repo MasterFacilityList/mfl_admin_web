@@ -20,11 +20,11 @@
                 </label>
             </div>
             <div class="col-md-12 margin-b-20 margin-t-20">
-                <button class="login-btn login-btn-default margin-h-5" ui-sref="setup.geocode_methods_list">
+                <button class="login-btn login-btn-default margin-h-5" ui-sref="setup.geocode_methods_list" requires-user-feature="is_staff">
                     Cancel
                 </button>
-                <button class="login-btn login-btn-primary margin-h-5" type="submit" >
-                <i class="fa fa-save"></i> Save
+                <button class="login-btn login-btn-primary margin-h-5" type="submit" requires-user-feature="is_staff">
+                    <i class="fa fa-save"></i> Save
                 </button>
             </div>
         </div>

@@ -47,7 +47,8 @@
                                         "facility-owners-view.tpl.html"
                     }
                 },
-                permission: "facilities.add_owner"
+                permission: "facilities.add_owner",
+                feature: "is_staff"
             })
 
         /** -----------------------------------------------------------**/
@@ -84,7 +85,9 @@
                         controller: "mfl.setup.controller.facilityOwnerType.view",
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.delete_ownertype",
+                feature: "is_staff"
             })
         .state("setup.facility_owner_types.create", {
                 url: "/create",
@@ -95,7 +98,8 @@
                                         "facility-owner-types-view.tpl.html"
                     }
                 },
-                permission: "facilities.add_ownertype"
+                permission: "facilities.add_ownertype",
+                feature: "is_staff"
             })
 
          /** -----------------------------------------------------------**/
@@ -130,7 +134,9 @@
                         controller: "mfl.setup.controller.facilityJobTitle.view",
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.delete_jobtitle",
+                feature: "is_staff"
             })
         .state("setup.facility_job_titles.create", {
                 url: "/create",
@@ -140,7 +146,8 @@
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
                 },
-                permission: "facilities.add_jobtitle"
+                permission: "facilities.add_jobtitle",
+                feature: "is_staff"
             })
 
          /** -----------------------------------------------------------**/
@@ -177,7 +184,9 @@
                         controller: "mfl.setup.controller.facilityRegulatoryBody.edit",
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
-                }
+                },
+                permission: "facilities.delete_regulatingbody",
+                feature: "is_staff"
             })
         .state("setup.facility_regulatory_bodies.edit.basic", {
                 url: "/basicdetails",
@@ -208,7 +217,8 @@
                                     "regulatory-bodies-view.tpl.html"
                     }
                 },
-                permission: "facilities.add_regulatingbody"
+                permission: "facilities.add_regulatingbody",
+                feature: "is_staff"
             })
         .state("setup.facility_regulatory_bodies.create.basic", {
                 url: "/basicdetails",
@@ -218,7 +228,8 @@
                         "regulatory-body-main-form.tpl.html"
                     }
                 },
-                permission: "facilities.add_regulatingbody"
+                permission: "facilities.add_regulatingbody",
+                feature: "is_staff"
             })
         .state("setup.facility_regulatory_bodies.create.contacts", {
                 url: "/:reg_cont_id/contacts",
@@ -228,8 +239,8 @@
                         "regulatory-body-contacts-form.tpl.html"
                     }
                 },
-                permission: "facilities.add_regulatingbodycontact"
+                permission: "facilities.add_regulatingbodycontact",
+                feature: "is_staff"
             });
     }]);
 })(angular);
-

@@ -13,7 +13,7 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.contacts.create'" + " requires-user-feature='is_staff'",
+                    func : "ui-sref='setup.contacts.create'",
                     class: "action-btn action-btn-primary action-btn-md",
                     tipmsg: "Add Contact",
                     icon: "fa-plus"
@@ -36,8 +36,7 @@
                 };
                 $scope.action = [
                     {
-                        func : "ui-sref=setup.contacts.edit.delete" +
-                               " requires-user-feature='is_staff'",
+                        func : "ui-sref=setup.contacts.edit.delete",
                         class: "action-btn action-btn-danger action-btn-md",
                         tipmsg: "Delete Contact",
                         icon: "fa-trash"
@@ -104,7 +103,8 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.contact_types.create'" +
-                           " requires-user-feature='is_staff'",
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='common.add_contacttype'",
                     class: "action-btn action-btn-primary action-btn-md",
                     tipmsg: "Add Contact type",
                     icon: "fa-plus"
@@ -125,7 +125,8 @@
                 $scope.action = [
                     {
                         func : "ui-sref='setup.contact_types.view.delete'" +
-                               " requires-user-feature='is_staff'",
+                               " requires-user-feature='is_staff'" +
+                               " requires-permission='common.delete_contacttype'",
                         class: "action-btn action-btn-danger action-btn-md",
                         tipmsg:"Delete",
 

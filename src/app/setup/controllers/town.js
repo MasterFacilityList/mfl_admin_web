@@ -13,7 +13,8 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.towns.town_create'" +
-                           " requires-user-feature='is_staff'",
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='common.add_town'",
                     class: "action-btn action-btn-primary action-btn-md",
 
                     tipmsg: "New Town",
@@ -54,7 +55,8 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.towns.town_edit.delete'" +
-                           " requires-user-feature='is_staff'",
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='common.change_town'",
                     class: "action-btn action-btn-danger action-btn-md",
 
                     tipmsg: "Delete Town",

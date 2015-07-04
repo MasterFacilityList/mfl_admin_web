@@ -42,6 +42,7 @@
     .directive("requiresPermission", ["mfl.auth.permissions.checker",
         function (permChecker) {
             return {
+                $$tlb: true, // https://github.com/angular/angular.js/issues/6042
                 restrict: "A",
                 transclude: "element",
                 priority: 1500, // highest yet : higher than ng-switch (1200)
@@ -60,6 +61,7 @@
     .directive("requiresUserFeature", ["mfl.auth.permissions.checker",
         function (permChecker) {
             return {
+                $$tlb: true, // http://stackoverflow.com/questions/16072529
                 restrict: "A",
                 transclude: "element",
                 priority: 1600,
