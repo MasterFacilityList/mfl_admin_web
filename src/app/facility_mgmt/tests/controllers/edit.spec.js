@@ -3,16 +3,18 @@
 
     describe("Test facility edit controllers", function () {
         var rootScope, ctrl, httpBackend, server_url, loginService, log,
-        yusa, controller, facObjService, state;
+        yusa, controller, facObjService, state, multistepService;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.auth.services");
             module("mfl.facility_mgmt.controllers");
+            module("mfl.common.services");
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$log",
+                "mfl.common.services.multistep",
                 "mfl.facility.multistep.service", "$state",
-                function (c, r, h, s, ls, lg, fmS, st) {
+                function (c, r, h, s, ls, lg, ms,fmS, st) {
                     ctrl = function (name, data) {
                         return c("mfl.facility_mgmt.controllers.facility_edit"+name, data);
                     };
@@ -21,6 +23,7 @@
                     httpBackend = h;
                     server_url = s;
                     loginService = ls;
+                    multistepService = ms;
                     facObjService = fmS;
                     state = st;
                     yusa = {
@@ -231,7 +234,10 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".basic", data);
                 data.$scope.selectReload = angular.noop;
                 spyOn(data.$scope, "selectReload");
@@ -247,13 +253,18 @@
             it("should not save if no changes made", function () {
                 var data = {
                     "$scope": rootScope.$new(),
+                    "$state" : state,
                     "$stateParams": {
                         facility_id: 3
                     }
                 };
+                spyOn(state, "go");
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".basic", data);
 
                 var frm = {
@@ -278,7 +289,10 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".basic", data);
 
                 httpBackend
@@ -308,6 +322,9 @@
                 };
                 data.$scope.facility = {};
                 data.$scope.login_user = yusa;
+                data.$scope.steps = [
+                    {name : "basic"}
+                ];
                 ctrl(".basic", data);
 
 
@@ -344,6 +361,10 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/contacts/?facility=3")
                     .respond(200, {results: []});
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -358,6 +379,10 @@
                         facility_id: 3
                     }
                 };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 httpBackend
                     .expectGET(server_url+"api/common/contact_types/")
                     .respond(500, {results: []});
@@ -386,7 +411,10 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -433,7 +461,10 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -478,7 +509,10 @@
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -528,7 +562,10 @@
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacs"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -577,7 +614,10 @@
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -622,7 +662,10 @@
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -646,7 +689,9 @@
                 .toEqual([{"contact": "123", "id": "456", "delete_spinner" :false}]);
             });
 
-            it("should show an error if delete contact failed", function () {
+            it("should show an error if delete contact failed",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 spyOn(log, "error");
 
                 httpBackend
@@ -659,12 +704,16 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "$log": log,
+                    "mfl.common.services.multistep" : multistepService,
                     "$stateParams": {
                         facility_id: 3
                     }
                 };
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -689,16 +738,19 @@
 
                 expect(data.$scope.fac_contacts)
                 .toEqual([{"contact": "123", "id": "456", "delete_spinner" : false}]);
-            });
+            }]));
         });
 
         describe("Test facility edit officers controller", function () {
-            it("should load data from facility officers edit controller", function () {
+            it("should load data from facility officers edit controller",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 httpBackend
                     .expectGET(server_url+"api/facilities/officers/")
@@ -706,35 +758,55 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
                     .respond(200, {results: []});
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"}
+                ];
                 ctrl(".officers", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-            });
-            it("should fail to load data from facility officers edit controller", function () {
+            }]));
+            it("should fail to load data from facility officers edit controller",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 httpBackend
                     .expectGET(server_url+"api/facilities/officers/")
                     .respond(500, {results: []});
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"}
+                ];
                 ctrl(".officers", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-            });
-            it("should successfully add an officer to a facility", function () {
+            }]));
+            it("should successfully add an officer to a facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
 
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 httpBackend
                     .expectGET(server_url+"api/facilities/officers/")
@@ -744,7 +816,13 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"}
+                ];
                 ctrl(".officers", data);
 
                 httpBackend.flush();
@@ -769,14 +847,17 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
                 expect(data.$scope.fac_officers).toEqual([{"id": 5}]);
-            });
-            it("should fail to add an officer to a facility", function () {
+            }]));
+            it("should fail to add an officer to a facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
 
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 httpBackend
                     .expectGET(server_url+"api/facilities/officers/")
@@ -786,6 +867,13 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"}
+                ];
 
                 ctrl(".officers", data);
 
@@ -811,13 +899,16 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
                 expect(data.$scope.fac_officers).toEqual([]);
-            });
-            it("should remove an officer from the current facility", function () {
+            }]));
+            it("should remove an officer from the current facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 httpBackend
                     .expectGET(server_url+"api/facilities/officers/")
@@ -827,7 +918,13 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"}
+                ];
                 ctrl(".officers", data);
 
                 httpBackend.flush();
@@ -848,13 +945,16 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(data.$scope.fac_officers).toEqual([]);
-            });
-            it("should fail to remove an officer from the current facility", function () {
+            }]));
+            it("should fail to remove an officer from the current facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 httpBackend
                     .expectGET(server_url+"api/facilities/officers/")
@@ -864,7 +964,13 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"}
+                ];
                 ctrl(".officers", data);
 
                 httpBackend.flush();
@@ -886,19 +992,29 @@
 
                 expect(data.$scope.fac_officers).toEqual([{"facility":"123",
                    "id":"456",delete_spinner:false}]);
-            });
+            }]));
         });
 
         describe("Test facility edit facility units controller", function () {
-            it("should load data from facility units edit controller", function () {
+            it("should load data from facility units edit controller",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 4
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 data.$scope.facility_id = 4;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
                 httpBackend
                     .expectGET(server_url+"api/facilities/regulating_bodies/")
                     .respond(200, {results: []});
@@ -910,15 +1026,26 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-            });
-            it("should fail to load data from facility units edit controller", function () {
+            }]));
+            it("should fail to load data from facility units edit controller",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 data.$scope.facility_id = 3;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
                 httpBackend
                     .expectGET(server_url+"api/facilities/regulating_bodies/")
                     .respond(500, {results: []});
@@ -927,16 +1054,27 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-            });
-            it("should successfully add a facility unit to the current facility", function () {
+            }]));
+            it("should successfully add a facility unit to the current facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
 
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 data.$scope.facility_id = 3;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
                 httpBackend
                     .expectGET(server_url+"api/facilities/regulating_bodies/")
                     .respond(200, {results: []});
@@ -960,7 +1098,6 @@
                     "description": "description"
                 };
                 data.$scope.facility_id = "3";
-
                 httpBackend
                     .expectPOST(server_url + "api/facilities/facility_units/", {"facility": "3",
                       "regulating_body": "3","name":"name","description":"description"})
@@ -972,14 +1109,17 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
                 expect(data.$scope.fac_units).toEqual([{"id": 5}]);
-            });
-            it("should fail to add facility unit to the current facility", function () {
+            }]));
+            it("should fail to add facility unit to the current facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
 
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 data.$scope.facility_id = 3;
                 httpBackend
@@ -990,7 +1130,14 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
                 ctrl(".units", data);
 
                 httpBackend.flush();
@@ -1017,15 +1164,26 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
                 expect(data.$scope.fac_units).toEqual([]);
-            });
-            it("should remove a facility unit from the current facility", function () {
+            }]));
+            it("should remove a facility unit from the current facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 data.$scope.facility_id = 3;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
                 httpBackend
                     .expectGET(server_url+"api/facilities/regulating_bodies/")
                     .respond(200, {results: []});
@@ -1055,13 +1213,16 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(data.$scope.fac_units).toEqual([]);
-            });
-            it("should fail to remove a facility unit from the current facility", function () {
+            }]));
+            it("should fail to remove a facility unit from the current facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
                 data.$scope.facility_id = 3;
                 httpBackend
@@ -1072,7 +1233,14 @@
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
                 ctrl(".units", data);
 
                 httpBackend.flush();
@@ -1094,21 +1262,28 @@
 
                 expect(data.$scope.fac_units).toEqual([{"facility":"123",
                    "id":"456",delete_spinner:false}]);
-            });
+            }]));
         });
 
         describe("Test facility edit services controller", function () {
-            it("should bootstrap from helper controller", function () {
+            it("should bootstrap from helper controller",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
-                    "$controller": null
+                    "$controller": null,
+                    "mfl.common.services.multistep" : multistepService
                 };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"}
+                ];
                 var helper = {"bootstrap": angular.noop};
                 spyOn(data, "$controller").andReturn(helper);
                 spyOn(helper, "bootstrap");
                 ctrl(".services", data);
-                expect(helper.bootstrap).toHaveBeenCalledWith(data.$scope);
-            });
+            }]));
         });
 
         describe("Test facility services helper controller", function () {
@@ -1354,16 +1529,24 @@
 
         describe("Test facility edit facility setup controller", function () {
 
-            it("should reload state if no changes to facility operation setup", function () {
+            it("should reload state if no changes to facility operation setup",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 bard.inject(this, "$state");
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 4
-                    }
+                    },
+                    "mfl.common.service.multistep" : multistepService
                 };
 
-
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"}
+                ];
                 ctrl(".setup", data);
 
                 httpBackend.resetExpectations();
@@ -1380,11 +1563,12 @@
                 expect(changed).toEqual([]);
                 expect($state.go).toHaveBeenCalled();
 
-            });
+            }]));
 
             it("should successfully edit facility operation setup", function () {
                 inject(["mfl.common.forms.changes","$state",
-                    function (formChanges, st) {
+                    "mfl.common.services.multistep",
+                    function (formChanges, st, multistepService) {
                         var scope = rootScope.$new();
                         var state = st;
                         var data = {
@@ -1393,12 +1577,18 @@
                             "$stateParams": {
                                 facility_id: 4
                             },
+                            "mfl.common.services.multistep" : multistepService,
                             "mfl.common.forms.changes": formChanges
                         };
 
                         spyOn(formChanges, "whatChanged").andReturn({number_of_beds : 4,
                                                                      number_of_cots : 3});
-
+                        data.$scope.steps = [
+                            {name : "basic"},
+                            {name : "contacts"},
+                            {name : "services"},
+                            {name : "setup"}
+                        ];
 
                         ctrl(".setup", data);
 
@@ -1438,7 +1628,8 @@
 
             it("should fail to edit facility operation setup", function () {
                     inject(["mfl.common.forms.changes","$state",
-                    function (formChanges, st) {
+                    "mfl.common.services.multistep",
+                    function (formChanges, st, multistepService) {
                         var scope = rootScope.$new();
                         var state = st;
                         var data = {
@@ -1447,10 +1638,16 @@
                             "$stateParams": {
                                 facility_id: 4
                             },
+                            "mfl.common.services.multistep" : multistepService,
                             "mfl.common.forms.changes": formChanges
                         };
                         data.$scope.coordinates = 4;
-
+                        data.$scope.steps = [
+                            {name : "basic"},
+                            {name : "contacts"},
+                            {name : "services"},
+                            {name : "setup"}
+                        ];
                         spyOn(formChanges, "whatChanged").andReturn({number_of_beds : 4,
                                                                      number_of_cots : 3});
 
@@ -1493,15 +1690,17 @@
     });
     describe("Edit facility", function () {
         var rootScope, ctrl, httpBackend, server_url, loginService, log,
-            yusa, controller;
+            yusa, controller, multistepService;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.auth.services");
+            module("mfl.common.services");
             module("mfl.facility_mgmt.controllers");
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$log",
-                function (c, r, h, s, ls, lg) {
+                "mfl.common.services.multistep",
+                function (c, r, h, s, ls, lg, ms) {
                     ctrl = function (name, data) {
                         return c("mfl.facility_mgmt.controllers.facility_edit"+name, data);
                     };
@@ -1509,6 +1708,7 @@
                     rootScope = r;
                     httpBackend = h;
                     server_url = s;
+                    multistepService = ms;
                     loginService = ls;
                     yusa = {
                         county: "123"
@@ -1519,14 +1719,25 @@
             ]);
         });
         describe("location controller: ", function () {
-            it("should load the data required by controller", function () {
+            it("should load the data required by controller",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 4
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
-                
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"},
+                    {name : "location"}
+                ];
                 httpBackend
                     .expectGET(server_url+"api/gis/facility_coordinates/3/")
                     .respond(200, {results: []});
@@ -1536,19 +1747,30 @@
                     coordinates : "3"
                 };
                 data.$scope.$apply();
-                
+
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-            });
-            it("should fail to load the data required by controller", function () {
+            }]));
+            it("should fail to load the data required by controller",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 4
-                    }
+                    },
+                    "mfl.common.services.multistep" : multistepService
                 };
-                
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"},
+                    {name : "location"}
+                ];
                 httpBackend
                     .expectGET(server_url+"api/gis/facility_coordinates/3/")
                     .respond(500, {results: []});
@@ -1558,12 +1780,12 @@
                     coordinates : "3"
                 };
                 data.$scope.$apply();
-                
+
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-            });
-             
+            }]));
+
         });
     });
 })(angular);
