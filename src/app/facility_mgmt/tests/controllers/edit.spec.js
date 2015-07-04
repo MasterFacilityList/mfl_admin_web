@@ -1775,9 +1775,13 @@
                                 ]
                             },
                             properties : {
+                                type: "Polygon",
                                 bound: {
                                     coordinates : [
-                                        [2,3]
+                                        [
+                                            [2,3],
+                                            [3,4]
+                                        ]
                                     ]
                                 }
                             }
@@ -1831,8 +1835,8 @@
                     };
                     spyOn(map, "fitBounds");
                     then_fxn(map);
-                    expect(map.fitBounds).toHaveBeenCalledWith([[undefined,undefined],
-                                                                [undefined,undefined]]);
+                    expect(map.fitBounds).toHaveBeenCalledWith([[2,3],
+                                                                [3,4]]);
                 });
 
             it("should fail to load the data required by controller",
