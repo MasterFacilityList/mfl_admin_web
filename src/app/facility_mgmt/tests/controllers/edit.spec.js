@@ -1764,76 +1764,76 @@
             }]));
 
             it("should expect map data to be loaded", function () {
-                var data = {
-                    ward_boundary:{
-                        geometry:{
-                            coordinates : [
-                                [
-                                    [1,2],
-                                    [3,4]
-                                ]
-                            ]
-                        },
-                        properties : {
-                            bound: {
+                    var data = {
+                        ward_boundary:{
+                            geometry:{
                                 coordinates : [
-                                    [3,4],
-                                    [4,5]
+                                    [
+                                        [1,2],
+                                        [3,4]
+                                    ]
                                 ]
+                            },
+                            properties : {
+                                bound: {
+                                    coordinates : [
+                                        [2,3]
+                                    ]
+                                }
                             }
                         }
-                    }
-                };
-                var obj = {
-                    then: angular.noop
-                };
-                var scope = rootScope.$new();
-                scope.facility = {
-                    ward : "3",
-                    coordinates: "3"
-                };
-                scope.steps = [
-                    {name : "basic"},
-                    {name : "contacts"},
-                    {name : "services"},
-                    {name : "setup"},
-                    {name : "officers"},
-                    {name : "units"},
-                    {name : "location"}
-                ];
-                spyOn(scope, "$on").andCallThrough();
-                spyOn(leafletData, "getMap").andReturn(obj);
-                spyOn(obj, "then");
+                    };
+                    var obj = {
+                        then: angular.noop
+                    };
+                    var scope = rootScope.$new();
+                    scope.facility = {
+                        ward : "3",
+                        coordinates: "3"
+                    };
+                    scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    spyOn(scope, "$on").andCallThrough();
+                    spyOn(leafletData, "getMap").andReturn(obj);
+                    spyOn(obj, "then");
 
-                ctrl(".location",{
-                    "$scope": scope,
-                    "leafletData": leafletData
+                    ctrl(".location",{
+                        "$scope": scope,
+                        "leafletData": leafletData
+                    });
+
+                    httpBackend
+                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                        .respond(200, {results: []});
+                    httpBackend
+                        .expectGET(server_url+"api/common/wards/3/")
+                        .respond(200, data);
+
+                    scope.$apply();
+                    scope.$digest();
+
+                    httpBackend.flush();
+
+                    expect(leafletData.getMap).toHaveBeenCalled();
+                    expect(obj.then).toHaveBeenCalled();
+
+                    var then_fxn = obj.then.calls[0].args[0];
+                    expect(angular.isFunction(then_fxn)).toBe(true);
+                    var map = {
+                        fitBounds: angular.noop
+                    };
+                    spyOn(map, "fitBounds");
+                    then_fxn(map);
+                    expect(map.fitBounds).toHaveBeenCalledWith([[undefined,undefined],
+                                                                [undefined,undefined]]);
                 });
-
-                httpBackend
-                    .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/common/wards/3/")
-                    .respond(200, data);
-
-                scope.$apply();
-                scope.$digest();
-
-                httpBackend.flush();
-
-                expect(leafletData.getMap).toHaveBeenCalled();
-                expect(obj.then).toHaveBeenCalled();
-
-                var then_fxn = obj.then.calls[0].args[0];
-                expect(angular.isFunction(then_fxn)).toBe(true);
-                var map = {
-                    fitBounds: angular.noop
-                };
-                spyOn(map, "fitBounds");
-                then_fxn(map);
-                expect(map.fitBounds).toHaveBeenCalledWith([[3,4],[4,5]]);
-            });
 
             it("should fail to load the data required by controller",
             inject(["mfl.common.services.multistep",
