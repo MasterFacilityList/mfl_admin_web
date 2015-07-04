@@ -447,7 +447,23 @@
                     }
                 }
             });
-            
+
+            wrappers.geo_code_methods.list()
+                .success(function (data) {
+                    $scope.geo_methods = data.results;
+                })
+                .error(function(error){
+                    $log.error(error);
+                });
+
+            wrappers.geo_code_sources.list()
+                .success(function (data) {
+                    $scope.geo_sources = data.results;
+                })
+                .error(function(error){
+                    $log.error(error);
+                });
+
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
                     return;

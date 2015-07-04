@@ -1743,6 +1743,12 @@
                     {name : "location"}
                 ];
                 httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_methods/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_sources/")
+                    .respond(200, {results: []});
+                httpBackend
                     .expectGET(server_url+"api/gis/facility_coordinates/3/")
                     .respond(200, {results: []});
                 httpBackend
