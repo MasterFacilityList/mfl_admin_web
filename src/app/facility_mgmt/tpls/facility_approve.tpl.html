@@ -18,16 +18,17 @@
 
     <div class="detail-content pad-20" ng-class="{'alert-success':!facility.latest_update}">
         <div ng-if="facility.latest_update" class="content-card">
-            <span class="fs-16"><strong>Approve facility updates</strong></span>
+            <h4 class="fs-18"><strong>Approve facility updates</strong></h4>
             <div class="row">
-                <div class="form-group col-sm-6">
-                    <p class="form-control-static">Updates made by:{{facility_update.created_by_name}}</p>
+                <div class="col-sm-6">
+                    <p class="form-control-static fs-16">Updates made by: <span class="label label-warning">{{facility_update.created_by_name}}</span></p>
                 </div>
-                <div class="form-group col-sm-6">
-                    <p class="form-control-static">Updates made on:{{facility_update.created | date}}</p>
+                <div class="col-sm-6">
+                    <p class="form-control-static text-right fs-16">Updates made on: <span class="label label-primary">{{facility_update.created | date}}</span></p>
                 </div>
             </div>
-            <table class="table table-hover">
+            <hr>
+            <table class=" margin-t-50 table">
                 <thead>
                     <tr>
                         <th>Field</th>
