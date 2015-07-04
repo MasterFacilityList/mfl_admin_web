@@ -17,7 +17,7 @@
                     }
                 },
                 data : { pageTitle: "System Setup"},
-                redirectTo: "setup.towns"
+                redirectTo: "setup.counties"
             });
     }]);
 })(angular);

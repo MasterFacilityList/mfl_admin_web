@@ -3,53 +3,52 @@
     <ul class=" nav nav-list">
         <li ng-model="collapsed.one" ng-click="collapsed.one=!collapsed.one"><label class="sidebar-label tree-toggle nav-header">Administrative Units</label>
           <ul class="nav nav-list tree" content-slide-in="collapsed.one" slide-show-duration="1000">
-              <li ui-sref-active="active">
+              <li ui-sref-active="active" requires-permission="common.view_county">
                 <a ui-sref="setup.counties">Counties</a>
               </li>
-              <li ui-sref-active="active">
+              <li ui-sref-active="active" requires-permission="common.view_constituency">
                 <a ui-sref="setup.constituencies">Constituencies</a>
               </li>
-              <li ui-sref-active="active">
+              <li ui-sref-active="active" requires-permission="common.view_ward">
                 <a ui-sref="setup.wards">Wards</a>
               </li>
-              <li ui-sref-active="active">
+              <li ui-sref-active="active" requires-permission="common.view_town">
                 <a ui-sref="setup.towns">Towns</a>
               </li>
           </ul>
         </li>
         <li ng-model="collapsed.two" ng-click="collapsed.two=!collapsed.two"><label class="sidebar-label tree-toggle nav-header">Community Units</label>
           <ul class="nav nav-list tree" content-slide-in="collapsed.two" slide-show-duration="1000">
-              <li ui-sref-active="active">
+              <li ui-sref-active="active" requires-permission="chul.view_status">
                 <a ui-sref="setup.chu_status">Community Units Status</a>
               </li>
-              <li ui-sref-active="active">
+              <li ui-sref-active="active" requires-permission="chul.view_approver">
                 <a ui-sref="setup.chu_approvers">CU Approvers</a>
               </li>
           </ul>
         </li>
         <li ng-model="collapsed.three" ng-click="collapsed.three=!collapsed.three"><label class="sidebar-label tree-toggle nav-header">Contacts</label>
           <ul class="nav nav-list tree" content-slide-in="collapsed.three" slide-show-duration="1000">
-              <li ui-sref-active="active">
+              <li ui-sref-active="active" requires-permission="common.view_contact">
                 <a ui-sref="setup.contacts">Contacts</a>
               </li>
               <li ui-sref-active="active">
-                <a ui-sref="setup.contact_types">Contact Type</a>
+                <a ui-sref="setup.contact_types" requires-permission="common.view_contacttype">Contact Type</a>
               </li>
           </ul>
         </li>
         <li ng-model="collapsed.four" ng-click="collapsed.four=!collapsed.four"><label class="sidebar-label tree-toggle nav-header">Facility Details</label>
           <ul class="nav nav-list tree" content-slide-in="collapsed.four" slide-show-duration="1000">
               <li ui-sref-active="active">
-                <a ui-sref="setup.facility_owners">Facility Owners</a>
+                <a ui-sref="setup.facility_owners" requires-permission="facilities.view_owner">Facility Owners</a>
               </li>
               <li ui-sref-active="active">
-                <a ui-sref="setup.facility_owner_types">Facility Owner Types</a>
+                <a ui-sref="setup.facility_owner_types" requires-permission="facilities.view_ownertype">Facility Owner Types</a>
               </li>
-
-              <li ui-sref-active="active">
+              <li ui-sref-active="active" requires-permission="facilities.view_jobtitle">
                 <a ui-sref="setup.facility_job_titles">Job Titles</a>
               </li>
-              <li ui-sref-active="active">
+              <li ui-sref-active="active" requires-permission="facilities.view_regulatingbody">
                 <a ui-sref="setup.facility_regulatory_bodies">
                 Regulatory Bodies
                 </a>
@@ -58,11 +57,11 @@
         </li>
         <li ng-model="collapsed.five" ng-click="collapsed.five=!collapsed.five"><label class="sidebar-label tree-toggle nav-header">Geo Codes</label>
         <ul class="nav nav-list tree" content-slide-in="collapsed.five" slide-show-duration="1000">
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" requires-permission="mfl_gis.view_geocodemethod">
               <a ui-sref="setup.geocode_methods_list">Geo Code Methods</a>
             </li>
             <li ui-sref-active="active">
-              <a ui-sref="setup.geocode_sources_list">Geo Code Sources</a>
+              <a ui-sref="setup.geocode_sources_list" requires-permission="mfl_gis.view_geocodesource">Geo Code Sources</a>
             </li>
         </ul>
       </li>
