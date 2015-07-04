@@ -82,6 +82,7 @@
         function ($scope, $q, $log, $stateParams, wrappers, loginService,
             facilityMultistepService, $state) {
             $scope.facility_id = $stateParams.facility_id;
+            $scope.create = false;
             $scope.spinner = true;
             $scope.steps = facilityMultistepService.facilityObject();
             $scope.tabState = function(obj) {
@@ -144,8 +145,11 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.basic",
         ["$scope", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
-        function ($scope, $log, $state, $stateParams, wrappers, formChanges) {
-
+        "mfl.common.services.multistep",
+        function ($scope, $log, $state, $stateParams, wrappers, formChanges,
+            multistepService) {
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[0]);
             $scope.reloadOwners = function (s) {
                 return $scope.selectReload(wrappers.facility_owners, "name", s, "owners");
             };
@@ -167,23 +171,27 @@
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
                 if (_.isEmpty(changes)) {
-                    return;
+                    $state.go("facilities.facility_edit.contacts");
                 }
-                wrappers.facility_detail.update($scope.facility_id, changes)
-                .success(function () {
-                    $state.go("facilities");
-                })
-                .error(function (data) {
-                    $log.error(data);
-                });
+                else {
+                    wrappers.facility_detail.update($scope.facility_id, changes)
+                    .success(function () {
+                        $state.go("facilities.facility_edit.contacts");
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                }
             };
         }]
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.contacts",
-        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        function($scope,$log,$stateParams,wrappers){
-
+        ["$scope", "$log", "$stateParams",
+        "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
+        function($scope,$log,$stateParams,wrappers, multistepService){
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[1]);
             $scope.contacts = [];
             $scope.contact = {
                 contact_type: "",
@@ -263,8 +271,11 @@
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
-        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        function($scope, $log, $stateParams, wrappers){
+        ["$scope", "$log", "$stateParams",
+        "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
+        function($scope, $log, $stateParams, wrappers, multistepService){
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[4]);
             $scope.fac_officers = [];
 
             /*officers*/
@@ -315,16 +326,21 @@
         }])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.services",
-        ["$scope", "$controller", function ($scope, $controller) {
+        ["$scope", "$controller", "mfl.common.services.multistep",
+        function ($scope, $controller, multistepService) {
             var helper = $controller("mfl.facility_mgmt.controllers.services_helper");
             helper.bootstrap($scope);
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[2]);
         }]
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.units",
-        ["$scope", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        function ($scope, $log, $stateParams, wrappers) {
-
+        ["$scope", "$log", "$stateParams",
+        "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
+        function ($scope, $log, $stateParams, wrappers, multistepService) {
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[5]);
             /*regulating bodies*/
             wrappers.regulating_bodies.list()
             .success(function(data){
@@ -379,10 +395,13 @@
     ])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.setup",
-        ["$scope","mfl.facility_mgmt.services.wrappers","$log", "mfl.common.forms.changes",
-         "$state",
-        function ($scope, wrappers, $log, formChanges, $state) {
+        ["$scope","mfl.facility_mgmt.services.wrappers","$log",
+        "mfl.common.forms.changes","$state", "mfl.common.services.multistep",
+        function ($scope, wrappers, $log, formChanges, $state,
+            multistepService) {
             /*Update operation setup details*/
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[3]);
             $scope.updateOp = function (opFrm) {
                 var changed = formChanges.whatChanged(opFrm);
                 opFrm.facility = $scope.facility_id;
@@ -399,7 +418,7 @@
                         });
                 }
                 else {
-                    $state.go("facilities.facility_edit.setup",
+                    $state.go("facilities.facility_edit.officers",
                         {"facility_id": $scope.facility_id}, {reload: true});
                 }
             };
@@ -407,7 +426,10 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
-        function ($scope,wrappers,$log,leafletData) {
+        "mfl.common.services.multistep",
+        function ($scope,wrappers,$log, leafletData,multistepService) {
+            multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[6]);
             $scope.spinner = true;
             angular.extend($scope, {
                 defaults: {
