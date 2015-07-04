@@ -38,7 +38,8 @@
                         controller: "mfl.setup.controller.contacts.edit"
                     }
                 },
-                permission: "common.delete_contact"
+                permission: "common.delete_contact",
+                feature: "is_staff"
             })
         .state("setup.contacts.create", {
                 url: "/create",
@@ -48,7 +49,8 @@
                         templateUrl: "setup/tpls/contacts/contacts-edit.tpl.html"
                     }
                 },
-                permission: "common.add_contact"
+                permission: "common.add_contact",
+                feature: "is_staff"
             })
 
         /*Contact Types*/
@@ -84,7 +86,8 @@
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
                 },
-                permission: "common.delete_contacttype"
+                permission: "common.delete_contacttype",
+                feature: "is_staff"
             })
         .state("setup.contact_types.create", {
                 url: "/create",
@@ -94,8 +97,8 @@
                         templateUrl: "setup/tpls/contacts/contact-types-view.tpl.html"
                     }
                 },
-                permission: "common.add_contacttype"
+                permission: "common.add_contacttype",
+                feature: "is_staff"
             });
     }]);
 })(angular);
-

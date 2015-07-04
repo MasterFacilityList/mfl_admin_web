@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _){
     "use strict";
     angular.module("mfl.setup.contacts.controllers",[
     ])
@@ -13,9 +13,8 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.contacts.create'",
+                    func : "ui-sref='setup.contacts.create'" + " requires-user-feature='is_staff'",
                     class: "action-btn action-btn-primary action-btn-md",
-
                     tipmsg: "Add Contact",
                     icon: "fa-plus"
                 }
@@ -37,10 +36,9 @@
                 };
                 $scope.action = [
                     {
-                        func : "ui-sref="+
-                        "setup.contacts.edit.delete",
+                        func : "ui-sref=setup.contacts.edit.delete" +
+                               " requires-user-feature='is_staff'",
                         class: "action-btn action-btn-danger action-btn-md",
-
                         tipmsg: "Delete Contact",
                         icon: "fa-trash"
                     }
@@ -105,9 +103,9 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.contact_types.create'",
+                    func : "ui-sref='setup.contact_types.create'" +
+                           " requires-user-feature='is_staff'",
                     class: "action-btn action-btn-primary action-btn-md",
-
                     tipmsg: "Add Contact type",
                     icon: "fa-plus"
                 }
@@ -126,8 +124,8 @@
                 };
                 $scope.action = [
                     {
-                        func : "ui-sref="+
-                        "'setup.contact_types.view.delete'",
+                        func : "ui-sref='setup.contact_types.view.delete'" +
+                               " requires-user-feature='is_staff'",
                         class: "action-btn action-btn-danger action-btn-md",
                         tipmsg:"Delete",
 
@@ -183,4 +181,4 @@
         }]
     );
 
-})(angular);
+})(angular, _);
