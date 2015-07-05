@@ -154,10 +154,10 @@
                     permission: "perm"
                 })
                 .state("testfeature", {
-                    feature: "feat"
+                    userFeature: "feat"
                 })
                 .state("testboth", {
-                    feature: "feat",
+                    userFeature: "feat",
                     permission: "perm"
                 })
                 .state("none", {});

@@ -26,7 +26,9 @@
                         }
                     },
                     data : { pageTitle: "User Management" },
-                    redirectTo: "users"
+                    redirectTo: "users",
+                    userFeature: "is_staff",
+                    permission: "users.view_mfluser"
                 });
         }
     ]);

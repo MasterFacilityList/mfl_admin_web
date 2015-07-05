@@ -70,7 +70,7 @@
                               (! permChecker.hasPermission(toState.permission))
                             ) {
                         change_state(evt, "common_403");
-                    } else if (toState.feature &&
+                    } else if (toState.userFeature &&
                               (! permChecker.hasUserFeature(toState.feature))
                             ) {
                         change_state(evt, "common_403");
