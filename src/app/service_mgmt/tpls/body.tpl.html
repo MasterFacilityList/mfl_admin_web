@@ -1,17 +1,17 @@
 <div class="col-sm-2 pad-r-0">
   <aside class="side-left partial">
     <ul class=" nav nav-sidebar">
-      <li ui-sref-active="active">
+      <li ui-sref-active="active" requires-permission="facilities.view_servicecategory">
         <a ui-sref="service_mgmt.category_list">
           <span class="sidebar-text">Categories</span>
         </a>
       </li>
-      <li ui-sref-active="active">
+      <li ui-sref-active="active" requires-permission="facilities.view_service">
         <a ui-sref="service_mgmt.service_list">
           <span class="sidebar-text">Services</span>
         </a>
       </li>
-      <li ui-sref-active="active">
+      <li ui-sref-active="active" requires-permission="facilities.view_option">
         <a ui-sref="service_mgmt.option_list">
           <span class="sidebar-text">Options</span>
         </a>

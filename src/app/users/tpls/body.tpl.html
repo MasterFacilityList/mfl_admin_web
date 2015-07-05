@@ -1,12 +1,12 @@
  <div class="col-sm-2 pad-r-0" >
     <aside class="side-left">
      <ul class="nav nav-sidebar">
-       <li ui-sref-active="active">
+       <li ui-sref-active="active" requires-permission="users.view_mfluser" require-user-feature="is_staff">
           <a ui-sref="users">
             <span class="sidebar-text">&nbsp;&nbsp;Users</span>
           </a>
         </li>
-        <li ui-sref-active="active">
+        <li ui-sref-active="active" requires-permission="auth.add_group" require-user-feature="is_staff">
           <a ui-sref="groups">
             <span class="sidebar-text">&nbsp;&nbsp;Groups</span>
           </a>

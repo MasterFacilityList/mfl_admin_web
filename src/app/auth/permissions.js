@@ -10,9 +10,21 @@
             var LIST_SPLITTER = ",";
 
             var checkList = function (lst, check_fxn) {
-                var items = lst.split(LIST_SPLITTER);
+                var items, user;
+
+                if ((! angular.isString(lst)) || lst === "") {
+                    return false;
+                }
+
+                if (! loginService.isLoggedIn()) {
+                    return false;
+                }
+
+                items = lst.split(LIST_SPLITTER);
+                user = loginService.getUser();
+
                 for (var i = 0; i < items.length; i++) {
-                    if (! check_fxn(items[i])) {
+                    if (! check_fxn(items[i], user)) {
                         return false;
                     }
                 }
@@ -20,30 +32,14 @@
             };
 
             var hasPermission =  function (permission) {
-                if ((! angular.isString(permission)) || permission === "") {
-                    return false;
-                }
-
-                if (! loginService.isLoggedIn()) {
-                    return false;
-                }
-
-                var user_perms = loginService.getUser().all_permissions;
-                return checkList(permission, function (p) {
-                    return _.contains(user_perms, p.toLowerCase());
+                return checkList(permission, function (p, u) {
+                    return _.contains(u.all_permissions, p.toLowerCase());
                 });
             };
 
             var hasUserFeature = function (feature) {
-                if ((! angular.isString(feature)) || feature === "") {
-                    return false;
-                }
-
-                if (! loginService.isLoggedIn()) {
-                    return false;
-                }
-                return checkList(feature, function (f) {
-                    return (loginService.getUser()[f]) ? true : false;
+                return checkList(feature, function (f, u) {
+                    return (u[f]) ? true : false;
                 });
             };
 
@@ -79,7 +75,7 @@
                 $$tlb: true, // http://stackoverflow.com/questions/16072529
                 restrict: "A",
                 transclude: "element",
-                priority: 1600,
+                priority: 1600,  // higher than requires-permission
                 link: function (scope, element, attrs, controller, transclude) {
                     transclude(scope, function (clone) {
                         if (permChecker.hasUserFeature(attrs.requiresUserFeature)) {

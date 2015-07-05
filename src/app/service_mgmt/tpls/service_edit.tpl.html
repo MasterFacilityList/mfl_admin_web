@@ -1,6 +1,6 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-        <a tooltip="delete service" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} action-btn action-btn-danger action-btn-md"  ui-sref="service_mgmt.service_list.service_edit.delete({service_id: service.id})" ui-sref-opts="{reload:true}"><i class="fa fa-trash"></i></a>
+        <a tooltip="delete service" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} action-btn action-btn-danger action-btn-md"  ui-sref="service_mgmt.service_list.service_edit.delete({service_id: service.id})" ui-sref-opts="{reload:true}" requires-user-feature="is_staff" requires-permission="facilities.delete_service"><i class="fa fa-trash"></i></a>
         <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="service_mgmt.service_list" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
    </div>
    <h2 class="content-title">

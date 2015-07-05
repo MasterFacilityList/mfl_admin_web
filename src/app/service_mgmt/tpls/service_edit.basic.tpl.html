@@ -33,9 +33,7 @@
                 <label>Category</label>
             </div>
             <a ng-if="!create" class="login-btn login-btn-default pull-left margin-t-10" ui-sref="service_mgmt.service_list"><i class="fa fa-angle-double-left"></i> Cancel</a>
-            <button ng-if="!create" class="login-btn login-btn-primary pull-right margin-t-10" ng-click="save(service_frm)"> &nbsp;&nbsp;Options <i class="fa fa-angle-double-right"></i></button>
-
-            <button ng-if="create" class="login-btn login-btn-primary margin-t-10 margin-t-10" ng-click="save(service_frm)">
+            <button class="login-btn login-btn-primary margin-t-10" ng-class="{'pull-right':!create}" ng-click="save(service_frm)" requires-user-feature="is_staff">
                 &nbsp;Service Options <i class="fa fa-angle-double-right"></i>
             </button>
         </div>

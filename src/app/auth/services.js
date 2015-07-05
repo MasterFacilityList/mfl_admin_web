@@ -71,7 +71,7 @@
                             ) {
                         change_state(evt, "common_403");
                     } else if (toState.userFeature &&
-                              (! permChecker.hasUserFeature(toState.feature))
+                              (! permChecker.hasUserFeature(toState.userFeature))
                             ) {
                         change_state(evt, "common_403");
                     } else if (loginService.getUser().requires_password_change &&

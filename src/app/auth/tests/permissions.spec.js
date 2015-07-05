@@ -44,12 +44,12 @@
                 }]);
             });
 
-            it("should allow loggedin users with permission", function () {
+            it("should allow loggedin users with permissions", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
-                spyOn(loginService, "getUser").andReturn({all_permissions: ["hello"]});
+                spyOn(loginService, "getUser").andReturn({all_permissions: ["hello", "world"]});
 
                 inject(["mfl.auth.permissions.checker", function (permChecker) {
-                    expect(permChecker.hasPermission("hello")).toBe(true);
+                    expect(permChecker.hasPermission("hello,world")).toBe(true);
                 }]);
             });
 
@@ -62,12 +62,12 @@
                 }]);
             });
 
-            it("should allow loggedin users with feature", function () {
+            it("should allow loggedin users with features", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
-                spyOn(loginService, "getUser").andReturn({county: "meru"});
+                spyOn(loginService, "getUser").andReturn({county: "meru", "is_admin":true});
 
                 inject(["mfl.auth.permissions.checker", function (permChecker) {
-                    expect(permChecker.hasUserFeature("county")).toBe(true);
+                    expect(permChecker.hasUserFeature("county,is_admin")).toBe(true);
                 }]);
             });
 
