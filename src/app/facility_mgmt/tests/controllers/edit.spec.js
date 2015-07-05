@@ -1845,6 +1845,48 @@
                                                                 [4,3]]);
                 });
 
+
+
+            it("should save physical location details", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+
+                data.$scope.facility = {};
+                data.$scope.login_user = yusa;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"},
+                    {name : "location"}
+                ];
+                ctrl(".location", data);
+
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(204);
+
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$dirty": true,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.savePhy(frm);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
             it("should fail to load the data required by controller",
             inject(["mfl.common.services.multistep",
                 function (multistepService) {
