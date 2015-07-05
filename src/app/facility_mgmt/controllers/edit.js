@@ -426,11 +426,13 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
-        "mfl.common.services.multistep",
-        function ($scope,wrappers,$log, leafletData,multistepService) {
+        "mfl.common.services.multistep", "mfl.common.forms.changes",
+        function ($scope,wrappers,$log, leafletData,multistepService,formChanges) {
             multistepService.filterActive(
                 $scope, $scope.steps, $scope.steps[6]);
             $scope.spinner = true;
+
+            /*Setup for map data*/
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false
@@ -448,6 +450,7 @@
                 }
             });
 
+            /*Fetch geo code methods*/
             wrappers.geo_code_methods.list()
                 .success(function (data) {
                     $scope.geo_methods = data.results;
@@ -456,6 +459,7 @@
                     $log.error(error);
                 });
 
+            /*Fetch geo code sources*/
             wrappers.geo_code_sources.list()
                 .success(function (data) {
                     $scope.geo_sources = data.results;
@@ -464,6 +468,7 @@
                     $log.error(error);
                 });
 
+            /*Wait for facility to be defined*/
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
                     return;
@@ -488,6 +493,7 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
+
                 /*ward coordinates*/
                 wrappers.wards.get(f.ward)
                 .success(function(data){
@@ -536,6 +542,37 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
+
+                /*Save physical location details*/
+                $scope.savePhy = function (frm) {
+                    var changes = formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        wrappers.facility_detail.update($scope.facility_id, changes)
+                            .success(function (data) {
+                                $scope.facility = data;
+                            })
+                            .error(function (error) {
+                                $log.error(error);
+                            });
+                    }
+                };
+
+                /*Save geolocation details*/
+                $scope.saveGeo = function (frm) {
+                    var changes = formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        wrappers.facility_coordinates
+                            .update($scope.facility.coordinates,changes)
+                            .success(function (data) {
+                                $scope.geo = data;
+                            })
+                            .error(function (error) {
+                                $log.error(error);
+                            });
+                    }
+                };
+
+                /*update marker position*/
                 $scope.checkLocation = function  (coords) {
                     angular.extend($scope,{
                         markers : {
@@ -548,7 +585,6 @@
                         }
                     });
                 };
-                /*update marker position*/
             });
         }]);
 

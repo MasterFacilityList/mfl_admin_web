@@ -1,155 +1,161 @@
 <section class="col-xs-12 pad-t-20">
     <div class="detail-content pad-20">
-        <div class="content-card">
-            <h4><strong>Physical details</strong></h4>
-            <div class="row">
-               <div class=" col-md-6">
-                    <div class="group">
-                        <input type="text" name="contact" ng-model="facility.facility_physical_address.town"  required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>
-                            Town
-                        </label>
-                    </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-6">
-                    <div class="group">
-                        <input type="text" name="contact" ng-model="facility.facility_physical_address.plot_number"  required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>
-                            Plot number
-                        </label>
-                    </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-6">
-                    <div class="group">
-                        <input type="text" name="contact" ng-model="facility.facility_physical_address.nearest_landmark"  required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>
-                            Nearest landmark
-                        </label>
-                    </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-6">
-                    <div class="group">
-                        <input type="text" name="contact" ng-model="facility.location_desc"  required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>
-                            Location description
-                        </label>
-                    </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-6">
-                    <div class="group">
-                        <input type="text" name="contact" ng-model="facility.facility_physical_address.address"  required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>
-                            Address
-                        </label>
-                    </div>
-               </div>
-            </div>
-       </div>
-        <button type="submit" class="login-btn login-btn-primary" >Save physical details</button>
-        <div class="margin-t-50 content-card">
-            <form name="geoForm">
-                <h4><strong>Geolocation details</strong></h4>
+       <form name="phyForm">
+            <div class="content-card">
+                <h4><strong>Physical details</strong></h4>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="row">
-                           <div class="col-md-6">
-                                <div class="group">
-                                    <input type="number" step="0.00000001" name="coordinates.coordinates[0]" ng-model="geo.coordinates.coordinates[0]"/>
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>
-                                        Longitude
-                                    </label>
-                                </div>
-                           </div>
-                           <div class="col-md-6">
-                                <div class="group">
-                                    <input type="number" step="0.00000001" name="coordinates.coordinates[1]" ng-model="geo.coordinates.coordinates[1]" />
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    <label>
-                                        Latitude
-                                    </label>
-                                </div>
-                           </div>
-                           <div class="col-md-12">
-                               <button class="login-btn login-btn-default" ng-click="checkLocation(geo.coordinates)"> Show facility location on map</button>
-                           </div>
+                   <div class=" col-md-6">
+                        <div class="group">
+                            <input type="text" name="town" ng-model="facility.facility_physical_address.town"  required />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>
+                                Town
+                            </label>
                         </div>
-                        <div class="row margin-t-20">
-                            <div class="group col-md-12">
-                                <select name="source" ng-model="geo.source">
-                                    <option value="" disabled>Geocode source</option>
-                                    <option ng-repeat="gcs in geo_sources" ng-value="gcs.id">{{gcs.name}}</option>
-                                </select>
-                                        <span class="highlight"></span>
-                                        <span class="bar"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="group col-md-12">
-                                <select name="method" ng-model="geo.method">
-                                    <option value="" disabled>Geocode method</option>
-                                    <option ng-repeat="gcm in geo_methods" ng-value="gcm.id">{{gcm.name}}</option>
-                                </select>
-                                        <span class="highlight"></span>
-                                        <span class="bar"></span>
-                            </div>
-                        </div>
-                        <div class="row margin-t-10">
-                            <div class="col-md-12">
-                                <label for="collection date" style="min-height:220px">
-                                    <span class="fs-16">Collection date:</span>
-                                        <date-picker
-                                            placeholder="collection date"
-                                            name="collection_date"
-                                            ng-model="geo.collection_date"
-                                            min-date="minDate"
-                                            show-weeks="true"
-                                            custom-class="getDayClass(date, mode)">
-                                        </date-picker>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                       <div>
-                        <h4>{{ward_gis.properties.name | titlecase}} Ward</h4>
-                       </div>
-                        <leaflet id="wardmap"
-                            defaults="defaults"
-                            markers="markers"
-                            layers="layers"
-                            tiles="tiles"
-                            width="100%"
-                            height="300px"
-                            geojson="geojson">
-                         </leaflet>
-                    </div>
+                   </div>
                 </div>
-            </form>
-        </div>
-        
-        <div>
-            <button type="submit" class="login-btn login-btn-primary" >Save geolocation details</button>
-        </div>
+                <div class="row">
+                   <div class="col-md-6">
+                        <div class="group">
+                            <input type="text" name="plot_number" ng-model="facility.facility_physical_address.plot_number"  required />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>
+                                Plot number
+                            </label>
+                        </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-6">
+                        <div class="group">
+                            <input type="text" name="nearest_landmark" ng-model="facility.facility_physical_address.nearest_landmark"  required />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>
+                                Nearest landmark
+                            </label>
+                        </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-6">
+                        <div class="group">
+                            <input type="text" name="location_desc" ng-model="facility.location_desc"  required />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>
+                                Location description
+                            </label>
+                        </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-6">
+                        <div class="group">
+                            <input type="text" name="address" ng-model="facility.facility_physical_address.address"  required />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>
+                                Address
+                            </label>
+                        </div>
+                   </div>
+                </div>
+            </div>
+            <button type="submit" ng-click="savePhy(phyForm)" class="login-btn login-btn-primary" >Save physical details</button>
+        </form>
+
+
+
+        <form name="geoForm">
+            <div class="margin-t-50 content-card">
+                    <h4><strong>Geolocation details</strong></h4>
+                    <form name="geoForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                               <div class="col-md-6">
+                                    <div class="group">
+                                        <input type="number" step="0.00000001" name="coordinates.coordinates[0]" ng-model="geo.coordinates.coordinates[0]"/>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label>
+                                            Longitude
+                                        </label>
+                                    </div>
+                               </div>
+                               <div class="col-md-6">
+                                    <div class="group">
+                                        <input type="number" step="0.00000001" name="coordinates.coordinates[1]" ng-model="geo.coordinates.coordinates[1]" />
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label>
+                                            Latitude
+                                        </label>
+                                    </div>
+                               </div>
+                               <div class="col-md-12">
+                                   <button class="login-btn login-btn-default" ng-click="checkLocation(geo.coordinates)"> Show facility location on map</button>
+                               </div>
+                            </div>
+                            <div class="row margin-t-20">
+                                <div class="group col-md-12">
+                                    <select name="source" ng-model="geo.source">
+                                        <option value="" disabled>Geocode source</option>
+                                        <option ng-repeat="gcs in geo_sources" ng-value="gcs.id">{{gcs.name}}</option>
+                                    </select>
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="group col-md-12">
+                                    <select name="method" ng-model="geo.method">
+                                        <option value="" disabled>Geocode method</option>
+                                        <option ng-repeat="gcm in geo_methods" ng-value="gcm.id">{{gcm.name}}</option>
+                                    </select>
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                </div>
+                            </div>
+                            <div class="row margin-t-10">
+                                <div class="col-md-12">
+                                    <label for="collection date" style="min-height:220px">
+                                        <span class="fs-16">Collection date:</span>
+                                            <date-picker
+                                                placeholder="collection date"
+                                                name="collection_date"
+                                                ng-model="geo.collection_date"
+                                                min-date="minDate"
+                                                show-weeks="true"
+                                                custom-class="getDayClass(date, mode)">
+                                            </date-picker>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div>
+                            <h4>{{ward_gis.properties.name | titlecase}} Ward</h4>
+                           </div>
+                            <leaflet id="wardmap"
+                                defaults="defaults"
+                                markers="markers"
+                                layers="layers"
+                                tiles="tiles"
+                                width="100%"
+                                height="300px"
+                                geojson="geojson">
+                             </leaflet>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <button type="submit" ng-click="saveGeo(geoForm)" class="login-btn login-btn-primary" >Save geolocation details</button>
+            </div>
+        </form>
     </div>
 </section>
