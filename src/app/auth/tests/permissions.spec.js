@@ -53,12 +53,30 @@
                 }]);
             });
 
+            it("should not allow loggedin users without all permissions", function () {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "getUser").andReturn({all_permissions: ["hello"]});
+
+                inject(["mfl.auth.permissions.checker", function (permChecker) {
+                    expect(permChecker.hasPermission("hello,world")).toBe(false);
+                }]);
+            });
+
             it("should allow loggedin users with feature", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
                 spyOn(loginService, "getUser").andReturn({county: "meru"});
 
                 inject(["mfl.auth.permissions.checker", function (permChecker) {
                     expect(permChecker.hasUserFeature("county")).toBe(true);
+                }]);
+            });
+
+            it("should not allow loggedin users without all features", function () {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "getUser").andReturn({county: "meru"});
+
+                inject(["mfl.auth.permissions.checker", function (permChecker) {
+                    expect(permChecker.hasUserFeature("county,admin")).toBe(false);
                 }]);
             });
 

@@ -60,7 +60,8 @@
                         templateUrl: "users/tpls/users.edit.groups.tpl.html"
                     }
                 },
-                userFeature: "is_staff"
+                userFeature: "is_staff",
+                permission: "users.change_mfluser"
             })
 
             .state("users.user_create.counties", {
@@ -71,7 +72,8 @@
                         templateUrl: "users/tpls/users.edit.counties.tpl.html"
                     }
                 },
-                userFeature: "is_staff"
+                userFeature: "is_staff,national",
+                permission: "users.change_mfluser"
             })
 
             .state("users.user_create.details", {

@@ -7,6 +7,17 @@
 
     .service("mfl.auth.permissions.checker",
         ["mfl.auth.services.login", function (loginService) {
+            var LIST_SPLITTER = ",";
+
+            var checkList = function (lst, check_fxn) {
+                var items = lst.split(LIST_SPLITTER);
+                for (var i = 0; i < items.length; i++) {
+                    if (! check_fxn(items[i])) {
+                        return false;
+                    }
+                }
+                return true;
+            };
 
             var hasPermission =  function (permission) {
                 if ((! angular.isString(permission)) || permission === "") {
@@ -18,7 +29,9 @@
                 }
 
                 var user_perms = loginService.getUser().all_permissions;
-                return _.contains(user_perms, permission.toLowerCase());
+                return checkList(permission, function (p) {
+                    return _.contains(user_perms, p.toLowerCase());
+                });
             };
 
             var hasUserFeature = function (feature) {
@@ -29,7 +42,9 @@
                 if (! loginService.isLoggedIn()) {
                     return false;
                 }
-                return (loginService.getUser()[feature]) ? true : false;
+                return checkList(feature, function (f) {
+                    return (loginService.getUser()[f]) ? true : false;
+                });
             };
 
             return {
