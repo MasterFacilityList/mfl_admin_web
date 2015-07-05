@@ -93,7 +93,7 @@
 
         });
 
-        describe("Testing require-permission directive :", function () {
+        describe("Testing requires-permission directive :", function () {
             var compile, rootscope, loginService, permChecker;
 
             beforeEach(inject(["$compile", "$rootScope", "mfl.auth.permissions.checker",

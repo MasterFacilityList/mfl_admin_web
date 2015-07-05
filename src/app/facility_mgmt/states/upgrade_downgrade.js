@@ -17,7 +17,8 @@
                     templateUrl: "facility_mgmt/tpls/facility_upgrade_downgrade.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_upgrade"
                 }
-            }
+            },
+            permission: "facilities.add_facilitytype"
         })
         .state("facilities.facility_edit.downgrade", {
             url: "downgrade/",
@@ -29,7 +30,8 @@
                     templateUrl: "facility_mgmt/tpls/facility_upgrade_downgrade.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_downgrade"
                 }
-            }
+            },
+            permission: "facilities.add_facilitytype"
         })
         .state("facilities.facility_edit.update_services_up", {
             url: "upgrade/update_services/",
@@ -41,7 +43,8 @@
                     templateUrl: "facility_mgmt/tpls/facility_edit.services.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.update_services"
                 }
-            }
+            },
+            permission: "facilities.add_facilityservice"
         })
         .state("facilities.facility_edit.update_services_down", {
             url: "downgrade/update_services/",
@@ -53,7 +56,8 @@
                     templateUrl: "facility_mgmt/tpls/facility_edit.services.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.update_services"
                 }
-            }
+            },
+            permission: "facilities.add_facilityservice"
         });
     }]);
 
