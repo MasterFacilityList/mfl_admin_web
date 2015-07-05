@@ -52,7 +52,17 @@
                    </div>
                 </div>
                 <div class="row">
-                   <div class="col-md-6">
+                   <div class="col-md-3">
+                        <div class="group">
+                            <input type="text" name="postal_code" ng-model="facility.facility_physical_address.postal_code"  required />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>
+                                Postal Code
+                            </label>
+                        </div>
+                   </div>
+                    <div class="col-md-3">
                         <div class="group">
                             <input type="text" name="address" ng-model="facility.facility_physical_address.address"  required />
                             <span class="highlight"></span>
@@ -61,7 +71,7 @@
                                 Address
                             </label>
                         </div>
-                   </div>
+                    </div>
                 </div>
             </div>
             <button type="submit" ng-click="savePhy(phyForm)" class="login-btn login-btn-primary" >Save physical details</button>

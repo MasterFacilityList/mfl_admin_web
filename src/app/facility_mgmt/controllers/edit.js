@@ -431,7 +431,7 @@
             multistepService.filterActive(
                 $scope, $scope.steps, $scope.steps[6]);
             $scope.spinner = true;
-
+            $scope.categoryForm = {};
             /*Setup for map data*/
             angular.extend($scope, {
                 defaults: {
@@ -547,6 +547,27 @@
                 $scope.savePhy = function (frm) {
                     var changes = formChanges.whatChanged(frm);
                     if(!_.isEmpty(changes)){
+                        changes.facility_physical_address = {};
+                        if(!_.isUndefined(changes.plot_number)){
+                            changes.facility_physical_address.plot_number = changes.plot_number;
+//                            changes = _.without(changes, changes.plot_number);
+                            
+                        }
+                        if(!_.isUndefined(changes.nearest_landmark)){
+                            changes.facility_physical_address.nearest_landmark =
+                                changes.nearest_landmark;
+//                            changes = _.without(changes, changes.nearest_landmark);
+                        }
+                        if(!_.isUndefined(changes.town)){
+                            changes.facility_physical_address.town = changes.town;
+//                            changes = _.without(changes, changes.town);
+                        }
+                        if(!_.isUndefined(changes.postal_code)){
+                            changes.facility_physical_address.postal_code = changes.postal_code;
+                        }
+                        if(!_.isUndefined(changes.address)){
+                            changes.facility_physical_address.address = changes.address;
+                        }
                         wrappers.facility_detail.update($scope.facility_id, changes)
                             .success(function (data) {
                                 $scope.facility = data;
