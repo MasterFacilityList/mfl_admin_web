@@ -584,10 +584,8 @@
                 /*Save geolocation details*/
                 $scope.saveGeo = function (frm) {
                     var spinner1 = true;
-                    console.log(frm);
                     var changes = formChanges.whatChanged(frm);
                     if(!_.isEmpty(changes)){
-                        console.log(changes);
                         wrappers.facility_coordinates
                             .update($scope.facility.coordinates,changes)
                             .success(function (data) {
