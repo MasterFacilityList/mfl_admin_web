@@ -1,5 +1,5 @@
 <div class="col-sm-12 detail-content">
-    <div class="col-sm-12 content-card form-card margin-t-20 margin-b-20">
+    <div class="col-sm-12 content-card form-card margin-t-20 margin-b-20" requires-permission="facilities.add_facilityservice">
         <div class="col-sm-12">
             <h4 class="fw-600 fs-18">Add Service</h4>
         </div>
@@ -46,7 +46,9 @@
                     <td>{{child.average_rating}}</td>
                     <td>{{child.number_of_ratings}}</td>
                     <td class="text-right">
-                        <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Service">
+                        <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open"
+                            popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Service"
+                            requires-permission="facilities.delete_facilityservice">
                             <i class="fa fa-trash fw-500"></i>
                         </a>
                     </td>

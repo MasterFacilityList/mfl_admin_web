@@ -18,7 +18,7 @@
                     controller: "mfl.facility_mgmt.controllers.facility_upgrade"
                 }
             },
-            permission: "facilities.add_facilitytype"
+            permission: "facilities.add_facilitytype,facilities.view_facility"
         })
         .state("facilities.facility_edit.downgrade", {
             url: "downgrade/",
@@ -31,7 +31,7 @@
                     controller: "mfl.facility_mgmt.controllers.facility_downgrade"
                 }
             },
-            permission: "facilities.add_facilitytype"
+            permission: "facilities.add_facilitytype,facilities.view_facility"
         })
         .state("facilities.facility_edit.update_services_up", {
             url: "upgrade/update_services/",
@@ -44,7 +44,7 @@
                     controller: "mfl.facility_mgmt.controllers.update_services"
                 }
             },
-            permission: "facilities.add_facilityservice"
+            permission: "facilities.add_facilityservice,facilities.view_facility"
         })
         .state("facilities.facility_edit.update_services_down", {
             url: "downgrade/update_services/",
@@ -57,7 +57,7 @@
                     controller: "mfl.facility_mgmt.controllers.update_services"
                 }
             },
-            permission: "facilities.add_facilityservice"
+            permission: "facilities.add_facilityservice,facilities.view_facility"
         });
     }]);
 

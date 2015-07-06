@@ -18,7 +18,7 @@
                     controller: "mfl.facility_mgmt.controllers.facility_approve"
                 }
             },
-            permission: "facilities.add_facilityapproval"
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
         });
     }]);
 

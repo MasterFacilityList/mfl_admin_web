@@ -1,5 +1,5 @@
 <div class="col-sm-12 detail-content">
-    <div class="col-sm-12 content-card form-card margin-t-20">
+    <div class="col-sm-12 content-card form-card margin-t-20" requires-permission="facilities.add_facilityofficer">
         <div class="col-sm-12">
             <h4 class="fw-600 fs-18"> Add Officers</h4>
         </div>
@@ -31,7 +31,9 @@
                     <span ng-if="child.delete_spinner">
                         <i class="fa fa-spin fa-circle-o-notch"></i>
                     </span>
-                        <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Officer">
+                        <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open"
+                            popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Officer"
+                             requires-permission="facilities.delete_facilityofficer">
                             <i class="fa fa-trash fw-500"></i>
                         </a>
                     </td>

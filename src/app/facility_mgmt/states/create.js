@@ -15,7 +15,8 @@
                         controller: "mfl.facility_mgmt.controllers.facility_create"
                     }
                 },
-                redirectTo: "facilities.facility_create.basic"
+                redirectTo: "facilities.facility_create.basic",
+                permission: "facilities.add_facility"
             })
 
             .state("facilities.facility_create.basic", {
@@ -28,7 +29,8 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.basic.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.basic"
                     }
-                }
+                },
+                permission: "facilities.add_facility"
             })
 
             .state("facilities.facility_create.contacts", {
@@ -41,7 +43,8 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.contacts.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.contacts"
                     }
-                }
+                },
+                permission: "facilities.add_facilitycontact"
             });
     }]);
 
