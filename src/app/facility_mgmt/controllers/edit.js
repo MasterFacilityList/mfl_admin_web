@@ -141,8 +141,7 @@
             };
             $scope.remove = function () {
                 wrappers.facility_detail.remove($scope.facility_id)
-                .success(function (data) {
-                    $log.info(data);
+                .success(function () {
                     $state.go("facilities");
                 })
                 .error(function (error) {

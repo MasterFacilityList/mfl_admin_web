@@ -27,7 +27,7 @@
                         controller: "mfl.facility_mgmt.controllers.facility_edit"
                     }
                 },
-                permission: "facilities.view_facility"
+                permission: "facilities.delete_facility"
             })
 
             .state("facilities.facility_edit.basic", {
