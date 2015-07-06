@@ -1,0 +1,45 @@
+<ul class="progress-container form-tab margin-t--15">
+    <li ui-sref-active="active" class="col-xs-2 text-center">
+        <div ng-model="steps[0].active" ng-click="tabState(steps[0])" class="progress-badge"
+        ng-class="{'progress-badge-active': steps[0].active, 'progress-badge-done' : steps[0].done || steps[0].furthest}">
+            1
+        </div>
+        <p class="text-center step-label " ng-class="{'step-label-active': steps[0].active, 'step-label-done' : steps[0].done || steps[0].furthest}"  ng-click="tabState(steps[0])">Basic Details</p>
+    </li>
+    <li ui-sref-active="active" class="col-xs-2 text-center">
+        <div ng-model="steps[1].active" ng-click="tabState(steps[1])" class="progress-badge" ng-class="{'progress-badge-active': steps[1].active, 'progress-badge-done' : steps[1].done || steps[1].furthest}">
+            2
+        </div>
+        <p  class="text-center step-label" ng-class="{'step-label-active': steps[1].active, 'step-label-done' : steps[1].done || steps[1].furthest}"  ng-click="tabState(steps[1])">Contacts</p>
+    </li>
+    <li ui-sref-active="active" class="col-xs-2 text-center">
+            <div class="progress-badge" ng-class="{'progress-badge-active': steps[2].active, ' progress-badge-done' : steps[2].done || steps[2].furthest}" ng-click="tabState(steps[2])">
+                3
+            </div>
+            <p  class="text-center step-label " ng-class="{'step-label-active': steps[2].active, 'step-label-done' : steps[2].done || steps[2].furthest}"  ng-click="tabState(steps[2])">Services</p>
+    </li>
+    <li ui-sref-active="active" class="col-xs-2 text-center">
+            <div class="progress-badge" ng-class="{'progress-badge-active': steps[3].active, 'progress-badge-done' : steps[3].done || steps[3].furthest}" ng-click="tabState(steps[3])">
+                4
+            </div>
+            <p  class="text-center step-label" ng-class="{'step-label-active': steps[3].active, 'step-label-done' : steps[3].done || steps[3].furthest}"  ng-click="tabState(steps[3])">Setup</p>
+    </li>
+    <li ui-sref-active="active" class="col-xs-2 text-center">
+        <div class="progress-badge" ng-class="{'progress-badge-active': steps[4].active, 'progress-badge-done' : steps[4].done || steps[4].furthest}" ng-click="tabState(steps[4])">
+            5
+        </div>
+        <p  class="text-center step-label " ng-class="{'step-label-active': steps[4].active, 'step-label-done' : steps[4].done || steps[4].furthest}"  ng-click="tabState(steps[4])">Officers</p>
+    </li>
+    <li ui-sref-active="active" class="col-xs-2 text-center">
+        <div class="progress-badge " ng-class="{'progress-badge-active': steps[5].active, 'progress-badge-done' : steps[5].done || steps[5].furthest}" ng-click="tabState(steps[5])">
+            6
+        </div>
+        <p  class="text-center step-label" ng-class="{'step-label-active': steps[5].active, ' step-label-done' : steps[5].done || steps[5].furthest}"  ng-click="tabState(steps[5])">Units</p>
+    </li>
+    <li ui-sref-active="active" class="col-xs-2 text-center">
+        <div class="progress-badge" ng-class="{'progress-badge-active': steps[6].active, 'progress-badge-done' : steps[6].done || steps[6].furthest}" ng-click="tabState(steps[6])">
+            7
+        </div>
+        <p  class="text-center step-label" ng-class="{'step-label-active': steps[6].active, ' step-label-done' : steps[6].done || steps[6].furthest}"  ng-click="tabState(steps[6])">Location</p>
+    </li>
+</ul>

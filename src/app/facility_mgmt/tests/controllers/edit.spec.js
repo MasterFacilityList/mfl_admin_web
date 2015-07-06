@@ -265,6 +265,12 @@
                     {name : "basic"},
                     {name : "contacts"}
                 ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"}
+                };
                 ctrl(".basic", data);
 
                 var frm = {
@@ -293,6 +299,13 @@
                     {name : "basic"},
                     {name : "contacts"}
                 ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"}
+                };
+                data.$scope.create = false;
                 ctrl(".basic", data);
 
                 httpBackend
@@ -313,6 +326,214 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
+            //piggy back test
+            it("should save facility basic details", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                state.params.facility_id = "";
+                data.$scope.facility = {};
+                data.$scope.login_user = yusa;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"}
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                ctrl(".basic", data);
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/facilities/")
+                    .respond(204, {name : "Yitchouse"});
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$dirty": true,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.save(frm);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+            it("should save facility basic details: fail", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                state.params.facility_id = "";
+                data.$scope.facility = {};
+                data.$scope.login_user = yusa;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"}
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                ctrl(".basic", data);
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/facilities/")
+                    .respond(500, {name : "Yitchouse"});
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$dirty": true,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.save(frm);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+            //second piggy back test success
+            it("should save facility basic details: update", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                state.params.facility_id = "3";
+                data.$scope.facility = {};
+                data.$scope.login_user = yusa;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"}
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                ctrl(".basic", data);
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(204);
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$dirty": true,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.save(frm);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+            it("should save facility basic details: update, fail",function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                state.params.facility_id = "3";
+                data.$scope.facility = {};
+                data.$scope.login_user = yusa;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"}
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                ctrl(".basic", data);
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(500);
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$dirty": true,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.save(frm);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+            //if the submission form is prestine and save function called
+            it("should save facility basic details: empty form",function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                spyOn(state, "go");
+                state.params.facility_id = "3";
+                data.$scope.facility = {};
+                data.$scope.login_user = yusa;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"}
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                ctrl(".basic", data);
+                var frm = {
+                    "$dirty": false,
+                    "name": {
+                        "$dirty": false,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.save(frm);
+            });
+
             it("should show error on fail to edit facility basic details", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -325,6 +546,13 @@
                 data.$scope.steps = [
                     {name : "basic"}
                 ];
+                data.$scope.create = false;
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"}
+                };
                 ctrl(".basic", data);
 
 
@@ -361,10 +589,12 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/contacts/?facility=3")
                     .respond(200, {results: []});
+                data.$scope.create = true;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
                 ];
+                data.$scope.nextState = angular.noop;
                 ctrl(".contacts", data);
 
                 httpBackend.flush();

@@ -8,7 +8,7 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
             .state("facilities.facility_edit", {
-                url: ":facility_id/",
+                url: "edit/:facility_id/",
                 views: {
                     "main-content@facility_mgmt": {
                         templateUrl: "facility_mgmt/tpls/facility_edit.tpl.html",
