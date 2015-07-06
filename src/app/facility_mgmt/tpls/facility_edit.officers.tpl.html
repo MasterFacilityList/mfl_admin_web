@@ -22,6 +22,13 @@
     <div class="col-sm-12 content-card margin-b-20 margin-t-20">
         <h4 class="fw-600 fs-18"> Current Officer(s)</h4>
         <table class="table content-card margin-t-20 margin-b-10">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ID Number</th>
+                    <th>Job Title</th>
+                </tr>
+            </thead>
             <tbody>
                 <tr ng-repeat="child in fac_officers">
                     <td class="pad-t-15 fs-16 fw-500">{{child.officer_name}}</td>

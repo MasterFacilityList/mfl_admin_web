@@ -30,6 +30,12 @@
     <div  class="col-lg-12 content-card margin-t-20">
         <h4 class="fw-600 fs-18"> Current Contacts</h4>
         <table class="table content-card margin-t-20 margin-b-10">
+            <thead>
+                <tr>
+                    <th>Contact Type</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
             <tbody>
                 <tr ng-repeat="child in fac_contacts">
                     <td class="pad-t-15 fs-16 fw-500">{{child.contact_type}}</td>
