@@ -102,6 +102,166 @@
                     });
                 }])
             );
+            it("should delete facility",
+                inject(["mfl.facility.multistep.service", function (facObjService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "mfl.facility.multistep.service" : facObjService,
+                        "$stateParams": {
+                            facility_id: 3
+                        }
+                    };
+
+                    var f = {
+                        ward_name: "ward",
+                        ward: "1",
+                        facility_type: "2",
+                        facility_type_name: "type",
+                        owner: "3",
+                        owner_name: "owner",
+                        operation_status: "4",
+                        operation_status_name: "opstatus"
+                    };
+                    spyOn(state, "go");
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/3/")
+                        .respond(200, f);
+                    //piggy back on test
+                    data.$scope.steps = [
+                        {
+                            name : "basic",
+                            active : false
+                        },
+                        {
+                            name : "contacts",
+                            active : false
+                        }
+                    ];
+
+                    ctrl("", data);
+                    var obj = {name : "basic", active : false};
+                    data.$scope.tabState(obj);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                    expect(data.$scope.facility).toEqual(f);
+                    expect(data.$scope.select_values).toEqual({
+                        ward: {
+                            "id": "1",
+                            "name": "ward"
+                        },
+                        facility_type: {
+                            "id": "2",
+                            "name": "type"
+                        },
+                        owner: {
+                            "id": "3",
+                            "name": "owner"
+                        },
+                        operation_status: {
+                            "id": "4",
+                            "name": "opstatus"
+                        }
+                    });
+
+                    httpBackend.resetExpectations();
+
+                    httpBackend
+                        .expectDELETE(server_url+"api/facilities/facilities/" +
+                                   "3/")
+                        .respond(204, {results : []});
+
+                    data.$scope.remove();
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                }])
+            );
+            it("should fail to delete facility",
+                inject(["mfl.facility.multistep.service", function (facObjService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "mfl.facility.multistep.service" : facObjService,
+                        "$stateParams": {
+                            facility_id: 3
+                        }
+                    };
+
+                    var f = {
+                        ward_name: "ward",
+                        ward: "1",
+                        facility_type: "2",
+                        facility_type_name: "type",
+                        owner: "3",
+                        owner_name: "owner",
+                        operation_status: "4",
+                        operation_status_name: "opstatus"
+                    };
+                    spyOn(state, "go");
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/3/")
+                        .respond(200, f);
+                    //piggy back on test
+                    data.$scope.steps = [
+                        {
+                            name : "basic",
+                            active : false
+                        },
+                        {
+                            name : "contacts",
+                            active : false
+                        }
+                    ];
+
+                    ctrl("", data);
+                    var obj = {name : "basic", active : false};
+                    data.$scope.tabState(obj);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                    expect(data.$scope.facility).toEqual(f);
+                    expect(data.$scope.select_values).toEqual({
+                        ward: {
+                            "id": "1",
+                            "name": "ward"
+                        },
+                        facility_type: {
+                            "id": "2",
+                            "name": "type"
+                        },
+                        owner: {
+                            "id": "3",
+                            "name": "owner"
+                        },
+                        operation_status: {
+                            "id": "4",
+                            "name": "opstatus"
+                        }
+                    });
+
+                    httpBackend.resetExpectations();
+
+                    httpBackend
+                        .expectDELETE(server_url+"api/facilities/facilities/" +
+                                   "3/")
+                        .respond(500, {results : []});
+
+                    data.$scope.remove();
+                    data.$scope.cancel();
+
+                    expect(state.go).toHaveBeenCalled();
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+                }])
+            );
 
             it("should not reload on invalid search term", function () {
                 var data = {
