@@ -21,7 +21,7 @@
             requires-permission="facilities.add_facilitytype,facilities.add_facilityservice"
             ui-sref=".downgrade({facility_id: facility_id})"
             ui-sref-opts="{reload:true}">&nbsp;Downgrade</a>
-        <a class="action-btn action-btn-danger action-btn-md" href requires-permission="facilities.delete_facility">
+        <a class="action-btn action-btn-danger action-btn-md" tooltip="delete" tooltip-placement="bottom" ui-sref="facilities.facility_edit.delete" requires-permission="facilities.delete_facility">
             <i class="fa fa-trash"></i>
         </a>
         <a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md"

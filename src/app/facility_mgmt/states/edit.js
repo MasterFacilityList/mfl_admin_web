@@ -19,6 +19,17 @@
                 permission: "facilities.view_facility"
             })
 
+            .state("facilities.facility_edit.delete", {
+                url: "delete/",
+                views: {
+                    "delete@facilities.facility_edit": {
+                        templateUrl: "common/tpls/delete.tpl.html",
+                        controller: "mfl.facility_mgmt.controllers.facility_edit"
+                    }
+                },
+                permission: "facilities.delete_facility"
+            })
+
             .state("facilities.facility_edit.basic", {
                 url: "basic/",
                 views: {
