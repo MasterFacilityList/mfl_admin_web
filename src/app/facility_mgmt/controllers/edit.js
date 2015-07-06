@@ -234,8 +234,13 @@
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
         function($scope,$log,$stateParams,wrappers, multistepService){
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[1]);
+            if(!$scope.create) {
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[1]);
+            }
+            else {
+                $scope.nextState();
+            }
             $scope.contacts = [];
             $scope.contact = {
                 contact_type: "",

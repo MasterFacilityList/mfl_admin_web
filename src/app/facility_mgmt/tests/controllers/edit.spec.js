@@ -589,10 +589,12 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/contacts/?facility=3")
                     .respond(200, {results: []});
+                data.$scope.create = true;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
                 ];
+                data.$scope.nextState = angular.noop;
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
