@@ -150,7 +150,7 @@
                 });
             };
             $scope.cancel = function () {
-                $state.go("facilities.facility_1edit",{facility_id:$scope.facility_id});
+                $state.go("facilities.facility_edit",{facility_id:$scope.facility_id});
             };
         }]
     )
