@@ -139,6 +139,18 @@
                     $log.error(data);
                 });
             };
+            $scope.remove = function () {
+                wrappers.facility_detail.remove($scope.facility_id)
+                .success(function () {
+                    $state.go("facilities");
+                })
+                .error(function (error) {
+                    $log.error(error);
+                });
+            };
+            $scope.cancel = function () {
+                $state.go("facilities.facility_edit",{facility_id:$scope.facility_id});
+            };
         }]
     )
 
@@ -514,6 +526,8 @@
                 $scope.nextState();
             }
             $scope.spinner = true;
+            $scope.categoryForm = {};
+            /*Setup for map data*/
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false
@@ -531,6 +545,16 @@
                 }
             });
 
+            /*Fetch towns*/
+            wrappers.towns.list()
+                .success(function (data) {
+                    $scope.towns = data.results;
+                })
+                .error(function(error){
+                    $log.error(error);
+                });
+
+            /*Fetch geo code methods*/
             wrappers.geo_code_methods.list()
                 .success(function (data) {
                     $scope.geo_methods = data.results;
@@ -539,6 +563,7 @@
                     $log.error(error);
                 });
 
+            /*Fetch geo code sources*/
             wrappers.geo_code_sources.list()
                 .success(function (data) {
                     $scope.geo_sources = data.results;
@@ -547,6 +572,7 @@
                     $log.error(error);
                 });
 
+            /*Wait for facility to be defined*/
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
                     return;
@@ -556,6 +582,20 @@
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.geo = data;
+                    $scope.select_values = {
+                        source: {
+                            "id": $scope.geo.source,
+                            "name": $scope.geo.source_name
+                        },
+                        method: {
+                            "id": $scope.geo.method,
+                            "name": $scope.geo.method_name
+                        },
+                        town:{
+                            "id": f.facility_physical_address.town_id,
+                            "name": f.facility_physical_address.town
+                        }
+                    };
                     angular.extend($scope,{
                         markers: {
                             mainMarker: {
@@ -571,6 +611,7 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
+
                 /*ward coordinates*/
                 wrappers.wards.get(f.ward)
                 .success(function(data){
@@ -619,6 +660,41 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
+
+                /*Save physical location details*/
+                $scope.savePhy = function (frm) {
+                    var changes = formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        wrappers.physical_addresses
+                            .update($scope.facility.facility_physical_address.id, changes)
+                            .success(function (data) {
+                                $scope.$parent.facility.facility_physical_address = data;
+                            })
+                            .error(function (error) {
+                                $log.error(error);
+                            });
+                    }
+                };
+
+                /*Save geolocation details*/
+                $scope.saveGeo = function (frm) {
+                    var spinner1 = true;
+                    var changes = formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        wrappers.facility_coordinates
+                            .update($scope.facility.coordinates,changes)
+                            .success(function (data) {
+                                spinner1 =false;
+                                $scope.geo = data;
+                            })
+                            .error(function (error) {
+                                spinner1 =false;
+                                $log.error(error);
+                            });
+                    }
+                };
+
+                /*update marker position*/
                 $scope.checkLocation = function  (coords) {
                     angular.extend($scope,{
                         markers : {
@@ -631,7 +707,6 @@
                         }
                     });
                 };
-                /*update marker position*/
             });
         }]);
 
