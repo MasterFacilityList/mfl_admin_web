@@ -1504,6 +1504,28 @@
                     "$controller": null,
                     "mfl.common.services.multistep" : multistepService
                 };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"}
+                ];
+                var helper = {"bootstrap": angular.noop};
+                spyOn(data, "$controller").andReturn(helper);
+                spyOn(helper, "bootstrap");
+                ctrl(".services", data);
+            }]));
+            //when editing a facility
+            it("should bootstrap from helper controller: when editing",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$controller": null,
+                    "mfl.common.services.multistep" : multistepService
+                };
+                data.$scope.create = false;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"},
@@ -1770,7 +1792,8 @@
                     },
                     "mfl.common.service.multistep" : multistepService
                 };
-
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"},

@@ -9,15 +9,45 @@
     .controller("mfl.facility_mgmt.controllers.facility_create", ["$scope",
     "$stateParams", "mfl.facility.multistep.service",
     "mfl.common.services.multistep", "$state", "$q",
+    "mfl.facility_mgmt.services.wrappers",
     function ($scope, $stateParams, facilityMultistepService,
-        multistepService, $state, $q) {
+        multistepService, $state, $q, wrappers) {
         $scope.test = "New";
         $scope.create = true;
         $scope.new_facility = $state.params.facility_id;
+        $scope.facility_id = $state.params.facility_id;
         $scope.furthest = $stateParams.furthest;
         //intializing ui select values
         if(_.isEmpty($state.params.facility_id)){
             $scope.select_values = {};
+        }
+        else {
+            wrappers.facility_detail.get($scope.new_facility)
+                .success(function(data){
+                    $scope.spinner = false;
+                    $scope.facility = data;
+                    $scope.select_values = {
+                        ward: {
+                            "id": $scope.facility.ward,
+                            "name": $scope.facility.ward_name
+                        },
+                        facility_type: {
+                            "id": $scope.facility.facility_type,
+                            "name": $scope.facility.facility_type_name
+                        },
+                        owner: {
+                            "id": $scope.facility.owner,
+                            "name": $scope.facility.owner_name
+                        },
+                        operation_status: {
+                            "id": $scope.facility.operation_status,
+                            "name": $scope.facility.operation_status_name
+                        }
+                    };
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
         }
         $scope.selectReload = function (wrapper, order_field, search_term,
         scope_var) {
@@ -54,6 +84,12 @@
             if($scope.furthest < val) {
                 $scope.furthest = val;
             }
+        };
+        $scope.goToNext = function (furthest_value, state_name) {
+            $scope.setFurthest(furthest_value);
+            $state.go("facilities.facility_create."+ state_name,
+                {furthest: $scope.furthest,
+                facility_id : $scope.new_facility});
         };
     }]);
 
