@@ -35,12 +35,12 @@
             </div>
 
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-12 margin-b-20">
             <a ng-if="!create" class="login-btn login-btn-default pull-left margin-t-10" ui-sref="service_mgmt.service_list">
                 <i class="fa fa-angle-double-left"></i> Cancel
             </a>
             <button class="login-btn login-btn-primary margin-t-10" ng-class="{'pull-right':!create}" ng-click="save(service_frm)" requires-user-feature="is_staff">
-                &nbsp;Service Options <i class="fa fa-angle-double-right"></i>
+                &nbsp;Options <i class="fa fa-angle-double-right"></i>
             </button>
         </div>
     </form>

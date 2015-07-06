@@ -65,10 +65,11 @@
                     data.$scope.tabState(obj);
                     data.$scope.furthest = 1;
                     data.$scope.setFurthest(2);
+                    data.$scope.goToNext(1, "contacts");
                 }])
             );
             //checking else part for above test
-            it("should load facility creation setup details: failures",
+            it("should load facility creation setup details: failures + fetch",
                 inject(["mfl.facility.multistep.service", function (facObjService) {
                     var data = {
                         "$scope": rootScope.$new(),
@@ -78,7 +79,7 @@
                             facility_id: 3
                         }
                     };
-                    state.params.facility_id = "2";
+                    state.params.facility_id = "3";
                     //piggy back on test
                     data.$scope.steps = [
                         {
@@ -90,12 +91,60 @@
                             active : false
                         }
                     ];
-
+                    var f = {
+                        ward_name: "ward",
+                        ward: "1",
+                        facility_type: "2",
+                        facility_type_name: "type",
+                        owner: "3",
+                        owner_name: "owner",
+                        operation_status: "4",
+                        operation_status_name: "opstatus"
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/3/")
+                        .respond(200, f);
                     ctrl("", data);
                     var obj = {name : "basic",active : false,furthest : false};
                     data.$scope.tabState(obj);
                     data.$scope.furthest = 3;
                     data.$scope.setFurthest(2);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+                }])
+            );
+
+            //test failure to fetch facility details
+            it("should load facility creation setup details: failures - fetch",
+                inject(["mfl.facility.multistep.service", function (facObjService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "mfl.facility.multistep.service" : facObjService,
+                        "$stateParams": {
+                            facility_id: 3
+                        }
+                    };
+                    state.params.facility_id = "3";
+                    //piggy back on test
+                    data.$scope.steps = [
+                        {
+                            name : "basic",
+                            active : false
+                        },
+                        {
+                            name : "contacts",
+                            active : false
+                        }
+                    ];
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/3/")
+                        .respond(400, {});
+                    ctrl("", data);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
                 }])
             );
 

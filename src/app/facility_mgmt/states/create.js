@@ -44,7 +44,35 @@
                         controller: "mfl.facility_mgmt.controllers.facility_edit.contacts"
                     }
                 },
-                permission: "facilities.add_facilitycontact"
+                permission: "facilities.add_facility"
+            })
+
+            .state("facilities.facility_create.services", {
+                url: ":facility_id/services",
+                views: {
+                    "tab-header@facilities.facility_create": {
+                        templateUrl: "facility_mgmt/tpls/facility_create.tab-headers.tpl.html"
+                    },
+                    "form-view@facilities.facility_create": {
+                        templateUrl: "facility_mgmt/tpls/facility_edit.services.tpl.html",
+                        controller: "mfl.facility_mgmt.controllers.facility_edit.services"
+                    }
+                },
+                permission: "facilities.add_facility"
+            })
+
+            .state("facilities.facility_create.setup", {
+                url: ":facility_id/setup",
+                views: {
+                    "tab-header@facilities.facility_create": {
+                        templateUrl: "facility_mgmt/tpls/facility_create.tab-headers.tpl.html"
+                    },
+                    "form-view@facilities.facility_create": {
+                        templateUrl: "facility_mgmt/tpls/facility_edit.setup.tpl.html",
+                        controller: "mfl.facility_mgmt.controllers.facility_edit.setup"
+                    }
+                },
+                permission: "facilities.add_facility"
             });
     }]);
 
