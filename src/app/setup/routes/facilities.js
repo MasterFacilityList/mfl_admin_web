@@ -48,7 +48,7 @@
                     }
                 },
                 permission: "facilities.add_owner",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
 
         /** -----------------------------------------------------------**/
@@ -87,7 +87,7 @@
                     }
                 },
                 permission: "facilities.delete_ownertype",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.facility_owner_types.create", {
                 url: "/create",
@@ -99,7 +99,7 @@
                     }
                 },
                 permission: "facilities.add_ownertype",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
 
          /** -----------------------------------------------------------**/
@@ -136,7 +136,7 @@
                     }
                 },
                 permission: "facilities.delete_jobtitle",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.facility_job_titles.create", {
                 url: "/create",
@@ -147,7 +147,7 @@
                     }
                 },
                 permission: "facilities.add_jobtitle",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
 
          /** -----------------------------------------------------------**/
@@ -186,7 +186,7 @@
                     }
                 },
                 permission: "facilities.delete_regulatingbody",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.facility_regulatory_bodies.edit.basic", {
                 url: "/basicdetails",
@@ -218,7 +218,7 @@
                     }
                 },
                 permission: "facilities.add_regulatingbody",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.facility_regulatory_bodies.create.basic", {
                 url: "/basicdetails",
@@ -229,7 +229,7 @@
                     }
                 },
                 permission: "facilities.add_regulatingbody",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.facility_regulatory_bodies.create.contacts", {
                 url: "/:reg_cont_id/contacts",
@@ -240,7 +240,7 @@
                     }
                 },
                 permission: "facilities.add_regulatingbodycontact",
-                feature: "is_staff"
+                userFeature: "is_staff"
             });
     }]);
 })(angular);

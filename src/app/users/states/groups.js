@@ -13,7 +13,9 @@
                         controller: "mfl.users.controllers.group_list",
                         templateUrl: "users/tpls/groups.grid.tpl.html"
                     }
-                }
+                },
+                userFeature: "is_staff",
+                permission: "auth.change_group"
             })
 
             .state("groups.group_create", {
@@ -24,7 +26,8 @@
                         templateUrl: "users/tpls/groups.edit.tpl.html"
                     }
                 },
-                permission: "auth.add_group"
+                permission: "auth.add_group",
+                userFeature: "is_staff"
             })
 
             .state("groups.group_edit", {
@@ -34,7 +37,9 @@
                         controller: "mfl.users.controllers.group_edit",
                         templateUrl: "users/tpls/groups.edit.tpl.html"
                     }
-                }
+                },
+                userFeature: "is_staff",
+                permission: "auth.change_group"
             })
             .state("groups.group_edit.delete", {
                 url: "delete/",
@@ -44,7 +49,8 @@
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
                 },
-                permission: "auth.delete_group"
+                permission: "auth.delete_group",
+                userFeature: "is_staff"
             })
 
             .state("groups.group_delete", {
@@ -55,7 +61,8 @@
                         templateUrl: "users/tpls/groups.delete.tpl.html"
                     }
                 },
-                permission: "auth.delete_group"
+                permission: "auth.delete_group",
+                userFeature: "is_staff"
             });
     }]);
 

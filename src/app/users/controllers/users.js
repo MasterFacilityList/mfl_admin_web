@@ -148,9 +148,10 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='users.user_edit.delete'",
+                    func : "ui-sref='users.user_edit.delete'" +
+                            "requires-user-feature='is_staff'" +
+                            "requires-permission='users.delete_mfluser'",
                     class: "action-btn action-btn-danger action-btn-md",
-
                     tipmsg: "Delete User",
                     icon: "fa-trash"
                 }

@@ -39,7 +39,7 @@
                     }
                 },
                 permission: "common.delete_contact",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.contacts.create", {
                 url: "/create",
@@ -50,7 +50,7 @@
                     }
                 },
                 permission: "common.add_contact",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
 
         /*Contact Types*/
@@ -87,7 +87,7 @@
                     }
                 },
                 permission: "common.delete_contacttype",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.contact_types.create", {
                 url: "/create",
@@ -98,7 +98,7 @@
                     }
                 },
                 permission: "common.add_contacttype",
-                feature: "is_staff"
+                userFeature: "is_staff"
             });
     }]);
 })(angular);

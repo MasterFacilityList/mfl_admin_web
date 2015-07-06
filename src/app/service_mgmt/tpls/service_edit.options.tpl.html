@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="col-sm-12 margin-t-30 detail-content margin-b-10">
-        <div class="col-sm-12 content-card form-card margin-t-20">
+        <div class="col-sm-12 content-card form-card margin-t-20" requires-user-feature="is_staff" requires-permission="facilities.add_serviceoption">
             <div class="col-sm-12">
                 <h4 class="fw-600 fs-18">Available options</h4>
             </div>
@@ -44,7 +44,13 @@
                         <td class="pad-t-15">{{child.value}}</td>
                         <td class="pad-t-15">{{child.option_type | titlecase}}</td>
                         <td class="pad-t-15">{{child.is_exclusive_option | boolFilter}}</td>
-                        <td class="text-right"><a tooltip="Delete Option" popover-trigger="open" popover-toggle popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" class="action-btn action-btn-grid action-btn-danger"><i class="fa fa-trash fw-500"></i></a></td>
+                        <td class="text-right">
+                            <a tooltip="Delete Option" popover-trigger="open" popover-toggle
+                                popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left"
+                                class="action-btn action-btn-grid action-btn-danger" requires-user-feature="is_staff" requires-permission="facilities.delete_option">
+                                <i class="fa fa-trash fw-500"></i>
+                            </a>
+                        </td>
                     </tr>
                     <tr ng-if="spinner">
                         <td class="text-center" colspan="5">
@@ -56,18 +62,10 @@
         </div>
         <div ng-if="!create" class="col-sm-12 margin-b-20 margin-t-20">
             <button class="login-btn login-btn-primary margin-l--10" ui-sref="service_mgmt.service_list.service_edit.basic ({service_id : service_id})">
-                &nbsp;<i class="fa fa-angle-double-left"></i> Details
-            </button>
-            <button class="login-btn login-btn-primary pull-right margin-r--10" ui-sref="service_mgmt.service_list">
-                &nbsp;&nbsp;Update <i class="fa fa-angle-double-right"></i>
-            </button>
-        </div>
-        <div ng-if="create" class="col-sm-12 margin-b-20 margin-t-20">
-            <button class="login-btn login-btn-primary margin-l--10" ui-sref="service_mgmt.service_list.service_create.basic ({service_id : service_id})">
                 &nbsp;<i class="fa fa-angle-double-left"></i> Service Details
             </button>
-            <button class="login-btn login-btn-primary pull-right margin-r--10" ui-sref="service_mgmt.service_list">
-                &nbsp;Submit Details <i class="fa fa-angle-double-right"></i>
+            <button class="login-btn login-btn-primary pull-right margin-r--10" ui-sref="service_mgmt.service_list"  requires-user-feature="is_staff">
+                &nbsp;&nbsp;{{ create ? 'Submit Details' : 'Update' }} <i class="fa fa-angle-double-right"></i>
             </button>
         </div>
     </div>

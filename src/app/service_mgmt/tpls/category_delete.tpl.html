@@ -9,7 +9,7 @@
          <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20">
               <p class="lead">Are you sure you want to delete the category <strong>{{category.name}}</strong>?</p>
               <div class="margin-t-30 margin-b-20">
-                  <button class="margin-h-5 login-btn login-btn-success" ng-click="save()">Yes</button>
+                  <button class="margin-h-5 login-btn login-btn-success" ng-click="save()" requires-permission="facilities.delete_servicecategory" requires-user-feature="is_staff">Yes</button>
                   <button class="margin-h-5 login-btn login-btn-default" ui-sref="service_mgmt.category_list" ui-sref-opts="{reload:true}">No</button>
               </div>
          </div>

@@ -44,21 +44,39 @@
                 }]);
             });
 
-            it("should allow loggedin users with permission", function () {
+            it("should allow loggedin users with permissions", function () {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "getUser").andReturn({all_permissions: ["hello", "world"]});
+
+                inject(["mfl.auth.permissions.checker", function (permChecker) {
+                    expect(permChecker.hasPermission("hello,world")).toBe(true);
+                }]);
+            });
+
+            it("should not allow loggedin users without all permissions", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
                 spyOn(loginService, "getUser").andReturn({all_permissions: ["hello"]});
 
                 inject(["mfl.auth.permissions.checker", function (permChecker) {
-                    expect(permChecker.hasPermission("hello")).toBe(true);
+                    expect(permChecker.hasPermission("hello,world")).toBe(false);
                 }]);
             });
 
-            it("should allow loggedin users with feature", function () {
+            it("should allow loggedin users with features", function () {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "getUser").andReturn({county: "meru", "is_admin":true});
+
+                inject(["mfl.auth.permissions.checker", function (permChecker) {
+                    expect(permChecker.hasUserFeature("county,is_admin")).toBe(true);
+                }]);
+            });
+
+            it("should not allow loggedin users without all features", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
                 spyOn(loginService, "getUser").andReturn({county: "meru"});
 
                 inject(["mfl.auth.permissions.checker", function (permChecker) {
-                    expect(permChecker.hasUserFeature("county")).toBe(true);
+                    expect(permChecker.hasUserFeature("county,admin")).toBe(false);
                 }]);
             });
 
@@ -75,7 +93,7 @@
 
         });
 
-        describe("Testing require-permission directive :", function () {
+        describe("Testing requires-permission directive :", function () {
             var compile, rootscope, loginService, permChecker;
 
             beforeEach(inject(["$compile", "$rootScope", "mfl.auth.permissions.checker",

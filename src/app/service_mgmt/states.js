@@ -54,7 +54,8 @@
                     templateUrl: "service_mgmt/tpls/category_edit.tpl.html"
                 }
             },
-            permission: "facilities.add_servicecategory"
+            permission: "facilities.add_servicecategory",
+            userFeature: "is_staff"
         })
 
         .state("service_mgmt.category_list.category_edit", {
@@ -75,7 +76,8 @@
                     templateUrl: "common/tpls/delete.tpl.html"
                 }
             },
-            permission: "facilities.delete_servicecategory"
+            permission: "facilities.delete_servicecategory",
+            userFeature: "is_staff"
         })
         // ============== services ====================
 
@@ -101,7 +103,8 @@
                     templateUrl: "service_mgmt/tpls/service_create.tpl.html"
                 }
             },
-            permission: "facilities.add_service"
+            permission: "facilities.add_service",
+            userFeature: "is_staff"
         })
 
         //nested created state for service details
@@ -113,7 +116,9 @@
                                 "ate.basic",
                     templateUrl: "service_mgmt/tpls/service_edit.basic.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.add_service",
+            userFeature: "is_staff"
         })
         .state("service_mgmt.service_list.service_create.options", {
             url: ":service_id/options/",
@@ -123,7 +128,9 @@
                                 ".options",
                     templateUrl: "service_mgmt/tpls/service_edit.options.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.add_service",
+            userFeature: "is_staff"
         })
 
         .state("service_mgmt.service_list.service_edit", {
@@ -168,7 +175,8 @@
                     templateUrl: "common/tpls/delete.tpl.html"
                 }
             },
-            permission: "facilities.delete_service"
+            permission: "facilities.delete_service",
+            userFeature: "is_staff"
         })
 
         // ============== options ====================
@@ -195,7 +203,8 @@
                     templateUrl: "service_mgmt/tpls/option_edit.tpl.html"
                 }
             },
-            permission: "facilities.add_option"
+            permission: "facilities.add_option",
+            userFeature: "is_staff"
         })
 
         .state("service_mgmt.option_list.option_edit", {
@@ -217,7 +226,8 @@
                     templateUrl: "common/tpls/delete.tpl.html"
                 }
             },
-            permission: "facilities.delete_option"
+            permission: "facilities.delete_option",
+            userFeature: "is_staff"
         });
 
     }]);

@@ -25,7 +25,10 @@
             <td data-title="Owner:" class="pad-t-15">{{fac.owner_name}}</td>
             <td data-title="Facility Type:" class="pad-t-15">{{fac.facility_type_name}}</td>
             <td data-title="Actions:"  class="text-right">
-                <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})" class="action-btn action-btn-grid action-btn-primary"><i class="fa fa-eye"></i> </a>
+                <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
+                    class="action-btn action-btn-grid action-btn-primary">
+                    <i class="fa fa-eye"></i>
+                </a>
             </td>
         </tr>
     </tbody>
