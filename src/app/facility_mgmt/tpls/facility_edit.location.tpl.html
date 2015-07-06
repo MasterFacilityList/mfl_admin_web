@@ -78,12 +78,11 @@
                         </div>
                     </div>
                     <div class="margin-t-50">
-                        <button type="submit" ng-click="savePhy(phyForm)" class="login-btn login-btn-primary" >Save physical details</button>
+                        <button type="submit" requires-permission="common.add_physicaladdress,facilities.change_facility" ng-click="savePhy(phyForm)" class="login-btn login-btn-primary" >Save physical details</button>
                     </div>
                 </div>
             </div>
         </form>
-
 
 
         <form name="geoForm">
@@ -180,9 +179,7 @@
                             </div>
                         </form>
                    </div>
-                <button type="submit" ng-click="saveGeo(geoForm)" class="login-btn login-btn-primary" >Save geolocation details</button>
-            </div>
-            <div>
+                <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary" >Save geolocation details</button>
             </div>
         </form>
     </div>

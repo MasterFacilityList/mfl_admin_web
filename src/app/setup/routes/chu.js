@@ -36,7 +36,7 @@
                     }
                 },
                 permission: "chul.delete_status",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.chu_status.create", {
                 url: "/create",
@@ -47,7 +47,7 @@
                     }
                 },
                 permission: "chul.create_status",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.chu_approvers", {
                 url: "/chu_approvers",
@@ -81,7 +81,7 @@
                     }
                 },
                 permission: "chul.delete_approver",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         .state("setup.chu_approvers.create", {
                 url: "/create",
@@ -92,7 +92,7 @@
                     }
                 },
                 permission: "chul.add_approver",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
         ;
     }]);

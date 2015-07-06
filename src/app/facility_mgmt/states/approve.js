@@ -17,7 +17,8 @@
                     templateUrl: "facility_mgmt/tpls/facility_approve.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_approve"
                 }
-            }
+            },
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
         });
     }]);
 

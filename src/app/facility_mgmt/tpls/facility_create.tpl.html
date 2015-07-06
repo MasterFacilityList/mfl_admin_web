@@ -1,0 +1,19 @@
+<div class="content-header">
+    <div class="action-container content-header-extra pad-r-20">
+        <a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md"
+           tooltip-placement="bottom" tooltip="Back">
+            <i class="fa fa-arrow-left"></i>
+        </a>
+    </div>
+   <h2 class="content-title">
+        <span class="main-title"><i class="fa fa-plus-circle"></i> New Facility</span>
+   </h2>
+</div>
+<div class="col-sm-12" style="display: inline-flex;">
+<div class="col-xs-12 margin-t-20 content-card">
+    <div ui-view="tab-header" class="margin-t-20"></div>
+    <hr class="line-divider">
+    <div class="tab-content margin-t-20">
+        <div class="listing col-sm-12" ui-view="form-view"></div>
+    </div>
+</div>

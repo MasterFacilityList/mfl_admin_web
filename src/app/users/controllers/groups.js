@@ -15,7 +15,8 @@
             $scope.action = [
                 {
                     func : "ui-sref='groups.group_create' " +
-                            "requires-permission='auth.add_group' ",
+                            "requires-permission='auth.add_group' " +
+                            "requires-user-feature='is_staff'",
                     class: "action-btn action-btn-primary action-btn-md",
 
                     tipmsg: "New Group",
@@ -81,9 +82,9 @@
             $scope.action = [
                 {
                     func : "ui-sref='groups.group_edit.delete' " +
-                           "requires-permission='auth.delete_group'" ,
+                           "requires-permission='auth.delete_group'"  +
+                           "requires-user-feature='is_staff'",
                     class: "action-btn action-btn-danger action-btn-md",
-
                     tipmsg: "Delete Group",
                     icon: "fa-trash"
                 }

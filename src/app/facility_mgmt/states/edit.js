@@ -8,14 +8,15 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
             .state("facilities.facility_edit", {
-                url: ":facility_id/",
+                url: "edit/:facility_id/",
                 views: {
                     "main-content@facility_mgmt": {
                         templateUrl: "facility_mgmt/tpls/facility_edit.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit"
                     }
                 },
-                redirectTo: "facilities.facility_edit.basic"
+                redirectTo: "facilities.facility_edit.basic",
+                permission: "facilities.view_facility"
             })
 
             .state("facilities.facility_edit.basic", {
@@ -28,7 +29,8 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.basic.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.basic"
                     }
-                }
+                },
+                permission: "facilities.view_facility"
             })
 
             .state("facilities.facility_edit.contacts", {
@@ -41,7 +43,8 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.contacts.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.contacts"
                     }
-                }
+                },
+                permission: "facilities.view_facility"
             })
             .state("facilities.facility_edit.services", {
                 url: "services/",
@@ -53,7 +56,8 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.services.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.services"
                     }
-                }
+                },
+                permission: "facilities.view_facility"
             })
             .state("facilities.facility_edit.units", {
                 url: "units/",
@@ -65,7 +69,8 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.units.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.units"
                     }
-                }
+                },
+                permission: "facilities.view_facility"
             })
             .state("facilities.facility_edit.officers", {
                 url: "officers/",
@@ -77,7 +82,8 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.officers.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.officers"
                     }
-                }
+                },
+                permission: "facilities.view_facility"
             })
             .state("facilities.facility_edit.setup", {
                 url: "setup/",
@@ -89,7 +95,8 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.setup.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.setup"
                     }
-                }
+                },
+                permission: "facilities.view_facility"
             })
             .state("facilities.facility_edit.location", {
                 url: "location/",
@@ -101,9 +108,9 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.location.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.location"
                     }
-                }
-            })
-            ;
+                },
+                permission: "facilities.view_facility"
+            });
     }]);
 
 })(angular);

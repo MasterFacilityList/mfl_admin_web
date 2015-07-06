@@ -6,8 +6,18 @@
     .controller("mfl.facility_mgmt.controllers.facility_list",
         ["$scope", function ($scope) {
             $scope.title = {
-                "name": "Facility Management"
+                "name": "Facility Management",
+                "icon": "fa-building"
             };
+            $scope.action = [
+                {
+                    func : "ui-sref='facilities.facility_create({furthest : 1})'" +
+                           "requires-permission='facilities.add_facility'",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    tipmsg: "New Facility",
+                    icon: "fa-plus"
+                }
+            ];
         }]
     );
 

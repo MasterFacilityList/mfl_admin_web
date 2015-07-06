@@ -148,8 +148,13 @@
         "mfl.common.services.multistep",
         function ($scope, $log, $state, $stateParams, wrappers, formChanges,
             multistepService) {
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[0]);
+            if(!$scope.create) {
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[0]);
+            }
+            else {
+                $scope.nextState();
+            }
             $scope.reloadOwners = function (s) {
                 return $scope.selectReload(wrappers.facility_owners, "name", s, "owners");
             };
@@ -170,17 +175,57 @@
 
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
-                if (_.isEmpty(changes)) {
-                    $state.go("facilities.facility_edit.contacts");
+                $scope.facility.ward = $scope.select_values.ward.id;
+                $scope.facility.facility_type = $scope.select_values.facility_type.id;
+                $scope.facility.owner = $scope.select_values.owner.id;
+                $scope.facility.operation_status = $scope.select_values.operation_status.id;
+                if($scope.create) {
+                    $scope.setFurthest(2);
+                    if(_.isEmpty($state.params.facility_id)) {
+                        wrappers.facility_detail.create($scope.facility)
+                        .success(function (data) {
+                            $state.go("facilities.facility_create.contacts",
+                            {facility_id : data.id,
+                            furthest : $scope.furthest});
+                        })
+                        .error(function (data) {
+                            $log.error(data);
+                        });
+                    }
+                    else {
+                        if (_.isEmpty(changes)) {
+                            $state.go("facilities.facility_create.contacts",
+                            {facility_id : $state.params.facility_id,
+                            furthest : $scope.furthest});
+                        }
+                        else {
+                            wrappers.facility_detail.update(
+                                $state.params.facility_id, changes)
+                            .success(function () {
+                                $state.go(
+                                    "facilities.facility_create.contacts",
+                                    {facility_id : $state.params.facility_id,
+                                        furthest : $scope.furthest});
+                            })
+                            .error(function (data) {
+                                $log.error(data);
+                            });
+                        }
+                    }
                 }
                 else {
-                    wrappers.facility_detail.update($scope.facility_id, changes)
-                    .success(function () {
+                    if (_.isEmpty(changes)) {
                         $state.go("facilities.facility_edit.contacts");
-                    })
-                    .error(function (data) {
-                        $log.error(data);
-                    });
+                    }
+                    else {
+                        wrappers.facility_detail.update($scope.facility_id, changes)
+                        .success(function () {
+                            $state.go("facilities.facility_edit.contacts");
+                        })
+                        .error(function (data) {
+                            $log.error(data);
+                        });
+                    }
                 }
             };
         }]
@@ -190,8 +235,13 @@
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
         function($scope,$log,$stateParams,wrappers, multistepService){
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[1]);
+            if(!$scope.create) {
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[1]);
+            }
+            else {
+                $scope.nextState();
+            }
             $scope.contacts = [];
             $scope.contact = {
                 contact_type: "",
@@ -330,8 +380,13 @@
         function ($scope, $controller, multistepService) {
             var helper = $controller("mfl.facility_mgmt.controllers.services_helper");
             helper.bootstrap($scope);
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[2]);
+            if(!$scope.create) {
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[2]);
+            }
+            else {
+                $scope.nextState();
+            }
         }]
     )
 
@@ -400,8 +455,13 @@
         function ($scope, wrappers, $log, formChanges, $state,
             multistepService) {
             /*Update operation setup details*/
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[3]);
+            if(!$scope.create){
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[3]);
+            }
+            else {
+                $scope.nextState();
+            }
             $scope.updateOp = function (opFrm) {
                 var changed = formChanges.whatChanged(opFrm);
                 opFrm.facility = $scope.facility_id;

@@ -7,9 +7,12 @@
 
     .service("mfl.auth.permissions.checker",
         ["mfl.auth.services.login", function (loginService) {
+            var LIST_SPLITTER = ",";
 
-            var hasPermission =  function (permission) {
-                if ((! angular.isString(permission)) || permission === "") {
+            var checkList = function (lst, check_fxn) {
+                var items, user;
+
+                if ((! angular.isString(lst)) || lst === "") {
                     return false;
                 }
 
@@ -17,19 +20,27 @@
                     return false;
                 }
 
-                var user_perms = loginService.getUser().all_permissions;
-                return _.contains(user_perms, permission.toLowerCase());
+                items = lst.split(LIST_SPLITTER);
+                user = loginService.getUser();
+
+                for (var i = 0; i < items.length; i++) {
+                    if (! check_fxn(items[i], user)) {
+                        return false;
+                    }
+                }
+                return true;
+            };
+
+            var hasPermission =  function (permission) {
+                return checkList(permission, function (p, u) {
+                    return _.contains(u.all_permissions, p.toLowerCase());
+                });
             };
 
             var hasUserFeature = function (feature) {
-                if ((! angular.isString(feature)) || feature === "") {
-                    return false;
-                }
-
-                if (! loginService.isLoggedIn()) {
-                    return false;
-                }
-                return (loginService.getUser()[feature]) ? true : false;
+                return checkList(feature, function (f, u) {
+                    return (u[f]) ? true : false;
+                });
             };
 
             return {
@@ -64,7 +75,7 @@
                 $$tlb: true, // http://stackoverflow.com/questions/16072529
                 restrict: "A",
                 transclude: "element",
-                priority: 1600,
+                priority: 1600,  // higher than requires-permission
                 link: function (scope, element, attrs, controller, transclude) {
                     transclude(scope, function (clone) {
                         if (permChecker.hasUserFeature(attrs.requiresUserFeature)) {

@@ -17,7 +17,7 @@
     </div>
 
     <div class="detail-content pad-20" ng-class="{'alert-success':!facility.latest_update}">
-        <div ng-if="facility.latest_update" class="content-card">
+        <div ng-if="facility.latest_update && facility.is_approved" class="content-card">
             <h4 class="fs-18"><strong>Approve facility updates</strong></h4>
             <div class="row">
                 <div class="col-sm-6">

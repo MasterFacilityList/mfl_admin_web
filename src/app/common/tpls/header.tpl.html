@@ -21,10 +21,10 @@
         <li ui-sref-active="active" requires-permission="facilities.view_service">
           <a ui-sref="service_mgmt"> Services</a>
         </li>
-        <li ui-sref-active="active" requires-permission="users.view_mfluser">
+        <li ui-sref-active="active" requires-permission="users.view_mfluser" requires-user-feature="is_staff">
           <a ui-sref="usermgmt"> Users</a>
         </li>
-        <li ui-sref-active="active" ng-if="user.is_staff">
+        <li ui-sref-active="active" requires-user-feature="is_staff">
           <a ui-sref="setup"> System Setup</a>
         </li>
         <li class="dropdown" style="width:200px">

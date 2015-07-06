@@ -16,7 +16,9 @@
                     templateUrl: "facility_mgmt/tpls/facility_publish.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_publish"
                 }
-            }
+            },
+            userFeature: "is_national",
+            permission: "facilities.publish_facilities,facilities.view_facility"
         });
     }]);
 

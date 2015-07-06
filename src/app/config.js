@@ -11,9 +11,9 @@
         "mfl.auth.services"
     ])
 
-    .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
+    .constant("SERVER_URL", angular.copy(window.MFL_SETTINGS.SERVER_URL))
 
-    .constant("CREDZ", window.MFL_SETTINGS.CREDZ)
+    .constant("CREDZ", angular.copy(window.MFL_SETTINGS.CREDZ))
 
     .constant("HOME_PAGE_NAME", "dashboard")
 
@@ -23,7 +23,7 @@
         loggingConfig.LOG_TO_CONSOLE = true;
     }])
 
-    .config(["silGridConfigProvider", function(silGridConfig){
+    .config(["silGridConfigProvider", function(silGridConfig) {
         silGridConfig.apiMaps = {
             owners: ["mfl.facilities.wrapper", "ownersApi"],
             users : ["mfl.users.services", "mfl.users.services.wrappers"],

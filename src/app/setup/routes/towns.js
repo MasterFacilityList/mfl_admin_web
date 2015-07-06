@@ -36,7 +36,7 @@
                     }
                 },
                 permission: "common.delete_town",
-                feature: "is_staff"
+                userFeature: "is_staff"
             })
             .state("setup.towns.town_create", {
                 url: "/create",
@@ -47,7 +47,7 @@
                     }
                 },
                 permission: "common.add_town",
-                feature: "is_staff"
+                userFeature: "is_staff"
             });
     }]);
 })(angular);

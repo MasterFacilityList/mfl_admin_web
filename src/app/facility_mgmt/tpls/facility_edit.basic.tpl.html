@@ -10,7 +10,7 @@
                 </label>
             </div>
             <div class="group col-xs-6">
-                <input type="text" name="abbreviation" ng-models="facility.abbreviation">
+                <input type="text" name="abbreviation" ng-model="facility.abbreviation">
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
@@ -66,10 +66,13 @@
                 </ui-select-choices>
             </ui-select>
         </div>
-        <button ng-if="!create" ui-sref="facilities" class="login-btn login-btn-default margin-t-20 margin-b-10">
+        <button ui-sref="facilities" class="login-btn login-btn-default margin-t-20 margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Cancel
         </button>
         <button ng-if="!create" type="submit" class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+            &nbsp; Contacts <i class="fa fa-angle-double-right"></i>
+        </button>
+        <button ng-if="create" type="submit" class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
             &nbsp; Contacts <i class="fa fa-angle-double-right"></i>
         </button>
     </form>
