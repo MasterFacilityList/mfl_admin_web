@@ -62,7 +62,6 @@
                     httpBackend
                         .expectGET(server_url+"api/facilities/facilities/3/")
                         .respond(200, f);
-                    //piggy back on test
                     data.$scope.steps = [
                         {
                             name : "basic",
@@ -127,7 +126,6 @@
                     httpBackend
                         .expectGET(server_url+"api/facilities/facilities/3/")
                         .respond(200, f);
-                    //piggy back on test
                     data.$scope.steps = [
                         {
                             name : "basic",
@@ -206,7 +204,6 @@
                     httpBackend
                         .expectGET(server_url+"api/facilities/facilities/3/")
                         .respond(200, f);
-                    //piggy back on test
                     data.$scope.steps = [
                         {
                             name : "basic",
@@ -486,7 +483,6 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
-            //piggy back test
             it("should save facility basic details", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -573,7 +569,6 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
-            //second piggy back test success
             it("should save facility basic details: update", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -656,7 +651,6 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
-            //if the submission form is prestine and save function called
             it("should save facility basic details: empty form",function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -1682,7 +1676,6 @@
                 spyOn(helper, "bootstrap");
                 ctrl(".services", data);
             }]));
-            //when editing a facility
             it("should bootstrap from helper controller: when editing",
             inject(["mfl.common.services.multistep",
                 function (multistepService) {
@@ -1984,7 +1977,6 @@
                 expect(changed).toEqual([]);
             }]));
 
-            //piggy back test
             it("should reload state if no changes to facility operation:fail",
             inject(["mfl.common.services.multistep",
                 function (multistepService) {
@@ -2019,9 +2011,6 @@
                 data.$scope.updateOp(form);
 
             }]));
-            //end of piggyed back test
-
-            //piggy back test
             it("should reload state if no changes to facility: empty form",
             inject(["mfl.common.services.multistep",
                 function (multistepService) {
@@ -2058,7 +2047,6 @@
                 data.$scope.create = true;
                 data.$scope.goToNext = angular.noop;
             }]));
-            //end of piggyed back test
 
             it("should successfully edit facility : creation", function () {
                 inject(["mfl.common.forms.changes","$state",
@@ -2129,7 +2117,6 @@
                 ]);
             });
 
-            //alternate test
             it("should successfully edit facility operation setup", function () {
                 inject(["mfl.common.forms.changes","$state",
                     "mfl.common.services.multistep",
@@ -2189,7 +2176,6 @@
                     }
                 ]);
             });
-            //end of alternate test
 
             it("should fail to edit facility operation setup", function () {
                     inject(["mfl.common.forms.changes","$state",
