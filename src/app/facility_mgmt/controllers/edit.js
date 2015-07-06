@@ -518,7 +518,8 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep",
-        function ($scope,wrappers,$log, leafletData,multistepService) {
+        function ($scope,wrappers,$log, leafletData,multistepService,
+            formChanges) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[6]);
