@@ -426,9 +426,8 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
-        "mfl.common.services.multistep", "mfl.common.forms.changes","$stateParams","$state",
-        function ($scope,wrappers,$log, leafletData,multistepService,formChanges,
-                  $stateParams,$state) {
+        "mfl.common.services.multistep", "mfl.common.forms.changes",
+        function ($scope,wrappers,$log, leafletData,multistepService,formChanges) {
             multistepService.filterActive(
                 $scope, $scope.steps, $scope.steps[6]);
             $scope.spinner = true;
@@ -532,25 +531,15 @@
                         });
                     /*Save physical location details*/
                     $scope.savePhy = function (frm) {
-                        $scope.spinner1 = true;
                         var changes = formChanges.whatChanged(frm);
                         if(!_.isEmpty(changes)){
                             wrappers.physical_addresses
                                 .update(f.facility_physical_address.id, changes)
-                                .success(function () {
-                                    wrappers.facility_detail.get($stateParams.facility_id)
-                                        .success(function (data) {
-                                            $scope.spinner1 = false;
-                                            $scope.facility = data.results;
-                                            $state.reload();
-                                        })
-                                        .error(function(error){
-                                            $scope.spinner1 = false;
-                                            $log.error(error);
-                                        });
+                                .success(function (data) {
+                                    console.log(data);
+                                    $scope.$parent.facility.facility_physical_address = data;
                                 })
                                 .error(function (error) {
-                                    $scope.spinner1 = false;
                                     $log.error(error);
                                 });
                         }
