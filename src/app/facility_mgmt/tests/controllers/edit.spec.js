@@ -62,7 +62,6 @@
                     httpBackend
                         .expectGET(server_url+"api/facilities/facilities/3/")
                         .respond(200, f);
-                    //piggy back on test
                     data.$scope.steps = [
                         {
                             name : "basic",
@@ -127,7 +126,6 @@
                     httpBackend
                         .expectGET(server_url+"api/facilities/facilities/3/")
                         .respond(200, f);
-                    //piggy back on test
                     data.$scope.steps = [
                         {
                             name : "basic",
@@ -206,7 +204,6 @@
                     httpBackend
                         .expectGET(server_url+"api/facilities/facilities/3/")
                         .respond(200, f);
-                    //piggy back on test
                     data.$scope.steps = [
                         {
                             name : "basic",
@@ -486,7 +483,6 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
-            //piggy back test
             it("should save facility basic details", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -573,7 +569,6 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
-            //second piggy back test success
             it("should save facility basic details: update", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -656,7 +651,6 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
-            //if the submission form is prestine and save function called
             it("should save facility basic details: empty form",function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -1155,6 +1149,8 @@
                     {name : "setup"},
                     {name : "officers"}
                 ];
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
                 ctrl(".officers", data);
 
                 httpBackend.flush();
@@ -1181,6 +1177,7 @@
                     {name : "setup"},
                     {name : "officers"}
                 ];
+                data.$scope.create = false;
                 ctrl(".officers", data);
 
                 httpBackend.flush();
@@ -1405,6 +1402,8 @@
                     {name : "officers"},
                     {name : "units"}
                 ];
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
                 httpBackend
                     .expectGET(server_url+"api/facilities/regulating_bodies/")
                     .respond(200, {results: []});
@@ -1436,6 +1435,7 @@
                     {name : "officers"},
                     {name : "units"}
                 ];
+                data.$scope.create = false;
                 httpBackend
                     .expectGET(server_url+"api/facilities/regulating_bodies/")
                     .respond(500, {results: []});
@@ -1676,7 +1676,6 @@
                 spyOn(helper, "bootstrap");
                 ctrl(".services", data);
             }]));
-            //when editing a facility
             it("should bootstrap from helper controller: when editing",
             inject(["mfl.common.services.multistep",
                 function (multistepService) {
@@ -1950,10 +1949,13 @@
                     "$stateParams": {
                         facility_id: 4
                     },
+                    "$state" : state,
                     "mfl.common.service.multistep" : multistepService
                 };
+                spyOn(state, "go");
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
+                data.$scope.goToNext = angular.noop;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"},
@@ -1964,7 +1966,6 @@
 
                 httpBackend.resetExpectations();
 
-                spyOn($state, "go");
                 data.$scope.facility_id = 4;
                 var opFrm = {
                     number_of_beds : 4,
@@ -1974,11 +1975,80 @@
 
                 data.$scope.updateOp(opFrm);
                 expect(changed).toEqual([]);
-                expect($state.go).toHaveBeenCalled();
-
             }]));
 
-            it("should successfully edit facility operation setup", function () {
+            it("should reload state if no changes to facility operation:fail",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                bard.inject(this, "$state");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 4
+                    },
+                    "$state" : state,
+                    "mfl.common.service.multistep" : multistepService
+                };
+                spyOn(state, "go");
+                data.$scope.create = false;
+                data.$scope.nextState = angular.noop;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"}
+                ];
+                ctrl(".setup", data);
+                data.$scope.facility_id = 4;
+                var form = {
+                    "$dirty": false,
+                    "name": {
+                        "$modelValue": "ASD",
+                        "$dirty": false
+                    }
+                };
+
+                data.$scope.updateOp(form);
+
+            }]));
+            it("should reload state if no changes to facility: empty form",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                bard.inject(this, "$state");
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 4
+                    },
+                    "$state" : state,
+                    "mfl.common.service.multistep" : multistepService
+                };
+                spyOn(state, "go");
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.goToNext = angular.noop;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"}
+                ];
+                ctrl(".setup", data);
+                data.$scope.facility_id = 4;
+                var form = {
+                    "$dirty": false,
+                    "name": {
+                        "$modelValue": "ASD",
+                        "$dirty": false
+                    }
+                };
+
+                data.$scope.updateOp(form);
+                data.$scope.create = true;
+                data.$scope.goToNext = angular.noop;
+            }]));
+
+            it("should successfully edit facility : creation", function () {
                 inject(["mfl.common.forms.changes","$state",
                     "mfl.common.services.multistep",
                     function (formChanges, st, multistepService) {
@@ -2002,7 +2072,77 @@
                             {name : "services"},
                             {name : "setup"}
                         ];
+                        data.$scope.create = true;
+                        data.$scope.nextState = angular.noop;
+                        ctrl(".setup", data);
 
+                        var opFrm = {
+                            $dirty: true,
+                            number_of_beds : {
+                                $dirty: true,
+                                $modelValue: 4
+                            },
+                            number_of_cots : {
+                                $modelValue: 3,
+                                $dirty: true
+                            }
+                        };
+                        var changed = {
+                            number_of_beds : 4,
+                            number_of_cots : 3
+                        };
+
+                        spyOn(state, "go");
+
+                        httpBackend
+                            .expectPATCH(server_url + "api/facilities/facilities/4/",changed)
+                            .respond(200);
+                        data.$scope.facility_id = 4;
+
+                        data.$scope.facility = {
+                            number_of_beds : 3,
+                            number_of_cots : 4
+                        };
+                        data.$scope.create = true;
+                        data.$scope.goToNext = angular.noop;
+                        expect(state.go).not.toHaveBeenCalled();
+
+                        data.$scope.updateOp(opFrm);
+
+                        httpBackend.flush();
+                        httpBackend.verifyNoOutstandingRequest();
+                        httpBackend.verifyNoOutstandingExpectation();
+
+                    }
+                ]);
+            });
+
+            it("should successfully edit facility operation setup", function () {
+                inject(["mfl.common.forms.changes","$state",
+                    "mfl.common.services.multistep",
+                    function (formChanges, st, multistepService) {
+                        var scope = rootScope.$new();
+                        var state = st;
+                        var data = {
+                            "$state": state,
+                            "$scope": scope,
+                            "$stateParams": {
+                                facility_id: 4
+                            },
+                            "mfl.common.services.multistep" : multistepService,
+                            "mfl.common.forms.changes": formChanges
+                        };
+                        spyOn(state, "go");
+                        spyOn(formChanges, "whatChanged").andReturn({number_of_beds : 4,
+                                                                     number_of_cots : 3});
+                        data.$scope.steps = [
+                            {name : "basic"},
+                            {name : "contacts"},
+                            {name : "services"},
+                            {name : "setup"}
+                        ];
+                        data.$scope.create = false;
+                        data.$scope.goToNext = angular.noop;
                         ctrl(".setup", data);
 
                         var opFrm = {
@@ -2014,7 +2154,6 @@
                             number_of_cots : 3
                         };
 
-                        spyOn(state, "go");
 
                         httpBackend
                             .expectPATCH(server_url + "api/facilities/facilities/4/",changed)
@@ -2034,7 +2173,6 @@
                         httpBackend.flush();
                         httpBackend.verifyNoOutstandingRequest();
                         httpBackend.verifyNoOutstandingExpectation();
-                        expect(state.go).not.toHaveBeenCalled();
                     }
                 ]);
             });
@@ -2155,6 +2293,8 @@
                     {name : "units"},
                     {name : "location"}
                 ];
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
                 httpBackend
                     .expectGET(server_url+"api/common/towns/")
                     .respond(200, {results: []});
@@ -2226,6 +2366,7 @@
                         {name : "units"},
                         {name : "location"}
                     ];
+                    scope.create = false;
                     spyOn(scope, "$on").andCallThrough();
                     spyOn(leafletData, "getMap").andReturn(obj);
                     spyOn(obj, "then");
