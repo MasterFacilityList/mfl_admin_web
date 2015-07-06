@@ -450,6 +450,15 @@
                 }
             });
 
+            /*Fetch towns*/
+            wrappers.towns.list()
+                .success(function (data) {
+                    $scope.towns = data.results;
+                })
+                .error(function(error){
+                    $log.error(error);
+                });
+
             /*Fetch geo code methods*/
             wrappers.geo_code_methods.list()
                 .success(function (data) {
@@ -486,6 +495,9 @@
                         method: {
                             "id": $scope.geo.method,
                             "name": $scope.geo.method_name
+                        },
+                        town:{
+                            "name": $scope.facility.facility_physical_address.town
                         }
                     };
                     angular.extend($scope,{
@@ -517,6 +529,20 @@
                             });
                             map.fitBounds(bounds);
                         });
+                    /*Save physical location details*/
+                    $scope.savePhy = function (frm) {
+                        var changes = formChanges.whatChanged(frm);
+                        if(!_.isEmpty(changes)){
+                            wrappers.physical_addresses
+                                .update(f.facility_physical_address.id, changes)
+                                .success(function (data) {
+                                    $scope.facility = data;
+                                })
+                                .error(function (error) {
+                                    $log.error(error);
+                                });
+                        }
+                    };
                     var gis = data.ward_boundary;
                     angular.extend($scope, {
                         geojson: {
@@ -552,38 +578,6 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
-
-                /*Save physical location details*/
-                $scope.savePhy = function (frm) {
-                    var changes = formChanges.whatChanged(frm);
-                    if(!_.isEmpty(changes)){
-                        changes.facility_physical_address = {};
-                        if(!_.isUndefined(changes.plot_number)){
-                            changes.facility_physical_address.plot_number = changes.plot_number;
-                            
-                        }
-                        if(!_.isUndefined(changes.nearest_landmark)){
-                            changes.facility_physical_address.nearest_landmark =
-                                changes.nearest_landmark;
-                        }
-                        if(!_.isUndefined(changes.town)){
-                            changes.facility_physical_address.town = changes.town;
-                        }
-                        if(!_.isUndefined(changes.postal_code)){
-                            changes.facility_physical_address.postal_code = changes.postal_code;
-                        }
-                        if(!_.isUndefined(changes.address)){
-                            changes.facility_physical_address.address = changes.address;
-                        }
-                        wrappers.facility_detail.update($scope.facility_id, changes)
-                            .success(function (data) {
-                                $scope.facility = data;
-                            })
-                            .error(function (error) {
-                                $log.error(error);
-                            });
-                    }
-                };
 
                 /*Save geolocation details*/
                 $scope.saveGeo = function (frm) {
