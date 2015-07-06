@@ -478,6 +478,16 @@
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.geo = data;
+                    $scope.select_values = {
+                        source: {
+                            "id": $scope.geo.source,
+                            "name": $scope.geo.source_name
+                        },
+                        method: {
+                            "id": $scope.geo.method,
+                            "name": $scope.geo.method_name
+                        }
+                    };
                     angular.extend($scope,{
                         markers: {
                             mainMarker: {
@@ -550,17 +560,14 @@
                         changes.facility_physical_address = {};
                         if(!_.isUndefined(changes.plot_number)){
                             changes.facility_physical_address.plot_number = changes.plot_number;
-//                            changes = _.without(changes, changes.plot_number);
                             
                         }
                         if(!_.isUndefined(changes.nearest_landmark)){
                             changes.facility_physical_address.nearest_landmark =
                                 changes.nearest_landmark;
-//                            changes = _.without(changes, changes.nearest_landmark);
                         }
                         if(!_.isUndefined(changes.town)){
                             changes.facility_physical_address.town = changes.town;
-//                            changes = _.without(changes, changes.town);
                         }
                         if(!_.isUndefined(changes.postal_code)){
                             changes.facility_physical_address.postal_code = changes.postal_code;

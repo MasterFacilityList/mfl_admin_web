@@ -111,23 +111,29 @@
                                </div>
                             </div>
                             <div class="row margin-t-20">
-                                <div class="group col-md-12">
-                                    <select name="source" ng-model="geo.source">
-                                        <option value="" disabled>Geocode source</option>
-                                        <option ng-repeat="gcs in geo_sources" ng-value="gcs.id">{{gcs.name}}</option>
-                                    </select>
-                                            <span class="highlight"></span>
-                                            <span class="bar"></span>
+                                <div class="col-md-12">
+                                    <label>Geocode source</label>
+                                    <ui-select ng-model="select_values.source" required>
+                                        <ui-select-match placeholder="Select a geo code source...">
+                                            <span>{{$select.selected.name}}</span>
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="gcm in geo_sources">
+                                            <span>{{gcs.name}}</span>
+                                        </ui-select-choices>
+                                    </ui-select>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="group col-md-12">
-                                    <select name="method" ng-model="geo.method">
-                                        <option value="" disabled>Geocode method</option>
-                                        <option ng-repeat="gcm in geo_methods" ng-value="gcm.id">{{gcm.name}}</option>
-                                    </select>
-                                            <span class="highlight"></span>
-                                            <span class="bar"></span>
+                                <div class="col-md-12">
+                                    <label>Geocode method</label>
+                                    <ui-select ng-model="select_values.method" required>
+                                        <ui-select-match placeholder="Select a geo code method...">
+                                            <span>{{$select.selected.name}}</span>
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="gcm in geo_methods">
+                                            <span>{{gcm.name}}</span>
+                                        </ui-select-choices>
+                                    </ui-select>
                                 </div>
                             </div>
                             <div class="row margin-t-10">
