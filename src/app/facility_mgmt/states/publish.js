@@ -18,7 +18,7 @@
                 }
             },
             userFeature: "is_national",
-            permission: "facilities.publish_facilities"
+            permission: "facilities.publish_facilities,facilities.view_facility"
         });
     }]);
 

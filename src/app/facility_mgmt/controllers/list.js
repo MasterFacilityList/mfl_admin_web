@@ -11,7 +11,8 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='facilities.facility_create ({furthest : 1})'",
+                    func : "ui-sref='facilities.facility_create({furthest : 1})'" +
+                           "requires-permission='facilities.add_facility'",
                     class: "action-btn action-btn-primary action-btn-md",
                     tipmsg: "New Facility",
                     icon: "fa-plus"

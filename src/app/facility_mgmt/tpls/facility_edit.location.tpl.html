@@ -63,7 +63,9 @@
                </div>
             </div>
        </div>
-        <button type="submit" class="login-btn login-btn-primary" >Save physical details</button>
+        <button type="submit" class="login-btn login-btn-primary" requires-permission="common.add_physicaladdress,facilities.change_facility" >
+            Save physical details
+        </button>
         <div class="margin-t-50 content-card">
             <form name="geoForm">
                 <h4><strong>Geolocation details</strong></h4>
@@ -147,9 +149,9 @@
                 </div>
             </form>
         </div>
-        
+
         <div>
-            <button type="submit" class="login-btn login-btn-primary" >Save geolocation details</button>
+            <button type="submit" class="login-btn login-btn-primary" requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" >Save geolocation details</button>
         </div>
     </div>
 </section>
