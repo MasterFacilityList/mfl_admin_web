@@ -14,18 +14,21 @@
         <th>Constituency</th>
         <th>Owner</th>
         <th>Facility Type</th>
-        <th>Actions</th>
+        <th class="text-right">Actions</th>
     </thead>
     <tbody class="fade-content">
         <tr ng-repeat="fac in facilities">
-            <td data-title="Code:" >{{fac.code}}</td>
-            <td data-title="Name:" >{{fac.name}}</td>
-            <td data-title="County:"> {{fac.county}}</td>
-            <td data-title="Constituency:" >{{fac.constituency}}</td>
-            <td data-title="Owner:" >{{fac.owner_name}}</td>
-            <td data-title="Facility Type:" >{{fac.facility_type_name}}</td>
-            <td data-title="Actions:" >
-                <a ui-sref="facilities.facility_edit({facility_id: fac.id})" class="action-btn action-btn-grid action-btn-primary"><i class="fa fa-eye"></i> </a>
+            <td data-title="Code:" class="pad-t-15">{{fac.code}}</td>
+            <td data-title="Name:" class="pad-t-15">{{fac.name}}</td>
+            <td data-title="County:"class="pad-t-15"> {{fac.county}}</td>
+            <td data-title="Constituency:" class="pad-t-15">{{fac.constituency}}</td>
+            <td data-title="Owner:" class="pad-t-15">{{fac.owner_name}}</td>
+            <td data-title="Facility Type:" class="pad-t-15">{{fac.facility_type_name}}</td>
+            <td data-title="Actions:"  class="text-right">
+                <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
+                    class="action-btn action-btn-grid action-btn-primary">
+                    <i class="fa fa-eye"></i>
+                </a>
             </td>
         </tr>
     </tbody>
