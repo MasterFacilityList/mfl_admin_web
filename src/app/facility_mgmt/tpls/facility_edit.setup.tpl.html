@@ -5,10 +5,10 @@
                         <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
                     </div>
                     <div ng-if="!spinner1" class="margin-t-20">
-                           <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true">
+                           <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true && !create">
                               <h4><strong><i class="fa fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
                            </div>
-                           <div ng-if="facility.has_edits===false">
+                           <div ng-if="facility.has_edits===false || create">
                                 <div class="group col-sm-10">
                                     <input type="text" name="number_of_beds" ng-model="facility.number_of_beds"  required />
                                     <span class="highlight"></span>
@@ -66,9 +66,16 @@
                                   </div>
                                 </div>
                             </div>
-                        <div class="col-sm-12 margin-t-30 margin-b-20" ng-if="facility.has_edits===false">
+                        <div class="col-sm-12 margin-t-30 margin-b-20" ng-if="!create">
                             <a class="login-btn login-btn-primary pull-left"
                             ui-sref="facilities.facility_edit.services">
+                              &nbsp;<i class="fa fa-angle-double-left"></i>
+                               Services</a>
+                            <button type="submit" class="login-btn login-btn-primary pull-right" ng-click="updateOp(operation_setup)">&nbsp;Officers <i class="fa fa-angle-double-right"></i></button>
+                        </div>
+                        <div class="col-sm-12 margin-t-30 margin-b-20" ng-if="create">
+                            <a class="login-btn login-btn-primary pull-left"
+                            ui-sref="facilities.facility_edit.services({facility_id : new_facility})">
                               &nbsp;<i class="fa fa-angle-double-left"></i>
                                Services</a>
                             <button type="submit" class="login-btn login-btn-primary pull-right" ng-click="updateOp(operation_setup)">&nbsp;Officers <i class="fa fa-angle-double-right"></i></button>

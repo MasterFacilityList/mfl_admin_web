@@ -324,8 +324,12 @@
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
         function($scope, $log, $stateParams, wrappers, multistepService){
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[4]);
+            if(!$scope.create) {
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[4]);
+            }else {
+                $scope.nextState();
+            }
             $scope.fac_officers = [];
 
             /*officers*/
@@ -394,8 +398,12 @@
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
         function ($scope, $log, $stateParams, wrappers, multistepService) {
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[5]);
+            if(!$scope.create) {
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[5]);
+            }else{
+                $scope.nextState();
+            }
             /*regulating bodies*/
             wrappers.regulating_bodies.list()
             .success(function(data){
@@ -470,7 +478,14 @@
                     wrappers.facility_detail.update($scope.facility_id, changed)
                         .success(function (data) {
                             $scope.spinner1 = false;
-                            $scope.geo = data.results;
+                            $scope.geo = data;
+
+                            if(!$scope.create){
+                                $state.go("facilities.facility_edit.officers",
+                                {"facility_id": $scope.facility_id}, {reload: true});
+                            }else{
+                                $scope.goToNext(5, "officers");
+                            }
                         })
                         .error(function (error) {
                             $scope.spinner1 = false;
@@ -478,8 +493,12 @@
                         });
                 }
                 else {
-                    $state.go("facilities.facility_edit.officers",
+                    if(!$scope.create){
+                        $state.go("facilities.facility_edit.officers",
                         {"facility_id": $scope.facility_id}, {reload: true});
+                    }else{
+                        $scope.goToNext(5, "officers");
+                    }
                 }
             };
         }])
@@ -488,8 +507,12 @@
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep",
         function ($scope,wrappers,$log, leafletData,multistepService) {
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[6]);
+            if(!$scope.create) {
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[6]);
+            }else{
+                $scope.nextState();
+            }
             $scope.spinner = true;
             angular.extend($scope, {
                 defaults: {
