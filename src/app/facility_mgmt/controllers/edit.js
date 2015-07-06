@@ -497,7 +497,8 @@
                             "name": $scope.geo.method_name
                         },
                         town:{
-                            "name": $scope.facility.facility_physical_address.town
+                            "id": f.facility_physical_address.town_id,
+                            "name": f.facility_physical_address.town
                         }
                     };
                     angular.extend($scope,{
@@ -529,21 +530,6 @@
                             });
                             map.fitBounds(bounds);
                         });
-                    /*Save physical location details*/
-                    $scope.savePhy = function (frm) {
-                        var changes = formChanges.whatChanged(frm);
-                        if(!_.isEmpty(changes)){
-                            wrappers.physical_addresses
-                                .update(f.facility_physical_address.id, changes)
-                                .success(function (data) {
-                                    console.log(data);
-                                    $scope.$parent.facility.facility_physical_address = data;
-                                })
-                                .error(function (error) {
-                                    $log.error(error);
-                                });
-                        }
-                    };
                     var gis = data.ward_boundary;
                     angular.extend($scope, {
                         geojson: {
@@ -579,6 +565,21 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
+
+                /*Save physical location details*/
+                $scope.savePhy = function (frm) {
+                    var changes = formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        wrappers.physical_addresses
+                            .update($scope.facility.facility_physical_address.id, changes)
+                            .success(function (data) {
+                                $scope.$parent.facility.facility_physical_address = data;
+                            })
+                            .error(function (error) {
+                                $log.error(error);
+                            });
+                    }
+                };
 
                 /*Save geolocation details*/
                 $scope.saveGeo = function (frm) {
