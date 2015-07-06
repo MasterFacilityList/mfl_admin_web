@@ -51,10 +51,18 @@
             </tbody>
         </table>
     </div>
-    <a ui-sref="facilities.facility_edit.basic" ng-if="!create" ui-sref="users.user_list" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+    <!-- Buttons for creation of facility -->
+    <a ui-sref="facilities.facility_edit.basic" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
         &nbsp;<i class="fa fa-angle-double-left"></i> Details
     </a>
     <a ui-sref="facilities.facility_edit.services" ng-if="!create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
         &nbsp; Services <i class="fa fa-angle-double-right"></i>
     </a>
+    <!-- End of facility creation buttons -->
+    <a ui-sref="facilities.facility_create.basic({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+        &nbsp;<i class="fa fa-angle-double-left"></i> Details
+    </a>
+    <button ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right" ng-click="goToNext(3, 'services')">
+        &nbsp; Services <i class="fa fa-angle-double-right"></i>
+    </button>
 </div>

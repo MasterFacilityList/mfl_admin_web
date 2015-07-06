@@ -380,8 +380,13 @@
         function ($scope, $controller, multistepService) {
             var helper = $controller("mfl.facility_mgmt.controllers.services_helper");
             helper.bootstrap($scope);
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[2]);
+            if(!$scope.create) {
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[2]);
+            }
+            else {
+                $scope.nextState();
+            }
         }]
     )
 
@@ -450,8 +455,13 @@
         function ($scope, wrappers, $log, formChanges, $state,
             multistepService) {
             /*Update operation setup details*/
-            multistepService.filterActive(
-                $scope, $scope.steps, $scope.steps[3]);
+            if(!$scope.create){
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[3]);
+            }
+            else {
+                $scope.nextState();
+            }
             $scope.updateOp = function (opFrm) {
                 var changed = formChanges.whatChanged(opFrm);
                 opFrm.facility = $scope.facility_id;
