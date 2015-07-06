@@ -139,6 +139,19 @@
                     $log.error(data);
                 });
             };
+            $scope.remove = function () {
+                wrappers.facility_detail.remove($scope.facility_id)
+                .success(function (data) {
+                    $log.info(data);
+                    $state.go("facilities");
+                })
+                .error(function (error) {
+                    $log.error(error);
+                });
+            };
+            $scope.cancel = function () {
+                $state.go("facilities.facility_1edit",{facility_id:$scope.facility_id});
+            };
         }]
     )
 
