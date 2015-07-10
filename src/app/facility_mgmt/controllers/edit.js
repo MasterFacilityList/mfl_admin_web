@@ -129,9 +129,7 @@
                 if (_.isEmpty(search_term) || (! _.isString(search_term))) {
                     return $q.reject();
                 }
-                return wrapper.filter(
-                    {page_size: 20, "ordering": order_field, "search_auto": search_term}
-                )
+                return wrapper.filter({"search_auto": search_term})
                 .success(function (data) {
                     $scope[scope_var] = data.results;
                 })

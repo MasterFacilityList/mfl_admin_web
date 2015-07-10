@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _) {
     "use strict";
 
     angular.module("mfl.facility_mgmt.controllers.create", [
@@ -8,10 +8,10 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_create", ["$scope",
     "$stateParams", "mfl.facility.multistep.service",
-    "mfl.common.services.multistep", "$state", "$q",
+    "mfl.common.services.multistep", "$state", "$q", "$log",
     "mfl.facility_mgmt.services.wrappers",
     function ($scope, $stateParams, facilityMultistepService,
-        multistepService, $state, $q, wrappers) {
+        multistepService, $state, $q, $log, wrappers) {
         $scope.test = "New";
         $scope.create = true;
         $scope.new_facility = $state.params.facility_id;
@@ -49,14 +49,11 @@
                     $log.error(data);
                 });
         }
-        $scope.selectReload = function (wrapper, order_field, search_term,
-        scope_var) {
+        $scope.selectReload = function (wrapper, order_field, search_term, scope_var) {
             if (_.isEmpty(search_term) || (! _.isString(search_term))) {
                 return $q.reject();
             }
-            return wrapper.filter(
-                {page_size: 20, "ordering": order_field, "search_auto": search_term}
-            )
+            return wrapper.filter({"search_auto": search_term})
             .success(function (data) {
                 $scope[scope_var] = data.results;
             })
@@ -93,4 +90,4 @@
         };
     }]);
 
-})(angular);
+})(window.angular, window._);
