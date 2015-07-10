@@ -1,93 +1,85 @@
-<section class="col-xs-12 pad-t-20">
-    <div class="detail-content pad-20">
+<div class="col-sm-12 detail-content">
+    <div class="col-sm-12 content-card form-card margin-t-20">
+        <div class="col-sm-12">
+            <h4 class="fw-600 fs-18"> Physical details</h4>
+        </div>
        <form name="phyForm">
-            <div class="content-card">
-                <div>
-                    <h4><strong>Physical details</strong></h4>
-                    <div class="row">
-                       <div class=" col-md-6">
-                            <div class="col-md-12">
-                                <label>Town</label>
-                                <ui-select ng-model="select_values.town" required>
-                                    <ui-select-match placeholder="Select a town...">
-                                        <span>{{$select.selected.name}}</span>
-                                    </ui-select-match>
-                                    <ui-select-choices repeat="town in towns">
-                                        <span>{{town.name}}</span>
-                                    </ui-select-choices>
-                                </ui-select>
-                            </div>
-                       </div>
-                    </div>
-                    <div class="row margin-t-20">
-                       <div class="col-md-6">
-                            <div class="group">
-                                <input type="text" name="plot_number" ng-model="facility.facility_physical_address.plot_number"  required />
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>
-                                    Plot number
-                                </label>
-                            </div>
-                       </div>
-                    </div>
-                    <div class="row">
-                       <div class="col-md-6">
-                            <div class="group">
-                                <input type="text" name="nearest_landmark" ng-model="facility.facility_physical_address.nearest_landmark"  required />
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>
-                                    Nearest landmark
-                                </label>
-                            </div>
-                       </div>
-                    </div>
-                    <div class="row">
-                       <div class="col-md-6">
-                            <div class="group">
-                                <input type="text" name="location_desc" ng-model="facility.location_desc"  required />
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>
-                                    Location description
-                                </label>
-                            </div>
-                       </div>
-                    </div>
-                    <div class="row">
-                       <div class="col-md-3">
-                            <div class="group">
-                                <input type="text" name="postal_code" ng-model="facility.facility_physical_address.postal_code"  required />
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>
-                                    Postal Code
-                                </label>
-                            </div>
-                       </div>
-                        <div class="col-md-3">
-                            <div class="group">
-                                <input type="text" name="address" ng-model="facility.facility_physical_address.address"  required />
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>
-                                    Address
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="margin-t-50">
-                        <button type="submit" requires-permission="common.add_physicaladdress,facilities.change_facility" ng-click="savePhy(phyForm)" class="login-btn login-btn-primary" >Save physical details</button>
-                    </div>
+            <div class="col-sm-10 margin-b-5">
+                <label>Town</label>
+                <ui-select ng-model="select_values.town" required>
+                    <ui-select-match placeholder="Select a town...">
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="town in towns">
+                        <span>{{town.name}}</span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="col-md-10 margin-b-5">
+                <div class="group">
+                    <input type="text" name="plot_number" ng-model="facility.facility_physical_address.plot_number"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Plot number
+                    </label>
+                </div>
+            </div>
+           <div class="col-md-10 margin-b-5">
+                <div class="group">
+                    <input type="text" name="nearest_landmark" ng-model="facility.facility_physical_address.nearest_landmark"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Nearest landmark
+                    </label>
+                </div>
+           </div>
+           <div class="col-md-10 margin-b-5">
+                <div class="group">
+                    <input type="text" name="location_desc" ng-model="facility.location_desc"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Location description
+                    </label>
+                </div>
+           </div>
+           <div class="col-md-10 margin-b-5">
+                <div class="group">
+                    <input type="text" name="postal_code" ng-model="facility.facility_physical_address.postal_code"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Postal Code
+                    </label>
+                </div>
+           </div>
+            <div class="col-md-10 margin-b-5">
+                <div class="group">
+                    <input type="text" name="address" ng-model="facility.facility_physical_address.address"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>
+                        Address
+                    </label>
                 </div>
             </div>
         </form>
+    </div>
+    
+    <div class="row">
+       <div class="col-xs-12">
+           <button type="submit" requires-permission="common.add_physicaladdress,facilities.change_facility" ng-click="savePhy(phyForm)" class="login-btn login-btn-primary" >Save physical details</button>
+       </div>
+    </div>
 
-
+   <div class="col-sm-12 content-card form-card margin-t-20">
+        <div class="col-sm-12">
+            <h4 class="fw-600 fs-18"> Geolocation details</h4>
+        </div>
         <form name="geoForm">
-            <div class="margin-t-50 content-card">
-                    <h4><strong>Geolocation details</strong></h4>
+            <div class="margin-t-50">
                    <div ng-if="spinner1">
                        <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
                    </div>
@@ -96,7 +88,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
-                                       <div class="col-md-6">
+                                       <div class="col-md-12">
                                             <div class="group">
                                                 <input type="number" step="0.00000001" name="coordinates.coordinates[0]" ng-model="geo.coordinates.coordinates[0]"/>
                                                 <span class="highlight"></span>
@@ -106,7 +98,7 @@
                                                 </label>
                                             </div>
                                        </div>
-                                       <div class="col-md-6">
+                                       <div class="col-md-12">
                                             <div class="group">
                                                 <input type="number" step="0.00000001" name="coordinates.coordinates[1]" ng-model="geo.coordinates.coordinates[1]" />
                                                 <span class="highlight"></span>
@@ -179,8 +171,8 @@
                             </div>
                         </form>
                    </div>
-                <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary" >Save geolocation details</button>
             </div>
         </form>
     </div>
-</section>
+    <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary" >Save geolocation details</button>
+</div>
