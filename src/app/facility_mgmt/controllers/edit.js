@@ -518,6 +518,7 @@
         "mfl.common.services.multistep", "mfl.common.forms.changes",
         function ($scope,wrappers,$log, leafletData, multistepService,
             formChanges) {
+            $scope.minDate = new Date();
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[5]);
@@ -581,6 +582,7 @@
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.geo = data;
+                    $scope.fetchedDate = data.collection_date;
                     $scope.select_values = {
                         source: {
                             "id": $scope.geo.source,
@@ -679,7 +681,9 @@
                 $scope.saveGeo = function (frm) {
                     var spinner1 = true;
                     var changes = formChanges.whatChanged(frm);
+                    changes.collection_date = frm.collection_date.$viewValue;
                     if(!_.isEmpty(changes)){
+                        console.log(changes);
                         wrappers.facility_coordinates
                             .update($scope.facility.coordinates,changes)
                             .success(function (data) {
