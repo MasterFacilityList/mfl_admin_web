@@ -708,9 +708,164 @@
             });
         }])
 
-        .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
-        ["$scope", function ($scope) {
-            $scope.title = "Geolocation";
+    .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
+        ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
+        "mfl.common.services.multistep", "mfl.common.forms.changes",
+        function ($scope,wrappers,$log, leafletData, multistepService,
+            formChanges) {
+            /*Setup for map data*/
+            angular.extend($scope, {
+                defaults: {
+                    scrollWheelZoom: false
+                },
+                layers:{},
+                tiles:{
+                    openstreetmap: {
+                        url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        options: {
+                            opacity: 0.2
+                        }
+                    }
+                }
+            });
+            /*Fetch geo code methods*/
+            wrappers.geo_code_methods.list()
+                .success(function (data) {
+                    $scope.geo_methods = data.results;
+                })
+                .error(function(error){
+                    $log.error(error);
+                });
+
+            /*Fetch geo code sources*/
+            wrappers.geo_code_sources.list()
+                .success(function (data) {
+                    $scope.geo_sources = data.results;
+                })
+                .error(function(error){
+                    $log.error(error);
+                });
+
+            /*Wait for facility to be defined*/
+            $scope.$watch("facility", function (f) {
+                if (_.isUndefined(f)){
+                    return;
+                }
+                /*facility's coordinates*/
+                wrappers.facility_coordinates.get(f.coordinates)
+                .success(function(data){
+                    $scope.spinner = false;
+                    $scope.geo = data;
+                    $scope.select_values = {
+                        source: {
+                            "id": $scope.geo.source,
+                            "name": $scope.geo.source_name
+                        },
+                        method: {
+                            "id": $scope.geo.method,
+                            "name": $scope.geo.method_name
+                        },
+                        town:{
+                            "id": f.facility_physical_address.town_id,
+                            "name": f.facility_physical_address.town
+                        }
+                    };
+                    angular.extend($scope,{
+                        markers: {
+                            mainMarker: {
+                                layer:"facility",
+                                lat: data.coordinates.coordinates[1],
+                                lng: data.coordinates.coordinates[0],
+                                message: "Facility location"
+                            }
+                        }
+                    });
+                })
+                .error(function(error){
+                    $scope.spinner = false;
+                    $log.error(error);
+                });
+
+                /*ward coordinates*/
+                wrappers.wards.get(f.ward)
+                .success(function(data){
+                    $scope.spinner = false;
+                    $scope.ward_gis = data.ward_boundary;
+                    leafletData.getMap("wardmap")
+                        .then(function (map) {
+                            var coords = data.ward_boundary.properties.bound.coordinates[0];
+                            var bounds = _.map(coords, function(c) {
+                                return [c[1], c[0]];
+                            });
+                            map.fitBounds(bounds);
+                        });
+                    var gis = data.ward_boundary;
+                    angular.extend($scope, {
+                        geojson: {
+                            data: gis,
+                            style: {
+                                fillColor: "rgb(255, 135, 32)",
+                                weight: 2,
+                                opacity: 1,
+                                color: "rgba(0, 0, 0, 0.52)",
+                                dashArray: "3",
+                                fillOpacity: 0.8
+                            }
+                        },
+                        layers:{
+                            baselayers:{
+                                Constituency: {
+                                    name: "Constituency",
+                                    url: "/assets/img/transparent.png",
+                                    type:"xyz"
+                                }
+                            },
+                            overlays:{
+                                facility:{
+                                    name:"Facility Location",
+                                    type:"group",
+                                    visible: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .error(function(error){
+                    $scope.spinner = false;
+                    $log.error(error);
+                });
+                /*Save geolocation details*/
+                $scope.saveGeo = function (frm) {
+                    var spinner1 = true;
+                    var changes = formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        console.log(changes);
+                        wrappers.facility_coordinates
+                            .update($scope.facility.coordinates,changes)
+                            .success(function (data) {
+                                spinner1 =false;
+                                $scope.geo = data;
+                            })
+                            .error(function (error) {
+                                spinner1 =false;
+                                $log.error(error);
+                            });
+                    }
+                };
+                /*update marker position*/
+                $scope.checkLocation = function  (coords) {
+                    angular.extend($scope,{
+                        markers : {
+                            mainMarker : {
+                                layer:"facility",
+                                lat:coords.coordinates[1],
+                                lng:coords.coordinates[0],
+                                message:"facility location"
+                            }
+                        }
+                    });
+                };
+            });
         }]);
 
 })(angular, _);

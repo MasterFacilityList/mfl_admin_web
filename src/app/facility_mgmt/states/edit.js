@@ -130,7 +130,7 @@
                         templateUrl: "facility_mgmt/tpls/facility_edit.tab-headers.tpl.html"
                     },
                     "form-view@facilities.facility_edit": {
-                        templateUrl: "facility_mgmt/tpls/geolocation.tpl.html",
+                        templateUrl: "facility_mgmt/tpls/facility_edit.geolocation.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit.geolocation"
                     }
                 },
