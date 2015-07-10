@@ -13,7 +13,7 @@
                 <th sil-grid-sort field='value'>Value</th>
                 <th sil-grid-sort field='option_type'>Option Type</th>
                 <th sil-grid-sort field='is_exclusive_option'>Is Exclusive Option</th>
-                <th class="text-right">Actions</th>
+                <th class="text-right">Actions&nbsp;&nbsp;&nbsp;</th>
             </tr>
         </thead>
         <tbody class="fade-content">
@@ -24,8 +24,8 @@
                 <td data-title="Type:"  class="pad-t-15">{{opt.option_type | titlecase}}</td>
                 <td data-title="Exclusive Option?"  class="pad-t-15">{{opt.is_exclusive_option | boolFilter}}</td>
                 <td data-title="Actions:" class="text-right">
-                    <a tooltip-placement="bottom" tooltip="edit option" ui-sref="service_mgmt.option_list.option_edit({option_id: opt.id})" ui-sref-opts="{reload:true}" class="action-btn action-btn-grid action-btn-primary">
-                        <i class="fa fa-eye"></i>
+                    <a tooltip-placement="bottom" tooltip="edit option" ui-sref="service_mgmt.option_list.option_edit({option_id: opt.id})" ui-sref-opts="{reload:true}" class="login-btn login-btn-primary">
+                        &nbsp;View
                     </a>
                 </td>
             </tr>

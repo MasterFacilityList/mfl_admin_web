@@ -11,16 +11,15 @@
             <thead>
                 <th sil-grid-sort field='name'>Name</th>
                 <th>Permissions</th>
-                <th class="text-right">Actions</th>
+                <th class="text-right">Actions&nbsp;&nbsp;&nbsp;</th>
             </thead>
             <tbody class="example-animate-container">
                 <tr class="animate-repeat" ng-repeat="group in groups | filter: search.query">
                     <td data-title="Name" class="pad-t-15">{{group.name}}</td>
                     <td>{{group.permissions.length}}</td>
                     <td data-title="Actions" class="text-right">
-                        <a ui-sref="groups.group_edit({group_id : group.id})" class="action-btn action-btn-grid action-btn-primary" bs-tooltip title="Edit group">
-                            <i class="fa fa-eye"></i>
-                        </a>
+                        <a ui-sref="groups.group_edit({group_id : group.id})" class="login-btn login-btn-primary" bs-tooltip title="Edit group">
+                            &nbsp;View
                     </td>
                 </tr>
             </tbody>

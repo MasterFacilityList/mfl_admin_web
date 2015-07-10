@@ -153,7 +153,8 @@
                             "requires-permission='users.delete_mfluser'",
                     class: "action-btn action-btn-danger action-btn-md",
                     tipmsg: "Delete User",
-                    icon: "fa-trash"
+                    icon: "fa-trash",
+                    wording : ""
                 }
             ];
             $scope.user_id = $stateParams.user_id;
@@ -572,10 +573,11 @@
             {
                 func: "ui-sref='users.user_create.basic ({furthest : 1})'" +
                         "requires-permission='users.add_mfluser' ",
-                class: "action-btn action-btn-primary action-btn-md",
+                class: "login-btn login-btn-primary",
 
                 tipmsg: "New User",
-                icon: "fa-plus"
+                icon: "",
+                wording: " Add User"
             }
         ];
     }]);

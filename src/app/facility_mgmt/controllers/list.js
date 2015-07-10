@@ -15,8 +15,8 @@
                            "requires-permission='facilities.add_facility'",
                     class: "login-btn login-btn-primary",
                     tipmsg: "Add Facility",
-                    icon: "fa-plus-circle",
-                    wording : "Add Facility"
+                    icon: "",
+                    wording : " Add Facility"
                 }
             ];
         }]
