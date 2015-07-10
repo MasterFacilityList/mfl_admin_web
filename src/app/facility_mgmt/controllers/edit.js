@@ -536,9 +536,7 @@
                     openstreetmap: {
                         url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                         options: {
-                            opacity: 0.7,
-                            attribution: "&copy; <a href='http://www.openstreetmap.org/"+
-                            "copyright'>OpenStreetMap</a> contributors"
+                            opacity: 0.2
                         }
                     }
                 }
@@ -680,6 +678,7 @@
                     var spinner1 = true;
                     var changes = formChanges.whatChanged(frm);
                     if(!_.isEmpty(changes)){
+                        console.log(changes);
                         wrappers.facility_coordinates
                             .update($scope.facility.coordinates,changes)
                             .success(function (data) {
