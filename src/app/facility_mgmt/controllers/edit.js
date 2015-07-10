@@ -707,6 +707,11 @@
                     });
                 };
             });
+        }])
+
+        .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
+        ["$scope", function ($scope) {
+            $scope.title = "Geolocation";
         }]);
 
 })(angular, _);
