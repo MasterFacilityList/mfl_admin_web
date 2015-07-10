@@ -49,11 +49,12 @@
                     $log.error(data);
                 });
         }
-        $scope.selectReload = function (wrapper, order_field, search_term, scope_var) {
+        $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
             if (_.isEmpty(search_term) || (! _.isString(search_term))) {
                 return $q.reject();
             }
-            return wrapper.filter({"search_auto": search_term})
+            var filters = {"search_auto": search_term};
+            return wrapper.filter(_.extend(filters, extra_filters))
             .success(function (data) {
                 $scope[scope_var] = data.results;
             })

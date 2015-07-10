@@ -125,11 +125,12 @@
                     $log.error(data);
                 });
             $scope.login_user = loginService.getUser();
-            $scope.selectReload = function (wrapper, order_field, search_term, scope_var) {
+            $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
                 if (_.isEmpty(search_term) || (! _.isString(search_term))) {
                     return $q.reject();
                 }
-                return wrapper.filter({"search_auto": search_term})
+                var filters = {"search_auto": search_term};
+                return wrapper.filter(_.extend(filters, extra_filters))
                 .success(function (data) {
                     $scope[scope_var] = data.results;
                 })
@@ -166,21 +167,21 @@
                 $scope.nextState();
             }
             $scope.reloadOwners = function (s) {
-                return $scope.selectReload(wrappers.facility_owners, "name", s, "owners");
+                return $scope.selectReload(wrappers.facility_owners, s, "owners");
             };
 
             $scope.reloadFacilityTypes = function (s) {
-                return $scope.selectReload(wrappers.facility_types, "name", s, "facility_types");
+                return $scope.selectReload(wrappers.facility_types, s, "facility_types");
             };
 
             $scope.reloadOperationStatus = function (s) {
-                return $scope.selectReload(
-                    wrappers.operation_status, "name", s, "operation_status"
-                );
+                return $scope.selectReload(wrappers.operation_status, s, "operation_status");
             };
 
             $scope.reloadWards = function (s) {
-                return $scope.selectReload(wrappers.wards, "name", s, "wards");
+                return $scope.selectReload(
+                    wrappers.wards, s, "wards", {"constituency": $scope.login_user.constituency}
+                );
             };
 
             $scope.save = function (frm) {
