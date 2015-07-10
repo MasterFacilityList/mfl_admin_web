@@ -17,10 +17,11 @@
                     func : "ui-sref='groups.group_create' " +
                             "requires-permission='auth.add_group' " +
                             "requires-user-feature='is_staff'",
-                    class: "action-btn action-btn-primary action-btn-md",
+                    class: "login-btn login-btn-primary",
 
                     tipmsg: "New Group",
-                    icon: "fa-plus"
+                    icon: "",
+                    wording: " Add Group"
                 }
             ];
         }
@@ -86,7 +87,8 @@
                            "requires-user-feature='is_staff'",
                     class: "action-btn action-btn-danger action-btn-md",
                     tipmsg: "Delete Group",
-                    icon: "fa-trash"
+                    icon: "fa-trash",
+                    wording: ""
                 }
             ];
             wrappers.groups.get($scope.group_id)

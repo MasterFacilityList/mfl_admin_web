@@ -18,7 +18,8 @@
                     class: "action-btn action-btn-primary action-btn-md",
 
                     tipmsg: "New Town",
-                    icon: "fa-plus"
+                    icon: "fa-plus",
+                    wording: ""
                 }
             ];
         }]
@@ -60,7 +61,8 @@
                     class: "action-btn action-btn-danger action-btn-md",
 
                     tipmsg: "Delete Town",
-                    icon: "fa-trash"
+                    icon: "fa-trash",
+                    wording: ""
                 }
             ];
             $scope.town_id = $stateParams.town_id;
