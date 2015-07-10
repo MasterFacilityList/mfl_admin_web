@@ -81,6 +81,7 @@
                             "$scope": $rootScope.$new()
                         };
                         var payload = {
+                            "wards_summary" : [],
                             "constituencies_summary": [
                                 {
                                     "count" : 256,
@@ -140,7 +141,12 @@
                             "$scope": $rootScope.$new()
                         };
                         var payload = {
-                            "wards_summary" : [],
+                            "wards_summary" : [
+                                {
+                                    "ward" : 256,
+                                    "name" : "STAREHE"
+                                }
+                            ],
                             "constituencies_summary": [],
                             "county_summary": [],
                             "owner_types": [
