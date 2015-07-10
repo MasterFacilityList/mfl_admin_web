@@ -165,9 +165,7 @@
                                    "?search_auto=kitale")
                         .respond(200);
 
-                    data.$scope.selectReload(
-                        wrappers.facility_detail, "name", "kitale", "facilities"
-                    );
+                    data.$scope.selectReload(wrappers.facility_detail, "kitale", "facilities");
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
@@ -193,9 +191,7 @@
                                    "?search_auto=kitale")
                         .respond(400);
 
-                    data.$scope.selectReload(
-                        wrappers.facility_detail, "name", "kitale", "facilities"
-                    );
+                    data.$scope.selectReload(wrappers.facility_detail,"kitale", "facilities");
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
@@ -216,9 +212,7 @@
                     };
                     state.params.facility_id = "";
                     ctrl("", data);
-                    data.$scope.selectReload(
-                        wrappers.facility_detail, "name", "", "facilities"
-                    );
+                    data.$scope.selectReload(wrappers.facility_detail, "", "facilities");
 
                     expect(data.$scope.facilities).toEqual(undefined);
                 }]);
