@@ -109,11 +109,20 @@
                         _list.unshift("county");
                     }
                     if(!_.isEmpty(_dt.constituencies_summary)) {
+                        $scope.constituency = true;
                         angular.forEach(_dt.constituencies_summary, function (item) {
                             _list.push(item.count);
                             _names_list.push(item.name);
                         });
                         _list.unshift("constituency");
+                    }
+                    if(!_.isEmpty(_dt.wards_summary)) {
+                        $scope.ward = true;
+                        angular.forEach(_dt.wards_summary, function (item) {
+                            _list.push(item.count);
+                            _names_list.push(item.name);
+                        });
+                        _list.unshift("wards");
                     }
                     var obj = {
                         bindto: "#facilitybar",

@@ -338,7 +338,7 @@
         function($scope, $log, $stateParams, wrappers, multistepService){
             if(!$scope.create) {
                 multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[4]);
+                    $scope, $scope.steps, $scope.steps[3]);
             }else {
                 $scope.nextState();
             }
@@ -412,7 +412,7 @@
         function ($scope, $log, $stateParams, wrappers, multistepService) {
             if(!$scope.create) {
                 multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[5]);
+                    $scope, $scope.steps, $scope.steps[4]);
             }else{
                 $scope.nextState();
             }
@@ -522,7 +522,7 @@
             formChanges) {
             if(!$scope.create) {
                 multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[6]);
+                    $scope, $scope.steps, $scope.steps[5]);
             }else{
                 $scope.nextState();
             }
