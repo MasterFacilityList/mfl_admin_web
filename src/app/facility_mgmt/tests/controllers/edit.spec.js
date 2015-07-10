@@ -327,7 +327,7 @@
 
                     httpBackend
                         .expectGET(server_url+"api/facilities/facilities/" +
-                                   "?page_size=20&ordering=name&search_auto=kitale")
+                                   "?search_auto=kitale")
                         .respond(200, {results : []});
 
                     data.$scope.selectReload(
@@ -364,7 +364,7 @@
 
                     httpBackend
                         .expectGET(server_url+"api/facilities/facilities/" +
-                                   "?page_size=20&ordering=name&search_auto=kitale")
+                                   "?search_auto=kitale")
                         .respond(400);
 
                     data.$scope.selectReload(
