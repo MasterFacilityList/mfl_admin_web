@@ -22,26 +22,21 @@
                     count: "3"
                 },
                 {
-                    name : "setup",
-                    prev : ["basic", "contacts", "services"],
-                    count: "4"
-                },
-                {
                     name : "officers",
                     prev : ["basic", "contacts", "services", "setup"],
-                    count: "5"
+                    count: "4"
                 },
                 {
                     name : "units",
                     prev : ["basic", "contacts",  "services", "setup",
                             "officers"],
-                    count: "6"
+                    count: "5"
                 },
                 {
                     name : "location",
                     prev : ["basic", "contacts",  "services", "setup",
                             "officers", "units"],
-                    count: "7"
+                    count: "6"
                 }
             ];
             return result;

@@ -18,7 +18,8 @@
                 var link_to_html = function (link) {
                     return "<a " + link.func + " class='" + link.class +"' " +
                         "tooltip-placement='bottom' tooltip='"+link.tipmsg+"'>" +
-                        "<i class='fa " + link.icon + "'></i></a>";
+                        "&nbsp;<i class='fa " + link.icon + "'></i> "+
+                        "" + link.wording + "</a>";
                 };
 
                 var html = _.reduce(scope.action, function (memo, val) {

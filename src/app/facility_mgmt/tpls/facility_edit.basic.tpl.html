@@ -1,7 +1,11 @@
 <div class="pad-t-20">
+
     <form name="frm_facility_basic" ng-submit="save(frm_facility_basic)">
-        <div class="row">
-            <div class="group col-xs-6">
+    <div class="custom-well col-xs-12">
+        <div class="col-xs-12">
+            <h4 class="margin-b-20 fw-600">Facility Basic Details</h4>
+        </div>
+            <div class="group col-xs-12">
                 <input type="text" name="name" ng-model="facility.name" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
@@ -9,7 +13,7 @@
                     Facility Name
                 </label>
             </div>
-            <div class="group col-xs-6">
+            <div class="group col-xs-12">
                 <input type="text" name="abbreviation" ng-model="facility.abbreviation">
                 <span class="highlight"></span>
                 <span class="bar"></span>
@@ -17,62 +21,127 @@
                     Abbreviation
                 </label>
             </div>
-        </div>
+            <div class="form-group col-xs-12">
+                <label>Facility Type</label>
+                <ui-select ng-model="select_values.facility_type" required ng-disabled="facility.id">
+                    <ui-select-match placeholder="Select a facility type...">
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="ft in facility_types" refresh-delay="500" refresh="reloadFacilityTypes($select.search)">
+                        <span>{{ft.name}}</span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
 
-        <div class="form-group">
-            <label>Facility Type</label>
-            <ui-select ng-model="select_values.facility_type" required ng-disabled="facility.id">
-                <ui-select-match placeholder="Select a facility type...">
-                    <span>{{$select.selected.name}}</span>
-                </ui-select-match>
-                <ui-select-choices repeat="ft in facility_types" refresh-delay="500" refresh="reloadFacilityTypes($select.search)">
-                    <span>{{ft.name}}</span>
-                </ui-select-choices>
-            </ui-select>
-        </div>
+            <div class="form-group col-xs-12">
+                <label>Operation Status</label>
+                <ui-select ng-model="select_values.operation_status" required>
+                    <ui-select-match placeholder="Select an operation status...">
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="os in operation_status" refresh-delay="500" refresh="reloadOperationStatus($select.search)">
+                        <span>{{os.name}}</span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
 
-        <div class="form-group">
-            <label>Operation Status</label>
-            <ui-select ng-model="select_values.operation_status" required>
-                <ui-select-match placeholder="Select an operation status...">
-                    <span>{{$select.selected.name}}</span>
-                </ui-select-match>
-                <ui-select-choices repeat="os in operation_status" refresh-delay="500" refresh="reloadOperationStatus($select.search)">
-                    <span>{{os.name}}</span>
-                </ui-select-choices>
-            </ui-select>
-        </div>
+            <div class="form-group col-xs-12">
+                <label>Owner</label>
+                <ui-select ng-model="select_values.owner" required ng-disabled="facility.id">
+                    <ui-select-match placeholder="Select an owner...">
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="owner in owners" refresh-delay="500" refresh="reloadOwners($select.search)">
+                        <span>{{owner.name}}</span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
 
-        <div class="form-group">
-            <label>Owner</label>
-            <ui-select ng-model="select_values.owner" required ng-disabled="facility.id">
-                <ui-select-match placeholder="Select an owner...">
-                    <span>{{$select.selected.name}}</span>
-                </ui-select-match>
-                <ui-select-choices repeat="owner in owners" refresh-delay="500" refresh="reloadOwners($select.search)">
-                    <span>{{owner.name}}</span>
-                </ui-select-choices>
-            </ui-select>
+            <div class="form-group col-xs-12">
+                <label>Ward</label>
+                <ui-select ng-model="select_values.ward" required>
+                    <ui-select-match placeholder="Select a ward...">
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="ward in wards" refresh-delay="500" refresh="reloadWards($select.search)">
+                        <span>{{ward.name}}</span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label>Ward</label>
-            <ui-select ng-model="select_values.ward" required>
-                <ui-select-match placeholder="Select a ward...">
-                    <span>{{$select.selected.name}}</span>
-                </ui-select-match>
-                <ui-select-choices repeat="ward in wards" refresh-delay="500" refresh="reloadWards($select.search)">
-                    <span>{{ward.name}}</span>
-                </ui-select-choices>
-            </ui-select>
+        <!-- Start of setup details -->
+        <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true && !create">
+          <h4><strong><i class="fa fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
+       </div>
+       <div ng-if="facility.has_edits===false || create" class="col-xs-12 custom-well">
+        <div class="col-xs-12">
+            <h4 class="margin-b-20 fw-600">Facility Setup Details</h4>
         </div>
-        <button ui-sref="facilities" class="login-btn login-btn-default margin-t-20 margin-b-10">
+            <div class="group col-sm-12">
+                <input type="text" name="number_of_beds" ng-model="facility.number_of_beds"  required />
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label class="pad-l-10">
+                    Beds
+                </label>
+            </div>
+            <div class="group col-sm-12">
+                <input type="text" name="number_of_cots" ng-model="facility.number_of_cots"  required />
+                <label class="pad-l-10" for="number_of_cots">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    Cots
+                </label>
+            </div>
+            <div class="col-sm-12">
+              <div class="checkbox-group margin-t-10">
+                  <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day">
+                  <label for="open_whole_day">
+                      <span class="check"></span>
+                      <span class="box"></span>
+                       Open 24 hours
+                   </label>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="checkbox-group margin-t-10">
+                  <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="facility.open_public_holidays">
+                  <label for="open_public_holidays">
+                      <span class="check"></span>
+                      <span class="box"></span>
+                       Open on public holidays
+                   </label>
+                 </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="checkbox-group margin-t-10">
+                  <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="facility.open_weekends">
+                  <label for="open_weekends">
+                      <span class="check"></span>
+                      <span class="box"></span>
+                       Open during weekends
+                   </label>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="checkbox-group margin-t-10">
+                  <input type="checkbox" id="is_classified" name="is_classified" ng-model="facility.is_classified">
+                  <label for="is_classified">
+                      <span class="check"></span>
+                      <span class="box"></span>
+                       Classified facility
+                   </label>
+              </div>
+            </div>
+        </div>
+        <!-- End of setupstuff -->
+        <button ui-sref="facilities" class="login-btn login-btn-default margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Cancel
         </button>
         <button ng-if="!create" type="submit" class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
             &nbsp; Contacts <i class="fa fa-angle-double-right"></i>
         </button>
-        <button ng-if="create" type="submit" class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+        <button ng-if="create" type="submit" class="login-btn login-btn-primary margin-b-10 pull-right">
             &nbsp; Contacts <i class="fa fa-angle-double-right"></i>
         </button>
     </form>

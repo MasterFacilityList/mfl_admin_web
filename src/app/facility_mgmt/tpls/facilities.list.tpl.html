@@ -14,7 +14,7 @@
         <th>Constituency</th>
         <th>Owner</th>
         <th>Facility Type</th>
-        <th class="text-right">Actions</th>
+        <th class="text-center">Actions</th>
     </thead>
     <tbody class="fade-content">
         <tr ng-repeat="fac in facilities">
@@ -26,8 +26,8 @@
             <td data-title="Facility Type:" class="pad-t-15">{{fac.facility_type_name}}</td>
             <td data-title="Actions:"  class="text-right">
                 <a  tooltip="edit" tooltip-placement="bottom" require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
-                    class="action-btn action-btn-grid action-btn-primary">
-                    <i class="fa fa-eye"></i>
+                    class="login-btn login-btn-primary">
+                    &nbsp;View
                 </a>
             </td>
         </tr>
