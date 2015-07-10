@@ -677,7 +677,6 @@
                 $scope.saveGeo = function (frm) {
                     var spinner1 = true;
                     var changes = formChanges.whatChanged(frm);
-                    changes.collection_date = frm.collection_date.$viewValue;
                     if(!_.isEmpty(changes)){
                         console.log(changes);
                         wrappers.facility_coordinates
