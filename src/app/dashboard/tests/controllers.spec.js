@@ -133,6 +133,61 @@
                 ]);
             });
 
+            it("should fetch dashboard info with ward data", function () {
+                inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
+                    function ($controller, $rootScope, $httpBackend, SERVER_URL) {
+                        var data = {
+                            "$scope": $rootScope.$new()
+                        };
+                        var payload = {
+                            "wards_summary" : [],
+                            "constituencies_summary": [],
+                            "county_summary": [],
+                            "owner_types": [
+                                {
+                                    "count": 0,
+                                    "name": "OTHER"
+                                }
+                            ],
+                            "owners_summary": [
+                                {
+                                    "count": 5,
+                                    "name": "State Coorporation"
+                                }
+                            ],
+                            "recently_created": 8361,
+                            "status_summary": [
+                                {
+                                    "count": 0,
+                                    "name": "FACILITY GAZETTE BY ID"
+                                }
+                            ],
+                            "total_facilities": 8361,
+                            "types_summary": [
+                                {
+                                    "count": 119,
+                                    "name": "DISTRICT HOSPITAL"
+                                }
+                            ]
+                        };
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/")
+                            .respond(200, payload);
+
+                        $controller("mfl.dashboard.content", data);
+
+                        //testing calling
+
+                        $httpBackend.flush();
+                        $httpBackend.verifyNoOutstandingRequest();
+                        $httpBackend.verifyNoOutstandingExpectation();
+
+                        expect(data.$scope.summary).toEqual(payload);
+                        expect(data.$scope.loading).toBe(false);
+                    }
+                ]);
+            });
+
             it("should show error on fail to fetch dashboard info from backend", function () {
                 inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
                     function ($controller, $rootScope, $httpBackend, SERVER_URL) {
