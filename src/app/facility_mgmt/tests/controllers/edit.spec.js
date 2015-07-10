@@ -2675,7 +2675,15 @@
                     httpBackend.verifyNoOutstandingRequest();
                     httpBackend.verifyNoOutstandingExpectation();
                 }]));
-
+            it("should check that geolocation controller is defined",
+                function () {
+                    var data = {
+                        "$scope": rootScope.$new()
+                    };
+                    ctrl(".geolocation", data);
+                    expect(data.$scope.title).toEqual("Geolocation");
+                }
+            );
         });
     });
 })(angular);
