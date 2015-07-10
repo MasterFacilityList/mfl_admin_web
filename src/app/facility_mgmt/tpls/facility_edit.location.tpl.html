@@ -8,11 +8,11 @@
                        <div class=" col-md-6">
                             <div class="col-md-12">
                                 <label>Town</label>
-                                <ui-select ng-model="select_values.town" required>
+                                <ui-select name="town" ng-model="select_values.town" required>
                                     <ui-select-match placeholder="Select a town...">
                                         <span>{{$select.selected.name}}</span>
                                     </ui-select-match>
-                                    <ui-select-choices repeat="town in towns">
+                                    <ui-select-choices repeat="town.id as town in towns">
                                         <span>{{town.name}}</span>
                                     </ui-select-choices>
                                 </ui-select>
