@@ -13,9 +13,10 @@
                 {
                     func : "ui-sref='facilities.facility_create({furthest : 1})'" +
                            "requires-permission='facilities.add_facility'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    tipmsg: "New Facility",
-                    icon: "fa-plus"
+                    class: "login-btn login-btn-primary",
+                    tipmsg: "Add Facility",
+                    icon: "fa-plus-circle",
+                    wording : "Add Facility"
                 }
             ];
         }]
