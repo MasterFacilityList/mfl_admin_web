@@ -536,7 +536,7 @@
                     openstreetmap: {
                         url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                         options: {
-                            opacity: 0.2,
+                            opacity: 0.2
                         }
                     }
                 }
