@@ -518,7 +518,6 @@
         "mfl.common.services.multistep", "mfl.common.forms.changes",
         function ($scope,wrappers,$log, leafletData, multistepService,
             formChanges) {
-            $scope.minDate = new Date();
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[5]);
@@ -537,9 +536,7 @@
                     openstreetmap: {
                         url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                         options: {
-                            opacity: 0.7,
-                            attribution: "&copy; <a href='http://www.openstreetmap.org/"+
-                            "copyright'>OpenStreetMap</a> contributors"
+                            opacity: 0.2,
                         }
                     }
                 }
@@ -582,7 +579,6 @@
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.geo = data;
-                    $scope.fetchedDate = data.collection_date;
                     $scope.select_values = {
                         source: {
                             "id": $scope.geo.source,
