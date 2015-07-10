@@ -13,12 +13,13 @@
                     func : "onclick='window.history.back()'",
                     class: "action-btn action-btn-primary action-btn-md",
                     tipmsg: "Back",
-                    icon: "fa-arrow-left"
+                    icon: "fa-arrow-left",
+                    wording: ""
                 };
                 var link_to_html = function (link) {
                     return "<a " + link.func + " class='" + link.class +"' " +
                         "tooltip-placement='bottom' tooltip='"+link.tipmsg+"'>" +
-                        "&nbsp;<i class='fa " + link.icon + "'></i> "+
+                        "<i class='fa " + link.icon + "'></i> "+
                         "" + link.wording + "</a>";
                 };
 
