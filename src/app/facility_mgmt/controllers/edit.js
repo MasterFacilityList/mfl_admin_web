@@ -138,7 +138,7 @@
                 });
             };
             $scope.remove = function () {
-                wrappers.facility_detail.remove($scope.facility_id)
+                wrappers.facility_detail.update($scope.facility_id, {"is_active": false})
                 .success(function () {
                     $state.go("facilities");
                 })
