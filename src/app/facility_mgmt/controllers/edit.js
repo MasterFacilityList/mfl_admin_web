@@ -249,7 +249,6 @@
                 contact_type: "",
                 contact: ""
             };
-
             /*contact types*/
             wrappers.contact_types.list()
             .success(function(data){
