@@ -50,10 +50,10 @@
                 });
         }
         $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
-            if (_.isEmpty(search_term) || (! _.isString(search_term))) {
+            if (! _.isString(search_term)) {
                 return $q.reject();
             }
-            var filters = {"search_auto": search_term};
+            var filters = _.isEmpty(search_term) ? {} : {"search_auto": search_term};
             return wrapper.filter(_.extend(filters, extra_filters))
             .success(function (data) {
                 $scope[scope_var] = data.results;

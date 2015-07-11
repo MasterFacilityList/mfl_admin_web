@@ -201,7 +201,7 @@
                 }]);
             });
 
-            it("should show errors on empty search term", function () {
+            it("should data", function () {
                 inject(["mfl.facility_mgmt.services.wrappers", function (wrappers) {
                     var data = {
                         "$scope": rootScope.$new(),
@@ -212,9 +212,18 @@
                     };
                     state.params.facility_id = "";
                     ctrl("", data);
-                    data.$scope.selectReload(wrappers.facility_detail, "", "facilities");
 
-                    expect(data.$scope.facilities).toEqual(undefined);
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facility_status/?")
+                        .respond(200, {});
+
+                    data.$scope.selectReload();
+                    data.$scope.selectReload(null, null, 3);
+                    data.$scope.selectReload(wrappers.operation_status, "", "ops");
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
                 }]);
             });
         });

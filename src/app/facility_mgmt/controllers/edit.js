@@ -78,8 +78,8 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit",
         ["$scope", "$q", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        "mfl.auth.services.login","mfl.facility.multistep.service", "$state",
-        function ($scope, $q, $log, $stateParams, wrappers, loginService,
+        "mfl.facility.multistep.service", "$state",
+        function ($scope, $q, $log, $stateParams, wrappers,
             facilityMultistepService, $state) {
             $scope.facility_id = $stateParams.facility_id;
             $scope.create = false;
@@ -124,12 +124,12 @@
                 .error(function (data) {
                     $log.error(data);
                 });
-            $scope.login_user = loginService.getUser();
+
             $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
-                if (_.isEmpty(search_term) || (! _.isString(search_term))) {
+                if (! _.isString(search_term)) {
                     return $q.reject();
                 }
-                var filters = {"search_auto": search_term};
+                var filters = _.isEmpty(search_term) ? {} : {"search_auto": search_term};
                 return wrapper.filter(_.extend(filters, extra_filters))
                 .success(function (data) {
                     $scope[scope_var] = data.results;
@@ -156,9 +156,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.basic",
         ["$scope", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
-        "mfl.common.services.multistep",
+        "mfl.common.services.multistep", "mfl.auth.services.login",
         function ($scope, $log, $state, $stateParams, wrappers, formChanges,
-            multistepService) {
+            multistepService, loginService) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[0]);
@@ -166,24 +166,15 @@
             else {
                 $scope.nextState();
             }
-            $scope.reloadOwners = function (s) {
-                return $scope.selectReload(wrappers.facility_owners, s, "owners");
-            };
-
-            $scope.reloadFacilityTypes = function (s) {
-                return $scope.selectReload(wrappers.facility_types, s, "facility_types");
-            };
-
-            $scope.reloadOperationStatus = function (s) {
-                return $scope.selectReload(wrappers.operation_status, s, "operation_status");
-            };
-
-            $scope.reloadWards = function (s) {
-                return $scope.selectReload(
-                    wrappers.wards, s, "wards", {"constituency": $scope.login_user.constituency}
-                );
-            };
-
+            $scope.login_user = loginService.getUser();
+            $scope.selectReload(wrappers.facility_owners, "", "owners");
+            $scope.selectReload(wrappers.operation_status, "", "operation_status");
+            $scope.selectReload(
+                wrappers.wards, "", "wards", {"constituency": $scope.login_user.constituency}
+            );
+            if ($scope.create) {
+                $scope.selectReload(wrappers.facility_types, "", "facility_types");
+            }
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
                 $scope.facility.ward = $scope.select_values.ward.id;
