@@ -17,7 +17,8 @@
                     controller: "mfl.setup.gis.controllers.geocode_methods_list"
                 }
             },
-            permission: "mfl_gis.view_geocodemethod"
+            permission: "mfl_gis.view_geocodemethod",
+            userFeature: "is_national"
         })
         .state("setup.geocode_methods_list.geocode_methods_create", {
             url: "/create",
@@ -27,7 +28,8 @@
                     controller: "mfl.setup.gis.controllers.geocode_methods_create"
                 }
             },
-            permission: "mfl_gis.view_geocodemethod"
+            permission: "mfl_gis.view_geocodemethod",
+            userFeature: "is_national"
         })
         .state("setup.geocode_methods_list.geocode_methods_edit", {
             url: "/edit/:geocode_method_id",
@@ -37,7 +39,8 @@
                     controller: "mfl.setup.gis.controllers.geocode_methods_edit"
                 }
             },
-            permission: "mfl_gis.view_geocodemethod"
+            permission: "mfl_gis.view_geocodemethod",
+            userFeature: "is_national"
         })
         .state("setup.geocode_methods_list.geocode_methods_delete", {
             url: "/delete/:geocode_method_id",
@@ -47,7 +50,8 @@
                     controller: "mfl.setup.gis.controllers.geocode_methods_delete"
                 }
             },
-            permission: "mfl_gis.delete_geocodemethod"
+            permission: "mfl_gis.delete_geocodemethod",
+            userFeature: "is_national"
         })
 
         .state("setup.geocode_sources_list", {
@@ -61,7 +65,8 @@
                     controller: "mfl.setup.gis.controllers.geocode_sources_list"
                 }
             },
-            permission: "mfl_gis.view_geocodesource"
+            permission: "mfl_gis.view_geocodesource",
+            userFeature: "is_national"
         })
         .state("setup.geocode_sources_list.geocode_sources_create", {
             url: "/geocode_sources/create",
@@ -71,7 +76,8 @@
                     controller: "mfl.setup.gis.controllers.geocode_sources_create"
                 }
             },
-            permission: "mfl_gis.add_geocodesource"
+            permission: "mfl_gis.add_geocodesource",
+            userFeature: "is_national"
         })
         .state("setup.geocode_sources_list.geocode_sources_edit", {
             url: "/geocode_sources/edit/:geocode_source_id",
@@ -81,7 +87,8 @@
                     controller: "mfl.setup.gis.controllers.geocode_sources_edit"
                 }
             },
-            permission: "mfl_gis.view_geocodesource"
+            permission: "mfl_gis.view_geocodesource",
+            userFeature: "is_national"
         })
         .state("setup.geocode_sources_list.geocode_sources_delete", {
             url: "/geocode_sources/delete/:geocode_source_id",
@@ -91,7 +98,8 @@
                     controller: "mfl.setup.gis.controllers.geocode_sources_delete"
                 }
             },
-            permission: "mfl_gis.delete_geocodesource"
+            permission: "mfl_gis.delete_geocodesource",
+            userFeature: "is_national"
         });
     }]);
 

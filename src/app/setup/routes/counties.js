@@ -15,7 +15,8 @@
                         templateUrl: "setup/tpls/counties/counties.tpl.html"
                     }
                 },
-                permission: "common.view_county"
+                permission: "common.view_county",
+                userFeature: "is_national"
             })
             .state("setup.counties.view_consts", {
                 url: "/:count_id",
@@ -25,7 +26,8 @@
                         templateUrl: "setup/tpls/counties/edit_county.tpl.html"
                     }
                 },
-                permission: "common.view_county"
+                permission: "common.view_county",
+                userFeature: "is_national"
             })
             .state("setup.counties.view_consts.constituencies", {
                 url: "/constituencies",
@@ -34,7 +36,8 @@
                         templateUrl: "setup/tpls/counties/constituencies.tpl.html"
                     }
                 },
-                permission: "common.view_constituency"
+                permission: "common.view_constituency",
+                userFeature: "is_national"
             })
             .state("setup.counties.view_consts.users", {
                 url: "/users",
@@ -43,7 +46,8 @@
                         templateUrl: "setup/tpls/counties/users-list.tpl.html"
                     }
                 },
-                permission: "common.view_usercounty"
+                permission: "common.view_usercounty",
+                userFeature: "is_national"
             });
     }]);
 

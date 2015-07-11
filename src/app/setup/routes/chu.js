@@ -15,7 +15,8 @@
                         templateUrl: "setup/tpls/chu/status/status-list.tpl.html"
                     }
                 },
-                permission: "chul.view_status"
+                permission: "chul.view_status",
+                userFeature: "is_national"
             })
         .state("setup.chu_status.view", {
                 url: "/:id",
@@ -25,7 +26,8 @@
                         templateUrl: "setup/tpls/chu/status/status-view.tpl.html"
                     }
                 },
-                permission: "chul.view_status"
+                permission: "chul.view_status",
+                userFeature: "is_national"
             })
         .state("setup.chu_status.view.delete", {
                 url: "/delete",
@@ -36,7 +38,7 @@
                     }
                 },
                 permission: "chul.delete_status",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.chu_status.create", {
                 url: "/create",
@@ -47,7 +49,7 @@
                     }
                 },
                 permission: "chul.create_status",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.chu_approvers", {
                 url: "/chu_approvers",
@@ -60,7 +62,8 @@
                         templateUrl: "setup/tpls/chu/approvers/approvers-list.tpl.html"
                     }
                 },
-                permission: "chul.view_approver"
+                permission: "chul.view_approver",
+                userFeature: "is_national"
             })
         .state("setup.chu_approvers.view", {
                 url: "/:id",
@@ -70,7 +73,8 @@
                         templateUrl: "setup/tpls/chu/approvers/approvers-view.tpl.html"
                     }
                 },
-                permission: "chul.view_approver"
+                permission: "chul.view_approver",
+                userFeature: "is_national"
             })
         .state("setup.chu_approvers.view.delete", {
                 url: "/delete",
@@ -81,7 +85,7 @@
                     }
                 },
                 permission: "chul.delete_approver",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.chu_approvers.create", {
                 url: "/create",
@@ -92,7 +96,7 @@
                     }
                 },
                 permission: "chul.add_approver",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         ;
     }]);

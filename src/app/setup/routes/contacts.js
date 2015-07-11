@@ -18,7 +18,8 @@
                         templateUrl: "setup/tpls/contacts/contacts-list.tpl.html"
                     }
                 },
-                permission: "common.view_contact"
+                permission: "common.view_contact",
+                userFeature: "is_national,is_national"
             })
         .state("setup.contacts.edit", {
                 url: "/:id/edit",
@@ -28,7 +29,8 @@
                         templateUrl: "setup/tpls/contacts/contacts-edit.tpl.html"
                     }
                 },
-                permission: "common.view_contact"
+                permission: "common.view_contact",
+                userFeature: "is_national,is_national"
             })
         .state("setup.contacts.edit.delete", {
                 url: "/delete",
@@ -39,7 +41,7 @@
                     }
                 },
                 permission: "common.delete_contact",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.contacts.create", {
                 url: "/create",
@@ -50,7 +52,7 @@
                     }
                 },
                 permission: "common.add_contact",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
 
         /*Contact Types*/
@@ -66,7 +68,8 @@
                         templateUrl: "setup/tpls/contacts/contact-types-list.tpl.html"
                     }
                 },
-                permission: "common.view_contacttype"
+                permission: "common.view_contacttype",
+                userFeature: "is_national"
             })
         .state("setup.contact_types.view", {
                 url: "/:id",
@@ -76,7 +79,8 @@
                         templateUrl: "setup/tpls/contacts/contact-types-view.tpl.html"
                     }
                 },
-                permission: "common.view_contacttype"
+                permission: "common.view_contacttype",
+                userFeature: "is_national"
             })
         .state("setup.contact_types.view.delete", {
                 url: "/delete",
@@ -87,7 +91,7 @@
                     }
                 },
                 permission: "common.delete_contacttype",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.contact_types.create", {
                 url: "/create",
@@ -98,7 +102,7 @@
                     }
                 },
                 permission: "common.add_contacttype",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             });
     }]);
 })(angular);
