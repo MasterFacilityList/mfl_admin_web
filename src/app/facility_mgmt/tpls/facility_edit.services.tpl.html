@@ -5,10 +5,14 @@
         </div>
         <form name="frm_facility_services" ng-submit="addServiceOption(new_service.option)">
                 <div class="group col-sm-5">
-                    <select name="service" ng-model="new_service.service" required>
-                        <option value="">Select a service</option>
-                        <option ng-repeat="serv in services" ng-value="serv.id">{{serv.name}}</option>
-                    </select>
+                    <ui-select name="service" ng-model="new_service.service">
+                        <ui-select-match placeholder="Select a service">
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="service.id as service in services | filter:$select.search">
+                            {{service.name}}
+                        </ui-select-choices>
+                    </ui-select>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
