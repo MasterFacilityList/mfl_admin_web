@@ -257,7 +257,20 @@
                 contact_type: "",
                 contact: ""
             };
-
+            //table editing
+            $scope.editItem = function (item) {
+                item.editing = true;
+            };
+            $scope.doneEditing = function (item) {
+                item.editing = false;
+                var updated_contact = {
+                    contact : item.actual_contact,
+                    contact_type : item.contact_type
+                };
+                console.log(updated_contact, item);
+                /*wrappers.contacts.update({item.id, updated_contact});*/
+            };
+            //end of table diting
             /*contact types*/
             wrappers.contact_types.list()
             .success(function(data){

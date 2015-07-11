@@ -38,8 +38,27 @@
             </thead>
             <tbody>
                 <tr ng-repeat="child in fac_contacts">
-                    <td class="pad-t-15 fs-16 fw-500">{{child.contact_type}}</td>
-                    <td class="pad-t-15 fs-16 fw-500">{{child.actual_contact}}</td>
+                    <td >
+                        <span ng-if="editable" >
+                            <select name="contact_type" ng-model="child.contact_type" class="pad-t-15" required>
+                                <option value="">Select Contact Type</option>
+                                <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
+                            </select>
+                        </span>
+                        <span ng-if="!editable" class="pad-t-15 fs-16 fw-500 group">
+                            {{child.contact_type}}
+                        </span>
+                    </td>
+                    <td class="pad-t-15 fs-16 fw-500">
+                        <span ng-hide="child.editing" ng-dblclick="editItem(child)">{{child.actual_contact}}</span>
+                        <span ng-show="child.editing" class="fs-14 group">
+                            <input type="text" ng-model="child.actual_contact" ng-blur="doneEditing(child)" autofocus />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                        </span>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                    </td>
                     <td class="pad-t-10 text-right">
                     <span ng-if="child.delete_spinner">
                         <i class="fa fa-spin fa-circle-o-notch"></i>
