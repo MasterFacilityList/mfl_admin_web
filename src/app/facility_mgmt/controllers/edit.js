@@ -552,6 +552,54 @@
                     $log.error(error);
                 });
 
+            /*Wait for facility to be defined*/
+            $scope.$watch("facility", function (f) {
+                if (_.isUndefined(f)){
+                    return;
+                }
+                $scope.select_values = {
+                    town:{
+                        "id": f.facility_physical_address.town_id,
+                        "name": f.facility_physical_address.town
+                    }
+                };
+                /*Save physical location details*/
+                $scope.savePhy = function (frm) {
+                    var changes = formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        wrappers.physical_addresses
+                            .update($scope.facility.facility_physical_address.id, changes)
+                            .success(function (data) {
+                                $scope.$parent.facility.facility_physical_address = data;
+                            })
+                            .error(function (error) {
+                                $log.error(error);
+                            });
+                    }
+                };
+            });
+        }])
+
+    .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
+        ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
+        "mfl.common.services.multistep", "mfl.common.forms.changes",
+        function ($scope,wrappers,$log, leafletData, multistepService,
+            formChanges) {
+            /*Setup for map data*/
+            angular.extend($scope, {
+                defaults: {
+                    scrollWheelZoom: false
+                },
+                layers:{},
+                tiles:{
+                    openstreetmap: {
+                        url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        options: {
+                            opacity: 0.2
+                        }
+                    }
+                }
+            });
             /*Fetch geo code methods*/
             wrappers.geo_code_methods.list()
                 .success(function (data) {
@@ -658,22 +706,6 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
-
-                /*Save physical location details*/
-                $scope.savePhy = function (frm) {
-                    var changes = formChanges.whatChanged(frm);
-                    if(!_.isEmpty(changes)){
-                        wrappers.physical_addresses
-                            .update($scope.facility.facility_physical_address.id, changes)
-                            .success(function (data) {
-                                $scope.$parent.facility.facility_physical_address = data;
-                            })
-                            .error(function (error) {
-                                $log.error(error);
-                            });
-                    }
-                };
-
                 /*Save geolocation details*/
                 $scope.saveGeo = function (frm) {
                     var spinner1 = true;
@@ -692,7 +724,6 @@
                             });
                     }
                 };
-
                 /*update marker position*/
                 $scope.checkLocation = function  (coords) {
                     angular.extend($scope,{
@@ -707,11 +738,6 @@
                     });
                 };
             });
-        }])
-
-        .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
-        ["$scope", function ($scope) {
-            $scope.title = "Geolocation";
         }]);
 
 })(angular, _);
