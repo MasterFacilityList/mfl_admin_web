@@ -430,7 +430,7 @@
                         "facility": $scope.facility_id,
                         "regulating_body": $scope.facility_unit.regulating_body,
                         "name": $scope.facility_unit.name,
-                        "description": $scope.facility_unit.description
+                        "description": $scope.facility_unit.name
                     })
                     .success(function (data) {
                         $scope.fac_units.push(data);
