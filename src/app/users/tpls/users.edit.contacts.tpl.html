@@ -7,7 +7,7 @@
                     <h4 class="fw-600 fs-18">Add Contact</h4>
                 </div>
                 <form ng-submit="add()">
-                    <div class="group col-sm-10">
+                    <div class="group col-sm-5">
                         <select name="contact_type" ng-model="contact.contact_type" required>
                             <option value="">Select Contact Type</option>
                             <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
@@ -15,13 +15,13 @@
                         <span class="highlight"></span>
                         <span class="bar"></span>
                     </div>
-                    <div class="group col-sm-10">
+                    <div class="group col-sm-5">
                         <input name="contact" type="text" ng-model="contact.contact" required />
                         <span class="highlight"></span>
                         <span class="bar"></span>
                         <label class="margin-l-10">Contact Details</label>
                     </div>
-                    <div class="col-sm-12 margin-b-10">
+                    <div class="col-sm-2 margin-b-10">
                         <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add contact" >
                             <i class="fa fa-plus-circle"></i> Add
                         </button>
@@ -39,10 +39,17 @@
             <div class="content-card margin-t-20" ng-show="contacts.length > 0">
             <h4 class="fw-600 fs-18">Current User Contacts</h4>
                 <table class="table tablediv.alert.alert-info-hover fs-14">
+                   <thead>
+                       <tr>
+                           <th class="fs-16">Contact Type</th>
+                           <th class="fs-16">Contact</th>
+                           <th></th>
+                       </tr>
+                   </thead>
                     <tbody>
                         <tr ng-repeat="child in contacts">
                             <td class="pad-t-15 fs-16 fw-500">
-                                {{child.contact_type_text}}
+                                {{child.contact_type_text | titlecase}}
                             </td>
                             <td class="pad-t-15 fs-16 fw-500">
                                 {{child.contact_text}}
