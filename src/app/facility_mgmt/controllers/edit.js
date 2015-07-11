@@ -585,9 +585,9 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
-        "mfl.common.services.multistep", "mfl.common.forms.changes",
+        "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
         function ($scope,wrappers,$log, leafletData, multistepService,
-            formChanges) {
+            formChanges, $state) {
             /*Setup for map data*/
             if(!$scope.create) {
                 multistepService.filterActive(
@@ -726,11 +726,14 @@
                             .success(function (data) {
                                 spinner1 =false;
                                 $scope.geo = data;
+                                $state.go("facility_mgmt");
                             })
                             .error(function (error) {
                                 spinner1 =false;
                                 $log.error(error);
                             });
+                    }else{
+                        $state.go("facility_mgmt");
                     }
                 };
                 /*update marker position*/

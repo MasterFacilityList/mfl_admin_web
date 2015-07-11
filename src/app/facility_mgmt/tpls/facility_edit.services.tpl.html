@@ -4,7 +4,7 @@
             <h4 class="fw-600 fs-18">Add Service</h4>
         </div>
         <form name="frm_facility_services" ng-submit="addServiceOption(new_service.option)">
-                <div class="group col-sm-5">
+                <div class="group col-sm-5 pad-t-10">
                     <ui-select name="service" ng-model="new_service.service">
                         <ui-select-match placeholder="Select a service">
                             {{$select.selected.name}}
@@ -13,8 +13,6 @@
                             {{service.name}}
                         </ui-select-choices>
                     </ui-select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
                 </div>
                 <div class="group col-sm-5">
                     <select name="service_option" ng-model="new_service.option" required>
