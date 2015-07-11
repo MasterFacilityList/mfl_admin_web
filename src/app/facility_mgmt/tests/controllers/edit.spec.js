@@ -2310,7 +2310,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
             }]));
 
-            it("should save physical location details and geolocation details", function () {
+            it("should save physical location details", function () {
                 inject(["mfl.common.services.multistep",
                     function (multistepService) {
                     var data = {
@@ -2320,9 +2320,7 @@
                         },
                         "mfl.common.services.multistep" : multistepService
                     };
-                    var coords = {
-                        coordinates : [0,1]
-                    };
+
                     data.$scope.steps = [
                         {name : "basic"},
                         {name : "contacts"},
@@ -2334,18 +2332,6 @@
                     ];
                     httpBackend
                         .expectGET(server_url+"api/common/towns/")
-                        .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/geo_code_methods/")
-                        .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/geo_code_sources/")
-                        .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
                     ctrl(".location", data);
                     data.$scope.$apply();
@@ -2360,7 +2346,6 @@
                     };
                     data.$scope.$apply();
                     data.$scope.$digest();
-                    data.$scope.checkLocation(coords);
 
                     httpBackend.flush();
 
@@ -2368,9 +2353,6 @@
 
                     httpBackend
                         .expectPATCH(server_url+"api/common/address/3/")
-                        .respond(204, {results: []});
-                    httpBackend
-                        .expectPATCH(server_url+"api/gis/facility_coordinates/3/")
                         .respond(204, {results: []});
                     var frm = {
                         "$dirty": true,
@@ -2381,7 +2363,6 @@
                     };
 
                     data.$scope.savePhy(frm);
-                    data.$scope.saveGeo(frm);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingExpectation();
@@ -2453,17 +2434,15 @@
             });
 
             it("should not save physical location details", function () {
-                inject(["mfl.common.services.multistep",
-                    function (multistepService) {
+                inject(["mfl.common.services.multistep","mfl.common.forms.changes",
+                    function (multistepService,formChanges) {
                     var data = {
                         "$scope": rootScope.$new(),
                         "$stateParams": {
                             facility_id: 4
                         },
-                        "mfl.common.services.multistep" : multistepService
-                    };
-                    var coords = {
-                        coordinates : [0,1]
+                        "mfl.common.services.multistep" : multistepService,
+                        "mfl.common.forms.changes": formChanges
                     };
                     data.$scope.steps = [
                         {name : "basic"},
@@ -2477,31 +2456,21 @@
                     httpBackend
                         .expectGET(server_url+"api/common/towns/")
                         .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/geo_code_methods/")
-                        .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/geo_code_sources/")
-                        .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/common/wards/3/")
-                        .respond(200, {results: []});
                     ctrl(".location", data);
                     data.$scope.$apply();
                     data.$scope.facility={
                         coordinates : "3",
-                        ward : "3"
+                        ward : "3",
+                        facility_physical_address:{
+                            address : "ZUZU",
+                            postal_code: "254",
+                            id: "3"
+                        }
                     };
                     data.$scope.$apply();
                     data.$scope.$digest();
-                    data.$scope.checkLocation(coords);
 
                     httpBackend.flush();
-
-                    httpBackend.resetExpectations();
 
                     var frm = {
                         "$dirty": false,
@@ -2510,8 +2479,8 @@
                             "$$modelValue": "test"
                         }
                     };
+
                     data.$scope.savePhy(frm);
-                    data.$scope.saveGeo(frm);
 
                     httpBackend.verifyNoOutstandingExpectation();
                     httpBackend.verifyNoOutstandingRequest();
@@ -2557,10 +2526,6 @@
                     };
                     data.$scope.$apply();
                     data.$scope.$digest();
-
-                    httpBackend.flush();
-                    httpBackend.verifyNoOutstandingRequest();
-                    httpBackend.verifyNoOutstandingExpectation();
                 }]));
             it("should save geolocation details", function () {
                 inject(["mfl.common.services.multistep",
