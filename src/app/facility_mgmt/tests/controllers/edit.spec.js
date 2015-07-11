@@ -2744,8 +2744,10 @@
                         "$stateParams": {
                             facility_id: 4
                         },
+                        "$state": state,
                         "mfl.common.services.multistep" : multistepService
                     };
+                    spyOn(state, "go");
                     var coords = {
                         coordinates : [0,1]
                     };
