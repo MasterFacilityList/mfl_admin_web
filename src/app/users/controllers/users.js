@@ -544,7 +544,6 @@
                     $log.error(data);
                     $scope.error =  "A user can only be active in only one sub-county at a time";
                     $scope.spinner = false;
-                    $scope.hide_alert = false;
                 });
             };
             $scope.removeChild = function (user_const) {
