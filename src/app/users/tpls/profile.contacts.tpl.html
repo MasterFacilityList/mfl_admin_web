@@ -37,27 +37,32 @@
     </form>
     </div>
     <div  class="col-lg-12 margin-t-20">
-    <h4> Current Contacts</h4>
-    <table class="table content-card margin-t-20 margin-b-10">
-        <tbody>
-            <tr ng-repeat="child in contacts">
-                <td class="pad-t-15 fs-16 fw-500">{{child.contact_type_text}}</td>
-                <td class="pad-t-15 fs-16 fw-500">{{child.contact_text}}</td>
-                <td class="pad-t-10 text-right">
-                <span ng-if="child.delete_spinner">
-                    <i class="fa fa-spin fa-circle-o-notch"></i>
-                </span>
-                    <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Remove Contact">
-                        <i class="fa fa-trash fw-500"></i>
-                    </a>
-                </td>
-            </tr>
-            <tr ng-if="spinner">
-                <td colspan="3" class="text-center">
-                    <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div ng-show="contacts.length > 0">
+        <h4> Current Contacts</h4>
+        <table class="table content-card margin-t-20 margin-b-10">
+            <tbody>
+                <tr ng-repeat="child in contacts">
+                    <td class="pad-t-15 fs-16 fw-500">{{child.contact_type_text}}</td>
+                    <td class="pad-t-15 fs-16 fw-500">{{child.contact_text}}</td>
+                    <td class="pad-t-10 text-right">
+                    <span ng-if="child.delete_spinner">
+                        <i class="fa fa-spin fa-circle-o-notch"></i>
+                    </span>
+                        <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Remove Contact">
+                            <i class="fa fa-trash fw-500"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-if="spinner">
+                    <td colspan="3" class="text-center">
+                        <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="alert alert-info" ng-show="contacts == 0">
+        <span class="fs-16"><i class="fa fa-info-circle"></i> Currently no contacts added.</span>
+    </div>
     </div>
 </div>
