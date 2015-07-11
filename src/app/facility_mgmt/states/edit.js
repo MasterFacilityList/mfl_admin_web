@@ -121,6 +121,20 @@
                     }
                 },
                 permission: "facilities.view_facility"
+            })
+
+            .state("facilities.facility_edit.geolocation", {
+                url: "geolocation/",
+                views: {
+                    "tab-header@facilities.facility_edit": {
+                        templateUrl: "facility_mgmt/tpls/facility_edit.tab-headers.tpl.html"
+                    },
+                    "form-view@facilities.facility_edit": {
+                        templateUrl: "facility_mgmt/tpls/facility_edit.geolocation.tpl.html",
+                        controller: "mfl.facility_mgmt.controllers.facility_edit.geolocation"
+                    }
+                },
+                permission: "facilities.view_facility"
             });
     }]);
 

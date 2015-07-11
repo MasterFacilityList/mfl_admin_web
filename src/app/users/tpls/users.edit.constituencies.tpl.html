@@ -2,7 +2,7 @@
     <div class="col-lg-12 margin-t-20">
         <div class="col-md-10 col-md-offset-1">
             <div class="col-lg-12 margin-t-20" requires-permission="common.add_userconstituency" >
-                <h4>Assign Constituency</h4>
+                <h4>Assign Sub County</h4>
                 <form ng-submit="add(new_constituency)">
                     <table class="table content-card  margin-b-10">
                         <tbody>
@@ -10,7 +10,7 @@
                                 <td class="pad-t-15">
                                     <div class="group">
                                     <select name="constituency" ng-model="new_constituency" class="pad-t-15" required>
-                                        <option value="">Select Constituency</option>
+                                        <option value="">Select Sub County</option>
                                         <option ng-repeat="cnst in constituencies" ng-value="cnst.id">{{cnst.name}}</option>
                                     </select>
                                     <span class="highlight"></span>
@@ -18,7 +18,7 @@
                                     </div>
                                 </td>
                                 <td class="text-right pad-t-15">
-                                    <button ng-disabled="new_constituency===''" type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Assign Constituency">
+                                    <button ng-disabled="new_constituency===''" type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Assign Sub County">
                                         <i class="fa fa-plus-circle"></i> Add
                                     </button>
                                 </td>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="col-lg-12 margin-t-20">
-                <h4> User Constituencies</h4>
+                <h4> User Sub Counties</h4>
                 <table class="table content-card">
                     <tbody>
                         <tr ng-repeat="child in user_constituencies">
@@ -40,7 +40,7 @@
                                 <span ng-if="child.delete_spinner">
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
                                 </span>
-                                <a popover-toggle popover-trigger="open" class="action-btn action-btn-grid action-btn-danger" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" tooltip="Remove constituency"
+                                <a popover-toggle popover-trigger="open" class="action-btn action-btn-grid action-btn-danger" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" tooltip="Remove Sub County"
                                 requires-permission="common.delete_userconstituency">
                                     <i class="fa fa-trash fw-500"></i>
                                 </a>
