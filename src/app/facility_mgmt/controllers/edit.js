@@ -547,38 +547,64 @@
                 if (_.isUndefined(f)){
                     return;
                 }
-                $scope.select_values = {
-                    town:{
-                        "id": f.facility_physical_address.town_id,
-                        "name": f.facility_physical_address.town
-                    }
-                };
+                if(angular.isDefined(f.facility_physical_address)) {
+                    $scope.select_values = {
+                        town:{
+                            "id": f.facility_physical_address.town_id,
+                            "name": f.facility_physical_address.town
+                        }
+                    };
+                } else {
+                    $scope.select_values = {
+                        town: null
+                    };
+                }
                 /*Save physical location details*/
                 $scope.savePhy = function (frm) {
                     var changes = formChanges.whatChanged(frm);
-                    if(!_.isEmpty(changes)){
-                        wrappers.physical_addresses
-                            .update($scope.facility.facility_physical_address.id, changes)
+                    //edit&create should go throuh here
+                    if(!_.isNull($scope.facility.physical_address)) {
+                        if(!_.isEmpty(changes)){
+                            wrappers.physical_addresses
+                                .update($scope.facility.facility_physical_address.id, changes)
+                                .success(function (data) {
+                                    $scope.$parent.facility.facility_physical_address = data;
+                                    if(!$scope.create){
+                                        $state.go("facilities.facility_edit.geolocation",
+                                        {"facility_id": $scope.facility_id}, {reload: true});
+                                    }else{
+                                        $scope.goToNext(7, "geolocation");
+                                    }
+                                })
+                                .error(function (error) {
+                                    $log.error(error);
+                                });
+                        }else {
+                            if(!$scope.create){
+                                $state.go("facilities.facility_edit.geolocation",
+                                {"facility_id": $scope.facility_id}, {reload: true});
+                            }else{
+                                $scope.goToNext(7, "geolocation");
+                            }
+                        }
+                    } else {
+                        wrappers.physical_addresses.create(changes)
                             .success(function (data) {
-                                $scope.$parent.facility.facility_physical_address = data;
-                                if(!$scope.create){
-                                    $state.go("facilities.facility_edit.geolocation",
-                                    {"facility_id": $scope.facility_id}, {reload: true});
-                                }else{
-                                    $scope.goToNext(7, "geolocation");
-                                }
+                                wrappers.facility_detail.update(
+                                    $state.params.facility_id,
+                                    {"physical_address" : data.id})
+                                    .success(function () {
+                                        $scope.goToNext(7, "geolocation");
+                                    })
+                                    .error(function (error) {
+                                        $log.error(error);
+                                    });
                             })
                             .error(function (error) {
                                 $log.error(error);
                             });
-                    }else {
-                        if(!$scope.create){
-                            $state.go("facilities.facility_edit.geolocation",
-                            {"facility_id": $scope.facility_id}, {reload: true});
-                        }else{
-                            $scope.goToNext(7, "geolocation");
-                        }
                     }
+
                 };
             });
         }])
@@ -632,6 +658,12 @@
                 if (_.isUndefined(f)){
                     return;
                 }
+
+                // Experimental
+                if (_.isUndefined(f.coordinates) || _.isNull(f.coordinates)){
+                    return;
+                }
+
                 /*facility's coordinates*/
                 wrappers.facility_coordinates.get(f.coordinates)
                 .success(function(data){

@@ -92,6 +92,9 @@
     <a ui-sref="facilities.facility_edit.location" ng-if="!create" class="login-btn login-btn-primary margin-t-10 margin-b-10">
         &nbsp;<i class="fa fa-angle-double-left"></i> Location
     </a>
+    <a ui-sref="facilities.facility_create.location({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-10 margin-b-10">
+        &nbsp;<i class="fa fa-angle-double-left"></i> Location
+    </a>
     <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary margin-t-10 margin-b-10 pull-right" >
-        &nbsp;Update <i class="fa fa-angle-double-right"></i>
+        &nbsp;{{create ? 'Submit' : 'Update'}} <i class="fa fa-angle-double-right"></i>
     </button>

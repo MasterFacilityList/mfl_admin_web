@@ -36,4 +36,10 @@
         </div>
         <p  class="text-center step-label" ng-class="{'step-label-active': steps[5].active, ' step-label-done' : steps[5].done || steps[5].furthest}"  ng-click="tabState(steps[5])">Location</p>
     </li>
+    <li ui-sref-active="active" class="col-xs-2 text-center">
+        <div class="progress-badge" ng-class="{'progress-badge-active': steps[6].active, 'progress-badge-done' : steps[6].done || steps[6].furthest}" ng-click="tabState(steps[6])">
+            7
+        </div>
+        <p  class="text-center step-label" ng-class="{'step-label-active': steps[6].active, ' step-label-done' : steps[6].done || steps[6].furthest}"  ng-click="tabState(steps[6])">Geolocation</p>
+    </li>
 </ul>
