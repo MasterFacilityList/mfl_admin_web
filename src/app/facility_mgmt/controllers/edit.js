@@ -125,11 +125,12 @@
                     $log.error(data);
                 });
             $scope.login_user = loginService.getUser();
-            $scope.selectReload = function (wrapper, order_field, search_term, scope_var) {
+            $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
                 if (_.isEmpty(search_term) || (! _.isString(search_term))) {
                     return $q.reject();
                 }
-                return wrapper.filter({"search_auto": search_term})
+                var filters = {"search_auto": search_term};
+                return wrapper.filter(_.extend(filters, extra_filters))
                 .success(function (data) {
                     $scope[scope_var] = data.results;
                 })
@@ -166,21 +167,21 @@
                 $scope.nextState();
             }
             $scope.reloadOwners = function (s) {
-                return $scope.selectReload(wrappers.facility_owners, "name", s, "owners");
+                return $scope.selectReload(wrappers.facility_owners, s, "owners");
             };
 
             $scope.reloadFacilityTypes = function (s) {
-                return $scope.selectReload(wrappers.facility_types, "name", s, "facility_types");
+                return $scope.selectReload(wrappers.facility_types, s, "facility_types");
             };
 
             $scope.reloadOperationStatus = function (s) {
-                return $scope.selectReload(
-                    wrappers.operation_status, "name", s, "operation_status"
-                );
+                return $scope.selectReload(wrappers.operation_status, s, "operation_status");
             };
 
             $scope.reloadWards = function (s) {
-                return $scope.selectReload(wrappers.wards, "name", s, "wards");
+                return $scope.selectReload(
+                    wrappers.wards, s, "wards", {"constituency": $scope.login_user.constituency}
+                );
             };
 
             $scope.save = function (frm) {
@@ -549,9 +550,7 @@
                     openstreetmap: {
                         url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                         options: {
-                            opacity: 0.7,
-                            attribution: "&copy; <a href='http://www.openstreetmap.org/"+
-                            "copyright'>OpenStreetMap</a> contributors"
+                            opacity: 0.2
                         }
                     }
                 }
@@ -566,6 +565,54 @@
                     $log.error(error);
                 });
 
+            /*Wait for facility to be defined*/
+            $scope.$watch("facility", function (f) {
+                if (_.isUndefined(f)){
+                    return;
+                }
+                $scope.select_values = {
+                    town:{
+                        "id": f.facility_physical_address.town_id,
+                        "name": f.facility_physical_address.town
+                    }
+                };
+                /*Save physical location details*/
+                $scope.savePhy = function (frm) {
+                    var changes = formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        wrappers.physical_addresses
+                            .update($scope.facility.facility_physical_address.id, changes)
+                            .success(function (data) {
+                                $scope.$parent.facility.facility_physical_address = data;
+                            })
+                            .error(function (error) {
+                                $log.error(error);
+                            });
+                    }
+                };
+            });
+        }])
+
+    .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
+        ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
+        "mfl.common.services.multistep", "mfl.common.forms.changes",
+        function ($scope,wrappers,$log, leafletData, multistepService,
+            formChanges) {
+            /*Setup for map data*/
+            angular.extend($scope, {
+                defaults: {
+                    scrollWheelZoom: false
+                },
+                layers:{},
+                tiles:{
+                    openstreetmap: {
+                        url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        options: {
+                            opacity: 0.2
+                        }
+                    }
+                }
+            });
             /*Fetch geo code methods*/
             wrappers.geo_code_methods.list()
                 .success(function (data) {
@@ -672,27 +719,12 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
-
-                /*Save physical location details*/
-                $scope.savePhy = function (frm) {
-                    var changes = formChanges.whatChanged(frm);
-                    if(!_.isEmpty(changes)){
-                        wrappers.physical_addresses
-                            .update($scope.facility.facility_physical_address.id, changes)
-                            .success(function (data) {
-                                $scope.$parent.facility.facility_physical_address = data;
-                            })
-                            .error(function (error) {
-                                $log.error(error);
-                            });
-                    }
-                };
-
                 /*Save geolocation details*/
                 $scope.saveGeo = function (frm) {
                     var spinner1 = true;
                     var changes = formChanges.whatChanged(frm);
                     if(!_.isEmpty(changes)){
+                        console.log(changes);
                         wrappers.facility_coordinates
                             .update($scope.facility.coordinates,changes)
                             .success(function (data) {
@@ -705,7 +737,6 @@
                             });
                     }
                 };
-
                 /*update marker position*/
                 $scope.checkLocation = function  (coords) {
                     angular.extend($scope,{
@@ -720,11 +751,6 @@
                     });
                 };
             });
-        }])
-
-        .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
-        ["$scope", function ($scope) {
-            $scope.title = "Geolocation";
         }]);
 
 })(angular, _);

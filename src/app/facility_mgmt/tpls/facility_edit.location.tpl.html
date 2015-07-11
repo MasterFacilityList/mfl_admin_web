@@ -1,5 +1,5 @@
-<div class="col-sm-12 detail-content">
-    <div class="col-sm-12 content-card form-card margin-t-20">
+<div class="col-sm-12">
+    <div class="col-sm-12 custom-well form-card margin-t-20">
         <div class="col-sm-12">
             <h4 class="fw-600 fs-18"> Physical details</h4>
         </div>
@@ -10,7 +10,7 @@
                     <ui-select-match placeholder="Select a town...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="town.id as town in towns">
+                    <ui-select-choices repeat="town.id as town in towns | filter:$select.search">
                         <span>{{town.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -47,112 +47,10 @@
            </div>
         </form>
     </div>
-    
+
     <div class="row">
        <div class="col-xs-12">
            <button type="submit" requires-permission="common.add_physicaladdress,facilities.change_facility" ng-click="savePhy(phyForm)" class="login-btn login-btn-primary" >Save physical details</button>
        </div>
     </div>
-
-   <div class="col-sm-12 content-card form-card margin-t-20">
-        <div class="col-sm-12">
-            <h4 class="fw-600 fs-18"> Geolocation details</h4>
-        </div>
-        <form name="geoForm">
-            <div class="margin-t-50">
-                   <div ng-if="spinner1">
-                       <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
-                   </div>
-                   <div ng-if="!spinner1">
-                        <form name="geoForm">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                       <div class="col-md-12">
-                                            <div class="group">
-                                                <input type="number" step="0.00000001" name="coordinates.coordinates[0]" ng-model="geo.coordinates.coordinates[0]"/>
-                                                <span class="highlight"></span>
-                                                <span class="bar"></span>
-                                                <label>
-                                                    Longitude
-                                                </label>
-                                            </div>
-                                       </div>
-                                       <div class="col-md-12">
-                                            <div class="group">
-                                                <input type="number" step="0.00000001" name="coordinates.coordinates[1]" ng-model="geo.coordinates.coordinates[1]" />
-                                                <span class="highlight"></span>
-                                                <span class="bar"></span>
-                                                <label>
-                                                    Latitude
-                                                </label>
-                                            </div>
-                                       </div>
-                                       <div class="col-md-12">
-                                           <button class="login-btn login-btn-default" ng-click="checkLocation(geo.coordinates)"> Show facility location on map</button>
-                                       </div>
-                                    </div>
-                                    <div class="row margin-t-20">
-                                        <div class="col-md-12">
-                                            <label>Geocode source</label>
-                                            <ui-select ng-model="select_values.source" required>
-                                                <ui-select-match placeholder="Select a geo code source...">
-                                                    <span>{{$select.selected.name}}</span>
-                                                </ui-select-match>
-                                                <ui-select-choices repeat="gcm in geo_sources">
-                                                    <span>{{gcs.name}}</span>
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Geocode method</label>
-                                            <ui-select ng-model="select_values.method" required>
-                                                <ui-select-match placeholder="Select a geo code method...">
-                                                    <span>{{$select.selected.name}}</span>
-                                                </ui-select-match>
-                                                <ui-select-choices repeat="gcm in geo_methods">
-                                                    <span>{{gcm.name}}</span>
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                    </div>
-                                    <div class="row margin-t-10">
-                                        <div class="col-md-12">
-                                            <label for="collection date" style="min-height:220px">
-                                                <span class="fs-16">Collection date:</span>
-                                                    <date-picker
-                                                        placeholder="collection date"
-                                                        name="collection_date"
-                                                        ng-model="geo.collection_date"
-                                                        min-date="minDate"
-                                                        show-weeks="true"
-                                                        custom-class="getDayClass(date, mode)">
-                                                    </date-picker>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                   <div>
-                                    <h4>{{ward_gis.properties.name | titlecase}} Ward</h4>
-                                   </div>
-                                    <leaflet id="wardmap"
-                                        defaults="defaults"
-                                        markers="markers"
-                                        layers="layers"
-                                        tiles="tiles"
-                                        width="100%"
-                                        height="300px"
-                                        geojson="geojson">
-                                     </leaflet>
-                                </div>
-                            </div>
-                        </form>
-                   </div>
-            </div>
-        </form>
-    </div>
-    <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary" >Save geolocation details</button>
 </div>
