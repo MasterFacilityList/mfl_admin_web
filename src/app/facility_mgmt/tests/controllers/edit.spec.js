@@ -2240,7 +2240,7 @@
     });
     describe("Edit facility", function () {
         var rootScope, ctrl, httpBackend, server_url, loginService, log,
-            yusa, controller, multistepService,leafletData;
+            yusa, controller, multistepService,leafletData, state;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
@@ -2249,8 +2249,9 @@
             module("mfl.facility_mgmt.controllers");
             module("leaflet-directive");
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
-                "mfl.auth.services.login", "$log","leafletData","mfl.common.services.multistep",
-                function (c, r, h, s, ls, lg, ld, ms) {
+                "mfl.auth.services.login", "$log","leafletData",
+                "mfl.common.services.multistep", "$state",
+                function (c, r, h, s, ls, lg, ld, ms, st) {
                     ctrl = function (name, data) {
                         return c("mfl.facility_mgmt.controllers.facility_edit"+name, data);
                     };
@@ -2259,6 +2260,7 @@
                     leafletData = ld;
                     httpBackend = h;
                     server_url = s;
+                    state = st;
                     multistepService = ms;
                     loginService = ls;
                     yusa = {
@@ -2317,9 +2319,10 @@
                         "$stateParams": {
                             facility_id: 4
                         },
+                        "$state": state,
                         "mfl.common.services.multistep" : multistepService
                     };
-
+                    spyOn(state, "go");
                     data.$scope.steps = [
                         {name : "basic"},
                         {name : "contacts"},
@@ -2360,7 +2363,76 @@
                             "$$modelValue": "test"
                         }
                     };
+                    data.$scope.$parent.facility = {
+                        facility_physical_address : {name : "MC"}
+                    };
+                    data.$scope.create = false;
+                    data.$scope.goToNext = angular.noop;
+                    data.$scope.savePhy(frm);
 
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }]);
+            });
+            //test that updates location during facility creation
+            it("should save physical location details: creation", function () {
+                inject(["mfl.common.services.multistep",
+                    function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "$state": state,
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    spyOn(state, "go");
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    httpBackend
+                        .expectGET(server_url+"api/common/towns/")
+                        .respond(200, {results: []});
+                    ctrl(".location", data);
+                    data.$scope.$apply();
+                    data.$scope.facility={
+                        coordinates : "3",
+                        ward : "3",
+                        facility_physical_address:{
+                            address : "ZUZU",
+                            postal_code: "254",
+                            id: "3"
+                        }
+                    };
+                    data.$scope.$apply();
+                    data.$scope.$digest();
+
+                    httpBackend.flush();
+
+                    httpBackend.resetExpectations();
+
+                    httpBackend
+                        .expectPATCH(server_url+"api/common/address/3/")
+                        .respond(204, {results: []});
+                    var frm = {
+                        "$dirty": true,
+                        "name": {
+                            "$dirty": true,
+                            "$$modelValue": "test"
+                        }
+                    };
+                    data.$scope.$parent.facility = {
+                        facility_physical_address : {name : "MC"}
+                    };
+                    data.$scope.create = true;
+                    data.$scope.goToNext = angular.noop;
                     data.$scope.savePhy(frm);
 
                     httpBackend.flush();
@@ -2378,8 +2450,10 @@
                         "$stateParams": {
                             facility_id: 4
                         },
+                        "$state": state,
                         "mfl.common.services.multistep" : multistepService
                     };
+                    spyOn(state, "go");
                     data.$scope.steps = [
                         {name : "basic"},
                         {name : "contacts"},
@@ -2389,6 +2463,7 @@
                         {name : "units"},
                         {name : "location"}
                     ];
+                    data.$scope.create = false;
                     httpBackend
                         .expectGET(server_url+"api/common/towns/")
                         .respond(200, {results: []});
@@ -2431,7 +2506,7 @@
 
                 }]);
             });
-
+            //empty form on edit path
             it("should not save physical location details", function () {
                 inject(["mfl.common.services.multistep","mfl.common.forms.changes",
                     function (multistepService,formChanges) {
@@ -2440,9 +2515,11 @@
                         "$stateParams": {
                             facility_id: 4
                         },
+                        "$state" : state,
                         "mfl.common.services.multistep" : multistepService,
                         "mfl.common.forms.changes": formChanges
                     };
+                    spyOn(state, "go");
                     data.$scope.steps = [
                         {name : "basic"},
                         {name : "contacts"},
@@ -2452,6 +2529,66 @@
                         {name : "units"},
                         {name : "location"}
                     ];
+                    data.$scope.create = false;
+                    httpBackend
+                        .expectGET(server_url+"api/common/towns/")
+                        .respond(200, {results: []});
+                    ctrl(".location", data);
+                    data.$scope.$apply();
+                    data.$scope.facility={
+                        coordinates : "3",
+                        ward : "3",
+                        facility_physical_address:{
+                            address : "ZUZU",
+                            postal_code: "254",
+                            id: "3"
+                        }
+                    };
+                    data.$scope.$apply();
+                    data.$scope.$digest();
+
+                    httpBackend.flush();
+
+                    var frm = {
+                        "$dirty": false,
+                        "name": {
+                            "$dirty": false,
+                            "$$modelValue": "test"
+                        }
+                    };
+
+                    data.$scope.savePhy(frm);
+
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }]);
+            });
+            //end of test
+            it("should not save physical location details", function () {
+                inject(["mfl.common.services.multistep","mfl.common.forms.changes",
+                    function (multistepService,formChanges) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "$state" : state,
+                        "mfl.common.services.multistep" : multistepService,
+                        "mfl.common.forms.changes": formChanges
+                    };
+                    spyOn(state, "go");
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    data.$scope.create = true;
+                    data.$scope.nextState = angular.noop;
+                    data.$scope.goToNext = angular.noop;
                     httpBackend
                         .expectGET(server_url+"api/common/towns/")
                         .respond(200, {results: []});
@@ -2539,6 +2676,8 @@
                     var coords = {
                         coordinates : [0,1]
                     };
+                    data.$scope.create = true;
+                    data.$scope.nextState = angular.noop;
                     data.$scope.steps = [
                         {name : "basic"},
                         {name : "contacts"},

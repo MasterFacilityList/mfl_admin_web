@@ -506,9 +506,9 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
-        "mfl.common.services.multistep", "mfl.common.forms.changes",
+        "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
         function ($scope,wrappers,$log, leafletData, multistepService,
-            formChanges) {
+            formChanges, $state) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[5]);
@@ -561,10 +561,23 @@
                             .update($scope.facility.facility_physical_address.id, changes)
                             .success(function (data) {
                                 $scope.$parent.facility.facility_physical_address = data;
+                                if(!$scope.create){
+                                    $state.go("facilities.facility_edit.geolocation",
+                                    {"facility_id": $scope.facility_id}, {reload: true});
+                                }else{
+                                    $scope.goToNext(7, "geolocation");
+                                }
                             })
                             .error(function (error) {
                                 $log.error(error);
                             });
+                    }else {
+                        if(!$scope.create){
+                            $state.go("facilities.facility_edit.geolocation",
+                            {"facility_id": $scope.facility_id}, {reload: true});
+                        }else{
+                            $scope.goToNext(7, "geolocation");
+                        }
                     }
                 };
             });
@@ -576,6 +589,12 @@
         function ($scope,wrappers,$log, leafletData, multistepService,
             formChanges) {
             /*Setup for map data*/
+            if(!$scope.create) {
+                multistepService.filterActive(
+                    $scope, $scope.steps, $scope.steps[6]);
+            }else{
+                $scope.nextState();
+            }
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false
