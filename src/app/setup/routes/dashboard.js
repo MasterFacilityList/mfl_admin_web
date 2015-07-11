@@ -18,7 +18,7 @@
                 },
                 data : { pageTitle: "System Setup"},
                 redirectTo: "setup.counties",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             });
     }]);
 })(angular);

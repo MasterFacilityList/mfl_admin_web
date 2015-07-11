@@ -11,7 +11,7 @@
         <th>Code</th>
         <th>Name</th>
         <th>County</th>
-        <th>Constituency</th>
+        <th>Sub County</th>
         <th>Owner</th>
         <th>Facility Type</th>
         <th class="text-center">Actions</th>
@@ -21,12 +21,12 @@
             <td data-title="Code:" class="pad-t-15">{{fac.code}}</td>
             <td data-title="Name:" class="pad-t-15">{{fac.name}}</td>
             <td data-title="County:"class="pad-t-15"> {{fac.county}}</td>
-            <td data-title="Constituency:" class="pad-t-15">{{fac.constituency}}</td>
+            <td data-title="Sub County:" class="pad-t-15">{{fac.constituency}}</td>
             <td data-title="Owner:" class="pad-t-15">{{fac.owner_name}}</td>
             <td data-title="Facility Type:" class="pad-t-15">{{fac.facility_type_name}}</td>
             <td data-title="Actions:"  class="text-right">
                 <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
-                    class="login-btn login-btn-primary">
+                    class="login-btn login-btn-action">
                     &nbsp;View
                 </a>
             </td>

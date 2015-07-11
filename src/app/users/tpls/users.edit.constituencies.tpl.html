@@ -10,7 +10,7 @@
                </div>
           </div>
             <div class="col-lg-12 margin-t-20" requires-permission="common.add_userconstituency" >
-                <h4>Assign Sub-county</h4>
+                <h4>Assign Sub County</h4>
                 <form ng-submit="add(new_constituency)">
                     <table class="table custom-well  margin-b-10">
                         <tbody>
@@ -18,7 +18,7 @@
                                 <td class="pad-t-15">
                                     <div class="group">
                                     <select name="constituency" ng-model="new_constituency" class="pad-t-15" required>
-                                        <option value="">Select Sub-county</option>
+                                        <option value="">Select Sub County</option>
                                         <option ng-repeat="cnst in constituencies" ng-value="cnst.id">{{cnst.name}}</option>
                                     </select>
                                     <span class="highlight"></span>
@@ -26,7 +26,7 @@
                                     </div>
                                 </td>
                                 <td class="text-right pad-t-15">
-                                    <button ng-disabled="new_constituency===''" type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Assign Sub-county">
+                                    <button ng-disabled="new_constituency===''" type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Assign Sub County">
                                         <i class="fa fa-plus-circle"></i> Add
                                     </button>
                                 </td>
@@ -38,7 +38,7 @@
 
             <div class="col-lg-12 margin-t-20">
                 <div ng-show="user_constituencies.length > 0">
-                    <h4> User's Sub-counties</h4>
+                    <h4> User's Sub County</h4>
                     <table class="table custom-well">
                         <tbody>
                             <tr ng-repeat="child in user_constituencies">

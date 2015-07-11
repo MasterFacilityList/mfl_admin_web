@@ -15,7 +15,8 @@
                         templateUrl: "setup/tpls/facilities/owners/facility-owners-list.tpl.html"
                     }
                 },
-                permission: "facilities.view_owner"
+                permission: "facilities.view_owner",
+                userFeature: "is_national"
             })
 
         .state("setup.facility_owners.view", {
@@ -27,7 +28,8 @@
                                         "facility-owners-view.tpl.html"
                     }
                 },
-                permission: "facilities.view_owner"
+                permission: "facilities.view_owner",
+                userFeature: "is_national"
             })
             .state("setup.facility_owners.view.delete", {
                 url: "/delete",
@@ -36,7 +38,8 @@
                         controller: "mfl.setup.controller.facilityOwner.view",
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
-                }
+                },
+                userFeature: "is_national"
             })
         .state("setup.facility_owners.create", {
                 url: "/create",
@@ -48,7 +51,7 @@
                     }
                 },
                 permission: "facilities.add_owner",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
 
         /** -----------------------------------------------------------**/
@@ -64,7 +67,8 @@
                                         "facility-owner-types-list.tpl.html"
                     }
                 },
-                permission: "facilities.view_ownertype"
+                permission: "facilities.view_ownertype",
+                userFeature: "is_national"
             })
 
         .state("setup.facility_owner_types.view", {
@@ -76,7 +80,8 @@
                                         "facility-owner-types-view.tpl.html"
                     }
                 },
-                permission: "facilities.view_ownertype"
+                permission: "facilities.view_ownertype",
+                userFeature: "is_national"
             })
         .state("setup.facility_owner_types.view.delete", {
                 url: "/delete",
@@ -87,7 +92,7 @@
                     }
                 },
                 permission: "facilities.delete_ownertype",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_owner_types.create", {
                 url: "/create",
@@ -99,7 +104,7 @@
                     }
                 },
                 permission: "facilities.add_ownertype",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
 
          /** -----------------------------------------------------------**/
@@ -114,7 +119,8 @@
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-list.tpl.html"
                     }
                 },
-                permission: "facilities.view_jobtitle"
+                permission: "facilities.view_jobtitle",
+                userFeature: "is_national"
             })
 
         .state("setup.facility_job_titles.view", {
@@ -125,7 +131,8 @@
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
                 },
-                permission: "facilities.view_jobtitle"
+                permission: "facilities.view_jobtitle",
+                userFeature: "is_national"
             })
         .state("setup.facility_job_titles.view.delete", {
                 url: "/delete",
@@ -136,7 +143,7 @@
                     }
                 },
                 permission: "facilities.delete_jobtitle",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_job_titles.create", {
                 url: "/create",
@@ -147,7 +154,7 @@
                     }
                 },
                 permission: "facilities.add_jobtitle",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
 
          /** -----------------------------------------------------------**/
@@ -164,7 +171,8 @@
                                     "regulatory-bodies-list.tpl.html"
                     }
                 },
-                permission: "facilities.view_regulatingbody"
+                permission: "facilities.view_regulatingbody",
+                userFeature: "is_national"
             })
         .state("setup.facility_regulatory_bodies.edit", {
                 url: "/:id",
@@ -175,7 +183,8 @@
                                     "regulatory-bodies-view.tpl.html"
                     }
                 },
-                permission: "facilities.view_regulatingbody"
+                permission: "facilities.view_regulatingbody",
+                userFeature: "is_national"
             })
         .state("setup.facility_regulatory_bodies.edit.delete", {
                 url: "/delete",
@@ -186,7 +195,7 @@
                     }
                 },
                 permission: "facilities.delete_regulatingbody",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_regulatory_bodies.edit.basic", {
                 url: "/basicdetails",
@@ -196,7 +205,8 @@
                         "regulatory-body-main-form.tpl.html"
                     }
                 },
-                permission: "facilities.view_regulatingbody"
+                permission: "facilities.view_regulatingbody",
+                userFeature: "is_national"
             })
         .state("setup.facility_regulatory_bodies.edit.contacts", {
                 url: "/contacts",
@@ -206,7 +216,8 @@
                         "regulatory-body-contacts-form.tpl.html"
                     }
                 },
-                permission: "facilities.view_regulatingbodycontact"
+                permission: "facilities.view_regulatingbodycontact",
+                userFeature: "is_national"
             })
         .state("setup.facility_regulatory_bodies.create", {
                 url: "/create",
@@ -218,7 +229,7 @@
                     }
                 },
                 permission: "facilities.add_regulatingbody",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_regulatory_bodies.create.basic", {
                 url: "/basicdetails",
@@ -229,7 +240,7 @@
                     }
                 },
                 permission: "facilities.add_regulatingbody",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_regulatory_bodies.create.contacts", {
                 url: "/:reg_cont_id/contacts",
@@ -240,7 +251,7 @@
                     }
                 },
                 permission: "facilities.add_regulatingbodycontact",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             });
     }]);
 })(angular);

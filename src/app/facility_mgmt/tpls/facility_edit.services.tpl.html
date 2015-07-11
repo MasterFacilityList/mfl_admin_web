@@ -4,7 +4,7 @@
             <h4 class="fw-600 fs-18">Add Service</h4>
         </div>
         <form name="frm_facility_services" ng-submit="addServiceOption(new_service.option)">
-                <div class="group col-sm-10">
+                <div class="group col-sm-5">
                     <select name="service" ng-model="new_service.service" required>
                         <option value="">Select a service</option>
                         <option ng-repeat="serv in services" ng-value="serv.id">{{serv.name}}</option>
@@ -12,7 +12,7 @@
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
-                <div class="group col-sm-10">
+                <div class="group col-sm-5">
                     <select name="service_option" ng-model="new_service.option" required>
                         <option value="">Select an option</option>
                         <option ng-repeat="serv_opt in service_options" ng-value="serv_opt.id">{{serv_opt.display_text}}</option>
@@ -20,41 +20,41 @@
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
-                <div class="col-sm-12 margin-b-10">
-                    <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add Service">
+                <div class="col-sm-2 margin-b-10 pull-right" style="padding: 0 25px;">
+                    <button type="submit" class="login-btn login-btn-primary margin-t-10 pull-right" tooltip="Add Service">
                         &nbsp;<i class="fa fa-plus-circle"></i> Add
                     </button>
                 </div>
         </form>
     </div>
-    <div class="col-lg-12 content-card margin-t-20">
-       <h4 class="fw-600 fs-18">Current Services</h4>
+    <div class="col-xs-12 content-card margin-t-20">
+        <div class="col-xs-12">
+        <h4 class="fw-600 fs-18">Current Services</h4>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Value</th>
-                    <th>Average rating</th>
-                    <th colspan="2">Number of ratings</th>
-                    <th></th>
+                    <th class="col-xs-5"><span class="fs-16">Service</span></th>
+                    <th class="col-xs-5"><span class="fs-16">Option</span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="child in facility.facility_services">
-                    <td>{{child.service_name}}</td>
-                    <td>{{child.option_name}}</td>
-                    <td>{{child.average_rating}}</td>
-                    <td>{{child.number_of_ratings}}</td>
+                    <td class="col-xs-5">
+                        <span class="fs-15">{{child.service_name}}</span>
+                        <p class="fs-14 text-muted margin-b--5">Average rating {{child.average_rating}}/ {{child.number_of_ratings}} Ratings</p>
+                    </td>
+                    <td class="pad-t-15 col-xs-5">{{child.option_name}}</td>
                     <td class="text-right">
-                        <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open"
+                        <a class="login-btn login-btn-danger" popover-trigger="open"
                             popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Service"
                             requires-permission="facilities.delete_facilityservice">
-                            <i class="fa fa-trash fw-500"></i>
+                            &nbsp;Delete
                         </a>
                     </td>
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
     <!-- Begining of create navigation buttons -->
     <a ui-sref="facilities.facility_create.contacts({facility_id : new_facility})" ng-if="create"

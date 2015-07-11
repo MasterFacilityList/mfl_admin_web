@@ -27,7 +27,7 @@
                     <ui-select-match placeholder="Select a facility type...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="ft in facility_types" refresh-delay="500" refresh="reloadFacilityTypes($select.search)">
+                    <ui-select-choices repeat="ft in facility_types | filter:$select.search" refresh-delay="500">
                         <span>{{ft.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -39,7 +39,7 @@
                     <ui-select-match placeholder="Select an operation status...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="os in operation_status" refresh-delay="500" refresh="reloadOperationStatus($select.search)">
+                    <ui-select-choices repeat="os in operation_status | filter:$select.search" refresh-delay="500">
                         <span>{{os.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -47,11 +47,11 @@
 
             <div class="form-group col-xs-12">
                 <label>Owner</label>
-                <ui-select ng-model="select_values.owner" required ng-disabled="facility.id">
+                <ui-select ng-model="select_values.owner" required>
                     <ui-select-match placeholder="Select an owner...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="owner in owners" refresh-delay="500" refresh="reloadOwners($select.search)">
+                    <ui-select-choices repeat="owner in owners | filter:$select.search" refresh-delay="500">
                         <span>{{owner.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -63,7 +63,7 @@
                     <ui-select-match placeholder="Select a ward...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="ward in wards" refresh-delay="500" refresh="reloadWards($select.search)">
+                    <ui-select-choices repeat="ward in wards | filter:$select.search" refresh-delay="500">
                         <span>{{ward.name}}</span>
                     </ui-select-choices>
                 </ui-select>
