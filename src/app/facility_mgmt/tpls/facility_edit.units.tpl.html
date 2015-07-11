@@ -4,59 +4,49 @@
             <h4 class="fs-18 fw-600"> Add Facility Unit</h4>
         </div>
         <form ng-submit="add()">
-            <div class="group col-sm-10">
-                <input type="text" name="name" ng-model="facility_unit.name" required>
+            <div class="group col-sm-5">
+                <input type="text" name="name" ng-model="facility_unit.name" required class="margin-t-5">
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
                     Facility Unit Name
                 </label>
             </div>
-            <div class="group col-sm-10">
+            <div class="group col-sm-5">
                 <select name="unit" ng-model="facility_unit.regulating_body" class="pad-t-15" required>
-                    <option value="">Select Unit</option>
+                    <option value="">Select Regulating Body</option>
                     <option ng-repeat="unit in regbodies" ng-value="unit.id">{{unit.name}}</option>
                 </select>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
-            <div class="group col-sm-10">
-                <textarea name="description" ng-model="facility_unit.description" id="" cols="30" rows="2" required></textarea>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="margin-l-10">
-                    Description
-                </label>
-            </div>
-            <div class="col-sm-12">
-                <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip-placement="bottom" tooltip="Add Facility Unit">
+            <div class="col-sm-1 pull-right" style="padding: 0 20px;">
+                <button type="submit" class="login-btn login-btn-primary margin-t-10 pull-right" tooltip-placement="bottom" tooltip="Add Facility Unit">
                     <i class="fa fa-plus-circle"></i> Add
                 </button>
             </div>
         </form>
     </div>
     <div  class="content-card col-lg-12 margin-t-20">
+        <div class="col-xs-12">
         <h4 class="fs-18 fw-600"> Current Unit(s)</h4>
         <table class="table content-card margin-t-20 margin-b-10">
            <thead>
                <tr>
-                   <td><strong>Unit Name</strong></td>
-                   <td><strong>Regulating Body</strong></td>
-                   <td><strong>Description</strong></td>
-                   <td></td>
+                   <td class="col-xs-4"><strong class="fs-16">Unit Name</strong></td>
+                   <td class="col-xs-5"><strong class="fs-16">Regulating Body</strong></td>
                </tr>
            </thead>
             <tbody>
                 <tr ng-repeat="child in fac_units">
-                    <td class="pad-t-15 fs-16 fw-500">{{child.name}}</td>
-                    <td class="pad-t-15 fs-16 fw-500">{{child.regulating_body_name}}</td>
-                    <td class="pad-t-15 fs-16 fw-500">{{child.description}}</td>
+                    <td class="pad-t-15 fs-16 fw-500 col-xs-5">{{child.name}}</td>
+                    <td class="pad-t-15 fs-16 fw-500 col-xs-5">{{child.regulating_body_name}}</td>
                     <td class="pad-t-10 text-right">
                     <span ng-if="child.delete_spinner">
                         <i class="fa fa-spin fa-circle-o-notch"></i>
                     </span>
-                        <a class="action-btn action-btn-grid action-btn-danger" tooltip-placement="bottom" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Unit">
-                            <i class="fa fa-trash fw-500"></i>
+                        <a class="login-btn login-btn-danger" tooltip-placement="bottom" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Unit">
+                            &nbsp;Delete
                         </a>
                     </td>
                 </tr>
@@ -67,6 +57,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
     <!-- Start of create buttons -->
     <a ui-sref="facilities.facility_create.officers({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">

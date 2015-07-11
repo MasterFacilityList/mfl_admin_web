@@ -426,6 +426,8 @@
             /*add existing regulatory to facility*/
             $scope.add = function () {
                 $scope.spinner = true;
+                $scope.facility_unit.description =
+                    $scope.facility_unit.description || "Description";
                 wrappers.facility_units.create({
                         "facility": $scope.facility_id,
                         "regulating_body": $scope.facility_unit.regulating_body,
