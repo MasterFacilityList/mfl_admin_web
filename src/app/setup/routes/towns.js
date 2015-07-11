@@ -15,7 +15,8 @@
                         templateUrl: "setup/tpls/towns/towns.tpl.html"
                     }
                 },
-                permission: "common.view_town"
+                permission: "common.view_town",
+                userFeature: "is_national"
             })
             .state("setup.towns.town_edit", {
                 url: "/edit/:town_id",
@@ -25,7 +26,8 @@
                         templateUrl: "setup/tpls/towns/towns.edit.tpl.html"
                     }
                 },
-                permission: "common.view_town"
+                permission: "common.view_town",
+                userFeature: "is_national"
             })
             .state("setup.towns.town_edit.delete", {
                 url: "/delete",
@@ -36,7 +38,7 @@
                     }
                 },
                 permission: "common.delete_town",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.towns.town_create", {
                 url: "/create",
@@ -47,7 +49,7 @@
                     }
                 },
                 permission: "common.add_town",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             });
     }]);
 })(angular);

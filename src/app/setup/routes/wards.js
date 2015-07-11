@@ -15,7 +15,8 @@
                         templateUrl: "setup/tpls/wards/wards.tpl.html"
                     }
                 },
-                permission: "common.view_ward"
+                permission: "common.view_ward",
+                userFeature: "is_national"
             });
     }]);
 })(angular);
