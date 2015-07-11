@@ -1485,13 +1485,12 @@
 
                 data.$scope.facility_unit = {
                     "regulating_body": "3",
-                    "name": "name",
-                    "description": "description"
+                    "name": "name"
                 };
                 data.$scope.facility_id = "3";
                 httpBackend
                     .expectPOST(server_url + "api/facilities/facility_units/", {"facility": "3",
-                      "regulating_body": "3","name":"name","description":"description"})
+                      "regulating_body": "3","name":"name","description":"name"})
                     .respond(201, {"id": 5});
 
                 data.$scope.add();
@@ -1545,8 +1544,7 @@
                 data.$scope.facility_id = "3";
 
                 httpBackend
-                    .expectPOST(server_url + "api/facilities/facility_units/", {"facility": "3",
-                      "regulating_body": "3","name":"name","description":"description"})
+                    .expectPOST(server_url + "api/facilities/facility_units/")
                     .respond(500, {"id": 5});
 
                 data.$scope.add();
