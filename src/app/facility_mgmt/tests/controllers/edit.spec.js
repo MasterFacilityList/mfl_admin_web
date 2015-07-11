@@ -100,7 +100,8 @@
                     });
                 }])
             );
-            it("should delete facility",
+
+            it("should deactivate a facility",
                 inject(["mfl.facility.multistep.service", function (facObjService) {
                     var data = {
                         "$scope": rootScope.$new(),
@@ -166,9 +167,8 @@
                     httpBackend.resetExpectations();
 
                     httpBackend
-                        .expectDELETE(server_url+"api/facilities/facilities/" +
-                                   "3/")
-                        .respond(204, {results : []});
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(200, {});
 
                     data.$scope.remove();
 
@@ -178,7 +178,8 @@
 
                 }])
             );
-            it("should fail to delete facility",
+
+            it("should show error on fail to delete facility",
                 inject(["mfl.facility.multistep.service", function (facObjService) {
                     var data = {
                         "$scope": rootScope.$new(),
@@ -244,9 +245,8 @@
                     httpBackend.resetExpectations();
 
                     httpBackend
-                        .expectDELETE(server_url+"api/facilities/facilities/" +
-                                   "3/")
-                        .respond(500, {results : []});
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(500);
 
                     data.$scope.remove();
                     data.$scope.cancel();
@@ -2737,7 +2737,7 @@
 
                 }]);
             });
-            
+
             it("should expect map data to be loaded", function () {
                     var data = {
                         ward_boundary:{
