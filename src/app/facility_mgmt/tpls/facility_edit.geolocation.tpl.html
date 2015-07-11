@@ -1,7 +1,9 @@
 
-   <div class="col-sm-12 custom-well form-card margin-t-20">
+   <div class="col-sm-12 custom-well margin-t-20">
         <div class="col-sm-12">
-            <h4 class="fw-600 fs-18"> Geolocation details</h4>
+            <div class="col-xs-12">
+                <h4 class="fw-600 fs-18"> Geolocation Details</h4>
+            </div>
         </div>
         <form name="geoForm">
             <div class="margin-t-50">
@@ -12,33 +14,59 @@
                         <form name="geoForm">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="row">
-                                      <div class="col-md-6">
-                                           <div class="col-md-12">
-                                                <div class="group">
+                                    <div class="col-sm-12">
+                                        <!-- Start of form -->
+                                        <div class="form-group col-md-12">
+                                            <label>Geocode source</label>
+                                            <ui-select name="source" ng-model="select_values.source" required>
+                                                <ui-select-match placeholder="Select a geo code source...">
+                                                    <span>{{$select.selected.name}}</span>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="gcm.id as gcm in geo_sources | filter:$select.search">
+                                                    <span>{{gcm.name}}</span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Geocode method</label>
+                                            <ui-select name="method" ng-model="select_values.method" required>
+                                                <ui-select-match placeholder="Select a geo code method...">
+                                                    <span>{{$select.selected.name}}</span>
+                                                </ui-select-match>
+                                                <ui-select-choices repeat="gcm.id as gcm in geo_methods | filter:$select.search">
+                                                    <span>{{gcm.name}}</span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="collection date">
+                                                <span class="fs-16">Collection date:</span>
+                                                    <strong>{{geo.collection_date | date}}</strong>
+                                            </label>
+                                        </div>
+                                    <!-- End of first section of form -->
+                                    <!-- Start lat long -->
+                                                <div class="group col-sm-6">
                                                     <input type="number" step="0.00000001" name="coordinates.coordinates[0]" ng-model="geo.coordinates.coordinates[0]"/>
                                                     <span class="highlight"></span>
                                                     <span class="bar"></span>
-                                                    <label>
+                                                    <label class="margin-l-10">
                                                         Longitude
                                                     </label>
                                                 </div>
-                                           </div>
-                                           <div class="col-md-12">
-                                                <div class="group">
+                                                <div class="group col-sm-6">
                                                     <input type="number" step="0.00000001" name="coordinates.coordinates[1]" ng-model="geo.coordinates.coordinates[1]" />
                                                     <span class="highlight"></span>
                                                     <span class="bar"></span>
-                                                    <label>
+                                                    <label class="margin-l-10">
                                                         Latitude
                                                     </label>
                                                 </div>
-                                           </div>
                                            <div class="col-md-12">
                                                <button class="login-btn login-btn-default" ng-click="checkLocation(geo.coordinates)"> Show facility location on map</button>
                                            </div>
-                                      </div>
-                                    <div class="col-md-6">
+                                      <!-- End lat long -->
+                                    <div class="col-md-12 margin-t-10 margin-b-20">
                                        <div>
                                         <h4>{{ward_gis.properties.name | titlecase}} Ward</h4>
                                        </div>
@@ -53,40 +81,7 @@
                                          </leaflet>
                                     </div>
                                     </div>
-                                    <div class="row margin-t-50">
-                                        <div class="col-md-12">
-                                            <label>Geocode source</label>
-                                            <ui-select name="source" ng-model="select_values.source" required>
-                                                <ui-select-match placeholder="Select a geo code source...">
-                                                    <span>{{$select.selected.name}}</span>
-                                                </ui-select-match>
-                                                <ui-select-choices repeat="gcm.id as gcm in geo_sources | filter:$select.search">
-                                                    <span>{{gcm.name}}</span>
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Geocode method</label>
-                                            <ui-select name="method" ng-model="select_values.method" required>
-                                                <ui-select-match placeholder="Select a geo code method...">
-                                                    <span>{{$select.selected.name}}</span>
-                                                </ui-select-match>
-                                                <ui-select-choices repeat="gcm.id as gcm in geo_methods | filter:$select.search">
-                                                    <span>{{gcm.name}}</span>
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                    </div>
-                                    <div class="row margin-t-10">
-                                        <div class="col-md-12">
-                                            <label for="collection date">
-                                                <span class="fs-16">Collection date:</span>
-                                                    <strong>{{geo.collection_date | date}}</strong>
-                                            </label>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </form>
@@ -94,4 +89,9 @@
             </div>
         </form>
     </div>
-    <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary" >Save geolocation details</button>
+    <a ui-sref="facilities.facility_edit.location" ng-if="!create" class="login-btn login-btn-primary margin-t-10 margin-b-10">
+        &nbsp;<i class="fa fa-angle-double-left"></i> Location
+    </a>
+    <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary margin-t-10 margin-b-10 pull-right" >
+        &nbsp;Update <i class="fa fa-angle-double-right"></i>
+    </button>
