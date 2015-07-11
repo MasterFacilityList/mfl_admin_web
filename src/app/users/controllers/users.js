@@ -542,6 +542,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.error =  "A user can only be active in only one sub-county at a time";
                     $scope.spinner = false;
                 });
             };
