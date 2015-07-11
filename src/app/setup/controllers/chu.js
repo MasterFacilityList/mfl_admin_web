@@ -16,7 +16,6 @@
                            " requires-user-feature='is_staff'" +
                            " requires-permission='chul.add_status'",
                     class: "action-btn action-btn-primary action-btn-md",
-
                     tipmsg: "Add community unit status",
                     icon: "fa-plus"
                 }

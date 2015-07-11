@@ -24,6 +24,7 @@
                 };
 
                 var html = _.reduce(scope.action, function (memo, val) {
+                    val.wording = val.wording || "";
                     return memo + link_to_html(val);
                 }, "");
                 if (_.isUndefined(attrs.hideBackButton)) {
