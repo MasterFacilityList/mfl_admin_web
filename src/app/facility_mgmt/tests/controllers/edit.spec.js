@@ -29,7 +29,6 @@
                     yusa = {
                         county: "123"
                     };
-                    spyOn(loginService, "getUser").andReturn();
                     log = lg;
                 }
             ]);
@@ -260,26 +259,30 @@
                 }])
             );
 
-            it("should not reload on invalid search term", function () {
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "$stateParams": {
-                        facility_id: 3
-                    }
-                };
-                httpBackend
-                    .expectGET(server_url+"api/facilities/facilities/3/")
-                    .respond(200, {});
+            it("should data", function () {
+                inject(["mfl.facility_mgmt.services.wrappers", function (wrappers) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "$stateParams": {
+                            facility_id: 3
+                        }
+                    };
+                    state.params.facility_id = "";
+                    ctrl("", data);
 
-                ctrl("", data);
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facility_status/?")
+                        .respond(200, {});
 
-                data.$scope.selectReload();
-                data.$scope.selectReload(null, null, 3);
+                    data.$scope.selectReload();
+                    data.$scope.selectReload(null, null, 3);
+                    data.$scope.selectReload(wrappers.operation_status, "", "ops");
 
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+                }]);
             });
 
             it("should show error on fail to load facility details", function () {
@@ -378,29 +381,10 @@
 
         describe("Test facility edit basic controller", function () {
 
-            it("should reload required data", function () {
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "$stateParams": {
-                        facility_id: 3
-                    }
-                };
-                data.$scope.facility = {};
-                data.$scope.login_user = yusa;
-                data.$scope.steps = [
-                    {name : "basic"},
-                    {name : "contacts"}
-                ];
-                ctrl(".basic", data);
-                data.$scope.selectReload = angular.noop;
-                spyOn(data.$scope, "selectReload");
-
-                data.$scope.reloadOwners("yeah");
-                data.$scope.reloadFacilityTypes("yeah");
-                data.$scope.reloadOperationStatus("yeah");
-                data.$scope.reloadWards("yeah");
-
-                expect(data.$scope.selectReload).toHaveBeenCalled();
+            beforeEach(function () {
+                spyOn(loginService, "getUser").andReturn({
+                    constituency: "123"
+                });
             });
 
             it("should not save if no changes made", function () {
@@ -412,8 +396,11 @@
                     }
                 };
                 spyOn(state, "go");
+
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
                 data.$scope.facility = {};
-                data.$scope.login_user = yusa;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -439,15 +426,17 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
-            it("should save facility basic details", function () {
+            it("should edit facility basic details", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
                     }
                 };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
                 data.$scope.facility = {};
-                data.$scope.login_user = yusa;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -487,9 +476,11 @@
                         facility_id: 3
                     }
                 };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
                 state.params.facility_id = "";
                 data.$scope.facility = {};
-                data.$scope.login_user = yusa;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -507,7 +498,7 @@
 
                 httpBackend
                     .expectPOST(server_url+"api/facilities/facilities/")
-                    .respond(204, {name : "Yitchouse"});
+                    .respond(201, {name : "Yitchouse"});
                 var frm = {
                     "$dirty": true,
                     "name": {
@@ -522,6 +513,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
+
             it("should save facility basic details: fail", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -530,9 +522,11 @@
                         facility_id: 3
                     }
                 };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
                 state.params.facility_id = "";
                 data.$scope.facility = {};
-                data.$scope.login_user = yusa;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -565,6 +559,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
+
             it("should save facility basic details: update", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -573,9 +568,11 @@
                         facility_id: 3
                     }
                 };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
                 state.params.facility_id = "3";
                 data.$scope.facility = {};
-                data.$scope.login_user = yusa;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -606,6 +603,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
+
             it("should save facility basic details: update, fail",function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -614,9 +612,11 @@
                         facility_id: 3
                     }
                 };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
                 state.params.facility_id = "3";
                 data.$scope.facility = {};
-                data.$scope.login_user = yusa;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -647,6 +647,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
+
             it("should save facility basic details: empty form",function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -655,10 +656,12 @@
                         facility_id: 3
                     }
                 };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
                 spyOn(state, "go");
                 state.params.facility_id = "3";
                 data.$scope.facility = {};
-                data.$scope.login_user = yusa;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -691,8 +694,10 @@
                         facility_id: 3
                     }
                 };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
                 data.$scope.facility = {};
-                data.$scope.login_user = yusa;
                 data.$scope.steps = [
                     {name : "basic"}
                 ];
