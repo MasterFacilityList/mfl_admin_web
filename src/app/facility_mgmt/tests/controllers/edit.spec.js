@@ -2375,8 +2375,183 @@
                     httpBackend.verifyNoOutstandingRequest();
                 }]);
             });
-            //test that updates location during facility creation
+            //creation of physical details
             it("should save physical location details: creation", function () {
+                inject(["mfl.common.services.multistep",
+                    function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "$state": state,
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    state.params.facility_id = "3";
+                    spyOn(state, "go");
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    ctrl(".location", data);
+                    data.$scope.$apply();
+                    data.$scope.facility={
+                        id : "3",
+                        coordinates : "3",
+                        ward : "3",
+                        physical_address: null
+                    };
+                    data.$scope.$apply();
+                    data.$scope.$digest();
+                    var rst_data = {id : "13"};
+                    httpBackend
+                        .expectPOST(server_url+"api/common/address/")
+                        .respond(204, {results: []});
+                    httpBackend
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(204, {"physical_address": rst_data.id});
+                    var frm = {
+                        "$dirty": true,
+                        "name": {
+                            "$dirty": true,
+                            "$$modelValue": "test"
+                        }
+                    };
+                    console.log(frm);
+                    data.$scope.$parent.facility = {
+                        physical_address : null
+                    };
+                    data.$scope.create = true;
+                    data.$scope.goToNext = angular.noop;
+                    data.$scope.savePhy(frm);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }]);
+            });
+            //creation of physical details failure to patch
+            it("should create physical location details", function () {
+                inject(["mfl.common.services.multistep",
+                    function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "$state": state,
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    state.params.facility_id = "3";
+                    spyOn(state, "go");
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    ctrl(".location", data);
+                    data.$scope.$apply();
+                    data.$scope.facility={
+                        id : "3",
+                        coordinates : "3",
+                        ward : "3",
+                        physical_address: null
+                    };
+                    data.$scope.$apply();
+                    data.$scope.$digest();
+                    httpBackend
+                        .expectPOST(server_url+"api/common/address/")
+                        .respond(204, {results: []});
+                    httpBackend
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(500, {});
+                    var frm = {
+                        "$dirty": true,
+                        "name": {
+                            "$dirty": true,
+                            "$$modelValue": "test"
+                        }
+                    };
+                    console.log(frm);
+                    data.$scope.$parent.facility = {
+                        physical_address : null
+                    };
+                    data.$scope.create = true;
+                    data.$scope.goToNext = angular.noop;
+                    data.$scope.savePhy(frm);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }]);
+            });
+
+            //creation of physical details failure to patch
+            it("should create physical location details:fail", function () {
+                inject(["mfl.common.services.multistep",
+                    function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "$state": state,
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    state.params.facility_id = "3";
+                    spyOn(state, "go");
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    ctrl(".location", data);
+                    data.$scope.$apply();
+                    data.$scope.facility={
+                        id : "3",
+                        coordinates : "3",
+                        ward : "3",
+                        physical_address: null
+                    };
+                    data.$scope.$apply();
+                    data.$scope.$digest();
+                    httpBackend
+                        .expectPOST(server_url+"api/common/address/")
+                        .respond(500, {results: []});
+                    var frm = {
+                        "$dirty": true,
+                        "name": {
+                            "$dirty": true,
+                            "$$modelValue": "test"
+                        }
+                    };
+                    console.log(frm);
+                    data.$scope.$parent.facility = {
+                        physical_address : null
+                    };
+                    data.$scope.create = true;
+                    data.$scope.savePhy(frm);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }]);
+            });
+            //test that updates location during facility creation
+            it("should save physical location details: update", function () {
                 inject(["mfl.common.services.multistep",
                     function (multistepService) {
                     var data = {
@@ -2663,6 +2838,7 @@
                     data.$scope.$apply();
                     data.$scope.$digest();
                 }]));
+
             it("should save geolocation details", function () {
                 inject(["mfl.common.services.multistep",
                     function (multistepService) {
@@ -2687,6 +2863,11 @@
                         {name : "units"},
                         {name : "location"}
                     ];
+                    var rst_data = {
+                        coordinates : {
+                            coordinates : [3, 1]
+                        }
+                    };
                     httpBackend
                         .expectGET(server_url+"api/gis/geo_code_methods/")
                         .respond(200, {results: []});
@@ -2695,7 +2876,7 @@
                         .respond(200, {results: []});
                     httpBackend
                         .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, {results: []});
+                        .respond(200, rst_data);
                     httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
@@ -2736,6 +2917,7 @@
                     httpBackend.verifyNoOutstandingRequest();
                 }]);
             });
+
             it("should try to save geolocation details but form has no changes", function () {
                 inject(["mfl.common.services.multistep",
                     function (multistepService) {
@@ -2760,6 +2942,14 @@
                         {name : "units"},
                         {name : "location"}
                     ];
+                    data.$scope.geo = {
+                        coordinates : []
+                    };
+                    var rst_data = {
+                        coordinates : {
+                            coordinates : [3, 1]
+                        }
+                    };
                     httpBackend
                         .expectGET(server_url+"api/gis/geo_code_methods/")
                         .respond(200, {results: []});
@@ -2768,7 +2958,7 @@
                         .respond(200, {results: []});
                     httpBackend
                         .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, {results: []});
+                        .respond(200, rst_data);
                     httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
@@ -2783,13 +2973,94 @@
                             id: "3"
                         }
                     };
+                    data.$scope.geo = rst_data;
                     data.$scope.$apply();
                     data.$scope.$digest();
+                    data.$scope.getFacilityCoordinates(data.$scope.facility);
                     data.$scope.checkLocation(coords);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingExpectation();
                     httpBackend.verifyNoOutstandingRequest();
+
+                    var frm = {
+                        "$dirty": false,
+                        "name": {
+                            "$dirty": false,
+                            "$$modelValue": "test"
+                        }
+                    };
+
+                    data.$scope.saveGeo(frm);
+
+                }]);
+            });
+
+            //facility is null
+            it("should try to save geolocation is : null", function () {
+                inject(["mfl.common.services.multistep",
+                    function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "$state": state,
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    spyOn(state, "go");
+                    var coords = {
+                        coordinates : [0,1]
+                    };
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    data.$scope.geo = {
+                        coordinates : []
+                    };
+                    var rst_data = {
+                        coordinates : {
+                            coordinates : [3, 1]
+                        }
+                    };
+                    /*httpBackend
+                        .expectGET(server_url+"api/gis/geo_code_methods/")
+                        .respond(200, {results: []});
+                    httpBackend
+                        .expectGET(server_url+"api/gis/geo_code_sources/")
+                        .respond(200, {results: []});
+                    httpBackend
+                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                        .respond(200, rst_data);
+                    httpBackend
+                        .expectGET(server_url+"api/common/wards/3/")
+                        .respond(200, {results: []});*/
+                    ctrl(".geolocation", data);
+                    data.$scope.$apply();
+                    data.$scope.facility={
+                        coordinates : "3",
+                        ward : "3",
+                        facility_physical_address:{
+                            address : "ZUZU",
+                            postal_code: "254",
+                            id: "3"
+                        }
+                    };
+                    data.$scope.geo = rst_data;
+                    data.$scope.$apply();
+                    data.$scope.$digest();
+                    data.$scope.getFacilityCoordinates(data.$scope.facility);
+                    data.$scope.checkLocation(coords);
+
+                    /*httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();*/
 
                     var frm = {
                         "$dirty": false,
@@ -2827,6 +3098,11 @@
                         {name : "units"},
                         {name : "location"}
                     ];
+                    var rst_data = {
+                        coordinates : {
+                            coordinates : [3, 1]
+                        }
+                    };
                     httpBackend
                         .expectGET(server_url+"api/gis/geo_code_methods/")
                         .respond(500, {results: []});
@@ -2835,7 +3111,7 @@
                         .respond(500, {results: []});
                     httpBackend
                         .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(500, {results: []});
+                        .respond(500, rst_data);
                     ctrl(".geolocation", data);
                     data.$scope.$apply();
                     data.$scope.facility={
@@ -2847,6 +3123,7 @@
                             id: "3"
                         }
                     };
+                    data.$scope.geo = rst_data;
                     data.$scope.$apply();
                     data.$scope.$digest();
                     data.$scope.checkLocation(coords);
@@ -2865,9 +3142,11 @@
                             "$$modelValue": "test"
                         }
                     };
-
+                    data.$scope.getFacilityCoordinates(data.$scope.facility);
                     data.$scope.saveGeo(frm);
-
+                    data.$scope.geo = {
+                        coordinates : []
+                    };
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingExpectation();
                     httpBackend.verifyNoOutstandingRequest();
@@ -2876,6 +3155,209 @@
 
                 }]);
             });
+
+            //on creation where facility coordinates is Null
+            it("should fail as coordinates is null",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    data.$scope.facility_id = 3;
+                    var rst_data = {
+                        coordinates : {
+                            coordinates : [3, 1]
+                        }
+                    };
+                    data.$scope.facility = {
+                        coordinates : null
+                    };
+                    var rst_coord = {id : "3"};
+                    httpBackend
+                        .expectPOST(server_url +
+                            "api/gis/facility_coordinates/")
+                        .respond(204, rst_coord);
+
+                    httpBackend
+                        .expectPATCH(server_url +
+                            "api/facilities/facilities/3/")
+                        .respond(204, {results : []});
+                    ctrl(".geolocation", data);
+                    var frm = {
+                        "$dirty": true,
+                        "name": {
+                            "$dirty": true,
+                            "$$modelValue": "test"
+                        }
+                    };
+                    data.$scope.geo = rst_data;
+                    data.$scope.saveGeo(frm);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }
+            ]));
+
+            it("should fail as coordinates is null: and return error",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    data.$scope.facility_id = 3;
+                    var rst_data = {
+                        coordinates : {
+                            coordinates : [3, 1]
+                        }
+                    };
+                    data.$scope.facility = {
+                        coordinates : null
+                    };
+                    var rst_coord = {id : "3"};
+                    httpBackend
+                        .expectPOST(server_url +
+                            "api/gis/facility_coordinates/")
+                        .respond(204, rst_coord);
+
+                    httpBackend
+                        .expectPATCH(server_url +
+                            "api/facilities/facilities/3/")
+                        .respond(500, {});
+                    ctrl(".geolocation", data);
+                    var frm = {
+                        "$dirty": true,
+                        "name": {
+                            "$dirty": true,
+                            "$$modelValue": "test"
+                        }
+                    };
+                    data.$scope.geo = rst_data;
+                    data.$scope.saveGeo(frm);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }
+            ]));
+
+            it("should fail as coordinates is null: not create coords",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    data.$scope.facility_id = 3;
+                    var rst_data = {
+                        coordinates : {
+                            coordinates : [3, 1]
+                        }
+                    };
+                    data.$scope.facility = {
+                        coordinates : null
+                    };
+                    var rst_coord = {id : "3"};
+                    httpBackend
+                        .expectPOST(server_url +
+                            "api/gis/facility_coordinates/")
+                        .respond(500, rst_coord);
+
+                    ctrl(".geolocation", data);
+                    var frm = {
+                        "$dirty": true,
+                        "name": {
+                            "$dirty": true,
+                            "$$modelValue": "test"
+                        }
+                    };
+                    data.$scope.geo = rst_data;
+                    data.$scope.saveGeo(frm);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }
+            ]));
+
+            it("should fail while coordinates isn't null",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                    var changes = {
+                        whatChanged: angular.noop
+                    };
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "$state" : state,
+                        "mfl.common.services.multistep" : multistepService,
+                        "mfl.common.forms.changes": changes
+                    };
+                    spyOn(state, "go");
+                    spyOn(changes, "whatChanged").andReturn({});
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    data.$scope.facility_id = 3;
+                    var rst_data = {
+                        coordinates : {
+                            coordinates : [3, 1]
+                        }
+                    };
+                    data.$scope.facility = {
+                        coordinates : "13"
+                    };
+                    ctrl(".geolocation", data);
+                    data.$scope.geo = rst_data;
+                    data.$scope.saveGeo();
+                }
+            ]));
 
             it("should expect map data to be loaded", function () {
                     var data = {
@@ -2953,7 +3435,6 @@
                     expect(map.fitBounds).toHaveBeenCalledWith([[3,2],
                                                                 [4,3]]);
                 });
-
         });
     });
 })(angular);

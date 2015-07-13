@@ -746,6 +746,7 @@
             $scope.saveGeo = function (frm) {
                 var spinner1 = true;
                 var changes = formChanges.whatChanged(frm);
+                /*if(!_.isEmpty(changes)){*/
                 var fac_id = $scope.facility_id || $state.params.facility_id;
                 /*changes.coordinates = [];*/
                 changes.longitude = changes.longitude || $scope.geo.coordinates.coordinates[0];
@@ -756,21 +757,17 @@
                     coordinates : [changes.longitude, changes.latitude]
                 };
                 if(!_.isNull($scope.facility.coordinates)) {
-                    if(!_.isEmpty(changes)){
-                        wrappers.facility_coordinates
-                            .update($scope.facility.coordinates,changes)
-                            .success(function (data) {
-                                spinner1 =false;
-                                $scope.geo = data;
-                                $state.go("facility_mgmt");
-                            })
-                            .error(function (error) {
-                                spinner1 =false;
-                                $log.error(error);
-                            });
-                    }else{
-                        $state.go("facility_mgmt");
-                    }
+                    wrappers.facility_coordinates
+                        .update($scope.facility.coordinates,changes)
+                        .success(function (data) {
+                            spinner1 =false;
+                            $scope.geo = data;
+                            $state.go("facility_mgmt");
+                        })
+                        .error(function (error) {
+                            spinner1 =false;
+                            $log.error(error);
+                        });
                 } else {
                     wrappers.facility_coordinates.create(changes)
                     .success(function (data) {
