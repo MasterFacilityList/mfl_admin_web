@@ -6,8 +6,11 @@
         <a class="login-btn login-btn-primary" ui-sref="users.user_edit.contacts ({user_id : user_id})">
             &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
         </a>
-        <a class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
-             &nbsp;Admin Areas <i class="fa fa-angle-double-right"></i>
+        <a  ng-if="(login_user.id) && (!login_user.is_national) && (login_user.county)" class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
+             <span>&nbsp;Sub County <i class="fa fa-angle-double-right"></i></span>
+        </a>
+        <a  ng-if="login_user.id && (!login_user.is_national) && (!login_user.county)" class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
+             <span>&nbsp;Sub County<i class="fa fa-angle-double-right"></i></span>
         </a>
     </div>
     <div ng-if="create" class="col-md-12 margin-b-20 margin-t-20 margin-l-10" requires-permission="users.change_mfluser">
@@ -15,7 +18,7 @@
             &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
         </a>
         <a class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
-             &nbsp;Admin Areas <i class="fa fa-angle-double-right"></i>
+             &nbsp;Sub County <i class="fa fa-angle-double-right"></i>
         </a>
     </div>
 </div>

@@ -3,10 +3,10 @@
     <div class="col-sm-11 col-sm-offset-1 margin-t-20 text-center">
         <div class="col-sm-3 text-center">
             <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div ng-model="steps[0].active" ng-click="tabState(steps[0])" class="progress-badge" ng-class="{'progress-badge-active': steps[0].active ,'progress-badge-done' : steps[0].done || steps[0].furthest && !steps[0].active}">
-                        1
-                    </div>
-                    <p class="text-center step-label" ng-class="{'step-label-active': steps[0].active, 'step-label-done' : steps[0].done || steps[0].furthest}"  ng-click="tabState(steps[0])">Basic Details</p>
+                <div ng-model="steps[0].active" ng-click="tabState(steps[0])" class="progress-badge" ng-class="{'progress-badge-active': steps[0].active ,'progress-badge-done' : steps[0].done || steps[0].furthest && !steps[0].active}">
+                    1
+                </div>
+                <p class="text-center step-label" ng-class="{'step-label-active': steps[0].active, 'step-label-done' : steps[0].done || steps[0].furthest}"  ng-click="tabState(steps[0])">Basic Details</p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 margin-t-20"  style="border: 2px solid #666666;">
 
@@ -32,12 +32,32 @@
             <div class="col-lg-6 col-md-6 col-sm-6 margin-t-20" style="border: 2px solid #666666;">
             </div>
         </div>
-        <div class="col-sm-3 text-center">
+        <!-- To assign county -->
+        <div class="col-sm-3 text-center" ng-if="user.id && (!user.is_national) && (! login_user.county)" requires-user-feature="is_staff,is_national">
             <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="progress-badge" ng-class="{'progress-badge-active': steps[3].active, 'progress-badge-done' : steps[3].done || steps[3].furthest}" ng-click="tabState(steps[3])">
                         4
                     </div>
-                    <p  class="text-center step-label" ng-class="{'step-label-active': steps[3].active, 'step-label-done': steps[3].done || steps[3].furthest}"  ng-click="tabState(steps[3])">Admin Areas</p>
+                    <p  class="text-center step-label" ng-class="{'step-label-active': steps[3].active,'step-label-done' : steps[3].done || steps[3].furthest }"  ng-click="tabState(steps[3])">Assign County</p>
+            </div>
+        </div>
+        <!-- To assign constituency -->
+        <div class="col-sm-3 text-center" ng-if="login_user.id && (!login_user.is_national)" requires-user-feature"is_staff,county">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="progress-badge"  ng-class="{'progress-badge-active': steps[4].active, 'progress-badge-done' : steps[4].done || steps[4].furthest}" ng-click="tabState(steps[4])">
+                        4
+                    </div>
+                    <p  class="text-center step-label" ng-class="{'step-label-active': steps[4].active,'step-label-done' : steps[4].done || steps[4].furthest }"  ng-click="tabState(steps[4])">Assign Sub County</p>
+            </div>
+        </div>
+        <!-- End of assigning constituency -->
+        <!-- To assign regulatory bodies -->
+        <div class="col-sm-3 text-center" ng-if="login_user.id && !login_user.regulator === null" requires-user-feature="is_staff,is_national">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="progress-badge" ng-class="{'progress-badge-active': steps[5].active, 'progress-badge-done' : steps[5].done || steps[5].furthest}" ng-click="tabState(steps[5])">
+                        4
+                    </div>
+                    <p  class="text-center step-label" ng-class="{'step-label-active': steps[5].active,'step-label-done' : steps[5].done || steps[5].furthest }"  ng-click="tabState(steps[5])">Regulatory Body</p>
             </div>
         </div>
     </div>
