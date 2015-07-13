@@ -352,9 +352,8 @@
                     if(!$scope.create) {
                         var state_name1 = $scope.login_user.is_national ? "counties" :
                         "constituency";
-                        console.log(state_name1);
                         $state.go("users.user_edit." + state_name1,
-                            {user_id: $scope.user_id, furthest : $scope.furthest});
+                            {user_id: $scope.user_id});
                     }
                     else {
                         var state_name2 = $scope.login_user.is_national ? "counties" :
@@ -532,7 +531,7 @@
             $scope.add = function (const_id) {
                 $scope.spinner = true;
                 var payload = {
-                    "user": $state.params.user_id,
+                    "user": $scope.user_id,
                     "constituency": const_id
                 };
                 wrappers.user_constituencies.create(payload)
