@@ -84,7 +84,7 @@
                 if (toState.requireUser === false) {
                     return;
                 }
-
+                // TODO : change this to use state urls instead of names
                 change_state(evt, "login", {"next": toState.name});
             };
 

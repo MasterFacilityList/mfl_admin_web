@@ -6,6 +6,30 @@
         "mfl.auth.services"
     ])
 
+    .controller("mfl.facility_mgmt.controllers.facilities_approve",
+        ["$scope", function ($scope) {
+            $scope.filters = {
+                "approved": false
+            };
+            $scope.title = {
+                "name": "Facilities Pending Approval",
+                "icon": "fa-building"
+            };
+        }]
+    )
+
+    .controller("mfl.facility_mgmt.controllers.facilities_approve_update",
+        ["$scope", function ($scope) {
+            $scope.filters = {
+                "has_edits": true
+            };
+            $scope.title = {
+                "name": "Facility Updates Pending Approval",
+                "icon": "fa-building"
+            };
+        }]
+    )
+
     .controller("mfl.facility_mgmt.controllers.facility_approve",
         ["$scope", "$state", "$stateParams", "$log",
         "mfl.facility_mgmt.services.wrappers",
@@ -27,10 +51,12 @@
 
             $scope.facility_approval = {
                 "facility": $scope.facility_id,
-                "comment": ""
+                "comment": "",
+                "is_cancelled": false
             };
 
-            $scope.approveFacility = function () {
+            $scope.approveFacility = function (cancel) {
+                $scope.facility_approval.is_cancelled = !!cancel;
                 wrappers.facility_approvals.create($scope.facility_approval)
                 .success(function () {
                     $state.go("facilities");

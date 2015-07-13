@@ -6,7 +6,22 @@
     ])
 
     .config(["$stateProvider", function ($stateProvider) {
-        $stateProvider.state("facilities.facility_edit.publish", {
+        $stateProvider
+
+        .state("facilities_publish", {
+            parent: "facility_mgmt",
+            url: "^/facilities_publish/",
+            views: {
+                "main-content@facility_mgmt": {
+                    templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facilities_publish"
+                }
+            },
+            userFeature: "is_national",
+            permission: "facilities.publish_facilities,facilities.view_facility"
+        })
+
+        .state("facilities.facility_edit.publish", {
             url: "publish/",
             views: {
                 "tab-header@facilities.facility_edit": {

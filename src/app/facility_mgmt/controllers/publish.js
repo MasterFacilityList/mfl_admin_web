@@ -6,6 +6,19 @@
         "mfl.auth.services"
     ])
 
+    .controller("mfl.facility_mgmt.controllers.facilities_publish",
+        ["$scope", "$state", function ($scope, $state) {
+            console.log($state);
+            $scope.filters = {
+                "is_published": false
+            };
+            $scope.title = {
+                "name": "Facilities Pending Publishing",
+                "icon": "fa-building"
+            };
+        }]
+    )
+
     .controller("mfl.facility_mgmt.controllers.facility_publish",
         ["$scope", "$log", "$state", "$stateParams", "mfl.facility_mgmt.services.wrappers",
         "mfl.auth.services.login",
