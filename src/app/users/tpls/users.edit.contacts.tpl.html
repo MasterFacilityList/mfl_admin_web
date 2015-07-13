@@ -6,7 +6,7 @@
                 <h4 class="fw-600 fs-18">Add Contact</h4>
                 <form ng-submit="add()">
                    <div class="row">
-                        <div class="group col-sm-5">
+                        <div class="group col-md-4">
                             <select name="contact_type" ng-model="contact.contact_type" required>
                                 <option value="">Select Contact Type</option>
                                 <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
@@ -14,13 +14,13 @@
                             <span class="highlight"></span>
                             <span class="bar"></span>
                         </div>
-                        <div class="group col-sm-5">
+                        <div class="group col-md-5">
                             <input name="contact" type="text" ng-model="contact.contact" required />
                             <span class="highlight"></span>
                             <span class="bar"></span>
                             <label class="margin-l-10">Contact Details</label>
                         </div>
-                        <div class="col-sm-2 margin-b-10 text-right">
+                        <div class="col-md-3 margin-b-10 text-right">
                             <button type="submit" class="login-btn login-btn-primary margin-r-10 margin-t-10">
                                 <i class="fa fa-plus-circle"></i> Add Contact
                             </button>
