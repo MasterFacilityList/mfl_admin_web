@@ -191,7 +191,7 @@
                     }
                 },
                 permission: "users.view_mfluser",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
 
             .state("users.user_delete", {
