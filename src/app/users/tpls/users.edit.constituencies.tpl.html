@@ -1,73 +1,70 @@
 <div class="tab-content">
-    <div class="col-lg-12 detail-content margin-t-20">
+    <div class="col-xs-12 margin-t-20 detail-content margin-t-20 margin-b-10">
         <div class="col-xs-12 margin-t-20">
-          <div class="col-xs-12">
-               <div class="alert alert-danger alert-dismissible" ng-show="error">
-                    <button type="button" class="close">
-                        <span ng-click="error = !error">&times;</span>
-                    </button>
-                    <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
-               </div>
+          <div class="col-xs-12 alert alert-danger alert-dismissible" ng-show="error">
+                <button type="button" class="close">
+                    <span ng-click="error = !error">&times;</span>
+                </button>
+                <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
           </div>
-            <div class="col-lg-12 margin-t-20" requires-permission="common.add_userconstituency" >
-                <h4 class="fw-600 fs-18">Assign Sub County</h4>
+            <div class="col-xs-12 margin-t-20 content-card content-form" requires-permission="common.add_userconstituency" >
+                <div class="col-sm-12">
+                    <h4 class="fw-600 fs-18">Assign Sub County</h4>
+                </div>
                 <form ng-submit="add(new_constituency)">
-                    <table class="table custom-well  margin-b-10">
-                        <tbody>
-                            <tr class="">
-                                <td class="pad-t-15">
-                                    <div class="group">
-                                    <select name="constituency" ng-model="new_constituency" class="pad-t-15" required>
-                                        <option value="">Select Sub County</option>
-                                        <option ng-repeat="cnst in constituencies" ng-value="cnst.id">{{cnst.name}}</option>
-                                    </select>
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                    </div>
-                                </td>
-                                <td class="text-right pad-t-15">
-                                    <button ng-disabled="new_constituency===''" type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Assign Sub County">
-                                        <i class="fa fa-plus-circle"></i> Add
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="row">
+                        <div class="group col-sm-6">
+                            <div class="group">
+                            <select name="constituency" ng-model="new_constituency" class="pad-t-15" required>
+                                <option value="">Select Sub County</option>
+                                <option ng-repeat="cnst in constituencies" ng-value="cnst.id">{{cnst.name}}</option>
+                            </select>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            </div>
+                        </div>
+                        <div class="margin-b-10 col-sm-6 text-right">
+                            <button ng-disabled="new_constituency===''" type="submit" class="login-btn login-btn-primary margin-t-10">
+                                <i class="fa fa-plus-circle"></i> Assign Sub County
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
 
-            <div class="col-lg-12 margin-t-20">
-                <div ng-show="user_constituencies.length > 0">
-                    <h4> User's Sub County</h4>
-                    <table class="table custom-well">
-                        <tbody>
-                            <tr ng-repeat="child in user_constituencies">
-                                <td class="pad-t-15 fs-18 fw-600 text-left">
-                                    {{child.constituency_name}}
-                                </td>
-                                <td class="text-right">
-                                    <span ng-if="child.delete_spinner">
-                                        <i class="fa fa-spin fa-circle-o-notch"></i>
-                                    </span>
-                                    <a popover-toggle popover-trigger="open" class="action-btn action-btn-grid action-btn-danger" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" tooltip="Remove constituency"
-                                    requires-permission="common.delete_userconstituency">
-                                        <i class="fa fa-trash fw-500"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr ng-if="spinner">
-                                <td colspan="3" class="text-center">
-                                    <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div ng-show="user_constituencies.length == 0">
-                    <div class="alert alert-info">
-                        No sub-county assigned to the user
-                    </div>
-                </div>
+            <div  ng-show="user_constituencies.length > 0" class="col-sm-12 content-card margin-t-20">
+                <table class="table">
+                   <thead>
+                       <tr>
+                           <th class="fs-16">User's Sub County</th>
+                           <th></th>
+                       </tr>
+                   </thead>
+                    <tbody>
+                        <tr ng-repeat="child in user_constituencies">
+                            <td class="pad-t-15 fs-18 fw-600 text-left">
+                                {{child.constituency_name}}
+                            </td>
+                            <td class="text-right">
+                                <span ng-if="child.delete_spinner">
+                                    <i class="fa fa-spin fa-circle-o-notch"></i>
+                                </span>
+                                <a popover-toggle popover-trigger="open" class= "login-btn login-btn-danger" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left"
+                                requires-permission="common.delete_userconstituency">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="spinner">
+                            <td colspan="3" class="text-center">
+                                <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 alert alert-info" ng-show="user_constituencies.length == 0">
+                No sub-county assigned to the user
             </div>
             <div ng-if="create" class="col-md-12 margin-b-20 margin-t-20">
                 <a ui-sref="users.user_create.details({user_id : user_id})" class="login-btn login-btn-primary">
