@@ -3,7 +3,22 @@
         <ul class=" nav nav-sidebar">
             <li ui-sref-active="active">
                 <a ui-sref="facilities">
-                    <span class="sidebar-text">Facilities</span>
+                    <span class="sidebar-text">All Facilities</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" requires-permission="facilities.view_facility,facilities.add_facilityapproval" requires-user-feature="county">
+                <a ui-sref="facilities_approve">
+                    <span class="sidebar-text">Facilities Pending Approval</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" requires-permission="facilities.view_facility,facilities.add_facilityapproval" requires-user-feature="county">
+                <a ui-sref="facilities_approve_update">
+                    <span class="sidebar-text">Facility Updates Pending Approval</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" requires-permission="facilities.publish_facilities,facilities.view_facility" requires-user-feature="is_national">
+                <a ui-sref="facilities_publish">
+                    <span class="sidebar-text">Facilities Pending Publishing</span>
                 </a>
             </li>
         </ul>

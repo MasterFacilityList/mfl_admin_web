@@ -7,6 +7,30 @@
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+
+        .state("facilities_approve", {
+            "parent": "facility_mgmt",
+            "url": "^/facilities_approve/",
+            "views": {
+                "main-content@facility_mgmt": {
+                    templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facilities_approve"
+                }
+            },
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
+        })
+
+        .state("facilities_approve_update", {
+            parent: "facility_mgmt",
+            url: "^/facilities_approve_update/",
+            views: {
+                "main-content@facility_mgmt": {
+                    templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facilities_approve_update"
+                }
+            }
+        })
+
         .state("facilities.facility_edit.approve", {
             url: "approve/:update_id",
             views: {

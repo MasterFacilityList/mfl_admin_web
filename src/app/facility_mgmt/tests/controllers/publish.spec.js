@@ -11,8 +11,8 @@
 
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL", "$log", "$state",
                 function (c, r, h, s, lg, st) {
-                    ctrl = function (data) {
-                        return c("mfl.facility_mgmt.controllers.facility_publish", data);
+                    ctrl = function (name, data) {
+                        return c("mfl.facility_mgmt.controllers."+name, data);
                     };
                     rootScope = r;
                     httpBackend = h;
@@ -25,44 +25,57 @@
             ]);
         });
 
-        it("should publish a facility", function () {
-            var data = {
-                "$scope": rootScope.$new(),
-                "$state": state
-            };
-            data.$scope.facility_id = 3;
-            ctrl(data);
+        describe("test publish list", function () {
 
-            httpBackend
-                .expectPATCH(server_url+"api/facilities/facilities/3/")
-                .respond(200);
-            data.$scope.publish();
-            httpBackend.flush();
-            httpBackend.verifyNoOutstandingRequest();
-            httpBackend.verifyNoOutstandingExpectation();
-
-            expect(state.go).toHaveBeenCalled();
+            it("should load", function () {
+                var scope = rootScope.$new();
+                ctrl("facilities_publish", {"$scope": scope});
+                expect(scope.filters).toEqual({"is_published": false});
+            });
         });
 
-        it("should show errors on fail to publish a facility", function () {
-            var data = {
-                "$scope": rootScope.$new(),
-                "$state": state,
-                "$log": log
-            };
-            data.$scope.facility_id = 3;
-            ctrl(data);
+        describe("test publish detail", function () {
 
-            httpBackend
-                .expectPATCH(server_url+"api/facilities/facilities/3/")
-                .respond(400);
-            data.$scope.publish();
-            httpBackend.flush();
-            httpBackend.verifyNoOutstandingRequest();
-            httpBackend.verifyNoOutstandingExpectation();
+            it("should publish a facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state
+                };
+                data.$scope.facility_id = 3;
+                ctrl("facility_publish", data);
 
-            expect(state.go).not.toHaveBeenCalled();
-            expect(log.error).toHaveBeenCalled();
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(200);
+                data.$scope.publish();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+
+            it("should show errors on fail to publish a facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$log": log
+                };
+                data.$scope.facility_id = 3;
+                ctrl("facility_publish", data);
+
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(400);
+                data.$scope.publish();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).not.toHaveBeenCalled();
+                expect(log.error).toHaveBeenCalled();
+            });
         });
+
     });
 })();

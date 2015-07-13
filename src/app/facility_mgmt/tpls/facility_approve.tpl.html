@@ -2,13 +2,14 @@
     <div class="well" ng-class="{'alert-success':facility.is_approved}">
         <div ng-if="!facility.is_approved">
             <h4>Approve newly created facility</h4>
-            <form ng-submit="approveFacility()">
+            <form name="frm_approve">
                 <div class="form-group">
                     <label for="comment">Comment for approval</label>
                     <textarea name="comment" ng-model="facility_approval.comment" class="form-control" required>
                     </textarea>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Approve Facility" />
+                <button class="btn btn-success" ng-click="approveFacility()">Approve Facility</button>
+                <button class="btn btn-danger" ng-click="approveFacility(true)">Reject Facility</button>
             </form>
         </div>
         <div ng-if="facility.is_approved">
