@@ -621,6 +621,7 @@
             }else{
                 $scope.nextState();
             }
+            $scope.geo = {};
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false
@@ -635,36 +636,9 @@
                     }
                 }
             });
-            /*Fetch geo code methods*/
-            wrappers.geo_code_methods.list()
-                .success(function (data) {
-                    $scope.geo_methods = data.results;
-                })
-                .error(function(error){
-                    $log.error(error);
-                });
-
-            /*Fetch geo code sources*/
-            wrappers.geo_code_sources.list()
-                .success(function (data) {
-                    $scope.geo_sources = data.results;
-                })
-                .error(function(error){
-                    $log.error(error);
-                });
-
-            /*Wait for facility to be defined*/
-            $scope.$watch("facility", function (f) {
-                if (_.isUndefined(f)){
-                    return;
-                }
-
-                // Experimental
-                if (_.isUndefined(f.coordinates) || _.isNull(f.coordinates)){
-                    return;
-                }
-
-                /*facility's coordinates*/
+            //gets facility coordinates
+            $scope.getFacilityCoordinates = function (f) {
+                //facility's coordinates
                 wrappers.facility_coordinates.get(f.coordinates)
                 .success(function(data){
                     $scope.spinner = false;
@@ -698,8 +672,11 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
-
-                /*ward coordinates*/
+                $scope.facilityWard(f);
+            };
+            //get facility ward and draw its map
+            $scope.facilityWard = function (f) {
+                //ward coordinates
                 wrappers.wards.get(f.ward)
                 .success(function(data){
                     $scope.spinner = false;
@@ -747,12 +724,39 @@
                     $scope.spinner = false;
                     $log.error(error);
                 });
-                /*Save geolocation details*/
-                $scope.saveGeo = function (frm) {
-                    var spinner1 = true;
-                    var changes = formChanges.whatChanged(frm);
+            };
+            /*Fetch geo code methods*/
+            wrappers.geo_code_methods.list()
+                .success(function (data) {
+                    $scope.geo_methods = data.results;
+                })
+                .error(function(error){
+                    $log.error(error);
+                });
+
+            /*Fetch geo code sources*/
+            wrappers.geo_code_sources.list()
+                .success(function (data) {
+                    $scope.geo_sources = data.results;
+                })
+                .error(function(error){
+                    $log.error(error);
+                });
+            //Save geolocation details
+            $scope.saveGeo = function (frm) {
+                var spinner1 = true;
+                var changes = formChanges.whatChanged(frm);
+                var fac_id = $scope.facility_id || $state.params.facility_id;
+                /*changes.coordinates = [];*/
+                changes.longitude = changes.longitude || $scope.geo.coordinates.coordinates[0];
+                changes.latitude = changes.latitude || $scope.geo.coordinates.coordinates[1];
+                changes.facility = fac_id;
+                changes.coordinates = {
+                    type : "Point",
+                    coordinates : [changes.longitude, changes.latitude]
+                };
+                if(!_.isNull($scope.facility.coordinates)) {
                     if(!_.isEmpty(changes)){
-                        console.log(changes);
                         wrappers.facility_coordinates
                             .update($scope.facility.coordinates,changes)
                             .success(function (data) {
@@ -767,20 +771,45 @@
                     }else{
                         $state.go("facility_mgmt");
                     }
-                };
-                /*update marker position*/
-                $scope.checkLocation = function  (coords) {
-                    angular.extend($scope,{
-                        markers : {
-                            mainMarker : {
-                                layer:"facility",
-                                lat:coords.coordinates[1],
-                                lng:coords.coordinates[0],
-                                message:"facility location"
-                            }
-                        }
+                } else {
+                    wrappers.facility_coordinates.create(changes)
+                    .success(function (data) {
+                        wrappers.facility_detail.update(
+                            fac_id, {"coordinates" : data.id})
+                            .success(function () {
+                                $state.go("facility_mgmt");
+                            })
+                            .error(function (error) {
+                                $log.error(error);
+                            });
+                    })
+                    .error(function (error) {
+                        $log.error(error);
                     });
-                };
+                }
+            };
+            //update marker position
+            $scope.checkLocation = function  (coords) {
+                angular.extend($scope,{
+                    markers : {
+                        mainMarker : {
+                            layer:"facility",
+                            lat:coords.coordinates[1],
+                            lng:coords.coordinates[0],
+                            message:"facility location"
+                        }
+                    }
+                });
+            };
+            /*Wait for facility to be defined*/
+            $scope.$watch("facility", function (f) {
+                if (_.isUndefined(f)){
+                    return;
+                }
+                $scope.facilityWard(f);
+                if(!_.isNull(f.coordinates)) {
+                    $scope.getFacilityCoordinates(f);
+                }
             });
         }]);
 
