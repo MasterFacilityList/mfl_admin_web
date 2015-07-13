@@ -37,6 +37,10 @@
         $urlRouterProvider.otherwise("/");
     }])
 
+    .config(["$httpProvider", function($httpProvider) {
+        $httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
+    }])
+
     .run(["api.oauth2",function (oauth2) {
         oauth2.setXHRToken(oauth2.getToken());
     }])

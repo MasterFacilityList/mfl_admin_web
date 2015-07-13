@@ -214,12 +214,10 @@
                             });
                         }
                     }
-                }
-                else {
+                } else {
                     if (_.isEmpty(changes)) {
                         $state.go("facilities.facility_edit.contacts");
-                    }
-                    else {
+                    } else {
                         wrappers.facility_detail.update($scope.facility_id, changes)
                         .success(function () {
                             $state.go("facilities.facility_edit.contacts");
