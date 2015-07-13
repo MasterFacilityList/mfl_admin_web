@@ -8,9 +8,7 @@
                 <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
           </div>
             <div class="col-xs-12 margin-t-20 content-card content-form" requires-permission="common.add_userconstituency" >
-                <div class="col-sm-12">
-                    <h4 class="fw-600 fs-18">Assign Sub County</h4>
-                </div>
+                <h4 class="fw-600 fs-18">Assign Sub County</h4>
                 <form ng-submit="add(new_constituency)">
                     <div class="row">
                         <div class="group col-sm-6">
@@ -23,8 +21,8 @@
                             <span class="bar"></span>
                             </div>
                         </div>
-                        <div class="margin-b-10 col-sm-6 text-right">
-                            <button ng-disabled="new_constituency===''" type="submit" class="login-btn login-btn-primary margin-t-10">
+                        <div class="margin-b-10 group col-sm-6 text-right">
+                            <button ng-disabled="new_constituency===''" type="submit" class="margin-r-10 login-btn login-btn-primary margin-t-10">
                                 <i class="fa fa-plus-circle"></i> Assign Sub County
                             </button>
                         </div>
