@@ -1,31 +1,31 @@
 <!-- /- Start of tabbed multi-step form -->
 <div class="tab-content">
-    <div class="col-xs-12 margin-t-20 detail-content margin-t-20 margin-b-10">
+    <div class="col-xs-12 margin-t-20 detail-content margin-b-10">
         <div class="col-xs-12 margin-t-20" requires-permission="common.add_usercontact">
             <div class="col-xs-12 content-card form-card">
-                <div class="col-sm-12">
-                    <h4 class="fw-600 fs-18">Add Contact</h4>
-                </div>
+                <h4 class="fw-600 fs-18">Add Contact</h4>
                 <form ng-submit="add()">
-                    <div class="group col-sm-5">
-                        <select name="contact_type" ng-model="contact.contact_type" required>
-                            <option value="">Select Contact Type</option>
-                            <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
-                        </select>
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                    </div>
-                    <div class="group col-sm-5">
-                        <input name="contact" type="text" ng-model="contact.contact" required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label class="margin-l-10">Contact Details</label>
-                    </div>
-                    <div class="col-sm-2 margin-b-10">
-                        <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add contact" >
-                            <i class="fa fa-plus-circle"></i> Add
-                        </button>
-                    </div>
+                   <div class="row">
+                        <div class="group col-md-4">
+                            <select name="contact_type" ng-model="contact.contact_type" required>
+                                <option value="">Select Contact Type</option>
+                                <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
+                            </select>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                        </div>
+                        <div class="group col-md-5">
+                            <input name="contact" type="text" ng-model="contact.contact" required />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label class="margin-l-10">Contact Details</label>
+                        </div>
+                        <div class="col-md-3 margin-b-10 text-right">
+                            <button type="submit" class="login-btn login-btn-primary margin-r-10 margin-t-10">
+                                <i class="fa fa-plus-circle"></i> Add Contact
+                            </button>
+                        </div>
+                   </div>
                 </form>
             </div>
         </div>
@@ -37,8 +37,8 @@
                </div>
             </div>
             <div class="content-card margin-t-20" ng-show="contacts.length > 0">
-            <h4 class="fw-600 fs-18">Current User Contacts</h4>
-                <table class="table tablediv.alert.alert-info-hover fs-14">
+                <h4 class="fw-600 fs-18">Current User Contacts</h4>
+                <table class="table fs-14">
                    <thead>
                        <tr>
                            <th class="fs-16">Contact Type</th>
@@ -58,8 +58,8 @@
                                 <span ng-if="child.delete_spinner">
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
                                 </span>
-                                <a class="action-btn action-btn-grid action-btn-danger" popover-toggle popover-trigger="open" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" tooltip="Remove contact" requires-permission="common.delete_usercontact" >
-                                    <i class="fa fa-trash fw-500"></i>
+                                <a class="login-btn login-btn-danger" popover-toggle popover-trigger="open" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left" requires-permission="common.delete_usercontact" >
+                                    Delete
                                 </a>
                             </td>
                         </tr>

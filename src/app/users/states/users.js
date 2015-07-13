@@ -75,18 +75,29 @@
                 userFeature: "is_staff,national",
                 permission: "users.change_mfluser"
             })
-
-            .state("users.user_create.details", {
-                url: ":user_id/confirm/",
+            .state("users.user_create.constituency", {
+                url: ":user_id/sub-counties/",
                 views: {
                     "form-view@users.user_create": {
-                        controller : "mfl.users.controllers.user_create.details",
-                        templateUrl: "users/tpls/users.create.details.tpl.html"
+                        controller: "mfl.users.controllers.user_edit.constituency",
+                        templateUrl: "users/tpls/users.edit.constituencies.tpl.html"
                     }
                 },
+                permission: "users.view_mfluser",
                 userFeature: "is_staff"
             })
 
+            .state("users.user_create.regulatory_body", {
+                url: ":user_id/regulatory_body/",
+                views: {
+                    "form-view@users.user_create": {
+                        controller: "mfl.users.controllers.user_edit.regulatory_body",
+                        templateUrl: "users/tpls/users.edit.regulatory_body.tpl.html"
+                    }
+                },
+                permission: "users.view_mfluser",
+                userFeature: "is_staff"
+            })
             .state("users.user_edit", {
                 url: "edit/:user_id/",
                 views: {
@@ -148,7 +159,7 @@
             })
 
             .state("users.user_edit.counties", {
-                url: "counties/",
+                url: "county/",
                 views: {
                     "form-view@users.user_edit": {
                         controller: "mfl.users.controllers.user_edit.counties",
@@ -160,7 +171,7 @@
             })
 
             .state("users.user_edit.constituency", {
-                url: "constituency/",
+                url: "sub-county/",
                 views: {
                     "form-view@users.user_edit": {
                         controller: "mfl.users.controllers.user_edit.constituency",
@@ -180,7 +191,7 @@
                     }
                 },
                 permission: "users.view_mfluser",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
 
             .state("users.user_delete", {

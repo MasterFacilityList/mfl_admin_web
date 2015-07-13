@@ -24,7 +24,7 @@
 
         it("should go to county assignment page", function () {
             expect($state.href("users.user_edit.counties", {"user_id": 3}))
-                .toEqual("#/users/edit/3/counties/");
+                .toEqual("#/users/edit/3/county/");
         });
 
         it("should go to users delete page", function () {
