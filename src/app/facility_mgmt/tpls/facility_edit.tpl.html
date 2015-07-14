@@ -38,7 +38,7 @@
     <div ng-if="spinner" class="text-center margin-t-20 margin-b-20 fs-18">
         <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
     </div>
-    <div ng-if="!spinner">
+    <div ng-if="!spinner && !error">
         <h4 class="fw-400"><a ui-sref="facilities.facility_edit">{{facility.code}} | {{facility.name | uppercase}}</a></h4>
         <div class="row">
             <div class="col-xs-12 margin-b-10 fs-16">
@@ -53,6 +53,12 @@
             </div>
             <div class="col-sm-6"><span class="pull-right">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
        </div>
+    </div>
+    <div class="fade-content alert alert-danger alert-dismissible margin-t-20" ng-show="error">
+        <button type="button" class="close">
+            <span ng-click="error = !error">&times;</span>
+        </button>
+        <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
     </div>
 </div>
 <div class="margin-20 content-card">
