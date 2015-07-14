@@ -190,10 +190,10 @@
             }
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
-                $scope.facility.ward = $scope.select_values.ward.id;
-                $scope.facility.facility_type = $scope.select_values.facility_type.id;
-                $scope.facility.owner = $scope.select_values.owner.id;
-                $scope.facility.operation_status = $scope.select_values.operation_status.id;
+                $scope.facility.ward = $scope.select_values.ward;
+                $scope.facility.facility_type = $scope.select_values.facility_type;
+                $scope.facility.owner = $scope.select_values.owner;
+                $scope.facility.operation_status = $scope.select_values.operation_status;
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {
