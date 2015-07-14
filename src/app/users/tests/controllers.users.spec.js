@@ -1243,7 +1243,6 @@
                 expect(data.$scope.groups).toEqual(results);
 
                 expect(data.$scope.groups).not.toEqual(undefined);
-                console.log("from test: $scope.groups: "+JSON.stringify(data.$scope.groups));
                 data.$scope.add();
                 data.$scope.updateUserGroups();
 
@@ -1392,7 +1391,6 @@
                 expect(data.$scope.groups).toEqual(results);
 
                 expect(data.$scope.groups).not.toEqual(undefined);
-                console.log("from test: $scope.groups: "+JSON.stringify(data.$scope.groups));
                 data.$scope.add();
                 data.$scope.updateUserGroups();
 
