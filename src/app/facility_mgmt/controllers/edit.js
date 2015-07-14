@@ -96,7 +96,7 @@
                 });
                 $state.go(
                         "facilities.facility_edit."+ obj.name,
-                        {facility_id : $scope.facility_id});
+                        {facility_id : $scope.facility_id}, {reload: true});
             };
             wrappers.facility_detail.get($scope.facility_id)
                 .success(function(data){
@@ -611,7 +611,6 @@
         "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
         function ($scope,wrappers,$log, leafletData, multistepService,
             formChanges, $state) {
-            /*Setup for map data*/
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[6]);
