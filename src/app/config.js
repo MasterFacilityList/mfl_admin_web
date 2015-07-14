@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, jQuery) {
     "use strict";
 
     angular.module("mflAdminAppConfig", [
@@ -37,6 +37,16 @@
         $urlRouterProvider.otherwise("/");
     }])
 
+    .config(["$httpProvider", function($httpProvider) {
+        var val = "no-cache";
+        $httpProvider.defaults.headers.common["Cache-Control"] = val;
+        jQuery.ajaxSetup({
+            headers: {
+                "Cache-Control": val
+            }
+        });
+    }])
+
     .run(["api.oauth2",function (oauth2) {
         oauth2.setXHRToken(oauth2.getToken());
     }])
@@ -45,4 +55,4 @@
         statecheck.startListening();
     }]);
 
-})(angular);
+})(angular, jQuery);

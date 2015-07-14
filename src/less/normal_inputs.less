@@ -29,13 +29,13 @@ input[type=search]:focus, input[type=password],input[type=email],
 }
 
 /* active state */
-input[type=text]:focus ~ label, input[type=text]:valid ~ label ,
-input[type=number]:focus ~ label, input[type=number]:valid ~ label ,
-input[type=search]:focus ~ label, input[type=search]:valid ~ label ,
-input[type=email]:focus ~ label, input[type=email]:valid ~ label ,
-input[type=password]:focus ~ label, input[type=password]:valid ~ label ,
-select:focus ~ label, select:valid ~ label,
-textarea:focus ~ label, textarea:valid ~ label {
+input[type=text]:focus ~ label, input[type=text] ~ label ,
+input[type=number]:focus ~ label, input[type=number] ~ label ,
+input[type=search]:focus ~ label, input[type=search] ~ label ,
+input[type=email]:focus ~ label, input[type=email] ~ label ,
+input[type=password]:focus ~ label, input[type=password] ~ label ,
+select:focus ~ label, select ~ label,
+textarea:focus ~ label, textarea ~ label {
     top:-10px;
     font-size:14px;
     color:#2196F3;
@@ -92,19 +92,6 @@ select:focus ~ .highlight, textarea:focus ~ .highlight {
 @keyframes inputHighlighter {
     from  { background:#2196F3; }
     to    { width:0; background:transparent; }
-}
-
-/* active state */
-input[type=text]:focus ~ label, input[type=text]:valid ~ label,
-input[type=number]:focus ~ label, input[type=number]:valid ~ label,
-input[type=search]:focus ~ label, input[type=search]:valid ~ label,
-input[type=email]:focus ~ label, input[type=email]:valid ~ label,
-input[type=password]:focus ~ label, input[type=password]:valid ~ label,
-select:focus ~ label, select:valid ~ label,
-textarea:focus ~ label, textarea:valid ~ label {
-    top:-10px;
-    font-size:14px;
-    color:#2196F3;
 }
 
 /*=====================Remove mozilla's highlighting red for required fields*/

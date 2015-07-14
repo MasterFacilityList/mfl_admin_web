@@ -8,7 +8,8 @@
         "mfl.common.filters",
         "mfl.common.controllers",
         "mfl.common.states",
-        "mfl.common.services"
+        "mfl.common.services",
+        "mfl.common.constants"
     ]);
 
 })(angular);

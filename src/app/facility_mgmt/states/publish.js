@@ -21,13 +21,10 @@
             permission: "facilities.publish_facilities,facilities.view_facility"
         })
 
-        .state("facilities.facility_edit.publish", {
-            url: "publish/",
+        .state("facilities_publish.publish", {
+            url: ":facility_id/",
             views: {
-                "tab-header@facilities.facility_edit": {
-                    templateUrl: "facility_mgmt/tpls/facility_publish.tabheaders.tpl.html"
-                },
-                "publish@facilities.facility_edit": {
+                "main-content@facility_mgmt": {
                     templateUrl: "facility_mgmt/tpls/facility_publish.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_publish"
                 }

@@ -1,10 +1,18 @@
 <div class="pad-t-20">
-
+    <div class="fade-content alert alert-danger alert-dismissible margin-t-5" ng-show="basic_error">
+        <button type="button" class="close">
+            <span ng-click="basic_error = !basic_error">&times;</span>
+        </button>
+        <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{basic_error}}</span>
+    </div>
     <form name="frm_facility_basic" ng-submit="save(frm_facility_basic)">
-    <div class="custom-well col-xs-12">
-        <div class="col-xs-12">
-            <h4 class="margin-b-20 fw-600">Facility Basic Details</h4>
+        <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true && !create">
+            <h4><strong><i class="fa fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
         </div>
+        <div class="custom-well col-xs-12">
+            <div class="col-xs-12">
+                <h4 class="margin-b-20 fw-600">Facility Basic Details</h4>
+            </div>
             <div class="group col-xs-12">
                 <input type="text" name="name" ng-model="facility.name" required />
                 <span class="highlight"></span>
@@ -23,11 +31,11 @@
             </div>
             <div class="form-group col-xs-12">
                 <label>Facility Type</label>
-                <ui-select ng-model="select_values.facility_type" required ng-disabled="facility.id">
+                <ui-select ng-model="select_values.facility_type" required ng-disabled="facility.id" name="facility_type">
                     <ui-select-match placeholder="Select a facility type...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="ft in facility_types | filter:$select.search" refresh-delay="500">
+                    <ui-select-choices repeat="ft.id as ft in facility_types | filter:$select.search" refresh-delay="500">
                         <span>{{ft.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -35,11 +43,11 @@
 
             <div class="form-group col-xs-12">
                 <label>Operation Status</label>
-                <ui-select ng-model="select_values.operation_status" required>
+                <ui-select ng-model="select_values.operation_status" required name="operation_status">
                     <ui-select-match placeholder="Select an operation status...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="os in operation_status | filter:$select.search" refresh-delay="500">
+                    <ui-select-choices repeat="os.id as os in operation_status | filter:$select.search" refresh-delay="500">
                         <span>{{os.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -47,11 +55,11 @@
 
             <div class="form-group col-xs-12">
                 <label>Owner</label>
-                <ui-select ng-model="select_values.owner" required>
+                <ui-select ng-model="select_values.owner" required name="owner">
                     <ui-select-match placeholder="Select an owner...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="owner in owners | filter:$select.search" refresh-delay="500">
+                    <ui-select-choices repeat="owner.id as owner in owners | filter:$select.search" refresh-delay="500">
                         <span>{{owner.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -59,21 +67,17 @@
 
             <div class="form-group col-xs-12">
                 <label>Ward</label>
-                <ui-select ng-model="select_values.ward" required>
+                <ui-select ng-model="select_values.ward" required name="ward">
                     <ui-select-match placeholder="Select a ward...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="ward in wards | filter:$select.search" refresh-delay="500">
+                    <ui-select-choices repeat="ward.id as ward in wards | filter:$select.search" refresh-delay="500">
                         <span>{{ward.name}}</span>
                     </ui-select-choices>
                 </ui-select>
             </div>
         </div>
-        <!-- Start of setup details -->
-        <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true && !create">
-          <h4><strong><i class="fa fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
-       </div>
-       <div ng-if="facility.has_edits===false || create" class="col-xs-12 custom-well">
+       <div class="col-xs-12 custom-well">
         <div class="col-xs-12">
             <h4 class="margin-b-20 fw-600">Facility Setup Details</h4>
         </div>
