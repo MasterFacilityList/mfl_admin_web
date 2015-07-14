@@ -371,9 +371,6 @@
 
             $scope.add = function () {
                 var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
-                console.log("$scope.groups: "+JSON.stringify($scope.groups));
-                console.log("new_grp: "+JSON.stringify($scope.new_grp));
-                console.log("grp: "+JSON.stringify(grp));
                 var update = angular.copy($scope.user.groups);
                 update.push(grp);
                 updateGroups(update);
