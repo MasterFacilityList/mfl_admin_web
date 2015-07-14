@@ -562,7 +562,6 @@
                 /*Save physical location details*/
                 $scope.savePhy = function (frm) {
                     var changes = formChanges.whatChanged(frm);
-                    //edit&create should go throuh here
                     if(!_.isNull($scope.facility.physical_address)) {
                         if(!_.isEmpty(changes)){
                             wrappers.physical_addresses

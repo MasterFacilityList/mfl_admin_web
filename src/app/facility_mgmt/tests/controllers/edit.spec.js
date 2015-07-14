@@ -2422,7 +2422,6 @@
                             "$$modelValue": "test"
                         }
                     };
-                    console.log(frm);
                     data.$scope.$parent.facility = {
                         physical_address : null
                     };
@@ -2481,7 +2480,6 @@
                             "$$modelValue": "test"
                         }
                     };
-                    console.log(frm);
                     data.$scope.$parent.facility = {
                         physical_address : null
                     };
@@ -2538,7 +2536,6 @@
                             "$$modelValue": "test"
                         }
                     };
-                    console.log(frm);
                     data.$scope.$parent.facility = {
                         physical_address : null
                     };
