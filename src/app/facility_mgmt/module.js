@@ -6,7 +6,8 @@
         "mfl.facility_mgmt.services",
         "mfl.facility_mgmt.states",
         "ui.select",
-        "ngSanitize"
+        "ngSanitize",
+        "mfl.common.constants"
     ]);
 
 })(angular);

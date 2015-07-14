@@ -7,12 +7,13 @@
         "datePicker",
         "ui.bootstrap.tpls",
         "mfl.common.forms",
-        "leaflet-directive"
+        "leaflet-directive",
+        "mfl.common.constants"
     ])
 
     .controller("mfl.facility_mgmt.controllers.services_helper",
-        ["$log", "mfl.facility_mgmt.services.wrappers",
-        function ($log, wrappers) {
+        ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
+        function ($log, wrappers, errorMessages) {
             var loadData = function ($scope) {
                 wrappers.services.filter({page_size: 100, ordering: "name"})
                 .success(function (data) {
@@ -20,8 +21,8 @@
                 })
                 .error(function (data) {
                     $log.error(data);
-                    $scope.service_error = "Sorry error occured while "+
-                    " fetching facility services";
+                    $scope.service_error = errorMessages.errors +
+                    errorMessages.fetching_services;
                 });
             };
 
@@ -36,8 +37,8 @@
                 })
                 .error(function (data) {
                     $log.error(data);
-                    $scope.service_error = "Sorry error occured while saving"+
-                    " facility service";
+                    $scope.service_error = errorMessages.errors +
+                    errorMessages.services;
                 });
             };
 
@@ -50,8 +51,8 @@
                 })
                 .error(function(data){
                     $log.error(data);
-                    $scope.service_error = "Sorry error occured while "+
-                    "deleting facility service";
+                    $scope.service_error =  errorMessages.errors +
+                        errorMessages.delete_services;
                 });
             };
 
@@ -84,9 +85,9 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit",
         ["$scope", "$q", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        "mfl.facility.multistep.service", "$state",
+        "mfl.facility.multistep.service", "$state", "mfl.error.messages",
         function ($scope, $q, $log, $stateParams, wrappers,
-            facilityMultistepService, $state) {
+            facilityMultistepService, $state, errorMessages) {
             $scope.facility_id = $stateParams.facility_id;
             $scope.create = false;
             $scope.spinner = true;
@@ -130,7 +131,8 @@
                 .error(function (data) {
                     $log.error(data);
                     $scope.spinner = false;
-                    $scope.error = "Sorry connection error, failed to load facility details";
+                    $scope.error = errorMessages.errors +
+                    errorMessages.facility_details;
                 });
 
             $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
@@ -153,6 +155,8 @@
                 })
                 .error(function (error) {
                     $log.error(error);
+                    $scope.error = errorMessages.errors +
+                    errorMessages.facility_details;
                 });
             };
             $scope.cancel = function () {
@@ -165,8 +169,9 @@
         ["$scope", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
         "mfl.common.services.multistep", "mfl.auth.services.login",
+        "mfl.error.messages",
         function ($scope, $log, $state, $stateParams, wrappers, formChanges,
-            multistepService, loginService) {
+            multistepService, loginService, errorMessages) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[0]);
@@ -200,8 +205,7 @@
                         })
                         .error(function (data) {
                             $log.error(data);
-                            $scope.basic_error = "Sorry an error occured,"+
-                            "facility data were not saved";
+                            $scope.basic_error = errorMessages.errors+ errorMessages.data;
                         });
                     }
                     else {
@@ -221,8 +225,9 @@
                             })
                             .error(function (data) {
                                 $log.error(data);
-                                $scope.basic_error= "Sorry an error occured,"+
-                                "facility was not updated";
+                                $scope.basic_error=
+                                errorMessages.errors+
+                                errorMessages.data;
                             });
                         }
                     }
@@ -236,7 +241,7 @@
                         })
                         .error(function (data) {
                             $log.error(data);
-                            $scope.basic_error = "Sorry an error occured, facility was not updated";
+                            $scope.basic_error = errorMessages.errors+ errorMessages.data;
                         });
                     }
                 }
@@ -247,7 +252,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.contacts",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        function($scope,$log,$stateParams,wrappers, multistepService){
+        "mfl.error.messages",
+        function($scope,$log,$stateParams,wrappers, multistepService,
+            errorMessages){
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[1]);
@@ -276,8 +283,8 @@
             })
             .error(function(error){
                 $log.error(error);
-                $scope.cont_error = "Sorry error occured"+
-                        ", failed to fetch facility contacts";
+                $scope.cont_error = errorMessages.errors +
+                    errorMessages.fetch_contacts;
             });
 
             /*remove contact*/
@@ -293,15 +300,15 @@
                     .error(function (data) {
                         $log.error(data);
                         obj.delete_spinner = false;
-                        $scope.cont_error = "Sorry error occured while saving"+
-                        " facility contacts";
+                        $scope.cont_error = errorMessages.errors +
+                            errorMessages.contacts;
                     });
                 })
                 .error(function (data) {
                     $log.error(data);
                     obj.delete_spinner = false;
-                    $scope.cont_error = "Sorry error occured while saving"+
-                    "facility contacts";
+                    $scope.cont_error = errorMessages.errors +
+                        errorMessages.contacts;
                 });
             };
 
@@ -328,15 +335,15 @@
                     .error(function (data) {
                         $log.error(data);
                         $scope.spinner = false;
-                        $scope.cont_error = "Sorry error occured while saving"+
-                        "facility contacts";
+                        $scope.cont_error = errorMessages.errors +
+                            errorMessages.contacts;
                     });
                 })
                 .error(function (data) {
                     $log.error(data);
                     $scope.spinner = false;
-                    $scope.cont_error = "Sorry error occured while saving"+
-                    "facility contacts";
+                    $scope.cont_error = errorMessages.errors +
+                        errorMessages.contacts;
                 });
             };
         }]
