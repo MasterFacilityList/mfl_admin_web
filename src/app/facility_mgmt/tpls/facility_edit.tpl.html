@@ -1,18 +1,5 @@
 <div class="content-header">
    <div class="action-container content-header-extra pad-r-20">
-        <a class="login-btn login-btn-info" requires-permission="facilities.add_facilityapproval"
-            ng-if="!facility.is_approved || facility.has_edits"
-            ui-sref=".approve({facility_id: facility_id,update_id: facility.latest_update})"
-            ui-sref-opts="{reload:true}">&nbsp;Approve</a>
-        <a class="login-btn login-btn-info margin-l-3" requires-permission="facilities.publish_facilities"
-            ng-if="!facility.is_published"
-            requires-user-feature="is_national"
-            ui-sref=".publish({facility_id: facility_id})"
-            ui-sref-opts="{reload:true}">&nbsp;Publish</a>
-        <a class="login-btn login-btn-info margin-l-3" requires-permission="facilities.add_facilityregulationstatus"
-            requires-user-feature="regulator"
-            ui-sref="facilities.facility_edit({facility_id: facility_id})"
-            ui-sref-opts="{reload:true}">&nbsp;Regulate</a>
         <a class="login-btn login-btn-info margin-l-3"
             requires-permission="facilities.add_facilitytype,facilities.add_facilityservice"
             ui-sref=".upgrade({facility_id: facility_id})"
@@ -21,7 +8,9 @@
             requires-permission="facilities.add_facilitytype,facilities.add_facilityservice"
             ui-sref=".downgrade({facility_id: facility_id})"
             ui-sref-opts="{reload:true}">&nbsp;Downgrade</a>
-        <a class="action-btn action-btn-danger action-btn-md" tooltip="delete" tooltip-placement="bottom" ui-sref="facilities.facility_edit.delete" requires-permission="facilities.delete_facility">
+        <a class="action-btn action-btn-danger action-btn-md" tooltip="delete"
+            tooltip-placement="bottom" ui-sref="facilities.facility_edit.delete"
+            requires-permission="facilities.delete_facility">
             <i class="fa fa-trash"></i>
         </a>
         <a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md"
