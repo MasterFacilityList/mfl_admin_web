@@ -46,9 +46,6 @@
         .state("facilities_approve.approve", {
             url: ":facility_id/",
             views: {
-                "tab-header@facilities.facility_edit": {
-                    templateUrl: "facility_mgmt/tpls/facility_approve.tabheaders.tpl.html"
-                },
                 "main-content@facility_mgmt": {
                     templateUrl: "facility_mgmt/tpls/facility_approve.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_approve"
