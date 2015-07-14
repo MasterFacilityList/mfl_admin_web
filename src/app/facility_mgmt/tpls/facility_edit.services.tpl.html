@@ -35,7 +35,10 @@
                 </div>
         </form>
     </div>
-    <div class="col-xs-12 content-card margin-t-20">
+    <div ng-if="facility.facility_services.length === 0" class="col-xs-12 alert alert-info">
+        <i class="fa fa-info-circle"></i> No Health Services assigned to the facility
+    </div>
+    <div class="col-xs-12 content-card margin-t-20" ng-if="facility.facility_services.length > 0">
         <div class="col-xs-12">
         <h4 class="fw-600 fs-18">Current Services</h4>
         <table class="table table-hover">
