@@ -3029,18 +3029,6 @@
                             coordinates : [3, 1]
                         }
                     };
-                    /*httpBackend
-                        .expectGET(server_url+"api/gis/geo_code_methods/")
-                        .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/geo_code_sources/")
-                        .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, rst_data);
-                    httpBackend
-                        .expectGET(server_url+"api/common/wards/3/")
-                        .respond(200, {results: []});*/
                     ctrl(".geolocation", data);
                     data.$scope.$apply();
                     data.$scope.facility={
@@ -3057,10 +3045,6 @@
                     data.$scope.$digest();
                     data.$scope.getFacilityCoordinates(data.$scope.facility);
                     data.$scope.checkLocation(coords);
-
-                    /*httpBackend.flush();
-                    httpBackend.verifyNoOutstandingExpectation();
-                    httpBackend.verifyNoOutstandingRequest();*/
 
                     var frm = {
                         "$dirty": false,
@@ -3315,6 +3299,42 @@
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingExpectation();
                     httpBackend.verifyNoOutstandingRequest();
+                }
+            ]));
+            //coordinates being null
+            it("should fail whith null coordinates",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "$state" : state,
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    ctrl(".geolocation", data);
+                    data.$scope.$apply();
+                    data.$scope.facility={
+                        coordinates : null,
+                        ward : "3",
+                        facility_physical_address:{
+                            address : "ZUZU",
+                            postal_code: "254",
+                            id: "3"
+                        }
+                    };
+                    data.$scope.$apply();
+                    data.$scope.facilityWard(data.$scope.facility);
                 }
             ]));
 
