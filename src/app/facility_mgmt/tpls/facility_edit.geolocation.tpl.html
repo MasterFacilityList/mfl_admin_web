@@ -47,7 +47,8 @@
                                     <!-- End of first section of form -->
                                     <!-- Start lat long -->
                                                 <div class="group col-sm-6">
-                                                    <input type="number" step="0.00000001" name="coordinates.coordinates[0]" ng-model="geo.coordinates.coordinates[0]"/>
+                                                    <input type="number" step="0.00000001" name="longitude" ng-model="geo.coordinates.coordinates[0]"
+                                                    ng-keydown="checkLocation(geo.coordinates)"/>
                                                     <span class="highlight"></span>
                                                     <span class="bar"></span>
                                                     <label class="margin-l-10">
@@ -55,16 +56,14 @@
                                                     </label>
                                                 </div>
                                                 <div class="group col-sm-6">
-                                                    <input type="number" step="0.00000001" name="coordinates.coordinates[1]" ng-model="geo.coordinates.coordinates[1]" />
+                                                    <input type="number" step="0.00000001" name="latitude" ng-model="geo.coordinates.coordinates[1]"
+                                                    ng-keydown="checkLocation(geo.coordinates)"/>
                                                     <span class="highlight"></span>
                                                     <span class="bar"></span>
                                                     <label class="margin-l-10">
                                                         Latitude
                                                     </label>
                                                 </div>
-                                           <div class="col-md-12">
-                                               <button class="login-btn login-btn-default" ng-click="checkLocation(geo.coordinates)"> Show facility location on map</button>
-                                           </div>
                                       <!-- End lat long -->
                                     <div class="col-md-12 margin-t-10 margin-b-20">
                                        <div>
@@ -92,6 +91,9 @@
     <a ui-sref="facilities.facility_edit.location" ng-if="!create" class="login-btn login-btn-primary margin-t-10 margin-b-10">
         &nbsp;<i class="fa fa-angle-double-left"></i> Location
     </a>
+    <a ui-sref="facilities.facility_create.location({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-10 margin-b-10">
+        &nbsp;<i class="fa fa-angle-double-left"></i> Location
+    </a>
     <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary margin-t-10 margin-b-10 pull-right" >
-        &nbsp;Update <i class="fa fa-angle-double-right"></i>
+        &nbsp;{{create ? 'Submit' : 'Update'}} <i class="fa fa-angle-double-right"></i>
     </button>

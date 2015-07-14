@@ -115,6 +115,20 @@
                     }
                 },
                 permission: "facilities.add_facility"
+            })
+
+            .state("facilities.facility_create.geolocation", {
+                url: ":facility_id/geolocation",
+                views: {
+                    "tab-header@facilities.facility_create": {
+                        templateUrl: "facility_mgmt/tpls/facility_create.tab-headers.tpl.html"
+                    },
+                    "form-view@facilities.facility_create": {
+                        templateUrl: "facility_mgmt/tpls/facility_edit.geolocation.tpl.html",
+                        controller: "mfl.facility_mgmt.controllers.facility_edit.geolocation"
+                    }
+                },
+                permission: "facilities.add_facility"
             });
     }]);
 
