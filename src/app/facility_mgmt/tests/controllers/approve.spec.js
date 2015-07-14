@@ -53,13 +53,44 @@
         });
 
         describe("test facility approve controller", function () {
+
+            beforeEach(function () {
+                httpBackend
+                .expectGET(server_url+"api/facilities/facilities/3/")
+                .respond(200, {
+                    latest_update: 3
+                });
+            });
+
+            it("should show error on fail to load facility details", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    },
+                    "$log": log
+                };
+                httpBackend.resetExpectations();
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facilities/3/")
+                    .respond(400, {});
+
+                ctrl("facility_approve", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.facility).toBe(undefined);
+                expect(log.error).toHaveBeenCalled();
+            });
+
             it("should load facility update", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
-                    "$stateParams": {update_id: 3}
+                    "$stateParams": {facility_id: 3}
                 };
-                data.$scope.facility_id = 3;
 
                 ctrl("facility_approve", data);
 
@@ -74,14 +105,34 @@
                 expect(data.$scope.facility_update).toEqual({facility_updates: {abbreviation: 2}});
             });
 
+            it("should not load undefined facility update", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {facility_id: 3}
+                };
+                httpBackend.resetExpectations();
+                httpBackend
+                .expectGET(server_url+"api/facilities/facilities/3/")
+                .respond(200, {
+                    latest_update: null
+                });
+                ctrl("facility_approve", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.facility_update).toEqual(undefined);
+            });
+
             it("should show errors on fail to load facility update", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
-                    "$stateParams": {update_id: 3},
+                    "$stateParams": {facility_id: 3},
                     "$log": log
                 };
-                data.$scope.facility_id = 3;
 
                 ctrl("facility_approve", data);
 
@@ -97,32 +148,38 @@
                 expect(log.error).toHaveBeenCalled();
             });
 
-            it("should make an update without update_id", function () {
+            it("should not make an update without update_id", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
-                    "$stateParams": {update_id: ""}
+                    "$stateParams": {facility_id: 3}
                 };
-                data.$scope.facility_id = 3;
 
                 ctrl("facility_approve", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
 
+                data.$scope.facility.latest_update = "";
                 data.$scope.approveUpdate();
 
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-
             });
 
             it("should approve a facility update", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
-                    "$stateParams": {update_id: 3}
+                    "$stateParams": {facility_id: 3}
                 };
-                data.$scope.facility_id = 3;
 
                 ctrl("facility_approve", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
 
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facility_updates/3/")
@@ -141,11 +198,14 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
-                    "$stateParams": {update_id: 3}
+                    "$stateParams": {facility_id: 3}
                 };
-                data.$scope.facility_id = 3;
 
                 ctrl("facility_approve", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
 
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facility_updates/3/")
@@ -165,11 +225,14 @@
                     "$scope": rootScope.$new(),
                     "$state": state,
                     "$log": log,
-                    "$stateParams": {update_id: 3}
+                    "$stateParams": {facility_id: 3}
                 };
-                data.$scope.facility_id = 3;
 
                 ctrl("facility_approve", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
 
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facility_updates/3/")
@@ -188,11 +251,14 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
-                    "$stateParams": {update_id: 3}
+                    "$stateParams": {facility_id: 3}
                 };
-                data.$scope.facility_id = 3;
 
                 ctrl("facility_approve", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
 
                 httpBackend
                     .expectPOST(server_url+"api/facilities/facility_approvals/")
@@ -212,12 +278,15 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
-                    "$stateParams": {update_id: 3},
+                    "$stateParams": {facility_id: 3},
                     "$log": log
                 };
-                data.$scope.facility_id = 3;
 
                 ctrl("facility_approve", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
 
                 httpBackend
                     .expectPOST(server_url+"api/facilities/facility_approvals/")

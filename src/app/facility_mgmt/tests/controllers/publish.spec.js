@@ -36,13 +36,48 @@
 
         describe("test publish detail", function () {
 
+            beforeEach(function () {
+                httpBackend
+                .expectGET(server_url+"api/facilities/facilities/3/")
+                .respond(200, {
+                    latest_update: 3
+                });
+            });
+
+            it("should show error on fail to load facility details", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    },
+                    "$log": log
+                };
+                httpBackend.resetExpectations();
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facilities/3/")
+                    .respond(400, {});
+
+                ctrl("facility_publish", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.facility).toBe(undefined);
+                expect(log.error).toHaveBeenCalled();
+            });
+
             it("should publish a facility", function () {
                 var data = {
                     "$scope": rootScope.$new(),
-                    "$state": state
+                    "$state": state,
+                    "$stateParams": {facility_id: 3}
                 };
-                data.$scope.facility_id = 3;
                 ctrl("facility_publish", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
 
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facilities/3/")
@@ -59,10 +94,15 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
-                    "$log": log
+                    "$log": log,
+                    "$stateParams": {facility_id: 3}
                 };
-                data.$scope.facility_id = 3;
+
                 ctrl("facility_publish", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
 
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facilities/3/")
@@ -76,6 +116,5 @@
                 expect(log.error).toHaveBeenCalled();
             });
         });
-
     });
 })();
