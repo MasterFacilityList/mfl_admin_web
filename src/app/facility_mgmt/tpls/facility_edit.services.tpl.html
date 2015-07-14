@@ -1,4 +1,10 @@
 <div class="col-sm-12 detail-content">
+    <div class="col-xs-12 fade-content alert alert-danger alert-dismissible margin-t-10" ng-show="service_error">
+        <button type="button" class="close">
+            <span ng-click="service_error = !service_error">&times;</span>
+        </button>
+        <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{service_error}}</span>
+  </div>
     <div class="col-sm-12 content-card form-card margin-t-20 margin-b-20" requires-permission="facilities.add_facilityservice">
         <div class="col-sm-12">
             <h4 class="fw-600 fs-18">Add Service</h4>

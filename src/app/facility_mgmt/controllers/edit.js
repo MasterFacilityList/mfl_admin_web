@@ -20,6 +20,8 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.service_error = "Sorry error occured while "+
+                    " fetching facility services";
                 });
             };
 
@@ -34,6 +36,8 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.service_error = "Sorry error occured while saving"+
+                    " facility service";
                 });
             };
 
@@ -46,6 +50,8 @@
                 })
                 .error(function(data){
                     $log.error(data);
+                    $scope.service_error = "Sorry error occured while "+
+                    "deleting facility service";
                 });
             };
 
@@ -123,6 +129,8 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.spinner = false;
+                    $scope.error = "Sorry connection error, failed to load facility details";
                 });
 
             $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
@@ -192,6 +200,8 @@
                         })
                         .error(function (data) {
                             $log.error(data);
+                            $scope.basic_error = "Sorry an error occured,"+
+                            "facility data were not saved";
                         });
                     }
                     else {
@@ -211,6 +221,8 @@
                             })
                             .error(function (data) {
                                 $log.error(data);
+                                $scope.basic_error= "Sorry an error occured,"+
+                                "facility was not updated";
                             });
                         }
                     }
@@ -224,6 +236,7 @@
                         })
                         .error(function (data) {
                             $log.error(data);
+                            $scope.basic_error = "Sorry an error occured, facility was not updated";
                         });
                     }
                 }
@@ -263,6 +276,8 @@
             })
             .error(function(error){
                 $log.error(error);
+                $scope.cont_error = "Sorry error occured"+
+                        ", failed to fetch facility contacts";
             });
 
             /*remove contact*/
@@ -278,11 +293,15 @@
                     .error(function (data) {
                         $log.error(data);
                         obj.delete_spinner = false;
+                        $scope.cont_error = "Sorry error occured while saving"+
+                        " facility contacts";
                     });
                 })
                 .error(function (data) {
                     $log.error(data);
                     obj.delete_spinner = false;
+                    $scope.cont_error = "Sorry error occured while saving"+
+                    "facility contacts";
                 });
             };
 
@@ -309,11 +328,15 @@
                     .error(function (data) {
                         $log.error(data);
                         $scope.spinner = false;
+                        $scope.cont_error = "Sorry error occured while saving"+
+                        "facility contacts";
                     });
                 })
                 .error(function (data) {
                     $log.error(data);
                     $scope.spinner = false;
+                    $scope.cont_error = "Sorry error occured while saving"+
+                    "facility contacts";
                 });
             };
         }]
