@@ -314,8 +314,8 @@
 
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        "mfl.common.services.multistep",
-        function (wrappers, $log, $scope, $state, multistepService) {
+        "mfl.common.services.multistep","mfl.users.services.groups_filter",
+        function (wrappers, $log, $scope, $state, multistepService, groupsService) {
             if($scope.create) {
                 $scope.nextState();
             }
@@ -325,7 +325,8 @@
             }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
-                $scope.groups = data.results;
+                $scope.groups =  groupsService.filterGroups($scope.login_user.is_national,
+                                                                                    data.results);
             })
             .error(function (data) {
                 $log.error(data);
@@ -370,6 +371,9 @@
 
             $scope.add = function () {
                 var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
+                console.log("$scope.groups: "+JSON.stringify($scope.groups));
+                console.log("new_grp: "+JSON.stringify($scope.new_grp));
+                console.log("grp: "+JSON.stringify(grp));
                 var update = angular.copy($scope.user.groups);
                 update.push(grp);
                 updateGroups(update);
