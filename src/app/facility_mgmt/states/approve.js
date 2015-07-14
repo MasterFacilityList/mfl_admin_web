@@ -8,6 +8,18 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
 
+        .state("facilities_rejected", {
+            "parent": "facility_mgmt",
+            "url": "^/facilities_rejected/",
+            "views": {
+                "main-content@facility_mgmt": {
+                    templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facilities_rejected"
+                }
+            },
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
+        })
+
         .state("facilities_approve", {
             "parent": "facility_mgmt",
             "url": "^/facilities_approve/",

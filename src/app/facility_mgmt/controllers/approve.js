@@ -6,6 +6,18 @@
         "mfl.auth.services"
     ])
 
+    .controller("mfl.facility_mgmt.controllers.facilities_rejected",
+        ["$scope", function ($scope) {
+            $scope.filters = {
+                "rejected": true
+            };
+            $scope.title = {
+                "name": "Rejected Facilities",
+                "icon": "fa-building"
+            };
+        }]
+    )
+
     .controller("mfl.facility_mgmt.controllers.facilities_approve",
         ["$scope", function ($scope) {
             $scope.filters = {

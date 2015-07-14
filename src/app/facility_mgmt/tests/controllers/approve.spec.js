@@ -25,6 +25,15 @@
             ]);
         });
 
+        describe("test rejected facilities list", function () {
+
+            it("should load", function () {
+                var scope = rootScope.$new();
+                ctrl("facilities_rejected", {"$scope": scope});
+                expect(scope.filters).toEqual({"rejected": true});
+            });
+        });
+
         describe("test facility approve list", function () {
 
             it("should load", function () {
