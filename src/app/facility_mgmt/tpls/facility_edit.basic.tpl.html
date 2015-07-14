@@ -23,11 +23,11 @@
             </div>
             <div class="form-group col-xs-12">
                 <label>Facility Type</label>
-                <ui-select ng-model="select_values.facility_type" required ng-disabled="facility.id">
+                <ui-select ng-model="select_values.facility_type" required ng-disabled="facility.id" name="facility_type">
                     <ui-select-match placeholder="Select a facility type...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="ft in facility_types | filter:$select.search" refresh-delay="500">
+                    <ui-select-choices repeat="ft.id as ft in facility_types | filter:$select.search" refresh-delay="500">
                         <span>{{ft.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -35,11 +35,11 @@
 
             <div class="form-group col-xs-12">
                 <label>Operation Status</label>
-                <ui-select ng-model="select_values.operation_status" required>
+                <ui-select ng-model="select_values.operation_status" required name="operation_status">
                     <ui-select-match placeholder="Select an operation status...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="os in operation_status | filter:$select.search" refresh-delay="500">
+                    <ui-select-choices repeat="os.id as os in operation_status | filter:$select.search" refresh-delay="500">
                         <span>{{os.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -47,11 +47,11 @@
 
             <div class="form-group col-xs-12">
                 <label>Owner</label>
-                <ui-select ng-model="select_values.owner" required>
+                <ui-select ng-model="select_values.owner" required name="owner">
                     <ui-select-match placeholder="Select an owner...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="owner in owners | filter:$select.search" refresh-delay="500">
+                    <ui-select-choices repeat="owner.id as owner in owners | filter:$select.search" refresh-delay="500">
                         <span>{{owner.name}}</span>
                     </ui-select-choices>
                 </ui-select>
@@ -59,11 +59,11 @@
 
             <div class="form-group col-xs-12">
                 <label>Ward</label>
-                <ui-select ng-model="select_values.ward" required>
+                <ui-select ng-model="select_values.ward" required name="ward">
                     <ui-select-match placeholder="Select a ward...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
-                    <ui-select-choices repeat="ward in wards | filter:$select.search" refresh-delay="500">
+                    <ui-select-choices repeat="ward.id as ward in wards | filter:$select.search" refresh-delay="500">
                         <span>{{ward.name}}</span>
                     </ui-select-choices>
                 </ui-select>
