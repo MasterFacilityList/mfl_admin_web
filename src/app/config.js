@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, jQuery) {
     "use strict";
 
     angular.module("mflAdminAppConfig", [
@@ -38,7 +38,13 @@
     }])
 
     .config(["$httpProvider", function($httpProvider) {
-        $httpProvider.defaults.headers.common["Cache-Control"] = "no-cache";
+        var val = "no-cache";
+        $httpProvider.defaults.headers.common["Cache-Control"] = val;
+        jQuery.ajaxSetup({
+            headers: {
+                "Cache-Control": val
+            }
+        });
     }])
 
     .run(["api.oauth2",function (oauth2) {
@@ -49,4 +55,4 @@
         statecheck.startListening();
     }]);
 
-})(angular);
+})(angular, jQuery);
