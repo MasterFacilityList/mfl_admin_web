@@ -21,7 +21,25 @@
                     expect(wrappers.user_contacts.apiBaseUrl).toEqual("api/common/user_contacts/");
                     expect(wrappers.contacts.apiBaseUrl).toEqual("api/common/contacts/");
                 }]);
+            });
+            it("should test group filter service", function () {
+                inject(["mfl.users.services.groups_filter",function (grpFilter) {
+                    expect(grpFilter.filterGroups).toBeDefined();
+                }]);
+            });
+            it("should expect national admin groups to have no county level groups",
+            function () {
+                inject(["mfl.users.services.groups_filter",function (grpFilter) {
+                    var grps = [
+                        {
+                            id:1,
+                            is_county_level:true
+                        }
+                    ];
+                    expect(grpFilter.filterGroups).toBeDefined();
+                    grpFilter.filterGroups(false,grps);
 
+                }]);
             });
         });
     });

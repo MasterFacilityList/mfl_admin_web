@@ -314,8 +314,8 @@
 
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        "mfl.common.services.multistep",
-        function (wrappers, $log, $scope, $state, multistepService) {
+        "mfl.common.services.multistep","mfl.users.services.groups_filter",
+        function (wrappers, $log, $scope, $state, multistepService, groupsService) {
             if($scope.create) {
                 $scope.nextState();
             }
@@ -325,7 +325,8 @@
             }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
-                $scope.groups = data.results;
+                $scope.groups =  groupsService.filterGroups($scope.login_user.is_national,
+                                                                                    data.results);
             })
             .error(function (data) {
                 $log.error(data);
