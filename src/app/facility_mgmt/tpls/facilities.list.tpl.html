@@ -25,17 +25,17 @@
             <td data-title="Owner:" class="pad-t-15">{{fac.owner_name}}</td>
             <td data-title="Facility Type:" class="pad-t-15">{{fac.facility_type_name}}</td>
             <td data-title="Actions:"  class="text-right">
-                <a require-permission="facilities.add_facilityapproval,facilities.view_facility" ui-sref="facilities_approve.approve({facility_id: fac.id})"
+                <a requires-permission="facilities.add_facilityapproval,facilities.view_facility" ui-sref="facilities_approve.approve({facility_id: fac.id})"
                     class="login-btn login-btn-action">
                     &nbsp;Approve
                 </a>
 
-                <a require-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish({facility_id: fac.id})"
+                <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish({facility_id: fac.id})"
                     class="login-btn login-btn-action">
                     &nbsp;Publish
                 </a>
 
-                <a require-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
+                <a requires-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
                     class="login-btn login-btn-action">
                     &nbsp;View
                 </a>
