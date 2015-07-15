@@ -45,6 +45,11 @@
                     class="login-btn login-btn-action" >
                     &nbsp;View
                 </a>
+
+                <a requires-permission="facilities.view_facility,facilities.add_facilityregulationstatus"
+                    ui-sref="facilities_regulation.regulate({facility_id: fac.id})" class="login-btn login-btn-action" >
+                    &nbsp;Regulate
+                </a>
             </td>
         </tr>
     </tbody>

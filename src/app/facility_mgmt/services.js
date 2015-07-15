@@ -55,6 +55,10 @@
         this.facility_types = api.setBaseUrl("api/facilities/facility_types/");
         this.facility_owners = api.setBaseUrl("api/facilities/owners/");
         this.regulating_bodies = api.setBaseUrl("api/facilities/regulating_bodies/");
+        this.facility_regulation_status = api.setBaseUrl(
+            "api/facilities/facility_regulation_status/"
+        );
+        this.regulation_status = api.setBaseUrl("api/facilities/regulation_status/");
         this.wards = api.setBaseUrl("api/common/wards/");
         this.towns = api.setBaseUrl("api/common/towns");
         this.officers = api.setBaseUrl("api/facilities/officers/");

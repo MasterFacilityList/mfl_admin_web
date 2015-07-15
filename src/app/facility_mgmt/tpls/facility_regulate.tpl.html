@@ -1,0 +1,22 @@
+<div>
+    <form name="frm_facility_regulation" ng-submit="regulateFacility()">
+        <div class="form-group">
+            <label for="regulation_status">Regulation Status</label>
+            <ui-select ng-model="regulation.regulation_status" name="regulation_status" required>
+                <ui-select-choices repeat="rs.id as rs in regulation_status">{{rs.name}}</ui-select-choices>
+                <ui-select-match><span>{{$select.selected.name}}</span></ui-select-match>
+            </ui-select>
+        </div>
+        <div class="form-group">
+            <label for="reason">Reason</label>
+            <textarea name="reason" required="" class="form-control" ng-model="regulation.reason"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="license_number">License Number</label>
+            <input type="text" class="form-control" name="license_number" ng-model="regulation.license_number" required >
+        </div>
+
+        <input type="submit" value="Regulate" class="btn btn-success" />
+        <a ui-sref="^" class="btn btn-default">Cancel</a>
+    </form>
+</div>
