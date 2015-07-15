@@ -273,6 +273,7 @@
                 id: 1,
                 groups : [
                     {
+                        id: 1,
                         name: "SCRIO",
                         permissions : [
                             {
@@ -310,6 +311,7 @@
                 id: 1,
                 groups : [
                     {
+                        id: 1,
                         name: "SCRIO",
                         permissions : [
                             {
@@ -1056,16 +1058,29 @@
 
         describe("Test user edit groups controller", function () {
 
-            it("should load all groups",
-            inject(["mfl.common.services.multistep",
-                function (multistepService) {
-                httpBackend
-                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
-                    .respond(200, {"results": []});
+            it("should load all groups | while creating a user",
+            inject(["mfl.common.services.multistep","mfl.users.services.groups_filter",
+                function (multistepService, groupsService) {
+                var results = [
+                    {
+                        "id": 2,
+                        "name": "grp2",
+                        "is_county_level":false
+                    },
+                    {
+                        "id": 3,
+                        "name": "grp3",
+                        "is_county_level":true
+                    }
+                ];
                 var data = {
                     "$scope": rootScope.$new(),
-                    "mfl.common.services.multistep": multistepService
+                    "mfl.common.services.multistep": multistepService,
+                    "mfl.users.services.groups_filter": groupsService
                 };
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
+                    .respond(200, results);
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"},
@@ -1075,7 +1090,56 @@
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
                 ctrl("user_edit.groups", data);
+                data.$scope.login_user = {
+                    is_national: true
+                };
+                data.$scope.groups = groupsService
+                            .filterGroups(data.$scope.login_user.is_national,results);
+                expect(data.$scope.$parent.furthest).toEqual(3);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
 
+                expect(data.$scope.groups).toEqual([]);
+            }]));
+
+            it("should load all groups | while editing a user",
+            inject(["mfl.common.services.multistep","mfl.users.services.groups_filter",
+                function (multistepService, groupsService) {
+                var results = [
+                    {
+                        "id": 2,
+                        "name": "grp2",
+                        "is_county_level":false
+                    },
+                    {
+                        "id": 3,
+                        "name": "grp3",
+                        "is_county_level":true
+                    }
+                ];
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
+                    .respond(200, results);
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "mfl.common.services.multistep": multistepService,
+                    "mfl.users.services.groups_filter": groupsService
+                };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "groups"}
+                ];
+                data.$scope.$parent.furthest = 3;
+                data.$scope.create = false;
+                data.$scope.login_user = {
+                    is_national: true
+                };
+                data.$scope.nextState = angular.noop;
+                ctrl("user_edit.groups", data);
+                data.$scope.groups = groupsService
+                        .filterGroups(data.$scope.login_user.is_national,results);
                 expect(data.$scope.$parent.furthest).toEqual(3);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -1113,22 +1177,178 @@
                 expect(log.error).toHaveBeenCalled();
             }]));
 
-            it("should add a group to the user | is_national and in editing",
-            inject(["mfl.common.services.multistep","$state",
-                function (multistepService,$state) {
+            it("should add a group to the user | is_national and is editing",
+            inject(["mfl.common.services.multistep","$state","mfl.users.services.groups_filter",
+                function (multistepService,$state,groupsService) {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": $state
+                };
+                var results = [
+                    {
+                        "id": 2,
+                        "name": "grp2",
+                        "is_county_level":false
+                    },
+                    {
+                        "id": 3,
+                        "name": "grp3",
+                        "is_county_level":true
+                    }
+                ];
                 httpBackend
                     .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
-                    .respond(200, {"results": [{"id": 2, "name": "grp2"}]});
+                    .respond(200, {"results": results});
+                spyOn($state, "go");
+                spyOn(groupsService, "filterGroups").andReturn(results);
+                data.$scope.create = false;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "groups"}
+                ];
+                data.$scope.nextState = angular.noop;
+                data.$scope.login_user = {
+                    is_national : true
+                };
+                ctrl("user_edit.groups", data);
+
+                data.$scope.user_id = 3;
+                data.$scope.new_grp = "2";
+                data.$scope.user = {
+                    "groups": [
+                        {
+                            "id":2,
+                            "name":"grp2",
+                            "is_county_level":false
+                        },
+                        {
+                            "id":3,
+                            "name":"grp3",
+                            "is_county_level":true
+                        }
+                    ]
+                };
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(server_url+"api/users/3/")
+                    .respond(200, {"groups": [{"id": 2, "name": "grp2"}]});
+
+                //testing adding roles using listing directive
+                expect(data.$scope.groups).toEqual(results);
+
+                expect(data.$scope.groups).not.toEqual(undefined);
+                data.$scope.add();
+                data.$scope.updateUserGroups();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                expect($state.go).toHaveBeenCalled();
+            }]));
+
+            it("should add a group to the user | is_national & in creating state",
+            inject(["mfl.common.services.multistep","$state","mfl.users.services.groups_filter",
+                function (multistepService,$state,groupsService) {
+                var results = [
+                    {
+                        "id": 2,
+                        "name": "grp2",
+                        "is_county_level":false
+                    },
+                    {
+                        "id": 3,
+                        "name": "grp3",
+                        "is_county_level":true
+                    }
+                ];
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
+                    .respond(200, {"results": [results]});
                 var data = {
                     "$scope": rootScope.$new(),
                     "mfl.common.services.multistep" : multistepService,
+                    "mfl.users.services.groups_filter": groupsService,
                     "$state": $state
                 };
+                var county_grp = {
+                    "id":2,
+                    "name":"grp2",
+                    "is_county_level":false
+                };
                 spyOn($state, "go");
+                data.$scope.login_user = {
+                    is_national : true
+                };
                 data.$scope.user_id = 3;
                 data.$scope.user = {
-                    "groups": []
+                    "groups": [county_grp]
                 };
+                data.$scope.create = true;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "groups"}
+                ];
+                data.$scope.groups = groupsService
+                            .filterGroups(data.$scope.login_user.is_national,results);
+                data.$scope.nextState = angular.noop;
+                data.$scope.login_user = {
+                    is_national : true
+                };
+                ctrl("user_edit.groups", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(
+                        server_url+"api/users/3/", {"groups": [{"id": 2, "name": "grp2"}]})
+                    .respond(200, {"groups": [{"id": 2, "name": "grp2"}]});
+
+                data.$scope.new_grp = "2";
+                //testing adding roles using listing directive
+                data.$scope.updateUserGroups({"groups": [{"id": 2, "name": "grp2"}]});
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                expect($state.go).toHaveBeenCalled();
+                expect(data.$scope.user).toEqual({"groups": [{"id": 2, "name": "grp2"}]});
+            }]));
+
+            it("should add a group to the user | !is_national & in editing state",
+            inject(["mfl.common.services.multistep","$state","mfl.users.services.groups_filter",
+                function (multistepService,$state,groupsService) {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": $state
+                };
+                var results = [
+                    {
+                        "id": 2,
+                        "name": "grp2",
+                        "is_county_level":false
+                    },
+                    {
+                        "id": 3,
+                        "name": "grp3",
+                        "is_county_level":false
+                    }
+                ];
+                httpBackend
+                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
+                    .respond(200, {"results": results});
+                spyOn($state, "go");
+                spyOn(groupsService, "filterGroups").andReturn(results);
                 data.$scope.create = false;
                 data.$scope.steps = [
                     {name : "basic"},
@@ -1141,57 +1361,22 @@
                 };
                 ctrl("user_edit.groups", data);
 
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                httpBackend.resetExpectations();
-
-                httpBackend
-                    .expectPATCH(
-                        server_url+"api/users/3/", {"groups": [{"id": 2, "name": "grp2"}]})
-                    .respond(200, {"groups": [{"id": 2, "name": "grp2"}]});
-
-                data.$scope.new_grp = "2";
-                data.$scope.add("3");
-                //testing adding roles using listing directive
-                data.$scope.updateUserGroups();
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-                expect($state.go).toHaveBeenCalled();
-                expect(data.$scope.user).toEqual({"groups": [{"id": 2, "name": "grp2"}]});
-            }]));
-
-            it("should add a group to the user | is_national & in creating state",
-            inject(["mfl.common.services.multistep","$state",
-                function (multistepService,$state) {
-                httpBackend
-                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
-                    .respond(200, {"results": [{"id": 2, "name": "grp2"}]});
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "mfl.common.services.multistep" : multistepService,
-                    "$state": $state
-                };
-                spyOn($state, "go");
                 data.$scope.user_id = 3;
+                data.$scope.new_grp = "2";
                 data.$scope.user = {
-                    "groups": []
+                    "groups": [
+                        {
+                            "id":2,
+                            "name":"grp2",
+                            "is_county_level":false
+                        },
+                        {
+                            "id":3,
+                            "name":"grp3",
+                            "is_county_level":true
+                        }
+                    ]
                 };
-                data.$scope.create = true;
-                data.$scope.steps = [
-                    {name : "basic"},
-                    {name : "contacts"},
-                    {name : "groups"}
-                ];
-                data.$scope.nextState = angular.noop;
-                data.$scope.login_user = {
-                    is_national : true
-                };
-                ctrl("user_edit.groups", data);
-
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -1199,71 +1384,20 @@
                 httpBackend.resetExpectations();
 
                 httpBackend
-                    .expectPATCH(
-                        server_url+"api/users/3/", {"groups": [{"id": 2, "name": "grp2"}]})
+                    .expectPATCH(server_url+"api/users/3/")
                     .respond(200, {"groups": [{"id": 2, "name": "grp2"}]});
 
-                data.$scope.new_grp = "2";
-                data.$scope.add("3");
                 //testing adding roles using listing directive
+                expect(data.$scope.groups).toEqual(results);
+
+                expect(data.$scope.groups).not.toEqual(undefined);
+                data.$scope.add();
                 data.$scope.updateUserGroups();
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
                 expect($state.go).toHaveBeenCalled();
-                expect(data.$scope.user).toEqual({"groups": [{"id": 2, "name": "grp2"}]});
-            }]));
-
-            it("should add a group to the user | !is_national & in editing state",
-            inject(["mfl.common.services.multistep","$state",
-                function (multistepService,$state) {
-                httpBackend
-                    .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
-                    .respond(200, {"results": [{"id": 2, "name": "grp2"}]});
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "mfl.common.services.multistep" : multistepService,
-                    "$state": $state
-                };
-                spyOn($state, "go");
-                data.$scope.user_id = 3;
-                data.$scope.user = {
-                    "groups": []
-                };
-                data.$scope.create = false;
-                data.$scope.steps = [
-                    {name : "basic"},
-                    {name : "contacts"},
-                    {name : "groups"}
-                ];
-                data.$scope.nextState = angular.noop;
-                data.$scope.login_user = {
-                    is_national : true
-                };
-                ctrl("user_edit.groups", data);
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-
-                httpBackend.resetExpectations();
-
-                httpBackend
-                    .expectPATCH(
-                        server_url+"api/users/3/", {"groups": [{"id": 2, "name": "grp2"}]})
-                    .respond(200, {"groups": [{"id": 2, "name": "grp2"}]});
-
-                data.$scope.new_grp = "2";
-                data.$scope.add("3");
-                //testing adding roles using listing directive
-                data.$scope.updateUserGroups();
-
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
-                expect($state.go).toHaveBeenCalled();
-                expect(data.$scope.user).toEqual({"groups": [{"id": 2, "name": "grp2"}]});
             }]));
 
             it("should add a group to the user | !is_national & in creating state",
@@ -1277,10 +1411,15 @@
                     "mfl.common.services.multistep" : multistepService,
                     "$state": $state
                 };
+                var county_grp = {
+                    "id":2,
+                    "name":"grp2",
+                    "is_county_level":true
+                };
                 spyOn($state, "go");
                 data.$scope.user_id = 3;
                 data.$scope.user = {
-                    "groups": []
+                    "groups": [county_grp]
                 };
                 data.$scope.create = true;
                 data.$scope.steps = [
@@ -1306,7 +1445,6 @@
                     .respond(200, {"groups": [{"id": 2, "name": "grp2"}]});
 
                 data.$scope.new_grp = "2";
-                data.$scope.add("3");
                 //testing adding roles using listing directive
                 data.$scope.updateUserGroups();
 
@@ -1335,9 +1473,14 @@
                     {name : "contacts"},
                     {name : "groups"}
                 ];
+                var county_grp = {
+                    "id":2,
+                    "name":"grp2",
+                    "is_county_level":true
+                };
                 data.$scope.user_id = 3;
                 data.$scope.user = {
-                    "groups": []
+                    "groups": [county_grp]
                 };
                 data.$scope.nextState = angular.noop;
                 ctrl("user_edit.groups", data);
@@ -1354,14 +1497,14 @@
                     .respond(400, {"error": "e"});
 
                 data.$scope.new_grp = "2";
-                data.$scope.add("3");
+                data.$scope.updateUserGroups({"groups": [{"id": 2, "name": "grp2"}]});
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(log.error).toHaveBeenCalled();
-                expect(data.$scope.user).toEqual({"groups": []});
+                expect(data.$scope.user).toEqual({"groups": [county_grp]});
             }]));
 
             it("should remove a group from the user",
