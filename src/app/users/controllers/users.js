@@ -430,7 +430,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
-                    $scope.error = data[0];
+                    $scope.error = "A user can only be active in one county at a time"
                     $scope.spinner = false;
                 });
             };
