@@ -406,7 +406,6 @@
             })
             .error(function (data) {
                 $log.error(data);
-                $scope.error = data[0];
             });
             wrappers.user_counties.filter({user: $scope.user_id})
             .success(function (data) {
@@ -430,7 +429,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
-                    $scope.error = "A user can only be active in one county at a time"
+                    $scope.error = "A user can only be active in one county at a time";
                     $scope.spinner = false;
                 });
             };
