@@ -406,6 +406,7 @@
             })
             .error(function (data) {
                 $log.error(data);
+                $scope.error = data[0];
             });
             wrappers.user_counties.filter({user: $scope.user_id})
             .success(function (data) {
@@ -429,6 +430,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.error = data[0];
                     $scope.spinner = false;
                 });
             };
