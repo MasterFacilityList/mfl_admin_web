@@ -29,7 +29,7 @@
                 </div>
             </div>
             <!-- To assign county -->
-            <div class="col-sm-3 text-center" ng-if="user.id && (!user.is_national) && (! login_user.county)">
+            <div class="col-sm-3 text-center" ng-if="((user.county) && (!user.is_national) && (user.county) && user.regulator === null) || (login_user.is_superuser && user.county)">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[3].active}" ng-click="tabState(steps[3])">
                             4
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <!-- To assign constituency -->
-            <div class="col-sm-3 text-center" ng-if="user.id && (!user.is_national) && login_user.county">
+            <div class="col-sm-3 text-center" ng-if="((user.constituency) && (!user.is_national) && (user.constituency) && (login_user.county) && (!login_user.is_national) && user.regulator === null)  || (login_user.is_superuser && user.constituency)">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[4].active}" ng-click="tabState(steps[4])">
                             4
@@ -48,7 +48,7 @@
             </div>
             <!-- End of assigning constituency -->
             <!-- To assign regulatory bodies -->
-            <div class="col-sm-3 text-center" ng-if="user.id && (login_user.is_national) && !user.regulator === null">
+            <div class="col-sm-3 text-center" ng-if="user.id && (login_user.is_national) && user.regulator !== null">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[5].active}" ng-click="tabState(steps[5])">
                             4

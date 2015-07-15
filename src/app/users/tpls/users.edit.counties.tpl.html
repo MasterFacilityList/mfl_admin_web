@@ -1,12 +1,17 @@
 <div class="tab-content">
-    <div class="col-lg-12 margin-t-20">
-        <div class="col-sm-12">
-            <div class="col-xs-12 margin-t-20 detail-content margin-t-20 margin-b-10">
+    <div class="col-lg-12 detail-content margin-t-20 margin-b-10">
+        <div class="col-md-12 pad-t-20">
+            <div class="col-md-12 alert alert-danger alert-dismissible" ng-show="error">
+                  <button type="button" class="close">
+                      <span ng-click="error = !error">&times;</span>
+                  </button>
+                  <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
+            </div>
             <div class="col-xs-12 content-card form-card margin-t-20 margin-b-10" requires-permission="common.add_usercounty" >
                 <div class="col-xs-12">
                     <h4 class="fw-600 fs-18">Assign County</h4>
                 </div>
-                <form ng-submit="add(new_county)">
+                <form name="countyForm" ng-submit="add(new_county)">
                     <div class="group col-sm-10">
                     <select name="county" ng-model="new_county" class="pad-t-15" required>
                         <option value="">Select County</option>
@@ -15,8 +20,8 @@
                     <span class="highlight"></span>
                     <span class="bar"></span>
                     </div>
-                    <div class="col-sm-12 margin-b-10">
-                        <button ng-disabled="new_county===''" type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Assign County">
+                    <div class="col-sm-2 margin-b-10 ">
+                        <button type="submit" class="login-btn login-btn-primary margin-t-10 pull-right" tooltip="Assign County">
                             <i class="fa fa-plus-circle"></i> Add
                         </button>
                     </div>
@@ -65,7 +70,6 @@
                      &nbsp;Submit
                 </a>
             </div>
-        </div>
         </div>
     </div>
 </div>
