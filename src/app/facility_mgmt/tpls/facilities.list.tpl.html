@@ -25,18 +25,18 @@
             <td data-title="Owner:" class="pad-t-15">{{fac.owner_name}}</td>
             <td data-title="Facility Type:" class="pad-t-15">{{fac.facility_type_name}}</td>
             <td data-title="Actions:"  class="text-right">
-                <a requires-permission="facilities.add_facilityapproval,facilities.view_facility" ui-sref="facilities_approve.approve({facility_id: fac.id})"
-                    class="login-btn login-btn-action">
+                <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve({facility_id: fac.id})"
+                    class="login-btn login-btn-action" ng-if="!fac.is_approved">
                     &nbsp;Approve
                 </a>
 
                 <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish({facility_id: fac.id})"
-                    class="login-btn login-btn-action">
+                    class="login-btn login-btn-action" ng-if="!fac.is_published">
                     &nbsp;Publish
                 </a>
 
-                <a requires-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
-                    class="login-btn login-btn-action">
+                <a requires-permission="facilities.change_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
+                    class="login-btn login-btn-action" >
                     &nbsp;View
                 </a>
             </td>
