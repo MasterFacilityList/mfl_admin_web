@@ -52,6 +52,33 @@
                 }
             },
             permission: "facilities.add_facilityapproval,facilities.view_facility"
+        })
+
+        .state("facilities_approve.approve.basic", {
+            url: "basic/",
+            views: {
+                "form-view@facilities_approve.approve" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve.basic.tpl.html"
+                }
+            }
+        })
+
+        .state("facilities_approve.approve.services", {
+            url: "services/",
+            views: {
+                "form-view@facilities_approve.approve" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve.services.tpl.html"
+                }
+            }
+        })
+
+        .state("facilities_approve.approve.units", {
+            url: "units/",
+            views: {
+                "form-view@facilities_approve.approve" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve.units.tpl.html"
+                }
+            }
         });
     }]);
 

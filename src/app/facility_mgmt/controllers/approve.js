@@ -50,6 +50,21 @@
             wrappers.facility_detail.get($scope.facility_id)
             .success(function(data) {
                 $scope.facility = data;
+                wrappers.facility_units.filter(
+                {"facility" : $scope.facility_id})
+                .success(function (data) {
+                    $scope.chus = data.results;
+                })
+                .error(function (e) {
+                    $scope.alert = e.error;
+                });
+                wrappers.facility_coordinates.get($scope.facility.coordinates)
+                .success(function (data) {
+                    $scope.gis = data;
+                })
+                .error(function (e) {
+                    $scope.alert = e.error;
+                });
                 if ($scope.facility.latest_update) {
                     wrappers.facility_updates.get($scope.facility.latest_update)
                     .success(function (data) {

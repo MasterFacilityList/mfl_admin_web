@@ -23,6 +23,39 @@
             <div class="col-sm-6"><span class="pull-right">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
        </div>
     </div>
+    <button class="login-btn login-btn-primary" ng-click="viewFacility = !viewFacility">
+        &nbsp;View {{viewFacility ? 'Less' : 'More'}} Facility Details <i class="fa {{viewFacility ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+    </button>
+    <div class="row" content-slide-in="viewFacility" slide-show-duration="1000">
+        <div class="col-xs-12">
+            <ul class="nav nav-tabs col-xs-12 margin-t-20">
+                <li ui-sref-active="active">
+                    <a ui-sref=".basic">
+                        <span class="fw-900 ">
+                            <i class="fa fa-building-o"></i> Facility Basic Details
+                        </span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".services">
+                        <span class="fw-900">
+                            <i class="fa fa-exchange"></i> Facility Health Services
+                        </span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".units">
+                        <span class="fw-900 ">
+                            <i class="fa fa-hospital-o"></i> Community Health Units
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content margin-t-20">
+                <div class="pad-t-20" ui-view="form-view"></div>
+            </div><!-- /tab-content -->
+        </div>
+    </div>
 </div>
 <div class="col-xs-12">
     <div class="col-xs-12 content-card margin-t-20" ng-class="{'alert-success':facility.is_approved}">
