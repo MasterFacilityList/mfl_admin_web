@@ -122,13 +122,17 @@
                 .respond(200, {results : []});
                 httpBackend
                 .expectGET(server_url+"api/facilities/facilities/3/")
-                .respond(200, {});
+                .respond(200, {"id": "2", "latest_update": null, coordinates: 13});
+                httpBackend
+                    .expectGET(server_url+"api/gis/facility_coordinates/13/")
+                    .respond(200, {results : []});
                 ctrl("facility_approve", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-
+                console.log("FACILITY");
+                console.log(data.$scope.facility);
                 expect(data.$scope.facility_update).toEqual(undefined);
             });
 
