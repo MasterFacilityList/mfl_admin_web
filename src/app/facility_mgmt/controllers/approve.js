@@ -24,7 +24,7 @@
                 "approved": false
             };
             $scope.title = {
-                "name": "Facilities Approval",
+                "name": "Approve Facilities",
                 "icon": "fa-building"
             };
         }]
@@ -36,7 +36,7 @@
                 "has_edits": true
             };
             $scope.title = {
-                "name": "Facilities Updates Approval",
+                "name": "Approve Facility Updates",
                 "icon": "fa-building"
             };
         }]

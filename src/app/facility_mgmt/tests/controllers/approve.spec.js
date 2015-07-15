@@ -131,8 +131,6 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-                console.log("FACILITY");
-                console.log(data.$scope.facility);
                 expect(data.$scope.facility_update).toEqual(undefined);
             });
 

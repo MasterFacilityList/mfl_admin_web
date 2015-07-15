@@ -11,7 +11,7 @@
                 "regulated": false
             };
             $scope.title = {
-                "name": "Facilities Pending Regulation",
+                "name": "Regulate Facilities",
                 "icon": "fa-building"
             };
         }]
@@ -23,7 +23,7 @@
                 "regulated": false
             };
             $scope.title = {
-                "name": "Facilities Pending Regulation Approval",
+                "name": "Approve Facility Regulations",
                 "icon": "fa-building"
             };
         }]
