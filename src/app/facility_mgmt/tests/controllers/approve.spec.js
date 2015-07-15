@@ -56,8 +56,12 @@
 
             beforeEach(function () {
                 httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(200, {results : []});
+                httpBackend
                 .expectGET(server_url+"api/facilities/facilities/3/")
                 .respond(200, {
+                    coordinates: 13,
                     latest_update: 3
                 });
             });
@@ -91,13 +95,13 @@
                     "$state": state,
                     "$stateParams": {facility_id: 3}
                 };
-
                 ctrl("facility_approve", data);
-
+                httpBackend
+                    .expectGET(server_url+"api/gis/facility_coordinates/13/")
+                    .respond(200, {results : []});
                 httpBackend
                     .expectGET(server_url+"api/facilities/facility_updates/3/")
                     .respond(200, {facility_updates: "{\"abbreviation\":2}"});
-
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -111,12 +115,14 @@
                     "$state": state,
                     "$stateParams": {facility_id: 3}
                 };
+
                 httpBackend.resetExpectations();
                 httpBackend
+                .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                .respond(200, {results : []});
+                httpBackend
                 .expectGET(server_url+"api/facilities/facilities/3/")
-                .respond(200, {
-                    latest_update: null
-                });
+                .respond(200, {});
                 ctrl("facility_approve", data);
 
                 httpBackend.flush();
@@ -135,7 +141,6 @@
                 };
 
                 ctrl("facility_approve", data);
-
                 httpBackend
                     .expectGET(server_url+"api/facilities/facility_updates/3/")
                     .respond(500);
