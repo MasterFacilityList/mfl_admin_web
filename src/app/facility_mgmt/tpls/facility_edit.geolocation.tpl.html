@@ -1,5 +1,13 @@
 
    <div class="col-sm-12 custom-well margin-t-20">
+        <div class="col-md-12 alert alert-danger alert-dismissible" ng-show="geoloc_error || wards_error || geocodes_error">
+            <button type="button" class="close">
+                <span ng-click="geoloc_error = !geoloc_error">&times;</span>
+            </button>
+            <p ng-if="geoloc_error" class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{geoloc_error}}</p>
+            <p ng-if="wards_error" class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{wards_error}}</p>
+            <p ng-if="geocodes_error" class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{geocodes_error}}</p>
+        </div>
         <div class="col-sm-12">
             <div class="col-xs-12">
                 <h4 class="fw-600 fs-18"> Geolocation Details</h4>

@@ -1,4 +1,10 @@
 <div class="col-sm-12">
+    <div class="col-md-12 alert alert-danger alert-dismissible" ng-show="loc_error">
+        <button type="button" class="close">
+            <span ng-click="loc_error = !loc_error">&times;</span>
+        </button>
+        <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{loc_error}}</span>
+    </div>
     <div class="col-sm-12 custom-well margin-t-20">
         <div class="col-sm-12">
             <h4 class="fw-600 fs-18"> Location Details</h4>
