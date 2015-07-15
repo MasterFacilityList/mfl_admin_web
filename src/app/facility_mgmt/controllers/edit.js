@@ -426,7 +426,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.units",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        function ($scope, $log, $stateParams, wrappers, multistepService) {
+        "mfl.error.messages",
+        function ($scope, $log, $stateParams, wrappers, multistepService,
+            errorMessages) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[4]);
@@ -449,6 +451,8 @@
             })
             .error(function(error){
                 $log.error(error);
+                $scope.units_error = errorMessages.errors +
+                    errorMessages.fetch_units;
             });
 
             /*add existing regulatory to facility*/
@@ -467,6 +471,8 @@
                     .error(function (data) {
                         $log.error(data);
                         $scope.spinner = false;
+                        $scope.units_error = errorMessages.errors +
+                            errorMessages.units;
                     });
             };
 
@@ -481,6 +487,8 @@
                 .error(function (data) {
                     $log.error(data);
                     obj.delete_spinner = false;
+                    $scope.units_error = errorMessages.errors +
+                        errorMessages.delete_units;
                 });
             };
         }
@@ -535,8 +543,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
+        "mfl.error.messages",
         function ($scope,wrappers,$log, leafletData, multistepService,
-            formChanges, $state) {
+            formChanges, $state, errorMessages) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[5]);
@@ -605,6 +614,8 @@
                                 })
                                 .error(function (error) {
                                     $log.error(error);
+                                    $scope.loc_error = errorMessages.errors +
+                                        errorMessages.location;
                                 });
                         }else {
                             if(!$scope.create){
@@ -629,6 +640,8 @@
                             })
                             .error(function (error) {
                                 $log.error(error);
+                                $scope.loc_error = errorMessages.errors +
+                                        errorMessages.location;
                             });
                     }
 
@@ -639,8 +652,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
+        "mfl.error.messages",
         function ($scope,wrappers,$log, leafletData, multistepService,
-            formChanges, $state) {
+            formChanges, $state, errorMessages) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[6]);
@@ -697,6 +711,8 @@
                 .error(function(error){
                     $scope.spinner = false;
                     $log.error(error);
+                    $scope.geocodes_error = errorMessages.errors +
+                                        errorMessages.geocodes;
                 });
                 $scope.facilityWard(f);
             };
@@ -749,6 +765,8 @@
                 .error(function(error){
                     $scope.spinner = false;
                     $log.error(error);
+                    $scope.wards_error = errorMessages.errors +
+                        errorMessages.ward;
                 });
             };
             /*Fetch geo code methods*/
@@ -793,6 +811,9 @@
                         .error(function (error) {
                             spinner1 =false;
                             $log.error(error);
+                            $scope.geoloc_error = error[0] ||
+                                errorMessages.errors +
+                                errorMessages.geolocation;
                         });
                 } else {
                     wrappers.facility_coordinates.create(changes)
@@ -804,10 +825,14 @@
                             })
                             .error(function (error) {
                                 $log.error(error);
+                                $scope.geoloc_error = errorMessages.errors +
+                                    errorMessages.geolocation;
                             });
                     })
                     .error(function (error) {
                         $log.error(error);
+                        $scope.geoloc_error = errorMessages.errors +
+                            errorMessages.geolocation;
                     });
                 }
             };

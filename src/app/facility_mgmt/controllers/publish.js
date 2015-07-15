@@ -13,7 +13,7 @@
                 "approved": true
             };
             $scope.title = {
-                "name": "Facilities Pending Publishing",
+                "name": "Publish Facilities",
                 "icon": "fa-building"
             };
         }]

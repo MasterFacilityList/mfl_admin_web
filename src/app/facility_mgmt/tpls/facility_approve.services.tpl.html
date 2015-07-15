@@ -1,0 +1,28 @@
+<div class="col-xs-12 content-card">
+    <div class="col-xs-12">
+        <table class="table table-hover fs-14">
+            <thead>
+                <th>#</th>
+                <th>Service Name</th>
+                <th>Service Category</th>
+                <th>Service Option</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="service in facility.facility_services">
+                    <td>
+                        {{$index + 1}}
+                    </td>
+                    <td>
+                        {{service.service_name}}
+                    </td>
+                    <td>
+                        {{service.category_name}}
+                    </td>
+                    <td>
+                        {{service.option_name}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
