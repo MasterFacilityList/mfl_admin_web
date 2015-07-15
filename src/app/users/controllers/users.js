@@ -314,7 +314,7 @@
 
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        "mfl.common.services.multistep","mfl.users.services.groups_filter",
+        "mfl.common.services.multistep","mfl.users.services.groups",
         function (wrappers, $log, $scope, $state, multistepService, groupsService) {
             if($scope.create) {
                 $scope.nextState();
@@ -351,16 +351,16 @@
                     $scope.spinner = false;
 
                     if(!$scope.create) {
-                        var state_name1 = $scope.login_user.is_national ? "counties" :
-                        "constituency";
-                        $state.go("users.user_edit." + state_name1,
-                            {user_id: $scope.user_id});
+                        groupsService.findNextStateCreate(
+                            $scope.login_user.is_national,
+                            $scope.user.groups,
+                            $scope.user.id);
                     }
                     else {
-                        var state_name2 = $scope.login_user.is_national ? "counties" :
-                        "constituency";
-                        $state.go("users.user_create." + state_name2,
-                            {user_id : $scope.user_id, furthest : $scope.furthest});
+                        groupsService.findNextStateEdit(
+                            $scope.login_user.is_national,
+                            $scope.user.groups,
+                            $scope.user.id);
                     }
                 })
                 .error(function (data) {
@@ -368,6 +368,7 @@
                     $scope.spinner = false;
                 });
             };
+
 
             $scope.add = function () {
                 var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});

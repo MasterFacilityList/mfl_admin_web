@@ -9,8 +9,11 @@
         <a  ng-if="(login_user.id) && (!login_user.is_national) && (login_user.county)" class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
              <span>&nbsp;Sub County <i class="fa fa-angle-double-right"></i></span>
         </a>
-        <a  ng-if="login_user.id && (!login_user.is_national) && (!login_user.county)" class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
-             <span>&nbsp;County<i class="fa fa-angle-double-right"></i></span>
+        <a  ng-if="((user.county) && (!user.is_national) && (user.county) && user.regulator === null) || (login_user.is_superuser && user.county)" class="login-btn login-btn-primary pull-right margin-r-25" ng-click="updateUserGroups()">
+             <span>&nbsp;County <i class="fa fa-angle-double-right"></i></span>
+        </a>
+        <a  ng-if="user.id && (login_user.is_national) && user.regulator !== null" class="login-btn login-btn-primary pull-right margin-r-25" ng-click="updateUserGroups()">
+             <span>&nbsp;Regulatory Body <i class="fa fa-angle-double-right"></i></span>
         </a>
     </div>
     <div ng-if="create" class="col-md-12 margin-b-20 margin-t-20 margin-l-10" requires-permission="users.change_mfluser">

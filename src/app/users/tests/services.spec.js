@@ -23,13 +23,13 @@
                 }]);
             });
             it("should test group filter service", function () {
-                inject(["mfl.users.services.groups_filter",function (grpFilter) {
+                inject(["mfl.users.services.groups",function (grpFilter) {
                     expect(grpFilter.filterGroups).toBeDefined();
                 }]);
             });
             it("should expect national admin groups to have no county level groups",
             function () {
-                inject(["mfl.users.services.groups_filter",function (grpFilter) {
+                inject(["mfl.users.services.groups",function (grpFilter) {
                     var grps = [
                         {
                             id:1,

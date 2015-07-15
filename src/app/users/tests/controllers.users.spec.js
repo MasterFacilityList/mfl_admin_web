@@ -1059,7 +1059,7 @@
         describe("Test user edit groups controller", function () {
 
             it("should load all groups | while creating a user",
-            inject(["mfl.common.services.multistep","mfl.users.services.groups_filter",
+            inject(["mfl.common.services.multistep","mfl.users.services.groups",
                 function (multistepService, groupsService) {
                 var results = [
                     {
@@ -1076,7 +1076,7 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "mfl.common.services.multistep": multistepService,
-                    "mfl.users.services.groups_filter": groupsService
+                    "mfl.users.services.groups": groupsService
                 };
                 httpBackend
                     .expectGET(server_url+"api/users/groups/?page_size=100&ordering=name")
@@ -1104,7 +1104,7 @@
             }]));
 
             it("should load all groups | while editing a user",
-            inject(["mfl.common.services.multistep","mfl.users.services.groups_filter",
+            inject(["mfl.common.services.multistep","mfl.users.services.groups",
                 function (multistepService, groupsService) {
                 var results = [
                     {
@@ -1124,7 +1124,7 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "mfl.common.services.multistep": multistepService,
-                    "mfl.users.services.groups_filter": groupsService
+                    "mfl.users.services.groups": groupsService
                 };
                 data.$scope.steps = [
                     {name : "basic"},
@@ -1178,7 +1178,7 @@
             }]));
 
             it("should add a group to the user | is_national and is editing",
-            inject(["mfl.common.services.multistep","$state","mfl.users.services.groups_filter",
+            inject(["mfl.common.services.multistep","$state","mfl.users.services.groups",
                 function (multistepService,$state,groupsService) {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -1253,7 +1253,7 @@
             }]));
 
             it("should add a group to the user | is_national & in creating state",
-            inject(["mfl.common.services.multistep","$state","mfl.users.services.groups_filter",
+            inject(["mfl.common.services.multistep","$state","mfl.users.services.groups",
                 function (multistepService,$state,groupsService) {
                 var results = [
                     {
@@ -1273,7 +1273,7 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "mfl.common.services.multistep" : multistepService,
-                    "mfl.users.services.groups_filter": groupsService,
+                    "mfl.users.services.groups": groupsService,
                     "$state": $state
                 };
                 var county_grp = {
@@ -1326,7 +1326,7 @@
             }]));
 
             it("should add a group to the user | !is_national & in editing state",
-            inject(["mfl.common.services.multistep","$state","mfl.users.services.groups_filter",
+            inject(["mfl.common.services.multistep","$state","mfl.users.services.groups",
                 function (multistepService,$state,groupsService) {
                 var data = {
                     "$scope": rootScope.$new(),
