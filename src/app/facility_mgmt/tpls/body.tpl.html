@@ -26,6 +26,16 @@
                     <span class="sidebar-text">Facilities Rejected</span>
                 </a>
             </li>
+            <li ui-sref-active="active" requires-permission="facilities.view_facility" requires-user-feature="is_national,regulator">
+                <a ui-sref="facilities_regulation">
+                    <span class="sidebar-text">Facilities Pending Regulation</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" requires-permission="facilities.view_facility" requires-user-feature="is_national,regulator">
+                <a ui-sref="facilities_regulation_approval">
+                    <span class="sidebar-text">Facilities Pending Regulation approval</span>
+                </a>
+            </li>
         </ul>
     </aside>
 </div>

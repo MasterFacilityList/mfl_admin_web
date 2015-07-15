@@ -3,9 +3,10 @@
         <sil-grid-search> </sil-grid-search>
     </div>
     <div class="pull-right col-xs-4">
-        <p class="text-right margin-t-5">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
+        <p class="text-right margin-t-5">Page {{::pagination.current_page}} / {{::pagination.page_count}}</p>
     </div>
 </div>
+
 <table class="table table-hover fs-14 margin-t-20" id="no-more-tables">
     <thead>
         <th>Code</th>
@@ -16,17 +17,22 @@
         <th>Facility Type</th>
         <th class="text-center">Actions</th>
     </thead>
-    <tbody class="fade-content">
-        <tr ng-repeat="fac in facilities">
-            <td data-title="Code:" class="pad-t-15">{{fac.code}}</td>
-            <td data-title="Name:" class="pad-t-15">{{fac.name}}</td>
-            <td data-title="County:"class="pad-t-15"> {{fac.county}}</td>
-            <td data-title="Sub County:" class="pad-t-15">{{fac.constituency}}</td>
-            <td data-title="Owner:" class="pad-t-15">{{fac.owner_name}}</td>
-            <td data-title="Facility Type:" class="pad-t-15">{{fac.facility_type_name}}</td>
+
+    <tbody ng-if="facilities.length===0">
+        <tr><td class="text-center" colspan="7">Sorry, no data is available</td></tr>
+    </tbody>
+
+    <tbody class="fade-content" ng-if="facilities.length>0">
+        <tr ng-repeat="fac in facilities" >
+            <td data-title="Code:" class="pad-t-15">{{::fac.code}}</td>
+            <td data-title="Name:" class="pad-t-15">{{::fac.name}}</td>
+            <td data-title="County:"class="pad-t-15"> {{::fac.county}}</td>
+            <td data-title="Sub County:" class="pad-t-15">{{::fac.constituency}}</td>
+            <td data-title="Owner:" class="pad-t-15">{{::fac.owner_name}}</td>
+            <td data-title="Facility Type:" class="pad-t-15">{{::fac.facility_type_name}}</td>
             <td data-title="Actions:"  class="text-right">
                 <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac.id})"
-                    class="login-btn login-btn-action" ng-if="!fac.is_approved">
+                    class="login-btn login-btn-action" ng-if="!fac.is_approved||fac.has_edits">
                     &nbsp;Approve
                 </a>
 
@@ -38,6 +44,11 @@
                 <a requires-permission="facilities.change_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
                     class="login-btn login-btn-action" >
                     &nbsp;View
+                </a>
+
+                <a requires-permission="facilities.view_facility,facilities.add_facilityregulationstatus"
+                    ui-sref="facilities_regulation.regulate({facility_id: fac.id})" class="login-btn login-btn-action" >
+                    &nbsp;Regulate
                 </a>
             </td>
         </tr>
