@@ -77,7 +77,7 @@
                         <label for="is_national">
                             <span class="check"></span>
                             <span class="box"></span>
-                             User is National user?
+                             User is <strong>national user</strong>?
                          </label>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                         <label for="is_staff">
                             <span class="check"></span>
                             <span class="box"></span>
-                             User is an administrator?
+                             User is an <strong>administrator</strong>?
                          </label>
                     </div>
                 </div>
@@ -97,15 +97,9 @@
                         <label for="is_regulator">
                             <span class="check"></span>
                             <span class="box"></span>
-                             User is a regulator?
+                             User is a <strong>regulator</strong>?
                          </label>
                     </div>
-                </div>
-                <div class="col-sm-12" requires-user-feature="is_national" ng-if="user.is_regulator">
-                    <select class="" name="regulators">
-                        <option value="" disabled>Regulators</option>
-                        <option value=""></option>
-                    </select>
                 </div>
             </div>
             <div class="margin-t-20 margin-b-20">
