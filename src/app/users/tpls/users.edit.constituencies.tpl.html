@@ -64,9 +64,14 @@
             <div class="col-sm-12 alert alert-info" ng-show="user_constituencies.length == 0">
                 No sub-county assigned to the user
             </div>
-            <div ng-if="create" class="margin-b-20 margin-t-20 pad-r-0">
+            <div ng-if="create" class="margin-b-20 margin-t-20 pad-r-0 pull-left">
+                <a ui-sref="users.user_create.groups({user_id:user_id})" class="login-btn login-btn-primary">
+                     <i class="fa fa-angle-double-left"></i> User Groups
+                </a>
+            </div>
+            <div ng-if="create" class="margin-b-20 margin-t-20 pad-r-0 pull-right">
                 <a ui-sref="users" class="login-btn login-btn-primary">
-                     Save
+                     &nbsp; Save
                 </a>
             </div>
         </div>

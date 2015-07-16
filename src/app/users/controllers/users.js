@@ -5,7 +5,8 @@
         "mfl.auth.services",
         "mfl.users.services",
         "ui.router",
-        "mfl.common.forms"
+        "mfl.common.forms",
+        "ui.mask"
     ])
 
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
@@ -247,6 +248,14 @@
             wrappers.contact_types.list()
                 .success(function (data) {
                     $scope.contact_types = data.results;
+                    var names = _.pluck($scope.contact_types, "name");
+                    $scope.new_names = _.without( names, "POSTAL","EMAIL","LANDLINE",
+                                                                                "FAX","MOBILE");
+                    $scope.mobile_cont = _.findWhere($scope.contact_types,{name:"MOBILE"});
+                    $scope.email_cont = _.findWhere($scope.contact_types,{name:"EMAIL"});
+                    $scope.fax_cont = _.findWhere($scope.contact_types,{name:"FAX"});
+                    $scope.landline_cont = _.findWhere($scope.contact_types,{name:"LANDLINE"});
+                    $scope.postal_cont = _.findWhere($scope.contact_types,{name:"POSTAL"});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -279,7 +288,6 @@
                     obj.delete_spinner = false;
                 });
             };
-
             $scope.add = function () {
                 $scope.spinner = true;
                 wrappers.contacts.create({
