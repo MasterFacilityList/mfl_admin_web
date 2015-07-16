@@ -88,7 +88,7 @@
                 }
             };
             this.checkWhichGroup = function(assign_grps){
-                _.pluck( assign_grps, name )
+                grp =_.pluck( assign_grps, name );
                 _.filter(usr_grps, function (grp) {
                   //if user is a regulator
                     var grpString = grp.name;

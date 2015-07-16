@@ -340,6 +340,7 @@
                 if($scope.$parent.furthest < 4) {
                     $scope.$parent.furthest = 4;
                 }
+                console.log(new_grps);
                 var grps = _.map(new_grps, function (grp) {
                     return {"id": grp.id, "name": grp.name};
                 });
@@ -350,18 +351,18 @@
                     $scope.new_grp = "";
                     $scope.spinner = false;
 
-                    if(!$scope.create) {
-                        groupsService.findNextStateCreate(
-                            $scope.login_user.is_national,
-                            $scope.user.groups,
-                            $scope.user.id);
-                    }
-                    else {
-                        groupsService.findNextStateEdit(
-                            $scope.login_user.is_national,
-                            $scope.user.groups,
-                            $scope.user.id);
-                    }
+                    // if(!$scope.create) {
+                    //     groupsService.findNextStateCreate(
+                    //         $scope.login_user.is_national,
+                    //         $scope.user.groups,
+                    //         $scope.user.id);
+                    // }
+                    // else {
+                    //     groupsService.findNextStateEdit(
+                    //         $scope.login_user.is_national,
+                    //         $scope.user.groups,
+                    //         $scope.user.id);
+                    // }
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -377,7 +378,7 @@
                 updateGroups(update);
             };
 
-            $scope.remove = function (grp) {
+            $scope.removeChild = function (grp) {
                 var update = _.without($scope.user.groups, grp);
                 updateGroups(update);
             };
