@@ -1,7 +1,11 @@
  <div class="col-sm-2 pad-r-0" >
     <aside class="side-left partial">
     <ul class=" nav nav-list">
-        <li ng-model="collapsed.one" ng-click="collapsed.one=!collapsed.one"><label class="sidebar-label tree-toggle nav-header">Administrative Units</label>
+        <li ng-model="collapsed.one" ng-click="collapsed.one=!collapsed.one">
+            <label class="sidebar-label tree-toggle nav-header">Administrative Units
+                <span  ng-show = "collapsed.one === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
+                <span  ng-show = "collapsed.one === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
+            </label>
           <ul class="nav nav-list tree" content-slide-in="collapsed.one" slide-show-duration="1000">
               <li ui-sref-active="active" requires-permission="common.view_county">
                 <a ui-sref="setup.counties">Counties</a>
@@ -17,7 +21,11 @@
               </li>
           </ul>
         </li>
-        <li ng-model="collapsed.two" ng-click="collapsed.two=!collapsed.two"><label class="sidebar-label tree-toggle nav-header">Community Units</label>
+        <li ng-model="collapsed.two" ng-click="collapsed.two=!collapsed.two">
+            <label class="sidebar-label tree-toggle nav-header">Community Units
+                <span  ng-show = "collapsed.two === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
+                <span  ng-show = "collapsed.two === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
+            </label>
           <ul class="nav nav-list tree" content-slide-in="collapsed.two" slide-show-duration="1000">
               <li ui-sref-active="active" requires-permission="chul.view_status">
                 <a ui-sref="setup.chu_status">Community Units Status</a>
@@ -27,7 +35,11 @@
               </li>
           </ul>
         </li>
-        <li ng-model="collapsed.three" ng-click="collapsed.three=!collapsed.three"><label class="sidebar-label tree-toggle nav-header">Contacts</label>
+        <li ng-model="collapsed.three" ng-click="collapsed.three=!collapsed.three">
+            <label class="sidebar-label tree-toggle nav-header">Contacts
+                <span  ng-show = "collapsed.three === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
+                <span  ng-show = "collapsed.three === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
+            </label>
           <ul class="nav nav-list tree" content-slide-in="collapsed.three" slide-show-duration="1000">
               <li ui-sref-active="active" requires-permission="common.view_contact">
                 <a ui-sref="setup.contacts">Contacts</a>
@@ -37,7 +49,11 @@
               </li>
           </ul>
         </li>
-        <li ng-model="collapsed.four" ng-click="collapsed.four=!collapsed.four"><label class="sidebar-label tree-toggle nav-header">Facilities</label>
+        <li ng-model="collapsed.four" ng-click="collapsed.four=!collapsed.four">
+            <label class="sidebar-label tree-toggle nav-header">Facilities
+                <span  ng-show = "collapsed.four === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
+                <span  ng-show = "collapsed.four === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
+            </label>
           <ul class="nav nav-list tree" content-slide-in="collapsed.four" slide-show-duration="1000">
               <li ui-sref-active="active">
                 <a ui-sref="setup.facility_owners" requires-permission="facilities.view_owner">Facility Owners</a>
@@ -55,7 +71,11 @@
               </li>
           </ul>
         </li>
-        <li ng-model="collapsed.five" ng-click="collapsed.five=!collapsed.five"><label class="sidebar-label tree-toggle nav-header">Geo Codes</label>
+        <li ng-model="collapsed.five" ng-click="collapsed.five=!collapsed.five">
+            <label class="sidebar-label tree-toggle nav-header">Geo Codes
+                <span  ng-show = "collapsed.five === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
+                <span  ng-show = "collapsed.five === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
+            </label>
         <ul class="nav nav-list tree" content-slide-in="collapsed.five" slide-show-duration="1000">
             <li ui-sref-active="active" requires-permission="mfl_gis.view_geocodemethod">
               <a ui-sref="setup.geocode_methods_list">Geo Code Methods</a>
