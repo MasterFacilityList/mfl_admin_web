@@ -119,7 +119,7 @@
                 expect(data.$scope.facility_update).toEqual({facility_updates: {abbreviation: 2}});
             });
 
-            it("should not load undefined facility update", function () {
+            it("should not load undefined facility update or coordinates", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
@@ -132,10 +132,8 @@
                 .respond(200, {results : []});
                 httpBackend
                 .expectGET(server_url+"api/facilities/facilities/3/")
-                .respond(200, {"id": "2", "latest_update": null, coordinates: 13});
-                httpBackend
-                    .expectGET(server_url+"api/gis/facility_coordinates/13/")
-                    .respond(200, {results : []});
+                .respond(200, {"id": "2", "latest_update": null, coordinates: null});
+
                 ctrl("facility_approve", data);
 
                 httpBackend.flush();
