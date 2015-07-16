@@ -32,7 +32,7 @@
 
             <div class="col-sm-12 content-card margin-t-20" ng-show="user.groups.length > 0">
                 <h4 class="fw-600 fs-18"> User's Group</h4>
-                <table class="table table-hover">
+                <table class="table">
                     <tbody>
                         <tr ng-repeat="child in user.groups">
                             <td class="pad-t-15 fs-18 fw-600 text-left">
@@ -42,11 +42,11 @@
                                 <span ng-if="uc.delete_spinner">
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
                                 </span>
-                                <a  class="action-btn action-btn-danger action-btn-grid"
+                                <a  class="login-btn login-btn-danger"
                                     popover-toggle popover-trigger="open" popover-placement="left"
                                     popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Remove county"
                                     requires-permission="users.change_mfluser" >
-                                    <i class="fa fa-trash fw-500"></i>
+                                    &nbsp; Delete
                                 </a>
                             </td>
                         </tr>

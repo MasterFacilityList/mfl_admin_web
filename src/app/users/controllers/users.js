@@ -351,6 +351,7 @@
                 wrappers.users.update($scope.user_id, {"groups": grps})
                 .success(function (data) {
                     $scope.user = data;
+                    $scope.$parent.user = data;
                     $scope.$parent.current_group= groupsService.checkWhichGroup($scope.user.groups);
                     $scope.spinner = false;
                 })
@@ -374,14 +375,7 @@
 
             $scope.removeChild = function (grp) {
                 var update = _.without($scope.user.groups, grp);
-                if($scope.user.county !== null){
-                    $scope.error = "Please unassign county of the user first";
-                } else if ($scope.user.constituency !== null){
-                    $scope.error = "Please unassign constituency of the user first";
-                }
-                else{
-                    updateGroups(update);
-                }
+                updateGroups(update);
             };
             $scope.updateUserGroups = function () {
                 updateGroups($scope.user.groups);
