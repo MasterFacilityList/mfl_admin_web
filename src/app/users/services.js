@@ -17,7 +17,7 @@
         this.regulatory_bodies = api.setBaseUrl("api/facilities/regulating_bodies/");
         this.regulatory_body_users = api.setBaseUrl("api/facilities/regulatory_body_users/");
     }])
-    .service("mfl.users.services.groups_filter",[function () {
+    .service("mfl.users.services.groups",[function () {
             this.filterGroups = function (user,grps) {
                 // gets national admin permissions
                 if(user === true){
@@ -35,6 +35,20 @@
                     });
                 }
                 return grps;
+            };
+            this.checkWhichGroup = function(usr_grps){
+                var grp =_.pluck(usr_grps, "name");
+                var grp_name = grp[0];
+                if(_.isUndefined(grp[0])){
+                    return null;
+                }
+                else if (grp_name.indexOf("County") > -1 ||
+                grp_name.indexOf("Regulator") > -1) {
+                    return grp_name;
+                }
+                else {
+                    return "others";
+                }
             };
         }
     ]);

@@ -1,24 +1,119 @@
-<div class="col-sm-12 margin-t-20">
-    <mfl-list-assignment title="Groups" class="listing" assigneditems="user.groups" listeditems="groups" write-perm="users.change_mfluser">
-    </mfl-list-assignment>
+<div class="tab-content">
+    <div class="row detail-content margin-b-10">
+        <div class="col-sm-12 pad-t-20">
+            <div class="col-sm-12 alert alert-danger alert-dismissible" ng-show="error">
+                <button type="button" class="close">
+                    <span ng-click="error = !error">&times;</span>
+                </button>
+                <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
+            </div>
+            <div class="col-sm-12 content-card form-card margin-b-10" write-perm="users.change_mfluser">
+                <h4 class="fw-600 fs-18">Assign User Group</h4>
+                <form name="countyForm" ng-submit="add()">
+                    <div class="col-sm-10 pad-l-0">
+                    <select name="county" ng-model="new_grp" class="pad-t-15" required>
+                        <option value="">Select Group</option>
+                        <option ng-repeat="grp in groups" ng-value="grp.id">{{grp.name}}</option>
+                    </select>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    </div>
+                    <div class="col-sm-2 margin-b-10 ">
+                        <button type="submit" class="login-btn login-btn-primary margin-t-10 pull-right" tooltip="Assign County">
+                            <i class="fa fa-plus-circle"></i> Add
+                        </button>
+                    </div>
+                </form>
+            </div>
 
-    <div ng-if="!create" class="col-md-12 margin-b-20 margin-t-20 margin-l-10" requires-permission="users.change_mfluser">
-        <a class="login-btn login-btn-primary" ui-sref="users.user_edit.contacts ({user_id : user_id})">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
-        </a>
-        <a  ng-if="(login_user.id) && (!login_user.is_national) && (login_user.county)" class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
-             <span>&nbsp;Sub County <i class="fa fa-angle-double-right"></i></span>
-        </a>
-        <a  ng-if="login_user.id && (!login_user.is_national) && (!login_user.county)" class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
-             <span>&nbsp;County<i class="fa fa-angle-double-right"></i></span>
-        </a>
-    </div>
-    <div ng-if="create" class="col-md-12 margin-b-20 margin-t-20 margin-l-10" requires-permission="users.change_mfluser">
-        <a class="login-btn login-btn-primary" ui-sref="users.user_create.contacts ({user_id : user_id})">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
-        </a>
-        <a class="login-btn login-btn-primary pull-right" ng-click="updateUserGroups()">
-             &nbsp;Sub County <i class="fa fa-angle-double-right"></i>
-        </a>
+            <div class="alert alert-info col-sm-12 margin-t-20" ng-show="user.groups.length === 0">
+                <span class="fs-18"><i class="fa fa-info-circle"></i> User has no group assigned yet</span>
+            </div>
+
+            <div class="col-sm-12 content-card margin-t-20" ng-show="user.groups.length > 0">
+                <h4 class="fw-600 fs-18"> User's Group</h4>
+                <table class="table">
+                    <tbody>
+                        <tr ng-repeat="child in user.groups">
+                            <td class="pad-t-15 fs-18 fw-600 text-left">
+                                {{child.name}}
+                            </td>
+                            <td class="text-right">
+                                <span ng-if="uc.delete_spinner">
+                                    <i class="fa fa-spin fa-circle-o-notch"></i>
+                                </span>
+                                <a  class="login-btn login-btn-danger"
+                                    popover-toggle popover-trigger="open" popover-placement="left"
+                                    popover-template="'common/tpls/del-pop.tpl.html'"
+                                    requires-permission="users.change_mfluser" >
+                                    &nbsp; Delete
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="spinner">
+                            <td colspan="3" class="text-center">
+                                <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div ng-if="!create" class="margin-b-20 margin-t-20"
+                 requires-permission="users.change_mfluser">
+                <a class="login-btn login-btn-primary" ui-sref="users.user_edit.contacts ({user_id : user_id})">
+                    &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
+                </a>
+                <a ui-sref="users.user_edit.constituency({user_id:user.id})"
+                   ng-if="$parent.current_group === 'Sub County Health Records Information Officer'"
+                   class="login-btn login-btn-primary pull-right">
+                     <span>&nbsp;Sub County <i class="fa fa-angle-double-right"></i></span>
+                </a>
+                <a ui-sref="users.user_edit.counties({user_id:user.id})"
+                   ng-if="$parent.current_group === 'County Administrators' ||
+                   $parent.current_group === 'County Health Records Information Officer'"
+                   class="login-btn login-btn-primary pull-right fade-content">
+                     <span>&nbsp;County <i class="fa fa-angle-double-right"></i></span>
+                </a>
+                <a  ui-sref="users.user_edit.regulatory_body({user_id:user.id})"
+                    ng-if="$parent.current_group === 'Regulators (Approvers)' ||
+                          $parent.current_group === 'Regulators (makers)'"
+                    class="login-btn login-btn-primary pull-right">
+                     <span>&nbsp;Regulatory Body <i class="fa fa-angle-double-right"></i></span>
+                </a>
+                <a  ui-sref="users"
+                    ng-if="$parent.current_group === 'others'"
+                    class="login-btn login-btn-primary pull-right">
+                     <span>&nbsp;Update</span>
+                </a>
+            </div>
+            <div ng-if="create" class="margin-b-20 margin-t-20" requires-permission="users.change_mfluser">
+                <a class="login-btn login-btn-primary" ui-sref="users.user_create.contacts ({user_id : user_id})">
+                    &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
+                </a>
+                <a ui-sref="users.user_create.constituency({user_id:user.id})"
+                   ng-if="$parent.current_group === 'Sub County Health Records Information Officer'"
+                   class="login-btn login-btn-primary pull-right">
+                     <span>&nbsp;Sub County <i class="fa fa-angle-double-right"></i></span>
+                </a>
+                <a ui-sref="users.user_create.counties({user_id:user.id})"
+                   ng-if="$parent.current_group === 'County Administrators' ||
+                   $parent.current_group === 'County Health Records Information Officer'"
+                   class="login-btn login-btn-primary pull-right fade-content">
+                     <span>&nbsp;County <i class="fa fa-angle-double-right"></i></span>
+                </a>
+                <a  ui-sref="users.user_create.regulatory_body({user_id:user.id})"
+                    ng-if="$parent.current_group === 'Regulators (Approvers)' ||
+                          $parent.current_group === 'Regulators (makers)'"
+                    class="login-btn login-btn-primary pull-right">
+                     <span>&nbsp;Regulatory Body <i class="fa fa-angle-double-right"></i></span>
+                </a>
+                <a  ui-sref="users"
+                    ng-if="$parent.current_group === 'others'"
+                    class="login-btn login-btn-primary pull-right">
+                     <span>&nbsp;Update</span>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
