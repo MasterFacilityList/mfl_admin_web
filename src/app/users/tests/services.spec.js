@@ -23,22 +23,41 @@
                 }]);
             });
             it("should test group filter service", function () {
-                inject(["mfl.users.services.groups",function (grpFilter) {
-                    expect(grpFilter.filterGroups).toBeDefined();
+                inject(["mfl.users.services.groups",function (grpService) {
+                    expect(grpService.filterGroups).toBeDefined();
                 }]);
             });
             it("should expect national admin groups to have no county level groups",
             function () {
-                inject(["mfl.users.services.groups",function (grpFilter) {
+                inject(["mfl.users.services.groups",function (grpService) {
                     var grps = [
                         {
                             id:1,
-                            is_county_level:true
+                            is_county_level:true,
+                            name:"Regulator (Approvers)"
                         }
                     ];
-                    expect(grpFilter.filterGroups).toBeDefined();
-                    grpFilter.filterGroups(false,grps);
+                    expect(grpService.filterGroups).toBeDefined();
+                    grpService.filterGroups(false,grps);
 
+                }]);
+            });
+            it("should test group check service", function () {
+                inject(["mfl.users.services.groups",function (grpService) {
+                    expect(grpService.checkWhichGroup).toBeDefined();
+                }]);
+            });
+            it("should expect group name to have 'Regulator'", function () {
+                inject(["mfl.users.services.groups",function (grpService) {
+                    expect(grpService.checkWhichGroup).toBeDefined();
+                    var grps = [
+                        {
+                            id:1,
+                            is_county_level:true,
+                            name:"Regulator (makers)"
+                        }
+                    ];
+                    grpService.checkWhichGroup(grps);
                 }]);
             });
         });
