@@ -10,10 +10,11 @@
         ["$scope", function ($scope) {
             $scope.filters = {
                 "is_published": false,
-                "approved": true
+                "approved": true,
+                "rejected": false
             };
             $scope.title = {
-                "name": "Facilities Pending Publishing",
+                "name": "Publish Facilities",
                 "icon": "fa-building"
             };
         }]

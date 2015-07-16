@@ -9,7 +9,8 @@
     .controller("mfl.facility_mgmt.controllers.facilities_rejected",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "rejected": true
+                "rejected": true,
+                "approved": true
             };
             $scope.title = {
                 "name": "Rejected Facilities",
@@ -21,10 +22,11 @@
     .controller("mfl.facility_mgmt.controllers.facilities_approve",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "approved": false
+                "approved": false,
+                "rejected": false
             };
             $scope.title = {
-                "name": "Facilities Pending Approval",
+                "name": "Approve Facilities",
                 "icon": "fa-building"
             };
         }]
@@ -36,7 +38,7 @@
                 "has_edits": true
             };
             $scope.title = {
-                "name": "Facility Updates Pending Approval",
+                "name": "Approve Facility Updates",
                 "icon": "fa-building"
             };
         }]
@@ -47,9 +49,34 @@
         "mfl.facility_mgmt.services.wrappers",
         function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.facility_id = $stateParams.facility_id;
+            wrappers.facility_units.filter({"facility" : $scope.facility_id})
+            .success(function (data) {
+                $scope.chus = data.results;
+            })
+            .error(function (e) {
+                $scope.alert = e.error;
+            });
+
+            wrappers.facility_approvals.filter({"facility": $scope.facility_id})
+            .success(function (data) {
+                $scope.facility_approvals = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
             wrappers.facility_detail.get($scope.facility_id)
             .success(function(data) {
                 $scope.facility = data;
+                if ($scope.facility.coordinates) {
+                    wrappers.facility_coordinates.get($scope.facility.coordinates)
+                    .success(function (data) {
+                        $scope.gis = data;
+                    })
+                    .error(function (e) {
+                        $scope.alert = e.error;
+                    });
+                }
                 if ($scope.facility.latest_update) {
                     wrappers.facility_updates.get($scope.facility.latest_update)
                     .success(function (data) {

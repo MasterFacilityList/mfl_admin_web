@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("Test facility publish controllers", function () {
+    describe("Test facility regulation controllers", function () {
         var rootScope, ctrl, httpBackend, server_url, log, state;
 
         beforeEach(function () {
@@ -25,24 +25,36 @@
             ]);
         });
 
-        describe("test publish list", function () {
+        describe("test regulation list (maker)", function () {
 
             it("should load", function () {
                 var scope = rootScope.$new();
-                ctrl("facilities_publish", {"$scope": scope});
-                expect(scope.filters).toEqual(
-                    {"is_published": false, "approved": true, "rejected": false}
-                );
+                ctrl("facilities_regulation", {"$scope": scope});
+                expect(scope.filters).toEqual({"regulated": false});
             });
         });
 
-        describe("test publish detail", function () {
+        describe("test regulation list (checker)", function () {
+
+            it("should load", function () {
+                var scope = rootScope.$new();
+                ctrl("facilities_regulation_approval", {"$scope": scope});
+                expect(scope.filters).toEqual({"regulated": false});
+            });
+        });
+
+        describe("test regulate detail", function () {
 
             beforeEach(function () {
                 httpBackend
                 .expectGET(server_url+"api/facilities/facilities/3/")
                 .respond(200, {
                     latest_update: 3
+                });
+                httpBackend
+                .expectGET(server_url+"api/facilities/regulation_status/?ordering=name")
+                .respond(200, {
+                    results: []
                 });
             });
 
@@ -58,33 +70,37 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/facilities/3/")
                     .respond(400, {});
+                httpBackend
+                .expectGET(server_url+"api/facilities/regulation_status/?ordering=name")
+                .respond(500);
 
-                ctrl("facility_publish", data);
+                ctrl("facility_regulate", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(data.$scope.facility).toBe(undefined);
+                expect(data.$scope.regulation_status).toBe(undefined);
                 expect(log.error).toHaveBeenCalled();
             });
 
-            it("should publish a facility", function () {
+            it("should regulate a facility", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
                     "$stateParams": {facility_id: 3}
                 };
-                ctrl("facility_publish", data);
+                ctrl("facility_regulate", data);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.resetExpectations();
 
                 httpBackend
-                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .expectPOST(server_url+"api/facilities/facility_regulation_status/")
                     .respond(200);
-                data.$scope.publish();
+                data.$scope.regulateFacility();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -92,24 +108,23 @@
                 expect(state.go).toHaveBeenCalled();
             });
 
-            it("should show errors on fail to publish a facility", function () {
+            it("should show eror on fail to regulate a facility", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
-                    "$log": log,
-                    "$stateParams": {facility_id: 3}
+                    "$stateParams": {facility_id: 3},
+                    "$log": log
                 };
-
-                ctrl("facility_publish", data);
+                ctrl("facility_regulate", data);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.resetExpectations();
 
                 httpBackend
-                    .expectPATCH(server_url+"api/facilities/facilities/3/")
-                    .respond(400);
-                data.$scope.publish();
+                    .expectPOST(server_url+"api/facilities/facility_regulation_status/")
+                    .respond(500);
+                data.$scope.regulateFacility();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -117,6 +132,7 @@
                 expect(state.go).not.toHaveBeenCalled();
                 expect(log.error).toHaveBeenCalled();
             });
+
         });
     });
 })();

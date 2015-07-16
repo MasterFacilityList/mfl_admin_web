@@ -30,7 +30,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_rejected", {"$scope": scope});
-                expect(scope.filters).toEqual({"rejected": true});
+                expect(scope.filters).toEqual({"rejected": true, "approved": true});
             });
         });
 
@@ -39,7 +39,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_approve", {"$scope": scope});
-                expect(scope.filters).toEqual({"approved": false});
+                expect(scope.filters).toEqual({"approved": false, "rejected": false});
             });
         });
 
@@ -56,8 +56,17 @@
 
             beforeEach(function () {
                 httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(200, {results : []});
+
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3")
+                    .respond(200, {results: []});
+
+                httpBackend
                 .expectGET(server_url+"api/facilities/facilities/3/")
                 .respond(200, {
+                    coordinates: 13,
                     latest_update: 3
                 });
             });
@@ -71,6 +80,11 @@
                     "$log": log
                 };
                 httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3")
+                    .respond(500, {results: []});
+
                 httpBackend
                     .expectGET(server_url+"api/facilities/facilities/3/")
                     .respond(400, {});
@@ -91,13 +105,13 @@
                     "$state": state,
                     "$stateParams": {facility_id: 3}
                 };
-
                 ctrl("facility_approve", data);
-
+                httpBackend
+                    .expectGET(server_url+"api/gis/facility_coordinates/13/")
+                    .respond(200, {results : []});
                 httpBackend
                     .expectGET(server_url+"api/facilities/facility_updates/3/")
                     .respond(200, {facility_updates: "{\"abbreviation\":2}"});
-
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -105,24 +119,26 @@
                 expect(data.$scope.facility_update).toEqual({facility_updates: {abbreviation: 2}});
             });
 
-            it("should not load undefined facility update", function () {
+            it("should not load undefined facility update or coordinates", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state": state,
                     "$stateParams": {facility_id: 3}
                 };
+
                 httpBackend.resetExpectations();
                 httpBackend
+                .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                .respond(200, {results : []});
+                httpBackend
                 .expectGET(server_url+"api/facilities/facilities/3/")
-                .respond(200, {
-                    latest_update: null
-                });
+                .respond(200, {"id": "2", "latest_update": null, coordinates: null});
+
                 ctrl("facility_approve", data);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-
                 expect(data.$scope.facility_update).toEqual(undefined);
             });
 
@@ -135,7 +151,6 @@
                 };
 
                 ctrl("facility_approve", data);
-
                 httpBackend
                     .expectGET(server_url+"api/facilities/facility_updates/3/")
                     .respond(500);

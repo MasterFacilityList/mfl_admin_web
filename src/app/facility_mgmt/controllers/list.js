@@ -6,7 +6,7 @@
     .controller("mfl.facility_mgmt.controllers.facility_list",
         ["$scope", function ($scope) {
             $scope.title = {
-                "name": "Facility Management",
+                "name": "All Facilities",
                 "icon": "fa-building"
             };
             $scope.action = [
