@@ -3,14 +3,59 @@
         <div class="col-sm-12">
             <h4 class="fw-600 fs-18"> Add Officers</h4>
         </div>
-        <form ng-submit="add()">
-            <div class="group col-sm-10">
-            <select name="officer" ng-model="officer.id" class="pad-t-15" required>
-                <option value="">Select Officer</option>
-                <option ng-repeat="off in officers" ng-value="off.id">{{off.name}}</option>
-            </select>
-            <span class="highlight"></span>
-            <span class="bar"></span>
+        <form ng-submit="add()" role="form">
+            <div class="group col-xs-12">
+                <input type="text" ng-model="off.name"
+                 required>
+                <span class="highlght"></span>
+                <span class="bar"></span>
+                <label class="margin-l-10">
+                    Officer Name
+                </label>
+            </div>
+            <div class="group col-xs-12">
+                <input type="number" ng-model="off.id"
+                 required>
+                <span class="highlght"></span>
+                <span class="bar"></span>
+                <label class="margin-l-10">
+                    Officer ID
+                </label>
+            </div>
+            <div class="group col-xs-12">
+                <input type="number" ng-model="off.registration_number"
+                 >
+                <span class="highlght"></span>
+                <span class="bar"></span>
+                <label class="margin-l-10">
+                    Officer Registration Number
+                </label>
+            </div>
+            <div class="group col-xs-12">
+                <input type="text" ng-model="off.title"
+                 required>
+                <span class="highlght"></span>
+                <span class="bar"></span>
+                <label class="margin-l-10">
+                    Officer Title
+                </label>
+            </div>
+            <div class="group col-xs-12">
+                <input type="text" ng-model="off.phone_number">
+                <span class="highlght"></span>
+                <span class="bar"></span>
+                <label class="margin-l-10">
+                    Officer Phone Number
+                </label>
+            </div>
+            <div class="group col-xs-12">
+                <input type="email" ng-model="off.email"
+                 required>
+                <span class="highlght"></span>
+                <span class="bar"></span>
+                <label class="margin-l-10">
+                    Officer Email
+                </label>
             </div>
             <div class="col-sm-12 margin-b-10">
                 <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add Officer">
