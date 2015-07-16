@@ -1205,22 +1205,29 @@
             }]));
             it("should successfully add an officer to a facility",
             inject(["mfl.common.services.multistep",
-                function (multistepService) {
+                "mfl.common.forms.changes",
+                function (multistepService, formChanges) {
 
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
                     },
-                    "mfl.common.services.multistep" : multistepService
+                    "mfl.common.services.multistep" : multistepService,
+                    "mfl.common.forms.changes" : formChanges
                 };
+                httpBackend
+                    .expectGET(server_url+"api/common/contact_types/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/job_titles/")
+                    .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url+"api/facilities/officers/")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
                     .respond(200, {results: []});
-
                 data.$scope.user_id = 3;
                 data.$scope.steps = [
                     {name : "basic"},
@@ -1241,13 +1248,26 @@
                     "id": "3"
                 };
                 data.$scope.facility_id = "3";
-
+                data.$scope.contacts = [{type : "13", contact : "0978423" }];
                 httpBackend
-                    .expectPOST(server_url + "api/facilities/facility_officers/", {"facility": "3",
-                      "officer": "3"})
+                    .expectPOST(server_url + "api/facilities/officer_facade/")
                     .respond(201, {"id": 5});
-
-                data.$scope.add();
+                data.$scope.contacts = [{type : "13", contact : "t@t.com"}];
+                var obj = {type : "13", contact : "t@t.com"};
+                data.$scope.add_contact();
+                data.$scope.remove_contact(obj);
+                var frm =  {
+                    $dirty: true,
+                    name : {
+                        $dirty: true,
+                        $modelValue: "Rick Ryan"
+                    },
+                    id_no : {
+                        $modelValue: "3",
+                        $dirty: true
+                    }
+                };
+                data.$scope.add(frm);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -1295,12 +1315,24 @@
                 data.$scope.facility_id = "3";
 
                 httpBackend
-                    .expectPOST(server_url + "api/facilities/facility_officers/", {"facility": "3",
-                      "officer": "3"})
+                    .expectPOST(server_url + "api/facilities/officer_facade/")
                     .respond(500, {"id": 5});
-
-                data.$scope.add();
-
+                data.$scope.contacts = [{type : "13", contact : "t@t.com"}];
+                var obj = {type : "13", contact : "t@t.com"};
+                data.$scope.add_contact();
+                data.$scope.remove_contact(obj);
+                var frm =  {
+                    $dirty: true,
+                    name : {
+                        $dirty: true,
+                        $modelValue: "Rick Ryan"
+                    },
+                    id_no : {
+                        $modelValue: "3",
+                        $dirty: true
+                    }
+                };
+                data.$scope.add(frm);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();

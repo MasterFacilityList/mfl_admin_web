@@ -357,7 +357,8 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        function($scope, $log, $stateParams, wrappers, multistepService){
+        "mfl.common.forms.changes",
+        function($scope, $log, $stateParams, wrappers, multistepService, formChanges){
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[3]);
@@ -365,7 +366,23 @@
                 $scope.nextState();
             }
             $scope.fac_officers = [];
-
+            $scope.contacts = [{type: "", contact : ""}];
+            /*Contact types*/
+            wrappers.contact_types.list()
+            .success(function (data) {
+                $scope.contact_types = data.results;
+            })
+            .error(function (error) {
+                $log.error(error);
+            });
+            /*Job Titles*/
+            wrappers.job_titles.list()
+            .success(function (data) {
+                $scope.job_titles = data.results;
+            })
+            .error(function (error) {
+                $log.error(error);
+            });
             /*officers*/
             wrappers.officers.list()
             .success(function(data){
@@ -382,16 +399,26 @@
             .error(function(error){
                 $log.error(error);
             });
+            /*adding contact object*/
+            $scope.add_contact = function() {
+                $scope.contacts.push({type : "", contact : ""});
+            };
+            /*removing contact object*/
+            $scope.remove_contact = function (obj) {
+                $scope.contacts = _.without($scope.contacts, obj);
+            };
             /*add existing officer to facility*/
-            $scope.add = function () {
+            $scope.add = function (frm) {
                 $scope.spinner = true;
-                wrappers.facility_officers.create({
-                        "facility": $scope.facility_id,
-                        "officer": $scope.officer.id
-                    })
+                var changes = formChanges.whatChanged(frm);
+                changes.facility_id = $scope.facility_id;
+                changes.contacts = $scope.contacts;
+                wrappers.create_officer.create(changes)
                     .success(function (data) {
                         $scope.fac_officers.push(data);
                         $scope.spinner = false;
+                        $scope.off = {};
+                        $scope.contacts = [{type : "", contacts : ""}];
                     })
                     .error(function (data) {
                         $log.error(data);
