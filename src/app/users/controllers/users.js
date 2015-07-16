@@ -10,8 +10,9 @@
 
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
         "$stateParams", "mfl.common.services.multistep",
-        "mfl.users.services.wrappers","$log","mfl.auth.services.login",
-        function ($scope, $state, $stateParams, multistepService, wrappers,$log,loginService) {
+        "mfl.users.services.wrappers","$log","mfl.auth.services.login","mfl.users.services.groups",
+        function ($scope, $state, $stateParams, multistepService, wrappers,$log,loginService,
+        groupsService) {
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
@@ -22,6 +23,7 @@
                 wrappers.users.get($state.params.user_id)
                 .success(function (data) {
                     $scope.user = data;
+                    $scope.current_group = groupsService.checkWhichGroup($scope.user.groups);
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -130,8 +132,9 @@
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
          "$state","mfl.auth.services.login", "mfl.common.services.multistep",
+         "mfl.users.services.groups",
         function ($scope, $stateParams, $log, wrappers,$state, loginService,
-            multistepService) {
+            multistepService,groupsService) {
             $scope.steps = multistepService.userMultistep();
             $scope.title = {
                 icon: "fa-edit",
@@ -178,6 +181,7 @@
             wrappers.users.get($scope.user_id)
                 .success(function (data) {
                     $scope.user = data;
+                    $scope.current_group = groupsService.checkWhichGroup($scope.user.groups);
                     $scope.deleteText = $scope.user.full_name;
                 })
                 .error(function (data) {
@@ -314,7 +318,7 @@
 
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        "mfl.common.services.multistep","mfl.users.services.groups_filter",
+        "mfl.common.services.multistep","mfl.users.services.groups",
         function (wrappers, $log, $scope, $state, multistepService, groupsService) {
             if($scope.create) {
                 $scope.nextState();
@@ -347,21 +351,9 @@
                 wrappers.users.update($scope.user_id, {"groups": grps})
                 .success(function (data) {
                     $scope.user = data;
-                    $scope.new_grp = "";
+                    $scope.$parent.user = data;
+                    $scope.$parent.current_group= groupsService.checkWhichGroup($scope.user.groups);
                     $scope.spinner = false;
-
-                    if(!$scope.create) {
-                        var state_name1 = $scope.login_user.is_national ? "counties" :
-                        "constituency";
-                        $state.go("users.user_edit." + state_name1,
-                            {user_id: $scope.user_id});
-                    }
-                    else {
-                        var state_name2 = $scope.login_user.is_national ? "counties" :
-                        "constituency";
-                        $state.go("users.user_create." + state_name2,
-                            {user_id : $scope.user_id, furthest : $scope.furthest});
-                    }
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -369,14 +361,19 @@
                 });
             };
 
+
             $scope.add = function () {
-                var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
-                var update = angular.copy($scope.user.groups);
-                update.push(grp);
-                updateGroups(update);
+                if (!_.isEmpty($scope.user.groups)) {
+                    $scope.error = "This user already belongs to a group";
+                } else{
+                    var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
+                    var update = angular.copy($scope.user.groups);
+                    update.push(grp);
+                    updateGroups(update);
+                }
             };
 
-            $scope.remove = function (grp) {
+            $scope.removeChild = function (grp) {
                 var update = _.without($scope.user.groups, grp);
                 updateGroups(update);
             };
@@ -450,8 +447,8 @@
 
     .controller("mfl.users.controllers.user_edit.regulatory_body",
         ["mfl.users.services.wrappers", "$log", "$scope",
-        "mfl.common.services.multistep",
-        function (wrappers, $log, $scope, multistepService) {
+        "mfl.common.services.multistep","$state",
+        function (wrappers, $log, $scope, multistepService,$state) {
             $scope.$parent.tab = 4;
             if(!$scope.create) {
                 multistepService.filterActive(
@@ -459,6 +456,10 @@
             } else {
                 $scope.nextState();
             }
+
+            $scope.edit_bodies = (! _.isUndefined($scope.user_id));
+            $scope.user_id = $scope.user_id || $state.params.user_id;
+
             wrappers.regulatory_bodies.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.bodies = data.results;
@@ -476,18 +477,22 @@
 
             $scope.new_body = "";
             $scope.addBody = function () {
-                var payload = {
-                    "regulatory_body": $scope.new_body,
-                    "user": $scope.user_id
-                };
-                wrappers.regulatory_body_users.create(payload)
-                .success(function (data) {
-                    $scope.user_bodies.push(data);
-                    $scope.new_body = "";
-                })
-                .error(function (data) {
-                    $log.error(data);
-                });
+                if(!_.isEmpty($scope.user_bodies)){
+                    $scope.error = "The user already belongs to a regulatory body";
+                } else{
+                    var payload = {
+                        "regulatory_body": $scope.new_body,
+                        "user": $scope.user_id
+                    };
+                    wrappers.regulatory_body_users.create(payload)
+                    .success(function (data) {
+                        $scope.user_bodies.push(data);
+                        $scope.new_body = "";
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                }
             };
             $scope.removeChild = function (reg) {
                 wrappers.regulatory_body_users.remove(reg.id)
