@@ -78,5 +78,6 @@
         this.geo_code_methods = api.setBaseUrl("api/gis/geo_code_methods/");
         this.geo_code_sources = api.setBaseUrl("api/gis/geo_code_sources/");
         this.facility_coordinates = api.setBaseUrl("api/gis/facility_coordinates/");
+        this.create_officer = api.setBaseUrl("api/facilities/officer_facade/");
     }]);
 })(angular);
