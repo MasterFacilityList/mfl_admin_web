@@ -125,6 +125,10 @@
                         operation_status: {
                             "id": $scope.facility.operation_status,
                             "name": $scope.facility.operation_status_name
+                        },
+                        regulatory_body: {
+                            "id": $scope.facility.regulatory_body,
+                            "name": $scope.facility.regulatory_body_name
                         }
                     };
                 })
@@ -185,6 +189,7 @@
             $scope.selectReload(
                 wrappers.wards, "", "wards", {"constituency": $scope.login_user.constituency}
             );
+            $scope.selectReload(wrappers.regulating_bodies, "", "regulating_bodies");
             if ($scope.create) {
                 $scope.selectReload(wrappers.facility_types, "", "facility_types");
             }

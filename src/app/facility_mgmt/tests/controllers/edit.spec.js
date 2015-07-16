@@ -55,7 +55,9 @@
                         owner: "3",
                         owner_name: "owner",
                         operation_status: "4",
-                        operation_status_name: "opstatus"
+                        operation_status_name: "opstatus",
+                        regulatory_body_name: "def",
+                        regulatory_body: "23"
                     };
                     spyOn(state, "go");
                     httpBackend
@@ -96,6 +98,10 @@
                         operation_status: {
                             "id": "4",
                             "name": "opstatus"
+                        },
+                        regulatory_body: {
+                            "id": "23",
+                            "name": "def"
                         }
                     });
                 }])
@@ -120,7 +126,9 @@
                         owner: "3",
                         owner_name: "owner",
                         operation_status: "4",
-                        operation_status_name: "opstatus"
+                        operation_status_name: "opstatus",
+                        regulatory_body_name: "def",
+                        regulatory_body: "23"
                     };
                     spyOn(state, "go");
                     httpBackend
@@ -161,6 +169,10 @@
                         operation_status: {
                             "id": "4",
                             "name": "opstatus"
+                        },
+                        regulatory_body: {
+                            "id": "23",
+                            "name": "def"
                         }
                     });
 
@@ -198,7 +210,9 @@
                         owner: "3",
                         owner_name: "owner",
                         operation_status: "4",
-                        operation_status_name: "opstatus"
+                        operation_status_name: "opstatus",
+                        regulatory_body: "23",
+                        regulatory_body_name: "def"
                     };
                     spyOn(state, "go");
                     httpBackend
@@ -239,6 +253,10 @@
                         operation_status: {
                             "id": "4",
                             "name": "opstatus"
+                        },
+                        regulatory_body: {
+                            "id": "23",
+                            "name": "def"
                         }
                     });
 
