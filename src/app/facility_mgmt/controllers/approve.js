@@ -57,6 +57,14 @@
                 $scope.alert = e.error;
             });
 
+            wrappers.facility_approvals.filter({"facility": $scope.facility_id})
+            .success(function (data) {
+                $scope.facility_approvals = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
             wrappers.facility_detail.get($scope.facility_id)
             .success(function(data) {
                 $scope.facility = data;
