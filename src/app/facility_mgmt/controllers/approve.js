@@ -9,7 +9,8 @@
     .controller("mfl.facility_mgmt.controllers.facilities_rejected",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "rejected": true
+                "rejected": true,
+                "approved": true
             };
             $scope.title = {
                 "name": "Rejected Facilities",
@@ -21,7 +22,8 @@
     .controller("mfl.facility_mgmt.controllers.facilities_approve",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "approved": false
+                "approved": false,
+                "rejected": false
             };
             $scope.title = {
                 "name": "Approve Facilities",

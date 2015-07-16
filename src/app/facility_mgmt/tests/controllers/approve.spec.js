@@ -30,7 +30,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_rejected", {"$scope": scope});
-                expect(scope.filters).toEqual({"rejected": true});
+                expect(scope.filters).toEqual({"rejected": true, "approved": true});
             });
         });
 
@@ -39,7 +39,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_approve", {"$scope": scope});
-                expect(scope.filters).toEqual({"approved": false});
+                expect(scope.filters).toEqual({"approved": false, "rejected": false});
             });
         });
 

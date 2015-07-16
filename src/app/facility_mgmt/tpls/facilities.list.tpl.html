@@ -32,7 +32,7 @@
             <td data-title="Facility Type:" class="pad-t-15">{{::fac.facility_type_name}}</td>
             <td data-title="Actions:"  class="text-right">
                 <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac.id})"
-                    class="login-btn login-btn-action" ng-if="!fac.is_approved||fac.has_edits">
+                    class="login-btn login-btn-action" ng-if="(!fac.rejected)&&(!fac.is_approved||fac.has_edits)">
                     &nbsp;Approve
                 </a>
 
