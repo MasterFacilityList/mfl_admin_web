@@ -4,7 +4,7 @@
             <h4 class="fw-600 fs-18"> Add Officers</h4>
         </div>
         <form name="frm_off" ng-submit="add(frm_off)" role="form">
-            <div class="group col-xs-12">
+            <div class="group col-xs-11">
                 <input type="text" name="name" ng-model="off.name"
                  required>
                 <span class="highlght"></span>
@@ -13,7 +13,7 @@
                     Officer Name
                 </label>
             </div>
-            <div class="group col-xs-12">
+            <div class="group col-xs-11">
                 <input type="number" name="id_no" ng-model="off.id_no"
                  required>
                 <span class="highlght"></span>
@@ -22,7 +22,7 @@
                     Officer ID
                 </label>
             </div>
-            <div class="group col-xs-12">
+            <div class="group col-xs-11">
                 <input type="text" name="reg_no" ng-model="off.reg_no"
                  >
                 <span class="highlght"></span>
@@ -31,34 +31,46 @@
                     Officer Registration Number
                 </label>
             </div>
-            <div class="group col-xs-12">
-                <input type="text" name="title" ng-model="off.title"
-                 required>
-                <span class="highlght"></span>
+            <div class="group col-xs-11">
+                <select name="title" ng-model="off.title" required>
+                    <option value="">Select Job Title</option>
+                    <option ng-repeat="title in job_titles" ng-value="title.id">{{title.name}}</option>
+                </select>
+                <span class="highlight"></span>
                 <span class="bar"></span>
-                <label class="margin-l-10">
-                    Officer Title
-                </label>
             </div>
-            <div class="group col-xs-12">
-                <input type="text" name="phone" ng-model="off.phone">
-                <span class="highlght"></span>
-                <span class="bar"></span>
-                <label class="margin-l-10">
-                    Officer Phone Number
-                </label>
+            <div class="col-xs-12 pad-r-0 pad-l-0"
+            ng-repeat="cont in contacts">
+                <div class="group col-xs-5">
+                    <select name="contact_type" ng-model="cont.type" required>
+                        <option value="">Select Contact Type</option>
+                        <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
+                    </select>
+                    <span class="highlight"></span1>
+                    <span class="bar"></span>
+                </div>
+                <div class="group col-xs-6">
+                    <input type="text" ng-model="cont.contact" name="contact">
+                    <span class="highlght"></span>
+                    <span class="bar"></span>
+                    <label class="margin-l-10">
+                        Contact Details
+                    </label>
+                </div>
+                <div class="col-xs-1 pull-right">
+                    <a ng-click="remove_contact(cont)" style="cursor: pointer;">
+                        <i class="fa fa-close fa-2x text-danger"></i>
+                    </a>
+                </div>
             </div>
-            <div class="group col-xs-12">
-                <input type="email" ng-model="off.email" name="email">
-                <span class="highlght"></span>
-                <span class="bar"></span>
-                <label class="margin-l-10">
-                    Officer Email
-                </label>
+            <div class="col-xs-11 text-right margin-b-10">
+                <a class="login-btn login-btn-primary pull-right" ng-click="add_contact()" >
+                    &nbsp;<i class="fa fa-plus-square-o"></i> Add Contact
+                </a>
             </div>
             <div class="col-sm-12 margin-b-10">
                 <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add Officer">
-                    <i class="fa fa-plus-circle"></i> Add Officer
+                    &nbsp;<i class="fa fa-plus-circle"></i> Add Officer
                 </button>
             </div>
         </form>
