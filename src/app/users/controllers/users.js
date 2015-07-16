@@ -10,8 +10,9 @@
 
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
         "$stateParams", "mfl.common.services.multistep",
-        "mfl.users.services.wrappers","$log","mfl.auth.services.login",
-        function ($scope, $state, $stateParams, multistepService, wrappers,$log,loginService) {
+        "mfl.users.services.wrappers","$log","mfl.auth.services.login","mfl.users.services.groups",
+        function ($scope, $state, $stateParams, multistepService, wrappers,$log,loginService,
+        groupsService) {
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
@@ -22,6 +23,7 @@
                 wrappers.users.get($state.params.user_id)
                 .success(function (data) {
                     $scope.user = data;
+                    $scope.current_group = groupsService.checkWhichGroup($scope.user.groups);
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -130,8 +132,9 @@
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
          "$state","mfl.auth.services.login", "mfl.common.services.multistep",
+         "mfl.users.services.groups",
         function ($scope, $stateParams, $log, wrappers,$state, loginService,
-            multistepService) {
+            multistepService,groupsService) {
             $scope.steps = multistepService.userMultistep();
             $scope.title = {
                 icon: "fa-edit",
@@ -178,6 +181,7 @@
             wrappers.users.get($scope.user_id)
                 .success(function (data) {
                     $scope.user = data;
+                    $scope.current_group = groupsService.checkWhichGroup($scope.user.groups);
                     $scope.deleteText = $scope.user.full_name;
                 })
                 .error(function (data) {
@@ -340,7 +344,6 @@
                 if($scope.$parent.furthest < 4) {
                     $scope.$parent.furthest = 4;
                 }
-                console.log(new_grps);
                 var grps = _.map(new_grps, function (grp) {
                     return {"id": grp.id, "name": grp.name};
                 });
@@ -348,21 +351,8 @@
                 wrappers.users.update($scope.user_id, {"groups": grps})
                 .success(function (data) {
                     $scope.user = data;
-                    $scope.new_grp = "";
+                    $scope.$parent.current_group= groupsService.checkWhichGroup($scope.user.groups);
                     $scope.spinner = false;
-
-                    // if(!$scope.create) {
-                    //     groupsService.findNextStateCreate(
-                    //         $scope.login_user.is_national,
-                    //         $scope.user.groups,
-                    //         $scope.user.id);
-                    // }
-                    // else {
-                    //     groupsService.findNextStateEdit(
-                    //         $scope.login_user.is_national,
-                    //         $scope.user.groups,
-                    //         $scope.user.id);
-                    // }
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -372,15 +362,26 @@
 
 
             $scope.add = function () {
-                var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
-                var update = angular.copy($scope.user.groups);
-                update.push(grp);
-                updateGroups(update);
+                if (_.isEmpty($scope.user.groups)) {
+                    var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
+                    var update = angular.copy($scope.user.groups);
+                    update.push(grp);
+                    updateGroups(update);
+                } else{
+                    $scope.error = "This user already belongs to a group";
+                }
             };
 
             $scope.removeChild = function (grp) {
                 var update = _.without($scope.user.groups, grp);
-                updateGroups(update);
+                if($scope.user.county !== null){
+                    $scope.error = "Please unassign county of the user first";
+                } else if ($scope.user.constituency !== null){
+                    $scope.error = "Please unassign constituency of the user first";
+                }
+                else{
+                    updateGroups(update);
+                }
             };
             $scope.updateUserGroups = function () {
                 updateGroups($scope.user.groups);

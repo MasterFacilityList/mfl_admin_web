@@ -17,7 +17,7 @@
         this.regulatory_bodies = api.setBaseUrl("api/facilities/regulating_bodies/");
         this.regulatory_body_users = api.setBaseUrl("api/facilities/regulatory_body_users/");
     }])
-    .service("mfl.users.services.groups",["$state",function ($state) {
+    .service("mfl.users.services.groups",[function () {
             this.filterGroups = function (user,grps) {
                 // gets national admin permissions
                 if(user === true){
@@ -36,76 +36,17 @@
                 }
                 return grps;
             };
-            this.findNextStateCreate = function(is_nat,usr_grps,usr_id){
-                var nat_usr = is_nat ? true : "constituency";
-                // if user is national user
-                if (nat_usr) {
-                    _.filter(usr_grps, function (grp) {
-                      //if user is a regulator
-                        var grpString = grp.name;
-                        if (grpString.includes("Regulators")){
-                            $state.go("users.user_edit.regulatory_body",
-                            {user_id: usr_id});
-                        }
-                        else if(grpString.includes("County")) {
-                            //if user is a county user
-                            $state.go("users.user_edit.counties",
-                            {user_id: usr_id});
-                        }
-                        else {
-                            $state.go("users");
-                        }
-                    });
-                } else {
-                    $state.go("users.user_edit.constituency",
-                        {user_id: $scope.user_id});
+            this.checkWhichGroup = function(usr_grps){
+                var grp =_.pluck(usr_grps, "name");
+                if(_.isUndefined(grp[0])){
+                    return null;
                 }
-            };
-            this.findNextStateEdit = function(is_nat,usr_grps,usr_id){
-                var nat_usr = is_nat ? true : "constituency";
-                // if user is national user
-                if (nat_usr) {
-                    _.filter(usr_grps, function (grp) {
-                      //if user is a regulator
-                        var grpString = grp.name;
-                        if (grpString.includes("Regulators")){
-                            $state.go("users.user_create.regulatory_body",
-                            {user_id: usr_id});
-                        }
-                        else if(grpString.includes("County")) {
-                            //if user is a county user
-                            $state.go("users.user_create.counties",
-                            {user_id: usr_id});
-                        }
-                        else {
-                            // Any other groups
-                            $state.go("users");
-                        }
-                    });
-                } else {
-                    $state.go("users.user_edit.constituency",
-                        {user_id: $scope.user_id});
+                else if (grp[0].includes("County") || grp[0].includes("Regulator")) {
+                    return grp[0];
                 }
-            };
-            this.checkWhichGroup = function(assign_grps){
-                grp =_.pluck( assign_grps, name );
-                _.filter(usr_grps, function (grp) {
-                  //if user is a regulator
-                    var grpString = grp.name;
-                    if (grpString.includes("Regulators")){
-                        $state.go("users.user_create.regulatory_body",
-                        {user_id: usr_id});
-                    }
-                    else if(grpString.includes("County")) {
-                        //if user is a county user
-                        $state.go("users.user_create.counties",
-                        {user_id: usr_id});
-                    }
-                    else {
-                        // Any other groups
-                        $state.go("users");
-                    }
-                });
+                else {
+                    return "others";
+                }
             };
         }
     ]);

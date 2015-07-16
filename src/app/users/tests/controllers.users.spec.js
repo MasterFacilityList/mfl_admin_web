@@ -1541,7 +1541,7 @@
                         server_url+"api/users/3/", {"groups": [{"id": 2, "name": "grp2"}]})
                     .respond(200, {"groups": []});
 
-                data.$scope.remove({"id": 2, "name": "grp2"});
+                data.$scope.removeChild({"id": 2, "name": "grp2"});
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
