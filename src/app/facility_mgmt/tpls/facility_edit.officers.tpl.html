@@ -3,7 +3,7 @@
         <div class="col-sm-12">
             <h4 class="fw-600 fs-18"> Add Officers</h4>
         </div>
-        <form ng-submit="add()" role="form" ng-submit="save(frm_off)">
+        <form name="frm_off" ng-submit="add(frm_off)" role="form">
             <div class="group col-xs-12">
                 <input type="text" name="name" ng-model="off.name"
                  required>
@@ -23,7 +23,7 @@
                 </label>
             </div>
             <div class="group col-xs-12">
-                <input type="number" name="reg_no" ng-model="off.reg_no"
+                <input type="text" name="reg_no" ng-model="off.reg_no"
                  >
                 <span class="highlght"></span>
                 <span class="bar"></span>
@@ -41,7 +41,7 @@
                 </label>
             </div>
             <div class="group col-xs-12">
-                <input type="text" ng-model="off.phone_number">
+                <input type="text" name="phone" ng-model="off.phone">
                 <span class="highlght"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
@@ -49,8 +49,7 @@
                 </label>
             </div>
             <div class="group col-xs-12">
-                <input type="email" ng-model="off.email"
-                 required>
+                <input type="email" ng-model="off.email" name="email">
                 <span class="highlght"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
@@ -59,7 +58,7 @@
             </div>
             <div class="col-sm-12 margin-b-10">
                 <button type="submit" class="login-btn login-btn-primary margin-t-10" tooltip="Add Officer">
-                    <i class="fa fa-plus-circle"></i> Add
+                    <i class="fa fa-plus-circle"></i> Add Officer
                 </button>
             </div>
         </form>

@@ -352,7 +352,8 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        function($scope, $log, $stateParams, wrappers, multistepService){
+        "mfl.common.forms.changes",
+        function($scope, $log, $stateParams, wrappers, multistepService, formChanges){
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[3]);
@@ -378,12 +379,15 @@
                 $log.error(error);
             });
             /*add existing officer to facility*/
-            $scope.add = function () {
+            $scope.add = function (frm) {
                 $scope.spinner = true;
-                wrappers.facility_officers.create({
-                        "facility": $scope.facility_id,
-                        "officer": $scope.officer.id
-                    })
+                var changes = formChanges.whatChanged(frm);
+                changes.facility_id = $scope.facility_id;
+                changes.contacts = [
+                    {type : "MOBILE", contact : changes.phone},
+                    {type : "EMAIL" , contact : changes.email}
+                ];
+                wrappers.create_officer.create(changes)
                     .success(function (data) {
                         $scope.fac_officers.push(data);
                         $scope.spinner = false;
