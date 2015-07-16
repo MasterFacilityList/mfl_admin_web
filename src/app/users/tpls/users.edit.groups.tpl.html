@@ -44,7 +44,7 @@
                                 </span>
                                 <a  class="login-btn login-btn-danger"
                                     popover-toggle popover-trigger="open" popover-placement="left"
-                                    popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Remove county"
+                                    popover-template="'common/tpls/del-pop.tpl.html'"
                                     requires-permission="users.change_mfluser" >
                                     &nbsp; Delete
                                 </a>
@@ -91,8 +91,27 @@
                 <a class="login-btn login-btn-primary" ui-sref="users.user_create.contacts ({user_id : user_id})">
                     &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
                 </a>
-                <a class="login-btn login-btn-primary pull-right" ng-click="findNextStateCreate">
-                     &nbsp;Sub County <i class="fa fa-angle-double-right"></i>
+                <a ui-sref="users.user_create.constituency({user_id:user.id})"
+                   ng-if="$parent.current_group === 'Sub County Health Records Information Officer'"
+                   class="login-btn login-btn-primary pull-right">
+                     <span>&nbsp;Sub County <i class="fa fa-angle-double-right"></i></span>
+                </a>
+                <a ui-sref="users.user_create.counties({user_id:user.id})"
+                   ng-if="$parent.current_group === 'County Administrators' ||
+                   $parent.current_group === 'County Health Records Information Officer'"
+                   class="login-btn login-btn-primary pull-right fade-content">
+                     <span>&nbsp;County <i class="fa fa-angle-double-right"></i></span>
+                </a>
+                <a  ui-sref="users.user_create.regulatory_body({user_id:user.id})"
+                    ng-if="$parent.current_group === 'Regulators (Approvers)' ||
+                          $parent.current_group === 'Regulators (makers)'"
+                    class="login-btn login-btn-primary pull-right">
+                     <span>&nbsp;Regulatory Body <i class="fa fa-angle-double-right"></i></span>
+                </a>
+                <a  ui-sref="users"
+                    ng-if="$parent.current_group === 'others'"
+                    class="login-btn login-btn-primary pull-right">
+                     <span>&nbsp;Update</span>
                 </a>
             </div>
         </div>

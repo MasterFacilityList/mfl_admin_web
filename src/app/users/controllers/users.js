@@ -447,8 +447,8 @@
 
     .controller("mfl.users.controllers.user_edit.regulatory_body",
         ["mfl.users.services.wrappers", "$log", "$scope",
-        "mfl.common.services.multistep",
-        function (wrappers, $log, $scope, multistepService) {
+        "mfl.common.services.multistep","$state",
+        function (wrappers, $log, $scope, multistepService,$state) {
             $scope.$parent.tab = 4;
             if(!$scope.create) {
                 multistepService.filterActive(
@@ -456,6 +456,10 @@
             } else {
                 $scope.nextState();
             }
+
+            $scope.edit_bodies = (! _.isUndefined($scope.user_id));
+            $scope.user_id = $scope.user_id || $state.params.user_id;
+
             wrappers.regulatory_bodies.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
                 $scope.bodies = data.results;
@@ -473,18 +477,22 @@
 
             $scope.new_body = "";
             $scope.addBody = function () {
-                var payload = {
-                    "regulatory_body": $scope.new_body,
-                    "user": $scope.user_id
-                };
-                wrappers.regulatory_body_users.create(payload)
-                .success(function (data) {
-                    $scope.user_bodies.push(data);
-                    $scope.new_body = "";
-                })
-                .error(function (data) {
-                    $log.error(data);
-                });
+                if(!_.isEmpty($scope.user_bodies)){
+                    $scope.error = "The user already belongs to a regulatory body";
+                } else{
+                    var payload = {
+                        "regulatory_body": $scope.new_body,
+                        "user": $scope.user_id
+                    };
+                    wrappers.regulatory_body_users.create(payload)
+                    .success(function (data) {
+                        $scope.user_bodies.push(data);
+                        $scope.new_body = "";
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                    });
+                }
             };
             $scope.removeChild = function (reg) {
                 wrappers.regulatory_body_users.remove(reg.id)

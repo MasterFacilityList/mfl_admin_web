@@ -33,7 +33,7 @@
             <div class="col-xs-12">
                 <div class="margin-t-20" ng-show="contacts.length == 0">
                    <div class="alert alert-info">
-                       No contacts have been added so far.
+                       <span class="fs-16"> <i class="fa fa-info"></i> No contacts have been added so far.</span>
                    </div>
                 </div>
                 <div class="content-card margin-t-20" ng-show="contacts.length > 0">
@@ -73,6 +73,24 @@
                 </div>
             </div>
 
+            <div class="col-xs-12">
+                <div ng-if="!create" class="margin-b-20 margin-t-10">
+                    <button class="login-btn login-btn-primary" ui-sref="users.user_edit.basic ({user_id : user_id})">
+                        &nbsp;<i class="fa fa-angle-double-left"></i> Details
+                    </button>
+                    <button class="login-btn login-btn-primary pull-right" ui-sref="users.user_edit.groups ({user_id : user_id})">
+                        &nbsp;&nbsp;Groups <i class="fa fa-angle-double-right"></i>
+                    </button>
+                </div>
+                <div ng-if="create" class="margin-b-20 margin-t-10">
+                    <button class="login-btn login-btn-primary" ui-sref="users.user_create.basic ({user_id : user_id})">
+                        &nbsp;<i class="fa fa-angle-double-left"></i> Details
+                    </button>
+                    <button class="login-btn login-btn-primary pull-right" ng-click="goToGroups()">
+                        &nbsp;Groups <i class="fa fa-angle-double-right"></i>
+                    </button>
+                </div>
+            </div>
 
     </div>
 </div>
