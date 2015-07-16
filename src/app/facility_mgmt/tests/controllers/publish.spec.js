@@ -30,7 +30,9 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_publish", {"$scope": scope});
-                expect(scope.filters).toEqual({"is_published": false, "approved": true});
+                expect(scope.filters).toEqual(
+                    {"is_published": false, "approved": true, "rejected": false}
+                );
             });
         });
 

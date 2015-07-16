@@ -15,7 +15,6 @@
                     };
 
                     $controller("mfl.facility_mgmt.controllers.facility_list", data);
-                    expect(data.$scope.title.name).toEqual("Facility Management");
                 }
             ]);
         });

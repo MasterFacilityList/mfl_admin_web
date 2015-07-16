@@ -30,7 +30,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_rejected", {"$scope": scope});
-                expect(scope.filters).toEqual({"rejected": true});
+                expect(scope.filters).toEqual({"rejected": true, "approved": true});
             });
         });
 
@@ -39,7 +39,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_approve", {"$scope": scope});
-                expect(scope.filters).toEqual({"approved": false});
+                expect(scope.filters).toEqual({"approved": false, "rejected": false});
             });
         });
 
@@ -58,6 +58,11 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/facility_units/?facility=3")
                     .respond(200, {results : []});
+
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3")
+                    .respond(200, {results: []});
+
                 httpBackend
                 .expectGET(server_url+"api/facilities/facilities/3/")
                 .respond(200, {
@@ -75,6 +80,11 @@
                     "$log": log
                 };
                 httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3")
+                    .respond(500, {results: []});
+
                 httpBackend
                     .expectGET(server_url+"api/facilities/facilities/3/")
                     .respond(400, {});

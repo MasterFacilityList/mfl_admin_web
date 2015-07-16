@@ -77,6 +77,26 @@
         </div>
         <div class="col-xs-12" ng-if="facility.is_approved">
             <span class="fs-16"><i class="fa fa-check"></i> Facility has already been approved</span>
+            <div class="col-xs-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Done By</th>
+                            <th>Done On</th>
+                            <th>Comment</th>
+                            <th>Rejected/Approved</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="fa in facility_approvals">
+                            <td>{{fa.done_by}}</td>
+                            <td>{{fa.created|date}}</td>
+                            <td>{{fa.comment}}</td>
+                            <td>{{fa.is_cancelled ? 'Rejected' : 'Approved'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -108,14 +128,13 @@
                     </tr>
                 </tbody>
             </table>
-        <div class="margin-t-20 margin-b-10">
-            <button ng-click="approveUpdate(true)" class="login-btn login-btn-success">Approve Updates</button>
-            <button ng-click="approveUpdate(false)" class="login-btn login-btn-danger">Decline Updates</button>
-        </div>
+            <div class="margin-t-20 margin-b-10">
+                <button ng-click="approveUpdate(true)" class="login-btn login-btn-success">Approve Updates</button>
+                <button ng-click="approveUpdate(false)" class="login-btn login-btn-danger">Decline Updates</button>
+            </div>
         </div>
         <div ng-if="!facility.latest_update" class="col-xs-12">
             <p class="lead margin-t-10 margin-b-10"><i class="fa fa-info-circle"></i> No facility updates pending approval</p>
         </div>
     </div>
-
 </div>
