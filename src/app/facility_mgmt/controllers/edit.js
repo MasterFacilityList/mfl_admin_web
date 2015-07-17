@@ -129,6 +129,10 @@
                         regulatory_body: {
                             "id": $scope.facility.regulatory_body,
                             "name": $scope.facility.regulatory_body_name
+                        },
+                        keph_level: {
+                            "id": $scope.facility.keph_level,
+                            "name": $scope.facility.keph_level_name
                         }
                     };
                 })
@@ -192,6 +196,7 @@
             $scope.selectReload(wrappers.regulating_bodies, "", "regulating_bodies");
             if ($scope.create) {
                 $scope.selectReload(wrappers.facility_types, "", "facility_types");
+                $scope.selectReload(wrappers.keph_levels, "", "keph_levels");
             }
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
@@ -199,6 +204,9 @@
                 $scope.facility.facility_type = $scope.select_values.facility_type;
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
+                $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
+                $scope.facility.keph_level = $scope.select_values.keph_level;
+
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {

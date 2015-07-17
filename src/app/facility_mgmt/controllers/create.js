@@ -42,6 +42,14 @@
                         operation_status: {
                             "id": $scope.facility.operation_status,
                             "name": $scope.facility.operation_status_name
+                        },
+                        regulatory_body: {
+                            "id": $scope.facility.regulatory_body,
+                            "name": $scope.facility.regulatory_body_name
+                        },
+                        keph_level: {
+                            "id": $scope.facility.keph_level,
+                            "name": $scope.facility.keph_level_name
                         }
                     };
                 })
