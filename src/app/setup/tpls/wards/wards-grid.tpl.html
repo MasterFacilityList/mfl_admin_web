@@ -14,8 +14,8 @@
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="ward in wards | filter: search.query">
                 <td data-title="#" class="pad-t-15 fs-14 fw-500">{{($index + 1)+((pagination.current_page-1)*25)}}</td>
-                <td data-title="Name" class="pad-t-15 fs-14 fw-500">{{ward.name | titlecase}}</td>
-                <td data-title="#" class="pad-t-15 fs-14 fw-500 text-right">{{ward.code}}</td>
+                <td data-title="Name" colspan="1" class="pad-t-15 fs-14 fw-500">{{ward.name | titlecase}}</td>
+                <td data-title="#" colspan="1" class="pad-t-15 fs-14 fw-500 text-right">{{ward.code}}</td>
             </tr>
         </tbody>
     </table>
