@@ -7,9 +7,10 @@
 <div id="no-more-tables" class="col-lg-12 margin-t-15">
     <table class="table table-hover">
         <thead class="cf">
-            <th class="fs-16">#</th>
+            <th class="fs-16 col-xs-1">#</th>
             <th sil-grid-sort field='name' class="fs-16">Name</th>
             <th sil-grid-sort field='code' class="fs-16 ">Code</th>
+            <th class="fs-16 text-right">Action</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="count in counts | filter: search.query">
@@ -17,8 +18,8 @@
                 <td data-title="Name" class="pad-t-15 fs-14 fw-500">{{count.name | titlecase}}</td>
                 <td data-title="#" class="pad-t-15 fs-14 fw-15">{{count.code}}</td>
                 <td class="text-right">
-                    <a ui-sref="setup.counties.view_consts.constituencies({count_id : count.id})" class="action-btn action-btn-grid action-btn-primary" tooltip="View County">
-                        <i class="fa fa-eye"></i>
+                    <a ui-sref="setup.counties.view_consts.constituencies({count_id : count.id})" class="login-btn login-btn-primary" tooltip="View County">
+                        &nbsp; View
                     </a>
                 </td>
             </tr>

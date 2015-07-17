@@ -8,7 +8,7 @@
         function ($scope) {
             $scope.title = {
                 icon: "fa-map-marker",
-                name: "Constituencies"
+                name: "Sub Counties"
             };
         }]
     )
