@@ -7,17 +7,15 @@
         "mfl.setup.contacts.controllers",
         "mfl.setup.town.controllers",
         "mfl.setup.chu.controllers",
-        "mfl.setup.gis.controllers"
+        "mfl.setup.gis.controllers",
+        "mfl.setup.api"
     ])
-    .controller("mfl.setup.controller.dashboard", ["$scope",
-        function ($scope) {
+    .controller("mfl.setup.controller.dashboard", ["$scope","currentStateOpen",
+        function ($scope,curStateService) {
             $scope.title = {
                 icon: "fa-map-marker",
                 name: "Adminstrative Units"
             };
-            $scope.collapsed = {
-                one: true
-            };
+            $scope.collapsed = curStateService.whichTab();
         }]);
 })(angular);
-
