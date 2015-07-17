@@ -80,5 +80,6 @@
         this.facility_coordinates = api.setBaseUrl("api/gis/facility_coordinates/");
         this.job_titles = api.setBaseUrl("api/facilities/job_titles/");
         this.create_officer = api.setBaseUrl("api/facilities/officer_facade/");
+        this.keph_levels = api.setBaseUrl("api/facilities/keph/");
     }]);
 })(angular);
