@@ -3522,4 +3522,4 @@
                 });
         });
     });
-})(angular);
+})(window.angular);

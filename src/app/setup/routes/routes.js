@@ -11,4 +11,4 @@
         "mfl.setup.routes.chu",
         "mfl.setup.routes.gis"
     ]);
-})(angular);
+})(window.angular);

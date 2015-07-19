@@ -1,4 +1,4 @@
-(function(describe){
+(function(_){
     "use strict";
     describe("wards controllers test suite", function(){
         var createController, $scope, $stateParams, $httpBackend, $state, adminApi;
@@ -37,4 +37,4 @@
                 expect(ctrl).toBeDefined();
             });
     });
-})(describe);
+})(window._);

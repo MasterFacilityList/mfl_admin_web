@@ -233,4 +233,4 @@
             });
         });
     });
-})(angular);
+})(window.angular);

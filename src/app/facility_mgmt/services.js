@@ -82,4 +82,4 @@
         this.create_officer = api.setBaseUrl("api/facilities/officer_facade/");
         this.keph_levels = api.setBaseUrl("api/facilities/keph/");
     }]);
-})(angular);
+})(window.angular);

@@ -151,4 +151,4 @@
         }
     ]);
 
-})(angular, _);
+})(window.angular, window._);

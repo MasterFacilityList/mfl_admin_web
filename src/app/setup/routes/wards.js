@@ -19,4 +19,4 @@
                 userFeature: "is_national"
             });
     }]);
-})(angular);
+})(window.angular);

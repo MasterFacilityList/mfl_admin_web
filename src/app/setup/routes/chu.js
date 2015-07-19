@@ -100,5 +100,4 @@
             })
         ;
     }]);
-})(angular);
-
+})(window.angular);

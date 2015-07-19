@@ -226,7 +226,6 @@
                 });
             };
         }]
-    )
-    ;
+    );
 
-})(angular);
+})(window.angular);

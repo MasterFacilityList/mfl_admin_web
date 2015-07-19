@@ -50,4 +50,4 @@
         }]
     );
 
-})(angular);
+})(window.angular);

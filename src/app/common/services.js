@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
     angular.module("mfl.common.services", [])
 
@@ -72,4 +72,4 @@
             });
         };
     }]);
-})(angular);
+})(window.angular, window._);

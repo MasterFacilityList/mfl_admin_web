@@ -207,4 +207,4 @@
             });
     }]);
 
-})(angular);
+})(window.angular);

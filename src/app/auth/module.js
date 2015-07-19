@@ -8,4 +8,4 @@
         "mfl.auth.oauth2"
     ]);
 
-})(angular);
+})(window.angular);

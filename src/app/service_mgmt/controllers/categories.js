@@ -1,5 +1,7 @@
 (function (angular, _) {
 
+    "use strict";
+
     angular.module("mfl.service_mgmt.controllers.categories", [
         "ui.router",
         "mfl.common.forms",
@@ -67,4 +69,4 @@
         }
     ]);
 
-})(angular, _);
+})(window.angular, window._);

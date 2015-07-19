@@ -12,4 +12,4 @@
         "mfl.facility_mgmt.states.upgrade_downgrade"
     ]);
 
-})(angular);
+})(window.angular);

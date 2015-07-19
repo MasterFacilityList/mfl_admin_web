@@ -1,4 +1,4 @@
-(function () {
+(function (angular, _) {
     "use strict";
 
     describe("Test users controllers (old):", function () {
@@ -2535,4 +2535,4 @@
             }]));
         });
     });
-})();
+})(window.angular, window._);

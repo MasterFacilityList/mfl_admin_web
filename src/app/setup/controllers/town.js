@@ -98,4 +98,4 @@
         }]
     );
 
-})(angular);
+})(window.angular);

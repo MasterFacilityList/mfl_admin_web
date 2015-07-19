@@ -35,4 +35,4 @@
             restrict: "A"
         });
     }]);
-})(angular);
+})(window.angular);

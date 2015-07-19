@@ -1,4 +1,4 @@
-(function(describe){
+(function(_){
     "use strict";
     describe("contacts controllers test suite", function(){
         var createController, $scope, $stateParams, $httpBackend, $state, adminApi;
@@ -411,4 +411,4 @@
                                                        { reload : true });
             });
     });
-})(describe);
+})(window._);

@@ -254,4 +254,4 @@
                 userFeature: "is_staff,is_national"
             });
     }]);
-})(angular);
+})(window.angular);

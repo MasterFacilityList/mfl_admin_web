@@ -1,4 +1,4 @@
-(function(describe){
+(function(_){
     "use strict";
     describe("chu controllers test suite", function(){
         var createController, $scope, $stateParams, $httpBackend, $state, adminApi;
@@ -351,4 +351,4 @@
                 expect($state.go).not.toHaveBeenCalledWith("setup.chu_approvers");
             });
     });
-})(describe);
+})(window._);
