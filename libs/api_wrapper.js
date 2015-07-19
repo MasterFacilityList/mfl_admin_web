@@ -2,26 +2,22 @@
     "use strict";
 
     angular.module("api.wrapper", [])
-    // CRUD API wrapper to be used by specific API wrappers
 
     .provider("api", function(){
         function Helpers(){}
         Helpers.prototype.hasTrailingSlash = function(url){
-            // check ir url has a trailing slash
-            if(url[url.length-1]==='/'){
+            if(url[url.length-1]==="/"){
                 return true;
             }
             return false;
         };
         Helpers.prototype.hasLeadingSlash = function(url){
-            // check ir url has a trailing slash
-            if(url[0]==='/'){
+            if(url[0]==="/"){
                 return true;
             }
             return false;
         };
         Helpers.prototype.removeTrailingSlash = function(url){
-            // remove trailing slash from url
             if (this.hasTrailingSlash(url)){
                 return url.substring(0, url.length-1);
             }
@@ -105,21 +101,20 @@
             Api.prototype.list = function(){
                 return this.callApi("GET", this.makeUrl(this.apiBaseUrl));
             };
-            Api.prototype.get = function(id){
-                var url_frag =  self.helpers.joinUrl([this.apiBaseUrl, id]);
-                return this.callApi("GET", this.makeUrl(url_frag));
+            Api.prototype.get = function(id, params){
+                var params_url_frag = self.helpers.makeParams(params);
+                var url = this.makeUrl(self.helpers.joinUrl([this.apiBaseUrl, id]));
+                if (params_url_frag) {
+                    url = self.helpers.joinUrl([
+                        url,
+                        self.helpers.makeGetParam(params_url_frag)]
+                    );
+                }
+                return this.callApi("GET", url);
             };
             Api.prototype.remove = function(id){
                 var url_frag = self.helpers.joinUrl([this.apiBaseUrl, id]);
                 return this.callApi("DELETE", this.makeUrl(url_frag));
-            };
-            Api.prototype.metadata = function (id) {
-                if (! _.isUndefined()) {
-                    return this.callApi(
-                        "OPTIONS", self.helpers.joinUrl([this.apiBaseUrl, id])
-                    );
-                }
-                return this.callApi("OPTIONS", this.makeUrl(this.apiBaseUrl));
             };
             /**
                 filter params in the format:
@@ -131,16 +126,6 @@
                     this.makeUrl(this.apiBaseUrl),
                     self.helpers.makeGetParam(params_url_frag)]);
                 return this.callApi("GET", url);
-
-            };
-            Api.prototype.search = function(url_frag, search_term){
-                var filter_param = {"q": search_term};
-                var params_url_frag = self.helpers.makeParams(filter_param);
-                var url = self.helpers.joinUrl([
-                    this.makeUrl("search"),
-                    url_frag,
-                    self.helpers.makeGetParam(params_url_frag)]);
-                return this.callApi("GET", url);
             };
 
             return {
@@ -149,41 +134,12 @@
                 },
                 setBaseUrl: function(url){
                     var api = new Api();
-                    api.setBaseUrl(url);
+                    if (url) {
+                        api.setBaseUrl(url);
+                    }
                     return api;
-                },
-                validators: (function(){
-                    var fxns = {
-                        args: function(req, passd){
-                            if(req!==passd){
-                                throw "Invalid function call";
-                            }
-                        },
-                        empty: function(obj){
-                            _.each(_.keys(obj), function(key){
-                                var val = obj[key];
-                                if(_.isUndefined(val)||val===""||_.isEmpty(obj)){
-                                    throw key+ ' is required';
-                                }
-                            });
-                        },
-                        required: function(what, obj_list, required_list){
-                            if(obj_list.length===0){
-                                throw what+" cannot be empty list";
-                            }
-                            _.each(obj_list, function(obj){
-                                _.each(required_list, function(req){
-                                    if(!_.has(obj, req)){
-                                        throw what+" : "+req+ ' is required';
-                                    }
-                                    fxns.empty(obj);
-                                });
-                            });
-                        }
-                    };
-                    return fxns;
-                })()
+                }
             };
         }];
     });
-})(angular, _);
+})(window.angular, window._);
