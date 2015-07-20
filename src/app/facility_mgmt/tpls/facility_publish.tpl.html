@@ -1,6 +1,15 @@
-
-<h4>Are you sure you want to publish the facility ?</h4>
-<div class="margin-t-20">
-<button class="login-btn login-btn-success" ng-click="publish()">Publish</button>
-<a class="login-btn login-btn-clear" onclick="window.history.back()">Cancel</a>
+<div class="content-header">
+   <div class="action-container content-header-extra">
+        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="facility_mgmt" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
+   </div>
+   <h2 class="content-title">
+       <span class="main-title"><i class="fa fa-newspaper-o"></i> Publish Facility</span>
+   </h2>
+</div>
+<div class="col-xs-8 content-card form-card col-xs-offset-2 margin-t-20">
+    <p class="lead text-center margin-t-10">Are you sure you want to publish the facility ?</p>
+    <div class="col-xs-12 text-center margin-t-20 margin-b-10">
+    <button class="login-btn login-btn-action margin-h-5" ng-click="publish()">Publish</button>
+    <a class="login-btn login-btn-default margin-h-5" onclick="window.history.back()">&nbsp;Cancel</a>
+    </div>
 </div>
