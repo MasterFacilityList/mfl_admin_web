@@ -112,7 +112,7 @@
                 </div>
             </div>
             <hr>
-            <table class=" margin-t-50 table">
+            <table class=" margin-t-50 table table-hover table-stripped">
                 <thead>
                     <tr>
                         <th>Field</th>
@@ -122,9 +122,9 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="change in facility_changes">
-                        <td>{{change}}</td>
-                        <td>{{facility[change]}}</td>
-                        <td>{{facility_update.facility_updates[change]}}</td>
+                        <td>{{change.human_field_name | titlecase}}</td>
+                        <td>{{facility[change.field_name] | boolFilter}}</td>
+                        <td>{{change.display_value}}</td>
                     </tr>
                 </tbody>
             </table>
