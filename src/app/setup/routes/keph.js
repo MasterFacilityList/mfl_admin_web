@@ -15,7 +15,8 @@
                         templateUrl: "setup/tpls/keph/keph.tpl.html"
                     }
                 },
-                userFeature: "is_national"
+                permission: "facilities.view_kephlevel",
+                userFeature: "is_staff,is_national"
             })
             .state("setup.kephs.keph_edit", {
                 url: "/edit/:keph_id",
@@ -25,7 +26,8 @@
                         templateUrl: "setup/tpls/keph/keph.edit.tpl.html"
                     }
                 },
-                userFeature: "is_national"
+                permission: "facilities.change_kephlevel",
+                userFeature: "is_staff,is_national"
             })
             .state("setup.kephs.keph_edit.delete", {
                 url: "/delete",
@@ -35,6 +37,7 @@
                         controller: "mfl.setup.controller.keph.edit"
                     }
                 },
+                permission: "facilities.delete_kephlevel",
                 userFeature: "is_staff,is_national"
             })
             .state("setup.kephs.keph_create", {
@@ -45,6 +48,7 @@
                         templateUrl: "setup/tpls/keph/keph.edit.tpl.html"
                     }
                 },
+                permission: "facilities.add_kephlevel",
                 userFeature: "is_staff,is_national"
             });
     }]);

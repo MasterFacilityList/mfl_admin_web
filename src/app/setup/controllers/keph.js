@@ -13,11 +13,10 @@
                 {
                     func : "ui-sref='setup.kephs.keph_create'" +
                            " requires-user-feature='is_staff'" +
-                           " requires-permission='common.add_keph'",
+                           " requires-permission='facilities.add_kephlevel'",
                     class: "action-btn action-btn-primary action-btn-md",
                     tipmsg: "New KEPH",
-                    icon: "fa-plus",
-                    wording: ""
+                    wording: "New KEPH "
                 }
             ];
         }]
