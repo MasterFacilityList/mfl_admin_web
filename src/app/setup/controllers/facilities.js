@@ -43,7 +43,7 @@
                            " requires-permission='facilities.delete_ownertype'",
                         class: "login-btn login-btn-danger",
                         tipmsg: "Delete Facility Owner Type",
-                        wording: "Delete Owner Type"
+                        wording: "Delete"
                     }
                 ];
                 adminApi.facilityOwnerTypes.get($stateParams.id).success(function(data){
@@ -131,7 +131,7 @@
                            " requires-permission='facilities.delete_owner'",
                         class: "login-btn login-btn-danger",
                         tipmsg: "Delete Facility Owner",
-                        wording: "Delete Facility Owner"
+                        wording: "Delete"
                     }
                 ];
                 adminApi.facilityOwners.get($stateParams.id).success(function(data){
@@ -240,7 +240,7 @@
                            " requires-permission='facilities.delete_jobtitle'",
                         class: "login-btn login-btn-danger",
                         tipmsg: "Delete Facility Job Title",
-                        wording: "Delete Facility Job Title"
+                        wording: "Delete"
                     }
                 ];
                 adminApi.facilityJobTitles.get($stateParams.id).success(function(data){
@@ -418,7 +418,7 @@
                            " requires-permission='facilities.delete_regulatingbody'",
                         class: "login-btn login-btn-danger",
 
-                        wording: "Delete Facility Regulatory Body",
+                        wording: "Delete",
                         tipmsg: "Delete Facility Regulatory Body"
                     }
                 ];
