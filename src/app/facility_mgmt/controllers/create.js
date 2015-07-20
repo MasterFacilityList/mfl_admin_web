@@ -97,6 +97,20 @@
                 {furthest: $scope.furthest,
                 facility_id : $scope.new_facility});
         };
-    }]);
+        $scope.printFacility = wrappers.printFacility;
+    }])
+
+    .controller("mfl.facility_mgmt.controllers.facility_print", ["$scope", "$state",
+        function ($scope, $state) {
+            $scope.test = "Print facility";
+            /*$scope.curr_state = function () {
+                var curr = $state.current.name;
+                curr = curr.split(".", 3).pop();
+                console.log(curr);
+            };
+            $scope.curr_state();*/
+            console.log($state);
+        }
+    ]);
 
 })(window.angular, window._);

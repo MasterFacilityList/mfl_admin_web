@@ -847,7 +847,10 @@
                         .success(function (data) {
                             spinner1 =false;
                             $scope.geo = data;
-                            $state.go("facility_mgmt");
+                            var submit_state = ($scope.create ? "facilities."+
+                                "facility_create.facility_cover_letter" :
+                                "facility_mgmt");
+                            $state.go(submit_state, {facility_id : $state.params.facility_id});
                         })
                         .error(function (error) {
                             spinner1 =false;
@@ -862,7 +865,8 @@
                         wrappers.facility_detail.update(
                             fac_id, {"coordinates" : data.id})
                             .success(function () {
-                                $state.go("facility_mgmt");
+                                $state.go("facilities.facility_create.facility_cover_letter",
+                                    {facility_id : $state.params.facility_id});
                             })
                             .error(function (error) {
                                 $log.error(error);
