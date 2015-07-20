@@ -6,7 +6,6 @@
     .controller("mfl.setup.controller.keph.list", ["$scope",
         function ($scope) {
             $scope.title = {
-                icon: "fa-map-marker",
                 name: "KEPH"
             };
 
@@ -16,8 +15,7 @@
                            " requires-user-feature='is_staff'" +
                            " requires-permission='common.add_keph'",
                     class: "action-btn action-btn-primary action-btn-md",
-
-                    tipmsg: "New keph",
+                    tipmsg: "New KEPH",
                     icon: "fa-plus",
                     wording: ""
                 }

@@ -16,7 +16,7 @@
             <tr class="animate-repeat" ng-repeat="keph in kephs">
                 <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td data-title="Name" class="pad-t-15">{{keph.name}}</td>
-                <td data-title="Ward" class="pad-t-15">{{keph.ward}}</td>
+                <td data-title="Ward" class="pad-t-15">{{keph.description}}</td>
                 <td class="text-right">
                     <a class="login-btn login-btn-action" ui-sref="setup.kephs.keph_edit({keph_id:keph.id})">
                         &nbsp; View

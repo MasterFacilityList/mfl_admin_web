@@ -4,20 +4,20 @@
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
-            .state("setup.keph", {
+            .state("setup.kephs", {
                 url: "/keph",
                 views: {
                     "body@setup" : {
                         templateUrl: "setup/tpls/dashboard/body.tpl.html"
                     },
-                    "main-content@setup.keph": {
+                    "main-content@setup.kephs": {
                         controller: "mfl.setup.controller.keph.list",
                         templateUrl: "setup/tpls/keph/keph.tpl.html"
                     }
                 },
                 userFeature: "is_national"
             })
-            .state("setup.keph.keph_edit", {
+            .state("setup.kephs.keph_edit", {
                 url: "/edit/:keph_id",
                 views: {
                     "main-content@setup.keph": {
@@ -27,7 +27,7 @@
                 },
                 userFeature: "is_national"
             })
-            .state("setup.keph.keph_edit.delete", {
+            .state("setup.kephs.keph_edit.delete", {
                 url: "/delete",
                 views: {
                     "delete@setup.keph.keph_edit": {
@@ -37,7 +37,7 @@
                 },
                 userFeature: "is_staff,is_national"
             })
-            .state("setup.keph.keph_create", {
+            .state("setup.kephs.keph_create", {
                 url: "/create",
                 views: {
                     "main-content@setup.keph": {
