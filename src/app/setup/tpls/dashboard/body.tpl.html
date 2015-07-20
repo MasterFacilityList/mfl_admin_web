@@ -21,6 +21,9 @@
               </li>
           </ul>
         </li>
+        <li ui-sref-active="active" requires-permission="facilities.view_kephlevel">
+            <a ui-sref="setup.kephs">KEPH Levels</a>
+        </li>
         <li ng-model="collapsed.two">
             <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.two=!collapsed.two">Community Units
                 <span  ng-show = "collapsed.two === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
