@@ -41,6 +41,36 @@
                 }
             },
             permission: "facilities.view_facility,facilities.add_facilityregulationstatus"
+        })
+
+        .state("facilities_regulation.regulate.basic", {
+            url: "basic/",
+            views: {
+                "form-view@facilities_regulation.regulate" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve.basic.tpl.html"
+                }
+            },
+            permission: "facilities.view_facility,facilities.add_facilityregulationstatus"
+        })
+
+        .state("facilities_regulation.regulate.services", {
+            url: "services/",
+            views: {
+                "form-view@facilities_regulation.regulate" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve.services.tpl.html"
+                }
+            },
+            permission: "facilities.view_facility,facilities.add_facilityregulationstatus"
+        })
+
+        .state("facilities_regulation.regulate.units", {
+            url: "units/",
+            views: {
+                "form-view@facilities_regulation.regulate" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve.units.tpl.html"
+                }
+            },
+            permission: "facilities.view_facility,facilities.add_facilityregulationstatus"
         });
     }]);
 
