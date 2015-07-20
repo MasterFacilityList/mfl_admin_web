@@ -9,14 +9,14 @@
         <thead class="cf">
             <th class="col-xs-1">#</th>
             <th sil-grid-sort field='name'>Name</th>
-            <th sil-grid-sort field='ward'>Description</th>
+            <th sil-grid-sort field='description'>Description</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="keph in kephs">
                 <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td data-title="Name" class="pad-t-15">{{keph.name}}</td>
-                <td data-title="Ward" class="pad-t-15">{{keph.description}}</td>
+                <td data-title="Description" class="pad-t-15">{{keph.description}}</td>
                 <td class="text-right">
                     <a class="login-btn login-btn-action" ui-sref="setup.kephs.keph_edit({keph_id:keph.id})">
                         &nbsp; View
