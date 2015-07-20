@@ -7,7 +7,7 @@
     </div>
     <div class="col-sm-12 content-card form-card margin-t-20" requires-permission="facilities.add_facilityunit">
         <div class="col-sm-12">
-            <h4 class="fs-18 fw-600"> Add Facility Unit</h4>
+            <h4 class="fs-18 fw-600"> Add Facility Department</h4>
         </div>
         <form ng-submit="add()">
             <div class="group col-sm-5">
@@ -15,7 +15,7 @@
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
-                    Facility Unit Name
+                    Facility Department Name
                 </label>
             </div>
             <div class="group col-sm-5">
@@ -27,14 +27,14 @@
                 <span class="bar"></span>
             </div>
             <div class="col-sm-1 pull-right" style="padding: 0 20px;">
-                <button type="submit" class="login-btn login-btn-primary margin-t-10 pull-right" tooltip-placement="bottom" tooltip="Add Facility Unit">
+                <button type="submit" class="login-btn login-btn-primary margin-t-10 pull-right" tooltip-placement="bottom" tooltip="Add Facility Department">
                     <i class="fa fa-plus-circle"></i> Add
                 </button>
             </div>
         </form>
     </div>
     <div class="col-xs-12 alert alert-info margin-t-20" ng-if="fac_units.length === 0">
-        <i class="fa fa-info-circle"></i> No Facility Unit assigned to facility
+        <i class="fa fa-info-circle"></i> No Facility Department assigned to facility
     </div>
     <div  class="content-card col-xs-12 margin-t-20" ng-if="fac_units.length > 0">
         <div class="col-xs-12">
