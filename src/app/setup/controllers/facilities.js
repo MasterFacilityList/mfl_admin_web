@@ -19,9 +19,9 @@
                     func : "ui-sref='setup.facility_owner_types.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_ownertype'",
-                    class: "action-btn action-btn-primary action-btn-md",
+                    class: "login-btn login-btn-primary",
                     tipmsg: "Add Facility Owner Type",
-                    icon: "fa-plus"
+                    wording:"Add Facility Owner Type"
                 }
             ];
         }]
@@ -41,9 +41,9 @@
                         func : "ui-sref='setup.facility_owner_types.view.delete'" +
                                " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.delete_ownertype'",
-                        class: "action-btn action-btn-danger action-btn-md",
+                        class: "login-btn login-btn-danger",
                         tipmsg: "Delete Facility Owner Type",
-                        icon: "fa-trash"
+                        wording: "Delete Owner Type"
                     }
                 ];
                 adminApi.facilityOwnerTypes.get($stateParams.id).success(function(data){
@@ -107,9 +107,9 @@
                     func : "ui-sref='setup.facility_owners.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_owner'",
-                    class: "action-btn action-btn-primary action-btn-md",
+                    class: "login-btn login-btn-primary",
                     tipmsg: "Add Facility Owner",
-                    icon: "fa-plus"
+                    wording: "Add Facility Owner"
                 }
             ];
         }]
@@ -129,9 +129,9 @@
                         func : "ui-sref='setup.facility_owners.view.delete'" +
                                " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.delete_owner'",
-                        class: "action-btn action-btn-danger action-btn-md",
+                        class: "login-btn login-btn-danger",
                         tipmsg: "Delete Facility Owner",
-                        icon: "fa-trash"
+                        wording: "Delete Facility Owner"
                     }
                 ];
                 adminApi.facilityOwners.get($stateParams.id).success(function(data){
@@ -212,9 +212,9 @@
                     func : "ui-sref='setup.facility_job_titles.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_jobtitle'",
-                    class: "action-btn action-btn-primary action-btn-md",
+                    class: "login-btn login-btn-primary",
                     tipmsg: "Add Job Title",
-                    icon: "fa-plus"
+                    wording: "Add Job Title"
                 }
             ];
         }]
@@ -238,9 +238,9 @@
                         func : "ui-sref='setup.facility_job_titles.view.delete'" +
                                " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.delete_jobtitle'",
-                        class: "action-btn action-btn-danger action-btn-md",
+                        class: "login-btn login-btn-danger",
                         tipmsg: "Delete Facility Job Title",
-                        icon: "fa-trash"
+                        wording: "Delete Facility Job Title"
                     }
                 ];
                 adminApi.facilityJobTitles.get($stateParams.id).success(function(data){
@@ -302,9 +302,9 @@
                     func : "ui-sref='setup.facility_regulatory_bodies.create.basic'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_regulatingbody'",
-                    class: "action-btn action-btn-primary action-btn-md",
+                    class: "login-btn login-btn-primary",
                     tipmsg: "Add Regulatory Body",
-                    icon: "fa-plus"
+                    wording: "Add Regulatory Body"
                 }
             ];
         }]
@@ -416,10 +416,10 @@
                         "'setup.facility_regulatory_bodies.edit.delete'" +
                         " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.delete_regulatingbody'",
-                        class: "action-btn action-btn-danger action-btn-md",
+                        class: "login-btn login-btn-danger",
 
-                        tipmsg: "Delete Facility Regulatory Body",
-                        icon: "fa-trash"
+                        wording: "Delete Facility Regulatory Body",
+                        tipmsg: "Delete Facility Regulatory Body"
                     }
                 ];
                 adminApi.facilityRegulatoryBodies.get($stateParams.id).success(function(data){

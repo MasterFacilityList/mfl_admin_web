@@ -18,7 +18,9 @@
                 <td data-title="Abbreviation" class="pad-t-15">{{gs.abbreviation}}</td>
                 <td data-title="Description" class="pad-t-15">{{gs.description}}</td>
                 <td class="text-right">
-                    <a class="login-btn login-btn-action" ui-sref="setup.geocode_sources_list.geocode_sources_edit({geocode_source_id:gs.id})">
+                    <a class="login-btn login-btn-action"
+                    tooltip-placement="bottom" tooltip="View Geo Code Source"
+                    ui-sref="setup.geocode_sources_list.geocode_sources_edit({geocode_source_id:gs.id})">
                     &nbsp; View
                     </a>
                 </td>

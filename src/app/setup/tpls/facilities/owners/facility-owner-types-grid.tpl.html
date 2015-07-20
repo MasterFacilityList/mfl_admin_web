@@ -16,7 +16,7 @@
                 <td data-title="#">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td data-title="Name" class="pad-t-15">{{ownerType.name}}</td>
                 <td data-title="Actions" class="text-right">
-                    <a ui-sref="setup.facility_owner_types.view({id : ownerType.id})" class="login-btn login-btn-action">
+                    <a ui-sref="setup.facility_owner_types.view({id : ownerType.id})" class="login-btn login-btn-action"  tooltip-placement="bottom" tooltip="View Facility Owner Type">
                         &nbsp; View
                     </a>
                 </td>

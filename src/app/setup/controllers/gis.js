@@ -16,9 +16,9 @@
                 func : "ui-sref='setup.geocode_methods_list.geocode_methods_create'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.add_geocodemethod'",
-                class: "action-btn action-btn-primary action-btn-md",
+                class: "login-btn login-btn-primary",
                 tipmsg: "Add geocode method",
-                icon: "fa-plus"
+                wording: "Add Geocode Method"
             }
         ];
     }])
@@ -59,10 +59,9 @@
                         "geocode_method_id:geocode_method.id})'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.delete_geocodemethod'",
-                    class: "action-btn action-btn-danger action-btn-md",
-
-                    tipmsg: "Delete Geocode Method",
-                    icon: "fa-trash"
+                    class: "login-btn login-btn-danger",
+                    wording: "Delete Geocode Method",
+                    tipmsg: "Delete Geocode Method"
                 }
             ];
             adminApi.geocode_methods.get($scope.geocode_method_id)
@@ -125,10 +124,8 @@
                 func : "ui-sref='setup.geocode_sources_list.geocode_sources_create'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.add_geocodesource'",
-                class: "action-btn action-btn-primary action-btn-md",
-
-                tipmsg: "Add geocode sources",
-                icon: "fa-plus"
+                class: "login-btn login-btn-primary",
+                wording: "Add Geocode Sources"
             }
         ];
     }])
@@ -170,10 +167,9 @@
                         "geocode_source_id:geocode_source.id})'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.delete_geocodesource'",
-                    class: "action-btn action-btn-danger action-btn-md",
-
-                    tipmsg: "Delete Geocode Source",
-                    icon: "fa-trash"
+                    class: "login-btn login-btn-danger",
+                    wording: "Delete Geocode Source",
+                    tipmsg: "Delete Geocode Source"
                 }
             ];
             adminApi.geocode_sources.get($scope.geocode_source_id)
