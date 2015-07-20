@@ -43,7 +43,7 @@
                            " requires-permission='facilities.delete_ownertype'",
                         class: "login-btn login-btn-danger",
                         tipmsg: "Delete Facility Owner Type",
-                        wording: "Delete Owner Type"
+                        wording: "Delete"
                     }
                 ];
                 adminApi.facilityOwnerTypes.get($stateParams.id).success(function(data){
