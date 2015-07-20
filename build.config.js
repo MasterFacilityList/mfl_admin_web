@@ -49,9 +49,7 @@ module.exports = {
     test_files: {
         js: [
             "vendor/angular-mocks/angular-mocks.js",
-            "build/templates-common.js",
-            "node_modules/bardjs/dist/bard.js",
-            "node_modules/sinon/lib/sinon.js"
+            "build/templates-common.js"
         ]
     },
 
