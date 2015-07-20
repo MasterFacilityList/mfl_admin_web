@@ -49,7 +49,8 @@
                 "form-view@facilities_regulation.regulate" : {
                     templateUrl: "facility_mgmt/tpls/facility_approve.basic.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.view_facility,facilities.add_facilityregulationstatus"
         })
 
         .state("facilities_regulation.regulate.services", {
@@ -58,7 +59,8 @@
                 "form-view@facilities_regulation.regulate" : {
                     templateUrl: "facility_mgmt/tpls/facility_approve.services.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.view_facility,facilities.add_facilityregulationstatus"
         })
 
         .state("facilities_regulation.regulate.units", {
@@ -67,7 +69,8 @@
                 "form-view@facilities_regulation.regulate" : {
                     templateUrl: "facility_mgmt/tpls/facility_approve.units.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.view_facility,facilities.add_facilityregulationstatus"
         });
     }]);
 
