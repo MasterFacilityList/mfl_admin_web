@@ -129,6 +129,7 @@
             };
 
             return {
+                apiHelpers: self.helpers,
                 getApi: function () {
                     return new Api();
                 },
