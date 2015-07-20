@@ -1,4 +1,4 @@
-(function(angular, _){
+(function(angular){
     "use strict";
 
     angular.module("mfl.facility_mgmt.controllers.approve", [
@@ -84,7 +84,7 @@
                         $scope.facility_update.facility_updates = JSON.parse(
                             $scope.facility_update.facility_updates
                         );
-                        $scope.facility_changes = _.keys(data.facility_updates);
+                        $scope.facility_changes = data.facility_updated_json;
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -128,4 +128,4 @@
         }]
     );
 
-})(window.angular, window._);
+})(window.angular);
