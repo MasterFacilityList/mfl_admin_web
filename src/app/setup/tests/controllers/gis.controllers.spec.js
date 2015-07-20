@@ -186,6 +186,23 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
+            it("should cancel delete of geocode_method", function () {
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {geocode_method_id: 1}
+                };
+                spyOn(state, "go");
+                ctrl("geocode_methods_delete", data);
+                data.$scope.cancel();
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_methods/1/")
+                    .respond(200, {});
+                expect(state.go).toHaveBeenCalled();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
 
             it("should show errors on delete a geocode method", function () {
                 spyOn(log, "error");
@@ -380,7 +397,23 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
+            it("should cancel delete of geocode_source", function () {
 
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {geocode_source_id: 1}
+                };
+                spyOn(state, "go");
+                ctrl("geocode_sources_delete", data);
+                data.$scope.cancel();
+                httpBackend
+                    .expectGET(server_url+"api/gis/geo_code_sources/1/")
+                    .respond(200, {});
+                expect(state.go).toHaveBeenCalled();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
             it("should show errors on delete or fetch a geocode source", function () {
                 spyOn(log, "error");
                 var data = {
