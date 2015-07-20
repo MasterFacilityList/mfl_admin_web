@@ -45,4 +45,4 @@
         };
     }]);
 
-})(angular);
+})(window.angular, window._);

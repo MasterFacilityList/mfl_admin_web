@@ -9,14 +9,16 @@
         <thead class="cf">
             <th class="col-xs-1">#</th>
             <th sil-grid-sort field='name'>Name</th>
+            <th>Description</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
-            <tr class="animate-repeat" ng-repeat="ownerType in facilityOwnerTypes">
-                <td data-title="#">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
-                <td data-title="Name" class="pad-t-15">{{ownerType.name}}</td>
-                <td data-title="Actions" class="text-right">
-                    <a ui-sref="setup.facility_owner_types.view({id : ownerType.id})" class="login-btn login-btn-action"  tooltip-placement="bottom" tooltip="View Facility Owner Type">
+            <tr class="animate-repeat" ng-repeat="keph in kephs">
+                <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
+                <td data-title="Name" class="pad-t-15">{{keph.name}}</td>
+                <td data-title="Description" class="pad-t-15">{{keph.description}}</td>
+                <td class="text-right">
+                    <a class="login-btn login-btn-action" ui-sref="setup.facility_kephs.keph_edit({keph_id:keph.id})">
                         &nbsp; View
                     </a>
                 </td>

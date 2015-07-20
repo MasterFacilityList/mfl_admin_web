@@ -16,7 +16,9 @@
                 <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td data-title="Name" class="pad-t-15">{{contact_type.name}}</td>
                 <td data-title="Actions" class="text-right">
-                    <a ui-sref="setup.contact_types.view({id : contact_type.id})" ui-sref-opts="{reload:true}" class="login-btn login-btn-action" >
+                    <a ui-sref="setup.contact_types.view({id : contact_type.id})"
+                    tooltip-placement="bottom" tooltip="View Contact Type"
+                    ui-sref-opts="{reload:true}" class="login-btn login-btn-action" >
                         &nbsp; View
                     </a>
                 </td>

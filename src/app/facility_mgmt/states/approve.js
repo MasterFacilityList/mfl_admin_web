@@ -60,7 +60,8 @@
                 "form-view@facilities_approve.approve" : {
                     templateUrl: "facility_mgmt/tpls/facility_approve.basic.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
         })
 
         .state("facilities_approve.approve.services", {
@@ -69,7 +70,8 @@
                 "form-view@facilities_approve.approve" : {
                     templateUrl: "facility_mgmt/tpls/facility_approve.services.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
         })
 
         .state("facilities_approve.approve.units", {
@@ -78,8 +80,9 @@
                 "form-view@facilities_approve.approve" : {
                     templateUrl: "facility_mgmt/tpls/facility_approve.units.tpl.html"
                 }
-            }
+            },
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
         });
     }]);
 
-})(angular);
+})(window.angular);

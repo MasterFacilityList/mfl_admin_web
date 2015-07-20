@@ -8,4 +8,4 @@
         "mfl.common.directives.statemodal",
         "mfl.common.directives.contentslidein"
     ]);
-})(angular);
+})(window.angular);

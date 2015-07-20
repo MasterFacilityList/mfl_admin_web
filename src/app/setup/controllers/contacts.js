@@ -14,9 +14,8 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.contacts.create'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    tipmsg: "Add Contact",
-                    icon: "fa-plus"
+                    class: "login-btn login-btn-primary",
+                    icon: "Add Contact"
                 }
             ];
         }]
@@ -31,15 +30,14 @@
             });
             if(!_.isUndefined($stateParams.id)){
                 $scope.title = {
-                    icon: "fa-edit",
+                    class: "login-btn login-btn-primary",
                     name: "Edit Contact"
                 };
                 $scope.action = [
                     {
                         func : "ui-sref=setup.contacts.edit.delete",
-                        class: "action-btn action-btn-danger action-btn-md",
-                        tipmsg: "Delete Contact",
-                        icon: "fa-trash"
+                        class: "login-btn login-btn-danger",
+                        name : "Delete Contact"
                     }
                 ];
                 adminApi.contacts.get($stateParams.id).success(function(data){
@@ -63,6 +61,7 @@
             else {
                 $scope.title = {
                     icon : "fa-plus-circle",
+                    class: "login-btn login-btn-primary",
                     name: "New Contact"
                 };
             }
@@ -105,9 +104,9 @@
                     func : "ui-sref='setup.contact_types.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='common.add_contacttype'",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    tipmsg: "Add Contact type",
-                    icon: "fa-plus"
+                    class: "login-btn login-btn-primary",
+                    tipmsg: "Add Contact Type",
+                    wording: "Add Contact Type"
                 }
             ];
         }]
@@ -119,7 +118,7 @@
             if(!_.isUndefined($stateParams.id) &&
                 $stateParams.id !== "create"){
                 $scope.title = {
-                    icon: "fa-edit",
+                    class: "login-btn login-btn-primary",
                     name: "Edit Contact Type"
                 };
                 $scope.action = [
@@ -127,10 +126,10 @@
                         func : "ui-sref='setup.contact_types.view.delete'" +
                                " requires-user-feature='is_staff'" +
                                " requires-permission='common.delete_contacttype'",
-                        class: "action-btn action-btn-danger action-btn-md",
-                        tipmsg:"Delete",
+                        class: "login-btn login-btn-danger",
+                        wording:"Delete",
+                        tipmsg:"Delete Contact Type"
 
-                        icon: "fa-trash"
                     }
                 ];
                 $scope.del_popover = {
@@ -182,4 +181,4 @@
         }]
     );
 
-})(angular, _);
+})(window.angular, window._);

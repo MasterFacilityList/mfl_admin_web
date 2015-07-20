@@ -57,4 +57,4 @@
                 requireUser: false
             });
     }]);
-})(angular);
+})(window.angular);

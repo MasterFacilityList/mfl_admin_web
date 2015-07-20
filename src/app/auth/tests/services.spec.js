@@ -471,4 +471,4 @@
             httpBackend.verifyNoOutstandingExpectation();
         });
     });
-})(angular);
+})(window.angular);

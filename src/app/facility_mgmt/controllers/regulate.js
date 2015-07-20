@@ -63,4 +63,4 @@
         }]
     );
 
-})(angular);
+})(window.angular);

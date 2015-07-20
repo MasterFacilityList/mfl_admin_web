@@ -1,6 +1,70 @@
-
-<h4>Are you sure you want to publish the facility ?</h4>
-<div class="margin-t-20">
-<button class="login-btn login-btn-success" ng-click="publish()">Publish</button>
-<a class="login-btn login-btn-clear" onclick="window.history.back()">Cancel</a>
+<div class="content-header">
+   <div class="action-container content-header-extra">
+        <a tooltip="back" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="facility_mgmt" ui-sref-opts="{reload:true}"><i class="fa fa-arrow-left"></i></a>
+   </div>
+   <h2 class="content-title">
+       <span class="main-title"><i class="fa fa-newspaper-o"></i> Publish Facility</span>
+   </h2>
+</div>
+<!-- Facility Details -->
+<div class="col-xs-12 margin-t-20">
+    <div class="col-xs-12 content-card">
+        <h4 class="fw-400"><a ui-sref="facilities.facility_edit">{{facility.code}} | {{facility.name | uppercase}}</a></h4>
+        <div class="row">
+            <div class="col-xs-12 margin-b-10 fs-16">
+                <span>Facility Type: <strong>{{facility.facility_type_name}}</strong></span>
+            </div>
+            <div class="col-sm-6">
+                <span>Regulation Status:
+                    <span class="label label-warning" style="font-size: 13px">
+                        {{facility.regulatory_status_name}}
+                    </span>
+                </span>
+            </div>
+            <div class="col-sm-6"><span class="pull-right">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
+       </div>
+    </div>
+    <button class="login-btn login-btn-primary" ng-click="viewFacility = !viewFacility">
+        &nbsp;View {{viewFacility ? 'Less' : 'More'}} Facility Details <i class="fa {{viewFacility ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+    </button>
+    <div class="row" content-slide-in="viewFacility" slide-show-duration="1000">
+        <div class="col-xs-12">
+            <ul class="nav nav-tabs col-xs-12 margin-t-20">
+                <li ui-sref-active="active">
+                    <a ui-sref=".basic">
+                        <span class="fw-900 ">
+                            <i class="fa fa-building-o"></i> Facility Basic Details
+                        </span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".services">
+                        <span class="fw-900">
+                            <i class="fa fa-exchange"></i> Facility Health Services
+                        </span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".units">
+                        <span class="fw-900 ">
+                            <i class="fa fa-hospital-o"></i> Facility Departments
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content margin-t-20">
+                <div class="pad-t-20" ui-view="form-view"></div>
+            </div><!-- /tab-content -->
+        </div>
+    </div>
+</div>
+<!-- End of facility details -->
+<div class="col-xs-12">
+    <div class="col-xs-12 content-card form-card margin-t-20">
+        <p class="text-left margin-t-10 fs-16">Are you sure you want to publish {{facility.name }} ?</p>
+        <div class="col-xs-12 text-left margin-t-20 margin-b-10">
+        <button class="login-btn login-btn-action margin-l--10" ng-click="publish()">Publish</button>
+        <a class="login-btn login-btn-default margin-l-5" onclick="window.history.back()">&nbsp;Cancel</a>
+        </div>
+    </div>
 </div>

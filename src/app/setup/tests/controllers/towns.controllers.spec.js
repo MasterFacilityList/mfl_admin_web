@@ -1,4 +1,4 @@
-(function(describe){
+(function(_){
     "use strict";
     describe("towns controllers test suite", function(){
         var createController, $scope, $stateParams, $httpBackend, $state, adminApi;
@@ -108,4 +108,4 @@
         });
 
     });
-})(describe);
+})(window._);

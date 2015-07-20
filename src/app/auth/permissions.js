@@ -7,7 +7,8 @@
 
     .service("mfl.auth.permissions.checker",
         ["mfl.auth.services.login", function (loginService) {
-            var LIST_SPLITTER = ",";
+            var AND_SPLITTER = ",";
+            var OR_SPLITTER = "|";
 
             var checkList = function (lst, check_fxn) {
                 var items, user;
@@ -20,15 +21,32 @@
                     return false;
                 }
 
-                items = lst.split(LIST_SPLITTER);
+                var use_or = false;
+                items = [lst];
+
+                if (lst.indexOf(AND_SPLITTER) !== -1 && lst.indexOf(OR_SPLITTER) !== -1) {
+                    throw new Error("use one type of permission splitter ("+lst+")");
+                }
+
+                if (lst.indexOf(AND_SPLITTER) !== -1) {
+                    items = lst.split(AND_SPLITTER);
+                } else if (lst.indexOf(OR_SPLITTER) !== -1) {
+                    items = lst.split(OR_SPLITTER);
+                    use_or = true;
+                }
+
                 user = loginService.getUser();
 
                 for (var i = 0; i < items.length; i++) {
-                    if (! check_fxn(items[i], user)) {
+                    var check = check_fxn(items[i], user);
+                    if (check && use_or) {
+                        return true;
+                    }
+                    if (! (check || use_or)) {
                         return false;
                     }
                 }
-                return true;
+                return use_or ? false : true;
             };
 
             var hasPermission =  function (permission) {
@@ -39,7 +57,7 @@
 
             var hasUserFeature = function (feature) {
                 return checkList(feature, function (f, u) {
-                    return (u[f]) ? true : false;
+                    return !!u[f];
                 });
             };
 
@@ -87,4 +105,4 @@
         }
     ]);
 
-})(angular, _);
+})(window.angular, window._);

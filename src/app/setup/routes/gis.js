@@ -42,11 +42,11 @@
             permission: "mfl_gis.view_geocodemethod",
             userFeature: "is_national"
         })
-        .state("setup.geocode_methods_list.geocode_methods_delete", {
-            url: "/delete/:geocode_method_id",
+        .state("setup.geocode_methods_list.geocode_methods_edit.geocode_methods_delete", {
+            url: "/delete/",
             views: {
-                "main-content@setup.geocode_methods_list": {
-                    templateUrl: "setup/tpls/gis/methods.delete.tpl.html",
+                "delete@setup.geocode_methods_list.geocode_methods_edit": {
+                    templateUrl: "common/tpls/delete.tpl.html",
                     controller: "mfl.setup.gis.controllers.geocode_methods_delete"
                 }
             },
@@ -90,11 +90,11 @@
             permission: "mfl_gis.view_geocodesource",
             userFeature: "is_national"
         })
-        .state("setup.geocode_sources_list.geocode_sources_delete", {
-            url: "/geocode_sources/delete/:geocode_source_id",
+        .state("setup.geocode_sources_list.geocode_sources_edit.geocode_sources_delete", {
+            url: "/delete/",
             views: {
-                "main-content@setup.geocode_sources_list": {
-                    templateUrl: "setup/tpls/gis/sources.delete.tpl.html",
+                "delete@setup.geocode_sources_list.geocode_sources_edit": {
+                    templateUrl: "common/tpls/delete.tpl.html",
                     controller: "mfl.setup.gis.controllers.geocode_sources_delete"
                 }
             },
@@ -103,4 +103,4 @@
         });
     }]);
 
-})(angular);
+})(window.angular);

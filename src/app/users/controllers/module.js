@@ -7,4 +7,4 @@
         "mfl.users.controllers.groups"
     ]);
 
-})(angular);
+})(window.angular);

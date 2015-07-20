@@ -16,7 +16,9 @@
                 <td data-title="Name" class="pad-t-15">{{gm.name}}</td>
                 <td data-title="Description" class="pad-t-15">{{gm.description}}</td>
                 <td class="text-right">
-                    <a class="login-btn login-btn-action" ui-sref="setup.geocode_methods_list.geocode_methods_edit({geocode_method_id:gm.id})">
+                    <a class="login-btn login-btn-action"
+                     tooltip-placement="bottom" tooltip="View Geo Code Method"
+                    ui-sref="setup.geocode_methods_list.geocode_methods_edit({geocode_method_id:gm.id})">
                     &nbsp; View
                     </a>
                 </td>

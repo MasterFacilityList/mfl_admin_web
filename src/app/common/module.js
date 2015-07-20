@@ -12,4 +12,4 @@
         "mfl.common.constants"
     ]);
 
-})(angular);
+})(window.angular);

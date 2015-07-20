@@ -9,4 +9,4 @@
         "mfl.common.services"
     ]);
 
-})(angular);
+})(window.angular);

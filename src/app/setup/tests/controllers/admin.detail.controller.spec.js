@@ -1,4 +1,5 @@
 (function () {
+    "use strict";
     describe("Testing admin units details views", function () {
         var controller, data, root, scope, SERVER_URL, httpBackend, state;
         var formService;

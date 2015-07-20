@@ -11,4 +11,4 @@
         "mfl.facility_mgmt.controllers.approve"
     ]);
 
-})(angular);
+})(window.angular);

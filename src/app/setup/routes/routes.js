@@ -4,6 +4,7 @@
         "mfl.setup.routes.constituencies",
         "mfl.setup.routes.counties",
         "mfl.setup.routes.dashboard",
+        "mfl.setup.routes.keph",
         "mfl.setup.routes.towns",
         "mfl.setup.routes.wards",
         "mfl.setup.routes.contacts",
@@ -11,4 +12,4 @@
         "mfl.setup.routes.chu",
         "mfl.setup.routes.gis"
     ]);
-})(angular);
+})(window.angular);

@@ -16,9 +16,9 @@
                 func : "ui-sref='setup.geocode_methods_list.geocode_methods_create'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.add_geocodemethod'",
-                class: "action-btn action-btn-primary action-btn-md",
+                class: "login-btn login-btn-primary",
                 tipmsg: "Add geocode method",
-                icon: "fa-plus"
+                wording: "Add Geocode Method"
             }
         ];
     }])
@@ -55,14 +55,14 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.geocode_methods_list.geocode_methods_delete({"+
+                    func : "ui-sref='setup.geocode_methods_list.geocode_methods_edit" +
+                    ".geocode_methods_delete({"+
                         "geocode_method_id:geocode_method.id})'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.delete_geocodemethod'",
-                    class: "action-btn action-btn-danger action-btn-md",
-
-                    tipmsg: "Delete Geocode Method",
-                    icon: "fa-trash"
+                    class: "login-btn login-btn-danger",
+                    wording: "Delete",
+                    tipmsg: "Delete Geocode Method"
                 }
             ];
             adminApi.geocode_methods.get($scope.geocode_method_id)
@@ -98,6 +98,7 @@
             adminApi.geocode_methods.get($scope.geocode_method_id)
             .success(function (data) {
                 $scope.geocode_method = data;
+                $scope.deleteText = $scope.geocode_method.name;
             })
             .error(function (data) {
                 $log.error(data);
@@ -112,6 +113,9 @@
                     $log.error(data);
                 });
             };
+            $scope.cancel = function () {
+                $state.go("setup.geocode_methods_list.geocode_methods_edit");
+            };
         }]
     )
 
@@ -125,10 +129,8 @@
                 func : "ui-sref='setup.geocode_sources_list.geocode_sources_create'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.add_geocodesource'",
-                class: "action-btn action-btn-primary action-btn-md",
-
-                tipmsg: "Add geocode sources",
-                icon: "fa-plus"
+                class: "login-btn login-btn-primary",
+                wording: "Add Geocode Sources"
             }
         ];
     }])
@@ -166,14 +168,14 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.geocode_sources_list.geocode_sources_delete({"+
+                    func : "ui-sref='setup.geocode_sources_list.geocode_sources_edit." +
+                    "geocode_sources_delete({"+
                         "geocode_source_id:geocode_source.id})'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.delete_geocodesource'",
-                    class: "action-btn action-btn-danger action-btn-md",
-
-                    tipmsg: "Delete Geocode Source",
-                    icon: "fa-trash"
+                    class: "login-btn login-btn-danger",
+                    wording: "Delete",
+                    tipmsg: "Delete Geocode Source"
                 }
             ];
             adminApi.geocode_sources.get($scope.geocode_source_id)
@@ -211,11 +213,11 @@
             adminApi.geocode_sources.get($scope.geocode_source_id)
             .success(function (data) {
                 $scope.geocode_source = data;
+                $scope.deleteText = $scope.geocode_source.name;
             })
             .error(function (data) {
                 $log.error(data);
             });
-
             $scope.remove = function () {
                 adminApi.geocode_sources.remove($scope.geocode_source_id)
                 .success(function () {
@@ -225,8 +227,10 @@
                     $log.error(data);
                 });
             };
+            $scope.cancel = function () {
+                $state.go("setup.geocode_sources_list.geocode_sources_edit");
+            };
         }]
-    )
-    ;
+    );
 
-})(angular);
+})(window.angular);

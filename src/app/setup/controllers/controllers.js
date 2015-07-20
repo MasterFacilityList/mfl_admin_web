@@ -3,6 +3,7 @@
     angular.module("mfl.setup.controllers",[
         "mfl.setup.county.controllers",
         "mfl.setup.constituency.controllers",
+        "mfl.setup.keph.controllers",
         "mfl.setup.ward.controllers",
         "mfl.setup.contacts.controllers",
         "mfl.setup.town.controllers",
@@ -18,4 +19,4 @@
             };
             $scope.collapsed = curStateService.whichTab();
         }]);
-})(angular);
+})(window.angular);

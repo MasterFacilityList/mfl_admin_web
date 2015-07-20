@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
 
     "use strict";
 
@@ -197,9 +197,9 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_create.basic",[
-        "$scope", "$state","mfl.service_mgmt.wrappers",
+        "$scope", "$state", "$log", "mfl.service_mgmt.wrappers",
         "mfl.common.forms.changes",
-        function ($scope, $state, wrappers, formChanges) {
+        function ($scope, $state, $log, wrappers, formChanges) {
             $scope.$parent.tab = 1;
             $scope.nextState();
             if(!_.isEmpty($state.params.service_id)) {
@@ -245,4 +245,4 @@
         }
     ]);
 
-})(angular);
+})(window.angular, window._);

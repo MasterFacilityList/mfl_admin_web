@@ -58,11 +58,9 @@
                     func : "ui-sref='setup.towns.town_edit.delete'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='common.change_town'",
-                    class: "action-btn action-btn-danger action-btn-md",
-
+                    class: "login-btn login-btn-danger",
                     tipmsg: "Delete Town",
-                    icon: "fa-trash",
-                    wording: ""
+                    wording: "Delete"
                 }
             ];
             $scope.town_id = $stateParams.town_id;
@@ -98,4 +96,4 @@
         }]
     );
 
-})(angular);
+})(window.angular);
