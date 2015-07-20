@@ -4,35 +4,35 @@
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
-            .state("setup.kephs", {
-                url: "/keph",
+            .state("setup.facility_kephs", {
+                url: "/facility_kephs",
                 views: {
                     "body@setup" : {
                         templateUrl: "setup/tpls/dashboard/body.tpl.html"
                     },
-                    "main-content@setup.kephs": {
+                    "main-content@setup.facility_kephs": {
                         controller: "mfl.setup.controller.keph.list",
-                        templateUrl: "setup/tpls/keph/keph.tpl.html"
+                        templateUrl: "setup/tpls/facilities/keph/keph.tpl.html"
                     }
                 },
                 permission: "facilities.view_kephlevel",
                 userFeature: "is_staff,is_national"
             })
-            .state("setup.kephs.keph_edit", {
+            .state("setup.facility_kephs.keph_edit", {
                 url: "/edit/:keph_id",
                 views: {
-                    "main-content@setup.keph": {
+                    "main-content@setup.facility_kephs": {
                         controller: "mfl.setup.controller.keph.edit",
-                        templateUrl: "setup/tpls/keph/keph.edit.tpl.html"
+                        templateUrl: "setup/tpls/facilities/keph/keph.edit.tpl.html"
                     }
                 },
                 permission: "facilities.change_kephlevel",
                 userFeature: "is_staff,is_national"
             })
-            .state("setup.kephs.keph_edit.delete", {
+            .state("setup.facility_kephs.keph_edit.delete", {
                 url: "/delete",
                 views: {
-                    "delete@setup.keph.keph_edit": {
+                    "delete@setup.facility_kephs.keph_edit": {
                         templateUrl: "common/tpls/delete.tpl.html",
                         controller: "mfl.setup.controller.keph.edit"
                     }
@@ -40,12 +40,12 @@
                 permission: "facilities.delete_kephlevel",
                 userFeature: "is_staff,is_national"
             })
-            .state("setup.kephs.keph_create", {
+            .state("setup.facility_kephs.keph_create", {
                 url: "/create",
                 views: {
-                    "main-content@setup.keph": {
+                    "main-content@setup.kephs": {
                         controller: "mfl.setup.controller.keph.create",
-                        templateUrl: "setup/tpls/keph/keph.edit.tpl.html"
+                        templateUrl: "setup/tpls/facilities/keph/keph.edit.tpl.html"
                     }
                 },
                 permission: "facilities.add_kephlevel",

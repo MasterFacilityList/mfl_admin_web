@@ -21,9 +21,6 @@
               </li>
           </ul>
         </li>
-        <li ui-sref-active="active" requires-permission="facilities.view_kephlevel">
-            <a ui-sref="setup.kephs">KEPH Levels</a>
-        </li>
         <li ng-model="collapsed.two">
             <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.two=!collapsed.two">Community Units
                 <span  ng-show = "collapsed.two === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
@@ -58,11 +55,11 @@
                 <span  ng-show = "collapsed.four === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
             </label>
           <ul class="nav nav-list tree" content-slide-in="collapsed.four" slide-show-duration="1000">
-              <li ui-sref-active="active">
-                <a ui-sref="setup.facility_owners" requires-permission="facilities.view_owner">Facility Owners</a>
+              <li ui-sref-active="active" requires-permission="facilities.view_owner">
+                <a ui-sref="setup.facility_owners">Facility Owners</a>
               </li>
-              <li ui-sref-active="active">
-                <a ui-sref="setup.facility_owner_types" requires-permission="facilities.view_ownertype">Facility Owner Types</a>
+              <li ui-sref-active="active" requires-permission="facilities.view_ownertype">
+                <a ui-sref="setup.facility_owner_types">Facility Owner Types</a>
               </li>
               <li ui-sref-active="active" requires-permission="facilities.view_jobtitle">
                 <a ui-sref="setup.facility_job_titles">Job Titles</a>
@@ -71,6 +68,9 @@
                 <a ui-sref="setup.facility_regulatory_bodies">
                 Regulatory Bodies
                 </a>
+              </li>
+              <li ui-sref-active="active" requires-permission="facilities.view_kephlevel">
+                  <a ui-sref="setup.facility_kephs">KEPH Levels</a>
               </li>
           </ul>
         </li>
@@ -83,8 +83,8 @@
             <li ui-sref-active="active" requires-permission="mfl_gis.view_geocodemethod">
               <a ui-sref="setup.geocode_methods_list">Geo Code Methods</a>
             </li>
-            <li ui-sref-active="active">
-              <a ui-sref="setup.geocode_sources_list" requires-permission="mfl_gis.view_geocodesource">Geo Code Sources</a>
+            <li ui-sref-active="active" requires-permission="mfl_gis.view_geocodesource">
+              <a ui-sref="setup.geocode_sources_list">Geo Code Sources</a>
             </li>
         </ul>
       </li>

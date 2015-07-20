@@ -9,7 +9,7 @@
         <thead class="cf">
             <th class="col-xs-1">#</th>
             <th sil-grid-sort field='name'>Name</th>
-            <th sil-grid-sort field='description'>Description</th>
+            <th>Description</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
@@ -18,7 +18,7 @@
                 <td data-title="Name" class="pad-t-15">{{keph.name}}</td>
                 <td data-title="Description" class="pad-t-15">{{keph.description}}</td>
                 <td class="text-right">
-                    <a class="login-btn login-btn-action" ui-sref="setup.kephs.keph_edit({keph_id:keph.id})">
+                    <a class="login-btn login-btn-action" ui-sref="setup.facility_kephs.keph_edit({keph_id:keph.id})">
                         &nbsp; View
                     </a>
                 </td>

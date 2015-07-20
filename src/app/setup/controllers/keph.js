@@ -6,11 +6,11 @@
     .controller("mfl.setup.controller.keph.list", ["$scope",
         function ($scope) {
             $scope.title = {
-                name: "KEPH"
+                name: "KEPH Levels"
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.kephs.keph_create'" +
+                    func : "ui-sref='setup.facility_kephs.keph_create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_kephlevel'",
                     class: "login-btn login-btn-primary",
@@ -31,7 +31,7 @@
             };
 
             $scope.save = function () {
-                adminApi.kephs.create($scope.town)
+                adminApi.kephs.create($scope.keph)
                 .success(function (data) {
                     $state.go("setup.kephs.keph_edit", {"keph_id": data.id});
                 })
@@ -51,38 +51,39 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.kephs.keph_edit.delete'" +
+                    func : "ui-sref='setup.facility_kephs.keph_edit.delete'" +
                            " requires-user-feature='is_staff,is_national'" +
                            " requires-permission='facilities.change_kephlevel'",
-                    class: "action-btn action-btn-danger action-btn-md",
+                    class: "login-btn login-btn-danger",
+                    tipmsg: "Delete KEPH level",
                     wording: "Delete"
                 }
             ];
-            $scope.keph= $stateParams.keph_id;
+            $scope.keph_id= $stateParams.keph_id;
 
-            adminApi.kephs.get($scope.town_id)
+            adminApi.kephs.get($scope.keph_id)
             .success(function (data) {
-                $scope.town = data;
-                $scope.deleteText = $scope.town.name;
+                $scope.keph = data;
+                $scope.deleteText = $scope.keph.name;
             })
             .error(function (data) {
                 $log.error(data);
             });
             $scope.remove = function () {
-                adminApi.towns.remove($stateParams.town_id).success(function(){
-                    $state.go("setup.towns",{},{reload:true});
+                adminApi.kephs.remove($stateParams.keph_id).success(function(){
+                    $state.go("setup.facility_kephs",{},{reload:true});
                 }).error(function(error){
                     $scope.alert = error.error;
-                    $state.go("setup.kephs",{},{reload:true});
+                    $state.go("setup.facility_kephs",{},{reload:true});
                 });
             };
             $scope.cancel = function () {
-                $state.go("setup.kephs",{},{reload:true});
+                $state.go("setup.facility_kephs",{},{reload:true});
             };
             $scope.save = function () {
-                adminApi.towns.update($scope.town_id, {"name": $scope.keph.name})
+                adminApi.kephs.update($scope.keph_id, {"name": $scope.keph.name})
                 .success(function () {
-                    $state.go("setup.kephs");
+                    $state.go("setup.facility_kephs");
                 })
                 .error(function (data) {
                     $log.error(data);

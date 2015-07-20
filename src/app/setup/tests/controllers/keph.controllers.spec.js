@@ -36,5 +36,76 @@
             var ctrl = createController("mfl.setup.controller.keph.list", {});
             expect(ctrl).toBeDefined();
         });
+
+        it("should create a new KEPH level", function () {
+            $httpBackend
+                .expectPOST(SERVER_URL+"api/facilities/keph/")
+                .respond(201);
+
+            createController("mfl.setup.controller.keph.create");
+
+            $scope.save();
+            $httpBackend.flush();
+        });
+
+        it("should catch errors on create a new KEPH level", function () {
+            $httpBackend
+                .expectPOST(SERVER_URL+"api/facilities/keph/")
+                .respond(500);
+
+            createController("mfl.setup.controller.keph.create");
+
+            $scope.save();
+            $httpBackend.flush();
+        });
+
+        it("should delete a KEPH level", function () {
+            $httpBackend
+                .expectGET(SERVER_URL+"api/facilities/keph/4/")
+                .respond(200, {"name": ""});
+            $httpBackend
+                .expectDELETE(SERVER_URL+"api/facilities/keph/4/")
+                .respond(200, {"name": ""});
+            createController("mfl.setup.controller.keph.edit", {"$stateParams": {"keph_id": 4}});
+            $scope.remove();
+            $httpBackend.flush();
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+
+            expect($scope.keph).toEqual({"name": ""});
+
+            $httpBackend
+                .expectPATCH(SERVER_URL+"api/facilities/keph/4/")
+                .respond(200);
+
+            $scope.save();
+            $httpBackend.flush();
+        });
+
+        it("should handle errors on delete a KEPH level", function () {
+            $httpBackend
+                .expectGET(SERVER_URL+"api/facilities/keph/4/")
+                .respond(500, {"name": ""});
+            $httpBackend
+                .expectDELETE(SERVER_URL+"api/facilities/keph/4/")
+                .respond(500, {"name": ""});
+            spyOn($state, "go");
+            createController("mfl.setup.controller.keph.edit", {"$stateParams": {"keph_id": 4}});
+            $scope.remove();
+            $scope.cancel();
+            $httpBackend.flush();
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+            $scope.keph = {"name": ""};
+            $httpBackend
+                .expectPATCH(SERVER_URL+"api/facilities/keph/4/")
+                .respond(500);
+            expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+            expect($state.go).toHaveBeenCalledWith("setup.facility_kephs", { },
+                                                   { reload : true });
+            $scope.save();
+            $httpBackend.flush();
+        });
+
     });
 })(window._);
