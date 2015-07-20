@@ -36,7 +36,7 @@
                     &nbsp;Approve
                 </a>
 
-                <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish({facility_id: fac.id})"
+                <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac.id})"
                     class="login-btn login-btn-action" ng-if="!fac.is_published">
                     &nbsp;Publish
                 </a>
@@ -47,7 +47,7 @@
                 </a>
 
                 <a requires-permission="facilities.view_facility,facilities.add_facilityregulationstatus"
-                    ui-sref="facilities_regulation.regulate({facility_id: fac.id})" class="login-btn login-btn-action" >
+                    ui-sref="facilities_regulation.regulate.basic({facility_id: fac.id})" class="login-btn login-btn-action" >
                     &nbsp;Regulate
                 </a>
             </td>

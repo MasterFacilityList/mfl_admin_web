@@ -31,6 +31,33 @@
             },
             userFeature: "is_national",
             permission: "facilities.publish_facilities,facilities.view_facility"
+        })
+
+        .state("facilities_publish.publish.basic", {
+            url: "basic/",
+            views: {
+                "form-view@facilities_publish.publish" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve.basic.tpl.html"
+                }
+            }
+        })
+
+        .state("facilities_publish.publish.services", {
+            url: "services/",
+            views: {
+                "form-view@facilities_publish.publish" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve.services.tpl.html"
+                }
+            }
+        })
+
+        .state("facilities_publish.publish.units", {
+            url: "units/",
+            views: {
+                "form-view@facilities_publish.publish" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve.units.tpl.html"
+                }
+            }
         });
     }]);
 
