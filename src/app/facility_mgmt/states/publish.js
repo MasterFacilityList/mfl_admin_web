@@ -39,7 +39,9 @@
                 "form-view@facilities_publish.publish" : {
                     templateUrl: "facility_mgmt/tpls/facility_approve.basic.tpl.html"
                 }
-            }
+            },
+            userFeature: "is_national",
+            permission: "facilities.publish_facilities,facilities.view_facility"
         })
 
         .state("facilities_publish.publish.services", {
@@ -48,7 +50,9 @@
                 "form-view@facilities_publish.publish" : {
                     templateUrl: "facility_mgmt/tpls/facility_approve.services.tpl.html"
                 }
-            }
+            },
+            userFeature: "is_national",
+            permission: "facilities.publish_facilities,facilities.view_facility"
         })
 
         .state("facilities_publish.publish.units", {
@@ -57,7 +61,9 @@
                 "form-view@facilities_publish.publish" : {
                     templateUrl: "facility_mgmt/tpls/facility_approve.units.tpl.html"
                 }
-            }
+            },
+            userFeature: "is_national",
+            permission: "facilities.publish_facilities,facilities.view_facility"
         });
     }]);
 
