@@ -128,4 +128,4 @@
         }]
     );
 
-})(window.angular, window._);
+})(window.angular);
