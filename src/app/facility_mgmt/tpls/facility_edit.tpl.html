@@ -1,5 +1,10 @@
 <div class="content-header">
    <div class="action-container content-header-extra pad-r-20">
+        <button class="login-btn login-btn-info margin-l-3"
+            ng-click="printFacility(facility_id)"
+            ng-if="facility_id">
+            Print Cover Report
+        </button>
         <a class="login-btn login-btn-info margin-l-3"
             requires-permission="facilities.add_facilitytype,facilities.add_facilityservice"
             ui-sref=".upgrade({facility_id: facility_id})"
