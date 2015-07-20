@@ -55,12 +55,13 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.geocode_methods_list.geocode_methods_delete({"+
+                    func : "ui-sref='setup.geocode_methods_list.geocode_methods_edit" +
+                    ".geocode_methods_delete({"+
                         "geocode_method_id:geocode_method.id})'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.delete_geocodemethod'",
                     class: "login-btn login-btn-danger",
-                    wording: "Delete Geocode Method",
+                    wording: "Delete",
                     tipmsg: "Delete Geocode Method"
                 }
             ];
@@ -97,6 +98,7 @@
             adminApi.geocode_methods.get($scope.geocode_method_id)
             .success(function (data) {
                 $scope.geocode_method = data;
+                $scope.deleteText = $scope.geocode_method.name;
             })
             .error(function (data) {
                 $log.error(data);
@@ -110,6 +112,9 @@
                 .error(function (data) {
                     $log.error(data);
                 });
+            };
+            $scope.cancel = function () {
+                $state.go("setup.geocode_methods_list.geocode_methods_edit");
             };
         }]
     )
@@ -163,12 +168,13 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.geocode_sources_list.geocode_sources_delete({"+
+                    func : "ui-sref='setup.geocode_sources_list.geocode_sources_edit." +
+                    "geocode_sources_delete({"+
                         "geocode_source_id:geocode_source.id})'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.delete_geocodesource'",
                     class: "login-btn login-btn-danger",
-                    wording: "Delete Geocode Source",
+                    wording: "Delete",
                     tipmsg: "Delete Geocode Source"
                 }
             ];
@@ -207,11 +213,11 @@
             adminApi.geocode_sources.get($scope.geocode_source_id)
             .success(function (data) {
                 $scope.geocode_source = data;
+                $scope.deleteText = $scope.geocode_source.name;
             })
             .error(function (data) {
                 $log.error(data);
             });
-
             $scope.remove = function () {
                 adminApi.geocode_sources.remove($scope.geocode_source_id)
                 .success(function () {
@@ -220,6 +226,9 @@
                 .error(function (data) {
                     $log.error(data);
                 });
+            };
+            $scope.cancel = function () {
+                $state.go("setup.geocode_sources_list.geocode_sources_edit");
             };
         }]
     );
