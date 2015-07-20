@@ -62,33 +62,24 @@
         it("should delete a KEPH level", function () {
             $httpBackend
                 .expectGET(SERVER_URL+"api/facilities/keph/4/")
-                .respond(200, {"name": ""});
+                .respond(200, {"name": "","description":""});
             $httpBackend
                 .expectDELETE(SERVER_URL+"api/facilities/keph/4/")
-                .respond(200, {"name": ""});
+                .respond(200, {"name": "","description":""});
             createController("mfl.setup.controller.keph.edit", {"$stateParams": {"keph_id": 4}});
             $scope.remove();
             $httpBackend.flush();
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
-
-            expect($scope.keph).toEqual({"name": ""});
-
-            $httpBackend
-                .expectPATCH(SERVER_URL+"api/facilities/keph/4/")
-                .respond(200);
-
-            $scope.save();
-            $httpBackend.flush();
         });
 
         it("should handle errors on delete a KEPH level", function () {
             $httpBackend
                 .expectGET(SERVER_URL+"api/facilities/keph/4/")
-                .respond(500, {"name": ""});
+                .respond(500, {"name": "","description":""});
             $httpBackend
                 .expectDELETE(SERVER_URL+"api/facilities/keph/4/")
-                .respond(500, {"name": ""});
+                .respond(500, {"name": "","description":""});
             spyOn($state, "go");
             createController("mfl.setup.controller.keph.edit", {"$stateParams": {"keph_id": 4}});
             $scope.remove();
@@ -96,16 +87,44 @@
             $httpBackend.flush();
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
-            $scope.keph = {"name": ""};
-            $httpBackend
-                .expectPATCH(SERVER_URL+"api/facilities/keph/4/")
-                .respond(500);
-            expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
-            expect($state.go).toHaveBeenCalledWith("setup.facility_kephs", { },
-                                                   { reload : true });
-            $scope.save();
-            $httpBackend.flush();
         });
 
+        it("should update keph level: no changes",function(){
+                var form = {};
+                spyOn($state, "go");
+                spyOn(formService, "whatChanged").andReturn(form);
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/keph/1/").respond(
+                200,{"name": "","description":""});
+                createController("mfl.setup.controller.keph.edit",{"$stateParams": {"keph_id": 1}});
+                $scope.save(1, form);
+                $httpBackend.flush();
+                expect($state.go).not.toHaveBeenCalledWith("setup.facility_kephs");
+            });
+        it("should update keph level: with changes",function(){
+                var form = {name:"level 2",description:"level 2 description"};
+                var res = {msg: "Ok"};
+                spyOn($state, "go");
+                spyOn(formService, "whatChanged").andReturn(form);
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/keph/1/").respond(
+                200,res);
+                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/keph/1/").respond(
+                200, res);
+                createController("mfl.setup.controller.keph.edit",{$stateParams: {keph_id: 1}});
+                $scope.save(1, form);
+                $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("setup.facility_kephs",{},{reload:true});
+            });
+        it("should fail to update keph level: with changes",function(){
+                var form = {name:"level 2"};
+                spyOn($state, "go");
+                spyOn(formService, "whatChanged").andReturn(form);
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/keph/1/").respond(
+                500);
+                createController("mfl.setup.controller.keph.edit",{"$stateParams": {"keph_id": 1}});
+                $scope.save(1, form);
+                $httpBackend.flush();
+                expect($state.go).not.toHaveBeenCalledWith("setup.facility_kephs");
+            });
     });
 })(window._);
