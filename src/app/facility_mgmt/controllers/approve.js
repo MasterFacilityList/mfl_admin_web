@@ -85,7 +85,6 @@
                             $scope.facility_update.facility_updates
                         );
                         $scope.facility_changes = data.facility_updated_json;
-                        console.log($scope.facility_changes);
                     })
                     .error(function (data) {
                         $log.error(data);
