@@ -2,8 +2,6 @@
     "immed": true,
     "newcap": true,
     "noarg": true,
-    "sub": true,
-    "boss": true,
     "bitwise": true,
     "node": true,
     "esnext": true,
@@ -17,6 +15,10 @@
     "unused": true,
     "maxlen": 100,
     "eqnull": true,
+    "forin": true,
+    "maxcomplexity": 10,
+    "strict": true,
+    "undef": true,
     "globals": {
         "beforeEach": true,
         "afterEach": true,
@@ -29,7 +31,6 @@
         "browser": true,
         "module":true,
         "window": true,
-        "spyOn": true,
-        "bard": true
+        "spyOn": true
     }
 }

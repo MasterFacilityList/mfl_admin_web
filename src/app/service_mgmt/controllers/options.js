@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
 
     angular.module("mfl.service_mgmt.controllers.options", [
@@ -70,4 +70,4 @@
         }
     ]);
 
-})(angular);
+})(window.angular, window._);

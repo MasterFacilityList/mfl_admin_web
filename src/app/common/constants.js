@@ -20,4 +20,4 @@
         geocodes : "failed to fetch facility geocoordinates",
         ward : "failed to fetch facility's ward geocoordinates"
     });
-})(angular);
+})(window.angular);

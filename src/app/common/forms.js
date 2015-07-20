@@ -9,25 +9,20 @@
         this.whatChanged = function (frm) {
             var vals = {};
 
-            if (_.isUndefined(frm)) {
-                return vals;
-            }
-
-            if (frm.$dirty === true) {
-                for (var f in frm) {
-                    if (_.isUndefined(frm[f])) {
-                        continue;
+            if (angular.isDefined(frm)) {
+                if (frm.$dirty === true) {
+                    for (var f in frm) {
+                        if (angular.isDefined(frm[f])) {
+                            if (frm[f].$dirty === true) {
+                                vals[f] = frm[f].$modelValue;
+                            }
+                        }
                     }
-                    if (frm[f].$dirty === true) {
-                        vals[f] = frm[f].$modelValue;
-                    }
-
                 }
             }
-
             return vals;
         };
 
     }]);
 
-})(angular);
+})(window.angular);

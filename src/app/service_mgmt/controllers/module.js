@@ -8,4 +8,4 @@
         "mfl.service_mgmt.controllers.options"
     ]);
 
-})(angular);
+})(window.angular);

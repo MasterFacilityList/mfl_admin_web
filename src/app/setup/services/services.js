@@ -29,12 +29,13 @@
     }])
     .service("currentStateOpen",["$state",function ($state){
         this.whichTab = function (){
-            var collapsed, state_name = $state.current.name;
+            var collapsed = {};
+            var state_name = $state.current.name;
             if(state_name.indexOf("counties") > -1 ||
                state_name.indexOf("constituencies") > -1 ||
                state_name.indexOf("wards") > -1 ||
                state_name.indexOf("towns") > -1 ){
-                return collapsed = {
+                collapsed = {
                     "one": true,
                     "true": false,
                     "three": false,
@@ -42,7 +43,7 @@
                     "five":false
                 };
             } else if(state_name.indexOf("chu_") > -1){
-                return collapsed = {
+                collapsed = {
                     "one": false,
                     "true": true,
                     "three": false,
@@ -50,7 +51,7 @@
                     "five":false
                 };
             } else if(state_name.indexOf("contact") > -1){
-                return collapsed = {
+                collapsed = {
                     "one": false,
                     "true": false,
                     "three": true,
@@ -58,7 +59,7 @@
                     "five":false
                 };
             } else if(state_name.indexOf("facility_") > -1){
-                return collapsed = {
+                collapsed = {
                     "one": false,
                     "true": false,
                     "three": false,
@@ -66,7 +67,7 @@
                     "five":false
                 };
             } else if(state_name.indexOf("geocode_") > -1){
-                return collapsed = {
+                collapsed = {
                     "one": false,
                     "true": false,
                     "three": false,
@@ -74,8 +75,9 @@
                     "five":true
                 };
             } else {
-                return collapsed = {};
+                collapsed = {};
             }
+            return collapsed;
         };
     }]);
-})(angular);
+})(window.angular);

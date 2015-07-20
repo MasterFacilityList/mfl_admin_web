@@ -16,4 +16,4 @@
         "mfl.facility_mgmt"
     ]);
 
-})(angular);
+})(window.angular);

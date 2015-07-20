@@ -222,7 +222,6 @@
                 });
             };
         }]
-    )
-    ;
+    );
 
-})(angular);
+})(window.angular);

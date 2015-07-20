@@ -11,4 +11,4 @@
         "mfl.common.directives"
     ]);
 
-})(angular);
+})(window.angular);

@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
     "use strict";
 
     describe("Test service controllers", function () {
@@ -816,4 +816,4 @@
         });
     });
 
-})();
+})(window.angular);

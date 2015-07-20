@@ -232,4 +232,4 @@
 
     }]);
 
-})(angular);
+})(window.angular);

@@ -2010,7 +2010,6 @@
             it("should reload state if no changes to facility operation setup",
             inject(["mfl.common.services.multistep",
                 function (multistepService) {
-                bard.inject(this, "$state");
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
@@ -2047,7 +2046,6 @@
             it("should reload state if no changes to facility operation:fail",
             inject(["mfl.common.services.multistep",
                 function (multistepService) {
-                bard.inject(this, "$state");
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
@@ -2081,7 +2079,6 @@
             it("should reload state if no changes to facility: empty form",
             inject(["mfl.common.services.multistep",
                 function (multistepService) {
-                bard.inject(this, "$state");
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
@@ -3522,4 +3519,4 @@
                 });
         });
     });
-})(angular);
+})(window.angular);

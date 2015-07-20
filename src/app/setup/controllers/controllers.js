@@ -18,4 +18,4 @@
             };
             $scope.collapsed = curStateService.whichTab();
         }]);
-})(angular);
+})(window.angular);

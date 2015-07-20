@@ -68,4 +68,4 @@
         }]
     );
 
-})(angular);
+})(window.angular);

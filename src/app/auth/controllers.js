@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
     "use strict";
 
     angular.module("mfl.auth.controllers", [
@@ -79,4 +79,4 @@
         }]
     );
 
-})(angular);
+})(window.angular);

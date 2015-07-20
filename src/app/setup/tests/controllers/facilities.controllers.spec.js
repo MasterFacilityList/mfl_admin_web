@@ -1,4 +1,4 @@
-(function(describe){
+(function(_){
     "use strict";
     describe("facilities setup controllers test suite", function(){
         var createController, $scope, $stateParams, $httpBackend, $state, adminApi;
@@ -656,4 +656,4 @@
                 expect($state.go).not.toHaveBeenCalledWith("setup.facility_regulatory_bodies");
             });
     });
-})(describe);
+})(window._);

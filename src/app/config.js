@@ -55,4 +55,4 @@
         statecheck.startListening();
     }]);
 
-})(angular, jQuery);
+})(window.angular, window.jQuery);

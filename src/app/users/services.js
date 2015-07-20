@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
 
     angular.module("mfl.users.services", ["api.wrapper"])
@@ -52,4 +52,4 @@
             };
         }
     ]);
-})(angular);
+})(window.angular, window._);

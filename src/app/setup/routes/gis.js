@@ -103,4 +103,4 @@
         });
     }]);
 
-})(angular);
+})(window.angular);

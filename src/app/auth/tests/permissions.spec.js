@@ -62,12 +62,39 @@
                 }]);
             });
 
-            it("should allow loggedin users with features", function () {
+            it("should allow loggedin users with features (and)", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
                 spyOn(loginService, "getUser").andReturn({county: "meru", "is_admin":true});
 
                 inject(["mfl.auth.permissions.checker", function (permChecker) {
                     expect(permChecker.hasUserFeature("county,is_admin")).toBe(true);
+                }]);
+            });
+
+            it("should allow loggedin users with all features (or)", function () {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "getUser").andReturn({county: "meru", "is_admin":true});
+
+                inject(["mfl.auth.permissions.checker", function (permChecker) {
+                    expect(permChecker.hasUserFeature("county|is_admin")).toBe(true);
+                }]);
+            });
+
+            it("should allow loggedin users with some features (or)", function () {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "getUser").andReturn({county: "meru"});
+
+                inject(["mfl.auth.permissions.checker", function (permChecker) {
+                    expect(permChecker.hasUserFeature("county|admin")).toBe(true);
+                }]);
+            });
+
+            it("should not allow loggedin users without any feature (or)", function () {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                spyOn(loginService, "getUser").andReturn({});
+
+                inject(["mfl.auth.permissions.checker", function (permChecker) {
+                    expect(permChecker.hasUserFeature("county|admin")).toBe(false);
                 }]);
             });
 
@@ -80,14 +107,19 @@
                 }]);
             });
 
-            it("should not allow if permission is not a valid string", function () {
+            it("should not allow if permission is not valid", function () {
                 spyOn(loginService, "isLoggedIn").andReturn(true);
                 spyOn(loginService, "getUser").andReturn({all_permissions: []});
 
                 inject(["mfl.auth.permissions.checker", function (permChecker) {
                     expect(permChecker.hasPermission()).toBe(false);
+                    expect(permChecker.hasUserFeature()).toBe(false);
                     expect(permChecker.hasPermission("")).toBe(false);
+                    expect(permChecker.hasUserFeature("")).toBe(false);
                     expect(permChecker.hasPermission({})).toBe(false);
+                    expect(permChecker.hasUserFeature({})).toBe(false);
+                    expect(function () {permChecker.hasPermission("a,w|q");}).toThrow();
+                    expect(function () {permChecker.hasUserFeature("a,w|q");}).toThrow();
                 }]);
             });
 
@@ -233,4 +265,4 @@
             });
         });
     });
-})(angular);
+})(window.angular);

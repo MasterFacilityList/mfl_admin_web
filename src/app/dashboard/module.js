@@ -1,5 +1,7 @@
-(function () {
+(function (angular) {
+
     "use strict";
+
     angular.module("mfl.dashboard", [
         "ui.router",
 
@@ -7,4 +9,5 @@
         "mfl.dashboard.states",
         "mfl.dashboard.wrapper"
     ]);
-})();
+
+})(window.angular);

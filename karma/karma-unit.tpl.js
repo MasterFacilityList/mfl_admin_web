@@ -22,15 +22,13 @@ module.exports = function ( karma ) {
         ],
 
         frameworks: [
-            "jasmine",
-            "sinon"
+            "jasmine"
         ],
 
         logLevel: karma.LOG_INFO,
 
         plugins: [
             "karma-jasmine",
-            "karma-sinon",
             "karma-firefox-launcher",
             "karma-chrome-launcher",
             "karma-sauce-launcher",
