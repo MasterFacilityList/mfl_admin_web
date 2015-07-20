@@ -46,7 +46,7 @@
                 <li ui-sref-active="active">
                     <a ui-sref=".units">
                         <span class="fw-900 ">
-                            <i class="fa fa-hospital-o"></i> Community Health Units
+                            <i class="fa fa-hospital-o"></i> Facility Departments
                         </span>
                     </a>
                 </li>
@@ -75,8 +75,8 @@
                 <button class="login-btn login-btn-danger margin-l-5" ng-click="approveFacility(true)">Reject Facility</button>
             </form>
         </div>
-        <div class="col-xs-12" ng-if="facility.is_approved">
-            <span class="fs-16"><i class="fa fa-check"></i> Facility has already been approved</span>
+        <div class="row" ng-if="facility.is_approved">
+            <span class="col-xs-12 fs-16"><i class="fa fa-check"></i> Facility has already been approved</span>
             <div class="col-xs-12">
                 <table class="table">
                     <thead>
@@ -101,7 +101,7 @@
     </div>
 
     <div class="col-xs-12 margin-t-20" ng-class="{'alert-info':!facility.latest_update, 'detail-content' : facility.latest_update}">
-        <div ng-if="facility.latest_update && facility.is_approved" class="content-card">
+        <div ng-if="facility.latest_update && facility.is_approved" class="content-card row">
             <h4 class="fs-18"><strong>Approve facility updates</strong></h4>
             <div class="row">
                 <div class="col-sm-6">
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <hr>
-            <table class=" margin-t-50 table">
+            <table class=" margin-t-20 table table-hover">
                 <thead>
                     <tr>
                         <th>Field</th>
