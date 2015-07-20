@@ -43,7 +43,7 @@
             .state("setup.facility_kephs.keph_create", {
                 url: "/create",
                 views: {
-                    "main-content@setup.kephs": {
+                    "main-content@setup.facility_kephs": {
                         controller: "mfl.setup.controller.keph.create",
                         templateUrl: "setup/tpls/facilities/keph/keph.edit.tpl.html"
                     }

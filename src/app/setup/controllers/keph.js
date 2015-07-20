@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular,_){
     "use strict";
     angular.module("mfl.setup.keph.controllers",[
         "mfl.setup.api"
@@ -32,8 +32,8 @@
 
             $scope.save = function () {
                 adminApi.kephs.create($scope.keph)
-                .success(function (data) {
-                    $state.go("setup.kephs.keph_edit", {"keph_id": data.id});
+                .success(function () {
+                    $state.go("setup.facility_kephs",{},{reload:true});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -43,8 +43,8 @@
     )
 
     .controller("mfl.setup.controller.keph.edit",
-        ["$scope", "$stateParams", "$state", "$log", "adminApi",
-        function ($scope, $stateParams, $state, $log, adminApi) {
+        ["$scope", "$stateParams", "$state", "$log", "adminApi","mfl.common.forms.changes",
+        function ($scope, $stateParams, $state, $log, adminApi, formChanges) {
             $scope.title = {
                 icon: "fa-edit",
                 name: "Edit KEPH Level"
@@ -80,16 +80,17 @@
             $scope.cancel = function () {
                 $state.go("setup.facility_kephs",{},{reload:true});
             };
-            $scope.save = function () {
-                adminApi.kephs.update($scope.keph_id, {"name": $scope.keph.name})
-                .success(function () {
-                    $state.go("setup.facility_kephs");
-                })
-                .error(function (data) {
-                    $log.error(data);
-                });
+            $scope.save = function (id, frm) {
+                var changes= formChanges.whatChanged(frm);
+                if(!_.isEmpty(changes)){
+                    adminApi.kephs.update(id, changes).success(function(){
+                        $state.go("setup.facility_kephs",{},{reload:true});
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                    });
+                }
             };
         }]
     );
 
-})(window.angular);
+})(window.angular,window._);

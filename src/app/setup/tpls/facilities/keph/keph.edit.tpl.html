@@ -1,10 +1,10 @@
 <contentheader></contentheader>
 <div ui-view="delete"></div>
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 content-card margin-t-20">
-    <form ng-submit="save()" >
+    <form name="kephForm" ng-submit="save(keph_id, kephForm)" >
         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
             <div class="group">
-                <input type="text" ng-model="keph.name" required />
+                <input name="name" type="text" ng-model="keph.name" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>
@@ -12,7 +12,7 @@
                 </label>
             </div>
             <div class="group">
-                <input type="text" ng-model="keph.description" required />
+                <input name="description" type="text" ng-model="keph.description" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>
