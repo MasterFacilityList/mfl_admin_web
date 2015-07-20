@@ -113,7 +113,7 @@
                 $scope.save(1, form);
                 $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
-                expect($state.go).toHaveBeenCalledWith("setup.facility_kephs",{},{reload:true});
+                expect($state.go).toHaveBeenCalledWith("setup.facility_kephs");
             });
         it("should fail to update keph level: with changes",function(){
                 var form = {name:"level 2"};

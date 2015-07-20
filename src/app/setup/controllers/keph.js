@@ -53,7 +53,7 @@
                 {
                     func : "ui-sref='setup.facility_kephs.keph_edit.delete'" +
                            " requires-user-feature='is_staff,is_national'" +
-                           " requires-permission='facilities.change_kephlevel'",
+                           " requires-permission='facilities.delete_kephlevel'",
                     class: "login-btn login-btn-danger",
                     tipmsg: "Delete KEPH level",
                     wording: "Delete"
@@ -71,20 +71,20 @@
             });
             $scope.remove = function () {
                 adminApi.kephs.remove($stateParams.keph_id).success(function(){
-                    $state.go("setup.facility_kephs",{},{reload:true});
+                    $state.go("setup.facility_kephs");
                 }).error(function(error){
                     $scope.alert = error.error;
-                    $state.go("setup.facility_kephs",{},{reload:true});
+                    $state.go("setup.facility_kephs");
                 });
             };
             $scope.cancel = function () {
-                $state.go("setup.facility_kephs",{},{reload:true});
+                $state.go("setup.facility_kephs");
             };
             $scope.save = function (id, frm) {
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.kephs.update(id, changes).success(function(){
-                        $state.go("setup.facility_kephs",{},{reload:true});
+                        $state.go("setup.facility_kephs");
                     }).error(function(error){
                         $scope.alert = error.error;
                     });
