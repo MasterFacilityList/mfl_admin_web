@@ -57,9 +57,7 @@
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
-                        regulatory_body: "23",
-                        keph_level: "55",
-                        keph_level_name: "level 2"
+                        regulatory_body: "23"
                     };
                     spyOn(state, "go");
                     httpBackend
@@ -104,10 +102,6 @@
                         regulatory_body: {
                             "id": "23",
                             "name": "def"
-                        },
-                        keph_level: {
-                            "id": "55",
-                            "name": "level 2"
                         }
                     });
                 }])
@@ -134,9 +128,7 @@
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
-                        regulatory_body: "23",
-                        keph_level: "55",
-                        keph_level_name: "level 2"
+                        regulatory_body: "23"
                     };
                     spyOn(state, "go");
                     httpBackend
@@ -181,10 +173,6 @@
                         regulatory_body: {
                             "id": "23",
                             "name": "def"
-                        },
-                        keph_level: {
-                            "id": "55",
-                            "name": "level 2"
                         }
                     });
 
@@ -224,9 +212,7 @@
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body: "23",
-                        regulatory_body_name: "def",
-                        keph_level: "55",
-                        keph_level_name: "level 2"
+                        regulatory_body_name: "def"
                     };
                     spyOn(state, "go");
                     httpBackend
@@ -271,10 +257,6 @@
                         regulatory_body: {
                             "id": "23",
                             "name": "def"
-                        },
-                        keph_level: {
-                            "id": "55",
-                            "name": "level 2"
                         }
                     });
 

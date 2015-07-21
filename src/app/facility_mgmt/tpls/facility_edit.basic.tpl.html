@@ -88,18 +88,6 @@
                     </ui-select-choices>
                 </ui-select>
             </div>
-
-            <div class="form-group col-xs-12">
-                <label>KEPH Level</label>
-                <ui-select ng-model="select_values.keph_level" required name="keph_level" ng-disabled="facility.id">
-                    <ui-select-match placeholder="Select a KEPH Level...">
-                        <span>{{$select.selected.name}}</span>
-                    </ui-select-match>
-                    <ui-select-choices repeat="kl.id as kl in keph_levels | filter:$select.search">
-                        <span>{{kl.name}}</span>
-                    </ui-select-choices>
-                </ui-select>
-            </div>
         </div>
        <div class="col-xs-12 custom-well">
         <div class="col-xs-12">
