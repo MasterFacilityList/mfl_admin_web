@@ -10,18 +10,19 @@
         $stateProvider
 
         .state("service_mgmt", {
+            parent: "setup",
             url: "/services/",
             views: {
                 "main": {
                     controller: "mfl.service_mgmt.controllers.main",
                     templateUrl: "common/tpls/main.tpl.html"
                 },
-                "header@service_mgmt": {
+                "body@setup" : {
+                    templateUrl: "setup/tpls/dashboard/body.tpl.html"
+                },
+                "header@setup": {
                     controller: "mfl.common.controllers.header",
                     templateUrl: "common/tpls/header.tpl.html"
-                },
-                "body@service_mgmt": {
-                    controller:"mfl.common.controllers.stateServices"
                 }
             },
             data : { pageTitle: "Service Management" },
@@ -34,8 +35,8 @@
         .state("service_mgmt.category_list", {
             url: "categories/",
             views: {
-                "body@service_mgmt": {
-                    templateUrl: "service_mgmt/tpls/body.tpl.html"
+                "body@setup": {
+                    templateUrl: "setup/tpls/dashboard/body.tpl.html"
                 },
                 "main-content@service_mgmt.category_list": {
                     controller: "mfl.service_mgmt.controllers.category_list",
@@ -84,8 +85,8 @@
         .state("service_mgmt.service_list", {
             url: "services/",
             views: {
-                "body@service_mgmt": {
-                    templateUrl: "service_mgmt/tpls/body.tpl.html"
+                "body@setup": {
+                    templateUrl: "setup/tpls/dashboard/body.tpl.html"
                 },
                 "main-content@service_mgmt.service_list": {
                     controller: "mfl.service_mgmt.controllers.service_list",
@@ -184,8 +185,8 @@
         .state("service_mgmt.option_list", {
             url: "options/",
             views: {
-                "body@service_mgmt": {
-                    templateUrl: "service_mgmt/tpls/body.tpl.html"
+                "body@setup": {
+                    templateUrl: "setup/tpls/dashboard/body.tpl.html"
                 },
                 "main-content@service_mgmt.option_list": {
                     controller: "mfl.service_mgmt.controllers.option_list",

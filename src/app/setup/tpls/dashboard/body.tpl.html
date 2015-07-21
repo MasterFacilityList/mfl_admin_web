@@ -35,6 +35,29 @@
               </li>
           </ul>
         </li>
+        <li ng-model="collapsed.six">
+            <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.six=!collapsed.six">Service Catalogue
+                <span  ng-show = "collapsed.six === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
+                <span  ng-show = "collapsed.six === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
+            </label>
+            <ul class="nav nav-list tree" content-slide-in="collapsed.six" slide-show-duration="1000">
+                <li ui-sref-active="active" requires-permission="facilities.view_servicecategory">
+                    <a ui-sref="service_mgmt.category_list">
+                      <span class="sidebar-text">Categories</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active" requires-permission="facilities.view_service">
+                    <a ui-sref="service_mgmt.service_list">
+                      <span class="sidebar-text">Services</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active" requires-permission="facilities.view_option">
+                    <a ui-sref="service_mgmt.option_list">
+                      <span class="sidebar-text">Options</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li ng-model="collapsed.three">
             <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.three=!collapsed.three">Contacts
                 <span  ng-show = "collapsed.three === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
