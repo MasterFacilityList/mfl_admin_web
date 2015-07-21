@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _){
     "use strict";
 
     angular.module("mfl.facility_mgmt.controllers.approve", [
@@ -66,6 +66,19 @@
                 $log.error(data);
             });
 
+            wrappers.facility_services.filter({
+                "facility": $scope.facility_id,
+                "is_cancelled": false,
+                "is_confirmed": false,
+                "fields": "id,service_name,option_display_value"
+            })
+            .success(function (data) {
+                $scope.facility_service_updates = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
             wrappers.facility_detail.get($scope.facility_id)
             .success(function(data) {
                 $scope.facility = data;
@@ -126,7 +139,21 @@
                     $log.error(data);
                 });
             };
+
+            $scope.approveFacilityService = function (fsu, approved) {
+                var payload = {
+                    "is_cancelled": approved ? false : true,
+                    "is_confirmed": approved ? true : false
+                };
+                wrappers.facility_services.update(fsu.id, payload)
+                .success(function () {
+                    $scope.facility_service_updates = _.without(
+                        $scope.facility_service_updates, fsu
+                    );
+                })
+                .error(function (data) {$log.error(data);});
+            };
         }]
     );
 
-})(window.angular);
+})(window.angular, window._);

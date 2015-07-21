@@ -132,7 +132,7 @@
             })
 
             .state("facilities.facility_create.facility_cover_letter", {
-                url: "print/:facility_id",
+                url: ":facility_id/print",
                 views : {
                     "form-view@facilities.facility_create": {
                         templateUrl: "facility_mgmt/tpls/facility_print.tpl.html",
