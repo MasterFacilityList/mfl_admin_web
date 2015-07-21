@@ -13,7 +13,7 @@
                 <th sil-grid-sort field='username'>Username</th>
                 <th sil-grid-sort field='email'>Email</th>
                 <th class="text-center">National User</th>
-                <th class="text-center">Actions</th>
+                <th class="text-right">Actions&nbsp;&nbsp;</th>
             </thead>
             <tbody class="example-animate-container">
                 <tr class="animate-repeat" ng-repeat="user in users | filter: search.query">
@@ -24,7 +24,7 @@
                         <i ng-if="user.is_national" class="fa fa-user fa-1x text-success" tooltip="National User"></i>
                         <i ng-if="!user.is_national" class="fa fa-user-times fa-1x text-danger" tooltip="Not a National User"></i>
                     </td>
-                    <td class="text-center">
+                    <td class="text-right">
                         <a ui-sref="users.user_edit.basic({user_id : user.id})" class="login-btn login-btn-action">
                             &nbsp;View
                         </a>
