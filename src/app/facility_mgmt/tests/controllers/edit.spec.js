@@ -2980,6 +2980,87 @@
                 }]);
             });
 
+            /*Test should cover negative of ternary*/
+            it("should save geolocation details and go to print", function () {
+                inject(["mfl.common.services.multistep",
+                    function (multistepService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            facility_id: 4
+                        },
+                        "mfl.common.services.multistep" : multistepService
+                    };
+                    var coords = {
+                        coordinates : [0,1]
+                    };
+                    data.$scope.create = false;
+                    data.$scope.nextState = angular.noop;
+                    data.$scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    var rst_data = {
+                        coordinates : {
+                            coordinates : [3, 1]
+                        }
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/gis/geo_code_methods/")
+                        .respond(200, {results: []});
+                    httpBackend
+                        .expectGET(server_url+"api/gis/geo_code_sources/")
+                        .respond(200, {results: []});
+                    httpBackend
+                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                        .respond(200, rst_data);
+                    httpBackend
+                        .expectGET(server_url+"api/common/wards/3/")
+                        .respond(200, {results: []});
+                    ctrl(".geolocation", data);
+                    data.$scope.$apply();
+                    data.$scope.facility={
+                        coordinates : "3",
+                        ward : "3",
+                        facility_physical_address:{
+                            address : "ZUZU",
+                            postal_code: "254",
+                            id: "3"
+                        }
+                    };
+                    data.$scope.$apply();
+                    data.$scope.$digest();
+                    data.$scope.checkLocation(coords);
+
+                    httpBackend.flush();
+
+                    httpBackend.resetExpectations();
+
+                    httpBackend
+                        .expectPATCH(server_url+"api/gis/facility_coordinates/3/")
+                        .respond(204, {results: []});
+                    var frm = {
+                        "$dirty": true,
+                        "name": {
+                            "$dirty": true,
+                            "$$modelValue": "test"
+                        }
+                    };
+
+                    data.$scope.saveGeo(frm);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+                }]);
+            });
+            /*End of ternary test*/
+
             it("should try to save geolocation details but form has no changes", function () {
                 inject(["mfl.common.services.multistep",
                     function (multistepService) {
