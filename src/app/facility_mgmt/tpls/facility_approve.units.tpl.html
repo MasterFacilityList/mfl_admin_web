@@ -7,15 +7,11 @@
 <div class="col-xs-12" ng-if="chus.length !== 0">
     <table class="table fs-14 table-hover table-stripped">
         <thead>
-            <th class="col-xs-1">#</th>
             <th>Name</th>
             <th>Regulating Body</th>
         </thead>
         <tbody class="fw-600">
             <tr ng-repeat="unit in chus">
-                <td class="col-xs-3">
-                    {{$index + 1}}
-                </td>
                 <td>
                     {{unit.name}}
                 </td>

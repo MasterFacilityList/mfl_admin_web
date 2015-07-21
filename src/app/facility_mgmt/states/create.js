@@ -139,7 +139,7 @@
                         controller: "mfl.facility_mgmt.controllers.facility_create.facility_print"
                     }
                 },
-                permission: "facilities.add_facility"
+                permission: "facilities.view_facility"
             });
     }]);
 
