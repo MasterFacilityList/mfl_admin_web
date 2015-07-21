@@ -1,32 +1,28 @@
-<div class="pad-t-20">
-   <div class="row">
-        <div class="col-xs-6">
-            <span class="pad-t-20 fs-18"><strong>{{ (upgrade) ? 'Upgrade' : 'Downgrade' }}</strong></span>
-        </div>
-        <div class="col-xs-6">
-            <p class="text-right fs-16">Current Facility Type: <span class="label label-info"><strong>{{facility.facility_type_name}}</strong></span></p>
-        </div>
-   </div>
-    <form ng-submit="updateType()">
-        <hr>
-        <div class="form-group pad-t-20" >
-            <label for="facility_type">New KEPH Level</label>
-            <ui-select ng-model="new_type.keph_level" name="keph_level" required>
-                <ui-select-match>{{$select.selected.name}}</ui-select-match>
-                <ui-select-choices repeat="kl.id as kl in keph_levels | filter:$select.search">{{kl.name}}</ui-select-choices>
-            </ui-select>
-        </div>
-        <div class="form-group pad-t-20" >
-            <label for="facility_type">New Facility Type</label>
-            <ui-select ng-model="new_type.facility_type" name="facility_type" required>
-                <ui-select-match>{{$select.selected.name}}</ui-select-match>
-                <ui-select-choices repeat="factype.id as factype in facility_types | filter:$select.search">{{factype.name}}</ui-select-choices>
-            </ui-select>
-        </div>
-        <div class="form-group">
-            <label for="reason">Reason for {{(upgrade) ? 'Upgrade' : 'Downgrade'}}</label>
-            <textarea ng-model="new_type.reason" name="reason" required class="form-control"></textarea>
-        </div>
-        <input class="login-btn" ng-class="{'login-btn-danger': !upgrade, 'login-btn-success': upgrade}" ng-value="(upgrade)?'Upgrade':'Downgrade'" type="submit" ng-disabled="new_type.id"/>
-    </form>
+<div>
+    <div>
+        <form ng-submit="updateType()">
+            <div class="form-group" >
+                <label for="facility_type">New KEPH Level</label>
+                <ui-select ng-model="new_type.keph_level" name="keph_level" required>
+                    <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="kl.id as kl in keph_levels | filter:$select.search">{{kl.name}}</ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group" >
+                <label for="facility_type">New Facility Type</label>
+                <ui-select ng-model="new_type.facility_type" name="facility_type" required>
+                    <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="factype.id as factype in facility_types | filter:$select.search">{{factype.name}}</ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group">
+                <label for="reason">Reason for {{(upgrade) ? 'Upgrade' : 'Downgrade'}}</label>
+                <textarea ng-model="new_type.reason" name="reason" required class="form-control"></textarea>
+            </div>
+            <input class="login-btn" ng-class="{'login-btn-danger': !upgrade, 'login-btn-success': upgrade}" ng-value="(upgrade)?'Upgrade':'Downgrade'" type="submit" ng-disabled="new_type.id"/>
+        </form>
+    </div>
+    <div class="margin-t-20">
+        <ng-include src="'facility_mgmt/tpls/facility_edit.services.tpl.html'"></ng-include>
+    </div>
 </div>

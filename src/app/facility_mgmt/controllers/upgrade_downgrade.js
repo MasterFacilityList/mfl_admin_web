@@ -57,23 +57,20 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_upgrade",
         ["$scope", "$controller", function ($scope, $controller) {
-            var helper = $controller("mfl.facility_mgmt.controllers.updown_helper");
-            helper.bootstrap($scope, true);
+            var updownHelper = $controller("mfl.facility_mgmt.controllers.updown_helper");
+            var srvHelper = $controller("mfl.facility_mgmt.controllers.services_helper");
+            srvHelper.bootstrap($scope);
+            updownHelper.bootstrap($scope, true);
         }]
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_downgrade",
         ["$scope", "$controller",
         function ($scope, $controller) {
-            var helper = $controller("mfl.facility_mgmt.controllers.updown_helper");
-            helper.bootstrap($scope, false);
-        }]
-    )
-
-    .controller("mfl.facility_mgmt.controllers.update_services",
-        ["$scope", "$controller", function ($scope, $controller) {
-            var helper = $controller("mfl.facility_mgmt.controllers.services_helper");
-            helper.bootstrap($scope);
+            var updownHelper = $controller("mfl.facility_mgmt.controllers.updown_helper");
+            var srvHelper = $controller("mfl.facility_mgmt.controllers.services_helper");
+            srvHelper.bootstrap($scope);
+            updownHelper.bootstrap($scope, false);
         }]
     );
 

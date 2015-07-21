@@ -110,18 +110,26 @@
             });
         });
 
-        describe("Test upgrade controller", function () {
-            it("should load", function () {
+        describe("Test upgrade & downgrade controller", function () {
+
+            it("should load upgrade controller", function () {
+                var c = {
+                    "bootstrap": angular.noop
+                };
                 var data = {
-                    "$scope": rootScope.$new()
+                    "$scope": rootScope.$new(),
+                    "$controller": angular.noop
                 };
 
+                spyOn(data, "$controller").andReturn(c);
+                spyOn(c, "bootstrap");
                 ctrl("facility_upgrade", data);
-            });
-        });
 
-        describe("Test downgrade controller", function () {
-            it("should load", function () {
+                expect(data.$controller.calls.length).toEqual(2);
+                expect(c.bootstrap).toHaveBeenCalled();
+            });
+
+            it("should load downgrade controller", function () {
                 var c = {
                     "bootstrap": angular.noop
                 };
@@ -134,24 +142,9 @@
                 spyOn(c, "bootstrap");
                 ctrl("facility_downgrade", data);
 
-                expect(data.$controller).toHaveBeenCalled();
+                expect(data.$controller.calls.length).toEqual(2);
                 expect(c.bootstrap).toHaveBeenCalled();
             });
         });
-
-        describe("Test update services controller", function () {
-            it("should bootstrap from helper controller", function () {
-                var data = {
-                    "$scope": rootScope.$new(),
-                    "$controller": null
-                };
-                var helper = {"bootstrap": angular.noop};
-                spyOn(data, "$controller").andReturn(helper);
-                spyOn(helper, "bootstrap");
-                ctrl("update_services", data);
-                expect(helper.bootstrap).toHaveBeenCalledWith(data.$scope);
-            });
-        });
-
     });
 })(window.angular);
