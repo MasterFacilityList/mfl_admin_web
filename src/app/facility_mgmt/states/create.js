@@ -129,6 +129,17 @@
                     }
                 },
                 permission: "facilities.add_facility"
+            })
+
+            .state("facilities.facility_create.facility_cover_letter", {
+                url: "print/:facility_id",
+                views : {
+                    "form-view@facilities.facility_create": {
+                        templateUrl: "facility_mgmt/tpls/facility_print.tpl.html",
+                        controller: "mfl.facility_mgmt.controllers.facility_create.facility_print"
+                    }
+                },
+                permission: "facilities.view_facility"
             });
     }]);
 

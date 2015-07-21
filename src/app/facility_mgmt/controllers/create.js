@@ -12,7 +12,7 @@
     "mfl.facility_mgmt.services.wrappers",
     function ($scope, $stateParams, facilityMultistepService,
         multistepService, $state, $q, $log, wrappers) {
-        $scope.test = "New";
+        $scope.print = false;
         $scope.create = true;
         $scope.new_facility = $state.params.facility_id;
         $scope.facility_id = $state.params.facility_id;
@@ -97,6 +97,37 @@
                 {furthest: $scope.furthest,
                 facility_id : $scope.new_facility});
         };
-    }]);
+        $scope.printFacility = wrappers.printFacility;
+    }])
+
+    .controller("mfl.facility_mgmt.controllers.facility_create.facility_print", ["$scope",
+        "mfl.facility_mgmt.services.wrappers", "$state",
+        function ($scope, wrappers, $state) {
+            $scope.$parent.print = true;
+            $scope.getFacilityCoords = function (f) {
+                wrappers.facility_coordinates.get(f.coordinates)
+                    .success(function (data) {
+                        $scope.gis = data;
+                    })
+                    .error(function (e) {
+                        $scope.alert = e.error;
+                    });
+            };
+            /*facility units*/
+            wrappers.facility_units.filter(
+            {facility:$state.params.facility_id})
+            .success(function(data){
+                $scope.fac_units = data.results;
+            })
+            .error(function (e) {
+                $scope.alert = e.error;
+            });
+            $scope.$watch("facility", function (f) {
+                if(!_.isNull(f.coordinates)) {
+                    $scope.getFacilityCoords(f);
+                }
+            });
+        }
+    ]);
 
 })(window.angular, window._);

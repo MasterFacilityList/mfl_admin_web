@@ -226,6 +226,78 @@
                     httpBackend.verifyNoOutstandingExpectation();
                 }]);
             });
+
+            it("should test print cover letter controller", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
+                };
+                state.params.facility_id = "3";
+                data.$scope.$parent.print = true;
+                httpBackend
+                        .expectGET(server_url+"api/facilities/facility_units/" +
+                                   "?facility=3")
+                        .respond(200);
+                httpBackend
+                        .expectGET(server_url+
+                            "api/gis/facility_coordinates/3/").respond(200);
+                ctrl( ".facility_print", data);
+                data.$scope.$apply();
+                data.$scope.facility={
+                    coordinates : "3"
+                };
+                data.$scope.$apply();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it("should fail to get coordinates", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
+                };
+                state.params.facility_id = "3";
+                data.$scope.$parent.print = true;
+                httpBackend
+                        .expectGET(server_url+"api/facilities/facility_units/" +
+                                   "?facility=3")
+                        .respond(200);
+                httpBackend
+                        .expectGET(server_url+
+                            "api/gis/facility_coordinates/3/").respond(500);
+                ctrl( ".facility_print", data);
+                data.$scope.$apply();
+                data.$scope.facility={
+                    coordinates : "3"
+                };
+                data.$scope.$apply();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it("should fail to fetch facility units", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
+                };
+                state.params.facility_id = "3";
+                data.$scope.$parent.print = true;
+                httpBackend
+                        .expectGET(server_url+"api/facilities/facility_units/" +
+                                   "?facility=3")
+                        .respond(500);
+                ctrl( ".facility_print", data);
+                data.$scope.$apply();
+                data.$scope.facility={
+                    coordinates : null
+                };
+                data.$scope.$apply();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
         });
     });
 })();
