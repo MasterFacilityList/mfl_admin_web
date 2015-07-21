@@ -35,7 +35,8 @@
     .controller("mfl.facility_mgmt.controllers.facilities_approve_update",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "has_edits": true
+                "has_edits": true,
+                "rejected": false
             };
             $scope.title = {
                 "name": "Approve Facility Updates",
