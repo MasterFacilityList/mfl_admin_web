@@ -96,10 +96,10 @@
                     <span ng-if="child.delete_spinner">
                         <i class="fa fa-spin fa-circle-o-notch"></i>
                     </span>
-                        <a class="action-btn action-btn-grid action-btn-danger" popover-trigger="open"
+                        <a class="login-btn login-btn-danger" popover-trigger="open"
                             popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Officer"
                              requires-permission="facilities.delete_facilityofficer">
-                            <i class="fa fa-trash fw-500"></i>
+                            &nbsp;Delete
                         </a>
                     </td>
                 </tr>
@@ -123,6 +123,6 @@
         &nbsp;<i class="fa fa-angle-double-left"></i> Services
     </a>
     <a ui-sref="facilities.facility_edit.units" ng-if="!create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
-        &nbsp; Facility Departments <i class="fa fa-angle-double-right"></i>
+        &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
     </a>
 </div>
