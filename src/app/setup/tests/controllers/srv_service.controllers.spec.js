@@ -9,7 +9,7 @@
             module("mflAdminAppConfig");
             module("mfl.common.forms");
             module("mfl.common.services");
-            module("mfl.service_mgmt.services");
+            module("mfl.setup.api");
             module("mfl.setup.services.controllers");
 
             inject(["$controller", "SERVER_URL", "$httpBackend", "$rootScope", "$state", "$log",

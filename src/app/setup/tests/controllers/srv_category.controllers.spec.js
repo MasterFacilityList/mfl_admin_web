@@ -8,7 +8,7 @@
             module("ui.router");
             module("mflAdminAppConfig");
             module("mfl.common.forms");
-            module("mfl.service_mgmt.services");
+            module("mfl.setup.api");
             module("mfl.setup.categories.controllers");
 
             inject(["$controller", "SERVER_URL", "$httpBackend", "$rootScope", "$state", "$log",
