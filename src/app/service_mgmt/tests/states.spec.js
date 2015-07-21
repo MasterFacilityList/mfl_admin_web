@@ -14,33 +14,33 @@
         });
 
         it("should define service management home url", function () {
-            expect(state.href("service_mgmt")).toEqual("#/services/");
+            expect(state.href("service_mgmt")).toEqual(null);
         });
 
         it("should define service list url", function () {
-            expect(state.href("service_mgmt.service_list")).toEqual("#/services/services/");
+            expect(state.href("service_mgmt.service_list")).toEqual(null);
         });
 
         it("should define service create url", function () {
             expect(state.href("service_mgmt.service_list.service_create"))
-            .toEqual("#/services/services/create/");
+            .toEqual(null);
         });
 
         it("should define service edit url", function () {
             expect(state.href("service_mgmt.service_list.service_edit", {"service_id": "abcd"}))
-            .toEqual("#/services/services/abcd/edit/");
+            .toEqual(null);
         });
 
         it("should define service delete url", function () {
             expect(state.href("service_mgmt.service_list.service_edit.delete",
                               {"service_id": "abcd"}))
-            .toEqual("#/services/services/abcd/edit/delete/");
+            .toEqual(null);
         });
 
         it("should define service options edit url", function () {
             expect(state.href("service_mgmt.service_list.service_edit.options",
                               {"service_id": "abcd"}))
-            .toEqual("#/services/services/abcd/edit/options/");
+            .toEqual(null);
         });
 
     });
