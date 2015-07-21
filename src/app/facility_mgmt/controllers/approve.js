@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _){
     "use strict";
 
     angular.module("mfl.facility_mgmt.controllers.approve", [
@@ -35,7 +35,8 @@
     .controller("mfl.facility_mgmt.controllers.facilities_approve_update",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "has_edits": true
+                "has_edits": true,
+                "rejected": false
             };
             $scope.title = {
                 "name": "Approve Facility Updates",
@@ -60,6 +61,19 @@
             wrappers.facility_approvals.filter({"facility": $scope.facility_id})
             .success(function (data) {
                 $scope.facility_approvals = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
+            wrappers.facility_services.filter({
+                "facility": $scope.facility_id,
+                "is_cancelled": false,
+                "is_confirmed": false,
+                "fields": "id,service_name,option_display_value"
+            })
+            .success(function (data) {
+                $scope.facility_service_updates = data.results;
             })
             .error(function (data) {
                 $log.error(data);
@@ -125,7 +139,21 @@
                     $log.error(data);
                 });
             };
+
+            $scope.approveFacilityService = function (fsu, approved) {
+                var payload = {
+                    "is_cancelled": approved ? false : true,
+                    "is_confirmed": approved ? true : false
+                };
+                wrappers.facility_services.update(fsu.id, payload)
+                .success(function () {
+                    $scope.facility_service_updates = _.without(
+                        $scope.facility_service_updates, fsu
+                    );
+                })
+                .error(function (data) {$log.error(data);});
+            };
         }]
     );
 
-})(window.angular);
+})(window.angular, window._);

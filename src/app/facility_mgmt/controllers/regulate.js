@@ -8,7 +8,8 @@
     .controller("mfl.facility_mgmt.controllers.facilities_regulation",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "regulated": false
+                "regulated": false,
+                "rejected": false
             };
             $scope.title = {
                 "name": "Regulate Facilities",
@@ -20,7 +21,8 @@
     .controller("mfl.facility_mgmt.controllers.facilities_regulation_approval",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "regulated": false
+                "regulated": false,
+                "rejected": false
             };
             $scope.title = {
                 "name": "Approve Facility Regulations",

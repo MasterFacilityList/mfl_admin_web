@@ -33,7 +33,7 @@
             <td data-title="Actions:"  class="text-right">
                 <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac.id})"
                     class="login-btn login-btn-action" ng-if="(!fac.rejected)&&(!fac.is_approved||fac.has_edits)" tooltip="Approve Facility">
-                    &nbsp;Approve
+                    &nbsp;Approve/Reject
                 </a>
 
                 <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac.id})"

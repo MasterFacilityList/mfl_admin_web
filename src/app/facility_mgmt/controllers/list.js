@@ -9,6 +9,9 @@
                 "name": "All Facilities",
                 "icon": "fa-building"
             };
+            $scope.filters = {
+                rejected: false
+            };
             $scope.action = [
                 {
                     func : "ui-sref='facilities.facility_create({furthest : 1})'" +

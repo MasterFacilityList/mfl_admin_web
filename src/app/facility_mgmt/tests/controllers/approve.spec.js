@@ -1,4 +1,4 @@
-(function () {
+(function (_) {
     "use strict";
 
     describe("Test facility approve controllers", function () {
@@ -48,7 +48,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_approve_update", {"$scope": scope});
-                expect(scope.filters).toEqual({"has_edits": true});
+                expect(scope.filters).toEqual({"has_edits": true, "rejected": false});
             });
         });
 
@@ -61,6 +61,12 @@
 
                 httpBackend
                     .expectGET(server_url+"api/facilities/facility_approvals/?facility=3")
+                    .respond(200, {results: []});
+
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_services/?" +
+                        "facility=3&is_cancelled=false&is_confirmed=false&" +
+                        "fields=id,service_name,option_display_value")
                     .respond(200, {results: []});
 
                 httpBackend
@@ -317,6 +323,88 @@
                 expect(state.go).not.toHaveBeenCalled();
                 expect(log.error).toHaveBeenCalled();
             });
+
+            it("should approve/reject a facility service update", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {facility_id: 3}
+                };
+
+                ctrl("facility_approve", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facility_services/1/",
+                        {"is_cancelled":false,"is_confirmed":true})
+                    .respond(200);
+
+                data.$scope.facility_service_updates = [
+                    {"id": "1"}, {"id": "2"}, {"id": "3"}
+                ];
+                data.$scope.approveFacilityService(
+                    data.$scope.facility_service_updates[0], true
+                );
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.resetExpectations();
+
+                expect(_.contains(data.$scope.facility_service_updates, {"id": "1"})).toBe(false);
+
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facility_services/2/",
+                        {"is_cancelled":true,"is_confirmed":false})
+                    .respond(200);
+
+                data.$scope.approveFacilityService(
+                    data.$scope.facility_service_updates[0], false
+                );
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.resetExpectations();
+
+                expect(_.contains(data.$scope.facility_service_updates, {"id": "2"})).toBe(false);
+            });
+
+            it("should approve/reject a facility service update", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {facility_id: 3}
+                };
+
+                ctrl("facility_approve", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facility_services/1/",
+                        {"is_cancelled":false,"is_confirmed":true})
+                    .respond(400);
+
+                data.$scope.facility_service_updates = [
+                    {"id": "1"}, {"id": "2"}, {"id": "3"}
+                ];
+                data.$scope.approveFacilityService(
+                    data.$scope.facility_service_updates[0], true
+                );
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.resetExpectations();
+
+                expect(_.contains(data.$scope.facility_service_updates, {"id": "1"})).toBe(false);
+            });
         });
     });
-})();
+})(window._);

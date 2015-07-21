@@ -20,8 +20,7 @@
         //intializing ui select values
         if(_.isEmpty($state.params.facility_id)){
             $scope.select_values = {};
-        }
-        else {
+        } else {
             wrappers.facility_detail.get($scope.new_facility)
                 .success(function(data){
                     $scope.spinner = false;
