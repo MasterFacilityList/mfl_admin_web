@@ -24,15 +24,6 @@
                     $scope.service_error = errorMessages.errors +
                     errorMessages.fetching_services;
                 });
-                wrappers.keph_levels.filter({fields: "id,name", ordering: "name"})
-                .success(function (data) {
-                    $scope.keph_levels = data.results;
-                })
-                .error(function (data) {
-                    $log.error(data);
-                    $scope.service_error = errorMessages.errors +
-                    errorMessages.keph_level;
-                });
             };
 
             var addServiceOption = function ($scope, so) {
@@ -69,18 +60,15 @@
                 loadData($scope);
                 $scope.new_service = {
                     service: "",
-                    option: "",
-                    keph_level: ""
+                    option: ""
                 };
                 $scope.services = [];
                 $scope.service_options = [];
-                $scope.keph_levels = [];
 
                 $scope.addServiceOption = function (a) {
                     addServiceOption($scope, a).then(function () {
                         $scope.new_service.service = "";
                         $scope.new_service.option = "";
-                        $scope.new_service.keph_level = "";
                     });
                 };
                 $scope.removeChild = function (a) {

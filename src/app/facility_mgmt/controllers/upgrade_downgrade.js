@@ -7,12 +7,12 @@
     ])
 
     .controller("mfl.facility_mgmt.controllers.updown_helper",
-        ["$log", "mfl.facility_mgmt.services.wrappers",
-        function ($log, wrappers) {
+        ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
+        function ($log, wrappers, errorMessages) {
             var load = function ($scope) {
                 $scope.new_type = {
-                    id:"",
                     facility_type: "",
+                    keph_level: "",
                     reason: "",
                     facility: $scope.facility_id
                 };
@@ -23,6 +23,15 @@
                 })
                 .error(function(data) {
                     $log.error(data);
+                });
+                wrappers.keph_levels.filter({fields: "id,name", ordering: "name"})
+                .success(function (data) {
+                    $scope.keph_levels = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    $scope.service_error = errorMessages.errors +
+                    errorMessages.keph_level;
                 });
             };
 

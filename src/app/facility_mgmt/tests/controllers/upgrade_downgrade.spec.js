@@ -35,6 +35,10 @@
                     .expectGET(
                         server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
                     .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/keph/?fields=id,name&ordering=name")
+                    .respond(200, {results: [{"id": 3, "name": "Level 2"}]});
 
                 var c = ctrl("updown_helper", data);
                 c.bootstrap(scope, false);
@@ -44,6 +48,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.facility_types).toEqual([]);
+                expect(scope.keph_levels).toEqual([{"id": 3, "name": "Level 2"}]);
                 expect(scope.upgrade).toEqual(false);
 
                 httpBackend.resetExpectations();
@@ -63,7 +68,7 @@
                 expect(scope.new_type.id).toEqual("89");
             });
 
-            it("should update facility types", function () {
+            it("should catch failures", function () {
                 var data = {
                     "$log": log
                 };
@@ -73,6 +78,10 @@
                     .expectGET(
                         server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
                     .respond(500);
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/keph/?fields=id,name&ordering=name")
+                    .respond(404);
 
                 var c = ctrl("updown_helper", data);
                 c.bootstrap(scope, true);
@@ -82,6 +91,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.facility_types).toEqual(undefined);
+                expect(scope.keph_levels).toEqual(undefined);
                 expect(scope.upgrade).toEqual(true);
 
                 httpBackend.resetExpectations();
@@ -97,8 +107,6 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-
-                expect(scope.new_type.id).toEqual("");
             });
         });
 
