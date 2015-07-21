@@ -4,7 +4,8 @@
     angular.module("mfl.common.constants", [])
 
     .constant("mfl.error.messages", {
-        errors : "Sorry a connection error occured, ",
+        errors : "Sorry, ",
+        connection : "a connection error occured",
         facility_details : "failed to load facility details",
         data : "failed to save updates",
         contacts : "failed to update contacts",
@@ -18,6 +19,7 @@
         location : "failed to update facility location details",
         geolocation : "failed to update facility geolocation details",
         geocodes : "failed to fetch facility geocoordinates",
-        ward : "failed to fetch facility's ward geocoordinates"
+        ward : "failed to fetch facility's ward geocoordinates",
+        keph_level: "failed to load KEPH Levels"
     });
 })(window.angular);

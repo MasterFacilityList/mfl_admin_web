@@ -10,7 +10,7 @@
                 <span class="highlght"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
-                    Officer Name
+                    Name
                 </label>
             </div>
             <div class="group col-xs-11">
@@ -19,7 +19,7 @@
                 <span class="highlght"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
-                    Officer ID
+                    ID Number
                 </label>
             </div>
             <div class="group col-xs-11">
@@ -28,7 +28,7 @@
                 <span class="highlght"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
-                    Officer Registration Number
+                    Registration Number
                 </label>
             </div>
             <div class="group col-xs-11">
@@ -82,6 +82,7 @@
                 <tr>
                     <th>Name</th>
                     <th>ID Number</th>
+                    <th>Registration Number</th>
                     <th>Job Title</th>
                 </tr>
             </thead>
@@ -89,6 +90,7 @@
                 <tr ng-repeat="child in fac_officers">
                     <td class="pad-t-15 fs-16 fw-500">{{child.officer_name}}</td>
                     <td class="pad-t-15 fs-16 fw-500">{{child.id_number}}</td>
+                    <td class="pad-t-15 fs-16 fw-500">{{child.registration_number}}</td>
                     <td class="pad-t-15 fs-16 fw-500">{{child.job_title}}</td>
                     <td class="pad-t-10 text-right">
                     <span ng-if="child.delete_spinner">

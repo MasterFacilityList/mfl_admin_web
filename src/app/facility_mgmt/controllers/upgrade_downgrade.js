@@ -7,15 +7,25 @@
     ])
 
     .controller("mfl.facility_mgmt.controllers.updown_helper",
-        ["$log", "mfl.facility_mgmt.services.wrappers",
-        function ($log, wrappers) {
+        ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
+        function ($log, wrappers, errorMessages) {
             var load = function ($scope) {
                 $scope.new_type = {
-                    id:"",
                     facility_type: "",
+                    keph_level: "",
                     reason: "",
                     facility: $scope.facility_id
                 };
+
+                wrappers.facility_upgrade.filter(
+                    {facility: $scope.facility_id, is_cancelled: false, is_confirmed: false}
+                )
+                .success(function (data) {
+                    $scope.new_type = data.results[0] || $scope.new_type;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
 
                 wrappers.facility_types.filter({page_size: 100, "ordering": "name"})
                 .success(function(data) {
@@ -23,6 +33,15 @@
                 })
                 .error(function(data) {
                     $log.error(data);
+                });
+                wrappers.keph_levels.filter({fields: "id,name", ordering: "name"})
+                .success(function (data) {
+                    $scope.keph_levels = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    $scope.service_error = errorMessages.errors +
+                    errorMessages.keph_level;
                 });
             };
 
@@ -48,23 +67,20 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_upgrade",
         ["$scope", "$controller", function ($scope, $controller) {
-            var helper = $controller("mfl.facility_mgmt.controllers.updown_helper");
-            helper.bootstrap($scope, true);
+            var updownHelper = $controller("mfl.facility_mgmt.controllers.updown_helper");
+            var srvHelper = $controller("mfl.facility_mgmt.controllers.services_helper");
+            srvHelper.bootstrap($scope);
+            updownHelper.bootstrap($scope, true);
         }]
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_downgrade",
         ["$scope", "$controller",
         function ($scope, $controller) {
-            var helper = $controller("mfl.facility_mgmt.controllers.updown_helper");
-            helper.bootstrap($scope, false);
-        }]
-    )
-
-    .controller("mfl.facility_mgmt.controllers.update_services",
-        ["$scope", "$controller", function ($scope, $controller) {
-            var helper = $controller("mfl.facility_mgmt.controllers.services_helper");
-            helper.bootstrap($scope);
+            var updownHelper = $controller("mfl.facility_mgmt.controllers.updown_helper");
+            var srvHelper = $controller("mfl.facility_mgmt.controllers.services_helper");
+            srvHelper.bootstrap($scope);
+            updownHelper.bootstrap($scope, false);
         }]
     );
 

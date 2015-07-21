@@ -31,7 +31,7 @@
                     facility: $scope.facility_id,
                     selected_option: so
                 };
-                wrappers.facility_services.create(payload)
+                return wrappers.facility_services.create(payload)
                 .success(function(data) {
                     $scope.facility.facility_services.push(data);
                 })
@@ -43,7 +43,7 @@
             };
 
             var removeServiceOption = function ($scope, fs) {
-                wrappers.facility_services.remove(fs.id)
+                return wrappers.facility_services.remove(fs.id)
                 .success(function () {
                     $scope.facility.facility_services = _.without(
                         $scope.facility.facility_services, fs
@@ -66,7 +66,10 @@
                 $scope.service_options = [];
 
                 $scope.addServiceOption = function (a) {
-                    addServiceOption($scope, a);
+                    addServiceOption($scope, a).then(function () {
+                        $scope.new_service.service = "";
+                        $scope.new_service.option = "";
+                    });
                 };
                 $scope.removeChild = function (a) {
                     removeServiceOption($scope, a);
@@ -129,10 +132,6 @@
                         regulatory_body: {
                             "id": $scope.facility.regulatory_body,
                             "name": $scope.facility.regulatory_body_name
-                        },
-                        keph_level: {
-                            "id": $scope.facility.keph_level,
-                            "name": $scope.facility.keph_level_name
                         }
                     };
                 })
@@ -197,7 +196,6 @@
             $scope.selectReload(wrappers.regulating_bodies, "", "regulating_bodies");
             if ($scope.create) {
                 $scope.selectReload(wrappers.facility_types, "", "facility_types");
-                $scope.selectReload(wrappers.keph_levels, "", "keph_levels");
             }
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
@@ -206,7 +204,6 @@
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
-                $scope.facility.keph_level = $scope.select_values.keph_level;
 
                 if($scope.create) {
                     $scope.setFurthest(2);
