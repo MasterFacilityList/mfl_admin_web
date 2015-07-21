@@ -5,6 +5,7 @@
         "mfl.setup.routes.counties",
         "mfl.setup.routes.dashboard",
         "mfl.setup.routes.keph",
+        "mfl.setup.routes.service_mgmt",
         "mfl.setup.routes.towns",
         "mfl.setup.routes.wards",
         "mfl.setup.routes.contacts",

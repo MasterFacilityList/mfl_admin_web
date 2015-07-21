@@ -1,0 +1,17 @@
+<div class="content-header">
+   <div class="action-container content-header-extra pad-r-20">
+        <a tooltip-placement="bottom" tooltip="new option"  class="login-btn login-btn-primary"
+            ui-sref="setup.srv_option_list.option_create" ui-sref-opts="{reload:true}"
+            requires-user-feature="is_staff" requires-permission="facilities.delete_option">
+            &nbsp;Add Option
+        </a>
+   </div>
+   <h2 class="content-title">
+        <span class="main-title"><i class="fa fa-list-alt"></i> Options</span>
+   </h2>
+</div>
+<div class="content-body">
+    <sil-grid template="setup/tpls/service_mgmt/option_list.tpl.html" grid-for="service_mgmt" api-key="options"
+        data="options" filters="filters" error="alert">
+    </sil-grid>
+</div>

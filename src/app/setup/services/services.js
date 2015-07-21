@@ -28,6 +28,45 @@
             };
         }];
     }])
+    .service("mfl.service_mgmt.wrappers", ["api", function (api) {
+        this.services = api.setBaseUrl("api/facilities/services/");
+
+        this.categories = api.setBaseUrl("api/facilities/service_categories/");
+
+        this.options = api.setBaseUrl("api/facilities/options/");
+
+        this.service_options = api.setBaseUrl("api/facilities/service_options/");
+
+        this.OPTION_TYPES = [
+            "BOOLEAN", "INTEGER", "DECIMAL", "TEXT"
+        ];
+
+        this.newCategory = function () {
+            return {
+                "name": "",
+                "description": "",
+                "abbreviation": ""
+            };
+        };
+
+        this.newService = function () {
+            return {
+                "name": "",
+                "description": "",
+                "abbreviation": "",
+                "category": ""
+            };
+        };
+
+        this.newOption = function () {
+            return {
+                "value": "",
+                "display_text": "",
+                "is_exclusive_option": false,
+                "option_type": ""
+            };
+        };
+    }])
     .service("currentStateOpen",["$state",function ($state){
         this.whichTab = function (){
             var collapsed = {};
@@ -41,7 +80,8 @@
                     "true": false,
                     "three": false,
                     "four":false,
-                    "five":false
+                    "five":false,
+                    "six":false
                 };
             } else if(state_name.indexOf("chu_") > -1){
                 collapsed = {
@@ -57,7 +97,8 @@
                     "true": false,
                     "three": true,
                     "four":false,
-                    "five":false
+                    "five":false,
+                    "six":false
                 };
             } else if(state_name.indexOf("facility_") > -1){
                 collapsed = {
@@ -65,7 +106,8 @@
                     "true": false,
                     "three": false,
                     "four":true,
-                    "five":false
+                    "five":false,
+                    "six":false
                 };
             } else if(state_name.indexOf("geocode_") > -1){
                 collapsed = {
@@ -73,7 +115,17 @@
                     "true": false,
                     "three": false,
                     "four":false,
-                    "five":true
+                    "five":true,
+                    "six":false
+                };
+            } else if(state_name.indexOf("srv_") > -1){
+                collapsed = {
+                    "one": false,
+                    "true": false,
+                    "three": false,
+                    "four":false,
+                    "five":false,
+                    "six":true
                 };
             } else {
                 collapsed = {};
