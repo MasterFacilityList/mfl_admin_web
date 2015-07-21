@@ -36,9 +36,19 @@
         "mfl.facility_mgmt.services.wrappers",
         function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.facility_id = $stateParams.facility_id;
+
+            $scope.regulation = {
+                "facility": $scope.facility_id,
+                "regulation_status": "",
+                "reason": "",
+                "license_number": "",
+                "regulating_body": ""
+            };
+
             wrappers.facility_detail.get($scope.facility_id)
             .success(function(data) {
                 $scope.facility = data;
+                $scope.regulation.regulating_body = $scope.facility.regulatory_body;
             })
             .error(function (data) {
                 $log.error(data);
@@ -50,17 +60,14 @@
             .error(function (data) {
                 $log.error(data);
             });
-            $scope.regulation = {
-                "facility": $scope.facility_id,
-                "regulation_status": "",
-                "reason": "",
-                "license_number": "",
-                "regulating_body": "344150ec-2f85-47fc-abf9-336765369eca"
-            };
             $scope.regulateFacility = function () {
                 wrappers.facility_regulation_status.create($scope.regulation)
-                .success(function () {$state.go("^");})
-                .error(function (data) {$log.error(data);});
+                .success(function () {
+                    $state.go("facilities_regulation");
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
             };
         }]
     );

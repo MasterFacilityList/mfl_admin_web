@@ -69,17 +69,13 @@
                     <ui-select-match><span>{{$select.selected.name}}</span></ui-select-match>
                 </ui-select>
             </div>
-            <div class="group">
-                <textarea name="reason" required="" ng-model="regulation.reason" row="1"></textarea>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Reason</label>
+            <div class="form-group">
+                <label for="reason">Reason</label>
+                <textarea class="form-control" name="reason" required ng-model="regulation.reason"></textarea>
             </div>
-            <div class="group">
-                <input type="text" name="license_number" ng-model="regulation.license_number" required >
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label>License Number</label>
+            <div class="form-group">
+                <label for="license_number">License Number / Reference Number</label>
+                <input class="form-control" type="text" name="license_number" ng-model="regulation.license_number" required >
             </div>
 
             <button type="submit" class="login-btn login-btn-action">

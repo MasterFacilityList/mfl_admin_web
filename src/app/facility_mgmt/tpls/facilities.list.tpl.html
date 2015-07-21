@@ -42,7 +42,12 @@
                 </a>
 
                 <a requires-permission="facilities.change_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
-                    class="login-btn login-btn-action" tooltip="View/Edit Facility">
+                    class="login-btn login-btn-action" tooltip="Edit Facility">
+                    &nbsp;Edit
+                </a>
+
+                <a requires-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
+                    class="login-btn login-btn-action" tooltip="View Facility">
                     &nbsp;View
                 </a>
 
