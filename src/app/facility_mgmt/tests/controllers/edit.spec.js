@@ -1781,6 +1781,10 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(200, {results: [{"id": 3}]});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/keph/?fields=id,name&ordering=name")
+                    .respond(200, {results: [{"id": 3, "name": "Level 2"}]});
 
                 var c = ctrl();
                 var scope = rootScope.$new();
@@ -1798,12 +1802,17 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.services).toEqual([{"id": 3}]);
+                expect(scope.keph_levels).toEqual([{"id": 3, "name": "Level 2"}]);
             });
 
             it("should show error on fail to load services", function () {
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(500, {"error": "e"});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/keph/?fields=id,name&ordering=name")
+                    .respond(404);
 
                 spyOn(log, "error");
                 var c = ctrl({"$log": log});
@@ -1815,6 +1824,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.services).toEqual([]);
+                expect(scope.keph_levels).toEqual([]);
                 expect(log.error).toHaveBeenCalled();
             });
 

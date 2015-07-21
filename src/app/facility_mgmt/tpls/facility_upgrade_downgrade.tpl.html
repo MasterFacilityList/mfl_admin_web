@@ -10,11 +10,18 @@
     <form ng-submit="updateType()">
         <hr>
         <div class="form-group pad-t-20" >
+            <label for="facility_type">New KEPH Level</label>
+            <ui-select ng-model="new_type.keph_level" name="keph_level" required>
+                <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="kl.id as kl in keph_levels | filter:$select.search">{{kl.name}}</ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group pad-t-20" >
             <label for="facility_type">New Facility Type</label>
-            <select ng-model="new_type.facility_type" name="facility_type" class="form-control col-xs-10" required>
-                <option value=""></option>
-                <option ng-repeat="factype in facility_types" ng-value="factype.id">{{factype.name}}</option>
-            </select>
+            <ui-select ng-model="new_type.facility_type" name="facility_type" required>
+                <ui-select-match>{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="factype.id as factype in facility_types | filter:$select.search">{{factype.name}}</ui-select-choices>
+            </ui-select>
         </div>
         <div class="form-group">
             <label for="reason">Reason for {{(upgrade) ? 'Upgrade' : 'Downgrade'}}</label>

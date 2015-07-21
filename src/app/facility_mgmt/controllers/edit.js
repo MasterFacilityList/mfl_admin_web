@@ -24,6 +24,15 @@
                     $scope.service_error = errorMessages.errors +
                     errorMessages.fetching_services;
                 });
+                wrappers.keph_levels.filter({fields: "id,name", ordering: "name"})
+                .success(function (data) {
+                    $scope.keph_levels = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    $scope.service_error = errorMessages.errors +
+                    errorMessages.keph_level;
+                });
             };
 
             var addServiceOption = function ($scope, so) {
@@ -31,7 +40,7 @@
                     facility: $scope.facility_id,
                     selected_option: so
                 };
-                wrappers.facility_services.create(payload)
+                return wrappers.facility_services.create(payload)
                 .success(function(data) {
                     $scope.facility.facility_services.push(data);
                 })
@@ -43,7 +52,7 @@
             };
 
             var removeServiceOption = function ($scope, fs) {
-                wrappers.facility_services.remove(fs.id)
+                return wrappers.facility_services.remove(fs.id)
                 .success(function () {
                     $scope.facility.facility_services = _.without(
                         $scope.facility.facility_services, fs
@@ -60,13 +69,19 @@
                 loadData($scope);
                 $scope.new_service = {
                     service: "",
-                    option: ""
+                    option: "",
+                    keph_level: ""
                 };
                 $scope.services = [];
                 $scope.service_options = [];
+                $scope.keph_levels = [];
 
                 $scope.addServiceOption = function (a) {
-                    addServiceOption($scope, a);
+                    addServiceOption($scope, a).then(function () {
+                        $scope.new_service.service = "";
+                        $scope.new_service.option = "";
+                        $scope.new_service.keph_level = "";
+                    });
                 };
                 $scope.removeChild = function (a) {
                     removeServiceOption($scope, a);
