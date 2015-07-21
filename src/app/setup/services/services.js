@@ -41,7 +41,8 @@
                     "true": false,
                     "three": false,
                     "four":false,
-                    "five":false
+                    "five":false,
+                    "six":false
                 };
             } else if(state_name.indexOf("chu_") > -1){
                 collapsed = {
@@ -57,7 +58,8 @@
                     "true": false,
                     "three": true,
                     "four":false,
-                    "five":false
+                    "five":false,
+                    "six":false
                 };
             } else if(state_name.indexOf("facility_") > -1){
                 collapsed = {
@@ -65,7 +67,8 @@
                     "true": false,
                     "three": false,
                     "four":true,
-                    "five":false
+                    "five":false,
+                    "six":false
                 };
             } else if(state_name.indexOf("geocode_") > -1){
                 collapsed = {
@@ -73,7 +76,17 @@
                     "true": false,
                     "three": false,
                     "four":false,
-                    "five":true
+                    "five":true,
+                    "six":false
+                };
+            } else if(state_name.indexOf("srv_") > -1){
+                collapsed = {
+                    "one": false,
+                    "true": false,
+                    "three": false,
+                    "four":false,
+                    "five":false,
+                    "six":true
                 };
             } else {
                 collapsed = {};

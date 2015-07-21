@@ -69,6 +69,15 @@
                     stateSrv.whichTab();
                 }]);
             });
+            it("should expect service branch to be used as a state",
+            function () {
+                inject(["currentStateOpen","$state",
+                function (stateSrv,$state) {
+                    $state.current.name = "srv_";
+                    expect(stateSrv.whichTab).toBeDefined();
+                    stateSrv.whichTab();
+                }]);
+            });
         });
     });
 

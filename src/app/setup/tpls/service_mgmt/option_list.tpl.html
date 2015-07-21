@@ -1,0 +1,35 @@
+<div class="content-card">
+    <div class="pull-left col-sm-4 col-xs-6">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-2">
+    <p class="text-right">Page {{pagination.current_page}} / {{pagination.page_count}}</p>
+    </div>
+    <table class="table table-hover fs-14" id="no-more-tables">
+        <thead>
+            <tr>
+               <th class="class="col-xs-12"">#</th>
+                <th sil-grid-sort field='display_text'>Display Text</th>
+                <th sil-grid-sort field='value'>Value</th>
+                <th sil-grid-sort field='option_type'>Option Type</th>
+                <th sil-grid-sort field='is_exclusive_option'>Is Exclusive Option</th>
+                <th class="text-right">Actions&nbsp;&nbsp;&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody class="fade-content">
+            <tr ng-repeat="opt in options">
+                <td data-title="#:"  class="pad-t-15">{{($index + 1 + ((pagination.current_page-1) * 25))}}</td>
+                <td data-title="Display Text:"  class="pad-t-15">{{opt.display_text}}</td>
+                <td data-title="Value:"  class="pad-t-15">{{opt.value}}</td>
+                <td data-title="Type:"  class="pad-t-15">{{opt.option_type | titlecase}}</td>
+                <td data-title="Exclusive Option?"  class="pad-t-15">{{opt.is_exclusive_option | boolFilter}}</td>
+                <td data-title="Actions:" class="text-right">
+                    <a tooltip-placement="bottom" tooltip="View option" ui-sref="setup.srv_option_list.option_edit({option_id: opt.id})" ui-sref-opts="{reload:true}" class="login-btn login-btn-action">
+                        &nbsp;View
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>

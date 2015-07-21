@@ -1,0 +1,13 @@
+<div class="content-header">
+   <div class="action-container content-header-extra pad-r-20">
+        <a  tooltip-placement="bottom" tooltip="new service" class="login-btn login-btn-primary" ui-sref="setup.srv_service_list.service_create.basic ({furthest : 1})" ui-sref-opts="{reload:true}" requires-user-feature="is_staff" requires-permission="facilities.add_service">&nbsp;Add Service</a>
+   </div>
+   <h2 class="content-title">
+        <span class="main-title"><i class="fa fa-exchange"></i> Services</span>
+   </h2>
+</div>
+<div class="content-body">
+    <sil-grid template="setup/tpls/service_mgmt/service_list.tpl.html" grid-for="service_mgmt" api-key="services"
+        data="services" filters="filters" error="alert">
+    </sil-grid>
+</div>

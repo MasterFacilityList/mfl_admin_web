@@ -1,0 +1,18 @@
+<div class="content-header">
+   <span class="content-title">
+       <i class="fa fa-trash"></i> Delete Service
+   </span>
+</div>
+<div class="col-md-12 col-sm-12">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 text-center content-card">
+    <form name="category_frm">
+            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20">
+                    <p class="lead">Are you sure you want to delete the service <strong>{{service.name}}</strong>?</p>
+                    <div class="margin-t-20 margin-b-20">
+                            <button class="login-btn login-btn-success margin-h-5" ng-click="save()" requires-user-feature="is_staff" requires-permission="facilities.delete_service">Yes</button>
+                            <a class="login-btn login-btn-default margin-l-5" ui-sref="setup.srv_service_list">No</a>
+                    </div>
+            </div>
+    </form>
+</div>
+</div>

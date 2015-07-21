@@ -1,0 +1,72 @@
+<div class="col-sm-12 margin-t-20 listing">
+    <div class="col-sm-12">
+        <div class="col-sm-12">
+            <h3 ng-if="create">
+                Step 2 of 2 Service Options
+            </h3>
+        </div>
+    </div>
+    <div class="col-sm-12 margin-t-30 detail-content margin-b-10">
+        <div class="col-sm-12 content-card form-card margin-t-20" requires-user-feature="is_staff" requires-permission="facilities.add_serviceoption">
+            <div class="col-sm-12">
+                <h4 class="fw-600 fs-18">Available options</h4>
+            </div>
+                <form ng-submit="addOption()">
+                    <div class="group col-sm-10">
+                        <select ng-model="new_option_id" required>
+                            <option value="">Select Option</option>
+                            <option ng-repeat="opt in options" ng-value="opt.id">{{opt.display_text}}</option>
+                        </select>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="submit" class="login-btn login-btn-info margin-t-10 margin-b-10" >
+                            <i class="fa fa-plus-circle"></i> Add
+                        </button>
+                    </div>
+                </form>
+        </div>
+        <div class="col-sm-12 content-card margin-t-30">
+            <h4 class="fw-600 fs-18">Options tied to the service</h4>
+            <table class="table table-hover fs-14">
+                <thead>
+                    <tr>
+                        <th >Display Text</th>
+                        <th >Value</th>
+                        <th >Option Type</th>
+                        <th colspan="2">Is Exclusive Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="child in service_options">
+                        <td class="pad-t-15">{{child.display_text}}</td>
+                        <td class="pad-t-15">{{child.value}}</td>
+                        <td class="pad-t-15">{{child.option_type | titlecase}}</td>
+                        <td class="pad-t-15">{{child.is_exclusive_option | boolFilter}}</td>
+                        <td class="text-right">
+                            <a tooltip="Delete Option" popover-trigger="open" popover-toggle
+                                popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left"
+                                class="action-btn action-btn-grid action-btn-danger" requires-user-feature="is_staff" requires-permission="facilities.delete_option">
+                                <i class="fa fa-trash fw-500"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr ng-if="spinner">
+                        <td class="text-center" colspan="5">
+                            <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-if="!create" class="col-sm-12 margin-b-20 margin-t-20">
+            <button class="login-btn login-btn-primary margin-l--10" ui-sref="setup.srv_service_list.service_edit.basic ({service_id : service_id})">
+                &nbsp;<i class="fa fa-angle-double-left"></i> Details
+            </button>
+            <button class="login-btn login-btn-primary pull-right margin-r--10" ui-sref="setup.srv_service_list"  requires-user-feature="is_staff">
+                &nbsp;&nbsp;{{ create ? 'Submit' : 'Update' }} <i class="fa fa-angle-double-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
