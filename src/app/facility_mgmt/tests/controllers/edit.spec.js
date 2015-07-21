@@ -3004,6 +3004,8 @@
                         {name : "units"},
                         {name : "location"}
                     ];
+                    //added create
+                    data.$scope.create = false;
                     data.$scope.geo = {
                         coordinates : []
                     };

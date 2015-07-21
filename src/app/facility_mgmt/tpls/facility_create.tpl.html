@@ -2,8 +2,13 @@
     <div class="action-container content-header-extra pad-r-20">
         <button class="action-btn action-btn-primary action-btn-md"
             ng-click="printFacility(facility_id)"
-            ng-if="create" tooltip="Print Cover Letter">
+            tooltip="Print Cover Letter" ng-if="create && print">
             <i class="fa fa-print"></i>
+        </button>
+        <button ng-if="create && print" ui-sref="facility_mgmt"
+        class="action-btn action-btn-primary action-btn-md"
+            ng-if="create && print" tooltip="Complete facility creation">
+            <i class="fa fa-save"></i>
         </button>
         <a onclick="window.history.back()" class="action-btn action-btn-primary action-btn-md"
            tooltip-placement="bottom" tooltip="Back">
@@ -17,7 +22,7 @@
 <div class="col-sm-12" style="display: inline-flex;">
 <div class="col-xs-12 margin-t-20 content-card">
     <div ui-view="tab-header" class="margin-t-20"></div>
-    <hr class="line-divider">
+    <hr class="line-divider" ng-if="!print">
     <div class="tab-content margin-t-20">
         <div class="listing col-sm-12" ui-view="form-view"></div>
     </div>

@@ -136,7 +136,7 @@
                 views : {
                     "form-view@facilities.facility_create": {
                         templateUrl: "facility_mgmt/tpls/facility_print.tpl.html",
-                        controller: "mfl.facility_mgmt.controllers.facility_print"
+                        controller: "mfl.facility_mgmt.controllers.facility_create.facility_print"
                     }
                 },
                 permission: "facilities.add_facility"
