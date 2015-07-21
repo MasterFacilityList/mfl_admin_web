@@ -94,6 +94,7 @@
             $scope.facility_id = $stateParams.facility_id;
             $scope.create = false;
             $scope.spinner = true;
+            $scope.updown = false;
             $scope.steps = facilityMultistepService.facilityObject();
             $scope.tabState = function(obj) {
                 _.each($scope.steps, function (step) {
