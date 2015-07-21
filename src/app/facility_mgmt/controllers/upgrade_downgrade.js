@@ -67,6 +67,7 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_upgrade",
         ["$scope", "$controller", function ($scope, $controller) {
+            $scope.updown = true;
             var updownHelper = $controller("mfl.facility_mgmt.controllers.updown_helper");
             var srvHelper = $controller("mfl.facility_mgmt.controllers.services_helper");
             srvHelper.bootstrap($scope);
@@ -77,6 +78,7 @@
     .controller("mfl.facility_mgmt.controllers.facility_downgrade",
         ["$scope", "$controller",
         function ($scope, $controller) {
+            $scope.updown = true;
             var updownHelper = $controller("mfl.facility_mgmt.controllers.updown_helper");
             var srvHelper = $controller("mfl.facility_mgmt.controllers.services_helper");
             srvHelper.bootstrap($scope);
