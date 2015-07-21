@@ -48,7 +48,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_approve_update", {"$scope": scope});
-                expect(scope.filters).toEqual({"has_edits": true});
+                expect(scope.filters).toEqual({"has_edits": true, "rejected": false});
             });
         });
 
