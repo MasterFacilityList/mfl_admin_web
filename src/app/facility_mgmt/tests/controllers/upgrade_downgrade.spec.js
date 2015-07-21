@@ -25,11 +25,20 @@
         });
 
         describe("Test upgrade downgrade helper controller", function () {
-            it("should update facility types", function () {
+
+            it("should load data", function () {
                 var data = {
                     "$log": log
                 };
-                var scope = {};
+                var scope = {
+                    "facility_id": "33"
+                };
+
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/facility_upgrade/?" +
+                        "facility=33&is_cancelled=false&is_confirmed=false")
+                    .respond(200, {results: [{"id": "1"}]});
 
                 httpBackend
                     .expectGET(
@@ -47,6 +56,43 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
+                expect(scope.new_type).toEqual({"id": "1"});
+                expect(scope.facility_types).toEqual([]);
+                expect(scope.keph_levels).toEqual([{"id": 3, "name": "Level 2"}]);
+                expect(scope.upgrade).toEqual(false);
+            });
+
+            it("should update facility types", function () {
+                var data = {
+                    "$log": log
+                };
+                var scope = {
+                    "facility_id": "33"
+                };
+
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/facility_upgrade/?" +
+                        "facility=33&is_cancelled=false&is_confirmed=false")
+                    .respond(200, {results: []});
+
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/keph/?fields=id,name&ordering=name")
+                    .respond(200, {results: [{"id": 3, "name": "Level 2"}]});
+
+                var c = ctrl("updown_helper", data);
+                c.bootstrap(scope, false);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.new_type).not.toEqual({});
                 expect(scope.facility_types).toEqual([]);
                 expect(scope.keph_levels).toEqual([{"id": 3, "name": "Level 2"}]);
                 expect(scope.upgrade).toEqual(false);
@@ -72,7 +118,15 @@
                 var data = {
                     "$log": log
                 };
-                var scope = {};
+                var scope = {
+                    "facility_id": "33"
+                };
+
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/facility_upgrade/?" +
+                        "facility=33&is_cancelled=false&is_confirmed=false")
+                    .respond(503);
 
                 httpBackend
                     .expectGET(

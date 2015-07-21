@@ -17,6 +17,16 @@
                     facility: $scope.facility_id
                 };
 
+                wrappers.facility_upgrade.filter(
+                    {facility: $scope.facility_id, is_cancelled: false, is_confirmed: false}
+                )
+                .success(function (data) {
+                    $scope.new_type = data.results[0] || $scope.new_type;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
+
                 wrappers.facility_types.filter({page_size: 100, "ordering": "name"})
                 .success(function(data) {
                     $scope.facility_types = data.results;

@@ -1,25 +1,30 @@
 <div>
     <div>
         <form ng-submit="updateType()">
+            <div class="alert alert-info" ng-if="new_type.id">
+                <p>The facility has pending upgrade/downgrade.</p>
+            </div>
             <div class="form-group" >
                 <label for="facility_type">New KEPH Level</label>
-                <ui-select ng-model="new_type.keph_level" name="keph_level" required>
+                <ui-select ng-model="new_type.keph_level" name="keph_level" required ng-disabled="new_type.id">
                     <ui-select-match>{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="kl.id as kl in keph_levels | filter:$select.search">{{kl.name}}</ui-select-choices>
                 </ui-select>
             </div>
             <div class="form-group" >
                 <label for="facility_type">New Facility Type</label>
-                <ui-select ng-model="new_type.facility_type" name="facility_type" required>
+                <ui-select ng-model="new_type.facility_type" name="facility_type" required ng-disabled="new_type.id">
                     <ui-select-match>{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="factype.id as factype in facility_types | filter:$select.search">{{factype.name}}</ui-select-choices>
                 </ui-select>
             </div>
             <div class="form-group">
                 <label for="reason">Reason for {{(upgrade) ? 'Upgrade' : 'Downgrade'}}</label>
-                <textarea ng-model="new_type.reason" name="reason" required class="form-control"></textarea>
+                <textarea ng-model="new_type.reason" name="reason" required class="form-control"  ng-disabled="new_type.id"></textarea>
             </div>
-            <input class="login-btn" ng-class="{'login-btn-danger': !upgrade, 'login-btn-success': upgrade}" ng-value="(upgrade)?'Upgrade':'Downgrade'" type="submit" ng-disabled="new_type.id"/>
+            <button class="login-btn" ng-class="{'login-btn-danger': !upgrade, 'login-btn-success': upgrade}" type="submit" ng-disabled="new_type.id">
+                {{(upgrade) ? 'Upgrade' : 'Downgrade' }}
+            </button>
         </form>
     </div>
     <div class="margin-t-20">
