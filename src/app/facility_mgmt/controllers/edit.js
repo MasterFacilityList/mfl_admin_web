@@ -188,6 +188,11 @@
             else {
                 $scope.nextState();
             }
+            $scope.initUniqueName = function(official, name) {
+                if(_.isUndefined(name)){
+                    $scope.facility.name = official;
+                }
+            };
             $scope.login_user = loginService.getUser();
             $scope.selectReload(wrappers.facility_owners, "", "owners");
             $scope.selectReload(wrappers.operation_status, "", "operation_status");

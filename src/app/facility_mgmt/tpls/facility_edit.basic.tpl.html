@@ -22,15 +22,15 @@
               </p>
             </div>
             <div class="group col-xs-12">
-                <input type="text" name="name" ng-model="facility.name" required />
+                <input type="text" name="official_name" ng-model="facility.official_name" ng-blur="initUniqueName(facility.official_name, facility.name)">
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
-                    Facility Official Name
+                    Facility Offical Name
                 </label>
             </div>
             <div class="group col-xs-12">
-                <input type="text" name="abbreviation" ng-model="facility.abbreviation">
+                <input type="text" name="name" ng-model="facility.name" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
@@ -124,6 +124,16 @@
                       <span class="check"></span>
                       <span class="box"></span>
                        Open 24 hours
+                   </label>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="checkbox-group margin-t-10">
+                  <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="facility.open_late_night">
+                  <label for="open_late_night">
+                      <span class="check"></span>
+                      <span class="box"></span>
+                       Open Late Night
                    </label>
               </div>
             </div>
