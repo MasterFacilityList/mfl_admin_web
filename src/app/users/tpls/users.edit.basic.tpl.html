@@ -71,36 +71,6 @@
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
-                <div class="col-sm-12" requires-user-feature="is_national">
-                    <div class="checkbox-group margin-b-20">
-                        <input type="checkbox" id="is_national" ng-model="user.is_national" name="is_national">
-                        <label for="is_national">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                             User is <strong>national user</strong>?
-                         </label>
-                    </div>
-                </div>
-                <div class="col-sm-12" requires-user-feature="is_national">
-                    <div class="checkbox-group margin-b-20">
-                        <input type="checkbox" id="is_staff" ng-model="user.is_staff" name="is_staff">
-                        <label for="is_staff">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                             User is an <strong>administrator</strong>?
-                         </label>
-                    </div>
-                </div>
-                <div class="col-sm-12" requires-user-feature="is_national">
-                    <div class="checkbox-group margin-b-20">
-                        <input type="checkbox" id="is_regulator" ng-model="user.is_regulator" name="is_regulator">
-                        <label for="is_regulator">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                             User is a <strong>regulator</strong>?
-                         </label>
-                    </div>
-                </div>
             </div>
             <div class="margin-t-20 margin-b-20">
                 <a ng-if="!create" ui-sref="users" class="login-btn login-btn-default">
