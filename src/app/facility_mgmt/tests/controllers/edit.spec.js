@@ -439,9 +439,12 @@
                     }
                 };
                 data.$scope.save(frm);
-
+                var official = "Antony Facility";
+                var name;
+                data.$scope.initUniqueName(official, name);
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
+                expect(data.$scope.facility.name).toEqual(official);
             });
 
             it("should edit facility basic details", function () {
@@ -480,7 +483,9 @@
                 };
                 data.$scope.facility_id = 3;
                 data.$scope.save(frm);
-
+                var official = "Antony Facility";
+                var name = "Yitch";
+                data.$scope.initUniqueName(official, name);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
