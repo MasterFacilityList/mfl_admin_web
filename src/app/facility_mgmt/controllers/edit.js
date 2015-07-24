@@ -742,7 +742,8 @@
                                 layer:"facility",
                                 lat: data.coordinates.coordinates[1],
                                 lng: data.coordinates.coordinates[0],
-                                message: "Facility location"
+                                message: f.name,
+                                draggable: true
                             }
                         }
                     });
@@ -771,6 +772,7 @@
                             map.fitBounds(bounds);
                         });
                     var gis = data.ward_boundary;
+                    // setup data for the map
                     angular.extend($scope, {
                         geojson: {
                             data: gis,
@@ -892,6 +894,10 @@
                     }
                 });
             };
+            // update coordinates after dragging marker
+            $scope.$on("leafletDirectiveMarker.dragend", function (e, args) {
+                $scope.geo.coordinates.coordinates = [args.model.lat,args.model.lng];
+            });
             /*Wait for facility to be defined*/
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
