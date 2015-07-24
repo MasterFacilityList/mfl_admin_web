@@ -23,17 +23,5 @@
             //Actual test
             expect($element.hasClass("content-header")).toBeTruthy();
         });
-
-        it("should optionally exclude the back button", function () {
-            var scope = $rootScope.$new();
-            var element = $compile("<contentheader hide-back-button></contentheader>")(scope);
-            scope.$digest();
-            expect(element.html().toLowerCase().indexOf("window.history.back")).toEqual(-1);
-
-            scope = $rootScope.$new();
-            element = $compile(directiveTpl)(scope);
-            scope.$digest();
-            expect(element.html().toLowerCase().indexOf("window.history.back")).not.toEqual(-1);
-        });
     });
 })();

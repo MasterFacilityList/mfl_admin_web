@@ -64,12 +64,5 @@
             expect($links.eq(0).attr("class")).toContain("btn");
             expect($links.eq(1).attr("class")).toContain("btn-primary");
         });
-
-        it("should optionally exclude the back button", function () {
-            var scope = $rootScope.$new();
-            var element = $compile("<actionbar></actionbar>")(scope);
-            scope.$digest();
-            expect(element.html()).not.toEqual("");
-        });
     });
 })();
