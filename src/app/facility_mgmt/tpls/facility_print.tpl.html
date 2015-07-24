@@ -14,8 +14,8 @@
         <label class="text-black fw-600">Regulatory status: </label>
         {{facility.regulatory_status_name}}
     </div>
-    <div class="col-md-6 col-xs-12 content-right fs-16">
-        <label class="text-black fw-600">Regulatory Body: </label>
+    <div class="col-md-6 col-xs-12 content-right fs-16" ng-if="facility.regulatory_body_name !== null">
+        <label class="text-black fw-600" >Regulatory Body: </label>
         {{facility.regulatory_body_name}}
     </div>
     <div class="col-xs-12"><hr class="line-divider"></div>
