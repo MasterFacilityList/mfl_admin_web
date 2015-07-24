@@ -41,6 +41,11 @@
                     &nbsp;Publish
                 </a>
 
+                <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac.id})"
+                    class="login-btn login-btn-action" ng-if="fac.is_published" tooltip="Unpublish Facility">
+                    &nbsp;Unpublish
+                </a>
+
                 <a requires-permission="facilities.change_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
                     class="login-btn login-btn-action" tooltip="Edit Facility">
                     &nbsp;Edit

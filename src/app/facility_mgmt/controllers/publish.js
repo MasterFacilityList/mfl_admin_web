@@ -38,8 +38,9 @@
                 $log.error(data);
             });
 
-            $scope.publish = function () {
-                wrappers.facility_detail.update($scope.facility_id, {"is_published": true})
+            $scope.publish = function (publish) {
+                var pub = publish ? true : false;
+                wrappers.facility_detail.update($scope.facility_id, {"is_published": pub})
                 .success(function () {
                     $state.go("facilities_publish");
                 })
