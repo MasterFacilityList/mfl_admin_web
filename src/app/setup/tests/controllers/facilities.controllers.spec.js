@@ -45,13 +45,13 @@
                 var ctrl = createController("mfl.setup.controller.facilityOwnerType.view", dt);
                 expect(ctrl).toBeDefined();
             });
-        it("should navigate to creating new owner type", function () {
+        it("should navigate to creating new owner category", function () {
             var dt = {
                 $stateParams : {id: "create"}
             };
             var test_title = {
                 icon: "fa-plus-circle",
-                name: "New Facility Owner Types"
+                name: "New Facility Owner Categories"
             };
             createController(
                 "mfl.setup.controller.facilityOwnerType.view", dt);

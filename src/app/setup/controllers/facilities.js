@@ -12,7 +12,7 @@
         function ($scope) {
             $scope.title = {
                 icon: "fa-dedent",
-                name: "Manage Facility Owner Types"
+                name: "Manage Facility Owner Categories"
             };
             $scope.action = [
                 {
@@ -20,8 +20,8 @@
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_ownertype'",
                     class: "login-btn login-btn-primary",
-                    tipmsg: "Add Facility Owner Type",
-                    wording:"Add Facility Owner Type"
+                    tipmsg: "Add Facility Owner Category",
+                    wording:"Add Facility Owner Category"
                 }
             ];
         }]
@@ -34,7 +34,7 @@
                 $stateParams.id !== "create"){
                 $scope.title = {
                     icon: "fa-edit",
-                    name: "Edit Facility Owner Types"
+                    name: "Edit Facility Owner Categories"
                 };
                 $scope.action = [
                     {
@@ -42,7 +42,7 @@
                                " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.delete_ownertype'",
                         class: "login-btn login-btn-danger",
-                        tipmsg: "Delete Facility Owner Type",
+                        tipmsg: "Delete Facility Owner Category",
                         wording: "Delete"
                     }
                 ];
@@ -67,7 +67,7 @@
             if(!_.isUndefined($stateParams) && $stateParams.id === "create") {
                 $scope.title = {
                     icon: "fa-plus-circle",
-                    name: "New Facility Owner Types"
+                    name: "New Facility Owner Categories"
                 };
             }
 

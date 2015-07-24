@@ -13,6 +13,12 @@
             <div class="col-xs-12">
                 <h4 class="margin-b-20 fw-600">Facility Basic Details</h4>
             </div>
+            <div class="form-group row col-xs-12">
+              <label class="col-xs-2 control-label">Facility Code</label>
+              <div class="col-xs-10">
+                <p class="form-control-static">{{facility.code || '(automatically generated after creating facility)'}}</p>
+              </div>
+            </div>
             <div class="group col-xs-12">
                 <input type="text" name="name" ng-model="facility.name" required />
                 <span class="highlight"></span>
@@ -31,7 +37,7 @@
             </div>
             <div class="form-group col-xs-12">
                 <label>Facility Type</label>
-                <ui-select ng-model="select_values.facility_type" required ng-disabled="facility.id" name="facility_type">
+                <ui-select ng-model="select_values.facility_type" required name="facility_type">
                     <ui-select-match placeholder="Select a facility type...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
