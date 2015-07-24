@@ -84,6 +84,29 @@
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facilities/3/")
                     .respond(200);
+                data.$scope.publish(true);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+
+            it("should unpublish a facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {facility_id: 3}
+                };
+                ctrl("facility_publish", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(200);
                 data.$scope.publish();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -109,7 +132,7 @@
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facilities/3/")
                     .respond(400);
-                data.$scope.publish();
+                data.$scope.publish(true);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
