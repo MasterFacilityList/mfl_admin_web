@@ -13,6 +13,8 @@
                 <th sil-grid-sort field='username'>Username</th>
                 <th sil-grid-sort field='email'>Email</th>
                 <th class="text-center">National User</th>
+                <th sil-grid-sort field='last_login'>Last Login</th>
+                <th sil-grid-sort field='is_active'>Is Active</th>
                 <th class="text-right">Actions&nbsp;&nbsp;</th>
             </thead>
             <tbody class="example-animate-container">
@@ -24,6 +26,8 @@
                         <i ng-if="user.is_national" class="fa fa-user fa-1x text-success" tooltip="National User"></i>
                         <i ng-if="!user.is_national" class="fa fa-user-times fa-1x text-danger" tooltip="Not a National User"></i>
                     </td>
+                    <td data-title="Last Login" class="pad-t-15">{{user.last_login|date }}</td>
+                    <td data-title="Is Active" class="pad-t-15">{{user.is_active|boolFilter}}</td>
                     <td class="text-right">
                         <a ui-sref="users.user_edit.basic({user_id : user.id})" class="login-btn login-btn-action">
                             &nbsp;View
