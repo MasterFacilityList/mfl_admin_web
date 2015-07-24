@@ -17,6 +17,11 @@
             });
         };
     })
+    .filter("dateFilter", ["$filter", function ($filter) {
+        return function (input) {
+            return $filter("date")(input, "EEE, dd MMM yyyy hh:mm a");
+        };
+    }])
     .filter("boolFilter", function() {
         return function(s) {
             if (s === true) {

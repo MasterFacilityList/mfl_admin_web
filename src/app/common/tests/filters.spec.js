@@ -1,13 +1,14 @@
 (function () {
     "use strict";
     describe("Filters: testing mfl common filters", function () {
-        var contact_type_filter,titlecase_filter,bool_filter;
+        var contact_type_filter,titlecase_filter,bool_filter,date_filter;
         beforeEach(function () {
             module("mfl.common.filters");
             inject(["$filter", function ($filter) {
                 contact_type_filter = $filter("contact_type");
                 titlecase_filter = $filter("titlecase");
                 bool_filter = $filter("boolFilter");
+                date_filter = $filter("dateFilter");
             }]);
         });
         it("Should have contact_type filter defined", function(){
@@ -30,6 +31,15 @@
             ];
             expect(contact_type_filter(
                 cont_type_id, cont_types)).toEqual(solution);
+        });
+        it("dateFilter should be defined", function () {
+            expect(date_filter).toBeDefined();
+        });
+        it("should give Expected output", function () {
+            var now = new Date();
+            var ans = date_filter(now, "EEE, dd MMM yyyy hh:mm a");
+            // Tue, 18 Nov 2014 03:09 PM
+            expect(date_filter(now.toISOString())).toBe(ans);
         });
         it( "Should test titlecase filter",function() {
             var result;
