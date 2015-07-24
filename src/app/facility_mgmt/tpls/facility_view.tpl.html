@@ -6,7 +6,7 @@
         <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="login-btn login-btn-action" ng-if="!facility.is_published" tooltip="Publish Facility">
             &nbsp;Publish
         </a>
-        <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="login-btn login-btn-action" ng-if="facility.is_published" tooltip="Publish Facility">
+        <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="login-btn login-btn-action" ng-if="facility.is_published" tooltip="Unpublish Facility">
             &nbsp;Unpublish
         </a>
         <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac_id})" class="login-btn login-btn-action" ng-if="(!facility.rejected)&&(!facility.is_approved||facility.has_edits)" tooltip="Approve Facility">
