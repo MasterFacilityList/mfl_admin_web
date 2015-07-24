@@ -2344,16 +2344,13 @@
                 httpBackend
                     .expectGET(server_url+"api/common/towns/")
                     .respond(200, {results: []});
-
                 ctrl(".location", data);
-                data.$scope.$apply();
                 data.$scope.facility={
                     coordinates : "3",
                     ward : "3"
                 };
                 data.$scope.$apply();
                 data.$scope.$digest();
-
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -2913,6 +2910,12 @@
                             coordinates : [3, 1]
                         }
                     };
+                    var args = {
+                        model:{
+                            lat:1,
+                            lng:2
+                        }
+                    };
                     httpBackend
                         .expectGET(server_url+"api/gis/geo_code_methods/")
                         .respond(200, {results: []});
@@ -2926,6 +2929,7 @@
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
                     ctrl(".geolocation", data);
+                    rootScope.$broadcast("leafletDirectiveMarker.dragend",null,args);
                     data.$scope.$apply();
                     data.$scope.facility={
                         coordinates : "3",
