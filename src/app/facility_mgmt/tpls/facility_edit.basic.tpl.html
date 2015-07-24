@@ -14,17 +14,19 @@
                 <h4 class="margin-b-20 fw-600">Facility Basic Details</h4>
             </div>
             <div class="form-group row col-xs-12">
-              <label class="col-xs-2 control-label">Facility Code</label>
-              <div class="col-xs-10">
-                <p class="form-control-static">{{facility.code || '(automatically generated after creating facility)'}}</p>
-              </div>
+              <p class="lead">
+                <label class="col-xs-2 control-label fs-18 fw-600 fs-18 margin-t-5">Facility Code: </label>
+                  <span class="label label-info">{{facility.code || 'Automatically generated after creating facility'}}
+                  </span>
+              </p>
+              </p>
             </div>
             <div class="group col-xs-12">
                 <input type="text" name="name" ng-model="facility.name" required />
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
-                    Facility Name
+                    Facility Official Name
                 </label>
             </div>
             <div class="group col-xs-12">
@@ -32,7 +34,7 @@
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
-                    Abbreviation
+                    Facility Unique Name
                 </label>
             </div>
             <div class="form-group col-xs-12">
