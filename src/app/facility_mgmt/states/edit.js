@@ -7,6 +7,19 @@
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+            .state("facilities.facility_view", {
+                url: "view/:facility_id/",
+                views: {
+                    "main-content@facility_mgmt": {
+                        templateUrl: "facility_mgmt/tpls/facility_view.tpl.html",
+                        controller: "mfl.facility_mgmt.controllers.facility_create.facility_print"
+                    },
+                    "read-only@facilities.facility_view": {
+                        templateUrl: "facility_mgmt/tpls/facility_print.tpl.html"
+                    }
+                },
+                permission: "facilities.view_facility"
+            })
             .state("facilities.facility_edit", {
                 url: "edit/:facility_id/",
                 views: {

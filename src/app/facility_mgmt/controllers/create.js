@@ -100,9 +100,22 @@
     }])
 
     .controller("mfl.facility_mgmt.controllers.facility_create.facility_print", ["$scope",
-        "mfl.facility_mgmt.services.wrappers", "$state",
-        function ($scope, wrappers, $state) {
+        "mfl.facility_mgmt.services.wrappers", "$state", "$stateParams",
+        function ($scope, wrappers, $state, $stateParams) {
             $scope.$parent.print = true;
+            $scope.fac_id = $stateParams.facility_id || $state.params.facility_id;
+            if(!_.isUndefined($stateParams.facility_id) &&
+                !_.isEmpty($stateParams.facility_id)){
+                $scope.spinner = true;
+                wrappers.facility_detail.get($scope.fac_id)
+                    .success(function(data){
+                        $scope.facility = data;
+                        $scope.spinner = false;
+                    }).error(function (error) {
+                        $scope.alert = error;
+                        $scope.spinner = false;
+                    });
+            }
             $scope.getFacilityCoords = function (f) {
                 wrappers.facility_coordinates.get(f.coordinates)
                     .success(function (data) {
@@ -114,7 +127,7 @@
             };
             /*facility units*/
             wrappers.facility_units.filter(
-            {facility:$state.params.facility_id})
+            {facility:$scope.fac_id})
             .success(function(data){
                 $scope.fac_units = data.results;
             })
@@ -122,10 +135,14 @@
                 $scope.alert = e.error;
             });
             $scope.$watch("facility", function (f) {
+                if (_.isUndefined(f)){
+                    return;
+                }
                 if(!_.isNull(f.coordinates)) {
                     $scope.getFacilityCoords(f);
                 }
             });
+            $scope.printFacility = wrappers.printFacility;
         }
     ]);
 

@@ -3,7 +3,7 @@
 
     describe("Test facility edit controllers", function () {
         var rootScope, ctrl, httpBackend, server_url, loginService, log,
-        yusa, controller, facObjService, state, multistepService;
+        yusa, controller, facObjService, state, multistepService, stateParams;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
@@ -13,8 +13,8 @@
             inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$log",
                 "mfl.common.services.multistep",
-                "mfl.facility.multistep.service", "$state",
-                function (c, r, h, s, ls, lg, ms,fmS, st) {
+                "mfl.facility.multistep.service", "$state", "$stateParams",
+                function (c, r, h, s, ls, lg, ms,fmS, st, sp) {
                     ctrl = function (name, data) {
                         return c("mfl.facility_mgmt.controllers.facility_create"+name, data);
                     };
@@ -26,6 +26,7 @@
                     multistepService = ms;
                     facObjService = fmS;
                     state = st;
+                    stateParams = sp;
                     yusa = {
                         county: "123"
                     };
@@ -230,10 +231,16 @@
             it("should test print cover letter controller", function () {
                 var data = {
                     "$scope" : rootScope.$new(),
-                    "$state" : state
+                    "$state" : state,
+                    "$stateParams": stateParams
                 };
                 state.params.facility_id = "3";
+                stateParams.facility_id = "3";
                 data.$scope.$parent.print = true;
+                data.$scope.fac_id = state.params.facility_id;
+                httpBackend
+                        .expectGET(server_url+
+                            "api/facilities/facilities/3/").respond(200);
                 httpBackend
                         .expectGET(server_url+"api/facilities/facility_units/" +
                                    "?facility=3")
@@ -255,7 +262,10 @@
             it("should fail to get coordinates", function () {
                 var data = {
                     "$scope" : rootScope.$new(),
-                    "$state" : state
+                    "$state" : state,
+                    "$stateParams" : {
+                        facility_id : ""
+                    }
                 };
                 state.params.facility_id = "3";
                 data.$scope.$parent.print = true;
