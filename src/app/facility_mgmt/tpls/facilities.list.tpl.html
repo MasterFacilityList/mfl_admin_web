@@ -11,11 +11,12 @@
     <thead>
         <th class="col-xs-1">Code</th>
         <th sil-grid-sort field='name'>Name</th>
+        <th sil-grid-sort field='facility_type_name'>Facility Type</th>
+        <th sil-grid-sort field='owner_name'>Owner</th>
         <th sil-grid-sort field='county'>County</th>
         <th sil-grid-sort field='constituency'>Sub County</th>
-        <th sil-grid-sort field='owner_name'>Owner</th>
-        <th sil-grid-sort field='facility_type_name'>Facility Type</th>
-        <!-- <th class="text-right">Actions&nbsp;&nbsp;</th> -->
+        <th sil-grid-sort field='constituency'>Constituency</th>
+        <th sil-grid-sort field='ward'>Ward</th>
     </thead>
 
     <tbody ng-if="facilities.length===0">
@@ -28,41 +29,12 @@
             <td data-title="Name:" class="pad-t-15">
                 <a ui-sref="facilities.facility_view({facility_id: fac.id})">{{::fac.name}}</a>
             </td>
+            <td data-title="Facility Type:" class="pad-t-15">{{::fac.facility_type_name}}</td>
+            <td data-title="Owner:" class="pad-t-15">{{::fac.owner_name}}</td>
             <td data-title="County:"class="pad-t-15"> {{::fac.county}}</td>
             <td data-title="Sub County:" class="pad-t-15">{{::fac.constituency}}</td>
-            <td data-title="Owner:" class="pad-t-15">{{::fac.owner_name}}</td>
-            <td data-title="Facility Type:" class="pad-t-15">{{::fac.facility_type_name}}</td>
-            <!-- <td data-title="Actions:"  class="text-right">
-                <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac.id})"
-                    class="login-btn login-btn-action" ng-if="(!fac.rejected)&&(!fac.is_approved||fac.has_edits)" tooltip="Approve Facility">
-                    &nbsp;Approve/Reject
-                </a>
-
-                <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac.id})"
-                    class="login-btn login-btn-action" ng-if="!fac.is_published" tooltip="Publish Facility">
-                    &nbsp;Publish
-                </a>
-
-                <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac.id})"
-                    class="login-btn login-btn-action" ng-if="fac.is_published" tooltip="Unpublish Facility">
-                    &nbsp;Unpublish
-                </a>
-
-                <a requires-permission="facilities.change_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
-                    class="login-btn login-btn-action" tooltip="Edit Facility">
-                    &nbsp;Edit
-                </a>
-
-                <a requires-permission="facilities.view_facility" ui-sref="facilities.facility_edit({facility_id: fac.id})"
-                    class="login-btn login-btn-action" tooltip="View Facility">
-                    &nbsp;View
-                </a>
-
-                <a requires-permission="facilities.view_facility,facilities.add_facilityregulationstatus"
-                    ui-sref="facilities_regulation.regulate.basic({facility_id: fac.id})" class="login-btn login-btn-action" tooltip="Regulate Facility">
-                    &nbsp;Regulate
-                </a>
-            </td> -->
+            <td data-title="Constituency:" class="pad-t-15">{{::fac.constituency}}</td>
+            <td data-title="Ward:" class="pad-t-15">{{::fac.ward_name}}</td>
         </tr>
     </tbody>
 </table>
