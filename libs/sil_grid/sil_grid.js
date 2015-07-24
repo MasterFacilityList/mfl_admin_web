@@ -13,7 +13,7 @@
     .provider("silGridConfig", function() {
         this.apiMaps = {};
         this.appConfig = "mflAdminAppConfig";
-        this.itemsPerPage = 25;
+        this.itemsPerPage = 30;
         this.$get = [function(){
             return {
                 apiMaps: this.apiMaps,
