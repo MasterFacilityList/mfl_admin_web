@@ -16,7 +16,7 @@
             <div class="form-group row col-xs-12">
               <label class="col-xs-2 control-label">Facility Code</label>
               <div class="col-xs-10">
-                <p class="form-control-static">{{facility.code || '(automatically generated after creating facility)'}}</p>
+                <p class="form-control-static">{{facility.code || '(automatically generated on creating facility)'}}</p>
               </div>
             </div>
             <div class="group col-xs-12">
@@ -24,15 +24,15 @@
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
-                    Facility Name
+                    Facility Unique Name
                 </label>
             </div>
             <div class="group col-xs-12">
-                <input type="text" name="abbreviation" ng-model="facility.abbreviation">
+                <input type="text" name="official_name" ng-model="facility.official_name">
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label class="margin-l-10">
-                    Abbreviation
+                    Facility Official Name
                 </label>
             </div>
             <div class="form-group col-xs-12">
