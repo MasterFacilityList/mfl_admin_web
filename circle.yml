@@ -17,10 +17,10 @@ test:
 
 deployment:
     release:
-        branch: "bump-release"
-        owner: "masterfacilitylist"
+        branch: bump-release
+        owner: masterfacilitylist
         commands:
             - grunt default
-            - 'tar cvzf "$RELEASE_ASSET" bin'
+            - tar cvzf "$RELEASE_ASSET" bin
             - pip install github3.py
             - python deploy.py
