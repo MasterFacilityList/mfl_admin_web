@@ -18,7 +18,7 @@ test:
 deployment:
     release:
         branch: bump-release
-        owner: masterfacilitylist
+        owner: MasterFacilityList
         commands:
             - grunt default
             - tar cvzf "$RELEASE_ASSET" bin
