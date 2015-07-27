@@ -7,14 +7,12 @@
 <div id="no-more-tables" class="col-lg-12 margin-t-15">
     <table class="table table-hover fs-14">
         <thead class="cf">
-            <th class="col-xs-1">#</th>
             <th>Regulating Body</th>
             <th>Contact</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="regbodycontact in regulatingBodyContacts">
-                <td data-title="#" class="pad-t-15">{{$index + 1 + 25 * (pagination.current_page - 1)}}</td>
                 <td data-title="Name" class="pad-t-15">{{regbodycontact.regulating_body}}</td>
                 <td data-title="Status" class="pad-t-15">
                     {{regbodycontact.contact}}
