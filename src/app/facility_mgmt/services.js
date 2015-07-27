@@ -15,37 +15,31 @@
                     count: "1"
                 },
                 {
-                    name : "contacts",
+                    name : "geolocation",
                     prev : ["basic"],
                     count: "2"
                 },
                 {
-                    name : "services",
-                    prev : ["basic", "contacts"],
+                    name : "contacts",
+                    prev : ["basic", "geolocation"],
                     count: "3"
                 },
                 {
                     name : "officers",
-                    prev : ["basic", "contacts", "services"],
+                    prev : ["basic", "geolocation", "contacts"],
                     count: "4"
                 },
                 {
                     name : "units",
-                    prev : ["basic", "contacts",  "services",
+                    prev : ["basic", "geolocation",  "contacts",
                             "officers"],
                     count: "5"
                 },
                 {
-                    name : "location",
-                    prev : ["basic", "contacts",  "services",
+                    name : "services",
+                    prev : ["basic", "geolocation",  "contacts",
                             "officers", "units"],
                     count: "6"
-                },
-                {
-                    name : "geolocation",
-                    prev : ["basic", "contacts",  "services",
-                            "officers", "units", "location"],
-                    count: "7"
                 }
             ];
             return result;
