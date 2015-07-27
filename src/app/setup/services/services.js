@@ -38,15 +38,16 @@
                state_name.indexOf("towns") > -1 ){
                 collapsed = {
                     "one": true,
-                    "true": false,
+                    "two": false,
                     "three": false,
                     "four":false,
-                    "five":false
+                    "five":false,
+                    "six":false
                 };
             } else if(state_name.indexOf("chu_") > -1){
                 collapsed = {
                     "one": false,
-                    "true": true,
+                    "two": true,
                     "three": false,
                     "four":false,
                     "five":false,
@@ -55,7 +56,7 @@
             } else if(state_name.indexOf("contact") > -1){
                 collapsed = {
                     "one": false,
-                    "true": false,
+                    "two": false,
                     "three": true,
                     "four":false,
                     "five":false,
@@ -64,7 +65,7 @@
             } else if(state_name.indexOf("facility_") > -1){
                 collapsed = {
                     "one": false,
-                    "true": false,
+                    "two": false,
                     "three": false,
                     "four":true,
                     "five":false,
@@ -73,7 +74,7 @@
             } else if(state_name.indexOf("geocode_") > -1){
                 collapsed = {
                     "one": false,
-                    "true": false,
+                    "two": false,
                     "three": false,
                     "four":false,
                     "five":true,
@@ -82,7 +83,7 @@
             } else if(state_name.indexOf("service_mgmt") > -1){
                 collapsed = {
                     "one": false,
-                    "true": false,
+                    "two": false,
                     "three": false,
                     "four":false,
                     "five":false,
