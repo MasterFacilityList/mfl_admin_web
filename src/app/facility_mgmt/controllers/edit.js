@@ -907,7 +907,6 @@
                 if (_.isUndefined(f)){
                     return;
                 }
-                //$scope.facilityWard(f);
                 if(!_.isNull(f.coordinates)) {
                     $scope.getFacilityCoordinates(f);
                 }
