@@ -38,7 +38,7 @@
     }])
 
     .config(["$httpProvider", function($httpProvider) {
-        var val = "no-cache";
+        var val = "no-cache, no-store, max-age=0";
         $httpProvider.defaults.headers.common["Cache-Control"] = val;
         jQuery.ajaxSetup({
             headers: {
