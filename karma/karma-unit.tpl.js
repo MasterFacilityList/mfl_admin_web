@@ -145,7 +145,9 @@ module.exports = function ( karma ) {
                 platform: "Windows 7"
             }
         };
-
+        karma_config.browserDisconnectTolerance = 1;
+        karma_config.browserNoActivityTimeout = 120000;
+        karma_config.browserDisconnectTimeout = 30000;
         karma_config.captureTimeout = 120000;
         karma_config.sauceLabs = {
             testName: "MFL Admin App JS Unit Testing"
