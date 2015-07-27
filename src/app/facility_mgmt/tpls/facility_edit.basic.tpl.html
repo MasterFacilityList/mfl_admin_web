@@ -72,19 +72,6 @@
                     </ui-select-choices>
                 </ui-select>
             </div>
-
-            <div class="form-group col-xs-12">
-                <label>Ward</label>
-                <ui-select ng-model="select_values.ward" required name="ward">
-                    <ui-select-match placeholder="Select a ward...">
-                        <span>{{$select.selected.name}}</span>
-                    </ui-select-match>
-                    <ui-select-choices repeat="ward.id as ward in wards | filter:$select.search">
-                        <span>{{ward.name}}</span>
-                    </ui-select-choices>
-                </ui-select>
-            </div>
-
             <div class="form-group col-xs-12">
                 <label>Regulatory Body</label>
                 <ui-select ng-model="select_values.regulatory_body" required name="regulatory_body">
@@ -96,11 +83,7 @@
                     </ui-select-choices>
                 </ui-select>
             </div>
-        </div>
-       <div class="col-xs-12 custom-well">
-        <div class="col-xs-12">
-            <h4 class="margin-b-20 fw-600">Facility Setup Details</h4>
-        </div>
+
             <div class="group col-sm-12">
                 <input type="text" name="number_of_beds" ng-model="facility.number_of_beds"  required />
                 <span class="highlight"></span>
@@ -167,6 +150,59 @@
                    </label>
               </div>
             </div>
+        </div>
+        <div class="col-sm-12 custom-well margin-t-20">
+            <div class="col-sm-12">
+                <h4 class="fw-600 fs-18"> Location Details</h4>
+            </div>
+           <!-- <form name="phyForm"> -->
+                <div class="form-group col-xs-12">
+                    <label>Ward</label>
+                    <ui-select ng-model="select_values.ward" required name="ward">
+                        <ui-select-match placeholder="Select a ward...">
+                            <span>{{$select.selected.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="ward.id as ward in wards | filter:$select.search">
+                            <span>{{ward.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group col-xs-12">
+                    <label>Town</label>
+                    <ui-select name="town" ng-model="select_values.town" required>
+                        <ui-select-match placeholder="Select a town...">
+                            <span>{{$select.selected.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="town.id as town in towns | filter:$select.search">
+                            <span>{{town.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="group col-xs-12">
+                    <input type="text" name="plot_number" ng-model="facility.facility_physical_address.plot_number"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="margin-l-10">
+                        Plot number
+                    </label>
+                </div>
+                <div class="group col-xs-12">
+                    <input type="text" name="nearest_landmark" ng-model="facility.facility_physical_address.nearest_landmark"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="margin-l-10">
+                        Nearest landmark
+                    </label>
+                </div>
+                <div class="group col-xs-12">
+                    <input type="text" name="location_desc" ng-model="facility.facility_physical_address.location_desc"  required />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="margin-l-10">
+                        Location description
+                    </label>
+                </div>
+            <!-- </form> -->
         </div>
         <!-- End of setupstuff -->
         <button ui-sref="facilities" class="login-btn login-btn-default margin-b-10">

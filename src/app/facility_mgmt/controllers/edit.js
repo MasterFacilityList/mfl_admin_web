@@ -250,11 +250,11 @@
                     }
                 } else {
                     if (_.isEmpty(changes)) {
-                        $state.go("facilities.facility_edit.contacts");
+                        $state.go("facilities.facility_edit.geolocation", {reload : true});
                     } else {
                         wrappers.facility_detail.update($scope.facility_id, changes)
                         .success(function () {
-                            $state.go("facilities.facility_edit.contacts");
+                            $state.go("facilities.facility_edit.geolocation", {reload : true});
                         })
                         .error(function (data) {
                             $log.error(data);
@@ -274,7 +274,7 @@
             errorMessages){
             if(!$scope.create) {
                 multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[1]);
+                    $scope, $scope.steps, $scope.steps[2]);
             }
             else {
                 $scope.nextState();
@@ -459,7 +459,7 @@
             helper.bootstrap($scope);
             if(!$scope.create) {
                 multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[2]);
+                    $scope, $scope.steps, $scope.steps[5]);
             }
             else {
                 $scope.nextState();
@@ -701,7 +701,7 @@
             formChanges, $state, errorMessages) {
             if(!$scope.create) {
                 multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[6]);
+                    $scope, $scope.steps, $scope.steps[1]);
             }else{
                 $scope.nextState();
             }
@@ -852,9 +852,8 @@
                         .success(function (data) {
                             spinner1 =false;
                             $scope.geo = data;
-                            var submit_state = ($scope.create ? "facilities."+
-                                "facility_create.facility_cover_letter" :
-                                "facility_mgmt");
+                            var submit_state = "facilities."+
+                                "facility_edit.contacts";
                             $state.go(submit_state, {facility_id : $state.params.facility_id});
                         })
                         .error(function (error) {
@@ -908,7 +907,7 @@
                 if (_.isUndefined(f)){
                     return;
                 }
-                $scope.facilityWard(f);
+                //$scope.facilityWard(f);
                 if(!_.isNull(f.coordinates)) {
                     $scope.getFacilityCoordinates(f);
                 }
