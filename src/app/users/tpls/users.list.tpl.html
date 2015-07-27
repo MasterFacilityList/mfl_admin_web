@@ -14,20 +14,18 @@
                 <th sil-grid-sort field='email'>Email</th>
                 <th sil-grid-sort field='last_login'>Last Login</th>
                 <th sil-grid-sort field='is_active'>Is Active</th>
-                <th class="text-right">Actions&nbsp;&nbsp;</th>
             </thead>
             <tbody class="example-animate-container">
                 <tr class="animate-repeat" ng-repeat="user in users | filter: search.query">
-                    <td data-title="Name" class="pad-t-15">{{user.first_name}}&nbsp;{{user.last_name}}</td>
+                    <td data-title="Name" class="pad-t-15">
+                        <a ui-sref="users.user_edit.basic({user_id : user.id})">
+                            {{user.first_name}}&nbsp;{{user.last_name}}
+                        </a>
+                    </td>
                     <td data-title="Username" class="pad-t-15">{{user.username}}</td>
                     <td data-title="Email" class="pad-t-15">{{user.email}}</td>
                     <td data-title="Last Login" class="pad-t-15">{{user.last_login | dateFilter }}</td>
                     <td data-title="Is Active" class="pad-t-15">{{user.is_active | boolFilter}}</td>
-                    <td class="text-right">
-                        <a ui-sref="users.user_edit.basic({user_id : user.id})" class="login-btn login-btn-action">
-                            &nbsp;View
-                        </a>
-                    </td>
                 </tr>
             </tbody>
         </table>
