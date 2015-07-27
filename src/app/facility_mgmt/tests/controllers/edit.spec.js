@@ -789,6 +789,7 @@
                 };
                 data.$scope.steps = [
                     {name : "basic"},
+                    {name : "geolocation"},
                     {name : "contacts"}
                 ];
                 httpBackend
@@ -821,6 +822,7 @@
                 data.$scope.user_id = 3;
                 data.$scope.steps = [
                     {name : "basic"},
+                    {name : "geolocation"},
                     {name : "contacts"}
                 ];
                 ctrl(".contacts", data);
@@ -871,6 +873,7 @@
                 data.$scope.user_id = 3;
                 data.$scope.steps = [
                     {name : "basic"},
+                    {name : "geolocation"},
                     {name : "contacts"}
                 ];
                 ctrl(".contacts", data);
@@ -899,7 +902,7 @@
                 expect(log.error).toHaveBeenCalled();
             });
 
-            it("should show error if add a new contact fails", function () {
+            it("should show error if add contacts fails", function () {
                 spyOn(log, "error");
 
                 httpBackend
@@ -919,6 +922,7 @@
                 data.$scope.user_id = 3;
                 data.$scope.steps = [
                     {name : "basic"},
+                    {name : "geolocation"},
                     {name : "contacts"}
                 ];
                 ctrl(".contacts", data);
@@ -972,7 +976,8 @@
                 data.$scope.user_id = 3;
                 data.$scope.steps = [
                     {name : "basic"},
-                    {name : "contacs"}
+                    {name : "geolocation"},
+                    {name : "contacts"}
                 ];
                 ctrl(".contacts", data);
 
@@ -1024,6 +1029,7 @@
                 data.$scope.user_id = 3;
                 data.$scope.steps = [
                     {name : "basic"},
+                    {name : "geolocation"},
                     {name : "contacts"}
                 ];
                 ctrl(".contacts", data);
@@ -1072,6 +1078,7 @@
                 data.$scope.user_id = 3;
                 data.$scope.steps = [
                     {name : "basic"},
+                    {name : "gelocstion"},
                     {name : "contacts"}
                 ];
                 ctrl(".contacts", data);
@@ -1120,6 +1127,7 @@
                 data.$scope.user_id = 3;
                 data.$scope.steps = [
                     {name : "basic"},
+                    {name : "geolocation"},
                     {name : "contacts"}
                 ];
                 ctrl(".contacts", data);
@@ -1741,7 +1749,10 @@
                 data.$scope.create = false;
                 data.$scope.steps = [
                     {name : "basic"},
+                    {name : "geolocation"},
                     {name : "contacts"},
+                    {name : "officer"},
+                    {name : "units"},
                     {name : "services"}
                 ];
                 var helper = {"bootstrap": angular.noop};
