@@ -15,9 +15,9 @@
                     func : "ui-sref='setup.chu_status.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='chul.add_status'",
-                    class: "action-btn action-btn-primary action-btn-md",
+                    class: "login-btn login-btn-primary",
                     tipmsg: "Add community unit status",
-                    icon: "fa-plus"
+                    wording: "Add CU Status"
                 }
             ];
         }]
@@ -36,10 +36,9 @@
                         func : "ui-sref='setup.chu_status.view.delete'" +
                                " requires-user-feature='is_staff'" +
                                " requires-permission='chul.delete_status'",
-                        class: "action-btn action-btn-danger action-btn-md",
-
-                        tipmsg: "Delete CHU Status",
-                        icon: "fa-trash"
+                        class: "login-btn login-btn-danger",
+                        wording: "Delete",
+                        tipmsg: "Delete CHU Status"
                     }
                 ];
                 adminApi.chuStatus.get($stateParams.id).success(function(data){
@@ -99,9 +98,9 @@
                     func : "ui-sref='setup.chu_approvers.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='chul.add_approver'",
-                    class: "action-btn action-btn-primary action-btn-md",
+                    class: "login-btn login-btn-primary",
                     tipmsg: "Add Community Unit Approver",
-                    icon: "fa-plus"
+                    wording: "Add CU Approver"
                 }
             ];
         }]
@@ -121,9 +120,9 @@
                         func : "ui-sref='setup.chu_approvers.view.delete'" +
                                " requires-user-feature='is_staff'" +
                            " requires-permission='chul.delete_approver'",
-                        class: "action-btn action-btn-danger action-btn-md",
+                        class: "login-btn login-btn-danger",
                         tipmsg: "Delete CHU Approver",
-                        icon: "fa-trash"
+                        wording: "Delete"
                     }
                 ];
                 adminApi.chuApprovers.get($stateParams.id).success(function(data){

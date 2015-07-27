@@ -145,10 +145,9 @@
                     func : "ui-sref='users.user_edit.delete'" +
                             "requires-user-feature='is_staff'" +
                             "requires-permission='users.delete_mfluser'",
-                    class: "action-btn action-btn-danger action-btn-md",
+                    class: "login-btn login-btn-danger",
                     tipmsg: "Delete User",
-                    icon: "fa-trash",
-                    wording : ""
+                    wording : "Delete"
                 }
             ];
             $scope.user_id = $stateParams.user_id;
