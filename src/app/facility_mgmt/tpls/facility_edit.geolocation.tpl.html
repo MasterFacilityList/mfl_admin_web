@@ -95,14 +95,16 @@
                </div>
         </div>
     </form>
-    <a ui-sref="facilities.facility_edit.basic" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
-        &nbsp;<i class="fa fa-angle-double-left"></i> Basic Details
-    </a>
-    <a ui-sref="facilities.facility_create.location({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-10 margin-b-10">
-        &nbsp;<i class="fa fa-angle-double-left"></i> Location
-    </a>
-    <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary margin-t-10 margin-b-10 pull-right" >
-        &nbsp;Save & Continue <i class="fa fa-angle-double-right"></i>
-    </button>
+    <div class="col-xs-12">
+        <a ui-sref="facilities.facility_edit.basic" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10 margin-l-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Basic Details
+        </a>
+        <a ui-sref="facilities.facility_create.location({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Location
+        </a>
+        <button type="submit" ng-click="saveGeo(geoForm)"  requires-permission="facilities.change_facility,mfl_gis.add_facilitycoordinates" class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right margin-r-10" >
+            &nbsp;Save & Continue <i class="fa fa-angle-double-right"></i>
+        </button>
+    </div>
 </div>
 
