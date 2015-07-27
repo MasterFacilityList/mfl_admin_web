@@ -147,7 +147,7 @@
                             "requires-permission='users.delete_mfluser'",
                     class: "login-btn login-btn-danger",
                     tipmsg: "Delete User",
-                    wording : "Delete User"
+                    wording : "Delete"
                 }
             ];
             $scope.user_id = $stateParams.user_id;

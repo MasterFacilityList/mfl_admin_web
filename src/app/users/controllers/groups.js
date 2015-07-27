@@ -87,7 +87,7 @@
                            "requires-user-feature='is_staff'",
                     class: "login-btn login-btn-danger",
                     tipmsg: "Delete Group",
-                    wording: "Delete Group"
+                    wording: "Delete"
                 }
             ];
             wrappers.groups.get($scope.group_id)
