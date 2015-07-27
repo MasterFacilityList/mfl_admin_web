@@ -1,4 +1,4 @@
-<div class="pad-t-20">
+<div class="col-xs-12 content-card">
     <div class="fade-content alert alert-danger alert-dismissible margin-t-5" ng-show="basic_error">
         <button type="button" class="close">
             <span ng-click="basic_error = !basic_error">&times;</span>
@@ -9,7 +9,7 @@
         <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true && !create">
             <h4><strong><i class="fa fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
         </div>
-        <div class="custom-well col-xs-12">
+        <div class="custom-well col-xs-12 margin-t-20">
             <div class="col-xs-12">
                 <h4 class="margin-b-20 fw-600">Facility Basic Details</h4>
             </div>

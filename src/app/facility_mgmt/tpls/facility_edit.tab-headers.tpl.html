@@ -1,40 +1,44 @@
-<ul class="progress-container form-tab margin-t--15">
-    <li ui-sref-active="active" class="col-xs-2 text-center">
-        <div ng-model="steps[0].active" ng-click="tabState(steps[0])" class="progress-badge progress-badge-done"
-        ng-class="{'progress-badge-active': steps[0].active}">
-            1
-        </div>
-        <p class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[0].active}"  ng-click="tabState(steps[0])">Basic Details</p>
+ <ul class="nav nav-tabs col-xs-12">
+    <li ui-sref-active="active" >
+        <a ui-sref="facilities.facility_edit.basic">
+            <span class="fw-900">
+                <i class="fa fa-hospital-o"></i> Basic Details
+            </span>
+        </a>
     </li>
-    <li ui-sref-active="active" class="col-xs-2 text-center">
-        <div ng-model="steps[1].active" ng-click="tabState(steps[1])" class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[1].active}">
-            2
-        </div>
-        <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[1].active}"  ng-click="tabState(steps[1])">
-        Geolocation</p>
+    <li ui-sref-active="active" >
+        <a ui-sref="facilities.facility_edit.geolocation">
+            <span class="fw-900 ">
+                <i class="fa fa-map-marker"></i> Geolocation
+            </span>
+        </a>
     </li>
-    <li ui-sref-active="active" class="col-xs-2 text-center">
-            <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[2].active}" ng-click="tabState(steps[2])">
-                3
-            </div>
-            <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[2].active}"  ng-click="tabState(steps[2])">Facility Contacts</p>
+    <li ui-sref-active="active" >
+        <a ui-sref="facilities.facility_edit.contacts">
+            <span class="fw-900 ">
+                <i class="fa fa-phone"></i> Facility Contacts
+            </span>
+        </a>
     </li>
-    <li ui-sref-active="active" class="col-xs-2 text-center">
-        <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[3].active}" ng-click="tabState(steps[3])">
-            4
-        </div>
-        <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[3].active}"  ng-click="tabState(steps[4])">Officer</p>
+    <li ui-sref-active="active" >
+        <a ui-sref="facilities.facility_edit.officers">
+            <span class="fw-900 ">
+                <i class="fa fa-user-secret"></i> Officer
+            </span>
+        </a>
     </li>
-    <li ui-sref-active="active" class="col-xs-2 text-center">
-        <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[4].active}" ng-click="tabState(steps[4])">
-            5
-        </div>
-        <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[4].active}"  ng-click="tabState(steps[4])">Department</p>
+    <li ui-sref-active="active" >
+        <a ui-sref="facilities.facility_edit.units">
+            <span class="fw-900 ">
+                <i class="fa fa-building"></i> Departments
+            </span>
+        </a>
     </li>
-    <li ui-sref-active="active" class="col-xs-2 text-center">
-        <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[5].active}" ng-click="tabState(steps[5])">
-            6
-        </div>
-        <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[5].active}"  ng-click="tabState(steps[5])">Services</p>
+    <li ui-sref-active="active">
+        <a ui-sref="facilities.facility_edit.services">
+            <span class="fw-900 ">
+                <i class="fa fa-exchange"></i> Services
+            </span>
+        </a>
     </li>
 </ul>
