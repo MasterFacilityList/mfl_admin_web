@@ -4,7 +4,7 @@ machine:
 
     environment:
         PATH: "$(npm bin):$PATH"
-        RELEASE_ASSET: RELEASE_ASSET: "$CIRCLE_PROJECT_REPONAME"
+        RELEASE_ASSET: "$CIRCLE_PROJECT_REPONAME"
         PACKAGE_JSON: "package.json"
 
 
