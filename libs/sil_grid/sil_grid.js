@@ -89,6 +89,9 @@
                         $scope.pagination.next_page = data.next ? data.current_page + 1 : null;
                         $scope.pagination.prev_page = data.previous ? data.current_page - 1 : null;
                         $scope.pagination.current_page = data.current_page;
+                        $scope.pagination.start_index = data.start_index;
+                        $scope.pagination.end_index = data.end_index;
+                        $scope.pagination.count = data.count;
                     } else {
                         $scope[$scope.data] = data;
                         $scope.pagination.active = false;
