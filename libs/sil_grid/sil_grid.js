@@ -69,35 +69,33 @@
                         $scope.$emit("silGrid.loader.stop");
                     }
                 };
-                self.getData = function(){
-
+                self.getData = function() {
                     self.setLoading(true);
                     var promise;
-                    if(_.isEmpty($scope.filters)){
+                    if(_.isEmpty($scope.filters)) {
                         promise = self.api.list();
-                    }else{
+                    } else {
                         promise = self.api.filter($scope.filters);
                     }
                     promise.success(self.setData).error(self.setError);
                 };
-                self.setData = function(data){
+
+                self.setData = function(data) {
                     self.setLoading(false);
-                    if(_.has(data, "results")){
+                    if(_.has(data, "results")) {
                         $scope[$scope.data] = data.results;
                         $scope.pagination.active = true;
                         $scope.pagination.page_count = data.total_pages;
-                        $scope.pagination.next = !!data.next;
-                        $scope.pagination.prev = !!data.previous;
                         $scope.pagination.next_page = data.next ? data.current_page + 1 : null;
                         $scope.pagination.prev_page = data.previous ? data.current_page - 1 : null;
                         $scope.pagination.current_page = data.current_page;
-                    } else{
+                    } else {
                         $scope[$scope.data] = data;
                         $scope.pagination.active = false;
                     }
                 };
 
-                self.showError = function(error){
+                self.showError = function(error) {
                     return {
                         title: "Error",
                         type:"danger",
