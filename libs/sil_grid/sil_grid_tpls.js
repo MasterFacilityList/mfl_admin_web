@@ -1,17 +1,20 @@
 (function(angular){
+    "use strict";
+
     var pagination_tpl = "sil.grid.pagination.tpl.html";
     var search_tpl = "sil.grid.search.tpl.html";
+
     angular.module(pagination_tpl, []).run(["$templateCache",
     function($templateCache){
         $templateCache.put("sil.grid.pagination.tpl.html",
             "<ul class=\"pager\" ng-if=\"pagination.active\">\n" +
-            "<li ng-if=\"pagination.prev\" class=\"previous\">\n"+
+            "<li ng-if=\"pagination.prev_page\" class=\"previous\">\n"+
             "<a class='login-btn login-btn-default' ng-click=paginate("+
             "pagination.prev_page)>\n" +
             "<span aria-hidden=\"true\">&laquo;</span> Prev</a>\n" +
             "</li>\n" +
             "<li>Page {{pagination.current_page}} / {{pagination.page_count}}</li>"+
-            " <li class=\"next\" ng-if=\"pagination.next\">\n"+
+            " <li class=\"next\" ng-if=\"pagination.next_page\">\n"+
             "<a class='login-btn login-btn-default' ng-click=paginate(" +
             "pagination.next_page)>Next\n" +
             " <span aria-hidden=\"true\">&raquo;</span></a>\n" +
