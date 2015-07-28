@@ -43,6 +43,7 @@
     "karma-threshold-reporter": "^0.1.12",
     "grunt-purifycss": "~0.1.0",
     "grunt-contrib-cssmin": "~0.12.3",
-    "karma-mocha-reporter": "~1.0.2"
+    "karma-mocha-reporter": "~1.0.2",
+    "karma-htmlfile-reporter": "~0.2.2"
   }
 }
