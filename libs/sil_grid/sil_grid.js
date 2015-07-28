@@ -84,7 +84,13 @@
                     self.setLoading(false);
                     if(_.has(data, "results")){
                         $scope[$scope.data] = data.results;
-                        addPagination(data.count, data.next, data.previous);
+                        $scope.pagination.active = true;
+                        $scope.pagination.page_count = data.total_pages;
+                        $scope.pagination.next = !!data.next;
+                        $scope.pagination.prev = !!data.previous;
+                        $scope.pagination.next_page = data.next ? data.current_page + 1 : null;
+                        $scope.pagination.prev_page = data.previous ? data.current_page - 1 : null;
+                        $scope.pagination.current_page = data.current_page;
                     } else{
                         $scope[$scope.data] = data;
                         $scope.pagination.active = false;
@@ -134,50 +140,6 @@
                 };
                 $scope.getData = self.getData;
                 $scope.setLoading = self.setLoading;
-                var addPagination = function(page_count, url_next, url_prev){
-                    $scope.pagination.active = true;
-                    $scope.filters = $scope.filters || {};
-                    var page_size = $scope.filters.page_size || silGridConfig.itemsPerPage;
-                    $scope.pagination.page_count = Math.ceil(page_count/page_size);
-                    var makeParams = function(url, next){
-                        url = url.replace("page_size", "");
-                        var params = url.substring(url.indexOf("?")+1, url.length).split("&");
-                        _.each(params, function(param){
-                            var p = param.split("=");
-                            if(param.indexOf("page")!==-1){
-                                if(next){
-                                    $scope.pagination.next_page = p[1];
-                                }
-                                else{
-                                    $scope.pagination.prev_page = p[1];
-                                }
-                            }
-                        });
-                    };
-                    if(url_next){
-                        $scope.pagination.next=true;
-                        makeParams(url_next, true);
-                    }else{
-                        $scope.pagination.next = false;
-                        $scope.pagination.current_page = $scope.pagination.page_count;
-                    }
-                    if(url_prev){
-                        $scope.pagination.prev = true;
-                        if(url_prev.indexOf("page")=== -1){
-                            url_prev = url_prev+"?page=1";
-                            $scope.pagination.prev_page = 1;
-                        }else{
-                            makeParams(url_prev, false);
-                        }
-
-                    }else{
-                        $scope.pagination.prev = false;
-                        $scope.pagination.current_page = 1;
-                    }
-                    if($scope.pagination.next){
-                        $scope.pagination.current_page = $scope.pagination.next_page-1;
-                    }
-                };
                 $scope.paginate = function(page_count){
                     if(_.isUndefined($scope.filters)){
                         $scope.filters = {};
@@ -234,10 +196,10 @@
                     }catch(err){}
                     event.stopPropagation();
                 });
-
             }
         };
     }])
+
     .directive("silGridSearch", function(){
         return {
             restrict: "EA",
@@ -257,8 +219,8 @@
                 };
             }
         };
-
     })
+
     .directive("silGridKeyPress", function () {
         return {
             restrict: "A",
@@ -284,6 +246,7 @@
             }
         };
     })
+
     .directive("silGridSort",["$rootScope", function($rootScope){
         return {
             restrict : "A",
@@ -328,6 +291,6 @@
                 });
             }
         };
-    }])
-    ;
-})(angular, _);
+    }]);
+
+})(window.angular, window._);
