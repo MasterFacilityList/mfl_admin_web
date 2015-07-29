@@ -759,7 +759,6 @@
                     $scope.geocodes_error = errorMessages.errors +
                                         errorMessages.geocodes;
                 });
-                $scope.facilityWard(f);
             };
             //get facility ward and draw its map
             $scope.facilityWard = function (f) {
@@ -814,6 +813,7 @@
                     $scope.wards_error = errorMessages.errors +
                         errorMessages.ward;
                 });
+                $scope.getFacilityCoordinates(f);
             };
             /*Fetch geo code methods*/
             wrappers.geo_code_methods.list()
@@ -908,7 +908,7 @@
                     return;
                 }
                 if(!_.isNull(f.coordinates)) {
-                    $scope.getFacilityCoordinates(f);
+                    $scope.facilityWard(f);
                 }
             });
         }]);
