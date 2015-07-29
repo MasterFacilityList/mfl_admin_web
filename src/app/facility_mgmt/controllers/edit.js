@@ -407,6 +407,7 @@
             wrappers.facility_officers.filter({facility:$stateParams.facility_id})
             .success(function(data){
                 $scope.fac_officers = data.results;
+                $scope.off = $scope.fac_officers[0];
             })
             .error(function(error){
                 $log.error(error);
