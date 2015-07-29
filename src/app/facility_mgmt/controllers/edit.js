@@ -725,6 +725,17 @@
                 //facility's coordinates
                 wrappers.facility_coordinates.get(f.coordinates)
                 .success(function(data){
+                    angular.extend($scope,{
+                        markers: {
+                            mainMarker: {
+                                layer:"facility",
+                                lat: data.coordinates.coordinates[1],
+                                lng: data.coordinates.coordinates[0],
+                                message: f.name,
+                                draggable: true
+                            }
+                        }
+                    });
                     $scope.spinner = false;
                     $scope.geo = data;
                     $scope.select_values = {
@@ -741,17 +752,6 @@
                             "name": f.facility_physical_address.town
                         }
                     };
-                    angular.extend($scope,{
-                        markers: {
-                            mainMarker: {
-                                layer:"facility",
-                                lat: data.coordinates.coordinates[1],
-                                lng: data.coordinates.coordinates[0],
-                                message: f.name,
-                                draggable: true
-                            }
-                        }
-                    });
                 })
                 .error(function(error){
                     $scope.spinner = false;
@@ -900,7 +900,7 @@
             };
             // update coordinates after dragging marker
             $scope.$on("leafletDirectiveMarker.dragend", function (e, args) {
-                $scope.geo.coordinates.coordinates = [args.model.lat,args.model.lng];
+                $scope.geo.coordinates.coordinates = [args.model.lng,args.model.lat];
             });
             /*Wait for facility to be defined*/
             $scope.$watch("facility", function (f) {

@@ -5,7 +5,7 @@
         </button>
         <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{basic_error}}</span>
     </div>
-    <form name="frm_facility_basic" ng-submit="save(frm_facility_basic)">
+    <form name="frm_facility_basic" ng-submit="saveGeo(frm_facility_basic)">
         <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true && !create">
             <h4><strong><i class="fa fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
         </div>
