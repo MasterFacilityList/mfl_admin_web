@@ -8,7 +8,6 @@
     <table class="table table-hover fs-14" id="no-more-tables">
         <thead>
             <tr>
-               <th class="class="col-xs-12"">#</th>
                 <th sil-grid-sort field='name'>Name</th>
                 <th sil-grid-sort field='abbreviation'>Abbreviation</th>
                 <th sil-grid-sort field='description'>Description</th>
@@ -17,7 +16,6 @@
         </thead>
         <tbody class="fade-content">
             <tr  ng-repeat="category in categories">
-                <td data-title="#:"  class="pad-t-15">{{($index + 1 + ((pagination.current_page-1)  * 25))}}</td>
                 <td data-title="Name:" class="pad-t-15">{{category.name}}</td>
                 <td data-title="Abbreviation:" class="pad-t-15">{{category.abbreviation}}</td>
                 <td data-title="Description:" class="pad-t-15">{{category.description}}</td>

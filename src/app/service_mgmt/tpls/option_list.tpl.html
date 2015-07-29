@@ -8,7 +8,6 @@
     <table class="table table-hover fs-14" id="no-more-tables">
         <thead>
             <tr>
-               <th class="class="col-xs-12"">#</th>
                 <th sil-grid-sort field='display_text'>Display Text</th>
                 <th sil-grid-sort field='value'>Value</th>
                 <th sil-grid-sort field='option_type'>Option Type</th>
@@ -18,7 +17,6 @@
         </thead>
         <tbody class="fade-content">
             <tr ng-repeat="opt in options">
-                <td data-title="#:"  class="pad-t-15">{{($index + 1 + ((pagination.current_page-1) * 25))}}</td>
                 <td data-title="Display Text:"  class="pad-t-15">{{opt.display_text}}</td>
                 <td data-title="Value:"  class="pad-t-15">{{opt.value}}</td>
                 <td data-title="Type:"  class="pad-t-15">{{opt.option_type | titlecase}}</td>

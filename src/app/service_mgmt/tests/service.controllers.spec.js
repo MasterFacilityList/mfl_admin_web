@@ -26,6 +26,14 @@
             ]);
         });
 
+        describe("Test service list controller", function () {
+            it("should load", function () {
+                ctrl("service_list", {
+                    "$scope": rootScope.$new()
+                });
+            });
+        });
+
         describe("Test service edit controller", function () {
             it("should get one service", function () {
                 var scope = rootScope.$new();

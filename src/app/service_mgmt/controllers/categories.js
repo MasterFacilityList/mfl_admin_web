@@ -8,7 +8,11 @@
         "mfl.service_mgmt.services"
     ])
 
-    .controller("mfl.service_mgmt.controllers.category_list", [angular.noop])
+    .controller("mfl.service_mgmt.controllers.category_list", ["$scope", function ($scope) {
+        $scope.filters = {
+            "fields": "id,name,abbreviation,description,"
+        };
+    }])
 
     .controller("mfl.service_mgmt.controllers.category_edit",
         ["$scope", "$state", "$stateParams", "$log",

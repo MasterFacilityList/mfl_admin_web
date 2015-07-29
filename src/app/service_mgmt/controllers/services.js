@@ -7,7 +7,11 @@
         "ui.router"
     ])
 
-    .controller("mfl.service_mgmt.controllers.service_list", [angular.noop])
+    .controller("mfl.service_mgmt.controllers.service_list", ["$scope", function ($scope) {
+        $scope.filters = {
+            "fields": "id,code,name,abbreviation,category_name"
+        };
+    }])
 
     .controller("mfl.service_mgmt.controllers.service_edit",
         ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
