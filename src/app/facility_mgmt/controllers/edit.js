@@ -205,7 +205,7 @@
             }
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
-                $scope.facility.ward = $scope.select_values.ward;
+                $scope.facility.ward = $scope.select_values.ward.id;
                 $scope.facility.facility_type = $scope.select_values.facility_type;
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
@@ -251,7 +251,7 @@
                 } else {
                     if (_.isEmpty(changes)) {
                         $state.go("facilities.facility_edit.geolocation",
-                        {"facility_id": $scope.facility_id});
+                        {"facility_id": $stateParams.facility_id});
                     } else {
                         wrappers.facility_detail.update($scope.facility_id, changes)
                         .success(function () {
@@ -371,8 +371,8 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        "mfl.common.forms.changes", "$state",
-        function($scope, $log, $stateParams, wrappers, multistepService, formChanges, $state){
+        "mfl.common.forms.changes",
+        function($scope, $log, $stateParams, wrappers, multistepService, formChanges){
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[3]);
@@ -409,7 +409,6 @@
             wrappers.facility_officers.filter({facility:$stateParams.facility_id})
             .success(function(data){
                 $scope.fac_officers = data.results;
-                $scope.off = $scope.fac_officers[0];
             })
             .error(function(error){
                 $log.error(error);
@@ -427,30 +426,18 @@
                 $scope.spinner = true;
                 var changes = formChanges.whatChanged(frm);
                 changes.facility_id = $scope.facility_id;
-                //commented out pending refactor in backend
-                //changes.contacts = $scope.contacts;
-                if(!$scope.create) {
-                    wrappers.facility_officers_incharge.update($scope.off.officer, changes)
-                        .success(function (data) {
-                            $state.go("facilities.facility_edit.units");
-                            $scope.fac_officers.push(data);
-                            $scope.spinner = false;
-                            $scope.off = {};
-                            $scope.contacts = [{type : "", contacts : ""}];
-                        })
-                        .error(function (data) {
-                            $log.error(data);
-                            $scope.spinner = false;
-                        });
-                }else {
-                    wrappers.create_officer.create(changes)
-                        .success(function () {
-                            $state.go("facilities.facility_edit.units");
-                        })
-                        .error(function (err) {
-                            $scope.alert = err.error;
-                        });
-                }
+                changes.contacts = $scope.contacts;
+                wrappers.create_officer.create(changes)
+                    .success(function (data) {
+                        $scope.fac_officers.push(data);
+                        $scope.spinner = false;
+                        $scope.off = {};
+                        $scope.contacts = [{type : "", contacts : ""}];
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                        $scope.spinner = false;
+                    });
             };
             /*remove officer*/
             $scope.removeChild = function (obj) {
