@@ -3085,11 +3085,11 @@
                         .expectGET(server_url+"api/gis/geo_code_sources/")
                         .respond(200, {results: []});
                     httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, rst_data);
-                    httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
+                    httpBackend
+                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                        .respond(200, rst_data);
                     ctrl(".geolocation", data);
                     rootScope.$broadcast("leafletDirectiveMarker.dragend",null,args);
                     data.$scope.$apply();
@@ -3166,11 +3166,11 @@
                         .expectGET(server_url+"api/gis/geo_code_sources/")
                         .respond(200, {results: []});
                     httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, rst_data);
-                    httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
+                    httpBackend
+                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                        .respond(200, rst_data);
                     ctrl(".geolocation", data);
                     data.$scope.$apply();
                     data.$scope.facility={
@@ -3251,11 +3251,11 @@
                         .expectGET(server_url+"api/gis/geo_code_sources/")
                         .respond(200, {results: []});
                     httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, rst_data);
-                    httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
+                    httpBackend
+                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                        .respond(200, rst_data);
                     ctrl(".geolocation", data);
                     data.$scope.$apply();
                     data.$scope.facility={
@@ -3387,9 +3387,6 @@
                     httpBackend
                         .expectGET(server_url+"api/gis/geo_code_sources/")
                         .respond(500, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(500, rst_data);
                     ctrl(".geolocation", data);
                     data.$scope.$apply();
                     data.$scope.facility={
@@ -3725,11 +3722,11 @@
                     });
 
                     httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, {results: []});
-                    httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, data);
+                    httpBackend
+                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
+                        .respond(200, {results: []});
 
                     scope.$apply();
                     scope.$digest();
