@@ -10,7 +10,6 @@
         <table class="table table-hover fs-14">
             <thead>
                 <th sil-grid-sort field='name'>Name</th>
-                <th>Permissions</th>
             </thead>
             <tbody class="example-animate-container">
                 <tr class="animate-repeat" ng-repeat="group in groups | filter: search.query">
@@ -19,7 +18,6 @@
                             {{group.name}}
                         </a>
                     </td>
-                    <td>{{group.permissions.length}}</td>
                 </tr>
             </tbody>
         </table>

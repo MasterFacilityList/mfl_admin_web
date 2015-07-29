@@ -21,21 +21,21 @@
               </p>
               </p>
             </div>
-            <div class="group col-xs-12">
-                <input type="text" name="official_name" ng-model="facility.official_name" ng-blur="initUniqueName(facility.official_name, facility.name)">
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="margin-l-10">
+            <div class="form-group col-xs-12">
+                <label>
                     Facility Offical Name
                 </label>
-            </div>
-            <div class="group col-xs-12">
-                <input type="text" name="name" ng-model="facility.name" required />
+                <input class="form-control" name="official_name" ng-model="facility.official_name" ng-blur="initUniqueName(facility.official_name, facility.name)" placeholder="Facility Official Name">
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label class="margin-l-10">
+            </div>
+            <div class="form-group col-xs-12">
+                <label>
                     Facility Unique Name
                 </label>
+                <input class="form-control" name="name" ng-model="facility.name" required placeholder="Facility Unique Name"/>
+                <span class="highlight"></span>
+                <span class="bar"></span>
             </div>
             <div class="form-group col-xs-12">
                 <label>Facility Type</label>
@@ -84,25 +84,25 @@
                 </ui-select>
             </div>
 
-            <div class="group col-sm-12">
-                <input type="text" name="number_of_beds" ng-model="facility.number_of_beds"  required />
-                <span class="highlight"></span>
-                <span class="bar"></span>
+            <div class="form-group col-xs-12">
                 <label class="pad-l-10">
                     Beds
                 </label>
+                <input class="form-control" name="number_of_beds" ng-model="facility.number_of_beds"  required placeholder="Beds"/>
+                <span class="highlight"></span>
+                <span class="bar"></span>
             </div>
-            <div class="group col-sm-12">
-                <input type="text" name="number_of_cots" ng-model="facility.number_of_cots"  required />
+            <div class="form-group col-sm-12">
                 <label class="pad-l-10" for="number_of_cots">
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
                     Cots
                 </label>
+                <input class="form-control" name="number_of_cots" ng-model="facility.number_of_cots"  required placeholder="Cots"/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
             </div>
             <div class="col-sm-12">
               <div class="checkbox-group margin-t-10">
-                  <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day">
+                  <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day" tooltip="If facility is open 24hrs a day">
                   <label for="open_whole_day">
                       <span class="check"></span>
                       <span class="box"></span>
@@ -178,29 +178,30 @@
                         </ui-select-choices>
                     </ui-select>
                 </div>
-                <div class="group col-xs-12">
-                    <input type="text" name="plot_number" ng-model="facility.facility_physical_address.plot_number"/>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label class="margin-l-10">
+                <div class="form-group col-xs-12">
+                    <label>
                         Plot number
                     </label>
-                </div>
-                <div class="group col-xs-12">
-                    <input type="text" name="nearest_landmark" ng-model="facility.facility_physical_address.nearest_landmark"/>
+                    <input class="form-control" name="plot_number" ng-model="facility.facility_physical_address.plot_number"  required
+                    placeholder="Plot Number"/>
                     <span class="highlight"></span>
                     <span class="bar"></span>
-                    <label class="margin-l-10">
+                </div>
+                <div class="form-group col-xs-12">
+                    <label>
                         Nearest landmark
                     </label>
-                </div>
-                <div class="group col-xs-12">
-                    <input type="text" name="location_desc" ng-model="facility.facility_physical_address.location_desc" />
+                    <input class="form-control" name="nearest_landmark" ng-model="facility.facility_physical_address.nearest_landmark"  required placeholder="Nearest Landmark"/>
                     <span class="highlight"></span>
                     <span class="bar"></span>
-                    <label class="margin-l-10">
+                </div>
+                <div class="form-group col-xs-12">
+                    <label>
                         Location description
                     </label>
+                    <input class="form-control" name="location_desc" ng-model="facility.facility_physical_address.location_desc"  required placeholder ="Location Description" />
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
                 </div>
             <!-- </form> -->
         </div>

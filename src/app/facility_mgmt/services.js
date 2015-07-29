@@ -71,6 +71,7 @@
             this.operation_status = api.setBaseUrl("api/facilities/facility_status/");
             this.facility_approvals = api.setBaseUrl("api/facilities/facility_approvals/");
             this.facility_officers = api.setBaseUrl("api/facilities/facility_officers/");
+            this.facility_officers_incharge = api.setBaseUrl("api/facilities/officers_incharge/");
             this.facility_upgrade = api.setBaseUrl("api/facilities/facility_upgrade/");
             this.facility_units = api.setBaseUrl("api/facilities/facility_units/");
             this.geo_code_methods = api.setBaseUrl("api/gis/geo_code_methods/");

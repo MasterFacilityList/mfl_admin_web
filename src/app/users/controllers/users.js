@@ -576,6 +576,9 @@
             icon: "fa-user",
             name: "Manage users"
         };
+        $scope.filters = {
+            "fields": "id,first_name,last_name,username,email,last_login,is_active"
+        };
         $scope.action = [
             {
                 func: "ui-sref='users.user_create.basic ({furthest : 1})'" +

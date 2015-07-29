@@ -30,7 +30,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_rejected", {"$scope": scope});
-                expect(scope.filters).toEqual({"rejected": true, "approved": true});
+                expect(scope.filters.rejected).toEqual(true);
             });
         });
 
@@ -39,7 +39,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_approve", {"$scope": scope});
-                expect(scope.filters).toEqual({"approved": false, "rejected": false});
+                expect(scope.filters.approved).toEqual(false);
             });
         });
 
@@ -48,7 +48,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_approve_update", {"$scope": scope});
-                expect(scope.filters).toEqual({"has_edits": true, "rejected": false});
+                expect(scope.filters.has_edits).toEqual(true);
             });
         });
 

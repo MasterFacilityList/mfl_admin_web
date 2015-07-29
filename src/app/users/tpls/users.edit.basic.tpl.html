@@ -40,10 +40,12 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="group">
-                        <input name="username" type="text" ng-model="user.username" ng-required="user.id === undefined">
+                        <input
+                        name="employee_number" type="text" ng-model="user.employee_number"
+                        ng-required="user.id === undefined">
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Username</label>
+                        <label>Employee Number</label>
                     </div>
                 </div>
                 <div class="col-sm-12">
@@ -70,16 +72,6 @@
                     The two passwords did not match
                     <span class="highlight"></span>
                     <span class="bar"></span>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 margin-t-10 margin-b-10 text-left">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="active" name="is_active" ng-model="user.is_active">
-                        <label for="active">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                             Is Active?
-                         </label>
-                    </div>
                 </div>
             </div>
             <div class="margin-t-20 margin-b-20">

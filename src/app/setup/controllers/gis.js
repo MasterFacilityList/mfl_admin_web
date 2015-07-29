@@ -11,6 +11,10 @@
             icon: "fa-crosshairs",
             name: "GeoCode Methods"
         };
+
+        $scope.filters =  {
+            "fields": "id,name,description"
+        };
         $scope.action = [
             {
                 func : "ui-sref='setup.geocode_methods_list.geocode_methods_create'" +
@@ -123,6 +127,10 @@
         $scope.title = {
             icon : "fa-compass",
             name: "GeoCode Sources"
+        };
+
+        $scope.filters =  {
+            "fields": "id,name,abbreviation,description"
         };
         $scope.action = [
             {
