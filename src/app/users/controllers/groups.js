@@ -24,6 +24,9 @@
                     wording: " Add Group"
                 }
             ];
+            $scope.filters = {
+                "fields": "id,name"
+            };
         }
     ])
 
