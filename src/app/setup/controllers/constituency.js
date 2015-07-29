@@ -6,6 +6,9 @@
 
     .controller("mfl.setup.controller.constituency.list", ["$scope",
         function ($scope) {
+            $scope.filters = {
+                "fields": "id,name,code"
+            };
             $scope.title = {
                 icon: "fa-map-marker",
                 name: "Sub Counties"

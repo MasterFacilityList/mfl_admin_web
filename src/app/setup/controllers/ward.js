@@ -9,6 +9,9 @@
                 icon: "fa-map-marker",
                 name: "Wards"
             };
+            $scope.filters = {
+                "fields": "id,name,code"
+            };
         }]
     );
 })(window.angular);

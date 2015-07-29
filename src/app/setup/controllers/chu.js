@@ -10,6 +10,10 @@
                 icon: "fa-tasks",
                 name: "Manage Community Units Status"
             };
+
+            $scope.filters =  {
+                "fields": "id,name,description"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='setup.chu_status.create'" +
@@ -92,6 +96,10 @@
             $scope.title = {
                 icon: "fa-user-secret",
                 name: "Manage Community Unit Approvers"
+            };
+
+            $scope.filters =  {
+                "fields": "id,name,description,abbreviation"
             };
             $scope.action = [
                 {

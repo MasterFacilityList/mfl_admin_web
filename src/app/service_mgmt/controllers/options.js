@@ -7,7 +7,11 @@
         "mfl.common.forms"
     ])
 
-    .controller("mfl.service_mgmt.controllers.option_list", [angular.noop])
+    .controller("mfl.service_mgmt.controllers.option_list", ["$scope", function ($scope) {
+        $scope.filters = {
+            "fields": "id,display_text,value,is_exclusive_option,option_type"
+        };
+    }])
 
     .controller("mfl.service_mgmt.controllers.option_edit",
         ["$scope", "$state", "$stateParams", "$log",

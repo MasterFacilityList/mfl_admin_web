@@ -10,7 +10,9 @@
                 "icon": "fa-building"
             };
             $scope.filters = {
-                rejected: false
+                "rejected": false,
+                "fields": "id,code,name,facility_type_name,owner_name,county,"+
+                          "sub_county,constituency,ward_name,updated"
             };
             $scope.action = [
                 {

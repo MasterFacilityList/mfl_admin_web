@@ -14,6 +14,10 @@
                 icon: "fa-dedent",
                 name: "Manage Facility Owner Categories"
             };
+
+            $scope.filters = {
+                "fields": "id,name"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='setup.facility_owner_types.create'" +
@@ -101,6 +105,9 @@
             $scope.title = {
                 icon: "fa-user",
                 name: "Manage Facility Owners"
+            };
+            $scope.filters = {
+                "fields": "id,name,code,abbreviation,owner_type_name"
             };
             $scope.action = [
                 {
@@ -207,6 +214,10 @@
                 icon: "fa-list-alt",
                 name: "Manage Job Titles"
             };
+
+            $scope.filters = {
+                "fields": "id,name"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='setup.facility_job_titles.create'" +
@@ -296,6 +307,10 @@
             $scope.title = {
                 icon: "fa-institution",
                 name: "Manage Facility Regulatory Bodies"
+            };
+
+            $scope.filters = {
+                "fields": "id,name,abbreviation,regulatory_body_type_name,regulation_verb"
             };
             $scope.action = [
                 {
