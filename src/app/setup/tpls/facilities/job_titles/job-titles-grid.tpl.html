@@ -8,16 +8,11 @@
     <table class="table table-hover fs-14">
         <thead class="cf">
             <th sil-grid-sort field='name'>Name</th>
-            <th>Status</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="jobTitle in jobTitles">
                 <td data-title="Name" class="pad-t-15">{{jobTitle.name}}</td>
-                <td data-title="Name" class="pad-t-15">
-                    <i ng-if="jobTitle.active" class="fa fa-check-circle-o fa-2x text-success" tooltip="Is Active"></i>
-                    <i ng-if="!jobTitle.active" class="fa fa-times-circle-o fa-2x text-danger" tooltip-placement="bottom" tooltip="Is Inactive"></i>
-                </td>
                 <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.facility_job_titles.view({id : jobTitle.id})" class="login-btn login-btn-action" tooltip-placement="bottom" tooltip="View Job Title">
                         &nbsp; View

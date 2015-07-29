@@ -17,6 +17,7 @@
         <th sil-grid-sort field='constituency'>Sub County</th>
         <th sil-grid-sort field='constituency'>Constituency</th>
         <th sil-grid-sort field='ward'>Ward</th>
+        <th sil-grid-sort field='updated'>Date Updated</th>
     </thead>
 
     <tbody ng-if="facilities.length===0">
@@ -35,6 +36,7 @@
             <td data-title="Sub County:" >{{::fac.constituency}}</td>
             <td data-title="Constituency:" >{{::fac.constituency}}</td>
             <td data-title="Ward:" >{{::fac.ward_name}}</td>
+            <td data-title="Date Updated:" >{{::fac.updated}}</td>
         </tr>
     </tbody>
 </table>

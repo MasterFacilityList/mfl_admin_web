@@ -25,6 +25,14 @@
             ]);
         });
 
+        describe("Test category list controller", function () {
+            it("should load", function () {
+                ctrl("category_list", {
+                    "$scope": rootScope.$new()
+                });
+            });
+        });
+
         describe("Test category edit controller", function () {
             it("should get one category", function () {
                 var scope = rootScope.$new();

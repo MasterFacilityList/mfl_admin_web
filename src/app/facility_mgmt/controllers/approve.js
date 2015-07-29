@@ -10,7 +10,9 @@
         ["$scope", function ($scope) {
             $scope.filters = {
                 "rejected": true,
-                "approved": true
+                "approved": true,
+                "fields": "id,code,name,facility_type_name,owner_name,county,"+
+                          "sub_county,constituency,ward_name,updated"
             };
             $scope.title = {
                 "name": "Rejected Facilities",

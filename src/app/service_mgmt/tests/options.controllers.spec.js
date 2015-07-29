@@ -25,6 +25,14 @@
             ]);
         });
 
+        describe("Test option list controller", function () {
+            it("should load", function () {
+                ctrl("option_list", {
+                    "$scope": rootScope.$new()
+                });
+            });
+        });
+
         describe("Test option edit controller", function () {
             it("should get one option", function () {
                 var scope = rootScope.$new();
