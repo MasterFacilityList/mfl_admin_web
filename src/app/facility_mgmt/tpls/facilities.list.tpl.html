@@ -3,7 +3,7 @@
         <sil-grid-search> </sil-grid-search>
     </div>
     <div class="pull-right col-xs-4">
-        <p class="text-right margin-t-5">Page {{::pagination.current_page}} / {{::pagination.page_count}}</p>
+        <p ng-if="pagination.active" class="text-right margin-t-5">Showing <strong>{{pagination.start_index}} - {{pagination.end_index}}</strong> of <span>{{pagination.count}} records</span></p>
     </div>
 </div>
 
