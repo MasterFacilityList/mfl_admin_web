@@ -27,7 +27,7 @@
                     Job Title
                 </label>
                 <select class="form-control" name="title" ng-model="off.job_title" required placeholder="Job Title">
-                    <option value="">{{off.job_title ? off.job_title : 'Select job title'}}</option>
+                    <option value="">Select Job Title</option>
                     <option ng-repeat="title in job_titles" ng-value="title.id">{{title.name}}</option>
                 </select>
                 <span class="highlight"></span>
@@ -49,7 +49,7 @@
                     <tr class="" ng-repeat="cont in contacts">
                         <td class="col-xs-5">
                             <div class="form-group">
-                                <select class="form-control" name="contact_type" ng-model="cont.type" required>
+                                <select class="form-control" name="contact_type" ng-model="cont.type">
                                     <option value="">Select Contact Type</option>
                                     <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
                                 </select>
@@ -73,28 +73,29 @@
                 </tbody>
                 </table>
             </div>
-            <div class="col-xs-12 text-right margin-b-10">
-                <a class="login-btn login-btn-primary pull-right" ng-click="add_contact()" >
-                    &nbsp;<i class="fa fa-plus-square-o"></i> Add
+                <div class="col-xs-12 text-right margin-b-10">
+                    <a class="login-btn login-btn-primary pull-right" ng-click="add_contact()" >
+                        &nbsp;<i class="fa fa-plus-square-o"></i> Add
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 pad-0">
+                <!-- Start of create buttons -->
+                <a ui-sref="facilities.facility_create.services({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+                    &nbsp;<i class="fa fa-angle-double-left"></i> Services
                 </a>
+                <button ng-click="goToNext(5, 'units')" ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+                    &nbsp; Facility Departments <i class="fa fa-angle-double-right"></i>
+                </button>
+                <!-- End of navigation buttons -->
+                <a ui-sref="facilities.facility_edit.contacts" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+                    &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
+                </a>
+                <button type="submit" ng-if="!create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+                    &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
+                </button>
+                <!-- End of create buttons -->
             </div>
         </form>
-    </div>
-    <div class="col-xs-12 pad-0">
-        <!-- Start of create buttons -->
-        <a ui-sref="facilities.facility_create.services({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Services
-        </a>
-        <button ng-click="goToNext(5, 'units')" ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
-            &nbsp; Facility Departments <i class="fa fa-angle-double-right"></i>
-        </button>
-        <!-- End of navigation buttons -->
-        <a ui-sref="facilities.facility_edit.contacts" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
-        </a>
-        <button type="submit" ng-if="!create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
-            &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
-        </button>
-        <!-- End of create buttons -->
     </div>
 </div>
