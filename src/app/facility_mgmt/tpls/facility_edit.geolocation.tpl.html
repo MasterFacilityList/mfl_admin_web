@@ -53,23 +53,23 @@
                                     </div>
                                 <!-- End of first section of form -->
                                 <!-- Start lat long -->
-                                            <div class="group col-sm-6">
-                                                <input type="number" step="0.00000001" name="longitude" ng-model="geo.coordinates.coordinates[0]"
-                                                ng-keypress="checkLocation(geo.coordinates)" ng-model-options="{ debounce: 250 }"/>
-                                                <span class="highlight"></span>
-                                                <span class="bar"></span>
-                                                <label class="margin-l-10">
+                                            <div class="form-group col-sm-6">
+                                                <label>
                                                     Longitude
                                                 </label>
-                                            </div>
-                                            <div class="group col-sm-6">
-                                                <input type="number" step="0.00000001" name="latitude" ng-model="geo.coordinates.coordinates[1]"
+                                                <input class="form-control" step="0.00000001" name="longitude" ng-model="geo.coordinates.coordinates[0]"
                                                 ng-keypress="checkLocation(geo.coordinates)" ng-model-options="{ debounce: 250 }"/>
                                                 <span class="highlight"></span>
                                                 <span class="bar"></span>
-                                                <label class="margin-l-10">
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label>
                                                     Latitude
                                                 </label>
+                                                <input class="form-control" step="0.00000001" name="latitude" ng-model="geo.coordinates.coordinates[1]"
+                                                ng-keypress="checkLocation(geo.coordinates)" ng-model-options="{ debounce: 250 }"/>
+                                                <span class="highlight"></span>
+                                                <span class="bar"></span>
                                             </div>
                                   <!-- End lat long -->
                                 <div class="col-md-12 margin-t-10 margin-b-20">
