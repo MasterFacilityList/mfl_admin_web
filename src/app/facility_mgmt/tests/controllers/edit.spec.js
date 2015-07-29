@@ -1226,9 +1226,11 @@
                     "$stateParams": {
                         facility_id: 3
                     },
+                    "$state" : state,
                     "mfl.common.services.multistep" : multistepService,
                     "mfl.common.forms.changes" : formChanges
                 };
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url+"api/common/contact_types/")
                     .respond(200, {results: []});
@@ -1242,6 +1244,7 @@
                     .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
                     .respond(200, {results: []});
                 data.$scope.user_id = 3;
+                data.$scope.create = false;
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"},
@@ -1256,7 +1259,82 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 httpBackend.resetExpectations();
+                data.$scope.off = {officer: "13"};
+                data.$scope.officer = {
+                    "id": "3"
+                };
+                data.$scope.facility_id = "3";
+                data.$scope.contacts = [{type : "13", contact : "0978423" }];
+                httpBackend
+                    .expectPATCH(server_url + "api/facilities/officers_incharge/13/")
+                    .respond(201, {"id": 5});
+                data.$scope.contacts = [{type : "13", contact : "t@t.com"}];
+                var obj = {type : "13", contact : "t@t.com"};
+                data.$scope.add_contact();
+                data.$scope.remove_contact(obj);
+                var frm =  {
+                    $dirty: true,
+                    name : {
+                        $dirty: true,
+                        $modelValue: "Rick Ryan"
+                    },
+                    id_no : {
+                        $modelValue: "3",
+                        $dirty: true
+                    }
+                };
+                data.$scope.add(frm);
 
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                expect(data.$scope.fac_officers).toEqual([{"id": 5}]);
+            }]));
+            it("should successfully create an officer of a facility",
+            inject(["mfl.common.services.multistep",
+                "mfl.common.forms.changes",
+                function (multistepService, formChanges) {
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    },
+                    "$state" : state,
+                    "mfl.common.services.multistep" : multistepService,
+                    "mfl.common.forms.changes" : formChanges
+                };
+                spyOn(state, "go");
+                httpBackend
+                    .expectGET(server_url+"api/common/contact_types/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/job_titles/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/officers/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
+                    .respond(200, {results: []});
+                data.$scope.user_id = 3;
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"}
+                ];
+                ctrl(".officers", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+                data.$scope.off = {officer: "13"};
                 data.$scope.officer = {
                     "id": "3"
                 };
@@ -1285,7 +1363,6 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-                expect(data.$scope.fac_officers).toEqual([{"id": 5}]);
             }]));
             it("should fail to add an officer to a facility",
             inject(["mfl.common.services.multistep",
@@ -1298,6 +1375,7 @@
                     },
                     "mfl.common.services.multistep" : multistepService
                 };
+                data.$scope.create = false;
                 httpBackend
                     .expectGET(server_url+"api/facilities/officers/")
                     .respond(200, {results: []});
@@ -1325,6 +1403,74 @@
                 data.$scope.officer = {
                     "id": "3"
                 };
+                data.$scope.off = {officer: "13"};
+                data.$scope.facility_id = "3";
+
+                httpBackend
+                    .expectPATCH(server_url + "api/facilities/officers_incharge/13/")
+                    .respond(500, {"id": 5});
+                data.$scope.contacts = [{type : "13", contact : "t@t.com"}];
+                var obj = {type : "13", contact : "t@t.com"};
+                data.$scope.add_contact();
+                data.$scope.remove_contact(obj);
+                var frm =  {
+                    $dirty: true,
+                    name : {
+                        $dirty: true,
+                        $modelValue: "Rick Ryan"
+                    },
+                    id_no : {
+                        $modelValue: "3",
+                        $dirty: true
+                    }
+                };
+                data.$scope.add(frm);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                expect(data.$scope.fac_officers).toEqual([]);
+            }]));
+            it("should fail to create an officer of a facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    },
+                    "mfl.common.services.multistep" : multistepService
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                httpBackend
+                    .expectGET(server_url+"api/facilities/officers/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_officers/?facility=3")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"}
+                ];
+
+                ctrl(".officers", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.officer = {
+                    "id": "3"
+                };
+                data.$scope.off = {officer: "13"};
                 data.$scope.facility_id = "3";
 
                 httpBackend
