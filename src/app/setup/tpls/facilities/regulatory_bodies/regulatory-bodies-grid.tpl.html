@@ -8,16 +8,17 @@
     <table class="table table-hover fs-14">
         <thead class="cf">
             <th sil-grid-sort field='name'>Name</th>
-            <th>Status</th>
+            <th>Abbreviation</th>
+            <th>Regulation Verb</th>
+            <th>Body Type</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="body in regulatingBodies">
                 <td data-title="Name" class="pad-t-15">{{body.name}}</td>
-                <td data-title="Status" class="pad-t-15">
-                    <i ng-if="body.active" class="fa fa-check-circle-o fa-2x text-success" tooltip="Is Active"></i>
-                    <i ng-if="!body.active" class="fa fa-trash fa-2x text-danger" tooltip-placement="bottom" tooltip="Is Inactive"></i>
-                </td>
+                <td data-title="Abbreviation" class="pad-t-15">{{body.abbreviation}}</td>
+                <td data-title="Regulation Verb" class="pad-t-15">{{body.regulation_verb}}</td>
+                <td data-title="Body Type" class="pad-t-15">{{body.regulatory_body_type_name}}</td>
                 <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.facility_regulatory_bodies.edit.basic({id : body.id})" class="login-btn login-btn-action" tooltip-placement="bottom" tooltip="View Regulatory Body">
                         &nbsp; View

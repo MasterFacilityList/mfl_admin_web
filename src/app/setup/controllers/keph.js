@@ -8,6 +8,9 @@
             $scope.title = {
                 name: "KEPH Levels"
             };
+            $scope.filters =  {
+                "fields": "id,name,description"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='setup.facility_kephs.keph_create'" +

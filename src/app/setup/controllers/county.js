@@ -9,6 +9,9 @@
                 icon: "fa-map-marker",
                 name: "Counties"
             };
+            $scope.filters = {
+                "fields": "id,name,code"
+            };
         }]
     )
     .controller("mfl.setup.controller.county.view", ["$scope", "$stateParams",

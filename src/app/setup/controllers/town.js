@@ -9,7 +9,9 @@
                 icon: "fa-map-marker",
                 name: "Towns"
             };
-
+            $scope.filters = {
+                "fields": "id,name,ward_name"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='setup.towns.town_create'" +

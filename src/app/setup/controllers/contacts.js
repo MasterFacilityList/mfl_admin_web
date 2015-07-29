@@ -11,6 +11,9 @@
                 icon: "fa-phone",
                 name: "Manage Contacts"
             };
+            $scope.filters = {
+                "fields": "id,contact_type_name,contact"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='setup.contacts.create'",
@@ -98,6 +101,9 @@
             $scope.title = {
                 icon: "fa-phone",
                 name: "Manage Contact Types"
+            };
+            $scope.filters = {
+                "fields": "id,name"
             };
             $scope.action = [
                 {
