@@ -205,7 +205,7 @@
             }
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
-                $scope.facility.ward = $scope.select_values.ward;
+                $scope.facility.ward = $scope.select_values.ward.id;
                 $scope.facility.facility_type = $scope.select_values.facility_type;
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
@@ -250,11 +250,13 @@
                     }
                 } else {
                     if (_.isEmpty(changes)) {
-                        $state.go("facilities.facility_edit.geolocation", {reload : true});
+                        $state.go("facilities.facility_edit.geolocation",
+                        {"facility_id": $stateParams.facility_id});
                     } else {
                         wrappers.facility_detail.update($scope.facility_id, changes)
                         .success(function () {
-                            $state.go("facilities.facility_edit.geolocation", {reload : true});
+                            $state.go("facilities.facility_edit.geolocation",
+                            {"facility_id": $scope.facility_id});
                         })
                         .error(function (data) {
                             $log.error(data);
@@ -369,8 +371,8 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        "mfl.common.forms.changes", "$state",
-        function($scope, $log, $stateParams, wrappers, multistepService, formChanges, $state){
+        "mfl.common.forms.changes",
+        function($scope, $log, $stateParams, wrappers, multistepService, formChanges){
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[3]);
@@ -407,7 +409,6 @@
             wrappers.facility_officers.filter({facility:$stateParams.facility_id})
             .success(function(data){
                 $scope.fac_officers = data.results;
-                $scope.off = $scope.fac_officers[0];
             })
             .error(function(error){
                 $log.error(error);
@@ -425,30 +426,18 @@
                 $scope.spinner = true;
                 var changes = formChanges.whatChanged(frm);
                 changes.facility_id = $scope.facility_id;
-                //commented out pending refactor in backend
-                //changes.contacts = $scope.contacts;
-                if(!$scope.create) {
-                    wrappers.facility_officers_incharge.update($scope.off.officer, changes)
-                        .success(function (data) {
-                            $state.go("facilities.facility_edit.units");
-                            $scope.fac_officers.push(data);
-                            $scope.spinner = false;
-                            $scope.off = {};
-                            $scope.contacts = [{type : "", contacts : ""}];
-                        })
-                        .error(function (data) {
-                            $log.error(data);
-                            $scope.spinner = false;
-                        });
-                }else {
-                    wrappers.create_officer.create(changes)
-                        .success(function () {
-                            $state.go("facilities.facility_edit.units");
-                        })
-                        .error(function (err) {
-                            $scope.alert = err.error;
-                        });
-                }
+                changes.contacts = $scope.contacts;
+                wrappers.create_officer.create(changes)
+                    .success(function (data) {
+                        $scope.fac_officers.push(data);
+                        $scope.spinner = false;
+                        $scope.off = {};
+                        $scope.contacts = [{type : "", contacts : ""}];
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                        $scope.spinner = false;
+                    });
             };
             /*remove officer*/
             $scope.removeChild = function (obj) {
@@ -664,7 +653,7 @@
                                     $scope.$parent.facility.facility_physical_address = data;
                                     if(!$scope.create){
                                         $state.go("facilities.facility_edit.geolocation",
-                                        {"facility_id": $scope.facility_id}, {reload: true});
+                                        {"facility_id": $scope.facility_id});
                                     }else{
                                         $scope.goToNext(7, "geolocation");
                                     }
@@ -677,7 +666,7 @@
                         }else {
                             if(!$scope.create){
                                 $state.go("facilities.facility_edit.geolocation",
-                                {"facility_id": $scope.facility_id}, {reload: true});
+                                {"facility_id": $scope.facility_id});
                             }else{
                                 $scope.goToNext(7, "geolocation");
                             }
@@ -738,6 +727,17 @@
                 //facility's coordinates
                 wrappers.facility_coordinates.get(f.coordinates)
                 .success(function(data){
+                    angular.extend($scope,{
+                        markers: {
+                            mainMarker: {
+                                layer:"facility",
+                                lat: data.coordinates.coordinates[1],
+                                lng: data.coordinates.coordinates[0],
+                                message: f.name,
+                                draggable: true
+                            }
+                        }
+                    });
                     $scope.spinner = false;
                     $scope.geo = data;
                     $scope.select_values = {
@@ -754,17 +754,6 @@
                             "name": f.facility_physical_address.town
                         }
                     };
-                    angular.extend($scope,{
-                        markers: {
-                            mainMarker: {
-                                layer:"facility",
-                                lat: data.coordinates.coordinates[1],
-                                lng: data.coordinates.coordinates[0],
-                                message: f.name,
-                                draggable: true
-                            }
-                        }
-                    });
                 })
                 .error(function(error){
                     $scope.spinner = false;
@@ -772,7 +761,6 @@
                     $scope.geocodes_error = errorMessages.errors +
                                         errorMessages.geocodes;
                 });
-                $scope.facilityWard(f);
             };
             //get facility ward and draw its map
             $scope.facilityWard = function (f) {
@@ -827,6 +815,7 @@
                     $scope.wards_error = errorMessages.errors +
                         errorMessages.ward;
                 });
+                $scope.getFacilityCoordinates(f);
             };
             /*Fetch geo code methods*/
             wrappers.geo_code_methods.list()
@@ -913,7 +902,7 @@
             };
             // update coordinates after dragging marker
             $scope.$on("leafletDirectiveMarker.dragend", function (e, args) {
-                $scope.geo.coordinates.coordinates = [args.model.lat,args.model.lng];
+                $scope.geo.coordinates.coordinates = [args.model.lng,args.model.lat];
             });
             /*Wait for facility to be defined*/
             $scope.$watch("facility", function (f) {
@@ -921,7 +910,7 @@
                     return;
                 }
                 if(!_.isNull(f.coordinates)) {
-                    $scope.getFacilityCoordinates(f);
+                    $scope.facilityWard(f);
                 }
             });
         }]);
