@@ -24,7 +24,7 @@
             it("should have wrappers defined", function() {
                 inject(["mfl.facility_mgmt.services.wrappers",function(wrappers){
                     expect(wrappers.facilities.apiBaseUrl)
-                        .toEqual("api/facilities/facilities_list/");
+                        .toEqual("api/facilities/facilities/");
                 }]);
             });
             it("should have facility officers wrapper defined", function() {
