@@ -13,7 +13,9 @@
         "mfl.service_mgmt",
         "mfl.setup",
         "mfl.dashboard",
-        "mfl.facility_mgmt"
+        "mfl.facility_mgmt",
+        "angulartics",
+        "angulartics.google.analytics"
     ]);
 
 })(window.angular);
