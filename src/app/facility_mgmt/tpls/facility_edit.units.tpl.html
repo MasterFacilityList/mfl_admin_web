@@ -1,85 +1,77 @@
-<div class="col-sm-12 detail-content">
+<div class="col-sm-12 content-card">
     <div class="col-md-12 alert alert-danger alert-dismissible" ng-show="units_error">
         <button type="button" class="close">
             <span ng-click="units_error = !units_error">&times;</span>
         </button>
         <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{units_error}}</span>
     </div>
-    <div class="col-sm-12 content-card form-card margin-t-20" requires-permission="facilities.add_facilityunit">
-        <div class="col-sm-12">
-            <h4 class="fs-18 fw-600"> Add Facility Department</h4>
-        </div>
-        <form ng-submit="add()">
-            <div class="group col-sm-5">
-                <input type="text" name="name" ng-model="facility_unit.name" required class="margin-t-5">
-                <span class="highlight"></span>
-                <span class="bar"></span>
-                <label class="margin-l-10">
-                    Facility Department Name
-                </label>
-            </div>
-            <div class="group col-sm-5">
-                <select name="unit" ng-model="facility_unit.regulating_body" class="pad-t-15" required>
-                    <option value="">Select Regulating Body</option>
-                    <option ng-repeat="unit in regbodies" ng-value="unit.id">{{unit.name}}</option>
-                </select>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="col-sm-1 pull-right" style="padding: 0 20px;">
-                <button type="submit" class="login-btn login-btn-primary margin-t-10 pull-right" tooltip-placement="bottom" tooltip="Add Facility Department">
-                    <i class="fa fa-plus-circle"></i> Add
-                </button>
-            </div>
-        </form>
-    </div>
-    <div class="col-xs-12 alert alert-info margin-t-20" ng-if="fac_units.length === 0">
-        <i class="fa fa-info-circle"></i> No Facility Department assigned to facility
-    </div>
-    <div  class="content-card col-xs-12 margin-t-20" ng-if="fac_units.length > 0">
+    <!-- Start of new implementation -->
+    <div class="col-xs-12 margin-t-10 pad-0" requires-permission="facilities.add_facilitycontact">
         <div class="col-xs-12">
-        <h4 class="fs-18 fw-600"> Current Unit(s)</h4>
-        <table class="table content-card margin-t-20 margin-b-10">
-           <thead>
-               <tr>
-                   <td class="col-xs-4"><strong class="fs-16">Unit Name</strong></td>
-                   <td class="col-xs-5"><strong class="fs-16">Regulating Body</strong></td>
-               </tr>
-           </thead>
-            <tbody>
-                <tr ng-repeat="child in fac_units">
-                    <td class="pad-t-15 fs-16 fw-500 col-xs-5">{{child.name}}</td>
-                    <td class="pad-t-15 fs-16 fw-500 col-xs-5">{{child.regulating_body_name}}</td>
-                    <td class="pad-t-10 text-right">
-                    <span ng-if="child.delete_spinner">
-                        <i class="fa fa-spin fa-circle-o-notch"></i>
-                    </span>
-                        <a class="login-btn login-btn-danger" tooltip-placement="bottom" popover-trigger="open" popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Unit">
-                            &nbsp;Delete
-                        </a>
-                    </td>
-                </tr>
-                <tr ng-if="spinner">
-                    <td colspan="3" class="text-center">
-                        <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <h4 class="fw-600 fs-18"> Facility Department</h4>
+        </div>
+        <div class="col-xs-12">
+            <table class="table table-bordered col-xs-12">
+                <thead class="grey-header">
+                    <th class="col-xs-5">Department Name</th>
+                    <th class="col-xs-6">Regulatory Body</th>
+                    <th class="col-xs-1 text-center"></th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="fac_dept in fac_units">
+                        <td>
+                            <div class="form-group grid-inputs">
+                                <input class="form-control" placeholder="Contact Details" ng-model="fac_dept.name">
+                            </div>
+                        </td>
+                        <td class="col-xs-5">
+                            <div class="form-group grid-inputs">
+                                <select class="form-control"
+                                ng-model="fac_dept.regulating_body" place-holder="Select Contact Details">
+                                    <option value="">Select Regulating Body</option>
+                                    <option ng-repeat="regbody in regbodies"
+                                    ng-value="regbody.id">{{regbody.name}}</option>
+                                </select>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </td>
+
+                        <td class="col-xs-1 text-center">
+                            <a ng-click="remove_contact(cont)" style="cursor: pointer;">
+                                <i class="fa fa-close fa-2x grid-inputs text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr ng-if="fac_units.length === 0" class="alert alert-info">
+                        <td colspan="3">
+                        <i class="fa fa-info-circle"></i> No Departments assigned to the facility
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12 text-right margin-b-10">
+            <a class="login-btn login-btn-primary pull-right" ng-click="add_contact()" >
+                &nbsp;<i class="fa fa-plus-square-o"></i> Add
+            </a>
         </div>
     </div>
-    <!-- Start of create buttons -->
-    <a ui-sref="facilities.facility_create.officers({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
-        &nbsp;<i class="fa fa-angle-double-left"></i> Officers
-    </a>
-    <button ng-click="goToNext(6, 'location')" ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
-        &nbsp; Location <i class="fa fa-angle-double-right"></i>
-    </button>
-    <!-- End of navigation buttons -->
-    <a ui-sref="facilities.facility_edit.officers" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
-        &nbsp;<i class="fa fa-angle-double-left"></i> Officers
-    </a>
-    <a ui-sref="facilities.facility_edit.services" ng-if="!create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
-        &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
-    </a>
+    <!-- End of tabular implementation -->
+    <div class="col-xs-12">
+        <!-- Start of create buttons -->
+        <a ui-sref="facilities.facility_create.officers({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Officers
+        </a>
+        <button ng-click="goToNext(6, 'location')" ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+            &nbsp; Location <i class="fa fa-angle-double-right"></i>
+        </button>
+        <!-- End of navigation buttons -->
+        <a ui-sref="facilities.facility_edit.officers" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Officers
+        </a>
+        <a ui-sref="facilities.facility_edit.services" ng-if="!create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+            &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
+        </a>
+    </div>
 </div>

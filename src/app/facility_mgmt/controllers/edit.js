@@ -495,7 +495,7 @@
                 $scope.nextState();
             }
             /*regulating bodies*/
-            wrappers.regulating_bodies.list()
+            wrappers.regulating_bodies.filter({fields:"id,name"})
             .success(function(data){
                 $scope.regbodies = data.results;
             })
@@ -504,7 +504,10 @@
             });
 
             /*facility units*/
-            wrappers.facility_units.filter({facility:$scope.facility_id})
+            wrappers.facility_units.filter({
+                facility: $scope.facility_id,
+                fields:"id,name,regulating_body,regulating_body_name"
+            })
             .success(function(data){
                 $scope.fac_units = data.results;
             })

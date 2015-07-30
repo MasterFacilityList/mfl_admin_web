@@ -51,9 +51,9 @@
 </div>
 <div class="margin-t-20 col-xs-12" ng-if="!create">
     <div ui-view="tab-header"></div>
-    <div ui-view="tab-content">
-        <div ui-view="publish"></div>
-        <div class="listing" ui-view="form-view"></div>
+    <div class="fade-content" ui-view="tab-content">
+        <div class="fade-content" ui-view="publish"></div>
+        <div class="listing fade-content" ui-view="form-view"></div>
     </div>
 </div>
 <div class="margin-20 content-card" ng-if="create">
