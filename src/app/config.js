@@ -12,8 +12,8 @@
     ])
 
     .constant("SERVER_URL", angular.copy(window.MFL_SETTINGS.SERVER_URL))
-
     .constant("CREDZ", angular.copy(window.MFL_SETTINGS.CREDZ))
+    .constant("SESSION_TIMEOUT", angular.copy(window.MFL_SETTINGS.TIMEOUT))
 
     .constant("HOME_PAGE_NAME", "dashboard")
 
