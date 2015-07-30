@@ -1615,10 +1615,13 @@
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
                 httpBackend
-                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facility_units/?facility=4")
+                    .expectGET(
+                        server_url+"api/facilities/"+
+                        "facility_units/?facility=4&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
                     .respond(200, {results: []});
                 ctrl(".units", data);
 
@@ -1647,7 +1650,7 @@
                 ];
                 data.$scope.create = false;
                 httpBackend
-                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
                     .respond(500, {results: []});
                 ctrl(".units", data);
 
@@ -1676,10 +1679,13 @@
                     {name : "units"}
                 ];
                 httpBackend
-                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .expectGET(
+                        server_url+"api/facilities/"+
+                        "facility_units/?facility=3&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
@@ -1722,10 +1728,12 @@
                 };
                 data.$scope.facility_id = 3;
                 httpBackend
-                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .expectGET(server_url+"api/facilities/"+
+                        "facility_units/?facility=3&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
@@ -1783,10 +1791,12 @@
                     {name : "units"}
                 ];
                 httpBackend
-                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .expectGET(server_url+"api/facilities/"+
+                        "facility_units/?facility=3&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
@@ -1824,10 +1834,12 @@
                 };
                 data.$scope.facility_id = 3;
                 httpBackend
-                    .expectGET(server_url+"api/facilities/regulating_bodies/")
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .expectGET(server_url+"api/facilities/"+
+                        "facility_units/?facility=3&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
                     .respond(200, {results: []});
 
                 data.$scope.user_id = 3;
