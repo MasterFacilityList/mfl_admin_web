@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
     "use strict";
 
     describe("Test facility_mgmt module services", function () {
@@ -13,7 +13,11 @@
             var $window;
 
             beforeEach(module(["$provide", function($provide){
-                $window = { location: {href: ""}, localStorage: window.localStorage };
+                $window = {
+                    location: {href: ""},
+                    localStorage: window.localStorage,
+                    attachEvent: angular.noop
+                };
                 $provide.value("$window", $window);
             }]));
 
@@ -46,4 +50,4 @@
         });
     });
 
-})();
+})(window.angular);
