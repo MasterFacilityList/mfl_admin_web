@@ -11,7 +11,8 @@
                              "ZKuIoma0pvqkkKDU9GPv",
             "token_url": "o/token/",
             "revoke_url": "o/revoke_token/"
-        }
+        },
+        "TIMEOUT": {"kickout": 90, "warning": 30}
     };
 
     setts.CREDZ.token_url = setts.SERVER_URL + setts.CREDZ.token_url;

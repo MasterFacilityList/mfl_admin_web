@@ -96,6 +96,7 @@ module.exports = {
             "vendor/d3/d3.js",
             "vendor/c3/c3.js",
             "vendor/angular-loading-bar/build/loading-bar.js",
+            "vendor/ng-idle/angular-idle.js",
             "vendor/angulartics/dist/angulartics.min.js",
             "vendor/angulartics-google-analytics/dist/angulartics-google-analytics.min.js",
             "libs/api_wrapper.js",

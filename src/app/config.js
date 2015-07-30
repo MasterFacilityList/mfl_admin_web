@@ -8,12 +8,13 @@
         "angular-loading-bar",
         "mfl.auth.oauth2",
         "ui.router",
-        "mfl.auth.services"
+        "mfl.auth.services",
+        "ngIdle"
     ])
 
     .constant("SERVER_URL", angular.copy(window.MFL_SETTINGS.SERVER_URL))
-
     .constant("CREDZ", angular.copy(window.MFL_SETTINGS.CREDZ))
+    .constant("SESSION_TIMEOUT", angular.copy(window.MFL_SETTINGS.TIMEOUT))
 
     .constant("HOME_PAGE_NAME", "dashboard")
 
@@ -45,6 +46,17 @@
                 "Cache-Control": val
             }
         });
+    }])
+
+    .config(["IdleProvider", "SESSION_TIMEOUT", function (ip, st) {
+        ip.idle(st.kickout);
+        ip.timeout(st.warning);
+        ip.keepalive(false);
+        ip.autoResume(true);
+    }])
+
+    .run(["Idle", function (idle) {
+        idle.watch();
     }])
 
     .run(["api.oauth2",function (oauth2) {
