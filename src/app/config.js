@@ -49,7 +49,8 @@
     }])
 
     .config(["IdleProvider", "SESSION_TIMEOUT", function (ip, st) {
-        ip.idle(st);
+        ip.idle(st.kickout);
+        ip.timeout(st.warning);
         ip.keepalive(false);
         ip.autoResume(true);
     }])
