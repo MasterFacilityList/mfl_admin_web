@@ -96,6 +96,8 @@ module.exports = {
             "vendor/d3/d3.js",
             "vendor/c3/c3.js",
             "vendor/angular-loading-bar/build/loading-bar.js",
+            "vendor/angulartics/dist/angulartics.min.js",
+            "vendor/angulartics-google-analytics/dist/angulartics-google-analytics.min.js",
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
