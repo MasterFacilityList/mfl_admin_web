@@ -162,7 +162,7 @@
                         <ui-select-match placeholder="Select a ward...">
                             <span>{{$select.selected.name}}</span>
                         </ui-select-match>
-                        <ui-select-choices repeat="ward.id as ward in wards | filter:$select.search">
+                        <ui-select-choices repeat="ward in wards | filter:$select.search">
                             <span>{{ward.name}}</span>
                         </ui-select-choices>
                     </ui-select>
@@ -173,7 +173,7 @@
                         <ui-select-match placeholder="Select a town...">
                             <span>{{$select.selected.name}}</span>
                         </ui-select-match>
-                        <ui-select-choices repeat="town.id as town in towns | filter:$select.search">
+                        <ui-select-choices repeat="town in towns | filter:$select.search | filter:select_values.ward.id">
                             <span>{{town.name}}</span>
                         </ui-select-choices>
                     </ui-select>

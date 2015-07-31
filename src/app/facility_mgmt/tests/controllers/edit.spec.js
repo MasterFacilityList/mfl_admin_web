@@ -57,7 +57,11 @@
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
-                        regulatory_body: "23"
+                        regulatory_body: "23",
+                        facility_physical_address : {
+                            town_id : "3",
+                            town : "Mombasa"
+                        }
                     };
                     spyOn(state, "go");
                     httpBackend
@@ -102,6 +106,10 @@
                         regulatory_body: {
                             "id": "23",
                             "name": "def"
+                        },
+                        town : {
+                            "id" : "3",
+                            "name" : "Mombasa"
                         }
                     });
                 }])
@@ -173,6 +181,10 @@
                         regulatory_body: {
                             "id": "23",
                             "name": "def"
+                        },
+                        town : {
+                            "id" : "",
+                            "name" : ""
                         }
                     });
 
@@ -257,6 +269,10 @@
                         regulatory_body: {
                             "id": "23",
                             "name": "def"
+                        },
+                        town : {
+                            "id" : "",
+                            "name" : ""
                         }
                     });
 
@@ -418,7 +434,12 @@
                 data.$scope.selectReload = function () {
                     return {"results": []};
                 };
-                data.$scope.facility = {};
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -427,7 +448,56 @@
                     ward : {id : "1"},
                     facility_type : {id : "2"},
                     owner : {id : "3"},
-                    operation_status : {id : "4"}
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
+                };
+                ctrl(".basic", data);
+
+                var frm = {
+                    "$dirty": false,
+                    "name": {
+                        "$dirty": false,
+                        "$$modelValue": "test"
+                    }
+                };
+                data.$scope.save(frm);
+                var official = "Antony Facility";
+                var name;
+                data.$scope.initUniqueName(official, name);
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(data.$scope.facility.name).toEqual(official);
+            });
+            //new test
+            it("should not save if no changes", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                spyOn(state, "go");
+
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
                 };
                 ctrl(".basic", data);
 
@@ -457,7 +527,9 @@
                 data.$scope.selectReload = function () {
                     return {"results": []};
                 };
-                data.$scope.facility = {};
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -466,7 +538,8 @@
                     ward : {id : "1"},
                     facility_type : {id : "2"},
                     owner : {id : "3"},
-                    operation_status : {id : "4"}
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
                 };
                 data.$scope.create = false;
                 ctrl(".basic", data);
@@ -503,7 +576,9 @@
                     return {"results": []};
                 };
                 state.params.facility_id = "";
-                data.$scope.facility = {};
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -512,7 +587,8 @@
                     ward : {id : "1"},
                     facility_type : {id : "2"},
                     owner : {id : "3"},
-                    operation_status : {id : "4"}
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -549,7 +625,9 @@
                     return {"results": []};
                 };
                 state.params.facility_id = "";
-                data.$scope.facility = {};
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -558,7 +636,8 @@
                     ward : {id : "1"},
                     facility_type : {id : "2"},
                     owner : {id : "3"},
-                    operation_status : {id : "4"}
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -595,7 +674,9 @@
                     return {"results": []};
                 };
                 state.params.facility_id = "3";
-                data.$scope.facility = {};
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -604,7 +685,8 @@
                     ward : {id : "1"},
                     facility_type : {id : "2"},
                     owner : {id : "3"},
-                    operation_status : {id : "4"}
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -639,7 +721,9 @@
                     return {"results": []};
                 };
                 state.params.facility_id = "3";
-                data.$scope.facility = {};
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -648,7 +732,8 @@
                     ward : {id : "1"},
                     facility_type : {id : "2"},
                     owner : {id : "3"},
-                    operation_status : {id : "4"}
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -684,7 +769,9 @@
                 };
                 spyOn(state, "go");
                 state.params.facility_id = "3";
-                data.$scope.facility = {};
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
                 data.$scope.steps = [
                     {name : "basic"},
                     {name : "contacts"}
@@ -693,7 +780,8 @@
                     ward : {id : "1"},
                     facility_type : {id : "2"},
                     owner : {id : "3"},
-                    operation_status : {id : "4"}
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -720,7 +808,9 @@
                 data.$scope.selectReload = function () {
                     return {"results": []};
                 };
-                data.$scope.facility = {};
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
                 data.$scope.steps = [
                     {name : "basic"}
                 ];
@@ -729,7 +819,8 @@
                     ward : {id : "1"},
                     facility_type : {id : "2"},
                     owner : {id : "3"},
-                    operation_status : {id : "4"}
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
                 };
                 ctrl(".basic", data);
 
@@ -3739,6 +3830,79 @@
                     httpBackend
                         .expectGET(server_url+"api/gis/facility_coordinates/3/")
                         .respond(200, {results: []});
+
+                    scope.$apply();
+                    scope.$digest();
+
+                    httpBackend.flush();
+
+                    expect(leafletData.getMap).toHaveBeenCalled();
+                    expect(obj.then).toHaveBeenCalled();
+
+                    var then_fxn = obj.then.calls[0].args[0];
+                    expect(angular.isFunction(then_fxn)).toBe(true);
+                    var map = {
+                        fitBounds: angular.noop
+                    };
+                    spyOn(map, "fitBounds");
+                    then_fxn(map);
+                    expect(map.fitBounds).toHaveBeenCalledWith([[3,2],
+                                                                [4,3]]);
+                });
+            it("should not plot facility marker", function () {
+                    var data = {
+                        ward_boundary:{
+                            geometry:{
+                                coordinates : [
+                                    [
+                                        [1,2],
+                                        [3,4]
+                                    ]
+                                ]
+                            },
+                            properties : {
+                                type: "Polygon",
+                                bound: {
+                                    coordinates : [
+                                        [
+                                            [2,3],
+                                            [3,4]
+                                        ]
+                                    ]
+                                }
+                            }
+                        }
+                    };
+                    var obj = {
+                        then: angular.noop
+                    };
+                    var scope = rootScope.$new();
+                    scope.facility = {
+                        ward : "3",
+                        coordinates: null
+                    };
+                    scope.steps = [
+                        {name : "basic"},
+                        {name : "contacts"},
+                        {name : "services"},
+                        {name : "setup"},
+                        {name : "officers"},
+                        {name : "units"},
+                        {name : "location"}
+                    ];
+                    scope.create = false;
+                    spyOn(scope, "$on").andCallThrough();
+                    spyOn(leafletData, "getMap").andReturn(obj);
+                    spyOn(obj, "then");
+
+                    ctrl(".geolocation",{
+                        "$scope": scope,
+                        "leafletData": leafletData
+                    });
+
+                    httpBackend
+                        .expectGET(server_url+"api/common/wards/3/")
+                        .respond(200, data);
 
                     scope.$apply();
                     scope.$digest();
