@@ -788,6 +788,23 @@
                     leafletData.getMap("wardmap")
                         .then(function (map) {
                             var coords = data.ward_boundary.properties.bound.coordinates[0];
+                            $scope.center = data.ward_boundary.properties.center;
+                            console.log($scope.center);
+                            if(_.isEmpty($scope.geo.coordinates.coordinates)){
+                                $scope.geo.coordinates.coordinates =
+                                $scope.center.coordinates;
+                                angular.extend($scope,{
+                                    markers: {
+                                        mainMarker: {
+                                            layer:"facility",
+                                            lat: $scope.geo.coordinates.coordinates[1],
+                                            lng: $scope.geo.coordinates.coordinates[0],
+                                            message: f.name,
+                                            draggable: true
+                                        }
+                                    }
+                                });
+                            }
                             var bounds = _.map(coords, function(c) {
                                 return [c[1], c[0]];
                             });
