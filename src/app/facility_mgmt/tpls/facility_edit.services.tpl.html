@@ -1,92 +1,80 @@
-<div class="col-sm-12 detail-content">
+<div class="col-sm-12 content-card">
     <div class="col-xs-12 fade-content alert alert-danger alert-dismissible margin-t-10" ng-show="service_error">
         <button type="button" class="close">
             <span ng-click="service_error = !service_error">&times;</span>
         </button>
         <span ng-cloak class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{service_error}}</span>
     </div>
-    <div class="col-sm-12 content-card form-card margin-t-20 margin-b-20" requires-permission="facilities.add_facilityservice">
-        <div class="col-sm-12">
-            <h4 class="fw-600 fs-18">Add Facility Service</h4>
-        </div>
-        <form name="frm_facility_services" ng-submit="addServiceOption(new_service.option)">
-                <div class="group col-xs-5 pad-t-10">
-                    <ui-select name="service" ng-model="new_service.service">
-                        <ui-select-match placeholder="Select a service">
-                            {{$select.selected.name}}
-                        </ui-select-match>
-                        <ui-select-choices repeat="service.id as service in services | filter:$select.search">
-                            {{service.name}}
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
-                <div class="group col-xs-5">
-                    <select name="service_option" ng-model="new_service.option" required>
-                        <option value="">Select an option</option>
-                        <option ng-repeat="serv_opt in service_options" ng-value="serv_opt.id">{{serv_opt.display_text}}</option>
-                    </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                </div>
-                <div class="col-sm-2 margin-b-10 pull-right" style="padding: 0 25px;">
-                    <button type="submit" class="login-btn login-btn-primary margin-t-10 pull-right" tooltip="Add Service"
-                        ng-disabled="frm_facility_services.$invalid">
-                        &nbsp;<i class="fa fa-plus-circle"></i> Add
-                    </button>
-                </div>
-        </form>
-    </div>
-    <div class="col-xs-12 content-card margin-t-20">
+    <div class="col-xs-12 margin-t-10 pad-0" requires-permission="facilities.add_facilitycontact">
         <div class="col-xs-12">
-            <h4 class="fw-600 fs-18">Facility Services</h4>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th class="col-xs-5"><span class="fs-16">Service</span></th>
-                        <th class="col-xs-5"><span class="fs-16">Option</span></th>
-                        <th></th>
-                    </tr>
+            <h4 class="fw-600 fs-18"> Facility Services</h4>
+        </div>
+        <div class="col-xs-12">
+            <table class="table table-bordered col-xs-12">
+                <thead class="grey-header">
+                    <th class="col-xs-5">Service Name</th>
+                    <th class="col-xs-6">Service Option</th>
+                    <th class="col-xs-1 text-center"></th>
                 </thead>
-                <tbody ng-if="facility.facility_services.length < 1">
-                    <tr>
-                        <td colspan="3">
-                            <p class="text-center">No Facility Services assigned to the facility</p>
+                <tbody>
+                    <tr ng-repeat="fac_service in facility.facility_services">
+                        <td class="col-xs-5">
+                            <div class="form-group grid_inputs">
+                                <ui-select name="service" ng-model="fac_service.service_id">
+                                    <ui-select-match placeholder="Select a service">
+                                        {{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="service.id as service in services | filter:$select.search">
+                                        {{service.name}}
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group grid_inputs">
+                                <select class="form-control " name="service_option" ng-model="fac_service.option" required>
+                                    <option value="">Select an option</option>
+                                    <option ng-repeat="serv_opt in service_options" ng-value="serv_opt.id">{{serv_opt.display_text}}</option>
+                                </select>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </td>
+                        <td class="col-xs-1 text-center">
+                            <a ng-click="remove_contact(cont)" style="cursor: pointer;">
+                                <i class="fa fa-close fa-2x grid-inputs text-danger"></i>
+                            </a>
                         </td>
                     </tr>
-                </tbody>
-                <tbody ng-if="facility.facility_services.length > 0">
-                    <tr ng-repeat="child in facility.facility_services">
-                        <td class="col-xs-5">
-                            <span class="fs-15">{{child.service_name}}</span>
-                            <p class="fs-14 text-muted margin-b--5">Average rating {{child.average_rating}}/ {{child.number_of_ratings}} Ratings</p>
-                        </td>
-                        <td class="pad-t-15 col-xs-5">{{child.option_name || child.option_display_value}}</td>
-                        <td class="text-right">
-                            <a class="login-btn login-btn-danger" popover-trigger="open"
-                                popover-toggle popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'" tooltip="Delete Service"
-                                requires-permission="facilities.delete_facilityservice">
-                                &nbsp;Delete
-                            </a>
+                    <tr ng-if="facility.facility_services.length === 0" class="alert alert-info">
+                        <td colspan="3">
+                        <i class="fa fa-info-circle"></i> No Health Service assigned to facility
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <div class="col-xs-12 text-right margin-b-10">
+            <a class="login-btn login-btn-primary pull-right" ng-click="add_contact()" >
+                &nbsp;<i class="fa fa-plus-square-o"></i> Add
+            </a>
+        </div>
     </div>
-
-    <!-- Begining of create navigation buttons -->
-    <a ui-sref="facilities.facility_create.contacts({facility_id : new_facility})" ng-if="create"
-    class="login-btn login-btn-primary margin-t-20 margin-b-10">
-        &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
-    </a>
-    <button ng-click="goToNext(4, 'officers')" ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
-        &nbsp; Officers <i class="fa fa-angle-double-right"></i>
-    </button>
-    <!-- End of navigation buttons -->
-    <a ui-sref="facilities.facility_edit.units" ng-if="!create && !updown" class="login-btn login-btn-primary margin-t-20 margin-b-10">
-        &nbsp;<i class="fa fa-angle-double-left"></i> Departments
-    </a>
-    <a ui-sref="facility_mgmt" ng-if="!create && !updown"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
-        &nbsp; Save & Finish <i class="fa fa-angle-double-right"></i>
-    </a>
+    <div class="col-xs-12">
+        <!-- Begining of create navigation buttons -->
+        <a ui-sref="facilities.facility_create.contacts({facility_id : new_facility})" ng-if="create"
+        class="login-btn login-btn-primary margin-t-20 margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
+        </a>
+        <button ng-click="goToNext(4, 'officers')" ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+            &nbsp; Officers <i class="fa fa-angle-double-right"></i>
+        </button>
+        <!-- End of navigation buttons -->
+        <a ui-sref="facilities.facility_edit.units" ng-if="!create && !updown" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Departments
+        </a>
+        <a ui-sref="facility_mgmt" ng-if="!create && !updown"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+            &nbsp; Save & Finish <i class="fa fa-angle-double-right"></i>
+        </a>
+    </div>
 </div>
