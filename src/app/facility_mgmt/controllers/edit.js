@@ -133,6 +133,12 @@
                         regulatory_body: {
                             "id": $scope.facility.regulatory_body,
                             "name": $scope.facility.regulatory_body_name
+                        },
+                        town: {
+                            "id": data.facility_physical_address ?
+                            data.facility_physical_address.town_id : "",
+                            "name": data.facility_physical_address ?
+                            data.facility_physical_address.town : ""
                         }
                     };
                 })
@@ -200,9 +206,9 @@
                 wrappers.wards, "", "wards", {"constituency": $scope.login_user.constituency}
             );
             $scope.selectReload(wrappers.regulating_bodies, "", "regulating_bodies");
-            if ($scope.create) {
-                $scope.selectReload(wrappers.facility_types, "", "facility_types");
-            }
+            $scope.selectReload(wrappers.facility_types, "", "facility_types");
+            $scope.selectReload(wrappers.towns, "", "towns");
+
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
                 $scope.facility.ward = $scope.select_values.ward.id;
@@ -210,13 +216,15 @@
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
-
+                $scope.facility.facility_physical_address.town = $scope.select_values.town.id;
+                $scope.facility.location_data = $scope.facility.facility_physical_address;
+                changes.location_data = $scope.facility.facility_physical_address;
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {
                         wrappers.facility_detail.create($scope.facility)
                         .success(function (data) {
-                            $state.go("facilities.facility_edit.geolocation",
+                            $state.go("facilities.facility_create.geolocation",
                             {facility_id : data.id,
                             furthest : $scope.furthest});
                         })
@@ -226,43 +234,31 @@
                         });
                     }
                     else {
-                        if (_.isEmpty(changes)) {
-                            $state.go("facilities.facility_edit.geolocation",
-                            {facility_id : $state.params.facility_id,
-                            furthest : $scope.furthest});
-                        }
-                        else {
-                            wrappers.facility_detail.update(
-                                $state.params.facility_id, changes)
-                            .success(function () {
-                                $state.go(
-                                    "facilities.facility_edit.geolocation",
-                                    {facility_id : $state.params.facility_id,
-                                        furthest : $scope.furthest});
-                            })
-                            .error(function (data) {
-                                $log.error(data);
-                                $scope.basic_error=
-                                errorMessages.errors+
-                                errorMessages.data;
-                            });
-                        }
-                    }
-                } else {
-                    if (_.isEmpty(changes)) {
-                        $state.go("facilities.facility_edit.geolocation",
-                        {facility_id:$scope.facility_id});
-                    } else {
-                        wrappers.facility_detail.update($scope.facility_id, changes)
+                        wrappers.facility_detail.update(
+                            $state.params.facility_id, changes)
                         .success(function () {
-                            $state.go("facilities.facility_edit.geolocation",
-                            {facility_id:$scope.facility_id});
+                            $state.go(
+                                "facilities.facility_edit.geolocation",
+                                {facility_id : $state.params.facility_id,
+                                    furthest : $scope.furthest});
                         })
                         .error(function (data) {
                             $log.error(data);
-                            $scope.basic_error = errorMessages.errors+ errorMessages.data;
+                            $scope.basic_error=
+                            errorMessages.errors+
+                            errorMessages.data;
                         });
                     }
+                } else {
+                    wrappers.facility_detail.update($scope.facility_id, changes)
+                    .success(function () {
+                        $state.go("facilities.facility_edit.geolocation",
+                        {facility_id:$scope.facility_id});
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                        $scope.basic_error = errorMessages.errors+ errorMessages.data;
+                    });
                 }
             };
         }]
@@ -824,7 +820,10 @@
                             }
                         }
                     });
-                    $scope.getFacilityCoordinates(f);
+                    //has to be there for marker to appear
+                    if(!_.isNull(f.coordinates)) {
+                        $scope.getFacilityCoordinates(f);
+                    }
                 })
                 .error(function(error){
                     $scope.spinner = false;
@@ -925,9 +924,8 @@
                 if (_.isUndefined(f)){
                     return;
                 }
-                if(!_.isNull(f.coordinates)) {
-                    $scope.facilityWard(f);
-                }
+                //draw facility on the map
+                $scope.facilityWard(f);
             });
         }]);
 
