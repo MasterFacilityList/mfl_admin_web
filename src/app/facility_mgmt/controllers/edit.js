@@ -719,7 +719,9 @@
             }else{
                 $scope.nextState();
             }
-            $scope.geo = {};
+            $scope.geo = {
+                coordinates : []
+            };
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false
@@ -904,12 +906,13 @@
             };
             //update marker position
             $scope.checkLocation = function  (coords) {
+                console.log(coords);
                 angular.extend($scope,{
                     markers : {
                         mainMarker : {
                             layer:"facility",
-                            lat:coords.coordinates[1],
-                            lng:coords.coordinates[0],
+                            lat:$scope.geo.coordinates.coordinates[1],
+                            lng:$scope.geo.coordinates.coordinates[0],
                             message:"facility location"
                         }
                     }
