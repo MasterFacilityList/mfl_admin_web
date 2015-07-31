@@ -720,7 +720,9 @@
                 $scope.nextState();
             }
             $scope.geo = {
-                coordinates : []
+                coordinates : {
+                    coordinates : []
+                }
             };
             angular.extend($scope, {
                 defaults: {
@@ -905,8 +907,8 @@
                 }
             };
             //update marker position
-            $scope.checkLocation = function  (coords) {
-                console.log(coords);
+            $scope.checkLocation = function  () {
+                console.log($scope.geo.coordinates);
                 angular.extend($scope,{
                     markers : {
                         mainMarker : {
