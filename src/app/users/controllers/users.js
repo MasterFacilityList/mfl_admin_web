@@ -577,7 +577,7 @@
             name: "Manage users"
         };
         $scope.filters = {
-            "fields": "id,first_name,last_name,username,email,last_login,is_active"
+            "fields": "id,first_name,last_name,username,email,last_login,is_active,employee_number"
         };
         $scope.action = [
             {
