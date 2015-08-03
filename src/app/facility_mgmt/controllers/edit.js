@@ -789,8 +789,14 @@
                         .then(function (map) {
                             var coords = data.ward_boundary.properties.bound.coordinates[0];
                             $scope.center = data.ward_boundary.properties.center;
-                            console.log($scope.center);
-                            if(_.isEmpty($scope.geo.coordinates.coordinates)){
+                            var bounds = _.map(coords, function(c) {
+                                return [c[1], c[0]];
+                            });
+                            map.fitBounds(bounds);
+                            //has to be there for marker to appear
+                            if(!_.isNull(f.coordinates)) {
+                                $scope.getFacilityCoordinates(f);
+                            }else{
                                 $scope.geo.coordinates.coordinates =
                                 $scope.center.coordinates;
                                 angular.extend($scope,{
@@ -805,10 +811,6 @@
                                     }
                                 });
                             }
-                            var bounds = _.map(coords, function(c) {
-                                return [c[1], c[0]];
-                            });
-                            map.fitBounds(bounds);
                         });
                     var gis = data.ward_boundary;
                     // setup data for the map
@@ -841,10 +843,6 @@
                             }
                         }
                     });
-                    //has to be there for marker to appear
-                    if(!_.isNull(f.coordinates)) {
-                        $scope.getFacilityCoordinates(f);
-                    }
                 })
                 .error(function(error){
                     $scope.spinner = false;
