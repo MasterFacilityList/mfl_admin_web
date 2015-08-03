@@ -362,14 +362,10 @@
 
 
             $scope.add = function () {
-                if (!_.isEmpty($scope.user.groups)) {
-                    $scope.error = "This user already belongs to a group";
-                } else{
-                    var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
-                    var update = angular.copy($scope.user.groups);
-                    update.push(grp);
-                    updateGroups(update);
-                }
+                var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
+                var update = angular.copy($scope.user.groups);
+                update.push(grp);
+                updateGroups(update);
             };
 
             $scope.removeChild = function (grp) {

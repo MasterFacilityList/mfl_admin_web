@@ -38,13 +38,14 @@
             };
             this.checkWhichGroup = function(usr_grps){
                 var grp =_.pluck(usr_grps, "name");
+                var grp_join = grp.join();
                 var grp_name = grp[0];
                 if(_.isUndefined(grp[0])){
                     return null;
                 }
-                else if (grp_name.indexOf("County") > -1 ||
+                else if (grp_join.indexOf("County") > -1 ||
                 grp_name.indexOf("Regulator") > -1) {
-                    return grp_name;
+                    return grp_join;
                 }
                 else {
                     return "others";
