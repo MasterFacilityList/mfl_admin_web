@@ -722,7 +722,9 @@
                 $scope.nextState();
             }
             $scope.geo = {
-                coordinates : {}
+                coordinates : {
+                    coordinates : []
+                }
             };
             angular.extend($scope, {
                 defaults: {

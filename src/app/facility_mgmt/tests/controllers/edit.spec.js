@@ -3190,9 +3190,6 @@
                     httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
-                    /*httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, rst_data);*/
                     ctrl(".geolocation", data);
                     rootScope.$broadcast("leafletDirectiveMarker.dragend",null,args);
                     data.$scope.$apply();
@@ -3881,7 +3878,9 @@
                                         ]
                                     ]
                                 },
-                                center : [36.8588, -1.2625777]
+                                center : {
+                                    coordinates : [36.8588, -1.2625777]
+                                }
                             }
                         }
                     };
@@ -3915,7 +3914,9 @@
                         coordinates: null
                     };
                     scope.center = data.ward_boundary.properties.center;
-                    scope.geo.coordinates = scope.center;
+                    scope.geo.coordinates = {
+                        coordinates : scope.center.coordinates
+                    };
                     scope.$apply();
                     scope.$digest();
                     httpBackend.flush();
