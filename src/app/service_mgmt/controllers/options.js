@@ -26,7 +26,7 @@
             }).error(function (data) {
                 $log.warn(data);
             });
-
+            $scope.edit_view = true;
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
 

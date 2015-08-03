@@ -19,14 +19,14 @@
         "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
         function ($scope, $state, $stateParams, $log, wrappers, forms) {
             $scope.category_id = $stateParams.category_id;
-
+            $scope.filters = {category:$scope.category_id};
+            $scope.edit_view = true;
             wrappers.categories.get($scope.category_id).success(function (data) {
                 $scope.category = data;
                 $scope.deleteText = $scope.category.name;
             }).error(function (data) {
                 $log.warn(data);
             });
-
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
 
@@ -55,9 +55,9 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.category_create",
-        ["$scope", "$state", "$stateParams", "$log",
+        ["$scope", "$state", "$log",
         "mfl.service_mgmt.wrappers",
-        function ($scope, $state, $stateParams, $log, wrappers) {
+        function ($scope, $state, $log, wrappers) {
             $scope.category = wrappers.newCategory();
 
             $scope.save = function () {
