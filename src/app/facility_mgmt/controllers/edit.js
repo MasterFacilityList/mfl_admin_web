@@ -443,7 +443,7 @@
                 }else {
                     wrappers.create_officer.create(changes)
                         .success(function () {
-                            $state.go("facilities.facility_edit.units");
+                            $scope.goToNext(5, "units");
                         })
                         .error(function (err) {
                             $scope.alert = err.error;
@@ -861,7 +861,16 @@
                 .error(function(error){
                     $log.error(error);
                 });
-
+            //if create go to create or edit state
+            $scope.toState = function () {
+                if($scope.create){
+                    $scope.goToNext(3, "contacts");
+                }else{
+                    $state.go("facilities.facility_edit.contacts",
+                        {"facility_id": $scope.facility_id},
+                        {reload: true});
+                }
+            };
             /*Fetch geo code sources*/
             wrappers.geo_code_sources.list()
                 .success(function (data) {
@@ -890,9 +899,7 @@
                         .success(function (data) {
                             spinner1 =false;
                             $scope.geo = data;
-                            var submit_state = "facilities."+
-                                "facility_edit.contacts";
-                            $state.go(submit_state, {facility_id : $state.params.facility_id});
+                            $scope.toState();
                         })
                         .error(function (error) {
                             spinner1 =false;
@@ -907,8 +914,7 @@
                         wrappers.facility_detail.update(
                             fac_id, {"coordinates" : data.id})
                             .success(function () {
-                                $state.go("facilities.facility_create.facility_cover_letter",
-                                    {facility_id : $state.params.facility_id});
+                                $scope.toState();
                             })
                             .error(function (error) {
                                 $log.error(error);

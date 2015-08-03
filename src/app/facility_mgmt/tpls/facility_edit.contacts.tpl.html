@@ -62,11 +62,11 @@
             &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
         </a>
         <!-- End of facility creation buttons -->
-        <a ui-sref="facilities.facility_create.basic({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Details
+        <a ui-sref="facilities.facility_create.geolocation({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Geolocation
         </a>
-        <button ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right" ng-click="goToNext(3, 'services')">
-            &nbsp; Services <i class="fa fa-angle-double-right"></i>
+        <button ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right" ng-click="goToNext(4, 'officers')">
+            &nbsp; Officer Incharge <i class="fa fa-angle-double-right"></i>
         </button>
     </div>
 </div>
