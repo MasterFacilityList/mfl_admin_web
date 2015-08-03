@@ -49,6 +49,12 @@
                         keph_level: {
                             "id": $scope.facility.keph_level,
                             "name": $scope.facility.keph_level_name
+                        },
+                        town: {
+                            "id": $scope.facility_physical_address ?
+                            $scope.facility_physical_address.town_id : "",
+                            "name": $scope.facility_physical_address ?
+                            $scope.facility_physical_address.town : ""
                         }
                     };
                 })

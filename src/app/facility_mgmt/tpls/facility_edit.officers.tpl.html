@@ -81,11 +81,11 @@
             </div>
             <div class="col-xs-12 pad-0">
                 <!-- Start of create buttons -->
-                <a ui-sref="facilities.facility_create.services({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
-                    &nbsp;<i class="fa fa-angle-double-left"></i> Services
+                <a ui-sref="facilities.facility_create.contacts({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+                    &nbsp;<i class="fa fa-angle-double-left"></i> Facility Contacts
                 </a>
-                <button ng-click="goToNext(5, 'units')" ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
-                    &nbsp; Facility Departments <i class="fa fa-angle-double-right"></i>
+                <button type="submit" ng-click="goToNext(5, 'units')" ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+                    &nbsp; Regulation <i class="fa fa-angle-double-right"></i>
                 </button>
                 <!-- End of navigation buttons -->
                 <a ui-sref="facilities.facility_edit.contacts" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
