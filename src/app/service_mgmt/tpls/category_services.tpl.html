@@ -1,0 +1,36 @@
+<div class="content-card">
+    <div class="pull-left col-sm-4 col-xs-6">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-4">
+    <p class="text-right margin-t-5">Showing <strong>{{pagination.start_index}} - {{pagination.end_index}}</strong> of <span>{{pagination.count}} records</span></p>
+    </div>
+    <table class="table table-hover fs-14" id="no-more-tables">
+        <thead>
+            <tr>
+                <th class="col-sm-1" sil-grid-sort field='code'>Code</th>
+                <th sil-grid-sort field='name'>Name</th>
+                <th sil-grid-sort field='abbreviation'>Abbreviation</th>
+                <th class="text-right pad-r-20">Actions </th>
+            </tr>
+        </thead>
+        <tbody class="fade-content">
+            <tr ng-repeat="service in services" ng-show="services">
+                <td data-title="Code:"  class="pad-t-15">{{service.code}}</td>
+                <td data-title="Name:" class="pad-t-15">{{service.name}}</td>
+                <td data-title="Abbreviation:" class="pad-t-15">{{service.abbreviation}}</td>
+                <td data-title="Actions:" class="text-right">
+                    <a tooltip-placement="bottom" tooltip="View service" ui-sref="service_mgmt.service_list.service_edit({service_id: service.id})" ui-sref-opts="{reload:true}" class="login-btn login-btn-action">
+                        &nbsp;View
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="services.length === 0" class="alert alert-info">
+                <td colspan="4">
+                <i class="fa fa-info-circle"></i> No services assigned to this category
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>
