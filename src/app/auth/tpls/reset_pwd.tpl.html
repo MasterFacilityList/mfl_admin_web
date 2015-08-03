@@ -10,15 +10,15 @@
            </h2>
         </div>
         <div class="content-body">
-           <div class="pad-form">
-                <div class="content-card">
-                   <div class="pad-form">
+           <div class="col-xs-12">
+                <div class="pad-20 col-xs-10 col-xs-offset-1 content-card margin-t-20">
+                   <div class="col-xs-12">
                         <form ng-submit="reset_pwd()" name="frm_reset_pwd">
-                            <div class="group">
-                                <input type="email" name="email" ng-model="email" required autofocus />
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" name="email" ng-model="email" required autofocus />
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label>Email Address</label>
                             </div>
                             <button type="submit" class="login-btn login-btn-primary">
                               &nbsp;Send Request
