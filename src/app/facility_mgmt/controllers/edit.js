@@ -216,7 +216,9 @@
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
-                $scope.facility.facility_physical_address.town = $scope.select_values.town.id;
+                $scope.facility.facility_physical_address = {
+                    town : $scope.select_values.town.id
+                };
                 $scope.facility.location_data = $scope.facility.facility_physical_address;
                 changes.location_data = $scope.facility.facility_physical_address;
                 if($scope.create) {
@@ -720,9 +722,7 @@
                 $scope.nextState();
             }
             $scope.geo = {
-                coordinates : {
-                    coordinates : []
-                }
+                coordinates : {}
             };
             angular.extend($scope, {
                 defaults: {
@@ -797,8 +797,8 @@
                             if(!_.isNull(f.coordinates)) {
                                 $scope.getFacilityCoordinates(f);
                             }else{
-                                $scope.geo.coordinates.coordinates =
-                                $scope.center.coordinates;
+                                $scope.geo.coordinates =
+                                $scope.center;
                                 angular.extend($scope,{
                                     markers: {
                                         mainMarker: {
