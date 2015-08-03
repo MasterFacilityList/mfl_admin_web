@@ -9,7 +9,8 @@
         "mfl.common.controllers",
         "mfl.common.states",
         "mfl.common.services",
-        "mfl.common.constants"
+        "mfl.common.constants",
+        "mfl.common.revision"
     ]);
 
 })(window.angular);

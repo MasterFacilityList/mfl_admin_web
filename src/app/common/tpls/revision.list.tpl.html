@@ -1,0 +1,33 @@
+<div >
+    <div>
+        <button ng-if="!showRevisions" ng-disabled="!id" class="btn btn-default" ng-click="fetchRevisions()">View Changelog</button>
+        <button ng-if="showRevisions" ng-click="hideRevisions()" class="btn btn-default">Hide Changelog</button>
+    </div>
+    <div ng-if="id&&showRevisions">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Updates</th>
+                </tr>
+            </thead>
+            <tbody ng-if="!revisions.length">
+                <tr>
+                    <td class="text-center" colspan="3">Sorry, no revisions found</td>
+                </tr>
+            </tbody>
+            <tbody ng-if="revisions.length">
+                <tr ng-repeat="rev in revisions">
+                    <td>{{::rev.updated | dateFilter}}</td>
+                    <td>{{::rev.updated_by}}</td>
+                    <td>
+                        <p ng-repeat="upd in rev.updates">
+                            <strong>{{::upd.name | titlecase}}</strong> : <span style="color:red">{{::upd.old}}</span> >> <span style="color:green">{{::upd.new}}</span>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
