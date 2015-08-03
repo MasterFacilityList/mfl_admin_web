@@ -62,7 +62,8 @@
                     wording: "Delete"
                 }
             ];
-            $scope.keph_id= $stateParams.keph_id;
+            $scope.keph_id = $stateParams.keph_id;
+            $scope.wrapper = adminApi.kephs;
 
             adminApi.kephs.get($scope.keph_id)
             .success(function (data) {

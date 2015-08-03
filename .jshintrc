@@ -31,6 +31,7 @@
         "browser": true,
         "module":true,
         "window": true,
-        "spyOn": true
+        "spyOn": true,
+        "jasmine": true
     }
 }

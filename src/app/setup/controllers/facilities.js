@@ -254,6 +254,8 @@
                         wording: "Delete"
                     }
                 ];
+                $scope.wrapper = adminApi.facilityJobTitles;
+
                 adminApi.facilityJobTitles.get($stateParams.id).success(function(data){
                     $scope.facilityJobTitles = data;
                     $scope.deleteText = $scope.facilityJobTitles.name;
