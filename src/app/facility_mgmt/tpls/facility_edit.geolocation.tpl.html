@@ -57,8 +57,8 @@
                                                 <label>
                                                     Longitude
                                                 </label>
-                                                <input class="form-control" step="0.00000001" name="longitude" ng-model="geo.coordinates.coordinates[0]"
-                                                ng-keypress="checkLocation(geo.coordinates)" ng-model-options="{ debounce: 250 }"/>
+                                                <input type="number" class="form-control" step="0.00000001" name="longitude" ng-model="geo.coordinates.coordinates[0]"
+                                                ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }"/>
                                                 <span class="highlight"></span>
                                                 <span class="bar"></span>
                                             </div>
@@ -66,8 +66,8 @@
                                                 <label>
                                                     Latitude
                                                 </label>
-                                                <input class="form-control" step="0.00000001" name="latitude" ng-model="geo.coordinates.coordinates[1]"
-                                                ng-keypress="checkLocation(geo.coordinates)" ng-model-options="{ debounce: 250 }"/>
+                                                <input type="number" class="form-control" step="0.00000001" name="latitude" ng-model="geo.coordinates.coordinates[1]"
+                                                ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }"/>
                                                 <span class="highlight"></span>
                                                 <span class="bar"></span>
                                             </div>

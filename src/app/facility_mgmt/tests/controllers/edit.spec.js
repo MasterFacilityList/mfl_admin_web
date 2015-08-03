@@ -3170,11 +3170,11 @@
                         {name : "units"},
                         {name : "location"}
                     ];
-                    var rst_data = {
+                    /*var rst_data = {
                         coordinates : {
                             coordinates : [3, 1]
                         }
-                    };
+                    };*/
                     var args = {
                         model:{
                             lat:1,
@@ -3190,9 +3190,6 @@
                     httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
-                    httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, rst_data);
                     ctrl(".geolocation", data);
                     rootScope.$broadcast("leafletDirectiveMarker.dragend",null,args);
                     data.$scope.$apply();
@@ -3257,11 +3254,11 @@
                         {name : "units"},
                         {name : "location"}
                     ];
-                    var rst_data = {
+                    /*var rst_data = {
                         coordinates : {
                             coordinates : [3, 1]
                         }
-                    };
+                    };*/
                     httpBackend
                         .expectGET(server_url+"api/gis/geo_code_methods/")
                         .respond(200, {results: []});
@@ -3271,9 +3268,9 @@
                     httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
-                    httpBackend
+                    /*httpBackend
                         .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, rst_data);
+                        .respond(200, rst_data);*/
                     ctrl(".geolocation", data);
                     data.$scope.$apply();
                     data.$scope.facility={
@@ -3727,6 +3724,11 @@
                             id: "3"
                         }
                     };
+                    data.$scope.geo = {
+                        coordinates : {
+                            coordinates : []
+                        }
+                    };
                     data.$scope.$apply();
                     data.$scope.facilityWard(data.$scope.facility);
                 }
@@ -3793,7 +3795,8 @@
                                             [3,4]
                                         ]
                                     ]
-                                }
+                                },
+                                center : [36.8588, -1.2625777]
                             }
                         }
                     };
@@ -3823,17 +3826,22 @@
                         "$scope": scope,
                         "leafletData": leafletData
                     });
-
                     httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, data);
-                    httpBackend
+                    /*httpBackend
                         .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, {results: []});
-
+                        .respond(200, {
+                            coordinates : {
+                                coordinates: [36.8588, -1.262577]
+                            }
+                        });*/
+                    scope.geo.coordinates.coordinates = "";
+                    scope.center = {
+                        coordinates : [36.8588, -1.2625777]
+                    };
                     scope.$apply();
                     scope.$digest();
-
                     httpBackend.flush();
 
                     expect(leafletData.getMap).toHaveBeenCalled();
@@ -3869,6 +3877,9 @@
                                             [3,4]
                                         ]
                                     ]
+                                },
+                                center : {
+                                    coordinates : [36.8588, -1.2625777]
                                 }
                             }
                         }
@@ -3877,10 +3888,6 @@
                         then: angular.noop
                     };
                     var scope = rootScope.$new();
-                    scope.facility = {
-                        ward : "3",
-                        coordinates: null
-                    };
                     scope.steps = [
                         {name : "basic"},
                         {name : "contacts"},
@@ -3899,14 +3906,19 @@
                         "$scope": scope,
                         "leafletData": leafletData
                     });
-
                     httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, data);
-
+                    scope.facility = {
+                        ward : "3",
+                        coordinates: null
+                    };
+                    scope.center = data.ward_boundary.properties.center;
+                    scope.geo.coordinates = {
+                        coordinates : scope.center.coordinates
+                    };
                     scope.$apply();
                     scope.$digest();
-
                     httpBackend.flush();
 
                     expect(leafletData.getMap).toHaveBeenCalled();

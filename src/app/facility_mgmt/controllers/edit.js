@@ -216,7 +216,9 @@
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
-                $scope.facility.facility_physical_address.town = $scope.select_values.town.id;
+                $scope.facility.facility_physical_address = {
+                    town : $scope.select_values.town.id
+                };
                 $scope.facility.location_data = $scope.facility.facility_physical_address;
                 changes.location_data = $scope.facility.facility_physical_address;
                 if($scope.create) {
@@ -719,7 +721,11 @@
             }else{
                 $scope.nextState();
             }
-            $scope.geo = {};
+            $scope.geo = {
+                coordinates : {
+                    coordinates : []
+                }
+            };
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false
@@ -784,10 +790,29 @@
                     leafletData.getMap("wardmap")
                         .then(function (map) {
                             var coords = data.ward_boundary.properties.bound.coordinates[0];
+                            $scope.center = data.ward_boundary.properties.center;
                             var bounds = _.map(coords, function(c) {
                                 return [c[1], c[0]];
                             });
                             map.fitBounds(bounds);
+                            //has to be there for marker to appear
+                            if(!_.isNull(f.coordinates)) {
+                                $scope.getFacilityCoordinates(f);
+                            }else{
+                                $scope.geo.coordinates =
+                                $scope.center;
+                                angular.extend($scope,{
+                                    markers: {
+                                        mainMarker: {
+                                            layer:"facility",
+                                            lat: $scope.geo.coordinates.coordinates[1],
+                                            lng: $scope.geo.coordinates.coordinates[0],
+                                            message: f.name,
+                                            draggable: true
+                                        }
+                                    }
+                                });
+                            }
                         });
                     var gis = data.ward_boundary;
                     // setup data for the map
@@ -820,10 +845,6 @@
                             }
                         }
                     });
-                    //has to be there for marker to appear
-                    if(!_.isNull(f.coordinates)) {
-                        $scope.getFacilityCoordinates(f);
-                    }
                 })
                 .error(function(error){
                     $scope.spinner = false;
@@ -903,13 +924,14 @@
                 }
             };
             //update marker position
-            $scope.checkLocation = function  (coords) {
+            $scope.checkLocation = function  () {
+                console.log($scope.geo.coordinates);
                 angular.extend($scope,{
                     markers : {
                         mainMarker : {
                             layer:"facility",
-                            lat:coords.coordinates[1],
-                            lng:coords.coordinates[0],
+                            lat:$scope.geo.coordinates.coordinates[1],
+                            lng:$scope.geo.coordinates.coordinates[0],
                             message:"facility location"
                         }
                     }
