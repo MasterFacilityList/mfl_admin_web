@@ -73,6 +73,19 @@
             }).error(function (data) {
                 $log.warn(data);
             });
+            //$scope.service_id = $scope.service_id || $state.params.service_id;
+            wrappers.options.filter({page_size: 1000}).success(function (data) {
+                $scope.options = data.results;
+            }).error(function (data) {
+                $log.warn(data);
+            });
+            wrappers.service_options.filter({page_size: 1000, service: $scope.service_id})
+            .success(function (data) {
+                $scope.service_options = data.results;
+            })
+            .error(function (data) {
+                $log.warn(data);
+            });
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
 
@@ -123,7 +136,6 @@
             .error(function (data) {
                 $log.warn(data);
             });
-
             $scope.addOption = function () {
                 $scope.spinner = true;
                 var data = {

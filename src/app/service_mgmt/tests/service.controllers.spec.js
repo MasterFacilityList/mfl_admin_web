@@ -105,11 +105,17 @@
                     {active : true},
                     {active : false}
                 ];
+                data.$scope.service_id = "3";
                 httpBackend
                     .expectGET(server_url +
                                "api/facilities/service_categories/?page_size=1000")
                     .respond(200, {results: []});
-
+                httpBackend.expectGET(server_url +
+                    "api/facilities/options/?page_size=1000")
+                    .respond(200, {results: []});
+                httpBackend.expectGET(server_url +
+                    "api/facilities/service_options/?page_size=1000&service=3")
+                    .respond(200, {results : []});
                 ctrl("service_edit.basic", data);
 
                 httpBackend.flush();

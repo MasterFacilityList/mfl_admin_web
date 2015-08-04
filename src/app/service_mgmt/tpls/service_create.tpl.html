@@ -7,26 +7,5 @@
    </h2>
 </div>
 <div class="col-sm-11 margin-l-50 margin-t-20 content-card ">
-    <div class="col-sm-11 col-sm-offset-1 margin-t-20 text-center">
-        <div class="col-sm-7">
-            <div class="col-lg-6 col-md-6 col-sm-6 text-center">
-                    <div ng-model="steps[0].active" ng-click="tabState(steps[0])" class="progress-badge" ng-class="{'progress-badge-active': steps[0].active, 'progress-badge-done' : steps[0].done || steps[0].furthest }">
-                        1
-                    </div>
-                    <p class="text-center step-label" ng-class="{'step-label-active': steps[0].active, 'step-label-done' : steps[0].done || steps[0].furthest }">Service Details</p>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 text-left margin-t-20" style="border: 2px solid #666666;">
-            </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div ng-click="tabState(steps[1])" class="progress-badge margin-l-10" ng-class="{'progress-badge-active': steps[1].active, 'progress-badge-done': steps[1].done || steps[1].furthest}">
-                    2
-                </div>
-                 <p class="text-center step-label" ng-class="{'step-label-active': steps[1].active, 'step-label-done' : steps[1].done || steps[1].furthest }">Service Options</p>
-            </div>
-        </div>
-    </div>
-    <hr class="line-divider">
     <div class="tab-content" ui-view="form-view"></div>
 </div>
