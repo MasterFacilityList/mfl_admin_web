@@ -310,8 +310,7 @@
                     $scope.removeChild(fac_delcont);
                 }
             };
-            $scope.saveContacts = function () {
-                $scope.fac_contobj = {contacts : $scope.facility.facility_contacts};
+            $scope.createContact = function () {
                 wrappers.facility_detail.update($scope.facility_id,
                     $scope.fac_contobj)
                     .success(function () {
@@ -320,6 +319,15 @@
                     .error(function (err) {
                         $scope.alert = err.error;
                     });
+            };
+            $scope.saveContacts = function () {
+                $scope.fac_contobj = {contacts : []};
+                _.each($scope.detailed_contacts, function (a_contact) {
+                    if(_.isUndefined(a_contact.id)){
+                        $scope.fac_contobj.contacts.push(a_contact);
+                    }
+                });
+                $scope.createContact();
             };
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
