@@ -1,11 +1,11 @@
 <contentheader></contentheader>
 <div ui-view="delete"></div>
-<div class="content-body" style="display: inline-flex;">
+<div class="col-sm-12" style="display: inline-flex;">
     <div class="col-sm-12 margin-t-20 content-card ">
         <!-- Replaceing tabs with multistep start -->
         <div class="col-sm-11 progress-container col-sm-offset-1 margin-t-20 text-center">
             <div class="col-sm-3 text-center">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-sm-6">
                         <div ng-model="steps[0].active" ng-click="tabState(steps[0])" class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[0].active }">
                             1
                         </div>
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="col-sm-3 text-center">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-sm-6">
                     <div ng-model="steps[1].active" ng-click="tabState(steps[1])" class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[1].active}">
                         2
                     </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="col-sm-3 text-center">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[2].active}" ng-click="tabState(steps[2])">
                             3
                         </div>
@@ -30,19 +30,28 @@
             </div>
             <!-- To assign county -->
             <div class="col-sm-3 text-center fade-content"
-                ng-if="current_group === 'County Administrators' ||
-                current_group === 'County Health Records Information Officer'">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                ng-class="{'hidden': current_group.indexOf('County Administrators') == -1}">
+                <div class="col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[3].active}" ng-click="tabState(steps[3])">
                             4
                         </div>
-                        <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[3].active}"  ng-click="tabState(steps[3])">Assign County</p>
+                        <p class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[3].active}"  ng-click="tabState(steps[3])">Assign County</p>
+                </div>
+            </div>
+            <!-- To assign county -->
+            <div class="col-sm-3 text-center fade-content"
+                ng-class="{'hidden': current_group.indexOf('County Health Records Information Officer') == -1,'hidden': current_group.indexOf('Sub County Health Records Information Officer') > -1}">
+                <div class="col-sm-6">
+                        <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[3].active}" ng-click="tabState(steps[3])">
+                            4
+                        </div>
+                        <p class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[3].active}"  ng-click="tabState(steps[3])">Assign County</p>
                 </div>
             </div>
             <!-- To assign constituency -->
             <div class="col-sm-3 text-center fade-content"
-                ng-if="current_group === 'Sub County Health Records Information Officer'">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                ng-class="{'hidden': current_group.indexOf('Sub County Health Records Information Officer') == -1}">
+                <div class="col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[4].active}" ng-click="tabState(steps[4])">
                             4
                         </div>
@@ -52,9 +61,8 @@
             <!-- End of assigning constituency -->
             <!-- To assign regulatory bodies -->
             <div class="col-sm-3 text-center fade-content"
-                ng-if="current_group === 'Regulators (Approvers)' ||
-                current_group === 'Regulators (makers)'">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                ng-class="{'hidden': current_group.indexOf('Regulators')===-1}">
+                <div class="col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[5].active}" ng-click="tabState(steps[5])">
                             4
                         </div>
@@ -68,7 +76,7 @@
         <div class="col-lg-12">
 
                     <div class="tab-content margin-t-20">
-                        <div class="" ui-view="form-view"></div>
+                        <div ui-view="form-view"></div>
                     </div><!-- /tab-content -->
         </div>
     </div>
