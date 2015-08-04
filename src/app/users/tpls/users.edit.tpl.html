@@ -30,17 +30,27 @@
             </div>
             <!-- To assign county -->
             <div class="col-sm-3 text-center fade-content"
-                ng-class="{'hidden': current_group.indexOf('County Administrators')===-1,  'hidden': current_group.indexOf('County Health Records Information Officer')===-1}">
+                ng-class="{'hidden': current_group.indexOf('County Administrators') == -1}">
                 <div class="col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[3].active}" ng-click="tabState(steps[3])">
                             4
                         </div>
-                        <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[3].active}"  ng-click="tabState(steps[3])">Assign County</p>
+                        <p class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[3].active}"  ng-click="tabState(steps[3])">Assign County</p>
+                </div>
+            </div>
+            <!-- To assign county -->
+            <div class="col-sm-3 text-center fade-content"
+                ng-class="{'hidden': current_group.indexOf('County Health Records Information Officer') == -1,'hidden': current_group.indexOf('Sub County Health Records Information Officer') > -1}">
+                <div class="col-sm-6">
+                        <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[3].active}" ng-click="tabState(steps[3])">
+                            4
+                        </div>
+                        <p class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[3].active}"  ng-click="tabState(steps[3])">Assign County</p>
                 </div>
             </div>
             <!-- To assign constituency -->
             <div class="col-sm-3 text-center fade-content"
-                ng-class="{'hidden': current_group.indexOf('Sub County Health Records Information Officer')===-1}">
+                ng-class="{'hidden': current_group.indexOf('Sub County Health Records Information Officer') == -1}">
                 <div class="col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[4].active}" ng-click="tabState(steps[4])">
                             4
