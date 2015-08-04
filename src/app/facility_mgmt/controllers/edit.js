@@ -931,7 +931,6 @@
             };
             //update marker position
             $scope.checkLocation = function  () {
-                console.log($scope.geo.coordinates);
                 angular.extend($scope,{
                     markers : {
                         mainMarker : {

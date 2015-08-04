@@ -15,7 +15,8 @@
         "mfl.dashboard",
         "mfl.facility_mgmt",
         "angulartics",
-        "angulartics.google.analytics"
+        "angulartics.google.analytics",
+        "jcs-autoValidate"
     ]);
 
 })(window.angular);
