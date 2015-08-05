@@ -9,7 +9,8 @@
         "mfl.auth.oauth2",
         "ui.router",
         "mfl.auth.services",
-        "ngIdle"
+        "ngIdle",
+        "mfl.common.forms"
     ])
 
     .constant("SERVER_URL", angular.copy(window.MFL_SETTINGS.SERVER_URL))
@@ -65,6 +66,11 @@
 
     .run(["mfl.auth.services.statecheck", function (statecheck) {
         statecheck.startListening();
+    }])
+
+    .run(["validator", "bs3Custom", function (validator, bs3Custom) {
+        validator.registerDomModifier(bs3Custom.key, bs3Custom);
+        validator.setDefaultElementModifier(bs3Custom.key);
     }]);
 
 })(window.angular, window.jQuery);

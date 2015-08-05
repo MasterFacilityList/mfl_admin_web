@@ -159,6 +159,7 @@
                         $state.go("setup.facility_owners",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                         $state.go("setup.facility_owners",{},{reload:true});
                     });
                 };
@@ -177,6 +178,7 @@
                 $scope.ownerTypes = ownerTypes.results;
             }).error(function(error){
                 $scope.alert = error.error;
+                $scope.errors = error;
             });
 
 
@@ -187,6 +189,7 @@
                         $state.go("setup.facility_owners");
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                     });
                 }
             };
@@ -196,6 +199,7 @@
                     $state.go("setup.facility_owners");
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
         }]
