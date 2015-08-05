@@ -42,6 +42,18 @@
         };
     })
 
+    .directive("apiChecker", [function () {
+        return {
+            "restrict": "A",
+            "require": "ngModel",
+            "link": function (scope, element, attrs, ngModel) {
+                ngModel.$validators.api = function () {
+                    return scope.errors ? scope.errors[attrs.name] === undefined : true;
+                };
+            }
+        };
+    }])
+
     .factory("bs3Custom", ["bootstrap3ElementModifier", function (bs3) {
         return {
             "makeInvalid": bs3.makeInvalid,
