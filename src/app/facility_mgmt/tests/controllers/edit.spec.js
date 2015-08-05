@@ -956,8 +956,10 @@
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         facility_id: 3
-                    }
+                    },
+                    "$state" : state
                 };
+                spyOn(state, "go");
                 var rslts = {
                     results : [
                         {
@@ -983,6 +985,7 @@
                     {name : "contacts"}
                 ];
                 data.$scope.nextState = angular.noop;
+                data.$scope.facility_id = "3";
                 ctrl(".contacts", data);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -990,20 +993,58 @@
 
                 httpBackend.resetExpectations();
                 data.$scope.$apply();
+                data.$scope.facility = {
+                    contacts : []
+                };
+                data.$scope.fac_contacts = rslts.results;
+                data.$scope.detailed_contacts = two_conts;
+                data.$scope.fac_contobj = {contacts : two_conts[0]};
+                data.$scope.$apply();
+                //contpatch
                 httpBackend.expectPATCH(server_url+
-                    "api/facilities/facilities/3/").respond(201, {id : "6"});
+                    "api/facilities/facilities/3/")
+                    .respond(201, data.$scope.fac_contobj);
+                data.$scope.saveContacts();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it("should fail to update facility contact", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    },
+                    "$state" : state
+                };
+                spyOn(state, "go");
+                var rslts = {
+                    results : []
+                };
+                var two_conts = [];
+                data.$scope.facility_id = "3";
+                httpBackend
+                    .expectGET(server_url+"api/common/contact_types/")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/contacts/?facility=3")
+                    .respond(200, rslts);
+                data.$scope.create = true;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.nextState = angular.noop;
+                ctrl(".contacts", data);
+                data.$scope.$apply();
                 data.$scope.facility = {
                     contacts : []
                 };
                 data.$scope.fac_contacts = rslts.results;
                 data.$scope.detailed_contacts = two_conts;
                 data.$scope.fac_contobj = {contacts : []};
-                data.$scope.$apply();
-                httpBackend.flush();
-                data.$scope.removeContact(two_conts);
-                data.$scope.removeChild(rslts.results[0]);
                 data.$scope.saveContacts();
-                data.$scope.createContact();
+                httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
             });
