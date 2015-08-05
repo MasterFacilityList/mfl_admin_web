@@ -1,9 +1,16 @@
 /* Animations */
 #filter-facet.open-add {
-    transition: all 1050ms ease 1s;
-    opacity: 1;
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
+    transition: all 1050ms ease 1s;
+    -webkit-transition: all 1050ms ease 1s;
+    opacity: 1;
+}
+
+#filter-facet.open-remove {
+    transition: all 1050ms ease 1s;
+    -webkit-transition: all 1050ms ease 1s;
+    opacity: 1;
 }
 
 #filter-facet.open-add-active,
@@ -20,7 +27,7 @@
 #grid-content.open,
 #show-button.open-add-active,
 #show-button.open{
-    bottom: 450px;
+    bottom: 10px;
 }
 
 #filter-facet.open-add #grid-content, #filter-facet.open-add #show-button {
@@ -29,5 +36,37 @@
 
 #filter-fields.open-add-active,
 #filter-fields.open  {
-    bottom: 500px;
+    bottom: 10px;
+}
+
+.ng-hide-add, .ng-hide-remove {
+  -webkit-transition:all linear 1s;
+  -moz-transition:all linear 1s;
+  -o-transition:all linear 1s;
+  transition:all linear 1s;
+  display:block!important;
+}
+.ng-hide-add.ng-hide-add-active,
+.ng-hide-remove {
+  opacity:0;
+}
+.ng-hide-add,
+.ng-hide-remove.ng-hide-remove-active {
+  opacity:1;
+}
+
+.ng-show-add, .ng-show-remove {
+  -webkit-transition:all linear 1s;
+  -moz-transition:all linear 1s;
+  -o-transition:all linear 1s;
+  transition:all linear 1s;
+  display:block!important;
+}
+.ng-show-add.ng-show-add-active,
+.ng-show-remove {
+  opacity:0;
+}
+.ng-show-add,
+.ng-show-remove.ng-show-remove-active {
+  opacity:1;
 }

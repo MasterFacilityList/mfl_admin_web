@@ -7,7 +7,7 @@
    </h2>
 </div>
 <div class="container-fluid">
-    <div id="filter-facet" class="col-xs-12 content-card form-card margin-t-20" ng-class="{'open': toggle}">
+    <div id="filter-facet" ng-hide="toggle" class="col-xs-12 content-card form-card margin-t-20" ng-class="{'open': toggle}">
         <span class="col-xs-6 fs-14">Reporting Panel</span>
         <div class="col-xs-6">
             <span class="pull-right">
@@ -102,11 +102,11 @@
         </div>
     </div>
 </div>
-<div ng-show="toggle==true" class="col-lg-12">
+<div ng-show="toggle" class="col-lg-12">
     <div id="show-button" class="col-xs-12 content-card form-card margin-t-20" class="col-xs-12" ng-class="{'open': toggle}">
         <div class="col-xs-12">
-            <button class="pull-right btn btn-primary" ng-click="toggle=!toggle">Show Reporting Panel </button>
-            <div>
+            <button class="pull-right login-btn login-btn-primary" ng-click="toggle=!toggle">Show Reporting Panel </button>
+            <div style="word-wrap:break-word">
                 Filtered by: {{filters}}
             </div>
         </div>
