@@ -312,15 +312,16 @@
             };
             $scope.createContact = function () {
                 if(!_.isEmpty($scope.fac_contobj.contacts)){
-                    wrappers.facility_detail.update($scope.facility_id,
-                        $scope.fac_contobj)
-                        .success(function () {
-                            $state.go("facilities.facility_edit.officers");
-                        })
-                        .error(function (err) {
-                            $scope.alert = err.error;
-                        });
-                }else {
+                    console.log("createcontact >>");
+                    console.log($scope.fac_contobj, $scope.facility_id);
+                    wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
+                    .success(function () {
+                        $state.go("facilities.facility_edit.officers");
+                    })
+                    .error(function (err) {
+                        $scope.alert = err.error;
+                    });
+                } else {
                     $state.go("facilities.facility_edit.officers");
                 }
             };
