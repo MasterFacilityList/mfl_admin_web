@@ -9,28 +9,6 @@
 </div>
 <div ui-view="delete"></div>
 <div class="col-sm-11 margin-l-50 margin-t-20 content-card ">
-            <div class="col-lg-12 margin-t-20 ">
-                <div class="col-sm-11 col-sm-offset-1 margin-t-20 text-center">
-                <div class="col-sm-7">
-                    <div class="col-lg-6 col-md-6 col-sm-6 text-center">
-                            <div ng-model="steps[0].active" ng-click="tabState(steps[0])" class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[0].active}">
-                                1
-                            </div>
-                            <p class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[0].active}">Service Details</p>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 text-left margin-t-20" style="border: 2px solid #666666;">
-                    </div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div ng-click="tabState(steps[1])" class="progress-badge progress-badge-done margin-l-10" ng-class="{'progress-badge-active': steps[1].active}">
-                            2
-                        </div>
-                         <p class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[1].active}">Service Options</p>
-                    </div>
-                </div>
-            </div>
-            <hr class="line-divider">
                 <div class="tab-content">
                     <div class="" ui-view="form-view"></div>
                 </div>
