@@ -83,6 +83,14 @@
                 },
                 permission: "facilities.view_facility"
             })
+            .state("facilities.facility_edit.services.view", {
+                url: "view/",
+                views: {
+                    "service-content@facilities.facility_edit.services": {
+                        templateUrl : "facility_mgmt/tpls/facility_services.view.tpl.html"
+                    }
+                }
+            })
             .state("facilities.facility_edit.units", {
                 url: "units/",
                 views: {

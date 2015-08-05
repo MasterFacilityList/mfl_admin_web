@@ -5,61 +5,7 @@
         </button>
         <span ng-cloak class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{service_error}}</span>
     </div>
-    <div class="col-xs-12 margin-t-10 pad-0" requires-permission="facilities.add_facilityservice">
-        <div class="col-xs-12">
-            <h4 class="fw-600 fs-18"> Facility Services</h4>
-        </div>
-        <div class="col-xs-12">
-            <table class="table table-bordered col-xs-12">
-                <thead class="grey-header">
-                    <th class="col-xs-5">Service Name</th>
-                    <th class="col-xs-6">Service Option</th>
-                    <th class="col-xs-1 text-center"></th>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="fac_service in facility.facility_services">
-                        <td class="col-xs-5">
-                            <div class="form-group grid_inputs">
-                                <ui-select name="service" ng-model="fac_service.service_id">
-                                    <ui-select-match placeholder="Select a service">
-                                        {{$select.selected.name}}
-                                    </ui-select-match>
-                                    <ui-select-choices repeat="service.id as service in services | filter:$select.search">
-                                        {{service.name}}
-                                    </ui-select-choices>
-                                </ui-select>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group grid_inputs">
-                                <select class="form-control " name="service_option" ng-model="fac_service.option" required>
-                                    <option value="">Select an option</option>
-                                    <option ng-repeat="serv_opt in service_options" ng-value="serv_opt.id">{{serv_opt.display_text}}</option>
-                                </select>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                            </div>
-                        </td>
-                        <td class="col-xs-1 text-center">
-                            <a ng-click="remove_contact(cont)" style="cursor: pointer;">
-                                <i class="fa fa-close fa-2x grid-inputs text-danger"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr ng-if="facility.facility_services.length === 0" class="alert alert-info">
-                        <td colspan="3">
-                        <i class="fa fa-info-circle"></i> No Health Service assigned to facility
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-xs-12 text-right margin-b-10">
-            <a class="login-btn login-btn-primary pull-right" ng-click="add_contact()" >
-                &nbsp;<i class="fa fa-plus-square-o"></i> Add
-            </a>
-        </div>
-    </div>
+    <div class="row" ui-view="service-content"></div>
     <div class="col-xs-12">
         <!-- Begining of create navigation buttons -->
         <a ui-sref="facilities.facility_create.units({facility_id : new_facility})" ng-if="create"
