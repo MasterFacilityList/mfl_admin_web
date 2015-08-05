@@ -547,6 +547,7 @@
             else {
                 $scope.nextState();
             }
+            $scope.filters = {facility : $scope.facility_id};
         }]
     )
 
