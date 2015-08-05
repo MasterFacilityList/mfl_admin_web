@@ -81,6 +81,7 @@
                         controller: "mfl.facility_mgmt.controllers.facility_edit.services"
                     }
                 },
+                redirectTo : "facilities.facility_edit.services.view",
                 permission: "facilities.view_facility"
             })
             .state("facilities.facility_edit.services.view", {
@@ -88,6 +89,14 @@
                 views: {
                     "service-content@facilities.facility_edit.services": {
                         templateUrl : "facility_mgmt/tpls/facility_services.view.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.facility_edit.services.edit", {
+                url : "edit/",
+                views : {
+                    "service-content@facilities.facility_edit.services": {
+                        templateUrl : "facility_mgmt/tpls/facility_services.edit.tpl.html"
                     }
                 }
             })
