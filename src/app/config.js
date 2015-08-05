@@ -10,7 +10,8 @@
         "ui.router",
         "mfl.auth.services",
         "ngIdle",
-        "mfl.common.forms"
+        "mfl.common.forms",
+        "jcs-autoValidate"
     ])
 
     .constant("SERVER_URL", angular.copy(window.MFL_SETTINGS.SERVER_URL))
@@ -68,9 +69,8 @@
         statecheck.startListening();
     }])
 
-    .run(["validator", "bs3Custom", function (validator, bs3Custom) {
-        validator.registerDomModifier(bs3Custom.key, bs3Custom);
-        validator.setDefaultElementModifier(bs3Custom.key);
+    .run(["bootstrap3ElementModifier", function (bootstrap3ElementModifier) {
+        bootstrap3ElementModifier.enableValidationStateIcons(false);
     }]);
 
 })(window.angular, window.jQuery);

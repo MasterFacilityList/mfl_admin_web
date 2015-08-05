@@ -28,7 +28,10 @@
     .directive("drfErrMsg", function () {
         return {
             "restrict": "EA",
-            "template": "<div ng-repeat='(key,err) in err_list'>{{key}}:<p ng-repeat='e in err'>{{e}}</p></div>",
+            "template": "<div><dl ng-repeat='(key,err) in err_list'>" +
+                        "<dt>{{key}}</dt>" +
+                        "<dd ng-repeat='e in err'>{{e}}</dd>" +
+                        "</dl></div>",
             "controller": ["$scope", function ($scope) {
                 $scope.$watch("errors", function (val) {
                     if (val) {
@@ -45,22 +48,28 @@
     .directive("apiChecker", [function () {
         return {
             "restrict": "A",
-            "require": "ngModel",
-            "link": function (scope, element, attrs, ngModel) {
-                ngModel.$validators.api = function () {
-                    return scope.errors ? scope.errors[attrs.name] === undefined : true;
-                };
-            }
-        };
-    }])
+            "require": ["ngModel", "^form"],
+            "link": function (scope, element, attrs, ctrls) {
+                var ngModel = ctrls[0];
+                var api_errs = attrs.errors || "errors";
+                var bad_val;
 
-    .factory("bs3Custom", ["bootstrap3ElementModifier", function (bs3) {
-        return {
-            "makeInvalid": bs3.makeInvalid,
-            "makeValid": bs3.makeValid,
-            "makeDefault": bs3.makeDefault,
-            "enableValidationStateIcons": false,
-            "key": "bs3Custom"
+                ngModel.$validators.api = function (v) {
+                    if (! scope[api_errs]) {  // api errors not defined
+                        return true;
+                    }
+                    if (scope[api_errs][attrs.name] !== undefined) {
+                        return v !== bad_val;
+                    }
+                    return true;
+                };
+                scope.$watch(api_errs, function (v) {
+                    if (v && v[attrs.name]) {
+                        bad_val = ngModel.$modelValue;
+                        ngModel.$setValidity("api", false);
+                    }
+                });
+            }
         };
     }]);
 
