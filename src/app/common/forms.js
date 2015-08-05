@@ -27,20 +27,19 @@
 
     .directive("drfErrMsg", function () {
         return {
-            "restrict": "EA",
-            "template": "<div><dl ng-repeat='(key,err) in err_list'>" +
+            "restrict": "E",
+            "template": "<div class='alert alert-danger' ng-if=err_list>" +
+                        "<dl ng-repeat='(key,err) in err_list'>" +
                         "<dt>{{key}}</dt>" +
                         "<dd ng-repeat='e in err'>{{e}}</dd>" +
                         "</dl></div>",
-            "controller": ["$scope", function ($scope) {
-                $scope.$watch("errors", function (val) {
+            "link": function (scope, element, attrs) {
+                var api_errs = attrs.errors || "errors";
+                scope.$watch(api_errs, function (val) {
                     if (val) {
-                        $scope.err_list = _.omit(val, "error_msg");
+                        scope.err_list = _.omit(val, "error_msg");
                     }
                 });
-            }],
-            "link": function (scope, element, attrs) {
-                scope.formName = attrs.formName;
             }
         };
     })
