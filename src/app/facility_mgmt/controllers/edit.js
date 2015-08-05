@@ -269,9 +269,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.contacts",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        "mfl.error.messages",
+        "mfl.error.messages", "$state",
         function($scope,$log,$stateParams,wrappers, multistepService,
-            errorMessages){
+            errorMessages, $state){
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[2]);
@@ -284,6 +284,62 @@
                 contact_type: "",
                 contact: ""
             };
+            $scope.detailed_contacts = [];
+            /*Set up facility contacts*/
+            $scope.facilityContacts = function (f) {
+                if(f.contacts.length < 1) {
+                    $scope.detailed_contacts.push({
+                        contact_type : "",
+                        contact : ""
+                    });
+                }
+            };
+            $scope.addContact = function () {
+                $scope.detailed_contacts.push({
+                    contact_type : "",
+                    contact : ""
+                });
+            };
+            $scope.removeContact = function (obj) {
+                if(_.isUndefined(obj.id)){
+                    $scope.detailed_contacts =
+                        _.without($scope.detailed_contacts, obj);
+                }
+                else {
+                    var fac_delcont = _.findWhere($scope.fac_contacts, {"contact" : obj.id});
+                    $scope.removeChild(fac_delcont);
+                }
+            };
+            $scope.createContact = function () {
+                if(!_.isEmpty($scope.fac_contobj.contacts)){
+                    console.log("createcontact >>");
+                    console.log($scope.fac_contobj, $scope.facility_id);
+                    wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
+                    .success(function () {
+                        $state.go("facilities.facility_edit.officers");
+                    })
+                    .error(function (err) {
+                        $scope.alert = err.error;
+                    });
+                } else {
+                    $state.go("facilities.facility_edit.officers");
+                }
+            };
+            $scope.saveContacts = function () {
+                $scope.fac_contobj = {contacts : []};
+                _.each($scope.detailed_contacts, function (a_contact) {
+                    if(_.isUndefined(a_contact.id)){
+                        $scope.fac_contobj.contacts.push(a_contact);
+                    }
+                });
+                $scope.createContact();
+            };
+            $scope.$watch("facility", function (f) {
+                if (_.isUndefined(f)){
+                    return;
+                }
+                $scope.facilityContacts(f);
+            });
             /*contact types*/
             wrappers.contact_types.list()
             .success(function(data){
@@ -297,6 +353,15 @@
             wrappers.facility_contacts.filter({facility:$stateParams.facility_id})
             .success(function(data){
                 $scope.fac_contacts = data.results;
+                _.each($scope.fac_contacts, function (cont) {
+                    wrappers.contacts.get(cont.contact)
+                        .success(function (data) {
+                            $scope.detailed_contacts.push(data);
+                        })
+                        .error(function (err) {
+                            $scope.alert = err.error;
+                        });
+                });
             })
             .error(function(error){
                 $log.error(error);
@@ -311,7 +376,12 @@
                 .success(function () {
                     wrappers.contacts.remove(obj.contact)
                     .success(function () {
-                        $scope.fac_contacts = _.without($scope.fac_contacts, obj);
+                        var delcont = _.findWhere($scope.detailed_contacts,
+                            {"id" : obj.contact});
+                        $scope.detailed_contacts =
+                        _.without($scope.detailed_contacts, delcont);
+                        $scope.fac_contacts =
+                        _.without($scope.fac_contacts, obj);
                         obj.delete_spinner = false;
                     })
                     .error(function (data) {

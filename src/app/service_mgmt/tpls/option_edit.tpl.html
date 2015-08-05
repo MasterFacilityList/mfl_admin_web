@@ -15,25 +15,26 @@
 <div class="fade-content col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20  content-card">
     <form name="option_frm" novalidate>
         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
-                <div class="group">
-                    <input type="text" name="display_text" ng-model="option.display_text" required />
+                <div class="form-group">
+                    <label>Display Text</label>
+                    <input class="form-control" name="display_text" ng-model="option.display_text" placeholder="Display Text" required />
                     <span class="highlight"></span>
                     <span class="bar"></span>
-                    <label>Display Text</label>
                 </div>
-                <div class="group">
-                    <select name="option_type" ng-model="option.option_type" required>
+                <div class="form-group">
+                    <label>Option Type</label>
+                    <select class="form-control" name="option_type" ng-model="option.option_type" placeholder="Option Type" required>
                         <option value="" disabled>Select an option type</option>
                         <option ng-repeat="opt_type in option_types" value="{{opt_type}}">{{opt_type}}</option>
                     </select>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
-                <div class="group">
-                    <input type="text" name="value" ng-model="option.value" required />
+                <div class="form-group">
+                    <label>Option Value</label>
+                    <input class="form-control" name="value" ng-model="option.value" required placeholder="Option Value"/>
                     <span class="highlight"></span>
                     <span class="bar"></span>
-                    <label>Value</label>
                 </div>
                 <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 margin-b-10 text-left"> -->
                     <div class="checkbox-group">
