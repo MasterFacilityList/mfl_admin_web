@@ -13,6 +13,7 @@
         "mfl.service_mgmt",
         "mfl.setup",
         "mfl.dashboard",
+        "mfl.reports",
         "mfl.facility_mgmt",
         "angulartics",
         "angulartics.google.analytics"

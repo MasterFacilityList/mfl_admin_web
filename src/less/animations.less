@@ -1,0 +1,33 @@
+/* Animations */
+#filter-facet.open-add {
+    transition: all 1050ms ease 1s;
+    opacity: 1;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+#filter-facet.open-add-active,
+#filter-facet.open {
+    left: 1000px;
+    opacity: 0;
+}
+
+#filter-facet.open-add #grid-content {
+    transition: all 350ms ease 500ms;
+}
+
+#grid-content.open-add-active,
+#grid-content.open,
+#show-button.open-add-active,
+#show-button.open{
+    bottom: 450px;
+}
+
+#filter-facet.open-add #grid-content, #filter-facet.open-add #show-button {
+    transition: bottom 350ms ease;
+}
+
+#filter-fields.open-add-active,
+#filter-fields.open  {
+    bottom: 500px;
+}

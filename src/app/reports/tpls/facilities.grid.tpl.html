@@ -1,0 +1,121 @@
+<div class="content-header">
+   <div class="action-container content-header-extra pad-r-20">
+
+   </div>
+   <h2 class="content-title">
+        <span class="main-title"><i class="fa fa-building"></i> Facilities</span>
+   </h2>
+</div>
+<div class="container-fluid">
+    <div id="filter-facet" class="col-xs-12 content-card form-card margin-t-20" ng-class="{'open': toggle}">
+        <span class="col-xs-6 fs-14">Reporting Panel</span>
+        <div class="col-xs-6">
+            <span class="pull-right">
+                <button ng-click="toggle=!toggle" class="login-btn login-btn-primary"> Hide Reporting Panel </button>
+            </span>
+        </div>
+        <div class="col-sm-4">
+            <span class="text-muted fs-16">Administrative Unit</span>
+            <div class="col-sm-12 custom-well">
+                <div class="form-group">
+                    <label class="fw-500">County:</label>
+                    <div class="ui-select-container ui-select-multiple ui-select-bootstrap dropdown form-control ng-valid">
+                    <input type="text" class="ui-select-search input-xs">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="fw-500">Sub County:</label>
+                    <div class="ui-select-container ui-select-multiple ui-select-bootstrap dropdown form-control ng-valid">
+                    <input type="text" class="ui-select-search input-xs">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="fw-500">Ward:</label>
+                    <div class="ui-select-container ui-select-multiple ui-select-bootstrap dropdown form-control ng-valid">
+                    <input type="text" class="ui-select-search input-xs">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <span class="text-muted fs-16">Facility Details</span>
+            <div class="col-sm-12 custom-well">
+                <div class="form-group">
+                    <label class="fw-500">KEPH Level:</label>
+                    <div class="ui-select-container ui-select-multiple ui-select-bootstrap dropdown form-control ng-valid">
+                    <input type="text" class="ui-select-search input-xs">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="fw-500">Facility Type:</label>
+                    <div class="ui-select-container ui-select-multiple ui-select-bootstrap dropdown form-control ng-valid">
+                    <input type="text" class="ui-select-search input-xs">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="fw-500">Operation Status:</label>
+                    <div class="ui-select-container ui-select-multiple ui-select-bootstrap dropdown form-control ng-valid">
+                    <input type="text" class="ui-select-search input-xs">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="fw-500">Service Category:</label>
+                    <div class="ui-select-container ui-select-multiple ui-select-bootstrap dropdown form-control ng-valid">
+                    <input type="text" class="ui-select-search input-xs">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <span class="text-muted fs-16">Availability</span>
+            <div class="col-sm-12 custom-well">
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label class="fw-500 fs-14 text-black">
+                            <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="filters.single.open_public_holidays" ng-true-value="'true'" ng-false-value="'false'" indeterminate-value="" class="ng-pristine ng-untouched ng-valid">
+                             Open Public Holidays
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                    <label class="fw-600 fs-14 text-black">
+                            <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="filters.single.open_weekends" ng-true-value="'true'" ng-false-value="'false'" indeterminate-value="" class="ng-valid ng-dirty ng-valid-parse ng-touched">
+                             Open Weekends
+                         </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label class="fw-600 fs-14 text-black">
+                            <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="filters.single.open_whole_day" ng-true-value="'true'" ng-false-value="'false'" indeterminate-value="" class="ng-pristine ng-untouched ng-valid">
+                             Open 24 Hours
+                         </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <button class="btn btn-primary">
+                Search
+            </button>
+        </div>
+    </div>
+</div>
+<div ng-show="toggle==true" class="col-lg-12">
+    <div id="show-button" class="col-xs-12 content-card form-card margin-t-20" class="col-xs-12" ng-class="{'open': toggle}">
+        <div class="col-xs-12">
+            <button class="pull-right btn btn-primary" ng-click="toggle=!toggle">Show Reporting Panel </button>
+            <div>
+                Filtered by: {{filters}}
+            </div>
+        </div>
+    </div>
+</div>
+<div id="grid-content" class="col-lg-12" ng-class="{'open': toggle}">
+    <div class="col-xs-12 content-card margin-b-20 margin-t-20">
+    <sil-grid template="reports/tpls/facilities.list.tpl.html" grid-for="facilities"
+        data="facilities" filters="filters" error="alert" api-key="facilities">
+    </sil-grid>
+    </div>
+</di
