@@ -18,7 +18,7 @@
                 {
                     func : "ui-sref='facilities.facility_create({furthest : 1})'" +
                            "requires-permission='facilities.add_facility'",
-                    class: "login-btn login-btn-primary",
+                    class: "mfl-btn mfl-btn-primary",
                     tipmsg: "Add Facility",
                     icon: "",
                     wording : " Add Facility"
