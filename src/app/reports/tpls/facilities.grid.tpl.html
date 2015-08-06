@@ -1,6 +1,7 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
        <div class="action-container content-header-extra pad-r-5">
+            <button class="login-btn login-btn-primary" ng-click="toggle=!toggle"> {{toggle ? 'Show' : 'Hide'}} Reporting Panel</button>
             <a tooltip-placement="bottom" tooltip="export facilities"  class="login-btn login-btn-primary">
                 &nbsp;Export Facilities
             </a>
@@ -11,7 +12,6 @@
    </h2>
 </div>
 <div class="container-fluid">
-    <button class="login-btn login-btn-primary margin-t-20" ng-click="toggle=!toggle"> {{toggle ? 'Show' : 'Hide'}} Reporting Panel <i class="fa {{toggle ? 'fa-chevron-left' : 'fa-chevron-right'}}"></i></button>
     <div id="filter-facet" class="col-xs-12 content-card form-card margin-t-20 open" ng-class="{'open-add': toggle,'open-remove':!toggle}" ng-cloak>
         <span class="col-xs-12 fs-14">Reporting Panel</span>
         <div class="col-sm-4">
@@ -102,7 +102,7 @@
         </div>
     </div>
 </div>
-<div id="grid-content" class="col-lg-12 open" ng-class="{'open-add': toggle,'open-remove':!toggle}">
+<div id="grid-content" class="col-lg-12 margin-t-20 open" ng-class="{'open-add': toggle,'open-remove':!toggle}">
     <div class="col-xs-12 content-card margin-b-20">
     <sil-grid template="reports/tpls/facilities.list.tpl.html" grid-for="facilities"
         data="facilities" filters="filters" error="alert" api-key="facilities">
