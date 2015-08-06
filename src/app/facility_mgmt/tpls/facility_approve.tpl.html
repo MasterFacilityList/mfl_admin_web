@@ -23,7 +23,7 @@
             <div class="col-sm-6"><span class="pull-right">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
        </div>
     </div>
-    <button class="login-btn login-btn-primary" ng-click="viewFacility = !viewFacility">
+    <button class="mfl-btn mfl-btn-primary" ng-click="viewFacility = !viewFacility">
         &nbsp;View {{viewFacility ? 'Less' : 'More'}} Facility Details <i class="fa {{viewFacility ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
     </button>
     <div class="row" content-slide-in="viewFacility" slide-show-duration="1000">
@@ -71,8 +71,8 @@
                         Comment for approval
                     </label>
                 </div>
-                <button class="login-btn login-btn-action" ng-click="approveFacility()">Approve Facility</button>
-                <button class="login-btn login-btn-danger margin-l-5" ng-click="approveFacility(true)">Reject Facility</button>
+                <button class="mfl-btn mfl-btn-action" ng-click="approveFacility()">Approve Facility</button>
+                <button class="mfl-btn mfl-btn-danger margin-l-5" ng-click="approveFacility(true)">Reject Facility</button>
             </form>
         </div>
         <div class="row" ng-if="facility.is_approved">
@@ -129,8 +129,8 @@
                 </tbody>
             </table>
             <div class="margin-t-20 margin-b-10">
-                <button ng-click="approveUpdate(true)" class="login-btn login-btn-success">Approve Updates</button>
-                <button ng-click="approveUpdate(false)" class="login-btn login-btn-danger">Decline Updates</button>
+                <button ng-click="approveUpdate(true)" class="mfl-btn mfl-btn-success">Approve Updates</button>
+                <button ng-click="approveUpdate(false)" class="mfl-btn mfl-btn-danger">Decline Updates</button>
             </div>
         </div>
         <div ng-if="!facility.latest_update" class="col-xs-12">
@@ -154,10 +154,10 @@
                         <td>{{fsu.service_name}}</td>
                         <td>{{fsu.option_display_value}}</td>
                         <td>
-                            <button class="login-btn login-btn-success" ng-click="approveFacilityService(fsu,true)">
+                            <button class="mfl-btn mfl-btn-success" ng-click="approveFacilityService(fsu,true)">
                                 &nbsp;Approve
                             </button>
-                            <button class="login-btn login-btn-danger" ng-click="approveFacilityService(fsu,false)">
+                            <button class="mfl-btn mfl-btn-danger" ng-click="approveFacilityService(fsu,false)">
                                 &nbsp;Reject
                             </button>
                         </td>
