@@ -39,7 +39,7 @@ input.login-input:active:focus,
   margin-left: -20%;
 }
 
-.login-btn {
+.mfl-btn {
     display: inline-block;
     margin-bottom: 0;
     font-weight: normal;
@@ -60,121 +60,152 @@ input.login-input:active:focus,
     -ms-user-select: none;
     user-select: none;
 }
-.login-btn-lg {
+.mfl-btn-lg {
   font-size: 18px;
   padding: 8px 14px 8px 14px;
 }
 
-.login-btn:focus,
-.login-btn:active:focus,
-.login-btn.active:focus {
+.mfl-btn:focus,
+.mfl-btn:active:focus,
+.mfl-btn.active:focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
-.login-btn:hover,
-.login-btn:focus {
+.mfl-btn:hover,
+.mfl-btn:focus {
   color: #333333;
   text-decoration: none;
   box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.56);
 }
-.login-btn-primary {
+.mfl-btn-primary {
   padding: 7px 13px 8px 5px;
   color: #ffffff;
   background-color: #2196F3;
   border-color: transparent;
 }
 
-.login-btn-primary:hover,
-.login-btn-primary:focus,
-.login-btn-primary:active,
-.login-btn-primary.active{
+.mfl-btn-primary:hover,
+.mfl-btn-primary:focus,
+.mfl-btn-primary:active,
+.mfl-btn-primary.active{
   color: #ffffff;
   background-color: darken(#2196F3, 5%);
   border-color: #285e8e;
 }
-.login-btn-primary:disabled {
-  color : darken(#f0f0f0, 5%);
-  background-color: darken(#428bca, 5%) !important;
-  box-shadow: 0px !important;
+.mfl-btn-primary[disabled],
+.mfl-btn-primary:disabled, .mfl-btn-primary[disabled]:hover,
+.mfl-btn-primary[disabled]:focus, .mfl-btn-primary[disabled].active,
+.mfl-btn-primary.disabled {
+  color : darken(#f0f0f0, 15%);
+  background-color: #337ab7 !important;
+  border-color: #2e6da4 !important;
+  box-shadow: 1px 1px transparent !important;
 }
 
-.login-btn-success {
+.mfl-btn-success {
   padding: 7px 13px 8px 10px;
   color: #ffffff;
   background-color: #179600;
   border-color: transparent;
 }
-.login-btn-success:hover,
-.login-btn-success:focus,
-.login-btn-success:active,
-.login-btn-success.active{
+.mfl-btn-success:hover,
+.mfl-btn-success:focus,
+.mfl-btn-success:active,
+.mfl-btn-success.active{
   color: #F0F0F0;
   background-color: darken(#179600, 5%);
   border-color: #179600;
 }
 
-.login-btn-danger {
+.mfl-btn-success[disabled],
+.mfl-btn-success:disabled, .mfl-btn-success[disabled]:hover,
+.mfl-btn-success[disabled]:focus, .mfl-btn-success[disabled].active,
+.mfl-btn-success.disabled {
+  color : darken(#f0f0f0, 15%);
+  background-color: darken(#179600, 15%) !important;
+  border-color: #179600 !important;
+  box-shadow: 1px 1px #FFFFFF !important;
+}
+
+.mfl-btn-danger {
   padding: 7px 13px 8px 10px;
   color: #ffffff;
   background-color: #d9534f;
   border-color: transparent;
 }
-.login-btn-danger:hover,
-.login-btn-danger:focus,
-.login-btn-danger:active,
-.login-btn-danger.active{
+.mfl-btn-danger:hover,
+.mfl-btn-danger:focus,
+.mfl-btn-danger:active,
+.mfl-btn-danger.active{
   color: #F0F0F0;
   background-color: darken(#d9534f, 5%);
   border-color: #d9534f;
 }
 
-.login-btn-action {
+.mfl-btn-action {
   padding: 7px 13px 8px 10px;
   color: #ffffff;
   background-color: #4CAF50;
   border-color: transparent;
 }
-.login-btn-action:hover,
-.login-btn-action:focus,
-.login-btn-action:active,
-.login-btn-action.active{
+.mfl-btn-action:hover,
+.mfl-btn-action:focus,
+.mfl-btn-action:active,
+.mfl-btn-action.active{
   color: #F0F0F0;
   background-color: darken(#4CAF50, 5%);
   border-color: #4CAF50;
 }
 
-.login-btn-info {
+.mfl-btn-info {
   padding: 7px 13px 8px 10px;
   color: #ffffff;
   background-color: #00bcd4;
   border-color: transparent;
 }
-.login-btn-info:hover,
-.login-btn-info:focus,
-.login-btn-info:active,
-.login-btn-info.active{
+.mfl-btn-info:hover,
+.mfl-btn-info:focus,
+.mfl-btn-info:active,
+.mfl-btn-info.active{
   color: #F0F0F0;
   background-color: darken(#00bcd4, 5%);
   border-color: #00bcd4;
 }
-
-.login-btn-default {
+.mfl-btn-info[disabled],
+.mfl-btn-info:disabled, .mfl-btn-info[disabled]:hover,
+.mfl-btn-info[disabled]:focus, .mfl-btn-info[disabled].active,
+.mfl-btn-info.disabled {
+  color : #f1f1f1;
+  background-color: darken(#00bcd4, 15%) !important;
+  border-color: #00bcd4 !important;
+  box-shadow: 1px 1px transparent !important;
+}
+.mfl-btn-default {
   padding: 7px 13px 8px 10px;
   color: #2196F3;
   border-radius: 2px !important;
   background-color: #F0F1F6;
   border-color: transparent !important;
 }
-.login-btn-default:hover,
-.login-btn-default:focus,
-.login-btn-default:active,
-.login-btn-default.active{
+.mfl-btn-default:hover,
+.mfl-btn-default:focus,
+.mfl-btn-default:active,
+.mfl-btn-default.active{
   color: darken(#2196F3, 5%);
   background-color: darken(#F0F1F6, 5%);
   border-color: darken(#F0F1F6, 7%);
 }
 
+.mfl-btn-default[disabled],
+.mfl-btn-default:disabled, .mfl-btn-default[disabled]:hover,
+.mfl-btn-default[disabled]:focus, .mfl-btn-default[disabled].active,
+.mfl-btn-default.disabled {
+  color : #666666;
+  background-color: #e0e0e0 !important;
+  border-color: #666666 !important;
+  box-shadow: 1px 1px transparent !important;
+}
 .dis-container {
     background-color: rgba(192, 192, 192, 0.6);
 }
@@ -218,7 +249,7 @@ input.login-input:active:focus,
 
 
 /*Material ripple effect =============*/
-/*.login-btn:after,
+/*.mfl-btn:after,
 .nav a:after {
     content: "";
     background: rgba(255,255,255,0.3);
@@ -232,7 +263,7 @@ input.login-input:active:focus,
     opacity: 0;
     transition: all 1s;
 }
-.login-btn:active:after,
+.mfl-btn:active:after,
 .nav a:active:after {
     padding-top: 0;
     padding-left: 0;

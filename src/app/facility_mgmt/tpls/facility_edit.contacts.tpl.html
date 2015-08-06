@@ -49,26 +49,26 @@
             </table>
         </div>
         <div class="col-xs-12 text-right margin-b-10">
-            <a class="login-btn login-btn-primary pull-right" ng-click="addContact()" >
+            <a class="mfl-btn mfl-btn-primary pull-right" ng-click="addContact()" >
                 &nbsp;<i class="fa fa-plus-square-o"></i> Add
             </a>
         </div>
     </div>
    <div class="col-xs-12">
     <!-- Buttons for creation of facility -->
-        <a ui-sref="facilities.facility_edit.geolocation" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+        <a ui-sref="facilities.facility_edit.geolocation" ng-if="!create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Geolocation
         </a>
         <!-- <a
         ui-sref="facilities.facility_edit.officers" ng-if="!create"   -->
-        <button class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right">
+        <button class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
             &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
         </button>
         <!-- End of facility creation buttons -->
-        <a ui-sref="facilities.facility_create.geolocation({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+        <a ui-sref="facilities.facility_create.geolocation({facility_id : new_facility})" ng-if="create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Geolocation
         </a>
-        <button ng-if="create"  class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right" ng-click="goToNext(4, 'officers')">
+        <button ng-if="create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right" ng-click="goToNext(4, 'officers')">
             &nbsp; Officer Incharge <i class="fa fa-angle-double-right"></i>
         </button>
     </div>
