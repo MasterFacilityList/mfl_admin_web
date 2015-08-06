@@ -611,3 +611,27 @@ table {
     margin-top: 3px;
   }
 }
+.block { display: block; }
+.table-head {
+    background-color: #FFF;
+    border: transparent;
+    box-shadow: 0 5px 6px -6px #000;
+}
+.table-fixed thead {
+  width: 100%;
+}
+.table-fixed tbody {
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed tbody > tr {
+  background-color: #e0e0e0;
+  margin-top: 0px;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+}

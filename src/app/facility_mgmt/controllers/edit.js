@@ -591,6 +591,7 @@
             }else{
                 $scope.nextState();
             }
+            $scope.fac_depts = [];
             /*regulating bodies*/
             wrappers.regulating_bodies.filter({fields:"id,name"})
             .success(function(data){
@@ -599,7 +600,6 @@
             .error(function(error){
                 $log.error(error);
             });
-
             /*facility units*/
             wrappers.facility_units.filter({
                 facility: $scope.facility_id,
@@ -613,7 +613,31 @@
                 $scope.units_error = errorMessages.errors +
                     errorMessages.fetch_units;
             });
-
+            $scope.facilityUnits = function (f) {
+                if(f.facility_units.length < 1) {
+                    $scope.fac_depts.push({
+                        name : "",
+                        regulating_body : ""
+                    });
+                }
+            };
+            $scope.addUnit = function () {
+                $scope.fac_depts.push({
+                    name : "",
+                    regulating_body : ""
+                });
+            };
+            $scope.removeUnit = function (obj) {
+                if(_.isUndefined(obj.id)) {
+                    $scope.fac_depts = _.without($scope.fac_depts, obj);
+                }
+            };
+            $scope.$watch("facility", function (f) {
+                if (_.isUndefined(f)){
+                    return;
+                }
+                $scope.facilityUnits(f);
+            });
             /*add existing regulatory to facility*/
             $scope.add = function () {
                 $scope.spinner = true;
