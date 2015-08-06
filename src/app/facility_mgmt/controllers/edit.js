@@ -261,6 +261,7 @@
                         })
                         .error(function (data) {
                             $log.error(data);
+                            $scope.errors = data;
                             $scope.basic_error = errorMessages.errors+ errorMessages.data;
                         });
                     }
@@ -275,9 +276,8 @@
                         })
                         .error(function (data) {
                             $log.error(data);
-                            $scope.basic_error=
-                            errorMessages.errors+
-                            errorMessages.data;
+                            $scope.errors = data;
+                            $scope.basic_error = errorMessages.errors+errorMessages.data;
                         });
                     }
                 } else {
@@ -288,6 +288,7 @@
                     })
                     .error(function (data) {
                         $log.error(data);
+                        $scope.errors = data;
                         $scope.basic_error = errorMessages.errors+ errorMessages.data;
                     });
                 }
