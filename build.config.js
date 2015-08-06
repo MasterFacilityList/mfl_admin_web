@@ -99,6 +99,7 @@ module.exports = {
             "vendor/ng-idle/angular-idle.js",
             "vendor/angulartics/dist/angulartics.min.js",
             "vendor/angulartics-google-analytics/dist/angulartics-google-analytics.min.js",
+            "vendor/angular-auto-validate/dist/jcs-auto-validate.js",
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",

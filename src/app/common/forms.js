@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
 
     "use strict";
 
@@ -23,6 +23,58 @@
             return vals;
         };
 
+    }])
+
+    .directive("drfErrMsg", function () {
+        return {
+            "restrict": "E",
+            "template": "<div class='alert alert-danger' ng-if='err_list'>" +
+                        "<dl ng-repeat='(key,err) in err_list'>" +
+                        "<dt>{{key}}</dt>" +
+                        "<dd ng-repeat='e in err'>{{e}}</dd>" +
+                        "</dl></div>",
+            "link": function (scope, element, attrs) {
+                var api_errs = attrs.errors || "errors";
+                scope.$watch(api_errs, function (val) {
+                    if (val) {
+                        scope.err_list = _.omit(val, "error_msg");
+                    } else {
+                        scope.err_list = null;
+                    }
+                });
+            }
+        };
+    })
+
+    .directive("apiChecker", [function () {
+        return {
+            "restrict": "A",
+            "require": ["ngModel", "^form"],
+            "link": function (scope, element, attrs, ctrls) {
+                var ngModel = ctrls[0];
+                var api_errs = attrs.apiChecker || "errors";
+                var bad_val;
+
+                if (! attrs.name) {
+                    throw new Error("name is not specified for the input : "+element.html());
+                }
+                ngModel.$validators.api = function (v) {
+                    if (! scope[api_errs]) {  // api errors not defined
+                        return true;
+                    }
+                    if (scope[api_errs][attrs.name] !== undefined) {
+                        return v !== bad_val;
+                    }
+                    return true;
+                };
+                scope.$watch(api_errs, function (v) {
+                    if (v && v[attrs.name]) {
+                        bad_val = ngModel.$modelValue;
+                        ngModel.$setValidity("api", false);
+                    }
+                });
+            }
+        };
     }]);
 
-})(window.angular);
+})(window.angular, window._);

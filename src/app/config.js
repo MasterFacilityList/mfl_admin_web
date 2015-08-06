@@ -9,7 +9,9 @@
         "mfl.auth.oauth2",
         "ui.router",
         "mfl.auth.services",
-        "ngIdle"
+        "ngIdle",
+        "mfl.common.forms",
+        "jcs-autoValidate"
     ])
 
     .constant("SERVER_URL", angular.copy(window.MFL_SETTINGS.SERVER_URL))
@@ -65,6 +67,10 @@
 
     .run(["mfl.auth.services.statecheck", function (statecheck) {
         statecheck.startListening();
+    }])
+
+    .run(["bootstrap3ElementModifier", function (bootstrap3ElementModifier) {
+        bootstrap3ElementModifier.enableValidationStateIcons(false);
     }]);
 
 })(window.angular, window.jQuery);
