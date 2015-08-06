@@ -2270,7 +2270,9 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(200, {results: [{"id": 3}]});
-
+                httpBackend.expectGET(server_url+
+                    "api/facilities/service_categories/")
+                    .respond(200, {results: [{"id": 1}]});
                 var c = ctrl();
                 var scope = rootScope.$new();
                 c.bootstrap(scope);
@@ -2315,6 +2317,14 @@
 
                 var c = ctrl();
                 var scope = rootScope.$new();
+                var cat = {selected : false, id : "3"};
+                var rslts = {
+                    results : [
+                        {
+                            id : "5"
+                        }
+                    ]
+                };
                 c.bootstrap(scope);
 
                 httpBackend.flush();
@@ -2326,11 +2336,19 @@
                 httpBackend
                     .expectPOST(server_url+"api/facilities/facility_services/")
                     .respond(201, {"id": 4});
-
                 scope.facility = {
                     facility_services: []
                 };
+                scope.categories = [
+                    {id : "1", selected : true},
+                    {id : "4", selected : false}
+                ];
                 scope.addServiceOption(payload.results[0]);
+                httpBackend
+                    .expectGET(server_url+
+                        "api/facilities/services/?category=3")
+                    .respond(200, rslts);
+                scope.showServices(cat);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
@@ -2346,6 +2364,7 @@
                 spyOn(log, "error");
                 var c = ctrl({"$log": log});
                 var scope = rootScope.$new();
+                var cat = {selected : true, id : "3"};
                 c.bootstrap(scope);
 
                 httpBackend.flush();
@@ -2362,6 +2381,7 @@
                     facility_services: []
                 };
                 scope.addServiceOption(payload.results[0]);
+                scope.showServices(cat);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
