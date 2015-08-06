@@ -12,22 +12,20 @@
     <div class="pull-right col-xs-4 pad-0">
     <p class="text-right margin-t-5">Showing <strong>{{pagination.start_index}} - {{pagination.end_index}}</strong> of <span>{{pagination.count}} records</span></p>
     </div>
-    <table class="table table-hover fs-14" id="no-more-tables">
-        <thead>
-            <tr>
+    <table class="table table-fixed table-hover fs-14" id="no-more-tables">
+        <thead class="table-head">
                 <th class="col-xs-10" sil-grid-sort field='name'>Name</th>
-                <th class="col-xs-2 text-center">Service Option&nbsp;&nbsp;</th>
-            </tr>
+                <th class="col-xs-2">Service Option&nbsp;&nbsp;</th>
         </thead>
-        <tbody class="fade-content">
-            <tr ng-repeat="service in services" ng-show="services">
-                <td data-title="Name:" class="">
+        <tbody class="table-list fade-content">
+            <tr class="table-item" ng-repeat="service in services" ng-show="services">
+                <td data-title="Name:" class="col-xs-10">
                     {{service.service_name}}
                 </td>
-                <td data-title="Abbreviation:" class="text-center">{{service.option_display_value}}&nbsp;&nbsp;&nbsp;</td>
+                <td data-title="Abbreviation:" class="col-xs-2 text-center">{{service.option_display_value}}&nbsp;&nbsp;&nbsp;</td>
             </tr>
-            <tr ng-if="services.length === 0" class="alert alert-info">
-                <td colspan="4">
+            <tr class="table-item" ng-if="services.length === 0" class="alert alert-info">
+                <td colspan="4" class="col-xs-12">
                 <i class="fa fa-info-circle"></i> No services assigned to this facility
                 </td>
             </tr>
