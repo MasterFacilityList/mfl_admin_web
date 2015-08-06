@@ -1957,7 +1957,66 @@
                         "regulating_body,regulating_body_name")
                     .respond(200, {results: []});
                 ctrl(".units", data);
-
+                data.$scope.$apply();
+                data.$scope.facility = {
+                    facility_units : []
+                };
+                data.$scope.fac_depts = [{name : "", regulating_body : ""}];
+                var obj = {name : "", regulatory_body: ""};
+                data.$scope.facilityUnits(data.$scope.facility);
+                data.$scope.addUnit();
+                data.$scope.removeUnit(obj);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            }]));
+            it("should have facility_units defined or loaded",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 4
+                    },
+                    "mfl.common.services.multistep" : multistepService
+                };
+                data.$scope.facility_id = 4;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/"+
+                        "facility_units/?facility=4&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
+                    .respond(200, {results: []});
+                ctrl(".units", data);
+                data.$scope.$apply();
+                data.$scope.facility = {
+                    facility_units : [
+                        {
+                            id : "3"
+                        },
+                        {
+                            id : "4"
+                        }
+                    ]
+                };
+                data.$scope.fac_depts = [{name : "", regulating_body : ""}];
+                var obj = {id : "", name : "", regulatory_body: ""};
+                data.$scope.facilityUnits(data.$scope.facility);
+                data.$scope.addUnit();
+                data.$scope.removeUnit(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
