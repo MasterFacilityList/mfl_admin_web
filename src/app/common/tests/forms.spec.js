@@ -109,9 +109,8 @@
                           "<input ng-model='desc' api-checker name='name'/>" +
                           "</form>";
                 var scope = rootScope.$new();
-                var el = compile(tpl)(scope);
-                el.children("input").val("test");
-                el.children("input").trigger("input");
+                compile(tpl)(scope);
+                scope.frm.name.$setViewValue("hahaha");
                 expect(scope.frm.$dirty).toBe(true);
                 expect(scope.frm.$valid).toBe(true);
             });
@@ -147,5 +146,4 @@
             });
         });
     });
-
 })();
