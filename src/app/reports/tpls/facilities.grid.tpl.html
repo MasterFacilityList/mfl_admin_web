@@ -1,13 +1,17 @@
 <div class="content-header">
-   <div class="action-container content-header-extra pad-r-20">
-
+   <div class="action-container content-header-extra">
+       <div class="action-container content-header-extra pad-r-5">
+            <a tooltip-placement="bottom" tooltip="export facilities"  class="login-btn login-btn-primary">
+                &nbsp;Export Facilities
+            </a>
+       </div>
    </div>
    <h2 class="content-title">
         <span class="main-title"><i class="fa fa-building"></i> Facilities</span>
    </h2>
 </div>
 <div class="container-fluid">
-    <button class="pull-right login-btn login-btn-primary margin-t-20" ng-click="toggle=!toggle"> {{toggle ? 'Show' : 'Hide'}} Reporting Panel </button>
+    <button class="login-btn login-btn-primary margin-t-20" ng-click="toggle=!toggle"> {{toggle ? 'Show' : 'Hide'}} Reporting Panel <i class="fa {{toggle ? 'fa-chevron-left' : 'fa-chevron-right'}}"></i></button>
     <div id="filter-facet" class="col-xs-12 content-card form-card margin-t-20 open" ng-class="{'open-add': toggle,'open-remove':!toggle}" ng-cloak>
         <span class="col-xs-12 fs-14">Reporting Panel</span>
         <div class="col-sm-4">
