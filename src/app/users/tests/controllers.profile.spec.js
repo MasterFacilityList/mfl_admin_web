@@ -240,7 +240,8 @@
                 httpBackend.verifyNoOutstandingRequest();
 
                 expect(log.error).toHaveBeenCalledWith({
-                    "detail": "The two passwords do not match"
+                    "new_password1": ["The two passwords do not match"],
+                    "new_password2": ["The two passwords do not match"]
                 });
             });
 
@@ -262,7 +263,7 @@
                 httpBackend.verifyNoOutstandingRequest();
 
                 expect(log.error).toHaveBeenCalledWith({
-                    "detail": "The current password is the same as the old password"
+                    "new_password1": ["The new password is the same as the old password"]
                 });
             });
         });

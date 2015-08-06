@@ -123,11 +123,14 @@
         };
         var updatePassword = function (old, pwd1, pwd2) {
             if (pwd1 !== pwd2) {
-                return $q.reject({"detail": "The two passwords do not match"});
+                return $q.reject({
+                    "new_password1": ["The two passwords do not match"],
+                    "new_password2": ["The two passwords do not match"]
+                });
             }
             if (old === pwd1) {
                 return $q.reject({
-                    "detail": "The current password is the same as the old password"
+                    "new_password1": ["The new password is the same as the old password"]
                 });
             }
             return api.callApi("POST", api.makeUrl(urls.password_change), {
@@ -144,7 +147,10 @@
 
         var resetPasswordConfirm = function (uid, token, pwd1, pwd2) {
             if (pwd1 !== pwd2) {
-                return $q.reject({"detail": "The two passwords do not match"});
+                return $q.reject({
+                    "new_password1": ["The two passwords do not match"],
+                    "new_password2": ["The two passwords do not match"]
+                });
             }
             var data = {
                 "uid": uid,

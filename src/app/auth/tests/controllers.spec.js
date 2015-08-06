@@ -59,9 +59,6 @@
 
                 expect(srvc.login).toHaveBeenCalledWith(obj);
                 $httpBackend.flush();
-
-                // expect(scope.login_err).toEqual("");
-                // expect(scope.login_err_html).toEqual("");
             }
         ]));
 
@@ -277,13 +274,13 @@
             expect(log.error).not.toHaveBeenCalled();
         });
 
-        it("should show an error on fail to reset a password", function () {
+        it("should show an error on fail to reset a password (uid fail)", function () {
             httpBackend.expectPOST(SERVER_URL + "api/rest-auth/password/reset/confirm/", {
                 "uid": "123",
                 "token": "456",
                 "new_password1": "pass",
                 "new_password2": "pass"
-            }).respond(500);
+            }).respond(500, {"uid": "haha"});
 
             spyOn(log, "error");
             spyOn(state, "go");
@@ -308,6 +305,71 @@
 
             expect(state.go).not.toHaveBeenCalled();
             expect(log.error).toHaveBeenCalled();
+            expect(data.$scope.errors).toEqual({"": ["Invalid password reset token."]});
+        });
+
+
+        it("should show an error on fail to reset a password (token fail)", function () {
+            httpBackend.expectPOST(SERVER_URL + "api/rest-auth/password/reset/confirm/", {
+                "uid": "123",
+                "token": "456",
+                "new_password1": "pass",
+                "new_password2": "pass"
+            }).respond(500, {"token": "haha"});
+
+            spyOn(log, "error");
+            spyOn(state, "go");
+            var data = {
+                "$scope": rootScope.$new(),
+                "$state": state,
+                "$log": log,
+                "$stateParams": {
+                    "uid": "123",
+                    "token": "456"
+                }
+            };
+            data.$scope.new_password1 = "pass";
+            data.$scope.new_password2 = "pass";
+
+            controller(data);
+            data.$scope.reset_pwd_confirm();
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+
+            expect(state.go).not.toHaveBeenCalled();
+            expect(log.error).toHaveBeenCalled();
+            expect(data.$scope.errors).toEqual({"": ["Invalid password reset token."]});
+        });
+
+        it("should show an error on fail to validate", function () {
+            spyOn(log, "error");
+            spyOn(state, "go");
+            var data = {
+                "$scope": rootScope.$new(),
+                "$state": state,
+                "$log": log,
+                "$stateParams": {
+                    "uid": "123",
+                    "token": "456"
+                }
+            };
+            data.$scope.new_password1 = "pass";
+            data.$scope.new_password2 = "hus";
+
+            controller(data);
+            data.$scope.reset_pwd_confirm();
+
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+
+            expect(state.go).not.toHaveBeenCalled();
+            expect(log.error).toHaveBeenCalled();
+            expect(data.$scope.errors).toEqual({
+                "new_password1": ["The two passwords do not match"],
+                "new_password2": ["The two passwords do not match"]
+            });
         });
     });
 

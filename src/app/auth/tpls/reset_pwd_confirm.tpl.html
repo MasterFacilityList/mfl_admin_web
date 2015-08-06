@@ -12,23 +12,18 @@
         <div class="content-body">
            <div class="pad-form">
                 <div class="content-card">
-                   <div class="pad-form">
-                        <form ng-submit="reset_pwd_confirm()">
-                            <div class="group">
-                                <input name="new_password1" type="password" ng-model="new_password1" required autofocus />
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Password</label>
-                            </div>
-                            <div class="group">
-                                <input name="new_password2" type="password" ng-model="new_password2" required/>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Confirm Password</label>
-                            </div>
-                            <input type="submit" class="md-btn md-btn-primary"  value="Confirm Reset Password" />
-                        </form>
-                   </div>
+                  <form ng-submit="reset_pwd_confirm()" name="frm_reset_pwd_confirm" novalidate>
+                    <drf-err-msg></drf-err-msg>
+                      <div class="form-group">
+                          <label class="control-label">Password</label>
+                          <input name="new_password1" type="password" ng-model="new_password1" required autofocus name="new_password1" api-checker class="form-control"/>
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label">Confirm Password</label>
+                          <input name="new_password2" type="password" ng-model="new_password2" required name="new_password2" api-checker class="form-control"/>
+                      </div>
+                      <button type="submit" class="btn btn-primary" ng-disabled="frm_reset_pwd_confirm.$invalid">Confirm Password Reset</button>
+                  </form>
                 </div>
            </div>
         </div>
