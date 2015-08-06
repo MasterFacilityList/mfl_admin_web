@@ -82,6 +82,16 @@
                 expect(el.html()).toContain("dl");
                 expect(el.html()).toContain("yeah");
             });
+
+            it("should use default message if errors is empty ", function () {
+                var tpl = "<drf-err-msg></drf-err-msg>";
+                var scope = rootScope.$new();
+                var el = compile(tpl)(scope);
+                scope.errors = {};
+                scope.$apply();
+                expect(el.html()).toContain("dl");
+                expect(el.html()).toContain("error occured");
+            });
         });
 
         describe("Test apichecker directive", function () {
