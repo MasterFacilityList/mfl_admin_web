@@ -40,7 +40,9 @@
                     if (errs.uid || errs.token) {
                         errs[""] = ["Invalid password reset token."];
                         delete errs.uid;
+                        delete errs.token;
                     }
+                    delete errs.error_msg;
                     $scope.errors = errs;
                 });
             };

@@ -404,7 +404,8 @@
             profileService.updatePassword("c", "a", "b")
                 .then(null, function (data) {
                     expect(data).toEqual({
-                        "detail": "The two passwords do not match"
+                        "new_password1": ["The two passwords do not match"],
+                        "new_password2": ["The two passwords do not match"]
                     });
                 });
 
@@ -418,7 +419,7 @@
             profileService.updatePassword("a", "a", "a")
                 .then(null, function (data) {
                     expect(data).toEqual({
-                        "detail": "The current password is the same as the old password"
+                        "new_password1": ["The new password is the same as the old password"]
                     });
                 });
 
@@ -444,7 +445,8 @@
             profileService.resetPasswordConfirm(1, 2, "b", "a")
                 .then(null, function (data) {
                     expect(data).toEqual({
-                        "detail": "The two passwords do not match"
+                        "new_password1": ["The two passwords do not match"],
+                        "new_password2": ["The two passwords do not match"]
                     });
                 });
 
