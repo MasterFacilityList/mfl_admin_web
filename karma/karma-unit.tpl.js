@@ -35,7 +35,6 @@ module.exports = function ( karma ) {
             "karma-coverage",
             "karma-threshold-reporter",
             "karma-coffee-preprocessor",
-            "karma-mocha-reporter",
             "karma-htmlfile-reporter"
         ],
 
@@ -51,7 +50,6 @@ module.exports = function ( karma ) {
             "progress",
             "coverage",
             "threshold",
-            "mocha",
             "html"
         ],
 

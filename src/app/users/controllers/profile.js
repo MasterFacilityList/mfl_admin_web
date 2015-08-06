@@ -12,7 +12,7 @@
         function ($scope, $log, wrappers, loginService) {
             $scope.title = {
                 icon: "fa-envelope",
-                name: "Manage Users Contacts"
+                name: "Contacts"
             };
             $scope.user_id = loginService.getUser().id;
             $scope.contact = {
@@ -26,6 +26,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
 
             wrappers.user_contacts.filter({"user": $scope.user_id})
@@ -34,6 +35,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
 
             $scope.removeChild = function (obj) {
@@ -47,10 +49,12 @@
                     })
                     .error(function (data) {
                         $log.error(data);
+                        $scope.errors = data;
                     });
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
 
@@ -75,11 +79,13 @@
                     })
                     .error(function (data) {
                         $log.error(data);
+                        $scope.errors = data;
                         $scope.spinner = false;
                     });
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                     $scope.spinner = false;
                 });
             };
@@ -100,6 +106,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
 
             $scope.save = function (frm) {
@@ -115,7 +122,9 @@
                             storage.setItem(store_key, JSON.stringify(data));
                         })
                         .error(function (data) {
+                            $scope.spinner = false;
                             $log.error(data);
+                            $scope.errors = data;
                         });
                 }
             };
@@ -145,6 +154,7 @@
                     },
                     function (data) {
                         $log.error(data);
+                        $scope.errors = data.data || data;
                     }
                 );
             };
