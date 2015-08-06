@@ -1,11 +1,6 @@
 <div class="col-xs-12 content-card">
-    <div class="fade-content alert alert-danger alert-dismissible margin-t-5" ng-show="basic_error">
-        <button type="button" class="close">
-            <span ng-click="basic_error = !basic_error">&times;</span>
-        </button>
-        <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{basic_error}}</span>
-    </div>
-    <form name="frm_facility_basic" ng-submit="save(frm_facility_basic)">
+    <form name="frm_facility_basic" ng-submit="save(frm_facility_basic)" novalidate>
+        <drf-err-msg></drf-err-msg>
         <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true && !create">
             <h4><strong><i class="fa fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
         </div>
@@ -22,24 +17,16 @@
               </p>
             </div>
             <div class="form-group col-xs-12">
-                <label>
-                    Facility Offical Name
-                </label>
-                <input class="form-control" name="official_name" ng-model="facility.official_name" ng-blur="initUniqueName(facility.official_name, facility.name)" placeholder="Facility Official Name">
-                <span class="highlight"></span>
-                <span class="bar"></span>
+                <label class="control-label">Facility Offical Name</label>
+                <input class="form-control" name="official_name" ng-model="facility.official_name" ng-blur="initUniqueName(facility.official_name, facility.name)" placeholder="Facility Official Name" api-checker>
             </div>
             <div class="form-group col-xs-12">
-                <label>
-                    Facility Unique Name
-                </label>
-                <input class="form-control" name="name" ng-model="facility.name" required placeholder="Facility Unique Name"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
+                <label class="control-label">Facility Unique Name</label>
+                <input class="form-control" name="name" ng-model="facility.name" required placeholder="Facility Unique Name" api-checker/>
             </div>
             <div class="form-group col-xs-12">
-                <label>Facility Type</label>
-                <ui-select ng-model="select_values.facility_type" required name="facility_type">
+                <label class="control-label">Facility Type</label>
+                <ui-select ng-model="select_values.facility_type" required name="facility_type" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select a facility type...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
@@ -50,8 +37,8 @@
             </div>
 
             <div class="form-group col-xs-12">
-                <label>Operation Status</label>
-                <ui-select ng-model="select_values.operation_status" required name="operation_status">
+                <label class="control-label">Operation Status</label>
+                <ui-select ng-model="select_values.operation_status" required name="operation_status" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select an operation status...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
@@ -62,8 +49,8 @@
             </div>
 
             <div class="form-group col-xs-12">
-                <label>Owner</label>
-                <ui-select ng-model="select_values.owner" required name="owner">
+                <label class="control-label">Owner</label>
+                <ui-select ng-model="select_values.owner" required name="owner" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select an owner...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
@@ -73,8 +60,8 @@
                 </ui-select>
             </div>
             <div class="form-group col-xs-12">
-                <label>Regulatory Body</label>
-                <ui-select ng-model="select_values.regulatory_body" required name="regulatory_body">
+                <label class="control-label">Regulatory Body</label>
+                <ui-select ng-model="select_values.regulatory_body" required name="regulatory_body" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select a regulatory body...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
@@ -85,68 +72,54 @@
             </div>
 
             <div class="form-group col-xs-12">
-                <label class="pad-l-10">
+                <label class="control-label">
                     Beds
                 </label>
-                <input class="form-control" name="number_of_beds" ng-model="facility.number_of_beds"  required placeholder="Beds"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
+                <input class="form-control" name="number_of_beds" ng-model="facility.number_of_beds"  required placeholder="Beds" api-checker />
             </div>
             <div class="form-group col-sm-12">
-                <label class="pad-l-10" for="number_of_cots">
+                <label class="control-label" for="number_of_cots">
                     Cots
                 </label>
-                <input class="form-control" name="number_of_cots" ng-model="facility.number_of_cots"  required placeholder="Cots"/>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+                <input class="form-control" name="number_of_cots" ng-model="facility.number_of_cots"  required placeholder="Cots" api-checker />
             </div>
             <div class="col-sm-12">
-              <div class="checkbox-group margin-t-10">
-                  <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day" tooltip="If facility is open 24hrs a day">
-                  <label for="open_whole_day">
-                      <span class="check"></span>
-                      <span class="box"></span>
-                       Open 24 hours
+              <div class="form-group checkbox">
+                  <label>
+                    <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="facility.open_whole_day" tooltip="If facility is open 24hrs a day" api-checker >
+                    Open 24 hours
                    </label>
               </div>
             </div>
             <div class="col-sm-12">
-              <div class="checkbox-group margin-t-10">
-                  <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="facility.open_late_night">
+              <div class="form-group checkbox">
                   <label for="open_late_night">
-                      <span class="check"></span>
-                      <span class="box"></span>
-                       Open Late Night
+                    <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="facility.open_late_night" api-checker >
+                    Open Late Night
                    </label>
               </div>
             </div>
             <div class="col-sm-12">
-              <div class="checkbox-group margin-t-10">
-                  <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="facility.open_public_holidays">
+              <div class="form-group checkbox">
                   <label for="open_public_holidays">
-                      <span class="check"></span>
-                      <span class="box"></span>
-                       Open on public holidays
+                    <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="facility.open_public_holidays" api-checker>
+                    Open on public holidays
                    </label>
                  </div>
             </div>
             <div class="col-sm-12">
-              <div class="checkbox-group margin-t-10">
-                  <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="facility.open_weekends">
+              <div class="form-group checkbox">
                   <label for="open_weekends">
-                      <span class="check"></span>
-                      <span class="box"></span>
-                       Open during weekends
+                    <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="facility.open_weekends" api-checker>
+                    Open during weekends
                    </label>
               </div>
             </div>
             <div class="col-sm-12">
-              <div class="checkbox-group margin-t-10">
-                  <input type="checkbox" id="is_classified" name="is_classified" ng-model="facility.is_classified">
-                  <label for="is_classified">
-                      <span class="check"></span>
-                      <span class="box"></span>
-                       Classified facility
+              <div class="form-group checkbox">
+                  <label>
+                    <input type="checkbox" id="is_classified" name="is_classified" ng-model="facility.is_classified" api-checker>
+                    Classified facility
                    </label>
               </div>
             </div>
@@ -157,8 +130,8 @@
             </div>
            <!-- <form name="phyForm"> -->
                 <div class="form-group col-xs-12">
-                    <label>Ward</label>
-                    <ui-select ng-model="select_values.ward" required name="ward">
+                    <label class="control-label">Ward</label>
+                    <ui-select ng-model="select_values.ward" required name="ward" api-checker register-custom-form-control>
                         <ui-select-match placeholder="Select a ward...">
                             <span>{{$select.selected.name}}</span>
                         </ui-select-match>
@@ -168,40 +141,28 @@
                     </ui-select>
                 </div>
                 <div class="form-group col-xs-12">
-                    <label>Town</label>
-                    <ui-select name="town" ng-model="select_values.town" required>
+                    <label class="control-label">Town</label>
+                    <ui-select name="town" ng-model="select_values.town" api-checker register-custom-form-control>
                         <ui-select-match placeholder="Select a town...">
                             <span>{{$select.selected.name}}</span>
                         </ui-select-match>
-                        <ui-select-choices repeat="town in towns | filter:$select.search | filter:select_values.ward.id">
+                        <ui-select-choices repeat="town in towns | filter:$select.search">
                             <span>{{town.name}}</span>
                         </ui-select-choices>
                     </ui-select>
                 </div>
                 <div class="form-group col-xs-12">
-                    <label>
-                        Plot number
-                    </label>
+                    <label class="control-label">Plot number</label>
                     <input class="form-control" name="plot_number" ng-model="facility.facility_physical_address.plot_number"
-                    placeholder="Plot Number"/>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+                    placeholder="Plot Number" api-checker/>
                 </div>
                 <div class="form-group col-xs-12">
-                    <label>
-                        Nearest landmark
-                    </label>
-                    <input class="form-control" name="nearest_landmark" ng-model="facility.facility_physical_address.nearest_landmark" placeholder="Nearest Landmark"/>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+                    <label class="control-label">Nearest landmark</label>
+                    <input class="form-control" name="nearest_landmark" ng-model="facility.facility_physical_address.nearest_landmark" placeholder="Nearest Landmark" api-checker/>
                 </div>
                 <div class="form-group col-xs-12">
-                    <label>
-                        Location description
-                    </label>
-                    <input class="form-control" name="location_desc" ng-model="facility.facility_physical_address.location_desc" placeholder ="Location Description" />
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+                    <label class="control-label">Location description</label>
+                    <input class="form-control" name="location_desc" ng-model="facility.facility_physical_address.location_desc" placeholder="Location Description" api-checker/>
                 </div>
             <!-- </form> -->
         </div>
