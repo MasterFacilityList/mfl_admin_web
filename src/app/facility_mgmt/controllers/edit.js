@@ -24,6 +24,14 @@
                     $scope.service_error = errorMessages.errors +
                     errorMessages.fetching_services;
                 });
+
+                wrappers.categories.list()
+                .success(function (data) {
+                    $scope.categories = data.results;
+                })
+                .error(function (err) {
+                    $scope.alert = err.error;
+                });
             };
 
             var addServiceOption = function ($scope, so) {
@@ -61,6 +69,27 @@
                 $scope.new_service = {
                     service: "",
                     option: ""
+                };
+                $scope.showServices = function (cat) {
+                    if(cat.selected === false) {
+                        cat.selected = true;
+                    }
+                    else{
+                        cat.selected = true;
+                    }
+                    _.each($scope.categories, function (one_cat) {
+                        if(one_cat.selected === true &&
+                            one_cat.id !== cat.id) {
+                            one_cat.selected = !one_cat.selected;
+                        }
+                    });
+                    wrappers.services.filter({"category" : cat.id})
+                        .success(function (data) {
+                            $scope.cat_services = data.results;
+                        })
+                        .error(function (err) {
+                            $scope.alert = err.error;
+                        });
                 };
                 $scope.services = [];
                 $scope.service_options = [];
