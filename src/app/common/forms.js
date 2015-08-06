@@ -38,6 +38,11 @@
                 scope.$watch(api_errs, function (val) {
                     if (val) {
                         scope.err_list = _.omit(val, "error_msg");
+                        if (_.isEmpty(scope.err_list)) {
+                            scope.err_list = {
+                                "": ["An error occured while processing your request"]
+                            };
+                        }
                     } else {
                         scope.err_list = null;
                     }
@@ -71,6 +76,7 @@
                     if (v && v[attrs.name]) {
                         bad_val = ngModel.$modelValue;
                         ngModel.$setValidity("api", false);
+                        // TODO : Add hack for pristine/untouched forms w/o viewvalue/modelvalue
                     }
                 });
             }
