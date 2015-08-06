@@ -27,16 +27,16 @@
     <tbody class="fade-content" ng-if="facilities.length>0">
         <tr ng-repeat="fac in facilities" >
             <td data-title="Code:" >{{::fac.code}}</td>
-            <td data-title="Name:" >
+            <td class="text-wrap" data-title="Name:" >
                 <a ui-sref="facilities.facility_view({facility_id: fac.id})">{{::fac.name}}</a>
             </td>
-            <td data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
-            <td data-title="Owner:" >{{::fac.owner_name}}</td>
-            <td data-title="County:"> {{::fac.county}}</td>
-            <td data-title="Sub County:" >{{::fac.constituency}}</td>
-            <td data-title="Constituency:" >{{::fac.constituency}}</td>
-            <td data-title="Ward:" >{{::fac.ward_name}}</td>
-            <td data-title="Date Updated:" >{{::fac.updated|dateFilter}}</td>
+            <td class="text-wrap" data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
+            <td class="text-wrap" data-title="Owner:" >{{::fac.owner_name}}</td>
+            <td class="text-wrap" data-title="County:"> {{::fac.county}}</td>
+            <td class="text-wrap" data-title="Sub County:" >{{::fac.constituency}}</td>
+            <td class="text-wrap" data-title="Constituency:" >{{::fac.constituency}}</td>
+            <td class="text-wrap" data-title="Ward:" >{{::fac.ward_name}}</td>
+            <td class="text-wrap" data-title="Date Updated:" >{{::fac.updated|dateFilter}}</td>
         </tr>
     </tbody>
 </table>
