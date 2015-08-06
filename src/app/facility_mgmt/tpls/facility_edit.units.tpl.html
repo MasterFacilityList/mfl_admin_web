@@ -8,20 +8,20 @@
     <!-- Start of new implementation -->
     <div class="col-xs-12 margin-t-10 pad-0" requires-permission="facilities.add_facilityunit">
         <div class="col-xs-12">
-            <h4 class="fw-600 fs-18"> Facility Department</h4>
+            <h4 class="fw-600 fs-18"> Facility Regulation</h4>
         </div>
         <div class="col-xs-12">
             <table class="table table-bordered col-xs-12">
                 <thead class="grey-header">
-                    <th class="col-xs-5">Department Name</th>
+                    <th class="col-xs-5">Name</th>
                     <th class="col-xs-6">Regulatory Body</th>
                     <th class="col-xs-1 text-center"></th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="fac_dept in fac_units">
+                    <tr ng-repeat="fac_dept in fac_depts">
                         <td>
                             <div class="form-group grid-inputs">
-                                <input class="form-control" placeholder="Contact Details" ng-model="fac_dept.name">
+                                <input class="form-control" placeholder="Facility Department Name" ng-model="fac_dept.name">
                             </div>
                         </td>
                         <td class="col-xs-5">
@@ -29,7 +29,7 @@
                                 <select class="form-control"
                                 ng-model="fac_dept.regulating_body" place-holder="Select Contact Details">
                                     <option value="">Select Regulating Body</option>
-                                    <option ng-repeat="regbody in regbodies"
+                                    <option ng-repeat="regbody in regbodies" ng-selected="{{regbody.id == fac_dept.regulating_body}}"
                                     ng-value="regbody.id">{{regbody.name}}</option>
                                 </select>
                                 <span class="highlight"></span>
@@ -38,12 +38,12 @@
                         </td>
 
                         <td class="col-xs-1 text-center">
-                            <a ng-click="remove_contact(cont)" style="cursor: pointer;">
-                                <i class="fa fa-close fa-2x grid-inputs text-danger"></i>
+                            <a ng-click="removeUnit(fac_dept)" style="cursor: pointer;">
+                                <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                             </a>
                         </td>
                     </tr>
-                    <tr ng-if="fac_units.length === 0" class="alert alert-info">
+                    <tr ng-if="fac_depts.length === 0" class="alert alert-info">
                         <td colspan="3">
                         <i class="fa fa-info-circle"></i> No Departments assigned to the facility
                         </td>
@@ -52,7 +52,7 @@
             </table>
         </div>
         <div class="col-xs-12 text-right margin-b-10">
-            <a class="mfl-btn mfl-btn-primary pull-right" ng-click="add_contact()" >
+            <a class="mfl-btn mfl-btn-primary pull-right" ng-click="addUnit()">
                 &nbsp;<i class="fa fa-plus-square-o"></i> Add
             </a>
         </div>
