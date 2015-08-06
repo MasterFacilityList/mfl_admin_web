@@ -28,7 +28,7 @@
     .directive("drfErrMsg", function () {
         return {
             "restrict": "E",
-            "template": "<div class='alert alert-danger' ng-if=err_list>" +
+            "template": "<div class='alert alert-danger' ng-if='err_list'>" +
                         "<dl ng-repeat='(key,err) in err_list'>" +
                         "<dt>{{key}}</dt>" +
                         "<dd ng-repeat='e in err'>{{e}}</dd>" +
@@ -38,6 +38,8 @@
                 scope.$watch(api_errs, function (val) {
                     if (val) {
                         scope.err_list = _.omit(val, "error_msg");
+                    } else {
+                        scope.err_list = null;
                     }
                 });
             }
@@ -50,9 +52,12 @@
             "require": ["ngModel", "^form"],
             "link": function (scope, element, attrs, ctrls) {
                 var ngModel = ctrls[0];
-                var api_errs = attrs.errors || "errors";
+                var api_errs = attrs.apiChecker || "errors";
                 var bad_val;
 
+                if (! attrs.name) {
+                    throw new Error("name is not specified for the input : "+element.html());
+                }
                 ngModel.$validators.api = function (v) {
                     if (! scope[api_errs]) {  // api errors not defined
                         return true;
