@@ -17,6 +17,7 @@
                 },
                 function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
         }]
@@ -35,6 +36,12 @@
                 },
                 function (data) {
                     $log.error(data);
+                    var errs = data.data || data;
+                    if (errs.uid || errs.token) {
+                        errs[""] = ["Invalid password reset token."];
+                        delete errs.uid;
+                    }
+                    $scope.errors = errs;
                 });
             };
         }]
