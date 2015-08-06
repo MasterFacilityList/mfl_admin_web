@@ -22,6 +22,7 @@
                         <td>
                             <div class="form-group grid-inputs">
                                 <input class="form-control" placeholder="Facility Department Name" ng-model="fac_dept.name">
+                                <input ng-init="fac_dept.description = 'Test'" type="hidden" ng-model="fac_dept.description" >
                             </div>
                         </td>
                         <td class="col-xs-5">
@@ -38,7 +39,7 @@
                         </td>
 
                         <td class="col-xs-1 text-center">
-                            <a ng-click="removeUnit(fac_dept)" style="cursor: pointer;">
+                            <a ng-click="removeChild(fac_dept)" style="cursor: pointer;">
                                 <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                             </a>
                         </td>
@@ -70,7 +71,7 @@
         <a ui-sref="facilities.facility_edit.officers" ng-if="!create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Officer Incharge
         </a>
-        <a ui-sref="facilities.facility_edit.services" ng-if="!create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
+        <a ng-click="saveUnits()" ui-sref="facilities.facility_edit.services" ng-if="!create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
             &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
         </a>
     </div>
