@@ -55,12 +55,14 @@
                     $scope.deleteText = $scope.facilityOwnerTypes.name;
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
                 $scope.remove = function () {
                     adminApi.facilityOwnerTypes.remove($stateParams.id).success(function(){
                         $state.go("setup.facility_owner_types",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                         $state.go("setup.facility_owner_types",{},{reload:true});
                     });
                 };
@@ -82,6 +84,7 @@
                         $state.go("setup.facility_owner_types");
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                     });
                 }
             };
@@ -91,6 +94,7 @@
                     $state.go("setup.facility_owner_types");
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
         }]
@@ -153,6 +157,7 @@
                     $scope.edit = true;
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
                 $scope.remove = function () {
                     adminApi.facilityOwners.remove($stateParams.id).success(function(){
@@ -265,6 +270,7 @@
                     $scope.deleteText = $scope.facilityJobTitles.name;
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
                 $scope.remove = function () {
                     adminApi.facilityJobTitles.remove($stateParams.id).success(function(){
@@ -272,6 +278,7 @@
                     }).error(function(error){
                         $scope.alert = error.error;
                         $state.go("setup.facility_job_titles",{},{reload:true});
+                        $scope.errors = error;
                     });
                 };
                 $scope.cancel = function () {
@@ -291,6 +298,7 @@
                         $state.go("setup.facility_job_titles");
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                     });
                 }
             };
@@ -299,6 +307,7 @@
                     $state.go("setup.facility_job_titles");
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
         }]
@@ -343,6 +352,7 @@
                 })
                 .error(function (err) {
                     $scope.alert = err.error;
+                    $scope.errors = err;
                 });
             $scope.contacts = {
                 items : []
@@ -372,12 +382,14 @@
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
+                        $scope.errors = err;
                         $scope.spinner = false;
                     });
                 })
                 .error(function (err) {
                     $scope.alert = err.error;
                     $scope.spinner = false;
+                    $scope.errors = err;
                 });
             };
             $scope.remove_contact = function (obj) {
@@ -392,11 +404,13 @@
                             })
                             .error(function (err) {
                                 $scope.alert = err.error;
+                                $scope.errors = err;
                                 obj.delete_spinner = false;
                             });
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
+                        $scope.errors = err;
                         obj.delete_spinner = false;
                     });
 
@@ -415,6 +429,7 @@
                 })
                 .error(function (err) {
                     $scope.alert = err.error;
+                    $scope.errors = err;
                 });
             adminApi.RegulatoryBodyContacts.filter(
                 {"regulating_body" : $stateParams.id})
@@ -423,6 +438,7 @@
                 })
                 .error(function (err) {
                     $scope.alert = err.error;
+                    $scope.errors = err;
                 });
 
             if($stateParams.id !== "create") {
@@ -449,12 +465,14 @@
                     $scope.edit = true;
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
                 $scope.remove = function () {
                     adminApi.facilityRegulatoryBodies.remove($stateParams.id).success(function(){
                         $state.go("setup.facility_regulatory_bodies",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                         $state.go("setup.facility_regulatory_bodies",{},{reload:true});
                     });
                 };
@@ -475,6 +493,7 @@
                         $state.go("setup.facility_regulatory_bodies");
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                     });
                 }
             };
@@ -486,6 +505,7 @@
                     $scope.regulatory_body = true;
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
             $scope.contact = {
@@ -514,11 +534,13 @@
                     .error(function (err) {
                         $scope.alert = err.error;
                         $scope.spinner = false;
+                        $scope.errors = err;
                     });
                 })
                 .error(function (err) {
                     $scope.alert = err.error;
                     $scope.spinner = false;
+                    $scope.errors = err;
                 });
             };
             $scope.remove_contact = function (obj) {
@@ -534,11 +556,13 @@
                             .error(function (err) {
                                 $scope.alert = err.error;
                                 obj.delete_spinner = false;
+                                $scope.errors = err;
                             });
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
                         obj.delete_spinner = false;
+                        $scope.errors = err;
                     });
 
             };
