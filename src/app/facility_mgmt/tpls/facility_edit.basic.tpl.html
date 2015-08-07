@@ -155,6 +155,8 @@
                     <label class="control-label">Plot number</label>
                     <input class="form-control" name="plot_number" ng-model="facility.facility_physical_address.plot_number"
                     placeholder="Plot Number" api-checker/>
+                    <input type="hidden" name="plot_number" ng-model="facility.facility_physical_address.town"
+                    placeholder="Town" />
                 </div>
                 <div class="form-group col-xs-12">
                     <label class="control-label">Nearest landmark</label>
@@ -193,7 +195,7 @@
                 <label class="">
                     Job Title
                 </label>
-                <select class="form-control" name="title" ng-model="off.job_title" required placeholder="Job Title">
+                <select class="form-control" name="title" ng-model="off.job_title" placeholder="Job Title">
                     <option value="">Select Job Title</option>
                     <option ng-repeat="title in job_titles" ng-value="title.id">{{title.name}}</option>
                 </select>
