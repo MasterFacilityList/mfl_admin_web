@@ -55,6 +55,7 @@
                     }).error(function(error){
                         $scope.alert = error.error;
                         $state.go("setup.contacts",{},{reload:true});
+                        $scope.errors = error;
                     });
                 };
                 $scope.cancel = function () {
@@ -73,6 +74,7 @@
                     $state.go("setup.contacts",{},{reload:true});
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
             $scope.updateContact = function(id, frm){
@@ -82,6 +84,7 @@
                         $state.go("setup.contacts",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                     });
                 }
             };
@@ -90,6 +93,7 @@
                     $state.go("setup.contacts",{},{reload:true});
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
         }]
@@ -153,6 +157,7 @@
                         $state.go("setup.contact_types",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                         $state.go("setup.contact_types",{},{reload:true});
                     });
                 };
@@ -172,6 +177,7 @@
                     $state.go("setup.contact_types",{},{reload:true});
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
             $scope.updateContacts = function(id, frm){
@@ -181,6 +187,7 @@
                         $state.go("setup.contact_types",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                     });
                 }
             };
