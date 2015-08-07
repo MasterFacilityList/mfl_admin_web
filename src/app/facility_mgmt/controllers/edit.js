@@ -592,6 +592,7 @@
                 $scope.nextState();
             }
             $scope.fac_depts = [];
+            $scope.fac_units = [];
             /*regulating bodies*/
             wrappers.regulating_bodies.filter({fields:"id,name"})
             .success(function(data){
