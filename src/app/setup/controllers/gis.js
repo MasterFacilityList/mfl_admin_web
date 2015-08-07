@@ -45,6 +45,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
         }]
@@ -88,6 +89,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
         }]
@@ -115,6 +117,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
             $scope.cancel = function () {
@@ -162,6 +165,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
         }]
@@ -206,6 +210,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
         }]
@@ -233,6 +238,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
             $scope.cancel = function () {
