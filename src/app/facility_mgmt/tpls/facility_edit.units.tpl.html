@@ -44,9 +44,9 @@
                             </a>
                         </td>
                     </tr>
-                    <tr ng-if="fac_depts.length === 0" class="alert alert-info">
+                    <tr ng-if="fac_depts.length === 0" class="">
                         <td colspan="3">
-                        <i class="fa fa-info-circle"></i> No Departments assigned to the facility
+                        <i class="fa fa-info-circle fa-2x"></i> No Departments assigned to the facility
                         </td>
                     </tr>
                 </tbody>
@@ -61,15 +61,15 @@
     <!-- End of tabular implementation -->
     <div class="col-xs-12">
         <!-- Start of create buttons -->
-        <a ui-sref="facilities.facility_create.officers({facility_id : new_facility})" ng-if="create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Officer Incharge
+        <a ui-sref="facilities.facility_create.contacts({facility_id : new_facility})" ng-if="create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Facility Contacts
         </a>
         <button ng-click="goToNext(6, 'services')" ng-if="create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
             &nbsp; Facility Services <i class="fa fa-angle-double-right"></i>
         </button>
         <!-- End of navigation buttons -->
-        <a ui-sref="facilities.facility_edit.officers" ng-if="!create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Officer Incharge
+        <a ui-sref="facilities.facility_edit.contacts" ng-if="!create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Facility Contacts
         </a>
         <a ng-click="saveUnits()" ui-sref="facilities.facility_edit.services" ng-if="!create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
             &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>

@@ -167,6 +167,81 @@
             <!-- </form> -->
         </div>
         <!-- End of setupstuff -->
+        <!-- Beggining of officers in charge -->
+        <div class="col-xs-12 custom-well">
+            <div class="col-xs-12 margin-b-5">
+                <h4 class="fw-600 fs-18"> Officer Incharge Details</h4>
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="">
+                    Name
+                </label>
+                <input class="form-control" name="name" ng-model="off.officer_name" required placeholder="Name">
+                <span class="highlght"></span>
+                <span class="bar"></span>
+
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="">
+                    Registration Number
+                </label>
+                <input class="form-control" name="reg_no" ng-model="off.registration_number" placeholder="Registration Number" required>
+                <span class="highlght"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="">
+                    Job Title
+                </label>
+                <select class="form-control" name="title" ng-model="off.job_title" required placeholder="Job Title">
+                    <option value="">Select Job Title</option>
+                    <option ng-repeat="title in job_titles" ng-value="title.id">{{title.name}}</option>
+                </select>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="col-xs-12">
+                <table class="table table-bordered col-xs-12">
+                <thead class="grey-header">
+                    <th class="col-xs-5">Contact Type</th>
+                    <th class="col-xs-6">Contact Details</th>
+                    <th class="col-xs-1 text-center"></th>
+                </thead>
+                <tbody class="">
+                    <tr class="" ng-repeat="cont in contacts">
+                        <td class="col-xs-5">
+                            <div class="form-group">
+                                <select class="form-control" name="contact_type" ng-model="cont.type">
+                                    <option value="">Select Contact Type</option>
+                                    <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
+                                </select>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </td>
+                        <td class="col-xs-6">
+                            <div class="form-group">
+                                <input class="form-control" ng-model="cont.contact" name="contact" placeholder="Contact Details">
+                                <span class="highlght"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </td>
+                        <td class="col-xs-1 text-center">
+                            <a ng-click="remove_contact(cont)" style="cursor: pointer; margin-botom: 5px;">
+                                <i class="fa fa-close fa-2x text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+                <div class="col-xs-12 text-right margin-b-10">
+                    <a class="mfl-btn mfl-btn-primary pull-right" ng-click="add_contact()" >
+                        &nbsp;<i class="fa fa-plus-square-o"></i> Add
+                    </a>
+                </div>
+        </div>
+        <!-- End of officer incharge -->
         <button ui-sref="facilities" class="mfl-btn mfl-btn-default margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Cancel
         </button>
