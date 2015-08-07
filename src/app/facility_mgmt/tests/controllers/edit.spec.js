@@ -2095,13 +2095,211 @@
                     "name": "name"
                 };
                 data.$scope.facility_id = "3";
+                data.$scope.fac_depts = [
+                    {
+                        name : "name",
+                        regulating_body : "3",
+                        description : "name"
+                    }
+                ];
+                data.$scope.fac_unitobj = {
+                    units : [
+                        {
+                            name : "name_two",
+                            regulating_body : "3",
+                            description : "name"
+                        }
+                    ]
+                };
+                httpBackend
+                    .expectPATCH(server_url + "api/facilities/facilities/3/")
+                    .respond(201, {"id": "3"});
+
+                data.$scope.add();
+                data.$scope.saveUnits();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            }]));
+            it("should fail to add a facility unit to the current facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    },
+                    "mfl.common.services.multistep" : multistepService
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/"+
+                        "facility_units/?facility=3&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".units", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.facility_unit = {
+                    "regulating_body": "3",
+                    "name": "name"
+                };
+                data.$scope.facility_id = "3";
+                data.$scope.fac_depts = [
+                    {
+                        name : "name",
+                        regulating_body : "3",
+                        description : "name"
+                    }
+                ];
+                data.$scope.fac_unitobj = {
+                    units : [
+                        {
+                            name : "name_two",
+                            regulating_body : "3",
+                            description : "name"
+                        }
+                    ]
+                };
+                httpBackend
+                    .expectPATCH(server_url + "api/facilities/facilities/3/")
+                    .respond(500, {"id": "3"});
+                data.$scope.add();
+                data.$scope.saveUnits();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            }]));
+            it("should successfully add a facility unit to the current facility",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    },
+                    "$state" : state,
+                    "mfl.common.services.multistep" : multistepService
+                };
+                spyOn(state, "go");
+                data.$scope.facility_id = 3;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/"+
+                        "facility_units/?facility=3&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".units", data);
+
+                data.$scope.facility_unit = {
+                    "regulating_body": "3",
+                    "name": "name"
+                };
+                data.$scope.facility_id = "3";
+                data.$scope.fac_depts = [
+                    {
+                        id : "5",
+                        name : "name",
+                        regulating_body : "3",
+                        description : "name"
+                    }
+                ];
+                data.$scope.fac_unitobj = {
+                    units : []
+                };
+                data.$scope.add();
+                data.$scope.saveUnits();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            }]));
+            it("should test add a function in controller",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    },
+                    "mfl.common.services.multistep" : multistepService
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/"+
+                        "facility_units/?facility=3&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".units", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                data.$scope.facility_unit = {
+                    "regulating_body": "3",
+                    "name": "name"
+                };
+                data.$scope.facility_id = "3";
                 httpBackend
                     .expectPOST(server_url + "api/facilities/facility_units/", {"facility": "3",
                       "regulating_body": "3","name":"name","description":"name"})
                     .respond(201, {"id": 5});
 
                 data.$scope.add();
-
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -2161,7 +2359,7 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
-                expect(data.$scope.fac_units).toEqual([]);
+                expect(data.$scope.fac_depts).toEqual([]);
             }]));
             it("should remove a facility unit from the current facility",
             inject(["mfl.common.services.multistep",
@@ -2205,14 +2403,52 @@
                     .expectDELETE(server_url + "api/facilities/facility_units/456/")
                     .respond(204);
 
-                data.$scope.fac_units = [{"facility": "123", "id": "456"}];
-                data.$scope.removeChild(data.$scope.fac_units[0]);
+                data.$scope.fac_depts = [{"facility": "123", "id": "456"}];
+                data.$scope.removeChild(data.$scope.fac_depts[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.fac_units).toEqual([]);
+                expect(data.$scope.fac_depts).toEqual([]);
+            }]));
+            it("should remove a facility unit object",
+            inject(["mfl.common.services.multistep",
+                function (multistepService) {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    },
+                    "mfl.common.services.multistep" : multistepService
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"},
+                    {name : "services"},
+                    {name : "setup"},
+                    {name : "officers"},
+                    {name : "units"}
+                ];
+                httpBackend
+                    .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/"+
+                        "facility_units/?facility=3&fields=id,name,"+
+                        "regulating_body,regulating_body_name")
+                    .respond(200, {results: []});
+
+                data.$scope.user_id = 3;
+
+                ctrl(".units", data);
+                data.$scope.fac_depts = [{"facility": "123", "id": undefined}];
+                data.$scope.removeChild(data.$scope.fac_depts[0]);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                expect(data.$scope.fac_depts).toEqual([]);
             }]));
             it("should fail to remove a facility unit from the current facility",
             inject(["mfl.common.services.multistep",
@@ -2255,14 +2491,14 @@
                     .expectDELETE(server_url + "api/facilities/facility_units/456/")
                     .respond(500);
 
-                data.$scope.fac_units = [{"facility": "123", "id": "456"}];
-                data.$scope.removeChild(data.$scope.fac_units[0]);
+                data.$scope.fac_depts = [{"facility": "123", "id": "456"}];
+                data.$scope.removeChild(data.$scope.fac_depts[0]);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.fac_units).toEqual([{"facility":"123",
+                expect(data.$scope.fac_depts).toEqual([{"facility":"123",
                    "id":"456",delete_spinner:false}]);
             }]));
         });

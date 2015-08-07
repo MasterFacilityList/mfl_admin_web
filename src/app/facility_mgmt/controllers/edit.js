@@ -582,9 +582,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.units",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        "mfl.error.messages",
+        "mfl.error.messages", "$state",
         function ($scope, $log, $stateParams, wrappers, multistepService,
-            errorMessages) {
+            errorMessages, $state) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[4]);
@@ -592,6 +592,7 @@
                 $scope.nextState();
             }
             $scope.fac_depts = [];
+            $scope.fac_units = [];
             /*regulating bodies*/
             wrappers.regulating_bodies.filter({fields:"id,name"})
             .success(function(data){
@@ -606,7 +607,7 @@
                 fields:"id,name,regulating_body,regulating_body_name"
             })
             .success(function(data){
-                $scope.fac_units = data.results;
+                $scope.fac_depts = data.results;
             })
             .error(function(error){
                 $log.error(error);
@@ -620,6 +621,9 @@
                         regulating_body : ""
                     });
                 }
+                else{
+                    $scope.fac_depts = f.facility_units;
+                }
             };
             $scope.addUnit = function () {
                 $scope.fac_depts.push({
@@ -631,6 +635,28 @@
                 if(_.isUndefined(obj.id)) {
                     $scope.fac_depts = _.without($scope.fac_depts, obj);
                 }
+            };
+            $scope.createUnit = function () {
+                if(!_.isEmpty($scope.fac_unitobj.units)){
+                    wrappers.facility_detail.update($scope.facility_id, $scope.fac_unitobj)
+                    .success(function () {
+                        $state.go("facilities.facility_edit.services");
+                    })
+                    .error(function (err) {
+                        $scope.alert = err.error;
+                    });
+                } else {
+                    $state.go("facilities.facility_edit.services");
+                }
+            };
+            $scope.saveUnits = function () {
+                $scope.fac_unitobj = {units : []};
+                _.each($scope.fac_depts, function (a_unit) {
+                    if(_.isUndefined(a_unit.id)){
+                        $scope.fac_unitobj.units.push(a_unit);
+                    }
+                });
+                $scope.createUnit();
             };
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
@@ -661,18 +687,22 @@
 
             /*remove facility unit*/
             $scope.removeChild = function (obj) {
-                obj.delete_spinner = true;
-                wrappers.facility_units.remove(obj.id)
-                .success(function () {
-                    $scope.fac_units = _.without($scope.fac_units, obj);
-                    obj.delete_spinner = false;
-                })
-                .error(function (data) {
-                    $log.error(data);
-                    obj.delete_spinner = false;
-                    $scope.units_error = errorMessages.errors +
-                        errorMessages.delete_units;
-                });
+                if(_.isUndefined(obj.id)) {
+                    $scope.fac_depts = _.without($scope.fac_depts, obj);
+                }else {
+                    obj.delete_spinner = true;
+                    wrappers.facility_units.remove(obj.id)
+                    .success(function () {
+                        $scope.fac_depts = _.without($scope.fac_depts, obj);
+                        obj.delete_spinner = false;
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                        obj.delete_spinner = false;
+                        $scope.units_error = errorMessages.errors +
+                            errorMessages.delete_units;
+                    });
+                }
             };
         }
     ])
