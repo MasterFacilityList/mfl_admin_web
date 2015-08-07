@@ -57,6 +57,7 @@
                     }).error(function(error){
                         $scope.alert = error.error;
                         $state.go("setup.chu_status");
+                        $scope.errors = error;
                     });
                 };
                 $scope.cancel = function () {
@@ -77,6 +78,7 @@
                         $state.go("setup.chu_status");
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                     });
                 }
             };
@@ -86,6 +88,7 @@
                     $state.go("setup.chu_status");
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
         }]
@@ -145,6 +148,7 @@
                         $state.go("setup.chu_approvers");
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                         $state.go("setup.chu_approvers");
                     });
                 };
@@ -167,6 +171,7 @@
                         $state.go("setup.chu_approvers");
                     }).error(function(error){
                         $scope.alert = error.error;
+                        $scope.errors = error;
                     });
                 }
             };
@@ -176,6 +181,7 @@
                     $state.go("setup.chu_approvers");
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
         }]
