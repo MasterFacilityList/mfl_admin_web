@@ -64,15 +64,12 @@
         <a ui-sref="facilities.facility_create.contacts({facility_id : new_facility})" ng-if="create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Facility Contacts
         </a>
-        <button ng-click="goToNext(6, 'services')" ng-if="create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
-            &nbsp; Facility Services <i class="fa fa-angle-double-right"></i>
-        </button>
         <!-- End of navigation buttons -->
         <a ui-sref="facilities.facility_edit.contacts" ng-if="!create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Facility Contacts
         </a>
-        <a ng-click="saveUnits()" ui-sref="facilities.facility_edit.services" ng-if="!create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
-            &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
+        <a ng-click="saveUnits()" ui-sref="facilities.facility_edit.services" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
+            &nbsp; {{create ? 'Facility Services' : 'Save & Continue'}} <i class="fa fa-angle-double-right"></i>
         </a>
     </div>
 </div>

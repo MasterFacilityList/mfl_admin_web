@@ -298,15 +298,10 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.contacts",
         ["$scope", "$log", "$stateParams",
-        "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        "mfl.error.messages", "$state",
-        function($scope,$log,$stateParams,wrappers, multistepService,
+        "mfl.facility_mgmt.services.wrappers",  "mfl.error.messages", "$state",
+        function($scope,$log,$stateParams,wrappers,
             errorMessages, $state){
-            if(!$scope.create) {
-                multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[2]);
-            }
-            else {
+            if($scope.create) {
                 $scope.nextState();
             }
             $scope.contacts = [];
@@ -344,13 +339,21 @@
                 if(!_.isEmpty($scope.fac_contobj.contacts)){
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
-                        $state.go("facilities.facility_edit.units");
+                        if(!$scope.create){
+                            $state.go("facilities.facility_edit.units");
+                        }else{
+                            $scope.goToNext(4, "units");
+                        }
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
                     });
                 } else {
-                    $state.go("facilities.facility_edit.units");
+                    if(!$scope.create){
+                        $state.go("facilities.facility_edit.units");
+                    }else{
+                        $scope.goToNext(4, "units");
+                    }
                 }
             };
             $scope.saveContacts = function () {
@@ -564,15 +567,11 @@
         }])
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.services",
-        ["$scope", "$controller", "mfl.common.services.multistep",
-        function ($scope, $controller, multistepService) {
+        ["$scope", "$controller",
+        function ($scope, $controller) {
             var helper = $controller("mfl.facility_mgmt.controllers.services_helper");
             helper.bootstrap($scope);
-            if(!$scope.create) {
-                multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[5]);
-            }
-            else {
+            if($scope.create) {
                 $scope.nextState();
             }
             $scope.filters = {facility : $scope.facility_id};
@@ -640,13 +639,21 @@
                 if(!_.isEmpty($scope.fac_unitobj.units)){
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_unitobj)
                     .success(function () {
-                        $state.go("facilities.facility_edit.services");
+                        if(!$scope.create){
+                            $state.go("facilities.facility_edit.services");
+                        }else{
+                            $scope.goToNext(5, "services");
+                        }
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
                     });
                 } else {
-                    $state.go("facilities.facility_edit.services");
+                    if(!$scope.create){
+                        $state.go("facilities.facility_edit.services");
+                    }else{
+                        $scope.goToNext(5, "services");
+                    }
                 }
             };
             $scope.saveUnits = function () {
