@@ -5,10 +5,28 @@
     angular.module("mfl.reports.states", [
         "ui.router"
     ])
+    .constant("URL_SEARCH_PARAMS", [
+        "name", "code",
 
-    .config(["$stateProvider", function ($stateProvider) {
+        "search",
+
+        "county", "constituency", "ward",
+
+        "operation_status", "facility_type", "keph_level",
+
+        "owner_type", "owner",
+
+        "service_category", "service",
+
+        "number_of_beds", "number_of_cots",
+        "open_public_holidays", "open_weekends", "open_whole_day",
+
+        // pagination controls
+        "page_size", "page"
+    ])
+    .config(["$stateProvider","URL_SEARCH_PARAMS", function ($stateProvider,
+         URL_SEARCH_PARAMS) {
         $stateProvider
-
         .state("reports", {
             url: "/reports/",
             views: {
@@ -26,7 +44,7 @@
             redirectTo:"reports.list"
         })
         .state("reports.list", {
-            url: "facilities/",
+            url: "facilities?"+URL_SEARCH_PARAMS.join("&"),
             views: {
                 "body@reports": {
                     templateUrl: "reports/tpls/body.tpl.html"
