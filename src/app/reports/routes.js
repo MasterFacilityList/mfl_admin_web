@@ -47,7 +47,8 @@
             url: "facilities?"+URL_SEARCH_PARAMS.join("&"),
             views: {
                 "body@reports": {
-                    templateUrl: "reports/tpls/body.tpl.html"
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
                 },
                 "main-content@reports.list": {
                     templateUrl: "reports/tpls/facilities.grid.tpl.html",

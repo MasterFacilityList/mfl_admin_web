@@ -1,6 +1,7 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
        <div class="action-container content-header-extra pad-r-5">
+           <button class="hidden-xs btn btn-primary" ng-click="$parent.hide_sidebar=!$parent.hide_sidebar">{{$parent.hide_sidebar ? 'Show' : 'Hide'}} Sidebar</button>
             <a tooltip-placement="bottom" tooltip="export facilities"  class="btn btn-primary">
                 &nbsp;Export Facilities
             </a>
@@ -11,7 +12,7 @@
    </h2>
 </div>
 <section class="margin-t-20">
-    <div id="filter-facet" class="col-sm-3 content-card">
+    <div id="filter-facet" class="col-sm-3 pad-l-25 content-card">
         <form ng-submit="filterFacilities()" name="frm_filter_facilities">
             <h4>Advanced Search</h4>
             <h5 class="text-muted">Administrative Units:</h5>

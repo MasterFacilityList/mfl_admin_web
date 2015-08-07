@@ -1,4 +1,4 @@
-<div class="col-sm-2 pad-r-0">
+<div class="pad-r-0" ng-class="{'hide':hide_sidebar,'col-sm-2':!hide_sidebar}">
     <aside class="side-left partial">
         <ul class=" nav nav-sidebar">
             <li ui-sref-active="active">
@@ -18,4 +18,4 @@
             </li>
     </aside>
 </div>
-<div class="content col-sm-10" ui-view="main-content"></div>
+<div class="content" ng-class="{'col-sm-12':hide_sidebar,'col-sm-10':!hide_sidebar}" ui-view="main-content"></div>
