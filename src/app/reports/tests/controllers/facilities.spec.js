@@ -126,6 +126,62 @@
                 .toEqual([{"id":"111","constituency":"11"}, {"id":"231","constituency":"23"}]);
         });
 
+        it("should update filters from params | no parameter values set", function () {
+            var data = {
+                "$scope": rootScope.$new(),
+                "$state": state,
+                "$stateParams": {
+                    "name": undefined,
+                    "number_of_cots": undefined,
+                    "open_weekends": undefined,
+                    "open_whole_day": undefined,
+                    "open_public_holidays": undefined,
+                    "county": undefined,
+                    "constituency": undefined,
+                    "ward": undefined
+                }
+            };
+
+            httpBackend
+                .expectGET(server_url+"api/common/filtering_summaries/" +
+                           "?fields=county,facility_type,constituency," +
+                           "ward,operation_status,service_category," +
+                           "owner_type,owner,service,keph_level")
+                .respond(200, {
+                    county: [{"id": "1"}, {"id": "2"}, {"id": "3"}],
+                    constituency: [
+                        {"id": "11", "county": "1"},
+                        {"id": "12", "county": "1"},
+                        {"id": "31", "county": "3"}
+                    ],
+                    ward: [
+                        {"id": "111", "constituency": "11"},
+                        {"id": "311", "constituency": "31"},
+                        {"id": "231", "constituency": "23"}
+                    ]
+                });
+
+            spyOn(state, "go");
+            ctrl("facilities", data);
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+
+            expect(data.$scope.filters.single.name).toEqual("");
+            expect(data.$scope.filters.single.number_of_cots).toEqual("");
+            expect(data.$scope.filters.single.open_weekends).toEqual("");
+            expect(data.$scope.filters.single.open_whole_day).toEqual("");
+            expect(data.$scope.filters.single.open_public_holidays).toEqual("");
+
+            expect(data.$scope.filters.multiple.county)
+                .toEqual([]);
+            expect(data.$scope.filters.multiple.constituency)
+                .toEqual([]);
+            expect(data.$scope.filters.multiple.ward)
+                .toEqual([]);
+        });
+
         it("should clear bool filters", function () {
             var data = {
                 "$scope": rootScope.$new(),
