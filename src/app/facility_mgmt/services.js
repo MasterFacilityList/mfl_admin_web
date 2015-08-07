@@ -25,21 +25,14 @@
                     count: "3"
                 },
                 {
-                    name : "officers",
+                    name : "units",
                     prev : ["basic", "geolocation", "contacts"],
                     count: "4"
                 },
                 {
-                    name : "units",
-                    prev : ["basic", "geolocation",  "contacts",
-                            "officers"],
-                    count: "5"
-                },
-                {
                     name : "services",
-                    prev : ["basic", "geolocation",  "contacts",
-                            "officers", "units"],
-                    count: "6"
+                    prev : ["basic", "geolocation",  "contacts", "units"],
+                    count: "5"
                 }
             ];
             return result;

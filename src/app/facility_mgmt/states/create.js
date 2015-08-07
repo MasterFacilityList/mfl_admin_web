@@ -34,7 +34,7 @@
             })
 
             .state("facilities.facility_create.contacts", {
-                url: ":facility_id/contacts",
+                url: ":facility_id/contacts/",
                 views: {
                     "tab-header@facilities.facility_create": {
                         templateUrl: "facility_mgmt/tpls/facility_create.tab-headers.tpl.html"
@@ -48,7 +48,7 @@
             })
 
             .state("facilities.facility_create.services", {
-                url: ":facility_id/services",
+                url: ":facility_id/services/",
                 views: {
                     "tab-header@facilities.facility_create": {
                         templateUrl: "facility_mgmt/tpls/facility_create.tab-headers.tpl.html"
@@ -58,9 +58,25 @@
                         controller: "mfl.facility_mgmt.controllers.facility_edit.services"
                     }
                 },
+                redirectTo : "facilities.facility_create.services.view",
                 permission: "facilities.add_facility"
             })
-
+            .state("facilities.facility_create.services.edit", {
+                url : "edit/",
+                views : {
+                    "service-content@facilities.facility_create.services": {
+                        templateUrl : "facility_mgmt/tpls/facility_services.edit.tpl.html"
+                    }
+                }
+            })
+            .state("facilities.facility_create.services.view", {
+                url: "view/",
+                views: {
+                    "service-content@facilities.facility_create.services": {
+                        templateUrl : "facility_mgmt/tpls/facility_services.view.tpl.html"
+                    }
+                }
+            })
             .state("facilities.facility_create.setup", {
                 url: ":facility_id/setup",
                 views: {
@@ -76,7 +92,7 @@
             })
 
             .state("facilities.facility_create.officers", {
-                url: ":facility_id/officers",
+                url: ":facility_id/officers/",
                 views: {
                     "tab-header@facilities.facility_create": {
                         templateUrl: "facility_mgmt/tpls/facility_create.tab-headers.tpl.html"
@@ -90,7 +106,7 @@
             })
 
             .state("facilities.facility_create.units", {
-                url: ":facility_id/units",
+                url: ":facility_id/units/",
                 views: {
                     "tab-header@facilities.facility_create": {
                         templateUrl: "facility_mgmt/tpls/facility_create.tab-headers.tpl.html"
@@ -118,7 +134,7 @@
             })
 
             .state("facilities.facility_create.geolocation", {
-                url: ":facility_id/geolocation",
+                url: ":facility_id/geolocation/",
                 views: {
                     "tab-header@facilities.facility_create": {
                         templateUrl: "facility_mgmt/tpls/facility_create.tab-headers.tpl.html"
@@ -132,7 +148,7 @@
             })
 
             .state("facilities.facility_create.facility_cover_letter", {
-                url: ":facility_id/print",
+                url: ":facility_id/print/",
                 views : {
                     "form-view@facilities.facility_create": {
                         templateUrl: "facility_mgmt/tpls/facility_print.tpl.html",
