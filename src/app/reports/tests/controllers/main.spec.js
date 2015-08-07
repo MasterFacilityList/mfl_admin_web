@@ -15,7 +15,7 @@
                 function ($controller, $rootScope, loginService) {
                     var data = false;
                     var scope = $rootScope.$new();
-                    $controller("mfl.service_mgmt.controllers.main", {
+                    $controller("mfl.reports.controllers.main", {
                         "$scope": scope,
                         "mfl.auth.services.login": loginService
                     });
