@@ -228,6 +228,7 @@
                     $scope.facility.name = official;
                 }
             };
+            $scope.contacts = [{type: "", contact : ""}];
             $scope.login_user = loginService.getUser();
             $scope.selectReload(wrappers.facility_owners, "", "owners");
             $scope.selectReload(wrappers.operation_status, "", "operation_status");
@@ -245,9 +246,8 @@
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
-                $scope.facility.facility_physical_address = {
-                    town : $scope.select_values.town.id
-                };
+                $scope.facility.facility_physical_address.town =
+                    $scope.select_values.town.id;
                 $scope.facility.location_data = $scope.facility.facility_physical_address;
                 changes.location_data = $scope.facility.facility_physical_address;
                 if($scope.create) {
@@ -344,13 +344,13 @@
                 if(!_.isEmpty($scope.fac_contobj.contacts)){
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
-                        $state.go("facilities.facility_edit.officers");
+                        $state.go("facilities.facility_edit.units");
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
                     });
                 } else {
-                    $state.go("facilities.facility_edit.officers");
+                    $state.go("facilities.facility_edit.units");
                 }
             };
             $scope.saveContacts = function () {

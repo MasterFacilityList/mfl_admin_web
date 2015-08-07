@@ -62,14 +62,14 @@
         <div class="col-xs-12 margin-b-10" ng-if="!facility.is_approved">
             <h4 class>Approve newly created facility</h4>
             <form name="frm_approve">
-                <div class="group margin-t-10">
-                    <textarea name="comment" ng-model="facility_approval.comment" required rows="1">
-                    </textarea>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
+                <div class="form-group margin-t-10">
                     <label>
                         Comment for approval
                     </label>
+                    <textarea class="form-control" name="comment" ng-model="facility_approval.comment" required rows="2">
+                    </textarea>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
                 </div>
                 <button class="mfl-btn mfl-btn-action" ng-click="approveFacility()">Approve Facility</button>
                 <button class="mfl-btn mfl-btn-danger margin-l-5" ng-click="approveFacility(true)">Reject Facility</button>
