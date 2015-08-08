@@ -73,6 +73,14 @@
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
+                <div class="col-sm-12" ng-if="!create">
+                  <div class="form-group checkbox">
+                      <label for="open_late_night">
+                        <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="user.is_active" api-checker="" class="ng-valid ng-valid-api">
+                        is active
+                       </label>
+                  </div>
+                </div>
             </div>
             <div class="margin-t-20 margin-b-20">
                 <a ng-if="!create" ui-sref="users" class="login-btn login-btn-default">
