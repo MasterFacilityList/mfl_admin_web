@@ -99,6 +99,10 @@
                             "id": "3",
                             "name": "owner"
                         },
+                        owner_type : {
+                            "id": "5",
+                            "name" : "ownertype"
+                        }
                         operation_status: {
                             "id": "4",
                             "name": "opstatus"
@@ -173,6 +177,10 @@
                         owner: {
                             "id": "3",
                             "name": "owner"
+                        },
+                        owner_type: {
+                            "id" : "5",
+                            "name" : "ownertype"
                         },
                         operation_status: {
                             "id": "4",
@@ -261,6 +269,10 @@
                         owner: {
                             "id": "3",
                             "name": "owner"
+                        },
+                        owner_type : {
+                            "id": "5",
+                            "name" : "ownertype"
                         },
                         operation_status: {
                             "id": "4",
