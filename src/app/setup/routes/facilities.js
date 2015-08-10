@@ -263,9 +263,17 @@
                         "templateUrl" : "setup/tpls/dashboard/body.tpl.html"
                     },
                     "main-content@setup.facility_reasons": {
-                        controller: "mfl.setup.controller.facilityRegulatoryBody.list",
                         templateUrl: "setup/tpls/facilities/reasons/"+
                         "reasons-list.tpl.html"
+                    }
+                }
+            })
+        .state("setup.facility_reasons.view", {
+                url: "/view",
+                views: {
+                    "main-content@setup.facility_reasons": {
+                        templateUrl: "setup/tpls/facilities/reasons/"+
+                        "reasons-view.tpl.html"
                     }
                 }
             });
