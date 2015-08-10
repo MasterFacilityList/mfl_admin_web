@@ -145,7 +145,7 @@
                     func : "ui-sref='users.user_edit.delete'" +
                             "requires-user-feature='is_staff'" +
                             "requires-permission='users.delete_mfluser'",
-                    class: "login-btn login-btn-danger",
+                    class: "btn btn-danger",
                     tipmsg: "Delete User",
                     wording : "Delete"
                 }
@@ -583,7 +583,7 @@
             {
                 func: "ui-sref='users.user_create.basic ({furthest : 1})'" +
                         "requires-permission='users.add_mfluser' ",
-                class: "login-btn login-btn-primary",
+                class: "btn btn-primary",
 
                 tipmsg: "New User",
                 icon: "",
