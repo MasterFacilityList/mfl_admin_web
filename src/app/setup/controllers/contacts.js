@@ -17,7 +17,7 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.contacts.create'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     icon: "Add Contact"
                 }
             ];
@@ -33,13 +33,13 @@
             });
             if(!_.isUndefined($stateParams.id)){
                 $scope.title = {
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     name: "Edit Contact"
                 };
                 $scope.action = [
                     {
                         func : "ui-sref=setup.contacts.edit.delete",
-                        class: "login-btn login-btn-danger",
+                        class: "btn btn-danger",
                         name : "Delete Contact"
                     }
                 ];
@@ -65,7 +65,7 @@
             else {
                 $scope.title = {
                     icon : "fa-plus-circle",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     name: "New Contact"
                 };
             }
@@ -114,7 +114,7 @@
                     func : "ui-sref='setup.contact_types.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='common.add_contacttype'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     tipmsg: "Add Contact Type",
                     wording: "Add Contact Type"
                 }
@@ -128,7 +128,7 @@
             if(!_.isUndefined($stateParams.id) &&
                 $stateParams.id !== "create"){
                 $scope.title = {
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     name: "Edit Contact Type"
                 };
                 $scope.action = [
@@ -136,7 +136,7 @@
                         func : "ui-sref='setup.contact_types.view.delete'" +
                                " requires-user-feature='is_staff'" +
                                " requires-permission='common.delete_contacttype'",
-                        class: "login-btn login-btn-danger",
+                        class: "btn btn-danger",
                         wording:"Delete",
                         tipmsg:"Delete Contact Type"
 

@@ -16,7 +16,7 @@
                     func : "ui-sref='setup.facility_kephs.keph_create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_kephlevel'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     tipmsg: "New KEPH Level",
                     wording: "New KEPH Level"
                 }
@@ -57,7 +57,7 @@
                     func : "ui-sref='setup.facility_kephs.keph_edit.delete'" +
                            " requires-user-feature='is_staff,is_national'" +
                            " requires-permission='facilities.delete_kephlevel'",
-                    class: "login-btn login-btn-danger",
+                    class: "btn btn-danger",
                     tipmsg: "Delete KEPH level",
                     wording: "Delete"
                 }

@@ -20,7 +20,7 @@
                 func : "ui-sref='setup.geocode_methods_list.geocode_methods_create'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.add_geocodemethod'",
-                class: "login-btn login-btn-primary",
+                class: "btn btn-primary",
                 tipmsg: "Add geocode method",
                 wording: "Add Geocode Method"
             }
@@ -65,7 +65,7 @@
                         "geocode_method_id:geocode_method.id})'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.delete_geocodemethod'",
-                    class: "login-btn login-btn-danger",
+                    class: "btn btn-danger",
                     wording: "Delete",
                     tipmsg: "Delete Geocode Method"
                 }
@@ -140,7 +140,7 @@
                 func : "ui-sref='setup.geocode_sources_list.geocode_sources_create'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.add_geocodesource'",
-                class: "login-btn login-btn-primary",
+                class: "btn btn-primary",
                 wording: "Add Geocode Sources"
             }
         ];
@@ -185,7 +185,7 @@
                         "geocode_source_id:geocode_source.id})'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='mfl_gis.delete_geocodesource'",
-                    class: "login-btn login-btn-danger",
+                    class: "btn btn-danger",
                     wording: "Delete",
                     tipmsg: "Delete Geocode Source"
                 }
