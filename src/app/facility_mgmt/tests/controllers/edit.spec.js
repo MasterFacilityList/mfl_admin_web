@@ -54,6 +54,8 @@
                         facility_type_name: "type",
                         owner: "3",
                         owner_name: "owner",
+                        owner_type : "5",
+                        owner_type_name : "ownertype",
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
@@ -99,6 +101,10 @@
                             "id": "3",
                             "name": "owner"
                         },
+                        owner_type : {
+                            "id": "5",
+                            "name" : "ownertype"
+                        },
                         operation_status: {
                             "id": "4",
                             "name": "opstatus"
@@ -133,6 +139,8 @@
                         facility_type_name: "type",
                         owner: "3",
                         owner_name: "owner",
+                        owner_type : "5",
+                        owner_type_name : "ownertype",
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
@@ -173,6 +181,10 @@
                         owner: {
                             "id": "3",
                             "name": "owner"
+                        },
+                        owner_type: {
+                            "id" : "5",
+                            "name" : "ownertype"
                         },
                         operation_status: {
                             "id": "4",
@@ -221,6 +233,8 @@
                         facility_type_name: "type",
                         owner: "3",
                         owner_name: "owner",
+                        owner_type : "5",
+                        owner_type_name : "ownertype",
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body: "23",
@@ -261,6 +275,10 @@
                         owner: {
                             "id": "3",
                             "name": "owner"
+                        },
+                        owner_type : {
+                            "id": "5",
+                            "name" : "ownertype"
                         },
                         operation_status: {
                             "id": "4",
