@@ -32,5 +32,15 @@
             }
             return s;
         };
+    })
+    .filter("facilityType", function () {
+        return function (list, input) {
+            var rslt = _.findWhere(list, {"id" : input});
+            if(!rslt) {
+                return;
+            }
+            var output = _.where(list, {"sub_division" : rslt.name});
+            return output;
+        };
     });
 })(window.angular, window._);

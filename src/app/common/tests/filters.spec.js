@@ -1,7 +1,8 @@
 (function () {
     "use strict";
     describe("Filters: testing mfl common filters", function () {
-        var contact_type_filter,titlecase_filter,bool_filter,date_filter;
+        var contact_type_filter,titlecase_filter,bool_filter,date_filter,
+        facility_type;
         beforeEach(function () {
             module("mfl.common.filters");
             inject(["$filter", function ($filter) {
@@ -9,6 +10,7 @@
                 titlecase_filter = $filter("titlecase");
                 bool_filter = $filter("boolFilter");
                 date_filter = $filter("dateFilter");
+                facility_type = $filter("facilityType");
             }]);
         });
         it("Should have contact_type filter defined", function(){
@@ -82,5 +84,43 @@
             result = bool_filter(string, "boolean");
             expect(result).toEqual("");
         }));
+        it("facilityType should be defined", function () {
+            expect(facility_type).toBeDefined();
+        });
+        it("should test that list variable is defined", function () {
+            var list, input, output;
+            list = [
+                {
+                    id : "5",
+                    name : "subdistrict-hospital",
+                    sub_division : "hospital"
+                },
+                {
+                    id : "6",
+                    name : "hospital",
+                    sub_division : null
+                }
+            ];
+            input  = "6";
+            output = [list[0]];
+            expect(facility_type(list, input)).toEqual(output);
+        });
+        it("should test that list variable is undefined", function () {
+            var list, input;
+            list = [
+                {
+                    id : "5",
+                    name : "subdistrict-hospital",
+                    sub_division : "hospital"
+                },
+                {
+                    id : "7",
+                    name : "hospital",
+                    sub_division : null
+                }
+            ];
+            input  = "6";
+            expect(facility_type(list, input)).toEqual(undefined);
+        });
     });
 })();
