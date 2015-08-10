@@ -156,7 +156,10 @@
                             "id": $scope.facility.owner,
                             "name": $scope.facility.owner_name
                         },
-                        owner_type: $scope.facility.owner_type,
+                        owner_type: {
+                            "id" : $scope.facility.owner_type,
+                            "name" : $scope.facility.owner_type_name
+                        },
                         operation_status: {
                             "id": $scope.facility.operation_status,
                             "name": $scope.facility.operation_status_name

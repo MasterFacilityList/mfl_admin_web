@@ -60,11 +60,14 @@
             </div>
             <div class="form-group col-xs-12">
                 <label class="control-label">Owner</label>
-                <select class="form-control" ng-model="select_values.owner_type" required>
-                    <option value="">Select Owner</option>
-                    <option ng-repeat="type in owner_types" ng-selected="{{type.id == select_values.owner_type}}"
-                    ng-value="type.id">{{type.name}}</option>
-                </select>
+                 <ui-select ng-model="select_values.owner_type" required name="owner_type" api-checker register-custom-form-control>
+                    <ui-select-match placeholder="Select owner...">
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="owner_type.id as owner_type in owner_types | filter:$select.search">
+                        <span>{{owner_type.name}}</span>
+                    </ui-select-choices>
+                </ui-select>
             </div>
             <div class="form-group col-xs-12">
                 <label class="control-label">Owner Details</label>
