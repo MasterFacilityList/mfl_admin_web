@@ -11,8 +11,9 @@
         <span class="main-title"><i class="fa fa-building"></i> Facility Reports</span>
    </h2>
 </div>
-<section class="margin-t-20">
-    <div id="filter-facet" class="col-sm-3 pad-l-25 content-card">
+<i bs-tooltip tooltip-placement="{{$parent.hide_sidebar ? 'right':'bottom'}} " tooltip="{{$parent.hide_sidebar ? 'Show':'Hide'}} Sidebar" class="margin-t-5 margin-l-{{$parent.hide_sidebar ? '20':'5'}} fa fa-chevron-circle-{{$parent.hide_sidebar ? 'right':'left'}}" ng-click="$parent.hide_sidebar=!$parent.hide_sidebar"></i>
+<section class="margin-t-10">
+    <div id="filter-facet" class="col-sm-3 pad-l-20 content-card search-panel">
         <form ng-submit="filterFacilities()" name="frm_filter_facilities">
             <h4>Advanced Search</h4>
             <h5 class="text-muted">Administrative Units:</h5>
@@ -30,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label class="fw-500">Sub County:</label>
-                    <ui-select ng-model="filters.multiple.constituency" multiple ng-disabled="filters.multiple.county.length==0" id="constituency" name="constituency">
+                    <ui-select ng-model="filters.multiple.constituency" multiple class="height-30" ng-disabled="filters.multiple.county.length==0" id="constituency" name="constituency">
                         <ui-select-match placeholder="Select a sub county...">
                             <span>{{$item.name}}</span>
                         </ui-select-match>
@@ -41,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label class="fw-500">Ward:</label>
-                    <ui-select ng-model="filters.multiple.ward" multiple ng-disabled="filters.multiple.constituency.length==0" id="ward" name="ward">
+                    <ui-select ng-model="filters.multiple.ward" multiple class="height-30" ng-disabled="filters.multiple.constituency.length==0" id="ward" name="ward">
                         <ui-select-match placeholder="Select a ward...">
                             <span>{{$item.name}}</span>
                         </ui-select-match>
