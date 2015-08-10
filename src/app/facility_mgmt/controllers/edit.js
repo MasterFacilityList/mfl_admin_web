@@ -219,13 +219,13 @@
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[0]);
-            }
-            else {
+            } else {
                 $scope.nextState();
             }
-            $scope.initUniqueName = function(official, name) {
-                if(_.isUndefined(name)){
-                    $scope.facility.name = official;
+            $scope.initUniqueName = function(frm) {
+                if(_.isUndefined($scope.facility.name)) {
+                    $scope.facility.name = $scope.facility.official_name;
+                    frm.name.$setViewValue($scope.facility.name);
                 }
             };
             $scope.contacts = [{type: "", contact : ""}];

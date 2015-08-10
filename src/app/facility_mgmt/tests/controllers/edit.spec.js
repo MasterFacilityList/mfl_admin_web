@@ -461,12 +461,13 @@
                     }
                 };
                 data.$scope.save(frm);
-                var official = "Antony Facility";
-                var name;
-                data.$scope.initUniqueName(official, name);
+                data.$scope.facility.official_name = "Facility";
+                data.$scope.initUniqueName({
+                    name: {"$setViewValue": jasmine.createSpy()}
+                });
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
-                expect(data.$scope.facility.name).toEqual(official);
+                expect(data.$scope.facility.name).toEqual("Facility");
             });
             //new test
             it("should not save if no changes", function () {
@@ -509,12 +510,13 @@
                     }
                 };
                 data.$scope.save(frm);
-                var official = "Antony Facility";
-                var name;
-                data.$scope.initUniqueName(official, name);
+                data.$scope.facility.official_name = "Facility";
+                data.$scope.initUniqueName({
+                    name: {"$setViewValue": jasmine.createSpy()}
+                });
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
-                expect(data.$scope.facility.name).toEqual(official);
+                expect(data.$scope.facility.name).toEqual("Facility");
             });
 
             it("should edit facility basic details", function () {
@@ -556,12 +558,15 @@
                 };
                 data.$scope.facility_id = 3;
                 data.$scope.save(frm);
-                var official = "Antony Facility";
-                var name = "Yitch";
-                data.$scope.initUniqueName(official, name);
+                data.$scope.facility.official_name = "Facility";
+                data.$scope.facility.name = "Another";
+                data.$scope.initUniqueName({
+                    name: {"$setViewValue": jasmine.createSpy()}
+                });
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
+                expect(data.$scope.facility.name).toEqual("Another");
             });
 
             it("should save facility basic details", function () {
