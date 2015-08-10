@@ -6,15 +6,14 @@
 
 <table class="table table-hover table-condensed fs-12 margin-t-20" id="no-more-tables">
     <thead>
-        <th class="col-xs-1">Code</th>
-        <th sil-grid-sort field='name'>Name</th>
-        <th sil-grid-sort field='facility_type_name'>Facility Type</th>
-        <th sil-grid-sort field='owner_name'>Owner</th>
-        <th sil-grid-sort field='county'>County</th>
-        <th sil-grid-sort field='constituency'>Sub County</th>
-        <th sil-grid-sort field='constituency'>Constituency</th>
-        <th sil-grid-sort field='ward'>Ward</th>
-        <th sil-grid-sort field='updated'>Date Updated</th>
+        <th class="col-xs-1 text-wrap">Code</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='name'>Name</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='facility_type_name'>Facility Type</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='owner_name'>Owner</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='county'>County</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='constituency'>Sub County</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='constituency'>Constituency</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='ward'>Ward</th>
     </thead>
 
     <tbody ng-if="facilities.length===0">
@@ -33,7 +32,6 @@
             <td class="text-wrap" data-title="Sub County:" >{{::fac.constituency}}</td>
             <td class="text-wrap" data-title="Constituency:" >{{::fac.constituency}}</td>
             <td class="text-wrap" data-title="Ward:" >{{::fac.ward_name}}</td>
-            <td class="text-wrap" data-title="Date Updated:" >{{::fac.updated|dateFilter}}</td>
         </tr>
     </tbody>
 </table>

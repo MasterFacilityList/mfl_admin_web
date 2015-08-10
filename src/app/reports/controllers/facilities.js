@@ -4,12 +4,13 @@
 
     angular.module("mfl.reports.controllers.facilities", [
         "mfl.reports.states",
-        "mfl.reports.services"
+        "mfl.reports.services",
+        "mfl.auth.oauth2"
     ])
 
     .controller("mfl.reports.controllers.facilities", ["$scope","$stateParams",
-        "mfl.reports.services.wrappers","$state","URL_SEARCH_PARAMS",
-        function($scope,filterParams,wrappers,$state, URL_SEARCH_PARAMS){
+        "mfl.reports.services.wrappers","$state","URL_SEARCH_PARAMS","$window","api.oauth2",
+        function($scope,filterParams,wrappers,$state, URL_SEARCH_PARAMS,$window,auth){
         var filter_keys = _.keys(filterParams);
         var params = _.reduce(filter_keys, function (memo, b) {
             if (filterParams[b]) {
@@ -98,7 +99,22 @@
                 $scope.filters.multiple[a] = _.uniq($scope.filters.multiple[a]);
             });
         };
+        $scope.excelExport = function () {
+            var download_params = {
+                "format": "excel",
+                "access_token": auth.getToken().access_token,
+                "page_size": 10000
+            };
+            _.extend(download_params, _.omit(params, "page"));
 
+            var helpers = wrappers.helpers;
+            var url = helpers.joinUrl([
+                wrappers.facilities.makeUrl(wrappers.facilities.apiBaseUrl),
+                helpers.makeGetParam(helpers.makeParams(download_params))
+            ]);
+
+            $window.location.href = url;
+        };
         $scope.filterFxns = {
             constFilter: function (a) {
                 var county_ids = _.pluck($scope.filters.multiple.county, "id");

@@ -2,13 +2,13 @@
    <div class="action-container content-header-extra">
        <div class="action-container content-header-extra pad-r-5">
            <button class="hidden-xs btn btn-primary" ng-click="$parent.hide_sidebar=!$parent.hide_sidebar">{{$parent.hide_sidebar ? 'Show' : 'Hide'}} Sidebar</button>
-            <a tooltip-placement="bottom" tooltip="export facilities"  class="btn btn-primary">
+            <a tooltip-placement="bottom" tooltip="export facilities"  class="btn btn-primary" ng-click="excelExport()">
                 &nbsp;Export Facilities
             </a>
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title"><i class="fa fa-building"></i> Facilities</span>
+        <span class="main-title"><i class="fa fa-building"></i> Facility Reports</span>
    </h2>
 </div>
 <section class="margin-t-20">
@@ -185,9 +185,9 @@
             </div>
             <div class="col-xs-12 margin-t-10">
                 <button class="btn btn-primary margin-l--10" type="submit">
-                    <i class="fa fa-search"></i> Search
+                    Search
                 </button>
-                <button type="reset" class="btn btn-primary margin-l-5" ng-click="clearFilters()"> <i class="fa fa-refresh"></i> Reset</button>
+                <button type="reset" class="btn btn-primary margin-l-5" ng-click="clearFilters()"> Reset</button>
             </div>
         </form>
     </div>

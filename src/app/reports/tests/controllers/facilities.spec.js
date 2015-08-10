@@ -182,6 +182,29 @@
                 .toEqual([]);
         });
 
+        it("should export all filtered facilities to excel", function () {
+            inject(["api.oauth2", function (a) {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "filterParams": {
+                        "county": "12",
+                        "page": 3,
+                        "constituency": undefined
+                    },
+                    "$window": {
+                        location: {}
+                    },
+                    "api.auth": a
+                };
+
+                spyOn(a, "getToken").andReturn({access_token: 21});
+                ctrl("facilities", data);
+
+                data.$scope.excelExport();
+                expect(a.getToken).toHaveBeenCalled();
+            }]);
+        });
+
         it("should clear bool filters", function () {
             var data = {
                 "$scope": rootScope.$new(),
