@@ -152,6 +152,10 @@
                             "id": $scope.facility.facility_type,
                             "name": $scope.facility.facility_type_name
                         },
+                        facility_type_details: {
+                            "id": $scope.facility.facility_type,
+                            "name": $scope.facility.facility_type_name
+                        },
                         owner: {
                             "id": $scope.facility.owner,
                             "name": $scope.facility.owner_name
