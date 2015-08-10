@@ -252,6 +252,22 @@
                 },
                 permission: "facilities.add_regulatingbodycontact",
                 userFeature: "is_staff,is_national"
+            })
+
+         /** -----------------------------------------------------------**/
+
+        .state("setup.facility_reasons", {
+                url: "/facility_reasons",
+                views: {
+                    "body@setup" : {
+                        "templateUrl" : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.facility_reasons": {
+                        controller: "mfl.setup.controller.facilityRegulatoryBody.list",
+                        templateUrl: "setup/tpls/facilities/reasons/"+
+                        "reasons-list.tpl.html"
+                    }
+                }
             });
     }]);
 })(window.angular);
