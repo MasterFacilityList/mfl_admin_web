@@ -55,6 +55,78 @@
                     controller: "mfl.reports.controllers.facilities"
                 }
             }
+        })
+        .state("reports.counties", {
+            url: "facility_counties",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.counties": {
+                    templateUrl: "reports/tpls/facility_counties.tpl.html"
+                }
+            }
+        })
+        .state("reports.constituencies", {
+            url: "facility_constituencies",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.constituencies": {
+                    templateUrl: "reports/tpls/facility_constituencies.tpl.html"
+                }
+            }
+        })
+        .state("reports.facility_types", {
+            url: "facility_types",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.facility_types": {
+                    templateUrl: "reports/tpls/facility_types.tpl.html"
+                }
+            }
+        })
+        .state("reports.facility_type_categories", {
+            url: "facility_type_categories",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.facility_type_categories": {
+                    templateUrl: "reports/tpls/facility_type_categories.tpl.html"
+                }
+            }
+        })
+        .state("reports.facility_owners", {
+            url: "facility_owners",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.facility_owners": {
+                    templateUrl: "reports/tpls/facility_owners.tpl.html"
+                }
+            }
+        })
+        .state("reports.facility_owner_categories", {
+            url: "facility_owner_categories",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.facility_owner_categories": {
+                    templateUrl: "reports/tpls/facility_owner_categories.tpl.html"
+                }
+            }
         });
 
     }]);
