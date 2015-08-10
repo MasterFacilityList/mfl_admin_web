@@ -9,7 +9,7 @@
         $stateProvider
 
             .state("login", {
-                url: "/login?next",
+                url: "/login?next&reset_pwd&reset_pwd_confirm",
                 views: {
                     "main": {
                         controller: "mfl.auth.controllers.login",

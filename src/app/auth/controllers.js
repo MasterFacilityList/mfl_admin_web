@@ -13,11 +13,11 @@
             $scope.reset_pwd = function () {
                 profileService.resetPassword($scope.email)
                 .then(function () {
-                    $state.go("login");
+                    $state.go("login", {"reset_pwd": "true"});
                 },
                 function (data) {
                     $log.error(data);
-                    $scope.errors = data;
+                    $scope.errors = data.data;
                 });
             };
         }]
@@ -32,7 +32,7 @@
                     $scope.new_password1, $scope.new_password2
                 )
                 .then(function () {
-                    $state.go("login");
+                    $state.go("login", {"reset_pwd_confirm": "true"});
                 },
                 function (data) {
                     $log.error(data);
@@ -55,7 +55,7 @@
         function ($scope, $sce, $state, $stateParams, loginService, HOME_PAGE_NAME) {
             $scope.login_err = "";
             $scope.login_err_html = "";
-
+            $scope.params = $stateParams;
             $scope.submitUser = function(obj) {
                 $scope.spinner = true;
                 var error_fxn = function (data) {

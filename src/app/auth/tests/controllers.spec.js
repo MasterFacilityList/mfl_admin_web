@@ -186,7 +186,7 @@
             httpBackend.verifyNoOutstandingRequest();
             httpBackend.verifyNoOutstandingExpectation();
 
-            expect(state.go).toHaveBeenCalledWith("login");
+            expect(state.go).toHaveBeenCalledWith("login", {"reset_pwd": "true"});
             expect(log.error).not.toHaveBeenCalled();
         });
 
@@ -270,7 +270,7 @@
             httpBackend.verifyNoOutstandingRequest();
             httpBackend.verifyNoOutstandingExpectation();
 
-            expect(state.go).toHaveBeenCalledWith("login");
+            expect(state.go).toHaveBeenCalledWith("login", {"reset_pwd_confirm": "true"});
             expect(log.error).not.toHaveBeenCalled();
         });
 
