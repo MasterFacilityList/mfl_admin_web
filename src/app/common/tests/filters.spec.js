@@ -122,5 +122,30 @@
             input  = "6";
             expect(facility_type(list, input)).toEqual(undefined);
         });
+        it("should return original object selected", function () {
+            var list, input;
+            list = [
+                {
+                    id : "5",
+                    name : "subdistrict-hospital",
+                    sub_division : "hospital"
+                },
+                {
+                    id : "6",
+                    name : "provisional-hospital",
+                    sub_division : null
+                }
+            ];
+            input = "6";
+            var arr = [
+                {
+                    id : "6",
+                    name : "provisional-hospital",
+                    sub_division : null
+                }
+            ];
+            var soltn = facility_type(list, input);
+            expect(arr).toEqual(soltn);
+        });
     });
 })();
