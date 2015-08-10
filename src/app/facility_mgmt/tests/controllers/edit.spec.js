@@ -102,7 +102,7 @@
                         owner_type : {
                             "id": "5",
                             "name" : "ownertype"
-                        }
+                        },
                         operation_status: {
                             "id": "4",
                             "name": "opstatus"
