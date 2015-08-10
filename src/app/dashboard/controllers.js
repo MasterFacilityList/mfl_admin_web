@@ -4,13 +4,14 @@
 
     angular.module("mfl.dashboard.controllers", ["mfl.dashboard.wrapper"])
 
-    .controller("mfl.dashboard.content", ["$scope", "dashboardApi",
-        "$filter",
-        function ($scope, dashboardApi, $filter) {
+    .controller("mfl.dashboard.content", ["$scope", "$filter", "dashboardApi",
+        "mfl.auth.services.login",
+        function ($scope, $filter, dashboardApi, loginService) {
             $scope.title = {
                 icon: "fa-dashboard",
                 name: "Dashboard"
             };
+            $scope.user = loginService.getUser();
             $scope.chart = null;
             $scope.spinner = true;
             $scope.county = false;

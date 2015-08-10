@@ -3,6 +3,24 @@
     <div class="content" >
         <contentheader hide-back-button></contentheader>
         <div class="content-body">
+            <div ng-if="user.groups.length!==0">
+                <h4>Active Groups</h4>
+                <ul>
+                    <li ng-repeat="g in user.groups">{{g.name}}</li>
+                </ul>
+            </div>
+            <div ng-if="user.user_counties.length!==0">
+                <h4>Active Counties</h4>
+                <ul>
+                    <li ng-repeat="c in user.user_counties">{{c.county_name}}</li>
+                </ul>
+            </div>
+            <div ng-if="user.user_constituencies.length!==0">
+                <h4>Active Sub Counties</h4>
+                <ul>
+                    <li ng-repeat="c in user.user_constituencies">{{c.constituency_name}}</li>
+                </ul>
+            </div>
             <div class="row-fluid">
                 <div class="col-md-6 col-sm-6">
                     <div class="social-box">
