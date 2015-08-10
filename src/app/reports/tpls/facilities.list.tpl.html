@@ -12,7 +12,6 @@
         <th class="text-wrap fs-11" sil-grid-sort field='owner_name'>Owner</th>
         <th class="text-wrap fs-11" sil-grid-sort field='county'>County</th>
         <th class="text-wrap fs-11" sil-grid-sort field='constituency'>Sub County</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='constituency'>Constituency</th>
         <th class="text-wrap fs-11" sil-grid-sort field='ward'>Ward</th>
     </thead>
 
@@ -28,10 +27,9 @@
             </td>
             <td class="text-wrap" data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
             <td class="text-wrap" data-title="Owner:" >{{::fac.owner_name}}</td>
-            <td class="text-wrap" data-title="County:"> {{::fac.county}}</td>
-            <td class="text-wrap" data-title="Sub County:" >{{::fac.constituency}}</td>
+            <td class="text-wrap" data-title="County:"> {{::fac.county | titlecase}}</td>
             <td class="text-wrap" data-title="Constituency:" >{{::fac.constituency}}</td>
-            <td class="text-wrap" data-title="Ward:" >{{::fac.ward_name}}</td>
+            <td class="text-wrap" data-title="Ward:" >{{::fac.ward_name | titlecase}}</td>
         </tr>
     </tbody>
 </table>
