@@ -40,7 +40,13 @@
                 return;
             }
             var output = _.where(list, {"sub_division" : rslt.name});
-            return output;
+            if(output.length === 0) {
+                var arr = [];
+                arr.push(rslt);
+                return arr;
+            }else{
+                return output;
+            }
         };
     });
 })(window.angular, window._);
