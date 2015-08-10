@@ -97,6 +97,10 @@
                             "id": "2",
                             "name": "type"
                         },
+                        facility_type_details: {
+                            "id" : "2",
+                            "name" : "type"
+                        },
                         owner: {
                             "id": "3",
                             "name": "owner"
@@ -177,6 +181,10 @@
                         facility_type: {
                             "id": "2",
                             "name": "type"
+                        },
+                        facility_type_details: {
+                            "id" : "2",
+                            "name" : "type"
                         },
                         owner: {
                             "id": "3",
@@ -271,6 +279,10 @@
                         facility_type: {
                             "id": "2",
                             "name": "type"
+                        },
+                        facility_type_details: {
+                            "id" : "2",
+                            "name" : "type"
                         },
                         owner: {
                             "id": "3",
