@@ -23,7 +23,7 @@
                     func : "ui-sref='setup.facility_owner_types.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_ownertype'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     tipmsg: "Add Facility Owner Category",
                     wording:"Add Facility Owner Category"
                 }
@@ -45,7 +45,7 @@
                         func : "ui-sref='setup.facility_owner_types.view.delete'" +
                                " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.delete_ownertype'",
-                        class: "login-btn login-btn-danger",
+                        class: "btn btn-danger",
                         tipmsg: "Delete Facility Owner Category",
                         wording: "Delete"
                     }
@@ -118,7 +118,7 @@
                     func : "ui-sref='setup.facility_owners.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_owner'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     tipmsg: "Add Facility Owner",
                     wording: "Add Facility Owner"
                 }
@@ -140,7 +140,7 @@
                         func : "ui-sref='setup.facility_owners.view.delete'" +
                                " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.delete_owner'",
-                        class: "login-btn login-btn-danger",
+                        class: "btn btn-danger",
                         tipmsg: "Delete Facility Owner",
                         wording: "Delete"
                     }
@@ -232,7 +232,7 @@
                     func : "ui-sref='setup.facility_job_titles.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_jobtitle'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     tipmsg: "Add Job Title",
                     wording: "Add Job Title"
                 }
@@ -258,7 +258,7 @@
                         func : "ui-sref='setup.facility_job_titles.view.delete'" +
                                " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.delete_jobtitle'",
-                        class: "login-btn login-btn-danger",
+                        class: "btn btn-danger",
                         tipmsg: "Delete Facility Job Title",
                         wording: "Delete"
                     }
@@ -332,7 +332,7 @@
                     func : "ui-sref='setup.facility_regulatory_bodies.create.basic'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_regulatingbody'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     tipmsg: "Add Regulatory Body",
                     wording: "Add Regulatory Body"
                 }
@@ -453,7 +453,7 @@
                         "'setup.facility_regulatory_bodies.edit.delete'" +
                         " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.delete_regulatingbody'",
-                        class: "login-btn login-btn-danger",
+                        class: "btn btn-danger",
 
                         wording: "Delete",
                         tipmsg: "Delete Facility Regulatory Body"

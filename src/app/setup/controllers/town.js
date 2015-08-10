@@ -17,11 +17,9 @@
                     func : "ui-sref='setup.towns.town_create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='common.add_town'",
-                    class: "action-btn action-btn-primary action-btn-md",
-
+                    class: "btn btn-primary",
                     tipmsg: "New Town",
-                    icon: "fa-plus",
-                    wording: ""
+                    wording: "New Town"
                 }
             ];
         }]
@@ -60,7 +58,7 @@
                     func : "ui-sref='setup.towns.town_edit.delete'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='common.change_town'",
-                    class: "login-btn login-btn-danger",
+                    class: "btn btn-danger",
                     tipmsg: "Delete Town",
                     wording: "Delete"
                 }

@@ -19,7 +19,7 @@
                     func : "ui-sref='setup.chu_status.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='chul.add_status'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     tipmsg: "Add community unit status",
                     wording: "Add CU Status"
                 }
@@ -40,7 +40,7 @@
                         func : "ui-sref='setup.chu_status.view.delete'" +
                                " requires-user-feature='is_staff'" +
                                " requires-permission='chul.delete_status'",
-                        class: "login-btn login-btn-danger",
+                        class: "btn btn-danger",
                         wording: "Delete",
                         tipmsg: "Delete CHU Status"
                     }
@@ -109,7 +109,7 @@
                     func : "ui-sref='setup.chu_approvers.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='chul.add_approver'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
                     tipmsg: "Add Community Unit Approver",
                     wording: "Add CU Approver"
                 }
@@ -131,7 +131,7 @@
                         func : "ui-sref='setup.chu_approvers.view.delete'" +
                                " requires-user-feature='is_staff'" +
                            " requires-permission='chul.delete_approver'",
-                        class: "login-btn login-btn-danger",
+                        class: "btn btn-danger",
                         tipmsg: "Delete CHU Approver",
                         wording: "Delete"
                     }
