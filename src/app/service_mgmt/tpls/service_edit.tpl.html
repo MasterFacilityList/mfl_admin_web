@@ -1,6 +1,6 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-        <a tooltip="delete service" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} login-btn login-btn-danger"  ui-sref="service_mgmt.service_list.service_edit.delete({service_id: service.id})" ui-sref-opts="{reload:true}" requires-user-feature="is_staff" requires-permission="facilities.delete_service">Delete</a>
+        <a tooltip="delete service" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} btn-btn btn-danger"  ui-sref="service_mgmt.service_list.service_edit.delete({service_id: service.id})" ui-sref-opts="{reload:true}" requires-user-feature="is_staff" requires-permission="facilities.delete_service">Delete</a>
    </div>
    <h2 class="content-title">
        <span class="main-title"> <span ng-if="!create"><i class="fa fa-edit"></i> Edit</span><span ng-if="create"><i class="fa fa-plus-circle"></i> New</span> Service</span>
