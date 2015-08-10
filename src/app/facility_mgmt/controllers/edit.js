@@ -142,6 +142,7 @@
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.facility = data;
+                    $scope.owner_typeid = $scope.facility.owner_type;
                     $scope.select_values = {
                         ward: {
                             "id": $scope.facility.ward,
@@ -155,6 +156,7 @@
                             "id": $scope.facility.owner,
                             "name": $scope.facility.owner_name
                         },
+                        owner_type: $scope.facility.owner_type,
                         operation_status: {
                             "id": $scope.facility.operation_status,
                             "name": $scope.facility.operation_status_name
@@ -231,6 +233,8 @@
             $scope.contacts = [{type: "", contact : ""}];
             $scope.login_user = loginService.getUser();
             $scope.selectReload(wrappers.facility_owners, "", "owners");
+            $scope.selectReload(wrappers.facility_owner_types, "",
+                "owner_types");
             $scope.selectReload(wrappers.operation_status, "", "operation_status");
             $scope.selectReload(
                 wrappers.wards, "", "wards", {"constituency": $scope.login_user.constituency}
@@ -238,7 +242,6 @@
             $scope.selectReload(wrappers.regulating_bodies, "", "regulating_bodies");
             $scope.selectReload(wrappers.facility_types, "", "facility_types");
             $scope.selectReload(wrappers.towns, "", "towns");
-
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
                 $scope.facility.ward = $scope.select_values.ward.id;

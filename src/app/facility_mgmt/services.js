@@ -45,6 +45,7 @@
             this.facility_detail = api.setBaseUrl("api/facilities/facilities/");
             this.facility_types = api.setBaseUrl("api/facilities/facility_types/");
             this.facility_owners = api.setBaseUrl("api/facilities/owners/");
+            this.facility_owner_types = api.setBaseUrl("api/facilities/owner_types/");
             this.regulating_bodies = api.setBaseUrl("api/facilities/regulating_bodies/");
             this.facility_regulation_status = api.setBaseUrl(
                 "api/facilities/facility_regulation_status/"
