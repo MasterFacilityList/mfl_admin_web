@@ -1,36 +1,30 @@
 <contentheader></contentheader>
 <div ui-view="delete"></div>
-<div class="col-lg-12">
-<div class="col-md-12 content-card margin-t-20 margin-b-20">
-    <div class="col-lg-12 margin-t-20">
-        <h4 requires-permission="auth.add_group" >Add Group</h4>
-        <table class="table content-card margin-b-10" requires-permission="auth.add_group" >
-            <tr>
-                <td class="pad-t-15 col-md-6">
-                    <div class="group">
-                        <input type="text" ng-model="group.name" required />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>
-                            Group Name
-                        </label>
+<div class="col-sm-12">
+    <div class="content-body margin-t-20 margin-b-20">
+        <div class="content-card col-xs-12">
+            <div class="col-xs-12 margin-b-20 margin-t-10">
+                <div class="group">
+                    <label class="control-label">Group Name:</label>
+                    <div>
+                        <input type="text" class="form-control" ng-model="group.name" required />
                     </div>
-                </td>
-            </tr>
-        </table>
+                </div>
+            </div>
+            <div class="col-xs-12 pad-r-0 pad-l-0">
+            <hr>
+            </div>
+            <mfl-list-assignment title="Permissions" assigneditems="group.permissions" listeditems="permissions"
+                write-perm="auth.change_group">
+            </mfl-list-assignment>
+            <div class="col-lg-12 margin-t-20 margin-b-20">
+                <button ng-click="save()" class="margin-h-5 btn btn-primary" requires-permission="auth.add_group" >
+                    Save
+                </button>
+                <button class="margin-h-5 btn btn-default" ui-sref="groups">
+                    Cancel
+                </button>
+            </div>
+        </div>
     </div>
-
-    <mfl-list-assignment title="Permissions" assigneditems="group.permissions" listeditems="permissions"
-        write-perm="auth.change_group">
-    </mfl-list-assignment>
-
-    <div class="col-lg-12 margin-t-20 margin-b-20">
-        <button ng-click="save()" class="margin-h-5 login-btn login-btn-primary" requires-permission="auth.add_group" >
-            <i class="fa fa-save"></i> Save
-        </button>
-        <button class="margin-h-5 login-btn login-btn-default" ui-sref="groups">
-            Cancel
-        </button>
-    </div>
-</div>
 </div>
