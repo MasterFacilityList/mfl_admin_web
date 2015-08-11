@@ -17,7 +17,7 @@
                     func : "ui-sref='groups.group_create' " +
                             "requires-permission='auth.add_group' " +
                             "requires-user-feature='is_staff'",
-                    class: "login-btn login-btn-primary",
+                    class: "btn btn-primary",
 
                     tipmsg: "New Group",
                     icon: "",
@@ -88,7 +88,7 @@
                     func : "ui-sref='groups.group_edit.delete' " +
                            "requires-permission='auth.delete_group'"  +
                            "requires-user-feature='is_staff'",
-                    class: "login-btn login-btn-danger",
+                    class: "btn btn-danger",
                     tipmsg: "Delete Group",
                     wording: "Delete"
                 }
