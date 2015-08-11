@@ -83,6 +83,8 @@
                     ctrl("", data);
                     var obj = {name : "basic", active : false};
                     data.$scope.tabState(obj);
+                    var arg = true;
+                    data.$scope.setNxt(arg);
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
                     httpBackend.verifyNoOutstandingExpectation();
@@ -481,6 +483,7 @@
                     operation_status : {id : "4"},
                     town : {id : "5"}
                 };
+                data.$scope.nxtState = false;
                 ctrl(".basic", data);
 
                 var frm = {
@@ -530,6 +533,7 @@
                     operation_status : {id : "4"},
                     town : {id : "5"}
                 };
+                data.$scope.nxtState = true;
                 ctrl(".basic", data);
 
                 var frm = {
