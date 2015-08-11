@@ -352,11 +352,13 @@
                 }
             };
             $scope.createContact = function () {
+                $scope.finish = ($scope.nxtState ? "facilities" :
+                    "facilities.facility_edit.units");
                 if(!_.isEmpty($scope.fac_contobj.contacts)){
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
                         if(!$scope.create){
-                            $state.go("facilities.facility_edit.units");
+                            $state.go($scope.finish);
                         }else{
                             $scope.goToNext(4, "units");
                         }
@@ -366,7 +368,7 @@
                     });
                 } else {
                     if(!$scope.create){
-                        $state.go("facilities.facility_edit.units");
+                        $state.go($scope.finish);
                     }else{
                         $scope.goToNext(4, "units");
                     }
@@ -651,12 +653,15 @@
                     $scope.fac_depts = _.without($scope.fac_depts, obj);
                 }
             };
-            $scope.createUnit = function () {
+            $scope.createUnit = function (arg) {
+                $scope.nxtState = arg;
+                $scope.finish = ($scope.nxtState ? "facilities" :
+                    "facilities.facility_edit.services");
                 if(!_.isEmpty($scope.fac_unitobj.units)){
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_unitobj)
                     .success(function () {
                         if(!$scope.create){
-                            $state.go("facilities.facility_edit.services");
+                            $state.go($scope.finish);
                         }else{
                             $scope.goToNext(5, "services");
                         }
@@ -666,20 +671,20 @@
                     });
                 } else {
                     if(!$scope.create){
-                        $state.go("facilities.facility_edit.services");
+                        $state.go($scope.finish);
                     }else{
                         $scope.goToNext(5, "services");
                     }
                 }
             };
-            $scope.saveUnits = function () {
+            $scope.saveUnits = function (arg) {
                 $scope.fac_unitobj = {units : []};
                 _.each($scope.fac_depts, function (a_unit) {
                     if(_.isUndefined(a_unit.id)){
                         $scope.fac_unitobj.units.push(a_unit);
                     }
                 });
-                $scope.createUnit();
+                $scope.createUnit(arg);
             };
             $scope.$watch("facility", function (f) {
                 if (_.isUndefined(f)){
@@ -1038,11 +1043,14 @@
                     $log.error(error);
                 });
             //if create go to create or edit state
-            $scope.toState = function () {
+            $scope.toState = function (arg) {
                 if($scope.create){
                     $scope.goToNext(3, "contacts");
                 }else{
-                    $state.go("facilities.facility_edit.contacts",
+                    $scope.nxtState = arg;
+                    $scope.finish = ($scope.nxtState ? "facilities" :
+                    "facilities.facility_edit.contacts");
+                    $state.go($scope.finish,
                         {"facility_id": $scope.facility_id},
                         {reload: true});
                 }
@@ -1056,7 +1064,7 @@
                     $log.error(error);
                 });
             //Save geolocation details
-            $scope.saveGeo = function (frm) {
+            $scope.saveGeo = function (frm, arg) {
                 var spinner1 = true;
                 var changes = formChanges.whatChanged(frm);
                 /*if(!_.isEmpty(changes)){*/
@@ -1075,7 +1083,7 @@
                         .success(function (data) {
                             spinner1 =false;
                             $scope.geo = data;
-                            $scope.toState();
+                            $scope.toState(arg);
                         })
                         .error(function (error) {
                             spinner1 =false;
@@ -1090,7 +1098,7 @@
                         wrappers.facility_detail.update(
                             fac_id, {"coordinates" : data.id})
                             .success(function () {
-                                $scope.toState();
+                                $scope.toState(arg);
                             })
                             .error(function (error) {
                                 $log.error(error);

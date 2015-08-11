@@ -68,8 +68,13 @@
         <a ui-sref="facilities.facility_edit.contacts" ng-if="!create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Facility Contacts
         </a>
-        <a ng-click="saveUnits()" ui-sref="facilities.facility_edit.services" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
-            &nbsp; {{create ? 'Facility Services' : 'Save & Continue'}} <i class="fa fa-angle-double-right"></i>
-        </a>
+        <span class="pull-right" >
+            <button ng-if="!create" ng-click="saveUnits(true)" type="submit" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 margin-r-5">
+                &nbsp; Finish
+            </button>
+            <a ng-click="saveUnits(false)" ui-sref="facilities.facility_edit.services" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
+                &nbsp; {{create ? 'Facility Services' : 'Save & Continue'}} <i class="fa fa-angle-double-right"></i>
+            </a>
+        </span>
     </div>
 </div>
