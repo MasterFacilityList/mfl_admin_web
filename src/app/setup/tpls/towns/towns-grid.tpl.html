@@ -8,13 +8,11 @@
     <table class="table table-hover fs-14">
         <thead class="cf">
             <th sil-grid-sort field='name'>Name</th>
-            <th sil-grid-sort field='ward'>Ward</th>
             <th class="text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="town in towns">
                 <td data-title="Name" class="pad-t-15">{{town.name}}</td>
-                <td data-title="Ward" class="pad-t-15">{{town.ward_name}}</td>
                 <td class="text-right">
                     <a class="btn btn-success" ui-sref="setup.towns.town_edit({town_id:town.id})">
                         View
