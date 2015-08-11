@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="group col-sm-6">
                             <div class="group">
-                            <select name="constituency" ng-model="new_constituency" class="pad-t-15" required>
+                            <select name="constituency" ng-model="new_constituency" class="form-control" required>
                                 <option value="">Select Sub County</option>
                                 <option ng-repeat="cnst in constituencies" ng-value="cnst.id">{{cnst.name}}</option>
                             </select>
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="margin-b-10 group col-sm-6 text-right">
-                            <button ng-disabled="new_constituency===''" type="submit" class="margin-r-10 login-btn login-btn-primary margin-t-10">
+                            <button ng-disabled="new_constituency===''" type="submit" class="margin-r-10 btn btn-primary">
                                 <i class="fa fa-plus-circle"></i> Assign Sub County
                             </button>
                         </div>
@@ -47,7 +47,7 @@
                                 <span ng-if="child.delete_spinner">
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
                                 </span>
-                                <a popover-toggle popover-trigger="open" class= "login-btn login-btn-danger" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left"
+                                <a popover-toggle popover-trigger="open" class= "btn btn-danger" popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left"
                                 requires-permission="common.delete_userconstituency">
                                     Delete
                                 </a>
@@ -65,7 +65,7 @@
                 No sub-county assigned to the user
             </div>
             <div ng-if="create" class="margin-b-20 margin-t-20 pad-r-0">
-                <a ui-sref="users" class="login-btn login-btn-primary">
+                <a ui-sref="users" class="btn btn-primary">
                      Save
                 </a>
             </div>

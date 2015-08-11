@@ -11,7 +11,7 @@
                 <h4 class="fw-600 fs-18">Assign Regulatory Body</h4>
                 <form name="frm_regulatory_body" ng-submit="addBody()">
                     <div class="group col-sm-10 pad-l-0">
-                    <select name="regbody"  ng-model="new_body" class="pad-t-15" required>
+                    <select name="regbody"  ng-model="new_body" class="form-control" required>
                         <option value="">Select Regulatory Body</option>
                         <option value="{{reg.id}}" ng-repeat="reg in bodies">{{reg.name}}</option>
                     </select>
@@ -19,7 +19,7 @@
                     <span class="bar"></span>
                     </div>
                     <div class="col-sm-2 margin-b-10 pad-r-0">
-                        <button type="submit" class="login-btn login-btn-primary margin-t-10 pull-right" tooltip="Assign Regulatory Body">
+                        <button type="submit" class="btn btn-primary pull-right" tooltip="Assign Regulatory Body">
                             <i class="fa fa-plus-circle"></i> Add
                         </button>
                     </div>
@@ -31,9 +31,9 @@
                     <tbody>
                         <tr ng-if="!spinner" ng-repeat="child in user_bodies">
                             <td class="pad-t-15 fs-18 fw-600 text-left">{{child.regulatory_body_name}}</td>
-                            <td class="text-right"><a class="login-btn login-btn-danger" popover-toggle
+                            <td class="text-right"><a class="btn btn-danger" popover-toggle
                                 popover-trigger="open" popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'">
-                                    &nbsp; Delete
+                                     Delete
                                 </a>
                             </td>
                         </tr>
@@ -49,19 +49,19 @@
                 <span class="fs-16"><i class="fa fa-info-circle"></i> No regulatory body assigned to the user</span>
             </div>
             <div ng-if="!create" class="margin-b-20 margin-t-20">
-                <a class="login-btn login-btn-primary" ui-sref="users.user_edit.groups ({user_id : user_id})">
-                    &nbsp;<i class="fa fa-angle-double-left"></i> Groups
+                <a class="btn btn-primary" ui-sref="users.user_edit.groups ({user_id : user_id})">
+                    <i class="fa fa-angle-double-left"></i> Groups
                 </a>
-                <a class="login-btn login-btn-primary pull-right" ui-sref="users">
-                     &nbsp; Update
+                <a class="btn btn-primary pull-right" ui-sref="users">
+                      Update
                 </a>
             </div>
             <div ng-if="create" class="margin-b-20 margin-t-20" requires-permission="users.change_mfluser">
-                <a class="login-btn login-btn-primary" ui-sref="users.user_create.groups ({user_id : user_id})">
-                    &nbsp;<i class="fa fa-angle-double-left"></i> Groups
+                <a class="btn btn-primary" ui-sref="users.user_create.groups ({user_id : user_id})">
+                    <i class="fa fa-angle-double-left"></i> Groups
                 </a>
-                <a class="login-btn login-btn-primary pull-right" ui-sref="users">
-                     &nbsp;Submit
+                <a class="btn btn-primary pull-right" ui-sref="users">
+                     Submit
                 </a>
             </div>
         </div>
