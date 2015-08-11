@@ -61,9 +61,14 @@
         </a>
         <!-- <a
         ui-sref="facilities.facility_edit.officers" ng-if="!create"   -->
-        <button ng-if="!create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
-            &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
-        </button>
+        <span class="pull-right" ng-if="!create">
+            <button ng-if="!create" ng-click="setNxt(true)" type="submit" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 margin-r-5">
+                &nbsp; Finish
+            </button>
+            <button ng-click="setNxt(false)" ng-if="!create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
+                &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
+            </button>
+        </span>
         <!-- End of facility creation buttons -->
         <a ui-sref="facilities.facility_create.geolocation({facility_id : new_facility})" ng-if="create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
             &nbsp;<i class="fa fa-angle-double-left"></i> Geolocation

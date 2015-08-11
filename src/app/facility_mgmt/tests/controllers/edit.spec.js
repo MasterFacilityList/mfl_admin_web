@@ -903,6 +903,7 @@
                     {name : "contacts"}
                 ];
                 data.$scope.nextState = angular.noop;
+                data.$scope.nxtState = true;
                 ctrl(".contacts", data);
 
                 httpBackend.flush();
@@ -1026,6 +1027,7 @@
                     {name : "contacts"}
                 ];
                 data.$scope.nextState = angular.noop;
+                data.$scope.nxtState = true;
                 ctrl(".contacts", data);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -1105,6 +1107,7 @@
                 httpBackend.expectPATCH(server_url+
                     "api/facilities/facilities/3/")
                     .respond(200, {id : "3"});
+                data.$scope.nxtState = true;
                 data.$scope.saveContacts();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
@@ -2090,6 +2093,7 @@
                 ];
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
+                data.$scope.nxtState = true;
                 httpBackend
                     .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
                     .respond(200, {results: []});
@@ -2258,9 +2262,10 @@
                 httpBackend
                     .expectPATCH(server_url + "api/facilities/facilities/3/")
                     .respond(201, {"id": "3"});
-
+                data.$scope.nxtState = true;
+                var arg = true;
                 data.$scope.add();
-                data.$scope.saveUnits();
+                data.$scope.saveUnits(arg);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -4007,11 +4012,6 @@
                         {name : "units"},
                         {name : "location"}
                     ];
-                    /*var rst_data = {
-                        coordinates : {
-                            coordinates : [3, 1]
-                        }
-                    };*/
                     var args = {
                         model:{
                             lat:1,
@@ -4057,8 +4057,9 @@
                             "$$modelValue": "test"
                         }
                     };
-
-                    data.$scope.saveGeo(frm);
+                    data.$scope.nxtState = true;
+                    var arg = true;
+                    data.$scope.saveGeo(frm, arg);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingExpectation();
@@ -4091,11 +4092,7 @@
                         {name : "units"},
                         {name : "location"}
                     ];
-                    /*var rst_data = {
-                        coordinates : {
-                            coordinates : [3, 1]
-                        }
-                    };*/
+                    data.$scope.nxtState = true;
                     httpBackend
                         .expectGET(server_url+"api/gis/geo_code_methods/")
                         .respond(200, {results: []});
@@ -4105,9 +4102,6 @@
                     httpBackend
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
-                    /*httpBackend
-                        .expectGET(server_url+"api/gis/facility_coordinates/3/")
-                        .respond(200, rst_data);*/
                     ctrl(".geolocation", data);
                     data.$scope.$apply();
                     data.$scope.facility={
@@ -4137,8 +4131,8 @@
                             "$$modelValue": "test"
                         }
                     };
-
-                    data.$scope.saveGeo(frm);
+                    var arg = true;
+                    data.$scope.saveGeo(frm, arg);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingExpectation();
