@@ -956,6 +956,7 @@
                 })
                 .error(function(error){
                     $scope.spinner = false;
+                    $scope.errors = error;
                     $log.error(error);
                     $scope.geocodes_error = errorMessages.errors +
                                         errorMessages.geocodes;
@@ -1030,6 +1031,7 @@
                 .error(function(error){
                     $scope.spinner = false;
                     $log.error(error);
+                    $scope.errors = error;
                     $scope.wards_error = errorMessages.errors +
                         errorMessages.ward;
                 });
@@ -1062,6 +1064,7 @@
                 })
                 .error(function(error){
                     $log.error(error);
+                    $scope.errors = error;
                 });
             //Save geolocation details
             $scope.saveGeo = function (frm, arg) {
@@ -1088,6 +1091,7 @@
                         .error(function (error) {
                             spinner1 =false;
                             $log.error(error);
+                            $scope.errors = error;
                             $scope.geoloc_error = error[0] ||
                                 errorMessages.errors +
                                 errorMessages.geolocation;
@@ -1102,6 +1106,7 @@
                             })
                             .error(function (error) {
                                 $log.error(error);
+                                $scope.errors = error;
                                 $scope.geoloc_error = errorMessages.errors +
                                     errorMessages.geolocation;
                             });
