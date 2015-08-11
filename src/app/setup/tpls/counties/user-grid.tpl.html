@@ -13,10 +13,10 @@
         <tbody>
             <tr ng-repeat="user in county_users">
                 <td class="pad-t-15">
-                    {{user.user_full_name}}
+                    {{::user.user_full_name}}
                 </td>
                 <td class="pad-t-15">
-                    <span class="pull-right">{{user.user_email}}</span>
+                    <span class="pull-right">{{::user.user_email}}</span>
                 </td>
             </tr>
         </tbody>
