@@ -1,6 +1,6 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-        <a tooltip="delete category" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} login-btn login-btn-danger"
+        <a tooltip="delete category" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} btn btn-danger"
           ui-sref="service_mgmt.category_list.category_edit.delete" ui-sref-opts="{reload:true}" requires-user-feature="is_staff"
           requires-permission="facilities.delete_servicecategory">
           Delete
@@ -18,31 +18,25 @@
             <div class="form-group">
                 <label>Name</label>
                 <input class="form-control" name="name" ng-model="category.name" required placeholder="Name"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
             </div>
             <div class="form-group">
                 <label>Abbreviation</label>
                 <input class="form-control" name="abbreviation" ng-model="category.abbreviation"/>
-                <span class="highlight"></span>
-                <span class="bar"></span>
             </div>
             <div class="form-group">
                 <label>Description</label>
                 <textarea class="form-control" name="description" ng-model="category.description" placeholder="Description"></textarea>
-                <span class="highlight"></span>
-                <span class="bar"></span>
             </div>
             <div class="pull-left">
-                <button class="login-btn login-btn-primary" ng-click="save(category_frm)" requires-permission="facilities.change_servicecategory" requires-user-feature="is_staff"><i class="fa fa-save"></i> Save</button>
-                <a class="margin-l-10 login-btn login-btn-default margin-l-5" ui-sref="service_mgmt.category_list">Cancel</a>
+                <button class="btn btn-primary" ng-click="save(category_frm)" requires-permission="facilities.change_servicecategory" requires-user-feature="is_staff">Save</button>
+                <a class="margin-l-10 btn btn-default margin-l-5" ui-sref="service_mgmt.category_list">Cancel</a>
             </div>
            </div>
         </form>
       </div>
     </div>
     <div class="col-xs-10 col-xs-offset-1">
-      <button class="login-btn login-btn-primary" ng-click="viewServices = !viewServices">
+      <button class="btn btn-primary" ng-click="viewServices = !viewServices">
           &nbsp;{{viewServices ? 'Hide' : 'View'}} Services <i class="fa {{viewServices ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
       </button>
     </div>
