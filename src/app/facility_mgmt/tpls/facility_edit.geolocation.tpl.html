@@ -1,12 +1,4 @@
 <div class="col-xs-12 content-card">
-    <div class="col-md-12 alert alert-danger alert-dismissible margin-t-20" ng-show="geoloc_error || wards_error || geocodes_error">
-        <button type="button" class="close">
-            <span ng-click="geoloc_error = !geoloc_error">&times;</span>
-        </button>
-        <p ng-if="geoloc_error" class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{geoloc_error}}</p>
-        <p ng-if="wards_error" class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{wards_error}}</p>
-        <p ng-if="geocodes_error" class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{geocodes_error}}</p>
-    </div>
     <div class="col-sm-12 margin-t-20">
         <div class="col-xs-12">
             <h4 class="fw-600 fs-18"> Geolocation Details</h4>
@@ -19,13 +11,18 @@
                </div>
                <div ng-if="!spinner1">
                     <form name="geoForm">
+                        <div class="col-xs-12">
+                            <div class="col-xs-12">
+                                <drf-err-msg></drf-err-msg>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-sm-12">
                                     <!-- Start of form -->
                                     <div class="form-group col-md-12">
                                         <label>Geocode source</label>
-                                        <ui-select name="source" ng-model="select_values.source" required>
+                                        <ui-select name="source" ng-model="select_values.source" required api-checker register-custom-form-control>
                                             <ui-select-match placeholder="Select a geo code source...">
                                                 <span>{{$select.selected.name}}</span>
                                             </ui-select-match>
@@ -36,7 +33,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label>Geocode method</label>
-                                        <ui-select name="method" ng-model="select_values.method" required>
+                                        <ui-select name="method" ng-model="select_values.method" required api-checker register-custom-form-control>
                                             <ui-select-match placeholder="Select a geo code method...">
                                                 <span>{{$select.selected.name}}</span>
                                             </ui-select-match>
@@ -54,22 +51,18 @@
                                 <!-- End of first section of form -->
                                 <!-- Start lat long -->
                                             <div class="form-group col-sm-6">
-                                                <label>
+                                                <label class="control-label">
                                                     Longitude
                                                 </label>
                                                 <input type="number" class="form-control" step="0.00000001" name="longitude" ng-model="geo.coordinates.coordinates[0]"
-                                                ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }"/>
-                                                <span class="highlight"></span>
-                                                <span class="bar"></span>
+                                                ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
                                             </div>
                                             <div class="form-group col-sm-6">
-                                                <label>
+                                                <label class="control-label">
                                                     Latitude
                                                 </label>
                                                 <input type="number" class="form-control" step="0.00000001" name="latitude" ng-model="geo.coordinates.coordinates[1]"
-                                                ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }"/>
-                                                <span class="highlight"></span>
-                                                <span class="bar"></span>
+                                                ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
                                             </div>
                                   <!-- End lat long -->
                                 <div class="col-md-12 margin-t-10 margin-b-20">
@@ -112,4 +105,3 @@
         </span>
     </div>
 </div>
-
