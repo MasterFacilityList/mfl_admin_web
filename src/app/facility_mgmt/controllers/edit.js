@@ -215,6 +215,10 @@
                 $state.go("facilities.facility_edit",{facility_id:$scope.facility_id});
             };
             $scope.printFacility = wrappers.printFacility;
+            $scope.nxtState = true;
+            $scope.setNxt = function (arg) {
+                $scope.nxtState = arg;
+            };
         }]
     )
 
@@ -250,6 +254,8 @@
             $scope.selectReload(wrappers.facility_types, "", "facility_types");
             $scope.selectReload(wrappers.towns, "", "towns");
             $scope.save = function (frm) {
+                $scope.finish = ($scope.nxtState ? "facilities" :
+                    "facilities.facility_edit.geolocation");
                 var changes = formChanges.whatChanged(frm);
                 $scope.facility.ward = $scope.select_values.ward.id;
                 $scope.facility.facility_type = $scope.select_values.facility_type;
@@ -280,7 +286,7 @@
                             $state.params.facility_id, changes)
                         .success(function () {
                             $state.go(
-                                "facilities.facility_edit.geolocation",
+                                "facilities.facility_create.geolocation",
                                 {facility_id : $state.params.facility_id,
                                     furthest : $scope.furthest});
                         })
@@ -293,7 +299,7 @@
                 } else {
                     wrappers.facility_detail.update($scope.facility_id, changes)
                     .success(function () {
-                        $state.go("facilities.facility_edit.geolocation",
+                        $state.go($scope.finish,
                         {facility_id:$scope.facility_id});
                     })
                     .error(function (data) {
