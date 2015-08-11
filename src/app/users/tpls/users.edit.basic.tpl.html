@@ -30,12 +30,12 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Confirm Password</label>
-                    <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-blur="confirmPassword(user.password, user.confirm_password)" class="form-control" />
+                    <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-required="!user.id" ng-blur="confirmPassword(user.password, user.confirm_password)" class="form-control" />
                 </div>
                 <div ng-if="confirm" class="err_class">The two passwords did not match</div>
                 <div class="form-group checkbox" ng-if="!create">
-                    <label for="open_late_night">
-                    <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="user.is_active" api-checker="" class="ng-valid ng-valid-api">
+                    <label for="open_late_night" class="control-label">
+                    <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="user.is_active" api-checker>
                     Is active
                     </label>
                 </div>
