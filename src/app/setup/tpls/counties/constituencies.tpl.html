@@ -1,5 +1,5 @@
 <div class="row">
-    <table class="table table-hover content-card fs-14 margin-t-20">
+    <table class="table table-hover fs-14 margin-t-20">
         <thead>
             <th class="fs-16">Name</th>
             <th class="fs-16 text-right">Code</th>
@@ -7,10 +7,10 @@
         <tbody>
             <tr ng-repeat="const in county_constituencies">
                 <td >
-                    {{const.name}}
+                    {{::const.name}}
                 </td>
                 <td class="text-right">
-                    {{const.code}}
+                    {{::const.code}}
                 </td>
             </tr>
         </tbody>
