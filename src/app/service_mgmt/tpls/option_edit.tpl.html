@@ -1,6 +1,6 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-        <a tooltip="delete option" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} login-btn login-btn-danger"
+        <a tooltip="delete option" tooltip-placement="bottom" class="{{edit_view ? '' : 'hidden'}} btn btn-danger"
             ui-sref="service_mgmt.option_list.option_edit.delete" requires-user-feature="is_staff" requires-permission="facilities.delete_option">
             Delete
         </a>
@@ -48,7 +48,7 @@
                 <!-- </div> -->
                 <button ng-click="save(option_frm)" class="btn btn-primary pull-left"
                     requires-user-feature="is_staff" requires-permission="facilities.delete_option">
-                    <i class="fa fa-save"></i> Save
+                    Save
                 </button>
                 <a class="btn btn-default margin-l-10 pull-left" ui-sref="service_mgmt.option_list">Cancel</a>
         </div>
