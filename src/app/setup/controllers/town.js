@@ -41,6 +41,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.error = data;
                 });
             };
         }]
@@ -91,6 +92,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.error = data;
                 });
             };
         }]
