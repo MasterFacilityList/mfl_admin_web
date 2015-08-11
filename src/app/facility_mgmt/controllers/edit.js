@@ -1038,11 +1038,14 @@
                     $log.error(error);
                 });
             //if create go to create or edit state
-            $scope.toState = function () {
+            $scope.toState = function (arg) {
                 if($scope.create){
                     $scope.goToNext(3, "contacts");
                 }else{
-                    $state.go("facilities.facility_edit.contacts",
+                    $scope.nxtState = arg;
+                    $scope.finish = ($scope.nxtState ? "facilities" :
+                    "facilities.facility_edit.contacts");
+                    $state.go($scope.finish,
                         {"facility_id": $scope.facility_id},
                         {reload: true});
                 }
@@ -1056,9 +1059,10 @@
                     $log.error(error);
                 });
             //Save geolocation details
-            $scope.saveGeo = function (frm) {
+            $scope.saveGeo = function (frm, arg) {
                 var spinner1 = true;
                 var changes = formChanges.whatChanged(frm);
+                var nxt_arg = arg;
                 /*if(!_.isEmpty(changes)){*/
                 var fac_id = $scope.facility_id || $state.params.facility_id;
                 /*changes.coordinates = [];*/
@@ -1075,7 +1079,7 @@
                         .success(function (data) {
                             spinner1 =false;
                             $scope.geo = data;
-                            $scope.toState();
+                            $scope.toState(nxt_arg);
                         })
                         .error(function (error) {
                             spinner1 =false;
@@ -1090,7 +1094,7 @@
                         wrappers.facility_detail.update(
                             fac_id, {"coordinates" : data.id})
                             .success(function () {
-                                $scope.toState();
+                                $scope.toState(nxt_arg);
                             })
                             .error(function (error) {
                                 $log.error(error);
