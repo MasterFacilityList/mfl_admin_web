@@ -22,10 +22,10 @@
                             {{user.first_name}} {{user.last_name}}
                         </a>
                     </td>
-                    <td data-title="Username" class="pad-t-15">{{user.employee_number}}</td>
-                    <td data-title="Email" class="pad-t-15">{{user.email}}</td>
-                    <td data-title="Last Login" class="pad-t-15">{{user.last_login | dateFilter }}</td>
-                    <td data-title="Is Active" class="pad-t-15">{{user.is_active | boolFilter}}</td>
+                    <td data-title="Username" class="pad-t-15">{{::user.employee_number}}</td>
+                    <td data-title="Email" class="pad-t-15">{{::user.email}}</td>
+                    <td data-title="Last Login" class="pad-t-15">{{::user.last_login | dateFilter }}</td>
+                    <td data-title="Is Active" class="pad-t-15">{{::user.is_active | boolFilter}}</td>
                 </tr>
             </tbody>
         </table>

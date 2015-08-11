@@ -107,6 +107,7 @@
                         })
                         .error(function (data) {
                             $log.error(data);
+                            $scope.errors = data;
                         });
                     }
                     else {
@@ -123,6 +124,7 @@
                     })
                     .error(function (data) {
                         $log.error(data);
+                        $scope.errors = data;
                     });
                 }
             };
@@ -209,6 +211,7 @@
                     })
                     .error(function (data) {
                         $log.error(data);
+                        $scope.errors = data;
                     });
                 }
                 else {

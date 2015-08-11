@@ -1,100 +1,57 @@
 <!-- /- Start of tabbed multi-step form -->
 <div class="tab-content">
-    <div class="col-sm-12">
         <form role="form" ng-submit="save(user_frm)" name="user_frm">
-            <div class="custom-well col-sm-12 margin-t-20 margin-b-20">
-                <div class="col-xs-12">
-                    <h4 class="margin-b-20 fw-600">User Basic Details</h4>
+            <drf-err-msg></drf-err-msg>
+            <div class="custom-well margin-t-20 margin-b-20">
+                <h4 class="margin-b-20 fw-600">User Basic Details</h4>
+                <div class="form-group">
+                    <label class="control-label">First Name</label>
+                    <input name="first_name" type="text" ng-model="user.first_name" required class="form-control" api-checker/>
                 </div>
-                <div class="col-sm-12 margin-t-10">
-                    <div class="group">
-                        <input name="first_name" type="text" ng-model="user.first_name" ng-required="user.id === undefined">
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>First Name</label>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Last Name</label>
+                    <input type="text" name="last_name" ng-model="user.last_name" required class="form-control" api-checker/>
                 </div>
-                <div class="col-sm-12">
-                    <div class="group">
-                        <input type="text" name="last_name" ng-model="user.last_name" ng-required="user.id === undefined">
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>Last Name</label>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Other Names</label>
+                    <input type="text" name="other_names" ng-model="user.other_names" class="form-control"/>
                 </div>
-                <div class="col-sm-12">
-                    <div class="group">
-                        <input type="text" name="other_names" ng-model="user.other_names" />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>Other Names</label>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <input type="email" ng-model="user.email" name="email"  required class="form-control" api-checker/>
                 </div>
-                <div class="col-sm-12">
-                    <div class="group">
-                        <input type="email" ng-model="user.email" name="email" ng-required="user.id === undefined">
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>Email</label>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Employee Number</label>
+                    <input name="employee_number" type="text" ng-model="user.employee_number" class="form-control" required api-checker/>
                 </div>
-                <div class="col-sm-12">
-                    <div class="group">
-                        <input
-                        name="employee_number" type="text" ng-model="user.employee_number"
-                        ng-required="user.id === undefined">
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>Employee Number</label>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Password</label>
+                    <input type="password" name="password" ng-model="user.password" ng-required="!user.id" class="form-control"/>
                 </div>
-                <div class="col-sm-12">
-                    <div class="group">
-                        <input type="password" name="password" ng-model="user.password" ng-required="user.id === undefined">
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>
-                            Password
-                        </label>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Confirm Password</label>
+                    <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-blur="confirmPassword(user.password, user.confirm_password)" class="form-control" />
                 </div>
-                <div class="col-sm-12">
-                    <div class="group">
-                        <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-blur="confirmPassword(user.password, user.confirm_password)"  ng-required="user.id === undefined">
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>
-                            Confirm Password
-                        </label>
-                    </div>
-                </div>
-                <div ng-if="confirm" class="err_class">
-                    The two passwords did not match
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                </div>
-                <div class="col-sm-12" ng-if="!create">
-                  <div class="form-group checkbox">
-                      <label for="open_late_night">
-                        <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="user.is_active" api-checker="" class="ng-valid ng-valid-api">
-                        is active
-                       </label>
-                  </div>
+                <div ng-if="confirm" class="err_class">The two passwords did not match</div>
+                <div class="form-group checkbox" ng-if="!create">
+                    <label for="open_late_night">
+                    <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="user.is_active" api-checker="" class="ng-valid ng-valid-api">
+                    Is active
+                    </label>
                 </div>
             </div>
             <div class="margin-t-20 margin-b-20">
-                <a ng-if="!create" ui-sref="users" class="login-btn login-btn-default">
-                    &nbsp;<i class="fa fa-angle-double-left"></i> Cancel
+                <a ng-if="!create" ui-sref="users" class="btn btn-default">
+                    <i class="fa fa-angle-double-left"></i> Cancel
                 </a>
-                <button ng-if="!create" type="submit" class="login-btn login-btn-primary pull-right" requires-permission="users.change_mfluser" >
-                    &nbsp; Contacts <i class="fa fa-angle-double-right"></i>
+                <button ng-if="!create" type="submit" class="btn btn-primary pull-right" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
+                    Contacts <i class="fa fa-angle-double-right"></i>
                 </button>
-                <div class="col-sm-12 margin-t-10" ng-if="create">
-                <button  requires-permission="users.change_mfluser" type="submit" class="login-btn login-btn-primary">
-                    &nbsp;User Contacts <i class="fa fa-angle-double-right"></i>
+                <div class="margin-t-10" ng-if="create">
+                <button requires-permission="users.change_mfluser" type="submit" class="btn btn-primary" ng-disabled="user_frm.$invalid">
+                    User Contacts <i class="fa fa-angle-double-right"></i>
                 </button>
                 </div>
             </div>
         </form>
-    </div>
 </div>
