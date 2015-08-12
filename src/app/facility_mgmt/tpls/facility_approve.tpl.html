@@ -4,7 +4,7 @@
        <span class="main-title">Approve Facility</span>
    </h2>
 </div>
-<div class="col-xs-12 margin-t-20">
+<div class="col-xs-12 margin-t-20 fade-content">
     <div class="col-xs-12 content-card">
         <h4 class="fw-400"><a ui-sref="facilities.facility_view({facility_id:facility.id})">{{facility.code}} | {{facility.name}}</a></h4>
         <div class="row">
@@ -21,12 +21,12 @@
             <div class="col-sm-6"><span class="pull-right">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
        </div>
     </div>
-    <button class="mfl-btn mfl-btn-primary" ng-click="viewFacility = !viewFacility">
+    <button class="mfl-btn mfl-btn-primary margin-b-20" ng-click="viewFacility = !viewFacility">
         &nbsp;View {{viewFacility ? 'Less' : 'More'}} Facility Details <i class="fa {{viewFacility ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
     </button>
     <div class="row" content-slide-in="viewFacility" slide-show-duration="1000">
         <div class="col-xs-12">
-            <ul class="nav nav-tabs col-xs-12 margin-t-20">
+            <ul class="nav nav-tabs col-xs-12">
                 <li ui-sref-active="active">
                     <a ui-sref=".basic">
                         <span class="fw-900 ">
@@ -44,7 +44,7 @@
                 <li ui-sref-active="active">
                     <a ui-sref=".units">
                         <span class="fw-900 ">
-                            <i class="fa fa-hospital-o"></i> Facility Departments
+                            <i class="fa fa-gavel"></i> Regulation
                         </span>
                     </a>
                 </li>
@@ -56,88 +56,19 @@
     </div>
 </div>
 <div class="col-xs-12" ng-cloak>
-    <div class="col-xs-12 content-card margin-t-20" ng-class="{'alert-success':facility.is_approved}">
-        <div class="col-xs-12 margin-b-10" ng-if="!facility.is_approved">
-            <h4 class>Approve newly created facility</h4>
-            <form name="frm_approve">
-                <div class="form-group margin-t-10">
-                    <label>
-                        Comment for approval
-                    </label>
-                    <textarea class="form-control" name="comment" ng-model="facility_approval.comment" required rows="2">
-                    </textarea>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                </div>
-                <button class="mfl-btn mfl-btn-action" ng-click="approveFacility()">Approve Facility</button>
-                <button class="mfl-btn mfl-btn-danger margin-l-5" ng-click="approveFacility(true)">Reject Facility</button>
-            </form>
-        </div>
-        <div class="row" ng-if="facility.is_approved">
-            <span class="col-xs-12 fs-16"><i class="fa fa-check"></i> Facility has already been approved</span>
-            <div class="col-xs-12">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Done By</th>
-                            <th>Done On</th>
-                            <th>Comment</th>
-                            <th>Rejected/Approved</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="fa in facility_approvals">
-                            <td>{{fa.done_by}}</td>
-                            <td>{{fa.created|date}}</td>
-                            <td>{{fa.comment}}</td>
-                            <td>{{fa.is_cancelled ? 'Rejected' : 'Approved'}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="col-xs-12 content-card marg-t-20 pad-0" ng-if="facility.is_approved">
+        <div class="col-xs-12 pad-0" >
+            <span class="col-xs-12 fs-16 alert alert-success margin-b-10 margin-t-10"><i class="fa fa-check-circle"></i> Facility has already been approved by
+                <span ng-repeat="fa in facility_approvals">
+                    <b>{{fa.done_by}}</b> on <b>{{fa.created|date}}.</b>
+                    <p ng-if="fa.comment">Comment: {{fa.comment}}</p>
+                </span>
+            </span>
         </div>
     </div>
-
-    <div class="col-xs-12 content-card margin-t-20" ng-class="{'alert-info':!facility.latest_update, 'detail-content' : facility.latest_update}">
-        <div ng-if="facility.latest_update && facility.is_approved" class="content-card row">
-            <h4 class="fs-18"><strong>Updated Facility Details</strong></h4>
-            <div class="row">
-                <div class="col-sm-6">
-                    <p class="form-control-static fs-16">Updates made by: <span class="label label-warning">{{facility_update.created_by_name}}</span></p>
-                </div>
-                <div class="col-sm-6">
-                    <p class="form-control-static text-right fs-16">Updates made on: <span class="label label-primary">{{facility_update.created | date}}</span></p>
-                </div>
-            </div>
-            <hr>
-            <table class="table table-hover table-stripped">
-                <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Old value</th>
-                        <th>New value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="change in facility_changes">
-                        <td>{{change.human_field_name | titlecase}}</td>
-                        <td>{{facility[change.field_name] | boolFilter}}</td>
-                        <td>{{change.display_value}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="margin-t-20 margin-b-10">
-                <button ng-click="approveUpdate(true)" class="mfl-btn mfl-btn-success">Approve Updates</button>
-                <button ng-click="approveUpdate(false)" class="mfl-btn mfl-btn-danger">Decline Updates</button>
-            </div>
-        </div>
-        <div ng-if="!facility.latest_update" class="col-xs-12">
-            <p class="lead margin-t-10 margin-b-10"><i class="fa fa-info-circle"></i> No facility updates pending approval</p>
-        </div>
-    </div>
-
-    <div class="col-xs-12 content-card margin-t-20" ng-class="{'alert-info':facility_service_updates.length<1, 'detail-content' : facility_service_updates.length>0}">
-        <div ng-if="facility_service_updates.length>0">
+    <!-- Start of approving facility services -->
+    <div class="col-xs-12 content-card margin-t-20 pad-0" ng-class="{'alert-info':facility_service_updates.length<1, 'detail-content' : facility_service_updates.length>0}">
+        <div ng-if="facility_service_updates.length>0" class="col-xs-12">
             <h4 class="fs-18"><strong>Updated Facility Services</strong></h4>
             <table class="table table-hover table-stripped">
                 <thead>
@@ -163,8 +94,67 @@
                 </tbody>
             </table>
         </div>
-        <div ng-if="facility_service_updates.length<1" class="col-xs-12">
-            <p class="lead margin-t-10 margin-b-10"><i class="fa fa-info-circle"></i> No facility service updates pending approval</p>
+        <div ng-if="facility_service_updates.length<1" class="col-xs-12 alert alert-info margin-t-10 margin-b-10">
+            <p class="fs-16"><i class="fa fa-info-circle"></i> No facility service updates pending approval</p>
         </div>
     </div>
+    <!-- End of approving facility services -->
+    <!-- Start of approving facility updates -->
+    <div class="col-xs-12 content-card margin-t-20 pad-0" ng-class="{'alert-info':!facility.latest_update, 'detail-content' : facility.latest_update}">
+        <div ng-if="facility.latest_update && facility.is_approved" class="col-xs-12">
+            <h4 class="fs-18"><strong>Updated Facility Details</strong></h4>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="form-control-static fs-16">Updates made by: <span class="label label-warning">{{facility_update.created_by_name}}</span></p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="form-control-static text-right fs-16">Updates made on: <span class="label label-primary">{{facility_update.created | date}}</span></p>
+                </div>
+            </div>
+            <table class="table table-hover table-stripped">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Old value</th>
+                        <th>New value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="change in facility_changes">
+                        <td>{{change.human_field_name | titlecase}}</td>
+                        <td>{{facility[change.field_name] | boolFilter}}</td>
+                        <td>{{change.display_value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="margin-t-20 margin-b-10">
+                <button ng-click="approveUpdate(true)" class="mfl-btn mfl-btn-success">Approve Updates</button>
+                <button ng-click="approveUpdate(false)" class="mfl-btn mfl-btn-danger">Decline Updates</button>
+            </div>
+        </div>
+        <div ng-if="!facility.latest_update" class="col-xs-12 alert alert-info margin-t-10 margin-b-10">
+            <p class="fs-16"><i class="fa fa-info-circle"></i> No facility updates pending approval</p>
+        </div>
+    </div>
+    <!-- End of approving facility updates -->
+    <!-- Overall facility approval -->
+    <div class="col-xs-12 content-card margin-t-20 pad-0" ng-class="{'alert-success':facility.is_approved}" ng-if="!facility.is_approved">
+        <div class="col-xs-12 margin-b-10" ng-if="!facility.is_approved">
+            <h4 class>Approve newly created facility</h4>
+            <form name="frm_approve">
+                <div class="form-group margin-t-10">
+                    <label>
+                        Comment for approval
+                    </label>
+                    <textarea class="form-control" name="comment" ng-model="facility_approval.comment" required rows="2">
+                    </textarea>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <button class="mfl-btn mfl-btn-action" ng-click="approveFacility()">Approve Facility</button>
+                <button class="mfl-btn mfl-btn-danger margin-l-5" ng-click="approveFacility(true)">Reject Facility</button>
+            </form>
+        </div>
+    </div>
+    <!-- End of overall apporval -->
 </div>

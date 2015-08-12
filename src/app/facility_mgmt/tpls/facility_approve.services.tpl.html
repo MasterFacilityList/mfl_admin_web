@@ -22,6 +22,11 @@
                         {{service.option_name}}
                     </td>
                 </tr>
+                <tr ng-if="facility.facility_services.length < 1">
+                    <td colspan="4" class="alert alert-info">
+                            <i class="fa fa-info-circle"></i>No Service assigned to the facility
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
