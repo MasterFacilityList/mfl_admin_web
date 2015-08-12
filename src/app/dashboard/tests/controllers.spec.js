@@ -59,9 +59,20 @@
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/")
                             .respond(200, payload);
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?weekly=True")
+                            .respond(200, payload);
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?monthly=True")
+                            .respond(200, payload);
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?quarterly=True")
+                            .respond(200, payload);
 
                         $controller("mfl.dashboard.content", data);
-
+                        data.$scope.weekly();
+                        data.$scope.monthly();
+                        data.$scope.quarterly();
                         //testing calling
 
                         $httpBackend.flush();
@@ -203,9 +214,20 @@
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/")
                             .respond(500, {"error": "a"});
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?weekly=True")
+                            .respond(500, {"error": "a"});
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?monthly=True")
+                            .respond(500, {"error": "a"});
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?quarterly=True")
+                            .respond(500, {"error": "a"});
 
                         $controller("mfl.dashboard.content", data);
-
+                        data.$scope.weekly();
+                        data.$scope.monthly();
+                        data.$scope.quarterly();
                         $httpBackend.flush();
                         $httpBackend.verifyNoOutstandingRequest();
                         $httpBackend.verifyNoOutstandingExpectation();
