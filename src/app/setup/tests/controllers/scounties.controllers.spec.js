@@ -36,10 +36,25 @@
                 var ctrl = createController("mfl.setup.controller.sub_counties.list", {});
                 expect(ctrl).toBeDefined();
             });
-        it("should have `mfl.setup.controller.sub_counties.detail` defined",
+        it("should have `mfl.setup.controller.sub_counties.details` defined and call made",
            function(){
-                var ctrl = createController("mfl.setup.controller.sub_counties.details", {});
-                expect(ctrl).toBeDefined();
+                var dt = {
+                    $stateParams: {scount_id: 1}
+                };
+                $httpBackend.expectGET(SERVER_URL+"api/common/sub_counties/1/")
+                .respond(200);
+                createController("mfl.setup.controller.sub_counties.details",dt);
+                $httpBackend.flush();
+            });
+        it("should have sub-county data fetch failed",
+           function(){
+                var dt = {
+                    $stateParams: {scount_id: 1}
+                };
+                $httpBackend.expectGET(SERVER_URL+"api/common/sub_counties/1/")
+                .respond(500);
+                createController("mfl.setup.controller.sub_counties.details",dt);
+                $httpBackend.flush();
             });
     });
 })(window._);
