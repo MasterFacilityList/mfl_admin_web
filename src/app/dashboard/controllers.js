@@ -19,29 +19,25 @@
                 c3.generate(_payload);
                 $scope.loading = false;
             };
-            $scope.weekly = function () {
-                dashboardApi.api.filter({"weekly":"True"})
+            var updateRecent = function (params) {
+                $scope.recent_spinner = true;
+                dashboardApi.api.filter(params)
                 .success(function(data) {
                     $scope.summary = data;
+                    $scope.recent_spinner = false;
                 }).error(function (err) {
                     $scope.err = err;
+                    $scope.recent_spinner = false;
                 });
+            };
+            $scope.weekly = function () {
+                updateRecent({"weekly":"True"});
             };
             $scope.monthly = function () {
-                dashboardApi.api.filter({"monthly":"True"})
-                .success(function(data) {
-                    $scope.summary = data;
-                }).error(function (err) {
-                    $scope.err = err;
-                });
+                updateRecent({"monthly":"True"});
             };
             $scope.quarterly = function () {
-                dashboardApi.api.filter({"quarterly":"True"})
-                .success(function(data) {
-                    $scope.summary = data;
-                }).error(function (err) {
-                    $scope.err = err;
-                });
+                updateRecent({"quarterly":"True"});
             };
             $scope.showGraph = function(_data) {
                 //owner chart

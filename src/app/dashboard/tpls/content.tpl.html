@@ -57,7 +57,8 @@
                                 <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="quarterly()">Quarterly</button>
                             </span>
                         </h4>
-                        <span class="counts">{{ summary.recently_created }}</span>
+                        <span ng-if="!recent_spinner" class="counts">{{ summary.recently_created }}</span>
+                        <span ng-if="recent_spinner" class="counts"><i class="fa fa-circle-o-notch fa-spin"></i></span>
                     </div><!--/social-box-->
                 </div><!--/col-->
             </div>
