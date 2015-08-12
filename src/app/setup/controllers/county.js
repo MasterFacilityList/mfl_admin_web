@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _){
     "use strict";
     angular.module("mfl.setup.county.controllers",[
         "mfl.setup.api"
@@ -15,8 +15,8 @@
         }]
     )
     .controller("mfl.setup.controller.county.view", ["$scope", "$stateParams",
-        "adminApi",
-        function ($scope, $stateParams, adminApi) {
+        "adminApi","mfl.common.forms.changes","$state",
+        function ($scope, $stateParams, adminApi, formChanges,$state) {
             $scope.spinner = true;
             adminApi.counties.get($stateParams.count_id)
                 .success(function (data) {
@@ -30,6 +30,21 @@
                 .error(function (err) {
                     $scope.alert = err.error;
                 });
+            //update county
+            $scope.saveFrm = function (frm) {
+                var changes= formChanges.whatChanged(frm);
+                if(!_.isEmpty(changes)){
+                    adminApi.counties.update($stateParams.count_id)
+                        .success(function () {
+                            $state.go("setup.counties");
+                        })
+                        .error(function (error) {
+                            $scope.errors = error;
+                        });
+                } else {
+                    $state.go("setup.counties");
+                }
+            };
              //getting counties of particular county
             adminApi.constituencies.filter({"county" : $stateParams.count_id})
                 .success(function (data) {
@@ -49,4 +64,4 @@
         }
     ]);
 
-})(window.angular);
+})(window.angular, window._);

@@ -36,5 +36,84 @@
                 var ctrl = createController("mfl.setup.controller.county.list", {});
                 expect(ctrl).toBeDefined();
             });
+        it("should have patch county with form changes succeeded patch",
+            inject(["$rootScope","mfl.common.forms.changes",function($rootScope,formChanges){
+                var data = {
+                    "$scope": $rootScope.$new(),
+                    "mfl.common.forms.changes" : formChanges,
+                    "$stateParams": {count_id: 1}
+                };
+                var frm = {
+                    name:"NAIROBI",
+                    code:47
+                };
+                $httpBackend.expectGET(SERVER_URL+"api/common/counties/1/")
+                .respond(200);
+                createController("mfl.setup.controller.county.view",data);
+                $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingRequest();
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.resetExpectations();
+                spyOn(formChanges, "whatChanged").andReturn({name:"NAIROBI"});
+                $httpBackend.expectPATCH(SERVER_URL+"api/common/counties/1/")
+                .respond(201, {"id": 1});
+                data.$scope.saveFrm(frm);
+                $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingRequest();
+                $httpBackend.verifyNoOutstandingExpectation();
+            }])
+        );
+        it("should have patch county with form changes failed patch",
+            inject(["$rootScope","mfl.common.forms.changes",function($rootScope,formChanges){
+                var data = {
+                    "$scope": $rootScope.$new(),
+                    "mfl.common.forms.changes" : formChanges,
+                    "$stateParams": {count_id: 1}
+                };
+                var frm = {
+                    name:"NAIROBI",
+                    code:47
+                };
+                $httpBackend.expectGET(SERVER_URL+"api/common/counties/1/")
+                .respond(200);
+                createController("mfl.setup.controller.county.view",data);
+                $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingRequest();
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.resetExpectations();
+                spyOn(formChanges, "whatChanged").andReturn({name:"NAIROBI"});
+                $httpBackend.expectPATCH(SERVER_URL+"api/common/counties/1/")
+                .respond(500);
+                data.$scope.saveFrm(frm);
+                $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingRequest();
+                $httpBackend.verifyNoOutstandingExpectation();
+            }])
+        );
+        it("should have patch county without form changes",
+            inject(["$rootScope","mfl.common.forms.changes",function($rootScope,formChanges){
+                var data = {
+                    "$scope": $rootScope.$new(),
+                    "mfl.common.forms.changes" : formChanges,
+                    "$stateParams": {count_id: 1}
+                };
+                var frm = {
+                    name:"NAIROBI",
+                    code:47
+                };
+                $httpBackend.expectGET(SERVER_URL+"api/common/counties/1/")
+                .respond(200);
+                createController("mfl.setup.controller.county.view",data);
+                $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingRequest();
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.resetExpectations();
+                spyOn($state, "go");
+                spyOn(formChanges, "whatChanged").andReturn({});
+                data.$scope.saveFrm(frm);
+                expect($state.go).toHaveBeenCalled();
+            }])
+        );
+
     });
 })(window._);
