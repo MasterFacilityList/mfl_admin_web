@@ -19,6 +19,28 @@
                 c3.generate(_payload);
                 $scope.loading = false;
             };
+            var updateRecent = function (t) {
+                $scope.recent_spinner = true;
+                var params = {"fields":"recently_created"};
+                params[t] = true;
+                dashboardApi.api.filter(params)
+                .success(function(data) {
+                    $scope.summary.recently_created = data.recently_created;
+                    $scope.recent_spinner = false;
+                }).error(function (err) {
+                    $scope.err = err;
+                    $scope.recent_spinner = false;
+                });
+            };
+            $scope.weekly = function () {
+                updateRecent("weekly");
+            };
+            $scope.monthly = function () {
+                updateRecent("monthly");
+            };
+            $scope.quarterly = function () {
+                updateRecent("quarterly");
+            };
             $scope.showGraph = function(_data) {
                 //owner chart
                 var owners_chart = function (_dt) {

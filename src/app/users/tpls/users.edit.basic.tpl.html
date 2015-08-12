@@ -44,9 +44,14 @@
                 <a ng-if="!create" ui-sref="users" class="btn btn-default">
                     <i class="fa fa-angle-double-left"></i> Cancel
                 </a>
-                <button ng-if="!create" type="submit" class="btn btn-primary pull-right" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
-                    Contacts <i class="fa fa-angle-double-right"></i>
-                </button>
+                <div class="pull-right">
+                    <button ng-if="!create" ng-click="save(user_frm)" class="btn btn-primary" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
+                        Finish
+                    </button>
+                    <button ng-if="!create" type="submit" class="btn btn-primary" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
+                        Contacts <i class="fa fa-angle-double-right"></i>
+                    </button>
+                </div>
                 <div class="margin-t-10" ng-if="create">
                 <button requires-permission="users.change_mfluser" type="submit" class="btn btn-primary" ng-disabled="user_frm.$invalid">
                     User Contacts <i class="fa fa-angle-double-right"></i>

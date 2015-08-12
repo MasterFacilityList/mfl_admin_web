@@ -59,9 +59,23 @@
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/")
                             .respond(200, payload);
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&weekly=true")
+                            .respond(200, payload);
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&monthly=true")
+                            .respond(200, payload);
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&quarterly=true")
+                            .respond(200, payload);
 
                         $controller("mfl.dashboard.content", data);
-
+                        data.$scope.weekly();
+                        data.$scope.monthly();
+                        data.$scope.quarterly();
                         //testing calling
 
                         $httpBackend.flush();
@@ -203,9 +217,23 @@
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/")
                             .respond(500, {"error": "a"});
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&weekly=true")
+                            .respond(500, {"error": "a"});
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&monthly=true")
+                            .respond(500, {"error": "a"});
+                        $httpBackend
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&quarterly=true")
+                            .respond(500, {"error": "a"});
 
                         $controller("mfl.dashboard.content", data);
-
+                        data.$scope.weekly();
+                        data.$scope.monthly();
+                        data.$scope.quarterly();
                         $httpBackend.flush();
                         $httpBackend.verifyNoOutstandingRequest();
                         $httpBackend.verifyNoOutstandingExpectation();
