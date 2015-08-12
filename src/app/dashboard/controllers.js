@@ -19,8 +19,10 @@
                 c3.generate(_payload);
                 $scope.loading = false;
             };
-            var updateRecent = function (params) {
+            var updateRecent = function (t) {
                 $scope.recent_spinner = true;
+                var params = {"fields":"recently_created"};
+                params[t] = true;
                 dashboardApi.api.filter(params)
                 .success(function(data) {
                     $scope.summary.recently_created = data.recently_created;
@@ -31,13 +33,13 @@
                 });
             };
             $scope.weekly = function () {
-                updateRecent({"weekly":"True","fields":"recently_created"});
+                updateRecent("weekly");
             };
             $scope.monthly = function () {
-                updateRecent({"monthly":"True","fields":"recently_created"});
+                updateRecent("monthly");
             };
             $scope.quarterly = function () {
-                updateRecent({"quarterly":"True","fields":"recently_created"});
+                updateRecent("quarterly");
             };
             $scope.showGraph = function(_data) {
                 //owner chart

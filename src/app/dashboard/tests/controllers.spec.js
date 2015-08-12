@@ -60,13 +60,16 @@
                             .expectGET(SERVER_URL + "api/facilities/dashboard/")
                             .respond(200, payload);
                         $httpBackend
-                            .expectGET(SERVER_URL + "api/facilities/dashboard/?weekly=True")
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&weekly=true")
                             .respond(200, payload);
                         $httpBackend
-                            .expectGET(SERVER_URL + "api/facilities/dashboard/?monthly=True")
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&monthly=true")
                             .respond(200, payload);
                         $httpBackend
-                            .expectGET(SERVER_URL + "api/facilities/dashboard/?quarterly=True")
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&quarterly=true")
                             .respond(200, payload);
 
                         $controller("mfl.dashboard.content", data);
@@ -215,13 +218,16 @@
                             .expectGET(SERVER_URL + "api/facilities/dashboard/")
                             .respond(500, {"error": "a"});
                         $httpBackend
-                            .expectGET(SERVER_URL + "api/facilities/dashboard/?weekly=True")
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&weekly=true")
                             .respond(500, {"error": "a"});
                         $httpBackend
-                            .expectGET(SERVER_URL + "api/facilities/dashboard/?monthly=True")
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&monthly=true")
                             .respond(500, {"error": "a"});
                         $httpBackend
-                            .expectGET(SERVER_URL + "api/facilities/dashboard/?quarterly=True")
+                            .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
+                            "_created&quarterly=true")
                             .respond(500, {"error": "a"});
 
                         $controller("mfl.dashboard.content", data);
