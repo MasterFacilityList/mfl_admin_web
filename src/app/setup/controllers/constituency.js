@@ -11,7 +11,7 @@
             };
             $scope.title = {
                 icon: "fa-map-marker",
-                name: "Sub Counties"
+                name: "Constituencies"
             };
         }]
     )

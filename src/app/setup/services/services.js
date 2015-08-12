@@ -9,6 +9,7 @@
                 constituencies:api.setBaseUrl("api/common/constituencies/"),
                 wards: api.setBaseUrl("api/common/wards/"),
                 counties: api.setBaseUrl("api/common/counties/"),
+                sub_counties: api.setBaseUrl("api/common/sub_counties/"),
                 kephs: api.setBaseUrl("api/facilities/keph/"),
                 towns: api.setBaseUrl("api/common/towns/"),
                 contacts: api.setBaseUrl("api/common/contacts/"),

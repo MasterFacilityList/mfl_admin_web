@@ -1,0 +1,35 @@
+<!-- Contentheader by hand -->
+<div class="content-header margin-b-20">
+    <div class="action-container content-header-extra">
+    </div>
+    <h2 class="content-title">
+        <span ng-if="spinner" class="colmd-12 margin-t-30 content-card text-center">
+            <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
+        </span>
+        <span ng-if="!spinner" class="main-title">
+            {{scount_details.name | titlecase}} Sub County
+        </span>
+    </h2>
+</div>
+<!-- End of content header -->
+<div class="col-xs-12">
+    <div class="content-card heading">
+        <form class="form-horizontal margin-t-20">
+            <div class="form-group">
+                <label class="col-sm-3 col-md-2 control-label"><span class="pull-left">Sub County Name:</span></label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="name" ng-model="scount_details.name" placeholder="County Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 col-md-2 control-label"><span class="pull-left">Sub County Code:</span></label>
+                <div class="col-sm-5">
+                    <input type="number" class="form-control" name="code" ng-model="scount_details.code" required placeholder="County Code" />
+                </div>
+            </div>
+            <div class="col-sm-12 pad-l-0 pad-b-10">
+                <button class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
