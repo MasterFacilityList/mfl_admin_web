@@ -23,7 +23,7 @@
                 $scope.recent_spinner = true;
                 dashboardApi.api.filter(params)
                 .success(function(data) {
-                    $scope.summary = data;
+                    $scope.summary.recently_created = data.recently_created;
                     $scope.recent_spinner = false;
                 }).error(function (err) {
                     $scope.err = err;
@@ -31,13 +31,13 @@
                 });
             };
             $scope.weekly = function () {
-                updateRecent({"weekly":"True"});
+                updateRecent({"weekly":"True","fields":"recently_created"});
             };
             $scope.monthly = function () {
-                updateRecent({"monthly":"True"});
+                updateRecent({"monthly":"True","fields":"recently_created"});
             };
             $scope.quarterly = function () {
-                updateRecent({"quarterly":"True"});
+                updateRecent({"quarterly":"True","fields":"recently_created"});
             };
             $scope.showGraph = function(_data) {
                 //owner chart
