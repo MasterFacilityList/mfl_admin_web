@@ -6,7 +6,7 @@
             <i class="fa fa-spin fa-circle-o-notch fa-1x"></i>
         </span>
         <span ng-if="!spinner" class="main-title">
-            {{county_details.name}} COUNTY
+            {{county_details.name | titlecase}} County
         </span>
     </h2>
 </div>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
             </ul>
-            <div class="tab-content margin-t-20">
+            <div class="tab-content">
                 <div class="col-xs-12" ui-view="form-view"></div>
             </div><!-- /tab-content -->
             <!-- end of tabbed multistep form -->
