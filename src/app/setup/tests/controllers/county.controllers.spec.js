@@ -20,8 +20,8 @@
                 var data = {
                     $scope: $scope
                 };
-                createController = function(ctrl, params){
-                    return $controller(ctrl, _.extend(data, params));
+                createController = function(name, params){
+                    return $controller("mfl.setup.controller.county."+name, _.extend(data, params));
 
                 };
             }]);
@@ -33,9 +33,50 @@
 
         it("should have `mfl.setup.controller.county.list` defined",
            function(){
-                var ctrl = createController("mfl.setup.controller.county.list", {});
+                var ctrl = createController("list", {});
                 expect(ctrl).toBeDefined();
             });
+        it("should have `mfl.setup.controller.county.create` defined",
+           function(){
+                var ctrl = createController("create", {});
+                expect(ctrl).toBeDefined();
+            });
+        it("should have post new county with success",
+            inject(["$rootScope",function($rootScope){
+                var data = {
+                    "$scope": $rootScope.$new()
+                };
+                var frm = {
+                    name:"NAIROBI",
+                    code:47
+                };
+                $httpBackend.expectPOST(SERVER_URL+"api/common/counties/")
+                .respond(201);
+                createController("create",data);
+                data.$scope.saveFrm(frm);
+                $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingRequest();
+                $httpBackend.verifyNoOutstandingExpectation();
+            }])
+        );
+        it("should have post new county but fail",
+            inject(["$rootScope",function($rootScope){
+                var data = {
+                    "$scope": $rootScope.$new()
+                };
+                var frm = {
+                    name:"NAIROBI",
+                    code:47
+                };
+                $httpBackend.expectPOST(SERVER_URL+"api/common/counties/")
+                .respond(500);
+                createController("create",data);
+                data.$scope.saveFrm(frm);
+                $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingRequest();
+                $httpBackend.verifyNoOutstandingExpectation();
+            }])
+        );
         it("should have patch county with form changes succeeded patch",
             inject(["$rootScope","mfl.common.forms.changes",function($rootScope,formChanges){
                 var data = {
@@ -49,14 +90,14 @@
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/counties/1/")
                 .respond(200);
-                createController("mfl.setup.controller.county.view",data);
+                createController("view",data);
                 $httpBackend.flush();
                 $httpBackend.verifyNoOutstandingRequest();
                 $httpBackend.verifyNoOutstandingExpectation();
                 $httpBackend.resetExpectations();
                 spyOn(formChanges, "whatChanged").andReturn({name:"NAIROBI"});
                 $httpBackend.expectPATCH(SERVER_URL+"api/common/counties/1/")
-                .respond(201, {"id": 1});
+                .respond(200, {"id": 1});
                 data.$scope.saveFrm(frm);
                 $httpBackend.flush();
                 $httpBackend.verifyNoOutstandingRequest();
@@ -76,7 +117,7 @@
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/counties/1/")
                 .respond(200);
-                createController("mfl.setup.controller.county.view",data);
+                createController("view",data);
                 $httpBackend.flush();
                 $httpBackend.verifyNoOutstandingRequest();
                 $httpBackend.verifyNoOutstandingExpectation();
@@ -103,7 +144,7 @@
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/counties/1/")
                 .respond(200);
-                createController("mfl.setup.controller.county.view",data);
+                createController("view",data);
                 $httpBackend.flush();
                 $httpBackend.verifyNoOutstandingRequest();
                 $httpBackend.verifyNoOutstandingExpectation();
