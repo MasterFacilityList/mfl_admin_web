@@ -365,6 +365,7 @@
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
+                        $scope.errors = err;
                     });
                 } else {
                     if(!$scope.create){
@@ -471,6 +472,7 @@
                     .error(function (data) {
                         $log.error(data);
                         $scope.spinner = false;
+                        $scope.errors = data;
                         $scope.cont_error = errorMessages.errors +
                             errorMessages.contacts;
                     });
@@ -478,6 +480,7 @@
                 .error(function (data) {
                     $log.error(data);
                     $scope.spinner = false;
+                    $scope.errors = data;
                     $scope.cont_error = errorMessages.errors +
                         errorMessages.contacts;
                 });
