@@ -15,7 +15,7 @@
                     }
                 },
                 permission: "common.view_constituency",
-                userFeature: "is_national"
+                userFeature: "is_national,is_staff"
             })
             .state("setup.sub_counties.view_scount", {
                 url: "/details/:scount_id",
@@ -26,7 +26,7 @@
                     }
                 },
                 permission: "common.view_constituency",
-                userFeature: "is_national"
+                userFeature: "is_national,is_staff"
             })
             .state("setup.sub_counties.edit", {
                 url: "/edit/:scount_id",
@@ -36,7 +36,7 @@
                     }
                 },
                 permission: "common.view_constituency",
-                userFeature: "is_national"
+                userFeature: "is_national,is_staff"
             });
     }]);
 
