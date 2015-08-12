@@ -28,11 +28,12 @@
                 permission: "common.view_constituency",
                 userFeature: "is_national"
             })
-            .state("setup.constituencies.edit", {
-                url: "/edit/:const_id",
+            .state("setup.constituencies.create", {
+                url: "/create",
                 views: {
-                    "main-content@setup": {
-                        templateUrl: "admin_units/tpls/constituencies/constituencies.tpl.html"
+                    "main-content@setup.constituencies": {
+                        templateUrl: "setup/tpls/constituencies/create_constituency.tpl.html",
+                        controller :"mfl.setup.controller.constituency.create"
                     }
                 },
                 permission: "common.view_constituency",

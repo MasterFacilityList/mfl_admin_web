@@ -20,20 +20,26 @@
                 var data = {
                     $scope: $scope
                 };
-                createController = function(ctrl, params){
-                    return $controller(ctrl, _.extend(data, params));
-
+                createController = function(name, params){
+                    return $controller("mfl.setup.controller.constituency."+
+                    name, _.extend(data, params));
                 };
             }]);
         });
 
         afterEach(function(){
             $httpBackend.verifyNoOutstandingRequest();
+            $httpBackend.verifyNoOutstandingExpectation();
         });
 
         it("should have `mfl.setup.controller.constituency.list` defined",
            function(){
-                var ctrl = createController("mfl.setup.controller.constituency.list", {});
+                var ctrl = createController("list", {});
+                expect(ctrl).toBeDefined();
+            });
+        it("should have `mfl.setup.controller.constituency.view` defined",
+           function(){
+                var ctrl = createController("view", {});
                 expect(ctrl).toBeDefined();
             });
     });

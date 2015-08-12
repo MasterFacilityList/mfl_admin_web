@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular,_){
     "use strict";
     angular.module("mfl.setup.constituency.controllers",[
         "mfl.setup.api"
@@ -13,12 +13,44 @@
                 icon: "fa-map-marker",
                 name: "Constituencies"
             };
+            $scope.action = [
+                {
+                    func : "ui-sref='setup.constituencies.create'" +
+                           " requires-user-feature='is_staff'",// +
+                        //    " requires-permission='common.add_county'",
+                    class: "btn btn-primary",
+                    tipmsg: "Add Constituency",
+                    wording: "Add Constituency"
+                }
+            ];
         }]
     )
 
+    .controller("mfl.setup.controller.constituency.create", ["$scope",
+        "adminApi","$state",
+        function ($scope, adminApi,$state) {
+            //update constituency
+            $scope.saveFrm = function (frm) {
+                adminApi.constituencies.create(frm)
+                    .success(function () {
+                        $state.go("setup.constituencies");
+                    })
+                    .error(function (error) {
+                        $scope.errors = error;
+                    });
+            };
+            adminApi.counties.list()
+                .success(function(data){
+                    $scope.counties = data;
+                })
+                .error(function (data) {
+                    $scope.errors = data;
+                });
+        }
+    ])
     .controller("mfl.setup.controller.constituency.details", ["$scope",
-        "$stateParams", "adminApi",
-        function ($scope, $stateParams, adminApi) {
+        "$stateParams", "adminApi","mfl.common.forms.changes","$state",
+        function ($scope, $stateParams, adminApi, formChanges,$state) {
             adminApi.constituencies.get($stateParams.const_id)
                 .success(function (data) {
                     $scope.const_details = data;
@@ -26,6 +58,19 @@
                 .error(function (err) {
                     $scope.alert = err.error;
                 });
+            //update constituency
+            $scope.saveFrm = function (frm) {
+                var changes= formChanges.whatChanged(frm);
+                if(!_.isEmpty(changes)){
+                    adminApi.counties.update($stateParams.const_id)
+                        .success(function () {
+                            $state.go("setup.constituencies");
+                        })
+                        .error(function (error) {
+                            $scope.errors = error;
+                        });
+                }
+            };
             adminApi.wards.filter({"constituency" : $stateParams.const_id})
                 .success(function (data) {
                     $scope.const_wards = data.results;
@@ -36,4 +81,4 @@
         }
     ]);
 
-})(window.angular);
+})(window.angular, window._);

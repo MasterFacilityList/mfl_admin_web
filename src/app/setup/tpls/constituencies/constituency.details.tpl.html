@@ -14,7 +14,8 @@
 <!-- End of content header -->
 <div class="col-xs-12">
     <div class="content-card heading">
-        <form class="form-horizontal margin-t-20">
+        <form ng-submit="saveFrm(const_frm)" name="const_frm" class="form-horizontal margin-t-20">
+            <drf-err-msg></drf-err-msg>
             <div class="form-group">
                 <label class="col-sm-3 col-md-2 control-label"><span class="pull-left">Constituency Name:</span></label>
                 <div class="col-sm-5">

@@ -1,0 +1,40 @@
+<div class="content-header margin-b-20">
+    <div class="action-container content-header-extra"></div>
+    <h2 class="content-title">
+        <span class="main-title">
+            Add Constituency
+        </span>
+    </h2>
+</div>
+<!-- End of content header -->
+<div class="col-xs-12 content-body">
+    <div class="pad-h-30">
+        <div class="content-card col-xs-12 col-sm-offset-1 col-sm-10">
+            <form name="const_frm" ng-submit="saveFrm(const_frm)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
+                <drf-err-msg></drf-err-msg>
+                <div class="form-group">
+                    <label class="control-label">Constituency Name:</label>
+                    <input type="text" class="form-control" name="name" ng-model="county_details.name" placeholder="County Name" required api-checker/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Constituency Code:</label>
+                    <input type="number" class="form-control" name="code" ng-model="county_details.code" required placeholder="County Code" required api-checker/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">County:</label>
+                    <ui-select ng-model="select_values.county" required name="county" api-checker register-custom-form-control>
+                        <ui-select-match placeholder="Select a county...">
+                            <span>{{$select.selected.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="county.id as county in counties | filter:$select.search">
+                            <span>{{county.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="margin-t-20 pad-b-10">
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
