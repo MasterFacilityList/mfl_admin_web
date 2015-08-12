@@ -18,8 +18,8 @@
                            " requires-user-feature='is_staff'",// +
                         //    " requires-permission='common.add_county'",
                     class: "btn btn-primary",
-                    tipmsg: "New County",
-                    wording: "New County"
+                    tipmsg: "Add County",
+                    wording: "Add County"
                 }
             ];
         }]

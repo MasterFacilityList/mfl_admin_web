@@ -55,8 +55,6 @@
                 createController("create",data);
                 data.$scope.saveFrm(frm);
                 $httpBackend.flush();
-                $httpBackend.verifyNoOutstandingRequest();
-                $httpBackend.verifyNoOutstandingExpectation();
             }])
         );
         it("should have post new county but fail",
@@ -73,8 +71,6 @@
                 createController("create",data);
                 data.$scope.saveFrm(frm);
                 $httpBackend.flush();
-                $httpBackend.verifyNoOutstandingRequest();
-                $httpBackend.verifyNoOutstandingExpectation();
             }])
         );
         it("should have patch county with form changes succeeded patch",
@@ -100,8 +96,6 @@
                 .respond(200, {"id": 1});
                 data.$scope.saveFrm(frm);
                 $httpBackend.flush();
-                $httpBackend.verifyNoOutstandingRequest();
-                $httpBackend.verifyNoOutstandingExpectation();
             }])
         );
         it("should have patch county with form changes failed patch",
@@ -127,8 +121,6 @@
                 .respond(500);
                 data.$scope.saveFrm(frm);
                 $httpBackend.flush();
-                $httpBackend.verifyNoOutstandingRequest();
-                $httpBackend.verifyNoOutstandingExpectation();
             }])
         );
         it("should have patch county without form changes",
