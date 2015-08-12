@@ -1,0 +1,35 @@
+<div class="content-header margin-b-20">
+    <div class="action-container content-header-extra"></div>
+    <h2 class="content-title">
+        <span ng-if="spinner" class="colmd-12 margin-t-30 content-card text-center">
+            <i class="fa fa-spin fa-circle-o-notch fa-1x"></i>
+        </span>
+        <span ng-if="!spinner" class="main-title">
+            New County
+        </span>
+    </h2>
+</div>
+<!-- End of content header -->
+<div class="col-xs-12 content-body">
+    <div ng-if="spinner" class="margin-t-30 text-center">
+        <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
+    </div>
+    <div ng-if="!spinner" class="pad-h-30">
+        <div class="content-card col-xs-12 col-sm-offset-1 col-sm-10">
+            <form name="county_frm" ng-submit="saveFrm(county_frm)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
+                <drf-err-msg></drf-err-msg>
+                <div class="form-group">
+                    <label class="control-label">County Name:</label>
+                    <input type="text" class="form-control" name="name" ng-model="county_details.name" placeholder="County Name" required api-checker/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">County Code:</label>
+                    <input type="number" class="form-control" name="code" ng-model="county_details.code" required placeholder="County Code" required api-checker/>
+                </div>
+                <div class="margin-t-20 pad-b-10">
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

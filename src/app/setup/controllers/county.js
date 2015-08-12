@@ -12,6 +12,16 @@
             $scope.filters = {
                 "fields": "id,name,code"
             };
+            $scope.action = [
+                {
+                    func : "ui-sref='setup.counties.create'" +
+                           " requires-user-feature='is_staff'",// +
+                        //    " requires-permission='common.add_county'",
+                    class: "btn btn-primary",
+                    tipmsg: "New County",
+                    wording: "New County"
+                }
+            ];
         }]
     )
     .controller("mfl.setup.controller.county.view", ["$scope", "$stateParams",
@@ -61,6 +71,21 @@
                 .error(function (err) {
                     $scope.alert = err.error;
                 });
+        }
+    ])
+    .controller("mfl.setup.controller.county.create", ["$scope", "$stateParams",
+        "adminApi","mfl.common.forms.changes","$state",
+        function ($scope, $stateParams, adminApi, formChanges,$state) {
+            //update county
+            $scope.saveFrm = function (frm) {
+                adminApi.counties.create(frm)
+                    .success(function () {
+                        $state.go("setup.counties");
+                    })
+                    .error(function (error) {
+                        $scope.errors = error;
+                    });
+            };
         }
     ]);
 
