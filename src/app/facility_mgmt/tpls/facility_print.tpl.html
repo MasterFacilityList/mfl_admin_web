@@ -58,6 +58,10 @@
                     <i class="fa fa-times-circle-o fa-1x fs-15"></i>
                 </span>
             </span>
+            <span ng-if="facility.facility_catchment_population" class="content-right col-md-6 col-xs-12">
+                <label class="text-black">Facility Catchment Population: </label>
+                {{facility.facility_catchment_population}}
+            </span>
             <div class="col-xs-12"><hr class="line-divider"></div>
             <div class="col-xs-12 margin-t-5">
                 <h4 class="fw-600">Location Details</h4>
@@ -126,6 +130,27 @@
                     {{cont.contact_type_name | titlecase}}:
                 </label>
                 {{cont.contact}}
+            </span>
+            <div class="col-xs-12 margin-t-20" ng-if="facility.bank_name">
+                <h4 class="fw-600">Facility Bank Details</h4>
+            </div>
+            <span class="col-xs-12 fw-500" ng-if="facility.bank_name">
+                <label class="text-black">
+                    Bank Name:
+                </label>
+                {{facility.bank_name}}
+            </span>
+            <span class="col-xs-12 fw-500" ng-if="facility.branch_name">
+                <label class="text-black">
+                    Branch Name:
+                </label>
+                {{facility.branch_name}}
+            </span>
+            <span class="col-xs-12 fw-500" ng-if="facility.bank_account">
+                <label class="text-black">
+                    Facility Bank Account:
+                </label>
+                {{facility.bank_account}}
             </span>
         </div>
     </div>
