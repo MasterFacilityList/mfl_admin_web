@@ -14,7 +14,7 @@
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="count in counts | filter: search.query">
                 <td data-title="Name" class="pad-t-15 fs-14 fw-500">{{::count.name | titlecase}}</td>
-                <td data-title="Code" class="pad-t-15 fs-14 fw-15">{{::count.code}}</td>
+                <td data-title="Code" class="pad-t-15 fs-14">{{::count.code}}</td>
                 <td class="text-right">
                     <a ui-sref="setup.counties.view_consts.constituencies({count_id : count.id})" class="btn btn-success" tooltip="View County">
                         View

@@ -49,14 +49,13 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
-                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?page_size=100")
-                .respond(200);
+                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?fields=id,name"+
+                "&page_size=100").respond(200);
                 createController("create", data);
                 $httpBackend.flush();
-                $httpBackend.expectPOST(SERVER_URL+"api/common/constituencies/")
-                .respond(201);
+                $httpBackend.expectPOST(SERVER_URL+"api/common/constituencies/").respond(201);
                 data.$scope.saveFrm(frm);
                 $httpBackend.flush();
             }])
@@ -68,10 +67,10 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
-                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?page_size=100")
-                .respond(200);
+                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?fields=id,name"+
+                "&page_size=100").respond(200);
                 createController("create", data);
                 $httpBackend.flush();
                 $httpBackend.expectPOST(SERVER_URL+"api/common/constituencies/")
@@ -89,12 +88,12 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/1/")
                 .respond(200);
-                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?page_size=100")
-                .respond(200);
+                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?fields=id,name"+
+                "&page_size=100").respond(200);
                 createController("details", data);
                 $httpBackend.flush();
                 $httpBackend.verifyNoOutstandingRequest();
@@ -116,11 +115,12 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/1/")
                 .respond(200);
-                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?page_size=100")
+                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?fields=id,name"+
+                "&page_size=100")
                 .respond(200);
                 createController("details", data);
                 $httpBackend.flush();
@@ -128,8 +128,7 @@
                 $httpBackend.verifyNoOutstandingExpectation();
                 $httpBackend.resetExpectations();
                 spyOn(formChanges, "whatChanged").andReturn({name:"MATHARE"});
-                $httpBackend.expectPATCH(SERVER_URL+"api/common/constituencies/1/")
-                .respond(500);
+                $httpBackend.expectPATCH(SERVER_URL+"api/common/constituencies/1/").respond(500);
                 data.$scope.saveFrm(frm);
                 $httpBackend.flush();
             }])
@@ -143,12 +142,12 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/1/")
                 .respond(200);
-                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?page_size=100")
-                .respond(200);
+                $httpBackend.expectGET(SERVER_URL+"api/common/counties/?fields=id,name"+
+                "&page_size=100").respond(200);
                 createController("details", data);
                 $httpBackend.flush();
                 $httpBackend.verifyNoOutstandingRequest();

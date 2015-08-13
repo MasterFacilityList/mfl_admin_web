@@ -44,7 +44,7 @@
             $scope.saveFrm = function (frm) {
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
-                    adminApi.counties.update($stateParams.count_id)
+                    adminApi.counties.update($stateParams.count_id,changes)
                         .success(function () {
                             $state.go("setup.counties");
                         })
