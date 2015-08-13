@@ -334,7 +334,7 @@
                         reg_no : "",
                         contacts : [
                             {
-                                contact_type : "",
+                                type : "",
                                 contact : ""
                             }
                         ]
@@ -343,7 +343,7 @@
             };
             $scope.addOfficerContact = function () {
                 $scope.facility.officer_in_charge.contacts.push({
-                    contact_type : "",
+                    type : "",
                     contact : ""
                 });
             };
