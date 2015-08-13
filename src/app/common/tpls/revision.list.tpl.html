@@ -19,7 +19,7 @@
             </tbody>
             <tbody ng-if="revisions.length">
                 <tr ng-repeat="rev in revisions">
-                    <td>{{::rev.updated | dateFilter}}</td>
+                    <td>{{::rev.updated_on | dateFilter}}</td>
                     <td>{{::rev.updated_by}}</td>
                     <td>
                         <p ng-repeat="upd in rev.updates">

@@ -17,6 +17,28 @@
                 },
                 permission: "common.view_ward",
                 userFeature: "is_national"
+            })
+            .state("setup.wards.edit", {
+                url: "/view/:ward_id",
+                views: {
+                    "main-content@setup.wards": {
+                        controller: "mfl.setup.controller.ward.edit",
+                        templateUrl: "setup/tpls/wards/edit_ward.tpl.html"
+                    }
+                },
+                permission: "common.view_ward",
+                userFeature: "is_national"
+            })
+            .state("setup.wards.create", {
+                url: "/new",
+                views: {
+                    "main-content@setup.wards": {
+                        controller: "mfl.setup.controller.ward.edit",
+                        templateUrl: "setup/tpls/wards/edit_ward.tpl.html"
+                    }
+                },
+                permission: "common.view_ward",
+                userFeature: "is_national"
             });
     }]);
 })(window.angular);
