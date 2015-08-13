@@ -11,15 +11,16 @@
 <div class="col-xs-12 content-body">
     <div class="pad-h-30">
         <div class="content-card col-xs-12 col-sm-offset-1 col-sm-10">
-            <form name="ward_frm" ng-submit="saveFrm(ward_frm)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
+            <form name="ward_frm" ng-submit="saveFrm(state ? ward_frm : ward_details)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
                 <div class="form-group fs-15">
-                    <label class="control-label">Ward Code:</label>
-                    <span class="form-control-static pad-l-10">{{ward_details.code}}</span>
+                    <label class="control-label">Ward Code:</label><br>
+                   <span ng-if="!state" class="fs-14 label label-info">To be generated after adding ward</span>
+                   <span ng-if="state" class="fs-16 fw-600 form-control-static"> {{ward_details.code}}</span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Ward Name:</label>
-                    <input type="text" class="form-control" name="name" ng-model="ward_details.name" placeholder="County Name" required api-checker/>
+                    <input type="text" class="form-control" name="name" ng-model="ward_details.name" placeholder="Enter Ward Name Here..." required api-checker/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Constituency:</label>

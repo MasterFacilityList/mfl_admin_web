@@ -27,6 +27,9 @@
     .controller("mfl.setup.controller.ward.edit", ["$scope","adminApi","$stateParams",
         "mfl.common.forms.changes","$state",
         function ($scope,adminApi,$stateParams,formChanges,$state) {
+            $scope.select_values = {
+                constituency: {}
+            };
             if(!_.isUndefined($stateParams.ward_id)){
                 $scope.state =  true;
                 adminApi.wards.get($stateParams.ward_id)
@@ -59,7 +62,8 @@
             $scope.saveFrm = function (frm) {
                 if(_.isUndefined($stateParams.ward_id)){
                     //create ward
-                    adminApi.wards.create(frm)
+                    adminApi.wards.create({"name": frm.name,
+                       "constituency": $scope.select_values.constituency})
                     .success(function () {
                         $state.go("setup.wards");
                     })

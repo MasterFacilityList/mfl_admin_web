@@ -10,16 +10,27 @@
 <div class="col-xs-12 content-body">
     <div class="pad-h-30">
         <div class="content-card col-xs-12 col-sm-offset-1 col-sm-10">
-            <form name="scounty_frm" ng-submit="saveFrm(county_frm)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
+            <form name="scounty_frm" ng-submit="saveFrm(state ? scounty_frm : scounty_details)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
                 <div class="form-group">
                     <label class="control-label">Sub County Code:</label><br>
                    <span ng-if="!state" class="fs-14 label label-info">To be generated after adding sub county</span>
-                   <span ng-if="state" class="fs-14 form-control-static"> {{scounty_details.code}}</span>
+                   <span ng-if="state" class="fs-16 form-control-static fw-600"> {{scount_details.code}}</span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Sub County Name:</label>
-                    <input type="text" class="form-control" name="name" ng-model="scounty_details.name" placeholder="County Name" required api-checker/>
+                    <input type="text" class="form-control" name="name" ng-model="scount_details.name" placeholder="County Name" required api-checker/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"><span class="pull-left">County:</span></label>
+                    <ui-select ng-model="select_values.county" required name="county" api-checker register-custom-form-control>
+                        <ui-select-match placeholder="Select a county...">
+                            <span>{{$select.selected.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="county.id as county in counties | filter:$select.search">
+                            <span>{{county.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
                 <div class="margin-t-20 pad-b-10">
                     <button class="btn btn-primary">Save</button>
