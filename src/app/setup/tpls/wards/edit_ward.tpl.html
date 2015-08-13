@@ -3,7 +3,7 @@
     <div class="action-container content-header-extra"></div>
     <h2 class="content-title">
         <span class="main-title">
-            {{state ? 'Edit' : 'Add'}} Ward
+            {{::state ? (ward_details.name |titlecase) : 'Add' }} Ward
         </span>
     </h2>
 </div>
@@ -13,6 +13,10 @@
         <div class="content-card col-xs-12 col-sm-offset-1 col-sm-10">
             <form name="ward_frm" ng-submit="saveFrm(ward_frm)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
+                <div class="form-group fs-15">
+                    <label class="control-label">Ward Code:</label>
+                    <span class="form-control-static pad-l-10">{{ward_details.code}}</span>
+                </div>
                 <div class="form-group">
                     <label class="control-label">Ward Name:</label>
                     <input type="text" class="form-control" name="name" ng-model="ward_details.name" placeholder="County Name" required api-checker/>
