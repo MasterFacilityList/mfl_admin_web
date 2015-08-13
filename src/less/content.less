@@ -348,7 +348,11 @@ overflow-x: hidden;
     -o-animation: fadein 1.2s; /* Opera < 12.1 */
     animation: fadein 1.2s;
 }
-
+.fade-outcontent {
+    -webkit-animation: fade-out .5s ease-in;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: 1;
+}
 .tab-content {
     -webkit-animation: fadein 1.2s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 1.2s; /* Firefox < 16 */
@@ -391,6 +395,11 @@ overflow-x: hidden;
 @-o-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+@keyframes fadeout {
+    0% { opacity: 1; -webkit-transform: scale(1);}
+    85% {opacity: 1; -webkit-transform: scale(1.05);}
+    100% {-webkit-transform: scale(.1); opacity: 0;}
 }
 
 .content-right {
