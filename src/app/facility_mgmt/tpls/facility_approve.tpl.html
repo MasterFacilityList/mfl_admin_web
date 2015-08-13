@@ -79,10 +79,10 @@
                     </tr>
                 </thead>
                 <tbody ng-if="facility_service_updates.length>0">
-                    <tr ng-repeat="fsu in facility_service_updates">
-                        <td>{{fsu.service_name}}</td>
-                        <td>{{fsu.option_display_value}}</td>
-                        <td>
+                    <tr ng-repeat="fsu in facility_service_updates" ng-class="{'fade-outcontent' : fsu.remove}">
+                        <td class="pad-t-15">{{fsu.service_name}}</td>
+                        <td class="pad-t-15">{{fsu.option_display_value}}</td>
+                        <td class="text-right">
                             <button class="mfl-btn mfl-btn-success" ng-click="approveFacilityService(fsu,true)">
                                 &nbsp;Approve
                             </button>
@@ -100,7 +100,7 @@
     </div>
     <!-- End of approving facility services -->
     <!-- Start of approving facility updates -->
-    <div class="col-xs-12 content-card margin-t-20 pad-0" ng-class="{'alert-info':!facility.latest_update, 'detail-content' : facility.latest_update}">
+    <div ng-if="facility.is_approved" class="col-xs-12 content-card margin-t-20 pad-0" ng-class="{'alert-info':!facility.latest_update, 'detail-content' : facility.latest_update}">
         <div ng-if="facility.latest_update && facility.is_approved" class="col-xs-12">
             <h4 class="fs-18"><strong>Updated Facility Details</strong></h4>
             <div class="row">
@@ -132,7 +132,7 @@
                 <button ng-click="approveUpdate(false)" class="mfl-btn mfl-btn-danger">Decline Updates</button>
             </div>
         </div>
-        <div ng-if="!facility.latest_update" class="col-xs-12 alert alert-info margin-t-10 margin-b-10">
+        <div ng-if="!facility.latest_update && facility.is_approved" class="col-xs-12 alert alert-info margin-t-10 margin-b-10">
             <p class="fs-16"><i class="fa fa-info-circle"></i> No facility updates pending approval</p>
         </div>
     </div>
