@@ -13,5 +13,15 @@
                 "fields": "id,name,code"
             };
         }]
+    )
+    .controller("mfl.setup.controller.ward.edit", ["$scope","adminApi","$stateParams",
+        function ($scope,adminApi,$stateParams) {
+            adminApi.wards.get($stateParams.ward_id)
+            .success(function (data) {
+                $scope.ward_details = data;
+            }).error(function (err) {
+                $scope.errors = err;
+            });
+        }]
     );
 })(window.angular);
