@@ -24,6 +24,7 @@
                     <label class="control-label">County:</label>
                     <ui-select ng-model="conts_details.county" required name="county" api-checker register-custom-form-control>
                         <ui-select-match placeholder="Select a county...">
+                        <span>{{$select.selected.name}}</span>
                         </ui-select-match>
                         <ui-select-choices repeat="county.id as county in counties | filter:$select.search">
                             <span>{{county.name}}</span>

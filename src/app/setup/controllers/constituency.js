@@ -43,6 +43,12 @@
                 "fields":"id,name",
                 "page_size":100
             };
+            $scope.const_details = {
+                county: {
+                    "id": null,
+                    "name": null
+                }
+            };
             adminApi.counties.filter($scope.filters)
                 .success(function(data){
                     $scope.counties = data.results;
