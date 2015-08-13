@@ -50,9 +50,9 @@
     )
 
     .controller("mfl.auth.controllers.login",
-        ["$scope", "$sce", "$state", "$stateParams",
+        ["$scope", "$sce", "$state", "$stateParams", "Idle",
         "mfl.auth.services.login", "HOME_PAGE_NAME",
-        function ($scope, $sce, $state, $stateParams, loginService, HOME_PAGE_NAME) {
+        function ($scope, $sce, $state, $stateParams, Idle, loginService, HOME_PAGE_NAME) {
             $scope.login_err = "";
             $scope.login_err_html = "";
             $scope.params = $stateParams;
@@ -68,7 +68,9 @@
                 var success_fxn = function () {
                     $scope.spinner = false;
                     var next_state = $stateParams.next || HOME_PAGE_NAME;
-                    $state.go(next_state);
+                    $state.go(next_state).then(function () {
+                        Idle.watch();
+                    });
                 };
                 loginService.login(obj)
                     .then(
@@ -82,9 +84,11 @@
     ])
 
     .controller("mfl.auth.controllers.logout",
-        ["$state", "mfl.auth.services.login", function ($state, loginService) {
+        ["$state", "mfl.auth.services.login", "Idle", function ($state, loginService, Idle) {
             var callback = function () {
-                $state.go("login");
+                $state.go("login").then(function () {
+                    Idle.unwatch();
+                });
             };
             loginService.logout().then(callback, callback);
         }]
