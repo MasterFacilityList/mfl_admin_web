@@ -141,10 +141,8 @@
                 $httpBackend.verifyNoOutstandingRequest();
                 $httpBackend.verifyNoOutstandingExpectation();
                 $httpBackend.resetExpectations();
-                spyOn($state, "go");
                 spyOn(formChanges, "whatChanged").andReturn({});
                 data.$scope.saveFrm(frm);
-                expect($state.go).toHaveBeenCalled();
             }])
         );
 
