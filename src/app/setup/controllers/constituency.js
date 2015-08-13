@@ -39,9 +39,9 @@
                         $scope.errors = error;
                     });
             };
-            adminApi.counties.list()
+            adminApi.counties.filter({"page_size":100})
                 .success(function(data){
-                    $scope.counties = data;
+                    $scope.counties = data.results;
                 })
                 .error(function (data) {
                     $scope.errors = data;
