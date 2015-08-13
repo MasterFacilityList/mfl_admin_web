@@ -49,7 +49,7 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/counties/?fields=id,name"+
                 "&page_size=100").respond(200);
@@ -67,7 +67,7 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/counties/?fields=id,name"+
                 "&page_size=100").respond(200);
@@ -88,7 +88,7 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/1/")
                 .respond(200);
@@ -115,7 +115,7 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/1/")
                 .respond(200);
@@ -142,7 +142,7 @@
                 };
                 var frm = {
                     name:"MATHARE",
-                    code:3
+                    county:"1"
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/1/")
                 .respond(200);

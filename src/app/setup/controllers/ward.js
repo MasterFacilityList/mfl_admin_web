@@ -45,6 +45,17 @@
             } else {
                 $scope.state = false;
             }
+            $scope.filters = {
+                "fields":"id,name",
+                "page_size":300
+            };
+            adminApi.constituencies.filter($scope.filters)
+                .success(function(data){
+                    $scope.constituencies = data.results;
+                })
+                .error(function (data) {
+                    $scope.errors = data;
+                });
             $scope.saveFrm = function (frm) {
                 if(_.isUndefined($stateParams.ward_id)){
                     //create ward
@@ -69,17 +80,6 @@
                     }
                 }
             };
-            $scope.filters = {
-                "fields":"id,name",
-                "page_size":300
-            };
-            adminApi.constituencies.filter($scope.filters)
-                .success(function(data){
-                    $scope.constituencies = data.results;
-                })
-                .error(function (data) {
-                    $scope.errors = data;
-                });
         }]
     );
 })(window.angular, window._);
