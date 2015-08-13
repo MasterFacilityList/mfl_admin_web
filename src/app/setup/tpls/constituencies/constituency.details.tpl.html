@@ -14,7 +14,8 @@
 <!-- End of content header -->
 <div class="col-xs-12">
     <div class="content-card heading">
-        <form class="form-horizontal margin-t-20">
+        <form ng-submit="saveFrm(const_frm)" name="const_frm" class="form-horizontal margin-t-20">
+            <drf-err-msg></drf-err-msg>
             <div class="form-group">
                 <label class="col-sm-3 col-md-2 control-label"><span class="pull-left">Constituency Name:</span></label>
                 <div class="col-sm-5">
@@ -26,6 +27,17 @@
                 <div class="col-sm-5">
                     <input type="number" class="form-control" name="code" ng-model="const_details.code" required placeholder="County Code" />
                 </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 col-md-2 control-label"><span class="pull-left">County:</span></label>
+                <ui-select class="col-sm-5" ng-model="select_values.county" required name="county" api-checker register-custom-form-control>
+                    <ui-select-match placeholder="Select a county...">
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="county.id as county in counties | filter:$select.search">
+                        <span>{{county.name}}</span>
+                    </ui-select-choices>
+                </ui-select>
             </div>
             <div class="col-sm-12 pad-l-0 pad-b-10">
                 <button class="btn btn-primary">Save</button>

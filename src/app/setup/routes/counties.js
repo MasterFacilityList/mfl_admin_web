@@ -18,6 +18,17 @@
                 permission: "common.view_county",
                 userFeature: "is_national"
             })
+            .state("setup.counties.create", {
+                url: "/new",
+                views: {
+                    "main-content@setup.counties": {
+                        controller: "mfl.setup.controller.county.create",
+                        templateUrl: "setup/tpls/counties/create_county.tpl.html"
+                    }
+                },
+                permission: "common.view_county",
+                userFeature: "is_national"
+            })
             .state("setup.counties.view_consts", {
                 url: "/:count_id",
                 views: {
