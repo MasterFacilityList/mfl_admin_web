@@ -8,34 +8,35 @@
                          <span class="text-warning">M</span>aster Facility List <span class="fs-18">V 2.0</span>
                     </h2>
                 </div>
-                <div class="col-md-10 col-md-offset-1 alert alert-info" ng-if="params.reset_pwd||params.reset_pwd_confirm||logout">
+                <div class="col-md-10 col-md-offset-1 alert alert-info" ng-if="params.reset_pwd||params.reset_pwd_confirm">
                     <button class="close" data-dismiss="alert" ><span>&times;</span></button>
                     <p ng-if="params.reset_pwd">Password reset instructions have been sent to your email.</p>
                     <p ng-if="params.reset_pwd_confirm">Password has been reset successfully.</p>
-                    <p ng-if="logout">Logging out your session.</p>
                 </div>
                 <span ng-if="login_err_html" ng-bind-html="login_err_html" class="fade-content alert alert-danger col-md-10 col-md-offset-1">
                     <span class="pull-right">
                         <i class="fa fa-times"></i>
                     </span>
                 </span>
-                <form role="form" name="frm_login" ng-submit="submitUser(user)" novalidate>
+                <form role="form" name="login" ng-submit="submitUser(user)" novalidate>
                     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
                         <div class="form-group">
                             <label class="control-label" for="email">Employee Number or Email Address</label>
-                            <input type="text" ng-model="user.username" required autofocus name="email" id="email" class="form-control" ng-disabled="logout">
+                            <input type="text" ng-model="user.username" required autofocus name="email" id="email" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label class="control-label" for="password">Password</label>
-                            <input type="password" ng-model="user.password" required name="password" id="password" class="form-control" ng-disabled="logout">
+                            <input type="password" ng-model="user.password" required name="password" id="password" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-sm-10 col-md-offset-1 col-sm-10 col-sm-offset-1 margin-t-10 margin-b-20 text-right">
                             <span class="pull-left">
-                                <button type="submit" class="mfl-btn mfl-btn-primary" ng-disabled="spinner||login.$invalid" ng-disabled="logout">Login</button>
+                                <button type="submit" class="mfl-btn mfl-btn-primary" ng-disabled="spinner||login.$invalid">
+                                    &nbsp;Login
+                                </button>
                                 <span ng-if="spinner" style="display: inline-block;" class="margin-r-10 margin-t-5">
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
                                 </span>
