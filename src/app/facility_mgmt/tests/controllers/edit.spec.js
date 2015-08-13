@@ -469,6 +469,7 @@
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
                 data.$scope.setFurthest = angular.noop;
+                data.$scope.$apply();
                 data.$scope.facility = {
                     facility_physical_address : {town : "5"}
                 };
@@ -484,6 +485,10 @@
                     town : {id : "5"}
                 };
                 data.$scope.nxtState = false;
+                httpBackend.expectGET(server_url +
+                    "api/facilities/job_titles/").respond(200, {results : []});
+                httpBackend.expectGET(server_url +
+                    "api/common/contact_types/").respond(200, {results : []});
                 ctrl(".basic", data);
 
                 var frm = {
@@ -493,11 +498,16 @@
                         "$$modelValue": "test"
                     }
                 };
+                var obj = {type : "", contact : ""};
                 data.$scope.save(frm);
+                data.$scope.facilityOfficers(data.$scope.facility);
+                data.$scope.addOfficerContact();
+                data.$scope.removeOfficerContact(obj);
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.initUniqueName({
                     name: {"$setViewValue": jasmine.createSpy()}
                 });
+                httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 expect(data.$scope.facility.name).toEqual("Facility");
@@ -519,8 +529,20 @@
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
                 data.$scope.setFurthest = angular.noop;
+                data.$scope.$apply();
                 data.$scope.facility = {
-                    facility_physical_address : {town : "5"}
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge : {
+                        name : "",
+                        reg_no : "",
+                        contacts : [
+                            {
+                                id : "3",
+                                type : "MOBILE",
+                                contact : "0722"
+                            }
+                        ]
+                    }
                 };
                 data.$scope.steps = [
                     {name : "basic"},
@@ -543,11 +565,14 @@
                         "$$modelValue": "test"
                     }
                 };
+                var obj = {id: "3", type : "MOBILE", contact : "0722"};
                 data.$scope.save(frm);
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.initUniqueName({
                     name: {"$setViewValue": jasmine.createSpy()}
                 });
+                data.$scope.removeOfficerContact(obj);
+                data.$scope.facilityOfficers(data.$scope.facility);
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 expect(data.$scope.facility.name).toEqual("Facility");
@@ -601,6 +626,39 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 expect(data.$scope.facility.name).toEqual("Another");
+            });
+            it("should not define facility basic details", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
+                data.$scope.$apply();
+                data.$scope.facility = undefined;
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
+                };
+                data.$scope.create = false;
+                httpBackend.expectGET(server_url +
+                    "api/facilities/job_titles/").respond(200, {results : []});
+                httpBackend.expectGET(server_url +
+                    "api/common/contact_types/").respond(200, {results : []});
+                ctrl(".basic", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
             });
 
             it("should save facility basic details", function () {
