@@ -51,8 +51,6 @@
                         .error(function (error) {
                             $scope.errors = error;
                         });
-                } else {
-                    $state.go("setup.counties");
                 }
             };
              //getting counties of particular county
