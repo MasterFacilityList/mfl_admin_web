@@ -13,7 +13,7 @@
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$state",
                 function ($rootScope, $controller, $httpBackend, url, loginService, $state) {
-                    root = $rootScope,
+                    root = $rootScope;
                     scope = root.$new();
                     SERVER_URL = url;
                     state = $state;
@@ -85,48 +85,45 @@
 
     describe("Test logout controller", function () {
 
-        var controller, credz, httpBackend, state, payload;
+        var controller, credz, httpBackend, state, payload, rootScope;
 
         beforeEach(function () {
             module("ui.router");
             module("mflAdminAppConfig");
             module("mfl.auth.oauth2");
             module("mfl.auth.services");
+            module("mfl.auth.states");
             module("mfl.auth.controllers");
 
-            inject(["$controller", "$httpBackend", "CREDZ", "$window",
+            inject(["$controller", "$httpBackend", "CREDZ", "$window", "$rootScope",
                 "mfl.auth.services.login", "$state", "api.oauth2",
-                function ($controller, $httpBackend, CREDZ, $window, loginService, $state, oauth2) {
+                function ($controller, $httpBackend, CREDZ, $window, r, l, $state, oauth2) {
                     credz = CREDZ;
                     state = $state;
                     httpBackend = $httpBackend;
-                    loginService = loginService;
-                    var data = {
-                        $state : $state,
-                        "mfl.auth.controllers.logout" : loginService
-                    };
+                    rootScope = r;
                     spyOn(oauth2, "getToken").andReturn({"access_token": "token"});
                     payload =
                         "token=" + "token" +
                         "&client_id=" + credz.client_id +
                         "&client_secret=" + credz.client_secret;
                     controller = function () {
-                        return $controller("mfl.auth.controllers.logout", data);
+                        return $controller("mfl.auth.controllers.logout", {
+                            "$scope": rootScope.$new()
+                        });
                     };
                 }
             ]);
         });
 
         it("should logout a user on successful revoke of token", function () {
-            httpBackend
-                .expectPOST(credz.revoke_url, payload)
-                .respond(200, {});
+            httpBackend.expectPOST(credz.revoke_url, payload).respond(200, {});
             spyOn(state, "go");
             controller();
             httpBackend.flush();
             httpBackend.verifyNoOutstandingExpectation();
             httpBackend.verifyNoOutstandingRequest();
-            expect(state.go).toHaveBeenCalledWith("login");
+            expect(state.go).toHaveBeenCalled();
         });
 
         it("should logout a user on failed revoke of token", function () {
@@ -136,7 +133,7 @@
             httpBackend.flush();
             httpBackend.verifyNoOutstandingExpectation();
             httpBackend.verifyNoOutstandingRequest();
-            expect(state.go).toHaveBeenCalledWith("login");
+            expect(state.go).toHaveBeenCalled();
         });
     });
 
@@ -152,7 +149,7 @@
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
                 "$state", "$log",
                 function ($rootScope, $controller, $httpBackend, url, $state, $log) {
-                    rootScope = $rootScope,
+                    rootScope = $rootScope;
                     SERVER_URL = url;
                     state = $state;
                     httpBackend = $httpBackend;
@@ -228,7 +225,7 @@
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
                 "$state", "$log",
                 function ($rootScope, $controller, $httpBackend, url, $state, $log) {
-                    rootScope = $rootScope,
+                    rootScope = $rootScope;
                     SERVER_URL = url;
                     state = $state;
                     httpBackend = $httpBackend;

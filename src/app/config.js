@@ -54,7 +54,6 @@
         ip.idle(st.kickout);
         ip.timeout(st.warning);
         ip.keepalive(false);
-        ip.autoResume(true);
     }])
 
     .run(["Idle", function (idle) {

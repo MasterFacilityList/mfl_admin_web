@@ -38,9 +38,7 @@
             var scope = rootScope.$new();
             spyOn(loginService, "getUser").andReturn({});
             spyOn(loginService, "isLoggedIn").andReturn(true);
-            spyOn(loginService, "logout").andReturn({
-                "then": function (a, b) { a(); b(); }
-            });
+            spyOn(loginService, "logout");
             spyOn(state, "go");
 
             ctrl({
@@ -57,9 +55,7 @@
             var scope = rootScope.$new();
             spyOn(loginService, "getUser").andReturn({});
             spyOn(loginService, "isLoggedIn").andReturn(false);
-            spyOn(loginService, "logout").andReturn({
-                "then": function (a, b) { a(); b(); }
-            });
+            spyOn(loginService, "logout");
             spyOn(state, "go");
 
             ctrl({
