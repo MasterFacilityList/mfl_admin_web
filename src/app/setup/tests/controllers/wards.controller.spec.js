@@ -20,8 +20,8 @@
                 var data = {
                     $scope: $scope
                 };
-                createController = function(ctrl, params){
-                    return $controller(ctrl, _.extend(data, params));
+                createController = function(name, params){
+                    return $controller("mfl.setup.controller.ward."+name, _.extend(data, params));
 
                 };
             }]);
@@ -31,10 +31,27 @@
             $httpBackend.verifyNoOutstandingRequest();
         });
 
-        it("should have `mfl.setup.controller.chuStatus.ward` defined",
+        it("should have `mfl.setup.controller.ward.list` defined",
            function(){
-                var ctrl = createController("mfl.setup.controller.ward.list", {});
+                var ctrl = createController("list", {});
                 expect(ctrl).toBeDefined();
             });
+        it("should have edit ctrl defined and calls for are done successfully",
+        inject(["$rootScope",function($rootScope){
+            var data = {
+                "$scope": $rootScope.$new(),
+                "$stateParams": {ward_id:1}
+            };
+            // var frm = {
+            //     name:"NAIROBI",
+            //     code:47
+            // };
+            $httpBackend.expectGET(SERVER_URL+"api/common/wards/1").respond(200);
+            $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/?fields=id,name&"+
+            "page_size=300").respond(200);
+            createController("edit", data);
+            $httpBackend.flush();
+        }])
+        );
     });
 })(window._);

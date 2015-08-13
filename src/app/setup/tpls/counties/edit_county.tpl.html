@@ -11,11 +11,11 @@
     </h2>
 </div>
 <!-- End of content header -->
-<div class="col-xs-12 content-body">
-    <div ng-if="spinner" class="col-md-12 margin-t-30 text-center">
+<div class="col-xs-12 content-body pad-h-30">
+    <div ng-if="spinner" class="col-md-12 margin-t-30 text-center pad-h-30">
         <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
     </div>
-    <div ng-if="!spinner" class="col-md-12">
+    <div ng-if="!spinner" class="col-md-12 pad-h-30">
         <div class="content-card heading">
             <form name="county_frm" ng-submit="saveFrm(county_frm)" class="form-horizontal margin-t-20">
                 <drf-err-msg></drf-err-msg>
@@ -28,11 +28,12 @@
                 <div class="form-group">
                     <label class="col-sm-3 col-md-2 control-label"><span class="pull-left fs-16">County Code:</span></label>
                     <div class="col-sm-5">
-                        <input type="number" class="form-control" name="code" ng-model="county_details.code" required placeholder="County Code" />
+                        <input type="number" class="form-control" name="code" ng-model="county_details.code" required placeholder="County Code" disabled/>
                     </div>
                 </div>
                 <div class="col-sm-12 pad-l-0 pad-b-10">
                     <button class="btn btn-primary">Save</button>
+                    <button class="btn btn-default" ui-sref="setup.counties">Cancel</button>
                 </div>
             </form>
         </div>
@@ -42,7 +43,7 @@
                 <li ui-sref-active="active" class="col-xs-6">
                     <a ui-sref=".constituencies">
                         <span class="fw-900">
-                            Sub Counties
+                            Constituencies
                         </span>
                     </a>
                 </li>

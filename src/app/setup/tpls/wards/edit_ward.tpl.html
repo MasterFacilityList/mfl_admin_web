@@ -3,7 +3,7 @@
     <div class="action-container content-header-extra"></div>
     <h2 class="content-title">
         <span class="main-title">
-            Add Ward
+            {{state ? 'Edit' : 'Add'}} Ward
         </span>
     </h2>
 </div>
@@ -18,11 +18,19 @@
                     <input type="text" class="form-control" name="name" ng-model="ward_details.name" placeholder="County Name" required api-checker/>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Ward Code:</label>
-                    <input type="number" class="form-control" name="code" ng-model="ward_details.code" required placeholder="County Code" required api-checker/>
+                    <label class="control-label">Constituency:</label>
+                    <ui-select ng-model="select_values.constituency" required name="constituency" api-checker register-custom-form-control>
+                        <ui-select-match placeholder="Select a constituency...">
+                            <span>{{$select.selected.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="const.id as const in constituencies | filter:$select.search">
+                            <span>{{const.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
                 <div class="margin-t-20 pad-b-10">
                     <button class="btn btn-primary">Save</button>
+                    <button class="btn btn-default" ui-sref="setup.wards">Cancel</button>
                 </div>
             </form>
         </div>
