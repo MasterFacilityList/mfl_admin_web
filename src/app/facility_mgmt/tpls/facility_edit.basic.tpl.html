@@ -94,15 +94,21 @@
 
             <div class="form-group col-xs-12">
                 <label class="control-label">
-                    Beds
+                    Number of Beds
                 </label>
-                <input class="form-control" name="number_of_beds" ng-model="facility.number_of_beds"  required placeholder="Beds" api-checker />
+                <input class="form-control" name="number_of_beds" ng-model="facility.number_of_beds"  required placeholder="Number of Beds" api-checker />
             </div>
             <div class="form-group col-sm-12">
                 <label class="control-label" for="number_of_cots">
-                    Cots
+                    Number of Cots
                 </label>
-                <input class="form-control" name="number_of_cots" ng-model="facility.number_of_cots"  required placeholder="Cots" api-checker />
+                <input class="form-control" name="number_of_cots" ng-model="facility.number_of_cots"  required placeholder="Number of Cots" api-checker />
+            </div>
+            <div class="form-group col-sm-12">
+                <label class="control-label" for="facility_catchment_population">
+                    Facility Catchment Population
+                </label>
+                <input class="form-control" name="facility_catchment_population" ng-model="facility.facility_catchment_population" placeholder="Facility Catchment Population" api-checker />
             </div>
             <div class="col-sm-12">
               <div class="form-group checkbox">
@@ -190,6 +196,25 @@
             <!-- </form> -->
         </div>
         <!-- End of setupstuff -->
+        <!-- Beggining of bank details -->
+        <div class="col-sm-12 custom-well margin-t-20">
+            <div class="col-sm-12">
+                <h4 class="fw-600 fs-18"> Bank Details</h4>
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="control-label">Name of Bank</label>
+                <input class="form-control" name="bank_name" ng-model="facility.bank_name" placeholder="Name of Bank" api-checker>
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="control-label">Name of Branch</label>
+                <input class="form-control" name="branch_name" ng-model="facility.branch_name" placeholder="Name of Branch" api-checker>
+            </div>
+            <div class="form-group col-xs-12">
+                <label class="control-label">Facility Bank Account</label>
+                <input class="form-control" name="bank_account" ng-model="facility.bank_account" placeholder="Facility Bank Account" api-checker>
+            </div>
+        </div>
+        <!-- End of bank details -->
         <!-- Beggining of officers in charge -->
         <div class="col-xs-12 custom-well">
             <div class="col-xs-12 margin-b-5">
