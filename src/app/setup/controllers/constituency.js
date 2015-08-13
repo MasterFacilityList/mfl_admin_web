@@ -68,7 +68,7 @@
             $scope.saveFrm = function (frm) {
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
-                    adminApi.counties.update($stateParams.const_id)
+                    adminApi.constituencies.update($stateParams.const_id)
                         .success(function () {
                             $state.go("setup.constituencies");
                         })
