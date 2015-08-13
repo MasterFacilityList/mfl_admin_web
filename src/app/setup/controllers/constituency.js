@@ -54,6 +54,12 @@
             adminApi.constituencies.get($stateParams.const_id)
                 .success(function (data) {
                     $scope.const_details = data;
+                    $scope.select_values = {
+                        county: {
+                            "id": $scope.const_details.county,
+                            "name": $scope.const_details.county_name
+                        }
+                    };
                 })
                 .error(function (err) {
                     $scope.alert = err.error;
@@ -71,6 +77,13 @@
                         });
                 }
             };
+            adminApi.counties.filter({"page_size":100})
+                .success(function(data){
+                    $scope.counties = data.results;
+                })
+                .error(function (data) {
+                    $scope.errors = data;
+                });
             adminApi.wards.filter({"constituency" : $stateParams.const_id})
                 .success(function (data) {
                     $scope.const_wards = data.results;
