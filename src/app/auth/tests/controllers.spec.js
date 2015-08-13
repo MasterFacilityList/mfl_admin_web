@@ -13,7 +13,7 @@
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$state",
                 function ($rootScope, $controller, $httpBackend, url, loginService, $state) {
-                    root = $rootScope,
+                    root = $rootScope;
                     scope = root.$new();
                     SERVER_URL = url;
                     state = $state;
@@ -123,7 +123,7 @@
             httpBackend.flush();
             httpBackend.verifyNoOutstandingExpectation();
             httpBackend.verifyNoOutstandingRequest();
-            expect(state.go).toHaveBeenCalledWith("login");
+            expect(state.go).toHaveBeenCalled();
         });
 
         it("should logout a user on failed revoke of token", function () {
@@ -133,7 +133,7 @@
             httpBackend.flush();
             httpBackend.verifyNoOutstandingExpectation();
             httpBackend.verifyNoOutstandingRequest();
-            expect(state.go).toHaveBeenCalledWith("login");
+            expect(state.go).toHaveBeenCalled();
         });
     });
 
@@ -149,7 +149,7 @@
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
                 "$state", "$log",
                 function ($rootScope, $controller, $httpBackend, url, $state, $log) {
-                    rootScope = $rootScope,
+                    rootScope = $rootScope;
                     SERVER_URL = url;
                     state = $state;
                     httpBackend = $httpBackend;
@@ -225,7 +225,7 @@
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
                 "$state", "$log",
                 function ($rootScope, $controller, $httpBackend, url, $state, $log) {
-                    rootScope = $rootScope,
+                    rootScope = $rootScope;
                     SERVER_URL = url;
                     state = $state;
                     httpBackend = $httpBackend;

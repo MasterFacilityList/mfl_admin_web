@@ -68,10 +68,9 @@
                 };
                 var success_fxn = function () {
                     $scope.spinner = false;
+                    Idle.watch();
                     var next_state = $stateParams.next || HOME_PAGE_NAME;
-                    $state.go(next_state).then(function () {
-                        Idle.watch();
-                    });
+                    $state.go(next_state);
                 };
                 loginService.login(obj)
                     .then(
@@ -85,12 +84,15 @@
     ])
 
     .controller("mfl.auth.controllers.logout",
-        ["$scope", "$state", "mfl.auth.services.login", "Idle",
-        function ($scope, $state, loginService, Idle) {
+        ["$scope", "$state", "$stateParams", "mfl.auth.services.login", "Idle",
+        function ($scope, $state, $stateParams, loginService, Idle) {
             $scope.logout = true;
             var callback = function () {
                 Idle.unwatch();
-                $state.go("login");
+                $state.go("login", {
+                    "timeout": $stateParams.timeout,
+                    "next": $stateParams.next
+                });
             };
             return loginService.logout().then(callback, callback);
         }]

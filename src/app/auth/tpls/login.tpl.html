@@ -8,10 +8,11 @@
                          <span class="text-warning">M</span>aster Facility List <span class="fs-18">V 2.0</span>
                     </h2>
                 </div>
-                <div class="col-md-10 col-md-offset-1 alert alert-info" ng-if="params.reset_pwd||params.reset_pwd_confirm||logout">
+                <div class="col-md-10 col-md-offset-1 alert alert-info" ng-if="params.reset_pwd||params.reset_pwd_confirm||params.timeout||logout">
                     <button class="close" data-dismiss="alert" ><span>&times;</span></button>
                     <p ng-if="params.reset_pwd">Password reset instructions have been sent to your email.</p>
                     <p ng-if="params.reset_pwd_confirm">Password has been reset successfully.</p>
+                    <p ng-if="params.timeout">Your session has expired. Please login again.</p>
                     <p ng-if="logout">Logging out your session.</p>
                 </div>
                 <span ng-if="login_err_html" ng-bind-html="login_err_html" class="fade-content alert alert-danger col-md-10 col-md-offset-1">
