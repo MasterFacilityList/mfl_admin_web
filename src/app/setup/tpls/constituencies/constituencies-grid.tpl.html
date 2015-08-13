@@ -22,6 +22,9 @@
                 </td>
             </tr>
         </tbody>
+        <tbody ng-if="consts.length===0">
+            <tr><td class="text-center alert alert-info" colspan="7"><i class="fa fa-info-circle"></i> There are no records available</td></tr>
+        </tbody>
     </table>
     <sil-grid-pagination> </sil-grid-pagination>
 </div>

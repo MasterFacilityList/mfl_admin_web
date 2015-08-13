@@ -13,6 +13,16 @@
                 icon: "fa-map-marker",
                 name: "Sub Counties"
             };
+            $scope.action = [
+                {
+                    func : "ui-sref='setup.sub_counties.create'" +
+                           " requires-user-feature='is_staff'",// +
+                        //    " requires-permission='common.add_sub_county'",
+                    class: "btn btn-primary",
+                    tipmsg: "Add Sub County",
+                    wording: "Add Sub County"
+                }
+            ];
         }]
     )
 
