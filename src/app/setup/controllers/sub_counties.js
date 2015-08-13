@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _){
     "use strict";
     angular.module("mfl.setup.sub_counties.controllers",[
         "mfl.setup.api"
@@ -26,17 +26,22 @@
         }]
     )
 
-    .controller("mfl.setup.controller.sub_counties.details", ["$scope",
+    .controller("mfl.setup.controller.sub_counties.edit", ["$scope",
         "$stateParams", "adminApi",
         function ($scope, $stateParams, adminApi) {
-            adminApi.sub_counties.get($stateParams.scount_id)
-                .success(function (data) {
-                    $scope.scount_details = data;
-                })
-                .error(function (err) {
-                    $scope.alert = err.error;
-                });
+            if(_.isUndefined($stateParams.scount_id)){
+                $scope.state = false;
+            } else {
+                $scope.state = true;
+                adminApi.sub_counties.get($stateParams.scount_id)
+                    .success(function (data) {
+                        $scope.scount_details = data;
+                    })
+                    .error(function (err) {
+                        $scope.alert = err.error;
+                    });
+            }
         }
     ]);
 
-})(window.angular);
+})(window.angular, window._);

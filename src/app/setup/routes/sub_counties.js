@@ -22,7 +22,7 @@
                 views: {
                     "main-content@setup.sub_counties": {
                         templateUrl: "setup/tpls/sub_counties/sub_counties.details.tpl.html",
-                        controller :"mfl.setup.controller.sub_counties.details"
+                        controller :"mfl.setup.controller.sub_counties.edit"
                     }
                 },
                 permission: "common.view_constituency",
@@ -32,7 +32,8 @@
                 url: "/create",
                 views: {
                     "main-content@setup.sub_counties": {
-                        templateUrl: "setup/tpls/sub_counties/sub_counties.details.tpl.html"
+                        templateUrl: "setup/tpls/sub_counties/sub_counties.details.tpl.html",
+                        controller :"mfl.setup.controller.sub_counties.edit"
                     }
                 },
                 permission: "common.view_constituency",
