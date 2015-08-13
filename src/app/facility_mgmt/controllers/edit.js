@@ -266,6 +266,7 @@
                     $scope.select_values.town.id;
                 $scope.facility.location_data = $scope.facility.facility_physical_address;
                 changes.location_data = $scope.facility.facility_physical_address;
+                changes.officer_in_charge = $scope.facility.officer_in_charge;
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {
@@ -309,6 +310,55 @@
                     });
                 }
             };
+            /*Job Titles*/
+            wrappers.job_titles.list()
+            .success(function (data) {
+                $scope.job_titles = data.results;
+            })
+            .error(function (error) {
+                $log.error(error);
+            });
+            /*contact types*/
+            wrappers.contact_types.list()
+            .success(function(data){
+                $scope.contact_types = data.results;
+            })
+            .error(function(error){
+                $log.error(error);
+            });
+            /*Set up facility contacts*/
+            $scope.facilityOfficers = function (f) {
+                if(_.isUndefined(f.officer_in_charge)) {
+                    $scope.facility.officer_in_charge = {
+                        name : "",
+                        reg_no : "",
+                        contacts : [
+                            {
+                                type : "",
+                                contact : ""
+                            }
+                        ]
+                    };
+                }
+            };
+            $scope.addOfficerContact = function () {
+                $scope.facility.officer_in_charge.contacts.push({
+                    type : "",
+                    contact : ""
+                });
+            };
+            $scope.removeOfficerContact = function (obj) {
+                if(_.isUndefined(obj.id)){
+                    $scope.facility.officer_in_charge.contacts =
+                        _.without($scope.facility.officer_in_charge.contacts, obj);
+                }
+            };
+            $scope.$watch("facility", function (f) {
+                if (_.isUndefined(f)){
+                    return;
+                }
+                $scope.facilityOfficers(f);
+            });
         }]
     )
 

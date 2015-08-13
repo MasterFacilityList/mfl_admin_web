@@ -10,21 +10,21 @@
 <div class="col-xs-12 content-body">
     <div class="pad-h-30">
         <div class="content-card col-xs-12 col-sm-offset-1 col-sm-10">
-            <form name="const_frm" ng-submit="saveFrm(const_frm)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
+            <form name="const_frm" ng-submit="saveFrm(conts_details)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
                 <div class="form-group">
-                    <label class="control-label">Constituency Name:</label>
-                    <input type="text" class="form-control" name="name" ng-model="county_details.name" placeholder="County Name" required api-checker/>
+                    <label class="control-label">Constituency Code:</label><br>
+                    <span class="label label-info fs-12">Generated after adding constituency</span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Constituency Code:</label>
-                    <input type="number" class="form-control" name="code" ng-model="county_details.code" required placeholder="County Code" required api-checker/>
+                    <label class="control-label">Constituency Name:</label>
+                    <input type="text" class="form-control" name="name" ng-model="conts_details.name" placeholder="County Name" required api-checker/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">County:</label>
-                    <ui-select ng-model="select_values.county" required name="county" api-checker register-custom-form-control>
+                    <ui-select ng-model="conts_details.county" required name="county" api-checker register-custom-form-control>
                         <ui-select-match placeholder="Select a county...">
-                            <span>{{$select.selected.name}}</span>
+                        <span>{{$select.selected.name}}</span>
                         </ui-select-match>
                         <ui-select-choices repeat="county.id as county in counties | filter:$select.search">
                             <span>{{county.name}}</span>
@@ -33,6 +33,7 @@
                 </div>
                 <div class="margin-t-20 pad-b-10">
                     <button class="btn btn-primary">Save</button>
+                    <button class="btn btn-default" ui-sref="setup.constituencies">Cancel</button>
                 </div>
             </form>
         </div>

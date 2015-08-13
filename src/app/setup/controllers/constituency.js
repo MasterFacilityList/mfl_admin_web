@@ -39,7 +39,17 @@
                         $scope.errors = error;
                     });
             };
-            adminApi.counties.filter({"page_size":100})
+            $scope.filters = {
+                "fields":"id,name",
+                "page_size":100
+            };
+            $scope.const_details = {
+                county: {
+                    "id": null,
+                    "name": null
+                }
+            };
+            adminApi.counties.filter($scope.filters)
                 .success(function(data){
                     $scope.counties = data.results;
                 })
@@ -68,7 +78,7 @@
             $scope.saveFrm = function (frm) {
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
-                    adminApi.constituencies.update($stateParams.const_id)
+                    adminApi.constituencies.update($stateParams.const_id,changes)
                         .success(function () {
                             $state.go("setup.constituencies");
                         })
@@ -77,7 +87,11 @@
                         });
                 }
             };
-            adminApi.counties.filter({"page_size":100})
+            $scope.filters = {
+                "fields":"id,name",
+                "page_size":100
+            };
+            adminApi.counties.filter($scope.filters)
                 .success(function(data){
                     $scope.counties = data.results;
                 })
