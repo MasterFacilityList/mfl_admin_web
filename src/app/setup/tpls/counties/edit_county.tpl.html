@@ -17,7 +17,8 @@
     </div>
     <div ng-if="!spinner" class="col-md-12">
         <div class="content-card heading">
-            <form class="form-horizontal margin-t-20">
+            <form name="county_frm" ng-submit="saveFrm(county_frm)" class="form-horizontal margin-t-20">
+                <drf-err-msg></drf-err-msg>
                 <div class="form-group">
                     <label class="col-sm-3 col-md-2 control-label"><span class="pull-left fs-16">County Name:</span></label>
                     <div class="col-sm-5">
