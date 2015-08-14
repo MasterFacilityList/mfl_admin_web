@@ -33,13 +33,14 @@
                     <button ng-if="!facilityOwnerTypes.id" ng-click="createFacilityOwnerTypes(facilityOwnerTypes)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_owner_type.$invalid">
                         Save
                     </button>
-                    <button ng-if="facilityOwnerTypes.id" ng-click="updateFacilityOwnerTypes(facilityOwnerTypes.id, facilities.owner_type.form)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_owner_type.$invalid">
+                    <button ng-if="facilityOwnerTypes.id" ng-click="updateFacilityOwnerTypes(facilityOwnerTypes.id, frm_owner_type)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_owner_type.$invalid">
                         Save
                     </button>
                     <a ui-sref="setup.facility_owner_types" class="btn btn-default">Cancel</a>
                 </span>
             </div>
         </div>
+        <mfl-revision-view id="facility_owner_type_id" wrapper="wrapper" ></mfl-revision-view>
     </form>
 </div>
 </div>

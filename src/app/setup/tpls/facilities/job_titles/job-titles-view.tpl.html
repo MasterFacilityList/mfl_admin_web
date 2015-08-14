@@ -31,7 +31,7 @@
                     <button ng-if="!facilityJobTitles.id" ng-click="createFacilityJobTitle(facilityJobTitles)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_job_titles.$invalid">
                         Save
                     </button>
-                    <button ng-if="facilityJobTitles.id" ng-click="updateFacilityJobTitle(facilityJobTitles.id, facilities.job_titles.form)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_job_titles.$invalid">
+                    <button ng-if="facilityJobTitles.id" ng-click="updateFacilityJobTitle(facilityJobTitles.id, frm_job_titles)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_job_titles.$invalid">
                         Save
                     </button>
                     <a ui-sref="setup.facility_job_titles" class="btn btn-default">Cancel</a>
