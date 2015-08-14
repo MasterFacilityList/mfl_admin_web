@@ -54,7 +54,7 @@
         </div>
         <div class="col-xs-12 text-right margin-b-10">
             <a class="btn btn-primary pull-right" ng-click="addUnit()">
-                &nbsp;<i class="fa fa-plus-square-o"></i> Add
+                <i class="fa fa-plus-square-o"></i> Add
             </a>
         </div>
     </div>
@@ -62,18 +62,18 @@
     <div class="col-xs-12">
         <!-- Start of create buttons -->
         <a ui-sref="facilities.facility_create.contacts({facility_id : new_facility})" ng-if="create" class="btn btn-primary margin-t-20 margin-b-10">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Facility Contacts
+            <i class="fa fa-angle-double-left"></i> Facility Contacts
         </a>
         <!-- End of navigation buttons -->
         <a ui-sref="facilities.facility_edit.contacts" ng-if="!create" class="btn btn-primary margin-t-20 margin-b-10">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Facility Contacts
+            <i class="fa fa-angle-double-left"></i> Facility Contacts
         </a>
         <span class="pull-right" >
             <button ng-if="!create" ng-click="saveUnits(true)" type="submit" class="btn btn-primary margin-t-20 margin-b-10 margin-r-5">
-                &nbsp; Finish
+                 Finish
             </button>
             <a ng-click="saveUnits(false)" ui-sref="facilities.facility_edit.services" class="btn btn-primary margin-t-20 margin-b-10 pull-right">
-                &nbsp; {{create ? 'Facility Services' : 'Save & Continue'}} <i class="fa fa-angle-double-right"></i>
+                 {{create ? 'Facility Services' : 'Save & Continue'}} <i class="fa fa-angle-double-right"></i>
             </a>
         </span>
     </div>

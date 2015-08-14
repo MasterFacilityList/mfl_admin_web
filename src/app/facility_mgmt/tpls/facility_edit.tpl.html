@@ -4,11 +4,11 @@
         <a class="btn btn-info margin-l-3"
             requires-permission="facilities.add_facilitytype,facilities.add_facilityservice"
             ui-sref=".upgrade({facility_id: facility_id})"
-            ui-sref-opts="{reload:true}">&nbsp;&nbsp;Upgrade</a>
+            ui-sref-opts="{reload:true}">Upgrade</a>
         <a class="btn btn-info margin-l-3"
             requires-permission="facilities.add_facilitytype,facilities.add_facilityservice"
             ui-sref=".downgrade({facility_id: facility_id})"
-            ui-sref-opts="{reload:true}">&nbsp;Downgrade</a>
+            ui-sref-opts="{reload:true}">Downgrade</a>
         <button class="action-btn action-btn-primary action-btn-md"
             ng-click="printFacility(facility_id)"
             ng-if="create" tooltip="Print Cover Letter">
