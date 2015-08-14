@@ -21,8 +21,8 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="const in const_facilities">
-                            <td>{{const.constituency_name | titlecase}}</td>
-                            <td>{{const.number_of_facilities}}</td>
+                            <td>{{::const.constituency_name | titlecase}}</td>
+                            <td>{{::const.number_of_facilities}}</td>
                         </tr>
                     </tbody>
                 </table>

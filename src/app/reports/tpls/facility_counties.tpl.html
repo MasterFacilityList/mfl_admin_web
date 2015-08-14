@@ -21,8 +21,8 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in county_facilities">
-                            <td>{{county.county_name | titlecase}}</td>
-                            <td>{{county.number_of_facilities}}</td>
+                            <td>{{::county.county_name | titlecase}}</td>
+                            <td>{{::county.number_of_facilities}}</td>
                         </tr>
                     </tbody>
                 </table>
