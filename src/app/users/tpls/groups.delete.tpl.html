@@ -4,8 +4,8 @@
     <div class="col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
         <p class="lead margin-b-20">Are you sure you want to delete the user <strong>{{group.name}}</strong> ?</p>
 
-        <button class="login-btn login-btn-success margin-h-5" ng-click="remove()">Yes</button>
-        <a requires-permission="auth.delete_group" class="login-btn login-btn-default margin-h-5" ui-sref="groups.group_edit({group_id: group.id})">No</a>
+        <button class="btn btn-success margin-h-5" ng-click="remove()">Yes</button>
+        <a requires-permission="auth.delete_group" class="btn btn-default margin-h-5" ui-sref="groups.group_edit({group_id: group.id})">No</a>
     </div>
     </div>
 </div>

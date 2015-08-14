@@ -50,14 +50,14 @@
 
     <div class="row">
        <div class="col-xs-12">
-            <a ui-sref="facilities.facility_create.units({facility_id : new_facility})" ng-if="create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+            <a ui-sref="facilities.facility_create.units({facility_id : new_facility})" ng-if="create" class="btn btn-primary margin-t-20 margin-b-10">
                 &nbsp;<i class="fa fa-angle-double-left"></i> Units
             </a>
-           <a ui-sref="facilities.facility_edit.units" ng-if="!create" class="login-btn login-btn-primary margin-t-20 margin-b-10">
+           <a ui-sref="facilities.facility_edit.units" ng-if="!create" class="btn btn-primary margin-t-20 margin-b-10">
                 &nbsp;<i class="fa fa-angle-double-left"></i> Units
             </a>
-           <button type="submit" ng-if="create" requires-permission="common.add_physicaladdress,facilities.change_facility" ng-click="savePhy(phyForm)" class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right" >&nbsp; Geolocation <i class="fa fa-angle-double-right"></i></button>
-           <button type="submit" ng-if="!create" requires-permission="common.add_physicaladdress,facilities.change_facility" ng-click="savePhy(phyForm)" class="login-btn login-btn-primary margin-t-20 margin-b-10 pull-right" >&nbsp; Save & Continue <i class="fa fa-angle-double-right"></i></button>
+           <button type="submit" ng-if="create" requires-permission="common.add_physicaladdress,facilities.change_facility" ng-click="savePhy(phyForm)" class="btn btn-primary margin-t-20 margin-b-10 pull-right" > Geolocation <i class="fa fa-angle-double-right"></i></button>
+           <button type="submit" ng-if="!create" requires-permission="common.add_physicaladdress,facilities.change_facility" ng-click="savePhy(phyForm)" class="btn btn-primary margin-t-20 margin-b-10 pull-right" > Save & Continue <i class="fa fa-angle-double-right"></i></button>
        </div>
     </div>
 </div>

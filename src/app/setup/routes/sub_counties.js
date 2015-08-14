@@ -17,22 +17,23 @@
                 permission: "common.view_constituency",
                 userFeature: "is_national,is_staff"
             })
-            .state("setup.sub_counties.view_scount", {
+            .state("setup.sub_counties.edit", {
                 url: "/details/:scount_id",
                 views: {
                     "main-content@setup.sub_counties": {
                         templateUrl: "setup/tpls/sub_counties/sub_counties.details.tpl.html",
-                        controller :"mfl.setup.controller.sub_counties.details"
+                        controller :"mfl.setup.controller.sub_counties.edit"
                     }
                 },
                 permission: "common.view_constituency",
                 userFeature: "is_national,is_staff"
             })
-            .state("setup.sub_counties.edit", {
-                url: "/edit/:scount_id",
+            .state("setup.sub_counties.create", {
+                url: "/create",
                 views: {
-                    "main-content@setup": {
-                        templateUrl: "admin_units/tpls/sub_counties/sub_counties.tpl.html"
+                    "main-content@setup.sub_counties": {
+                        templateUrl: "setup/tpls/sub_counties/sub_counties.details.tpl.html",
+                        controller :"mfl.setup.controller.sub_counties.edit"
                     }
                 },
                 permission: "common.view_constituency",

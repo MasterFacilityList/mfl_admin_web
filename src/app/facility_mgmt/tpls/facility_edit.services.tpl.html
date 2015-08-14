@@ -9,18 +9,18 @@
     <div class="col-xs-12">
         <!-- Begining of create navigation buttons -->
         <a ui-sref="facilities.facility_create.units({facility_id : new_facility})" ng-if="create"
-        class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Regulation
+        class="btn btn-primary margin-t-20 margin-b-10">
+            <i class="fa fa-angle-double-left"></i> Regulation
         </a>
-        <button ui-sref="facilities.facility_create.facility_cover_letter({facility_id : new_facility})" ng-if="create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
-            &nbsp; Submit <i class="fa fa-angle-double-right"></i>
+        <button ui-sref="facilities.facility_create.facility_cover_letter({facility_id : new_facility})" ng-if="create"  class="btn btn-primary margin-t-20 margin-b-10 pull-right">
+             Submit <i class="fa fa-angle-double-right"></i>
         </button>
         <!-- End of navigation buttons -->
-        <a ui-sref="facilities.facility_edit.units" ng-if="!create && !updown" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
-            &nbsp;<i class="fa fa-angle-double-left"></i> Regulation
+        <a ui-sref="facilities.facility_edit.units" ng-if="!create && !updown" class="btn btn-primary margin-t-20 margin-b-10">
+            <i class="fa fa-angle-double-left"></i> Regulation
         </a>
-        <button ui-sref="facility_mgmt" ng-if="!create && !updown"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right" ng-disabled="facility.facility_services.length === 0">
-            &nbsp; Save & Finish <i class="fa fa-angle-double-right"></i>
+        <button ui-sref="facility_mgmt" ng-if="!create && !updown"  class="btn btn-primary margin-t-20 margin-b-10 pull-right" ng-disabled="facility.facility_services.length === 0">
+             Save & Finish <i class="fa fa-angle-double-right"></i>
         </button>
     </div>
 </div>

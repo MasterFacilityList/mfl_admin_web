@@ -21,7 +21,7 @@
                         <span class="bar"></span>
                     </div>
                     <div class="col-sm-12">
-                        <button type="submit" class="login-btn login-btn-info margin-t-10 margin-b-10" >
+                        <button type="submit" class="btn btn-info margin-t-10 margin-b-10" >
                             <i class="fa fa-plus-circle"></i> Add
                         </button>
                     </div>
@@ -47,7 +47,7 @@
                         <td class="text-right">
                             <a tooltip="Delete Option" popover-trigger="open" popover-toggle
                                 popover-template="'common/tpls/del-pop.tpl.html'" popover-placement="left"
-                                class="login-btn login-btn-danger" requires-user-feature="is_staff" requires-permission="facilities.delete_option">
+                                class="btn btn-danger" requires-user-feature="is_staff" requires-permission="facilities.delete_option">
                                 Delete
                             </a>
                         </td>
@@ -61,11 +61,11 @@
             </table>
         </div>
         <div ng-if="!create" class="col-sm-12 margin-b-20 margin-t-20">
-            <button class="login-btn login-btn-primary margin-l--10" ui-sref="service_mgmt.service_list.service_edit.basic ({service_id : service_id})">
-                &nbsp;<i class="fa fa-angle-double-left"></i> Details
+            <button class="btn btn-primary margin-l--10" ui-sref="service_mgmt.service_list.service_edit.basic ({service_id : service_id})">
+                <i class="fa fa-angle-double-left"></i> Details
             </button>
-            <button class="login-btn login-btn-primary pull-right margin-r--10" ui-sref="service_mgmt.service_list"  requires-user-feature="is_staff">
-                &nbsp;&nbsp;{{ create ? 'Submit' : 'Update' }} <i class="fa fa-angle-double-right"></i>
+            <button class="btn btn-primary pull-right margin-r--10" ui-sref="service_mgmt.service_list"  requires-user-feature="is_staff">
+                {{ create ? 'Submit' : 'Update' }} <i class="fa fa-angle-double-right"></i>
             </button>
         </div>
     </div>
