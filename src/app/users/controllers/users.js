@@ -153,6 +153,8 @@
                 }
             ];
             $scope.user_id = $stateParams.user_id;
+            $scope.wrapper = wrappers.users;
+
             $scope.create = false;
             $scope.tabState = function(obj) {
                 _.each($scope.steps, function (step) {
