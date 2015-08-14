@@ -12,8 +12,8 @@
             module("ngIdle");
 
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
-                "mfl.auth.services.login", "$state", "Idle",
-                function ($rootScope, $controller, $httpBackend, url, loginService, $state, Idle) {
+                "mfl.auth.services.login", "$state",
+                function ($rootScope, $controller, $httpBackend, url, loginService, $state) {
                     root = $rootScope;
                     scope = root.$new();
                     SERVER_URL = url;
@@ -29,8 +29,6 @@
                     controller = function () {
                         return $controller("mfl.auth.controllers.login", data);
                     };
-                    spyOn(Idle, "watch");
-                    spyOn(Idle, "unwatch");
                 }
             ]);
         });
@@ -99,8 +97,8 @@
             module("mfl.auth.controllers");
 
             inject(["$controller", "$httpBackend", "CREDZ", "$window", "$rootScope",
-                "mfl.auth.services.login", "$state", "api.oauth2", "Idle",
-                function ($controller, $httpBackend, CREDZ, $window, r, l, $state, oauth2, Idle) {
+                "mfl.auth.services.login", "$state", "api.oauth2",
+                function ($controller, $httpBackend, CREDZ, $window, r, l, $state, oauth2) {
                     credz = CREDZ;
                     state = $state;
                     httpBackend = $httpBackend;
@@ -115,9 +113,6 @@
                             "$scope": rootScope.$new()
                         });
                     };
-
-                    spyOn(Idle, "watch");
-                    spyOn(Idle, "unwatch");
                 }
             ]);
         });
