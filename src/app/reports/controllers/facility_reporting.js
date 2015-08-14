@@ -32,7 +32,7 @@
         "$controller",
         function($scope,$controller){
             var helper = $controller("mfl.reports.controllers.helper");
-            helper.initCtrl($scope, "facility_count_by_constituency",
+            helper.initCtrl($scope, "facility_count_by_consituency",
                             "const_facilities");
         }
     ])
