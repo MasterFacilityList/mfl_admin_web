@@ -26,10 +26,11 @@
                     Is Active?
                  </label>
             </div>
+            <mfl-revision-view id="approver_id" wrapper="wrapper" ></mfl-revision-view>
             <button ng-if="!chuApprovers.id" ng-click="createChuApprovers(chuApprovers)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_chu_approver.$invalid">
                 Save
             </button>
-            <button ng-if="chuApprovers.id" ng-click="updateChuApprovers(chuApprovers.id, chu.approvers.form)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_chu_approver.$invalid">
+            <button ng-if="chuApprovers.id" ng-click="updateChuApprovers(chuApprovers.id, frm_chu_approver)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_chu_approver.$invalid">
                 Save
             </button>
             <a class="btn btn-default" ui-sref="setup.chu_approvers">Cancel</a>
