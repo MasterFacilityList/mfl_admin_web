@@ -65,6 +65,7 @@
                 }
             ];
             $scope.town_id = $stateParams.town_id;
+            $scope.wrapper = adminApi.towns;
 
             adminApi.towns.get($scope.town_id)
             .success(function (data) {

@@ -28,6 +28,9 @@
         "adminApi","mfl.common.forms.changes","$state",
         function ($scope, $stateParams, adminApi, formChanges,$state) {
             $scope.spinner = true;
+            $scope.county_id = $stateParams.count_id;
+            $scope.wrapper = adminApi.counties;
+
             adminApi.counties.get($stateParams.count_id)
                 .success(function (data) {
                     $scope.county_details = data;

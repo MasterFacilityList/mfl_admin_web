@@ -61,6 +61,8 @@
     .controller("mfl.setup.controller.constituency.details", ["$scope",
         "$stateParams", "adminApi","mfl.common.forms.changes","$state",
         function ($scope, $stateParams, adminApi, formChanges,$state) {
+            $scope.constituency_id = $stateParams.const_id;
+            $scope.wrapper = adminApi.constituencies;
             adminApi.constituencies.get($stateParams.const_id)
                 .success(function (data) {
                     $scope.const_details = data;

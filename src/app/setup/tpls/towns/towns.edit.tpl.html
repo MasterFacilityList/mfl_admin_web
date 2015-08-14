@@ -8,10 +8,9 @@
                 <label class="control-label">Town Name:</label>
                 <input name="name" class="form-control" type="text" ng-model="town.name" required api-checker/>
             </div>
-            <button class="btn btn-primary" type="submit"  ng-disabled="town_frm.$invalid">
-                Save
-            </button>
+            <button class="btn btn-primary" type="submit"  ng-disabled="town_frm.$invalid">Save</button>
             <button class="btn btn-default margin-l-10" ui-sref="setup.towns">Cancel</button>
+            <mfl-revision-view id="town_id" wrapper="wrapper" ></mfl-revision-view>
         </div>
     </form>
 </div>

@@ -14,12 +14,12 @@
                 <drf-err-msg></drf-err-msg>
                 <div class="form-group">
                     <label class="control-label">Sub County Code:</label><br>
-                   <span ng-if="!state" class="fs-14 label label-info">To be generated after adding sub county</span>
-                   <span ng-if="state" class="fs-16 form-control-static fw-600"> {{scount_details.code}}</span>
+                    <span ng-if="!state" class="fs-14 label label-info">To be generated after adding sub county</span>
+                    <span ng-if="state" class="fs-16 form-control-static fw-600"> {{scount_details.code}}</span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Sub County Name:</label>
-                    <input type="text" class="form-control" name="name" ng-model="scount_details.name" placeholder="County Name" required api-checker/>
+                    <input type="text" class="form-control" name="name" ng-model="scount_details.name" placeholder="Sub County Name" required api-checker/>
                 </div>
                 <div class="form-group">
                     <label class="control-label"><span class="pull-left">County:</span></label>
@@ -35,7 +35,7 @@
                 <div class="margin-t-20 pad-b-10">
                     <button class="btn btn-primary">Save</button>
                     <button class="btn btn-default">Cancel</button>
-
+                    <mfl-revision-view id="sub_county_id" wrapper="wrapper" ></mfl-revision-view>
                 </div>
             </form>
         </div>
