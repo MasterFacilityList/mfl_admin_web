@@ -11,17 +11,18 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Geocode Source Abbreviation</label>
-                    <input type="text" ng-model="geocode_source.abbreviation" name="abbreviation" required api-checker class="form-control"/>
+                    <input type="text" ng-model="geocode_source.abbreviation" name="abbreviation" api-checker class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Description</label>
-                    <textarea type="text" ng-model="geocode_source.description" name="description" required api-checker class="form-control"></textarea>
+                    <textarea type="text" ng-model="geocode_source.description" name="description" api-checker class="form-control"></textarea>
                 </div>
                 <div class="col-md-12 margin-t-20 margin-b-20">
                     <button class="btn btn-primary" type="submit" requires-user-feature="is_staff" ng-disabled="frm_geocode_source.$invalid">
                         Save
                     </button>
                     <a class="btn btn-default" ui-sref="setup.geocode_sources_list">Cancel</a>
+                    <mfl-revision-view id="geocode_source_id" wrapper="wrapper" ></mfl-revision-view>
                 </div>
             </div>
         </form>

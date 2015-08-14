@@ -6,44 +6,41 @@
 <div ui-view="delete"></div>
 <div class="col-lg-12 margin-t-20">
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
-    <form role="form" name="facility_owner" novalidate>
-        <div class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-20">
-                <drf-err-msg></drf-err-msg>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <input type="text" name="name" ng-model="facilityOwners.name" class="form-control" required api-checker>
-                </div>
-                 <div class="form-group">
-                    <label class="control-label">Abbreviation</label>
-                    <input type="text" name="abbreviation" ng-model="facilityOwners.abbreviation" class="form-control" api-checker>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Description</label>
-                    <textarea type="text" id="description" name="description" ng-model="facilityOwners.description" class="form-control" api-checker></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="owner_type" class="control-label">Owner Type</label>
-                    <select name="owner_type" ng-model="facilityOwners.owner_type" class="form-control" api-checker required>
-                        <option value="">Select Facility Owner Category</option>
-                        <option ng-repeat="owner in ownerTypes" ng-value="owner.id">{{owner.name}}</option>
-                    </select>
-                </div>
-                <div class="form-group checkbox" ng-if="facilityOwners.id">
-                    <label>
-                        <input type="checkbox" id="active" name="active" ng-model="facilityOwners.active" api-checker>
-                         Is Active?
-                     </label>
-                </div>
+    <form role="form" name="frm_facility_owner" novalidate>
+        <drf-err-msg></drf-err-msg>
+        <div class="form-group">
+            <label class="control-label" for="name">Name</label>
+            <input type="text" name="name" ng-model="facilityOwners.name" class="form-control" required api-checker>
         </div>
-        <div class="col-md-11 col-md-offset-1 margin-t-10 margin-b-20">
-            <button ng-if="!facilityOwners.id" ng-click="createFacilityOwner(facilityOwners)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="facility_owner.$invalid">
-                Save
-            </button>
-            <button ng-if="facilityOwners.id" ng-click="updateFacilityOwner(facilityOwners.id, facilities.facility_owners_type.form)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="facility_owner.$invalid">
-                Save
-            </button>
-            <a ui-sref="setup.facility_owners" class="btn btn-default">Cancel</a>
+         <div class="form-group">
+            <label class="control-label">Abbreviation</label>
+            <input type="text" name="abbreviation" ng-model="facilityOwners.abbreviation" class="form-control" api-checker>
         </div>
+        <div class="form-group">
+            <label class="control-label">Description</label>
+            <textarea type="text" id="description" name="description" ng-model="facilityOwners.description" class="form-control" api-checker></textarea>
+        </div>
+        <div class="form-group">
+            <label for="owner_type" class="control-label">Owner Type</label>
+            <select name="owner_type" ng-model="facilityOwners.owner_type" class="form-control" api-checker required>
+                <option value="">Select Facility Owner Category</option>
+                <option ng-repeat="owner in ownerTypes" ng-value="owner.id">{{owner.name}}</option>
+            </select>
+        </div>
+        <div class="form-group checkbox" ng-if="facilityOwners.id">
+            <label>
+                <input type="checkbox" id="active" name="active" ng-model="facilityOwners.active" api-checker>
+                 Is Active?
+             </label>
+        </div>
+        <button ng-if="!facilityOwners.id" ng-click="createFacilityOwner(facilityOwners)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="facility_owner.$invalid">
+            Save
+        </button>
+        <button ng-if="facilityOwners.id" ng-click="updateFacilityOwner(facilityOwners.id, frm_facility_owner)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="facility_owner.$invalid">
+            Save
+        </button>
+        <a ui-sref="setup.facility_owners" class="btn btn-default">Cancel</a>
+        <mfl-revision-view id="facility_owner_id" wrapper="wrapper" ></mfl-revision-view>
     </form>
 </div>
 </div>

@@ -30,6 +30,9 @@
             $scope.select_values = {
                 constituency: {}
             };
+            $scope.ward_id = $stateParams.ward_id;
+            $scope.wrapper = adminApi.wards;
+
             if(!_.isUndefined($stateParams.ward_id)){
                 $scope.state =  true;
                 adminApi.wards.get($stateParams.ward_id)

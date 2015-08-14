@@ -33,7 +33,8 @@
     .controller("mfl.setup.controller.facilityOwnerType.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
-
+            $scope.facility_owner_type_id = $stateParams.id;
+            $scope.wrapper = adminApi.facilityOwnerTypes;
             if(!_.isUndefined($stateParams.id) &&
                 $stateParams.id !== "create"){
                 $scope.title = {
@@ -129,6 +130,9 @@
     .controller("mfl.setup.controller.facilityOwner.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges) {
+            $scope.facility_owner_id = $stateParams.id;
+            $scope.wrapper = adminApi.facilityOwners;
+
             if(!_.isUndefined($stateParams.id)&&
                 $stateParams.id !== "create"){
                 $scope.title = {
@@ -423,6 +427,9 @@
             $scope.contacts = {
                 items : []
             };
+            $scope.regulatory_body_id = $stateParams.id;
+            $scope.wrapper = adminApi.facilityRegulatoryBodies;
+
             adminApi.contact_types.list()
                 .success(function (data) {
                     $scope.contact_types = data.results;

@@ -93,6 +93,8 @@
                     wording: "Delete"
                 }
             ];
+            $scope.wrapper = wrappers.groups;
+
             wrappers.groups.get($scope.group_id)
                 .success(function (data) {
                     $scope.group = data;
