@@ -2952,17 +2952,12 @@
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(200, payload);
-
+                httpBackend
+                    .expectGET(server_url+"api/facilities/options/")
+                    .respond(200, payload);
                 var c = ctrl();
                 var scope = rootScope.$new();
                 var cat = {selected : false, id : "3"};
-                var rslts = {
-                    results : [
-                        {
-                            id : "5"
-                        }
-                    ]
-                };
                 c.bootstrap(scope);
 
                 httpBackend.flush();
@@ -2981,11 +2976,11 @@
                     {id : "1", selected : true},
                     {id : "4", selected : false}
                 ];
+                scope.services = [
+                    {id : "1", category : "3"},
+                    {id : "5", category : "3"}
+                ];
                 scope.addServiceOption(payload.results[0]);
-                httpBackend
-                    .expectGET(server_url+
-                        "api/facilities/services/?category=3")
-                    .respond(200, rslts);
                 scope.showServices(cat);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();

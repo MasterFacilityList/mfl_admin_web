@@ -26,8 +26,6 @@
     "c3": "~0.4.10",
     "angular-ui-select": "~0.12.0",
     "ng-idle": "https://github.com/ngash/ng-idle.git#develop",
-    "angulartics": "~0.20.0",
-    "angulartics-google-analytics": "~0.1.1",
     "angular-auto-validate": "https://github.com/ngash/angular-auto-validate.git#api-message-hack"
   },
   "resolutions": {

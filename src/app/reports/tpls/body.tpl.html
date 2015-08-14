@@ -8,12 +8,12 @@
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="reports.counties">
-                    <span class="sidebar-text">County Summaries</span>
+                    <span class="sidebar-text">County</span>
                 </a>
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="reports.constituencies">
-                    <span class="sidebar-text">Sub County Summaries</span>
+                    <span class="sidebar-text">Constituency</span>
                 </a>
             </li>
             <li ui-sref-active="active">
@@ -32,10 +32,21 @@
                 </a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="reports.facility_type_categories">
-                    <span class="sidebar-text">Type Categories</span>
+                <a ui-sref="reports.facility_county_keph_levels">
+                    <span class="sidebar-text">County KEPH Levels</span>
                 </a>
             </li>
+            <li ui-sref-active="active">
+                <a ui-sref="reports.facility_county_facility_types">
+                    <span class="sidebar-text">County with Facility Types</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="reports.facility_county_consituencies">
+                    <span class="sidebar-text">County with Consituencies</span>
+                </a>
+            </li>
+        </ul>
     </aside>
 </div>
 <div class="content" ng-class="{'col-sm-12':hide_sidebar,'col-sm-10':!hide_sidebar}" ui-view="main-content"></div>
