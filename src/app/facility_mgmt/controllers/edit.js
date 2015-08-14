@@ -137,15 +137,13 @@
                             });
                         }
                     });
-                    console.log($scope.fac_serv);
                     wrappers.facility_detail.update($scope.facility_id,
                         $scope.fac_serv)
-                        .success(function (data) {
-                            console.log(data);
+                        .success(function () {
                             $state.go("facilities");
                         })
                         .error(function (err) {
-                            console.log(err);
+                            $scope.alert = err.error;
                         });
 
                 };
