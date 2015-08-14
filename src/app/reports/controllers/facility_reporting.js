@@ -36,21 +36,6 @@
                 });
         }
     ])
-    .controller("mfl.reports.controllers.facility_type_categories", ["$scope",
-        "mfl.reports.services.wrappers",
-        function($scope,wrappers){
-            $scope.filters = {
-                "report_type":"facility_count_by_facility_type"
-            };
-            wrappers.reporting.filter($scope.filters)
-                .success(function (data) {
-                    $scope.type_cat_facilities = data.results;
-                })
-                .error(function (err) {
-                    $scope.errors = err;
-                });
-        }
-    ])
     .controller("mfl.reports.controllers.facility_types", ["$scope",
         "mfl.reports.services.wrappers",
         function($scope,wrappers){
