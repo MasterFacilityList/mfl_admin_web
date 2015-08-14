@@ -26,6 +26,9 @@
     .controller("mfl.setup.controller.contacts.edit", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
+            $scope.wrapper = adminApi.contacts;
+            $scope.contact_id = $stateParams.id;
+
             adminApi.contact_types.list().success(function(data){
                 $scope.contact_types = data.results;
             }).error(function(error){
@@ -124,6 +127,8 @@
     .controller("mfl.setup.controller.contact_types.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes",
         function($scope, $state, $stateParams, adminApi, formChanges){
+            $scope.contact_type_id = $stateParams.id;
+            $scope.wrapper = adminApi.contact_types;
 
             if(!_.isUndefined($stateParams.id) &&
                 $stateParams.id !== "create"){

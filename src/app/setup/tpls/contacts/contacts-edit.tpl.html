@@ -28,6 +28,7 @@
                 <button ng-if="!contacts.id" ng-click="createContacts(contacts)" class="btn btn-primary">Save</button>
                 <button ng-if="contacts.id" ng-click="updateContact(contacts.id, contact.form)" class="btn btn-primary">Save</button>
                 <a ui-sref="setup.contacts" class="btn btn-default">Cancel</a>
+                <mfl-revision-view id="contact_id" wrapper="wrapper" ></mfl-revision-view>
             </form>
         </div>
     </div>
