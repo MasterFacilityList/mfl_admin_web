@@ -19,6 +19,7 @@
         function ($scope, $state, $stateParams, $log, wrappers, forms) {
             $scope.option_id = $stateParams.option_id;
             $scope.option_types = wrappers.OPTION_TYPES;
+            $scope.wrapper = wrappers.options;
 
             wrappers.options.get($scope.option_id).success(function (data) {
                 $scope.option = data;

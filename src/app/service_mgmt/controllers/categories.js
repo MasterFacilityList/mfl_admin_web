@@ -19,6 +19,8 @@
         "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
         function ($scope, $state, $stateParams, $log, wrappers, forms) {
             $scope.category_id = $stateParams.category_id;
+            $scope.wrapper = wrappers.categories;
+
             $scope.filters = {category:$scope.category_id};
             $scope.edit_view = true;
             wrappers.categories.get($scope.category_id).success(function (data) {
