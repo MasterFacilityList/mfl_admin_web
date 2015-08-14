@@ -9,7 +9,10 @@
     .controller("mfl.reports.controllers.facility_counties", ["$scope",
         "mfl.reports.services.wrappers",
         function($scope,wrappers){
-            wrappers.reporting.list()
+            $scope.filters = {
+                "report_type":"facility_count_by_county"
+            };
+            wrappers.reporting.filter($scope.filters)
                 .success(function (data) {
                     $scope.county_facilities = data.results;
                 })
