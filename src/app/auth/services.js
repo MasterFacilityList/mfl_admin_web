@@ -85,7 +85,7 @@
                     return;
                 }
                 // TODO : change this to use state urls instead of names
-                change_state(evt, "login", {"next": toState.name});
+                change_state(evt, "login", {"next": toState.url});
             };
 
             var start = function () {

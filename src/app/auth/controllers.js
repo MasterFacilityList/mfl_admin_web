@@ -69,8 +69,9 @@
                 var success_fxn = function () {
                     $scope.spinner = false;
                     Idle.watch();
-                    var next_state = $stateParams.next || HOME_PAGE_NAME;
-                    $state.go(next_state);
+                    var next_state = $stateParams.next || $state.href(HOME_PAGE_NAME);
+                    next_state = window.decodeURIComponent(window.decodeURIComponent(next_state));
+                    window.location.assign(next_state);
                 };
                 loginService.login(obj)
                     .then(
@@ -91,7 +92,8 @@
                 Idle.unwatch();
                 $state.go("login", {
                     "timeout": $stateParams.timeout,
-                    "next": $stateParams.next
+                    "next": $stateParams.next ?
+                            window.decodeURIComponent($stateParams.next) : undefined
                 });
             };
             return loginService.logout().then(callback, callback);
