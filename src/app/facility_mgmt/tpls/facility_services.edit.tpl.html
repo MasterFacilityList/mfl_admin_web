@@ -37,12 +37,12 @@
                     <div ng-if="serv.option_no > 2" class="form-group">
                         <select name="option{{$index}}" class="form-control" ng-model="serv.option">
                             <option value="">Select Option</option>
-                            <option ng-repeat="opt in serv.serv_options" ng-value="opt.id">{{opt.display_text}}</option>
+                            <option ng-repeat="opt in serv.serv_options" ng-selected="{{opt.id == serv.option}}" ng-value="opt.id">{{opt.display_text}}</option>
                         </select>
                     </div>
                     <div ng-if="serv.option_no === 2 && serv.serv_options[0].display_text === 'No'" class="form-group checkbox margin-t-1">
                         <label for="service_option_yes">
-                            <input type="checkbox" id="service_option_yes" name="option{{$index}}" ng-model="serv.option" ng-true-value="serv.serv_options[1].id">
+                            <input type="checkbox" id="option{{$index}}" name="option{{$index}}" ng-model="serv.option" ng-value="serv.serv_options[1].id">
                             Yes
                         </label>
                     </div>
@@ -67,9 +67,4 @@
             </div>
         </div>
     </div>
-</div>
-<div class="col-xs-12">
-    <button class="col-xs-12" ng-click="facilityServices()">
-        Save Services
-    </button>
 </div>

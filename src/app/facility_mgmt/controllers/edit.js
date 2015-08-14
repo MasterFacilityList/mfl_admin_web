@@ -125,14 +125,29 @@
                 $scope.removeChild = function (a) {
                     removeServiceOption($scope, a);
                 };
+                $scope.fac_serv = {
+                    facility_services : []
+                };
                 $scope.facilityServices = function () {
-                    $scope.facility_services = [];
-                    _.each($scope.services, function (cat_obj) {
-                        if(cat_obj.option) {
-                            $scope.facility_services.push(cat_obj);
+                    _.each($scope.services, function (service_obj) {
+                        if(service_obj.option) {
+                            $scope.fac_serv.facility_services.push({
+                                service : service_obj.id,
+                                option : service_obj.option
+                            });
                         }
                     });
-                    console.log($scope.facility_services);
+                    console.log($scope.fac_serv);
+                    wrappers.facility_detail.update($scope.facility_id,
+                        $scope.fac_serv)
+                        .success(function (data) {
+                            console.log(data);
+                            $state.go("facilities");
+                        })
+                        .error(function (err) {
+                            console.log(err);
+                        });
+
                 };
                 $scope.$watch("new_service.service", function (newVal) {
                     var s = _.findWhere($scope.services, {"id": newVal});
