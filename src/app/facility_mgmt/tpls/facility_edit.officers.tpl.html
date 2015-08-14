@@ -74,25 +74,25 @@
                 </table>
             </div>
                 <div class="col-xs-12 text-right margin-b-10">
-                    <a class="mfl-btn mfl-btn-primary pull-right" ng-click="add_contact()" >
-                        &nbsp;<i class="fa fa-plus-square-o"></i> Add
+                    <a class="btn btn-primary pull-right" ng-click="add_contact()" >
+                        <i class="fa fa-plus-square-o"></i> Add
                     </a>
                 </div>
             </div>
             <div class="col-xs-12 pad-0">
                 <!-- Start of create buttons -->
-                <a ui-sref="facilities.facility_create.contacts({facility_id : new_facility})" ng-if="create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
-                    &nbsp;<i class="fa fa-angle-double-left"></i> Facility Contacts
+                <a ui-sref="facilities.facility_create.contacts({facility_id : new_facility})" ng-if="create" class="btn btn-primary margin-t-20 margin-b-10">
+                    <i class="fa fa-angle-double-left"></i> Facility Contacts
                 </a>
-                <button type="submit" ng-click="goToNext(5, 'units')" ng-if="create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
-                    &nbsp; Regulation <i class="fa fa-angle-double-right"></i>
+                <button type="submit" ng-click="goToNext(5, 'units')" ng-if="create"  class="btn btn-primary margin-t-20 margin-b-10 pull-right">
+                     Regulation <i class="fa fa-angle-double-right"></i>
                 </button>
                 <!-- End of navigation buttons -->
-                <a ui-sref="facilities.facility_edit.contacts" ng-if="!create" class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10">
-                    &nbsp;<i class="fa fa-angle-double-left"></i> Contacts
+                <a ui-sref="facilities.facility_edit.contacts" ng-if="!create" class="btn btn-primary margin-t-20 margin-b-10">
+                    <i class="fa fa-angle-double-left"></i> Contacts
                 </a>
-                <button type="submit" ng-if="!create"  class="mfl-btn mfl-btn-primary margin-t-20 margin-b-10 pull-right">
-                    &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
+                <button type="submit" ng-if="!create"  class="btn btn-primary margin-t-20 margin-b-10 pull-right">
+                     Save & Continue <i class="fa fa-angle-double-right"></i>
                 </button>
                 <!-- End of create buttons -->
             </div>

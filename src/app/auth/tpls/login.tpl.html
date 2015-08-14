@@ -1,7 +1,7 @@
 <div class="row login-content" style="background-color: #F6F4F4;">
     <div class="bg-overlay">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="margin-t-120 col-lg-6 col-md-6 col-sm-8 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-2 col-xs-offset-1 content-card">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1 col-md-offset-3 col-lg-6 col-lg-offset-3">
+            <div class="margin-t-120 content-card col-xs-12">
                 <div class="row title-line">
                     <h2 class="text-center">
                         <img src="assets/img/kenya-coat-of-arms.png" width="40px" height="40px">
@@ -20,8 +20,8 @@
                         <i class="fa fa-times"></i>
                     </span>
                 </span>
-                <form role="form" name="frm_login" ng-submit="submitUser(user)" novalidate>
-                    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+                <form role="form" class="pad-b-20" name="frm_login" ng-submit="submitUser(user)" novalidate>
+                    <div class="col-xs-12 col-sm-10 col-sm-offset-1 margin-b-20">
                         <div class="form-group">
                             <label class="control-label" for="email">Employee Number or Email Address</label>
                             <input type="text" ng-model="user.username" required autofocus name="email" id="email" class="form-control" ng-disabled="logout">
@@ -31,19 +31,17 @@
                             <label class="control-label" for="password">Password</label>
                             <input type="password" ng-model="user.password" required name="password" id="password" class="form-control" ng-disabled="logout">
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-sm-10 col-md-offset-1 col-sm-10 col-sm-offset-1 margin-t-10 margin-b-20 text-right">
-                            <span class="pull-left">
-                                <button type="submit" class="mfl-btn mfl-btn-primary" ng-disabled="spinner||login.$invalid" ng-disabled="logout">Login</button>
+                        <div class="form-group">
+                            <div class="pull-left">
+                                <button type="submit" class="btn btn-primary" ng-disabled="spinner||login.$invalid" ng-disabled="logout">Login</button>
                                 <span ng-if="spinner" style="display: inline-block;" class="margin-r-10 margin-t-5">
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
                                 </span>
-                            </span>
-                            <span class="pull-right">
+                            </div>
+                            <div class="pull-right">
                                 <a ui-sref="reset_pwd">Forgot password</a>
-                            </span>
+                            </div>
                         </div>
                     </div>
                 </form>

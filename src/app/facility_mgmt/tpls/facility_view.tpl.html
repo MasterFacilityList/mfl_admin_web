@@ -1,16 +1,16 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-        <a requires-permission="facilities.view_facility,facilities.add_facilityregulationstatus" ui-sref="facilities_regulation.regulate.basic({facility_id: fac_id})" class="mfl-btn mfl-btn-action" tooltip="Regulate Facility">
-            &nbsp;Regulate
+        <a requires-permission="facilities.view_facility,facilities.add_facilityregulationstatus" ui-sref="facilities_regulation.regulate.basic({facility_id: fac_id})" class="btn btn-success" tooltip="Regulate Facility">
+            Regulate
         </a>
-        <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="mfl-btn mfl-btn-action" ng-if="!facility.is_published" tooltip="Publish Facility">
-            &nbsp;Publish
+        <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="btn btn-success" ng-if="!facility.is_published" tooltip="Publish Facility">
+            Publish
         </a>
-        <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="mfl-btn mfl-btn-action" ng-if="facility.is_published" tooltip="Unpublish Facility">
-            &nbsp;Unpublish
+        <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="btn btn-success" ng-if="facility.is_published" tooltip="Unpublish Facility">
+            Unpublish
         </a>
-        <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac_id})" class="mfl-btn mfl-btn-action" ng-if="(!facility.rejected)&&(!facility.is_approved||facility.has_edits)" tooltip="Approve Facility">
-            &nbsp;Approve/Reject
+        <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac_id})" class="btn btn-success" ng-if="(!facility.rejected)&&(!facility.is_approved||facility.has_edits)" tooltip="Approve Facility">
+            Approve/Reject
         </a>
         <a  tooltip="Print Facility Cover Letter" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ng-click="printFacility(fac_id)"><i class="fa fa-print"></i></a>
 

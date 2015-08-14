@@ -4,8 +4,8 @@
     <div class="col-md-10 col-md-offset-1 margin-b-20 margin-t-20">
         <p class="lead margin-b-10">Are you sure you want to delete the user <strong>{{user.full_name}}</strong> ?</p>
 
-        <button class="login-btn login-btn-success margin-h-5" ng-click="remove()">Yes</button>
-        <a requires-permission="users.delete_mfluser" class="login-btn login-btn-default margin-h-5"
+        <button class="btn btn-success margin-h-5" ng-click="remove()">Yes</button>
+        <a requires-permission="users.delete_mfluser" class="btn btn-default margin-h-5"
             ui-sref="users.user_edit.basic({user_id: user.id})">No</a>
     </div>
     </div>
