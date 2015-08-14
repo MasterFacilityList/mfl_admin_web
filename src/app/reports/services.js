@@ -9,6 +9,7 @@
         ["api", function(api) {
             this.filters = api.setBaseUrl("api/common/filtering_summaries/");
             this.facilities = api.setBaseUrl("api/facilities/facilities/");
+            this.reporting = api.setBaseUrl("api/reporting/");
             this.helpers = api.apiHelpers;
         }]
     );

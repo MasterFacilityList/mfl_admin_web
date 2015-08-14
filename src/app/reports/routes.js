@@ -64,7 +64,8 @@
                     controller:"mfl.reports.controllers.main"
                 },
                 "main-content@reports.counties": {
-                    templateUrl: "reports/tpls/facility_counties.tpl.html"
+                    templateUrl: "reports/tpls/facility_counties.tpl.html",
+                    controller:"mfl.reports.controllers.facility_counties"
                 }
             }
         })
@@ -76,7 +77,8 @@
                     controller:"mfl.reports.controllers.main"
                 },
                 "main-content@reports.constituencies": {
-                    templateUrl: "reports/tpls/facility_constituencies.tpl.html"
+                    templateUrl: "reports/tpls/facility_constituencies.tpl.html",
+                    controller:"mfl.reports.controllers.facility_constituencies"
                 }
             }
         })
