@@ -2905,6 +2905,7 @@
             });
 
             it("should load services", function () {
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(200, {results: [{"id": 3}]});
@@ -2914,7 +2915,9 @@
                 var c = ctrl();
                 var scope = rootScope.$new();
                 c.bootstrap(scope);
-
+                scope.create = true;
+                var name = "edit";
+                scope.changeView(name);
                 expect(scope.new_service.service).toEqual("");
                 expect(scope.new_service.option).toEqual("");
                 expect(scope.services).toEqual([]);
@@ -2930,6 +2933,7 @@
             });
 
             it("should show error on fail to load services", function () {
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(500, {"error": "e"});
@@ -2937,8 +2941,10 @@
                 spyOn(log, "error");
                 var c = ctrl({"$log": log});
                 var scope = rootScope.$new();
+                scope.create = false;
                 c.bootstrap(scope);
-
+                var name = "edit";
+                scope.changeView(name);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -2949,6 +2955,7 @@
 
             it("should add a facility service", function () {
                 var payload = {results: [{"id": 3}]};
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(200, payload);
@@ -2957,6 +2964,8 @@
                     .respond(200, payload);
                 var c = ctrl();
                 var scope = rootScope.$new();
+                scope.create = true;
+                scope.facility_id = "3";
                 var cat = {selected : false, id : "3"};
                 c.bootstrap(scope);
 
@@ -2969,6 +2978,9 @@
                 httpBackend
                     .expectPOST(server_url+"api/facilities/facility_services/")
                     .respond(201, {"id": 4});
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(200, {"id": "3"});
                 scope.facility = {
                     facility_services: []
                 };
@@ -2978,10 +2990,75 @@
                 ];
                 scope.services = [
                     {id : "1", category : "3"},
-                    {id : "5", category : "3"}
+                    {id : "5", category : "3", option : "5"}
                 ];
+                scope.fac_serv.facility_services = [
+                    {
+                        service : "1",
+                        option : "3"
+                    }
+                ];
+                var name = "edit";
                 scope.addServiceOption(payload.results[0]);
                 scope.showServices(cat);
+                scope.changeView(name);
+                scope.facilityServices();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(scope.facility.facility_services[0]).toEqual({"id": 4});
+            });
+
+            it("should fail to add facility services", function () {
+                var payload = {results: [{"id": 3}]};
+                spyOn(state, "go");
+                httpBackend
+                    .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
+                    .respond(200, payload);
+                httpBackend
+                    .expectGET(server_url+"api/facilities/options/")
+                    .respond(200, payload);
+                var c = ctrl();
+                var scope = rootScope.$new();
+                scope.create = true;
+                scope.facility_id = "3";
+                var cat = {selected : false, id : "3"};
+                c.bootstrap(scope);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/facility_services/")
+                    .respond(201, {"id": 4});
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(500);
+                scope.facility = {
+                    facility_services: []
+                };
+                scope.categories = [
+                    {id : "1", selected : true},
+                    {id : "4", selected : false}
+                ];
+                scope.services = [
+                    {id : "1", category : "3"},
+                    {id : "5", category : "3", option : "5"}
+                ];
+                scope.fac_serv.facility_services = [
+                    {
+                        service : "1",
+                        option : "3"
+                    }
+                ];
+                var name = "edit";
+                scope.addServiceOption(payload.results[0]);
+                scope.showServices(cat);
+                scope.changeView(name);
+                scope.facilityServices();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
