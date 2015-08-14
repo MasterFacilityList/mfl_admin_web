@@ -78,6 +78,16 @@
                     service: "",
                     option: ""
                 };
+                $scope.changeView = function (name) {
+                    console.log(name);
+                    /*if($scope.create) {
+                        $state.go("facilities.facility_create.services."+
+                            name,{furthest: $scope.furthest,
+                            facility_id : $scope.new_facility});
+                    }else{
+                        $state.go("facilities.facility_edit.services." + name);
+                    }*/
+                };
                 $scope.optionNumber = function (services) {
                     _.each(services, function(serv_obj) {
                         serv_obj.serv_options = [];
