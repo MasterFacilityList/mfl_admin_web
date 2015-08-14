@@ -110,5 +110,35 @@
                     $scope.errors = err;
                 });
         }
+    ])
+    .controller("mfl.reports.controllers.county_facility_types", ["$scope",
+        "mfl.reports.services.wrappers",
+        function($scope,wrappers){
+            $scope.filters = {
+                "report_type":"facility_count_by_facility_type_detailed"
+            };
+            wrappers.reporting.filter($scope.filters)
+                .success(function (data) {
+                    $scope.county_types_facilities = data.results;
+                })
+                .error(function (err) {
+                    $scope.errors = err;
+                });
+        }
+    ])
+    .controller("mfl.reports.controllers.county_constituencies", ["$scope",
+        "mfl.reports.services.wrappers",
+        function($scope,wrappers){
+            $scope.filters = {
+                "report_type":"facility_constituency_report"
+            };
+            wrappers.reporting.filter($scope.filters)
+                .success(function (data) {
+                    $scope.county_constituencies_facilities = data.results;
+                })
+                .error(function (err) {
+                    $scope.errors = err;
+                });
+        }
     ]);
 })(window.angular);

@@ -7,7 +7,7 @@
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title"> Facility Report by County KEPH Levels</span>
+        <span class="main-title"> Facility Report by Constituencies per County</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -20,17 +20,17 @@
                         <th class="text-wrap"></th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="county in keph_facilities">
+                        <tr ng-repeat="county in county_constituencies_facilities">
                             <td><i>{{county.county | titlecase}}</i></td>
                             <td>
                               <table class="table table-condensed">
                                <thead>
-                                   <th>KEPH Level</th>
+                                   <th>Constituency</th>
                                    <th>Number of Facilities</th>
                                </thead>
                                 <tbody>
                                    <tr ng-repeat="c in county.facilities">
-                                        <td>{{c.keph_level}}</td>
+                                        <td>{{c.constituency}}</td>
                                         <td>{{c.number_of_facilities}}</td>
                                     </tr>
                                 </tbody>
