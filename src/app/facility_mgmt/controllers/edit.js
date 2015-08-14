@@ -32,6 +32,14 @@
                 .error(function (err) {
                     $scope.alert = err.error;
                 });
+
+                wrappers.options.list()
+                .success(function (data) {
+                    $scope.options = data.results;
+                })
+                .error(function (err) {
+                    $scope.alert = err.error;
+                });
             };
 
             var addServiceOption = function ($scope, so) {
@@ -70,6 +78,14 @@
                     service: "",
                     option: ""
                 };
+                $scope.optionNumber = function (services) {
+                    _.each(services, function(serv_obj) {
+                        serv_obj.serv_options = [];
+                        serv_obj.serv_options = _.where(
+                            $scope.options, {"group" : serv_obj.group});
+                        serv_obj.option_no = serv_obj.serv_options.length;
+                    });
+                };
                 $scope.showServices = function (cat) {
                     if(cat.selected === false) {
                         cat.selected = true;
@@ -83,13 +99,9 @@
                             one_cat.selected = !one_cat.selected;
                         }
                     });
-                    wrappers.services.filter({"category" : cat.id})
-                        .success(function (data) {
-                            $scope.cat_services = data.results;
-                        })
-                        .error(function (err) {
-                            $scope.alert = err.error;
-                        });
+                    $scope.cat_services = _.where(
+                        $scope.services, {"category" : cat.id});
+                    $scope.optionNumber($scope.cat_services);
                 };
                 $scope.services = [];
                 $scope.service_options = [];

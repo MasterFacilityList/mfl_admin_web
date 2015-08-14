@@ -61,6 +61,7 @@
             this.categories = api.setBaseUrl("api/facilities/service_categories/");
             this.services = api.setBaseUrl("api/facilities/services/");
             this.service_options = api.setBaseUrl("api/facilities/service_options/");
+            this.options = api.setBaseUrl("api/facilities/options/");
             this.facility_services = api.setBaseUrl("api/facilities/facility_services/");
             this.facility_updates = api.setBaseUrl("api/facilities/facility_updates/");
             this.operation_status = api.setBaseUrl("api/facilities/facility_status/");
