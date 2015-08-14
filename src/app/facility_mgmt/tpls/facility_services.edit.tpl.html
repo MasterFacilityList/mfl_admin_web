@@ -1,15 +1,12 @@
 <div class="col-xs-12">
     <div class="col-xs-12">
         <span class="pull-right">
-            <button ng-if="create" class="btn btn-primary" ng-click="changeView('view')">
-               {{edit ? 'Edit' : 'View'}} Facility Services
-            </button>
-            <button ng-if="!create" class="btn btn-primary" ng-click="changeView('view')">
-               {{edit ? 'Edit' : 'View'}} Facility Services
+            <button class="btn btn-primary" ng-click="changeView('view')">
+               View Facility Services
             </button>
         </span>
     </div>
-    <div class="col-xs-12 pad-0">
+    <div class="col-xs-12 margin-t-5 pad-0">
         <div class="col-sm-4 col-xs-12">
             <div class="col-xs-12 category-title">
                 <h4>Categories</h4>
@@ -38,27 +35,27 @@
                 <div class="col-xs-6 margin-t-15 margin-b-10">{{serv.name}}</div>
                 <div class="col-xs-6 pad-0 margin-t-10">
                     <div ng-if="serv.option_no > 2" class="form-group">
-                        <select name="option" class="form-control" ng-model="serv.option">
+                        <select name="option{{$index}}" class="form-control" ng-model="serv.option">
                             <option value="">Select Option</option>
-                            <option ng-repeat="opt in serv.serv_options" value="opt.id">{{opt.display_text}}</option>
+                            <option ng-repeat="opt in serv.serv_options" ng-value="opt.id">{{opt.display_text}}</option>
                         </select>
                     </div>
                     <div ng-if="serv.option_no === 2 && serv.serv_options[0].display_text === 'No'" class="form-group checkbox margin-t-1">
                         <label for="service_option_yes">
-                            <input type="checkbox" id="service_option_yes" name="service_option_yes" ng-model="serv.option">
+                            <input type="checkbox" id="service_option_yes" name="option{{$index}}" ng-model="serv.option" ng-true-value="serv.serv_options[1].id">
                             Yes
                         </label>
                     </div>
-                    <div ng-if="serv.option_no === 2 && serv.serv_options[0].display_text !== 'No'">
-                        <div class="form-group checkbox margin-t-1">
-                            <label for="service_option_one">
-                                <input type="checkbox" id="service_option_one" name="service_option_one" ng-model="serv.option">
+                    <div ng-if="serv.option_no === 2 && serv.serv_options[0].display_text !== 'No'" class="margin-t--15">
+                        <div class="radio">
+                            <label class="radio-inline">
+                                <input type="radio" name="option{{$index}}"  ng-value="serv.serv_options[0].id" ng-model="serv.option">
                                 {{serv.serv_options[0].display_text}}
                             </label>
                         </div>
-                        <div class="form-group checkbox margin-t-1">
-                            <label for="service_option_twp">
-                                <input type="checkbox" id="service_option_two" name="service_option_one" ng-model="serv.option">
+                        <div class="radio">
+                            <label class="radio-inline">
+                                <input type="radio" name="option{{$index}}" ng-value="serv.serv_options[1].id" ng-model="serv.option">
                                 {{serv.serv_options[1].display_text}}
                             </label>
                         </div>
@@ -70,4 +67,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="col-xs-12">
+    <button class="col-xs-12" ng-click="facilityServices()">
+        Save Services
+    </button>
 </div>

@@ -13,7 +13,8 @@
 
     .controller("mfl.facility_mgmt.controllers.services_helper",
         ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
-        function ($log, wrappers, errorMessages) {
+        "$state",
+        function ($log, wrappers, errorMessages, $state) {
             var loadData = function ($scope) {
                 wrappers.services.filter({page_size: 100, ordering: "name"})
                 .success(function (data) {
@@ -79,14 +80,13 @@
                     option: ""
                 };
                 $scope.changeView = function (name) {
-                    console.log(name);
-                    /*if($scope.create) {
+                    if($scope.create) {
                         $state.go("facilities.facility_create.services."+
                             name,{furthest: $scope.furthest,
                             facility_id : $scope.new_facility});
                     }else{
                         $state.go("facilities.facility_edit.services." + name);
-                    }*/
+                    }
                 };
                 $scope.optionNumber = function (services) {
                     _.each(services, function(serv_obj) {
@@ -124,6 +124,15 @@
                 };
                 $scope.removeChild = function (a) {
                     removeServiceOption($scope, a);
+                };
+                $scope.facilityServices = function () {
+                    $scope.facility_services = [];
+                    _.each($scope.services, function (cat_obj) {
+                        if(cat_obj.option) {
+                            $scope.facility_services.push(cat_obj);
+                        }
+                    });
+                    console.log($scope.facility_services);
                 };
                 $scope.$watch("new_service.service", function (newVal) {
                     var s = _.findWhere($scope.services, {"id": newVal});
