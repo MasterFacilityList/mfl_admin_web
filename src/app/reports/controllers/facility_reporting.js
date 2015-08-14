@@ -33,6 +33,36 @@
                 });
         }
     ])
+    .controller("mfl.reports.controllers.facility_type_categories", ["$scope",
+        "mfl.reports.services.wrappers",
+        function($scope,wrappers){
+            $scope.filters = {
+                "report_type":"facility_count_by_facility_type"
+            };
+            wrappers.reporting.filter($scope.filters)
+                .success(function (data) {
+                    $scope.type_cat_facilities = data.results;
+                })
+                .error(function (err) {
+                    $scope.errors = err;
+                });
+        }
+    ])
+    .controller("mfl.reports.controllers.facility_types", ["$scope",
+        "mfl.reports.services.wrappers",
+        function($scope,wrappers){
+            $scope.filters = {
+                "report_type":"facility_count_by_facility_type"
+            };
+            wrappers.reporting.filter($scope.filters)
+                .success(function (data) {
+                    $scope.type_facilities = data.results;
+                })
+                .error(function (err) {
+                    $scope.errors = err;
+                });
+        }
+    ])
     .controller("mfl.reports.controllers.facility_owner_categories", ["$scope",
         "mfl.reports.services.wrappers",
         function($scope,wrappers){
@@ -63,7 +93,7 @@
                 });
         }
     ])
-    .controller("mfl.reports.controllers.keph_counties", ["$scope",
+    .controller("mfl.reports.controllers.keph_levels", ["$scope",
         "mfl.reports.services.wrappers",
         function($scope,wrappers){
             $scope.filters = {
@@ -71,22 +101,7 @@
             };
             wrappers.reporting.filter($scope.filters)
                 .success(function (data) {
-                    $scope.county_kephs = data.results;
-                })
-                .error(function (err) {
-                    $scope.errors = err;
-                });
-        }
-    ])
-    .controller("mfl.reports.controllers.keph_constituencies", ["$scope",
-        "mfl.reports.services.wrappers",
-        function($scope,wrappers){
-            $scope.filters = {
-                "report_type":"ffacility_constituency_report"
-            };
-            wrappers.reporting.filter($scope.filters)
-                .success(function (data) {
-                    $scope.const_kephs = data.results;
+                    $scope.keph_facilities = data.results;
                 })
                 .error(function (err) {
                     $scope.errors = err;

@@ -90,7 +90,8 @@
                     controller:"mfl.reports.controllers.main"
                 },
                 "main-content@reports.facility_types": {
-                    templateUrl: "reports/tpls/facility_types.tpl.html"
+                    templateUrl: "reports/tpls/facility_types.tpl.html",
+                    controller:"mfl.reports.controllers.facility_types"
                 }
             }
         })
@@ -102,7 +103,8 @@
                     controller:"mfl.reports.controllers.main"
                 },
                 "main-content@reports.facility_type_categories": {
-                    templateUrl: "reports/tpls/facility_type_categories.tpl.html"
+                    templateUrl: "reports/tpls/facility_type_categories.tpl.html",
+                    controller:"mfl.reports.controllers.facility_type_categories"
                 }
             }
         })
@@ -114,7 +116,8 @@
                     controller:"mfl.reports.controllers.main"
                 },
                 "main-content@reports.facility_owners": {
-                    templateUrl: "reports/tpls/facility_owners.tpl.html"
+                    templateUrl: "reports/tpls/facility_owners.tpl.html",
+                    controller:"mfl.reports.controllers.facility_owners"
                 }
             }
         })
@@ -126,7 +129,21 @@
                     controller:"mfl.reports.controllers.main"
                 },
                 "main-content@reports.facility_owner_categories": {
-                    templateUrl: "reports/tpls/facility_owner_categories.tpl.html"
+                    templateUrl: "reports/tpls/facility_owner_categories.tpl.html",
+                    controller:"mfl.reports.controllers.facility_owner_categories"
+                }
+            }
+        })
+        .state("reports.facility_keph_levels", {
+            url: "facility_keph_levels",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.facility_keph_levels": {
+                    templateUrl: "reports/tpls/facility_keph_levels.tpl.html",
+                    controller:"mfl.reports.controllers.keph_levels"
                 }
             }
         });
