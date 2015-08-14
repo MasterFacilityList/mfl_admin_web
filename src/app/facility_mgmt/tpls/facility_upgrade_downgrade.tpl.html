@@ -24,7 +24,7 @@
 
     </form>
     <div class="col-xs-12 pad-0">
-        <button class="mfl-btn mfl-btn-primary margin-b-10" ng-click="viewServices = !viewServices">
+        <button class="btn btn-primary margin-b-10" ng-click="viewServices = !viewServices">
             &nbsp;Click to {{viewServices ? 'Hide' : 'Edit'}} Facility Services <i class="fa {{viewServices ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
         </button>
     </div>
@@ -32,7 +32,7 @@
         <ng-include src="'facility_mgmt/tpls/facility_edit.services.tpl.html'"></ng-include>
     </div>
     <div class="col-xs-12 pad-0 margin-t-10">
-        <button class="mfl-btn" ng-class="{'mfl-btn-danger': !upgrade, 'mfl-btn-success': upgrade}" type="submit" ng-disabled="new_type.id">
+        <button class="btn" ng-class="{'btn-danger': !upgrade, 'btn-success': upgrade}" type="submit" ng-disabled="new_type.id">
             {{(upgrade) ? 'Upgrade' : 'Downgrade' }} Facility
         </button>
     </div>

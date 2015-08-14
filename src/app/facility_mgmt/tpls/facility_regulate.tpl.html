@@ -22,7 +22,7 @@
             <div class="col-sm-6"><span class="pull-right">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
        </div>
     </div>
-    <button class="mfl-btn mfl-btn-primary" ng-click="viewFacility = !viewFacility">
+    <button class="btn btn-primary" ng-click="viewFacility = !viewFacility">
         &nbsp;View {{viewFacility ? 'Less' : 'More'}} Facility Details <i class="fa {{viewFacility ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
     </button>
     <div class="row" content-slide-in="viewFacility" slide-show-duration="1000">
@@ -76,10 +76,10 @@
                 <input class="form-control" type="text" name="license_number" ng-model="regulation.license_number" required >
             </div>
 
-            <button type="submit" class="mfl-btn mfl-btn-action">
+            <button type="submit" class="btn btn-success">
                 Regulate
             </button>
-            <a ui-sref="^" class="mfl-btn mfl-btn-default margin-l-5">&nbsp;Cancel</a>
+            <a ui-sref="^" class="btn btn-default margin-l-5">&nbsp;Cancel</a>
         </form>
     </div>
 </div>
