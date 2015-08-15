@@ -421,6 +421,10 @@
             };
         }
     ])
+//    .controller("mfl.setup.controller.change_reasons_details",["$scope","adminApi",
+//        function ($scope,adminApi) {
+//            
+//        }])
     .controller("mfl.setup.controller.facilityRegulatoryBody.edit", ["$scope",
         "$stateParams", "adminApi", "mfl.common.forms.changes", "$state",
         function ($scope, $stateParams, adminApi, formChanges, $state) {

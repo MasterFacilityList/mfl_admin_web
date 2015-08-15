@@ -2,32 +2,21 @@
    <div class="action-container content-header-extra">
        <div class="action-container content-header-extra pad-r-5">
             <a tooltip-placement="bottom" tooltip="export facilities"  class="btn btn-primary">
-                Add Facility Reason
+                Add Change Reason
             </a>
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title"> Facility Reasons</span>
+        <span class="main-title"> Change Reasons</span>
    </h2>
 </div>
 <section class="margin-t-10">
     <div class="col-sm-12">
         <div class="content-card col-xs-12">
             <div class="col-xs-12 margin-b-20">
-                <table class="table table-hover table-condensed margin-t-20" id="no-more-tables">
-                    <thead>
-                        <th class="text-wrap">Facility Reason</th>
-                        <th col="4" class="text-wrap"><span class="pull-right">Action</span></th>
-                    </thead>
-                    <tbody class="fade-content">
-                        <tr>
-                            <td class="text-wrap" data-title="Sub County:">Does not meet requirements</td>
-                            <td col="4" class="text-wrap pull-right" data-title="Action:">
-                                <a ui-sref="setup.facility_reasons.view" class="btn btn-success pull-right">View</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <sil-grid template="setup/tpls/facilities/reasons/reasons-grid.tpl.html" grid-for="admin"
+                   api-key="level_change_reasons" data="level_change_reasons" filters="filters" error="alert">
+                </sil-grid>
             </div>
         </div>
     </div>
