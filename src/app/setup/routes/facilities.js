@@ -267,7 +267,8 @@
                         "reasons-list.tpl.html",
                         controller:"mfl.setup.controller.change_reasons.list"
                     }
-                }
+                },
+                userFeature: "is_national,is_staff"
             })
         .state("setup.facility_reasons.create", {
                 url: "/create",
@@ -277,7 +278,8 @@
                         "reasons-view.tpl.html",
                         controller:"mfl.setup.controller.change_reasons.view"
                     }
-                }
+                },
+                userFeature: "is_national"
             })
         .state("setup.facility_reasons.edit", {
                 url: "/edit/:reason_id",
@@ -287,7 +289,18 @@
                         "reasons-view.tpl.html",
                         controller:"mfl.setup.controller.change_reasons.view"
                     }
-                }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.facility_reasons.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.setup.facility_reasons.edit": {
+                        controller:"mfl.setup.controller.change_reasons.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                },
+                userFeature: "is_national,is_staff"
             });
     }]);
 })(window.angular);

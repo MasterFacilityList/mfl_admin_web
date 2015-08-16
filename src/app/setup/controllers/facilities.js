@@ -437,6 +437,17 @@
                 .error(function  (err) {
                     $scope.errors = err;
                 });
+                $scope.remove = function () {
+                    adminApi.change_reasons.remove($stateParams.reason_id).success(function(){
+                        $state.go("setup.facility_reasons");
+                    }).error(function(error){
+                        $scope.errors = error;
+                        $state.go("facility_reasons");
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.facility_reasons");
+                };
             } else {
                 $scope.state = false;
             }

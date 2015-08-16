@@ -161,6 +161,36 @@
                 data.$scope.saveFrm(frm);
             }])
         );
+        it("should delete a reason: success",function(){
+                var res = {msg: "ok"};
+                var dt = {
+                    $stateParams: {reason_id: 1}
+                };
+                spyOn($state, "go");
+                $httpBackend.expectDELETE(SERVER_URL+"api/facilities/level_change_reasons/1/")
+                .respond(200, res);
+                createController("view", dt);
+                $scope.remove();
+                $scope.cancel();
+                $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("setup.facility_reasons");
+            });
+        it("should delete a contact:reason fail",function(){
+                var res = {"detail":"Authentication credentials were not provided."};
+                var dt = {
+                    $stateParams: {reason_id: 1}
+                };
+                spyOn($state, "go");
+                $httpBackend.expectDELETE(SERVER_URL+"api/facilities/level_change_reasons/1/")
+                .respond(500, res);
+                createController("view", dt);
+                $scope.remove();
+                $scope.cancel();
+                $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("setup.facility_reasons");
+            });
 
     });
 })(window._);
