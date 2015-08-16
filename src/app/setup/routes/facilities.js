@@ -295,7 +295,7 @@
         .state("setup.facility_reasons.edit.delete", {
                 url: "/delete",
                 views: {
-                    "delete@setup.setup.facility_reasons.edit": {
+                    "delete@setup.facility_reasons.edit": {
                         controller:"mfl.setup.controller.change_reasons.view",
                         templateUrl: "common/tpls/delete.tpl.html"
                     }

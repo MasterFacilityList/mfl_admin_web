@@ -433,6 +433,7 @@
                 adminApi.change_reasons.get($stateParams.reason_id)
                 .success(function (data) {
                     $scope.reason = data;
+                    $scope.deleteText = data.reason;
                 })
                 .error(function  (err) {
                     $scope.errors = err;
