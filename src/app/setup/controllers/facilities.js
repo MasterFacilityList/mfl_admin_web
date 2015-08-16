@@ -421,12 +421,12 @@
             };
         }
     ])
-    .controller("mfl.setup.controller.change_reasons",["$scope",
+    .controller("mfl.setup.controller.change_reasons.list",["$scope",
         function ($scope) {
             $scope.filters = {"fields":"id,reason,description"};
         }])
-    .controller("mfl.setup.controller.change_reason",["$scope","adminApi","$stateParams","$state",
-        "mfl.common.forms.changes",
+    .controller("mfl.setup.controller.change_reasons.view",["$scope","adminApi",
+        "$stateParams","$state","mfl.common.forms.changes",
         function ($scope,adminApi,$stateParams,$state,formChanges) {
             if(!_.isUndefined($stateParams.reason_id)){
                 $scope.state = true;

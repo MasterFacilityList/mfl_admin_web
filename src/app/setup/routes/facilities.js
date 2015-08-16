@@ -265,7 +265,7 @@
                     "main-content@setup.facility_reasons": {
                         templateUrl: "setup/tpls/facilities/reasons/"+
                         "reasons-list.tpl.html",
-                        controller:"mfl.setup.controller.change_reasons"
+                        controller:"mfl.setup.controller.change_reasons.list"
                     }
                 }
             })
@@ -275,7 +275,7 @@
                     "main-content@setup.facility_reasons": {
                         templateUrl: "setup/tpls/facilities/reasons/"+
                         "reasons-view.tpl.html",
-                        controller:"mfl.setup.controller.change_reason"
+                        controller:"mfl.setup.controller.change_reasons.view"
                     }
                 }
             })
@@ -285,7 +285,7 @@
                     "main-content@setup.facility_reasons": {
                         templateUrl: "setup/tpls/facilities/reasons/"+
                         "reasons-view.tpl.html",
-                        controller:"mfl.setup.controller.change_reason"
+                        controller:"mfl.setup.controller.change_reasons.view"
                     }
                 }
             });
