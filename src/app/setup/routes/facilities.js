@@ -264,16 +264,28 @@
                     },
                     "main-content@setup.facility_reasons": {
                         templateUrl: "setup/tpls/facilities/reasons/"+
-                        "reasons-list.tpl.html"
+                        "reasons-list.tpl.html",
+                        controller:"mfl.setup.controller.change_reasons"
                     }
                 }
             })
-        .state("setup.facility_reasons.view", {
-                url: "/view",
+        .state("setup.facility_reasons.create", {
+                url: "/create",
                 views: {
                     "main-content@setup.facility_reasons": {
                         templateUrl: "setup/tpls/facilities/reasons/"+
-                        "reasons-view.tpl.html"
+                        "reasons-view.tpl.html",
+                        controller:"mfl.setup.controller.change_reason"
+                    }
+                }
+            })
+        .state("setup.facility_reasons.create", {
+                url: "/edit/:reason_id",
+                views: {
+                    "main-content@setup.facility_reasons": {
+                        templateUrl: "setup/tpls/facilities/reasons/"+
+                        "reasons-view.tpl.html",
+                        controller:"mfl.setup.controller.change_reason"
                     }
                 }
             });

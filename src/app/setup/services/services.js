@@ -19,7 +19,7 @@
                 facilityOwners: api.setBaseUrl("api/facilities/owners/"),
                 regulatoryBodyContacts: api.setBaseUrl("api/common/contacts/"),
                 facilityRegulatoryBodies: api.setBaseUrl("api/facilities/regulating_bodies/"),
-                level_change_reasons: api.setBaseUrl("api/facilities/level_change_reasons/"),
+                change_reasons: api.setBaseUrl("api/facilities/level_change_reasons/"),
                 RegulatoryBodyContacts: api.setBaseUrl("api/facilities/regulating_body_contacts/"),
                 chuStatus: api.setBaseUrl("api/chul/statuses/"),
                 chuApprovers: api.setBaseUrl("api/chul/approvers/"),

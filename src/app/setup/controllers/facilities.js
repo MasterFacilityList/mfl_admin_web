@@ -421,10 +421,51 @@
             };
         }
     ])
-//    .controller("mfl.setup.controller.change_reasons_details",["$scope","adminApi",
-//        function ($scope,adminApi) {
-//            
-//        }])
+    .controller("mfl.setup.controller.change_reasons",["$scope","adminApi",
+        function ($scope,adminApi) {
+            adminApi.change_reasons.list()
+            .success(function (data) {
+                $scope.reasons = data.results;
+            })
+            .errror(function  (err) {
+                $scope.err = err;
+            });
+        }])
+    .controller("mfl.setup.controller.change_reason",["$scope","adminApi","$stateParams","$state",
+        "mfl.common.forms.changes",
+        function ($scope,adminApi,$stateParams,$state,formChanges) {
+            if(!_.isUndefined($stateParams.reason_id)){
+                adminApi.change_reasons.get($stateParams.reason_id)
+                .success(function (data) {
+                    $scope.reason = data;
+                })
+                .errror(function  (err) {
+                    $scope.errors = err;
+                });
+            }
+            $scope.saveFrm = function (frm) {
+                if(_.isUndefined($stateParams.reason_id)){
+                    adminApi.change_reasons.create()
+                    .success(function () {
+                        $state.go("setup.change_reasons");
+                    })
+                    .error(function (err) {
+                        $scope.errors = err;
+                    });
+                } else {
+                    var changes= formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        adminApi.change_reasons.update($stateParams.reason_id,changes)
+                        .success(function () {
+                            $state.go("setup.change_reasons");
+                        })
+                        .error(function (err) {
+                            $scope.errors = err;
+                        });
+                    }
+                }
+            };
+        }])
     .controller("mfl.setup.controller.facilityRegulatoryBody.edit", ["$scope",
         "$stateParams", "adminApi", "mfl.common.forms.changes", "$state",
         function ($scope, $stateParams, adminApi, formChanges, $state) {
