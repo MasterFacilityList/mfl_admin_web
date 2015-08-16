@@ -421,33 +421,30 @@
             };
         }
     ])
-    .controller("mfl.setup.controller.change_reasons",["$scope","adminApi",
-        function ($scope,adminApi) {
-            adminApi.change_reasons.list()
-            .success(function (data) {
-                $scope.reasons = data.results;
-            })
-            .errror(function  (err) {
-                $scope.err = err;
-            });
+    .controller("mfl.setup.controller.change_reasons",["$scope",
+        function ($scope) {
+            $scope.filters = {"fields":"id,reason,description"};
         }])
     .controller("mfl.setup.controller.change_reason",["$scope","adminApi","$stateParams","$state",
         "mfl.common.forms.changes",
         function ($scope,adminApi,$stateParams,$state,formChanges) {
             if(!_.isUndefined($stateParams.reason_id)){
+                $scope.state = true;
                 adminApi.change_reasons.get($stateParams.reason_id)
                 .success(function (data) {
                     $scope.reason = data;
                 })
-                .errror(function  (err) {
+                .error(function  (err) {
                     $scope.errors = err;
                 });
+            } else {
+                $scope.state = false;
             }
             $scope.saveFrm = function (frm) {
                 if(_.isUndefined($stateParams.reason_id)){
-                    adminApi.change_reasons.create()
+                    adminApi.change_reasons.create(frm)
                     .success(function () {
-                        $state.go("setup.change_reasons");
+                        $state.go("setup.facility_reasons");
                     })
                     .error(function (err) {
                         $scope.errors = err;
@@ -457,7 +454,7 @@
                     if(!_.isEmpty(changes)){
                         adminApi.change_reasons.update($stateParams.reason_id,changes)
                         .success(function () {
-                            $state.go("setup.change_reasons");
+                            $state.go("setup.facility_reasons");
                         })
                         .error(function (err) {
                             $scope.errors = err;

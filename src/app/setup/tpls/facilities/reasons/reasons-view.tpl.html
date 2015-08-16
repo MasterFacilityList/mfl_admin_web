@@ -2,21 +2,26 @@
    <div class="action-container content-header-extra">
    </div>
    <h2 class="content-title">
-       <span class="main-title"><i class="fa {{edit_view ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{edit_view ? 'Edit' : 'New'}} Facility Change Reason</span>
+       <span class="main-title"><i class="fa {{state ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{state ? 'Edit' : 'New'}} Facility Change Reason</span>
    </h2>
 </div>
 <div ui-view="delete"></div>
-<div class="col-md-12">
-<div class="fade-content col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20  content-card">
-    <form name="option_frm" novalidate>
-        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
+<div class="col-xs-12">
+<div class="fade-content col-md-10 col-md-offset-1 margin-t-20 col-xs-12 content-card">
+    <form name="reason_frm" ng-submit="saveFrm((state ? reason_frm : reason))" novalidate>
+        <drf-err-msg></drf-err-msg>
+        <div class="col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
                 <div class="form-group">
-                    <label>Facility Reason</label>
-                    <input class="form-control" name="value" required placeholder="Facility Reason"/>
+                    <label class="control-label">Facility Change Reason</label>
+                    <input class="form-control" name="reason" required ng-model="reason.reason" placeholder="Enter change reason here.." api-checker/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Description</label>
+                    <input class="form-control" name="description" required ng-model="reason.description" placeholder="Enter description here.." api-checker/>
                 </div>
                 <!-- </div> -->
                 <button  class="btn btn-primary pull-left">
-                    <i class="fa fa-save"></i> Save
+                    Save
                 </button>
                 <a class="btn btn-default margin-l-10 pull-left" ui-sref="setup.facility_reasons">Cancel</a>
                 <mfl-revision-view id="reason_id" wrapper="wrapper" ></mfl-revision-view>

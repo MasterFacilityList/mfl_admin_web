@@ -1,13 +1,15 @@
 <table class="table table-hover table-condensed margin-t-20" id="no-more-tables">
     <thead>
         <th class="text-wrap">Change Reason</th>
-        <th col="4" class="text-wrap"><span class="pull-right">Action</span></th>
+        <th class="text-wrap">Description</th>
+        <th class="text-wrap"><span class="pull-right">Action</span></th>
     </thead>
     <tbody class="fade-content">
-        <tr>
-            <td class="text-wrap" data-title="Sub County:">Does not meet requirements</td>
-            <td col="4" class="text-wrap pull-right" data-title="Action:">
-                <a ui-sref="setup.facility_reasons.view" class="btn btn-success pull-right">View</a>
+        <tr ng-repeat="reason in change_reasons">
+            <td class="text-wrap" data-title="Sub County:">{{reason.reason}}</td>
+            <td class="text-wrap" data-title="Sub County:">{{reason.description}}</td>
+            <td class="text-wrap" data-title="Action:">
+                <a ui-sref="setup.facility_reasons.edit({reason_id:reason.id})" class="btn btn-success pull-right">View</a>
             </td>
         </tr>
     </tbody>

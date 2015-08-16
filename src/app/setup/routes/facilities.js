@@ -279,7 +279,7 @@
                     }
                 }
             })
-        .state("setup.facility_reasons.create", {
+        .state("setup.facility_reasons.edit", {
                 url: "/edit/:reason_id",
                 views: {
                     "main-content@setup.facility_reasons": {
