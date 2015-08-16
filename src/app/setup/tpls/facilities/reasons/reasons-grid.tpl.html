@@ -6,8 +6,8 @@
     </thead>
     <tbody class="fade-content">
         <tr ng-repeat="reason in change_reasons">
-            <td class="text-wrap" data-title="Sub County:">{{reason.reason}}</td>
-            <td class="text-wrap" data-title="Sub County:">{{reason.description}}</td>
+            <td class="text-wrap" data-title="Reason:">{{reason.reason}}</td>
+            <td class="text-wrap" data-title="Description:">{{reason.description}}</td>
             <td class="text-wrap" data-title="Action:">
                 <a ui-sref="setup.facility_reasons.edit({reason_id:reason.id})" class="btn btn-success pull-right">View</a>
             </td>
