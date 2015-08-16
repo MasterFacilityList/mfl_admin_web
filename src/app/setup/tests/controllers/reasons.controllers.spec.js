@@ -139,7 +139,7 @@
                 $httpBackend.flush();
             }])
         );
-        it("should have patch county without form changes",
+        it("should have patch reason without form changes",
             inject(["$rootScope","mfl.common.forms.changes",function($rootScope,formChanges){
                 var data = {
                     "$scope": $rootScope.$new(),
