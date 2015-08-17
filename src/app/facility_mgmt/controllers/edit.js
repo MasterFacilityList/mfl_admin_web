@@ -305,9 +305,6 @@
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
                 $scope.facility.town = $scope.select_values.town.id;
-                if(changes.town){
-                    changes.town = changes.town.id;
-                }
                 //changes.officer_in_charge = $scope.facility.officer_in_charge;
                 if($scope.create) {
                     $scope.setFurthest(2);
