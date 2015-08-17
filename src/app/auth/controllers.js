@@ -91,7 +91,8 @@
                 Idle.unwatch();
                 $state.go("login", {
                     "timeout": $stateParams.timeout,
-                    "next": $stateParams.next
+                    "next": $stateParams.next,
+                    "change_pwd": $stateParams.change_pwd
                 });
             };
             return loginService.logout().then(callback, callback);

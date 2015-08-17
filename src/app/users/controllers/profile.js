@@ -151,7 +151,7 @@
                 profileService.updatePassword(old, pwd1, pwd2).then(
                     function () {
                         loginService.logout();
-                        $state.go("logout");
+                        $state.go("logout", {"change_pwd": "true"});
                     },
                     function (data) {
                         $log.error(data);
