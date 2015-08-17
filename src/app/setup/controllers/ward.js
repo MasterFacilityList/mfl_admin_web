@@ -10,7 +10,7 @@
                 name: "Wards"
             };
             $scope.filters = {
-                "fields": "id,name,code"
+                "fields": "id,name,code,county_name,constituency_name"
             };
             $scope.action = [
                 {
