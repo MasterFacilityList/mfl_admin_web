@@ -7,7 +7,7 @@
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title"> Facility Report by Facility Types per County</span>
+        <span class="main-title"> Facility Report by County Facility Types</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -21,7 +21,7 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in county_types_facilities">
-                            <td><i>{::{county.county | titlecase}}</i></td>
+                            <td><i>{{::county.county | titlecase}}</i></td>
                             <td>
                               <table class="table table-condensed">
                                <thead>
