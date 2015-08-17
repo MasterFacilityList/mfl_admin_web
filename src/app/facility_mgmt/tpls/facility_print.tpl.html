@@ -76,20 +76,20 @@
                 <label class="text-black">Ward:</label> {{facility.ward_name | titlecase}}
             </span>
             <span class="content-right col-md-6 col-xs-12 margin-t-10">
-                <label class="text-black">Town:</label> {{facility.facility_physical_address.town}}
+                <label class="text-black">Town:</label> {{facility.town_name}}
             </span>
             <!-- Geo -->
-            <span class="col-xs-12 margin-t-10" ng-if="facility.facility_physical_address.plot_number !== ''">
+            <span class="col-xs-12 margin-t-10" ng-if="facility.plot_number !== ''">
                 <label class="text-black">Plot number: </label>
-                {{facility.facility_physical_address.plot_number}}
+                {{facility.plot_number}}
             </span>
-            <span class="col-xs-12 margin-t-10" ng-show="facility.facility_physical_address.nearest_landmark">
+            <span class="col-xs-12 margin-t-10" ng-show="facility.nearest_landmark">
                 <label class="text-black">Nearest Landmark: </label>
-                {{facility.facility_physical_address.nearest_landmark}}
+                {{facility.nearest_landmark}}
             </span>
-            <span class="col-xs-12 margin-t-10" ng-if="facility.facility_physical_address.location_desc !== ''">
+            <span class="col-xs-12 margin-t-10" ng-if="facility.location_desc !== ''">
                 <label class="text-black">Specific directions: </label>
-                {{facility.facility_physical_address.location_desc}}
+                {{facility.location_desc}}
             </span>
             <div class="col-xs-12"><hr class="line-divider"></div>
             <div class="col-xs-12 margin-t-5">
@@ -157,7 +157,7 @@
     <!-- End of basic details -->
     <div class="col-xs-12 margin-t-20 margin-b-20" ng-if="fac_units.length !== 0"><hr class="line-divider"></div>
     <div class="col-xs-12 margin-t-10" ng-if="fac_units.length !== 0">
-        <h4 class="fw-600">Facility Departments</h4>
+        <h4 class="fw-600">Regulation</h4>
     </div>
     <div class="col-xs-12" ng-if="fac_units.length !== 0">
         <table class="table fs-14 table-hover table-stripped">
