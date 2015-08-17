@@ -78,8 +78,8 @@
                             <i class="fa fa-map-marker fa-2x icon-circles pad-icon margin-t-10"></i>
                         </div>
                         <div class="col-xs-10 text-left margin-l-5">
-                            <h4 class="fw-600 margin-b-0">Active Counties</h4>
-                            <p ng-repeat="c in user.user_constituencies" class="fs-12">
+                            <h4 class="fw-600 margin-b-0">Active Sub-Counties</h4>
+                            <p ng-repeat="c in user.user_constituencies" class="fs-12 margin-b-5">
                                 {{c.constituency_name}} SUB-COUNTY
                             </p>
                         </div>
@@ -92,12 +92,12 @@
                             <h3 class="text-center dash" ng-if="!spinner">
                                 <span ng-if="ward">Wards</span>
                                 <span ng-if="constituency">Sub Counties</span>
-                                <span ng-if="county">Top 20 Counties</span> With Most Facilities in
+                                <span ng-if="county">Top 20 Counties</span> With Most Facilities
                                 <span ng-if="user.constituency_name">
-                                    {{user.constituency_name}} SUB-COUNTY
+                                    in {{user.constituency_name}} SUB-COUNTY
                                 </span>
                                 <span ng-if="user.county_name">
-                                    {{user.county_name}} COUNTY
+                                    in {{user.county_name}} COUNTY
                                 </span>
                             </h3>
                         </div>
