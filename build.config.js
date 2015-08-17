@@ -28,6 +28,7 @@ module.exports = {
         js: [
             "src/**/*.js",
             "!src/**/*.spec.js",
+            "!src/**/*.e2e.js",
             "!src/assets/**/*.js",
             "!src/<%= settings_file %>"
         ],

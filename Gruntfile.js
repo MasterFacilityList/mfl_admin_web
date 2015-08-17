@@ -378,7 +378,7 @@ module.exports = function ( grunt ) {
            */
         protractor: {
             options: {
-                configFile: "e2e-tests/protractor.conf.js", // Default config file 
+                configFile: "e2e/protractor.conf.js", // Default config file 
                 keepAlive: true, // If false, the grunt process stops when the test fails. 
                 noColor: false, // If true, protractor will not use colors in its output. 
                 args: {
@@ -388,14 +388,14 @@ module.exports = function ( grunt ) {
             e2e: {
                 options: {
                     // Stops Grunt process if a test fails
-                    configFile: "e2e-tests/protractor.conf.js", // Default config file 
+                    configFile: "e2e/protractor.conf.js", // Default config file 
                     keepAlive: false, // If false, the grunt process stops when the test fais. 
                     noColor: false // If true, protractor will not use colors in its output. 
                 }
             },
             continuous: {
                 options: {
-                    configFile: "e2e-tests/protractor.conf.js", // Default config file 
+                    configFile: "e2e/protractor.conf.js", // Default config file 
                     keepAlive: true, // If true, the grunt process continues when the test fails. 
                     noColor: false // If true, protractor will not use colors in its output. 
                 }
