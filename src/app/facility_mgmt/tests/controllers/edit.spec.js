@@ -60,6 +60,8 @@
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
                         regulatory_body: "23",
+                        town : "3",
+                        town_name : "Mombasa",
                         facility_physical_address : {
                             town_id : "3",
                             town : "Mombasa"
@@ -147,6 +149,8 @@
                         owner_name: "owner",
                         owner_type : "5",
                         owner_type_name : "ownertype",
+                        town : "3",
+                        town_name : "Mombasa",
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
@@ -205,8 +209,8 @@
                             "name": "def"
                         },
                         town : {
-                            "id" : "",
-                            "name" : ""
+                            "id" : "3",
+                            "name" : "Mombasa"
                         }
                     });
 
@@ -244,6 +248,8 @@
                         owner: "3",
                         owner_name: "owner",
                         owner_type : "5",
+                        town : "3",
+                        town_name : "Mombasa",
                         owner_type_name : "ownertype",
                         operation_status: "4",
                         operation_status_name: "opstatus",
@@ -303,8 +309,8 @@
                             "name": "def"
                         },
                         town : {
-                            "id" : "",
-                            "name" : ""
+                            "id" : "3",
+                            "name" : "Mombasa"
                         }
                     });
 
@@ -613,6 +619,11 @@
                     "name": {
                         "$dirty": true,
                         "$$modelValue": "test"
+                    },
+                    "town": {
+                        "$dirty": true,
+                        "$$modelValue": "test",
+                        "id" : "3"
                     }
                 };
                 data.$scope.facility_id = 3;
@@ -759,6 +770,62 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
+            it("should save facility basic details: update in edit mode", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
+                state.params.facility_id = "3";
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"}
+                };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
+                };
+                data.$scope.create = false;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                ctrl(".basic", data);
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(204);
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$dirty": true,
+                        "$$modelValue": "test"
+                    },
+                    "town": {
+                        "$dirty": true,
+                        "$$modelValue" : {
+                            "id" : "3",
+                            "name" : "Mombasa"
+                        },
+                        "id" : "3"
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.save(frm);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(frm.town).toBeDefined();
+            });
+
             it("should save facility basic details: update", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -797,6 +864,13 @@
                     "name": {
                         "$dirty": true,
                         "$$modelValue": "test"
+                    },
+                    "town": {
+                        "$dirty": true,
+                        "$$modelValue" : {
+                            "id" : "3",
+                            "name" : "Mombasa"
+                        }
                     }
                 };
                 data.$scope.facility_id = 3;

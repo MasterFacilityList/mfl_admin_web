@@ -9,11 +9,11 @@
     <div id="no-more-tables" class="col-lg-12 margin-t-15">
         <table class="table table-hover fs-14">
             <thead>
-                <th sil-grid-sort field='first_name'>Name</th>
-                <th sil-grid-sort field='username'>Employee Number</th>
-                <th sil-grid-sort field='email'>Email</th>
-                <th sil-grid-sort field='last_login'>Last Login</th>
-                <th sil-grid-sort field='is_active'>Is Active</th>
+                <th sil-grid-sort field='first_name' class="col-xs-2">Name</th>
+                <th sil-grid-sort field='username' class="col-xs-2">Employee Number</th>
+                <th sil-grid-sort field='email' class="col-xs-4">Email</th>
+                <th sil-grid-sort field='last_login' class="col-xs-3">Last Login</th>
+                <th sil-grid-sort field='is_active' class="col-xs-1">Is Active</th>
             </thead>
             <tbody class="example-animate-container">
                 <tr class="animate-repeat" ng-repeat="user in users | filter: search.query">
@@ -22,10 +22,10 @@
                             {{user.first_name}} {{user.last_name}}
                         </a>
                     </td>
-                    <td data-title="Username" class="pad-t-15">{{::user.employee_number}}</td>
+                    <td data-title="Username" class="pad-t-15 text-center">{{::user.employee_number}}</td>
                     <td data-title="Email" class="pad-t-15">{{::user.email}}</td>
                     <td data-title="Last Login" class="pad-t-15">{{::user.last_login | dateFilter }}</td>
-                    <td data-title="Is Active" class="pad-t-15">{{::user.is_active | boolFilter}}</td>
+                    <td data-title="Is Active" class="pad-t-15 text-center">{{::user.is_active | boolFilter}}</td>
                 </tr>
             </tbody>
         </table>
