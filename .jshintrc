@@ -32,6 +32,7 @@
         "module":true,
         "window": true,
         "spyOn": true,
-        "jasmine": true
+        "jasmine": true,
+        "protractor": true
     }
 }
