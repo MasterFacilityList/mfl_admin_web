@@ -32,6 +32,7 @@ module.exports = {
             "!src/<%= settings_file %>"
         ],
         jsunit: ["src/**/*.spec.js"],
+        jse2e: ["src/**/*.e2e.js"],
 
         coffee: ["src/**/*.coffee", "!src/**/*.spec.coffee"],
         coffeeunit: ["src/**/*.spec.coffee"],
