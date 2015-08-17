@@ -4,8 +4,8 @@
     <p ng-bind-html="alert"></p>
 </div>
 <div ui-view="delete"></div>
-<div class="col-lg-12 margin-t-20">
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
+<div class="col-xs-12 margin-t-20">
+<div class="col-sm-10 col-sm-offset-1 margin-t-20 content-card">
     <form role="form form-horizontal form-bordered" name="frm_owner_type">
         <drf-err-msg></drf-err-msg>
         <div class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-20">
@@ -17,7 +17,7 @@
                 <label class="form-group">Description</label>
                 <textarea type="text" name="description" ng-model="facilityOwnerTypes.description" api-checher class="form-control"></textarea>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 margin-t-10 margin-b-10 text-left">
+            <div class="form-group">
                 <div class="form-group checkbox">
                     <label for="active" ng-if="facilityOwnerTypes.id">
                         <input type="checkbox" id="active" name="active" ng-model="facilityOwnerTypes.active" api-checker >
@@ -27,9 +27,9 @@
             </div>
         </div>
         <!-- End of the dynamic form -->
-        <div class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 margin-t-10 margin-b-20 text-left">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-t-10 ">
-                <span class="pull-left margin-h-5">
+        <div class="margin-t-10 margin-b-20 text-left">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 margin-t-10 margin-l-0">
+                <span class="pull-left">
                     <button ng-if="!facilityOwnerTypes.id" ng-click="createFacilityOwnerTypes(facilityOwnerTypes)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_owner_type.$invalid">
                         Save
                     </button>
@@ -39,8 +39,10 @@
                     <a ui-sref="setup.facility_owner_types" class="btn btn-default">Cancel</a>
                 </span>
             </div>
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 ">
+                <mfl-revision-view id="facility_owner_type_id" wrapper="wrapper" ></mfl-revision-view>
+            </div>
         </div>
-        <mfl-revision-view id="facility_owner_type_id" wrapper="wrapper" ></mfl-revision-view>
     </form>
 </div>
 </div>
