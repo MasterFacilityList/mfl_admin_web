@@ -217,10 +217,8 @@
                             "name": $scope.facility.regulatory_body_name
                         },
                         town: {
-                            "id": data.facility_physical_address ?
-                            data.facility_physical_address.town_id : "",
-                            "name": data.facility_physical_address ?
-                            data.facility_physical_address.town : ""
+                            "id": $scope.facility.town,
+                            "name": $scope.facility.town_name
                         }
                     };
                 })
@@ -306,10 +304,7 @@
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
-                $scope.facility.facility_physical_address.town =
-                    $scope.select_values.town.id;
-                $scope.facility.location_data = $scope.facility.facility_physical_address;
-                changes.location_data = $scope.facility.facility_physical_address;
+                $scope.facility.town = $scope.select_values.town.id;
                 changes.officer_in_charge = $scope.facility.officer_in_charge;
                 if($scope.create) {
                     $scope.setFurthest(2);
@@ -318,7 +313,7 @@
                         .success(function (data) {
                             $state.go("facilities.facility_create.geolocation",
                             {facility_id : data.id,
-                            furthest : $scope.furthest});
+                            furthest : $scope.furthest}, {reload : true});
                         })
                         .error(function (data) {
                             $log.error(data);
@@ -333,7 +328,8 @@
                             $state.go(
                                 "facilities.facility_create.geolocation",
                                 {facility_id : $state.params.facility_id,
-                                    furthest : $scope.furthest});
+                                    furthest : $scope.furthest},
+                                    {reload : true});
                         })
                         .error(function (data) {
                             $log.error(data);
@@ -345,7 +341,7 @@
                     wrappers.facility_detail.update($scope.facility_id, changes)
                     .success(function () {
                         $state.go($scope.finish,
-                        {facility_id:$scope.facility_id});
+                        {facility_id:$scope.facility_id}, {reload : true});
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -1035,8 +1031,8 @@
                             "name": $scope.geo.method_name
                         },
                         town:{
-                            "id": f.facility_physical_address.town_id,
-                            "name": f.facility_physical_address.town
+                            "id": f.town,
+                            "name": f.town_name
                         }
                     };
                     angular.extend($scope,{

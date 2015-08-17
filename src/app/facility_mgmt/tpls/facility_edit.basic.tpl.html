@@ -162,7 +162,7 @@
                         <ui-select-match placeholder="Select a ward...">
                             <span>{{$select.selected.name}}</span>
                         </ui-select-match>
-                        <ui-select-choices repeat="ward in wards | filter:$select.search">
+                        <ui-select-choices repeat="ward.id as ward in wards | filter:$select.search">
                             <span>{{ward.name}}</span>
                         </ui-select-choices>
                     </ui-select>
@@ -173,25 +173,23 @@
                         <ui-select-match placeholder="Select a town...">
                             <span>{{$select.selected.name}}</span>
                         </ui-select-match>
-                        <ui-select-choices repeat="town in towns | filter:$select.search">
+                        <ui-select-choices repeat="town.id as town in towns | filter:$select.search">
                             <span>{{town.name}}</span>
                         </ui-select-choices>
                     </ui-select>
                 </div>
                 <div class="form-group col-xs-12">
                     <label class="control-label">Plot number</label>
-                    <input class="form-control" name="plot_number" ng-model="facility.facility_physical_address.plot_number"
+                    <input class="form-control" name="plot_number" ng-model="facility.plot_number"
                     placeholder="Plot Number" api-checker/>
-                    <input type="hidden" name="plot_number" ng-model="facility.facility_physical_address.town"
-                    placeholder="Town" />
                 </div>
                 <div class="form-group col-xs-12">
                     <label class="control-label">Nearest landmark</label>
-                    <input class="form-control" name="nearest_landmark" ng-model="facility.facility_physical_address.nearest_landmark" placeholder="Nearest Landmark" api-checker/>
+                    <input class="form-control" name="nearest_landmark" ng-model="facility.nearest_landmark" placeholder="Nearest Landmark" api-checker/>
                 </div>
                 <div class="form-group col-xs-12">
                     <label class="control-label">Location description</label>
-                    <input class="form-control" name="location_desc" ng-model="facility.facility_physical_address.location_desc" placeholder="Location Description" api-checker/>
+                    <input class="form-control" name="location_desc" ng-model="facility.location_desc" placeholder="Location Description" api-checker/>
                 </div>
             <!-- </form> -->
         </div>

@@ -302,7 +302,7 @@ module.exports = function ( grunt ) {
                 "Gruntfile.js", "build.config.js"
             ],
             config_files: [
-                ".jshintrc", "bower.json","package.json", ".bowerrc", "src/<%= settings_file %>"
+                ".jshintrc", "package.json", ".bowerrc", "src/<%= settings_file %>"
             ],
             options: {
                 jshintrc: ".jshintrc"
