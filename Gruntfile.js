@@ -304,7 +304,8 @@ module.exports = function ( grunt ) {
             options: {
                 jshintrc: ".jshintrc"
             },
-            globals: {}
+            globals: {},
+            ignores: ["bower.json"]
         },
 
         /**
