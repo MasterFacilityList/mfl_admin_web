@@ -7,7 +7,7 @@
     .controller("mfl.setup.controller.sub_counties.list", ["$scope",
         function ($scope) {
             $scope.filters = {
-                "fields": "id,name,code"
+                "fields": "id,name,code,county_name"
             };
             $scope.title = {
                 icon: "fa-map-marker",

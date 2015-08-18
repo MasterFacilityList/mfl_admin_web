@@ -10,7 +10,8 @@
         "mfl.common.states",
         "mfl.common.services",
         "mfl.common.constants",
-        "mfl.common.revision"
+        "mfl.common.revision",
+        "mfl.common.export"
     ]);
 
 })(window.angular);
