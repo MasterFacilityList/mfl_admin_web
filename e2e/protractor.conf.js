@@ -5,9 +5,11 @@ exports.config = {
         "../src/app/**/*.e2e.js"
     ],
 
-    capabilities: {
+    multiCapabilities: [{
+        "browserName": "firefox"
+    }, {
         "browserName": "chrome"
-    },
+    }],
 
     baseUrl: "http://localhost:8062/",
 
