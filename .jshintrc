@@ -23,15 +23,18 @@
         "beforeEach": true,
         "afterEach": true,
         "describe": true,
+        "ddescribe": true,
         "xdescribe": true,
         "expect": true,
         "inject": true,
         "it": true,
+        "iit": true,
         "xit": true,
         "browser": true,
         "module":true,
         "window": true,
         "spyOn": true,
-        "jasmine": true
+        "jasmine": true,
+        "dump": true
     }
 }
