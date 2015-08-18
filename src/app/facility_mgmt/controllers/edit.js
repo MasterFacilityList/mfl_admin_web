@@ -425,7 +425,7 @@
             $scope.detailed_contacts = [];
             /*Set up facility contacts*/
             $scope.facilityContacts = function (f) {
-                if(f.facility_contacts.length < 1) {
+                if(f.contacts.length < 1) {
                     $scope.detailed_contacts.push({
                         contact_type : "",
                         contact : ""
@@ -451,7 +451,7 @@
             $scope.createContact = function () {
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.units");
-                if(!_.isEmpty($scope.fac_contobj.facility_contacts)){
+                if(!_.isEmpty($scope.fac_contobj.contacts)){
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
                         if(!$scope.create){
@@ -473,10 +473,10 @@
                 }
             };
             $scope.saveContacts = function () {
-                $scope.fac_contobj = {facility_contacts : []};
+                $scope.fac_contobj = {contacts : []};
                 _.each($scope.detailed_contacts, function (a_contact) {
                     if(_.isUndefined(a_contact.id)){
-                        $scope.fac_contobj.facility_contacts.push(a_contact);
+                        $scope.fac_contobj.contacts.push(a_contact);
                     }
                 });
                 $scope.createContact();
