@@ -43,6 +43,13 @@
                     $scope.service_error = errorMessages.errors +
                     errorMessages.keph_level;
                 });
+                wrappers.change_reasons.filter({fields: "id,reason"})
+                .success(function (data) {
+                    $scope.change_reasons = data.results;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                });
             };
 
             var updateType = function ($scope) {

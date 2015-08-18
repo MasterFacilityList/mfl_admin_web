@@ -84,7 +84,11 @@
                     .expectGET(
                         server_url+"api/facilities/keph/?fields=id,name&ordering=name")
                     .respond(200, {results: [{"id": 3, "name": "Level 2"}]});
-
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/level_change_reasons/?fields=id,"+
+                    "reason")
+                    .respond(200, {results: []});
                 var c = ctrl("updown_helper", data);
                 c.bootstrap(scope, false);
 
