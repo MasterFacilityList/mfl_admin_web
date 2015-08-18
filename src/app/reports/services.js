@@ -10,6 +10,7 @@
             this.filters = api.setBaseUrl("api/common/filtering_summaries/");
             this.facilities = api.setBaseUrl("api/facilities/facilities/");
             this.reporting = api.setBaseUrl("api/reporting/");
+            this.up_down_grades = api.setBaseUrl("api/reporting/upgrade_downgrade/");
             this.helpers = api.apiHelpers;
         }]
     );
