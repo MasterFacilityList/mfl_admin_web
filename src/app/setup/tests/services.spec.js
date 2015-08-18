@@ -51,15 +51,6 @@
                     stateSrv.whichTab();
                 }]);
             });
-            it("should expect contact branch to be used as a state",
-            function () {
-                inject(["currentStateOpen","$state",
-                function (stateSrv,$state) {
-                    $state.current.name = "contact";
-                    expect(stateSrv.whichTab).toBeDefined();
-                    stateSrv.whichTab();
-                }]);
-            });
             it("should expect geocode branch to be used as a state",
             function () {
                 inject(["currentStateOpen","$state",
