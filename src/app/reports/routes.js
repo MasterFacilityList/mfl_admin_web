@@ -160,15 +160,41 @@
                 }
             }
         })
-        .state("reports.facility_county_consituencies", {
-            url: "facility_county_constiuencies",
+        .state("reports.facility_county_constituencies", {
+            url: "facility_county_constituencies",
             views: {
                 "body@reports": {
                     templateUrl: "reports/tpls/body.tpl.html",
                     controller:"mfl.reports.controllers.main"
                 },
-                "main-content@reports.facility_county_consituencies": {
+                "main-content@reports.facility_county_constituencies": {
                     templateUrl: "reports/tpls/facility_counties_constituencies.tpl.html",
+                    controller:"mfl.reports.controllers.county_constituencies"
+                }
+            }
+        })
+        .state("reports.facility_county_changes", {
+            url: "facility_county_changes",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.facility_county_changes": {
+                    templateUrl: "reports/tpls/facility_changes.tpl.html",
+                    controller:"mfl.reports.controllers.county_constituencies"
+                }
+            }
+        })
+        .state("reports.facility_county_changes.view", {
+            url: "/view/:county_id",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.facility_county_changes.view": {
+                    templateUrl: "reports/tpls/facility_changes_view.tpl.html",
                     controller:"mfl.reports.controllers.county_constituencies"
                 }
             }
