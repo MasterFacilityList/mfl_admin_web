@@ -271,11 +271,27 @@
         "mfl.error.messages",
         function ($scope, $log, $state, $stateParams, wrappers, formChanges,
             multistepService, loginService, errorMessages) {
+            /*Set up facility officer*/
+            $scope.facilityOfficers = function (f) {
+                if(_.isUndefined(f.officer_in_charge) || _.isNull(f.officer_in_charge)) {
+                    $scope.facility.officer_in_charge = {
+                        name : "",
+                        reg_no : "",
+                        contacts : [
+                            {
+                                type : "",
+                                contact : ""
+                            }
+                        ]
+                    };
+                }
+            };
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[0]);
             } else {
                 $scope.nextState();
+                $scope.facilityOfficers($scope.facility);
             }
             $scope.initUniqueName = function(frm) {
                 if(_.isUndefined($scope.facility.name)) {
@@ -299,13 +315,19 @@
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.geolocation");
                 var changes = formChanges.whatChanged(frm);
-                $scope.facility.ward = $scope.select_values.ward.id;
+                $scope.facility.ward = $scope.select_values.ward;
                 $scope.facility.facility_type = $scope.select_values.facility_type;
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
-                $scope.facility.town = $scope.select_values.town.id;
-                changes.officer_in_charge = $scope.facility.officer_in_charge;
+                $scope.facility.town = $scope.select_values.town;
+                changes.officer_in_charge = {
+                    name : changes.officer_name ? changes.officer_name :
+                        $scope.facility.officer_in_charge.name,
+                    reg_no : changes.reg_number ? changes.reg_number :
+                            $scope.facility.officer_in_charge.reg_no,
+                    title : changes.title ? changes.title : $scope.facility.officer_in_charge.title
+                };
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {
@@ -366,21 +388,6 @@
             .error(function(error){
                 $log.error(error);
             });
-            /*Set up facility contacts*/
-            $scope.facilityOfficers = function (f) {
-                if(_.isUndefined(f.officer_in_charge)) {
-                    $scope.facility.officer_in_charge = {
-                        name : "",
-                        reg_no : "",
-                        contacts : [
-                            {
-                                type : "",
-                                contact : ""
-                            }
-                        ]
-                    };
-                }
-            };
             $scope.addOfficerContact = function () {
                 $scope.facility.officer_in_charge.contacts.push({
                     type : "",
@@ -418,7 +425,7 @@
             $scope.detailed_contacts = [];
             /*Set up facility contacts*/
             $scope.facilityContacts = function (f) {
-                if(f.contacts.length < 1) {
+                if(f.facility_contacts.length < 1) {
                     $scope.detailed_contacts.push({
                         contact_type : "",
                         contact : ""
@@ -444,7 +451,7 @@
             $scope.createContact = function () {
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.units");
-                if(!_.isEmpty($scope.fac_contobj.contacts)){
+                if(!_.isEmpty($scope.fac_contobj.facility_contacts)){
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
                         if(!$scope.create){
@@ -466,10 +473,10 @@
                 }
             };
             $scope.saveContacts = function () {
-                $scope.fac_contobj = {contacts : []};
+                $scope.fac_contobj = {facility_contacts : []};
                 _.each($scope.detailed_contacts, function (a_contact) {
                     if(_.isUndefined(a_contact.id)){
-                        $scope.fac_contobj.contacts.push(a_contact);
+                        $scope.fac_contobj.facility_contacts.push(a_contact);
                     }
                 });
                 $scope.createContact();
