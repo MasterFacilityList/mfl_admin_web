@@ -529,19 +529,20 @@
                     $scope.errors = error;
                 });
                 $scope.remove = function () {
-                    adminApi.facilityRegulatoryBodies.remove($stateParams.id).success(function(){
-                        $state.go("setup.facility_regulatory_bodies",{},{reload:true});
-                    }).error(function(error){
+                    adminApi.facilityRegulatoryBodies.remove($stateParams.id)
+                    .success(function(){
+                        $state.go("setup.facility_regulatory_bodies");
+                    })
+                    .error(function(error){
                         $scope.alert = error.error;
                         $scope.errors = error;
-                        $state.go("setup.facility_regulatory_bodies",{},{reload:true});
+                        $state.go("setup.facility_regulatory_bodies");
                     });
                 };
                 $scope.cancel = function () {
-                    $state.go("setup.facility_regulatory_bodies.edit.basic");
+                    $state.go("setup.facility_regulatory_bodies.edit");
                 };
-            }
-            else {
+            } else {
                 $scope.title = {
                     icon: "fa-plus-circle",
                     name: "New Regulatory Body"
