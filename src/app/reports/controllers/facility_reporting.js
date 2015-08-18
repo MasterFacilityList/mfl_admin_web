@@ -9,6 +9,7 @@
     .controller("mfl.reports.controllers.helper", ["mfl.reports.services.wrappers",
         function(wrappers){
             this.initCtrl = function($scope, report_type, data_param){
+                $scope.search = "";
                 $scope.filters = {
                     "report_type":report_type
                 };
