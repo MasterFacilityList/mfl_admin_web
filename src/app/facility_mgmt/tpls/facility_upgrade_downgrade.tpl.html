@@ -19,7 +19,10 @@
         </div>
         <div class="form-group">
             <label for="reason">Reason for {{(upgrade) ? 'Upgrade' : 'Downgrade'}}</label>
-            <textarea ng-model="new_type.reason" name="reason" required class="form-control"  ng-disabled="new_type.id"></textarea>
+            <ui-select ng-model="new_type.reason" name="reason" required ng-disabled="new_type.id">
+                <ui-select-match>{{$select.selected.reason}}</ui-select-match>
+                <ui-select-choices repeat="reason.id as reason in change_reasons | filter:$select.search">{{reason.reason}}</ui-select-choices>
+            </ui-select>
         </div>
 
     </form>

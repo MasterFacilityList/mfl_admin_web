@@ -7,7 +7,7 @@
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title"> Facility Report by County with Constituencies</span>
+        <span class="main-title"> Facility Report by County Changes</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -19,30 +19,19 @@
                     <ui-select-choices repeat="county.county as county in county_constituencies_facilities | filter:$select.search">{{county.county | titlecase}}</ui-select-choices>
                 </ui-select>
             </div>
-            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+            <div ng-show="search!==''"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="text-wrap col-xs-1">County</th>
-                        <th class="text-wrap"></th>
+                        <th field='County' class="text-wrap">County</th>
+                        <th field='Changes' class="text-wrap">Changes</th>
+                        <th class="text-wrap"> <span class="pull-right">Action</span></th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in county_constituencies_facilities | filter:search">
-                            <td><i>{{::county.county | titlecase}}</i></td>
-                            <td>
-                              <table class="table table-condensed">
-                               <thead>
-                                   <th>Constituency</th>
-                                   <th>Number of Facilities</th>
-                               </thead>
-                                <tbody>
-                                   <tr ng-repeat="c in county.facilities">
-                                        <td>{{::c.constituency | titlecase}}</td>
-                                        <td>{{::c.number_of_facilities}}</td>
-                                    </tr>
-                                </tbody>
-                              </table>
-                            </td>
+                            <td>{{county.county | titlecase}}</td>
+                            <td>{{(($index+2) %3)+(($index+1) % 7)}}</td>
+                            <td><span class="pull-right"><a ui-sref="reports.facility_county_changes.view({county_id:1})" class="btn btn-success">View</a></span></td>
                         </tr>
                     </tbody>
                 </table>

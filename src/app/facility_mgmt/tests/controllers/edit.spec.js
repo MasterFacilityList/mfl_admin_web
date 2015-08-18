@@ -595,7 +595,12 @@
                     return {"results": []};
                 };
                 data.$scope.facility = {
-                    facility_physical_address : {town : "5"}
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge : {
+                        name : "Antony",
+                        reg_no : "P15/1331",
+                        title : "Medical Supritendant"
+                    }
                 };
                 data.$scope.steps = [
                     {name : "basic"},
@@ -783,7 +788,12 @@
                 };
                 state.params.facility_id = "3";
                 data.$scope.facility = {
-                    facility_physical_address : {town : "5"}
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge: {
+                        name : "Antony",
+                        reg_no : "P15/1331/",
+                        title: "Medical Supritendant"
+                    }
                 };
                 data.$scope.steps = [
                     {name : "basic"},
@@ -807,15 +817,24 @@
                     "$dirty": true,
                     "name": {
                         "$dirty": true,
-                        "$$modelValue": "test"
+                        "$modelValue": "test"
                     },
-                    "town": {
+                    "officer_name": {
                         "$dirty": true,
-                        "$$modelValue" : {
-                            "id" : "3",
-                            "name" : "Mombasa"
-                        },
-                        "id" : "3"
+                        "$modelValue": "Antony"
+                    },
+                    "reg_number": {
+                        "$dirty": true,
+                        "$modelValue": "P15/133/"
+                    },
+                    "title": {
+                        "$dirty": true,
+                        "$modelValue": "Medical Supritendant"
+                    },
+                    "officer_in_charge": {
+                        "name" : "",
+                        "reg_no" : "",
+                        "title": ""
                     }
                 };
                 data.$scope.facility_id = 3;
@@ -823,7 +842,6 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
-                expect(frm.town).toBeDefined();
             });
 
             it("should save facility basic details: update", function () {
@@ -865,12 +883,22 @@
                         "$dirty": true,
                         "$$modelValue": "test"
                     },
-                    "town": {
+                    "officer_name": {
                         "$dirty": true,
-                        "$$modelValue" : {
-                            "id" : "3",
-                            "name" : "Mombasa"
-                        }
+                        "$$modelValue": "Antony"
+                    },
+                    "reg_number": {
+                        "$dirty": true,
+                        "$$modelValue": "P15/133/"
+                    },
+                    "title": {
+                        "$dirty": true,
+                        "$$modelValue": "Medical Supritendant"
+                    },
+                    "officer_in_charge": {
+                        "name" : "",
+                        "reg_no" : "",
+                        "title": ""
                     }
                 };
                 data.$scope.facility_id = 3;
@@ -980,7 +1008,12 @@
                     return {"results": []};
                 };
                 data.$scope.facility = {
-                    facility_physical_address : {town : "5"}
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge : {
+                        name : "Antony",
+                        reg_no : "P15/1221/",
+                        title : "Medical Supritendant"
+                    }
                 };
                 data.$scope.steps = [
                     {name : "basic"}
@@ -1004,6 +1037,18 @@
                     "name": {
                         "$dirty": true,
                         "$$modelValue": "test"
+                    },
+                    "officer_name": {
+                        "$dirty": true,
+                        "$$modelValue": "Antony"
+                    },
+                    "reg_number": {
+                        "$dirty": true,
+                        "$$modelValue": "P15/133/"
+                    },
+                    "title": {
+                        "$dirty": true,
+                        "$$modelValue": "Medical Supritendant"
                     }
                 };
                 data.$scope.facility_id = 3;

@@ -9,6 +9,6 @@ case $CIRCLE_NODE_INDEX in
     grunt test:unit
     ;;
 2)
-    grunt connect:dev & 
+    grunt connect:dev &
     grunt test:e2e
 esac
