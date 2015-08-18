@@ -14,6 +14,8 @@
         multistepService, $state, $q, $log, wrappers) {
         $scope.print = false;
         $scope.create = true;
+        //declaration of facility scope variable
+        $scope.facility = {};
         $scope.new_facility = $state.params.facility_id;
         $scope.facility_id = $state.params.facility_id;
         $scope.furthest = $stateParams.furthest;
