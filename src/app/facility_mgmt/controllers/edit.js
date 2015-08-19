@@ -100,7 +100,12 @@
                                     if(fac_service.service_id === serv_obj.id)
                                     {
                                         serv_obj.option = fac_service.option;
-                                        console.log(serv_obj.name, serv_obj.option);
+                                        serv_obj.option = serv_obj.option ?
+                                            serv_obj.option :
+                                            serv_obj.serv_options[1].id;
+                                        console.log(serv_obj.name,
+                                            serv_obj.option,
+                                            serv_obj.serv_options[1].id);
                                     }
                                 });
                         }
