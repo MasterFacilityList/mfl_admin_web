@@ -55,15 +55,6 @@
                     "five":false,
                     "six":false
                 };
-            } else if(state_name.indexOf("contact") > -1){
-                collapsed = {
-                    "one": false,
-                    "two": false,
-                    "three": true,
-                    "four":false,
-                    "five":false,
-                    "six":false
-                };
             } else if(state_name.indexOf("facility_") > -1){
                 collapsed = {
                     "one": false,

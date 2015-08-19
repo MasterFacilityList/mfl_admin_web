@@ -19,7 +19,7 @@
                 userFeature: "is_national"
             })
         .state("setup.contact_types.view", {
-                url: "/:id",
+                url: "/edit/:id",
                 views: {
                     "main-content@setup.contact_types": {
                         controller: "mfl.setup.controller.contact_types.view",

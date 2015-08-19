@@ -30,8 +30,7 @@
             $scope.contact_type_id = $stateParams.id;
             $scope.wrapper = adminApi.contact_types;
 
-            if(!_.isUndefined($stateParams.id) &&
-                $stateParams.id !== "create"){
+            if(!_.isUndefined($stateParams.id)){
                 $scope.title = {
                     class: "btn btn-primary",
                     name: "Edit Contact Type"
@@ -47,10 +46,6 @@
 
                     }
                 ];
-                $scope.del_popover = {
-                    content: "Hello, World!",
-                    templateUrl:"common/tpls/del_pop.tpl.html"
-                };
                 adminApi.contact_types.get($stateParams.id).success(function(data){
                     $scope.contact_types = data;
                     $scope.deleteText = $scope.contact_types.name;
@@ -69,9 +64,7 @@
                 $scope.cancel = function () {
                     $state.go("setup.contact_types.view",{},{reload:true});
                 };
-            }
-            else if(!_.isUndefined($stateParams.id) &&
-                $stateParams.id === "create") {
+            } else {
                 $scope.title = {
                     icon : "fa-plus-circle",
                     name: "New Contact Type"
