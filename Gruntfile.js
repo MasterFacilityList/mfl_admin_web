@@ -632,7 +632,7 @@ module.exports = function ( grunt ) {
     ]);
 
     grunt.registerTask("test:unit", ["build", "karma:continuous"]);
-    grunt.registerTask("test:e2e", ["build", "protractor:continuous"]);
+    grunt.registerTask("test:e2e", ["build","compile", "protractor:continuous"]);
     grunt.registerTask("test", ["build", "karma:continuous", "protractor:continuous"]);
 
     /**

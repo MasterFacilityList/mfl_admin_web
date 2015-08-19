@@ -10,6 +10,6 @@ case $CIRCLE_NODE_INDEX in
     ;;
 2)
     npm run update-webdriver
-    grunt connect:dev &
+    grunt connect:prod &
     grunt test:e2e
 esac
