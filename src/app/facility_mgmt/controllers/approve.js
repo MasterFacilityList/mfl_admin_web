@@ -6,6 +6,19 @@
         "mfl.auth.services"
     ])
 
+    .controller("mfl.facility_mgmt.controllers.facilities_closed",
+        ["$scope", function ($scope) {
+            $scope.filters = {
+                "closed": true,
+                "fields": "id,code,name,facility_type_name,owner_name,county,"+
+                          "sub_county,constituency,ward_name,updated"
+            };
+            $scope.title = {
+                "name": "Closed Facilities",
+                "icon": "fa-building"
+            };
+        }]
+    )
     .controller("mfl.facility_mgmt.controllers.facilities_rejected",
         ["$scope", function ($scope) {
             $scope.filters = {

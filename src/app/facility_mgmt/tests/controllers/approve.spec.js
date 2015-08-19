@@ -34,6 +34,15 @@
             });
         });
 
+        describe("test closed facilities list", function () {
+
+            it("should load", function () {
+                var scope = rootScope.$new();
+                ctrl("facilities_closed", {"$scope": scope});
+                expect(scope.filters.closed).toEqual(true);
+            });
+        });
+
         describe("test facility approve list", function () {
 
             it("should load", function () {
