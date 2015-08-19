@@ -598,7 +598,7 @@
                 $scope.remove();
                 $scope.cancel();
                 expect($state.go)
-                    .toHaveBeenCalledWith("setup.facility_regulatory_bodies.edit.basic");
+                    .toHaveBeenCalledWith("setup.facility_regulatory_bodies.edit");
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });

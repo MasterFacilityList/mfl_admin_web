@@ -197,28 +197,6 @@
                 permission: "facilities.delete_regulatingbody",
                 userFeature: "is_staff,is_national"
             })
-        .state("setup.facility_regulatory_bodies.edit.basic", {
-                url: "/basicdetails",
-                views: {
-                    "form-view@setup.facility_regulatory_bodies.edit" : {
-                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
-                        "regulatory-body-main-form.tpl.html"
-                    }
-                },
-                permission: "facilities.view_regulatingbody",
-                userFeature: "is_national"
-            })
-        .state("setup.facility_regulatory_bodies.edit.contacts", {
-                url: "/contacts",
-                views: {
-                    "form-view@setup.facility_regulatory_bodies.edit" : {
-                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
-                        "regulatory-body-contacts-form.tpl.html"
-                    }
-                },
-                permission: "facilities.view_regulatingbodycontact",
-                userFeature: "is_national"
-            })
         .state("setup.facility_regulatory_bodies.create", {
                 url: "/create",
                 views: {
@@ -229,28 +207,6 @@
                     }
                 },
                 permission: "facilities.add_regulatingbody",
-                userFeature: "is_staff,is_national"
-            })
-        .state("setup.facility_regulatory_bodies.create.basic", {
-                url: "/basicdetails",
-                views: {
-                    "form-view@setup.facility_regulatory_bodies.create" : {
-                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
-                        "regulatory-body-main-form.tpl.html"
-                    }
-                },
-                permission: "facilities.add_regulatingbody",
-                userFeature: "is_staff,is_national"
-            })
-        .state("setup.facility_regulatory_bodies.create.contacts", {
-                url: "/:reg_cont_id/contacts",
-                views: {
-                    "form-view@setup.facility_regulatory_bodies.create" : {
-                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
-                        "regulatory-body-contacts-form.tpl.html"
-                    }
-                },
-                permission: "facilities.add_regulatingbodycontact",
                 userFeature: "is_staff,is_national"
             })
 
