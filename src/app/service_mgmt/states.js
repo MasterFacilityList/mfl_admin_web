@@ -192,7 +192,9 @@
                     controller: "mfl.service_mgmt.controllers.option_group_list",
                     templateUrl: "service_mgmt/tpls/option_group_grid.tpl.html"
                 }
-            }
+            },
+            ermission: "facilities.view_option",
+            userFeature: "is_staff, is_national"
         })
 
         .state("service_mgmt.option_groups_list.option_group_edit", {
@@ -205,7 +207,7 @@
                 }
             },
             permission: "facilities.add_option",
-            userFeature: "is_staff"
+            userFeature: "is_staff, is_national"
         })
 
         .state("service_mgmt.option_groups_list.option_group_create", {
@@ -218,7 +220,7 @@
                 }
             },
             permission: "facilities.add_option",
-            userFeature: "is_staff"
+            userFeature: "is_staff, is_national"
         })
 
         .state("service_mgmt.option_groups_list.option_group_edit.delete", {
@@ -231,7 +233,7 @@
                 }
             },
             permission: "facilities.delete_option",
-            userFeature: "is_staff"
+            userFeature: "is_staff, is_national"
         })
         // ============== options ====================
 
