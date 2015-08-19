@@ -13,7 +13,7 @@
 </div>
 <i bs-tooltip tooltip-placement="{{$parent.hide_sidebar ? 'right':'bottom'}} " tooltip="{{$parent.hide_sidebar ? 'Show':'Hide'}} Sidebar" class="margin-t-5 margin-l-{{$parent.hide_sidebar ? '20':'5'}} fa fa-chevron-circle-{{$parent.hide_sidebar ? 'right':'left'}}" ng-click="$parent.hide_sidebar=!$parent.hide_sidebar"></i>
 <section class="margin-t-10">
-    <div id="filter-facet" class="col-sm-3 pad-l-20 content-card search-panel">
+    <div id="filter-facet" class="col-xs-12 col-sm-3 content-card search-panel">
         <form ng-submit="filterFacilities()" name="frm_filter_facilities">
             <h4>Advanced Search</h4>
             <h5 class="text-muted">Administrative Units:</h5>
@@ -195,7 +195,7 @@
             </div>
         </form>
     </div>
-    <div class="pad-r-0 col-sm-9">
+    <div class="col-xs-12 pad-r-0 col-sm-9">
         <div class="content-card col-xs-12">
             <div class="col-xs-12 margin-b-20">
                 <sil-grid template="reports/tpls/facilities.list.tpl.html" grid-for="facilities"
