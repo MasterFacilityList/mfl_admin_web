@@ -101,8 +101,8 @@
                                     {
                                         serv_obj.option = fac_service.option;
                                         serv_obj.option = serv_obj.option ?
-                                            serv_obj.option :
-                                            serv_obj.serv_options[1].id;
+                                        serv_obj.option :
+                                        serv_obj.serv_options[1].id;
                                     }
                                 });
                         }
@@ -156,6 +156,13 @@
                             });
                         }
                     });
+                    _.each($scope.facility.facility_services,
+                        function (facility_service) {
+                            var obj = _.findWhere($scope.fac_serv.services,
+                                {"service" : facility_service.service_id});
+                            $scope.fac_serv.services =
+                                _.without($scope.fac_serv.services, obj);
+                        });
                     wrappers.facility_detail.update($scope.facility_id,
                         $scope.fac_serv)
                         .success(function () {
