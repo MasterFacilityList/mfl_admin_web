@@ -9,7 +9,7 @@ case $CIRCLE_NODE_INDEX in
     grunt test:unit
     ;;
 2)
-    npm run update-webdirver
+    npm run update-webdriver
     grunt connect:dev &
     grunt test:e2e
 esac
