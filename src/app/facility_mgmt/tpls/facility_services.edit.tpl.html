@@ -40,13 +40,13 @@
                             <option ng-repeat="opt in serv.serv_options" ng-selected="{{opt.id == serv.option}}" ng-value="opt.id">{{opt.display_text}}</option>
                         </select>
                     </div>
-                    <div ng-if="serv.option_no === 2 && serv.serv_options[0].display_text === ('No' || 'Yes')" class="form-group checkbox margin-t-1">
+                    <div ng-if="serv.option_no === 2 && serv.has_options === false" class="form-group checkbox margin-t-1">
                         <label for="service_option_yes">
                             <input type="checkbox" id="option{{$index}}" name="option{{$index}}" ng-value="serv.serv_options[1].id" ng-model="serv.option" ng-checked="(serv.option === serv.serv_options[1].id) || serv.option">
                             Yes
                         </label>
                     </div>
-                    <div ng-if="serv.option_no === 2 && serv.serv_options[0].display_text !== ('No' || 'Yes')" class="margin-t--15">
+                    <div ng-if="serv.option_no === 2 && serv.has_options === true" class="margin-t--15">
                         <div class="radio">
                             <label class="radio-inline">
                                 <input type="radio" name="option{{$index}}"  ng-value="serv.serv_options[0].id" ng-model="serv.option">
