@@ -384,7 +384,7 @@ module.exports = function ( grunt ) {
             e2e: {
                 options: {
                     // Stops Grunt process if a test fails
-                    keepAlive: false // If false, the grunt process stops when the test fais.
+                    keepAlive: false // If false, the grunt process stops when the test fails.
                 }
             },
             continuous: {
