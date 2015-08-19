@@ -4,7 +4,7 @@
     describe("mflAdminApp scenario tests:", function() {
 
         beforeEach(function() {
-            browser.get("http://127.0.0.1:8062/");
+            browser.get("/");
         });
         it("should automatically redirect to /login?next=dashboard"+
             " when location hash/fragment is empty", function() {
