@@ -90,7 +90,7 @@
                 $scope.nextState();
                 $state.go("facilities.facility_create."+ obj.name,
                 {furthest: $scope.furthest,
-                facility_id : $scope.new_facility});
+                facility_id : $scope.new_facility}, {reload : true});
             }
         };
         $scope.setFurthest = function (val) {
@@ -102,7 +102,7 @@
             $scope.setFurthest(furthest_value);
             $state.go("facilities.facility_create."+ state_name,
                 {furthest: $scope.furthest,
-                facility_id : $scope.new_facility});
+                facility_id : $scope.new_facility}, {reload : true});
         };
         $scope.printFacility = wrappers.printFacility;
     }])

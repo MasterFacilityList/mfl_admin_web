@@ -481,7 +481,7 @@
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
                         if(!$scope.create){
-                            $state.go($scope.finish);
+                            $state.go($scope.finish, {reload : true});
                         }else{
                             $scope.goToNext(4, "units");
                         }
@@ -492,7 +492,7 @@
                     });
                 } else {
                     if(!$scope.create){
-                        $state.go($scope.finish);
+                        $state.go($scope.finish, {reload : true});
                     }else{
                         $scope.goToNext(4, "units");
                     }
@@ -758,7 +758,7 @@
                     errorMessages.fetch_units;
             });
             $scope.facilityUnits = function (f) {
-                if(f.facility_units.length < 1) {
+                if(f.facility_units.length === 0) {
                     $scope.fac_depts.push({
                         name : "",
                         regulating_body : ""
