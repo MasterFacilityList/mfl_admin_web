@@ -35,6 +35,7 @@
         "window": true,
         "spyOn": true,
         "jasmine": true,
+        "protractor": true,
         "dump": true
     }
 }

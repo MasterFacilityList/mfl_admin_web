@@ -18,7 +18,8 @@ module.exports = function ( karma ) {
         ],
 
         exclude: [
-          "src/assets/**/*.js"
+          "src/assets/**/*.js",
+          "src/**/*.e2e.js"
         ],
 
         frameworks: [

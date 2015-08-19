@@ -3,9 +3,13 @@
 case $CIRCLE_NODE_INDEX in
 0)
     export RUN_SAUCE_TESTS=true
-    grunt test
+    grunt test:unit
     ;;
 1)
-    grunt test
+    grunt test:unit
     ;;
+2)
+    npm run update-webdriver
+    grunt connect:dev &
+    grunt test:e2e
 esac
