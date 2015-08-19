@@ -1,4 +1,4 @@
-(function () {
+(function (_) {
     "use strict";
 
     describe("Testing the auth login controller: ", function () {
@@ -108,10 +108,9 @@
                         "token=" + "token" +
                         "&client_id=" + credz.client_id +
                         "&client_secret=" + credz.client_secret;
-                    controller = function () {
-                        return $controller("mfl.auth.controllers.logout", {
-                            "$scope": rootScope.$new()
-                        });
+                    controller = function (params) {
+                        var data = _.extend({"$scope": rootScope.$new()}, params);
+                        return $controller("mfl.auth.controllers.logout", data);
                     };
                 }
             ]);
@@ -124,7 +123,11 @@
             httpBackend.flush();
             httpBackend.verifyNoOutstandingExpectation();
             httpBackend.verifyNoOutstandingRequest();
-            expect(state.go).toHaveBeenCalled();
+            expect(state.go).toHaveBeenCalledWith("login", {
+                "timeout": undefined,
+                "next": undefined,
+                "change_pwd": undefined
+            });
         });
 
         it("should logout a user on failed revoke of token", function () {
@@ -134,7 +137,25 @@
             httpBackend.flush();
             httpBackend.verifyNoOutstandingExpectation();
             httpBackend.verifyNoOutstandingRequest();
-            expect(state.go).toHaveBeenCalled();
+            expect(state.go).toHaveBeenCalledWith("login", {
+                "timeout": undefined,
+                "next": undefined,
+                "change_pwd": undefined
+            });
+        });
+
+        it("should pass on state params", function () {
+            httpBackend.expectPOST(credz.revoke_url, payload).respond(200, {});
+            spyOn(state, "go");
+            controller({"$stateParams": {"next": "%2F", "timeout": "true", "change_pwd": "true"}});
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingExpectation();
+            httpBackend.verifyNoOutstandingRequest();
+            expect(state.go).toHaveBeenCalledWith("login", {
+                "timeout": "true",
+                "next": "/",
+                "change_pwd": "true"
+            });
         });
     });
 
@@ -371,4 +392,4 @@
         });
     });
 
-})();
+})(window._);

@@ -100,7 +100,7 @@
             $httpBackend
                 .expectPATCH(SERVER_URL+"api/common/towns/4/")
                 .respond(500);
-            expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+            expect($state.go).toHaveBeenCalledWith("login", { next: "/" });
             expect($state.go).toHaveBeenCalledWith("setup.towns", { },
                                                    { reload : true });
             $scope.save();

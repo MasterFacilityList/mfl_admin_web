@@ -50,11 +50,10 @@
     )
 
     .controller("mfl.auth.controllers.login",
-        ["$scope", "$sce", "$state", "$stateParams", "Idle",
+        ["$scope", "$state", "$stateParams", "$window", "Idle",
         "mfl.auth.services.login", "HOME_PAGE_NAME",
-        function ($scope, $sce, $state, $stateParams, Idle, loginService, HOME_PAGE_NAME) {
+        function ($scope, $state, $stateParams, $window, Idle, loginService, HOME_PAGE_NAME) {
             $scope.login_err = "";
-            $scope.login_err_html = "";
             $scope.params = $stateParams;
 
             $scope.submitUser = function(obj) {
@@ -64,14 +63,13 @@
                     $scope.login_err = data.data.error_description ||
                                        data.data.detail ||
                                        "Sorry, a connection error occurred";
-                    $scope.login_err_html = $sce.trustAsHtml($scope.login_err);
                 };
                 var success_fxn = function () {
                     $scope.spinner = false;
                     Idle.watch();
-                    var next_state = $stateParams.next || $state.href(HOME_PAGE_NAME);
-                    next_state = window.decodeURIComponent(window.decodeURIComponent(next_state));
-                    window.location.assign(next_state);
+                    var next_url = $stateParams.next || $state.href(HOME_PAGE_NAME);
+                    next_url = $window.decodeURIComponent(next_url);
+                    // window.location.assign(next_url);
                 };
                 loginService.login(obj)
                     .then(
@@ -85,15 +83,15 @@
     ])
 
     .controller("mfl.auth.controllers.logout",
-        ["$scope", "$state", "$stateParams", "mfl.auth.services.login", "Idle",
-        function ($scope, $state, $stateParams, loginService, Idle) {
+        ["$scope", "$state", "$window", "$stateParams", "mfl.auth.services.login", "Idle",
+        function ($scope, $state, $window, $stateParams, loginService, Idle) {
             $scope.logout = true;
             var callback = function () {
                 Idle.unwatch();
                 $state.go("login", {
                     "timeout": $stateParams.timeout,
                     "next": $stateParams.next ?
-                            window.decodeURIComponent($stateParams.next) : undefined,
+                            $window.decodeURIComponent($stateParams.next) : undefined,
                     "change_pwd": $stateParams.change_pwd
                 });
             };

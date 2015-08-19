@@ -16,11 +16,6 @@
                     <p ng-if="params.timeout">Your session has expired. Please login again.</p>
                     <p ng-if="logout">Logging out your session.</p>
                 </div>
-                <span ng-if="login_err_html" ng-bind-html="login_err_html" class="fade-content alert alert-danger col-md-10 col-md-offset-1">
-                    <span class="pull-right">
-                        <i class="fa fa-times"></i>
-                    </span>
-                </span>
                 <form role="form" class="pad-b-20" name="frm_login" ng-submit="submitUser(user)" novalidate>
                     <div class="col-xs-12 col-sm-10 col-sm-offset-1 margin-b-20">
                         <div class="form-group">

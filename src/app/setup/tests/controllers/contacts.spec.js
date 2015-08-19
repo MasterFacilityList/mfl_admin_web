@@ -87,7 +87,7 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("login", { next: "/" });
                 expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
                                                        { reload : true });
             });
@@ -108,7 +108,7 @@
                 $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
                                                        { reload : true });
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("login", { next: "/" });
                 expect($scope.alert).toEqual(res.error);
             });
 
@@ -127,7 +127,7 @@
                 createController("mfl.setup.controller.contact_types.view", dt);
                 $scope.updateContacts(1, form);
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("login", { next: "/" });
                 expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
                                                        { reload : true });
             });
@@ -176,7 +176,7 @@
                 createController("mfl.setup.controller.contact_types.view", {});
                 $scope.createContacts({name: "Testing"});
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("login", { next: "/" });
                 expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
                                                        { reload : true });
             });
@@ -203,7 +203,7 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("login", { next: "/" });
                 expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
                                                        { reload : true });
             });
@@ -219,7 +219,7 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("login", { next: "/" });
                 expect($state.go).toHaveBeenCalledWith("setup.contact_types", {  },
                                                        { reload : true });
             });

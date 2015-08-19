@@ -94,8 +94,7 @@
                 createController("mfl.setup.controller.facilityOwnerType.view", dt);
                 $scope.remove();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login",
-                                                       {next:"dashboard"});
+                expect($state.go).toHaveBeenCalledWith("login",{next:"/"});
                 expect($state.go).toHaveBeenCalledWith("setup.facility_owner_types",
                                                        {},{reload:true});
             });
@@ -281,7 +280,7 @@
                 $scope.remove();
                 $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("login",
-                                                       {next:"dashboard"});
+                                                       {next:"/"});
                 expect($state.go).toHaveBeenCalledWith("setup.facility_owners",
                                                        {},{reload:true});
             });
@@ -441,7 +440,7 @@
                 $scope.remove();
                 $httpBackend.flush();
                 expect($state.go).toHaveBeenCalledWith("login",
-                                                       {next:"dashboard"});
+                                                       {next:"/"});
                 expect($state.go).toHaveBeenCalledWith("setup.facility_job_titles",{},
                                                        {reload:true});
             });
