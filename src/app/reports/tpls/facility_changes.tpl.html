@@ -16,7 +16,7 @@
             <div class="col-sm-4">
                 <ui-select ng-model="$parent.search">
                     <ui-select-match placeholder="Select County">{{$select.selected.county}}</ui-select-match>
-                    <ui-select-choices repeat="county.county as county in county_constituencies_facilities | filter:$select.search">{{county.county | titlecase}}</ui-select-choices>
+                    <ui-select-choices repeat="county.county as county in changes.results | filter:$select.search">{{county.county | titlecase}}</ui-select-choices>
                 </ui-select>
             </div>
             <div ng-show="search!==''"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
@@ -28,10 +28,15 @@
                         <th class="text-wrap"> <span class="pull-right">Action</span></th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="county in county_constituencies_facilities | filter:search">
+                        <tr ng-repeat="county in changes.results | filter:search">
                             <td>{{county.county | titlecase}}</td>
-                            <td>{{(($index+2) %3)+(($index+1) % 7)}}</td>
-                            <td><span class="pull-right"><a ui-sref="reports.facility_county_changes.view({county_id:1})" class="btn btn-success">View</a></span></td>
+                            <td>{{county.changes}}</td>
+                            <td><span class="pull-right"><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View</a></span></td>
+                        </tr>
+                        <tr>
+                            <td>TOTAL</td>
+                            <td>{{changes.total_number_of_changes}}</td>
+                            <td><span class="pull-right"></span></td>
                         </tr>
                     </tbody>
                 </table>

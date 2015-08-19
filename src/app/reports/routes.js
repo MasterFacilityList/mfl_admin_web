@@ -182,7 +182,7 @@
                 },
                 "main-content@reports.facility_county_changes": {
                     templateUrl: "reports/tpls/facility_changes.tpl.html",
-                    controller:"mfl.reports.controllers.county_constituencies"
+                    controller:"mfl.reports.controller.updowngrade.list"
                 }
             }
         })
@@ -195,7 +195,7 @@
                 },
                 "main-content@reports.facility_county_changes.view": {
                     templateUrl: "reports/tpls/facility_changes_view.tpl.html",
-                    controller:"mfl.reports.controllers.county_constituencies"
+                    controller:"mfl.reports.controller.updowngrade.view"
                 }
             }
         });
