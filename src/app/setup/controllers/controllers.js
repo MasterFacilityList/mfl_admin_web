@@ -1,5 +1,6 @@
 (function(angular){
     "use strict";
+
     angular.module("mfl.setup.controllers",[
         "mfl.setup.county.controllers",
         "mfl.setup.constituency.controllers",
@@ -12,12 +13,12 @@
         "mfl.setup.gis.controllers",
         "mfl.setup.api"
     ])
-    .controller("mfl.setup.controller.dashboard", ["$scope","currentStateOpen",
-        function ($scope,curStateService) {
+    .controller("mfl.setup.controller.dashboard", ["$scope",
+        function ($scope) {
             $scope.title = {
                 icon: "fa-map-marker",
                 name: "Adminstrative Units"
             };
-            $scope.collapsed = curStateService.whichTab();
         }]);
+
 })(window.angular);
