@@ -16,16 +16,16 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.option_group_create", ["$scope",
-        "$stateParams", "mfl.service_mgmt.wrappers", "$log",
+        "$stateParams", "mfl.service_mgmt.wrappers",
         "mfl.common.forms.changes", "$state",
-        function ($scope, $stateParams, wrappers, $log, forms, $state) {
+        function ($scope, $stateParams, wrappers, forms, $state) {
             $scope.option_group_id = $stateParams.option_group_id;
             $scope.edit_view = $scope.option_group_id ? true : false;
             if($scope.edit_view) {
                 wrappers.option_groups.get($scope.option_group_id).success(function (data) {
                     $scope.option_group = data;
                 }).error(function (data) {
-                    $log.warn(data);
+                    $scope.errors = data;
                 });
             }
             $scope.save = function (frm) {
@@ -35,6 +35,9 @@
                     .success(function () {
                         $state.go( "service_mgmt.option_groups_list",
                             {reload: true});
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
                     });
                 }else{
                     if (! _.isEmpty(changed)) {
@@ -43,6 +46,9 @@
                                 $state.go(
                                     "service_mgmt.option_groups_list",
                                     {reload: true});
+                            })
+                            .error(function (data) {
+                                $scope.errors = data;
                             });
                     }
                 }
@@ -50,8 +56,8 @@
             $scope.remove = function () {
                 wrappers.option_groups.remove($scope.option_group_id).success(function(){
                     $state.go("service_mgmt.option_groups_list",{reload:true});
-                }).error(function(error){
-                    $log.warn(error);
+                }).error(function(data){
+                    $scope.errors = data;
                 });
             };
             $scope.cancel = function () {
