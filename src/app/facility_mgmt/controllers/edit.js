@@ -103,9 +103,6 @@
                                         serv_obj.option = serv_obj.option ?
                                             serv_obj.option :
                                             serv_obj.serv_options[1].id;
-                                        console.log(serv_obj.name,
-                                            serv_obj.option,
-                                            serv_obj.serv_options[1].id);
                                     }
                                 });
                         }
