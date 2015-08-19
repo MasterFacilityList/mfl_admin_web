@@ -94,7 +94,7 @@
                         serv_obj.serv_options = _.where(
                             $scope.options, {"group" : serv_obj.group});
                         serv_obj.option_no = serv_obj.serv_options.length;
-                        if($scope.facility.facility_services) {
+                        if($scope.facility.facility_services.length > 0) {
                             _.each($scope.facility.facility_services,
                                 function (fac_service) {
                                     if(fac_service.service_id === serv_obj.id)

@@ -3101,15 +3101,50 @@
                     .expectPATCH(server_url+"api/facilities/facilities/3/")
                     .respond(200, {"id": "3"});
                 scope.facility = {
-                    facility_services: []
+                    facility_services: [
+                        {
+                            service_id : "3",
+                            option : null
+                        },
+                        {
+                            service_id : "5",
+                            option : "5"
+                        }
+                    ]
                 };
                 scope.categories = [
                     {id : "1", selected : true},
                     {id : "4", selected : false}
                 ];
+                scope.cat_services = [
+                    {
+                        id : "3",
+                        option : "",
+                        category : "3"
+                    },
+                    {
+                        id : "5",
+                        option : "5",
+                        category : "3"
+                    }
+                ];
+                scope.options = [
+                    {
+                        group : "3",
+                        id : "1",
+                        display_text : "No"
+                    },
+                    {
+                        group : "3",
+                        id : "2",
+                        display_text : "Yes"
+                    }
+                ];
                 scope.services = [
                     {id : "1", category : "3"},
-                    {id : "5", category : "3", option : "5"}
+                    {id : "3", category : "3", option : "5", group : "3"},
+                    {id : "5", category : "3", option : "5"},
+                    {id : "6", category : "3", option : true}
                 ];
                 scope.fac_serv.facility_services = [
                     {
@@ -3125,7 +3160,6 @@
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
-                expect(scope.facility.facility_services[0]).toEqual({"id": 4});
             });
 
             it("should fail to add facility services", function () {
