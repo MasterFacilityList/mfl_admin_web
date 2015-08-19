@@ -18,7 +18,7 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-purifycss");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
     grunt.loadNpmTasks("grunt-html2js");
-
+    grunt.loadNpmTasks("grunt-protractor-runner");
     grunt.loadNpmTasks("grunt-istanbul-coverage");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-concurrent");
@@ -292,14 +292,17 @@ module.exports = function ( grunt ) {
             src: [
                 "<%= app_files.js %>"
             ],
-            test: [
+            test_unit: [
                 "<%= app_files.jsunit %>"
+            ],
+            test_e2e: [
+                "<%= app_files.jse2e %>"
             ],
             gruntfile: [
                 "Gruntfile.js", "build.config.js"
             ],
             config_files: [
-                ".jshintrc", "bower.json","package.json", ".bowerrc", "src/<%= settings_file %>"
+                ".jshintrc", "package.json", ".bowerrc", "src/<%= settings_file %>"
             ],
             options: {
                 jshintrc: ".jshintrc"
@@ -370,7 +373,26 @@ module.exports = function ( grunt ) {
                 singleRun: true
             }
         },
-
+          /**
+           * The Protractor configurations.
+           */
+        protractor: {
+            options: {
+                configFile: "e2e/protractor.conf.js", // Default config file
+                noColor: false // If true, protractor will not use colors in its output.
+            },
+            e2e: {
+                options: {
+                    // Stops Grunt process if a test fails
+                    keepAlive: false // If false, the grunt process stops when the test fails.
+                }
+            },
+            continuous: {
+                options: {
+                    keepAlive: true // If true, the grunt process continues when the test fails.
+                }
+            }
+        },
         /**
          * The `index` task compiles the `index.html` file as a Grunt template. CSS
          * and JS files co-exist here but they get split apart later.
@@ -538,7 +560,20 @@ module.exports = function ( grunt ) {
                 files: [
                     "<%= app_files.jsunit %>"
                 ],
-                tasks: [ "jshint:test", "karma:unit:run" ],
+                tasks: [ "jshint:test_unit", "karma:unit:run" ],
+                options: {
+                    livereload: false
+                }
+            },
+            /**
+             * When a JavaScript e2e file changes, we only want to lint it and
+             * run the e2e tests. We still don't want to do any live reloading.
+             */
+            jse2e: {
+                files: [
+                    "<%= app_files.jse2e %>"
+                ],
+                tasks: [ "jshint:test_e2e", "protractor:e2e" ],
                 options: {
                     livereload: false
                 }
@@ -570,7 +605,7 @@ module.exports = function ( grunt ) {
      * before watching for changes.
      */
     grunt.renameTask( "watch", "delta" );
-    grunt.registerTask( "watch", [ "build", "karma:unit", "delta" ] );
+    grunt.registerTask( "watch", [ "build", "karma:unit","protractor:e2e","delta" ] );
 
     /**
      * The default task is to build and compile.
@@ -581,7 +616,7 @@ module.exports = function ( grunt ) {
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask( "build", [
-        "clean", "html2js", "jshint", "coffeelint", "coffee", "less:build",
+        "clean", "html2js", "jshint", "less:build",
         "concat:build_css", "copy:build_app_assets", "copy:build_vendor_assets",
         "copy:build_app_settings", "copy:build_appjs", "copy:build_vendorjs",
         "index:build", "karmaconfig"
@@ -596,7 +631,9 @@ module.exports = function ( grunt ) {
         "copy:compile_app_settings", "uglify", "index:compile"
     ]);
 
-    grunt.registerTask("test", ["build", "karma:continuous"]);
+    grunt.registerTask("test:unit", ["build", "karma:continuous"]);
+    grunt.registerTask("test:e2e", ["build", "protractor:continuous"]);
+    grunt.registerTask("test", ["build", "karma:continuous", "protractor:continuous"]);
 
     /**
      * A utility function to get all app JavaScript sources.

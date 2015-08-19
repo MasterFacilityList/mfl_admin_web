@@ -6,14 +6,19 @@
                     <span class="sidebar-text">All Facilities</span>
                 </a>
             </li>
+            <li ui-sref-active="active" requires-permission="facilities.view_facility">
+                <a ui-sref="facility_approve_list">
+                    <span class="sidebar-text">Approved Facilities</span>
+                </a>
+            </li>
             <li ui-sref-active="active" requires-permission="facilities.view_facility,facilities.add_facilityapproval" requires-user-feature="county">
                 <a ui-sref="facilities_approve">
-                    <span class="sidebar-text">Approve Facilities</span>
+                    <span class="sidebar-text">Facilities Pending Approval</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.view_facility,facilities.add_facilityapproval" requires-user-feature="county">
                 <a ui-sref="facilities_approve_update">
-                    <span class="sidebar-text">Approve Facility Updates</span>
+                    <span class="sidebar-text">Facility Updates Pending Approval</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.publish_facilities,facilities.view_facility" requires-user-feature="is_national">
@@ -24,6 +29,11 @@
             <li ui-sref-active="active" requires-permission="facilities.view_facility,facilities.add_facilityapproval" >
                 <a ui-sref="facilities_rejected">
                     <span class="sidebar-text">Rejected Facilities</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" requires-permission="facilities.view_facility,facilities.add_facilityapproval" >
+                <a ui-sref="facilities_closed">
+                    <span class="sidebar-text">Closed Facilities</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.view_facility" requires-user-feature="is_national,regulator">

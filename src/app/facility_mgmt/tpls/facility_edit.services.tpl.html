@@ -19,7 +19,7 @@
         <a ui-sref="facilities.facility_edit.units" ng-if="!create && !updown" class="btn btn-primary margin-t-20 margin-b-10">
             <i class="fa fa-angle-double-left"></i> Regulation
         </a>
-        <button ui-sref="facility_mgmt" ng-if="!create && !updown"  class="btn btn-primary margin-t-20 margin-b-10 pull-right" ng-disabled="facility.facility_services.length === 0">
+        <button ng-click="facilityServices()" ng-if="!create && !updown"  class="btn btn-primary margin-t-20 margin-b-10 pull-right">
              Save & Finish <i class="fa fa-angle-double-right"></i>
         </button>
     </div>

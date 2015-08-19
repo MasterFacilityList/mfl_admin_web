@@ -28,10 +28,12 @@ module.exports = {
         js: [
             "src/**/*.js",
             "!src/**/*.spec.js",
+            "!src/**/*.e2e.js",
             "!src/assets/**/*.js",
             "!src/<%= settings_file %>"
         ],
         jsunit: ["src/**/*.spec.js"],
+        jse2e: ["src/**/*.e2e.js"],
 
         coffee: ["src/**/*.coffee", "!src/**/*.spec.coffee"],
         coffeeunit: ["src/**/*.spec.coffee"],
@@ -97,8 +99,6 @@ module.exports = {
             "vendor/c3/c3.js",
             "vendor/angular-loading-bar/build/loading-bar.js",
             "vendor/ng-idle/angular-idle.js",
-            "vendor/angulartics/dist/angulartics.min.js",
-            "vendor/angulartics-google-analytics/dist/angulartics-google-analytics.min.js",
             "vendor/angular-auto-validate/dist/jcs-auto-validate.js",
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",

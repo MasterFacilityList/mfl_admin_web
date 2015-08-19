@@ -1,4 +1,11 @@
-<div class="col-xs-12 margin-b-20 margin-t-20">
+<div class="col-xs-12 margin-t-10">
+    <span class="col-xs-12">
+        <button class="btn btn-primary pull-right" ng-click="changeView('edit')">
+           Edit Facility Services
+        </button>
+    </span>
+</div>
+<div class="col-xs-12 margin-b-20 margin-t-10">
     <sil-grid template="facility_mgmt/tpls/facility_services.list.tpl.html" grid-for="facilities"
         data="services" filters="filters" error="alert" api-key="facility_services">
     </sil-grid>

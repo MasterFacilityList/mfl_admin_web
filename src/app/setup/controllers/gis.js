@@ -54,6 +54,8 @@
         ["$scope", "$state", "$log", "$stateParams", "adminApi",
         function ($scope, $state, $log, $stateParams, adminApi) {
             $scope.geocode_method_id = $stateParams.geocode_method_id;
+            $scope.wrapper = adminApi.geocode_methods;
+
             $scope.title = {
                 icon: "fa-edit",
                 name: "Edit GeoCode Method"
@@ -174,6 +176,8 @@
         ["$scope", "$state", "$log", "$stateParams", "adminApi",
         function ($scope, $state, $log, $stateParams, adminApi) {
             $scope.geocode_source_id = $stateParams.geocode_source_id;
+            $scope.wrapper = adminApi.geocode_sources;
+
             $scope.title = {
                 icon: "fa-edit",
                 name: "Edit GeoCode Source"

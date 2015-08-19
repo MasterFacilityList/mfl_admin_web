@@ -5,36 +5,32 @@
     <p ng-bind-html="alert"></p>
 </div>
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
-    <div class="col-lg-12 margin-t-20 ">
-        <!-- Start of tabbed multi step form  -->
-        <div class="container-fluid">
-            <ul class="form-tab margin-t--27">
-                <li ui-sref-active="active" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <a ui-sref=".basic">
-                        <span class="fw-900">
-                            Basic details
-                        </span>
-                    </a>
-                </li>
-                <li ng-if="!regulatory_body" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <a >
-                        <span class="fw-900 " style="color: #666">
-                            Contact information
-                        </span>
-                    </a>
-                </li>
-                <li ng-if="regulatory_body" ui-sref-active="active" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <a ui-sref=".contacts">
-                        <span class="fw-900 ">
-                            Contact information
-                        </span>
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content margin-t-20">
-                <div class="" ui-view="form-view"></div>
-            </div><!-- /tab-content -->
+    <form role="form" name="frm_reg_body">
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" name="name" ng-model="facilityRegulatoryBodies.name" required api-checker class="form-control">
         </div>
-        <!-- end of tabbed multistep form -->
-    </div>
+        <div class="form-group">
+            <label class="control-label">Regulation Verb</label>
+            <input type="text" name="regulation_verb" ng-model="facilityRegulatoryBodies.regulation_verb" required api-checker class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Abbreviation</label>
+            <input type="text" name="abbreviation" ng-model="facilityRegulatoryBodies.abbreviation" api-checker class="form-control">
+        </div>
+        <div class="checkbox form-group">
+            <label for="active">
+                <input type="checkbox" id="active" name="active" ng-model="facilityRegulatoryBodies.active" api-checker>
+                Is Active?
+             </label>
+        </div>
+        <button ng-if="!facilityRegulatoryBodies.id" ng-click="createFacilityRegulatoryBody(facilityRegulatoryBodies)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_reg_body.$invalid">
+            Save
+        </button>
+        <button ng-if="facilityRegulatoryBodies.id" ng-click="updateFacilityRegulatoryBody(facilityRegulatoryBodies.id, frm_reg_body)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_reg_body.$invalid">
+            Save
+        </button>
+        <a class="btn btn-default" ui-sref="setup.facility_regulatory_bodies">Cancel</a>
+        <mfl-revision-view id="facilityRegulatoryBodies.id" wrapper="wrapper"></mfl-revision-view>
+    </form>
 </div>

@@ -60,6 +60,8 @@
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
                         regulatory_body: "23",
+                        town : "3",
+                        town_name : "Mombasa",
                         facility_physical_address : {
                             town_id : "3",
                             town : "Mombasa"
@@ -147,6 +149,8 @@
                         owner_name: "owner",
                         owner_type : "5",
                         owner_type_name : "ownertype",
+                        town : "3",
+                        town_name : "Mombasa",
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
@@ -205,8 +209,8 @@
                             "name": "def"
                         },
                         town : {
-                            "id" : "",
-                            "name" : ""
+                            "id" : "3",
+                            "name" : "Mombasa"
                         }
                     });
 
@@ -244,6 +248,8 @@
                         owner: "3",
                         owner_name: "owner",
                         owner_type : "5",
+                        town : "3",
+                        town_name : "Mombasa",
                         owner_type_name : "ownertype",
                         operation_status: "4",
                         operation_status_name: "opstatus",
@@ -303,8 +309,8 @@
                             "name": "def"
                         },
                         town : {
-                            "id" : "",
-                            "name" : ""
+                            "id" : "3",
+                            "name" : "Mombasa"
                         }
                     });
 
@@ -589,7 +595,12 @@
                     return {"results": []};
                 };
                 data.$scope.facility = {
-                    facility_physical_address : {town : "5"}
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge : {
+                        name : "Antony",
+                        reg_no : "P15/1331",
+                        title : "Medical Supritendant"
+                    }
                 };
                 data.$scope.steps = [
                     {name : "basic"},
@@ -613,6 +624,11 @@
                     "name": {
                         "$dirty": true,
                         "$$modelValue": "test"
+                    },
+                    "town": {
+                        "$dirty": true,
+                        "$$modelValue": "test",
+                        "id" : "3"
                     }
                 };
                 data.$scope.facility_id = 3;
@@ -759,6 +775,75 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
+            it("should save facility basic details: update in edit mode", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
+                state.params.facility_id = "3";
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge: {
+                        name : "Antony",
+                        reg_no : "P15/1331/",
+                        title: "Medical Supritendant"
+                    }
+                };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
+                };
+                data.$scope.create = false;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                ctrl(".basic", data);
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(204);
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$dirty": true,
+                        "$modelValue": "test"
+                    },
+                    "officer_name": {
+                        "$dirty": true,
+                        "$modelValue": "Antony"
+                    },
+                    "reg_number": {
+                        "$dirty": true,
+                        "$modelValue": "P15/133/"
+                    },
+                    "title": {
+                        "$dirty": true,
+                        "$modelValue": "Medical Supritendant"
+                    },
+                    "officer_in_charge": {
+                        "name" : "",
+                        "reg_no" : "",
+                        "title": ""
+                    }
+                };
+                data.$scope.facility_id = 3;
+                data.$scope.save(frm);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
             it("should save facility basic details: update", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -797,6 +882,23 @@
                     "name": {
                         "$dirty": true,
                         "$$modelValue": "test"
+                    },
+                    "officer_name": {
+                        "$dirty": true,
+                        "$$modelValue": "Antony"
+                    },
+                    "reg_number": {
+                        "$dirty": true,
+                        "$$modelValue": "P15/133/"
+                    },
+                    "title": {
+                        "$dirty": true,
+                        "$$modelValue": "Medical Supritendant"
+                    },
+                    "officer_in_charge": {
+                        "name" : "",
+                        "reg_no" : "",
+                        "title": ""
                     }
                 };
                 data.$scope.facility_id = 3;
@@ -906,7 +1008,12 @@
                     return {"results": []};
                 };
                 data.$scope.facility = {
-                    facility_physical_address : {town : "5"}
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge : {
+                        name : "Antony",
+                        reg_no : "P15/1221/",
+                        title : "Medical Supritendant"
+                    }
                 };
                 data.$scope.steps = [
                     {name : "basic"}
@@ -930,6 +1037,18 @@
                     "name": {
                         "$dirty": true,
                         "$$modelValue": "test"
+                    },
+                    "officer_name": {
+                        "$dirty": true,
+                        "$$modelValue": "Antony"
+                    },
+                    "reg_number": {
+                        "$dirty": true,
+                        "$$modelValue": "P15/133/"
+                    },
+                    "title": {
+                        "$dirty": true,
+                        "$$modelValue": "Medical Supritendant"
                     }
                 };
                 data.$scope.facility_id = 3;
@@ -2905,6 +3024,7 @@
             });
 
             it("should load services", function () {
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(200, {results: [{"id": 3}]});
@@ -2914,7 +3034,9 @@
                 var c = ctrl();
                 var scope = rootScope.$new();
                 c.bootstrap(scope);
-
+                scope.create = true;
+                var name = "edit";
+                scope.changeView(name);
                 expect(scope.new_service.service).toEqual("");
                 expect(scope.new_service.option).toEqual("");
                 expect(scope.services).toEqual([]);
@@ -2930,6 +3052,7 @@
             });
 
             it("should show error on fail to load services", function () {
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(500, {"error": "e"});
@@ -2937,8 +3060,10 @@
                 spyOn(log, "error");
                 var c = ctrl({"$log": log});
                 var scope = rootScope.$new();
+                scope.create = false;
                 c.bootstrap(scope);
-
+                var name = "edit";
+                scope.changeView(name);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -2949,20 +3074,18 @@
 
             it("should add a facility service", function () {
                 var payload = {results: [{"id": 3}]};
+                spyOn(state, "go");
                 httpBackend
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(200, payload);
-
+                httpBackend
+                    .expectGET(server_url+"api/facilities/options/")
+                    .respond(200, payload);
                 var c = ctrl();
                 var scope = rootScope.$new();
+                scope.create = true;
+                scope.facility_id = "3";
                 var cat = {selected : false, id : "3"};
-                var rslts = {
-                    results : [
-                        {
-                            id : "5"
-                        }
-                    ]
-                };
                 c.bootstrap(scope);
 
                 httpBackend.flush();
@@ -2974,6 +3097,9 @@
                 httpBackend
                     .expectPOST(server_url+"api/facilities/facility_services/")
                     .respond(201, {"id": 4});
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(200, {"id": "3"});
                 scope.facility = {
                     facility_services: []
                 };
@@ -2981,12 +3107,77 @@
                     {id : "1", selected : true},
                     {id : "4", selected : false}
                 ];
+                scope.services = [
+                    {id : "1", category : "3"},
+                    {id : "5", category : "3", option : "5"}
+                ];
+                scope.fac_serv.facility_services = [
+                    {
+                        service : "1",
+                        option : "3"
+                    }
+                ];
+                var name = "edit";
                 scope.addServiceOption(payload.results[0]);
-                httpBackend
-                    .expectGET(server_url+
-                        "api/facilities/services/?category=3")
-                    .respond(200, rslts);
                 scope.showServices(cat);
+                scope.changeView(name);
+                scope.facilityServices();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(scope.facility.facility_services[0]).toEqual({"id": 4});
+            });
+
+            it("should fail to add facility services", function () {
+                var payload = {results: [{"id": 3}]};
+                spyOn(state, "go");
+                httpBackend
+                    .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
+                    .respond(200, payload);
+                httpBackend
+                    .expectGET(server_url+"api/facilities/options/")
+                    .respond(200, payload);
+                var c = ctrl();
+                var scope = rootScope.$new();
+                scope.create = true;
+                scope.facility_id = "3";
+                var cat = {selected : false, id : "3"};
+                c.bootstrap(scope);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/facility_services/")
+                    .respond(201, {"id": 4});
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(500);
+                scope.facility = {
+                    facility_services: []
+                };
+                scope.categories = [
+                    {id : "1", selected : true},
+                    {id : "4", selected : false}
+                ];
+                scope.services = [
+                    {id : "1", category : "3"},
+                    {id : "5", category : "3", option : "5"}
+                ];
+                scope.fac_serv.facility_services = [
+                    {
+                        service : "1",
+                        option : "3"
+                    }
+                ];
+                var name = "edit";
+                scope.addServiceOption(payload.results[0]);
+                scope.showServices(cat);
+                scope.changeView(name);
+                scope.facilityServices();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();

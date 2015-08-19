@@ -139,21 +139,23 @@
                 icon: "fa-lock",
                 name: "Password"
             };
-            $scope.pwds = {
+            var init_pwds = {
                 "old_pwd": "",
                 "new_pwd": "",
                 "confirm_pwd": ""
             };
+            $scope.pwds = init_pwds;
             $scope.change_required = (! _.isUndefined($stateParams.required));
 
             $scope.save = function (old, pwd1, pwd2) {
                 profileService.updatePassword(old, pwd1, pwd2).then(
                     function () {
                         loginService.logout();
-                        $state.go("logout");
+                        $state.go("logout", {"change_pwd": "true"});
                     },
                     function (data) {
                         $log.error(data);
+                        $scope.pwds = init_pwds;
                         $scope.errors = data.data || data;
                     }
                 );

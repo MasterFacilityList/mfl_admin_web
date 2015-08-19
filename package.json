@@ -1,11 +1,12 @@
 {
   "name": "mfl-admin-frontend",
-  "version": "0.0.1a11",
+  "version": "0.0.1a13",
   "repository": {
     "type": "git",
     "url": "https://github.com/MasterFacilityList/mfl_admin_web"
   },
   "scripts": {
+    "update-webdriver": "./node_modules/protractor/bin/webdriver-manager update",
     "postinstall": "./node_modules/bower/bin/bower install"
   },
   "license": "MIT",
@@ -44,6 +45,8 @@
     "karma-threshold-reporter": "^0.1.12",
     "grunt-purifycss": "~0.1.0",
     "grunt-contrib-cssmin": "~0.12.3",
-    "karma-htmlfile-reporter": "~0.2.2"
+    "karma-htmlfile-reporter": "~0.2.2",
+    "protractor": "^2.1.0",
+    "grunt-protractor-runner": "~2.1.0"
   }
 }

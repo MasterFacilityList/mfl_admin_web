@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label class="col-sm-3 col-md-2 control-label"><span class="pull-left">Constituency Name:</span></label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" name="name" ng-model="const_details.name" placeholder="County Name">
+                    <input type="text" class="form-control" name="name" ng-model="const_details.name" placeholder="Enter Constituency Name">
                 </div>
             </div>
             <div class="form-group">
@@ -42,6 +42,7 @@
             <div class="col-sm-12 pad-l-0 pad-b-10">
                 <button class="btn btn-primary">Save</button>
                 <button class="btn btn-default" ui-sref="setup.constituencies">Cancel</button>
+                <mfl-revision-view id="constituency_id" wrapper="wrapper" ></mfl-revision-view>
             </div>
         </form>
     </div>

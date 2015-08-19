@@ -58,7 +58,7 @@
                     <i class="fa fa-times-circle-o fa-1x fs-15"></i>
                 </span>
             </span>
-            <span ng-if="facility.facility_catchment_population" class="content-right col-md-6 col-xs-12">
+            <span ng-if="facility.facility_catchment_population" class="col-xs-12">
                 <label class="text-black">Facility Catchment Population: </label>
                 {{facility.facility_catchment_population}}
             </span>
@@ -76,20 +76,20 @@
                 <label class="text-black">Ward:</label> {{facility.ward_name | titlecase}}
             </span>
             <span class="content-right col-md-6 col-xs-12 margin-t-10">
-                <label class="text-black">Town:</label> {{facility.facility_physical_address.town}}
+                <label class="text-black">Town:</label> {{facility.town_name}}
             </span>
             <!-- Geo -->
-            <span class="col-xs-12 margin-t-10" ng-if="facility.facility_physical_address.plot_number !== ''">
+            <span class="col-xs-12 margin-t-10" ng-if="facility.plot_number !== ''">
                 <label class="text-black">Plot number: </label>
-                {{facility.facility_physical_address.plot_number}}
+                {{facility.plot_number}}
             </span>
-            <span class="col-xs-12 margin-t-10" ng-show="facility.facility_physical_address.nearest_landmark">
+            <span class="col-xs-12 margin-t-10" ng-show="facility.nearest_landmark">
                 <label class="text-black">Nearest Landmark: </label>
-                {{facility.facility_physical_address.nearest_landmark}}
+                {{facility.nearest_landmark}}
             </span>
-            <span class="col-xs-12 margin-t-10" ng-if="facility.facility_physical_address.location_desc !== ''">
+            <span class="col-xs-12 margin-t-10" ng-if="facility.location_desc !== ''">
                 <label class="text-black">Specific directions: </label>
-                {{facility.facility_physical_address.location_desc}}
+                {{facility.location_desc}}
             </span>
             <div class="col-xs-12"><hr class="line-divider"></div>
             <div class="col-xs-12 margin-t-5">
@@ -111,6 +111,28 @@
                 <label class="text-black">Latitude: </label>
                 {{gis.coordinates.coordinates[1]}}
             </span>
+            <!-- Facility officer in charge -->
+            <div class="col-xs-12" ng-if="facility.officer_in_charge"><hr class="line-divider"></div>
+            <div class="col-xs-12 margin-t-5" ng-if="facility.officer_in_charge">
+                <h4 class="fw-600">Officer Incharge</h4>
+            </div>
+            <span class="pull-left col-md-6 col-xs-12" ng-if="facility.officer_in_charge.name">
+                <label class="text-black">Name:</label>
+                    {{facility.officer_in_charge.name}}
+            </span>
+            <span class="content-right col-md-6 col-xs-12" ng-if="facility.officer_in_charge.reg_no">
+                <label class="text-black">Registration No: </label>
+                {{facility.officer_in_charge.reg_no}}
+            </span>
+            <span class="pull-left col-md-6 col-xs-12" ng-if="facility.officer_in_charge.title">
+                <label class="text-black">Job Title: </label>
+                {{facility.officer_in_charge.title_name}}
+            </span>
+            <span class="pull-left col-xs-12" ng-repeat="off_conts in facility.officer_in_charge.contacts" ng-if="facility.officer_in_charge.contacts">
+                <label class="text-black">{{off_conts.contact_type_name}}: </label>
+                {{off_conts.contact}}
+            </span>
+            <!-- End of facility officer in charge -->
         </div>
         <div class="col-md-4 col-xs-12">
             <div class="col-xs-12">
@@ -157,7 +179,7 @@
     <!-- End of basic details -->
     <div class="col-xs-12 margin-t-20 margin-b-20" ng-if="fac_units.length !== 0"><hr class="line-divider"></div>
     <div class="col-xs-12 margin-t-10" ng-if="fac_units.length !== 0">
-        <h4 class="fw-600">Facility Departments</h4>
+        <h4 class="fw-600">Regulation</h4>
     </div>
     <div class="col-xs-12" ng-if="fac_units.length !== 0">
         <table class="table fs-14 table-hover table-stripped">

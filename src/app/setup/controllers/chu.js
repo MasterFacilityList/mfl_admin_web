@@ -45,6 +45,8 @@
                         tipmsg: "Delete CHU Status"
                     }
                 ];
+                $scope.status_id = $stateParams.id;
+                $scope.wrapper = adminApi.chuStatus;
                 adminApi.chuStatus.get($stateParams.id).success(function(data){
                     $scope.chuStatus = data;
                     $scope.deleteText = $scope.chuStatus.name;
@@ -136,6 +138,8 @@
                         wording: "Delete"
                     }
                 ];
+                $scope.approver_id = $stateParams.id;
+                $scope.wrapper = adminApi.chuApprovers;
                 adminApi.chuApprovers.get($stateParams.id).success(function(data){
                     $scope.chuApprovers = data;
                     $scope.deleteText = $scope.chuApprovers.name;

@@ -31,6 +31,7 @@
             ];
 
             $scope.service_id = $stateParams.service_id;
+            $scope.wrapper = wrappers.services;
             $scope.tabState = function(obj) {
                 _.each($scope.steps, function (step) {
                     if(step.name === obj.name) {

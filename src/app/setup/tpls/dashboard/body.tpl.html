@@ -1,12 +1,9 @@
  <div class="col-sm-2 pad-r-0" >
     <aside class="side-left partial">
-    <ul class=" nav nav-list">
-        <li ng-model="collapsed.one" >
-            <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.one=!collapsed.one">Administrative Units
-                <span  ng-show = "collapsed.one === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
-                <span  ng-show = "collapsed.one === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
-            </label>
-          <ul class="nav nav-list tree" content-slide-in="collapsed.one" slide-show-duration="1000">
+    <ul class="nav nav-list">
+        <li>
+          <label class="sidebar-label tree-toggle nav-header">Administrative Units</label>
+          <ul class="nav nav-list tree">
               <li ui-sref-active="active" requires-permission="common.view_county">
                 <a ui-sref="setup.counties">Counties</a>
               </li>
@@ -24,63 +21,31 @@
               </li>
           </ul>
         </li>
-        <li ng-model="collapsed.two">
-            <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.two=!collapsed.two">Community Units
-                <span  ng-show = "collapsed.two === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
-                <span  ng-show = "collapsed.two === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
-            </label>
-          <ul class="nav nav-list tree" content-slide-in="collapsed.two" slide-show-duration="1000">
-              <li ui-sref-active="active" requires-permission="chul.view_status">
-                <a ui-sref="setup.chu_status">Community Units Status</a>
-              </li>
-              <li ui-sref-active="active" requires-permission="chul.view_approver">
-                <a ui-sref="setup.chu_approvers">CU Approvers</a>
-              </li>
-          </ul>
-        </li>
-        <li ng-model="collapsed.six">
-            <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.six=!collapsed.six">Service Catalogue
-                <span  ng-show = "collapsed.six === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
-                <span  ng-show = "collapsed.six === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
-            </label>
-            <ul class="nav nav-list tree" content-slide-in="collapsed.six" slide-show-duration="1000">
+        <li>
+            <label class="sidebar-label tree-toggle nav-header">Service Catalogue</label>
+            <ul class="nav nav-list tree">
                 <li ui-sref-active="active" requires-permission="facilities.view_servicecategory">
-                    <a ui-sref="service_mgmt.category_list">
-                      <span class="sidebar-text">Categories</span>
-                    </a>
+                    <a ui-sref="service_mgmt.category_list">Categories</a>
                 </li>
                 <li ui-sref-active="active" requires-permission="facilities.view_service">
-                    <a ui-sref="service_mgmt.service_list">
-                      <span class="sidebar-text">Services</span>
-                    </a>
+                    <a ui-sref="service_mgmt.service_list">Services</a>
                 </li>
                 <li ui-sref-active="active" requires-permission="facilities.view_option">
-                    <a ui-sref="service_mgmt.option_list">
-                      <span class="sidebar-text">Options</span>
-                    </a>
+                    <a ui-sref="service_mgmt.option_list">Options</a>
                 </li>
             </ul>
         </li>
-        <li ng-model="collapsed.three">
-            <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.three=!collapsed.three">Contacts
-                <span  ng-show = "collapsed.three === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
-                <span  ng-show = "collapsed.three === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
-            </label>
-          <ul class="nav nav-list tree" content-slide-in="collapsed.three" slide-show-duration="1000">
-              <li ui-sref-active="active" requires-permission="common.view_contact">
-                <a ui-sref="setup.contacts">Contacts</a>
-              </li>
+        <li>
+          <label class="sidebar-label tree-toggle nav-header">Contacts</label>
+          <ul class="nav nav-list tree">
               <li ui-sref-active="active">
                 <a ui-sref="setup.contact_types" requires-permission="common.view_contacttype">Contact Type</a>
               </li>
           </ul>
         </li>
-        <li ng-model="collapsed.four">
-            <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.four=!collapsed.four">Facilities
-                <span  ng-show = "collapsed.four === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
-                <span  ng-show = "collapsed.four === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
-            </label>
-          <ul class="nav nav-list tree" content-slide-in="collapsed.four" slide-show-duration="1000">
+        <li>
+          <label class="sidebar-label tree-toggle nav-header">Facilities</label>
+          <ul class="nav nav-list tree">
               <li ui-sref-active="active" requires-permission="facilities.view_owner">
                 <a ui-sref="setup.facility_owners">Facility Owners</a>
               </li>
@@ -91,26 +56,19 @@
                 <a ui-sref="setup.facility_job_titles">Job Titles</a>
               </li>
               <li ui-sref-active="active" requires-permission="facilities.view_regulatingbody">
-                <a ui-sref="setup.facility_regulatory_bodies">
-                Regulatory Bodies
-                </a>
+                <a ui-sref="setup.facility_regulatory_bodies">Regulatory Bodies</a>
               </li>
               <li ui-sref-active="active">
-                <a ui-sref="setup.facility_reasons">
-                Reasons
-                </a>
+                <a ui-sref="setup.facility_reasons">Reasons</a>
               </li>
               <li ui-sref-active="active" requires-permission="facilities.view_kephlevel">
                   <a ui-sref="setup.facility_kephs">KEPH Levels</a>
               </li>
           </ul>
         </li>
-        <li ng-model="collapsed.five">
-            <label class="sidebar-label tree-toggle nav-header" ng-click="collapsed.five=!collapsed.five">Geo Codes
-                <span  ng-show = "collapsed.five === true" class="pull-right"><i class="fa fa-chevron-up"></i>&nbsp;</span>
-                <span  ng-show = "collapsed.five === false" class="pull-right"><i class="fa fa-chevron-down"></i>&nbsp;</span>
-            </label>
-        <ul class="nav nav-list tree" content-slide-in="collapsed.five" slide-show-duration="1000">
+        <li>
+          <label class="sidebar-label tree-toggle nav-header">Geo Codes</label>
+          <ul class="nav nav-list tree">
             <li ui-sref-active="active" requires-permission="mfl_gis.view_geocodemethod">
               <a ui-sref="setup.geocode_methods_list">Geo Code Methods</a>
             </li>

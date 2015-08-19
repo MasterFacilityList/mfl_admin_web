@@ -197,28 +197,6 @@
                 permission: "facilities.delete_regulatingbody",
                 userFeature: "is_staff,is_national"
             })
-        .state("setup.facility_regulatory_bodies.edit.basic", {
-                url: "/basicdetails",
-                views: {
-                    "form-view@setup.facility_regulatory_bodies.edit" : {
-                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
-                        "regulatory-body-main-form.tpl.html"
-                    }
-                },
-                permission: "facilities.view_regulatingbody",
-                userFeature: "is_national"
-            })
-        .state("setup.facility_regulatory_bodies.edit.contacts", {
-                url: "/contacts",
-                views: {
-                    "form-view@setup.facility_regulatory_bodies.edit" : {
-                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
-                        "regulatory-body-contacts-form.tpl.html"
-                    }
-                },
-                permission: "facilities.view_regulatingbodycontact",
-                userFeature: "is_national"
-            })
         .state("setup.facility_regulatory_bodies.create", {
                 url: "/create",
                 views: {
@@ -229,28 +207,6 @@
                     }
                 },
                 permission: "facilities.add_regulatingbody",
-                userFeature: "is_staff,is_national"
-            })
-        .state("setup.facility_regulatory_bodies.create.basic", {
-                url: "/basicdetails",
-                views: {
-                    "form-view@setup.facility_regulatory_bodies.create" : {
-                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
-                        "regulatory-body-main-form.tpl.html"
-                    }
-                },
-                permission: "facilities.add_regulatingbody",
-                userFeature: "is_staff,is_national"
-            })
-        .state("setup.facility_regulatory_bodies.create.contacts", {
-                url: "/:reg_cont_id/contacts",
-                views: {
-                    "form-view@setup.facility_regulatory_bodies.create" : {
-                        templateUrl: "setup/tpls/facilities/regulatory_bodies/" +
-                        "regulatory-body-contacts-form.tpl.html"
-                    }
-                },
-                permission: "facilities.add_regulatingbodycontact",
                 userFeature: "is_staff,is_national"
             })
 
@@ -264,18 +220,43 @@
                     },
                     "main-content@setup.facility_reasons": {
                         templateUrl: "setup/tpls/facilities/reasons/"+
-                        "reasons-list.tpl.html"
+                        "reasons-list.tpl.html",
+                        controller:"mfl.setup.controller.change_reasons.list"
                     }
-                }
+                },
+                userFeature: "is_national,is_staff"
             })
-        .state("setup.facility_reasons.view", {
-                url: "/view",
+        .state("setup.facility_reasons.create", {
+                url: "/create",
                 views: {
                     "main-content@setup.facility_reasons": {
                         templateUrl: "setup/tpls/facilities/reasons/"+
-                        "reasons-view.tpl.html"
+                        "reasons-view.tpl.html",
+                        controller:"mfl.setup.controller.change_reasons.view"
                     }
-                }
+                },
+                userFeature: "is_national"
+            })
+        .state("setup.facility_reasons.edit", {
+                url: "/edit/:reason_id",
+                views: {
+                    "main-content@setup.facility_reasons": {
+                        templateUrl: "setup/tpls/facilities/reasons/"+
+                        "reasons-view.tpl.html",
+                        controller:"mfl.setup.controller.change_reasons.view"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.facility_reasons.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_reasons.edit": {
+                        controller:"mfl.setup.controller.change_reasons.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                },
+                userFeature: "is_national,is_staff"
             });
     }]);
 })(window.angular);

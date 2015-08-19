@@ -13,7 +13,8 @@
 
     .controller("mfl.facility_mgmt.controllers.services_helper",
         ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
-        function ($log, wrappers, errorMessages) {
+        "$state",
+        function ($log, wrappers, errorMessages, $state) {
             var loadData = function ($scope) {
                 wrappers.services.filter({page_size: 100, ordering: "name"})
                 .success(function (data) {
@@ -28,6 +29,14 @@
                 wrappers.categories.list()
                 .success(function (data) {
                     $scope.categories = data.results;
+                })
+                .error(function (err) {
+                    $scope.alert = err.error;
+                });
+
+                wrappers.options.list()
+                .success(function (data) {
+                    $scope.options = data.results;
                 })
                 .error(function (err) {
                     $scope.alert = err.error;
@@ -70,6 +79,23 @@
                     service: "",
                     option: ""
                 };
+                $scope.changeView = function (name) {
+                    if($scope.create) {
+                        $state.go("facilities.facility_create.services."+
+                            name,{furthest: $scope.furthest,
+                            facility_id : $scope.new_facility});
+                    }else{
+                        $state.go("facilities.facility_edit.services." + name);
+                    }
+                };
+                $scope.optionNumber = function (services) {
+                    _.each(services, function(serv_obj) {
+                        serv_obj.serv_options = [];
+                        serv_obj.serv_options = _.where(
+                            $scope.options, {"group" : serv_obj.group});
+                        serv_obj.option_no = serv_obj.serv_options.length;
+                    });
+                };
                 $scope.showServices = function (cat) {
                     if(cat.selected === false) {
                         cat.selected = true;
@@ -83,13 +109,9 @@
                             one_cat.selected = !one_cat.selected;
                         }
                     });
-                    wrappers.services.filter({"category" : cat.id})
-                        .success(function (data) {
-                            $scope.cat_services = data.results;
-                        })
-                        .error(function (err) {
-                            $scope.alert = err.error;
-                        });
+                    $scope.cat_services = _.where(
+                        $scope.services, {"category" : cat.id});
+                    $scope.optionNumber($scope.cat_services);
                 };
                 $scope.services = [];
                 $scope.service_options = [];
@@ -102,6 +124,28 @@
                 };
                 $scope.removeChild = function (a) {
                     removeServiceOption($scope, a);
+                };
+                $scope.fac_serv = {
+                    facility_services : []
+                };
+                $scope.facilityServices = function () {
+                    _.each($scope.services, function (service_obj) {
+                        if(service_obj.option) {
+                            $scope.fac_serv.facility_services.push({
+                                service : service_obj.id,
+                                option : service_obj.option
+                            });
+                        }
+                    });
+                    wrappers.facility_detail.update($scope.facility_id,
+                        $scope.fac_serv)
+                        .success(function () {
+                            $state.go("facilities");
+                        })
+                        .error(function (err) {
+                            $scope.alert = err.error;
+                        });
+
                 };
                 $scope.$watch("new_service.service", function (newVal) {
                     var s = _.findWhere($scope.services, {"id": newVal});
@@ -173,10 +217,8 @@
                             "name": $scope.facility.regulatory_body_name
                         },
                         town: {
-                            "id": data.facility_physical_address ?
-                            data.facility_physical_address.town_id : "",
-                            "name": data.facility_physical_address ?
-                            data.facility_physical_address.town : ""
+                            "id": $scope.facility.town,
+                            "name": $scope.facility.town_name
                         }
                     };
                 })
@@ -229,11 +271,27 @@
         "mfl.error.messages",
         function ($scope, $log, $state, $stateParams, wrappers, formChanges,
             multistepService, loginService, errorMessages) {
+            /*Set up facility officer*/
+            $scope.facilityOfficers = function (f) {
+                if(_.isUndefined(f.officer_in_charge) || _.isNull(f.officer_in_charge)) {
+                    $scope.facility.officer_in_charge = {
+                        name : "",
+                        reg_no : "",
+                        contacts : [
+                            {
+                                type : "",
+                                contact : ""
+                            }
+                        ]
+                    };
+                }
+            };
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[0]);
             } else {
                 $scope.nextState();
+                $scope.facilityOfficers($scope.facility);
             }
             $scope.initUniqueName = function(frm) {
                 if(_.isUndefined($scope.facility.name)) {
@@ -257,16 +315,19 @@
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.geolocation");
                 var changes = formChanges.whatChanged(frm);
-                $scope.facility.ward = $scope.select_values.ward.id;
+                $scope.facility.ward = $scope.select_values.ward;
                 $scope.facility.facility_type = $scope.select_values.facility_type;
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
-                $scope.facility.facility_physical_address.town =
-                    $scope.select_values.town.id;
-                $scope.facility.location_data = $scope.facility.facility_physical_address;
-                changes.location_data = $scope.facility.facility_physical_address;
-                changes.officer_in_charge = $scope.facility.officer_in_charge;
+                $scope.facility.town = $scope.select_values.town;
+                changes.officer_in_charge = {
+                    name : changes.officer_name ? changes.officer_name :
+                        $scope.facility.officer_in_charge.name,
+                    reg_no : changes.reg_number ? changes.reg_number :
+                            $scope.facility.officer_in_charge.reg_no,
+                    title : changes.title ? changes.title : $scope.facility.officer_in_charge.title
+                };
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {
@@ -274,7 +335,7 @@
                         .success(function (data) {
                             $state.go("facilities.facility_create.geolocation",
                             {facility_id : data.id,
-                            furthest : $scope.furthest});
+                            furthest : $scope.furthest}, {reload : true});
                         })
                         .error(function (data) {
                             $log.error(data);
@@ -289,7 +350,8 @@
                             $state.go(
                                 "facilities.facility_create.geolocation",
                                 {facility_id : $state.params.facility_id,
-                                    furthest : $scope.furthest});
+                                    furthest : $scope.furthest},
+                                    {reload : true});
                         })
                         .error(function (data) {
                             $log.error(data);
@@ -301,7 +363,7 @@
                     wrappers.facility_detail.update($scope.facility_id, changes)
                     .success(function () {
                         $state.go($scope.finish,
-                        {facility_id:$scope.facility_id});
+                        {facility_id:$scope.facility_id}, {reload : true});
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -326,21 +388,6 @@
             .error(function(error){
                 $log.error(error);
             });
-            /*Set up facility contacts*/
-            $scope.facilityOfficers = function (f) {
-                if(_.isUndefined(f.officer_in_charge)) {
-                    $scope.facility.officer_in_charge = {
-                        name : "",
-                        reg_no : "",
-                        contacts : [
-                            {
-                                type : "",
-                                contact : ""
-                            }
-                        ]
-                    };
-                }
-            };
             $scope.addOfficerContact = function () {
                 $scope.facility.officer_in_charge.contacts.push({
                     type : "",
@@ -991,8 +1038,8 @@
                             "name": $scope.geo.method_name
                         },
                         town:{
-                            "id": f.facility_physical_address.town_id,
-                            "name": f.facility_physical_address.town
+                            "id": f.town,
+                            "name": f.town_name
                         }
                     };
                     angular.extend($scope,{

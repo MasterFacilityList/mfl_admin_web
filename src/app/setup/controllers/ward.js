@@ -10,7 +10,7 @@
                 name: "Wards"
             };
             $scope.filters = {
-                "fields": "id,name,code"
+                "fields": "id,name,code,county_name,constituency_name"
             };
             $scope.action = [
                 {
@@ -30,6 +30,9 @@
             $scope.select_values = {
                 constituency: {}
             };
+            $scope.ward_id = $stateParams.ward_id;
+            $scope.wrapper = adminApi.wards;
+
             if(!_.isUndefined($stateParams.ward_id)){
                 $scope.state =  true;
                 adminApi.wards.get($stateParams.ward_id)

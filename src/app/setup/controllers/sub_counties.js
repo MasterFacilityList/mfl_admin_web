@@ -7,7 +7,7 @@
     .controller("mfl.setup.controller.sub_counties.list", ["$scope",
         function ($scope) {
             $scope.filters = {
-                "fields": "id,name,code"
+                "fields": "id,name,code,county_name"
             };
             $scope.title = {
                 icon: "fa-map-marker",
@@ -32,6 +32,9 @@
             $scope.select_values = {
                 county : {}
             };
+            $scope.sub_county_id = $stateParams.scount_id;
+            $scope.wrapper = adminApi.sub_counties;
+
             if(_.isUndefined($stateParams.scount_id)){
                 $scope.state = false;
             } else {

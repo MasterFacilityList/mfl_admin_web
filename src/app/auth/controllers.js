@@ -93,7 +93,8 @@
                 $state.go("login", {
                     "timeout": $stateParams.timeout,
                     "next": $stateParams.next ?
-                            window.decodeURIComponent($stateParams.next) : undefined
+                            window.decodeURIComponent($stateParams.next) : undefined,
+                    "change_pwd": $stateParams.change_pwd
                 });
             };
             return loginService.logout().then(callback, callback);
