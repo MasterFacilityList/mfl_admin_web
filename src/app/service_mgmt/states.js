@@ -193,7 +193,7 @@
                     templateUrl: "service_mgmt/tpls/option_group_grid.tpl.html"
                 }
             },
-            ermission: "facilities.view_option",
+            permission: "facilities.view_option",
             userFeature: "is_staff, is_national"
         })
 
