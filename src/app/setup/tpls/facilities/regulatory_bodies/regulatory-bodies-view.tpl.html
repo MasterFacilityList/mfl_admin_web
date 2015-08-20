@@ -6,6 +6,7 @@
 </div>
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
     <form role="form" name="frm_reg_body">
+        <drf-err-msg></drf-err-msg>
         <div class="form-group">
             <label class="control-label">Name</label>
             <input type="text" name="name" ng-model="facilityRegulatoryBodies.name" required api-checker class="form-control">
@@ -17,6 +18,13 @@
         <div class="form-group">
             <label class="control-label">Abbreviation</label>
             <input type="text" name="abbreviation" ng-model="facilityRegulatoryBodies.abbreviation" api-checker class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Body Type</label>
+            <ui-select ng-model="facilityRegulatoryBodies.regulatory_body_type" api-checker name="regulatory_body_type" register-custom-form-control>
+                <ui-select-match placeholder="Select a body type"><span>{{$select.selected.name}}</span></ui-select-match>
+                <ui-select-choices repeat="ot.id as ot in owner_types | filter:$select.search"><span>{{ot.name}}</span></ui-select-choices>
+            </ui-select>
         </div>
         <div class="checkbox form-group">
             <label for="active">
