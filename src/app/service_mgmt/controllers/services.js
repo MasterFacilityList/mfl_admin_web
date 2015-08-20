@@ -79,6 +79,11 @@
             }).error(function (data) {
                 $log.warn(data);
             });
+            wrappers.option_groups.filter({page_size: 1000}).success(function (data) {
+                $scope.option_groups = data.results;
+            }).error(function (data) {
+                $scope.errors = data;
+            });
             wrappers.service_options.filter({page_size: 1000, service: $scope.service_id})
             .success(function (data) {
                 $scope.service_options = data.results;

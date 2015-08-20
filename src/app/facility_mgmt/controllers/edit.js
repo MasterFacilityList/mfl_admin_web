@@ -99,6 +99,7 @@
                                 function (fac_service) {
                                     if(fac_service.service_id === serv_obj.id)
                                     {
+                                        serv_obj.fac_serv = fac_service.id;
                                         serv_obj.option = fac_service.option;
                                         serv_obj.option = serv_obj.option ?
                                         serv_obj.option :
@@ -139,6 +140,19 @@
                 };
                 $scope.fac_serv = {
                     services : []
+                };
+                $scope.removeOption = function (serv_obj) {
+                    if(_.isUndefined(serv_obj.fac_serv)){
+                        serv_obj.option = "";
+                    }else{
+                        wrappers.facility_services.remove(serv_obj.fac_serv)
+                        .success(function () {
+                            serv_obj.option = "";
+                        })
+                        .error(function (data) {
+                            $scope.errors = data;
+                        });
+                    }
                 };
                 $scope.facilityServices = function () {
                     _.each($scope.services, function (service_obj) {

@@ -27,7 +27,12 @@
                 $scope.category = data;
                 $scope.deleteText = $scope.category.name;
             }).error(function (data) {
-                $log.warn(data);
+                $scope.errors = data;
+            });
+            wrappers.keph.filter({page_size: 1000}).success(function (data) {
+                $scope.kephs = data.results;
+            }).error(function (data) {
+                $scope.errors = data;
             });
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
@@ -46,8 +51,8 @@
             $scope.remove = function () {
                 wrappers.categories.remove($scope.category_id).success(function(){
                     $state.go("service_mgmt.category_list",{},{reload:true});
-                }).error(function(error){
-                    $scope.alert = error.error;
+                }).error(function(data){
+                    $scope.errors = data;
                 });
             };
             $scope.cancel = function () {
@@ -61,7 +66,11 @@
         "mfl.service_mgmt.wrappers",
         function ($scope, $state, $log, wrappers) {
             $scope.category = wrappers.newCategory();
-
+            wrappers.keph.filter({page_size: 1000}).success(function (data) {
+                $scope.kephs = data.results;
+            }).error(function (data) {
+                $scope.errors = data;
+            });
             $scope.save = function () {
                 wrappers.categories.create($scope.category)
                 .success(function (data) {

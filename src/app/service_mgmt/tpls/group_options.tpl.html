@@ -1,0 +1,32 @@
+<div class="col-xs-12 content-card">
+    <div class="pull-left col-sm-4 col-xs-6">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-4">
+    <p class="text-right margin-t-5">Showing <strong>{{pagination.start_index}} - {{pagination.end_index}}</strong> of <span>{{pagination.count}} records</span></p>
+    </div>
+    <table class="table table-hover fs-14" id="no-more-tables">
+        <thead>
+            <tr>
+                <th class="col-xs-6" sil-grid-sort field='display_text'>Name</th>
+                <th class="col-xs-4" sil-grid-sort field='value'>Value</th>
+                <th class="col-xs-2" sil-grid-sort field='option_type'>Type</th>
+            </tr>
+        </thead>
+        <tbody class="fade-content">
+            <tr ng-repeat="option in options" ng-show="options">
+                <td data-title="Name:" class="">
+                    <a tooltip-placement="bottom" tooltip="View service" ui-sref="service_mgmt.option_list.option_edit({option_id: option.id})" ui-sref-opts="{reload:true}">{{option.display_text}}</a>
+                </td>
+                <td data-title="Abbreviation:" class="">{{option.value}}</td>
+                <td data-title="Code:"  class="">{{option.option_type}}&nbsp;&nbsp;</td>
+            </tr>
+            <tr ng-if="options.length === 0" class="alert alert-info">
+                <td colspan="4">
+                <i class="fa fa-info-circle"></i> No options assigned to this option group
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>

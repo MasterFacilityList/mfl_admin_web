@@ -21,6 +21,7 @@
         function ($scope, $stateParams, wrappers, forms, $state) {
             $scope.option_group_id = $stateParams.option_group_id;
             $scope.edit_view = $scope.option_group_id ? true : false;
+            $scope.filters = {group:$scope.option_group_id};
             if($scope.edit_view) {
                 wrappers.option_groups.get($scope.option_group_id).success(function (data) {
                     $scope.option_group = data;
@@ -80,7 +81,11 @@
             $scope.option_id = $stateParams.option_id;
             $scope.option_types = wrappers.OPTION_TYPES;
             $scope.wrapper = wrappers.options;
-
+            wrappers.option_groups.filter({page_size: 1000}).success(function (data) {
+                $scope.option_groups = data.results;
+            }).error(function (data) {
+                $scope.errors = data;
+            });
             wrappers.options.get($scope.option_id).success(function (data) {
                 $scope.option = data;
                 $scope.deleteText = $scope.option.display_text;
@@ -121,7 +126,11 @@
         function ($scope, $state, $stateParams, $log, wrappers) {
             $scope.option = wrappers.newOption();
             $scope.option_types = wrappers.OPTION_TYPES;
-
+            wrappers.option_groups.filter({page_size: 1000}).success(function (data) {
+                $scope.option_groups = data.results;
+            }).error(function (data) {
+                $scope.errors = data;
+            });
             $scope.save = function () {
                 wrappers.options.create($scope.option)
                 .success(function (data) {

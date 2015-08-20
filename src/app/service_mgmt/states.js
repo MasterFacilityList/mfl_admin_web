@@ -194,7 +194,7 @@
                 }
             },
             permission: "facilities.view_option",
-            userFeature: "is_staff, is_national"
+            userFeature: "is_staff"
         })
 
         .state("service_mgmt.option_groups_list.option_group_edit", {
@@ -207,7 +207,7 @@
                 }
             },
             permission: "facilities.add_option",
-            userFeature: "is_staff, is_national"
+            userFeature: "is_staff"
         })
 
         .state("service_mgmt.option_groups_list.option_group_create", {
@@ -220,7 +220,7 @@
                 }
             },
             permission: "facilities.add_option",
-            userFeature: "is_staff, is_national"
+            userFeature: "is_staff"
         })
 
         .state("service_mgmt.option_groups_list.option_group_edit.delete", {
@@ -233,7 +233,7 @@
                 }
             },
             permission: "facilities.delete_option",
-            userFeature: "is_staff, is_national"
+            userFeature: "is_staff"
         })
         // ============== options ====================
 

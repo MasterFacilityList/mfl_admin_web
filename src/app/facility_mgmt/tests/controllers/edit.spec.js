@@ -3160,10 +3160,12 @@
                 scope.facility = {
                     facility_services: [
                         {
+                            id : "1",
                             service_id : "3",
                             option : null
                         },
                         {
+                            id : "4",
                             service_id : "5",
                             option : "5"
                         }
@@ -3182,7 +3184,8 @@
                     {
                         id : "5",
                         option : "5",
-                        category : "3"
+                        category : "3",
+                        fac_serv : "4"
                     }
                 ];
                 scope.options = [
@@ -3214,11 +3217,34 @@
                 scope.showServices(cat);
                 scope.changeView(name);
                 scope.facilityServices();
+                scope.removeOption(scope.cat_services[1]);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
-
+            it("should delete a facility service", function () {
+                var payload = {results: [{"id": 3}]};
+                httpBackend
+                    .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
+                    .respond(200, payload);
+                httpBackend
+                    .expectGET(server_url+"api/facilities/options/")
+                    .respond(200, payload);
+                var c = ctrl();
+                var scope = rootScope.$new();
+                c.bootstrap(scope);
+                var serv_obj = {
+                    fac_serv : "1",
+                    option : "5",
+                    service : "3"
+                };
+                httpBackend.expectDELETE(server_url +
+                    "api/facilities/facility_services/1/").respond(204);
+                scope.removeOption(serv_obj);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
             it("should fail to add facility services", function () {
                 var payload = {results: [{"id": 3}]};
                 spyOn(state, "go");
@@ -3264,10 +3290,23 @@
                         option : "3"
                     }
                 ];
+                scope.cat_services = [
+                    {
+                        id : "3",
+                        option : "",
+                        category : "3"
+                    },
+                    {
+                        id : "5",
+                        option : "5",
+                        category : "3"
+                    }
+                ];
                 var name = "edit";
                 scope.addServiceOption(payload.results[0]);
                 scope.showServices(cat);
                 scope.changeView(name);
+                scope.removeOption(scope.cat_services[0]);
                 scope.facilityServices();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();

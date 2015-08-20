@@ -24,6 +24,15 @@
                 <input class="form-control" name="abbreviation" ng-model="category.abbreviation"/>
             </div>
             <div class="form-group">
+                <label>KEPH Level</label>
+                <select class="form-control" name="keph_level" ng-model="category.keph_level" required>
+                    <option value="" disabled>Select a keph level</option>
+                    <option  ng-repeat="keph in kephs" ng-selected="{{keph.id == category.keph_level}}" ng-value="keph.id">{{keph.name}}</option>
+                </select>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="form-group">
                 <label>Description</label>
                 <textarea class="form-control" name="description" ng-model="category.description" placeholder="Description"></textarea>
             </div>
@@ -37,7 +46,7 @@
       </div>
     </div>
     <div class="col-xs-10 col-xs-offset-1">
-      <button class="btn btn-primary" ng-click="viewServices = !viewServices">
+      <button ng-show="edit_view" class="btn btn-primary" ng-click="viewServices = !viewServices">
           {{viewServices ? 'Hide' : 'View'}} Services <i class="fa {{viewServices ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
       </button>
     </div>
