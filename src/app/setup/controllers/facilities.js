@@ -333,7 +333,7 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.facility_regulatory_bodies.create.basic'" +
+                    func : "ui-sref='setup.facility_regulatory_bodies.create'" +
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_regulatingbody'",
                     class: "btn btn-primary",
