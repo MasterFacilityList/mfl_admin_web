@@ -1,0 +1,27 @@
+<div class="content-card">
+    <div class="pull-left col-sm-4 col-xs-6">
+            <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-2">
+    <p class="text-right margin-t-5">Showing <strong>{{pagination.start_index}} - {{pagination.end_index}}</strong> of <span>{{pagination.count}} records</span></p>
+    </div>
+    <table class="table table-hover fs-14" id="no-more-tables">
+        <thead>
+            <tr>
+                <th sil-grid-sort field='name'>Name</th>
+                <th class="text-right">Actions&nbsp;&nbsp;&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody class="fade-content">
+            <tr ng-repeat="opt_grp in option_groups">
+                <td data-title="Name:"  class="pad-t-15">{{opt_grp.name}}</td>
+                <td data-title="Actions:" class="text-right">
+                    <a  class="btn btn-success" tooltip-placement="bottom" tooltip="View option" ui-sref="service_mgmt.option_groups_list.option_group_edit({option_group_id: opt_grp.id})" ui-sref-opts="{reload:true}" class="btn btn-success">
+                        View
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>

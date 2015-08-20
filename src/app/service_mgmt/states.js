@@ -180,6 +180,61 @@
             userFeature: "is_staff"
         })
 
+        // ============= option groups ==============
+
+        .state("service_mgmt.option_groups_list", {
+            url: "optiongroups/",
+            views: {
+                "body@setup": {
+                    templateUrl: "setup/tpls/dashboard/body.tpl.html"
+                },
+                "main-content@service_mgmt.option_groups_list": {
+                    controller: "mfl.service_mgmt.controllers.option_group_list",
+                    templateUrl: "service_mgmt/tpls/option_group_grid.tpl.html"
+                }
+            },
+            permission: "facilities.view_option",
+            userFeature: "is_staff, is_national"
+        })
+
+        .state("service_mgmt.option_groups_list.option_group_edit", {
+            url: ":option_group_id/edit/",
+            views: {
+                "main-content@service_mgmt.option_groups_list": {
+                    controller: "mfl.service_mgmt.controllers."+
+                        "option_group_create",
+                    templateUrl: "service_mgmt/tpls/option_group_edit.tpl.html"
+                }
+            },
+            permission: "facilities.add_option",
+            userFeature: "is_staff, is_national"
+        })
+
+        .state("service_mgmt.option_groups_list.option_group_create", {
+            url: "create/",
+            views: {
+                "main-content@service_mgmt.option_groups_list": {
+                    controller: "mfl.service_mgmt.controllers."+
+                        "option_group_create",
+                    templateUrl: "service_mgmt/tpls/option_group_edit.tpl.html"
+                }
+            },
+            permission: "facilities.add_option",
+            userFeature: "is_staff, is_national"
+        })
+
+        .state("service_mgmt.option_groups_list.option_group_edit.delete", {
+            url: "delete/",
+            views: {
+                "delete@service_mgmt.option_groups_list.option_group_edit": {
+                    controller: "mfl.service_mgmt.controllers."+
+                    "option_group_create",
+                    templateUrl: "common/tpls/delete.tpl.html"
+                }
+            },
+            permission: "facilities.delete_option",
+            userFeature: "is_staff, is_national"
+        })
         // ============== options ====================
 
         .state("service_mgmt.option_list", {
