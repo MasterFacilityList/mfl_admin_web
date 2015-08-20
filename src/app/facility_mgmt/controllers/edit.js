@@ -290,6 +290,24 @@
         }]
     )
 
+    .controller("mfl.facility_mgmt.controllers.facility_edit.close",
+            ["$scope","mfl.facility_mgmt.services.wrappers","$stateParams",
+             "mfl.common.forms.changes","$state",
+            function ($scope,wrappers,$stateParams, formChanges,$state) {
+            $scope.minDate = new Date();
+            $scope.close = function (frm) {
+                var changes = formChanges.whatChanged(frm);
+                wrappers.facility_detail.update($stateParams.facility_id,changes)
+                .success(function (data) {
+                    $scope.facility = data;
+                    $state.go("facilities.facility_edit",{facility_id:$stateParams.id});
+                })
+                .error(function (err) {
+                    $scope.errors = err;
+                });
+            };
+        }])
+
     .controller("mfl.facility_mgmt.controllers.facility_edit.basic",
         ["$scope", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
