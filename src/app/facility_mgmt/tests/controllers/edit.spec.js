@@ -36,6 +36,63 @@
 
         describe("Test facility edit controller", function () {
 
+            it("should test closing a facility and patch successfully", function () {
+                inject(["mfl.facility_mgmt.services.wrappers","mfl.common.forms.changes",
+                    function (wrappers, formChanges) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "$stateParams": {
+                            facility_id: 3
+                        },
+                        "mfl.common.forms.changes" : formChanges
+                    };
+                    var frm = {
+                        closed:true,
+                        closing_reason:"Not good"
+                    };
+                    ctrl(".close", data);
+
+                    httpBackend
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(200, {});
+                    spyOn(formChanges, "whatChanged").andReturn({closed : true,
+                                             closing_reason : "Not good"});
+                    data.$scope.close(frm);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+                }]);
+            });
+            it("should test closing a facility but fails to patch", function () {
+                inject(["mfl.facility_mgmt.services.wrappers","mfl.common.forms.changes",
+                    function (wrappers, formChanges) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "$stateParams": {
+                            facility_id: 3
+                        },
+                        "mfl.common.forms.changes" : formChanges
+                    };
+                    var frm = {
+                        closed:true,
+                        closing_reason:"Not good"
+                    };
+                    ctrl(".close", data);
+
+                    httpBackend
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(500);
+                    spyOn(formChanges, "whatChanged").andReturn({closed : true,
+                                             closing_reason : "Not good"});
+                    data.$scope.close(frm);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+                }]);
+            });
+
             it("should load facility details",
                 inject(["mfl.facility.multistep.service", function (facObjService) {
                     var data = {

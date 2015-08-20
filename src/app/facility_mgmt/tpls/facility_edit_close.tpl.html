@@ -1,0 +1,30 @@
+<statemodal>
+  <h4 class="text-left">Are you sure you want to close <strong>{{facility.name}}</strong>?</h4>
+  <div class="margin-t-20">
+   <form name="close_frm" ng-submit="close(close_frm)">
+      <div class="form-group checkbox text-left">
+            <label>
+            <input type="checkbox" id="closed" name="closed" ng-model="facility.closed">
+               Closed
+            </label>
+      </div>
+       <div class="text-left form-group">
+           <label for="Closing Reason">Closing Reason</label>
+           <textarea name="closing_reason" type="text" class="form-control" ng-model="closing_reason" placeholder="Enter closing reason"></textarea>
+       </div>
+        <div class="text-left form-group">
+           <label for="Closing Date">Closing Date</label>
+            <p class="input-group">
+              <input placeholder="Enter closing date" type="text" name="closed_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="facility.closed_date" is-open="open" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open=!open"><i class="fa fa-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        <div class="text-left">
+            <button type="submit" class="btn btn-danger">Close Facility</button>
+            <a class="btn btn-default" ui-sref="facilities.facility_view({facility_id: fac.id})">Cancel</a>
+        </div>
+   </form>
+  </div>
+</statemodal>
