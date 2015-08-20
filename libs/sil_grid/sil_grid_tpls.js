@@ -9,13 +9,13 @@
         $templateCache.put("sil.grid.pagination.tpl.html",
             "<ul class=\"pager\" ng-if=\"pagination.active\">\n" +
             "<li ng-if=\"pagination.prev_page\" class=\"previous\">\n"+
-            "<a class='btn btn-default' ng-click=paginate("+
+            "<a class='border-radius-4 btn btn-default' ng-click=paginate("+
             "pagination.prev_page)>\n" +
             "<span aria-hidden=\"true\">&laquo;</span> Prev</a>\n" +
             "</li>\n" +
             "<li>Page {{pagination.current_page}} / {{pagination.page_count}}</li>"+
             " <li class=\"next\" ng-if=\"pagination.next_page\">\n"+
-            "<a class='btn btn-default' ng-click=paginate(" +
+            "<a class='border-radius-4 btn btn-default' ng-click=paginate(" +
             "pagination.next_page)>Next\n" +
             " <span aria-hidden=\"true\">&raquo;</span></a>\n" +
             "</li>\n" +

@@ -21,6 +21,7 @@
         function ($scope, $stateParams, wrappers, forms, $state) {
             $scope.option_group_id = $stateParams.option_group_id;
             $scope.edit_view = $scope.option_group_id ? true : false;
+            $scope.filters = {group:$scope.option_group_id};
             if($scope.edit_view) {
                 wrappers.option_groups.get($scope.option_group_id).success(function (data) {
                     $scope.option_group = data;
