@@ -36,7 +36,7 @@
     </form>
 </div>
 <div class="col-xs-10 col-xs-offset-1 pad-0">
-  <button class="btn btn-primary" ng-click="viewServices = !viewServices">
+  <button ng-show="edit_view" class="btn btn-primary" ng-click="viewServices = !viewServices">
       {{viewServices ? 'Hide' : 'View'}} Options <i class="fa {{viewServices ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
   </button>
 </div>

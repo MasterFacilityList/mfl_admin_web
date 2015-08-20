@@ -272,7 +272,9 @@
                     },
                     "$scope": scope
                 };
-
+                httpBackend.expectGET(server_url +
+                    "api/facilities/option_groups/?page_size=1000")
+                    .respond(200, {});
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/1/")
                     .respond(200, {});
@@ -429,7 +431,6 @@
                 httpBackend
                     .expectGET(server_url + "api/facilities/options/1/")
                     .respond(200, {});
-
                 spyOn(state, "go");
                 spyOn(log, "warn");
                 ctrl("option_edit", data);
@@ -462,6 +463,37 @@
                 scope.option = {
                     "name": "get"
                 };
+                httpBackend.expectGET(server_url +
+                    "api/facilities/option_groups/?page_size=1000")
+                    .respond(200, {});
+                httpBackend
+                    .expectPOST(server_url + "api/facilities/options/", {"name": "get"})
+                    .respond(200, {});
+
+                scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+            it("should create the option and fail to load groups",function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$state": state,
+                    "$scope": scope
+                };
+
+                spyOn(state, "go");
+                ctrl("option_create", data);
+
+                scope.option = {
+                    "name": "get"
+                };
+                httpBackend.expectGET(server_url +
+                    "api/facilities/option_groups/?page_size=1000")
+                    .respond(500, {});
                 httpBackend
                     .expectPOST(server_url + "api/facilities/options/", {"name": "get"})
                     .respond(200, {});
