@@ -15,7 +15,12 @@
                 <td data-title="Name:" class="col-xs-10">
                     {{service.service_name}}
                 </td>
-                <td data-title="Abbreviation:" class="col-xs-2 text-center">{{service.option_display_value}}&nbsp;&nbsp;&nbsp;</td>
+                <td data-title="Abbreviation:" class="col-xs-2 text-center">{{service.option_display_value}}
+                <span ng-if="service.option === null">
+                    N/A
+                </span>
+                &nbsp;&nbsp;&nbsp;
+                </td>
             </tr>
             <tr class="table-item" ng-if="services.length === 0" class="alert alert-info">
                 <td colspan="4" class="col-xs-12">

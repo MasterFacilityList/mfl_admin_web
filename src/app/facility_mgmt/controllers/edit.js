@@ -94,6 +94,18 @@
                         serv_obj.serv_options = _.where(
                             $scope.options, {"group" : serv_obj.group});
                         serv_obj.option_no = serv_obj.serv_options.length;
+                        if($scope.facility.facility_services.length > 0) {
+                            _.each($scope.facility.facility_services,
+                                function (fac_service) {
+                                    if(fac_service.service_id === serv_obj.id)
+                                    {
+                                        serv_obj.option = fac_service.option;
+                                        serv_obj.option = serv_obj.option ?
+                                        serv_obj.option :
+                                        serv_obj.serv_options[1].id;
+                                    }
+                                });
+                        }
                     });
                 };
                 $scope.showServices = function (cat) {
@@ -126,17 +138,31 @@
                     removeServiceOption($scope, a);
                 };
                 $scope.fac_serv = {
-                    facility_services : []
+                    services : []
                 };
                 $scope.facilityServices = function () {
                     _.each($scope.services, function (service_obj) {
-                        if(service_obj.option) {
-                            $scope.fac_serv.facility_services.push({
+                        if(!_.isUndefined(service_obj.option) &&
+                            !_.isEmpty(service_obj.option)) {
+                            $scope.fac_serv.services.push({
                                 service : service_obj.id,
                                 option : service_obj.option
                             });
                         }
+                        if(!_.isUndefined(service_obj.option) &&
+                            service_obj.option === true){
+                            $scope.fac_serv.services.push({
+                                service : service_obj.id
+                            });
+                        }
                     });
+                    _.each($scope.facility.facility_services,
+                        function (facility_service) {
+                            var obj = _.findWhere($scope.fac_serv.services,
+                                {"service" : facility_service.service_id});
+                            $scope.fac_serv.services =
+                                _.without($scope.fac_serv.services, obj);
+                        });
                     wrappers.facility_detail.update($scope.facility_id,
                         $scope.fac_serv)
                         .success(function () {
@@ -455,7 +481,7 @@
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
                         if(!$scope.create){
-                            $state.go($scope.finish);
+                            $state.go($scope.finish, {reload : true});
                         }else{
                             $scope.goToNext(4, "units");
                         }
@@ -466,7 +492,7 @@
                     });
                 } else {
                     if(!$scope.create){
-                        $state.go($scope.finish);
+                        $state.go($scope.finish, {reload : true});
                     }else{
                         $scope.goToNext(4, "units");
                     }
@@ -732,7 +758,7 @@
                     errorMessages.fetch_units;
             });
             $scope.facilityUnits = function (f) {
-                if(f.facility_units.length < 1) {
+                if(f.facility_units.length === 0) {
                     $scope.fac_depts.push({
                         name : "",
                         regulating_body : ""

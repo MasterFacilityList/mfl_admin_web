@@ -11,6 +11,7 @@
 <section class="margin-t-10">
     <div class="col-sm-12">
         <div class="content-card col-xs-12">
+           <div class="col-xs-12">Total number of changes: <strong>{{changes.total_facilities_changed}}</strong> </div>
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
@@ -20,11 +21,11 @@
                         <th field='To' class="text-wrap">To</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="county in county_constituencies_facilities | filter:search">
-                            <td>Gathanga Dispensary</td>
-                            <td>Health Center <br><span class="text-danger">Level 3</span></td>
+                        <tr ng-repeat="fac in changes.facilities | filter:search">
+                            <td>{{fac.name}}</td>
+                            <td>{{fac.previous_facility_type || 'No facility type set'}} <br><span class="text-danger">{{fac.previous_keph_level || 'No KEPH level set'}}</span></td>
                             <td class="fs-14">>>></td>
-                            <td>District Hospital <br><span class="text-success">Level 4</span></td>
+                            <td>{{fac.current_facility_type || 'No facility type set'}} <br><span class="text-success">{{fac.current_keph_level || 'No KEPH level set'}}</span></td>
                         </tr>
                     </tbody>
                 </table>

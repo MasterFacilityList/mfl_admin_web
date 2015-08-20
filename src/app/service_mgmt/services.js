@@ -12,6 +12,8 @@
 
         this.options = api.setBaseUrl("api/facilities/options/");
 
+        this.option_groups = api.setBaseUrl("api/facilities/option_groups/");
+
         this.service_options = api.setBaseUrl("api/facilities/service_options/");
 
         this.OPTION_TYPES = [

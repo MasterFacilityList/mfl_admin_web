@@ -17,7 +17,7 @@
                     controller: "mfl.facility_mgmt.controllers.facilities_closed"
                 }
             },
-            permission: "facilities.add_facilityapproval,facilities.view_facility"
+            permission: "facilities.view_closed_facilities"
         })
         .state("facilities_rejected", {
             "parent": "facility_mgmt",
