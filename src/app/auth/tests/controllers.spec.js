@@ -33,33 +33,37 @@
             ]);
         });
 
-        it("should test auth login controller",
-        inject(["$state", function ($state) {
-            controller("mfl.auth.controllers.login");
-            spyOn($state, "go");
-        }]));
-
         it("should call backend and login and save user credentials: success",
         inject(["$httpBackend", "$controller", "$rootScope", "$state", "mfl.auth.services.login",
             function ($httpBackend, $controller, $rootScope, $state, srvc) {
                 var obj = {username : "owagaantony@gmail.com", password: "owaga"};
                 var s = $rootScope.$new();
+                var wndw = {
+                    decodeURIComponent: window.decodeURIComponent,
+                    location: {assign: null}
+                };
                 $httpBackend.expectPOST(SERVER_URL + "o/token/").respond(200);
                 $httpBackend.expectGET(SERVER_URL + "api/rest-auth/user/")
                     .respond(200, {email: ""});
 
                 spyOn(srvc, "login").andCallThrough();
                 spyOn($state, "go");
+                spyOn(wndw.location, "assign");
                 $controller("mfl.auth.controllers.login", {
                     "$scope": s,
                     "$state": $state,
-                    "mfl.auth.services.login": srvc
+                    "mfl.auth.services.login": srvc,
+                    "$window": wndw
                 });
 
                 s.submitUser(obj);
 
                 expect(srvc.login).toHaveBeenCalledWith(obj);
                 $httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(wndw.location.assign).toHaveBeenCalled();
             }
         ]));
 
@@ -72,15 +76,6 @@
             $httpBackend.expectGET(SERVER_URL + "api/rest-auth/user/").respond(400, {email: ""});
             $httpBackend.flush();
             expect(scope.login_err).not.toEqual("");
-        }]));
-
-        it("should call backend and login a user: success",
-        inject(["$httpBackend", function ($httpBackend) {
-            controller("mfl.auth.controllers.login");
-            var obj = {date : ""};
-            scope.submitUser(obj);
-            $httpBackend.expectPOST(SERVER_URL + "o/token/").respond(400, {email: ""});
-            $httpBackend.flush();
         }]));
     });
 
