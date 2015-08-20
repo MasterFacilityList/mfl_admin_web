@@ -8,7 +8,7 @@
     </div>
     <div class="col-xs-12 margin-t-5 pad-0">
         <div class="col-sm-4 col-xs-12">
-            <div class="col-xs-12 category-title">
+            <div class="col-xs-12 category-title pad-0">
                 <h4>Categories</h4>
                 <div class="form-group">
                     <input class="form-control" ng-model="category.query" placeholder="Search Categories">
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="col-sm-8 col-xs-12 fade-content">
-            <div class="col-xs-12 category-title">
+            <div class="col-xs-12 category-title pad-0">
                 <h4>Services</h4>
                 <div class="form-group">
                     <input class="form-control" ng-model="service.query" placeholder="Search Services">
@@ -32,7 +32,7 @@
             </div>
             <div class="service-list">
                 <div class="service-item col-xs-12 pad-0" ng-repeat="serv in cat_services | filter : service.query">
-                <div class="col-xs-6 margin-t-15 margin-b-10">{{serv.name}}</div>
+                <div class="col-xs-5 margin-t-15 margin-b-10">{{serv.name}}</div>
                 <div class="col-xs-6 pad-0 margin-t-10">
                     <div ng-if="serv.option_no > 2" class="form-group">
                         <select name="option{{$index}}" class="form-control" ng-model="serv.option">
@@ -60,6 +60,11 @@
                             </label>
                         </div>
                     </div>
+                </div>
+                <div class="col-xs-1 pad-0 margin-t-5 text-center">
+                    <a ng-click="removeOption(serv)" style="cursor: pointer;" ng-if="serv.option" tooltip="Delete Service">
+                        <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                    </a>
                 </div>
             </div>
             <div ng-if="cat_services.length === 0 || !cat_services" class="service-item col-xs-12 text-blue pad-t-10 pad-b-10">
