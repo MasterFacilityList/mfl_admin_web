@@ -299,7 +299,7 @@
                 wrappers.facility_detail.update($stateParams.facility_id,changes)
                 .success(function (data) {
                     $scope.facility = data;
-                    $state.go("facilities.facility_edit({facility_id:facility.id})");
+                    $state.go("facilities.facility_edit",{facility_id:$stateParams.id});
                 })
                 .error(function (err) {
                     $scope.errors = err;
