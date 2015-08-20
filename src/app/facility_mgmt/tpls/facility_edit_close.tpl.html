@@ -2,6 +2,7 @@
   <h4 class="text-left">Are you sure you want to close <strong>{{facility.name}}</strong>?</h4>
   <div class="margin-t-20">
    <form name="close_frm" ng-submit="close(close_frm)">
+     <drf-err-mwg></drf-err-mwg>
       <div class="form-group checkbox text-left">
             <label>
             <input type="checkbox" id="closed" name="closed" ng-model="facility.closed">
@@ -9,13 +10,13 @@
             </label>
       </div>
        <div class="text-left form-group">
-           <label for="Closing Reason">Closing Reason</label>
-           <textarea name="closing_reason" type="text" class="form-control" ng-model="closing_reason" placeholder="Enter closing reason"></textarea>
+           <label for="Closing Reason" class="control-label">Closing Reason</label>
+           <textarea name="closing_reason" type="text" class="form-control" ng-model="closing_reason" placeholder="Enter closing reason" api-checker></textarea>
        </div>
         <div class="text-left form-group">
-           <label for="Closing Date">Closing Date</label>
+           <label for="Closing Date" class="control-label">Closing Date</label>
             <p class="input-group">
-              <input placeholder="Enter closing date" type="text" name="closed_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="facility.closed_date" is-open="open" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <input placeholder="Enter closing date" type="text" name="closed_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="facility.closed_date" is-open="open" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"  api-checker/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open=!open"><i class="fa fa-calendar"></i></button>
               </span>
