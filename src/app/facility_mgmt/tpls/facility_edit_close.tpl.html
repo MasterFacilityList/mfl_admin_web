@@ -1,8 +1,8 @@
 <statemodal>
   <h4 class="text-left">Are you sure you want to close <strong>{{facility.name}}</strong>?</h4>
   <div class="margin-t-20">
-   <form name="close_frm" ng-submit="close(close_frm)">
-     <drf-err-mwg></drf-err-mwg>
+   <form name="close_frm" ng-submit="close(close_frm)" novalidate>
+     <drf-err-msg></drf-err-msg>
       <div class="form-group checkbox text-left">
             <label>
             <input type="checkbox" id="closed" name="closed" ng-model="facility.closed">
@@ -16,7 +16,7 @@
         <div class="text-left form-group">
            <label for="Closing Date" class="control-label">Closing Date</label>
             <p class="input-group">
-              <input placeholder="Enter closing date" type="text" name="closed_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="facility.closed_date" is-open="open" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"  api-checker/>
+              <input placeholder="Enter closing date" type="text" name="closed_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="facility.closed_date" is-open="open" max-date="minDate" close-text="Close" api-checker/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open=!open"><i class="fa fa-calendar"></i></button>
               </span>

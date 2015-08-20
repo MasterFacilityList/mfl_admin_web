@@ -290,10 +290,11 @@
         }]
     )
 
-        .controller("mfl.facility_mgmt.controllers.facility_edit.close",
+    .controller("mfl.facility_mgmt.controllers.facility_edit.close",
             ["$scope","mfl.facility_mgmt.services.wrappers","$stateParams",
              "mfl.common.forms.changes","$state",
             function ($scope,wrappers,$stateParams, formChanges,$state) {
+            $scope.minDate = new Date();
             $scope.close = function (frm) {
                 var changes = formChanges.whatChanged(frm);
                 wrappers.facility_detail.update($stateParams.facility_id,changes)
@@ -307,7 +308,7 @@
             };
         }])
 
-        .controller("mfl.facility_mgmt.controllers.facility_edit.basic",
+    .controller("mfl.facility_mgmt.controllers.facility_edit.basic",
         ["$scope", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
         "mfl.common.services.multistep", "mfl.auth.services.login",
