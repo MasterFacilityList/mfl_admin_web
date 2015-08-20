@@ -317,10 +317,63 @@
         }]
     )
 
-    /**
-        Facility Regulatory Body
+    .controller("mfl.setup.controller.change_reasons.list",["$scope",
+        function ($scope) {
+            $scope.filters = {"fields":"id,reason,description"};
+        }])
 
-    **/
+    .controller("mfl.setup.controller.change_reasons.view",["$scope","adminApi",
+        "$stateParams","$state","mfl.common.forms.changes",
+        function ($scope,adminApi,$stateParams,$state,formChanges) {
+            if(!_.isUndefined($stateParams.reason_id)){
+                $scope.state = true;
+                adminApi.change_reasons.get($stateParams.reason_id)
+                .success(function (data) {
+                    $scope.reason = data;
+                    $scope.deleteText = data.reason;
+                })
+                .error(function  (err) {
+                    $scope.errors = err;
+                });
+                $scope.remove = function () {
+                    adminApi.change_reasons.remove($stateParams.reason_id).success(function(){
+                        $state.go("setup.facility_reasons");
+                    }).error(function(error){
+                        $scope.errors = error;
+                        $state.go("facility_reasons");
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.facility_reasons");
+                };
+            } else {
+                $scope.state = false;
+            }
+            $scope.saveFrm = function (frm) {
+                if(_.isUndefined($stateParams.reason_id)){
+                    adminApi.change_reasons.create(frm)
+                    .success(function () {
+                        $state.go("setup.facility_reasons");
+                    })
+                    .error(function (err) {
+                        $scope.errors = err;
+                    });
+                } else {
+                    var changes= formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        adminApi.change_reasons.update($stateParams.reason_id,changes)
+                        .success(function () {
+                            $state.go("setup.facility_reasons");
+                        })
+                        .error(function (err) {
+                            $scope.errors = err;
+                        });
+                    }
+                }
+            };
+        }])
+
+    /**Facility Regulatory Body**/
     .controller("mfl.setup.controller.facilityRegulatoryBody.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -343,6 +396,7 @@
             ];
         }]
     )
+
     .controller("mfl.setup.controller.facilityRegulatoryBody.create",["$scope",
         "$stateParams", "$state", "adminApi",
         function ($scope, $stateParams, $state, adminApi) {
@@ -421,60 +475,7 @@
             };
         }
     ])
-    .controller("mfl.setup.controller.change_reasons.list",["$scope",
-        function ($scope) {
-            $scope.filters = {"fields":"id,reason,description"};
-        }])
-    .controller("mfl.setup.controller.change_reasons.view",["$scope","adminApi",
-        "$stateParams","$state","mfl.common.forms.changes",
-        function ($scope,adminApi,$stateParams,$state,formChanges) {
-            if(!_.isUndefined($stateParams.reason_id)){
-                $scope.state = true;
-                adminApi.change_reasons.get($stateParams.reason_id)
-                .success(function (data) {
-                    $scope.reason = data;
-                    $scope.deleteText = data.reason;
-                })
-                .error(function  (err) {
-                    $scope.errors = err;
-                });
-                $scope.remove = function () {
-                    adminApi.change_reasons.remove($stateParams.reason_id).success(function(){
-                        $state.go("setup.facility_reasons");
-                    }).error(function(error){
-                        $scope.errors = error;
-                        $state.go("facility_reasons");
-                    });
-                };
-                $scope.cancel = function () {
-                    $state.go("setup.facility_reasons");
-                };
-            } else {
-                $scope.state = false;
-            }
-            $scope.saveFrm = function (frm) {
-                if(_.isUndefined($stateParams.reason_id)){
-                    adminApi.change_reasons.create(frm)
-                    .success(function () {
-                        $state.go("setup.facility_reasons");
-                    })
-                    .error(function (err) {
-                        $scope.errors = err;
-                    });
-                } else {
-                    var changes= formChanges.whatChanged(frm);
-                    if(!_.isEmpty(changes)){
-                        adminApi.change_reasons.update($stateParams.reason_id,changes)
-                        .success(function () {
-                            $state.go("setup.facility_reasons");
-                        })
-                        .error(function (err) {
-                            $scope.errors = err;
-                        });
-                    }
-                }
-            };
-        }])
+
     .controller("mfl.setup.controller.facilityRegulatoryBody.edit", ["$scope",
         "$stateParams", "adminApi", "mfl.common.forms.changes", "$state",
         function ($scope, $stateParams, adminApi, formChanges, $state) {
@@ -501,6 +502,9 @@
                     $scope.alert = err.error;
                     $scope.errors = err;
                 });
+            adminApi.facilityOwnerTypes.filter({"fields": "id,name"})
+            .success(function (data) {$scope.owner_types = data.results;})
+            .error(function (err) {$scope.errors = err;});
 
             if($stateParams.id !== "create") {
                 $scope.regulatory_body = true;
@@ -560,10 +564,8 @@
                 }
             };
             $scope.createFacilityRegulatoryBody = function(regulatoryBody){
-                adminApi.facilityRegulatoryBodies.create(regulatoryBody).success(function(data){
-                    $state.go(
-                        "setup.facility_regulatory_bodies.create.contacts",
-                        {reg_cont_id : data.id});
+                adminApi.facilityRegulatoryBodies.create(regulatoryBody).success(function() {
+                    $state.go("setup.facility_regulatory_bodies");
                     $scope.regulatory_body = true;
                 }).error(function(error){
                     $scope.alert = error.error;
