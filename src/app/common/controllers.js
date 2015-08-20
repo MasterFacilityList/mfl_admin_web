@@ -5,12 +5,12 @@
         "mfl.auth.services"
     ])
     .controller("mfl.common.controllers.header",
-        ["$rootScope", "$state", "$scope", "mfl.auth.services.login",
-        function ($rootScope, $state, $scope, loginService) {
+        ["$rootScope", "$location", "$state", "$scope", "mfl.auth.services.login",
+        function ($rootScope, $location, $state, $scope, loginService) {
             $scope.user = loginService.getUser();
             $rootScope.$on("IdleTimeout", function () {
                 if (loginService.isLoggedIn() || $state.current.name !== "login") {
-                    $state.go("logout", {"timeout": "true", "next": $state.current.url});
+                    $state.go("logout", {"timeout": "true", "next": $location.path()});
                 }
             });
         }]

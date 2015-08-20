@@ -69,7 +69,7 @@
                     Idle.watch();
                     var next_url = $stateParams.next || $state.href(HOME_PAGE_NAME);
                     next_url = $window.decodeURIComponent(next_url);
-                    // window.location.assign(next_url);
+                    $window.location.assign(next_url);
                 };
                 loginService.login(obj)
                     .then(

@@ -46,9 +46,9 @@
     ])
 
     .service("mfl.auth.services.statecheck",
-        ["$rootScope", "$injector", "mfl.auth.services.login",
+        ["$rootScope", "$injector", "$location", "mfl.auth.services.login",
         "mfl.auth.permissions.checker", "HOME_PAGE_NAME",
-        function ($rootScope, $injector, loginService, permChecker, HOME_PAGE_NAME) {
+        function ($rootScope, $injector, $location, loginService, permChecker, HOME_PAGE_NAME) {
             var cancel_listen;
 
             var change_state = function (evt, name, args) {
@@ -85,7 +85,7 @@
                     return;
                 }
                 // TODO : change this to use state urls instead of names
-                change_state(evt, "login", {"next": toState.url});
+                change_state(evt, "login", {"next": $location.path()});
             };
 
             var start = function () {
