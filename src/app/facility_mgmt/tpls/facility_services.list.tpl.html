@@ -1,10 +1,5 @@
 <div class="col-xs-12">
-    <div class="pull-left col-sm-4 col-xs-6 pad-0">
-        <sil-grid-search> </sil-grid-search>
-    </div>
-    <div class="pull-right col-xs-4 pad-0">
-    <p class="text-right margin-t-5">Showing <strong>{{pagination.start_index}} - {{pagination.end_index}}</strong> of <span>{{pagination.count}} records</span></p>
-    </div>
+    <ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
     <table class="table table-fixed table-hover fs-14" id="no-more-tables">
         <thead class="table-head">
                 <th class="col-xs-10" sil-grid-sort field='name'>Name</th>
