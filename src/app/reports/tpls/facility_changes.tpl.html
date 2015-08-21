@@ -26,17 +26,15 @@
             <div class="col-sm-6 col-xs-12">
                     <h4>Recent by:</h4>
                     <div class="btn-group">
-                        <label class="btn btn-default" ng-model="recent" btn-radio="{weekly:true}">Last Week</label>
-                        <label class="btn btn-default" ng-model="recent" btn-radio="{monthly:true}">Last Month</label>
-                        <label class="btn btn-default" ng-model="recent" btn-radio="{quarterly:true}">Last Quarter</label>
+                        <label class="btn btn-default" ng-model="recent" btn-radio="{last_week:true}">Last Week</label>
+                        <label class="btn btn-default" ng-model="recent" btn-radio="{last_month:true}">Last Month</label>
+                        <label class="btn btn-default" ng-model="recent" btn-radio="{last_3_months:true}">Last Quarter</label>
                         <label class="btn btn-default" ng-model="recent" btn-radio="{}">Reset</label>
                     </div>
             </div>
-            <div class="col-xs-6 margin-t-10">
+            <div class="col-xs-12 margin-t-10">
                 <button class="btn btn-primary" ng-click="search_changes()">Search</button>
-            </div>
-            <div class="col-xs-6 margin-t-10 custom-well">
-                Current Filter: <i>{{recent || 'Any time' }}, {{upgrades || 'All Changes'}}</i>
+                <span class="margin-l-5 custom-well">Current Filter: <i>{{recent || 'Any time' }}, {{upgrades || 'All Changes'}}</i></span>
             </div>
        </div>
         <div class="content-card col-xs-12">
@@ -59,7 +57,8 @@
                         <tr ng-repeat="county in changes.results | filter:search">
                             <td data-title="County:" >{{county.county | titlecase}}</td>
                             <td data-title="Changes:">{{county.changes}}</td>
-                            <td data-title="Action:" class="text-right"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View</a></span></td>
+                            <td ng-show="county.changes > 0" data-title="Action:" class="text-right"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
+                            <td ng-hide="county.changes > 0" data-title="Action:" class="text-right"><button class="btn btn-success" disabled>View</button></td>
                         </tr>
                         <tr>
                             <td>TOTAL</td>

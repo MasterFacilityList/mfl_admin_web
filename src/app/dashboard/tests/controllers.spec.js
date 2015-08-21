@@ -61,15 +61,15 @@
                             .respond(200, payload);
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
-                            "_created&weekly=true")
+                            "_created&last_week=true")
                             .respond(200, payload);
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
-                            "_created&monthly=true")
+                            "_created&last_month=true")
                             .respond(200, payload);
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
-                            "_created&quarterly=true")
+                            "_created&last_3_months=true")
                             .respond(200, payload);
 
                         $controller("mfl.dashboard.content", data);
@@ -219,15 +219,15 @@
                             .respond(500, {"error": "a"});
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
-                            "_created&weekly=true")
+                            "_created&last_week=true")
                             .respond(500, {"error": "a"});
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
-                            "_created&monthly=true")
+                            "_created&last_month=true")
                             .respond(500, {"error": "a"});
                         $httpBackend
                             .expectGET(SERVER_URL + "api/facilities/dashboard/?fields=recently"+
-                            "_created&quarterly=true")
+                            "_created&last_3_months=true")
                             .respond(500, {"error": "a"});
 
                         $controller("mfl.dashboard.content", data);
