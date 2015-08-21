@@ -21,24 +21,20 @@
             </div>
             <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
-                <table class="table table-condensed fs-14 margin-t-20" id="no-more-tables">
-                    <thead>
-                        <th class="text-wrap col-xs-1">County</th>
-                        <th class="text-wrap"></th>
-                    </thead>
-                    <tbody class="fade-content">
-                        <tr ng-repeat="county in keph_facilities | filter:search">
-                            <td><i>{{::county.county | titlecase}}</i></td>
+                <table class="table table-condensed fs-14 margin-t-20">
+                    <tbody class="fade-content" ng-repeat="county in keph_facilities | filter:search">
+                        <tr><td data-title="County:"><strong class="fs-16">{{::county.county | titlecase}}</strong></td></tr>
+                        <tr>
                             <td>
                               <table class="table table-condensed">
                                <thead>
-                                   <th>KEPH Level</th>
-                                   <th>Number of Facilities</th>
+                                   <td><i class="fw-600">KEPH Level</i></td>
+                                   <td><i class="fw-600">Number of Facilities</i></td>
                                </thead>
                                 <tbody>
                                    <tr ng-repeat="c in county.facilities">
-                                        <td>{{::c.keph_level}}</td>
-                                        <td>{{::c.number_of_facilities}}</td>
+                                        <td data-title="Keph Level:">{{::c.keph_level}}</td>
+                                        <td data-title="Facilities:">{{::c.number_of_facilities}}</td>
                                     </tr>
                                 </tbody>
                               </table>

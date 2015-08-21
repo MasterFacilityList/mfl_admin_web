@@ -19,16 +19,14 @@
                     <ui-select-choices repeat="county.county as county in county_constituencies_facilities | filter:$select.search">{{county.county | titlecase}}</ui-select-choices>
                 </ui-select>
             </div>
-            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+            <div ng-show="search!==''" class="col-sm-1 col-xs-12"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
-                <table class="table table-condensed fs-14 margin-t-20" id="no-more-tables">
-                    <thead>
-                        <th class="text-wrap col-xs-1">County</th>
-                        <th class="text-wrap"></th>
-                    </thead>
-                    <tbody class="fade-content">
-                        <tr ng-repeat="county in county_constituencies_facilities | filter:search">
-                            <td><i>{{::county.county | titlecase}}</i></td>
+                <table class="table table-condensed fs-14 margin-t-20">
+                    <tbody class="fade-content" ng-repeat="county in county_constituencies_facilities | filter:search">
+                        <tr>
+                            <td data-title="County:"><strong class="fs-16">{{::county.county | titlecase}}</strong></td>
+                        </tr>
+                        <tr>
                             <td>
                               <table class="table table-condensed">
                                <thead>
@@ -37,8 +35,8 @@
                                </thead>
                                 <tbody>
                                    <tr ng-repeat="c in county.facilities">
-                                        <td>{{::c.constituency | titlecase}}</td>
-                                        <td>{{::c.number_of_facilities}}</td>
+                                        <td data-title="Constituency:">{{::c.constituency | titlecase}}</td>
+                                        <td data-title="Facilities:">{{::c.number_of_facilities}}</td>
                                     </tr>
                                 </tbody>
                               </table>

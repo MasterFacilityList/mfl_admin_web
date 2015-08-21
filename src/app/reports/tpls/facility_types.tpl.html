@@ -28,8 +28,8 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="type in type_facilities | filter:search">
-                            <td>{{::type.type_category}}</td>
-                            <td>{{::type.number_of_facilities}}</td>
+                            <td data-title="Category:">{{::type.type_category}}</td>
+                            <td data-title="Facilities:">{{::type.number_of_facilities}}</td>
                         </tr>
                     </tbody>
                 </table>
