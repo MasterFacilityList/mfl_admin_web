@@ -4,15 +4,6 @@ h2 {
     @media (min-width:180px) and (max-width:@screen-xs-max){
         font-size:20px;
     }
-    @media (min-width:@screen-sm-min) and (max-width:@screen-sm-max){
-        padding: 0 20% 0 0;
-    }
-    @media (min-width:@screen-md-min) and (max-width:@screen-md-max){
-        padding: 0 30% 0 0;
-    }
-    @media (min-width:@screen-lg-min) and (max-width:3000px){
-        padding: 0 30% 0 0;
-    }
 }
 
 /*Padding*/
@@ -77,5 +68,11 @@ h2 {
 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     @media (max-width: 767px) {
         color: #FFFFFF;
+    }
+}
+
+.side-left{
+        @media (min-width:180px) and (max-width:@screen-xs-max){
+        max-height: none;
     }
 }
