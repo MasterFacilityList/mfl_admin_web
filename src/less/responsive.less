@@ -1,4 +1,21 @@
 
+/*Typography*/
+h2 {
+    @media (min-width:180px) and (max-width:@screen-xs-max){
+        font-size:20px;
+    }
+}
+
+/*Padding*/
+.pad-gt-xs-l-5{
+    @media (min-width:180px) and (max-width:@screen-xs-max){
+        padding-left:0px;
+    }
+    @media (min-width:@screen-sm-min) and (max-width:3000px){
+        padding-left: 5px;
+    }
+}
+
 .navbar-default .navbar-brand {
     @media (min-width:@screen-sm-min) and (max-width:@screen-sm-max){
         font-size: 12px;
@@ -51,5 +68,11 @@
 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     @media (max-width: 767px) {
         color: #FFFFFF;
+    }
+}
+
+.side-left{
+        @media (min-width:180px) and (max-width:@screen-xs-max){
+        max-height: none;
     }
 }

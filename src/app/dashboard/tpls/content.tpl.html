@@ -2,136 +2,132 @@
     <div ui-view="header"></div>
     <div class="content fade-content">
         <contentheader hide-back-button></contentheader>
-        <div class="col-xs-12">
-            <div class="col-xs-12 margin-t-20">
-                <div class="col-md-6 col-sm-12 pad-0" ng-if="user.user_constituencies.length!==0">
-                    <div class="col-xs-12 margin-b-5 content-card" style="border-bottom: 1px solid #e0e0e0;" ng-if="user.user_constituencies.length!==0">
-                        <div class="col-xs-1 text-left margin-t-5 pad-l-0">
-                            <i class="fa fa-building fa-2x icon-circles pad-icon-two"></i>
-                        </div>
-                        <div class="col-xs-11 text-left margin-t--5 pad-l-0">
-                            <h4 class="fw-600 ">
-                                <span class="">
-                                    Total Facilities
-                                    <br/>
-                                    <span class="fs-13" ng-if="user.constituency_name">
-                                        {{user.constituency_name}} SUB-COUNTY
-                                    </span>
-                                    <span class="fs-13" ng-if="user.ward_name">
-                                        {{user.ward_name}} WARD
-                                    </span>
-                                </span>
-                                <span class="pull-right margin-t--15 text-success fs-26 ">
-                                    {{summary.total_facilities }}
-                                </span>
-                            </h4>
-                        </div>
+        <div class="col-xs-12 margin-t-20">
+            <div class="col-md-6 col-sm-12 pad-0" ng-if="user.user_constituencies.length!==0">
+                <div class="col-xs-12 margin-b-5 content-card" style="border-bottom: 1px solid #e0e0e0;" ng-if="user.user_constituencies.length!==0">
+                    <div class="col-xs-2 col-sm-1  hidden-xs text-left margin-t-5 pad-l-0">
+                        <i class="fa fa-building fa-2x icon-circles pad-icon-two"></i>
                     </div>
-                    <div class="col-xs-12 content-card" style="border-bottom: 1px solid #e0e0e0;" ng-if="user.user_constituencies.length!==0">
-                        <div class="col-xs-12 pad-0">
-                            <h4 class="fw-600 margin-t-5">
-                                Recently Added Facilities:
-                                <span class="pull-right">
-                                    <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="weekly()">Last Week</button>
-                                    <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="monthly()">Last Month</button>
-                                    <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="quarterly()">Last Quarter</button>
+                    <div class="col-xs-10 col-sm-11 text-left margin-t--5 pad-r-0">
+                        <h4 class="fw-600 ">
+                            <span class="">
+                                Total Facilities
+                                <br/>
+                                <span class="fs-13" ng-if="user.constituency_name">
+                                    {{user.constituency_name | titlecase}} Sub-county
                                 </span>
-                            </h4>
-                        </div>
-                        <div class="col-xs-12 pad-l-0" style="background-color: #F1F1F4">
-                            <p class="margin-t-5">
-                                <span ng-if="!recent_spinner" class="fs-16 pad-0">   {{ summary.recently_created }} Recently Added Facilities
+                                <span class="fs-13" ng-if="user.ward_name">
+                                    {{user.ward_name | titlecase}} Sard
                                 </span>
-                                <span ng-if="recent_spinner" class="fs-18 pad-l-20">
-                                    <i class="fa fa-circle-o-notch fa-spin">
-                                    </i>
-                                </span>
-                            </p>
-                        </div>
+                            </span>
+                            <span class="pull-right margin-t--15 text-success fs-26 ">
+                                {{summary.total_facilities }}
+                            </span>
+                        </h4>
                     </div>
-                </div><!--/col-->
-                <div class="col-md-5 col-xs-12 pad-0  content-card" style="padding: 0px;" ng-class="{'col-md-offset-1' : user.constituency}">
-                    <div class="col-xs-12 pad-0" style="border-bottom: 1px solid #e0e0e0;">
-                        <div class="col-xs-1 text-center">
-                            <i class="fa fa-users fa-2x icon-circles margin-t-10"></i>
-                        </div>
-                        <div class="col-xs-10 text-left margin-l-5" ng-if="user.groups.length!==0">
-                            <h4 class="fw-600 margin-b-0">Active Groups</h4>
-                            <p ng-repeat="g in user.groups" class="fs-14">
-                                {{g.name}}
-                            </p>
-                        </div>
+                </div>
+                <div class="col-xs-12 content-card" style="border-bottom: 1px solid #e0e0e0;" ng-if="user.user_constituencies.length!==0">
+                    <h4 class="fw-600 margin-t-5 col-sm-5">
+                        Recently Added Facilities:
+                    </h4>
+                    <span class="text-right col-sm-7">
+                        <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="weekly()">Last Week</button>
+                        <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="monthly()">Last Month</button>
+                        <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="quarterly()">Last Quarter</button>
+                    </span>
+                    <div class="col-xs-12">
+                        <p class="margin-t-10">
+                            <span ng-if="!recent_spinner" class="fs-16 pad-0">   <i>{{ summary.recently_created }}</i> Recently Added Facilities
+                            </span>
+                            <span ng-if="recent_spinner" class="fs-18 pad-l-20">
+                                <i class="fa fa-circle-o-notch fa-spin">
+                                </i>
+                            </span>
+                        </p>
                     </div>
-                    <div class="col-xs-12 pad-0" style="border-bottom: 1px solid #e0e0e0;" ng-if="user.user_counties.length!==0">
-                        <div class="col-xs-1 text-center">
-                            <i class="fa fa-map-marker fa-2x icon-circles pad-icon margin-t-10"></i>
-                        </div>
-                        <div class="col-xs-10 text-left margin-l-5">
-                            <h4 class="fw-600 margin-b-0">Active Counties</h4>
-                            <p ng-repeat="c in user.user_counties" class="fs-12">
-                                {{c.county_name}} COUNTY
-                            </p>
-                        </div>
+                </div>
+            </div><!--/col-->
+            <div class="col-md-5 col-xs-12 content-card" ng-class="{'col-md-offset-1':user.user_constituencies.length!==0}">
+                <div class="col-xs-12 pad-0" style="border-bottom: 1px solid #e0e0e0;">
+                    <div class="col-xs-1 pad-l-0 hidden-xs text-center">
+                        <i class="fa fa-users fa-2x icon-circles margin-t-10"></i>
                     </div>
-                    <div class="col-xs-12 pad-0" style="border-bottom: 1px solid #e0e0e0;" ng-if="user.user_constituencies.length!==0">
-                        <div class="col-xs-1 text-center">
-                            <i class="fa fa-map-marker fa-2x icon-circles pad-icon margin-t-10"></i>
-                        </div>
-                        <div class="col-xs-10 text-left margin-l-5">
-                            <h4 class="fw-600 margin-b-0">Active Sub-Counties</h4>
-                            <p ng-repeat="c in user.user_constituencies" class="fs-12 margin-b-5">
-                                {{c.constituency_name}} SUB-COUNTY
-                            </p>
-                        </div>
+                    <div class="col-xs-9 pad-r-0 text-left" ng-if="user.groups.length!==0">
+                        <h4 class="fw-600 margin-b-0">Active Groups</h4>
+                        <p ng-repeat="g in user.groups" class="fs-14">
+                            {{g.name}}
+                        </p>
                     </div>
-                </div><!--/col-->
-            </div>
-            <div class="col-xs-12" style="background-color: #f4f4f6;">
-                    <div class="col-xs-12 content-card">
-                        <div class="">
-                            <h3 class="text-center dash" ng-if="!spinner">
-                                <span ng-if="ward">Wards</span>
-                                <span ng-if="constituency">Sub Counties</span>
-                                <span ng-if="county">Top 20 Counties</span> With Most Facilities
-                                <span ng-if="user.constituency_name">
-                                    in {{user.constituency_name}} SUB-COUNTY
-                                </span>
-                                <span ng-if="user.county_name">
-                                    in {{user.county_name}} COUNTY
-                                </span>
-                            </h3>
-                        </div>
-                        <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
-                            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
-                        </div>
-                        <div class="panel-body">
-                            <div id="facilitybar">
-                            </div>
-                        </div>
+                </div>
+                <div class="col-xs-12 pad-0" style="border-top: 1px solid #e0e0e0;" ng-if="user.user_counties.length!==0">
+                    <div class="col-xs-1 pad-l-0  hidden-xs text-center">
+                        <i class="fa fa-map-marker fa-2x icon-circles pad-icon margin-t-10"></i>
                     </div>
-            </div>
-            <div class="col-xs-12 pad-0">
-                <div class="col-md-5">
-                    <div class="col-xs-12 content-card">
-                        <h3 class="text-center dash">Facility Owner Categories</h3>
-                        <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
-                            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
-                        </div>
-                        <div class="panel-body">
-                            <div id="chartowners">
-                            </div>
+                    <div class="col-xs-9 pad-r-0 text-left">
+                        <h4 class="fw-600 margin-b-0">Active Counties</h4>
+                        <p ng-repeat="c in user.user_counties" class="fs-12">
+                            {{c.county_name | titlecase}} County
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-12 pad-0" style="border-top: 1px solid #e0e0e0;" ng-if="user.user_constituencies.length!==0">
+                    <div class="col-xs-1 pad-l-0  hidden-xs text-center">
+                        <i class="fa fa-map-marker fa-2x icon-circles pad-icon margin-t-10"></i>
+                    </div>
+                    <div class="col-xs-9 pad-r-0 text-left">
+                        <h4 class="fw-600 margin-b-0">Active Sub-Counties</h4>
+                        <p ng-repeat="c in user.user_constituencies" class="fs-12 margin-b-5">
+                            {{c.constituency_name | titlecase}} Sub-county
+                        </p>
+                    </div>
+                </div>
+            </div><!--/col-->
+        </div>
+        <div class="col-xs-12" style="background-color: #f4f4f6;">
+                <div class="col-xs-12 content-card">
+                    <div class="">
+                        <h3 class="text-center dash" ng-if="!spinner">
+                            <span ng-if="ward">Wards</span>
+                            <span ng-if="constituency">Sub Counties</span>
+                            <span ng-if="county">Top 20 Counties</span> With Most Facilities
+                            <span ng-if="user.constituency_name">
+                                in {{user.constituency_name | titlecase}} Sub-county
+                            </span>
+                            <span ng-if="user.county_name">
+                                in {{user.county_name | titlecase}} County
+                            </span>
+                        </h3>
+                    </div>
+                    <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
+                        <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+                    </div>
+                    <div class="panel-body">
+                        <div id="facilitybar">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <div class="col-xs-12 content-card">
-                        <h3 class="text-center dash">Facility Types</h4>
-                        <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
-                            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+        </div>
+        <div class="col-xs-12 pad-0">
+            <div class="col-md-5">
+                <div class="col-xs-12 content-card">
+                    <h3 class="text-center dash">Facility Owner Categories</h3>
+                    <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
+                        <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+                    </div>
+                    <div class="panel-body">
+                        <div id="chartowners">
                         </div>
-                        <div class="panel-body">
-                            <div id="chartfacility">
-                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="col-xs-12 content-card">
+                    <h3 class="text-center dash">Facility Types</h4>
+                    <div ng-if="spinner" class="col-lg-12 text-center margin-t-20 margin-b-20 fs-18">
+                        <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+                    </div>
+                    <div class="panel-body">
+                        <div id="chartfacility">
                         </div>
                     </div>
                 </div>
