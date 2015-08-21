@@ -10,8 +10,7 @@
         ["$scope", function ($scope) {
             $scope.filters = {
                 "closed": true,
-                "fields": "id,code,name,facility_type_name,owner_name,county,"+
-                          "sub_county,constituency,ward_name,updated"
+                "fields": "id,code,name,closing_reason,closed_date"
             };
             $scope.title = {
                 "name": "Closed Facilities",
