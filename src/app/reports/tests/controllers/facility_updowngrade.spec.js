@@ -72,6 +72,8 @@
                 };
                 $httpBackend.expectGET(SERVER_URL+"api/reporting/upgrades_downgrades/?county=1")
                 .respond(200);
+                data.$scope.upgrades={upgrades:true};
+                data.$scope.recent={last_week:true};
                 createController("view",data);
                 $httpBackend.flush();
             }])
@@ -85,6 +87,37 @@
                 $httpBackend.expectGET(SERVER_URL+"api/reporting/upgrades_downgrades/?county=1")
                 .respond(500);
                 createController("view",data);
+                $httpBackend.flush();
+            }])
+        );
+        it("should have called filter from ui and done a successful call",
+            inject(["$rootScope",function($rootScope){
+                var data = {
+                    "$scope": $rootScope.$new()
+                };
+                $httpBackend.expectGET(SERVER_URL+"api/reporting/upgrades_downgrades/")
+                .respond(200);
+                createController("list",data);
+                $httpBackend.flush();
+                $httpBackend.expectGET(SERVER_URL+"api/reporting/upgrades_downgrades/"+
+                "?fields=county,changes,county_id").respond(200);
+                data.$scope.search_changes();
+                $httpBackend.flush();
+                
+            }])
+        );
+        it("should have called filter from ui but did a call that failed",
+            inject(["$rootScope",function($rootScope){
+                var data = {
+                    "$scope": $rootScope.$new(),
+                    "$stateParams":{county_id:1}
+                };
+                $httpBackend.expectGET(SERVER_URL+"api/reporting/upgrades_downgrades/")
+                .respond(200);
+                createController("list",data);
+                data.$scope.search_changes();
+                $httpBackend.expectGET(SERVER_URL+"api/reporting/upgrades_downgrades/"+
+                "?fields=county,changes,county_id").respond(500);
                 $httpBackend.flush();
             }])
         );

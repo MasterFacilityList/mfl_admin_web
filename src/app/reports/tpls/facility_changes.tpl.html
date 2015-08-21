@@ -12,6 +12,31 @@
 </div>
 <section class="margin-t-10">
     <div class="col-sm-12">
+       <div class="col-xs-12 content-card heading pad-b-10">
+            <div class="col-sm-6 col-xs-12">
+               <div>
+                    <h4>Change Options:</h4>
+                    <div class="btn-group">
+                        <label class="btn btn-default" ng-model="upgrades" btn-radio="{upgrades:true}">Upgrades</label>
+                        <label class="btn btn-default" ng-model="upgrades" btn-radio="{upgrades:false}">Downgrades</label>
+                        <label class="btn btn-default" ng-model="upgrades" btn-radio="{}">Reset</label>
+                    </div>
+               </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                    <h4>Recent by:</h4>
+                    <div class="btn-group">
+                        <label class="btn btn-default" ng-model="recent" btn-radio="{last_week:true}">Last Week</label>
+                        <label class="btn btn-default" ng-model="recent" btn-radio="{last_month:true}">Last Month</label>
+                        <label class="btn btn-default" ng-model="recent" btn-radio="{last_3_months:true}">Last Quarter</label>
+                        <label class="btn btn-default" ng-model="recent" btn-radio="{}">Reset</label>
+                    </div>
+            </div>
+            <div class="col-xs-12 margin-t-10">
+                <button class="btn btn-primary" ng-click="search_changes()">Search</button>
+                <span class="margin-l-5 custom-well">Current Filter: <i>{{recent || 'Any time' }}, {{upgrades || 'All Changes'}}</i></span>
+            </div>
+       </div>
         <div class="content-card col-xs-12">
             <div class="col-sm-4 col-xs-12">
                 <ui-select ng-model="$parent.search">
@@ -19,7 +44,8 @@
                     <ui-select-choices repeat="county.county as county in changes.results | filter:$select.search">{{county.county | titlecase}}</ui-select-choices>
                 </ui-select>
             </div>
-            <div class="col-sm-3 col-xs-12" ng-show="search!==''"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+            <div class="margin-t-10 visible-xs transparent">space</div>
+            <div class="col-xs-4" ng-show="search!==''"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
@@ -31,7 +57,8 @@
                         <tr ng-repeat="county in changes.results | filter:search">
                             <td data-title="County:" >{{county.county | titlecase}}</td>
                             <td data-title="Changes:">{{county.changes}}</td>
-                            <td data-title="Action:" class="text-right"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View</a></span></td>
+                            <td ng-show="county.changes > 0" data-title="Action:" class="text-right"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
+                            <td ng-hide="county.changes > 0" data-title="Action:" class="text-right"><button class="btn btn-success" disabled>View</button></td>
                         </tr>
                         <tr>
                             <td>TOTAL</td>

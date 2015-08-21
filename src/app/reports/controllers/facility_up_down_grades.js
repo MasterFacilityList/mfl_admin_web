@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular,_){
     "use strict";
     angular.module("mfl.reports.updowngrades.controllers",[
         "mfl.reports.services"
@@ -17,8 +17,17 @@
             .error(function (error) {
                 $scope.errors = error;
             });
-            
-            
+            $scope.search_changes = function () {
+                $scope.filters = _.extend({"fields": "county,changes,county_id"},
+                                          $scope.recent, $scope.upgrades);
+                reportsApi.up_down_grades.filter($scope.filters)
+                .success(function (data) {
+                    $scope.changes = data;
+                })
+                .error(function (error) {
+                    $scope.errors = error;
+                });
+            };
         }]
     )
     .controller("mfl.reports.controller.updowngrade.view", ["$scope",
@@ -36,4 +45,4 @@
         }]
     );
 
-})(window.angular);
+})(window.angular,window._);
