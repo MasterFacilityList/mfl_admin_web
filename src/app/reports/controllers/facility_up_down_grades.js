@@ -20,7 +20,6 @@
             $scope.search_changes = function () {
                 $scope.filters = _.extend({"fields": "county,changes,county_id"},
                                           $scope.recent, $scope.upgrades);
-                console.log($scope.filters);
                 reportsApi.up_down_grades.filter($scope.filters)
                 .success(function (data) {
                     $scope.changes = data;
