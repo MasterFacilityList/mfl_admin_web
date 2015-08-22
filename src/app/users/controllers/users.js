@@ -206,10 +206,10 @@
                 var changes = formChanges.whatChanged(frm);
                 if (! _.isEmpty(changes)) {
                     wrappers.users.update($scope.user_id, changes)
-                    .success(function (data) {
+                    .success(function () {
                         toasty.success({
                             title: "User updated",
-                            msg: data.full_name +" has been updated"
+                            msg: "User has been updated"
                         });
                         $state.go("users.user_edit.contacts",
                             {user_id : $scope.user_id});
