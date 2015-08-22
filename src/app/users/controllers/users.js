@@ -197,17 +197,20 @@
     .controller("mfl.users.controllers.user_edit.basic",
         ["$scope", "$log", "mfl.common.forms.changes",
         "mfl.users.services.wrappers", "mfl.common.services.multistep",
-        "$state",
+        "$state","toasty",
         function ($scope, $log, formChanges, wrappers, multistepService,
-            $state) {
+            $state,toasty) {
             multistepService.filterActive(
                 $scope, $scope.steps, $scope.steps[0]);
             $scope.save = function (frm) {
                 var changes = formChanges.whatChanged(frm);
-
                 if (! _.isEmpty(changes)) {
                     wrappers.users.update($scope.user_id, changes)
-                    .success(function () {
+                    .success(function (data) {
+                        toasty.success({
+                            title: "User updated",
+                            msg: data.full_name +" has been updated"
+                        });
                         $state.go("users.user_edit.contacts",
                             {user_id : $scope.user_id});
                     })
@@ -226,8 +229,8 @@
 
     .controller("mfl.users.controllers.user_edit.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers", "$state",
-        "mfl.common.services.multistep",
-        function ($scope, $log, wrappers, $state, multistepService) {
+        "mfl.common.services.multistep","toasty",
+        function ($scope, $log, wrappers, $state, multistepService,toasty) {
             $scope.tooltip = {
                 "title": "",
                 "checked": false
@@ -300,6 +303,10 @@
                         "contact": data.id
                     })
                     .success(function (data) {
+                        toasty.success({
+                            title: "Contact added",
+                            msg: "Contact has been added to the user"
+                        });
                         $scope.contacts.push(data);
                         $scope.contact = {
                             contact_type: "",
@@ -322,8 +329,8 @@
 
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
-        "mfl.common.services.multistep","mfl.users.services.groups",
-        function (wrappers, $log, $scope, $state, multistepService, groupsService) {
+        "mfl.common.services.multistep","mfl.users.services.groups","toasty",
+        function (wrappers, $log, $scope, $state, multistepService, groupsService, toasty) {
             if($scope.create) {
                 $scope.nextState();
             }
@@ -354,6 +361,10 @@
 
                 wrappers.users.update($scope.user_id, {"groups": grps})
                 .success(function (data) {
+                    toasty.success({
+                        title: "Group updated",
+                        msg: "User's group has been updated"
+                    });
                     $scope.user = data;
                     $scope.$parent.user = data;
                     $scope.$parent.current_group= groupsService.checkWhichGroup($scope.user.groups);
