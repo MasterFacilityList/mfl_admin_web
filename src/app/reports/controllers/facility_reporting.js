@@ -14,11 +14,13 @@
     };
 
     angular.module("mfl.reports.controllers.facility_reporting", [
-        "mfl.reports.services"
+        "mfl.reports.services",
+        "mfl.common.export"
     ])
 
     .controller("mfl.reports.controllers.helper", ["mfl.reports.services.wrappers",
-        function(wrappers){
+        "mfl.common.export.service",
+        function(wrappers, exportService){
             this.initCtrl = function($scope, report_type, data_param, transform_fxn){
                 $scope.search = "";
                 $scope.filters = {
@@ -32,6 +34,9 @@
                 .error(function (err) {
                     $scope.errors = err;
                 });
+                $scope.exportToExcel = function () {
+                    exportService.excelExport(wrappers.reporting, $scope.filters);
+                };
             };
         }
     ])
