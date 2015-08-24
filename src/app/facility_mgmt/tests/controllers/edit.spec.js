@@ -600,9 +600,10 @@
                         reg_no : "",
                         contacts : [
                             {
-                                id : "3",
+                                officer_contact_id : "3",
                                 type : "MOBILE",
-                                contact : "0722"
+                                contact : "0722",
+                                contact_id : "5"
                             }
                         ]
                     }
@@ -628,7 +629,14 @@
                         "$$modelValue": "test"
                     }
                 };
-                var obj = {id: "3", type : "MOBILE", contact : "0722"};
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/"+
+                    "officer_contacts/3/").respond(204);
+                httpBackend
+                    .expectDELETE(server_url+"api/common/contacts/5/")
+                    .respond(204);
+                var obj = {officer_contact_id: "3", type : "MOBILE",
+                    contact : "0722", contact_id : "5"};
                 data.$scope.save(frm);
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.initUniqueName({
@@ -636,6 +644,150 @@
                 });
                 data.$scope.removeOfficerContact(obj);
                 data.$scope.facilityOfficers(data.$scope.facility);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(data.$scope.facility.name).toEqual("Facility");
+            });
+            it("should fail to delete contact through", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                spyOn(state, "go");
+
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                data.$scope.$apply();
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge : {
+                        name : "",
+                        reg_no : "",
+                        contacts : [
+                            {
+                                officer_contact_id : "3",
+                                type : "MOBILE",
+                                contact : "0722",
+                                contact_id : "5"
+                            }
+                        ]
+                    }
+                };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
+                };
+                data.$scope.nxtState = true;
+                ctrl(".basic", data);
+
+                var frm = {
+                    "$dirty": false,
+                    "name": {
+                        "$dirty": false,
+                        "$$modelValue": "test"
+                    }
+                };
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/"+
+                    "officer_contacts/3/").respond(204);
+                httpBackend
+                    .expectDELETE(server_url+"api/common/contacts/5/")
+                    .respond(500);
+                var obj = {officer_contact_id: "3", type : "MOBILE",
+                    contact : "0722", contact_id : "5"};
+                data.$scope.save(frm);
+                data.$scope.facility.official_name = "Facility";
+                data.$scope.initUniqueName({
+                    name: {"$setViewValue": jasmine.createSpy()}
+                });
+                data.$scope.removeOfficerContact(obj);
+                data.$scope.facilityOfficers(data.$scope.facility);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(data.$scope.facility.name).toEqual("Facility");
+            });
+            it("should fail to delete officer contact", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                spyOn(state, "go");
+
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                data.$scope.$apply();
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge : {
+                        name : "",
+                        reg_no : "",
+                        contacts : [
+                            {
+                                officer_contact_id : "3",
+                                type : "MOBILE",
+                                contact : "0722",
+                                contact_id : "5"
+                            }
+                        ]
+                    }
+                };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
+                };
+                data.$scope.nxtState = true;
+                ctrl(".basic", data);
+
+                var frm = {
+                    "$dirty": false,
+                    "name": {
+                        "$dirty": false,
+                        "$$modelValue": "test"
+                    }
+                };
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/"+
+                    "officer_contacts/3/").respond(500);
+                var obj = {officer_contact_id: "3", type : "MOBILE",
+                    contact : "0722", contact_id : "5"};
+                data.$scope.save(frm);
+                data.$scope.facility.official_name = "Facility";
+                data.$scope.initUniqueName({
+                    name: {"$setViewValue": jasmine.createSpy()}
+                });
+                data.$scope.removeOfficerContact(obj);
+                data.$scope.facilityOfficers(data.$scope.facility);
+                httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 expect(data.$scope.facility.name).toEqual("Facility");
@@ -651,6 +803,14 @@
                 data.$scope.selectReload = function () {
                     return {"results": []};
                 };
+                data.$scope.off_contacts = [
+                    {
+                        officer_contact_id : "3",
+                        type : "18",
+                        contact : "email@mail.com",
+                        contact_id : "5"
+                    }
+                ];
                 data.$scope.facility = {
                     facility_physical_address : {town : "5"},
                     officer_in_charge : {
@@ -851,6 +1011,22 @@
                     return {"results": []};
                 };
                 state.params.facility_id = "3";
+                data.$scope.off_contacts = [
+                    {
+                        officer_contact_id : "3",
+                        type : "18",
+                        contact : "email@mail.com"
+                    },
+                    {
+                        officer_contact_id : "4",
+                        type : "20",
+                        contact : "0722134567"
+                    },
+                    {
+                        type : "21",
+                        contact : "999999"
+                    }
+                ];
                 data.$scope.facility = {
                     facility_physical_address : {town : "5"},
                     officer_in_charge: {
@@ -865,8 +1041,8 @@
                             },
                             {
                                 officer_contact_id : "4",
-                                type : "20",
-                                contact : "0722134567"
+                                type : "21",
+                                contact : "072213456799"
                             },
                             {
                                 type : "21",
@@ -918,19 +1094,16 @@
                         "title": "Medical Supritendant",
                         "contacts" : [
                             {
-                                "$dirty": true,
                                 "officer_contact_id" : "3",
                                 "type" : "18",
                                 "contact" : "email@mail.com"
                             },
                             {
-                                "$dirty": true,
                                 "officer_contact_id" : "4",
                                 "type" : "21",
                                 "contact" : "072213456799"
                             },
                             {
-                                "$dirty": true,
                                 "type" : "21",
                                 "contact" : "999999"
                             }

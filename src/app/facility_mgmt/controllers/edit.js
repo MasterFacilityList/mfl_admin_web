@@ -261,6 +261,7 @@
                             "name": $scope.facility.town_name
                         }
                     };
+                    $scope.off_contacts = $scope.facility.officer_in_charge.contacts;
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -417,8 +418,7 @@
                             function (a_cont){
                                 if(!_.isUndefined(a_cont.officer_contact_id)){
                                     var curr_cont = _.findWhere(
-                                    $scope.facility.officer_in_charge.contacts,
-                                        {"officer_contact_id" :
+                                    $scope.off_contacts,{"officer_contact_id":
                                         a_cont.officer_contact_id});
                                     if(curr_cont.type === a_cont.type &&
                                         curr_cont.contact === a_cont.contact){
