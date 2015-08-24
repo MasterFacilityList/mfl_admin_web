@@ -3311,6 +3311,18 @@
                 scope.create = true;
                 var name = "edit";
                 scope.changeView(name);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : ""
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : ""};
+                scope.servicesDisplay(obj);
                 expect(scope.new_service.service).toEqual("");
                 expect(scope.new_service.option).toEqual("");
                 expect(scope.services).toEqual([]);
@@ -3338,6 +3350,18 @@
                 c.bootstrap(scope);
                 var name = "edit";
                 scope.changeView(name);
+                scope.service_display =[
+                    {
+                        id : "4",
+                        option : ""
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : "12"};
+                scope.servicesDisplay(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -3435,6 +3459,18 @@
                 scope.changeView(name);
                 scope.facilityServices();
                 scope.removeOption(scope.cat_services[1]);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : "12"
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : "12"};
+                scope.servicesDisplay(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
@@ -3458,6 +3494,18 @@
                 httpBackend.expectDELETE(server_url +
                     "api/facilities/facility_services/1/").respond(204);
                 scope.removeOption(serv_obj);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : undefined
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : undefined};
+                scope.servicesDisplay(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
@@ -3525,6 +3573,18 @@
                 scope.changeView(name);
                 scope.removeOption(scope.cat_services[0]);
                 scope.facilityServices();
+                scope.service_display =[
+                    {
+                        id : "4",
+                        option : ""
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : ""};
+                scope.servicesDisplay(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
@@ -3558,6 +3618,18 @@
                 };
                 scope.addServiceOption(payload.results[0]);
                 scope.showServices(cat);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : "12"
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "4", option : true};
+                scope.servicesDisplay(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
