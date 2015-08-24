@@ -29,6 +29,20 @@
                     $scope.errors = data;
                 });
             }
+            $scope.addOption = function () {
+                $scope.option_group.options.push({
+                    option_type : "",
+                    display_text : "",
+                    value : ""
+                });
+            };
+            $scope.removeOption = function (obj) {
+                if(_.isUndefined(obj.id)) {
+                    $scope.option_group.options =
+                        _.without($scope.option_group.options, obj);
+                }
+            };
+            $scope.option_types = wrappers.OPTION_TYPES;
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
                 if(!$scope.edit_view){
