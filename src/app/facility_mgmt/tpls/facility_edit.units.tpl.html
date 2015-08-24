@@ -1,9 +1,6 @@
 <div class="col-sm-12 content-card">
-    <div class="col-md-12 alert alert-danger alert-dismissible" ng-show="units_error">
-        <button type="button" class="close">
-            <span ng-click="units_error = !units_error">&times;</span>
-        </button>
-        <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{units_error}}</span>
+    <div class="col-xs-12">
+        <drf-err-msg></drf-err-msg>
     </div>
     <!-- Start of new implementation -->
     <div class="col-xs-12 margin-t-10 pad-0" requires-permission="facilities.add_facilityunit">

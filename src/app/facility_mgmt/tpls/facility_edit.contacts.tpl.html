@@ -1,10 +1,7 @@
 <div class="col-sm-12 content-card">
-    <div class="col-xs-12 fade-content alert alert-danger alert-dismissible margin-t-10" ng-show="cont_error">
-            <button type="button" class="close">
-                <span ng-click="cont_error = !cont_error">&times;</span>
-            </button>
-            <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{cont_error}}</span>
-      </div>
+    <div class="col-xs-12">
+        <drf-err-msg></drf-err-msg>
+    </div>
     <form role="form" name="contForm" ng-submit="saveContacts()">
     <div class="col-xs-12">
         <drf-err-msg></drf-err-msg>
