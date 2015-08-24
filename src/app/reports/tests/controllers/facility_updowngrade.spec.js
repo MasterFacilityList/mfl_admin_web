@@ -30,6 +30,7 @@
 
         afterEach(function(){
             $httpBackend.verifyNoOutstandingRequest();
+            $httpBackend.verifyNoOutstandingExpectation();
         });
 
         it("should have `mfl.reports.controller.updowngrade.list` defined",
@@ -51,6 +52,20 @@
                 .respond(200);
                 createController("list",data);
                 $httpBackend.flush();
+            }])
+        );
+        it("should export to excel",
+            inject(["$rootScope", "mfl.common.export.service",function($rootScope, exportService){
+                var data = {
+                    "$scope": $rootScope.$new()
+                };
+                $httpBackend.expectGET(SERVER_URL+"api/reporting/upgrades_downgrades/")
+                .respond(200);
+                spyOn(exportService, "excelExport");
+                createController("list",data);
+                data.$scope.exportToExcel();
+                $httpBackend.flush();
+                expect(exportService.excelExport).toHaveBeenCalled();
             }])
         );
         it("should have load list view of counties but fail",
@@ -103,7 +118,7 @@
                 "?fields=county,changes,county_id").respond(200);
                 data.$scope.search_changes();
                 $httpBackend.flush();
-                
+
             }])
         );
         it("should have called filter from ui but did a call that failed",

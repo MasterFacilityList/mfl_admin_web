@@ -4,6 +4,7 @@
 
     describe("Reports test for facility summary reporting controller", function () {
         var ctrl, rootScope, state, server_url, httpBackend;
+
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.auth.services");
@@ -20,6 +21,30 @@
                     };
                 }]
             );
+        });
+
+        it("should test 'facility count by county' controller export ", function () {
+            inject(["mfl.common.export.service",
+                function (exportService) {
+                    var data = {
+                        "$scope": rootScope.$new()
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/reporting/?report_type="+
+                        "facility_count_by_county")
+                        .respond(200, {});
+                    spyOn(exportService, "excelExport");
+
+                    ctrl("facility_counties", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                    data.$scope.exportToExcel();
+                    expect(exportService.excelExport).toHaveBeenCalled();
+                }
+            ]);
         });
 
         it("should test 'facility count by county' controller | success ", function () {
@@ -41,6 +66,7 @@
                 }
             ]);
         });
+
         it("should test 'facility count by county' controller | fail ", function () {
             inject([
                 function () {
@@ -270,13 +296,32 @@
                     httpBackend
                         .expectGET(server_url+"api/reporting/?report_type="+
                         "facility_keph_level_report")
-                        .respond(200, {});
+                        .respond(200, {
+                            total: [],
+                            results: [
+                                {
+                                    county: "NAIROBI",
+                                    keph_level: "Not Classified",
+                                    number_of_facilities: 0
+                                },
+                                {
+                                    county: "KISUMU",
+                                    keph_level: "Level 6",
+                                    number_of_facilities: 7
+                                },
+                                {
+                                    county: "MOMBASA",
+                                    keph_level: "Level 5",
+                                    number_of_facilities: 4
+                                }
+                            ]
+                        });
                     ctrl("keph_levels", data);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
                     httpBackend.verifyNoOutstandingExpectation();
-
+                    expect(data.$scope.counties).toEqual(["NAIROBI", "KISUMU", "MOMBASA"]);
                 }
             ]);
         });

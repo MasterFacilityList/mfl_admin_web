@@ -1,12 +1,13 @@
 (function(angular,_){
     "use strict";
     angular.module("mfl.reports.updowngrades.controllers",[
-        "mfl.reports.services"
+        "mfl.reports.services",
+        "mfl.common.export"
     ])
 
     .controller("mfl.reports.controller.updowngrade.list", ["$scope",
-        "mfl.reports.services.wrappers",
-        function ($scope,reportsApi) {
+        "mfl.reports.services.wrappers", "mfl.common.export.service",
+        function ($scope,reportsApi, exportService) {
             $scope.filters =  {
                 "fields": "county,changes,county_id"
             };
@@ -28,6 +29,9 @@
                     $scope.errors = error;
                 });
             };
+            $scope.exportToExcel = function () {
+                exportService.excelExport(reportsApi.up_down_grades, $scope.filters);
+            };
         }]
     )
     .controller("mfl.reports.controller.updowngrade.view", ["$scope",
@@ -40,8 +44,8 @@
             .error(function (error) {
                 $scope.errors = error;
             });
-            
-            
+
+
         }]
     );
 
