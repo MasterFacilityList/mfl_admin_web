@@ -29,7 +29,7 @@
                     count: "2"
                 }
             ];
-
+            $scope.edit_view = true;
             $scope.service_id = $stateParams.service_id;
             $scope.wrapper = wrappers.services;
             $scope.tabState = function(obj) {

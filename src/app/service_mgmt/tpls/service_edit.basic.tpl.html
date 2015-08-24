@@ -37,6 +37,18 @@
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
+            <div class="form-group col-xs-12 checkbox">
+                <label>
+                    <input type="checkbox" id="has_options" name="has_options" ng-model="service.has_options" api-checker >
+                    Service has Options?
+                 </label>
+            </div>
+            <div class="form-group checkbox col-xs-12" ng-if="edit_view">
+                <label>
+                    <input type="checkbox" id="active" name="active" ng-model="service.active" api-checker >
+                    Is Active?
+                 </label>
+            </div>
             <div class="col-sm-12 margin-b-20">
                 <button class="btn btn-primary margin-t-10" ng-click="save(service_frm)" requires-user-feature="is_staff">
                     Save
