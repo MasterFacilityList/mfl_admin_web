@@ -8,6 +8,7 @@
             module("mfl.setup.gis.controllers");
             module("mflAdminAppConfig");
             module("ui.router");
+            module("angular-toasty");
             module("mfl.setup.api");
 
             inject(["$state", "$rootScope", "$log", "$httpBackend", "SERVER_URL",

@@ -31,8 +31,8 @@
         }]
     )
     .controller("mfl.setup.controller.facilityOwnerType.view", ["$scope","$state", "$stateParams",
-                "adminApi","mfl.common.forms.changes",
-        function($scope, $state, $stateParams, adminApi, formChanges){
+                "adminApi","mfl.common.forms.changes","toasty",
+        function($scope, $state, $stateParams, adminApi, formChanges,toasty){
             $scope.facility_owner_type_id = $stateParams.id;
             $scope.wrapper = adminApi.facilityOwnerTypes;
             if(!_.isUndefined($stateParams.id) &&
@@ -60,6 +60,10 @@
                 });
                 $scope.remove = function () {
                     adminApi.facilityOwnerTypes.remove($stateParams.id).success(function(){
+                        toasty.success({
+                            title: "Owner type delete",
+                            msg: "Owner type has been deleted"
+                        });
                         $state.go("setup.facility_owner_types",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -82,6 +86,10 @@
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.facilityOwnerTypes.update(id, changes).success(function(){
+                        toasty.success({
+                            title: "Owner type updated",
+                            msg: "Owner type has been updated"
+                        });
                         $state.go("setup.facility_owner_types");
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -92,6 +100,10 @@
 
             $scope.createFacilityOwnerTypes = function(ownerType){
                 adminApi.facilityOwnerTypes.create(ownerType).success(function(){
+                    toasty.success({
+                        title: "Owner type added",
+                        msg: "Owner type has been added"
+                    });
                     $state.go("setup.facility_owner_types");
                 }).error(function(error){
                     $scope.alert = error.error;
@@ -128,8 +140,8 @@
     )
 
     .controller("mfl.setup.controller.facilityOwner.view", ["$scope","$state", "$stateParams",
-                "adminApi","mfl.common.forms.changes",
-        function($scope, $state, $stateParams, adminApi, formChanges) {
+                "adminApi","mfl.common.forms.changes","toasty",
+        function($scope, $state, $stateParams, adminApi, formChanges,toasty) {
             $scope.facility_owner_id = $stateParams.id;
             $scope.wrapper = adminApi.facilityOwners;
 
@@ -165,6 +177,10 @@
                 });
                 $scope.remove = function () {
                     adminApi.facilityOwners.remove($stateParams.id).success(function(){
+                        toasty.success({
+                            title: "Owner deleted",
+                            msg: "Owner has been deleted"
+                        });
                         $state.go("setup.facility_owners",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -195,6 +211,10 @@
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.facilityOwners.update(id, changes).success(function(){
+                        toasty.success({
+                            title: "Owner updated",
+                            msg: "Owner has been updated"
+                        });
                         $state.go("setup.facility_owners");
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -205,6 +225,10 @@
 
             $scope.createFacilityOwner = function(owner){
                 adminApi.facilityOwners.create(owner).success(function(){
+                    toasty.success({
+                        title: "Owner added",
+                        msg: "Owner has been added"
+                    });
                     $state.go("setup.facility_owners");
                 }).error(function(error){
                     $scope.alert = error.error;
@@ -245,8 +269,8 @@
     )
 
     .controller("mfl.setup.controller.facilityJobTitle.view", ["$scope","$state", "$stateParams",
-                "adminApi","mfl.common.forms.changes",
-        function($scope, $state, $stateParams, adminApi, formChanges){
+                "adminApi","mfl.common.forms.changes", "toasty",
+        function($scope, $state, $stateParams, adminApi, formChanges, toasty){
             $scope.tooltip = {
                 "title": "",
                 "checked": false
@@ -278,6 +302,10 @@
                 });
                 $scope.remove = function () {
                     adminApi.facilityJobTitles.remove($stateParams.id).success(function(){
+                        toasty.success({
+                            title: "Job title deleted",
+                            msg: "Job title has been deleted"
+                        });
                         $state.go("setup.facility_job_titles",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -299,6 +327,10 @@
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.facilityJobTitles.update(id, changes).success(function(){
+                        toasty.success({
+                            title: "Job title updated",
+                            msg: "Job title has been updated"
+                        });
                         $state.go("setup.facility_job_titles");
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -308,6 +340,10 @@
             };
             $scope.createFacilityJobTitle = function(title){
                 adminApi.facilityJobTitles.create(title).success(function(){
+                    toasty.success({
+                        title: "Job title added",
+                        msg: "Job title has been added"
+                    });
                     $state.go("setup.facility_job_titles");
                 }).error(function(error){
                     $scope.alert = error.error;
@@ -323,8 +359,8 @@
         }])
 
     .controller("mfl.setup.controller.change_reasons.view",["$scope","adminApi",
-        "$stateParams","$state","mfl.common.forms.changes",
-        function ($scope,adminApi,$stateParams,$state,formChanges) {
+        "$stateParams","$state","mfl.common.forms.changes","toasty",
+        function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
             if(!_.isUndefined($stateParams.reason_id)){
                 $scope.state = true;
                 adminApi.change_reasons.get($stateParams.reason_id)
@@ -337,6 +373,10 @@
                 });
                 $scope.remove = function () {
                     adminApi.change_reasons.remove($stateParams.reason_id).success(function(){
+                        toasty.success({
+                            title: "Change reason deleted",
+                            msg: "Change reason has been deleted"
+                        });
                         $state.go("setup.facility_reasons");
                     }).error(function(error){
                         $scope.errors = error;
@@ -353,6 +393,10 @@
                 if(_.isUndefined($stateParams.reason_id)){
                     adminApi.change_reasons.create(frm)
                     .success(function () {
+                        toasty.success({
+                            title: "Change reason added",
+                            msg: "Change reason has been added"
+                        });
                         $state.go("setup.facility_reasons");
                     })
                     .error(function (err) {
@@ -363,6 +407,10 @@
                     if(!_.isEmpty(changes)){
                         adminApi.change_reasons.update($stateParams.reason_id,changes)
                         .success(function () {
+                            toasty.success({
+                                title: "Change reason updated",
+                                msg: "Change reason has been updated"
+                            });
                             $state.go("setup.facility_reasons");
                         })
                         .error(function (err) {
@@ -398,8 +446,8 @@
     )
 
     .controller("mfl.setup.controller.facilityRegulatoryBody.create",["$scope",
-        "$stateParams", "$state", "adminApi",
-        function ($scope, $stateParams, $state, adminApi) {
+        "$stateParams", "$state", "adminApi","toasty",
+        function ($scope, $stateParams, $state, adminApi,toasty) {
             $scope.title = {
                 icon: "fa-plus-circle",
                 name: "New Regulatory Body"
@@ -431,6 +479,10 @@
                         "contact" : data.id
                     })
                     .success(function (data) {
+                        toasty.success({
+                            title: "Regulatory body contact added",
+                            msg: "Regulatory body contact has been added"
+                        });
                         $scope.contact = {
                             contact_type : "",
                             contact : ""
@@ -456,6 +508,10 @@
                     .success(function () {
                         adminApi.regulatoryBodyContacts.remove(obj.contact)
                             .success(function () {
+                                toasty.success({
+                                    title: "Regulatory body contact deleted",
+                                    msg: "Regulatory body contact has been deleted"
+                                });
                                 obj.delete_spinner = false;
                                 $scope.contacts.items =
                                 _.without($scope.contacts.items, obj);
@@ -477,8 +533,8 @@
     ])
 
     .controller("mfl.setup.controller.facilityRegulatoryBody.edit", ["$scope",
-        "$stateParams", "adminApi", "mfl.common.forms.changes", "$state",
-        function ($scope, $stateParams, adminApi, formChanges, $state) {
+        "$stateParams", "adminApi", "mfl.common.forms.changes", "$state","toasty",
+        function ($scope, $stateParams, adminApi, formChanges, $state,toasty) {
             $scope.contacts = {
                 items : []
             };
@@ -535,6 +591,10 @@
                 $scope.remove = function () {
                     adminApi.facilityRegulatoryBodies.remove($stateParams.id)
                     .success(function(){
+                        toasty.success({
+                            title: "Regulatory body deleted",
+                            msg: "Regulatory body has been deleted"
+                        });
                         $state.go("setup.facility_regulatory_bodies");
                     })
                     .error(function(error){
@@ -556,6 +616,10 @@
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.facilityRegulatoryBodies.update(id, changes).success(function(){
+                        toasty.success({
+                            title: "Regulatory body updated",
+                            msg: "Regulatory body has been updated"
+                        });
                         $state.go("setup.facility_regulatory_bodies");
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -565,6 +629,10 @@
             };
             $scope.createFacilityRegulatoryBody = function(regulatoryBody){
                 adminApi.facilityRegulatoryBodies.create(regulatoryBody).success(function() {
+                    toasty.success({
+                        title: "Regulatory body added",
+                        msg: "Regulatory body has been added"
+                    });
                     $state.go("setup.facility_regulatory_bodies");
                     $scope.regulatory_body = true;
                 }).error(function(error){
@@ -588,6 +656,10 @@
                         "contact" : data.id
                     })
                     .success(function (data) {
+                        toasty.success({
+                            title: "Regulatory body contact added",
+                            msg: "Regulatory body contact has been added"
+                        });
                         $scope.contact = {
                             contact_type : "",
                             contact : ""
@@ -613,6 +685,10 @@
                     .success(function () {
                         adminApi.regulatoryBodyContacts.remove(obj.contact)
                             .success(function () {
+                                toasty.success({
+                                    title: "Regulatory body contact deleted",
+                                    msg: "Regulatory body contact has been deleted"
+                                });
                                 obj.delete_spinner = false;
                                 $scope.contacts.items =
                                 _.without($scope.contacts.items, obj);

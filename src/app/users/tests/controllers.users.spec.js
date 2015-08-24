@@ -9,6 +9,7 @@
             module("mfl.users.services");
             module("api.wrapper");
             module("ui.router");
+            module("angular-toasty");
             module("mfl.users.controllers.users");
             module("mfl.common.services");
 
@@ -335,6 +336,7 @@
         beforeEach(function () {
             module("mfl.users.controllers.users");
             module("ui.router");
+            module("angular-toasty");
             module("mflAdminAppConfig");
             module("mfl.common.forms");
             module("mfl.common.services");

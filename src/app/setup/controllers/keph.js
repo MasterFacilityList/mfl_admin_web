@@ -24,7 +24,8 @@
         }]
     )
     .controller("mfl.setup.controller.keph.create",
-        ["$scope", "$state", "$log", "adminApi", function ($scope, $state, $log, adminApi) {
+        ["$scope", "$state", "$log", "adminApi","toasty",
+         function ($scope, $state, $log, adminApi,toasty) {
             $scope.title = {
                 icon: "fa-plus-circle",
                 name: "New KEPH Level"
@@ -36,6 +37,10 @@
             $scope.save = function () {
                 adminApi.kephs.create($scope.keph)
                 .success(function () {
+                    toasty.success({
+                        title: "KEPH Added",
+                        msg: "Keph level has been added"
+                    });
                     $state.go("setup.facility_kephs",{},{reload:true});
                 })
                 .error(function (data) {
@@ -46,8 +51,8 @@
     )
 
     .controller("mfl.setup.controller.keph.edit",
-        ["$scope", "$stateParams", "$state", "$log", "adminApi","mfl.common.forms.changes",
-        function ($scope, $stateParams, $state, $log, adminApi, formChanges) {
+        ["$scope", "$stateParams", "$state", "$log", "adminApi","mfl.common.forms.changes","toasty",
+        function ($scope, $stateParams, $state, $log, adminApi, formChanges,toasty) {
             $scope.title = {
                 icon: "fa-edit",
                 name: "Edit KEPH Level"
@@ -75,6 +80,10 @@
             });
             $scope.remove = function () {
                 adminApi.kephs.remove($stateParams.keph_id).success(function(){
+                    toasty.success({
+                        title: "KEPH Deleted",
+                        msg: "Keph level has been deleted"
+                    });
                     $state.go("setup.facility_kephs");
                 }).error(function(error){
                     $scope.alert = error.error;
@@ -88,6 +97,10 @@
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.kephs.update(id, changes).success(function(){
+                        toasty.success({
+                            title: "KEPH Updated",
+                            msg: "Keph level has been updated"
+                        });
                         $state.go("setup.facility_kephs");
                     }).error(function(error){
                         $scope.alert = error.error;

@@ -17,9 +17,9 @@
             .error(function (error) {
                 $scope.errors = error;
             });
-            $scope.search_changes = function () {
+            $scope.search_changes = function (upgrades, recent) {
                 $scope.filters = _.extend({"fields": "county,changes,county_id"},
-                                          $scope.recent, $scope.upgrades);
+                                          upgrades,recent);
                 reportsApi.up_down_grades.filter($scope.filters)
                 .success(function (data) {
                     $scope.changes = data;

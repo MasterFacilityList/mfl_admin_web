@@ -25,8 +25,8 @@
         }]
     )
     .controller("mfl.setup.controller.contact_types.view", ["$scope","$state", "$stateParams",
-                "adminApi","mfl.common.forms.changes",
-        function($scope, $state, $stateParams, adminApi, formChanges){
+                "adminApi","mfl.common.forms.changes","toasty",
+        function($scope, $state, $stateParams, adminApi, formChanges,toasty){
             $scope.contact_type_id = $stateParams.id;
             $scope.wrapper = adminApi.contact_types;
 
@@ -56,6 +56,10 @@
                     adminApi.contact_types.remove($stateParams.id).success(function(){
                         $state.go("setup.contact_types",{},{reload:true});
                     }).error(function(error){
+                        toasty.success({
+                            title: "Contact Delete",
+                            msg: "Contact has been deleted successfully"
+                        });
                         $scope.alert = error.error;
                         $scope.errors = error;
                         $state.go("setup.contact_types",{},{reload:true});
@@ -72,6 +76,10 @@
             }
             $scope.createContacts = function(chuApprover){
                 adminApi.contact_types.create(chuApprover).success(function(){
+                    toasty.success({
+                        title: "Contact added",
+                        msg: "Contact has been added"
+                    });
                     $state.go("setup.contact_types",{},{reload:true});
                 }).error(function(error){
                     $scope.alert = error.error;
@@ -82,6 +90,10 @@
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.contact_types.update(id, changes).success(function(){
+                        toasty.success({
+                            title: "Contact updated",
+                            msg: "Contact has been updated"
+                        });
                         $state.go("setup.contact_types",{},{reload:true});
                     }).error(function(error){
                         $scope.alert = error.error;
