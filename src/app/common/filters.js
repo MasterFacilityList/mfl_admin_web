@@ -33,6 +33,12 @@
             return s;
         };
     })
+    .filter("optionName", function () {
+        return function (input, list) {
+            var rslt = _.findWhere(list, {"id" : input});
+            return rslt.display_text;
+        };
+    })
     .filter("facilityType", function () {
         return function (list, input) {
             var rslt = _.findWhere(list, {"id" : input});

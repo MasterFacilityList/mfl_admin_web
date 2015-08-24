@@ -141,9 +141,11 @@
                 $scope.fac_serv = {
                     services : []
                 };
+                $scope.service_display = [];
                 $scope.removeOption = function (serv_obj) {
                     if(_.isUndefined(serv_obj.fac_serv)){
                         serv_obj.option = "";
+                        $scope.service_display = _.without($scope.service_display, serv_obj);
                     }else{
                         wrappers.facility_services.remove(serv_obj.fac_serv)
                         .success(function () {
@@ -152,6 +154,17 @@
                         .error(function (data) {
                             $scope.errors = data;
                         });
+                    }
+                };
+                $scope.servicesDisplay = function (obj) {
+                    if(_.where($scope.service_display, obj).length > 0) {
+                        if(_.isEmpty(obj.option) || _.isUndefined(obj.option)){
+                            $scope.service_display = _.without($scope.service_display, obj);
+                        }
+                    }else{
+                        if(!_.isEmpty(obj.option) || obj.option === true){
+                            $scope.service_display.push(obj);
+                        }
                     }
                 };
                 $scope.facilityServices = function () {
@@ -183,7 +196,7 @@
                             $state.go("facilities");
                         })
                         .error(function (err) {
-                            $scope.alert = err.error;
+                            $scope.errors = err.error;
                         });
 
                 };
@@ -578,7 +591,7 @@
                 $scope.contact_types = data.results;
             })
             .error(function(error){
-                $log.error(error);
+                $scope.errors = error;
             });
 
             /*facility contacts*/
@@ -591,12 +604,12 @@
                             $scope.detailed_contacts.push(data);
                         })
                         .error(function (err) {
-                            $scope.alert = err.error;
+                            $scope.errors = err;
                         });
                 });
             })
             .error(function(error){
-                $log.error(error);
+                $scope.errors = error;
                 $scope.cont_error = errorMessages.errors +
                     errorMessages.fetch_contacts;
             });
@@ -617,14 +630,14 @@
                         obj.delete_spinner = false;
                     })
                     .error(function (data) {
-                        $log.error(data);
+                        $scope.errors = data;
                         obj.delete_spinner = false;
                         $scope.cont_error = errorMessages.errors +
                             errorMessages.contacts;
                     });
                 })
                 .error(function (data) {
-                    $log.error(data);
+                    $scope.errors = data;
                     obj.delete_spinner = false;
                     $scope.cont_error = errorMessages.errors +
                         errorMessages.contacts;
@@ -801,7 +814,7 @@
                 $scope.regbodies = data.results;
             })
             .error(function(error){
-                $log.error(error);
+                $scope.errors = error;
             });
             /*facility units*/
             wrappers.facility_units.filter({
@@ -813,6 +826,7 @@
             })
             .error(function(error){
                 $log.error(error);
+                $scope.errors = error;
                 $scope.units_error = errorMessages.errors +
                     errorMessages.fetch_units;
             });
@@ -853,6 +867,7 @@
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
+                        $scope.errors = err;
                     });
                 } else {
                     if(!$scope.create){
@@ -893,6 +908,7 @@
                     .error(function (data) {
                         $log.error(data);
                         $scope.spinner = false;
+                        $scope.errors = data;
                         $scope.units_error = errorMessages.errors +
                             errorMessages.units;
                     });
@@ -1228,6 +1244,7 @@
                 })
                 .error(function(error){
                     $log.error(error);
+                    $scope.errors = error;
                 });
             //if create go to create or edit state
             $scope.toState = function (arg) {
@@ -1298,6 +1315,7 @@
                     })
                     .error(function (error) {
                         $log.error(error);
+                        $scope.errors = error;
                         $scope.geoloc_error = errorMessages.errors +
                             errorMessages.geolocation;
                     });
