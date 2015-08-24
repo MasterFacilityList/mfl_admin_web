@@ -13,7 +13,7 @@
             "url": "^/facilities_closed/",
             "views": {
                 "main-content@facility_mgmt": {
-                    templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
+                    templateUrl: "facility_mgmt/tpls/facilities.closed.grid.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facilities_closed"
                 }
             },
