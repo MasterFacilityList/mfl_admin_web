@@ -2,6 +2,17 @@
 
     "use strict";
 
+    var results_transform = function (results, $scope) {
+        var data = _.groupBy(results, function (a) {return a.county;});
+        $scope.counties = _.keys(data);
+        return _.map($scope.counties, function (c) {
+            return {
+                "county": c,
+                "facilities": data[c]
+            };
+        });
+    };
+
     angular.module("mfl.reports.controllers.facility_reporting", [
         "mfl.reports.services"
     ])
@@ -64,16 +75,6 @@
         "$controller",
         function($scope,$controller){
             var helper = $controller("mfl.reports.controllers.helper");
-            var results_transform = function (results, $scope) {
-                var data = _.groupBy(results, function (a) {return a.county;});
-                $scope.counties = _.keys(data);
-                return _.map($scope.counties, function (c) {
-                    return {
-                        "county": c,
-                        "facilities": data[c]
-                    };
-                });
-            };
             helper.initCtrl($scope, "facility_keph_level_report",
                             "keph_facilities", results_transform);
         }
@@ -83,7 +84,7 @@
         function($scope,$controller){
             var helper = $controller("mfl.reports.controllers.helper");
             helper.initCtrl($scope, "facility_count_by_facility_type_detailed",
-                            "county_types_facilities");
+                            "county_types_facilities", results_transform);
         }
     ])
     .controller("mfl.reports.controllers.county_constituencies", ["$scope",
@@ -91,7 +92,7 @@
         function($scope,$controller){
             var helper = $controller("mfl.reports.controllers.helper");
             helper.initCtrl($scope, "facility_constituency_report",
-                            "county_constituencies_facilities");
+                            "county_constituencies_facilities", results_transform);
         }
     ]);
 })(window.angular, window._);
