@@ -33,7 +33,7 @@
             });
         });
 
-        describe("Test option edit controller", function () {
+        describe("Test option group edit controller", function () {
             it("should get one option group", function () {
                 var scope = rootScope.$new();
                 var data = {
@@ -48,6 +48,22 @@
                     .expectGET(server_url + "api/facilities/option_groups/1/")
                     .respond(200, {});
                 scope.option_group_id = "1";
+                scope.option_group = {
+                    "id" : "1",
+                    "options" : [
+                        {
+                            "id" : "5",
+                            "value" : "5",
+                            "display_text" : "Level 5",
+                            "option_type": "INTEGER"
+                        },
+                        {
+                            "value" : "4",
+                            "display_text" : "Level 4",
+                            "option_type" : "INTEGER"
+                        }
+                    ]
+                };
                 scope.edit_view = true;
                 ctrl("option_group_create", data);
                 var frm = {
@@ -60,8 +76,15 @@
                 httpBackend
                     .expectPATCH(server_url +
                         "api/facilities/option_groups/1/").respond(204);
+                var obj = {
+                    "value" : "4",
+                    "display_text" : "Level 4",
+                    "option_type" : "INTEGER"
+                };
                 scope.cancel();
                 scope.save(frm);
+                scope.addOption();
+                scope.removeOption(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -91,11 +114,35 @@
                         "$$modelValue": "New Option Group"
                     }
                 };
+                scope.option_group = {
+                    "id" : "1",
+                    "options" : [
+                        {
+                            "id" : "5",
+                            "value" : "5",
+                            "display_text" : "Level 5",
+                            "option_type": "INTEGER"
+                        },
+                        {
+                            "id" : "5",
+                            "value" : "4",
+                            "display_text" : "Level 4",
+                            "option_type" : "INTEGER"
+                        }
+                    ]
+                };
                 httpBackend
                     .expectPATCH(server_url +
                         "api/facilities/option_groups/1/").respond(500);
+                var obj = {
+                    "id" : "4",
+                    "value" : "4",
+                    "display_text" : "Level 4",
+                    "option_type" : "INTEGER"
+                };
                 scope.cancel();
                 scope.save(frm);
+                scope.removeOption(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();

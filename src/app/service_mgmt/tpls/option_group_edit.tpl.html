@@ -10,39 +10,78 @@
    </h2>
 </div>
 <div ui-view="delete"></div>
-<div class="col-md-12">
-<div class="fade-content col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20  content-card">
+<div class="col-xs-12 fade-content">
+<!-- <div class="fade-content col-xs-12 margin-t-20  content-card"> -->
     <form name="option_group_frm" novalidate ng-submit="save(option_group_frm)">
+      <div class="col-xs-12 margin-t-20 content-card">
         <drf-err-msg></drf-err-msg>
-        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
-                <div class="form-group">
-                    <label>Option Group Name</label>
-                    <input class="form-control" name="display_text" ng-model="option_group.name" placeholder="Option Group Name" required api-checker/>
-                </div>
-                <div class="form-group checkbox" ng-if="edit_view">
-                    <label>
-                        <input type="checkbox" id="active" name="active" ng-model="option_group.active" api-checker >
-                        Is Active?
-                     </label>
-                </div>
-                <!-- </div> -->
-                <button type="submit" class="btn btn-primary pull-left"
-                    requires-user-feature="is_staff" requires-permission="facilities.delete_option">
-                    Save
-                </button>
-                <a class="btn btn-default margin-l-10 pull-left" ui-sref="service_mgmt.option_groups_list">Cancel</a>
-                <mfl-revision-view ng-if="edit_view" id="option_group_id" wrapper="wrapper" ></mfl-revision-view>
-        </div>
+          <div class="form-group">
+              <label class="control-label" for="lg">Option Group Name</label>
+              <input class="form-control input input-default" name="display_text" ng-model="option_group.name" placeholder="Option Group Name" required api-checker/>
+          </div>
+          <div class="checkbox checkbox-lg" ng-if="edit_view">
+              <label>
+                  <input type="checkbox" data-toggle="checkbox-x" id="active" name="active" ng-model="option_group.active" api-checker >
+                  Is Active?
+               </label>
+          </div>
+      </div>
+      <div class="col-xs-12 pad-0 margin-t-10 margin-b-0 content-card">
+          <table class="table table-hover col-xs-12">
+              <thead class="grey-header">
+                  <th class="col-xs-4">Option Type</th>
+                  <th class="col-xs-4">Display Text</th>
+                  <th class="col-xs-3">Option Value</th>
+                  <th class="col-xs-1 text-center"></th>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="option in option_group.options">
+                      <td class="col-xs-4">
+                        <div class="form-group grid-inputs">
+                          <select class="form-control" name="option_type" ng-model="option.option_type" placeholder="Option Type" required>
+                            <option value="" disabled>Select an option type</option>
+                            <option ng-repeat="opt_type in option_types" ng-selected="{{opt_type == option.option_type}}" value="{{opt_type}}">{{opt_type}}</option>
+                          </select>
+                          <span class="highlight"></span>
+                          <span class="bar"></span>
+                        </div>
+                      </td>
+                      <td class="col-xs-4">
+                        <div class="form-group grid-inputs">
+                            <input class="form-control" name="display_text" ng-model="option.display_text" placeholder="Display Text" required />
+                        </div>
+                      </td>
+                      <td class="col-xs-3">
+                        <div class="form-group grid-inputs">
+                            <input class="form-control" name="value" ng-model="option.value" required placeholder="Option Value"/>
+                        </div>
+                      </td>
+                      <td class="col-xs-1 text-center">
+                          <a ng-click="removeOption(option)" style="cursor: pointer;" ng-if="option_group.options.length > 1">
+                              <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                          </a>
+                      </td>
+                  </tr>
+                  <tr ng-if="option_group.options.length === 0" class="">
+                      <td colspan="3">
+                          <i class="fa fa-info-circle"></i> No Options Assigned to Option Group
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      <div class="col-xs-12 pad-0 text-right margin-t-10 margin-b-10">
+          <a class="btn btn-primary pull-right" ng-click="addOption()" >
+              <i class="fa fa-plus-square-o"></i> Add
+          </a>
+      </div>
+          <!-- </div> -->
+          <button type="submit" class="btn btn-primary pull-left margin-t-10"
+              requires-user-feature="is_staff" requires-permission="facilities.delete_option">
+              Save
+          </button>
+          <a class="btn btn-default margin-l-10 pull-left margin-t-10" ui-sref="service_mgmt.option_groups_list">Cancel</a>
+          <mfl-revision-view ng-if="edit_view" id="option_group_id" wrapper="wrapper" ></mfl-revision-view>
     </form>
-</div>
-<div class="col-xs-10 col-xs-offset-1 pad-0">
-  <button ng-show="edit_view" class="btn btn-primary" ng-click="viewServices = !viewServices">
-      {{viewServices ? 'Hide' : 'View'}} Options <i class="fa {{viewServices ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
-  </button>
-</div>
-<div class="col-sm-10 col-sm-offset-1 fade-content margin-t-20 pad-0" content-slide-in="viewServices" slide-show-duration="1000">
-    <sil-grid template="service_mgmt/tpls/group_options.tpl.html" grid-for="service_mgmt" api-key="options"
-        data="options" filters="filters" error="alert">
-    </sil-grid>
-</div>
+<!-- </div> -->
 </div>
