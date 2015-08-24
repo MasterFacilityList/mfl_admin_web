@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label>Option Group</label>
-                    <select class="form-control" name="category" ng-model="option.group" required>
+                    <select class="form-control" name="group" ng-model="option.group" required>
                         <option value="" disabled>Select an option group</option>
                         <option  ng-repeat="opt_grp in option_groups" ng-selected="{{opt_grp.id == option.group}}" value="{{opt_grp.id}}">{{opt_grp.name}}</option>
                     </select>

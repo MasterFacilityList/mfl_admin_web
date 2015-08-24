@@ -261,6 +261,7 @@
                             "name": $scope.facility.town_name
                         }
                     };
+                    $scope.off_contacts = $scope.facility.officer_in_charge.contacts;
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -379,13 +380,6 @@
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
                 $scope.facility.town = $scope.select_values.town;
-                changes.officer_in_charge = {
-                    name : changes.officer_name ? changes.officer_name :
-                        $scope.facility.officer_in_charge.name,
-                    reg_no : changes.reg_number ? changes.reg_number :
-                            $scope.facility.officer_in_charge.reg_no,
-                    title : changes.title ? changes.title : $scope.facility.officer_in_charge.title
-                };
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {
@@ -418,6 +412,23 @@
                         });
                     }
                 } else {
+                    changes.officer_in_charge = $scope.facility.officer_in_charge;
+                    if($scope.facility.officer_in_charge.contacts.length > 0) {
+                        _.each(changes.officer_in_charge.contacts,
+                            function (a_cont){
+                                if(!_.isUndefined(a_cont.officer_contact_id)){
+                                    var curr_cont = _.findWhere(
+                                    $scope.off_contacts,{"officer_contact_id":
+                                        a_cont.officer_contact_id});
+                                    if(curr_cont.type === a_cont.type &&
+                                        curr_cont.contact === a_cont.contact){
+                                        changes.officer_in_charge.contacts =
+                                        _.without(changes.officer_in_charge.contacts, curr_cont);
+                                    }
+                                }
+                            }
+                        );
+                    }
                     wrappers.facility_detail.update($scope.facility_id, changes)
                     .success(function () {
                         $state.go($scope.finish,
@@ -453,9 +464,25 @@
                 });
             };
             $scope.removeOfficerContact = function (obj) {
-                if(_.isUndefined(obj.id)){
+                if(_.isUndefined(obj.officer_contact_id)){
                     $scope.facility.officer_in_charge.contacts =
                         _.without($scope.facility.officer_in_charge.contacts, obj);
+                }else{
+                    wrappers.officer_contacts.remove(obj.officer_contact_id)
+                    .success(function (){
+                        wrappers.contacts.remove(obj.contact_id)
+                        .success(function () {
+                            $scope.facility.officer_in_charge.contacts =
+                            _.without(
+                            $scope.facility.officer_in_charge.contacts, obj);
+                        })
+                        .error(function (data) {
+                            $scope.errors = data;
+                        });
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
                 }
             };
             $scope.$watch("facility", function (f) {

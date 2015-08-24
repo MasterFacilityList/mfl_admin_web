@@ -222,7 +222,7 @@
                     <label class="">
                         Name
                     </label>
-                    <input type="text" class="form-control" ng-model="facility.officer_in_charge.name" name="officer_name" placeholder="Name" api-checker>
+                    <input type="text" class="form-control" ng-model="facility.officer_in_charge.name" name="officer_name" placeholder="Name" api-checker required>
                     <span class="highlght"></span>
                     <span class="bar"></span>
                 </div>
@@ -230,7 +230,7 @@
                     <label class="">
                         Registration Number
                     </label>
-                    <input class="form-control" name="reg_number" ng-model="facility.officer_in_charge.reg_no" placeholder="Registration Number" api-checker>
+                    <input class="form-control" name="reg_number" ng-model="facility.officer_in_charge.reg_no" placeholder="Registration Number" api-checker required>
                     <span class="highlght"></span>
                     <span class="bar"></span>
                 </div>
@@ -238,9 +238,9 @@
                     <label class="">
                         Job Title
                     </label>
-                    <select class="form-control" name="title" ng-model="facility.officer_in_charge.title" placeholder="Job Title">
-                        <option value="">Select Job Title</option>
-                        <option ng-repeat="title in job_titles" ng-selected="{{title.id == facility.officer_in_charge.title}}" ng-value="title.id">{{title.name}}</option>
+                    <select class="form-control" name="title" ng-model="facility.officer_in_charge.title" api-checker required>
+                        <option value="" disabled>Select Job Title</option>
+                        <option ng-repeat="title in job_titles" ng-selected="{{title.id == facility.officer_in_charge.title}}" value="{{title.id}}">{{title.name}}</option>
                     </select>
                     <span class="highlight"></span>
                     <span class="bar"></span>
@@ -256,7 +256,7 @@
                         <tr class="" ng-repeat="cont in facility.officer_in_charge.contacts">
                             <td class="col-xs-5">
                                 <div class="form-group">
-                                    <select name="contact_type" class="form-control"  ng-model="cont.type">
+                                    <select name="contact_type" class="form-control"  ng-model="cont.type" api-checker required>
                                         <option value="">Select Contact Type</option>
                                         <option ng-repeat="cont_type in contact_types" ng-selected="{{cont_type.id == cont.type}}" ng-value="cont_type.id">{{cont_type.name}}</option>
                                     </select>
@@ -266,7 +266,7 @@
                             </td>
                             <td class="col-xs-6">
                                 <div class="form-group">
-                                    <input name="contact" class="form-control" ng-model="cont.contact" placeholder="Contact Details">
+                                    <input name="contact" class="form-control" ng-model="cont.contact" placeholder="Contact Details" api-checker required>
                                     <span class="highlght"></span>
                                     <span class="bar"></span>
                                 </div>
@@ -275,6 +275,11 @@
                                 <a ng-click="removeOfficerContact(cont)" style="cursor: pointer; margin-botom: 5px;">
                                     <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                                 </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="facility.officer_in_charge.contacts.length < 1">
+                            <td class="alert alert-info" colspan="3">
+                                <i class="fa fa-info-circle"></i> No contacts assigned to officer in charge
                             </td>
                         </tr>
                     </tbody>
