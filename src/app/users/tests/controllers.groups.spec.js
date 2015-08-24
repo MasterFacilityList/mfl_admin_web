@@ -7,6 +7,7 @@
         beforeEach(function () {
             module("mfl.users.controllers.groups");
             module("ui.router");
+            module("angular-toasty");
             module("mflAdminAppConfig");
 
             inject(["$controller", "$log", "$httpBackend", "$rootScope", "SERVER_URL", "$state",
