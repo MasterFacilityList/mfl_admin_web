@@ -25,7 +25,8 @@
         }]
     )
     .controller("mfl.setup.controller.town.create",
-        ["$scope", "$state", "$log", "adminApi", function ($scope, $state, $log, adminApi) {
+        ["$scope", "$state", "$log", "adminApi","toasty",
+         function ($scope, $state, $log, adminApi, toasty) {
             $scope.title = {
                 icon: "fa-plus-circle",
                 name: "New Town"
@@ -37,6 +38,10 @@
             $scope.save = function () {
                 adminApi.towns.create($scope.town)
                 .success(function (data) {
+                    toasty.success({
+                        title: "Town Added",
+                        msg: "Town level has been added"
+                    });
                     $state.go("setup.towns.town_edit", {"town_id": data.id});
                 })
                 .error(function (data) {
@@ -48,8 +53,8 @@
     )
 
     .controller("mfl.setup.controller.town.edit",
-        ["$scope", "$stateParams", "$state", "$log", "adminApi",
-        function ($scope, $stateParams, $state, $log, adminApi) {
+        ["$scope", "$stateParams", "$state", "$log", "adminApi","toasty",
+        function ($scope, $stateParams, $state, $log, adminApi, toasty) {
             $scope.title = {
                 icon: "fa-edit",
                 name: "Edit Town"
@@ -77,6 +82,10 @@
             });
             $scope.remove = function () {
                 adminApi.towns.remove($stateParams.town_id).success(function(){
+                    toasty.success({
+                        title: "Town Deleted",
+                        msg: "Town has been updated"
+                    });
                     $state.go("setup.towns",{},{reload:true});
                 }).error(function(error){
                     $scope.alert = error.error;
@@ -89,6 +98,10 @@
             $scope.save = function () {
                 adminApi.towns.update($scope.town_id, {"name": $scope.town.name})
                 .success(function () {
+                    toasty.success({
+                        title: "Town Updated",
+                        msg: "Town level has been updated"
+                    });
                     $state.go("setup.towns");
                 })
                 .error(function (data) {

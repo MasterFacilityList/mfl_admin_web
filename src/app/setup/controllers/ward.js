@@ -25,8 +25,8 @@
         }]
     )
     .controller("mfl.setup.controller.ward.edit", ["$scope","adminApi","$stateParams",
-        "mfl.common.forms.changes","$state",
-        function ($scope,adminApi,$stateParams,formChanges,$state) {
+        "mfl.common.forms.changes","$state","toasty",
+        function ($scope,adminApi,$stateParams,formChanges,$state,toasty) {
             $scope.select_values = {
                 constituency: {}
             };
@@ -68,6 +68,10 @@
                     adminApi.wards.create({"name": frm.name,
                        "constituency": $scope.select_values.constituency})
                     .success(function () {
+                        toasty.success({
+                            title: "Ward Added",
+                            msg: "Ward has been added"
+                        });
                         $state.go("setup.wards");
                     })
                     .error(function (error) {
@@ -79,6 +83,10 @@
                     if(!_.isEmpty(changes)){
                         adminApi.wards.update($stateParams.ward_id,changes)
                         .success(function () {
+                            toasty.success({
+                                title: "Ward Updated",
+                                msg: "Ward has been updated"
+                            });
                             $state.go("setup.wards");
                         })
                         .error(function (error) {

@@ -8,6 +8,7 @@
         "angular-loading-bar",
         "mfl.auth.oauth2",
         "ui.router",
+        "angular-toasty",
         "mfl.auth.services",
         "ngIdle",
         "mfl.common.forms",
@@ -55,7 +56,13 @@
         ip.timeout(st.warning);
         ip.keepalive(false);
     }])
-
+    .config(["toastyConfigProvider", function(toastyConfigProvider) {
+        toastyConfigProvider.setConfig({
+            sound: false,
+            position: "top-right",
+            theme: "default"
+        });
+    }])
     .run(["Idle", function (idle) {
         idle.watch();
     }])

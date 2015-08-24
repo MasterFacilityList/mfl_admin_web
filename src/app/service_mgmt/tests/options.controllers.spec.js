@@ -6,6 +6,7 @@
 
         beforeEach(function () {
             module("ui.router");
+            module("angular-toasty");
             module("mflAdminAppConfig");
             module("mfl.common.forms");
             module("mfl.service_mgmt.services");
