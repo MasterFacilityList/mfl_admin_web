@@ -846,10 +846,8 @@
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_unitobj)
                     .success(function () {
                         if(!$scope.create){
-                            console.log("editing");
                             $state.go($scope.finish);
                         }else{
-                            console.log("creating");
                             $scope.goToNext(5, "services");
                         }
                     })
