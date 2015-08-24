@@ -11,30 +11,30 @@
    </h2>
 </div>
 <section class="margin-t-10">
-    <div class="col-sm-12">
+    <div class="col-xs-12">
        <div class="col-xs-12 content-card heading pad-b-10">
-            <div class="col-sm-6 col-xs-12">
+            <div class="col-xs-12">
                <div>
-                    <h4>Change Options:</h4>
+                   <div class="col-xs-12 col-sm-3 pad-l-0">
+                        <h4>Change Options:</h4>
+                   </div>
                     <div class="btn-group">
-                        <label class="btn btn-default" ng-model="upgrades" btn-radio="{upgrades:true}">Upgrades</label>
-                        <label class="btn btn-default" ng-model="upgrades" btn-radio="{upgrades:false}">Downgrades</label>
-                        <label class="btn btn-default" ng-model="upgrades" btn-radio="{}">Reset</label>
+                        <button class="btn btn-default" ng-model="upgrades" btn-radio="{upgrades:true}" ng-click="search_changes({upgrades:true},recent)">Upgrades</button>
+                        <button class="btn btn-default" ng-model="upgrades" btn-radio="{upgrades:false}" ng-click="search_changes({upgrades:false},recent)">Downgrades</button>
+                        <button class="btn btn-default" ng-model="upgrades" btn-radio="{}" ng-click="search_change({},recent)">Reset</button>
                     </div>
                </div>
             </div>
-            <div class="col-sm-6 col-xs-12">
-                    <h4>Recent by:</h4>
+            <div class="col-xs-12">
+                   <div class="col-xs-12 col-sm-3 pad-l-0">
+                        <h4>Recent by:</h4>
+                   </div>
                     <div class="btn-group">
-                        <label class="btn btn-default" ng-model="recent" btn-radio="{last_week:true}">Last Week</label>
-                        <label class="btn btn-default" ng-model="recent" btn-radio="{last_month:true}">Last Month</label>
-                        <label class="btn btn-default" ng-model="recent" btn-radio="{last_3_months:true}">Last Quarter</label>
-                        <label class="btn btn-default" ng-model="recent" btn-radio="{}">Reset</label>
+                        <button class="btn btn-default" ng-model="recent" btn-radio="{last_week:true}" ng-click="search_changes(upgrades,{last_week:true})">Last Week</button>
+                        <button class="btn btn-default" ng-model="recent" btn-radio="{last_month:true}" ng-click="search_changes(upgrades,{last_month:true})" >Last Month</button>
+                        <button class="btn btn-default" ng-model="recent" btn-radio="{last_3_months:true}" ng-click="search_changes(upgrades,{last_3_months:true})">Last Quarter</button>
+                        <button class="btn btn-default" ng-model="recent" btn-radio="{}" ng-click="search_changes(upgrades,{})">Reset</button>
                     </div>
-            </div>
-            <div class="col-xs-12 margin-t-10">
-                <button class="btn btn-primary" ng-click="search_changes()">Search</button>
-                <span class="margin-l-5 custom-well">Current Filter: <i>{{recent || 'Any time' }}, {{upgrades || 'All Changes'}}</i></span>
             </div>
        </div>
         <div class="content-card col-xs-12">
