@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _) {
 
     "use strict";
 
@@ -8,14 +8,15 @@
 
     .controller("mfl.reports.controllers.helper", ["mfl.reports.services.wrappers",
         function(wrappers){
-            this.initCtrl = function($scope, report_type, data_param){
+            this.initCtrl = function($scope, report_type, data_param, transform_fxn){
                 $scope.search = "";
                 $scope.filters = {
                     "report_type":report_type
                 };
                 wrappers.reporting.filter($scope.filters)
                 .success(function (data) {
-                    $scope[data_param] = data.results;
+                    var transform = transform_fxn || _.identity;
+                    $scope[data_param] = transform(data.results, $scope);
                 })
                 .error(function (err) {
                     $scope.errors = err;
@@ -63,8 +64,18 @@
         "$controller",
         function($scope,$controller){
             var helper = $controller("mfl.reports.controllers.helper");
+            var results_transform = function (results, $scope) {
+                var data = _.groupBy(results, function (a) {return a.county;});
+                $scope.counties = _.keys(data);
+                return _.map($scope.counties, function (c) {
+                    return {
+                        "county": c,
+                        "facilities": data[c]
+                    };
+                });
+            };
             helper.initCtrl($scope, "facility_keph_level_report",
-                            "keph_facilities");
+                            "keph_facilities", results_transform);
         }
     ])
     .controller("mfl.reports.controllers.county_facility_types", ["$scope",
@@ -83,4 +94,4 @@
                             "county_constituencies_facilities");
         }
     ]);
-})(window.angular);
+})(window.angular, window._);
