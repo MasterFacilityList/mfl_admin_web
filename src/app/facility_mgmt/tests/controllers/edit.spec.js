@@ -656,7 +656,14 @@
                     officer_in_charge : {
                         name : "Antony",
                         reg_no : "P15/1331",
-                        title : "Medical Supritendant"
+                        title : "Medical Supritendant",
+                        contacts : [
+                            {
+                                officer_contact_id : "3",
+                                type : "18",
+                                contact : "email@mail.com"
+                            }
+                        ]
                     }
                 };
                 data.$scope.steps = [
@@ -849,7 +856,23 @@
                     officer_in_charge: {
                         name : "Antony",
                         reg_no : "P15/1331/",
-                        title: "Medical Supritendant"
+                        title: "Medical Supritendant",
+                        contacts : [
+                            {
+                                officer_contact_id : "3",
+                                type : "18",
+                                contact : "email@mail.com"
+                            },
+                            {
+                                officer_contact_id : "4",
+                                type : "20",
+                                contact : "0722134567"
+                            },
+                            {
+                                type : "21",
+                                contact : "999999"
+                            }
+                        ]
                     }
                 };
                 data.$scope.steps = [
@@ -889,9 +912,29 @@
                         "$modelValue": "Medical Supritendant"
                     },
                     "officer_in_charge": {
-                        "name" : "",
-                        "reg_no" : "",
-                        "title": ""
+                        "$dirty": true,
+                        "name" : "Antony",
+                        "reg_no" : "P15/1331/",
+                        "title": "Medical Supritendant",
+                        "contacts" : [
+                            {
+                                "$dirty": true,
+                                "officer_contact_id" : "3",
+                                "type" : "18",
+                                "contact" : "email@mail.com"
+                            },
+                            {
+                                "$dirty": true,
+                                "officer_contact_id" : "4",
+                                "type" : "21",
+                                "contact" : "072213456799"
+                            },
+                            {
+                                "$dirty": true,
+                                "type" : "21",
+                                "contact" : "999999"
+                            }
+                        ]
                     }
                 };
                 data.$scope.facility_id = 3;
@@ -1069,7 +1112,8 @@
                     officer_in_charge : {
                         name : "Antony",
                         reg_no : "P15/1221/",
-                        title : "Medical Supritendant"
+                        title : "Medical Supritendant",
+                        contacts : []
                     }
                 };
                 data.$scope.steps = [
