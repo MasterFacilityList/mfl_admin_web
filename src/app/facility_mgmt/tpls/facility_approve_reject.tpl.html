@@ -1,0 +1,222 @@
+<div class="content-header">
+   <div class="action-container content-header-extra"></div>
+   <h2 class="content-title">
+       <span class="main-title">{{reject ? 'Approve': 'Reject'}} Facility</span>
+   </h2>
+</div>
+<div class="row">
+   <div class="col-xs-12">
+    <div class="col-xs-12 margin-t-20 fade-content">
+        <div class="col-xs-12 content-card">
+            <h4 class="fw-400"><a ui-sref="facilities.facility_view({facility_id:facility.id})">{{facility.code}} | {{facility.name}}</a></h4>
+            <div class="row">
+                <div class="col-xs-12 margin-b-10 fs-16">
+                    <span>Facility Type: <strong>{{facility.facility_type_name}}</strong></span>
+                </div>
+                <div class="col-sm-6">
+                    <span>Regulation Status:
+                        <span class="label label-warning" style="font-size: 13px">
+                            {{facility.regulatory_status_name}}
+                        </span>
+                    </span>
+                </div>
+                <div class="col-sm-6"><span class="pull-right">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
+           </div>
+        </div>
+        <button class="btn btn-primary margin-b-20" ng-click="viewFacility = !viewFacility">
+            View {{viewFacility ? 'Less' : 'More'}} Facility Details <i class="fa {{viewFacility ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+        </button>
+        <div class="col-xs-12 content-card" content-slide-in="viewFacility" slide-show-duration="1000">
+                <div class="col-md-8 col-xs-12 fs-14" style="border-right: 1px solid #F0F0F0;">
+                    <div class="col-xs-12"><h4 class="fw-600">Basic Details</h4></div>
+                    <span class="pull-left col-md-6 col-xs-12">
+                        <label class="text-black">Open weekends </label>
+                        <span ng-show="facility.open_weekends" class="text-success">
+                            <i class="fa fa-check-circle-o fa-1x fs-15"></i>
+                        </span>
+                        <span ng-hide="facility.open_weekends" class="text-danger">
+                            <i class="fa fa-times-circle-o fa-1x fs-15"></i>
+                        </span>
+                    </span>
+                    <span class="content-right col-md-6 col-xs-12">
+                        <label class="text-black">Beds: </label>
+                        {{facility.number_of_beds}}
+                    </span>
+                    <span class="pull-left col-md-6 col-xs-12">
+                        <label class="text-black">Open on public holidays </label>
+                        <span ng-show="oneFacility.open_public_holidays" class="text-success">
+                            <i class="fa fa-check-circle-o fa-1x fs-15"></i>
+                        </span>
+                        <span ng-hide="oneFacility.open_public_holidays" class="text-danger">
+                            <i class="fa fa-times-circle-o fa-1x fs-15"></i>
+                        </span>
+                    </span>
+                    <span class="content-right col-md-6 col-xs-12">
+                        <label class="text-black">Cots: </label>
+                        {{facility.number_of_cots}}
+                    </span>
+                    <span class="pull-left col-md-6 col-xs-12">
+                        <label class="text-black">Open 24 hours </label>
+                        <span ng-show="oneFacility.open_whole_day" class="text-success">
+                            <i class="fa fa-check-circle-o fa-1x fs-15"></i>
+                        </span>
+                        <span ng-hide="oneFacility.open_whole_day" class="text-danger">
+                            <i class="fa fa-times-circle-o fa-1x fs-15"></i>
+                        </span>
+                    </span>
+                    <span ng-if="facility.facility_catchment_population" class="col-xs-12">
+                        <label class="text-black">Facility Catchment Population: </label>
+                        {{facility.facility_catchment_population}}
+                    </span>
+                    <div class="col-xs-12"><hr class="line-divider"></div>
+                    <div class="col-xs-12 margin-t-5">
+                        <h4 class="fw-600">Location Details</h4>
+                    </div>
+                    <span class="pull-left col-md-6 col-xs-12">
+                         <label class="text-black">County:</label> {{facility.county | titlecase}}
+                    </span>
+                    <span class="content-right col-md-6 col-xs-12">
+                        <label class="text-black">Sub-County:</label> {{facility.constituency | titlecase}}
+                    </span>
+                    <span class="pull-left col-md-6 col-xs-12 margin-t-10">
+                        <label class="text-black">Ward:</label> {{facility.ward_name | titlecase}}
+                    </span>
+                    <span class="content-right col-md-6 col-xs-12 margin-t-10">
+                        <label class="text-black">Town:</label> {{facility.town_name}}
+                    </span>
+                    <!-- Geo -->
+                    <span class="col-xs-12 margin-t-10" ng-if="facility.plot_number !== ''">
+                        <label class="text-black">Plot number: </label>
+                        {{facility.plot_number}}
+                    </span>
+                    <span class="col-xs-12 margin-t-10" ng-show="facility.nearest_landmark">
+                        <label class="text-black">Nearest Landmark: </label>
+                        {{facility.nearest_landmark}}
+                    </span>
+                    <span class="col-xs-12 margin-t-10" ng-if="facility.location_desc !== ''">
+                        <label class="text-black">Specific directions: </label>
+                        {{facility.location_desc}}
+                    </span>
+                    <div class="col-xs-12"><hr class="line-divider"></div>
+                    <div class="col-xs-12 margin-t-5">
+                        <h4 class="fw-600">Geolocation</h4>
+                    </div>
+                    <div class="col-xs-12 pad-0">
+                        <span class="pull-left col-md-6 col-xs-12">
+                            <label class="text-black">Geosource:</label>
+                                {{gis.source_name}}
+                        </span>
+                        <span class="content-right col-md-6 col-xs-12">
+                            <label class="text-black">Geomethod: </label>
+                            {{gis.method_name}}
+                        </span>
+                    </div>
+                    <div class="col-xs-12 pad-0">
+                        <span class="pull-left col-md-6 col-xs-12 margin-t-5">
+                            <label class="text-black">Longitude: </label>
+                                {{gis.coordinates.coordinates[0]}}
+                        </span>
+                        <span class="content-right col-md-6 col-xs-12 margin-t-5">
+                            <label class="text-black">Latitude: </label>
+                            {{gis.coordinates.coordinates[1]}}
+                        </span>
+                    </div>
+                    <!-- Facility officer in charge -->
+                    <div class="col-xs-12" ng-if="facility.officer_in_charge"><hr class="line-divider"></div>
+                    <div class="col-xs-12 margin-t-5" ng-if="facility.officer_in_charge">
+                        <h4 class="fw-600">Officer Incharge</h4>
+                    </div>
+                    <span class="pull-left col-md-6 col-xs-12" ng-if="facility.officer_in_charge.name">
+                        <label class="text-black">Name:</label>
+                            {{facility.officer_in_charge.name}}
+                    </span>
+                    <span class="content-right col-md-6 col-xs-12" ng-if="facility.officer_in_charge.reg_no">
+                        <label class="text-black">Registration No: </label>
+                        {{facility.officer_in_charge.reg_no}}
+                    </span>
+                    <span class="pull-left col-md-6 col-xs-12" ng-if="facility.officer_in_charge.title">
+                        <label class="text-black">Job Title: </label>
+                        {{facility.officer_in_charge.title_name}}
+                    </span>
+                    <span class="pull-left col-xs-12" ng-repeat="off_conts in facility.officer_in_charge.contacts" ng-if="facility.officer_in_charge.contacts">
+                        <label class="text-black">{{off_conts.contact_type_name}}: </label>
+                        {{off_conts.contact}}
+                    </span>
+                    <!-- End of facility officer in charge -->
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="col-xs-12">
+                        <h4 class="fw-600">Ownership Status</h4>
+                    </div>
+                    <span class="col-xs-12">
+                        <label class="text-black">Owner:</label> &nbsp;{{facility.owner_name}}
+                    </span>
+                    <span class="col-xs-12 margin-t-10">
+                        <label class="text-black">Category:</label>&nbsp;{{facility.owner_type_name}}
+                    </span>
+                    <div class="col-xs-12 margin-t-20" ng-if="facility.facility_contacts.length > 0">
+                        <h4 class="fw-600">Facility Contacts</h4>
+                    </div>
+                    <span ng-repeat="cont in facility.facility_contacts" class="col-xs-12 fw-500">
+                        <label class="text-black">
+                            {{cont.contact_type_name | titlecase}}:
+                        </label>
+                        {{cont.contact}}
+                    </span>
+                    <div class="col-xs-12 margin-t-20" ng-if="facility.bank_name">
+                        <h4 class="fw-600">Facility Bank Details</h4>
+                    </div>
+                    <span class="col-xs-12 fw-500" ng-if="facility.bank_name">
+                        <label class="text-black">
+                            Bank Name:
+                        </label>
+                        {{facility.bank_name}}
+                    </span>
+                    <span class="col-xs-12 fw-500" ng-if="facility.branch_name">
+                        <label class="text-black">
+                            Branch Name:
+                        </label>
+                        {{facility.branch_name}}
+                    </span>
+                    <span class="col-xs-12 fw-500" ng-if="facility.bank_account">
+                        <label class="text-black">
+                            Facility Bank Account:
+                        </label>
+                        {{facility.bank_account}}
+                    </span>
+                </div>
+            <!-- End of basic details -->
+        </div>
+    </div>
+    <div class="col-xs-12" ng-cloak>
+        <div class="col-xs-12 content-card marg-t-20 pad-0">
+            <div class="col-xs-12">
+                <span ng-repeat="fa in facility_approvals">
+                    <b>{{fa.done_by}}</b> on <b>{{fa.created|date}}.</b>
+                    <p ng-if="fa.comment"><i class="fa fa-{{fa.is_cancelled?'times text-danger':'check text-success'}}"></i> Comment: {{fa.comment}}</p>
+                </span>
+            </div>
+        </div>
+        <!-- Overall facility approval -->
+        <div class="col-xs-12 content-card margin-t-20 pad-0">
+            <div class="col-xs-12 margin-b-10">
+                <h4 class>{{reject ? 'Approve': 'Reject'}} this facility</h4>
+                <form name="frm_approve">
+                    <div class="form-group margin-t-10">
+                        <label>
+                            Comment for approval
+                        </label>
+                        <textarea class="form-control" name="comment" ng-model="facility_approval.comment" required rows="2">
+                        </textarea>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                    </div>
+                    <button ng-if="reject" class="btn btn-success" ng-click="approveFacility()">Approve Facility</button>
+                    <button ng-if="!reject" class="btn btn-danger margin-l-5" ng-click="approveFacility(true)">Reject Facility</button>
+                </form>
+            </div>
+        </div>
+        <!-- End of overall apporval -->
+    </div>
+    </div>
+</div>

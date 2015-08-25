@@ -18,11 +18,11 @@
             };
         }]
     )
+
     .controller("mfl.facility_mgmt.controllers.facilities_rejected",
         ["$scope", function ($scope) {
             $scope.filters = {
                 "rejected": true,
-                "approved": true,
                 "fields": "id,code,name,facility_type_name,owner_name,county,"+
                           "sub_county,constituency,ward_name,updated"
             };
@@ -30,6 +30,42 @@
                 "name": "Rejected Facilities",
                 "icon": "fa-building"
             };
+        }]
+    )
+
+    .controller("mfl.facility_mgmt.controllers.facility_rejected",
+        ["$scope","mfl.facility_mgmt.services.wrappers","$stateParams","$state",
+         function ($scope,wrappers,$stateParams,$state) {
+            console.log($state.current.name);
+            if(($state.current.name).indexOf("reject_list.view") <0){
+                $scope.reject = false;
+            } else {
+                $scope.reject = true;
+            }
+            $scope.fac_id = $stateParams.facility_id;
+            wrappers.facility_detail.get($stateParams.facility_id)
+                .success(function (data) {
+                    $scope.facility = data;
+                })
+                .error(function (err) {
+                    $scope.errors = err;
+                });
+            wrappers.facility_units.filter(
+                {facility:$stateParams.facility_id})
+                .success(function(data){
+                    $scope.fac_units = data.results;
+                })
+                .error(function (e) {
+                    $scope.alert = e.error;
+                });
+            wrappers.facility_approvals.filter(
+                {facility:$stateParams.facility_id,is_cancelled:$scope.reject})
+                .success(function(data){
+                    $scope.rejections = data.results;
+                })
+                .error(function (e) {
+                    $scope.alert = e.error;
+                });
         }]
     )
 
@@ -96,6 +132,7 @@
             wrappers.facility_detail.get($scope.facility_id)
             .success(function(data) {
                 $scope.facility = data;
+                $scope.reject = $scope.facility.approved && $scope.facility.rejected;
                 if ($scope.facility.coordinates) {
                     wrappers.facility_coordinates.get($scope.facility.coordinates)
                     .success(function (data) {

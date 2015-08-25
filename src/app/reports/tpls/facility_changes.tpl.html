@@ -19,9 +19,9 @@
                         <h4>Change Options:</h4>
                    </div>
                     <div class="btn-group">
-                        <button class="btn btn-default" ng-model="upgrades" btn-radio="{upgrades:true}" ng-click="search_changes({upgrades:true},recent)">Upgrades</button>
-                        <button class="btn btn-default" ng-model="upgrades" btn-radio="{upgrades:false}" ng-click="search_changes({upgrades:false},recent)">Downgrades</button>
-                        <button class="btn btn-default" ng-model="upgrades" btn-radio="{}" ng-click="search_change({},recent)">Reset</button>
+                        <label class="btn btn-default" ng-model="upgrades" btn-radio="{upgrade:true}">Upgrades</label>
+                        <label class="btn btn-default" ng-model="upgrades" btn-radio="{upgrade:false}">Downgrades</label>
+                        <label class="btn btn-default" ng-model="upgrades" btn-radio="{}">Reset</label>
                     </div>
                </div>
             </div>
