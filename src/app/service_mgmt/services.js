@@ -14,6 +14,9 @@
 
         this.option_groups = api.setBaseUrl("api/facilities/option_groups/");
 
+        this.create_option_group = api.setBaseUrl("api/facilities/"+
+            "option_group_with_options/");
+
         this.service_options = api.setBaseUrl("api/facilities/service_options/");
 
         this.keph = api.setBaseUrl("api/facilities/keph/");
