@@ -73,9 +73,6 @@
                         "$$modelValue": "New Option Group"
                     }
                 };
-                httpBackend
-                    .expectPATCH(server_url +
-                        "api/facilities/option_groups/1/").respond(204);
                 var obj = {
                     "value" : "4",
                     "display_text" : "Level 4",
@@ -131,9 +128,6 @@
                         }
                     ]
                 };
-                httpBackend
-                    .expectPATCH(server_url +
-                        "api/facilities/option_groups/1/").respond(500);
                 var obj = {
                     "id" : "4",
                     "value" : "4",
