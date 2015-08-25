@@ -62,7 +62,7 @@
                           </a>
                       </td>
                   </tr>
-                  <tr ng-if="option_group.options.length === 0" class="">
+                  <tr ng-if="option_group.options.length < 1" class="">
                       <td colspan="3">
                           <i class="fa fa-info-circle"></i> No Options Assigned to Option Group
                       </td>
@@ -76,12 +76,12 @@
           </a>
       </div>
           <!-- </div> -->
-          <button type="submit" class="btn btn-primary pull-left margin-t-10"
+          <button type="submit" class="btn btn-primary pull-left margin-t-10 margin-b-10"
               requires-user-feature="is_staff" requires-permission="facilities.delete_option">
               Save
           </button>
-          <a class="btn btn-default margin-l-10 pull-left margin-t-10" ui-sref="service_mgmt.option_groups_list">Cancel</a>
-          <mfl-revision-view ng-if="edit_view" id="option_group_id" wrapper="wrapper" ></mfl-revision-view>
+          <a class="btn btn-default margin-l-10 pull-left margin-t-10 margin-b-10" ui-sref="service_mgmt.option_groups_list">Cancel</a>
+          <mfl-revision-view ng-if="edit_view" id="option_group_id" wrapper="wrapper" class="margin-b-20"></mfl-revision-view>
     </form>
 <!-- </div> -->
 </div>
