@@ -9,10 +9,10 @@
         <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="btn btn-success" ng-if="facility.is_published" tooltip="Unpublish Facility">
             Unpublish
         </a>
-        <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facility_reject_list.view.approve({facility_id: fac_id})" class="btn btn-success" ng-if="(facility.rejected)&&(facility.approved)" tooltip="Reject Facility">
+        <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facility_reject_list.view.approve({facility_id: fac_id})" class="btn btn-success" ng-if="(facility.rejected)&&(facility.approved)" tooltip="Approve Facility">
             Approve
         </a>
-        <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facility_approve_list.view.reject({facility_id: fac_id})" class="btn btn-success" ng-if="(!facility.rejected)&&(facility.approved)" tooltip="Approve Facility">
+        <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facility_approve_list.view.reject({facility_id: fac_id})" class="btn btn-success" ng-if="(!facility.rejected)&&(facility.approved)" tooltip="Reject Facility">
             Reject
         </a>
         <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac_id})" class="btn btn-success" ng-if="(!facility.rejected)&&(!facility.is_approved||facility.has_edits)" tooltip="Approve Facility">

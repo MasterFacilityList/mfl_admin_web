@@ -190,11 +190,10 @@
     </div>
     <div class="col-xs-12" ng-cloak>
         <div class="col-xs-12 content-card marg-t-20 pad-0" ng-if="facility.is_approved">
-            <div class="col-xs-12 pad-0"2>
-                    <span ng-repeat="fa in facility_approvals">
-                        <b>{{fa.done_by}}</b> on <b>{{fa.created|date}}.</b>
-                        <p ng-if="fa.comment">Comment: {{fa.comment}}</p>
-                    </span>
+            <div class="col-xs-12">
+                <span ng-repeat="fa in facility_approvals">
+                    <b>{{fa.done_by}}</b> on <b>{{fa.created|date}}.</b>
+                    <p ng-if="fa.comment"><i class="fa fa-{{fa.is_cancelled?'times text-danger':'check text-success'}}"></i> Comment: {{fa.comment}}</p>
                 </span>
             </div>
         </div>
