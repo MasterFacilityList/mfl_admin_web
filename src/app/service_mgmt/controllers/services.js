@@ -223,6 +223,11 @@
         function ($scope, $state, $log, wrappers, formChanges) {
             $scope.$parent.tab = 1;
             $scope.nextState();
+            wrappers.option_groups.filter({page_size: 1000}).success(function (data) {
+                $scope.option_groups = data.results;
+            }).error(function (data) {
+                $scope.errors = data;
+            });
             if(!_.isEmpty($state.params.service_id)) {
                 wrappers.services.get($state.params.service_id)
                 .success(function (data) {

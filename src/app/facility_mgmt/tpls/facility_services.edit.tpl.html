@@ -1,7 +1,10 @@
 <div class="col-xs-12">
     <div class="col-xs-12">
+        <drf-err-msg></drf-err-msg>
+    </div>
+    <div class="col-xs-12">
         <span class="pull-right">
-            <button class="btn btn-primary" ng-click="changeView('view')">
+            <button ng-show="!create" class="btn btn-primary" ng-click="changeView('view')">
                View Facility Services
             </button>
         </span>
@@ -30,32 +33,32 @@
                     <input class="form-control" ng-model="service.query" placeholder="Search Services">
                 </div>
             </div>
-            <div class="service-list">
+            <div class="service-list col-xs-12 pad-0">
                 <div class="service-item col-xs-12 pad-0" ng-repeat="serv in cat_services | filter : service.query">
                 <div class="col-xs-5 margin-t-15 margin-b-10">{{serv.name}}</div>
                 <div class="col-xs-6 pad-0 margin-t-10">
                     <div ng-if="serv.option_no > 2" class="form-group">
-                        <select name="option{{$index}}" class="form-control" ng-model="serv.option">
+                        <select name="option{{$index}}" class="form-control" ng-model="serv.option" ng-change="servicesDisplay(serv)">
                             <option value="">Select Option</option>
                             <option ng-repeat="opt in serv.serv_options" ng-selected="{{opt.id == serv.option}}" ng-value="opt.id">{{opt.display_text}}</option>
                         </select>
                     </div>
                     <div ng-if="serv.option_no === 2 && serv.has_options === false" class="form-group checkbox margin-t-1">
                         <label for="service_option_yes">
-                            <input type="checkbox" id="option{{$index}}" name="option{{$index}}" ng-value="serv.serv_options[1].id" ng-model="serv.option" ng-checked="(serv.option === serv.serv_options[1].id) || serv.option">
+                            <input type="checkbox" id="option{{$index}}" name="option{{$index}}" ng-value="serv.serv_options[1].id" ng-model="serv.option" ng-checked="(serv.option === serv.serv_options[1].id) || serv.option" ng-change="servicesDisplay(serv)">
                             Yes
                         </label>
                     </div>
                     <div ng-if="serv.option_no === 2 && serv.has_options === true" class="margin-t--15">
                         <div class="radio">
                             <label class="radio-inline">
-                                <input type="radio" name="option{{$index}}"  ng-value="serv.serv_options[0].id" ng-model="serv.option">
+                                <input type="radio" name="option{{$index}}"  ng-value="serv.serv_options[0].id" ng-model="serv.option" ng-change="servicesDisplay(serv)">
                                 {{serv.serv_options[0].display_text}}
                             </label>
                         </div>
                         <div class="radio">
                             <label class="radio-inline">
-                                <input type="radio" name="option{{$index}}" ng-value="serv.serv_options[1].id" ng-model="serv.option">
+                                <input type="radio" name="option{{$index}}" ng-value="serv.serv_options[1].id" ng-model="serv.option" ng-change="servicesDisplay(serv)">
                                 {{serv.serv_options[1].display_text}}
                             </label>
                         </div>
@@ -70,6 +73,42 @@
             <div ng-if="cat_services.length === 0 || !cat_services" class="service-item col-xs-12 text-blue pad-t-10 pad-b-10">
                 <i class="fa fa-info-circle"></i> No Services Listed
             </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <button class="btn btn-primary margin-t-20" ng-click="viewServices = !viewServices" ng-show="create">
+            {{viewServices ? 'Hide' : 'View'}} Facility Services
+            <i class="fa {{viewServices ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+        </button>
+        <div class="col-xs-12 pad-0" content-slide-in="viewServices" slide-show-duration="1000">
+            <table class="table table-fixed table-hover fs-14" id="no-more-tables">
+                <thead class="table-head">
+                        <th class="col-xs-10">Name</th>
+                        <th class="col-xs-2">Service Option&nbsp;&nbsp;</th>
+                </thead>
+                <tbody class="table-list fade-content">
+                    <tr class="table-item" ng-repeat="service in service_display track by $index" ng-show="services">
+                        <td data-title="Name:" class="col-xs-10">
+                            {{service.name}}
+                        </td>
+                        <td data-title="Abbreviation:" class="col-xs-2 text-center">
+                        <span ng-if="service.has_options">
+                            {{service.option | optionName:service.serv_options}}
+                        </span>
+                        <span ng-if="!service.has_options">
+                            N/A
+                        </span>
+                        &nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr class="table-item" ng-if="services.length === 0" class="alert alert-info">
+                        <td colspan="4" class="col-xs-12">
+                        <i class="fa fa-info-circle"></i> No services assigned to this facility
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -4,19 +4,20 @@
         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
             <div class="form-group col-xs-12">
                 <label>Service Name</label>
-                <input class="form-control" name="name" ng-model="service.name" required />
+                <input class="form-control" name="name" ng-model="service.name" required api-checker placeholder="Service Name"/>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="form-group col-xs-12">
                 <label>Abbreviation</label>
-                <input class="form-control" name="abbreviation" ng-model="service.abbreviation"/>
+                <input class="form-control" name="abbreviation" ng-model="service.abbreviation" api-checker placeholder="Service Abbreviation"/>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="form-group col-xs-12">
                 <label>Category</label>
-                <select class="form-control" name="category" ng-model="service.category" required>
+                <select class="form-control" name="category" ng-model="service.category" required api-checker>
+                    <option value="" disabled>Select a Category</option>
                     <option  ng-repeat="cat in categories" ng-selected="{{cat.id == service.category}}" value="{{cat.id}}">{{cat.name}}</option>
                 </select>
                 <span class="highlight"></span>
@@ -24,7 +25,7 @@
             </div>
             <div class="form-group col-xs-12">
                 <label>Option Groups</label>
-                <select class="form-control" name="category" ng-model="service.group" required>
+                <select class="form-control" name="category" ng-model="service.group" required api-checker>
                     <option value="" disabled>Select an option group</option>
                     <option  ng-repeat="opt_grp in option_groups" ng-selected="{{opt_grp.id == service.group}}" value="{{opt_grp.id}}">{{opt_grp.name}}</option>
                 </select>
@@ -33,7 +34,7 @@
             </div>
             <div class="form-group col-xs-12">
                 <label>Description</label>
-                <textarea class="form-control" name="description" ng-model="service.description"></textarea>
+                <textarea class="form-control" name="description" ng-model="service.description" placeholder="Service Description"></textarea>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
@@ -56,7 +57,7 @@
                 <a class="btn btn-default margin-t-10" ui-sref="service_mgmt.service_list">
                     Cancel
                 </a>
-                <mfl-revision-view id="service_id" wrapper="wrapper" ></mfl-revision-view>
+                <mfl-revision-view ng-show="edit_view" id="service_id" wrapper="wrapper" ></mfl-revision-view>
             </div>
         </div>
 

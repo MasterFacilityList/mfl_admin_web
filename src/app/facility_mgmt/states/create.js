@@ -58,7 +58,7 @@
                         controller: "mfl.facility_mgmt.controllers.facility_edit.services"
                     }
                 },
-                redirectTo : "facilities.facility_create.services.view",
+                redirectTo : "facilities.facility_create.services.edit",
                 permission: "facilities.add_facility"
             })
 

@@ -2,7 +2,7 @@
     "use strict";
     describe("Filters: testing mfl common filters", function () {
         var contact_type_filter,titlecase_filter,bool_filter,date_filter,
-        facility_type;
+        facility_type, option_name;
         beforeEach(function () {
             module("mfl.common.filters");
             inject(["$filter", function ($filter) {
@@ -11,6 +11,7 @@
                 bool_filter = $filter("boolFilter");
                 date_filter = $filter("dateFilter");
                 facility_type = $filter("facilityType");
+                option_name = $filter("optionName");
             }]);
         });
         it("Should have contact_type filter defined", function(){
@@ -84,6 +85,24 @@
             result = bool_filter(string, "boolean");
             expect(result).toEqual("");
         }));
+        it("optionName should be defined", function () {
+            expect(option_name).toBeDefined();
+        });
+        it("should text option name filter", function () {
+            var list, input;
+            list = [
+                {
+                    id : "5",
+                    display_text : "option_example"
+                },
+                {
+                    id : "7",
+                    display_text : "hospital"
+                }
+            ];
+            input  = "5";
+            expect(option_name(input, list)).toEqual("option_example");
+        });
         it("facilityType should be defined", function () {
             expect(facility_type).toBeDefined();
         });

@@ -717,6 +717,9 @@
 
                     $state.params.service_id = "1";
                     httpBackend.expectGET(server_url +
+                        "api/facilities/option_groups/?page_size=1000")
+                        .respond(200, {results: []});
+                    httpBackend.expectGET(server_url +
                         "api/facilities/services/1/").respond(
                         500, {});
                     data.$scope.create = true;
