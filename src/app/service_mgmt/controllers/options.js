@@ -21,6 +21,18 @@
         function ($scope, $stateParams, wrappers, forms, $state) {
             $scope.option_group_id = $stateParams.option_group_id;
             $scope.edit_view = $scope.option_group_id ? true : false;
+            if(!$scope.edit_view){
+                //declaring option_group
+                $scope.option_group = {
+                    options : [
+                        {
+                            option_type : "",
+                            display_text : "",
+                            value : ""
+                        }
+                    ]
+                };
+            }
             $scope.filters = {group:$scope.option_group_id};
             if($scope.edit_view) {
                 wrappers.option_groups.get($scope.option_group_id).success(function (data) {
@@ -40,13 +52,22 @@
                 if(_.isUndefined(obj.id)) {
                     $scope.option_group.options =
                         _.without($scope.option_group.options, obj);
+                }else{
+                    wrappers.options.remove(obj.id)
+                    .success(function () {
+                        $scope.option_group.options =
+                        _.without($scope.option_group.options, obj);
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
                 }
             };
             $scope.option_types = wrappers.OPTION_TYPES;
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
                 if(!$scope.edit_view){
-                    wrappers.option_groups.create($scope.option_group)
+                    wrappers.create_option_group.create($scope.option_group)
                     .success(function () {
                         $state.go( "service_mgmt.option_groups_list",
                             {reload: true});

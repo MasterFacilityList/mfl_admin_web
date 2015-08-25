@@ -164,6 +164,23 @@
                     .respond(200, {});
                 scope.option_group_id = "1";
                 scope.edit_view = true;
+                scope.option_group = {
+                    "id" : "1",
+                    "options" : [
+                        {
+                            "id" : "5",
+                            "value" : "5",
+                            "display_text" : "Level 5",
+                            "option_type": "INTEGER"
+                        },
+                        {
+                            "id" : "4",
+                            "value" : "4",
+                            "display_text" : "Level 4",
+                            "option_type" : "INTEGER"
+                        }
+                    ]
+                };
                 ctrl("option_group_create", data);
                 var frm = {
                     "$dirty": false,
@@ -172,13 +189,23 @@
                         "$$modelValue": "New Option Group"
                     }
                 };
+                httpBackend
+                    .expectDELETE(server_url +
+                        "api/facilities/options/4/").respond(204);
+                var obj = {
+                    "id" : "4",
+                    "value" : "4",
+                    "display_text" : "Level 4",
+                    "option_type" : "INTEGER"
+                };
                 scope.cancel();
                 scope.save(frm);
+                scope.removeOption(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(scope.option_group).toEqual({});
+                expect(scope.option_group).toEqual({options: []});
             });
             it("should save a new option group", function () {
                 var scope = rootScope.$new();
@@ -199,7 +226,7 @@
                 scope.option_group = {name : "New Option Group"};
                 httpBackend
                     .expectPOST(server_url +
-                        "api/facilities/option_groups/")
+                        "api/facilities/option_group_with_options/")
                         .respond(201, {name : "New Option Group"});
                 scope.save(frm);
                 httpBackend.flush();
@@ -227,7 +254,7 @@
                 scope.option_group = {name : "New Option Group"};
                 httpBackend
                     .expectPOST(server_url +
-                        "api/facilities/option_groups/")
+                        "api/facilities/option_group_with_options/")
                         .respond(500);
                 scope.save(frm);
                 httpBackend.flush();
