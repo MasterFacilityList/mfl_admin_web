@@ -40,7 +40,7 @@
                     controller: "mfl.facility_mgmt.controllers.facility_rejected"
                 }
             },
-            permission: "facilities.add_facilityapproval,facilities.view_facility"
+            permission: "facilities.view_rejected_facilities,facilities.view_facility"
         })
 
         .state("facility_reject_list.view.approve", {
