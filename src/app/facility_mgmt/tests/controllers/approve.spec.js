@@ -61,6 +61,78 @@
             });
         });
 
+        describe("test facility approve/reject view", function () {
+
+            it("should load reject list of a facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {facility_id: 3},
+                    "$log": log
+                };
+                state.current.name = "facility_reject_list.view";
+                var scope = rootScope.$new();
+                httpBackend
+                .expectGET(server_url+"api/facilities/facilities/3/")
+                .respond(200, {});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(200, {results : []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3&"+
+                    "is_cancelled=true").respond(200, {results : []});
+                ctrl("facility_rejected", data);
+                scope.reject = true;
+                httpBackend.flush();
+            });
+
+            it("should load approve list of a facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {facility_id: 3},
+                    "$log": log
+                };
+                state.current.name = "facility_approve_list.view";
+                var scope = rootScope.$new();
+                httpBackend
+                .expectGET(server_url+"api/facilities/facilities/3/")
+                .respond(200, {});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(200, {results : []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3&"+
+                    "is_cancelled=false").respond(200, {results : []});
+                ctrl("facility_rejected", data);
+                scope.reject = false;
+                httpBackend.flush();
+            });
+
+            it("should fail to load approve list of a facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {facility_id: 3},
+                    "$log": log
+                };
+                state.current.name = "facility_approve_list.view";
+                var scope = rootScope.$new();
+                httpBackend
+                .expectGET(server_url+"api/facilities/facilities/3/")
+                .respond(500);
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(500);
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3&"+
+                    "is_cancelled=false").respond(500);
+                ctrl("facility_rejected", data);
+                scope.reject = false;
+                httpBackend.flush();
+            });
+        });
+
         describe("test facility approve controller", function () {
 
             beforeEach(function () {
@@ -82,10 +154,58 @@
                 .expectGET(server_url+"api/facilities/facilities/3/")
                 .respond(200, {
                     coordinates: 13,
-                    latest_update: 3
+                    latest_update: 3,
+                    rejected: false,
+                    approved: true
                 });
             });
+            it("should load facility update", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {facility_id: 3}
+                };
+                ctrl("facility_approve", data);
+                httpBackend
+                    .expectGET(server_url+"api/gis/facility_coordinates/13/")
+                    .respond(200, {results : []});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_updates/3/")
+                    .respond(200, {facility_updates: "{\"abbreviation\":2}"});
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
 
+                expect(data.$scope.facility_update).toEqual({facility_updates: {abbreviation: 2}});
+            });
+        });
+
+        describe("test facility approve controller", function () {
+
+            beforeEach(function () {
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
+                    .respond(200, {results : []});
+
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3")
+                    .respond(200, {results: []});
+
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_services/?" +
+                        "facility=3&is_cancelled=false&is_confirmed=false&" +
+                        "fields=id,service_name,option_display_value")
+                    .respond(200, {results: []});
+
+                httpBackend
+                .expectGET(server_url+"api/facilities/facilities/3/")
+                .respond(200, {
+                    coordinates: 13,
+                    latest_update: 3,
+                    rejected: true,
+                    approved: true
+                });
+            });
             it("should show error on fail to load facility details", function () {
                 var data = {
                     "$scope": rootScope.$new(),

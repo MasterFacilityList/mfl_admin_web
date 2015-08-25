@@ -17,7 +17,6 @@
                     controller: "mfl.facility_mgmt.controllers.facilities_publish"
                 }
             },
-            userFeature: "is_national",
             permission: "facilities.publish_facilities,facilities.view_facility"
         })
 
@@ -29,7 +28,6 @@
                     controller: "mfl.facility_mgmt.controllers.facility_publish"
                 }
             },
-            userFeature: "is_national",
             permission: "facilities.publish_facilities,facilities.view_facility"
         })
 
@@ -40,7 +38,6 @@
                     templateUrl: "facility_mgmt/tpls/facility_approve.basic.tpl.html"
                 }
             },
-            userFeature: "is_national",
             permission: "facilities.publish_facilities,facilities.view_facility"
         })
 
@@ -51,7 +48,6 @@
                     templateUrl: "facility_mgmt/tpls/facility_approve.services.tpl.html"
                 }
             },
-            userFeature: "is_national",
             permission: "facilities.publish_facilities,facilities.view_facility"
         })
 
@@ -62,7 +58,6 @@
                     templateUrl: "facility_mgmt/tpls/facility_approve.units.tpl.html"
                 }
             },
-            userFeature: "is_national",
             permission: "facilities.publish_facilities,facilities.view_facility"
         });
     }]);
