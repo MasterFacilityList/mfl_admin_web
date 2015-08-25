@@ -6,6 +6,8 @@
     ])
 
     .service("mfl.service_mgmt.wrappers", ["api", function (api) {
+
+
         this.services = api.setBaseUrl("api/facilities/services/");
 
         this.categories = api.setBaseUrl("api/facilities/service_categories/");
