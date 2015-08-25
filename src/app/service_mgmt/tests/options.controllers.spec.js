@@ -205,7 +205,7 @@
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
 
-                expect(scope.option_group).toEqual({});
+                expect(scope.option_group).toEqual({options: []});
             });
             it("should save a new option group", function () {
                 var scope = rootScope.$new();
