@@ -198,6 +198,45 @@
                     controller:"mfl.reports.controller.updowngrade.view"
                 }
             }
+        })
+        .state("reports.b&c_counties", {
+            url: "beds_cots_counties",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.b&c_counties": {
+                    templateUrl: "reports/tpls/b&c_counties.tpl.html",
+                    controller:"mfl.reports.controllers.b&c_counties"
+                }
+            }
+        })
+        .state("reports.b&c_constituencies", {
+            url: "beds_cots_constituencies",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.b&c_constituencies": {
+                    templateUrl: "reports/tpls/b&c_constituencies.tpl.html",
+                    controller:"mfl.reports.controllers.b&c_constituencies"
+                }
+            }
+        })
+        .state("reports.b&c_wards", {
+            url: "beds_cots_wards",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.b&c_wards": {
+                    templateUrl: "reports/tpls/b&c_wards.tpl.html",
+                    controller:"mfl.reports.controllers.b&c_wards"
+                }
+            }
         });
 
     }]);
