@@ -25,9 +25,11 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in county_bc">
-                            <td data-title="County:">{{::county.county_name | titlecase}}</td>
-                            <td data-title="Beds:">{{::county.number_of_beds}}</td>
-                            <td data-title="Cots:">{{::county.number_of_cots}}</td>
+                            <td data-title="County:">
+                              <a ui-sref="reports.bc_constituencies({county:county.county})">{{::county.county_name | titlecase}}</a>
+                            </td>
+                            <td data-title="Beds:">{{::county.beds}}</td>
+                            <td data-title="Cots:">{{::county.cots}}</td>
                         </tr>
                     </tbody>
                 </table>

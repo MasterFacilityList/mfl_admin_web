@@ -36,7 +36,6 @@
     .controller("mfl.facility_mgmt.controllers.facility_rejected",
         ["$scope","mfl.facility_mgmt.services.wrappers","$stateParams","$state",
          function ($scope,wrappers,$stateParams,$state) {
-            console.log($state.current.name);
             if(($state.current.name).indexOf("reject_list.view") <0){
                 $scope.reject = false;
             } else {
