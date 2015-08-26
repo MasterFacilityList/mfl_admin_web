@@ -568,7 +568,10 @@
                 data.$scope.removeOfficerContact(obj);
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.initUniqueName({
-                    name: {"$setViewValue": jasmine.createSpy()}
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
                 });
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -640,7 +643,10 @@
                 data.$scope.save(frm);
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.initUniqueName({
-                    name: {"$setViewValue": jasmine.createSpy()}
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
                 });
                 data.$scope.removeOfficerContact(obj);
                 data.$scope.facilityOfficers(data.$scope.facility);
@@ -713,7 +719,10 @@
                 data.$scope.save(frm);
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.initUniqueName({
-                    name: {"$setViewValue": jasmine.createSpy()}
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
                 });
                 data.$scope.removeOfficerContact(obj);
                 data.$scope.facilityOfficers(data.$scope.facility);
@@ -783,7 +792,10 @@
                 data.$scope.save(frm);
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.initUniqueName({
-                    name: {"$setViewValue": jasmine.createSpy()}
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
                 });
                 data.$scope.removeOfficerContact(obj);
                 data.$scope.facilityOfficers(data.$scope.facility);
@@ -839,7 +851,7 @@
                 };
                 data.$scope.create = false;
                 ctrl(".basic", data);
-
+                data.$scope.nxtState = true;
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facilities/3/")
                     .respond(204);
@@ -860,7 +872,10 @@
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.facility.name = "Another";
                 data.$scope.initUniqueName({
-                    name: {"$setViewValue": jasmine.createSpy()}
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
                 });
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -1611,6 +1626,7 @@
                 data.$scope.facility = {
                     contacts : []
                 };
+                data.$scope.nxtState = false;
                 data.$scope.detailed_contacts = [{id : undefined,
                     contact : "PHONE"}];
                 data.$scope.detailed_contacts.push(two_conts);
@@ -2790,7 +2806,9 @@
                     .respond(201, {"id": "3"});
 
                 data.$scope.add();
-                data.$scope.saveUnits();
+                data.$scope.nxtState = false;
+                var arg = false;
+                data.$scope.saveUnits(arg);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -3370,7 +3388,113 @@
                 expect(log.error).toHaveBeenCalled();
             });
 
-            it("should add a facility service", function () {
+            it("should add a facility service: facility edit", function () {
+                var payload = {results: [{"id": 3}]};
+                spyOn(state, "go");
+                httpBackend
+                    .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
+                    .respond(200, payload);
+                httpBackend
+                    .expectGET(server_url+"api/facilities/options/")
+                    .respond(200, payload);
+                var c = ctrl();
+                var scope = rootScope.$new();
+                scope.create = false;
+                scope.facility_id = "3";
+                var cat = {selected : false, id : "3"};
+                c.bootstrap(scope);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/facility_services/")
+                    .respond(201, {"id": 4});
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(200, {"id": "3"});
+                scope.facility = {
+                    facility_services: [
+                        {
+                            id : "1",
+                            service_id : "3",
+                            option : null
+                        },
+                        {
+                            id : "4",
+                            service_id : "5",
+                            option : "5"
+                        }
+                    ]
+                };
+                scope.categories = [
+                    {id : "1", selected : true},
+                    {id : "4", selected : false}
+                ];
+                scope.cat_services = [
+                    {
+                        id : "3",
+                        option : "",
+                        category : "3"
+                    },
+                    {
+                        id : "5",
+                        option : "5",
+                        category : "3",
+                        fac_serv : "4"
+                    }
+                ];
+                scope.options = [
+                    {
+                        group : "3",
+                        id : "1",
+                        display_text : "No"
+                    },
+                    {
+                        group : "3",
+                        id : "2",
+                        display_text : "Yes"
+                    }
+                ];
+                scope.services = [
+                    {id : "1", category : "3"},
+                    {id : "3", category : "3", option : "5", group : "3"},
+                    {id : "5", category : "3", option : "5"},
+                    {id : "6", category : "3", option : true}
+                ];
+                scope.fac_serv.facility_services = [
+                    {
+                        service : "1",
+                        option : "3"
+                    }
+                ];
+                var name = "edit";
+                scope.addServiceOption(payload.results[0]);
+                scope.showServices(cat);
+                scope.changeView(name);
+                scope.facilityServices();
+                scope.removeOption(scope.cat_services[1]);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : "12"
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : "12"};
+                scope.servicesDisplay(obj);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should add a facility service: facility create", function () {
                 var payload = {results: [{"id": 3}]};
                 spyOn(state, "go");
                 httpBackend
@@ -3475,6 +3599,7 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
+
             it("should delete a facility service", function () {
                 var payload = {results: [{"id": 3}]};
                 httpBackend

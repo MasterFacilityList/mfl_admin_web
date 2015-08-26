@@ -150,6 +150,10 @@
                     }else{
                         wrappers.facility_services.remove(serv_obj.fac_serv)
                         .success(function () {
+                            toasty.success({
+                                title: "Facility Services",
+                                msg: "Service successfully deleted"
+                            });
                             serv_obj.option = "";
                         })
                         .error(function (data) {
@@ -576,12 +580,10 @@
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
                         if(!$scope.create){
-                            if($scope.nxtState){
-                                toasty.success({
-                                    title: "Facility",
-                                    msg: "Facility contacts successfully updated"
-                                });
-                            }
+                            toasty.success({
+                                title: "Facility",
+                                msg: "Facility contacts successfully updated"
+                            });
                             $state.go($scope.finish, {reload : true});
                         }else{
                             $scope.goToNext(4, "units");
@@ -656,6 +658,10 @@
                         _.without($scope.detailed_contacts, delcont);
                         $scope.fac_contacts =
                         _.without($scope.fac_contacts, obj);
+                        toasty.success({
+                                title: "Facility Contacts",
+                                msg: "Contact successfully deleted"
+                            });
                         obj.delete_spinner = false;
                     })
                     .error(function (data) {
@@ -889,12 +895,10 @@
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_unitobj)
                     .success(function () {
                         if(!$scope.create){
-                            if($scope.nxtState){
-                                toasty.success({
-                                    title: "Facility",
-                                    msg: "Facility regulation successfully updated"
-                                });
-                            }
+                            toasty.success({
+                                title: "Facility",
+                                msg: "Facility regulation successfully updated"
+                            });
                             $state.go($scope.finish);
                         }else{
                             $scope.goToNext(5, "services");
@@ -958,6 +962,10 @@
                     wrappers.facility_units.remove(obj.id)
                     .success(function () {
                         $scope.fac_depts = _.without($scope.fac_depts, obj);
+                        toasty.success({
+                            title: "Facility Regulation",
+                            msg: "Regulation successfully deleted"
+                        });
                         obj.delete_spinner = false;
                     })
                     .error(function (data) {
