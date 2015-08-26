@@ -3,7 +3,8 @@
 
     angular.module("mfl.facility_mgmt.controllers.approve", [
         "mfl.facility_mgmt.services",
-        "mfl.auth.services"
+        "mfl.auth.services",
+        "angular-toasty"
     ])
 
     .controller("mfl.facility_mgmt.controllers.facilities_closed",
@@ -97,8 +98,8 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_approve",
         ["$scope", "$state", "$stateParams", "$log",
-        "mfl.facility_mgmt.services.wrappers",
-        function ($scope, $state, $stateParams, $log, wrappers) {
+        "mfl.facility_mgmt.services.wrappers","toasty",
+        function ($scope, $state, $stateParams, $log, wrappers, toasty) {
             if(($state.current.name).indexOf(".reject") > 0){
                 $scope.reject = false;
             } else {
@@ -175,6 +176,10 @@
                 $scope.facility_approval.is_cancelled = !!cancel;
                 wrappers.facility_approvals.create($scope.facility_approval)
                 .success(function () {
+                    toasty.success({
+                        title:"Facility comment added",
+                        msg:"Facility comment has been added"
+                    });
                     $state.go("facilities_approve");
                 })
                 .error(function (data) {
@@ -189,6 +194,10 @@
                 var payload = (approved) ? {"approved": true} : {"cancelled": true};
                 wrappers.facility_updates.update($scope.facility.latest_update, payload)
                 .success(function () {
+                    toasty.success({
+                        title:"Facility updates",
+                        msg:"Facility's updates have been processed"
+                    });
                     $state.go("facilities_approve_update");
                 })
                 .error(function (data) {
@@ -203,6 +212,10 @@
                 };
                 wrappers.facility_services.update(fsu.id, payload)
                 .success(function () {
+                    toasty.success({
+                        title:"Facility services edit",
+                        msg:"Facility services has been edited"
+                    });
                     $scope.facility_service_updates = _.without(
                         $scope.facility_service_updates, fsu
                     );
