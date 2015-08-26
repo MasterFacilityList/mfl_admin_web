@@ -23,10 +23,12 @@
         function(wrappers, exportService){
             this.initCtrl = function($scope, report_type, data_param, transform_fxn){
                 $scope.search = "";
-                $scope.filters = {
-                    "report_type":report_type
+                var api_filters = {
+                    "report_type": report_type
                 };
-                wrappers.reporting.filter($scope.filters)
+                _.extend(api_filters, $scope.filters);
+
+                wrappers.reporting.filter(api_filters)
                 .success(function (data) {
                     var transform = transform_fxn || _.identity;
                     $scope[data_param] = transform(data.results, $scope);
@@ -35,9 +37,38 @@
                     $scope.errors = err;
                 });
                 $scope.exportToExcel = function () {
-                    exportService.excelExport(wrappers.reporting, $scope.filters);
+                    exportService.excelExport(wrappers.reporting, api_filters);
                 };
             };
+        }
+    ])
+    .controller("mfl.reports.controllers.bc_counties", ["$scope", "$controller",
+        function($scope, $controller) {
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, "beds_and_cots_by_county", "county_bc");
+        }
+    ])
+    .controller("mfl.reports.controllers.bc_constituencies",
+        ["$scope", "$controller", "$stateParams",
+        function($scope, $controller, $stateParams){
+            if ($stateParams.county) {
+                $scope.filters = {
+                    "county": $stateParams.county
+                };
+            }
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, "beds_and_cots_by_constituency", "constituency_bc");
+        }
+    ])
+    .controller("mfl.reports.controllers.bc_wards", ["$scope", "$controller", "$stateParams",
+        function($scope, $controller, $stateParams){
+            if ($stateParams.constituency) {
+                $scope.filters = {
+                    "constituency": $stateParams.constituency
+                };
+            }
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, "beds_and_cots_by_ward", "ward_bc");
         }
     ])
     .controller("mfl.reports.controllers.facility_counties", ["$scope", "$controller",

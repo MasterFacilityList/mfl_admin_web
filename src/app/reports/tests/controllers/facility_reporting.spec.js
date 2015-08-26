@@ -67,6 +67,26 @@
             ]);
         });
 
+        it("should test 'beds and cots count by county' controller | success ", function () {
+            inject([
+                function () {
+                    var data = {
+                        "$scope": rootScope.$new()
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/reporting/?report_type="+
+                        "beds_and_cots_by_county")
+                        .respond(200, {});
+                    ctrl("bc_counties", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                }
+            ]);
+        });
+
         it("should test 'facility count by county' controller | fail ", function () {
             inject([
                 function () {
@@ -78,6 +98,25 @@
                         "facility_count_by_county")
                         .respond(500);
                     ctrl("facility_counties", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                }
+            ]);
+        });
+        it("should test 'beds and cots count by county' controller | fail ", function () {
+            inject([
+                function () {
+                    var data = {
+                        "$scope": rootScope.$new()
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/reporting/?report_type="+
+                        "beds_and_cots_by_county")
+                        .respond(500);
+                    ctrl("bc_counties", data);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
@@ -106,6 +145,42 @@
                 }
             ]);
         });
+        it("should test 'beds and cots by constituency' controller | success ", function () {
+            inject([
+                function () {
+                    var data = {
+                        "$scope": rootScope.$new()
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/reporting/?report_type="+
+                        "beds_and_cots_by_constituency")
+                        .respond(200, {});
+                    ctrl("bc_constituencies", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                }
+            ]);
+        });
+
+        it("should test 'beds and cots by constituency' controller with params", function () {
+            var data = {
+                "$scope": rootScope.$new(),
+                "$stateParams": {"county": "123"}
+            };
+            httpBackend
+                .expectGET(server_url+"api/reporting/?report_type="+
+                "beds_and_cots_by_constituency&county=123")
+                .respond(200, {});
+            ctrl("bc_constituencies", data);
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+        });
+
         it("should test 'facility count by constituency' controller | fail ",
            function () {
             inject([
@@ -118,6 +193,83 @@
                         "facility_count_by_consituency")
                         .respond(500);
                     ctrl("facility_constituencies", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                }
+            ]);
+        });
+
+        it("should test 'beds and cots by constituency' controller | fail ", function () {
+            inject([
+                function () {
+                    var data = {
+                        "$scope": rootScope.$new()
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/reporting/?report_type="+
+                        "beds_and_cots_by_constituency")
+                        .respond(500);
+                    ctrl("bc_constituencies", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                }
+            ]);
+        });
+
+        it("should test 'beds and cots by ward' controller | success ", function () {
+            inject([
+                function () {
+                    var data = {
+                        "$scope": rootScope.$new()
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/reporting/?report_type="+
+                        "beds_and_cots_by_ward")
+                        .respond(200, {});
+                    ctrl("bc_wards", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                }
+            ]);
+        });
+
+        it("should test 'beds and cots by ward' with params", function () {
+            var data = {
+                "$scope": rootScope.$new(),
+                "$stateParams": {
+                    "constituency": "456"
+                }
+            };
+            httpBackend
+                .expectGET(server_url+"api/reporting/?report_type="+
+                "beds_and_cots_by_ward&constituency=456")
+                .respond(200, {});
+            ctrl("bc_wards", data);
+
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+        });
+        it("should test 'beds and cots by ward' controller | fail ", function () {
+            inject([
+                function () {
+                    var data = {
+                        "$scope": rootScope.$new()
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/reporting/?report_type="+
+                        "beds_and_cots_by_ward")
+                        .respond(500);
+                    ctrl("bc_wards", data);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();

@@ -3,7 +3,8 @@
 
     angular.module("mfl.users.controllers.groups", [
         "mfl.auth.services",
-        "mfl.users.services"
+        "mfl.users.services",
+        "angular-toasty"
     ])
 
     .controller("mfl.users.controllers.group_list", ["$scope",
@@ -31,8 +32,8 @@
     ])
 
     .controller("mfl.users.controllers.group_create",
-        ["$scope", "$log", "$state", "mfl.users.services.wrappers",
-        function ($scope, $log, $state, wrappers) {
+        ["$scope", "$log", "$state", "mfl.users.services.wrappers", "toasty",
+        function ($scope, $log, $state, wrappers, toasty) {
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New Group"
@@ -63,9 +64,17 @@
             };
 
             $scope.save = function () {
+                _.each($scope.group.permissions, function (perm) {
+                    delete perm.set_selected;
+                    delete perm.selected;
+                });
                 wrappers.groups.create($scope.group)
-                .success(function (data) {
-                    $state.go("groups.group_edit", {"group_id": data.id});
+                .success(function () {
+                    toasty.success({
+                        title : "User Groups",
+                        msg : "Successfully added new user group"
+                    });
+                    $state.go("groups");
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -76,9 +85,10 @@
     )
 
     .controller("mfl.users.controllers.group_edit",
-        ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers",
-        function ($scope, $log, $state, $stateParams, wrappers) {
+        ["$scope", "$log", "$state", "$stateParams", "mfl.users.services.wrappers", "toasty",
+        function ($scope, $log, $state, $stateParams, wrappers, toasty) {
             $scope.group_id = $stateParams.group_id;
+            $scope.edit_view = true;
             $scope.title = {
                 icon : "fa-edit",
                 name : "Edit Group"
@@ -107,6 +117,10 @@
             $scope.remove = function () {
                 wrappers.groups.remove($scope.group_id)
                     .success(function () {
+                        toasty.success({
+                            title : "User Groups",
+                            msg : "Successfully deleted user group"
+                        });
                         $state.go("groups");
                     })
                     .error(function (data) {
@@ -137,10 +151,16 @@
             };
 
             $scope.save = function () {
-                $scope.spinner = true;
+                _.each($scope.group.permissions, function (perm) {
+                    delete perm.set_selected;
+                    delete perm.selected;
+                });
                 wrappers.groups.update($scope.group_id, $scope.group)
                 .success(function () {
-                    $scope.spinner = false;
+                    toasty.success({
+                        title : "User Groups",
+                        msg : "Successfully updated user group"
+                    });
                     $state.go("groups");
                 })
                 .error(function (data) {

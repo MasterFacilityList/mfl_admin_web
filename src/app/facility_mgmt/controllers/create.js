@@ -3,6 +3,7 @@
 
     angular.module("mfl.facility_mgmt.controllers.create", [
         "mfl.facility_mgmt.services",
+        "angular-toasty",
         "mfl.auth.services"
     ])
 
