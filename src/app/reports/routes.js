@@ -199,42 +199,42 @@
                 }
             }
         })
-        .state("reports.b&c_counties", {
+        .state("reports.bc_counties", {
             url: "beds_cots_counties",
             views: {
                 "body@reports": {
                     templateUrl: "reports/tpls/body.tpl.html",
                     controller:"mfl.reports.controllers.main"
                 },
-                "main-content@reports.b&c_counties": {
-                    templateUrl: "reports/tpls/b&c_counties.tpl.html",
-                    controller:"mfl.reports.controllers.b&c_counties"
+                "main-content@reports.bc_counties": {
+                    templateUrl: "reports/tpls/bc_counties.tpl.html",
+                    controller:"mfl.reports.controllers.bc_counties"
                 }
             }
         })
-        .state("reports.b&c_constituencies", {
+        .state("reports.bc_constituencies", {
             url: "beds_cots_constituencies",
             views: {
                 "body@reports": {
                     templateUrl: "reports/tpls/body.tpl.html",
                     controller:"mfl.reports.controllers.main"
                 },
-                "main-content@reports.b&c_constituencies": {
-                    templateUrl: "reports/tpls/b&c_constituencies.tpl.html",
-                    controller:"mfl.reports.controllers.b&c_constituencies"
+                "main-content@reports.bc_constituencies": {
+                    templateUrl: "reports/tpls/bc_constituencies.tpl.html",
+                    controller:"mfl.reports.controllers.bc_constituencies"
                 }
             }
         })
-        .state("reports.b&c_wards", {
+        .state("reports.bc_wards", {
             url: "beds_cots_wards",
             views: {
                 "body@reports": {
                     templateUrl: "reports/tpls/body.tpl.html",
                     controller:"mfl.reports.controllers.main"
                 },
-                "main-content@reports.b&c_wards": {
-                    templateUrl: "reports/tpls/b&c_wards.tpl.html",
-                    controller:"mfl.reports.controllers.b&c_wards"
+                "main-content@reports.bc_wards": {
+                    templateUrl: "reports/tpls/bc_wards.tpl.html",
+                    controller:"mfl.reports.controllers.bc_wards"
                 }
             }
         });
