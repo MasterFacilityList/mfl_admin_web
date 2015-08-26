@@ -39,7 +39,7 @@
                 </div>
             </div>
             <!-- To assign county -->
-            <div class="col-sm-3 text-center"
+            <div class="col-sm-3 text-center pad-0"
             ng-if="current_group === 'County Administrators' ||
             current_group === 'County Health Records Information Officer'">
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <!-- To assign constituency -->
-            <div class="col-sm-3 text-center" ng-if="current_group === 'Sub County Health Records Information Officer'">
+            <div class="col-sm-3 text-center pad-0" ng-if="current_group === 'Sub County Health Records Information Officer'">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[4].active}" ng-click="tabState(steps[4])">
                             4
@@ -60,7 +60,7 @@
             </div>
             <!-- End of assigning constituency -->
             <!-- To assign regulatory bodies -->
-            <div class="col-sm-3 text-center"
+            <div class="col-sm-3 text-center pad-0"
             ng-if="current_group === 'Regulators (Approvers)' ||
             current_group === 'Regulators (makers)'">
                 <div class="col-lg-6 col-md-6 col-sm-6">
