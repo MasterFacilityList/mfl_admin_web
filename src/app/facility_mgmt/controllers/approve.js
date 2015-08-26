@@ -72,7 +72,6 @@
     .controller("mfl.facility_mgmt.controllers.facilities_approve",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "has_edits": true,
                 "approved": false,
                 "rejected": false
             };
