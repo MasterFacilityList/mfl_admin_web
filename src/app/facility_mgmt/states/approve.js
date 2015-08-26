@@ -62,7 +62,7 @@
                     controller: "mfl.facility_mgmt.controllers.facility_rejected"
                 }
             },
-            permission: "facilities.add_facilityapproval,facilities.view_facility"
+            permission: "facilities.view_facilityapproval,facilities.view_facility"
         })
 
         .state("facility_approve_list.view.reject", {
@@ -85,7 +85,7 @@
                     controller: "mfl.facility_mgmt.controllers.facilities_approve"
                 }
             },
-            permission: "facilities.add_facilityapproval,facilities.view_facility"
+            permission: "facilities.view_facilityapproval,facilities.view_facility"
         })
 
         .state("facilities_approve_update", {
@@ -96,7 +96,8 @@
                     templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facilities_approve_update"
                 }
-            }
+            },
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
         })
 
         .state("facilities_approve.approve", {
