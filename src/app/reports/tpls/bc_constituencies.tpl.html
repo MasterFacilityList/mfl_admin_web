@@ -25,9 +25,11 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="const in constituency_bc">
-                            <td data-title="Constituency:">{{::const.constituency_name | titlecase}}</td>
-                            <td data-title="Beds:">{{::const.number_of_beds}}</td>
-                            <td data-title="Cots:">{{::const.number_of_cots}}</td>
+                            <td data-title="Constituency:">
+                              <a ui-sref="reports.bc_wards({constituency:const.constituency})">{{::const.constituency_name | titlecase}}</a>
+                            </td>
+                            <td data-title="Beds:">{{::const.beds}}</td>
+                            <td data-title="Cots:">{{::const.cots}}</td>
                         </tr>
                     </tbody>
                 </table>

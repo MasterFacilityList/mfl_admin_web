@@ -213,7 +213,7 @@
             }
         })
         .state("reports.bc_constituencies", {
-            url: "beds_cots_constituencies",
+            url: "beds_cots_constituencies?county",
             views: {
                 "body@reports": {
                     templateUrl: "reports/tpls/body.tpl.html",
@@ -226,7 +226,7 @@
             }
         })
         .state("reports.bc_wards", {
-            url: "beds_cots_wards",
+            url: "beds_cots_wards?constituency",
             views: {
                 "body@reports": {
                     templateUrl: "reports/tpls/body.tpl.html",
