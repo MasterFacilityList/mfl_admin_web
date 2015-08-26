@@ -4,15 +4,20 @@
     angular.module("mfl.auth.controllers", [
         "mfl.auth.services",
         "ui.router",
-        "ngIdle"
+        "ngIdle",
+        "angular-toasty"
     ])
 
     .controller("mfl.auth.controllers.reset_pwd",
-        ["$scope", "$state", "$log", "mfl.auth.services.profile",
-        function ($scope, $state, $log, profileService) {
+        ["$scope", "$state", "$log", "mfl.auth.services.profile", "toasty",
+        function ($scope, $state, $log, profileService, toasty) {
             $scope.reset_pwd = function () {
                 profileService.resetPassword($scope.email)
                 .then(function () {
+                    toasty.success({
+                        title: "Password reset request",
+                        msg: "Password reset request successfully sent"
+                    });
                     $state.go("login", {"reset_pwd": "true"});
                 },
                 function (data) {
@@ -24,14 +29,19 @@
     )
 
     .controller("mfl.auth.controllers.reset_pwd_confirm",
-        ["$scope", "$state", "$stateParams", "$log", "mfl.auth.services.profile",
-        function ($scope, $state, $stateParams, $log, profileService) {
+        ["$scope", "$state", "$stateParams", "$log",
+        "mfl.auth.services.profile", "toasty",
+        function ($scope, $state, $stateParams, $log, profileService, toasty) {
             $scope.reset_pwd_confirm = function () {
                 profileService.resetPasswordConfirm(
                     $stateParams.uid, $stateParams.token,
                     $scope.new_password1, $scope.new_password2
                 )
                 .then(function () {
+                    toasty.success({
+                        title: "Password change",
+                        msg: "Password changed successfully"
+                    });
                     $state.go("login", {"reset_pwd_confirm": "true"});
                 },
                 function (data) {
@@ -85,10 +95,15 @@
 
     .controller("mfl.auth.controllers.logout",
         ["$scope", "$state", "$stateParams", "mfl.auth.services.login", "Idle",
-        function ($scope, $state, $stateParams, loginService, Idle) {
+        "toasty",
+        function ($scope, $state, $stateParams, loginService, Idle, toasty) {
             $scope.logout = true;
             var callback = function () {
                 Idle.unwatch();
+                toasty.info({
+                    title: "Logout",
+                    msg: "You have been successfully logged out"
+                });
                 $state.go("login", {
                     "timeout": $stateParams.timeout,
                     "next": $stateParams.next,

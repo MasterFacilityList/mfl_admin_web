@@ -5,6 +5,7 @@
         "mfl.facility_mgmt.services",
         "mfl.auth.services",
         "datePicker",
+        "angular-toasty",
         "ui.bootstrap.tpls",
         "mfl.common.forms",
         "leaflet-directive",
@@ -13,8 +14,8 @@
 
     .controller("mfl.facility_mgmt.controllers.services_helper",
         ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
-        "$state",
-        function ($log, wrappers, errorMessages, $state) {
+        "$state", "toasty",
+        function ($log, wrappers, errorMessages, $state, toasty) {
             var loadData = function ($scope) {
                 wrappers.services.filter({page_size: 100, ordering: "name"})
                 .success(function (data) {
@@ -193,6 +194,16 @@
                     wrappers.facility_detail.update($scope.facility_id,
                         $scope.fac_serv)
                         .success(function () {
+                            var create_msg = {
+                                title : "Facility",
+                                msg : "Facility successfully created"
+                            };
+                            var update_msg = {
+                                title : "Facility",
+                                msg : "Facility successfully updated"
+                            };
+                            var feedback = ($scope.create ? create_msg : update_msg);
+                            toasty.success(feedback);
                             $state.go("facilities");
                         })
                         .error(function (err) {
@@ -274,7 +285,8 @@
                             "name": $scope.facility.town_name
                         }
                     };
-                    $scope.off_contacts = $scope.facility.officer_in_charge.contacts;
+                    $scope.off_contacts =
+                        $scope.facility.officer_in_charge.contacts;
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -320,14 +332,18 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_edit.close",
             ["$scope","mfl.facility_mgmt.services.wrappers","$stateParams",
-             "mfl.common.forms.changes","$state",
-            function ($scope,wrappers,$stateParams, formChanges,$state) {
+             "mfl.common.forms.changes","$state", "toasty",
+            function ($scope,wrappers,$stateParams,formChanges,$state,toasty) {
             $scope.minDate = new Date();
             $scope.close = function (frm) {
                 var changes = formChanges.whatChanged(frm);
                 wrappers.facility_detail.update($stateParams.facility_id,changes)
                 .success(function (data) {
                     $scope.facility = data;
+                    toasty.success({
+                        title: "Facility",
+                        msg: "Facility successfully closed"
+                    });
                     $state.go("facilities.facility_edit",{facility_id:$stateParams.id});
                 })
                 .error(function (err) {
@@ -340,9 +356,9 @@
         ["$scope", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
         "mfl.common.services.multistep", "mfl.auth.services.login",
-        "mfl.error.messages",
+        "mfl.error.messages", "toasty",
         function ($scope, $log, $state, $stateParams, wrappers, formChanges,
-            multistepService, loginService, errorMessages) {
+            multistepService, loginService, errorMessages, toasty) {
             /*Set up facility officer*/
             $scope.facilityOfficers = function (f) {
                 if(_.isUndefined(f.officer_in_charge) || _.isNull(f.officer_in_charge)) {
@@ -369,6 +385,7 @@
                 if(_.isUndefined($scope.facility.name)) {
                     $scope.facility.name = $scope.facility.official_name;
                     frm.name.$setViewValue($scope.facility.name);
+                    frm.name.$render();
                 }
             };
             $scope.contacts = [{type: "", contact : ""}];
@@ -444,6 +461,12 @@
                     }
                     wrappers.facility_detail.update($scope.facility_id, changes)
                     .success(function () {
+                        if($scope.nxtState){
+                            toasty.success({
+                                title: "Facility",
+                                msg: "Facility successfully updated"
+                            });
+                        }
                         $state.go($scope.finish,
                         {facility_id:$scope.facility_id}, {reload : true});
                     })
@@ -510,8 +533,8 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.contacts",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers",  "mfl.error.messages", "$state",
-        function($scope,$log,$stateParams,wrappers,
-            errorMessages, $state){
+        "toasty",
+        function($scope,$log,$stateParams,wrappers, errorMessages, $state, toasty){
             if($scope.create) {
                 $scope.nextState();
             }
@@ -553,6 +576,12 @@
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
                         if(!$scope.create){
+                            if($scope.nxtState){
+                                toasty.success({
+                                    title: "Facility",
+                                    msg: "Facility contacts successfully updated"
+                                });
+                            }
                             $state.go($scope.finish, {reload : true});
                         }else{
                             $scope.goToNext(4, "units");
@@ -797,9 +826,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.units",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        "mfl.error.messages", "$state",
+        "mfl.error.messages", "$state", "toasty",
         function ($scope, $log, $stateParams, wrappers, multistepService,
-            errorMessages, $state) {
+            errorMessages, $state, toasty) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[4]);
@@ -860,6 +889,12 @@
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_unitobj)
                     .success(function () {
                         if(!$scope.create){
+                            if($scope.nxtState){
+                                toasty.success({
+                                    title: "Facility",
+                                    msg: "Facility regulation successfully updated"
+                                });
+                            }
                             $state.go($scope.finish);
                         }else{
                             $scope.goToNext(5, "services");
@@ -1094,9 +1129,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
-        "mfl.error.messages",
+        "mfl.error.messages", "toasty",
         function ($scope,wrappers,$log, leafletData, multistepService,
-            formChanges, $state, errorMessages) {
+            formChanges, $state, errorMessages, toasty) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[1]);
@@ -1254,6 +1289,12 @@
                     $scope.nxtState = arg;
                     $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.contacts");
+                    if($scope.nxtState) {
+                        toasty.info({
+                            title: "Facility",
+                            msg: "Facility geolocation successfully updated"
+                        });
+                    }
                     $state.go($scope.finish,
                         {"facility_id": $scope.facility_id},
                         {reload: true});
