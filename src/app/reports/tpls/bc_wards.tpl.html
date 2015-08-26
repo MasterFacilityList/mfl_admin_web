@@ -1,0 +1,37 @@
+<div class="content-header">
+   <div class="action-container content-header-extra">
+       <div class="action-container content-header-extra pad-r-5">
+            <button tooltip-placement="bottom"  class="btn btn-primary" ng-click="exportToExcel()">
+                Export To Excel
+            </button>
+       </div>
+   </div>
+   <h2 class="content-title">
+        <span class="main-title">Beds and Cots Report by Ward</span>
+   </h2>
+</div>
+<section class="margin-t-10">
+    <div class="col-sm-12">
+        <div class="content-card col-xs-12">
+           <div class="col-sm-4">
+           </div>
+           <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+            <div class="col-xs-12 margin-b-20">
+                <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
+                    <thead>
+                        <th class="text-wrap">Ward</th>
+                        <th class="text-wrap">Beds</th>
+                        <th class="text-wrap">Cots</th>
+                    </thead>
+                    <tbody class="fade-content">
+                        <tr ng-repeat="ward in ward_bc">
+                            <td data-title="County:">{{::ward.ward_name | titlecase}}</td>
+                            <td data-title="Beds:">{{::ward.beds}}</td>
+                            <td data-title="Cots:">{{::ward.cots}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

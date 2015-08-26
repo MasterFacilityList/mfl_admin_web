@@ -27,16 +27,16 @@
                     </div>
                 </div>
                 <div class="col-xs-12 content-card" style="border-bottom: 1px solid #e0e0e0;" ng-if="user.user_constituencies.length!==0">
-                    <h4 class="fw-600 fs-16 margin-t-5 col-sm-5">
+                    <h4 class="fw-600 fs-16 margin-t-5 col-sm-5 pad-l-0">
                         Recently Added Facilities:
                     </h4>
-                    <span class="text-right col-sm-7">
+                    <span class="text-right col-sm-7 pad-r-0">
                         <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="weekly()">Last Week</button>
                         <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="monthly()">Last Month</button>
                         <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="quarterly()">Last Quarter</button>
                     </span>
-                    <div class="col-xs-12">
-                        <p class="margin-t-10">
+                    <div class="col-xs-12 pad-l-0" style="background-color: #f1f1f4;">
+                        <p class="margin-l-3 margin-t-5">
                             <span ng-if="!recent_spinner" class="fs-16 pad-0">   <i>{{ summary.recently_created }}</i> Recently Added Facilities
                             </span>
                             <span ng-if="recent_spinner" class="fs-18 pad-l-20">

@@ -11,7 +11,7 @@
             <div class="form-group row col-xs-12">
               <p class="lead">
                 <label class="col-xs-2 control-label fs-18 fw-600 fs-18 margin-t-5">Facility Code: </label>
-                  <span class="label label-info">{{facility.code || 'Automatically generated after creating facility'}}
+                  <span class="label label-info">{{create ?  'Automatically generated after creating facility' : facility.code}}
                   </span>
               </p>
               </p>
@@ -246,16 +246,16 @@
                     <span class="bar"></span>
                 </div>
                 <div class="col-xs-12">
-                    <table class="table table-bordered col-xs-12">
+                    <table class="table table-hover col-xs-12">
                     <thead class="grey-header">
                         <th class="col-xs-5">Contact Type</th>
                         <th class="col-xs-6">Contact Details</th>
                         <th class="col-xs-1 text-center"></th>
                     </thead>
-                    <tbody class="">
-                        <tr class="" ng-repeat="cont in facility.officer_in_charge.contacts">
+                    <tbody>
+                        <tr ng-repeat="cont in facility.officer_in_charge.contacts">
                             <td class="col-xs-5">
-                                <div class="form-group">
+                                <div class="form-group grid-inputs">
                                     <select name="contact_type" class="form-control"  ng-model="cont.type" api-checker required>
                                         <option value="">Select Contact Type</option>
                                         <option ng-repeat="cont_type in contact_types" ng-selected="{{cont_type.id == cont.type}}" ng-value="cont_type.id">{{cont_type.name}}</option>
@@ -265,7 +265,7 @@
                                 </div>
                             </td>
                             <td class="col-xs-6">
-                                <div class="form-group">
+                                <div class="form-group grid-inputs">
                                     <input name="contact" class="form-control" ng-model="cont.contact" placeholder="Contact Details" api-checker required>
                                     <span class="highlght"></span>
                                     <span class="bar"></span>

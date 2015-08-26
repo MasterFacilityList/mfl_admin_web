@@ -198,6 +198,45 @@
                     controller:"mfl.reports.controller.updowngrade.view"
                 }
             }
+        })
+        .state("reports.bc_counties", {
+            url: "beds_cots_counties",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.bc_counties": {
+                    templateUrl: "reports/tpls/bc_counties.tpl.html",
+                    controller:"mfl.reports.controllers.bc_counties"
+                }
+            }
+        })
+        .state("reports.bc_constituencies", {
+            url: "beds_cots_constituencies?county",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.bc_constituencies": {
+                    templateUrl: "reports/tpls/bc_constituencies.tpl.html",
+                    controller:"mfl.reports.controllers.bc_constituencies"
+                }
+            }
+        })
+        .state("reports.bc_wards", {
+            url: "beds_cots_wards?constituency",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.bc_wards": {
+                    templateUrl: "reports/tpls/bc_wards.tpl.html",
+                    controller:"mfl.reports.controllers.bc_wards"
+                }
+            }
         });
 
     }]);
