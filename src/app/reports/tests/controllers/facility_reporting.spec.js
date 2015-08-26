@@ -77,7 +77,7 @@
                         .expectGET(server_url+"api/reporting/?report_type="+
                         "beds_and_cots_by_county")
                         .respond(200, {});
-                    ctrl("b&c_counties", data);
+                    ctrl("bc_counties", data);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
@@ -115,7 +115,7 @@
                         .expectGET(server_url+"api/reporting/?report_type="+
                         "beds_and_cots_by_county")
                         .respond(500);
-                    ctrl("b&c_counties", data);
+                    ctrl("bc_counties", data);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
@@ -154,7 +154,7 @@
                         .expectGET(server_url+"api/reporting/?report_type="+
                         "beds_and_cots_by_constituency")
                         .respond(200, {});
-                    ctrl("b&c_constituencies", data);
+                    ctrl("bc_constituencies", data);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
@@ -193,7 +193,7 @@
                         .expectGET(server_url+"api/reporting/?report_type="+
                         "beds_and_cots_by_constituency")
                         .respond(500);
-                    ctrl("b&c_constituencies", data);
+                    ctrl("bc_constituencies", data);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
@@ -212,7 +212,7 @@
                         .expectGET(server_url+"api/reporting/?report_type="+
                         "beds_and_cots_by_ward")
                         .respond(200, {});
-                    ctrl("b&c_wards", data);
+                    ctrl("bc_wards", data);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
@@ -231,7 +231,7 @@
                         .expectGET(server_url+"api/reporting/?report_type="+
                         "beds_and_cots_by_ward")
                         .respond(500);
-                    ctrl("b&c_wards", data);
+                    ctrl("bc_wards", data);
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
