@@ -40,6 +40,24 @@
             };
         }
     ])
+    .controller("mfl.reports.controllers.bc_counties", ["$scope", "$controller",
+        function($scope, $controller){
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, "beds_and_cots_by_county", "county_bc");
+        }
+    ])
+    .controller("mfl.reports.controllers.bc_constituencies", ["$scope", "$controller",
+        function($scope, $controller){
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, "beds_and_cots_by_constituency", "constituency_bc");
+        }
+    ])
+    .controller("mfl.reports.controllers.bc_wards", ["$scope", "$controller",
+        function($scope, $controller){
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, "beds_and_cots_by_ward", "ward_bc");
+        }
+    ])
     .controller("mfl.reports.controllers.facility_counties", ["$scope", "$controller",
         function($scope, $controller){
             var helper = $controller("mfl.reports.controllers.helper");
