@@ -4,7 +4,8 @@
     angular.module("mfl.service_mgmt.controllers.options", [
         "mfl.service_mgmt.services",
         "ui.router",
-        "mfl.common.forms"
+        "mfl.common.forms",
+        "angular-toasty"
     ])
 
     .controller("mfl.service_mgmt.controllers.option_group_list", ["$scope",
@@ -17,8 +18,8 @@
 
     .controller("mfl.service_mgmt.controllers.option_group_create", ["$scope",
         "$stateParams", "mfl.service_mgmt.wrappers",
-        "mfl.common.forms.changes", "$state",
-        function ($scope, $stateParams, wrappers, forms, $state) {
+        "mfl.common.forms.changes", "$state", "toasty",
+        function ($scope, $stateParams, wrappers, forms, $state, toasty) {
             $scope.option_group_id = $stateParams.option_group_id;
             $scope.edit_view = $scope.option_group_id ? true : false;
             if(!$scope.edit_view){
@@ -55,6 +56,10 @@
                 }else{
                     wrappers.options.remove(obj.id)
                     .success(function () {
+                        toasty.success({
+                            title : "Option Deletion",
+                            msg : "Option successfully deleted"
+                        });
                         $scope.option_group.options =
                         _.without($scope.option_group.options, obj);
                     })
@@ -68,6 +73,13 @@
                 wrappers.create_option_group.create(
                     $scope.option_group)
                     .success(function () {
+                        toasty.success({
+                            title : $scope.edit_view ? "Option Group Updated"
+                                : "Option Group Added",
+                            msg :  $scope.edit_view ?
+                                "Option group successfully updated" :
+                                "Option group successfully added"
+                        });
                         $state.go(
                             "service_mgmt.option_groups_list",
                             {reload: true});
@@ -78,6 +90,10 @@
             };
             $scope.remove = function () {
                 wrappers.option_groups.remove($scope.option_group_id).success(function(){
+                    toasty.success({
+                        title : "Option Group Deletion",
+                        msg : "Option group successfully deleted"
+                    });
                     $state.go("service_mgmt.option_groups_list",{reload:true});
                 }).error(function(data){
                     $scope.errors = data;
