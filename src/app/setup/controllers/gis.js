@@ -39,14 +39,14 @@
             };
             $scope.save = function () {
                 adminApi.geocode_methods.create($scope.geocode_method)
-                .success(function (data) {
+                .success(function () {
                     toasty.success({
                         title: "Geocode Method Added",
                         msg: "Geocode method has been added"
                     });
                     $state.go(
-                        "setup.geocode_methods_list.geocode_methods_edit",
-                        {"method_id": data.id});
+                        "setup.geocode_methods_list",
+                        {reload: true});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -174,14 +174,13 @@
             };
             $scope.save = function () {
                 adminApi.geocode_sources.create($scope.geocode_source)
-                .success(function (data) {
+                .success(function () {
                     toasty.success({
                         title: "Geocode Source Added",
                         msg: "Geocode source has been added"
                     });
                     $state.go(
-                        "setup.geocode_sources_list.geocode_sources_edit",
-                        {"geocode_source_id": data.id});
+                        "setup.geocode_sources_list", {reload: true});
                 })
                 .error(function (data) {
                     $log.error(data);
