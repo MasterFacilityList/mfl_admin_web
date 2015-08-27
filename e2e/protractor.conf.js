@@ -1,10 +1,12 @@
 exports.config = {
-    allScriptsTimeout: 11000,
+//    allScriptsTimeout: 10000,
 
     specs: [
         "../src/app/**/*.e2e.js"
     ],
 
+    getPageTimeout: 2000,
+    
     multiCapabilities: [{
         "browserName": "firefox"
     }, {

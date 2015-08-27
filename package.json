@@ -46,6 +46,7 @@
     "grunt-contrib-cssmin": "~0.12.3",
     "karma-htmlfile-reporter": "~0.2.2",
     "protractor": "^2.1.0",
-    "grunt-protractor-runner": "~2.1.0"
+    "grunt-protractor-runner": "~2.1.0",
+    "protractor-http-mock": "~0.1.17"
   }
 }
