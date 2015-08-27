@@ -27,7 +27,7 @@
                 <label>KEPH Level</label>
                 <select class="form-control" name="keph_level" ng-model="category.keph_level" required>
                     <option value="" disabled>Select a keph level</option>
-                    <option  ng-repeat="keph in kephs" ng-selected="{{keph.id == category.keph_level}}" ng-value="keph.id">{{keph.name}}</option>
+                    <option  ng-repeat="keph in kephs" ng-selected="{{keph.id == category.keph_level}}" value="{{keph.id}}">{{keph.name}}</option>
                 </select>
                 <span class="highlight"></span>
                 <span class="bar"></span>

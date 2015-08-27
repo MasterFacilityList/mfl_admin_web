@@ -102,7 +102,7 @@
                     .expectGET(server_url + "api/facilities/option_groups/1/")
                     .respond(200, {});
                 scope.option_group_id = "1";
-                scope.edit_view = true;
+                scope.edit_view = false;
                 ctrl("option_group_create", data);
                 var frm = {
                     "$dirty": true,
@@ -205,24 +205,42 @@
                 var scope = rootScope.$new();
                 var data = {
                     "$scope": scope,
-                    "$state" : state
-                };
-                spyOn(state, "go");
-                scope.edit_view = false;
-                ctrl("option_group_create", data);
-                var frm = {
-                    "$dirty": true,
-                    "name": {
-                        "$dirty": true,
-                        "$$modelValue": "New Option Group"
+                    "$state" : state,
+                    "$stateParams" : {
+                        option_group_id : "3"
                     }
                 };
+                spyOn(state, "go");
+                scope.option_group_id = "3";
+                scope.edit_view = true;
+                ctrl("option_group_create", data);
                 scope.option_group = {name : "New Option Group"};
                 httpBackend
                     .expectPOST(server_url +
                         "api/facilities/option_group_with_options/")
                         .respond(201, {name : "New Option Group"});
-                scope.save(frm);
+                scope.save();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(scope.option_group).toEqual({name : "New Option Group"});
+            });
+            it("should update an existing option group", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$scope": scope,
+                    "$state" : state
+                };
+                spyOn(state, "go");
+                ctrl("option_group_create", data);
+                scope.option_group = {name : "New Option Group"};
+                scope.edit_view = false;
+                httpBackend
+                    .expectPOST(server_url +
+                        "api/facilities/option_group_with_options/")
+                        .respond(201, {name : "New Option Group"});
+                scope.save();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
