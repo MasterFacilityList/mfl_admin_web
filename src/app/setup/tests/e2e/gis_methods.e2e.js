@@ -151,7 +151,7 @@
             expect(gmName.getText()).toEqual("test2_geocode_name");
         });
 
-        it("logout user after tests",function () {
+        xit("logout user after tests",function () {
             //variables
             var profileLink,logoutLink, title;
 
