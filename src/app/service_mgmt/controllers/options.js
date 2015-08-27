@@ -73,12 +73,14 @@
                 wrappers.create_option_group.create(
                     $scope.option_group)
                     .success(function () {
+                        var msg_title  = $scope.edit_view ?
+                            "Option Group Updated" : "Option Group Added";
+                        var msg_msg = $scope.edit_view ?
+                            "Option group successfully updated" :
+                            "Option group successfully added";
                         toasty.success({
-                            title : $scope.edit_view ? "Option Group Updated"
-                                : "Option Group Added",
-                            msg :  $scope.edit_view ?
-                                "Option group successfully updated" :
-                                "Option group successfully added"
+                            title : msg_title,
+                            msg :  msg_msg
                         });
                         $state.go(
                             "service_mgmt.option_groups_list",
