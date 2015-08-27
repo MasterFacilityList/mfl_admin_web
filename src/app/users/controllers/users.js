@@ -235,10 +235,46 @@
                 "title": "",
                 "checked": false
             };
+            $scope.spinner = true;
+            $scope.addContact = function () {
+                $scope.user_contacts.push({
+                    contact_type : "",
+                    contact : ""
+                });
+            };
+            $scope.removeContact = function (obj) {
+                if(_.isUndefined(obj.id)){
+                    $scope.user_contacts = _.without(
+                        $scope.user_contacts, obj);
+                }
+            };
+            $scope.save = function () {
+                _.each($scope.user_contacts, function (cont) {
+                    wrappers.contacts.create({
+                        "contact_type": cont.contact_type,
+                        "contact": cont.contact
+                    })
+                    .success(function (data) {
+                        wrappers.user_contacts.create({
+                            "user": $scope.user_id,
+                            "contact": data.id
+                        })
+                        .success(function () {})
+                        .error(function (data) {
+                            $scope.errors = data;
+                        });
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+
+                });
+            };
             $scope.goToGroups = function () {
                 if($scope.$parent.furthest < 3) {
                     $scope.$parent.furthest = 3;
                 }
+                $scope.save();
                 $state.go("users.user_create.groups",
                     {user_id : $state.params.user_id, furthest : $scope.furthest});
             };
@@ -265,10 +301,21 @@
 
             wrappers.user_contacts.filter({"user": $scope.user_id})
                 .success(function(data) {
+                    $scope.user_contacts = data.results;
                     $scope.contacts = data.results;
+                    $scope.spinner = false;
+                    if($scope.contacts.length === 0){
+                        $scope.user_contacts = [
+                            {
+                                contact_type : "",
+                                contact : ""
+                            }
+                        ];
+                    }
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
 
             $scope.removeChild = function (obj) {
