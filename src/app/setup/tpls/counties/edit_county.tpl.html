@@ -2,33 +2,33 @@
 <div class="content-header margin-b-20">
     <div class="action-container content-header-extra"></div>
     <h2 class="content-title">
-        <span ng-if="spinner" class="colmd-12 margin-t-30 content-card text-center">
-            <i class="fa fa-spin fa-circle-o-notch fa-1x"></i>
-        </span>
         <span ng-if="!spinner" class="main-title">
             {{county_details.name | titlecase}} County
         </span>
     </h2>
 </div>
 <!-- End of content header -->
-<div class="col-xs-12 content-body pad-h-30">
-    <div ng-if="spinner" class="col-md-12 margin-t-30 text-center pad-h-30">
-        <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
+<div class="col-xs-12">
+    <div ng-if="spinner" class="col-xs-12 margin-t-30 text-center">
+        <div class="map-change-state">
+            <div class="loader"></div>
+            <div class="row">
+                <h3 class="text-center loader-text">Please wait...</h3>
+            </div>
+        </div>
     </div>
-    <div ng-if="!spinner" class="col-md-12 pad-h-30">
-        <div class="content-card heading">
-            <form name="county_frm" ng-submit="saveFrm(county_frm)" class="form-horizontal margin-t-20">
+    <div ng-if="!spinner" class="col-xs-12 fade-content">
+        <div class="col-xs-12 content-card">
+            <form name="county_frm" role="form" ng-submit="saveFrm(county_frm)" >
                 <drf-err-msg></drf-err-msg>
                 <div class="form-group">
-                    <label class="col-sm-3 col-md-2 control-label"><span class="pull-left fs-16">County Name:</span></label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" name="name" ng-model="county_details.name" placeholder="County Name">
-                    </div>
+                    <label class="control-label">County Name:</label>
+                    <input type="text" class="form-control" name="name" ng-model="county_details.name" placeholder="County Name" api-checker required>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 col-md-2 control-label"><span class="pull-left fs-16">County Code:</span></label>
-                    <div class="col-sm-5">
-                       <p class="form-control-static pad-l-10">{{county_details.code}}</p>
+                    <label class="control-label"> County Code:</label>
+                    <div class="form-group">
+                        <input type="text" readonly class="form-control" ng-model="county_details.code" >
                     </div>
                 </div>
                 <div class="col-sm-12 pad-l-0 pad-b-10">
@@ -38,17 +38,17 @@
                 </div>
             </form>
         </div>
-        <div class="col-xs-12 content-card pad-0">
+        <div class="col-xs-12 pad-0">
             <!-- Start of tabbed multi step form  -->
-            <ul class="form-tab fix">
-                <li ui-sref-active="active" class="col-xs-6">
+            <ul class="nav nav-tabs">
+                <li ui-sref-active="active">
                     <a ui-sref=".constituencies">
                         <span class="fw-900">
                             Constituencies
                         </span>
                     </a>
                 </li>
-                <li ui-sref-active="active" class="col-xs-6">
+                <li ui-sref-active="active">
                     <a ui-sref=".users">
                         <span class="fw-900 ">
                             County Users
@@ -57,7 +57,7 @@
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="col-xs-12" ui-view="form-view"></div>
+                <div class="content-card col-xs-12" ui-view="form-view"></div>
             </div><!-- /tab-content -->
             <!-- end of tabbed multistep form -->
         </div>
