@@ -24,12 +24,13 @@
             });
             loginButton.click();
             browser.ignoreSynchronization = true;
-            browser.driver.sleep(1000);
+            browser.driver.sleep(2000);
             browser.waitForAngular();
             
             expect(browser.getLocationAbsUrl()).toEqual("/");
         });
 
+        //Creating without ability to delete hinders test from being included
         xit("should open up new geocode method screen and save geocode method", function() {
             //variables
             var gm_input_name, gm_textarea_desc,gm_save_btn;
@@ -48,8 +49,8 @@
             expect(gm_input_name.getAttribute("value")).toEqual("");
             gm_input_name.sendKeys("test_geocode_method");
             gm_textarea_desc.sendKeys("Test gecode method");
-            gm_save_btn.click(); //saves geocode_method
-            
+            gm_save_btn.click(); //saves geocode_method 
+            browser.waitForAngular(); //navigation to list page
 
             //expectations
             expect(browser.getLocationAbsUrl()).toEqual("/#/setup/geocode_methods");
@@ -63,13 +64,13 @@
             //navigation
             browser.get("/#/setup/geocode_methods");
             browser.driver.sleep(1000);
-            browser.waitForAngular(); //navigation to list
+            browser.waitForAngular(); //navigation to list page
 
             //interaction setup
-            gmName = element(by.repeater("gm in geocode_methods").row(0).column("gm.name"));
+            gmName = element(by.repeater("gm in geocode_methods").row(1).column("gm.name"));
 
             //expectations
-            expect(gmName.getText()).toEqual("test2_geocode_name");
+            expect(gmName.getText()).toEqual("Other");
         });
 
         it("should go to edit view of created geocode method", function() {
@@ -77,51 +78,53 @@
             var gmRow, view_btn, gm_input_name;
 
             //interation setup
-            gmRow = element(by.repeater("gm in geocode_methods").row(0));
+            gmRow = element(by.repeater("gm in geocode_methods").row(1));
             view_btn = gmRow.element(by.cssContainingText(".btn","View"));
 
             //interaction
             view_btn.click();
-            browser.waitForAngular();  //navigation to detail
+            browser.driver.sleep(1000);
+            browser.waitForAngular();  //navigation to detail page
 
             //expectations
             gm_input_name = element(by.id("gm_name"));
             gm_input_name.getAttribute("value").then(function (text) {
-                expect(text).toEqual("test2_geocode_name");
+                expect(text).toEqual("Other");
             });
         });
 
         it("should edit geocode method, save and check if updated", function() {
             //variables
-            var gm_input_name,gm_save_btn, gmName;
+            var gm_input_name, gm_textarea_desc, gm_save_btn, gmNameEl;
 
             //setup interaction
             gm_input_name = element(by.id("gm_name"));
-            gm_save_btn = element(by.id("gm_save_btn"));
+            gm_textarea_desc = element(by.id("gm_desc"));
+            gm_save_btn = element(by.buttonText("Save"));
 
             //interaction
             gm_input_name.clear().then(function () {
-                gm_input_name.sendKeys("test2_geocode_name");
+                gm_input_name.sendKeys("Other");
             });
+            gm_textarea_desc.clear().then(function () {
+                gm_textarea_desc.sendKeys("Describes different geocode methods "+
+                                          "not included in the list");
+            });
+            expect(gm_save_btn.getText()).toEqual("Save");
             gm_save_btn.click();
             browser.driver.sleep(1000);
-            browser.waitForAngular();
+            browser.waitForAngular();//navigates to list page
             
-            expect(browser.getLocationAbsUrl()).toEqual("/setup/geocode_methods");
-            gmName = element(by.repeater("gm in geocode_methods").row(0).column("gm.name"));
-            expect(gmName.getText()).toEqual("test2_geocode_name");
+            gmNameEl = element.all(by.repeater("gm in geocode_methods").row(1).column("gm.name"));
+            expect(gmNameEl.getText()).toEqual(["Other"]);
         });
 
-        it("should delete geocode method from edit view",function () {
+        //Only to be added if deleted fields can be recreated
+        xit("should delete geocode method from edit view",function () {
             var gm_del_btn,view_btn,del_btn,gmRow,gmName;
 
-            //navigation
-            browser.get("/#/setup/geocode_methods");
-            browser.driver.sleep(1000);
-            browser.waitForAngular(); //navigation to list
-
             //interation setup
-            gmRow = element(by.repeater("gm in geocode_methods").row(0));
+            gmRow = element(by.repeater("gm in geocode_methods").row(1));
             view_btn = gmRow.element(by.cssContainingText(".btn","View"));
 
             //interaction
@@ -134,17 +137,32 @@
 
             //interaction
             gm_del_btn.click();
-            browser.waitForAngular(); //delete page loads
+            browser.waitForAngular(); //navigation to delete page
 
             del_btn = element(by.id("del_btn"));
             expect(del_btn.getText()).toEqual("Delete");
             del_btn.click();
             browser.driver.sleep(1000);
-            browser.waitForAngular();
-
-            expect(browser.getLocationAbsUrl()).toEqual("/setup/geocode_methods");
+            browser.waitForAngular();//goes back to list page
             gmName = element(by.repeater("gm in geocode_methods").row(0).column("gm.name"));
+
+            //expectations
+            expect(browser.getLocationAbsUrl()).toEqual("/setup/geocode_methods");
             expect(gmName.getText()).toEqual("test2_geocode_name");
+        });
+
+        it("logout user after tests",function () {
+            //variables
+            var logoutLink;
+
+            //setup interaction
+            logoutLink = element(by.partiallinkText("Log Out"));
+
+            //interaction
+            logoutLink.click();
+
+            //expectations
+            expect(browser.getLocationAbsUrl()).toEqual("/login");
         });
     });
 })();
