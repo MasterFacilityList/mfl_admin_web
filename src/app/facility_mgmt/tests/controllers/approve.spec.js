@@ -141,10 +141,6 @@
                     .respond(200, {results : []});
 
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3")
-                    .respond(200, {results: []});
-
-                httpBackend
                     .expectGET(server_url+"api/facilities/facility_services/?" +
                         "facility=3&is_cancelled=false&is_confirmed=false&" +
                         "fields=id,service_name,option_display_value")
@@ -188,10 +184,6 @@
                     .respond(200, {results : []});
 
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3")
-                    .respond(200, {results: []});
-
-                httpBackend
                     .expectGET(server_url+"api/facilities/facility_services/?" +
                         "facility=3&is_cancelled=false&is_confirmed=false&" +
                         "fields=id,service_name,option_display_value")
@@ -215,9 +207,10 @@
                     "$log": log
                 };
                 httpBackend.resetExpectations();
-
+                state.current.name = "facility_approve_list.view.reject";
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3")
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3&"+
+                               "is_cancelled=false")
                     .respond(500, {results: []});
 
                 httpBackend
@@ -240,18 +233,38 @@
                     "$state": state,
                     "$stateParams": {facility_id: 3}
                 };
-                ctrl("facility_approve", data);
+                httpBackend.resetExpectations();
                 httpBackend
-                    .expectGET(server_url+"api/gis/facility_coordinates/13/")
+                    .expectGET(server_url+"api/facilities/facility_units/?facility=3")
                     .respond(200, {results : []});
-                httpBackend
-                    .expectGET(server_url+"api/facilities/facility_updates/3/")
-                    .respond(200, {facility_updates: "{\"abbreviation\":2}"});
-                httpBackend.flush();
-                httpBackend.verifyNoOutstandingRequest();
-                httpBackend.verifyNoOutstandingExpectation();
 
-                expect(data.$scope.facility_update).toEqual({facility_updates: {abbreviation: 2}});
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_approvals/?facility=3&"+
+                               "is_cancelled=false")
+                    .respond(200, {results: []});
+
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facility_services/?" +
+                        "facility=3&is_cancelled=false&is_confirmed=false&" +
+                        "fields=id,service_name,option_display_value")
+                    .respond(200, {results: []});
+
+                httpBackend
+                .expectGET(server_url+"api/facilities/facilities/3/")
+                .respond(200, {
+                    coordinates: 13,
+                    latest_update: 3,
+                    rejected: true,
+                    approved: true
+                });
+
+                state.current.name = "facility_approve_list.view.reject";
+                ctrl("facility_approve", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
             });
 
             it("should not load undefined facility update or coordinates", function () {

@@ -39,7 +39,7 @@
         </div>
         <ul class="nav nav-pills nav-stacked perm-container margin-b-20" >
             <span ng-hide="assigneditems.length">
-                <p class="lead margin-l-5"><i class="fa fa-info-circle"></i> Nothing assigned yet</p>
+                <p class="fs-16 lead margin-l-5"><i class="fa fa-info-circle"></i> Nothing assigned yet</p>
             </span>
             <li ng-repeat="set_item in assigneditems | filter: search.assigned_query" class="list-item"
             ng-class="{active : set_item.set_selected}">

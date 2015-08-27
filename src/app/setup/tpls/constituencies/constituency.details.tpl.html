@@ -3,9 +3,6 @@
     <div class="action-container content-header-extra">
     </div>
     <h2 class="content-title">
-        <span ng-if="spinner" class="colmd-12 margin-t-30 content-card text-center">
-            <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
-        </span>
         <span ng-if="!spinner" class="main-title">
             {{const_details.name | titlecase}} Constituency
         </span>
@@ -13,24 +10,28 @@
 </div>
 <!-- End of content header -->
 <div class="col-xs-12">
-    <div class="content-card heading">
-        <form ng-submit="saveFrm(const_frm)" name="const_frm" class="form-horizontal margin-t-20">
+    <div ng-if="spinner" class="col-xs-12 margin-t-30 text-center">
+        <div class="map-change-state">
+            <div class="loader"></div>
+            <div class="row">
+                <h3 class="text-center loader-text">Please wait...</h3>
+            </div>
+        </div>
+    </div>
+    <div ng-if="!spinner" class="col-xs-12 content-card fade-content">
+        <form ng-submit="saveFrm(const_frm)" name="const_frm" role="form">
             <drf-err-msg></drf-err-msg>
             <div class="form-group">
-                <label class="col-sm-3 col-md-2 control-label"><span class="pull-left">Constituency Name:</span></label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" name="name" ng-model="const_details.name" placeholder="Enter Constituency Name">
-                </div>
+                <label class="control-label">Constituency Name:</label>
+                <input type="text" class="form-control" name="name" ng-model="const_details.name" placeholder="Enter Constituency Name">
             </div>
             <div class="form-group">
-                <label class="col-sm-3 col-md-2 control-label"><span class="pull-left">Constituency Code:</span></label>
-                <div class="col-sm-5">
-                    <p class="form-control-static pad-l-10">{{const_details.code}}</p>
-                </div>
+                <label class="control-label">Constituency Code:</label>
+                <input type="text" readonly class="form-control" ng-model="const_details.code">
             </div>
             <div class="form-group">
-                <label class="col-sm-3 col-md-2 control-label"><span class="pull-left">County:</span></label>
-                <ui-select class="col-sm-5" ng-model="select_values.county" required name="county" api-checker register-custom-form-control>
+                <label class="control-label">County:</label>
+                <ui-select ng-model="select_values.county" required name="county" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select a county...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
@@ -42,32 +43,29 @@
             <div class="col-sm-12 pad-l-0 pad-b-10">
                 <button class="btn btn-primary">Save</button>
                 <button class="btn btn-default" ui-sref="setup.constituencies">Cancel</button>
-                <mfl-revision-view id="constituency_id" wrapper="wrapper" ></mfl-revision-view>
             </div>
         </form>
+        <mfl-revision-view id="constituency_id" wrapper="wrapper" ></mfl-revision-view>
     </div>
-    <div class="col-xs-12 content-card pad-0">
-        <ul class="form-tab fix">
-            <li ui-sref-active="active" class="col-xs-12">
-                <a class="active">
-                    <span class="fw-900">
-                        Wards
-                    </span>
-                </a>
-            </li>
-        </ul>
-        <table class="table table-hover ">
+    <div class="col-xs-12 content-card">
+        <h4>WARDS IN {{const_details.name}} CONSTITUENCY</h4>
+        <table class="table table-fixed table-hover fs-14">
             <thead>
-                <th class="fs-16">Name</th>
-                <th class="fs-16 text-right">Code</th>
+                <th class="col-sm-11 col-xs-9 fs-14">Name</th>
+                <th class="col-sm-1 col-xs-3 fs-14 text-center">Code</th>
             </thead>
             <tbody>
                 <tr ng-repeat="ward in const_wards">
-                    <td class="pad-t-15 fs-14">
+                    <td class="col-sm-11 col-xs-9">
                         {{::ward.name | titlecase}}
                     </td>
-                    <td class="pad-t-15 fs-14 text-right">
+                    <td class="col-sm-1 col-xs-3 text-center">
                         {{::ward.code}}
+                    </td>
+                </tr>
+                <tr ng-if="const_wards.length === 0">
+                    <td class="alert alert-info col-xs-12" colspan="2">
+                        <i class="fa fa-info-circle"></i> No Wards Exist within the constituency
                     </td>
                 </tr>
             </tbody>

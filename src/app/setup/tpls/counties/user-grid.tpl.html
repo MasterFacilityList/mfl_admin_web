@@ -1,20 +1,25 @@
-<div class="row">
+<div class="col-xs-12">
     <ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
-    <table class="table table-hover fs-14">
+    <table class="table table-fixed table-hover fs-14">
         <thead>
-            <th class="fs-16">User</th>
-            <th class="fs-16"><span class="pull-right">Email</span></th>
+            <th class="col-xs-7 fs-14">User</th>
+            <th class="col-xs-5 fs-14 text-center">Email</th>
         </thead>
         <tbody>
             <tr ng-repeat="user in county_users">
-                <td class="pad-t-15">
+                <td class="col-xs-7">
                     {{::user.user_full_name}}
                 </td>
-                <td class="pad-t-15">
-                    <span class="pull-right">{{::user.user_email}}</span>
+                <td class="col-xs-5 text-center">
+                    {{::user.user_email}}
+                </td>
+            </tr>
+            <tr ng-if="county_users.length === 0">
+                <td class="col-xs-12 alert alert-info" colspan="2">
+                    <i class="fa fa-info-circle"></i> No County users assigned to this County
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-    
+
