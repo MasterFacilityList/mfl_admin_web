@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("mflAdminApp scenario tests for geo code screens:", function() {
+    describe("mflAdminApp scenario tests for geo code methods:", function() {
 
         it("should log in as superuser and load the dashboard", function() {
             //test variables
@@ -153,16 +153,16 @@
 
         it("logout user after tests",function () {
             //variables
-            var logoutLink;
+            var profileLink,logoutLink, title;
 
-            //setup interaction
-            logoutLink = element(by.partiallinkText("Log Out"));
-
-            //interaction
+            profileLink = element(by.binding("name"));
+            profileLink.click();
+            logoutLink = element(by.partialLinkText("Log Out"));
             logoutLink.click();
 
             //expectations
-            expect(browser.getLocationAbsUrl()).toEqual("/login");
+            title = element(by.css("h2"));
+            expect(title.getText()).toEqual("Master Facility List V 2.0");
         });
     });
 })();
