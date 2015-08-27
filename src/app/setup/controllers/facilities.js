@@ -281,6 +281,7 @@
                     icon: "fa-edit",
                     name: "Edit Facility Job Title"
                 };
+                $scope.edit_view = true;
                 $scope.action = [
                     {
                         func : "ui-sref='setup.facility_job_titles.view.delete'" +
