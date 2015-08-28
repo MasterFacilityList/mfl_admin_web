@@ -5,7 +5,7 @@
     <p ng-bind-html="alert"></p>
 </div>
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
-    <form role="form" name="frm_reg_body">
+    <form role="form" name="frm_reg_body" class="col-sm-10 col-sm-offset-1 col-xs-12 margin-t-20 margin-b-20">
         <drf-err-msg></drf-err-msg>
         <div class="form-group">
             <label class="control-label">Name</label>
@@ -26,7 +26,7 @@
                 <ui-select-choices repeat="ot.id as ot in owner_types | filter:$select.search"><span>{{ot.name}}</span></ui-select-choices>
             </ui-select>
         </div>
-        <div class="checkbox form-group">
+        <div class="checkbox form-group" ng-if="facilityRegulatoryBodies.id">
             <label for="active">
                 <input type="checkbox" id="active" name="active" ng-model="facilityRegulatoryBodies.active" api-checker>
                 Is Active?
@@ -39,6 +39,6 @@
             Save
         </button>
         <a class="btn btn-default" ui-sref="setup.facility_regulatory_bodies">Cancel</a>
-        <mfl-revision-view id="facilityRegulatoryBodies.id" wrapper="wrapper"></mfl-revision-view>
+        <mfl-revision-view ng-show="facilityRegulatoryBodies.id" id="facilityRegulatoryBodies.id" wrapper="wrapper"></mfl-revision-view>
     </form>
 </div>

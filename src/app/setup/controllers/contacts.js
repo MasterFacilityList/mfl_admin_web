@@ -33,7 +33,8 @@
             if(!_.isUndefined($stateParams.id)){
                 $scope.title = {
                     class: "btn btn-primary",
-                    name: "Edit Contact Type"
+                    name: "Edit Contact Type",
+                    icon: "fa-edit"
                 };
                 $scope.action = [
                     {
@@ -54,12 +55,12 @@
                 });
                 $scope.remove = function () {
                     adminApi.contact_types.remove($stateParams.id).success(function(){
+                        toasty.success({
+                            title: "Contact Type Delete",
+                            msg: "Contact type has been deleted successfully"
+                        });
                         $state.go("setup.contact_types",{},{reload:true});
                     }).error(function(error){
-                        toasty.success({
-                            title: "Contact Delete",
-                            msg: "Contact has been deleted successfully"
-                        });
                         $scope.alert = error.error;
                         $scope.errors = error;
                         $state.go("setup.contact_types",{},{reload:true});
