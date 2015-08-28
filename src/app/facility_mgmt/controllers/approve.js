@@ -152,7 +152,7 @@
                         $scope.gis = data;
                     })
                     .error(function (data) {
-                        $scope.errors = data5;
+                        $scope.errors = data;
                     });
                 }
                 if ($scope.facility.latest_update) {
