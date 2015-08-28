@@ -3,7 +3,19 @@
 
     describe("mflAdminApp scenario tests for geo code sources:", function() {
 
-        xit("should log in as superuser and load the dashboard", function() {
+        //variable required in test
+        var geocode_desc = "description of source";
+        var getRandomString = function (characterLength) {
+            var randomText = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (var i = 0; i < characterLength; i++){
+                randomText += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return randomText;
+        };
+        var geocode_source = getRandomString(25);
+
+        it("should log in as superuser and load the dashboard", function() {
             //test variables
             var email, password, loginButton;
 
@@ -24,41 +36,42 @@
             });
             loginButton.click();
             browser.ignoreSynchronization = true;
-            browser.driver.sleep(2000);
+            browser.driver.sleep(1000);
             browser.waitForAngular();
-            
-            expect(browser.getLocationAbsUrl()).toEqual("/");
+
+            expect(element(by.linkText("Home")).isPresent()).toBe(true);
         });
 
         //Creating without ability to delete hinders test from being included
-        xit("should open up new geocode source screen and save geocode source", function() {
+        it("should open up new geocode source screen and save geocode source", function() {
             //variables
             var gs_input_name, gs_textarea_desc,gs_save_btn;
 
             //navigation
-            browser.get("/#/setup/geocode_sources/geocode_sources/create");
-            browser.driver.sleep(1000);
+            browser.get("/#/setup/geocode_sources/create");
             browser.waitForAngular(); //navigation to create
+            browser.driver.sleep(3000);
 
             //interaction setup
-            gs_input_name = element.all(by.binding("geocode_source.name").get(1));
-            gs_textarea_desc = element(by.id("gs_desc"));
-            gs_save_btn = element(by.id("gs_save_btn"));
+
+            gs_input_name = element(by.name("name"));
+            gs_textarea_desc = element(by.name("description"));
+            gs_save_btn = element(by.buttonText("Save"));
 
             //interations
-            expect(gs_input_name.getAttribute("value")).toEqual("");
-            gs_input_name.sendKeys("test_geocode_source");
-            gs_textarea_desc.sendKeys("Test gecode source");
-            gs_save_btn.click(); //saves geocode_source 
+            gs_input_name.sendKeys(geocode_source);
+            gs_textarea_desc.sendKeys(geocode_desc);
+            gs_save_btn.click(); //saves geocode_source
+            browser.driver.sleep(1000);
             browser.waitForAngular(); //navigation to list page
 
             //expectations
-            expect(gs_input_name.getAttribute("value")).toEqual("test_geocode_source");
+            expect(browser.getLocationAbsUrl()).toEqual("/setup/geocode_sources");
         });
 
         it("should find created geocode_source in the list generated", function() {
             //variables
-            var gcName;
+            var gsName;
 
             //navigation
             browser.get("/#/setup/geocode_sources");
@@ -66,19 +79,19 @@
             browser.waitForAngular(); //navigation to list page
 
             //interaction setup
-            gcName = element(by.repeater("gs in geocode_sources").row(0).column("gs.name"));
+            gsName = element(by.repeater("gs in geocode_sources").row(0).column("gs.name"));
 
             //expectations
-            expect(gcName.getText()).toEqual("ministry");
+            expect(gsName.getText()).toEqual(geocode_source);
         });
 
         it("should go to edit view of created geocode source", function() {
             //variables
-            var gcRow, view_btn, gs_input_name;
+            var gsRow, view_btn, gs_input_name;
 
             //interation setup
-            gcRow = element(by.repeater("gs in geocode_sources").row(0));
-            view_btn = gcRow.element(by.cssContainingText(".btn","View"));
+            gsRow = element(by.repeater("gs in geocode_sources").row(0));
+            view_btn = gsRow.element(by.cssContainingText(".btn","View"));
 
             //interaction
             view_btn.click();
@@ -88,45 +101,48 @@
             //expectations
             gs_input_name = element(by.name("name"));
             gs_input_name.getAttribute("value").then(function (text) {
-                expect(text).toEqual("ministry");
+                expect(text).toEqual(geocode_source);
             });
         });
 
         it("should edit geocode source, save and check if updated", function() {
             //variables
-            var gs_input_name, gs_textarea_desc, gs_save_btn, gcNameEl;
+            var gs_input_name, gs_textarea_desc, gs_save_btn, gsNameEl;
 
             //setup interaction
             gs_input_name = element(by.name("name"));
-            gs_input_name.getAttribute("value").then(function (text) {
-                expect(text).toEqual("ministry");
-            });
             gs_textarea_desc = element(by.name("description"));
             gs_save_btn = element(by.buttonText("Save"));
 
             //interaction
             gs_input_name.clear().then(function () {
-                gs_input_name.sendKeys("ministry");
+                gs_input_name.sendKeys(geocode_source);
             });
             gs_textarea_desc.clear().then(function () {
-                gs_textarea_desc.sendKeys("Source originating from the ministry");
+                gs_textarea_desc.sendKeys("Describes different geocode sources "+
+                                          "not included in the list");
             });
             expect(gs_save_btn.getText()).toEqual("Save");
             gs_save_btn.click();
             browser.driver.sleep(1000);
             browser.waitForAngular();//navigates to list page
             
-            gcNameEl = element.all(by.repeater("gs in geocode_sources").row(0).column("gs.name"));
-            expect(gcNameEl.getText()).toEqual(["ministry"]);
+            gsNameEl = element.all(by.repeater("gs in geocode_sources").row(0).column("gs.name"));
+            expect(gsNameEl.getText()).toEqual([geocode_source]);
         });
 
         //Only to be added if deleted fields can be recreated
-        xit("should delete geocode source from edit view",function () {
-            var gs_del_btn,view_btn,del_btn,gcRow,gcName;
+        it("should delete geocode source from edit view",function () {
+            var gs_del_btn,view_btn,del_btn,gsRow;
+
+            //navigation
+            browser.get("/#/setup/geocode_sources");
+            browser.driver.sleep(1500);
+            browser.waitForAngular(); //navigation to list page
 
             //interation setup
-            gcRow = element(by.repeater("gc in geocode_sources").row(0));
-            view_btn = gcRow.element(by.cssContainingText(".btn","View"));
+            gsRow = element(by.repeater("gs in geocode_sources").row(0));
+            view_btn = gsRow.element(by.cssContainingText(".btn","View"));
 
             //interaction
             view_btn.click();
@@ -141,25 +157,20 @@
             browser.waitForAngular(); //navigation to delete page
 
             del_btn = element(by.id("del_btn"));
-            expect(del_btn.getText()).toEqual("Delete");
             del_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(1500);
             browser.waitForAngular();//goes back to list page
-            gcName = element(by.repeater("gc in geocode_sources").row(0).column("gs.name"));
 
             //expectations
             expect(browser.getLocationAbsUrl()).toEqual("/setup/geocode_sources");
-            expect(gcName.getText()).toEqual("test2_geocode_name");
         });
 
-        xit("logout user after tests",function () {
+        it("logout user after tests",function () {
             //variables
-            var profileLink,logoutLink, title;
-
-            profileLink = element(by.binding("name"));
-            profileLink.click();
-            logoutLink = element(by.partialLinkText("Log Out"));
-            logoutLink.click();
+            var title;
+            browser.get("/#/logout");
+            browser.driver.sleep(1000);
+            browser.waitForAngular();//goes back to login page
 
             //expectations
             title = element(by.css("h2"));

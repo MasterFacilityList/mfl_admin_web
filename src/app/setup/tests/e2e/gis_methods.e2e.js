@@ -3,6 +3,18 @@
 
     describe("mflAdminApp scenario tests for geo code methods:", function() {
 
+        //variable required in test
+        var geocode_desc = "description of method";
+        var getRandomString = function (characterLength) {
+            var randomText = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (var i = 0; i < characterLength; i++){
+                randomText += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return randomText;
+        };
+        var geocode_method = getRandomString(25);
+
         it("should log in as superuser and load the dashboard", function() {
             //test variables
             var email, password, loginButton;
@@ -24,37 +36,37 @@
             });
             loginButton.click();
             browser.ignoreSynchronization = true;
-            browser.driver.sleep(2000);
+            browser.driver.sleep(1000);
             browser.waitForAngular();
-            
-            expect(browser.getLocationAbsUrl()).toEqual("/");
+
+            expect(element(by.linkText("Home")).isPresent()).toBe(true);
         });
 
         //Creating without ability to delete hinders test from being included
-        xit("should open up new geocode method screen and save geocode method", function() {
+        it("should open up new geocode method screen and save geocode method", function() {
             //variables
             var gm_input_name, gm_textarea_desc,gm_save_btn;
 
             //navigation
             browser.get("/#/setup/geocode_methods/create");
-            browser.driver.sleep(1000);
             browser.waitForAngular(); //navigation to create
+            browser.driver.sleep(3000);
 
             //interaction setup
-            gm_input_name = element(by.id("gm_name"));
-            gm_textarea_desc = element(by.id("gm_desc"));
-            gm_save_btn = element(by.id("gm_save_btn"));
+
+            gm_input_name = element(by.name("name"));
+            gm_textarea_desc = element(by.name("description"));
+            gm_save_btn = element(by.buttonText("Save"));
 
             //interations
-            expect(gm_input_name.getAttribute("value")).toEqual("");
-            gm_input_name.sendKeys("test_geocode_method");
-            gm_textarea_desc.sendKeys("Test gecode method");
-            gm_save_btn.click(); //saves geocode_method 
+            gm_input_name.sendKeys(geocode_method);
+            gm_textarea_desc.sendKeys(geocode_desc);
+            gm_save_btn.click(); //saves geocode_method
+            browser.driver.sleep(1000);
             browser.waitForAngular(); //navigation to list page
 
             //expectations
-            expect(browser.getLocationAbsUrl()).toEqual("/#/setup/geocode_methods");
-            expect(gm_input_name.getAttribute("value")).toEqual("");
+            expect(browser.getLocationAbsUrl()).toEqual("/setup/geocode_methods");
         });
 
         it("should find created geocode_method in the list generated", function() {
@@ -67,10 +79,10 @@
             browser.waitForAngular(); //navigation to list page
 
             //interaction setup
-            gmName = element(by.repeater("gm in geocode_methods").row(1).column("gm.name"));
+            gmName = element(by.repeater("gm in geocode_methods").row(0).column("gm.name"));
 
             //expectations
-            expect(gmName.getText()).toEqual("Other");
+            expect(gmName.getText()).toEqual(geocode_method);
         });
 
         it("should go to edit view of created geocode method", function() {
@@ -78,7 +90,7 @@
             var gmRow, view_btn, gm_input_name;
 
             //interation setup
-            gmRow = element(by.repeater("gm in geocode_methods").row(1));
+            gmRow = element(by.repeater("gm in geocode_methods").row(0));
             view_btn = gmRow.element(by.cssContainingText(".btn","View"));
 
             //interaction
@@ -87,9 +99,9 @@
             browser.waitForAngular();  //navigation to detail page
 
             //expectations
-            gm_input_name = element(by.id("gm_name"));
+            gm_input_name = element(by.name("name"));
             gm_input_name.getAttribute("value").then(function (text) {
-                expect(text).toEqual("Other");
+                expect(text).toEqual(geocode_method);
             });
         });
 
@@ -98,13 +110,13 @@
             var gm_input_name, gm_textarea_desc, gm_save_btn, gmNameEl;
 
             //setup interaction
-            gm_input_name = element(by.id("gm_name"));
-            gm_textarea_desc = element(by.id("gm_desc"));
+            gm_input_name = element(by.name("name"));
+            gm_textarea_desc = element(by.name("description"));
             gm_save_btn = element(by.buttonText("Save"));
 
             //interaction
             gm_input_name.clear().then(function () {
-                gm_input_name.sendKeys("Other");
+                gm_input_name.sendKeys(geocode_method);
             });
             gm_textarea_desc.clear().then(function () {
                 gm_textarea_desc.sendKeys("Describes different geocode methods "+
@@ -115,16 +127,21 @@
             browser.driver.sleep(1000);
             browser.waitForAngular();//navigates to list page
             
-            gmNameEl = element.all(by.repeater("gm in geocode_methods").row(1).column("gm.name"));
-            expect(gmNameEl.getText()).toEqual(["Other"]);
+            gmNameEl = element.all(by.repeater("gm in geocode_methods").row(0).column("gm.name"));
+            expect(gmNameEl.getText()).toEqual([geocode_method]);
         });
 
         //Only to be added if deleted fields can be recreated
-        xit("should delete geocode method from edit view",function () {
-            var gm_del_btn,view_btn,del_btn,gmRow,gmName;
+        it("should delete geocode method from edit view",function () {
+            var gm_del_btn,view_btn,del_btn,gmRow;
+
+            //navigation
+            browser.get("/#/setup/geocode_methods");
+            browser.driver.sleep(1500);
+            browser.waitForAngular(); //navigation to list page
 
             //interation setup
-            gmRow = element(by.repeater("gm in geocode_methods").row(1));
+            gmRow = element(by.repeater("gm in geocode_methods").row(0));
             view_btn = gmRow.element(by.cssContainingText(".btn","View"));
 
             //interaction
@@ -140,25 +157,20 @@
             browser.waitForAngular(); //navigation to delete page
 
             del_btn = element(by.id("del_btn"));
-            expect(del_btn.getText()).toEqual("Delete");
             del_btn.click();
             browser.driver.sleep(1000);
             browser.waitForAngular();//goes back to list page
-            gmName = element(by.repeater("gm in geocode_methods").row(0).column("gm.name"));
 
             //expectations
             expect(browser.getLocationAbsUrl()).toEqual("/setup/geocode_methods");
-            expect(gmName.getText()).toEqual("test2_geocode_name");
         });
 
-        xit("logout user after tests",function () {
+        it("logout user after tests",function () {
             //variables
-            var profileLink,logoutLink, title;
-
-            profileLink = element(by.binding("name"));
-            profileLink.click();
-            logoutLink = element(by.partialLinkText("Log Out"));
-            logoutLink.click();
+            var title;
+            browser.get("/#/logout");
+            browser.driver.sleep(1000);
+            browser.waitForAngular();//goes back to login page
 
             //expectations
             title = element(by.css("h2"));

@@ -1,5 +1,4 @@
 exports.config = {
-//    allScriptsTimeout: 10000,
 
     specs: [
         "../src/app/**/*.e2e.js"
@@ -7,11 +6,16 @@ exports.config = {
 
     getPageTimeout: 2000,
     
-    multiCapabilities: [{
-        "browserName": "firefox"
-    }, {
-        "browserName": "chrome"
-    }],
+    multiCapabilities: [
+        {
+            "browserName": "chrome"
+        },
+        {
+            "browserName": "firefox"
+        }
+    ],
+
+    maxSessions: 1,
 
     baseUrl: "http://localhost:8062/",
 
