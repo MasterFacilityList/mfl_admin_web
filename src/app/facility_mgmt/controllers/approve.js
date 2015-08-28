@@ -110,15 +110,13 @@
                 $scope.reject = true;
             }
             $scope.spinner = true;
-            console.log($scope.spinner);
             $scope.facility_id = $stateParams.facility_id;
             wrappers.facility_units.filter({"facility" : $scope.facility_id})
             .success(function (data) {
                 $scope.chus = data.results;
             })
-            .error(function (e) {
-                $scope.alert = e.error;
-                $scope.errors = e;
+            .error(function (data) {
+                $scope.errors = data;
             });
 
             wrappers.facility_approvals.filter({"facility": $scope.facility_id,
@@ -147,16 +145,14 @@
             wrappers.facility_detail.get($scope.facility_id)
             .success(function(data) {
                 $scope.spinner = false;
-                console.log($scope.spinner);
                 $scope.facility = data;
                 if ($scope.facility.coordinates) {
                     wrappers.facility_coordinates.get($scope.facility.coordinates)
                     .success(function (data) {
                         $scope.gis = data;
                     })
-                    .error(function (e) {
-                        $scope.alert = e.error;
-                        $scope.errors = e;
+                    .error(function (data) {
+                        $scope.errors = data5;
                     });
                 }
                 if ($scope.facility.latest_update) {

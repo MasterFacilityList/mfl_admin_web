@@ -93,7 +93,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="change in facility_changes">
+                    <tr ng-repeat="change in facility_changes.basic">
                         <td>{{change.human_field_name | titlecase}}</td>
                         <td>{{facility[change.field_name] | boolFilter}}</td>
                         <td>{{change.display_value}}</td>
@@ -107,6 +107,75 @@
         </div>
         <div ng-if="!facility.latest_update && facility.is_approved" class="col-xs-12 alert alert-info margin-t-10 margin-b-10">
             <p class="fs-16"><i class="fa fa-info-circle"></i> No facility updates pending approval</p>
+        </div>
+    </div>
+    <div class="col-xs-12 content-card margin-t-20" ng-if="facility_changes.contacts.length > 0">
+        <div class="col-xs-7" ng-class="{'vertical-divider' : facility_changes.contacts.length > 0}">
+            <h4>Officer Incharge</h4>
+            <span class="pull-left col-xs-12 pad-0" ng-if="facility_changes.officer_in_charge.name">
+                <label class="text-black fw-600">Name:</label>
+                    {{facility_changes.officer_in_charge.name}}
+            </span>
+            <span class="pull-left col-xs-12 pad-0" ng-if="facility_changes.officer_in_charge.reg_no">
+                <label class="text-black fw-600">Registration Number:</label>
+                    {{facility_changes.officer_in_charge.reg_no}}
+            </span>
+            <span class="pull-left col-xs-12 pad-0" ng-if="facility_changes.officer_in_charge.job_title_name">
+                <label class="text-black fw-600">Job Title:</label>
+                    {{facility_changes.officer_in_charge.job_title_name}}
+            </span>
+            <div class="col-xs-12 pad-0 margin-t-5" >
+                <h5 class="fs-16">Officer in charge Contacts</h5>
+            </div>
+            <div class="col-xs-12 pad-0 margin-b-5" ng-repeat="officer_contact in facility_changes.officer_in_charge.contacts">
+                <label class="text-black fw-600">
+                    {{officer_contact.contact_type_name | titlecase}}:
+                </label>
+                {{officer_contact.contact | titlecase}}
+            </div>
+        </div>
+        <div class="col-xs-5" ng-if="facility_changes.contacts.length > 0">
+            <h4>Facility Contacts</h4>
+            <div class="col-xs-12 pad-0 margin-b-5" ng-repeat="contact_changed in facility_changes.contacts">
+                <label class="text-black fw-600">
+                    {{contact_changed.contact_type_name | titlecase}}:
+                </label>
+                {{contact_changed.contact | titlecase}}
+            </div>
+        </div>
+        <div class="col-xs-12 margin-t-15" ng-if="facility_changes.units.length > 0" >
+            <h4>Deparments</h4>
+            <table class="table table-condensed table-hover fs-14">
+                <thead>
+                    <th class="col-xs-7">
+                        Department Name
+                    </th>
+                    <th class="col-xs-5 text-center">
+                        Regulating Body
+                    </th>
+                </thead>
+               <tr ng-repeat="unit_changed in facility_changes.units">
+                    <td class="col-xs-7">{{unit_changed.name | titlecase}}</td>
+                    <td class="col-xs-5 text-center">{{unit_changed.regulating_body_name | titlecase}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-12 margin-t-15" ng-if="facility_changes.services.length > 0">
+            <h4>Facility Services</h4>
+            <table class="table table-hover table-condensed fs-14">
+                <thead>
+                    <th class="col-xs-7">
+                        Service Name
+                    </th>
+                    <th class="col-xs-5 text-center">
+                        Service Option
+                    </th>
+                </thead>
+               <tr ng-repeat="service_changed in facility_changes.services">
+                    <td class="col-xs-7">{{service_changed.name | titlecase}}</td>
+                    <td class="col-xs-5 text-center">{{service_changed.display_name ? service_changed.display_name : 'N/A' | titlecase}}</td>
+                </tr>
+            </table>
         </div>
     </div>
     <!-- End of approving facility updates -->
