@@ -10,9 +10,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_create", ["$scope",
     "$stateParams", "mfl.facility.multistep.service",
     "mfl.common.services.multistep", "$state", "$q", "$log",
-    "mfl.facility_mgmt.services.wrappers",
+    "mfl.facility_mgmt.services.wrappers", "toasty",
     function ($scope, $stateParams, facilityMultistepService,
-        multistepService, $state, $q, $log, wrappers) {
+        multistepService, $state, $q, $log, wrappers, toasty) {
         $scope.print = false;
         $scope.create = true;
         //declaration of facility scope variable
@@ -106,6 +106,13 @@
                 facility_id : $scope.new_facility}, {reload : true});
         };
         $scope.printFacility = wrappers.printFacility;
+        $scope.finishFacilityCreation = function () {
+            toasty.success({
+                title : "Facility Added",
+                msg : "Facility successfully added"
+            });
+            $state.go("facility_mgmt");
+        };
     }])
 
     .controller("mfl.facility_mgmt.controllers.facility_create.facility_print", ["$scope",
