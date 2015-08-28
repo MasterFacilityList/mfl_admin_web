@@ -67,7 +67,8 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.geocode_methods_list.geocode_methods_edit" +
+                    func :"id='gm_del_btn' "+
+                    "ui-sref='setup.geocode_methods_list.geocode_methods_edit" +
                     ".geocode_methods_delete({"+
                         "geocode_method_id:geocode_method.id})'" +
                        " requires-user-feature='is_staff'" +

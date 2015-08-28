@@ -69,7 +69,7 @@
             userFeature: "is_national"
         })
         .state("setup.geocode_sources_list.geocode_sources_create", {
-            url: "/geocode_sources/create",
+            url: "/create",
             views: {
                 "main-content@setup.geocode_sources_list": {
                     templateUrl: "setup/tpls/gis/sources.edit.tpl.html",
@@ -80,7 +80,7 @@
             userFeature: "is_national"
         })
         .state("setup.geocode_sources_list.geocode_sources_edit", {
-            url: "/geocode_sources/edit/:geocode_source_id",
+            url: "/edit/:geocode_source_id",
             views: {
                 "main-content@setup.geocode_sources_list": {
                     templateUrl: "setup/tpls/gis/sources.edit.tpl.html",

@@ -35,7 +35,7 @@
 
                         <div class="form-group">
                             <div class="pull-left">
-                                <button type="submit" class="btn btn-primary" ng-disabled="spinner||login.$invalid" ng-disabled="logout">Login</button>
+                                <button id="login_btn" type="submit" class="btn btn-primary" ng-disabled="spinner||login.$invalid||logout">Login</button>
                                 <span ng-if="spinner" style="display: inline-block;" class="margin-r-10 margin-t-5">
                                     <i class="fa fa-spin fa-circle-o-notch"></i>
                                 </span>
