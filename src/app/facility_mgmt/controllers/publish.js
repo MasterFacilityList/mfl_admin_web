@@ -3,7 +3,8 @@
 
     angular.module("mfl.facility_mgmt.controllers.publish", [
         "mfl.facility_mgmt.services",
-        "mfl.auth.services"
+        "mfl.auth.services",
+        "angular-toasty"
     ])
 
     .controller("mfl.facility_mgmt.controllers.facilities_publish",
@@ -23,9 +24,10 @@
     )
 
     .controller("mfl.facility_mgmt.controllers.facility_publish",
-        ["$scope", "$log", "$state", "$stateParams", "mfl.facility_mgmt.services.wrappers",
-        "mfl.auth.services.login",
-        function ($scope, $log, $state, $stateParams, wrappers) {
+        ["$scope", "$log", "$state", "$stateParams",
+        "mfl.facility_mgmt.services.wrappers", "mfl.auth.services.login",
+        "toasty",
+        function ($scope, $log, $state, $stateParams, wrappers, toasty) {
             $scope.facility_id = $stateParams.facility_id;
 
             $scope.title = {
@@ -38,16 +40,22 @@
             })
             .error(function (data) {
                 $log.error(data);
+                $scope.errors = data;
             });
 
             $scope.publish = function (publish) {
                 var pub = publish ? true : false;
                 wrappers.facility_detail.update($scope.facility_id, {"is_published": pub})
                 .success(function () {
+                    toasty.success({
+                        title: "Publish Facility",
+                        msg : "Facility published successfully"
+                    });
                     $state.go("facilities_publish");
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
         }]
