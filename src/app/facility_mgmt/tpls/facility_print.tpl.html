@@ -181,12 +181,12 @@
         </div>
     </div>
     <!-- End of basic details -->
-    <div class="col-xs-12 margin-t-20 margin-b-20" ng-if="fac_units.length !== 0"><hr class="line-divider"></div>
+    <div class="col-xs-12 margin-t-10 margin-b-10" ng-if="fac_units.length !== 0 || facility.facility_services.length !== 0"><hr class="line-divider"></div>
     <div class="col-xs-12 margin-t-10" ng-if="fac_units.length !== 0">
         <h4 class="fw-600">Regulation</h4>
     </div>
     <div class="col-xs-12" ng-if="fac_units.length !== 0">
-        <table class="table fs-14 table-hover table-stripped">
+        <table class="table fs-14 table-hover table-condensed table-stripped">
             <thead>
                 <th class="col-xs-8">Name</th>
                 <th class="col-xs-4 text-center">Regulating Body</th>
@@ -207,7 +207,7 @@
         <h4 class="fw-600">Facility Health Services</h4>
     </div>
     <div class="col-xs-12" ng-if="facility.facility_services.length !== 0">
-        <table class="table table-hover fs-14 table-stripped">
+        <table class="table table-hover fs-14 table-condensed table-stripped">
             <thead>
                 <th class="col-xs-4">Service Name</th>
                 <th class="col-xs-4">Service Category</th>

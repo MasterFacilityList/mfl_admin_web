@@ -42,12 +42,15 @@
             } else {
                 $scope.reject = true;
             }
+            $scope.spinner = true;
             $scope.fac_id = $stateParams.facility_id;
             wrappers.facility_detail.get($stateParams.facility_id)
                 .success(function (data) {
+                    $scope.spinner = false;
                     $scope.facility = data;
                 })
                 .error(function (err) {
+                    $scope.spinner = false;
                     $scope.errors = err;
                 });
             wrappers.facility_units.filter(
@@ -57,6 +60,7 @@
                 })
                 .error(function (e) {
                     $scope.alert = e.error;
+                    $scope.errors = e;
                 });
             wrappers.facility_approvals.filter(
                 {facility:$stateParams.facility_id,is_cancelled:$scope.reject})
@@ -65,6 +69,7 @@
                 })
                 .error(function (e) {
                     $scope.alert = e.error;
+                    $scope.errors = e;
                 });
         }]
     )
@@ -104,6 +109,8 @@
             } else {
                 $scope.reject = true;
             }
+            $scope.spinner = true;
+            console.log($scope.spinner);
             $scope.facility_id = $stateParams.facility_id;
             wrappers.facility_units.filter({"facility" : $scope.facility_id})
             .success(function (data) {
@@ -111,6 +118,7 @@
             })
             .error(function (e) {
                 $scope.alert = e.error;
+                $scope.errors = e;
             });
 
             wrappers.facility_approvals.filter({"facility": $scope.facility_id,
@@ -120,6 +128,7 @@
             })
             .error(function (data) {
                 $log.error(data);
+                $scope.errors = data;
             });
 
             wrappers.facility_services.filter({
@@ -133,10 +142,12 @@
             })
             .error(function (data) {
                 $log.error(data);
+                $scope.errors = data;
             });
-
             wrappers.facility_detail.get($scope.facility_id)
             .success(function(data) {
+                $scope.spinner = false;
+                console.log($scope.spinner);
                 $scope.facility = data;
                 if ($scope.facility.coordinates) {
                     wrappers.facility_coordinates.get($scope.facility.coordinates)
@@ -145,6 +156,7 @@
                     })
                     .error(function (e) {
                         $scope.alert = e.error;
+                        $scope.errors = e;
                     });
                 }
                 if ($scope.facility.latest_update) {
@@ -158,11 +170,13 @@
                     })
                     .error(function (data) {
                         $log.error(data);
+                        $scope.errors = data;
                     });
                 }
             })
             .error(function (data) {
                 $log.error(data);
+                $scope.errors = data;
             });
 
             $scope.facility_approval = {
@@ -176,13 +190,14 @@
                 wrappers.facility_approvals.create($scope.facility_approval)
                 .success(function () {
                     toasty.success({
-                        title:"Facility comment added",
-                        msg:"Facility comment has been added"
+                        title:"Facility Approval",
+                        msg:"Facility successfully approved"
                     });
                     $state.go("facilities_approve");
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
 
@@ -201,6 +216,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
 
@@ -219,7 +235,10 @@
                         $scope.facility_service_updates, fsu
                     );
                 })
-                .error(function (data) {$log.error(data);});
+                .error(function (data) {
+                    $log.error(data);
+                    $scope.errors = data;
+                });
             };
         }]
     );

@@ -199,16 +199,22 @@
                         $scope.fac_serv)
                         .success(function () {
                             var create_msg = {
-                                title : "Facility",
-                                msg : "Facility successfully created"
+                                title : "Facility Added",
+                                msg : "Facility successfully added"
                             };
                             var update_msg = {
-                                title : "Facility",
+                                title : "Facility Updated",
                                 msg : "Facility successfully updated"
                             };
                             var feedback = ($scope.create ? create_msg : update_msg);
-                            toasty.success(feedback);
-                            $state.go("facilities");
+                            if(!$scope.create){
+                                toasty.success(feedback);
+                                $state.go("facilities");
+                            }else{
+                                $state.go("facilities.facility_create."+
+                                    "facility_cover_letter", {facility_id :
+                                    $scope.new_facility}, {reload : true});
+                            }
                         })
                         .error(function (err) {
                             $scope.errors = err.error;
@@ -382,6 +388,7 @@
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[0]);
             } else {
+                $scope.$parent.print = false;
                 $scope.nextState();
                 $scope.facilityOfficers($scope.facility);
             }
@@ -541,6 +548,7 @@
         function($scope,$log,$stateParams,wrappers, errorMessages, $state, toasty){
             if($scope.create) {
                 $scope.nextState();
+                $scope.$parent.print = false;
             }
             $scope.contacts = [];
             $scope.contact = {
@@ -824,6 +832,7 @@
             helper.bootstrap($scope);
             if($scope.create) {
                 $scope.nextState();
+                $scope.$parent.print = false;
             }
             $scope.filters = {facility : $scope.facility_id};
         }]
@@ -840,6 +849,7 @@
                     $scope, $scope.steps, $scope.steps[4]);
             }else{
                 $scope.nextState();
+                $scope.$parent.print = false;
             }
             $scope.fac_depts = [];
             $scope.fac_units = [];
@@ -1145,6 +1155,7 @@
                     $scope, $scope.steps, $scope.steps[1]);
             }else{
                 $scope.nextState();
+                $scope.$parent.print = false;
             }
             $scope.geo = {
                 coordinates : {
