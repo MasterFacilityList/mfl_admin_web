@@ -82,7 +82,7 @@
 
             //interaction setup
             facility_job_titleName = element(by.repeater("jobTitle in jobTitles")
-                .row(0).column("keph.name"));
+                .row(0).column("jobTitle.name"));
 
             //expectations
             expect(facility_job_titleName.getText()).toEqual(facility_job_title);
@@ -132,7 +132,7 @@
             browser.waitForAngular();//navigates to list page
             
             facility_job_titleNameEl = element.all(by.repeater("jobTitle in jobTitles")
-                                             .row(0).column("keph.name"));
+                                             .row(0).column("jobTitle.name"));
             expect(facility_job_titleNameEl.getText()).toEqual([facility_job_title]);
         });
 
