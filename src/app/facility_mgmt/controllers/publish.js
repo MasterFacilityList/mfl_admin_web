@@ -25,8 +25,7 @@
 
     .controller("mfl.facility_mgmt.controllers.facility_publish",
         ["$scope", "$log", "$state", "$stateParams",
-        "mfl.facility_mgmt.services.wrappers", "mfl.auth.services.login",
-        "toasty",
+        "mfl.facility_mgmt.services.wrappers", "toasty",
         function ($scope, $log, $state, $stateParams, wrappers, toasty) {
             $scope.facility_id = $stateParams.facility_id;
 
