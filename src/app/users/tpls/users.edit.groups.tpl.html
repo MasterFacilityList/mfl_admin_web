@@ -1,4 +1,53 @@
 <div class="tab-content">
+     <!-- Beginning of user groups reimplementation -->
+        <div class="col-xs-12 margin-t-0 pad-0" requires-permission="users.change_mfluser">
+            <div class="col-xs-12">
+                <h4 class="fw-600 fs-18"> User Groups</h4>
+            </div>
+            <div class="col-xs-12">
+            <form name="contacts">
+                <table class="table table-hover col-xs-12 custom-well">
+                    <thead class="grey-header">
+                        <th class="col-xs-10">Groups</th>
+                        <th class="col-xs-2 text-center"></th>
+                    </thead>
+                    <tbody>
+                        <tr class="fade-content" ng-repeat="user_grp in user_groups">
+                            <td class="col-xs-10">
+                                <div class="form-group grid-inputs">
+                                    <select class="form-control" name="contact_type" ng-model="contact.contact_type" required api-checker>
+                                        <option value="" disabled>Select Contact Type</option>
+                                        <option ng-repeat="grp in groups" ng-selected="{{grp.id == user_grp.id}}" value="{{cont.id}}">{{grp.name}}</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td class="col-xs-2 text-center">
+                                <a ng-click="removeContact(contact)" style="cursor: pointer;" ng-if="user_contacts.length > 1">
+                                    <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="user_groups.length === 0 && !spinner" class="">
+                            <td colspan="3" class="text-left">
+                                <i class="fa fa-info-circle"></i> No group assigned to user
+                            </td>
+                        </tr>
+                        <tr ng-if="spinner" class="">
+                            <td colspan="3" class="text-center">
+                                <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            </div>
+            <div class="col-xs-12 text-right margin-b-10">
+                <a class="btn btn-primary pull-right" ng-click="addGroup()" >
+                    <i class="fa fa-plus-square-o"></i> Add
+                </a>
+            </div>
+        </div>
+        <!-- End of user groups reimplementation -->
     <div class="row detail-content margin-b-10">
         <div class="col-sm-12 pad-t-20">
             <div class="col-sm-12 alert alert-danger alert-dismissible" ng-show="error">
