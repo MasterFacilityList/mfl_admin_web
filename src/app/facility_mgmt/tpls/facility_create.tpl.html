@@ -5,9 +5,8 @@
             tooltip="Print Cover Letter" ng-if="create && print">
             <i class="fa fa-print"></i>
         </button>
-        <button ng-if="create && print" ui-sref="facility_mgmt"
-        class="action-btn action-btn-primary action-btn-md"
-            ng-if="create && print" tooltip="Complete facility creation">
+        <button ng-click="finishFacilityCreation()" ng-if="create && print"
+        class="action-btn action-btn-primary action-btn-md" tooltip="Complete facility creation">
             <i class="fa fa-save"></i>
         </button>
     </div>

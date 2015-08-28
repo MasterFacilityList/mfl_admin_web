@@ -273,7 +273,6 @@
                     "$state": state,
                     "$stateParams": {facility_id: 3}
                 };
-
                 httpBackend.resetExpectations();
                 httpBackend
                 .expectGET(server_url+"api/facilities/facility_units/?facility=3")

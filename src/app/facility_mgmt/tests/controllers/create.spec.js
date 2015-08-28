@@ -66,6 +66,7 @@
                     data.$scope.tabState(obj);
                     data.$scope.furthest = 1;
                     data.$scope.setFurthest(2);
+                    data.$scope.finishFacilityCreation();
                     data.$scope.goToNext(1, "contacts");
                 }])
             );
