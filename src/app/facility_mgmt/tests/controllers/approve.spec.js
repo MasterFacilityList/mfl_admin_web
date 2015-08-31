@@ -48,7 +48,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_approve", {"$scope": scope});
-                expect(scope.filters.approved).toEqual(false);
+                expect(scope.filters.approved).toEqual(undefined);
             });
         });
 
