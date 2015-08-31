@@ -141,7 +141,7 @@
         });
 
         //Only to be added if deleted fields can be recreated
-        xit("should delete option group from edit view",function () {
+        it("should delete option group from edit view",function () {
             var optionGroup_del_btn,view_btn,del_btn,optionGroupRow;
 
             //navigation
@@ -174,7 +174,7 @@
             expect(browser.getLocationAbsUrl()).toEqual("/setup/services/optiongroups/");
         });
 
-        xit("logout user after tests",function () {
+        it("logout user after tests",function () {
             //variables
             var title;
             browser.get("/#/logout");
