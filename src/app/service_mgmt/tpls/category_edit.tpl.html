@@ -16,16 +16,16 @@
         <form name="category_frm" novalidate>
           <div class="col-sm-10 col-sm-offset-1 margin-t-20 margin-b-20">
             <div class="form-group">
-                <label>Name</label>
-                <input class="form-control" name="name" ng-model="category.name" required placeholder="Name"/>
+                <label class="control-label">Name</label>
+                <input class="form-control" name="name" ng-model="category.name" required placeholder="Name" api-checker/>
             </div>
             <div class="form-group">
-                <label>Abbreviation</label>
-                <input class="form-control" name="abbreviation" ng-model="category.abbreviation"/>
+                <label class="control-label">Abbreviation</label>
+                <input class="form-control" name="abbreviation" ng-model="category.abbreviation" api-checker/>
             </div>
             <div class="form-group">
-                <label>KEPH Level</label>
-                <select class="form-control" name="keph_level" ng-model="category.keph_level" required>
+                <label class="control-label">KEPH Level</label>
+                <select class="form-control" name="keph_level" ng-model="category.keph_level" required api-checker>
                     <option value="" disabled>Select a keph level</option>
                     <option  ng-repeat="keph in kephs" ng-selected="{{keph.id == category.keph_level}}" value="{{keph.id}}">{{keph.name}}</option>
                 </select>
@@ -33,8 +33,8 @@
                 <span class="bar"></span>
             </div>
             <div class="form-group">
-                <label>Description</label>
-                <textarea class="form-control" name="description" ng-model="category.description" placeholder="Description"></textarea>
+                <label class="control-label">Description</label>
+                <textarea class="form-control" name="description" ng-model="category.description" api-checker placeholder="Description"></textarea>
             </div>
             <div class="pull-left">
                 <button class="btn btn-primary" ng-click="save(category_frm)" requires-permission="facilities.change_servicecategory" requires-user-feature="is_staff">Save</button>

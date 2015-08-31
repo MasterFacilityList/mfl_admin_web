@@ -26,15 +26,18 @@
                 var api_filters = {
                     "report_type": report_type
                 };
+                $scope.spinner = true;
                 _.extend(api_filters, $scope.filters);
 
                 wrappers.reporting.filter(api_filters)
                 .success(function (data) {
                     var transform = transform_fxn || _.identity;
                     $scope[data_param] = transform(data.results, $scope);
+                    $scope.spinner = false;
                 })
                 .error(function (err) {
                     $scope.errors = err;
+                    $scope.spinner = false;
                 });
                 $scope.exportToExcel = function () {
                     exportService.excelExport(wrappers.reporting, api_filters);

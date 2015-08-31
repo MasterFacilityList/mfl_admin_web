@@ -3,18 +3,16 @@
     <table class="table table-hover table-condensed fs-14" id="no-more-tables">
         <thead>
             <tr>
-                <th sil-grid-sort field='name'>Name</th>
-                <th sil-grid-sort field='abbreviation'>Abbreviation</th>
-                <th sil-grid-sort field='description'>Description</th>
-                <th class="text-right pad-r-20">Actions</th>
+                <th class="col-sm-4" sil-grid-sort field='name'>Name</th>
+                <th class="col-sm-4" sil-grid-sort field='abbreviation'>Abbreviation</th>
+                <th class="col-sm-4 text-right pad-r-20">Actions</th>
             </tr>
         </thead>
         <tbody class="fade-content">
             <tr  ng-repeat="category in categories">
-                <td data-title="Name:" class="pad-t-15">{{category.name}}</td>
-                <td data-title="Abbreviation:" class="pad-t-15">{{category.abbreviation}}</td>
-                <td data-title="Description:" class="pad-t-15">{{category.description}}</td>
-                <td data-title="Actions:" class="text-right">
+                <td class="col-sm-4 pad-t-15" data-title="Name:" class="pad-t-15">{{category.name}}</td>
+                <td class="col-sm-4 pad-t-15" data-title="Abbreviation:" class="pad-t-15">{{category.abbreviation}}</td>
+                <td data-title="Actions:" class="col-sm-4 text-right">
                     <a class="btn btn-success" tooltip-placement="bottom" tooltip="View category" ui-sref="service_mgmt.category_list.category_edit({category_id: category.id})"  ui-sref-opts="{reload:true}" class="btn btn-success">
                         View
                     </a>

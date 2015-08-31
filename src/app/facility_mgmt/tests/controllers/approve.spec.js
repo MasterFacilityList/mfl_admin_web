@@ -52,15 +52,6 @@
             });
         });
 
-        describe("test facility update approve list", function () {
-
-            it("should load", function () {
-                var scope = rootScope.$new();
-                ctrl("facilities_approve_update", {"$scope": scope});
-                expect(scope.filters.has_edits).toEqual(true);
-            });
-        });
-
         describe("test facility approve/reject view", function () {
 
             it("should load reject list of a facility", function () {

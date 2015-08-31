@@ -77,24 +77,10 @@
     .controller("mfl.facility_mgmt.controllers.facilities_approve",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "approved": false,
-                "rejected": false
+                "pending_approval" : true
             };
             $scope.title = {
                 "name": "Approve Facilities",
-                "icon": "fa-building"
-            };
-        }]
-    )
-
-    .controller("mfl.facility_mgmt.controllers.facilities_approve_update",
-        ["$scope", function ($scope) {
-            $scope.filters = {
-                "has_edits": true,
-                "rejected": false
-            };
-            $scope.title = {
-                "name": "Approve Facility Updates",
                 "icon": "fa-building"
             };
         }]

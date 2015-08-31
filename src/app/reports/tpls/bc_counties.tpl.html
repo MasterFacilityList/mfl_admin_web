@@ -12,24 +12,32 @@
 </div>
 <section class="margin-t-10">
     <div class="col-sm-12">
-        <div class="content-card col-xs-12">
+        <div class="col-xs-12 margin-t-40" ng-if="spinner">
+        <div class="map-change-state">
+              <div class="loader"></div>
+              <div class="row">
+                  <h3 class="text-center loader-text">Please wait...</h3>
+              </div>
+          </div>
+        </div>
+        <div ng-if="!spinner" class="content-card col-xs-12">
            <div class="col-sm-4">
            </div>
            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="text-wrap">County</th>
-                        <th class="text-wrap">Beds</th>
-                        <th class="text-wrap">Cots</th>
+                        <th class="col-xs-5 text-wrap">County</th>
+                        <th class="col-xs-4 text-center text-wrap">Beds</th>
+                        <th class="col-xs-3 text-center text-wrap">Cots</th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in county_bc">
-                            <td data-title="County:">
+                            <td class="col-xs-5" data-title="County:">
                               <a ui-sref="reports.bc_constituencies({county:county.county})">{{::county.county_name | titlecase}}</a>
                             </td>
-                            <td data-title="Beds:">{{::county.beds}}</td>
-                            <td data-title="Cots:">{{::county.cots}}</td>
+                            <td class="col-xs-4 text-center" data-title="Beds:">{{::county.beds}}</td>
+                            <td class="col-xs-3 text-center" data-title="Cots:">{{::county.cots}}</td>
                         </tr>
                     </tbody>
                 </table>
