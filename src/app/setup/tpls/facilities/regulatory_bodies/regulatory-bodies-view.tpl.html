@@ -4,9 +4,11 @@
     <h4>Some Errors On The Form</h4>
     <p ng-bind-html="alert"></p>
 </div>
+<<<<<<< HEAD
 <div class="col-xs-12">
     <div class="col-xs-12 margin-t-20 content-card">
-    <form role="form" name="frm_reg_body" class="col-xs-12 margin-t-5 margin-b-5">
+    <form role="form" name="frm_reg_body"
+    ng-submit="createFacilityRegulatoryBody(facilityRegulatoryBodies)" class="col-xs-12 margin-t-5 margin-b-5">
             <drf-err-msg></drf-err-msg>
             <div class="form-group">
                 <label class="control-label">Name</label>
@@ -78,10 +80,10 @@
       </a>
     </div>
     <div class="col-xs-12 pad-0 margin-b-10">
-        <button ng-if="!facilityRegulatoryBodies.id" ng-click="createFacilityRegulatoryBody(facilityRegulatoryBodies)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_reg_body.$invalid">
+        <button ng-if="!facilityRegulatoryBodies.id"  class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_reg_body.$invalid">
             Save
         </button>
-        <button ng-if="facilityRegulatoryBodies.id" ng-click="updateFacilityRegulatoryBody(facilityRegulatoryBodies.id, frm_reg_body)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_reg_body.$invalid">
+        <button ng-if="facilityRegulatoryBodies.id" ng-click="updateFacilityRegulatoryBody(facilityRegulatoryBodies.id, frm_reg_body)" class="btn btn-primary" requires-user-feature="is_staff">
             Save
         </button>
         <a class="btn btn-default" ui-sref="setup.facility_regulatory_bodies">Cancel</a>
