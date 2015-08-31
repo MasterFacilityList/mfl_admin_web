@@ -23,8 +23,8 @@
                     httpBackend = $httpBackend;
                     SERVER_URL = url;
                     scope.fakeStateParams = {
-                        id : 1,
-                        reg_cont_id : 1
+                        id : "1",
+                        reg_cont_id : "1"
                     };
                     adminApi = adminApi;
                     formService = frm;
@@ -168,61 +168,31 @@
         it("should test that regulatory body view is defined: total failure",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.facilityRegulatoryBody.create");
+            scope.contacts = {
+                items : [
+                    {
+                        id : 1,
+                        delete_spinner : true,
+                        contact : 1
+                    }
+                ]
+            };
+            scope.contact = {
+                contact_type : "POSTAL",
+                contact : "Box 89 Githu"
+            };
+            scope.add_contact();
             scope.add();
             $httpBackend.expectPOST(
                 SERVER_URL + "api/common/contacts/").respond(400, {});
             $httpBackend.flush();
         }]));
-        it("should test deleting reg_body contact: success",
-        inject(["$httpBackend", function ($httpBackend) {
-            controller("mfl.setup.controller.facilityRegulatoryBody.create");
-            var obj = {
-                id : 1,
-                delete_spinner : true,
-                contact : 1
-            };
-            scope.remove_contact(obj);
-            $httpBackend.expectDELETE(
-                SERVER_URL + "api/facilities/regulating_body_contacts/1/")
-                .respond(200, {});
-            $httpBackend.expectDELETE(
-                SERVER_URL + "api/common/contacts/1/").respond(200, {});
-            $httpBackend.flush();
-        }]));
-        it("should test deleting reg_body contact: one failure",
-        inject(["$httpBackend", function ($httpBackend) {
-            controller("mfl.setup.controller.facilityRegulatoryBody.create");
-            var obj = {
-                id : 1,
-                delete_spinner : true,
-                contact : 1
-            };
-            scope.remove_contact(obj);
-            $httpBackend.expectDELETE(
-                SERVER_URL + "api/facilities/regulating_body_contacts/1/")
-                .respond(200, {});
-            $httpBackend.expectDELETE(
-                SERVER_URL + "api/common/contacts/1/").respond(400, {});
-            $httpBackend.flush();
-        }]));
-        it("should test deleting reg_body contact: total failure",
-        inject(["$httpBackend", function ($httpBackend) {
-            controller("mfl.setup.controller.facilityRegulatoryBody.create");
-            var obj = {
-                id : 1,
-                delete_spinner : true,
-                contact : 1
-            };
-            scope.remove_contact(obj);
-            $httpBackend.expectDELETE(
-                SERVER_URL + "api/facilities/regulating_body_contacts/1/")
-                .respond(400, {});
-            $httpBackend.flush();
-        }]));
         it("should test that regulatory body contact_list fetch: success",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.facilityRegulatoryBody.create");
-
+            scope.contacts = {
+                items : []
+            };
             $httpBackend.expectGET(
                 SERVER_URL + "api/common/contact_types/").respond(200, {});
             $httpBackend.flush();
@@ -241,6 +211,7 @@
                 contact : "0710110110",
                 contact_type: "MOBILE"
             };
+            scope.add_contact();
             scope.add();
             $httpBackend.expectPOST(
                 SERVER_URL + "api/common/contacts/").respond(200, {
@@ -273,15 +244,26 @@
                 .respond(400, {});
             $httpBackend.flush();
         }]));
-        it("should test that regulatory body view is defined: total failure",
+        it("should test that regulatory body view is defined: failure",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.facilityRegulatoryBody.edit");
+            scope.contacts = {
+                items : []
+            };
             scope.add();
+            var obj = {
+                delete_spinner : true,
+                contact : 1
+            };
+            scope.contacts = {
+                items : []
+            };
+            scope.remove_contact(obj);
             $httpBackend.expectPOST(
                 SERVER_URL + "api/common/contacts/").respond(400, {});
             $httpBackend.flush();
         }]));
-        it("should test deleting reg_body contact: success",
+        it("should test deleting reg_body contact: total success",
         inject(["$httpBackend", function ($httpBackend) {
             $httpBackend.expectDELETE(
                 SERVER_URL + "api/facilities/regulating_body_contacts/1/")
@@ -294,12 +276,24 @@
                 delete_spinner : true,
                 contact : 1
             };
+            scope.contacts = {
+                items : []
+            };
             scope.remove_contact(obj);
             $httpBackend.flush();
         }]));
         it("should test deleting reg_body contact: one failure",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.facilityRegulatoryBody.edit");
+            scope.contacts = {
+                items : [
+                    {
+                        id : 1,
+                        delete_spinner : true,
+                        contact : 1
+                    }
+                ]
+            };
             var obj = {
                 id : 1,
                 delete_spinner : true,
@@ -316,6 +310,19 @@
         it("should test deleting reg_body contact: total failure",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.facilityRegulatoryBody.edit");
+            scope.contacts = {
+                items : [
+                    {
+                        id : 1,
+                        delete_spinner : true,
+                        contact : 1
+                    },
+                    {
+                        delete_spinner : false,
+                        contact : 3
+                    }
+                ]
+            };
             var obj = {
                 id : 1,
                 delete_spinner : true,
