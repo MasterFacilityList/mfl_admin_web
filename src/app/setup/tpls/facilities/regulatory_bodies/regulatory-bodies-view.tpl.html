@@ -4,16 +4,17 @@
     <h4>Some Errors On The Form</h4>
     <p ng-bind-html="alert"></p>
 </div>
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
-    <form role="form" name="frm_reg_body" class="col-sm-10 col-sm-offset-1 col-xs-12 margin-t-20 margin-b-20">
+<div class="col-md-10 col-md-offset-1 margin-t-20 content-card">
+    <form role="form" name="frm_reg_body" ng-submit="{{facilityRegulatoryBodies.id ? updateFacilityRegulatoryBody(facilityRegulatoryBodies.id, frm_reg_body):createFacilityRegulatoryBody(facilityRegulatoryBodies)}}"
+       class="col-sm-10 col-sm-offset-1 col-xs-12 margin-t-20 margin-b-20" novalidate>
         <drf-err-msg></drf-err-msg>
         <div class="form-group">
             <label class="control-label">Name</label>
-            <input type="text" name="name" ng-model="facilityRegulatoryBodies.name" required api-checker class="form-control">
+            <input type="text" name="name" ng-model="facilityRegulatoryBodies.name" required api-checker class="form-control"/>
         </div>
         <div class="form-group">
             <label class="control-label">Regulation Verb</label>
-            <input type="text" name="regulation_verb" ng-model="facilityRegulatoryBodies.regulation_verb" required api-checker class="form-control">
+            <input type="text" name="regulation_verb" ng-model="facilityRegulatoryBodies.regulation_verb" required api-checker class="form-control"/>
         </div>
         <div class="form-group">
             <label class="control-label">Abbreviation</label>
@@ -32,10 +33,10 @@
                 Is Active?
              </label>
         </div>
-        <button ng-if="!facilityRegulatoryBodies.id" ng-click="createFacilityRegulatoryBody(facilityRegulatoryBodies)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_reg_body.$invalid">
+        <button ng-if="!facilityRegulatoryBodies.id" ng-click="createFacilityRegulatoryBody(facilityRegulatoryBodies)" class="btn btn-primary" requires-user-feature="is_staff">
             Save
         </button>
-        <button ng-if="facilityRegulatoryBodies.id" ng-click="updateFacilityRegulatoryBody(facilityRegulatoryBodies.id, frm_reg_body)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_reg_body.$invalid">
+        <button ng-if="facilityRegulatoryBodies.id" ng-click="updateFacilityRegulatoryBody(facilityRegulatoryBodies.id, frm_reg_body)" class="btn btn-primary" requires-user-feature="is_staff">
             Save
         </button>
         <a class="btn btn-default" ui-sref="setup.facility_regulatory_bodies">Cancel</a>
