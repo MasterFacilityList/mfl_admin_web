@@ -11,12 +11,15 @@
             $scope.filters =  {
                 "fields": "county,changes,county_id"
             };
+            $scope.spinner = true;
             reportsApi.up_down_grades.list()
             .success(function (data) {
                 $scope.changes = data;
+                $scope.spinner = false;
             })
             .error(function (error) {
                 $scope.errors = error;
+                $scope.snipper = false;
             });
             $scope.search_changes = function (upgrades, recent) {
                 $scope.filters = _.extend({"fields": "county,changes,county_id"},

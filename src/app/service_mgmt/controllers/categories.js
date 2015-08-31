@@ -5,7 +5,8 @@
     angular.module("mfl.service_mgmt.controllers.categories", [
         "ui.router",
         "mfl.common.forms",
-        "mfl.service_mgmt.services"
+        "mfl.service_mgmt.services",
+        "angular-toasty"
     ])
 
     .controller("mfl.service_mgmt.controllers.category_list", ["$scope", function ($scope) {

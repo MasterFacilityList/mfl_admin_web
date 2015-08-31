@@ -11,8 +11,16 @@
    </h2>
 </div>
 <section class="margin-t-10">
+    <div class="col-xs-12 margin-t-40" ng-if="spinner">
+      <div class="map-change-state">
+            <div class="loader"></div>
+            <div class="row">
+                <h3 class="text-center loader-text">Please wait...</h3>
+            </div>
+        </div>
+    </div>
     <div class="col-xs-12">
-       <div class="col-xs-12 content-card heading pad-b-10">
+        <div ng-if="!spinner" class="col-xs-12 content-card heading pad-b-10">
             <div class="col-xs-12">
                <div>
                    <div class="col-xs-12 col-sm-3 pad-l-0">
@@ -37,7 +45,7 @@
                     </div>
             </div>
        </div>
-        <div class="content-card col-xs-12">
+        <div ng-if="!spinner" class="content-card col-xs-12">
             <div class="col-sm-4 col-xs-12">
                 <ui-select ng-model="$parent.search">
                     <ui-select-match placeholder="Select County">{{$select.selected.county}}</ui-select-match>
@@ -49,20 +57,20 @@
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="text-wrap">County</th>
-                        <th class="text-wrap">Changes</th>
-                        <th class="text-wrap"> <span class="pull-right">Action</span></th>
+                        <th class="col-xs-5 text-wrap">County</th>
+                        <th class="col-xs-5 text-center text-wrap">Changes</th>
+                        <th class="col-xs-2 text-right text-wrap"> <span class="pull-right">Action</span></th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in changes.results | filter:search">
-                            <td data-title="County:" >{{county.county | titlecase}}</td>
-                            <td data-title="Changes:">{{county.changes}}</td>
-                            <td ng-show="county.changes > 0" data-title="Action:" class="text-right"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
-                            <td ng-hide="county.changes > 0" data-title="Action:" class="text-right"><button class="btn btn-success" disabled>View</button></td>
+                            <td class="col-xs-5" data-title="County:" >{{county.county | titlecase}}</td>
+                            <td class="col-xs-5 text-center" data-title="Changes:">{{county.changes}}</td>
+                            <td class="col-xs-2 text-right" ng-show="county.changes > 0" data-title="Action:" class="text-right"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
+                            <td class="col-xs-2 text-right" ng-hide="county.changes > 0" data-title="Action:" class="text-right"><button class="btn btn-success" disabled>View</button></td>
                         </tr>
                         <tr>
-                            <td>TOTAL</td>
-                            <td>{{changes.total_number_of_changes}}</td>
+                            <td class="col-xs-5">TOTAL</td>
+                            <td class="col-xs-5 text-center">{{changes.total_number_of_changes}}</td>
                             <td><span class="pull-right"></span></td>
                         </tr>
                     </tbody>

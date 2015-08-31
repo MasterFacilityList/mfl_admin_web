@@ -48,16 +48,7 @@
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_approve", {"$scope": scope});
-                expect(scope.filters.approved).toEqual(false);
-            });
-        });
-
-        describe("test facility update approve list", function () {
-
-            it("should load", function () {
-                var scope = rootScope.$new();
-                ctrl("facilities_approve_update", {"$scope": scope});
-                expect(scope.filters.has_edits).toEqual(true);
+                expect(scope.filters.approved).toEqual(undefined);
             });
         });
 
