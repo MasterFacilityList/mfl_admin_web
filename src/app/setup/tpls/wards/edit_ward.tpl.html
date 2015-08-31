@@ -3,24 +3,23 @@
     <div class="action-container content-header-extra"></div>
     <h2 class="content-title">
         <span class="main-title">
-            {{::state ? (ward_details.name |titlecase) : 'Add' }} Ward
+          <i class="fa {{state ? 'fa-edit' : 'fa-plus-circle'}}"></i>  {{::state ? 'Edit' : 'Add' }} Ward
         </span>
     </h2>
 </div>
 <!-- End of content header -->
-<div class="col-xs-12 content-body">
-    <div class="pad-h-30">
-        <div class="content-card col-xs-12 col-sm-offset-1 col-sm-10">
+<div class="col-xs-12">
+    <div class="col-xs-12">
+        <div class=" col-xs-12 col-sm-offset-1 col-sm-10 content-card">
             <form name="ward_frm" ng-submit="saveFrm(state ? ward_frm : ward_details)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
-                <div class="form-group fs-15">
-                    <label class="control-label">Ward Code:</label><br>
-                   <span ng-if="!state" class="fs-14 label label-info">To be generated after adding ward</span>
-                   <span ng-if="state" class="fs-16 fw-600 form-control-static"> {{ward_details.code}}</span>
-                </div>
                 <div class="form-group">
                     <label class="control-label">Ward Name:</label>
                     <input type="text" class="form-control" name="name" ng-model="ward_details.name" placeholder="Enter Ward Name Here..." required api-checker/>
+                </div>
+                <div ng-if="state" class="form-group">
+                    <label class="control-label">Ward Code:</label>
+                    <input type="text" readonly class="form-control" ng-model="ward_details.code">
                 </div>
                 <div class="form-group">
                     <label class="control-label">Constituency:</label>
@@ -36,7 +35,7 @@
                 <div class="margin-t-20 pad-b-10">
                     <button class="btn btn-primary">Save</button>
                     <button class="btn btn-default" ui-sref="setup.wards">Cancel</button>
-                    <mfl-revision-view id="ward_id" wrapper="wrapper" ></mfl-revision-view>
+                    <mfl-revision-view ng-show="state" id="ward_id" wrapper="wrapper" ></mfl-revision-view>
                 </div>
             </form>
         </div>

@@ -1,99 +1,66 @@
 <div class="listing">
     <div class="col-sm-12">
     <form name="service_frm">
-        <div class="col-sm-12 custom-well margin-t-10">
-            <div class="col-xs-12">
-                <h4 class="fw-600 fs-18"> Service Details</h4>
-            </div>
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
             <div class="form-group col-xs-12">
                 <label>Service Name</label>
-                <input class="form-control" name="name" ng-model="service.name" required />
+                <input class="form-control" name="name" ng-model="service.name" required api-checker placeholder="Service Name"/>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="form-group col-xs-12">
                 <label>Abbreviation</label>
-                <input class="form-control" name="abbreviation" ng-model="service.abbreviation"/>
+                <input class="form-control" name="abbreviation" ng-model="service.abbreviation" api-checker placeholder="Service Abbreviation"/>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="form-group col-xs-12">
                 <label>Category</label>
-                <select class="form-control" name="category" ng-model="service.category" required>
+                <select class="form-control" name="category" ng-model="service.category" required api-checker>
+                    <option value="" disabled>Select a Category</option>
                     <option  ng-repeat="cat in categories" ng-selected="{{cat.id == service.category}}" value="{{cat.id}}">{{cat.name}}</option>
                 </select>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="form-group col-xs-12">
-                <label>KEPH Level</label>
-                <select class="form-control" name="category" ng-model="service.keph_level" required>
-                    <option  ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
-                </select>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="form-group col-xs-12">
                 <label>Option Groups</label>
-                <select class="form-control" name="category" ng-model="service.option_group" required>
-                    <option  ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+                <select class="form-control" name="group" ng-model="service.group" required api-checker>
+                    <option value="" disabled>Select an option group</option>
+                    <option  ng-repeat="opt_grp in option_groups" ng-selected="{{opt_grp.id == service.group}}" value="{{opt_grp.id}}">{{opt_grp.name}}</option>
                 </select>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="form-group col-xs-12">
                 <label>Description</label>
-                <textarea class="form-control" name="description" ng-model="service.description"></textarea>
+                <textarea class="form-control" name="description" ng-model="service.description" placeholder="Service Description"></textarea>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
-
-        </div>
-        <div class="col-sm-12 custom-well margin-t-10">
-            <div class="col-xs-12">
-                <h4 class="fw-600 fs-18"> Service Options</h4>
+            <div class="form-group col-xs-12 checkbox">
+                <label>
+                    <input type="checkbox" id="has_options" name="has_options" ng-model="service.has_options" api-checker >
+                    Service has Options?
+                 </label>
             </div>
-            <div class="col-xs-12">
-                <table class="table table-bordered col-xs-12">
-                    <thead class="grey-header">
-                        <th class="col-xs-11">Service Option</th>
-                        <th class="col-xs-1 text-center"></th>
-                    </thead>
-                    <tbody class="">
-                        <tr ng-repeat="serv_opt in service_options">
-                            <td>
-                                <div class="form-group">
-                                    <select class="form-control" ng-model="serv_opt.option" required placeholder="Select Option">
-                                        <option ng-selected="{{opt.id == serv_opt.option}}" ng-repeat="opt in options" ng-value="opt.id">{{opt.display_text}}</option>
-                                    </select>
-                                    <span class="highlight"></span>
-                                    <span class="bar"></span>
-                                </div>
-                            </td>
-                            <td class="col-xs-1 text-center">
-                                <a ng-click="removeOption(serv_opt)" style="cursor: pointer; margin-botom: 5px;">
-                                    <i class="fa fa-close fa-2x text-danger"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="form-group checkbox col-xs-12" ng-if="edit_view">
+                <label>
+                    <input type="checkbox" id="active" name="active" ng-model="service.active" api-checker >
+                    Is Active?
+                 </label>
             </div>
-            <div class="col-sm-12 text-right">
-                <a ng-click="addOption()" class="btn btn-info margin-t-10 margin-b-10" >
-                    <i class="fa fa-plus-circle"></i> Add
+            <div class="col-sm-12 margin-b-20">
+                <button class="btn btn-primary margin-t-10" ng-click="save(service_frm)" requires-user-feature="is_staff">
+                    Save
+                </button>
+                <a class="btn btn-default margin-t-10" ui-sref="service_mgmt.service_list">
+                    Cancel
                 </a>
+                <mfl-revision-view ng-show="edit_view" id="service_id" wrapper="wrapper" ></mfl-revision-view>
             </div>
         </div>
-        <div class="col-sm-12 margin-b-20">
-            <button class="btn btn-primary margin-t-10" ng-click="save(service_frm)" requires-user-feature="is_staff">
-                Save
-            </button>
-            <a class="btn btn-default margin-t-10" ui-sref="service_mgmt.service_list">
-                Cancel
-            </a>
-            <mfl-revision-view id="service_id" wrapper="wrapper" ></mfl-revision-view>
-        </div>
+
     </form>
     </div>
 </div>

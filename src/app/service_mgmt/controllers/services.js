@@ -4,7 +4,8 @@
 
     angular.module("mfl.service_mgmt.controllers.services", [
         "mfl.service_mgmt.services",
-        "ui.router"
+        "ui.router",
+        "angular-toasty"
     ])
 
     .controller("mfl.service_mgmt.controllers.service_list", ["$scope", function ($scope) {
@@ -14,8 +15,9 @@
     }])
 
     .controller("mfl.service_mgmt.controllers.service_edit",
-        ["$scope", "$state", "$stateParams", "$log", "mfl.service_mgmt.wrappers",
-        function ($scope, $state, $stateParams, $log, wrappers) {
+        ["$scope", "$state", "$stateParams", "$log",
+        "mfl.service_mgmt.wrappers", "toasty",
+        function ($scope, $state, $stateParams, $log, wrappers, toasty) {
             $scope.create = false;
             $scope.steps = [
                 {
@@ -29,7 +31,7 @@
                     count: "2"
                 }
             ];
-
+            $scope.edit_view = true;
             $scope.service_id = $stateParams.service_id;
             $scope.wrapper = wrappers.services;
             $scope.tabState = function(obj) {
@@ -53,6 +55,10 @@
             });
             $scope.remove = function () {
                 wrappers.services.remove($scope.service_id).success(function(){
+                    toasty.success({
+                        title : "Service Deletion",
+                        msg : "Service successfully deleted"
+                    });
                     $state.go("service_mgmt.service_list",{},{reload:true});
                 }).error(function(error){
                     $scope.alert = error.error;
@@ -65,26 +71,21 @@
     ])
 
     .controller("mfl.service_mgmt.controllers.service_edit.basic",
-        ["$scope", "$state", "$log", "mfl.service_mgmt.wrappers", "mfl.common.forms.changes",
-        function ($scope, $state, $log, wrappers, forms) {
+        ["$scope", "$state", "$log", "mfl.service_mgmt.wrappers",
+        "mfl.common.forms.changes", "toasty",
+        function ($scope, $state, $log, wrappers, forms, toasty) {
             $scope.steps[0].active = true;
             $scope.steps[1].active = false;
             wrappers.categories.filter({page_size: 1000}).success(function (data) {
                 $scope.categories = data.results;
             }).error(function (data) {
                 $log.warn(data);
+                $scope.errors = data;
             });
-            wrappers.options.filter({page_size: 1000}).success(function (data) {
-                $scope.options = data.results;
+            wrappers.option_groups.filter({page_size: 1000}).success(function (data) {
+                $scope.option_groups = data.results;
             }).error(function (data) {
-                $log.warn(data);
-            });
-            wrappers.service_options.filter({page_size: 1000, service: $scope.service_id})
-            .success(function (data) {
-                $scope.service_options = data.results;
-            })
-            .error(function (data) {
-                $log.warn(data);
+                $scope.errors = data;
             });
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
@@ -92,19 +93,17 @@
                 if (! _.isEmpty(changed)) {
                     wrappers.services.update($scope.service_id, changed)
                         .success(function () {
-                            $state.go(
-                            "service_mgmt.service_list.service_edit.options",
-                            {"service_id": $scope.service_id},
-                            {reload: true}
-                            );
+                            toasty.success({
+                                title: "Services Updated",
+                                msg: "Servuce updated successfully"
+                            });
+                            $state.go( "service_mgmt.service_list",
+                                {reload: true});
                         });
                 }
                 else {
-                    $state.go(
-                    "service_mgmt.service_list.service_edit.options",
-                    {"service_id": $scope.service_id},
-                    {reload: true}
-                    );
+                    $state.go( "service_mgmt.service_list",
+                                {reload: true});
                 }
             };
         }
@@ -214,10 +213,15 @@
 
     .controller("mfl.service_mgmt.controllers.service_create.basic",[
         "$scope", "$state", "$log", "mfl.service_mgmt.wrappers",
-        "mfl.common.forms.changes",
-        function ($scope, $state, $log, wrappers, formChanges) {
+        "mfl.common.forms.changes", "toasty",
+        function ($scope, $state, $log, wrappers, formChanges, toasty) {
             $scope.$parent.tab = 1;
             $scope.nextState();
+            wrappers.option_groups.filter({page_size: 1000}).success(function (data) {
+                $scope.option_groups = data.results;
+            }).error(function (data) {
+                $scope.errors = data;
+            });
             if(!_.isEmpty($state.params.service_id)) {
                 wrappers.services.get($state.params.service_id)
                 .success(function (data) {
@@ -249,12 +253,12 @@
                 }
                 else {
                     wrappers.services.create($scope.service)
-                    .success(function (data) {
-                        $state.go(
-                            "service_mgmt.service_list.service_create.options",
-                            {"service_id": data.id, furthest : 2},
-                            {reload: true}
-                        );
+                    .success(function () {
+                        toasty.success({
+                            title: "Service Added",
+                            msg: "Service added successfully"
+                        });
+                        $state.go("service_mgmt.service_list", {reload: true});
                     });
                 }
             };

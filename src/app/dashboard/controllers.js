@@ -33,13 +33,13 @@
                 });
             };
             $scope.weekly = function () {
-                updateRecent("weekly");
+                updateRecent("last_week");
             };
             $scope.monthly = function () {
-                updateRecent("monthly");
+                updateRecent("last_month");
             };
             $scope.quarterly = function () {
-                updateRecent("quarterly");
+                updateRecent("last_3_months");
             };
             $scope.showGraph = function(_data) {
                 //owner chart

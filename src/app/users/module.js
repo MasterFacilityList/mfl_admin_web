@@ -4,7 +4,7 @@
 
     angular.module("mfl.users", [
         "ui.router",
-
+        "angular-toasty",
         "mfl.users.controllers",
         "mfl.users.states",
         "mfl.users.services",

@@ -27,12 +27,16 @@
     )
 
     .controller("mfl.setup.controller.constituency.create", ["$scope",
-        "adminApi","$state",
-        function ($scope, adminApi,$state) {
+        "adminApi","$state","toasty",
+        function ($scope, adminApi,$state,toasty) {
             //update constituency
             $scope.saveFrm = function (frm) {
                 adminApi.constituencies.create(frm)
                     .success(function () {
+                        toasty.success({
+                            title: "Constituency added",
+                            msg: "Constituency has been added"
+                        });
                         $state.go("setup.constituencies");
                     })
                     .error(function (error) {
@@ -59,8 +63,8 @@
         }
     ])
     .controller("mfl.setup.controller.constituency.details", ["$scope",
-        "$stateParams", "adminApi","mfl.common.forms.changes","$state",
-        function ($scope, $stateParams, adminApi, formChanges,$state) {
+        "$stateParams", "adminApi","mfl.common.forms.changes","$state","toasty",
+        function ($scope, $stateParams, adminApi, formChanges,$state,toasty) {
             $scope.constituency_id = $stateParams.const_id;
             $scope.wrapper = adminApi.constituencies;
             adminApi.constituencies.get($stateParams.const_id)
@@ -82,6 +86,10 @@
                 if(!_.isEmpty(changes)){
                     adminApi.constituencies.update($stateParams.const_id,changes)
                         .success(function () {
+                            toasty.success({
+                                title: "Constituency updated",
+                                msg: "Constituency has been updated"
+                            });
                             $state.go("setup.constituencies");
                         })
                         .error(function (error) {

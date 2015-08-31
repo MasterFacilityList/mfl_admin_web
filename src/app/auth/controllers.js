@@ -24,7 +24,8 @@
     )
 
     .controller("mfl.auth.controllers.reset_pwd_confirm",
-        ["$scope", "$state", "$stateParams", "$log", "mfl.auth.services.profile",
+        ["$scope", "$state", "$stateParams", "$log",
+        "mfl.auth.services.profile",
         function ($scope, $state, $stateParams, $log, profileService) {
             $scope.reset_pwd_confirm = function () {
                 profileService.resetPasswordConfirm(

@@ -1,9 +1,6 @@
 <div class="col-sm-12 content-card">
-    <div class="col-md-12 alert alert-danger alert-dismissible" ng-show="units_error">
-        <button type="button" class="close">
-            <span ng-click="units_error = !units_error">&times;</span>
-        </button>
-        <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{units_error}}</span>
+    <div class="col-xs-12">
+        <drf-err-msg></drf-err-msg>
     </div>
     <!-- Start of new implementation -->
     <div class="col-xs-12 margin-t-10 pad-0" requires-permission="facilities.add_facilityunit">
@@ -11,7 +8,7 @@
             <h4 class="fw-600 fs-18"> Facility Regulation</h4>
         </div>
         <div class="col-xs-12">
-            <table class="table table-bordered col-xs-12">
+            <table class="table table-hover table-condensed custom-well col-xs-12">
                 <thead class="grey-header">
                     <th class="col-xs-5">Name</th>
                     <th class="col-xs-6">Regulatory Body</th>
@@ -73,7 +70,7 @@
             <button ng-if="!create" ng-click="saveUnits(true)" type="submit" class="btn btn-primary margin-t-20 margin-b-10 margin-r-5">
                  Finish
             </button>
-            <a ng-click="saveUnits(false)" ui-sref="facilities.facility_edit.services" class="btn btn-primary margin-t-20 margin-b-10 pull-right">
+            <a ng-click="saveUnits(false)" class="btn btn-primary margin-t-20 margin-b-10 pull-right">
                  {{create ? 'Facility Services' : 'Save & Continue'}} <i class="fa fa-angle-double-right"></i>
             </a>
         </span>

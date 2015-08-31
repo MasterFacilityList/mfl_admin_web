@@ -58,17 +58,10 @@
                         controller: "mfl.facility_mgmt.controllers.facility_edit.services"
                     }
                 },
-                redirectTo : "facilities.facility_create.services.view",
+                redirectTo : "facilities.facility_create.services.edit",
                 permission: "facilities.add_facility"
             })
-            .state("facilities.facility_create.services.edit", {
-                url : "edit/",
-                views : {
-                    "service-content@facilities.facility_create.services": {
-                        templateUrl : "facility_mgmt/tpls/facility_services.edit.tpl.html"
-                    }
-                }
-            })
+
             .state("facilities.facility_create.services.view", {
                 url: "view/",
                 views: {
@@ -77,6 +70,16 @@
                     }
                 }
             })
+
+            .state("facilities.facility_create.services.edit", {
+                url : "edit/",
+                views : {
+                    "service-content@facilities.facility_create.services": {
+                        templateUrl : "facility_mgmt/tpls/facility_services.edit.tpl.html"
+                    }
+                }
+            })
+
             .state("facilities.facility_create.setup", {
                 url: ":facility_id/setup",
                 views: {

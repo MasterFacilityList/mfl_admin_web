@@ -12,7 +12,7 @@
         class="btn btn-primary margin-t-20 margin-b-10">
             <i class="fa fa-angle-double-left"></i> Regulation
         </a>
-        <button ui-sref="facilities.facility_create.facility_cover_letter({facility_id : new_facility})" ng-if="create"  class="btn btn-primary margin-t-20 margin-b-10 pull-right">
+        <button ng-click="facilityServices()" ng-if="create"  class="btn btn-primary margin-t-20 margin-b-10 pull-right">
              Submit <i class="fa fa-angle-double-right"></i>
         </button>
         <!-- End of navigation buttons -->
@@ -20,7 +20,7 @@
             <i class="fa fa-angle-double-left"></i> Regulation
         </a>
         <button ng-click="facilityServices()" ng-if="!create && !updown"  class="btn btn-primary margin-t-20 margin-b-10 pull-right">
-             Save & Finish <i class="fa fa-angle-double-right"></i>
+             {{create ? 'Submit' : 'Save & Finish'}} <i class="fa fa-angle-double-right"></i>
         </button>
     </div>
 </div>

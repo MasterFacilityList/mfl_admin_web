@@ -25,8 +25,8 @@
         }]
     )
     .controller("mfl.setup.controller.county.view", ["$scope", "$stateParams",
-        "adminApi","mfl.common.forms.changes","$state",
-        function ($scope, $stateParams, adminApi, formChanges,$state) {
+        "adminApi","mfl.common.forms.changes","$state","toasty",
+        function ($scope, $stateParams, adminApi, formChanges,$state,toasty) {
             $scope.spinner = true;
             $scope.county_id = $stateParams.count_id;
             $scope.wrapper = adminApi.counties;
@@ -49,6 +49,10 @@
                 if(!_.isEmpty(changes)){
                     adminApi.counties.update($stateParams.count_id,changes)
                         .success(function () {
+                            toasty.success({
+                                title: "County updated",
+                                msg: "County has been updated"
+                            });
                             $state.go("setup.counties");
                         })
                         .error(function (error) {
@@ -75,13 +79,17 @@
         }
     ])
     .controller("mfl.setup.controller.county.create", ["$scope", "$stateParams",
-        "adminApi","mfl.common.forms.changes","$state",
-        function ($scope, $stateParams, adminApi, formChanges,$state) {
+        "adminApi","mfl.common.forms.changes","$state","toasty",
+        function ($scope, $stateParams, adminApi, formChanges,$state,toasty) {
             //update county
             $scope.saveFrm = function (frm) {
                 adminApi.counties.create(frm)
                     .success(function () {
                         $state.go("setup.counties");
+                        toasty.success({
+                            title: "County added",
+                            msg: "County has been added"
+                        });
                     })
                     .error(function (error) {
                         $scope.errors = error;

@@ -7,6 +7,10 @@
 <!-- Facility Details -->
 <div class="col-xs-12 margin-t-20">
     <div class="col-xs-12 content-card">
+    <div class="col-xs-12 pad-0 margin-t-20 margin-b-20 text-center" ng-if="spinner">
+        <i class="fa fa-spin fa-circle-o-notch fa-3x"></i>
+    </div>
+    <div class="col-xs-12 pad-0" ng-if="!spinner">
         <h4 class="fw-400"><a ui-sref="facilities.facility_view({facility_id:facility.id})">{{facility.code}} | {{facility.name}}</a></h4>
         <div class="row">
             <div class="col-xs-12 margin-b-10 fs-16">
@@ -22,6 +26,8 @@
             <div class="col-sm-6"><span class="pull-right">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
        </div>
     </div>
+    </div>
+    <drf-err-msg></drf-err-msg>
     <button class="btn btn-primary" ng-click="viewFacility = !viewFacility">
         View {{viewFacility ? 'Less' : 'More'}} Facility Details <i class="fa {{viewFacility ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
     </button>
@@ -59,21 +65,21 @@
 <!-- End of facility details -->
 <div class="col-xs-12 margin-t-20">
     <div class="col-xs-12 content-card">
-        <form name="frm_facility_regulation" ng-submit="regulateFacility()">
+        <form name="frm_facility_regulation" ng-submit="regulateFacility()" novalidate>
             <div class="form-group">
-                <label for="regulation_status">Regulation Status</label>
-                <ui-select ng-model="regulation.regulation_status" name="regulation_status" required>
+                <label for="regulation_status" class="control-label">Regulation Status</label>
+                <ui-select ng-model="regulation.regulation_status" name="regulation_status" required api-checker>
                     <ui-select-choices repeat="rs.id as rs in regulation_status">{{rs.name}}</ui-select-choices>
                     <ui-select-match><span>{{$select.selected.name}}</span></ui-select-match>
                 </ui-select>
             </div>
             <div class="form-group">
-                <label for="reason">Reason</label>
-                <textarea class="form-control" name="reason" required ng-model="regulation.reason"></textarea>
+                <label for="reason" class="control-label">Reason</label>
+                <textarea class="form-control" name="reason" required ng-model="regulation.reason" api-checker></textarea>
             </div>
             <div class="form-group">
-                <label for="license_number">License Number / Reference Number</label>
-                <input class="form-control" type="text" name="license_number" ng-model="regulation.license_number" required >
+                <label for="license_number" class="control-label">License Number / Reference Number</label>
+                <input class="form-control" type="text" name="license_number" ng-model="regulation.license_number" required api-checker>
             </div>
 
             <button type="submit" class="btn btn-success">

@@ -27,7 +27,8 @@
         ];
     }])
     .controller("mfl.setup.gis.controllers.geocode_methods_create",
-        ["$scope", "adminApi", "$log", "$state", function ($scope, adminApi, $log, $state) {
+        ["$scope", "adminApi", "$log", "$state","toasty",
+         function ($scope, adminApi, $log, $state,toasty) {
             $scope.title = {
                 icon: "fa-plus-circle",
                 name: "New GeoCode Method"
@@ -38,10 +39,14 @@
             };
             $scope.save = function () {
                 adminApi.geocode_methods.create($scope.geocode_method)
-                .success(function (data) {
+                .success(function () {
+                    toasty.success({
+                        title: "Geocode Method Added",
+                        msg: "Geocode method has been added"
+                    });
                     $state.go(
-                        "setup.geocode_methods_list.geocode_methods_edit",
-                        {"method_id": data.id});
+                        "setup.geocode_methods_list",
+                        {reload: true});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -51,8 +56,8 @@
         }]
     )
     .controller("mfl.setup.gis.controllers.geocode_methods_edit",
-        ["$scope", "$state", "$log", "$stateParams", "adminApi",
-        function ($scope, $state, $log, $stateParams, adminApi) {
+        ["$scope", "$state", "$log", "$stateParams", "adminApi","toasty",
+        function ($scope, $state, $log, $stateParams, adminApi, toasty) {
             $scope.geocode_method_id = $stateParams.geocode_method_id;
             $scope.wrapper = adminApi.geocode_methods;
 
@@ -62,7 +67,8 @@
             };
             $scope.action = [
                 {
-                    func : "ui-sref='setup.geocode_methods_list.geocode_methods_edit" +
+                    func :"id='gm_del_btn' "+
+                    "ui-sref='setup.geocode_methods_list.geocode_methods_edit" +
                     ".geocode_methods_delete({"+
                         "geocode_method_id:geocode_method.id})'" +
                        " requires-user-feature='is_staff'" +
@@ -87,6 +93,10 @@
                 };
                 adminApi.geocode_methods.update($scope.geocode_method_id, p)
                 .success(function () {
+                    toasty.success({
+                        title: "Geocode Method Updated",
+                        msg: "Geocode method has been updated"
+                    });
                     $state.go("setup.geocode_methods_list");
                 })
                 .error(function (data) {
@@ -97,8 +107,8 @@
         }]
     )
     .controller("mfl.setup.gis.controllers.geocode_methods_delete",
-        ["$scope", "$state", "$log", "$stateParams", "adminApi",
-        function ($scope, $state, $log, $stateParams, adminApi) {
+        ["$scope", "$state", "$log", "$stateParams", "adminApi","toasty",
+        function ($scope, $state, $log, $stateParams, adminApi, toasty) {
             $scope.geocode_method_id = $stateParams.geocode_method_id;
             $scope.title = {
                 name: "Delete GeoCode Method"
@@ -115,6 +125,10 @@
             $scope.remove = function () {
                 adminApi.geocode_methods.remove($scope.geocode_method_id)
                 .success(function () {
+                    toasty.success({
+                        title: "Geocode Method Deleted",
+                        msg: "Geocode method has been deleted"
+                    });
                     $state.go("setup.geocode_methods_list");
                 })
                 .error(function (data) {
@@ -148,7 +162,8 @@
         ];
     }])
     .controller("mfl.setup.gis.controllers.geocode_sources_create",
-        ["$scope", "adminApi", "$log", "$state", function ($scope, adminApi, $log, $state) {
+        ["$scope", "adminApi", "$log", "$state","toasty",
+         function ($scope, adminApi, $log, $state, toasty) {
             $scope.title = {
                 icon: "fa-plus-circle",
                 name: "New GeoCode Source"
@@ -160,10 +175,13 @@
             };
             $scope.save = function () {
                 adminApi.geocode_sources.create($scope.geocode_source)
-                .success(function (data) {
+                .success(function () {
+                    toasty.success({
+                        title: "Geocode Source Added",
+                        msg: "Geocode source has been added"
+                    });
                     $state.go(
-                        "setup.geocode_sources_list.geocode_sources_edit",
-                        {"geocode_source_id": data.id});
+                        "setup.geocode_sources_list", {reload: true});
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -173,8 +191,8 @@
         }]
     )
     .controller("mfl.setup.gis.controllers.geocode_sources_edit",
-        ["$scope", "$state", "$log", "$stateParams", "adminApi",
-        function ($scope, $state, $log, $stateParams, adminApi) {
+        ["$scope", "$state", "$log", "$stateParams", "adminApi","toasty",
+        function ($scope, $state, $log, $stateParams, adminApi, toasty) {
             $scope.geocode_source_id = $stateParams.geocode_source_id;
             $scope.wrapper = adminApi.geocode_sources;
 
@@ -210,6 +228,10 @@
                 };
                 adminApi.geocode_sources.update($scope.geocode_source_id, p)
                 .success(function () {
+                    toasty.success({
+                        title: "Geocode Source Updated",
+                        msg: "Geocode source has been updated"
+                    });
                     $state.go("setup.geocode_sources_list");
                 })
                 .error(function (data) {
@@ -220,8 +242,8 @@
         }]
     )
     .controller("mfl.setup.gis.controllers.geocode_sources_delete",
-        ["$scope", "$state", "$log", "$stateParams", "adminApi",
-        function ($scope, $state, $log, $stateParams, adminApi) {
+        ["$scope", "$state", "$log", "$stateParams", "adminApi","toasty",
+        function ($scope, $state, $log, $stateParams, adminApi, toasty) {
             $scope.geocode_source_id = $stateParams.geocode_source_id;
             $scope.title = {
                 name: "Delete GeoCode Source"
@@ -238,6 +260,10 @@
             $scope.remove = function () {
                 adminApi.geocode_sources.remove($scope.geocode_source_id)
                 .success(function () {
+                    toasty.success({
+                        title: "Geocode Source Deleted",
+                        msg: "Geocode source has been deleted"
+                    });
                     $state.go("setup.geocode_sources_list");
                 })
                 .error(function (data) {

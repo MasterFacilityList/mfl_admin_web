@@ -2,7 +2,7 @@
     <div class="action-container content-header-extra"></div>
     <h2 class="content-title">
         <span class="main-title">
-            Add County
+            <i class="fa fa-plus-circle"></i> Add County
         </span>
     </h2>
 </div>
@@ -12,10 +12,6 @@
         <div class="content-card col-xs-12 col-sm-offset-1 col-sm-10">
             <form name="county_frm" ng-submit="saveFrm(county_details)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
-                <div class="form-group">
-                    <label class="control-label">County Code:</label><br>
-                    <span class="label label-info fs-12">Generated after adding county</span>
-                </div>
                 <div class="form-group">
                     <label class="control-label">County Name:</label>
                     <input type="text" class="form-control" name="name" ng-model="county_details.name" placeholder="County Name" required api-checker/>

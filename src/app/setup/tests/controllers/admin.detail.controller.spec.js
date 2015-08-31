@@ -10,6 +10,7 @@
             module("api.wrapper");
             module("ui.router");
             module("mfl.setup.api");
+            module("angular-toasty");
             module("mfl.setup.facilities.controllers");
 
             inject(["$rootScope", "$controller", "$httpBackend", "$state",

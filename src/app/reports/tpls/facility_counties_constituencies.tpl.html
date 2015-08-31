@@ -1,9 +1,9 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
        <div class="action-container content-header-extra pad-r-5">
-            <a tooltip-placement="bottom" tooltip="export facilities"  class="btn btn-primary">
-                Export Summary
-            </a>
+            <button tooltip-placement="bottom"  class="btn btn-primary" ng-click="exportToExcel()">
+                Export To Excel
+            </button>
        </div>
    </div>
    <h2 class="content-title">
@@ -12,33 +12,39 @@
 </div>
 <section class="margin-t-10">
     <div class="col-sm-12">
-        <div class="content-card col-xs-12">
+        <div class="col-xs-12 margin-t-40" ng-if="spinner">
+        <div class="map-change-state">
+              <div class="loader"></div>
+              <div class="row">
+                  <h3 class="text-center loader-text">Please wait...</h3>
+              </div>
+          </div>
+        </div>
+        <div ng-if="!spinner" class="content-card col-xs-12">
             <div class="col-sm-4">
                 <ui-select ng-model="$parent.search">
                     <ui-select-match placeholder="Select County">{{$select.selected.county}}</ui-select-match>
                     <ui-select-choices repeat="county.county as county in county_constituencies_facilities | filter:$select.search">{{county.county | titlecase}}</ui-select-choices>
                 </ui-select>
             </div>
-            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+            <div ng-show="search!==''" class="col-sm-1 col-xs-12"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
-                <table class="table table-condensed fs-14 margin-t-20" id="no-more-tables">
-                    <thead>
-                        <th class="text-wrap col-xs-1">County</th>
-                        <th class="text-wrap"></th>
-                    </thead>
-                    <tbody class="fade-content">
-                        <tr ng-repeat="county in county_constituencies_facilities | filter:search">
-                            <td><i>{{::county.county | titlecase}}</i></td>
+                <table class="table table-condensed fs-14 margin-t-20">
+                    <tbody class="fade-content" ng-repeat="county in county_constituencies_facilities | filter:search">
+                        <tr>
+                            <td data-title="County:"><strong class="fs-16">{{::county.county | titlecase}}</strong></td>
+                        </tr>
+                        <tr>
                             <td>
                               <table class="table table-condensed">
                                <thead>
-                                   <th>Constituency</th>
-                                   <th>Number of Facilities</th>
+                                   <th class="col-xs-9">Constituency</th>
+                                   <th class="col-xs-3 text-center">Number of Facilities</th>
                                </thead>
                                 <tbody>
                                    <tr ng-repeat="c in county.facilities">
-                                        <td>{{::c.constituency | titlecase}}</td>
-                                        <td>{{::c.number_of_facilities}}</td>
+                                        <td class="col-xs-9" data-title="Constituency:">{{::c.constituency | titlecase}}</td>
+                                        <td class="col-xs-3 text-center" data-title="Facilities:">{{::c.number_of_facilities}}</td>
                                     </tr>
                                 </tbody>
                               </table>

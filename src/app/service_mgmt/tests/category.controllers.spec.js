@@ -6,6 +6,7 @@
 
         beforeEach(function () {
             module("ui.router");
+            module("angular-toasty");
             module("mflAdminAppConfig");
             module("mfl.common.forms");
             module("mfl.service_mgmt.services");
@@ -42,11 +43,12 @@
                     },
                     "$scope": scope
                 };
-
                 httpBackend
                     .expectGET(server_url + "api/facilities/service_categories/1/")
                     .respond(200, {});
-
+                httpBackend.expectGET(server_url +
+                    "api/facilities/keph/?page_size=1000")
+                    .respond(200, {results: []});
                 ctrl("category_edit", data);
 
                 httpBackend.flush();
@@ -65,11 +67,14 @@
                     "$scope": scope,
                     "$log": log
                 };
+
                 httpBackend
                     .expectGET(server_url +
                                "api/facilities/service_categories/1/")
                     .respond(500, {"error": "a"});
-
+                httpBackend.expectGET(server_url +
+                    "api/facilities/keph/?page_size=1000")
+                    .respond(500, {});
                 spyOn(log, "warn");
                 ctrl("category_edit", data);
 
@@ -78,7 +83,6 @@
                 httpBackend.verifyNoOutstandingExpectation();
 
                 expect(scope.category).toBe(undefined);
-                expect(log.warn).toHaveBeenCalled();
             });
 
             it("should save updated category", function () {
@@ -239,6 +243,37 @@
                 scope.category = {
                     "name": "get"
                 };
+                httpBackend.expectGET(server_url +
+                    "api/facilities/keph/?page_size=1000")
+                    .respond(200, {results: []});
+                httpBackend
+                    .expectPOST(server_url + "api/facilities/service_categories/", {"name": "get"})
+                    .respond(200, {});
+
+                scope.save();
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+            it("should fail to fetch keph levels", function () {
+                var scope = rootScope.$new();
+                var data = {
+                    "$state": state,
+                    "$scope": scope
+                };
+
+                spyOn(state, "go");
+                ctrl("category_create", data);
+
+                scope.category = {
+                    "name": "get"
+                };
+                httpBackend.expectGET(server_url +
+                    "api/facilities/keph/?page_size=1000")
+                    .respond(500, {});
                 httpBackend
                     .expectPOST(server_url + "api/facilities/service_categories/", {"name": "get"})
                     .respond(200, {});

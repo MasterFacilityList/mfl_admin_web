@@ -2,24 +2,23 @@
     <div class="action-container content-header-extra"></div>
     <h2 class="content-title">
         <span class="main-title">
-            {{state ? 'Edit' : 'Add'}} Sub County
+          <i class="fa {{state ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{state ? 'Edit' : 'Add'}} Sub County
         </span>
     </h2>
 </div>
 <!-- End of content header -->
-<div class="col-xs-12 content-body">
-    <div class="pad-h-30">
-        <div class="content-card col-xs-12 col-sm-offset-1 col-sm-10">
+<div class="col-xs-12">
+    <div class="col-xs-12">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10 content-card">
             <form name="scounty_frm" ng-submit="saveFrm(state ? scounty_frm : scount_details)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
                 <div class="form-group">
-                    <label class="control-label">Sub County Code:</label><br>
-                    <span ng-if="!state" class="fs-14 label label-info">To be generated after adding sub county</span>
-                    <span ng-if="state" class="fs-16 form-control-static fw-600"> {{scount_details.code}}</span>
-                </div>
-                <div class="form-group">
                     <label class="control-label">Sub County Name:</label>
                     <input type="text" class="form-control" name="name" ng-model="scount_details.name" placeholder="Sub County Name" required api-checker/>
+                </div>
+                <div ng-if="state" class="form-group">
+                    <label class="control-label">Sub-County Code:</label>
+                    <input type="text" readonly class="form-control" ng-model="scount_details.code">
                 </div>
                 <div class="form-group">
                     <label class="control-label"><span class="pull-left">County:</span></label>

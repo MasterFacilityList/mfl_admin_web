@@ -1,6 +1,6 @@
 {
   "name": "mfl-admin-frontend",
-  "version": "0.0.1a14",
+  "version": "0.0.1a16",
   "repository": {
     "type": "git",
     "url": "https://github.com/MasterFacilityList/mfl_admin_web"
@@ -47,6 +47,8 @@
     "grunt-contrib-cssmin": "~0.12.3",
     "karma-htmlfile-reporter": "~0.2.2",
     "protractor": "^2.1.0",
-    "grunt-protractor-runner": "~2.1.0"
+    "grunt-protractor-runner": "~2.1.0",
+    "protractor-html-screenshot-reporter": "0.0.21",
+    "q": "~1.4.1"
   }
 }

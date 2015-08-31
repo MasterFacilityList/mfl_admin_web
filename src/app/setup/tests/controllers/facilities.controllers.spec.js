@@ -549,11 +549,16 @@
                     $stateParams: {id: 1}
                 };
                 var res = {msg: "ok"};
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/?fields=id,name")
+                .respond(200, {results: []});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
                 $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingRequest();
+                $httpBackend.verifyNoOutstandingExpectation();
                 expect($scope.facilityRegulatoryBodies).toEqual(res);
+                expect($scope.owner_types).toEqual([]);
             });
 
         it("should view a facilityRegulatoryBody: error",function(){

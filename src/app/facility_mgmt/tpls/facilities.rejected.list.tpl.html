@@ -1,0 +1,41 @@
+<div class="col-xs-12 pad-0">
+    <ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
+</div>
+
+<table class="table table-hover table-condensed fs-12 margin-t-20" id="no-more-tables">
+    <thead>
+        <th class="col-xs-1">Code</th>
+        <th sil-grid-sort field='name'>Name</th>
+        <th sil-grid-sort field='facility_type_name'>Facility Type</th>
+        <th sil-grid-sort field='operation_status'>Operation Status</th>
+        <th sil-grid-sort field='owner_name'>Owner</th>
+        <th sil-grid-sort field='county'>County</th>
+        <th >Sub County</th>
+        <th sil-grid-sort field='constituency'>Constituency</th>
+        <th sil-grid-sort field='ward'>Ward</th>
+        <th sil-grid-sort field='updated'>Date Updated</th>
+    </thead>
+
+    <tbody ng-if="facilities.length===0">
+        <tr><td class="text-center" colspan="7">Sorry, no data is available</td></tr>
+    </tbody>
+
+    <tbody class="fade-content" ng-if="facilities.length>0">
+        <tr ng-repeat="fac in facilities" >
+            <td data-title="Code:" >{{::fac.code}}</td>
+            <td data-title="Name:" >
+                <a ui-sref="facility_reject_list.view({facility_id: fac.id})"
+                ui-sref-opts="{reload: true}">{{::fac.name}}</a>
+            </td>
+            <td data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
+            <td data-title="Operation Status:" >{{::fac.operation_status_name | titlecase }}</td>
+            <td data-title="Owner:" >{{::fac.owner_name}}</td>
+            <td data-title="County:"> {{::fac.county | titlecase }}</td>
+            <td data-title="Sub County:" >{{::fac.constituency | titlecase }}</td>
+            <td data-title="Constituency:" >{{::fac.constituency}}</td>
+            <td data-title="Ward:" >{{::fac.ward_name | titlecase }}</td>
+            <td data-title="Date Updated:" >{{::fac.updated|dateFilter}}</td>
+        </tr>
+    </tbody>
+</table>
+<sil-grid-pagination> </sil-grid-pagination>

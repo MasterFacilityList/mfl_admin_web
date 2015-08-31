@@ -27,8 +27,8 @@
     )
 
     .controller("mfl.setup.controller.sub_counties.edit", ["$scope",
-        "$stateParams", "adminApi","$state","mfl.common.forms.changes",
-        function ($scope, $stateParams, adminApi,$state,formChanges) {
+        "$stateParams", "adminApi","$state","mfl.common.forms.changes","toasty",
+        function ($scope, $stateParams, adminApi,$state,formChanges, toasty) {
             $scope.select_values = {
                 county : {}
             };
@@ -59,6 +59,10 @@
                     adminApi.sub_counties.create({"name": frm.name,
                        "county": $scope.select_values.county})
                     .success(function () {
+                        toasty.success({
+                            title: "Sub County Added",
+                            msg: "Sub county has been added"
+                        });
                         $state.go("setup.sub_counties");
                     })
                     .error(function (error) {
@@ -70,6 +74,10 @@
                     if(!_.isEmpty(changes)){
                         adminApi.sub_counties.update($stateParams.scount_id,changes)
                         .success(function () {
+                            toasty.success({
+                                title: "Sub County Updated",
+                                msg: "Sub county has been updated"
+                            });
                             $state.go("setup.sub_counties");
                         })
                         .error(function (error) {

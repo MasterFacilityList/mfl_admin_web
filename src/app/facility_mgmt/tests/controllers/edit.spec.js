@@ -36,6 +36,63 @@
 
         describe("Test facility edit controller", function () {
 
+            it("should test closing a facility and patch successfully", function () {
+                inject(["mfl.facility_mgmt.services.wrappers","mfl.common.forms.changes",
+                    function (wrappers, formChanges) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "$stateParams": {
+                            facility_id: 3
+                        },
+                        "mfl.common.forms.changes" : formChanges
+                    };
+                    var frm = {
+                        closed:true,
+                        closing_reason:"Not good"
+                    };
+                    ctrl(".close", data);
+
+                    httpBackend
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(200, {});
+                    spyOn(formChanges, "whatChanged").andReturn({closed : true,
+                                             closing_reason : "Not good"});
+                    data.$scope.close(frm);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+                }]);
+            });
+            it("should test closing a facility but fails to patch", function () {
+                inject(["mfl.facility_mgmt.services.wrappers","mfl.common.forms.changes",
+                    function (wrappers, formChanges) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "$stateParams": {
+                            facility_id: 3
+                        },
+                        "mfl.common.forms.changes" : formChanges
+                    };
+                    var frm = {
+                        closed:true,
+                        closing_reason:"Not good"
+                    };
+                    ctrl(".close", data);
+
+                    httpBackend
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(500);
+                    spyOn(formChanges, "whatChanged").andReturn({closed : true,
+                                             closing_reason : "Not good"});
+                    data.$scope.close(frm);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+                }]);
+            });
+
             it("should load facility details",
                 inject(["mfl.facility.multistep.service", function (facObjService) {
                     var data = {
@@ -511,7 +568,10 @@
                 data.$scope.removeOfficerContact(obj);
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.initUniqueName({
-                    name: {"$setViewValue": jasmine.createSpy()}
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
                 });
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -543,9 +603,10 @@
                         reg_no : "",
                         contacts : [
                             {
-                                id : "3",
+                                officer_contact_id : "3",
                                 type : "MOBILE",
-                                contact : "0722"
+                                contact : "0722",
+                                contact_id : "5"
                             }
                         ]
                     }
@@ -571,14 +632,174 @@
                         "$$modelValue": "test"
                     }
                 };
-                var obj = {id: "3", type : "MOBILE", contact : "0722"};
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/"+
+                    "officer_contacts/3/").respond(204);
+                httpBackend
+                    .expectDELETE(server_url+"api/common/contacts/5/")
+                    .respond(204);
+                var obj = {officer_contact_id: "3", type : "MOBILE",
+                    contact : "0722", contact_id : "5"};
                 data.$scope.save(frm);
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.initUniqueName({
-                    name: {"$setViewValue": jasmine.createSpy()}
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
                 });
                 data.$scope.removeOfficerContact(obj);
                 data.$scope.facilityOfficers(data.$scope.facility);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(data.$scope.facility.name).toEqual("Facility");
+            });
+            it("should fail to delete contact through", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                spyOn(state, "go");
+
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                data.$scope.$apply();
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge : {
+                        name : "",
+                        reg_no : "",
+                        contacts : [
+                            {
+                                officer_contact_id : "3",
+                                type : "MOBILE",
+                                contact : "0722",
+                                contact_id : "5"
+                            }
+                        ]
+                    }
+                };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
+                };
+                data.$scope.nxtState = true;
+                ctrl(".basic", data);
+
+                var frm = {
+                    "$dirty": false,
+                    "name": {
+                        "$dirty": false,
+                        "$$modelValue": "test"
+                    }
+                };
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/"+
+                    "officer_contacts/3/").respond(204);
+                httpBackend
+                    .expectDELETE(server_url+"api/common/contacts/5/")
+                    .respond(500);
+                var obj = {officer_contact_id: "3", type : "MOBILE",
+                    contact : "0722", contact_id : "5"};
+                data.$scope.save(frm);
+                data.$scope.facility.official_name = "Facility";
+                data.$scope.initUniqueName({
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
+                });
+                data.$scope.removeOfficerContact(obj);
+                data.$scope.facilityOfficers(data.$scope.facility);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(data.$scope.facility.name).toEqual("Facility");
+            });
+            it("should fail to delete officer contact", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state" : state,
+                    "$stateParams": {
+                        facility_id: 3
+                    }
+                };
+                spyOn(state, "go");
+
+                data.$scope.selectReload = function () {
+                    return {"results": []};
+                };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                data.$scope.setFurthest = angular.noop;
+                data.$scope.$apply();
+                data.$scope.facility = {
+                    facility_physical_address : {town : "5"},
+                    officer_in_charge : {
+                        name : "",
+                        reg_no : "",
+                        contacts : [
+                            {
+                                officer_contact_id : "3",
+                                type : "MOBILE",
+                                contact : "0722",
+                                contact_id : "5"
+                            }
+                        ]
+                    }
+                };
+                data.$scope.steps = [
+                    {name : "basic"},
+                    {name : "contacts"}
+                ];
+                data.$scope.select_values = {
+                    ward : {id : "1"},
+                    facility_type : {id : "2"},
+                    owner : {id : "3"},
+                    operation_status : {id : "4"},
+                    town : {id : "5"}
+                };
+                data.$scope.nxtState = true;
+                ctrl(".basic", data);
+
+                var frm = {
+                    "$dirty": false,
+                    "name": {
+                        "$dirty": false,
+                        "$$modelValue": "test"
+                    }
+                };
+                httpBackend
+                    .expectDELETE(server_url+"api/facilities/"+
+                    "officer_contacts/3/").respond(500);
+                var obj = {officer_contact_id: "3", type : "MOBILE",
+                    contact : "0722", contact_id : "5"};
+                data.$scope.save(frm);
+                data.$scope.facility.official_name = "Facility";
+                data.$scope.initUniqueName({
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
+                });
+                data.$scope.removeOfficerContact(obj);
+                data.$scope.facilityOfficers(data.$scope.facility);
+                httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
                 expect(data.$scope.facility.name).toEqual("Facility");
@@ -594,12 +815,27 @@
                 data.$scope.selectReload = function () {
                     return {"results": []};
                 };
+                data.$scope.off_contacts = [
+                    {
+                        officer_contact_id : "3",
+                        type : "18",
+                        contact : "email@mail.com",
+                        contact_id : "5"
+                    }
+                ];
                 data.$scope.facility = {
                     facility_physical_address : {town : "5"},
                     officer_in_charge : {
                         name : "Antony",
                         reg_no : "P15/1331",
-                        title : "Medical Supritendant"
+                        title : "Medical Supritendant",
+                        contacts : [
+                            {
+                                officer_contact_id : "3",
+                                type : "18",
+                                contact : "email@mail.com"
+                            }
+                        ]
                     }
                 };
                 data.$scope.steps = [
@@ -615,7 +851,7 @@
                 };
                 data.$scope.create = false;
                 ctrl(".basic", data);
-
+                data.$scope.nxtState = true;
                 httpBackend
                     .expectPATCH(server_url+"api/facilities/facilities/3/")
                     .respond(204);
@@ -636,7 +872,10 @@
                 data.$scope.facility.official_name = "Facility";
                 data.$scope.facility.name = "Another";
                 data.$scope.initUniqueName({
-                    name: {"$setViewValue": jasmine.createSpy()}
+                    name: {
+                        "$setViewValue": jasmine.createSpy(),
+                        "$render" : jasmine.createSpy()
+                    }
                 });
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -787,12 +1026,44 @@
                     return {"results": []};
                 };
                 state.params.facility_id = "3";
+                data.$scope.off_contacts = [
+                    {
+                        officer_contact_id : "3",
+                        type : "18",
+                        contact : "email@mail.com"
+                    },
+                    {
+                        officer_contact_id : "4",
+                        type : "20",
+                        contact : "0722134567"
+                    },
+                    {
+                        type : "21",
+                        contact : "999999"
+                    }
+                ];
                 data.$scope.facility = {
                     facility_physical_address : {town : "5"},
                     officer_in_charge: {
                         name : "Antony",
                         reg_no : "P15/1331/",
-                        title: "Medical Supritendant"
+                        title: "Medical Supritendant",
+                        contacts : [
+                            {
+                                officer_contact_id : "3",
+                                type : "18",
+                                contact : "email@mail.com"
+                            },
+                            {
+                                officer_contact_id : "4",
+                                type : "21",
+                                contact : "072213456799"
+                            },
+                            {
+                                type : "21",
+                                contact : "999999"
+                            }
+                        ]
                     }
                 };
                 data.$scope.steps = [
@@ -832,9 +1103,26 @@
                         "$modelValue": "Medical Supritendant"
                     },
                     "officer_in_charge": {
-                        "name" : "",
-                        "reg_no" : "",
-                        "title": ""
+                        "$dirty": true,
+                        "name" : "Antony",
+                        "reg_no" : "P15/1331/",
+                        "title": "Medical Supritendant",
+                        "contacts" : [
+                            {
+                                "officer_contact_id" : "3",
+                                "type" : "18",
+                                "contact" : "email@mail.com"
+                            },
+                            {
+                                "officer_contact_id" : "4",
+                                "type" : "21",
+                                "contact" : "072213456799"
+                            },
+                            {
+                                "type" : "21",
+                                "contact" : "999999"
+                            }
+                        ]
                     }
                 };
                 data.$scope.facility_id = 3;
@@ -1012,7 +1300,8 @@
                     officer_in_charge : {
                         name : "Antony",
                         reg_no : "P15/1221/",
-                        title : "Medical Supritendant"
+                        title : "Medical Supritendant",
+                        contacts : []
                     }
                 };
                 data.$scope.steps = [
@@ -1337,6 +1626,7 @@
                 data.$scope.facility = {
                     contacts : []
                 };
+                data.$scope.nxtState = false;
                 data.$scope.detailed_contacts = [{id : undefined,
                     contact : "PHONE"}];
                 data.$scope.detailed_contacts.push(two_conts);
@@ -2516,7 +2806,9 @@
                     .respond(201, {"id": "3"});
 
                 data.$scope.add();
-                data.$scope.saveUnits();
+                data.$scope.nxtState = false;
+                var arg = false;
+                data.$scope.saveUnits(arg);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -3037,6 +3329,18 @@
                 scope.create = true;
                 var name = "edit";
                 scope.changeView(name);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : ""
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : ""};
+                scope.servicesDisplay(obj);
                 expect(scope.new_service.service).toEqual("");
                 expect(scope.new_service.option).toEqual("");
                 expect(scope.services).toEqual([]);
@@ -3064,6 +3368,18 @@
                 c.bootstrap(scope);
                 var name = "edit";
                 scope.changeView(name);
+                scope.service_display =[
+                    {
+                        id : "4",
+                        option : ""
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : "12"};
+                scope.servicesDisplay(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -3072,7 +3388,7 @@
                 expect(log.error).toHaveBeenCalled();
             });
 
-            it("should add a facility service", function () {
+            it("should add a facility service: facility edit", function () {
                 var payload = {results: [{"id": 3}]};
                 spyOn(state, "go");
                 httpBackend
@@ -3083,7 +3399,7 @@
                     .respond(200, payload);
                 var c = ctrl();
                 var scope = rootScope.$new();
-                scope.create = true;
+                scope.create = false;
                 scope.facility_id = "3";
                 var cat = {selected : false, id : "3"};
                 c.bootstrap(scope);
@@ -3103,10 +3419,12 @@
                 scope.facility = {
                     facility_services: [
                         {
+                            id : "1",
                             service_id : "3",
                             option : null
                         },
                         {
+                            id : "4",
                             service_id : "5",
                             option : "5"
                         }
@@ -3125,7 +3443,8 @@
                     {
                         id : "5",
                         option : "5",
-                        category : "3"
+                        category : "3",
+                        fac_serv : "4"
                     }
                 ];
                 scope.options = [
@@ -3157,11 +3476,165 @@
                 scope.showServices(cat);
                 scope.changeView(name);
                 scope.facilityServices();
+                scope.removeOption(scope.cat_services[1]);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : "12"
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : "12"};
+                scope.servicesDisplay(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
 
+            it("should add a facility service: facility create", function () {
+                var payload = {results: [{"id": 3}]};
+                spyOn(state, "go");
+                httpBackend
+                    .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
+                    .respond(200, payload);
+                httpBackend
+                    .expectGET(server_url+"api/facilities/options/")
+                    .respond(200, payload);
+                var c = ctrl();
+                var scope = rootScope.$new();
+                scope.create = true;
+                scope.facility_id = "3";
+                var cat = {selected : false, id : "3"};
+                c.bootstrap(scope);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/facility_services/")
+                    .respond(201, {"id": 4});
+                httpBackend
+                    .expectPATCH(server_url+"api/facilities/facilities/3/")
+                    .respond(200, {"id": "3"});
+                scope.facility = {
+                    facility_services: [
+                        {
+                            id : "1",
+                            service_id : "3",
+                            option : null
+                        },
+                        {
+                            id : "4",
+                            service_id : "5",
+                            option : "5"
+                        }
+                    ]
+                };
+                scope.categories = [
+                    {id : "1", selected : true},
+                    {id : "4", selected : false}
+                ];
+                scope.cat_services = [
+                    {
+                        id : "3",
+                        option : "",
+                        category : "3"
+                    },
+                    {
+                        id : "5",
+                        option : "5",
+                        category : "3",
+                        fac_serv : "4"
+                    }
+                ];
+                scope.options = [
+                    {
+                        group : "3",
+                        id : "1",
+                        display_text : "No"
+                    },
+                    {
+                        group : "3",
+                        id : "2",
+                        display_text : "Yes"
+                    }
+                ];
+                scope.services = [
+                    {id : "1", category : "3"},
+                    {id : "3", category : "3", option : "5", group : "3"},
+                    {id : "5", category : "3", option : "5"},
+                    {id : "6", category : "3", option : true}
+                ];
+                scope.fac_serv.facility_services = [
+                    {
+                        service : "1",
+                        option : "3"
+                    }
+                ];
+                var name = "edit";
+                scope.addServiceOption(payload.results[0]);
+                scope.showServices(cat);
+                scope.changeView(name);
+                scope.facilityServices();
+                scope.removeOption(scope.cat_services[1]);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : "12"
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : "12"};
+                scope.servicesDisplay(obj);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should delete a facility service", function () {
+                var payload = {results: [{"id": 3}]};
+                httpBackend
+                    .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
+                    .respond(200, payload);
+                httpBackend
+                    .expectGET(server_url+"api/facilities/options/")
+                    .respond(200, payload);
+                var c = ctrl();
+                var scope = rootScope.$new();
+                c.bootstrap(scope);
+                var serv_obj = {
+                    fac_serv : "1",
+                    option : "5",
+                    service : "3"
+                };
+                httpBackend.expectDELETE(server_url +
+                    "api/facilities/facility_services/1/").respond(204);
+                scope.removeOption(serv_obj);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : undefined
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : undefined};
+                scope.servicesDisplay(obj);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
             it("should fail to add facility services", function () {
                 var payload = {results: [{"id": 3}]};
                 spyOn(state, "go");
@@ -3207,11 +3680,36 @@
                         option : "3"
                     }
                 ];
+                scope.cat_services = [
+                    {
+                        id : "3",
+                        option : "",
+                        category : "3"
+                    },
+                    {
+                        id : "5",
+                        option : "5",
+                        category : "3"
+                    }
+                ];
                 var name = "edit";
                 scope.addServiceOption(payload.results[0]);
                 scope.showServices(cat);
                 scope.changeView(name);
+                scope.removeOption(scope.cat_services[0]);
                 scope.facilityServices();
+                scope.service_display =[
+                    {
+                        id : "4",
+                        option : ""
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "3", option : ""};
+                scope.servicesDisplay(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
@@ -3245,6 +3743,18 @@
                 };
                 scope.addServiceOption(payload.results[0]);
                 scope.showServices(cat);
+                scope.service_display =[
+                    {
+                        id : "3",
+                        option : "12"
+                    },
+                    {
+                        id : "5",
+                        option: ""
+                    }
+                ];
+                var obj = {id : "4", option : true};
+                scope.servicesDisplay(obj);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();

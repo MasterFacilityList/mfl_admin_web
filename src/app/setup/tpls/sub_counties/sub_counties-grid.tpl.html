@@ -1,11 +1,6 @@
-<div class="pull-left col-sm-4 col-xs-6">
-    <sil-grid-search> </sil-grid-search>
-</div>
-<div class="pull-right col-xs-4">
-    <p ng-if="pagination.active" class="text-right margin-t-5">Showing <strong>{{pagination.start_index}} - {{pagination.end_index}}</strong> of <span>{{pagination.count}} records</span></p>
-</div>
+<ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
 <div id="no-more-tables" class="col-lg-12 margin-t-15">
-    <table class="table table-hover">
+    <table class="table table-hover table-condensed fs-14">
         <thead class="cf">
             <th col="1" sil-grid-sort field='code' class="fs-16">Code</th>
             <th col="1" sil-grid-sort field='name' class="fs-16">Name</th>
@@ -25,7 +20,7 @@
             </tr>
         </tbody>
         <tbody ng-if="scounts.length===0">
-            <tr><td class="text-center alert alert-info" colspan="7"><i class="fa fa-info-circle"></i> There are no records available</td></tr>
+            <tr><td class="alert alert-info" colspan="7"><i class="fa fa-info-circle"></i> There are no records available</td></tr>
         </tbody>
     </table>
 <sil-grid-pagination> </sil-grid-pagination>

@@ -5,6 +5,7 @@
         "mfl.facility_mgmt.services",
         "mfl.auth.services",
         "datePicker",
+        "angular-toasty",
         "ui.bootstrap.tpls",
         "mfl.common.forms",
         "leaflet-directive",
@@ -13,8 +14,8 @@
 
     .controller("mfl.facility_mgmt.controllers.services_helper",
         ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
-        "$state",
-        function ($log, wrappers, errorMessages, $state) {
+        "$state", "toasty",
+        function ($log, wrappers, errorMessages, $state, toasty) {
             var loadData = function ($scope) {
                 wrappers.services.filter({page_size: 100, ordering: "name"})
                 .success(function (data) {
@@ -99,6 +100,7 @@
                                 function (fac_service) {
                                     if(fac_service.service_id === serv_obj.id)
                                     {
+                                        serv_obj.fac_serv = fac_service.id;
                                         serv_obj.option = fac_service.option;
                                         serv_obj.option = serv_obj.option ?
                                         serv_obj.option :
@@ -140,6 +142,36 @@
                 $scope.fac_serv = {
                     services : []
                 };
+                $scope.service_display = [];
+                $scope.removeOption = function (serv_obj) {
+                    if(_.isUndefined(serv_obj.fac_serv)){
+                        serv_obj.option = "";
+                        $scope.service_display = _.without($scope.service_display, serv_obj);
+                    }else{
+                        wrappers.facility_services.remove(serv_obj.fac_serv)
+                        .success(function () {
+                            toasty.success({
+                                title: "Facility Services",
+                                msg: "Service successfully deleted"
+                            });
+                            serv_obj.option = "";
+                        })
+                        .error(function (data) {
+                            $scope.errors = data;
+                        });
+                    }
+                };
+                $scope.servicesDisplay = function (obj) {
+                    if(_.where($scope.service_display, obj).length > 0) {
+                        if(_.isEmpty(obj.option) || _.isUndefined(obj.option)){
+                            $scope.service_display = _.without($scope.service_display, obj);
+                        }
+                    }else{
+                        if(!_.isEmpty(obj.option) || obj.option === true){
+                            $scope.service_display.push(obj);
+                        }
+                    }
+                };
                 $scope.facilityServices = function () {
                     _.each($scope.services, function (service_obj) {
                         if(!_.isUndefined(service_obj.option) &&
@@ -166,10 +198,26 @@
                     wrappers.facility_detail.update($scope.facility_id,
                         $scope.fac_serv)
                         .success(function () {
-                            $state.go("facilities");
+                            var create_msg = {
+                                title : "Facility Added",
+                                msg : "Facility successfully added"
+                            };
+                            var update_msg = {
+                                title : "Facility Updated",
+                                msg : "Facility successfully updated"
+                            };
+                            var feedback = ($scope.create ? create_msg : update_msg);
+                            if(!$scope.create){
+                                toasty.success(feedback);
+                                $state.go("facilities");
+                            }else{
+                                $state.go("facilities.facility_create."+
+                                    "facility_cover_letter", {facility_id :
+                                    $scope.new_facility}, {reload : true});
+                            }
                         })
                         .error(function (err) {
-                            $scope.alert = err.error;
+                            $scope.errors = err.error;
                         });
 
                 };
@@ -247,6 +295,8 @@
                             "name": $scope.facility.town_name
                         }
                     };
+                    $scope.off_contacts =
+                        $scope.facility.officer_in_charge.contacts;
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -290,13 +340,35 @@
         }]
     )
 
+    .controller("mfl.facility_mgmt.controllers.facility_edit.close",
+            ["$scope","mfl.facility_mgmt.services.wrappers","$stateParams",
+             "mfl.common.forms.changes","$state", "toasty",
+            function ($scope,wrappers,$stateParams,formChanges,$state,toasty) {
+            $scope.minDate = new Date();
+            $scope.close = function (frm) {
+                var changes = formChanges.whatChanged(frm);
+                wrappers.facility_detail.update($stateParams.facility_id,changes)
+                .success(function (data) {
+                    $scope.facility = data;
+                    toasty.success({
+                        title: "Facility",
+                        msg: "Facility successfully closed"
+                    });
+                    $state.go("facilities.facility_edit",{facility_id:$stateParams.id});
+                })
+                .error(function (err) {
+                    $scope.errors = err;
+                });
+            };
+        }])
+
     .controller("mfl.facility_mgmt.controllers.facility_edit.basic",
         ["$scope", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
         "mfl.common.services.multistep", "mfl.auth.services.login",
-        "mfl.error.messages",
+        "mfl.error.messages", "toasty",
         function ($scope, $log, $state, $stateParams, wrappers, formChanges,
-            multistepService, loginService, errorMessages) {
+            multistepService, loginService, errorMessages, toasty) {
             /*Set up facility officer*/
             $scope.facilityOfficers = function (f) {
                 if(_.isUndefined(f.officer_in_charge) || _.isNull(f.officer_in_charge)) {
@@ -316,6 +388,7 @@
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[0]);
             } else {
+                $scope.$parent.print = false;
                 $scope.nextState();
                 $scope.facilityOfficers($scope.facility);
             }
@@ -323,6 +396,7 @@
                 if(_.isUndefined($scope.facility.name)) {
                     $scope.facility.name = $scope.facility.official_name;
                     frm.name.$setViewValue($scope.facility.name);
+                    frm.name.$render();
                 }
             };
             $scope.contacts = [{type: "", contact : ""}];
@@ -347,13 +421,6 @@
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
                 $scope.facility.town = $scope.select_values.town;
-                changes.officer_in_charge = {
-                    name : changes.officer_name ? changes.officer_name :
-                        $scope.facility.officer_in_charge.name,
-                    reg_no : changes.reg_number ? changes.reg_number :
-                            $scope.facility.officer_in_charge.reg_no,
-                    title : changes.title ? changes.title : $scope.facility.officer_in_charge.title
-                };
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {
@@ -386,8 +453,31 @@
                         });
                     }
                 } else {
+                    changes.officer_in_charge = $scope.facility.officer_in_charge;
+                    if($scope.facility.officer_in_charge.contacts.length > 0) {
+                        _.each(changes.officer_in_charge.contacts,
+                            function (a_cont){
+                                if(!_.isUndefined(a_cont.officer_contact_id)){
+                                    var curr_cont = _.findWhere(
+                                    $scope.off_contacts,{"officer_contact_id":
+                                        a_cont.officer_contact_id});
+                                    if(curr_cont.type === a_cont.type &&
+                                        curr_cont.contact === a_cont.contact){
+                                        changes.officer_in_charge.contacts =
+                                        _.without(changes.officer_in_charge.contacts, curr_cont);
+                                    }
+                                }
+                            }
+                        );
+                    }
                     wrappers.facility_detail.update($scope.facility_id, changes)
                     .success(function () {
+                        if($scope.nxtState){
+                            toasty.success({
+                                title: "Facility",
+                                msg: "Facility successfully updated"
+                            });
+                        }
                         $state.go($scope.finish,
                         {facility_id:$scope.facility_id}, {reload : true});
                     })
@@ -421,9 +511,25 @@
                 });
             };
             $scope.removeOfficerContact = function (obj) {
-                if(_.isUndefined(obj.id)){
+                if(_.isUndefined(obj.officer_contact_id)){
                     $scope.facility.officer_in_charge.contacts =
                         _.without($scope.facility.officer_in_charge.contacts, obj);
+                }else{
+                    wrappers.officer_contacts.remove(obj.officer_contact_id)
+                    .success(function (){
+                        wrappers.contacts.remove(obj.contact_id)
+                        .success(function () {
+                            $scope.facility.officer_in_charge.contacts =
+                            _.without(
+                            $scope.facility.officer_in_charge.contacts, obj);
+                        })
+                        .error(function (data) {
+                            $scope.errors = data;
+                        });
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
                 }
             };
             $scope.$watch("facility", function (f) {
@@ -438,10 +544,11 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.contacts",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers",  "mfl.error.messages", "$state",
-        function($scope,$log,$stateParams,wrappers,
-            errorMessages, $state){
+        "toasty",
+        function($scope,$log,$stateParams,wrappers, errorMessages, $state, toasty){
             if($scope.create) {
                 $scope.nextState();
+                $scope.$parent.print = false;
             }
             $scope.contacts = [];
             $scope.contact = {
@@ -481,6 +588,10 @@
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
                         if(!$scope.create){
+                            toasty.success({
+                                title: "Facility",
+                                msg: "Facility contacts successfully updated"
+                            });
                             $state.go($scope.finish, {reload : true});
                         }else{
                             $scope.goToNext(4, "units");
@@ -519,7 +630,7 @@
                 $scope.contact_types = data.results;
             })
             .error(function(error){
-                $log.error(error);
+                $scope.errors = error;
             });
 
             /*facility contacts*/
@@ -532,12 +643,12 @@
                             $scope.detailed_contacts.push(data);
                         })
                         .error(function (err) {
-                            $scope.alert = err.error;
+                            $scope.errors = err;
                         });
                 });
             })
             .error(function(error){
-                $log.error(error);
+                $scope.errors = error;
                 $scope.cont_error = errorMessages.errors +
                     errorMessages.fetch_contacts;
             });
@@ -555,17 +666,21 @@
                         _.without($scope.detailed_contacts, delcont);
                         $scope.fac_contacts =
                         _.without($scope.fac_contacts, obj);
+                        toasty.success({
+                                title: "Facility Contacts",
+                                msg: "Contact successfully deleted"
+                            });
                         obj.delete_spinner = false;
                     })
                     .error(function (data) {
-                        $log.error(data);
+                        $scope.errors = data;
                         obj.delete_spinner = false;
                         $scope.cont_error = errorMessages.errors +
                             errorMessages.contacts;
                     });
                 })
                 .error(function (data) {
-                    $log.error(data);
+                    $scope.errors = data;
                     obj.delete_spinner = false;
                     $scope.cont_error = errorMessages.errors +
                         errorMessages.contacts;
@@ -717,6 +832,7 @@
             helper.bootstrap($scope);
             if($scope.create) {
                 $scope.nextState();
+                $scope.$parent.print = false;
             }
             $scope.filters = {facility : $scope.facility_id};
         }]
@@ -725,14 +841,15 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.units",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        "mfl.error.messages", "$state",
+        "mfl.error.messages", "$state", "toasty",
         function ($scope, $log, $stateParams, wrappers, multistepService,
-            errorMessages, $state) {
+            errorMessages, $state, toasty) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[4]);
             }else{
                 $scope.nextState();
+                $scope.$parent.print = false;
             }
             $scope.fac_depts = [];
             $scope.fac_units = [];
@@ -742,7 +859,7 @@
                 $scope.regbodies = data.results;
             })
             .error(function(error){
-                $log.error(error);
+                $scope.errors = error;
             });
             /*facility units*/
             wrappers.facility_units.filter({
@@ -754,6 +871,7 @@
             })
             .error(function(error){
                 $log.error(error);
+                $scope.errors = error;
                 $scope.units_error = errorMessages.errors +
                     errorMessages.fetch_units;
             });
@@ -787,6 +905,10 @@
                     wrappers.facility_detail.update($scope.facility_id, $scope.fac_unitobj)
                     .success(function () {
                         if(!$scope.create){
+                            toasty.success({
+                                title: "Facility",
+                                msg: "Facility regulation successfully updated"
+                            });
                             $state.go($scope.finish);
                         }else{
                             $scope.goToNext(5, "services");
@@ -794,6 +916,7 @@
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
+                        $scope.errors = err;
                     });
                 } else {
                     if(!$scope.create){
@@ -834,6 +957,7 @@
                     .error(function (data) {
                         $log.error(data);
                         $scope.spinner = false;
+                        $scope.errors = data;
                         $scope.units_error = errorMessages.errors +
                             errorMessages.units;
                     });
@@ -848,6 +972,10 @@
                     wrappers.facility_units.remove(obj.id)
                     .success(function () {
                         $scope.fac_depts = _.without($scope.fac_depts, obj);
+                        toasty.success({
+                            title: "Facility Regulation",
+                            msg: "Regulation successfully deleted"
+                        });
                         obj.delete_spinner = false;
                     })
                     .error(function (data) {
@@ -1019,14 +1147,15 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
-        "mfl.error.messages",
+        "mfl.error.messages", "toasty",
         function ($scope,wrappers,$log, leafletData, multistepService,
-            formChanges, $state, errorMessages) {
+            formChanges, $state, errorMessages, toasty) {
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[1]);
             }else{
                 $scope.nextState();
+                $scope.$parent.print = false;
             }
             $scope.geo = {
                 coordinates : {
@@ -1169,6 +1298,7 @@
                 })
                 .error(function(error){
                     $log.error(error);
+                    $scope.errors = error;
                 });
             //if create go to create or edit state
             $scope.toState = function (arg) {
@@ -1178,6 +1308,12 @@
                     $scope.nxtState = arg;
                     $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.contacts");
+                    if($scope.nxtState) {
+                        toasty.info({
+                            title: "Facility",
+                            msg: "Facility geolocation successfully updated"
+                        });
+                    }
                     $state.go($scope.finish,
                         {"facility_id": $scope.facility_id},
                         {reload: true});
@@ -1239,6 +1375,7 @@
                     })
                     .error(function (error) {
                         $log.error(error);
+                        $scope.errors = error;
                         $scope.geoloc_error = errorMessages.errors +
                             errorMessages.geolocation;
                     });

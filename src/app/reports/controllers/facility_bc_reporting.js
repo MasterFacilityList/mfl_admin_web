@@ -1,26 +1,77 @@
-(function (angular) {
+(function (angular, _) {
 
     "use strict";
 
+    var results_transform = function (results, $scope) {
+        var data = _.groupBy(results, function (a) {return a.county;});
+        $scope.counties = _.keys(data);
+        return _.map($scope.counties, function (c) {
+            return {
+                "county": c,
+                "facilities": data[c]
+            };
+        });
+    };
+
     angular.module("mfl.reports.controllers.facility_reporting", [
-        "mfl.reports.services"
+        "mfl.reports.services",
+        "mfl.common.export"
     ])
 
     .controller("mfl.reports.controllers.helper", ["mfl.reports.services.wrappers",
-        function(wrappers){
-            this.initCtrl = function($scope, report_type, data_param){
+        "mfl.common.export.service",
+        function(wrappers, exportService){
+            this.initCtrl = function($scope, report_type, data_param, transform_fxn){
                 $scope.search = "";
-                $scope.filters = {
-                    "report_type":report_type
+                var api_filters = {
+                    "report_type": report_type
                 };
-                wrappers.reporting.filter($scope.filters)
+                $scope.spinner = true;
+                _.extend(api_filters, $scope.filters);
+
+                wrappers.reporting.filter(api_filters)
                 .success(function (data) {
-                    $scope[data_param] = data.results;
+                    var transform = transform_fxn || _.identity;
+                    $scope[data_param] = transform(data.results, $scope);
+                    $scope.spinner = false;
                 })
                 .error(function (err) {
                     $scope.errors = err;
+                    $scope.spinner = false;
                 });
+                $scope.exportToExcel = function () {
+                    exportService.excelExport(wrappers.reporting, api_filters);
+                };
             };
+        }
+    ])
+    .controller("mfl.reports.controllers.bc_counties", ["$scope", "$controller",
+        function($scope, $controller) {
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, "beds_and_cots_by_county", "county_bc");
+        }
+    ])
+    .controller("mfl.reports.controllers.bc_constituencies",
+        ["$scope", "$controller", "$stateParams",
+        function($scope, $controller, $stateParams){
+            if ($stateParams.county) {
+                $scope.filters = {
+                    "county": $stateParams.county
+                };
+            }
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, "beds_and_cots_by_constituency", "constituency_bc");
+        }
+    ])
+    .controller("mfl.reports.controllers.bc_wards", ["$scope", "$controller", "$stateParams",
+        function($scope, $controller, $stateParams){
+            if ($stateParams.constituency) {
+                $scope.filters = {
+                    "constituency": $stateParams.constituency
+                };
+            }
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, "beds_and_cots_by_ward", "ward_bc");
         }
     ])
     .controller("mfl.reports.controllers.facility_counties", ["$scope", "$controller",
@@ -64,7 +115,7 @@
         function($scope,$controller){
             var helper = $controller("mfl.reports.controllers.helper");
             helper.initCtrl($scope, "facility_keph_level_report",
-                            "keph_facilities");
+                            "keph_facilities", results_transform);
         }
     ])
     .controller("mfl.reports.controllers.county_facility_types", ["$scope",
@@ -72,7 +123,7 @@
         function($scope,$controller){
             var helper = $controller("mfl.reports.controllers.helper");
             helper.initCtrl($scope, "facility_count_by_facility_type_detailed",
-                            "county_types_facilities");
+                            "county_types_facilities", results_transform);
         }
     ])
     .controller("mfl.reports.controllers.county_constituencies", ["$scope",
@@ -80,7 +131,7 @@
         function($scope,$controller){
             var helper = $controller("mfl.reports.controllers.helper");
             helper.initCtrl($scope, "facility_constituency_report",
-                            "county_constituencies_facilities");
+                            "county_constituencies_facilities", results_transform);
         }
     ]);
-})(window.angular);
+})(window.angular, window._);

@@ -7,6 +7,7 @@
         "mfl.facility_mgmt.states",
         "ui.select",
         "ngSanitize",
+        "angular-toasty",
         "mfl.common.constants"
     ]);
 

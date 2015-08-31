@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="pull-left col-xs-12 col-sm-4">
+        <sil-grid-search> </sil-grid-search>
+    </div>
+    <div class="pull-right col-xs-12 col-sm-4 margin-t-5">
+        <p ng-if="pagination.active" class="text-right margin-t-5">Showing <strong>{{pagination.start_index}} - {{pagination.end_index}}</strong> of <span>{{pagination.count}} records</span></p>
+    </div>
+</div>
+
+<table class="table table-hover table-condensed fs-12 margin-t-20" id="no-more-tables">
+    <thead>
+        <th class="col-xs-1">Code</th>
+        <th sil-grid-sort field='name'>Name</th>
+        <th>Closing Reason</th>
+        <th>Date Closed</th>
+    </thead>
+
+    <tbody ng-if="facilities.length===0">
+        <tr><td class="text-center" colspan="7">Sorry, no data is available</td></tr>
+    </tbody>
+
+    <tbody class="fade-content" ng-if="facilities.length>0">
+        <tr ng-repeat="fac in facilities" >
+            <td data-title="Code:" >{{::fac.code}}</td>
+            <td data-title="Name:" >
+                <a ui-sref="facilities.facility_view({facility_id: fac.id})"
+                ui-sref-opts="{reload: true}">{{::fac.name}}</a>
+            </td>
+            <td data-title="Closing Reason:">
+                {{::fac.closing_reason}}
+            </td>
+            <td data-title="Date Closed:">
+                {{::fac.closed_date | dateFilter}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+<sil-grid-pagination> </sil-grid-pagination>

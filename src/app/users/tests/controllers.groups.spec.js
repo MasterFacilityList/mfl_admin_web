@@ -7,6 +7,7 @@
         beforeEach(function () {
             module("mfl.users.controllers.groups");
             module("ui.router");
+            module("angular-toasty");
             module("mflAdminAppConfig");
 
             inject(["$controller", "$log", "$httpBackend", "$rootScope", "SERVER_URL", "$state",
@@ -116,7 +117,7 @@
                     "$stateParams": {group_id: 3},
                     "$state": state
                 };
-                
+
                 spyOn(state,"go");
 
                 ctrl("group_edit", data);
@@ -200,9 +201,8 @@
 
                 var data = {
                     "$scope": rootScope.$new(),
-                    "$stateParams": {group_id: 3}
+                    "$stateParams": {group_id: "3"}
                 };
-
                 ctrl("group_edit", data);
 
                 httpBackend.flush();
@@ -210,14 +210,40 @@
                 httpBackend.verifyNoOutstandingRequest();
 
                 httpBackend.resetExpectations();
-
+                var magongo = {
+                    "id" : "3",
+                    "name" : "Magongo Group",
+                    "permissions" : [
+                        {
+                            "id" : "3"
+                        },
+                        {
+                            "id" : "4"
+                        }
+                    ]
+                };
+                data.$scope.group = {
+                    "id" : "3",
+                    "name" : "Magongo Group",
+                    "permissions" : [
+                        {
+                            "id" : "3",
+                            "set_selected" : true,
+                            "selected" : false
+                        },
+                        {
+                            "id" : "4",
+                            "set_selected" : false,
+                            "selected" : true
+                        }
+                    ]
+                };
                 httpBackend
                     .expectPATCH(
-                        server_url+"api/users/groups/3/", {"name": "ASD", "permissions": []})
+                        server_url+"api/users/groups/3/", magongo)
                     .respond(200);
 
                 data.$scope.save();
-                expect(data.$scope.spinner).toBeTruthy();
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();

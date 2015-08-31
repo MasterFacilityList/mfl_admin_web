@@ -36,6 +36,8 @@
         "spyOn": true,
         "jasmine": true,
         "protractor": true,
+        "element": true,
+        "by": true,
         "dump": true
     }
 }

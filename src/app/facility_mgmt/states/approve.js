@@ -13,19 +13,64 @@
             "url": "^/facilities_closed/",
             "views": {
                 "main-content@facility_mgmt": {
-                    templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
+                    templateUrl: "facility_mgmt/tpls/facilities.closed.grid.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facilities_closed"
                 }
             },
             permission: "facilities.view_closed_facilities"
         })
-        .state("facilities_rejected", {
+
+        .state("facilities_closed.view", {
             "parent": "facility_mgmt",
-            "url": "^/facilities_rejected/",
+            "url": "^/facilities_closed/",
             "views": {
                 "main-content@facility_mgmt": {
-                    templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
-                    controller: "mfl.facility_mgmt.controllers.facilities_rejected"
+                    templateUrl: "facility_mgmt/tpls/facility_rejected.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facilities_closed"
+                }
+            },
+            permission: "facilities.view_closed_facilities"
+        })
+
+        .state("facility_reject_list.view", {
+            "url": "rejections/:facility_id",
+            "views": {
+                "main-content@facility_mgmt": {
+                    templateUrl: "facility_mgmt/tpls/facility_rejected.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facility_rejected"
+                }
+            },
+            permission: "facilities.view_rejected_facilities,facilities.view_facility"
+        })
+
+        .state("facility_reject_list.view.approve", {
+            url: "/approve_facility",
+            views: {
+                "main-content@facility_mgmt" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve_reject.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facility_approve"
+                }
+            },
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
+        })
+
+        .state("facility_approve_list.view", {
+            "url": "approvals/:facility_id",
+            "views": {
+                "main-content@facility_mgmt": {
+                    templateUrl: "facility_mgmt/tpls/facility_rejected.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facility_rejected"
+                }
+            },
+            permission: "facilities.view_facilityapproval,facilities.view_facility"
+        })
+
+        .state("facility_approve_list.view.reject", {
+            "url": "/reject_facility",
+            views: {
+                "main-content@facility_mgmt" : {
+                    templateUrl: "facility_mgmt/tpls/facility_approve_reject.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facility_approve"
                 }
             },
             permission: "facilities.add_facilityapproval,facilities.view_facility"
@@ -40,7 +85,7 @@
                     controller: "mfl.facility_mgmt.controllers.facilities_approve"
                 }
             },
-            permission: "facilities.add_facilityapproval,facilities.view_facility"
+            permission: "facilities.view_facilityapproval,facilities.view_facility"
         })
 
         .state("facilities_approve_update", {
@@ -51,7 +96,8 @@
                     templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facilities_approve_update"
                 }
-            }
+            },
+            permission: "facilities.add_facilityapproval,facilities.view_facility"
         })
 
         .state("facilities_approve.approve", {

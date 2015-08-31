@@ -1,63 +1,62 @@
 <!-- /- Start of tabbed multi-step form -->
-<div class="tab-content">
+<div class="col-xs-12 tab-content">
         <form role="form" ng-submit="save(user_frm)" name="user_frm">
             <drf-err-msg></drf-err-msg>
-            <div class="custom-well margin-t-20 margin-b-20">
-                <h4 class="margin-b-20 fw-600">User Basic Details</h4>
-                <div class="form-group">
-                    <label class="control-label">First Name</label>
-                    <input name="first_name" type="text" ng-model="user.first_name" required class="form-control" api-checker/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Last Name</label>
-                    <input type="text" name="last_name" ng-model="user.last_name" required class="form-control" api-checker/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Other Names</label>
-                    <input type="text" name="other_names" ng-model="user.other_names" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Email</label>
-                    <input type="email" ng-model="user.email" name="email"  required class="form-control" api-checker/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Employee Number</label>
-                    <input name="employee_number" type="text" ng-model="user.employee_number" class="form-control" required api-checker/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Password</label>
-                    <input type="password" name="password" ng-model="user.password" ng-required="!user.id" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Confirm Password</label>
-                    <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-required="!user.id" ng-blur="confirmPassword(user.password, user.confirm_password)" class="form-control" />
-                </div>
-                <div ng-if="confirm" class="err_class">The two passwords did not match</div>
-                <div class="form-group checkbox" ng-if="!create">
-                    <label for="open_late_night" class="control-label">
-                    <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="user.is_active" api-checker>
-                    Is active
-                    </label>
-                </div>
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <input name="first_name" type="text" ng-model="user.first_name" required class="form-control" api-checker/>
             </div>
-            <div class="margin-t-20 margin-b-20">
-                <mfl-revision-view id="user_id" wrapper="wrapper" ></mfl-revision-view>
-                <a ng-if="!create" ui-sref="users" class="btn btn-default">
+            <div class="form-group">
+                <label class="control-label">Last Name</label>
+                <input type="text" name="last_name" ng-model="user.last_name" required class="form-control" api-checker/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Other Names</label>
+                <input type="text" name="other_names" ng-model="user.other_names" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input type="email" ng-model="user.email" name="email"  required class="form-control" api-checker/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Employee Number</label>
+                <input name="employee_number" type="text" ng-model="user.employee_number" class="form-control" required api-checker/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password</label>
+                <input type="password" name="password" ng-model="user.password" ng-required="!user.id" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Confirm Password</label>
+                <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-required="!user.id" ng-blur="confirmPassword(user.password, user.confirm_password)" class="form-control" />
+            </div>
+            <div ng-if="confirm" class="err_class">The two passwords did not match</div>
+            <div class="form-group checkbox" ng-if="!create">
+                <label for="open_late_night" class="control-label">
+                <input type="checkbox" id="open_late_night" name="open_late_night" ng-model="user.is_active" api-checker>
+                Is active
+                </label>
+            </div>
+            <div class="col-xs-12 margin-t-20 margin-b-20 pad-0">
+                <a ui-sref="users" class="btn btn-default">
                     <i class="fa fa-angle-double-left"></i> Cancel
                 </a>
                 <div class="pull-right">
-                    <button ng-if="!create" ng-click="save(user_frm)" class="btn btn-primary" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
+                    <button ng-if="!create" type="submit" class="btn btn-primary" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
                         Finish
                     </button>
                     <button ng-if="!create" type="submit" class="btn btn-primary" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
-                        Contacts <i class="fa fa-angle-double-right"></i>
+                        Save & Continue <i class="fa fa-angle-double-right"></i>
                     </button>
                 </div>
-                <div class="margin-t-10" ng-if="create">
+                <div class="pull-right" ng-if="create">
                 <button requires-permission="users.change_mfluser" type="submit" class="btn btn-primary" ng-disabled="user_frm.$invalid">
                     User Contacts <i class="fa fa-angle-double-right"></i>
                 </button>
                 </div>
+            </div>
+            <div class="col-xs-12 margin-b-10 pad-0" ng-show="!create">
+                <mfl-revision-view id="user_id" wrapper="wrapper" ></mfl-revision-view>
             </div>
         </form>
 </div>

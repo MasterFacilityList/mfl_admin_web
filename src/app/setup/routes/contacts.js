@@ -5,7 +5,7 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
         .state("setup.contact_types", {
-                url: "/contact-types",
+                url: "/contact_types",
                 views: {
                     "body@setup" : {
                         templateUrl: "setup/tpls/dashboard/body.tpl.html"

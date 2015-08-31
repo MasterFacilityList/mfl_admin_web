@@ -100,6 +100,7 @@ module.exports = {
             "vendor/angular-loading-bar/build/loading-bar.js",
             "vendor/ng-idle/angular-idle.js",
             "vendor/angular-auto-validate/dist/jcs-auto-validate.js",
+            "vendor/angular-toasty/dist/angular-toasty.js",
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
