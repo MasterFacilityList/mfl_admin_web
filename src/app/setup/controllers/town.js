@@ -37,12 +37,12 @@
 
             $scope.save = function () {
                 adminApi.towns.create($scope.town)
-                .success(function (data) {
+                .success(function () {
                     toasty.success({
                         title: "Town Added",
                         msg: "Town level has been added"
                     });
-                    $state.go("setup.towns.town_edit", {"town_id": data.id});
+                    $state.go("setup.towns");
                 })
                 .error(function (data) {
                     $log.error(data);
