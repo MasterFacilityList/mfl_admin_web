@@ -21,8 +21,9 @@
           </div>
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
-           <div class="col-sm-4">
-           </div>
+            <div class="col-sm-4">
+               <input class="form-control" type="text"  ng-model="search" placeholder="Search Constituency.."/>
+            </div>
            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
@@ -32,7 +33,7 @@
                         <th class="col-xs-3 text-center text-wrap">Cots</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="const in constituency_bc">
+                        <tr ng-repeat="const in constituency_bc | filter:search">
                             <td class="col-xs-5" data-title="Constituency:">
                               <a ui-sref="reports.bc_wards({constituency:const.constituency})">{{::const.constituency_name | titlecase}}</a>
                             </td>
