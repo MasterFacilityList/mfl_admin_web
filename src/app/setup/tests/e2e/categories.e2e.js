@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    ddescribe("mflAdminApp scenario tests for service categories:", function() {
+    describe("mflAdminApp scenario tests for service categories:", function() {
 
         //variable required in test
         var getRandomString = function (characterLength) {
