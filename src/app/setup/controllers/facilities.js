@@ -462,11 +462,22 @@
                     $scope.errors = err;
                 });
             $scope.contacts = {
-                items : []
+                items : [
+                    {
+                        contact_type : "",
+                        contact: ""
+                    }
+                ]
             };
-            $scope.contact = {
+            $scope.contacts = {
                 contact_type: "",
                 contact: ""
+            };
+            $scope.add_contact = function () {
+                $scope.contacts.items.push({
+                    contact_type: "",
+                    contact : ""
+                });
             };
             $scope.add = function () {
                 $scope.spinner = true;
@@ -489,7 +500,6 @@
                             contact : ""
                         };
                         $scope.contacts.items.push(data);
-                        $scope.spinner = false;
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
@@ -503,33 +513,6 @@
                     $scope.errors = err;
                 });
             };
-            $scope.remove_contact = function (obj) {
-                obj.delete_spinner = true;
-                adminApi.RegulatoryBodyContacts.remove(obj.id)
-                    .success(function () {
-                        adminApi.regulatoryBodyContacts.remove(obj.contact)
-                            .success(function () {
-                                toasty.success({
-                                    title: "Regulatory body contact deleted",
-                                    msg: "Regulatory body contact has been deleted"
-                                });
-                                obj.delete_spinner = false;
-                                $scope.contacts.items =
-                                _.without($scope.contacts.items, obj);
-                            })
-                            .error(function (err) {
-                                $scope.alert = err.error;
-                                $scope.errors = err;
-                                obj.delete_spinner = false;
-                            });
-                    })
-                    .error(function (err) {
-                        $scope.alert = err.error;
-                        $scope.errors = err;
-                        obj.delete_spinner = false;
-                    });
-
-            };
         }
     ])
 
@@ -541,7 +524,12 @@
             };
             $scope.regulatory_body_id = $stateParams.id;
             $scope.wrapper = adminApi.facilityRegulatoryBodies;
-
+            $scope.add_contact = function () {
+                $scope.contacts.items.push({
+                    contact_type: "",
+                    contact : ""
+                });
+            };
             adminApi.contact_types.list()
                 .success(function (data) {
                     $scope.contact_types = data.results;
@@ -681,31 +669,34 @@
                 });
             };
             $scope.remove_contact = function (obj) {
-                obj.delete_spinner = true;
-                adminApi.RegulatoryBodyContacts.remove(obj.id)
-                    .success(function () {
-                        adminApi.regulatoryBodyContacts.remove(obj.contact)
-                            .success(function () {
-                                toasty.success({
-                                    title: "Regulatory body contact deleted",
-                                    msg: "Regulatory body contact has been deleted"
+                if(!_.isUndefined(obj.id)) {
+                    adminApi.RegulatoryBodyContacts.remove(obj.id)
+                        .success(function () {
+                            adminApi.regulatoryBodyContacts.remove(obj.contact)
+                                .success(function () {
+                                    toasty.success({
+                                        title: "Regulatory body contact deleted",
+                                        msg: "Regulatory body contact has been deleted"
+                                    });
+                                    obj.delete_spinner = false;
+                                    $scope.contacts.items =
+                                    _.without($scope.contacts.items, obj);
+                                })
+                                .error(function (err) {
+                                    $scope.alert = err.error;
+                                    $scope.errors = err;
+                                    obj.delete_spinner = false;
                                 });
-                                obj.delete_spinner = false;
-                                $scope.contacts.items =
-                                _.without($scope.contacts.items, obj);
-                            })
-                            .error(function (err) {
-                                $scope.alert = err.error;
-                                obj.delete_spinner = false;
-                                $scope.errors = err;
-                            });
-                    })
-                    .error(function (err) {
-                        $scope.alert = err.error;
-                        obj.delete_spinner = false;
-                        $scope.errors = err;
-                    });
-
+                        })
+                        .error(function (err) {
+                            $scope.alert = err.error;
+                            $scope.errors = err;
+                            obj.delete_spinner = false;
+                        });
+                }else{
+                    $scope.contacts.items =
+                        _.without($scope.contacts.items, obj);
+                }
             };
         }
     ]);
