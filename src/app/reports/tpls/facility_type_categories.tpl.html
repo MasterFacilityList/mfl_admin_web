@@ -22,13 +22,17 @@
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
             <div class="col-xs-12 margin-b-20">
+                <div class="col-sm-4">
+                   <input class="form-control" type="text"  ng-model="search" placeholder="Search Type Category .."/>
+                </div>
+                <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
                         <th class="col-xs-9 text-wrap">Types</th>
                         <th class="col-xs-3 text-center text-wrap">Number of Facilities</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="typ_cat in type_cat_facilities">
+                        <tr ng-repeat="typ_cat in type_cat_facilities | search">
                             <td class="col-xs-9" data-title="Type Category:">{{::typ_cat.type_category}}</td>
                             <td class="col-xs-3 text-center" data-title="Facilities:">{{::typ_cat.number_of_facilities}}</td>
                         </tr>

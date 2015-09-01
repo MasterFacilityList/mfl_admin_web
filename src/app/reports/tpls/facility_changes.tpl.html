@@ -47,13 +47,9 @@
        </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
             <div class="col-sm-4 col-xs-12">
-                <ui-select ng-model="$parent.search">
-                    <ui-select-match placeholder="Select County">{{$select.selected.county}}</ui-select-match>
-                    <ui-select-choices repeat="county.county as county in changes.results | filter:$select.search">{{county.county | titlecase}}</ui-select-choices>
-                </ui-select>
+               <input class="form-control" type="text"  ng-model="search" placeholder="Search County.."/>
             </div>
-            <div class="margin-t-10 visible-xs transparent">space</div>
-            <div class="col-xs-4" ng-show="search!==''"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
@@ -65,8 +61,8 @@
                         <tr ng-repeat="county in changes.results | filter:search">
                             <td class="col-xs-5" data-title="County:" >{{county.county | titlecase}}</td>
                             <td class="col-xs-5 text-center" data-title="Changes:">{{county.changes}}</td>
-                            <td class="col-xs-2 text-right" ng-show="county.changes > 0" data-title="Action:" class="text-right"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
-                            <td class="col-xs-2 text-right" ng-hide="county.changes > 0" data-title="Action:" class="text-right"><button class="btn btn-success" disabled>View</button></td>
+                            <td class="col-xs-2 text-right" ng-show="county.changes > 0" data-title="Action:"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
+                            <td class="col-xs-2 text-right" ng-hide="county.changes > 0" data-title="Action:"><button class="btn btn-success" disabled>View</button></td>
                         </tr>
                         <tr>
                             <td class="col-xs-5">TOTAL</td>

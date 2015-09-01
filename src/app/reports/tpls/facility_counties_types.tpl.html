@@ -22,12 +22,9 @@
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
             <div class="col-sm-4">
-                <ui-select ng-model="$parent.search">
-                    <ui-select-match placeholder="Select County">{{$select.selected.county | titlecase}}</ui-select-match>
-                    <ui-select-choices repeat="county.county as county in county_types_facilities | filter:$select.search">{{county.county | titlecase}}</ui-select-choices>
-                </ui-select>
+               <input class="form-control" type="text"  ng-model="search" placeholder="Search County.."/>
             </div>
-            <div ng-show="search!==''" class="col-xs-12 col-sm-2"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-condensed fs-14 margin-t-20">
                     <tbody class="fade-content" ng-repeat="county in county_types_facilities | filter:search">

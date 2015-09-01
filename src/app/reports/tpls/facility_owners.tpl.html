@@ -22,10 +22,7 @@
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
             <div class="col-sm-4">
-                <ui-select ng-model="$parent.search">
-                    <ui-select-match placeholder="Select Owner">{{$select.selected.owner}}</ui-select-match>
-                    <ui-select-choices repeat="owner.owner as owner in owner_facilities | filter:$select.search">{{owner.owner}}</ui-select-choices>
-                </ui-select>
+               <input class="form-control" type="text"  ng-model="search" placeholder="Search Owner.."/>
             </div>
             <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
