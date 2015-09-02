@@ -194,7 +194,7 @@
                         title:"Facility updates",
                         msg:"Facility's updates have been processed"
                     });
-                    $state.go("facilities_approve_update");
+                    $state.go("facilities_approve");
                 })
                 .error(function (data) {
                     $log.error(data);

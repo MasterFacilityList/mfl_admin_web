@@ -5,10 +5,10 @@
                   <button type="button" class="close">
                       <span ng-click="error = !error">&times;</span>
                   </button>
-                  <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
+                  <span class="fs-16"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
             </div>
             <div class="col-xs-12 content-card form-card pad-t-20 margin-b-10" requires-permission="common.add_usercounty" >
-                <h4 class="fw-600 fs-18">Assign County</h4>
+                <h4 class="fw-600 fs-16">Assign County</h4>
                 <form name="countyForm" ng-submit="add(new_county)">
                     <div class="group col-sm-10 pad-l-0">
                     <select class="form-control" name="county" ng-model="new_county" class="pad-t-15" required>
@@ -27,11 +27,11 @@
             </div>
 
             <div class="col-xs-12 content-card margin-t-20" ng-show="user_counties.length > 0">
-                <h4 class="fw-600 fs-18"> Current County</h4>
-                <table class="table">
+                <h4 class="fw-600 fs-14"> Current County</h4>
+                <table class="table table-condensed table-hover fs-14">
                     <tbody>
                         <tr  ng-if="!spinner" ng-repeat="child in user_counties">
-                            <td class="pad-t-15 fs-18 fw-600 text-left">
+                            <td class="pad-t-15 fs-14 fw-500 text-left">
                                 {{child.county_name}}
                             </td>
                             <td class="text-right">
@@ -56,7 +56,7 @@
                 </table>
             </div>
             <div class="col-xs-12 alert alert-info margin-t-20" ng-show="user_counties.length == 0">
-                <span class="fs-16"><i class="fa fa-info-circle"> No county assigned to the user</i></span>
+                <span class="fs-14"><i class="fa fa-info-circle"> No county assigned to the user</i></span>
             </div>
             <div ng-if="!create" class="margin-b-20 margin-t-20">
                 <a class="btn btn-primary" ui-sref="users.user_edit.groups ({user_id : user_id})">
