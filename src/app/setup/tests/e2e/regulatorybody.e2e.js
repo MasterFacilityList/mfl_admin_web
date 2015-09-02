@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("mflAdminApp scenario tests for facility regulatory bodies:", function() {
+    xdescribe("mflAdminApp scenario tests for facility regulatory bodies:", function() {
 
         //variable required in test
         var facility_regulatory_body_desc = "description of facility regulatory body";

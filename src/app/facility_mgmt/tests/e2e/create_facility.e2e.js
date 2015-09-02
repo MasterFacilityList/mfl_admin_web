@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("mflAdminApp scenario tests for creating facility:", function() {
+    xdescribe("mflAdminApp scenario tests for creating facility:", function() {
 
         //variable required in test
         var getRandomString = function (characterLength) {
@@ -121,7 +121,7 @@
             element(by.model("cont.type"))
                 .element(by.cssContainingText("option", "MOBILE")).click();
 
-            element(by.name("contact")).sendKeys("0700000000");
+            element(by.name("contact")).sendKeys(facility);
 
             var geolocationBtn = element(by.partialButtonText("Geolocation"));
             expect(geolocationBtn.getText()).toEqual("Geolocation");
@@ -142,19 +142,15 @@
 
             var geo_source = element(by.name("source"));
             geo_source.element(by.css(".caret")).click();
-            browser.driver.sleep(1000);
             var geo_source_input = geo_source.element(by.css(".ui-select-search"));
             geo_source_input.sendKeys("SARAM");
             enter.perform();
-            browser.driver.sleep(1000);
 
             var geo_method = element(by.model("select_values.method"));
             geo_method.element(by.css(".caret")).click();
-            browser.driver.sleep(1000);
             var geo_method_input = geo_method.element(by.css(".ui-select-search"));
             geo_method_input.sendKeys("Taken with GPS Device");
             enter.perform();
-            browser.driver.sleep(1000);
 
             var contactsBtn = element(by.partialButtonText("Facility Contacts"));
             expect(contactsBtn.getText()).toEqual("Facility Contacts");
@@ -172,11 +168,11 @@
             expect(element(by.css("h4")).getText()).toEqual("Facility Contact");
         });
 
-        it("should fill in new facility screen | facility contacts",function () {
+        xit("should fill in new facility screen | facility contacts",function () {
             element(by.name("cont_fac.type"))
                 .element(by.cssContainingText("option", "MOBILE")).click();
 
-            element(by.model("fac_cont.contact")).sendKeys("0700000000");
+            element(by.model("fac_cont.contact")).sendKeys(facility);
 
             var contactsBtn = element(by.buttonText("Regulation"));
             expect(contactsBtn.getText()).toEqual("Regulation");
@@ -194,10 +190,11 @@
             element(by.model("fac_dept.name")).sendKeys("Radiology Unit");
 
             element(by.model("fac_dept.regulating_body"))
-                .element(by.cssContainingText("option", "Clinical Officers Council")).click();
+                .element(by.cssContainingText("option", "Ministry of Health")).click();
+            browser.driver.sleep(5000);
 
-            var servicesBtn = element(by.buttonText("Save & Continue"));
-            expect(servicesBtn.getText()).toEqual("Save & Continue");
+            var servicesBtn = element(by.linkText("Facility Services"));
+            expect(servicesBtn.getText()).toEqual("Facility Services");
             servicesBtn.click();
 
             //interations
