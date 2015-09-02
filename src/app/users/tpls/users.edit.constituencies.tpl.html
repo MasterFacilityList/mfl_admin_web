@@ -31,16 +31,16 @@
             </div>
 
             <div ng-show="user_constituencies.length > 0" class="col-md-12 content-card margin-t-20">
-                <table class="table">
+                <table class="table table-condensed table-hover fs-14">
                    <thead>
                        <tr>
-                           <th class="fs-16">User's Sub County</th>
+                           <th class="fs-14">User's Sub County</th>
                            <th></th>
                        </tr>
                    </thead>
                     <tbody>
                         <tr ng-repeat="child in user_constituencies">
-                            <td class="pad-t-15 fs-18 fw-600 text-left">
+                            <td class="pad-t-15 fs-14 fw-600 text-left">
                                 {{child.constituency_name}}
                             </td>
                             <td class="text-right">
@@ -61,8 +61,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-12 alert alert-info" ng-show="user_constituencies.length == 0">
-                No sub-county assigned to the user
+            <div class="col-sm-12 alert alert-info fs-14" ng-show="user_constituencies.length == 0">
+                <i class="fa fa-info-circle"></i> No sub-county assigned to the user
             </div>
             <div ng-if="create" class="margin-b-20 margin-t-20 pad-r-0">
                 <a ui-sref="users" class="btn btn-primary">

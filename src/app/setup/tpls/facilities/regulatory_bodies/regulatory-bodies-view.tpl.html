@@ -4,10 +4,19 @@
     <h4>Some Errors On The Form</h4>
     <p ng-bind-html="alert"></p>
 </div>
-<div class="col-xs-12">
-    <div class="col-xs-12 margin-t-20 content-card">
+<div class="col-xs-12 margin-t-30" ng-if="spinner">
+    <div class="map-change-state">
+        <div class="loader"></div>
+        <div class="row">
+            <h3 class="text-center loader-text">Please wait...</h3>
+        </div>
+    </div>
+</div>
+<div ng-if="!spinner" class="col-xs-12">
+
     <form role="form" name="frm_reg_body"
-    ng-submit="createFacilityRegulatoryBody(facilityRegulatoryBodies)" class="col-xs-12 margin-t-5 margin-b-5">
+    ng-submit="createFacilityRegulatoryBody(frm_reg_body)" class="col-xs-12 margin-t-5 margin-b-5">
+    <div class="col-xs-12 margin-t-20 content-card">
             <drf-err-msg></drf-err-msg>
             <div class="form-group">
                 <label class="control-label">Name</label>
@@ -43,7 +52,7 @@
               <th class="col-xs-1 text-center"></th>
           </thead>
           <tbody>
-              <tr ng-repeat="contact in contacts.items">
+              <tr ng-repeat="contact in facilityRegulatoryBodies.contacts">
                   <td class="col-xs-5">
                     <div class="form-group grid-inputs">
                       <select class="form-control" name="contact_type" ng-model="contact.contact_type" placeholder="Contact Type" required>
@@ -60,12 +69,12 @@
                     </div>
                   </td>
                   <td class="col-xs-1 text-center">
-                      <a ng-click="remove_contact(contact)" style="cursor: pointer;" ng-if="contacts.items.length > 1">
+                      <a ng-click="remove_contact(contact)" style="cursor: pointer;">
                           <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                       </a>
                   </td>
               </tr>
-              <tr ng-if="contacts.items.length < 1" class="">
+              <tr ng-if="facilityRegulatoryBodies.contacts.length < 1" class="">
                   <td colspan="3">
                       <i class="fa fa-info-circle"></i> No Contact Assigned to Regulatory Body
                   </td>
@@ -79,10 +88,7 @@
       </a>
     </div>
     <div class="col-xs-12 pad-0 margin-b-10">
-        <button ng-if="!facilityRegulatoryBodies.id"  class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="frm_reg_body.$invalid">
-            Save
-        </button>
-        <button ng-if="facilityRegulatoryBodies.id" ng-click="updateFacilityRegulatoryBody(facilityRegulatoryBodies.id, frm_reg_body)" class="btn btn-primary" requires-user-feature="is_staff">
+        <button class="btn btn-primary" requires-user-feature="is_staff">
             Save
         </button>
         <a class="btn btn-default" ui-sref="setup.facility_regulatory_bodies">Cancel</a>

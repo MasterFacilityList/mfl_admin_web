@@ -8,7 +8,7 @@
                   <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
             </div>
             <div class="col-xs-12 content-card form-card pad-t-20 margin-b-10" >
-                <h4 class="fw-600 fs-18">Assign Regulatory Body</h4>
+                <h4 class="fw-600 fs-16">Assign Regulatory Body</h4>
                 <form name="frm_regulatory_body" ng-submit="addBody()">
                     <div class="group col-sm-10 pad-l-0">
                     <select name="regbody"  ng-model="new_body" class="form-control" required>
@@ -26,11 +26,11 @@
                 </form>
             </div>
             <div class="col-xs-12 content-card col-sm-12 margin-t-20" ng-show="user_bodies.length > 0">
-                <h4 class="fw-600 fs-18"> Current Regulattory Body</h4>
-                <table class="table margin-b-10">
+                <h4 class="fw-600 fs-16"> Current Regulattory Body</h4>
+                <table class="table table-condensed table-hover margin-b-10">
                     <tbody>
                         <tr ng-if="!spinner" ng-repeat="child in user_bodies">
-                            <td class="pad-t-15 fs-18 fw-600 text-left">{{child.regulatory_body_name}}</td>
+                            <td class="pad-t-15 fs-14 fw-600 text-left">{{child.regulatory_body_name}}</td>
                             <td class="text-right"><a class="btn btn-danger" popover-toggle
                                 popover-trigger="open" popover-placement="left" popover-template="'common/tpls/del-pop.tpl.html'">
                                      Delete
@@ -46,7 +46,7 @@
                 </table>
             </div>
             <div class="col-xs-12 alert alert-info margin-t-20" ng-show="user_bodies.length == 0">
-                <span class="fs-16"><i class="fa fa-info-circle"></i> No regulatory body assigned to the user</span>
+                <span class="fs-14"><i class="fa fa-info-circle"></i> No regulatory body assigned to the user</span>
             </div>
             <div ng-if="!create" class="margin-b-20 margin-t-20">
                 <a class="btn btn-primary" ui-sref="users.user_edit.groups ({user_id : user_id})">

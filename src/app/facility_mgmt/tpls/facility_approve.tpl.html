@@ -109,7 +109,8 @@
             <p class="fs-16"><i class="fa fa-info-circle"></i> No facility updates pending approval</p>
         </div>
     </div>
-    <div class="col-xs-12 content-card margin-t-20" ng-if="facility.is_approved && facility_changes.contacts.length > 0 || facility_changes.officer_in_charge !== "" || facility_changes.units.length > 0 || facility_changes.services.length > 0">
+    <div class="col-xs-12 content-card margin-t-20" ng-if="facility.is_approved && (facility_changes.contacts.length > 0) || (facility_changes.officer_in_charge !== "") || (facility_changes.units.length > 0) ||
+    (facility_changes.services.length > 0)">
         <div class="col-xs-7" ng-class="{'vertical-divider' : facility_changes.contacts.length > 0}">
             <h4>Officer Incharge</h4>
             <span class="pull-left col-xs-12 pad-0" ng-if="facility_changes.officer_in_charge.name">

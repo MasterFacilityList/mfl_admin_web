@@ -340,8 +340,8 @@
             }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
-                $scope.groups =  groupsService.filterGroups($scope.login_user.is_national,
-                                                                                    data.results);
+                $scope.groups =  groupsService.filterGroups(
+                    $scope.login_user.is_national, data.results);
             })
             .error(function (data) {
                 $log.error(data);
@@ -378,14 +378,10 @@
 
 
             $scope.add = function () {
-                if (!_.isEmpty($scope.user.groups)) {
-                    $scope.error = "This user already belongs to a group";
-                } else{
-                    var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
-                    var update = angular.copy($scope.user.groups);
-                    update.push(grp);
-                    updateGroups(update);
-                }
+                var grp = _.findWhere($scope.groups, {"id": parseInt($scope.new_grp, 10)});
+                var update = angular.copy($scope.user.groups);
+                update.push(grp);
+                updateGroups(update);
             };
 
             $scope.removeChild = function (grp) {
