@@ -175,7 +175,7 @@
                 userFeature: "is_national"
             })
         .state("setup.facility_regulatory_bodies.edit", {
-                url: "/:id",
+                url: "/:id/edit",
                 views: {
                     "main-content@setup.facility_regulatory_bodies": {
                         controller: "mfl.setup.controller.facilityRegulatoryBody.edit",
@@ -201,7 +201,7 @@
                 url: "/create",
                 views: {
                     "main-content@setup.facility_regulatory_bodies": {
-                        controller: "mfl.setup.controller.facilityRegulatoryBody.create",
+                        controller: "mfl.setup.controller.facilityRegulatoryBody.edit",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
                     }

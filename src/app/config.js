@@ -59,6 +59,8 @@
     .config(["toastyConfigProvider", function(toastyConfigProvider) {
         toastyConfigProvider.setConfig({
             sound: false,
+            timeout: 3000,
+            clickToClose:true,
             position: "top-right",
             theme: "default"
         });

@@ -48,8 +48,9 @@
         <mfl-revision-view id="constituency_id" wrapper="wrapper" ></mfl-revision-view>
     </div>
     <div class="col-xs-12 content-card">
-        <h4>WARDS IN {{const_details.name}} CONSTITUENCY</h4>
-        <table class="table table-fixed table-hover fs-14">
+        <legend>{{const_details.name | titlecase}} Wards</legend>
+        <div class="line-divider"></div>
+        <table class="table table-hover fs-14">
             <thead>
                 <th class="col-sm-11 col-xs-9 fs-14">Name</th>
                 <th class="col-sm-1 col-xs-3 fs-14 text-center">Code</th>
