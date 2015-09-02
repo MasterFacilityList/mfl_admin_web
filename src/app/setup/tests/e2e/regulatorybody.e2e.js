@@ -63,6 +63,9 @@
             //interations
             facility_regulatory_body_input_name.sendKeys(facility_regulatory_body);
             facility_regulatory_body_textarea_desc.sendKeys(facility_regulatory_body_desc);
+            element(by.tagName("select"))
+                .element(by.cssContainingText("option", "LANDLINE")).click();
+            element(by.model("contact.contact")).sendKeys(facility_regulatory_body);
             facility_regulatory_body_save_btn.click(); //saves facility_regulatory_body
             browser.driver.sleep(1000);
             browser.waitForAngular(); //navigation to list page

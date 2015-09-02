@@ -116,8 +116,6 @@
             facilityOwner_input_name = element(by.name("name"));
             facilityOwner_textarea_desc = element(by.name("description"));
             facilityOwner_save_btn = element(by.buttonText("Save"));
-            facilityOwner_textarea_desc = element(by.css("select"));
-            facilityOwner_textarea_desc.click();
             element(by.tagName("select"))
                 .element(by.cssContainingText("option", "Ministry of Health")).click();
             
