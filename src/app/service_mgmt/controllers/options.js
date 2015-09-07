@@ -34,6 +34,7 @@
                     ]
                 };
             }
+            $scope.wrapper = wrappers.option_groups;
             $scope.filters = {group:$scope.option_group_id};
             if($scope.edit_view) {
                 wrappers.option_groups.get($scope.option_group_id).success(function (data) {
