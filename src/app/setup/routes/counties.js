@@ -16,7 +16,7 @@
                     }
                 },
                 permission: "common.view_county",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.counties.create", {
                 url: "/new",
@@ -27,7 +27,7 @@
                     }
                 },
                 permission: "common.view_county",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.counties.view_consts", {
                 url: "/:count_id",
@@ -38,7 +38,7 @@
                     }
                 },
                 permission: "common.view_county",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.counties.view_consts.constituencies", {
                 url: "/constituencies",
@@ -48,7 +48,7 @@
                     }
                 },
                 permission: "common.view_constituency",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.counties.view_consts.users", {
                 url: "/users",
@@ -58,7 +58,7 @@
                     }
                 },
                 permission: "common.view_usercounty",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             });
     }]);
 

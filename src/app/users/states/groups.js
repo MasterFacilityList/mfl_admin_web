@@ -14,7 +14,7 @@
                         templateUrl: "users/tpls/groups.grid.tpl.html"
                     }
                 },
-                userFeature: "is_staff",
+                userFeature: "is_staff,is_national",
                 permission: "auth.change_group"
             })
 
@@ -27,7 +27,7 @@
                     }
                 },
                 permission: "auth.add_group",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
 
             .state("groups.group_edit", {
@@ -38,7 +38,7 @@
                         templateUrl: "users/tpls/groups.edit.tpl.html"
                     }
                 },
-                userFeature: "is_staff",
+                userFeature: "is_staff,is_national",
                 permission: "auth.change_group"
             })
             .state("groups.group_edit.delete", {
@@ -50,7 +50,7 @@
                     }
                 },
                 permission: "auth.delete_group",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             })
 
             .state("groups.group_delete", {
@@ -62,7 +62,7 @@
                     }
                 },
                 permission: "auth.delete_group",
-                userFeature: "is_staff"
+                userFeature: "is_staff,is_national"
             });
     }]);
 

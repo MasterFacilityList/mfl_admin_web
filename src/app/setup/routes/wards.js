@@ -16,7 +16,7 @@
                     }
                 },
                 permission: "common.view_ward",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.wards.edit", {
                 url: "/view/:ward_id",
@@ -27,7 +27,7 @@
                     }
                 },
                 permission: "common.view_ward",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.wards.create", {
                 url: "/new",
@@ -38,7 +38,7 @@
                     }
                 },
                 permission: "common.view_ward",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             });
     }]);
 })(window.angular);

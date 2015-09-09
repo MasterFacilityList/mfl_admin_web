@@ -16,7 +16,7 @@
                     }
                 },
                 permission: "common.view_town",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.towns.town_edit", {
                 url: "/edit/:town_id",
@@ -27,7 +27,7 @@
                     }
                 },
                 permission: "common.view_town",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.towns.town_edit.delete", {
                 url: "/delete",
