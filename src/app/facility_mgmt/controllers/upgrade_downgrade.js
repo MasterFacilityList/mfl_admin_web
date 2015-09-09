@@ -62,7 +62,7 @@
                     $scope.new_type.id = data.id;
                     toasty.success({
                         title: "Facility" + $scope.msg,
-                        msg: "Facility has been" + $scope.msg + "successfully"
+                        msg: "Facility has been " + $scope.msg + " successfully"
                     });
                     $state.go("facilities", {reload : true});
                 })
