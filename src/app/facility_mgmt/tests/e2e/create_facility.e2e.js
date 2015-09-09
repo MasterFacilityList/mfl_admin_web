@@ -4,42 +4,16 @@
     xdescribe("mflAdminApp scenario tests for creating facility:", function() {
 
         //variable required in test
-        var getRandomString = function (characterLength) {
-            var randomText = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for (var i = 0; i < characterLength; i++){
-                randomText += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            return randomText;
-        };
-        var facility = getRandomString(25);
+        var test_utils = require("../../../common/tests/utils.e2e.js");
+        var facility = test_utils.getRandomString(25);
         var enter = browser.actions().sendKeys(protractor.Key.ENTER);
 
         it("should log in as starehe schrio and load the dashboard", function() {
-            //test variables
-            var email, password, loginButton;
-
-            //navigation
-            browser.get("/");
-
-            //setup interactions
-            email = element(by.name("email"));
-            password = element(by.name("password"));
-            loginButton = element(by.id("login_btn"));
-
-            //interations
-            email.clear().then(function () {
-                email.sendKeys("10012");
-            });
-            password.clear().then(function () {
-                password.sendKeys("password1");
-            });
-            loginButton.click();
-            browser.ignoreSynchronization = true;
-            browser.driver.sleep(1000);
-            browser.waitForAngular();
-
-            expect(element(by.linkText("Home")).isPresent()).toBe(true);
+            test_utils.loginUser(
+                browser,
+                browser.params.users.schrio.username,
+                browser.params.users.schrio.password
+            );
         });
 
         it("should fill in new facility screen | basic details", function() {
@@ -65,7 +39,7 @@
             facility_type_details_input.sendKeys("Radiology Unit");
             enter.perform();
 
-            
+
             var facility_type = element(by.model("select_values.facility_type"));
             facility_type.element(by.css(".caret")).click();
             var facility_type_input = facility_type
@@ -206,15 +180,7 @@
         });
 
         it("logout user after tests",function () {
-            //variables
-            var title;
-            browser.get("/#/logout");
-            browser.driver.sleep(1000);
-            browser.waitForAngular();//goes back to login page
-
-            //expectations
-            title = element(by.css("h2"));
-            expect(title.getText()).toEqual("Master Facility List V 2.0");
+            test_utils.logoutUser(browser);
         });
     });
 })();
