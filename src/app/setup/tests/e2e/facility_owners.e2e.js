@@ -4,41 +4,15 @@
     describe("mflAdminApp scenario tests for facility owners:", function() {
 
         //variable required in test
-        var getRandomString = function (characterLength) {
-            var randomText = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for (var i = 0; i < characterLength; i++){
-                randomText += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            return randomText;
-        };
-        var facilityOwner = getRandomString(25);
+        var test_utils = require("../../../common/tests/utils.e2e.js");
+        var facilityOwner = test_utils.getRandomString(25);
 
-        it("should log in as superuser and load the dashboard", function() {
-            //test variables
-            var email, password, loginButton;
-
-            //navigation
-            browser.get("/");
-
-            //setup interactions
-            email = element(by.name("email"));
-            password = element(by.name("password"));
-            loginButton = element(by.id("login_btn"));
-
-            //interations
-            email.clear().then(function () {
-                email.sendKeys("10000");
-            });
-            password.clear().then(function () {
-                password.sendKeys("password1");
-            });
-            loginButton.click();
-            browser.ignoreSynchronization = true;
-            browser.driver.sleep(1000);
-            browser.waitForAngular();
-
-            expect(element(by.linkText("Home")).isPresent()).toBe(true);
+        it("should log in and load the dashboard", function() {
+            test_utils.loginUser(
+                browser,
+                browser.params.users.national_admin.username,
+                browser.params.users.national_admin.password
+            );
         });
 
         //Creating without ability to delete hinders test from being included
@@ -50,7 +24,7 @@
 
             //navigation
             browser.get("/#/setup/facility_owners/create");
-//            browser.waitForAngular(); //navigation to create
+            browser.waitForAngular(); //navigation to create
             browser.driver.sleep(1000);
 
             //interaction setup
@@ -118,7 +92,7 @@
             facilityOwner_save_btn = element(by.buttonText("Save"));
             element(by.tagName("select"))
                 .element(by.cssContainingText("option", "Ministry of Health")).click();
-            
+
             facilityOwner_save_btn = element(by.buttonText("Save"));
 
             //interations
@@ -129,7 +103,7 @@
             facilityOwner_save_btn.click();
             browser.driver.sleep(1000);
             browser.waitForAngular();//navigates to list page
-            
+
             facilityOwnerNameEl = element.all(by.repeater("owner in facilityOwners")
                                              .row(0).column("owner.name"));
             expect(facilityOwnerNameEl.getText()).toEqual([facilityOwner]);
@@ -159,6 +133,7 @@
             //interaction
             facilityOwner_del_btn.click();
             browser.waitForAngular(); //navigation to delete page
+            browser.driver.sleep(1000);
 
             del_btn = element(by.id("del_btn"));
             del_btn.click();
@@ -170,15 +145,7 @@
         });
 
         it("logout user after tests",function () {
-            //variables
-            var title;
-            browser.get("/#/logout");
-            browser.driver.sleep(1000);
-            browser.waitForAngular();//goes back to login page
-
-            //expectations
-            title = element(by.css("h2"));
-            expect(title.getText()).toEqual("Master Facility List V 2.0");
+            test_utils.logoutUser(browser);
         });
     });
 })();

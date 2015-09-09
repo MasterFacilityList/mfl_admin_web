@@ -15,7 +15,7 @@
                     }
                 },
                 permission: "common.view_constituency",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.constituencies.view_const", {
                 url: "/details/:const_id",
@@ -26,7 +26,7 @@
                     }
                 },
                 permission: "common.view_constituency",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.constituencies.create", {
                 url: "/create",
@@ -37,7 +37,7 @@
                     }
                 },
                 permission: "common.view_constituency",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             });
     }]);
 

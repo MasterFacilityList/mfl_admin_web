@@ -78,8 +78,8 @@
             $scope.createContacts = function(chuApprover){
                 adminApi.contact_types.create(chuApprover).success(function(){
                     toasty.success({
-                        title: "Contact added",
-                        msg: "Contact has been added"
+                        title: "Contact type added",
+                        msg: "Contact type has been added"
                     });
                     $state.go("setup.contact_types",{},{reload:true});
                 }).error(function(error){
@@ -92,8 +92,8 @@
                 if(!_.isEmpty(changes)){
                     adminApi.contact_types.update(id, changes).success(function(){
                         toasty.success({
-                            title: "Contact updated",
-                            msg: "Contact has been updated"
+                            title: "Contact type updated",
+                            msg: "Contact type has been updated"
                         });
                         $state.go("setup.contact_types",{},{reload:true});
                     }).error(function(error){

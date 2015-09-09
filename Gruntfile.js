@@ -303,7 +303,8 @@ module.exports = function ( grunt ) {
                 "Gruntfile.js", "build.config.js"
             ],
             config_files: [
-                ".jshintrc", "package.json", ".bowerrc", "src/<%= settings_file %>"
+                ".jshintrc", "package.json", ".bowerrc", "src/<%= settings_file %>",
+                "e2e/protractor.conf.js"
             ],
             options: {
                 jshintrc: ".jshintrc"
@@ -633,8 +634,8 @@ module.exports = function ( grunt ) {
     ]);
 
     grunt.registerTask("test:unit", ["build", "karma:continuous"]);
-    grunt.registerTask("test:e2e", ["build","compile", "protractor:continuous"]);
-    grunt.registerTask("test", ["build", "karma:continuous", "protractor:continuous"]);
+    grunt.registerTask("test:e2e", ["build", "compile", "protractor:e2e"]);
+    grunt.registerTask("test", ["build", "compile", "karma:continuous", "protractor:e2e"]);
 
     /**
      * A utility function to get all app JavaScript sources.
