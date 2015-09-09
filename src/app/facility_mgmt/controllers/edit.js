@@ -290,6 +290,10 @@
                             "id": $scope.facility.regulatory_body,
                             "name": $scope.facility.regulatory_body_name
                         },
+                        keph_level: {
+                            "id": $scope.facility.keph_level,
+                            "name": $scope.facility.keph_level_name
+                        },
                         town: {
                             "id": $scope.facility.town,
                             "name": $scope.facility.town_name
@@ -405,6 +409,7 @@
             $scope.selectReload(wrappers.facility_owner_types, "",
                 "owner_types");
             $scope.selectReload(wrappers.operation_status, "", "operation_status");
+            $scope.selectReload(wrappers.keph_levels, "", "keph_levels");
             $scope.selectReload(
                 wrappers.wards, "", "wards", {"constituency": $scope.login_user.constituency}
             );
@@ -416,6 +421,7 @@
                     "facilities.facility_edit.geolocation");
                 var changes = formChanges.whatChanged(frm);
                 $scope.facility.ward = $scope.select_values.ward;
+                $scope.facility.keph_level = $scope.select_values.keph_level;
                 $scope.facility.facility_type = $scope.select_values.facility_type;
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;

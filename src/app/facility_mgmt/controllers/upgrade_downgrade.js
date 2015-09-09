@@ -3,12 +3,14 @@
 
     angular.module("mfl.facility_mgmt.controllers.upgrade_downgrade", [
         "mfl.facility_mgmt.services",
-        "mfl.facility_mgmt.controllers.edit"
+        "mfl.facility_mgmt.controllers.edit",
+        "angular-toasty"
     ])
 
     .controller("mfl.facility_mgmt.controllers.updown_helper",
         ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
-        function ($log, wrappers, errorMessages) {
+        "toasty", "$state",
+        function ($log, wrappers, errorMessages, toasty, $state) {
             var load = function ($scope) {
                 $scope.new_type = {
                     facility_type: "",
@@ -25,6 +27,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
 
                 wrappers.facility_types.filter({page_size: 100, "ordering": "name"})
@@ -33,6 +36,7 @@
                 })
                 .error(function(data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
                 wrappers.keph_levels.filter({fields: "id,name", ordering: "name"})
                 .success(function (data) {
@@ -40,8 +44,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
-                    $scope.service_error = errorMessages.errors +
-                    errorMessages.keph_level;
+                    $scope.errors = data;
                 });
                 wrappers.change_reasons.filter({fields: "id,reason"})
                 .success(function (data) {
@@ -49,6 +52,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
 
@@ -56,14 +60,21 @@
                 wrappers.facility_upgrade.create($scope.new_type)
                 .success(function (data) {
                     $scope.new_type.id = data.id;
+                    toasty.success({
+                        title: "Facility" + $scope.msg,
+                        msg: "Facility has been" + $scope.msg + "successfully"
+                    });
+                    $state.go("facilities", {reload : true});
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
 
             this.bootstrap = function ($scope, is_upgrade) {
                 $scope.upgrade = is_upgrade;
+                $scope.msg = is_upgrade ? "Upgrade" : "Downgrade";
                 load($scope);
                 $scope.updateType = function () {
                     updateType($scope);

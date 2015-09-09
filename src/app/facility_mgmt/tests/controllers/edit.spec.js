@@ -112,6 +112,8 @@
                         owner: "3",
                         owner_name: "owner",
                         owner_type : "5",
+                        keph_level : "6",
+                        keph_level_name : "level 6",
                         owner_type_name : "ownertype",
                         operation_status: "4",
                         operation_status_name: "opstatus",
@@ -170,6 +172,10 @@
                             "id": "5",
                             "name" : "ownertype"
                         },
+                        keph_level : {
+                            "id" : "6",
+                            "name" : "level 6"
+                        },
                         operation_status: {
                             "id": "4",
                             "name": "opstatus"
@@ -206,6 +212,8 @@
                         owner_name: "owner",
                         owner_type : "5",
                         owner_type_name : "ownertype",
+                        keph_level : "6",
+                        keph_level_name : "level 6",
                         town : "3",
                         town_name : "Mombasa",
                         operation_status: "4",
@@ -257,6 +265,10 @@
                             "id" : "5",
                             "name" : "ownertype"
                         },
+                        keph_level : {
+                            "id" : "6",
+                            "name" : "level 6"
+                        },
                         operation_status: {
                             "id": "4",
                             "name": "opstatus"
@@ -305,6 +317,8 @@
                         owner: "3",
                         owner_name: "owner",
                         owner_type : "5",
+                        keph_level : "6",
+                        keph_level_name : "level 6",
                         town : "3",
                         town_name : "Mombasa",
                         owner_type_name : "ownertype",
@@ -356,6 +370,10 @@
                         owner_type : {
                             "id": "5",
                             "name" : "ownertype"
+                        },
+                        keph_level : {
+                            "id" : "6",
+                            "name" : "level 6"
                         },
                         operation_status: {
                             "id": "4",
