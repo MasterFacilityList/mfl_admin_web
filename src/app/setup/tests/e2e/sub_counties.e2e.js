@@ -2,7 +2,7 @@
 (function () {
     "use strict";
 
-    ddescribe("mflAdminApp scenario test for sub counties", function () {
+    describe("mflAdminApp scenario test for sub counties", function () {
 
         //variables required in test
         var getRandomString = function (characterLength) {
