@@ -16,7 +16,7 @@
                     }
                 },
                 permission: "facilities.view_owner",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
 
         .state("setup.facility_owners.view", {
@@ -29,7 +29,7 @@
                     }
                 },
                 permission: "facilities.view_owner",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
             .state("setup.facility_owners.view.delete", {
                 url: "/delete",
@@ -39,7 +39,7 @@
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
                 },
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_owners.create", {
                 url: "/create",
@@ -68,7 +68,7 @@
                     }
                 },
                 permission: "facilities.view_ownertype",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
 
         .state("setup.facility_owner_types.view", {
@@ -81,7 +81,7 @@
                     }
                 },
                 permission: "facilities.view_ownertype",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_owner_types.view.delete", {
                 url: "/delete",
@@ -120,7 +120,7 @@
                     }
                 },
                 permission: "facilities.view_jobtitle",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
 
         .state("setup.facility_job_titles.view", {
@@ -132,7 +132,7 @@
                     }
                 },
                 permission: "facilities.view_jobtitle",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_job_titles.view.delete", {
                 url: "/delete",
@@ -172,10 +172,10 @@
                     }
                 },
                 permission: "facilities.view_regulatingbody",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_regulatory_bodies.edit", {
-                url: "/:id",
+                url: "/:id/edit",
                 views: {
                     "main-content@setup.facility_regulatory_bodies": {
                         controller: "mfl.setup.controller.facilityRegulatoryBody.edit",
@@ -184,7 +184,7 @@
                     }
                 },
                 permission: "facilities.view_regulatingbody",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_regulatory_bodies.edit.delete", {
                 url: "/delete",
@@ -201,7 +201,7 @@
                 url: "/create",
                 views: {
                     "main-content@setup.facility_regulatory_bodies": {
-                        controller: "mfl.setup.controller.facilityRegulatoryBody.create",
+                        controller: "mfl.setup.controller.facilityRegulatoryBody.edit",
                         templateUrl: "setup/tpls/facilities/regulatory_bodies/"+
                                     "regulatory-bodies-view.tpl.html"
                     }
@@ -235,7 +235,7 @@
                         controller:"mfl.setup.controller.change_reasons.view"
                     }
                 },
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.facility_reasons.edit", {
                 url: "/edit/:reason_id",

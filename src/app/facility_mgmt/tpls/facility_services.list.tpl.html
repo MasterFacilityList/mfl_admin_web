@@ -2,15 +2,15 @@
     <ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
     <table class="table table-fixed table-hover fs-14" id="no-more-tables">
         <thead class="table-head">
-                <th class="col-xs-10" sil-grid-sort field='name'>Name</th>
-                <th class="col-xs-2">Service Option&nbsp;&nbsp;</th>
+                <th class="col-md-10 col-xs-9" sil-grid-sort field='name'>Name</th>
+                <th class="col-md-2 col-xs-3 text-center">Service Option&nbsp;&nbsp;</th>
         </thead>
         <tbody class="table-list fade-content">
             <tr class="table-item" ng-repeat="service in services" ng-show="services">
-                <td data-title="Name:" class="col-xs-10">
+                <td data-title="Name:" class="col-md-10 col-xs-9">
                     {{service.service_name}}
                 </td>
-                <td data-title="Abbreviation:" class="col-xs-2 text-center">{{service.option_display_value}}
+                <td data-title="Abbreviation:" class="col-md-2 col-xs-3 text-center">{{service.option_display_value}}
                 <span ng-if="service.option === null">
                     N/A
                 </span>

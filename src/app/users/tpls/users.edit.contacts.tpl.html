@@ -3,17 +3,17 @@
     <div class="row detail-content margin-b-10">
             <div class="col-xs-12 margin-t-20" requires-permission="common.add_usercontact">
                 <div class="col-xs-12 content-card form-card">
-                    <h4 class="fw-600 fs-18">Add Contact</h4>
-                    <form ng-submit="add()">
+                    <h4 class="fw-600 fs-16">Add Contact</h4>
+                    <form name="userContacts" ng-submit="add()">
                        <div class="row">
                             <div class="form-group col-md-4">
-                                <select class="form-control" name="contact_type" ng-model="contact.contact_type" required>
+                                <select class="form-control" name="contact_type" ng-model="contact.contact_type" required api-checker>
                                     <option value="">Select Contact Type</option>
                                     <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-5">
-                                <input class="form-control" name="contact" type="text" placeholder="Contact Details" ng-model="contact.contact" required />
+                                <input class="form-control" name="contact" type="text" placeholder="Contact Details" ng-model="contact.contact" required api-checker/>
                             </div>
                             <div class="col-md-3 margin-b-10 text-right">
                                 <button type="submit" class="btn btn-primary margin-r-10">
@@ -28,25 +28,25 @@
             <div class="col-xs-12">
                 <div class="margin-t-20" ng-show="contacts.length == 0">
                    <div class="alert alert-info">
-                       <span class="fs-16"> <i class="fa fa-info"></i> No contacts have been added so far.</span>
+                       <span class="fs-14"> <i class="fa fa-info-circle"></i> No contacts have been added so far.</span>
                    </div>
                 </div>
                 <div class="content-card margin-t-20" ng-show="contacts.length > 0">
-                    <h4 class="fw-600 fs-18">Current User Contacts</h4>
-                    <table class="table fs-14">
+                    <h4 class="fw-600 fs-16">Current User Contacts</h4>
+                    <table class="table table-hover table-condensed fs-14">
                        <thead>
                            <tr>
-                               <th class="fs-16">Contact Type</th>
-                               <th class="fs-16">Contact</th>
+                               <th class="">Contact Type</th>
+                               <th class="">Contact</th>
                                <th></th>
                            </tr>
                        </thead>
                         <tbody>
                             <tr ng-repeat="child in contacts">
-                                <td class="pad-t-15 fs-16 fw-500">
+                                <td class="pad-t-15  fw-500">
                                     {{child.contact_type_text | titlecase}}
                                 </td>
-                                <td class="pad-t-15 fs-16 fw-500">
+                                <td class="pad-t-15  fw-500">
                                     {{child.contact_text}}
                                 </td>
                                 <td class="text-right">

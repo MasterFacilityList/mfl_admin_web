@@ -6,11 +6,18 @@
 <div ui-view="delete"></div>
 <div class="col-lg-12 margin-t-20">
 <div class="col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 margin-t-20 content-card">
-    <form role="form" name="frm_facility_owner" novalidate class="col-xs-10 col-xs-offset-1 margin-t-20">
+    <form role="form" name="frm_facility_owner" ng-submit="createFacilityOwner(facilityOwners)" class="col-xs-10 col-xs-offset-1 margin-t-20" novalidate>
         <drf-err-msg></drf-err-msg>
         <div class="form-group">
-            <label class="control-label" for="name">Name</label>
+            <label class="control-label" for="name">Name &#42;</label>
             <input type="text" name="name" ng-model="facilityOwners.name" class="form-control" required api-checker>
+        </div>
+        <div class="form-group">
+            <label for="owner_type" class="control-label">Owner Type &#42;</label>
+            <select name="owner_type" ng-model="facilityOwners.owner_type" class="form-control" api-checker required>
+                <option value="" disabled>Select Facility Owner Category</option>
+                <option ng-repeat="owner in ownerTypes" ng-selected="{{owner.id == facilityOwners.owner_type}}" value="{{owner.id}}">{{owner.name}}</option>
+            </select>
         </div>
          <div class="form-group">
             <label class="control-label">Abbreviation</label>
@@ -20,20 +27,13 @@
             <label class="control-label">Description</label>
             <textarea type="text" id="description" name="description" ng-model="facilityOwners.description" class="form-control" api-checker></textarea>
         </div>
-        <div class="form-group">
-            <label for="owner_type" class="control-label">Owner Type</label>
-            <select name="owner_type" ng-model="facilityOwners.owner_type" class="form-control" api-checker required>
-                <option value="" disabled>Select Facility Owner Category</option>
-                <option ng-repeat="owner in ownerTypes" ng-selected="{{owner.id == facilityOwners.owner_type}}" value="{{owner.id}}">{{owner.name}}</option>
-            </select>
-        </div>
         <div class="form-group checkbox" ng-if="facilityOwners.id">
             <label>
                 <input type="checkbox" id="active" name="active" ng-model="facilityOwners.active" api-checker>
                  Is Active?
              </label>
         </div>
-        <button ng-if="!facilityOwners.id" ng-click="createFacilityOwner(facilityOwners)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="facility_owner.$invalid">
+        <button type="submit" ng-if="!facilityOwners.id" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="facility_owner.$invalid">
             Save
         </button>
         <button ng-if="facilityOwners.id" ng-click="updateFacilityOwner(facilityOwners.id, frm_facility_owner)" class="btn btn-primary" requires-user-feature="is_staff" ng-disabled="facility_owner.$invalid">

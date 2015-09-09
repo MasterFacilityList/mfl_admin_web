@@ -72,7 +72,7 @@
                         templateUrl: "users/tpls/users.edit.counties.tpl.html"
                     }
                 },
-                userFeature: "is_staff,national",
+                userFeature: "is_staff",
                 permission: "users.change_mfluser"
             })
             .state("users.user_create.constituency", {
@@ -191,7 +191,7 @@
                     }
                 },
                 permission: "users.view_mfluser",
-                userFeature: "is_staff,is_national"
+                userFeature: "is_staff"
             })
 
             .state("users.user_delete", {

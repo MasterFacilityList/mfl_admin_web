@@ -548,11 +548,13 @@
                 var dt = {
                     $stateParams: {id: 1}
                 };
-                var res = {msg: "ok"};
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/?fields=id,name")
-                .respond(200, {results: []});
+                $scope.regularoty_body_id = 1;
+                $scope.cont_length = 1;
+                var res = {id: "1", contacts : [{id : "5"}]};
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/?fields=id,name")
+                .respond(200, {results: []});
                 createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
                 $httpBackend.flush();
                 $httpBackend.verifyNoOutstandingRequest();
@@ -572,7 +574,13 @@
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
-
+        it("should have facilityRegulatoryBody as undefined",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                $scope.regulatory_body_id = undefined;
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
+            });
         it("should delete facilityRegulatoryBody: success",function(){
                 var dt = {
                     $stateParams: {id: 1}
@@ -606,21 +614,84 @@
                 $httpBackend.flush();
                 expect($scope.alert).toEqual(res.error);
             });
+        it("should be in creation state",function(){
+                var dt = {
+                    $stateParams: {id: undefined}
+                };
+                $scope.regulatory_body_id = undefined;
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
+            });
 
         it("should update facilityRegulatoryBody: success",function(){
                 var dt = {
                     $stateParams: {id: 1}
                 };
-                var res = {msg: "Ok"};
+                $scope.regulatory_body_id = 1;
+                var res = {id: "1", contacts : [{id : "5"}, {id : "3"}]};
                 var form = {name : "Antony"};
                 spyOn($state, "go");
                 spyOn(formService, "whatChanged").andReturn(form);
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
                 $httpBackend.expectPATCH(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
+                200, {id : "1", contacts : [{contact : "test@test.com"}]});
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
+                $scope.cont_length = 2;
+                $scope.facilityRegulatoryBodies = {
+                    contacts : [
+                        {id : "3"},
+                        {id : "5"},
+                        {contact : "test@test.com"}
+                    ]
+                };
+                $scope.createFacilityRegulatoryBody(form);
+                $scope.add_contact();
+                $httpBackend.flush();
+            });
+
+        it("should update facilityRegulatoryBody : no contacts",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                $scope.regulatory_body_id = 1;
+                var res = {id: "1", contacts : [{id : "5"}, {id : "3"}]};
+                var form = {name : "Antony"};
+                spyOn($state, "go");
+                spyOn(formService, "whatChanged").andReturn(form);
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
+                200, res);
+                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
+                200, {id : "1"});
+                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
+                $scope.cont_length = 2;
+                $scope.facilityRegulatoryBodies = {
+                    contacts : [
+                        {id : "3"},
+                        {id : "5"}
+                    ]
+                };
+                $scope.createFacilityRegulatoryBody(form);
+                $httpBackend.flush();
+            });
+
+        it("should update facilityRegulatoryBody no contacts: success",
+            function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                $scope.regulatory_body_id = 1;
+                var res = {id: "1", contacts : []};
+                var form = {};
+                spyOn($state, "go");
+                spyOn(formService, "whatChanged").andReturn(form);
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
                 createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
-                $scope.updateFacilityRegulatoryBody(1, form);
+                $scope.cont_length = 2;
+                $scope.facilityRegulatoryBodies = {
+                    contacts : []
+                };
+                $scope.createFacilityRegulatoryBody(form);
                 $httpBackend.flush();
             });
 
@@ -628,36 +699,28 @@
                 var dt = {
                     $stateParams: {id: 1}
                 };
-                var res = {error: "error"};
+                $scope.regulatory_body_id = 1;
+                var res = {id: "1", contacts : [{id : "5"}, {id : "3"}]};
                 var form = {name : "Antony"};
                 spyOn($state, "go");
                 spyOn(formService, "whatChanged").andReturn(form);
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
                 200, res);
                 $httpBackend.expectPATCH(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
-                500, res);
+                500, {id : "1", contacts : [{contact : "test@test.com"}]});
                 createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
-                $scope.updateFacilityRegulatoryBody(1, form);
+                $scope.cont_length = 2;
+                $scope.facilityRegulatoryBodies = {
+                    contacts : [
+                        {id : "3"},
+                        {id : "5"},
+                        {contact : "test@test.com"}
+                    ]
+                };
+                $scope.createFacilityRegulatoryBody(form);
                 $httpBackend.flush();
                 expect($state.go).not.toHaveBeenCalledWith("setup.facility_regulatory_bodies");
                 expect($scope.alert).toEqual(res.error);
-            });
-        it("should update facilityRegulatoryBody: fail: no changes",function(){
-                var dt = {
-                    $stateParams: {id: 1}
-                };
-                var res = {error: "error"};
-                var form = {};
-                spyOn($state, "go");
-                spyOn(formService, "whatChanged").andReturn(form);
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
-                200, res);
-                $httpBackend.expectPATCH(SERVER_URL+"api/facilities/regulating_bodies/1/").respond(
-                500, res);
-                createController("mfl.setup.controller.facilityRegulatoryBody.edit", dt);
-                $scope.updateFacilityRegulatoryBody(1, form);
-                expect($httpBackend.flush).toThrow();
-                expect($state.go).not.toHaveBeenCalledWith("setup.facility_regulatory_bodies");
             });
     });
 })(window._);

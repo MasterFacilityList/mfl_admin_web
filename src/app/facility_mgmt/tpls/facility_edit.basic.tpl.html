@@ -17,7 +17,7 @@
               </p>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Facility Offical Name</label>
+                <label class="control-label">Facility Offical Name &#42;</label>
                 <input class="form-control" name="official_name" ng-model="facility.official_name" ng-blur="initUniqueName(frm_facility_basic)" placeholder="Facility Official Name" api-checker>
             </div>
             <div class="form-group col-xs-12">
@@ -25,7 +25,7 @@
                 <input class="form-control" name="name" ng-model="facility.name" required placeholder="Facility Unique Name" api-checker/>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Facility Type</label>
+                <label class="control-label">Facility Type &#42;</label>
                 <ui-select ng-model="select_values.facility_type_details" required name="facility_type_detail" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select a facility type...">
                         <span>{{$select.selected.name}}</span>
@@ -36,7 +36,7 @@
                 </ui-select>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Facility Type Details</label>
+                <label class="control-label">Facility Type Details &#42;</label>
                 <ui-select ng-model="select_values.facility_type" required name="facility_type" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select a facility type details...">
                         <span>{{$select.selected.name}}</span>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="form-group col-xs-12">
-                <label class="control-label">Operation Status</label>
+                <label class="control-label">Operation Status &#42;</label>
                 <ui-select ng-model="select_values.operation_status" required name="operation_status" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select an operation status...">
                         <span>{{$select.selected.name}}</span>
@@ -59,7 +59,7 @@
                 </ui-select>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Owner</label>
+                <label class="control-label">Owner &#42;</label>
                  <ui-select ng-model="select_values.owner_type" required name="owner_type" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select owner...">
                         <span>{{$select.selected.name}}</span>
@@ -70,7 +70,7 @@
                 </ui-select>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Owner Details</label>
+                <label class="control-label">Owner Details &#42;</label>
                 <ui-select ng-model="select_values.owner" required name="owner" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select an owner...">
                         <span>{{$select.selected.name}}</span>
@@ -81,7 +81,7 @@
                 </ui-select>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Regulatory Body</label>
+                <label class="control-label">Regulatory Body &#42;</label>
                 <ui-select ng-model="select_values.regulatory_body" required name="regulatory_body" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select a regulatory body...">
                         <span>{{$select.selected.name}}</span>
@@ -94,13 +94,13 @@
 
             <div class="form-group col-xs-12">
                 <label class="control-label">
-                    Number of Beds
+                    Number of Beds &#42;
                 </label>
                 <input class="form-control" name="number_of_beds" ng-model="facility.number_of_beds"  required placeholder="Number of Beds" api-checker />
             </div>
             <div class="form-group col-sm-12">
                 <label class="control-label" for="number_of_cots">
-                    Number of Cots
+                    Number of Cots &#42;
                 </label>
                 <input class="form-control" name="number_of_cots" ng-model="facility.number_of_cots"  required placeholder="Number of Cots" api-checker />
             </div>
@@ -157,7 +157,7 @@
             </div>
            <!-- <form name="phyForm"> -->
                 <div class="form-group col-xs-12">
-                    <label class="control-label">Ward</label>
+                    <label class="control-label">Ward &#42;</label>
                     <ui-select ng-model="select_values.ward" required name="ward" api-checker register-custom-form-control>
                         <ui-select-match placeholder="Select a ward...">
                             <span>{{$select.selected.name}}</span>
@@ -220,7 +220,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <label class="">
-                        Name
+                        Name &#42;
                     </label>
                     <input type="text" class="form-control" ng-model="facility.officer_in_charge.name" name="officer_name" placeholder="Name" api-checker required>
                     <span class="highlght"></span>
@@ -228,7 +228,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <label class="">
-                        Registration Number
+                        Registration Number &#42;
                     </label>
                     <input class="form-control" name="reg_number" ng-model="facility.officer_in_charge.reg_no" placeholder="Registration Number" api-checker required>
                     <span class="highlght"></span>
@@ -236,7 +236,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <label class="">
-                        Job Title
+                        Job Title &#42;
                     </label>
                     <select class="form-control" name="title" ng-model="facility.officer_in_charge.title" api-checker required>
                         <option value="" disabled>Select Job Title</option>
@@ -300,11 +300,11 @@
                 Finish
             </button>
             <button ng-if="!create" ng-click="setNxt(false)" type="submit" class="btn btn-primary margin-b-10 pull-right">
-                &nbsp; Save & Continue <i class="fa fa-angle-double-right"></i>
+                Save & Continue <i class="fa fa-angle-double-right"></i>
             </button>
         </span>
         <button ng-if="create" type="submit" class="btn btn-primary margin-b-10 pull-right">
-            &nbsp; Geolocation <i class="fa fa-angle-double-right"></i>
+            Geolocation <i class="fa fa-angle-double-right"></i>
         </button>
     </form>
 </div>

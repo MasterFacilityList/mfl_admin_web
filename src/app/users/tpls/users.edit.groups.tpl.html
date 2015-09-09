@@ -8,7 +8,7 @@
                 <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
             </div>
             <div class="col-sm-12 content-card form-card margin-b-10" write-perm="users.change_mfluser">
-                <h4 class="fw-600 fs-18">Assign User Group</h4>
+                <h4 class="fw-600 fs-16">Assign User Group</h4>
                 <form name="countyForm" ng-submit="add()">
                     <div class="col-sm-10 pad-l-0">
                     <select name="county" class="form-control" ng-model="new_grp" class="pad-t-15" required>
@@ -19,7 +19,7 @@
                     <span class="bar"></span>
                     </div>
                     <div class="col-sm-2 margin-b-10 ">
-                        <button type="submit" class="btn btn-primary margin-t-10 pull-right" tooltip="Assign County">
+                        <button type="submit" class="btn btn-primary margin-t-5 pull-right" tooltip="Assign User Group">
                             <i class="fa fa-plus-circle"></i> Add
                         </button>
                     </div>
@@ -27,15 +27,15 @@
             </div>
 
             <div class="alert alert-info col-sm-12 margin-t-20" ng-show="user.groups.length === 0">
-                <span class="fs-18"><i class="fa fa-info-circle"></i> User has no group assigned yet</span>
+                <span class="fs-14"><i class="fa fa-info-circle"></i> User has no group assigned yet</span>
             </div>
 
             <div class="col-sm-12 content-card margin-t-20" ng-show="user.groups.length > 0">
-                <h4 class="fw-600 fs-18"> User's Group</h4>
-                <table class="table">
+                <h4 class="fw-600 fs-16"> User's Group</h4>
+                <table class="table table-condensed table-hover fs-14">
                     <tbody>
                         <tr ng-repeat="child in user.groups">
-                            <td class="pad-t-15 fs-18 fw-600 text-left">
+                            <td class="pad-t-15 fs-14 fw-500 text-left">
                                 {{child.name}}
                             </td>
                             <td class="text-right">

@@ -171,9 +171,11 @@
                 $scope.facility_approval.is_cancelled = !!cancel;
                 wrappers.facility_approvals.create($scope.facility_approval)
                 .success(function () {
+                    var msg_title = cancel ? "Rejection" : "Approval";
+                    var msg_detail = cancel ? "rejected" : "approved";
                     toasty.success({
-                        title:"Facility Approval",
-                        msg:"Facility successfully approved"
+                        title:"Facility " + msg_title,
+                        msg:"Facility successfully " + msg_detail
                     });
                     $state.go("facilities_approve");
                 })
@@ -194,7 +196,7 @@
                         title:"Facility updates",
                         msg:"Facility's updates have been processed"
                     });
-                    $state.go("facilities_approve_update");
+                    $state.go("facilities_approve");
                 })
                 .error(function (data) {
                     $log.error(data);

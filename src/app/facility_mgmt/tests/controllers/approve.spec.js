@@ -418,7 +418,36 @@
                     .respond(201);
 
                 data.$scope.facility_approval.comment = "Koment";
-                data.$scope.approveFacility();
+                var status = false;
+                data.$scope.approveFacility(status);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(state.go).toHaveBeenCalled();
+            });
+
+            it("should rejected a facility", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {facility_id: 3}
+                };
+
+                ctrl("facility_approve", data);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(server_url+"api/facilities/facility_approvals/")
+                    .respond(201);
+
+                data.$scope.facility_approval.comment = "Koment";
+                var status = true;
+                data.$scope.approveFacility(status);
 
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();

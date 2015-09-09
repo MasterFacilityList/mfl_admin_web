@@ -16,7 +16,7 @@
                     }
                 },
                 permission: "common.view_contacttype",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.contact_types.view", {
                 url: "/edit/:id",
@@ -27,7 +27,7 @@
                     }
                 },
                 permission: "common.view_contacttype",
-                userFeature: "is_national"
+                userFeature: "is_staff,is_national"
             })
         .state("setup.contact_types.view.delete", {
                 url: "/delete",

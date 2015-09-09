@@ -1,5 +1,5 @@
 <div class="content-header">
-   <div class="action-container content-header-extra">
+   <div class="action-container content-header-extra margin-t-3">
         <a requires-permission="facilities.view_facility,facilities.add_facilityregulationstatus" ui-sref="facilities_regulation.regulate.basic({facility_id: fac_id})" class="btn btn-success" tooltip="Regulate Facility">
             Regulate
         </a>
@@ -30,4 +30,7 @@
         </div>
     </div>
     <div class="content-card col-xs-12 margin-t-20" ng-if="!spinner" ui-view="read-only"></div>
+    <div class="col-xs-12 pad-0 margin-b-20">
+        <mfl-revision-view id="facility_id" wrapper="wrapper"></mfl-revision-view>
+    </div>
 </div>

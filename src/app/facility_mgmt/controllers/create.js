@@ -123,6 +123,7 @@
             if(!_.isUndefined($stateParams.facility_id) &&
                 !_.isEmpty($stateParams.facility_id)){
                 $scope.spinner = true;
+                $scope.wrapper = wrappers.facility_detail;
                 wrappers.facility_detail.get($scope.fac_id)
                     .success(function(data){
                         $scope.facility = data;

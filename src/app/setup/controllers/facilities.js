@@ -437,7 +437,8 @@
                 {
                     func : "ui-sref='setup.facility_regulatory_bodies.create'" +
                            " requires-user-feature='is_staff'" +
-                           " requires-permission='facilities.add_regulatingbody'",
+                           " requires-permission='facilities."+
+                           "add_regulatingbody' ui-sref-opts='{reload : true}'",
                     class: "btn btn-primary",
                     tipmsg: "Add Regulatory Body",
                     wording: "Add Regulatory Body"
@@ -447,8 +448,8 @@
     )
 
     .controller("mfl.setup.controller.facilityRegulatoryBody.create",["$scope",
-        "$stateParams", "$state", "adminApi","toasty",
-        function ($scope, $stateParams, $state, adminApi,toasty) {
+        "$stateParams", "$state", "adminApi",
+        function ($scope, $stateParams, $state, adminApi) {
             $scope.title = {
                 icon: "fa-plus-circle",
                 name: "New Regulatory Body"
@@ -462,73 +463,30 @@
                     $scope.errors = err;
                 });
             $scope.contacts = {
-                items : []
+                items : [
+                    {
+                        contact_type : "",
+                        contact: ""
+                    }
+                ]
             };
-            $scope.contact = {
+            $scope.facilityRegulatoryBodies = {
+                contacts : [
+                    {
+                        contact_type : "",
+                        contact: ""
+                    }
+                ]
+            };
+            $scope.contacts = {
                 contact_type: "",
                 contact: ""
             };
-            $scope.add = function () {
-                $scope.spinner = true;
-                adminApi.regulatoryBodyContacts.create({
-                    "contact_type": $scope.contact.contact_type,
-                    "contact": $scope.contact.contact
-                })
-                .success(function (data) {
-                    adminApi.RegulatoryBodyContacts.create({
-                        "regulating_body" : $state.params.reg_cont_id,
-                        "contact" : data.id
-                    })
-                    .success(function (data) {
-                        toasty.success({
-                            title: "Regulatory body contact added",
-                            msg: "Regulatory body contact has been added"
-                        });
-                        $scope.contact = {
-                            contact_type : "",
-                            contact : ""
-                        };
-                        $scope.contacts.items.push(data);
-                        $scope.spinner = false;
-                    })
-                    .error(function (err) {
-                        $scope.alert = err.error;
-                        $scope.errors = err;
-                        $scope.spinner = false;
-                    });
-                })
-                .error(function (err) {
-                    $scope.alert = err.error;
-                    $scope.spinner = false;
-                    $scope.errors = err;
+            $scope.add_contact = function () {
+                $scope.facilityRegulatoryBodies.contacts.push({
+                    contact_type: "",
+                    contact : ""
                 });
-            };
-            $scope.remove_contact = function (obj) {
-                obj.delete_spinner = true;
-                adminApi.RegulatoryBodyContacts.remove(obj.id)
-                    .success(function () {
-                        adminApi.regulatoryBodyContacts.remove(obj.contact)
-                            .success(function () {
-                                toasty.success({
-                                    title: "Regulatory body contact deleted",
-                                    msg: "Regulatory body contact has been deleted"
-                                });
-                                obj.delete_spinner = false;
-                                $scope.contacts.items =
-                                _.without($scope.contacts.items, obj);
-                            })
-                            .error(function (err) {
-                                $scope.alert = err.error;
-                                $scope.errors = err;
-                                obj.delete_spinner = false;
-                            });
-                    })
-                    .error(function (err) {
-                        $scope.alert = err.error;
-                        $scope.errors = err;
-                        obj.delete_spinner = false;
-                    });
-
             };
         }
     ])
@@ -536,34 +494,35 @@
     .controller("mfl.setup.controller.facilityRegulatoryBody.edit", ["$scope",
         "$stateParams", "adminApi", "mfl.common.forms.changes", "$state","toasty",
         function ($scope, $stateParams, adminApi, formChanges, $state,toasty) {
-            $scope.contacts = {
-                items : []
-            };
             $scope.regulatory_body_id = $stateParams.id;
-            $scope.wrapper = adminApi.facilityRegulatoryBodies;
-
-            adminApi.contact_types.list()
-                .success(function (data) {
-                    $scope.contact_types = data.results;
-                })
-                .error(function (err) {
-                    $scope.alert = err.error;
-                    $scope.errors = err;
+            $scope.facilityRegulatoryBodies = {};
+            $scope.cont_length = "";
+            if(!$scope.regulatory_body_id){
+                $scope.facilityRegulatoryBodies = {
+                    contacts : [
+                        {
+                            contact_type : "",
+                            contact: ""
+                        }
+                    ]
+                };
+                $scope.title = {
+                    icon: "fa-plus-circle",
+                    name: "New Regulatory Body"
+                };
+            }else{
+                $scope.spinner = true;
+                adminApi.facilityRegulatoryBodies.get($stateParams.id).success(function(data){
+                    $scope.facilityRegulatoryBodies = data;
+                    $scope.cont_length = $scope.facilityRegulatoryBodies.contacts.length;
+                    $scope.deleteText = $scope.facilityRegulatoryBodies.name;
+                    $scope.edit = true;
+                    $scope.spinner = false;
+                }).error(function(error){
+                    $scope.alert = error.error;
+                    $scope.errors = error;
+                    $scope.spinner = false;
                 });
-            adminApi.RegulatoryBodyContacts.filter(
-                {"regulating_body" : $stateParams.id})
-                .success(function (data) {
-                    $scope.contacts.items = data.results;
-                })
-                .error(function (err) {
-                    $scope.alert = err.error;
-                    $scope.errors = err;
-                });
-            adminApi.facilityOwnerTypes.filter({"fields": "id,name"})
-            .success(function (data) {$scope.owner_types = data.results;})
-            .error(function (err) {$scope.errors = err;});
-
-            if($stateParams.id !== "create") {
                 $scope.regulatory_body = true;
                 $scope.title = {
                     icon: "fa-edit",
@@ -581,40 +540,58 @@
                         tipmsg: "Delete Facility Regulatory Body"
                     }
                 ];
-                adminApi.facilityRegulatoryBodies.get($stateParams.id).success(function(data){
-                    $scope.facilityRegulatoryBodies = data;
-                    $scope.deleteText = $scope.facilityRegulatoryBodies.name;
-                    $scope.edit = true;
-                }).error(function(error){
+            }
+            $scope.wrapper = adminApi.facilityRegulatoryBodies;
+            $scope.add_contact = function () {
+                $scope.facilityRegulatoryBodies.contacts.push({
+                    contact_type: "",
+                    contact : ""
+                });
+            };
+            adminApi.contact_types.list()
+                .success(function (data) {
+                    $scope.contact_types = data.results;
+                })
+                .error(function (err) {
+                    $scope.errors = err;
+                });
+            adminApi.facilityOwnerTypes.filter({"fields": "id,name"})
+            .success(function (data) {$scope.owner_types = data.results;})
+            .error(function (err) {$scope.errors = err;});
+
+            $scope.remove = function () {
+                adminApi.facilityRegulatoryBodies.remove($stateParams.id)
+                .success(function(){
+                    toasty.success({
+                        title: "Regulatory body deleted",
+                        msg: "Regulatory body has been deleted"
+                    });
+                    $state.go("setup.facility_regulatory_bodies");
+                })
+                .error(function(error){
                     $scope.alert = error.error;
                     $scope.errors = error;
+                    $state.go("setup.facility_regulatory_bodies");
                 });
-                $scope.remove = function () {
-                    adminApi.facilityRegulatoryBodies.remove($stateParams.id)
-                    .success(function(){
-                        toasty.success({
-                            title: "Regulatory body deleted",
-                            msg: "Regulatory body has been deleted"
-                        });
-                        $state.go("setup.facility_regulatory_bodies");
-                    })
-                    .error(function(error){
-                        $scope.alert = error.error;
-                        $scope.errors = error;
-                        $state.go("setup.facility_regulatory_bodies");
-                    });
-                };
-                $scope.cancel = function () {
-                    $state.go("setup.facility_regulatory_bodies.edit");
-                };
-            } else {
-                $scope.title = {
-                    icon: "fa-plus-circle",
-                    name: "New Regulatory Body"
-                };
-            }
+            };
+            $scope.cancel = function () {
+                $state.go("setup.facility_regulatory_bodies.edit");
+            };
             $scope.updateFacilityRegulatoryBody = function(id, frm){
-                var changes= formChanges.whatChanged(frm);
+                var changes = formChanges.whatChanged(frm);
+                if($scope.facilityRegulatoryBodies.contacts.length > 0) {
+                    if($scope.facilityRegulatoryBodies.contacts.length >
+                        $scope.cont_length){
+                        changes.contacts = [];
+                    }
+                    _.each($scope.facilityRegulatoryBodies.contacts,
+                        function (a_cont) {
+                            if(_.isUndefined(a_cont.id)){
+                                changes.contacts.push(a_cont);
+                            }
+                        }
+                    );
+                }
                 if(!_.isEmpty(changes)){
                     adminApi.facilityRegulatoryBodies.update(id, changes).success(function(){
                         toasty.success({
@@ -628,84 +605,56 @@
                     });
                 }
             };
-            $scope.createFacilityRegulatoryBody = function(regulatoryBody){
-                adminApi.facilityRegulatoryBodies.create(regulatoryBody).success(function() {
-                    toasty.success({
-                        title: "Regulatory body added",
-                        msg: "Regulatory body has been added"
-                    });
-                    $state.go("setup.facility_regulatory_bodies");
-                    $scope.regulatory_body = true;
-                }).error(function(error){
-                    $scope.alert = error.error;
-                    $scope.errors = error;
-                });
-            };
-            $scope.contact = {
-                contact_type: "",
-                contact: ""
-            };
-            $scope.add = function () {
-                $scope.spinner = true;
-                adminApi.regulatoryBodyContacts.create({
-                    "contact_type": $scope.contact.contact_type,
-                    "contact": $scope.contact.contact
-                })
-                .success(function (data) {
-                    adminApi.RegulatoryBodyContacts.create({
-                        "regulating_body" : $stateParams.id,
-                        "contact" : data.id
-                    })
-                    .success(function (data) {
+            $scope.createFacilityRegulatoryBody = function(frm){
+                if(!$scope.regulatory_body_id){
+                    adminApi.facilityRegulatoryBodies.create(
+                        $scope.facilityRegulatoryBodies)
+                    .success(function() {
                         toasty.success({
-                            title: "Regulatory body contact added",
-                            msg: "Regulatory body contact has been added"
+                            title: "Regulatory body added",
+                            msg: "Regulatory body has been added"
                         });
-                        $scope.contact = {
-                            contact_type : "",
-                            contact : ""
-                        };
-                        $scope.contacts.items.push(data);
-                        $scope.spinner = false;
-                    })
-                    .error(function (err) {
-                        $scope.alert = err.error;
-                        $scope.spinner = false;
-                        $scope.errors = err;
+                        $state.go("setup.facility_regulatory_bodies");
+                        $scope.regulatory_body = true;
+                    }).error(function(error){
+                        $scope.alert = error.error;
+                        $scope.errors = error;
                     });
-                })
-                .error(function (err) {
-                    $scope.alert = err.error;
-                    $scope.spinner = false;
-                    $scope.errors = err;
-                });
+                }else{
+                    $scope.updateFacilityRegulatoryBody($scope.regulatory_body_id, frm);
+                }
             };
             $scope.remove_contact = function (obj) {
-                obj.delete_spinner = true;
-                adminApi.RegulatoryBodyContacts.remove(obj.id)
-                    .success(function () {
-                        adminApi.regulatoryBodyContacts.remove(obj.contact)
-                            .success(function () {
-                                toasty.success({
-                                    title: "Regulatory body contact deleted",
-                                    msg: "Regulatory body contact has been deleted"
+                if(!_.isUndefined(obj.id)) {
+                    adminApi.RegulatoryBodyContacts.remove(obj.id)
+                        .success(function () {
+                            adminApi.regulatoryBodyContacts.remove(obj.contact_id)
+                                .success(function () {
+                                    toasty.success({
+                                        title: "Regulatory body contact deleted",
+                                        msg: "Regulatory body contact has been deleted"
+                                    });
+                                    obj.delete_spinner = false;
+                                    $scope.facilityRegulatoryBodies.
+                                    contacts =_.without(
+                                        $scope.facilityRegulatoryBodies.contacts, obj);
+                                })
+                                .error(function (err) {
+                                    $scope.alert = err.error;
+                                    $scope.errors = err;
+                                    obj.delete_spinner = false;
                                 });
-                                obj.delete_spinner = false;
-                                $scope.contacts.items =
-                                _.without($scope.contacts.items, obj);
-                            })
-                            .error(function (err) {
-                                $scope.alert = err.error;
-                                obj.delete_spinner = false;
-                                $scope.errors = err;
-                            });
-                    })
-                    .error(function (err) {
-                        $scope.alert = err.error;
-                        obj.delete_spinner = false;
-                        $scope.errors = err;
-                    });
-
+                        })
+                        .error(function (err) {
+                            $scope.alert = err.error;
+                            $scope.errors = err;
+                            obj.delete_spinner = false;
+                        });
+                }else{
+                    $scope.facilityRegulatoryBodies.contacts =
+                        _.without($scope.facilityRegulatoryBodies.
+                            contacts, obj);
+                }
             };
         }
     ]);

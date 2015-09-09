@@ -12,8 +12,9 @@ test:
     override:
         - bash ci_test.sh:
             parallel: true
-
-
+            environment:
+                LOG_FOLDER: "$HOME/$CIRCLE_PROJECT_REPONAME/_logs_"
+                BUILD_DIR: "$HOME/$CIRCLE_PROJECT_REPONAME"
 
 deployment:
     release:
@@ -24,3 +25,9 @@ deployment:
             - tar cvzf "$RELEASE_ASSET" bin
             - sudo pip install github3.py
             - python deploy.py
+
+
+general:
+    artifacts:
+        - "_logs_"
+        - "coverage"
