@@ -37,14 +37,6 @@
                           "sub_county,constituency,ward_name,updated," +
                           "operation_status_name,date_requested,date_approved"
             };
-            $scope.action = [
-                {
-                    class: "btn btn-primary",
-                    tipmsg: "Export to Excel",
-                    icon: "",
-                    wording : "Export to Excel"
-                }
-            ];
         }]
     );
 

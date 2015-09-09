@@ -8,7 +8,7 @@
                          <span class="text-warning">M</span>aster Facility List <small>V 2.0</small>
                     </h2>
                 </div>
-                <div class="col-xs-12 col-md-10 col-md-offset-1 alert alert-info" ng-if="params.reset_pwd||params.reset_pwd_confirm||params.timeout||logout">
+                <div class="col-xs-12 col-md-10 col-md-offset-1 alert alert-info" ng-if="params.reset_pwd||params.reset_pwd_confirm||params.timeout||params.change_pwd||logout">
                     <button class="close" data-dismiss="alert" ><span>&times;</span></button>
                     <p ng-if="params.reset_pwd">Password reset instructions have been sent to your email.</p>
                     <p ng-if="params.reset_pwd_confirm">Password has been reset successfully.</p>

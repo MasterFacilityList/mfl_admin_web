@@ -27,7 +27,8 @@
             geocode_methods: api.setBaseUrl("api/gis/geo_code_methods/"),
             geocode_sources: api.setBaseUrl("api/gis/geo_code_sources/"),
             county_users : api.setBaseUrl("api/common/user_counties/"),
-            county_slim : api.setBaseUrl("api/counties/slim_detail/")
+            county_slim : api.setBaseUrl("api/counties/slim_detail/"),
+            rating_comments: api.setBaseUrl("api/facilities/facility_service_ratings/")
         };
     }]);
 
