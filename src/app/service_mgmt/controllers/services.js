@@ -62,7 +62,7 @@
                     });
                     $state.go("service_mgmt.service_list",{},{reload:true});
                 }).error(function(error){
-                    $scope.errors = error.error;
+                    $scope.errors = error;
                 });
             };
             $scope.cancel = function () {
