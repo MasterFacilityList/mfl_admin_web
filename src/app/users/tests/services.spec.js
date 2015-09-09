@@ -42,6 +42,21 @@
 
                 }]);
             });
+            it("should expect national admin groups to have no sub-county level groups",
+            function () {
+                inject(["mfl.users.services.groups",function (grpService) {
+                    var grps = [
+                        {
+                            id:1,
+                            is_sub_county_level:true,
+                            name:"Regulator (Approvers)"
+                        }
+                    ];
+                    expect(grpService.filterGroups).toBeDefined();
+                    grpService.filterGroups(false,grps);
+
+                }]);
+            });
             it("should test group check service", function () {
                 inject(["mfl.users.services.groups",function (grpService) {
                     expect(grpService.checkWhichGroup).toBeDefined();

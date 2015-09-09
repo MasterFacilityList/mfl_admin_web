@@ -193,6 +193,48 @@
                 ]);
             });
 
+            it("should fail to save updated service", function () {
+                inject(["mfl.common.forms.changes",
+                    function (formChanges) {
+                        var scope = rootScope.$new();
+                        var data = {
+                            "$state": state,
+                            "$scope": scope,
+                            "mfl.common.forms.changes": formChanges
+                        };
+                        data.$scope.steps = [
+                            {active : true},
+                            {active : false}
+                        ];
+                        httpBackend
+                            .expectGET(server_url +
+                                       "api/facilities/service_categories/?page_size=1000")
+                            .respond(200, {results: []});
+
+                        spyOn(formChanges, "whatChanged").andReturn({"name": "get"});
+                        data.$scope.service = {};
+                        data.$scope.service_id = 1;
+                        ctrl("service_edit.basic", data);
+
+                        httpBackend.flush();
+                        httpBackend.verifyNoOutstandingRequest();
+                        httpBackend.verifyNoOutstandingExpectation();
+
+                        httpBackend.resetExpectations();
+
+                        httpBackend
+                            .expectPATCH(server_url + "api/facilities/services/1/").respond(400,
+                                {"details" :"Error"});
+                        scope.save();
+
+                        httpBackend.flush();
+                        httpBackend.verifyNoOutstandingRequest();
+                        httpBackend.verifyNoOutstandingExpectation();
+                        expect(formChanges.whatChanged).toHaveBeenCalled();
+                    }
+                ]);
+            });
+
             it("should not save if service is not updated", function () {
                 inject(["mfl.common.forms.changes",
                     function (formChanges) {
@@ -821,6 +863,34 @@
                     httpBackend.expectPOST(server_url +
                         "api/facilities/services/").respond(
                         201, {"name" : "ASD"});
+                    data.$scope.nextState = angular.noop;
+                    ctrl("service_create.basic", data);
+                    scope.save(form);
+                    httpBackend.flush();
+                }
+            ]));
+
+            it("should test getting details of new service save method: pass",
+            inject(["mfl.common.forms.changes", "$state",
+                function (formChanges, $state) {
+                    var scope = rootScope.$new();
+                    var data = {
+                        "$scope" : scope,
+                        "mfl.common.forms.changes": formChanges,
+                        "$state" : $state
+                    };
+                    spyOn($state, "go");
+                    $state.params.service_id = "";
+                    var form = {
+                        "$dirty": true,
+                        "name": {
+                            "$modelValue": "ASD",
+                            "$dirty": true
+                        }
+                    };
+                    httpBackend.expectPOST(server_url +
+                        "api/facilities/services/").respond(
+                        500, {});
                     data.$scope.nextState = angular.noop;
                     ctrl("service_create.basic", data);
                     scope.save(form);

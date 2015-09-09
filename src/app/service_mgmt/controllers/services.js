@@ -52,6 +52,7 @@
                 $scope.deleteText = $scope.service.name;
             }).error(function (data) {
                 $log.warn(data);
+                $scope.errors = data;
             });
             $scope.remove = function () {
                 wrappers.services.remove($scope.service_id).success(function(){
@@ -61,7 +62,7 @@
                     });
                     $state.go("service_mgmt.service_list",{},{reload:true});
                 }).error(function(error){
-                    $scope.alert = error.error;
+                    $scope.errors = error;
                 });
             };
             $scope.cancel = function () {
@@ -99,6 +100,9 @@
                             });
                             $state.go( "service_mgmt.service_list",
                                 {reload: true});
+                        })
+                        .error(function (data) {
+                            $scope.errors = data;
                         });
                 }
                 else {
@@ -179,6 +183,7 @@
                 $scope.categories = data.results;
             }).error(function (data) {
                 $log.warn(data);
+                $scope.errors = data;
             });
 
             $scope.new_service = $state.params.service_id;
@@ -229,6 +234,7 @@
                 })
                 .error(function (data) {
                     $log.warn(data);
+                    $scope.errors = data;
                 });
             }
             $scope.save = function (frm) {
@@ -243,7 +249,7 @@
                                 {service_id : $state.params.service_id, furthest : 2});
                         })
                         .error (function (err) {
-                            $scope.alert = err.error;
+                            $scope.errors = err.error;
                         });
                     }
                     else {
@@ -259,6 +265,9 @@
                             msg: "Service added successfully"
                         });
                         $state.go("service_mgmt.service_list", {reload: true});
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
                     });
                 }
             };
