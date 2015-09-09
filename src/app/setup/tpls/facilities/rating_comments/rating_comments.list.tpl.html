@@ -1,0 +1,22 @@
+<ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
+<div id="no-more-tables" class="col-lg-12 margin-t-15">
+    <table class="table table-hover table-condensed fs-14">
+        <thead>
+            <th>Facility</th>
+            <th>Service</th>
+            <th>Comment</th>
+            <th>Rating</th>
+            <th>Date</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="rt in rating_comments">
+                <td data-title="Facility" class="pad-t-15">{{rt.facility_name}}</td>
+                <td data-title="Service" class="pad-t-15">{{rt.service_name}}</td>
+                <td data-title="Comment" class="pad-t-15">{{rt.comment}}</td>
+                <td data-title="Rating" class="pad-t-15">{{rt.rating}}</td>
+                <td data-title="Date" class="pad-t-15">{{rt.created | date}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>
