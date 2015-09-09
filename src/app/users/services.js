@@ -31,6 +31,8 @@
                     grps = _.filter(grps,function (group) {
                         if (group.is_county_level === true){
                             return group;
+                        }else if(group.is_sub_county_level === true){
+                            return group;
                         }
                     });
                 }
