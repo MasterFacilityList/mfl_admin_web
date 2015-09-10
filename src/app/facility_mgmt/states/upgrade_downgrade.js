@@ -10,9 +10,6 @@
         .state("facilities.facility_edit.upgrade", {
             url: "upgrade/",
             views: {
-                "tab-header@facilities.facility_edit": {
-                    template: "<span class='pad-t-20 fs-18'><strong>Upgrade</strong></span>"
-                },
                 "form-view@facilities.facility_edit": {
                     templateUrl: "facility_mgmt/tpls/facility_upgrade_downgrade.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_upgrade"
@@ -23,9 +20,6 @@
         .state("facilities.facility_edit.downgrade", {
             url: "downgrade/",
             views: {
-                "tab-header@facilities.facility_edit": {
-                    template: "<span class='pad-t-20 fs-18'><strong>Downgrade</strong></span>"
-                },
                 "form-view@facilities.facility_edit": {
                     templateUrl: "facility_mgmt/tpls/facility_upgrade_downgrade.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facility_downgrade"

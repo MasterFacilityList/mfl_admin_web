@@ -59,7 +59,7 @@
                 </ui-select>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Owner &#42;</label>
+                <label class="control-label">Owner Category &#42;</label>
                  <ui-select ng-model="select_values.owner_type" required name="owner_type" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select owner...">
                         <span>{{$select.selected.name}}</span>
@@ -78,6 +78,15 @@
                     <ui-select-choices repeat="owner.id as owner in owners | filter: select_values.owner_type | filter:$select.search">
                         <span>{{owner.name}}</span>
                     </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group col-xs-12" >
+                <label for="facility_type" class="control-label">KEPH Level</label>
+                <ui-select ng-model="select_values.keph_level" name="keph_level" api-checker register-custom-form-control>
+                    <ui-select-match placeholder="Select a Keph Level..">
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="kl.id as kl in keph_levels | filter:$select.search">{{kl.name}}</ui-select-choices>
                 </ui-select>
             </div>
             <div class="form-group col-xs-12">

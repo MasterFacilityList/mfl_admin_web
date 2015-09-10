@@ -84,7 +84,7 @@
                 <p class="form-control-static text-right fs-16">Updates made on: <span class="label label-primary">{{facility_update.created | date}}</span></p>
             </div>
         </div>
-        <div class="col-xs-7" ng-class="{'vertical-divider' : facility_changes.officer_in_charge}" ng-if="facility_changes.officer_in_charge">
+        <div class="col-xs-7" ng-class="{'vertical-divider' : (facility_changes.officer_in_charge && facility_changes.contacts.length > 0)}" ng-if="facility_changes.officer_in_charge">
             <h4 ng-if="facility_changes.officer_in_charge">Officer Incharge</h4>
             <span class="pull-left col-xs-12 pad-0" ng-if="facility_changes.officer_in_charge.name">
                 <label class="text-black fw-600">Name:</label>
