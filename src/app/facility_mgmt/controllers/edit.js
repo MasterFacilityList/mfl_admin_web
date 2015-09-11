@@ -358,7 +358,7 @@
                         title: "Facility",
                         msg: "Facility successfully closed"
                     });
-                    $state.go("facilities.facility_edit",{facility_id:$stateParams.id});
+                    $state.go("facilities");
                 })
                 .error(function (err) {
                     $scope.errors = err;

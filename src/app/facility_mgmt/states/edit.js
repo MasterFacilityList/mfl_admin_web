@@ -20,6 +20,16 @@
                 },
                 permission: "facilities.view_facility"
             })
+            .state("facilities.facility_view.close", {
+                url: "close/",
+                views: {
+                    "delete@facilities.facility_view": {
+                        templateUrl: "facility_mgmt/tpls/facility_edit_close.tpl.html",
+                        controller: "mfl.facility_mgmt.controllers.facility_edit.close"
+                    }
+                },
+                permission: "facilities.delete_facility"
+            })
             .state("facilities.facility_edit", {
                 url: "edit/:facility_id/",
                 views: {
@@ -38,17 +48,6 @@
                     "delete@facilities.facility_edit": {
                         templateUrl: "common/tpls/delete.tpl.html",
                         controller: "mfl.facility_mgmt.controllers.facility_edit"
-                    }
-                },
-                permission: "facilities.delete_facility"
-            })
-
-            .state("facilities.facility_edit.close", {
-                url: "close/",
-                views: {
-                    "delete@facilities.facility_edit": {
-                        templateUrl: "facility_mgmt/tpls/facility_edit_close.tpl.html",
-                        controller: "mfl.facility_mgmt.controllers.facility_edit.close"
                     }
                 },
                 permission: "facilities.delete_facility"

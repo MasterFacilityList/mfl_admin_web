@@ -16,10 +16,12 @@
         <div class="text-left form-group">
            <label for="Closing Date" class="control-label">Closing Date</label>
             <p class="input-group">
-              <input placeholder="Enter closing date" type="text" name="closed_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="facility.closed_date" is-open="open" max-date="minDate" close-text="Close" api-checker/>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open=!open"><i class="fa fa-calendar"></i></button>
-              </span>
+            <label for="closing date">
+                <span class="fs-16">Collection date: {{facility.closed_date | date}}</span>
+                    <datepicker date-format="y-MM-dTHH:mm:ss">
+                      <input class="form-control" name="collection_date" ng-model="facility.closed_date" type="text"/>
+                    </datepicker>
+            </label>
             </p>
         </div>
         <div class="text-left">
