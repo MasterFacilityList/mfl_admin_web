@@ -4,7 +4,7 @@
     angular.module("mfl.facility_mgmt.controllers.edit", [
         "mfl.facility_mgmt.services",
         "mfl.auth.services",
-        "datePicker",
+        "720kb.datepicker",
         "angular-toasty",
         "ui.bootstrap.tpls",
         "mfl.common.forms",
