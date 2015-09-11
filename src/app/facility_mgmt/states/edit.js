@@ -110,6 +110,14 @@
                     }
                 }
             })
+            .state("facilities.facility_edit.services.view.prompt", {
+                url  : "upgradeprompt/",
+                views : {
+                    "upgrade-prompt@facilities.facility_edit.services.view": {
+                        templateUrl : "facility_mgmt/tpls/facility_upgrade_prompt.tpl.html"
+                    }
+                }
+            })
             .state("facilities.facility_edit.units", {
                 url: "units/",
                 views: {

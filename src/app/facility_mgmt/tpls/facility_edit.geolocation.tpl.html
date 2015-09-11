@@ -42,13 +42,15 @@
                                             </ui-select-choices>
                                         </ui-select>
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="collection date">
+                                    <div class="col-xs-12 pad-0">
+                                    <div class="form-group col-md-6 col-xs-12">
+                                        <label for="collection date" class="control-label">
                                             <span class="fs-16">Collection date: {{geo.collection_date | date}}</span>
+                                        </label>
                                                 <datepicker date-format="y-MM-dTHH:mm:ss">
                                                   <input class="form-control" name="collection_date" ng-model="geo.collection_date" type="text"/>
                                                 </datepicker>
-                                        </label>
+                                    </div>
                                     </div>
                                 <!-- End of first section of form -->
                                 <!-- Start lat long -->
