@@ -362,6 +362,7 @@
     .controller("mfl.setup.controller.change_reasons.view",["$scope","adminApi",
         "$stateParams","$state","mfl.common.forms.changes","toasty",
         function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
+            $scope.wrapper = adminApi.change_reasons;
             if(!_.isUndefined($stateParams.reason_id)){
                 $scope.state = true;
                 adminApi.change_reasons.get($stateParams.reason_id)
@@ -657,6 +658,76 @@
                 }
             };
         }
-    ]);
+    ])
+
+    // Facility departments
+    .controller("mfl.setup.controller.facility_depts.list", ["$scope", function ($scope) {
+        $scope.filters = {"fields":"id,name,description"};
+    }])
+
+    .controller("mfl.setup.controller.facility_depts.view",["$scope","adminApi",
+        "$stateParams","$state","mfl.common.forms.changes","toasty",
+        function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
+            $scope.wrapper = adminApi.facility_depts;
+            if(!_.isUndefined($stateParams.dept_id)){
+                $scope.state = true;
+                adminApi.facility_depts.get($stateParams.dept_id)
+                .success(function (data) {
+                    $scope.facility_dept = data;
+                    $scope.deleteText = data.name;
+                })
+                .error(function  (err) {
+                    $scope.errors = err;
+                });
+                $scope.remove = function () {
+                    adminApi.facility_depts.remove($stateParams.dept_id).success(function(){
+                        toasty.success({
+                            title: "Facility department deleted",
+                            msg: "Facility department has been deleted"
+                        });
+                        $state.go("setup.facility_depts");
+                    }).error(function(error){
+                        $scope.errors = error;
+                        $state.go("setup.facility_depts");
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.facility_depts");
+                };
+            } else {
+                $scope.state = false;
+            }
+            $scope.saveFrm = function (frm) {
+                if(_.isUndefined($stateParams.dept_id)){
+                    adminApi.facility_depts.create(frm)
+                    .success(function () {
+                        toasty.success({
+                            title: "Facility department added",
+                            msg: "Facility department has been added"
+                        });
+                        $state.go("setup.facility_depts");
+                    })
+                    .error(function (err) {
+                        $scope.errors = err;
+                    });
+                } else {
+                    var changes= formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        adminApi.facility_depts.update($stateParams.dept_id, changes)
+                        .success(function () {
+                            toasty.success({
+                                title: "Facility department updated",
+                                msg: "Facility department has been updated"
+                            });
+                            $state.go("setup.facility_depts");
+                        })
+                        .error(function (err) {
+                            $scope.errors = err;
+                        });
+                    }
+                }
+            };
+        }])
+;
 
 })(window.angular, window._);

@@ -5,6 +5,9 @@
 
     .controller("mfl.revision.controller", ["$scope", "$log",
         function ($scope, $log) {
+            if (! $scope.wrapper) {
+                throw new Error("wrapper for revision is undefined");
+            }
             $scope.showRevisions = false;
 
             $scope.hideRevisions = function () {
