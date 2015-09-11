@@ -30,6 +30,11 @@
         "ng-model=\"silGrid.searchQuery\" placeholder=\"Search anything...\">\n" +
         "<span class=\"input-group-btn\">\n" +
         "<button class=\"btn btn-primary text-muted\" \n" +
+        "ng-show=\"silGrid.searchQuery.length < 3\" \n" +
+        "ng-click=\"silGridSearch(false)\" disabled><i class=\"fa fa-search\"></i>\n" +
+        "</button>\n" +
+        "<button class=\"btn btn-primary text-muted\" \n" +
+        "ng-show=\"silGrid.searchQuery.length > 2\" \n" +
         "ng-click=\"silGridSearch(false)\"><i class=\"fa fa-search\"></i>\n" +
         "</button>\n" +
         "<button ng-show=\"silGrid.searchQuery\" class=\"btn btn-primary text-muted\"\n" +

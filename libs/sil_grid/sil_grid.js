@@ -230,9 +230,14 @@
                 element.bind("keydown keypress", function (event) {
                 //enter key press
                 if(event.which === 13) {
-                    scope.$apply(function (){
-                        scope.silGridSearch(false);
-                    });
+                    if((scope.silGrid.searchQuery.length) < 3){
+                        scope.$apply(function (){
+                        });
+                    } else {
+                        scope.$apply(function (){
+                            scope.silGridSearch();
+                        });
+                    }
                     event.preventDefault();
                 }
                 //esc key press
@@ -242,7 +247,14 @@
                     });
                     event.preventDefault();
                 }
-
+                //backspace
+                if(event.which === 8){
+                    if((scope.silGrid.searchQuery.length) === 1){
+                        scope.$apply(function (){
+                            scope.silGridSearch(true);
+                        });
+                    }
+                }
             });
             }
         };
