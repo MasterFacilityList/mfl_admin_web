@@ -74,7 +74,7 @@
     </div>
     <!-- Start of approving facility updates -->
     <div class="col-xs-12 content-card margin-t-20" ng-if="facility.is_approved && facility_changes.contacts || facility_changes.officer_in_charge || facility_changes.units.length ||
-    facility_changes.services">
+    facility_changes.services || facility_changes.geo_codes.method_human || facility_changes.geo_codes.source_human || facility_changes.geo_codes.longitude || facility_changes.geo_codes.latitude">
         <h4 class="fs-18"><strong>Updated Facility Details</strong></h4>
         <div class="row">
             <div class="col-sm-6">
@@ -116,6 +116,27 @@
                 </label>
                 {{contact_changed.contact | titlecase}}
             </div>
+        </div>
+        <div class="col-xs-12 margin-t-15" ng-if="facility_changes.geo_codes.method_human || facility_changes.geo_codes.source_human || facility_changes.geo_codes.longitude || facility_changes.geo_codes.latitude">
+            <h4 ng-if="facility_changes.officer_in_charge">
+                Facility Geolocation Details
+            </h4>
+            <span class="pull-left col-xs-12 pad-0" ng-if="facility_changes.geo_codes.method_human">
+                <label class="text-black fw-600">Geocode Method:</label>
+                    {{facility_changes.geo_codes.method_human}}
+            </span>
+            <span class="pull-left col-xs-12 pad-0" ng-if="facility_changes.geo_codes.source_human">
+                <label class="text-black fw-600">Geocode Source:</label>
+                    {{facility_changes.geo_codes.source_human}}
+            </span>
+            <span class="pull-left col-xs-12 pad-0" ng-if="facility_changes.geo_codes.longitude">
+                <label class="text-black fw-600">Facility Longitude:</label>
+                    {{facility_changes.geo_codes.longitude}}
+            </span>
+            <span class="pull-left col-xs-12 pad-0" ng-if="facility_changes.geo_codes.latitude">
+                <label class="text-black fw-600">Facility Latitude:</label>
+                    {{facility_changes.geo_codes.latidude}}
+            </span>
         </div>
         <div class="col-xs-12 margin-t-15" ng-if="facility_changes.units.length > 0" >
             <h4>Regulation</h4>
