@@ -272,6 +272,54 @@
                     }
                 },
                 userFeature: "is_national,is_staff"
+            })
+
+
+
+         /** -----------------------------------------------------------**/
+
+        .state("setup.facility_depts", {
+                url: "/facility_depts",
+                views: {
+                    "body@setup" : {
+                        "templateUrl" : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.facility_depts": {
+                        templateUrl: "setup/tpls/facilities/depts/depts-list.tpl.html",
+                        controller:"mfl.setup.controller.facility_depts.view"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.facility_depts.create", {
+                url: "/create",
+                views: {
+                    "main-content@setup.facility_depts": {
+                        templateUrl: "setup/tpls/facilities/depts/depts-view.tpl.html",
+                        controller:"mfl.setup.controller.facility_depts.view"
+                    }
+                },
+                userFeature: "is_staff,is_national"
+            })
+        .state("setup.facility_depts.edit", {
+                url: "/edit/:dept_id",
+                views: {
+                    "main-content@setup.facility_depts": {
+                        templateUrl: "setup/tpls/facilities/depts/depts-view.tpl.html",
+                        controller:"mfl.setup.controller.facility_depts.view"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.facility_depts.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_depts.edit": {
+                        controller:"mfl.setup.controller.facility_depts.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                },
+                userFeature: "is_national,is_staff"
             });
     }]);
 })(window.angular);

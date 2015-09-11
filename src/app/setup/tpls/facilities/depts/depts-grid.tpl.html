@@ -1,0 +1,17 @@
+<ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
+<table class="table table-hover table-condensed margin-t-20" id="no-more-tables">
+    <thead>
+        <th class="text-wrap">Name</th>
+        <th class="text-wrap">Description</th>
+        <th class="text-wrap"><span class="pull-right">Action</span></th>
+    </thead>
+    <tbody class="fade-content">
+        <tr ng-repeat="dept in facility_depts">
+            <td class="text-wrap" data-title="Name:">{{dept.name}}</td>
+            <td class="text-wrap" data-title="Description:">{{dept.description}}</td>
+            <td class="text-wrap" data-title="Action:">
+                <a ui-sref="setup.facility_depts.edit({dept_id:dept.id})" class="btn btn-success pull-right">View</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -35,6 +35,14 @@
                 }]);
             });
 
+            it("should complain if wrapper is not set", function () {
+                var scope = rootScope.$new();
+                scope.id = 3;
+                var data = { "$scope": scope };
+                var err_fxn = function () {ctrl(data);};
+                expect(err_fxn).toThrow(new Error("wrapper for revision is undefined"));
+            });
+
             it("should fetch revisions", function () {
                 var scope = rootScope.$new();
                 scope.wrapper = wrapper;
