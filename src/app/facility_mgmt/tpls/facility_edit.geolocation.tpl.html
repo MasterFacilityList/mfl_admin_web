@@ -15,9 +15,6 @@
                <div ng-if="!spinner1">
                     <form name="geoForm">
                         <div class="col-xs-12">
-                            <div class="col-xs-12">
-                                <drf-err-msg></drf-err-msg>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -47,8 +44,10 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for="collection date">
-                                            <span class="fs-16">Collection date:</span>
-                                                <strong>{{geo.collection_date | date}}</strong>
+                                            <span class="fs-16">Collection date: {{geo.collection_date | date}}</span>
+                                                <datepicker date-format="y-MM-dTHH:mm:ss">
+                                                  <input class="form-control" name="collection_date" ng-model="geo.collection_date" type="text"/>
+                                                </datepicker>
                                         </label>
                                     </div>
                                 <!-- End of first section of form -->
