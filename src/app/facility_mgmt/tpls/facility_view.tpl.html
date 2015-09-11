@@ -12,6 +12,9 @@
         <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac_id})" class="btn btn-success" ng-if="(!facility.rejected)&&(!facility.is_approved||facility.has_edits)" tooltip="Approve Facility">
             Approve/Reject
         </a>
+        <a ng-if="!facility.closed" class="btn btn-danger margin-l-3"
+            requires-permission="facilities.view_closed_facilities,facilities.add_facilityservice"
+            ui-sref=".close({facility_id: facility.id})">Close</a>
         <a  tooltip="Print Facility Cover Letter" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ng-click="printFacility(fac_id)"><i class="fa fa-print"></i></a>
 
         <a requires-permission='facilities.change_facility' tooltip="Edit Facility" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="facilities.facility_edit({facility_id: fac_id})" ui-sref-opts="{reload:true}"><i class="fa fa-pencil"></i></a>
@@ -20,6 +23,7 @@
        <span class="main-title"><i class="fa fa-eye"></i> View Facility</span>
    </h2>
 </div>
+<div ui-view="delete"></div>
 <div class="col-xs-12">
     <div class="col-xs-12 margin-t-30" ng-if="spinner">
         <div class="map-change-state">
