@@ -235,7 +235,7 @@
                 "$scope": rootScope.$new(),
                 "$state": state
             };
-
+            state.current.name = "reports.list";
             httpBackend
                 .expectGET(server_url+"api/common/filtering_summaries/" +
                            "?fields=county,facility_type,constituency," +
@@ -264,62 +264,7 @@
                 "$scope": rootScope.$new(),
                 "$state": state
             };
-
-            httpBackend
-                .expectGET(server_url+"api/common/filtering_summaries/" +
-                           "?fields=county,facility_type,constituency," +
-                           "ward,operation_status,service_category," +
-                           "owner_type,owner,service,keph_level")
-                .respond(200, {});
-
-            spyOn(state, "go");
-            ctrl("facilities", data);
-
-            httpBackend.flush();
-            httpBackend.verifyNoOutstandingRequest();
-            httpBackend.verifyNoOutstandingExpectation();
-
-            data.$scope.filters.multiple.county = [
-                {"id": "3"}
-            ];
-            data.$scope.clearFilters();
-            expect(state.go).toHaveBeenCalledWith("reports.list", {});
-        });
-        it("should filter facilities", function () {
-            var data = {
-                "$scope": rootScope.$new(),
-                "$state": state
-            };
-
-            httpBackend
-                .expectGET(server_url+"api/common/filtering_summaries/" +
-                           "?fields=county,facility_type,constituency," +
-                           "ward,operation_status,service_category," +
-                           "owner_type,owner,service,keph_level")
-                .respond(200, {});
-
-            spyOn(state, "go");
-            ctrl("facilities", data);
-
-            httpBackend.flush();
-            httpBackend.verifyNoOutstandingRequest();
-            httpBackend.verifyNoOutstandingExpectation();
-
-            data.$scope.filters.multiple.county = [
-                {"id": "3"}
-            ];
-            data.$scope.filterFacilities();
-            expect(state.go).toHaveBeenCalled();
-            expect(state.go.calls[0].args[0]).toEqual("reports.list");
-            expect(state.go.calls[0].args[1].county).toEqual("3");
-        });
-
-        it("should clear filter facilities", function () {
-            var data = {
-                "$scope": rootScope.$new(),
-                "$state": state
-            };
-
+            state.current.name = "reports.list";
             httpBackend
                 .expectGET(server_url+"api/common/filtering_summaries/" +
                            "?fields=county,facility_type,constituency," +

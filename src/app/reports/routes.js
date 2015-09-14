@@ -56,6 +56,17 @@
                 }
             }
         })
+        .state("facilities_list", {
+            parent: "facility_mgmt",
+            url: "^/facility_list?"+URL_SEARCH_PARAMS.join("&"),
+            views: {
+                "main-content@facility_mgmt": {
+                    templateUrl: "reports/tpls/facilities_list.grid.tpl.html",
+                    controller: "mfl.reports.controllers.facilities"
+                }
+            },
+            permission: "facilities.view_facility"
+        })
         .state("reports.counties", {
             url: "facility_counties",
             views: {
