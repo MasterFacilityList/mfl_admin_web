@@ -17,6 +17,7 @@
            <label for="Closing Date" class="control-label">Closing Date</label>
             <p class="input-group">
             <label for="closing date">
+                <span class="fs-16">Closing Date: {{facility.closed_date | date}}</span>
                     <datepicker date-format="y-MM-dTHH:mm:ss">
                       <input class="form-control" name="collection_date" ng-model="facility.closed_date" type="text"/>
                     </datepicker>
