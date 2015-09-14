@@ -14,7 +14,7 @@
                         templateUrl: "setup/tpls/sub_counties/sub_counties.tpl.html"
                     }
                 },
-                permission: "common.view_constituency",
+                permission: "common.view_subcounty",
                 userFeature: "is_national,is_staff"
             })
             .state("setup.sub_counties.edit", {
@@ -25,7 +25,18 @@
                         controller :"mfl.setup.controller.sub_counties.edit"
                     }
                 },
-                permission: "common.view_constituency",
+                permission: "common.change_subcounty",
+                userFeature: "is_national,is_staff"
+            })
+            .state("setup.sub_counties.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.sub_counties.edit": {
+                        templateUrl: "common/tpls/delete.tpl.html",
+                        controller :"mfl.setup.controller.sub_counties.edit"
+                    }
+                },
+                permission: "common.delete_subcounty",
                 userFeature: "is_national,is_staff"
             })
             .state("setup.sub_counties.create", {
@@ -36,7 +47,7 @@
                         controller :"mfl.setup.controller.sub_counties.edit"
                     }
                 },
-                permission: "common.view_constituency",
+                permission: "common.add_subcounty",
                 userFeature: "is_national,is_staff"
             });
     }]);

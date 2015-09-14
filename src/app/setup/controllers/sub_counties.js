@@ -16,8 +16,8 @@
             $scope.action = [
                 {
                     func : "ui-sref='setup.sub_counties.create'" +
-                           " requires-user-feature='is_staff'",// +
-                        //    " requires-permission='common.add_sub_county'",
+                           " requires-user-feature='is_staff'"+
+                           " requires-permission='common.add_subcounty'",
                     class: "btn btn-primary",
                     tipmsg: "Add Sub County",
                     wording: "Add Sub County"
@@ -42,6 +42,7 @@
                 adminApi.sub_counties.get($stateParams.scount_id)
                     .success(function (data) {
                         $scope.scount_details = data;
+                        $scope.deleteText = $scope.scount_details.county_name;
                         $scope.select_values = {
                             county: {
                                 "id": $scope.scount_details.county,
@@ -85,6 +86,21 @@
                         });
                     }
                 }
+            };
+            $scope.remove = function () {
+                adminApi.sub_counties.remove($stateParams.scount_id).success(function(){
+                    toasty.success({
+                        title: "Sub County Deleted",
+                        msg: "Sub County has been updated"
+                    });
+                    $state.go("setup.sub_counties");
+                }).error(function(error){
+                    $scope.alert = error.error;
+                    $state.go("setup.sub_counties");
+                });
+            };
+            $scope.cancel = function () {
+                $state.go("setup.sub_counties");
             };
             $scope.filters = {
                 "fields":"id,name",

@@ -175,5 +175,36 @@
             $httpBackend.verifyNoOutstandingExpectation();
         }])
         );
+        it("should delete a sub county", function () {
+            $httpBackend
+                .expectGET(SERVER_URL+"api/common/sub_counties/4/")
+                .respond(200, {"name": ""});
+            $httpBackend
+                .expectDELETE(SERVER_URL+"api/common/sub_counties/4/")
+                .respond(200, {"name": ""});
+            createController("edit",
+                             {"$stateParams": {"scount_id": 4}});
+            $scope.remove();
+            $httpBackend.flush();
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+        });
+        it("should handle errors on delete a sub county", function () {
+            $httpBackend
+                .expectGET(SERVER_URL+"api/common/sub_counties/4/")
+                .respond(500, {"name": ""});
+            $httpBackend
+                .expectDELETE(SERVER_URL+"api/common/sub_counties/4/")
+                .respond(500, {"name": ""});
+            spyOn($state, "go");
+            createController("edit",
+                             {"$stateParams": {"scount_id": 4}});
+            $scope.remove();
+            $scope.cancel();
+            $httpBackend.flush();
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+        });
+
     });
 })(window._);
