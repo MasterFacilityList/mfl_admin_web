@@ -47,6 +47,16 @@
                     }
                 ]);
             });
+            it("should print correction template", function () {
+                inject(["mfl.facility_mgmt.services.wrappers", "SERVER_URL",
+                    function(wrappers, server_url){
+                        wrappers.getCorrectionTemplate("456");
+                        expect($window.location.href).toEqual(
+                            server_url+"api/facilities/facility_"+
+                            "correction_template/456/?access_token=123");
+                    }
+                ]);
+            });
         });
     });
 

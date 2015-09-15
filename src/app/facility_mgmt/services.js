@@ -79,16 +79,23 @@
             this.officer_contacts = api.setBaseUrl("api/facilities/officer_contacts/");
             this.keph_levels = api.setBaseUrl("api/facilities/keph/");
 
-            this.printFacility = function (facility_id) {
-                var cover_report = api.setBaseUrl("api/facilities/facility_cover_report/");
+            var downloadFile = function (base_url, facility_id) {
                 var helpers = api.apiHelpers;
+                var wrapper = api.setBaseUrl(base_url);
+                var url = wrapper.makeUrl(
+                    helpers.joinUrl([wrapper.apiBaseUrl, facility_id])
+                );
                 var download_params = {
                     "access_token": oauth2.getToken().access_token
                 };
-                var url = cover_report.makeUrl(
-                    helpers.joinUrl([cover_report.apiBaseUrl, facility_id])
-                );
                 $window.location.href = url + "?" + helpers.makeParams(download_params);
+            };
+            this.getCorrectionTemplate = function (facility_id) {
+                downloadFile("api/facilities/facility_correction_template/", facility_id);
+            };
+
+            this.printFacility = function (facility_id) {
+                downloadFile("api/facilities/facility_cover_report/", facility_id);
             };
         }
     ]);
