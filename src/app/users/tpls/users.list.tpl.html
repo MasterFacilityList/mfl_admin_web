@@ -22,6 +22,9 @@
                     <td data-title="Is Active" class="pad-t-15 text-center">{{::user.is_active | boolFilter}}</td>
                 </tr>
             </tbody>
+            <tbody ng-if="users.length===0">
+                <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
+            </tbody>
         </table>
         <sil-grid-pagination> </sil-grid-pagination>
     </div>

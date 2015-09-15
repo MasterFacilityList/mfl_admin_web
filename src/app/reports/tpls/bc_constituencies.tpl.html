@@ -41,6 +41,9 @@
                             <td class="col-xs-3 text-center" data-title="Cots:">{{::const.cots}}</td>
                         </tr>
                     </tbody>
+                    <tbody ng-if="constituency_bc.length===0">
+                        <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
+                    </tbody>
                 </table>
             </div>
         </div>
