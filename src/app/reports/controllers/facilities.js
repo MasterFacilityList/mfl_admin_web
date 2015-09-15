@@ -25,6 +25,8 @@
             "title": "tooltip",
             "checked": false
         };
+        $scope.hide = true;
+        $scope.state_name = $state.current.name;
         $scope.filters_grid = params;
         $scope.toggle = false;
         $scope.filters = {
@@ -168,7 +170,7 @@
             var params = _.extend(single, multiple);
             params.page = undefined;
             params.page_size = undefined;
-            $state.go("reports.list", params);
+            $state.go($state.current.name, params);
         };
 
         $scope.clearFilters = function () {
@@ -177,7 +179,7 @@
                 params[a] = undefined;
             });
             // TODO : cancel filter_promise defined in L120
-            $state.go("reports.list", params);
+            $state.go($state.current.name, params);
         };
 
     }]);
