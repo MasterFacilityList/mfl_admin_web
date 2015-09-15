@@ -3359,6 +3359,7 @@
                 ];
                 var obj = {id : "3", option : ""};
                 scope.servicesDisplay(obj);
+                scope.upgradePrompt();
                 expect(scope.new_service.service).toEqual("");
                 expect(scope.new_service.option).toEqual("");
                 expect(scope.services).toEqual([]);
