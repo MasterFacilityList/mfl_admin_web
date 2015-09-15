@@ -70,8 +70,13 @@
                 var success_fxn = function () {
                     $scope.spinner = false;
                     Idle.watch();
-                    var next_state = $stateParams.next || HOME_PAGE_NAME;
-                    $state.go(next_state);
+                    var load_state = loginService.loadState();
+                    loginService.clearState();
+                    if (load_state) {
+                        $state.go(load_state.name, load_state.params);
+                    } else {
+                        $state.go(HOME_PAGE_NAME);
+                    }
                 };
                 loginService.login(obj)
                     .then(
@@ -92,7 +97,6 @@
                 Idle.unwatch();
                 $state.go("login", {
                     "timeout": $stateParams.timeout,
-                    "next": $stateParams.next,
                     "change_pwd": $stateParams.change_pwd
                 });
             };

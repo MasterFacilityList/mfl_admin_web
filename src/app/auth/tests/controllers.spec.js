@@ -22,8 +22,6 @@
                     loginService = loginService;
                     data = {
                         $scope : scope,
-                        $state : $state,
-                        loginService : loginService,
                         SERVER_URL : url
                     };
                     controller = function () {
@@ -60,6 +58,33 @@
 
                 expect(srvc.login).toHaveBeenCalledWith(obj);
                 $httpBackend.flush();
+            }
+        ]));
+
+        it("should call backend and login and save user credentials: success (load prev state)",
+        inject(["$httpBackend", "$controller", "$rootScope", "$state", "mfl.auth.services.login",
+            function ($httpBackend, $controller, $rootScope, $state, srvc) {
+                var obj = {username : "owagaantony@gmail.com", password: "owaga"};
+                var s = $rootScope.$new();
+                $httpBackend.expectPOST(SERVER_URL + "o/token/").respond(200);
+                $httpBackend.expectGET(SERVER_URL + "api/rest-auth/user/")
+                    .respond(200, {email: ""});
+
+                spyOn(srvc, "login").andCallThrough();
+                spyOn(srvc, "loadState").andReturn({"name": "next"});
+                spyOn(srvc, "clearState");
+                spyOn($state, "go");
+                $controller("mfl.auth.controllers.login", {
+                    "$scope": s,
+                    "$state": $state,
+                    "mfl.auth.services.login": srvc
+                });
+
+                s.submitUser(obj);
+
+                expect(srvc.login).toHaveBeenCalledWith(obj);
+                $httpBackend.flush();
+                expect(srvc.clearState).toHaveBeenCalled();
             }
         ]));
 

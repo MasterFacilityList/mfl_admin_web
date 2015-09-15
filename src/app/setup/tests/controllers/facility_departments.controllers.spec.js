@@ -166,7 +166,6 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($state.go).toHaveBeenCalledWith("setup.facility_depts");
             });
         it("should handle fail to delete a department",function(){
@@ -180,7 +179,6 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($state.go).toHaveBeenCalledWith("setup.facility_depts");
             });
     });
