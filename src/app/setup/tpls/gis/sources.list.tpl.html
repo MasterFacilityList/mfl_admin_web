@@ -21,6 +21,9 @@
                 </td>
             </tr>
         </tbody>
+        <tbody ng-if="geocode_sources.length===0">
+            <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
+        </tbody>
     </table>
     <sil-grid-pagination> </sil-grid-pagination>
 </div>

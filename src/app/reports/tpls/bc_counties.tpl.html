@@ -41,6 +41,9 @@
                             <td class="col-xs-3 text-center" data-title="Cots:">{{::county.cots}}</td>
                         </tr>
                     </tbody>
+                    <tbody ng-if="county_bc.length===0">
+                        <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
+                    </tbody>
                 </table>
             </div>
         </div>
