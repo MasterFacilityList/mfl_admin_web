@@ -112,7 +112,7 @@
                 createController("mfl.setup.controller.keph.edit",{$stateParams: {keph_id: 1}});
                 $scope.save(1, form);
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
+                expect($state.go).toHaveBeenCalledWith("login", { next: "/" });
                 expect($state.go).toHaveBeenCalledWith("setup.facility_kephs");
             });
         it("should fail to update keph level: with changes",function(){

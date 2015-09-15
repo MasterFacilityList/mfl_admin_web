@@ -127,7 +127,14 @@ module.exports = {
         options: {
             port: 8062,
             hostname: "*",
-            keepalive: true
+            keepalive: true,
+            middleware: function (connect, options, middlewares) {
+                "use strict";
+
+                var modRewrite = require("connect-modrewrite");
+                middlewares.unshift(modRewrite(["^[^\\.]*$ /index.html [L]"]));
+                return middlewares;
+            }
         },
         dev: {
             options: {

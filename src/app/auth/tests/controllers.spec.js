@@ -1,4 +1,4 @@
-(function () {
+(function (_) {
     "use strict";
 
     describe("Testing the auth login controller: ", function () {
@@ -33,33 +33,37 @@
             ]);
         });
 
-        it("should test auth login controller",
-        inject(["$state", function ($state) {
-            controller("mfl.auth.controllers.login");
-            spyOn($state, "go");
-        }]));
-
         it("should call backend and login and save user credentials: success",
         inject(["$httpBackend", "$controller", "$rootScope", "$state", "mfl.auth.services.login",
             function ($httpBackend, $controller, $rootScope, $state, srvc) {
                 var obj = {username : "owagaantony@gmail.com", password: "owaga"};
                 var s = $rootScope.$new();
+                var wndw = {
+                    decodeURIComponent: window.decodeURIComponent,
+                    location: {assign: null}
+                };
                 $httpBackend.expectPOST(SERVER_URL + "o/token/").respond(200);
                 $httpBackend.expectGET(SERVER_URL + "api/rest-auth/user/")
                     .respond(200, {email: ""});
 
                 spyOn(srvc, "login").andCallThrough();
                 spyOn($state, "go");
+                spyOn(wndw.location, "assign");
                 $controller("mfl.auth.controllers.login", {
                     "$scope": s,
                     "$state": $state,
-                    "mfl.auth.services.login": srvc
+                    "mfl.auth.services.login": srvc,
+                    "$window": wndw
                 });
 
                 s.submitUser(obj);
 
                 expect(srvc.login).toHaveBeenCalledWith(obj);
                 $httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                expect(wndw.location.assign).toHaveBeenCalled();
             }
         ]));
 
@@ -72,15 +76,6 @@
             $httpBackend.expectGET(SERVER_URL + "api/rest-auth/user/").respond(400, {email: ""});
             $httpBackend.flush();
             expect(scope.login_err).not.toEqual("");
-        }]));
-
-        it("should call backend and login a user: success",
-        inject(["$httpBackend", function ($httpBackend) {
-            controller("mfl.auth.controllers.login");
-            var obj = {date : ""};
-            scope.submitUser(obj);
-            $httpBackend.expectPOST(SERVER_URL + "o/token/").respond(400, {email: ""});
-            $httpBackend.flush();
         }]));
     });
 
@@ -108,10 +103,9 @@
                         "token=" + "token" +
                         "&client_id=" + credz.client_id +
                         "&client_secret=" + credz.client_secret;
-                    controller = function () {
-                        return $controller("mfl.auth.controllers.logout", {
-                            "$scope": rootScope.$new()
-                        });
+                    controller = function (params) {
+                        var data = _.extend({"$scope": rootScope.$new()}, params);
+                        return $controller("mfl.auth.controllers.logout", data);
                     };
                 }
             ]);
@@ -124,7 +118,11 @@
             httpBackend.flush();
             httpBackend.verifyNoOutstandingExpectation();
             httpBackend.verifyNoOutstandingRequest();
-            expect(state.go).toHaveBeenCalled();
+            expect(state.go).toHaveBeenCalledWith("login", {
+                "timeout": undefined,
+                "next": undefined,
+                "change_pwd": undefined
+            });
         });
 
         it("should logout a user on failed revoke of token", function () {
@@ -134,7 +132,25 @@
             httpBackend.flush();
             httpBackend.verifyNoOutstandingExpectation();
             httpBackend.verifyNoOutstandingRequest();
-            expect(state.go).toHaveBeenCalled();
+            expect(state.go).toHaveBeenCalledWith("login", {
+                "timeout": undefined,
+                "next": undefined,
+                "change_pwd": undefined
+            });
+        });
+
+        it("should pass on state params", function () {
+            httpBackend.expectPOST(credz.revoke_url, payload).respond(200, {});
+            spyOn(state, "go");
+            controller({"$stateParams": {"next": "%2F", "timeout": "true", "change_pwd": "true"}});
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingExpectation();
+            httpBackend.verifyNoOutstandingRequest();
+            expect(state.go).toHaveBeenCalledWith("login", {
+                "timeout": "true",
+                "next": "/",
+                "change_pwd": "true"
+            });
         });
     });
 
@@ -371,4 +387,4 @@
         });
     });
 
-})();
+})(window._);
