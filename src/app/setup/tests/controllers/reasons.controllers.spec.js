@@ -173,7 +173,6 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($state.go).toHaveBeenCalledWith("setup.facility_reasons");
             });
         it("should delete a contact:reason fail",function(){
@@ -188,7 +187,6 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($state.go).toHaveBeenCalledWith("setup.facility_reasons");
             });
 

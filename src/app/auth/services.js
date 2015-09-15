@@ -13,7 +13,11 @@
             var url = {
                 curr_user : "api/rest-auth/user/"
             };
-            var store_key = "auth.user";
+            var store_keys = {
+                "user": "auth.user",
+                "state": "state.dump"
+            };
+
             var api = API.getApi();
             var storage = $window.localStorage;
 
@@ -24,12 +28,12 @@
             this.currentUser = function () {
                 return api.callApi("GET", api.makeUrl(url.curr_user))
                     .success(function (data) {
-                        storage.setItem(store_key, JSON.stringify(data));
+                        storage.setItem(store_keys.user, JSON.stringify(data));
                     });
             };
 
             this.getUser = function(){
-                return JSON.parse(storage.getItem(store_key));
+                return JSON.parse(storage.getItem(store_keys.user));
             };
 
             this.isLoggedIn = function () {
@@ -39,8 +43,24 @@
             };
 
             this.logout = function () {
-                storage.removeItem(store_key);
+                storage.removeItem(store_keys.user);
                 return oauth2.revokeToken(oauth2.getToken());
+            };
+
+            this.clearState = function () {
+                return storage.removeItem(store_keys.state);
+            };
+
+            this.loadState = function () {
+                return JSON.parse(storage.getItem(store_keys.state));
+            };
+
+            this.dumpState = function (state, params) {
+                var state_dump = {
+                    "name": state.name,
+                    "params": params
+                };
+                return storage.setItem(store_keys.state, JSON.stringify(state_dump));
             };
         }
     ])
@@ -84,8 +104,9 @@
                 if (toState.requireUser === false) {
                     return;
                 }
-                // TODO : change this to use state urls instead of names
-                change_state(evt, "login", {"next": toState.name});
+
+                loginService.dumpState(toState, toParams);
+                change_state(evt, "login");
             };
 
             var start = function () {

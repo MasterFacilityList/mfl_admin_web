@@ -9,7 +9,7 @@
         $stateProvider
 
             .state("login", {
-                url: "/login?next&change_pwd&reset_pwd&reset_pwd_confirm&timeout",
+                url: "/login?change_pwd&reset_pwd&reset_pwd_confirm&timeout",
                 views: {
                     "main": {
                         controller: "mfl.auth.controllers.login",
@@ -20,7 +20,7 @@
             })
 
             .state("logout", {
-                url: "/logout?next&timeout&change_pwd",
+                url: "/logout?timeout&change_pwd",
                 views: {
                     "main": {
                         controller: "mfl.auth.controllers.logout",

@@ -93,7 +93,6 @@
                 createController("mfl.setup.controller.chuStatus.view", dt);
                 $scope.remove();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login",{next:"dashboard"});
                 expect($state.go).toHaveBeenCalledWith("setup.chu_status");
             });
 
