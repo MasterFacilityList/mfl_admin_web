@@ -13,6 +13,7 @@
         <th class="text-wrap fs-11" sil-grid-sort field='county'>County</th>
         <th class="text-wrap fs-11" sil-grid-sort field='constituency'>Sub County</th>
         <th class="text-wrap fs-11" sil-grid-sort field='ward'>Ward</th>
+        <th sil-grid-sort field='updated'>Date Updated</th>
     </thead>
 
     <tbody ng-if="facilities.length===0">
@@ -30,6 +31,7 @@
             <td class="text-wrap" data-title="County:"> {{::fac.county | titlecase}}</td>
             <td class="text-wrap" data-title="Constituency:" >{{::fac.constituency}}</td>
             <td class="text-wrap" data-title="Ward:" >{{::fac.ward_name | titlecase}}</td>
+            <td data-title="Date Updated:" >{{::fac.updated|dateFilter}}</td>
         </tr>
     </tbody>
 </table>
