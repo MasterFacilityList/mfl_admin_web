@@ -4,6 +4,9 @@
             <a tooltip-placement="bottom" tooltip="export facilities"  class="btn btn-primary" ng-click="excelExport()">
                 Export Facilities
             </a>
+            <a tooltip-placement="bottom" tooltip="Add New Facilities"  class="btn btn-primary" ui-sref="facilities.facility_create({furthest  : 1})" requires-permission="facilities.add_facility">
+                Add Facilities
+            </a>
        </div>
    </div>
    <h2 class="content-title">
