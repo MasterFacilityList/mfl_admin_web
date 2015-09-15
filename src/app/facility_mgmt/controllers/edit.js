@@ -198,18 +198,8 @@
                     wrappers.facility_detail.update($scope.facility_id,
                         $scope.fac_serv)
                         .success(function () {
-                            var create_msg = {
-                                title : "Facility Added",
-                                msg : "Facility successfully added"
-                            };
-                            var update_msg = {
-                                title : "Facility Updated",
-                                msg : "Facility successfully updated"
-                            };
-                            var feedback = ($scope.create ? create_msg : update_msg);
                             if(!$scope.create){
-                                toasty.success(feedback);
-                                $state.go("facilities");
+                                $scope.prompt_msg = true;
                             }else{
                                 $state.go("facilities.facility_create."+
                                     "facility_cover_letter", {facility_id :
@@ -219,7 +209,14 @@
                         .error(function (err) {
                             $scope.errors = err.error;
                         });
-
+                };
+                $scope.upgradePrompt = function () {
+                    var update_msg = {
+                        title : "Facility Updated",
+                        msg : "Facility successfully updated"
+                    };
+                    toasty.success(update_msg);
+                    $state.go("facilities");
                 };
                 $scope.$watch("new_service.service", function (newVal) {
                     var s = _.findWhere($scope.services, {"id": newVal});
