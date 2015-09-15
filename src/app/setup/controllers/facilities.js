@@ -669,6 +669,11 @@
         "$stateParams","$state","mfl.common.forms.changes","toasty",
         function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
             $scope.wrapper = adminApi.facility_depts;
+
+            adminApi.facilityRegulatoryBodies.filter({"fields": "id,name"})
+            .success(function(data){$scope.regulatory_bodies = data.results;})
+            .error(function(data){$scope.errors = data;});
+
             if(!_.isUndefined($stateParams.dept_id)){
                 $scope.state = true;
                 adminApi.facility_depts.get($stateParams.dept_id)

@@ -20,6 +20,17 @@
               <label class="control-label">Description</label>
               <textarea class="form-control" row="2" name="description" ng-model="facility_dept.description" placeholder="Enter description" api-checker></textarea>
           </div>
+          <div class="form-group">
+              <label class="control-label">Regulatory Body</label>
+              <ui-select ng-model="facility_depts.regulatory_body" required name="regulatory_body" api-checker register-custom-form-control>
+                  <ui-select-match placeholder="Select a regulatory body...">
+                      <span>{{$select.selected.name}}</span>
+                  </ui-select-match>
+                  <ui-select-choices repeat="rb.id as rb in regulatory_bodies | filter:$select.search">
+                      <span>{{rb.name}}</span>
+                  </ui-select-choices>
+              </ui-select>
+            </div>
           <!-- </div> -->
           <button type="submit" class="btn btn-primary pull-left">Save</button>
           <a class="btn btn-default margin-l-10 pull-left" ui-sref="setup.facility_depts">Cancel</a>
