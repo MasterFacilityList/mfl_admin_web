@@ -10,7 +10,8 @@
             $scope.user = loginService.getUser();
             $rootScope.$on("IdleTimeout", function () {
                 if (loginService.isLoggedIn() || $state.current.name !== "login") {
-                    $state.go("logout", {"timeout": "true", "next": $state.current.name});
+                    loginService.dumpState($state.current, $state.params);
+                    $state.go("logout", {"timeout": "true"});
                 }
             });
         }]

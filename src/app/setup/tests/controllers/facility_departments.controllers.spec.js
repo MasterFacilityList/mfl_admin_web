@@ -43,6 +43,9 @@
                 description: "lab description"
             };
             $httpBackend
+                .expectGET(SERVER_URL+"api/facilities/regulating_bodies/?fields=id,name")
+                .respond(200, {"results": []});
+            $httpBackend
                 .expectPOST(SERVER_URL+"api/facilities/facility_depts/")
                 .respond(201);
             createController("view");
@@ -56,6 +59,9 @@
                 description: "lab description"
             };
             $httpBackend
+                .expectGET(SERVER_URL+"api/facilities/regulating_bodies/?fields=id,name")
+                .respond(403, {"detail": "Not allowed"});
+            $httpBackend
                 .expectPOST(SERVER_URL+"api/facilities/facility_depts/")
                 .respond(500);
             createController("view");
@@ -64,6 +70,9 @@
         });
 
         it("should handle failure to retrieve department", function () {
+            $httpBackend
+                .expectGET(SERVER_URL+"api/facilities/regulating_bodies/?fields=id,name")
+                .respond(200, {"results": []});
             $httpBackend
                 .expectGET(SERVER_URL+"api/facilities/facility_depts/1/")
                 .respond(500);
@@ -78,6 +87,9 @@
                 var frm = {
                     description: "lab description"
                 };
+                $httpBackend
+                    .expectGET(SERVER_URL+"api/facilities/regulating_bodies/?fields=id,name")
+                    .respond(200, {"results": []});
                 $httpBackend
                     .expectGET(SERVER_URL+"api/facilities/facility_depts/1/")
                     .respond(200);
@@ -102,8 +114,11 @@
                 var frm = {
                     description:"lab description"
                 };
+                $httpBackend
+                    .expectGET(SERVER_URL+"api/facilities/regulating_bodies/?fields=id,name")
+                    .respond(200, {"results": []});
                 $httpBackend.expectGET(SERVER_URL+"api/facilities/facility_depts/1/")
-                .respond(200);
+                    .respond(200);
                 createController("view", {
                     "mfl.common.forms.changes": formChanges,
                     "$stateParams": {dept_id: 1}
@@ -122,6 +137,9 @@
         );
         it("should not update without form changes", function() {
             var data = {"$stateParams": {dept_id: 1}};
+            $httpBackend
+                .expectGET(SERVER_URL+"api/facilities/regulating_bodies/?fields=id,name")
+                .respond(200, {"results": []});
             $httpBackend
                 .expectGET(SERVER_URL+"api/facilities/facility_depts/1/")
                 .respond(200);
@@ -148,7 +166,6 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($state.go).toHaveBeenCalledWith("setup.facility_depts");
             });
         it("should handle fail to delete a department",function(){
@@ -162,10 +179,8 @@
                 $scope.remove();
                 $scope.cancel();
                 $httpBackend.flush();
-                expect($state.go).toHaveBeenCalledWith("login", { next : "dashboard" });
                 expect($state.go).toHaveBeenCalledWith("setup.facility_depts");
             });
-
     });
 
 })(window._);
