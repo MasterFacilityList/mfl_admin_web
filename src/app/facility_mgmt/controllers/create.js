@@ -160,6 +160,7 @@
                 }
             });
             $scope.printFacility = wrappers.printFacility;
+            $scope.correctionTemplate = wrappers.getCorrectionTemplate;
         }
     ]);
 
