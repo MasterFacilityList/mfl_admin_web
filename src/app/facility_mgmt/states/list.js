@@ -4,16 +4,29 @@
     angular.module("mfl.facility_mgmt.states.list", [
         "ui.router"
     ])
+    .constant("URL_SEARCH_PARAMS", [
+        "name", "code",
 
-    .config(["$stateProvider", function ($stateProvider) {
+        "search",
+
+        "county", "constituency", "ward",
+
+        "operation_status", "facility_type", "keph_level",
+
+        "open_public_holidays", "open_weekends", "open_whole_day",
+
+        // pagination controls
+        "page_size", "page"
+    ])
+    .config(["$stateProvider","URL_SEARCH_PARAMS", function ($stateProvider,URL_SEARCH_PARAMS) {
         $stateProvider
         .state("facilities", {
             parent: "facility_mgmt",
-            url: "^/facilities/",
+            url: "^/facility_list/?"+URL_SEARCH_PARAMS.join("&"),
             views: {
                 "main-content@facility_mgmt": {
                     templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
-                    controller: "mfl.facility_mgmt.controllers.facility_list"
+                    controller: "mfl.reports.controllers.facilities"
                 }
             },
             permission: "facilities.view_facility"
