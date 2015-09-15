@@ -28,6 +28,9 @@
                             <td>{{fac.current_facility_type || 'No facility type set'}} <br><span class="text-success">{{fac.current_keph_level || 'No KEPH level set'}}</span></td>
                         </tr>
                     </tbody>
+                    <tbody ng-if="(changes.results).length===0">
+                        <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
+                    </tbody>
                 </table>
             </div>
         </div>

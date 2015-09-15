@@ -64,6 +64,7 @@
                             <td class="col-xs-2 text-right" ng-show="county.changes > 0" data-title="Action:"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
                             <td class="col-xs-2 text-right" ng-hide="county.changes > 0" data-title="Action:"><button class="btn btn-success" disabled>View</button></td>
                         </tr>
+                        <tr ng-if="(changes.results).length===0"><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
                         <tr>
                             <td class="col-xs-5">TOTAL</td>
                             <td class="col-xs-5 text-center">{{changes.total_number_of_changes}}</td>

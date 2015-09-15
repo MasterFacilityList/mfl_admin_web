@@ -11,7 +11,6 @@
         <span class="main-title"><i class="fa fa-building"></i> Facility Reports</span>
    </h2>
 </div>
-<i bs-tooltip tooltip-placement="{{$parent.hide_sidebar ? 'right':'bottom'}} " tooltip="{{$parent.hide_sidebar ? 'Show':'Hide'}} Sidebar" class="margin-t-5 margin-l-{{$parent.hide_sidebar ? '20':'5'}} fa fa-chevron-circle-{{$parent.hide_sidebar ? 'right':'left'}}" ng-click="$parent.hide_sidebar=!$parent.hide_sidebar"></i>
 <section class="margin-t-10">
     <div id="filter-facet" class="col-xs-12 col-sm-3 content-card search-panel">
         <form ng-submit="filterFacilities()" name="frm_filter_facilities">

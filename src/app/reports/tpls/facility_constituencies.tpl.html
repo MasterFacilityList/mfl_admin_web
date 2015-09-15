@@ -36,6 +36,7 @@
                             <td class="col-xs-9" data-title="Constituency:">{{::const.constituency_name | titlecase}}</td>
                             <td class="col-xs-3 text-center" data-title="Facilities:">{{::const.number_of_facilities}}</td>
                         </tr>
+                        <tr ng-if="const_facilities.length===0"><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
                     </tbody>
                 </table>
             </div>
