@@ -947,7 +947,7 @@
                 $scope.fac_unitobj = {units : []};
                 _.each($scope.fac_depts, function (a_unit) {
                     if(_.isUndefined(a_unit.id)){
-                        delete a_unit.regulating_body;
+                        delete a_unit.regulating_body_name;
                         $scope.fac_unitobj.units.push(a_unit);
                     }
                 });
