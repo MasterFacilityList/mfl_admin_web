@@ -856,6 +856,13 @@
             }
             $scope.fac_depts = [];
             $scope.fac_units = [];
+            /*Facility departments*/
+            wrappers.facility_depts.filter({fields: "id,name,regulatory_body,regulatory_body_name"
+            }).success(function (data) {
+                $scope.facility_depts = data.results;
+            }).error(function (data) {
+                $scope.errors = data;
+            });
             /*regulating bodies*/
             wrappers.regulating_bodies.filter({fields:"id,name"})
             .success(function(data){
@@ -878,10 +885,14 @@
                 $scope.units_error = errorMessages.errors +
                     errorMessages.fetch_units;
             });
+            $scope.autoFillRegBody = function (fac_dept) {
+                var result = _.findWhere($scope.facility_depts, {"id" : fac_dept.unit});
+                fac_dept.regulating_body = result.regulatory_body_name;
+            };
             $scope.facilityUnits = function (f) {
                 if(f.facility_units.length === 0) {
                     $scope.fac_depts.push({
-                        name : "",
+                        unit : "",
                         regulating_body : ""
                     });
                 }
@@ -891,7 +902,7 @@
             };
             $scope.addUnit = function () {
                 $scope.fac_depts.push({
-                    name : "",
+                    unit : "",
                     regulating_body : ""
                 });
             };
