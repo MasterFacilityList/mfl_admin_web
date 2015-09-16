@@ -2610,7 +2610,7 @@
                 data.$scope.fac_depts = [{name : "", regulating_body : ""}];
                 data.$scope.facility_depts = facility_depts.results;
                 var obj = {name : "", regulatory_body: ""};
-                var fac_depts_obj = {unit : "5", regulating_body : ""};
+                var fac_depts_obj = {unit : "5", regulating_body_name : ""};
                 data.$scope.autoFillRegBody(fac_depts_obj);
                 data.$scope.facilityUnits(data.$scope.facility);
                 data.$scope.addUnit();
