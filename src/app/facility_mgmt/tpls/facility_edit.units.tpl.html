@@ -18,20 +18,29 @@
                     <tr ng-repeat="fac_dept in fac_depts">
                         <td>
                             <div class="form-group grid-inputs">
-                                <input class="form-control" placeholder="Facility Department Name" ng-model="fac_dept.name">
+                                <select class="form-control"
+                                ng-model="fac_dept.unit" place-holder="Select Contact Details" ng-change="autoFillRegBody(fac_dept)">
+                                    <option value="">Select Facility Department</option>
+                                    <option ng-repeat="dept in facility_depts"
+                                    ng-selected="{{dept.id == fac_dept.unit}}"
+                                    value="{{dept.id}}">{{dept.name}}</option>
+                                </select>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
                                 <input ng-init="fac_dept.description = 'Test'" type="hidden" ng-model="fac_dept.description" >
                             </div>
                         </td>
                         <td class="col-xs-5">
-                            <div class="form-group grid-inputs">
-                                <select class="form-control"
+                            <div class="form-group grid-inputs" >
+                                <input type="text" class="form-control" readonly ng-model="fac_dept.regulating_body">
+                                <!-- <select class="form-control"
                                 ng-model="fac_dept.regulating_body" place-holder="Select Contact Details">
                                     <option value="">Select Regulating Body</option>
                                     <option ng-repeat="regbody in regbodies" ng-selected="{{regbody.id == fac_dept.regulating_body}}"
                                     ng-value="regbody.id">{{regbody.name}}</option>
                                 </select>
                                 <span class="highlight"></span>
-                                <span class="bar"></span>
+                                <span class="bar"></span> -->
                             </div>
                         </td>
 
