@@ -81,7 +81,7 @@
             "url": "^/facilities_approve/",
             "views": {
                 "main-content@facility_mgmt": {
-                    templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
+                    templateUrl: "facility_mgmt/tpls/facilities.rejected.grid.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facilities_approve"
                 }
             },
@@ -93,7 +93,7 @@
             url: "^/facilities_approve_update/",
             views: {
                 "main-content@facility_mgmt": {
-                    templateUrl: "facility_mgmt/tpls/facilities.grid.tpl.html",
+                    templateUrl: "facility_mgmt/tpls/facilities.rejected.grid.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facilities_approve_update"
                 }
             },

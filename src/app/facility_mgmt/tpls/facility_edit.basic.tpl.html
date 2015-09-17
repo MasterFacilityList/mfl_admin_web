@@ -2,22 +2,25 @@
     <form name="frm_facility_basic" ng-submit="save(frm_facility_basic)" novalidate>
         <drf-err-msg></drf-err-msg>
         <div class="alert alert-info" role="alert" ng-if="facility.has_edits===true && !create">
-            <h4><strong><i class="fa fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
+            <h4><strong><i class="fa fa-2x fa-info-circle"></i></strong> This facility has pending approvals.</h4> Further editing is not possible until pending approvals are cleared.
         </div>
         <div class="custom-well col-xs-12 margin-t-20">
             <div class="col-xs-12">
                 <h4 class="margin-b-20 fw-600">Facility Basic Details</h4>
             </div>
             <div class="form-group row col-xs-12">
-              <p class="lead">
-                <label class="col-xs-2 control-label fs-18 fw-600 fs-18 margin-t-5">Facility Code: </label>
+              <p class="lead col-xs-12">
+                <label class="control-label fs-18 margin-t-5">Facility Code: </label>
                   <span class="label label-info">{{create ?  'Automatically generated after creating facility' : facility.code}}
                   </span>
-              </p>
               </p>
             </div>
             <div class="form-group col-xs-12">
                 <label class="control-label">Facility Offical Name &#42;</label>
+                    <a class=" btn-info btn btn-xs btn-default" popover-toggle popover-trigger="open" popover-placement="right"
+                        popover-template="'facility_mgmt/tpls/guide_official_name.tpl.html'">
+                        <i class="fa fa-info-circle"></i>
+                    </a>
                 <input class="form-control" name="official_name" ng-model="facility.official_name" ng-blur="initUniqueName(frm_facility_basic)" placeholder="Facility Official Name" api-checker>
             </div>
             <div class="form-group col-xs-12">
