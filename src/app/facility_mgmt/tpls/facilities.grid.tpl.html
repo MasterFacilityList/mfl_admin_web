@@ -21,7 +21,10 @@
        <div class="col-xs-12 content-card">
         <form ng-submit="filterFacilities()" name="frm_filter_facilities">
             <div class="col-sm-4">
-            <h5 class="text-muted">Administrative Units:</h5>
+                <div class="form-group">
+                    <label class="fw-500"><strong>Search:</strong></label>
+                    <input type="text" class="form-control" ng-model="filters.single.search" placeholder="Search any ..">
+                </div>
                 <div class="form-group">
                     <label class="fw-500">County:</label>
                     <ui-select ng-model="filters.multiple.county" multiple id="county" name="county">
@@ -57,7 +60,10 @@
                 </div>
             </div>
             <div class="col-sm-4">
-            <h5 class="text-muted">Facility Details:</h5>
+                <div class="form-group">
+                    <label class="fw-500">Facility Code:</label>
+                    <input type="text" class="form-control" ng-model="filters.single.code" placeholder="Enter facility code ..">
+                </div>
                 <div class="form-group">
                     <label class="fw-500">KEPH Level:</label>
                     <ui-select ng-model="filters.multiple.keph_level" multiple id="keph_level" name="keph_level">
@@ -93,7 +99,6 @@
                 </div>
             </div>
             <div class="col-sm-4">
-            <h5 class="text-muted">Availability</h5>
                 <div class="form-group">
                     <div class="col-xs-12">
                         <div class="col-xs-3 pull-right">
