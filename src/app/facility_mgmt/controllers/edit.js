@@ -1171,6 +1171,9 @@
         "mfl.error.messages", "toasty",
         function ($scope,wrappers,$log, leafletData, multistepService,
             formChanges, $state, errorMessages, toasty) {
+            var value = new Date();
+            $scope.maxDate = value.getFullYear() + "/" + (value.getMonth()+1) +
+            "/" + value.getDate();
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[1]);

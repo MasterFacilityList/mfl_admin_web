@@ -44,7 +44,7 @@
                                         <label for="collection date" class="control-label">
                                             <span class="fs-16">Collection date: {{geo.collection_date | date}}</span>
                                         </label>
-                                                <datepicker date-format="y-MM-dTHH:mm:ss">
+                                                <datepicker date-format="y-MM-dTHH:mm:ss" date-max-limit="{{maxDate}}">
                                                   <input class="form-control" name="collection_date" ng-model="geo.collection_date" type="text"/>
                                                 </datepicker>
                                     </div>
