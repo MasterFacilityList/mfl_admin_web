@@ -345,7 +345,9 @@
             ["$scope","mfl.facility_mgmt.services.wrappers","$stateParams",
              "mfl.common.forms.changes","$state", "toasty",
             function ($scope,wrappers,$stateParams,formChanges,$state,toasty) {
-            $scope.minDate = new Date();
+            var value = new Date();
+            $scope.maxDate = value.getFullYear() + "/" + (value.getMonth()+1) +
+            "/" + value.getDate();
             $scope.close = function (frm) {
                 var changes = formChanges.whatChanged(frm);
                 wrappers.facility_detail.update($stateParams.facility_id,changes)
