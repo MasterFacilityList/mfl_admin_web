@@ -857,6 +857,13 @@
             }
             $scope.fac_depts = [];
             $scope.fac_units = [];
+            /*Facility departments*/
+            wrappers.facility_depts.filter({fields: "id,name,regulatory_body,regulatory_body_name"
+            }).success(function (data) {
+                $scope.facility_depts = data.results;
+            }).error(function (data) {
+                $scope.errors = data;
+            });
             /*regulating bodies*/
             wrappers.regulating_bodies.filter({fields:"id,name"})
             .success(function(data){
@@ -871,7 +878,7 @@
                 fields:"id,name,regulating_body,regulating_body_name"
             })
             .success(function(data){
-                $scope.fac_depts = data.results;
+                $scope.facility_departments = data.results;
             })
             .error(function(error){
                 $log.error(error);
@@ -879,21 +886,28 @@
                 $scope.units_error = errorMessages.errors +
                     errorMessages.fetch_units;
             });
+            $scope.autoFillRegBody = function (fac_dept) {
+                var result = _.findWhere($scope.facility_depts, {"id" : fac_dept.unit});
+                fac_dept.regulating_body_name = result.regulatory_body_name;
+            };
+            $scope.dept_spinner = true;
             $scope.facilityUnits = function (f) {
                 if(f.facility_units.length === 0) {
+                    $scope.dept_spinner = false;
                     $scope.fac_depts.push({
-                        name : "",
-                        regulating_body : ""
+                        unit : "",
+                        regulating_body_name : ""
                     });
                 }
                 else{
+                    $scope.dept_spinner = false;
                     $scope.fac_depts = f.facility_units;
                 }
             };
             $scope.addUnit = function () {
                 $scope.fac_depts.push({
-                    name : "",
-                    regulating_body : ""
+                    unit : "",
+                    regulating_body_name : ""
                 });
             };
             $scope.removeUnit = function (obj) {
@@ -934,6 +948,7 @@
                 $scope.fac_unitobj = {units : []};
                 _.each($scope.fac_depts, function (a_unit) {
                     if(_.isUndefined(a_unit.id)){
+                        delete a_unit.regulating_body_name;
                         $scope.fac_unitobj.units.push(a_unit);
                     }
                 });

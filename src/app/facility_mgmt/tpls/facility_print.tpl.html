@@ -1,4 +1,12 @@
-<div class="row" ng-class="{'margin-t--15' : print}">
+<div ng-if="spinner" class="col-xs-12 margin-t-30">
+    <div class="map-change-state">
+        <div class="loader"></div>
+        <div class="row">
+            <h3 class="text-center loader-text">Please wait...</h3>
+        </div>
+    </div>
+</div>
+<div class="row" ng-class="{'margin-t--15' : print}" ng-if="!spinner">
     <div class="col-xs-12">
         <h3><b>{{facility.code}}</b> | {{facility.name | uppercase}}</h3>
     </div>

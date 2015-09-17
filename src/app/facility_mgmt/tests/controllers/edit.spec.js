@@ -2579,6 +2579,20 @@
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
                 data.$scope.nxtState = true;
+                var facility_depts = {
+                    results : [
+                        {
+                            id : "5",
+                            name : "Antony Department",
+                            regulatory_body : "3",
+                            regulatory_body_name : "Yitchouse"
+                        }
+                    ]
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/"+
+                        "facility_depts/?fields=id,name,regulatory_body,"+
+                        "regulatory_body_name").respond(200, facility_depts);
                 httpBackend
                     .expectGET(server_url+"api/facilities/regulating_bodies/?fields=id,name")
                     .respond(200, {results: []});
@@ -2594,7 +2608,10 @@
                     facility_units : []
                 };
                 data.$scope.fac_depts = [{name : "", regulating_body : ""}];
+                data.$scope.facility_depts = facility_depts.results;
                 var obj = {name : "", regulatory_body: ""};
+                var fac_depts_obj = {unit : "5", regulating_body_name : ""};
+                data.$scope.autoFillRegBody(fac_depts_obj);
                 data.$scope.facilityUnits(data.$scope.facility);
                 data.$scope.addUnit();
                 data.$scope.removeUnit(obj);
