@@ -45,6 +45,7 @@
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
                 });
             };
         }]
