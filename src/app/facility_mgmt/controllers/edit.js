@@ -369,9 +369,9 @@
         ["$scope", "$log", "$state", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.forms.changes",
         "mfl.common.services.multistep", "mfl.auth.services.login",
-        "mfl.error.messages", "toasty",
+        "mfl.error.messages", "toasty","MFL_GUIDE_URL",
         function ($scope, $log, $state, $stateParams, wrappers, formChanges,
-            multistepService, loginService, errorMessages, toasty) {
+            multistepService, loginService, errorMessages, toasty,MFL_GUIDE_URL) {
             /*Set up facility officer*/
             $scope.facilityOfficers = function (f) {
                 if(_.isUndefined(f.officer_in_charge) || _.isNull(f.officer_in_charge)) {
@@ -387,6 +387,7 @@
                     };
                 }
             };
+            $scope.MFL_GUIDE_URL = MFL_GUIDE_URL;
             if(!$scope.create) {
                 multistepService.filterActive(
                     $scope, $scope.steps, $scope.steps[0]);

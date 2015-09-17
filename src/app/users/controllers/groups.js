@@ -50,7 +50,7 @@
                 name: "",
                 permissions: []
             };
-
+            $scope.wrapper = wrappers.groups;
             $scope.addPerm = function (perm_id) {
                 $scope.new_perm = "";
                 var perm = _.findWhere($scope.permissions, {id: parseInt(perm_id, 10)});

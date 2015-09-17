@@ -73,6 +73,24 @@
                 expect(el.html()).not.toContain("dl");
             });
 
+            it("should hide wiered errors", function () {
+                var tpl = "<drf-err-msg></drf-err-msg>";
+                var scope = rootScope.$new();
+                var el = compile(tpl)(scope);
+                expect(el.html()).not.toContain("dl");
+
+                scope.errors = {
+                    "name": ["yeah"],
+                    "__all__": ["something"],
+                    "detail": ["Authentication error"],
+                    "non_field_errors": ["another"]
+                };
+                scope.$apply();
+                expect(scope.err_list[""]).toEqual([
+                    "another", "something", "Authentication error"
+                ]);
+            });
+
             it("should use defined error key", function () {
                 var tpl = "<drf-err-msg errors='haha'></drf-err-msg>";
                 var scope = rootScope.$new();

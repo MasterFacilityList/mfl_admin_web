@@ -3,6 +3,8 @@
 
     var setts = {
         "SERVER_URL": "http://localhost:8061/",
+        "MFL_GUIDE_URL": "http://ehealth.go.ke/public/Master_Facility_Lis"+
+        "t_-_Implementation_Guide.pdf",
         "CREDZ": {
             "client_id": "5O1KlpwBb96ANWe27ZQOpbWSF4DZDm4sOytwdzGv",
             "client_secret": "PqV0dHbkjXAtJYhY9UOCgRVi5BzLhiDxGU91" +

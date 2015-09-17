@@ -35,14 +35,21 @@
                         "</dl></div>",
             "link": function (scope, element, attrs) {
                 var api_errs = attrs.errors || "errors";
+                var wiered_keys = [
+                    "non_field_errors", "__all__", "detail"
+                ];
                 scope.$watch(api_errs, function (val) {
                     if (val) {
                         scope.err_list = _.omit(val, "error_msg");
+                        var wiered_errors = _.map(wiered_keys, function(k) {
+                            return val[k] || [];
+                        });
                         if (_.isEmpty(scope.err_list)) {
-                            scope.err_list = {
-                                "": ["An error occured while processing your request"]
-                            };
+                            wiered_errors = ["An error occured while processing your request"];
                         }
+                        wiered_errors = _.flatten(wiered_errors);
+
+                        scope.err_list[""] = wiered_errors;
                     } else {
                         scope.err_list = null;
                     }
