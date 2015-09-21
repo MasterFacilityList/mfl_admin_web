@@ -9,6 +9,9 @@
                 "name": "All Community Units",
                 "icon": "fa-hospital-o"
             };
+            $scope.filters = {
+                "fields": "id,code,name,status_name,facility"
+            };
             $scope.action = [
                 {
                     func : "ui-sref='chul.unit_create({furthest : 1})'" +

@@ -9,4 +9,4 @@
         this.chuls = api.setBaseUrl("api/chul/units/");
     }]);
 
-})(window.angular, window._);
+})(window.angular);
