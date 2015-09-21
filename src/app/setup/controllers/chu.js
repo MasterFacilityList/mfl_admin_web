@@ -2,7 +2,8 @@
     "use strict";
     angular.module("mfl.setup.chu.controllers",[
         "mfl.setup.api",
-        "mfl.common.forms"
+        "mfl.common.forms",
+        "angular-toasty"
     ])
     .controller("mfl.setup.controller.chuStatus.list", ["$scope",
         function ($scope) {
@@ -28,8 +29,8 @@
     )
 
     .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state", "$stateParams",
-                "adminApi","mfl.common.forms.changes",
-        function($scope, $state, $stateParams, adminApi, formChanges){
+                "adminApi","mfl.common.forms.changes", "toasty",
+        function($scope, $state, $stateParams, adminApi, formChanges, toasty){
             if(!_.isUndefined($stateParams.id) && $stateParams.id !== "create"){
                 $scope.title = {
                     icon: "fa-edit",
@@ -55,6 +56,10 @@
                 });
                 $scope.remove = function () {
                     adminApi.chuStatus.remove($stateParams.id).success(function(){
+                        toasty.success({
+                            title: "CHUL Status Deleted",
+                            msg: "CHUL Status has been deleted"
+                        });
                         $state.go("setup.chu_status");
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -77,6 +82,10 @@
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.chuStatus.update(id, changes).success(function(){
+                        toasty.success({
+                            title: "CHUL Status Updates",
+                            msg: "CHUL Status has been updated"
+                        });
                         $state.go("setup.chu_status");
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -87,6 +96,10 @@
 
             $scope.createChuStatus = function(chuStatus){
                 adminApi.chuStatus.create(chuStatus).success(function(){
+                    toasty.success({
+                        title: "CHUL Status Added",
+                        msg: "CHUL Status has been added"
+                    });
                     $state.go("setup.chu_status");
                 }).error(function(error){
                     $scope.alert = error.error;
@@ -119,8 +132,8 @@
         }]
     )
     .controller("mfl.setup.controller.chuApprover.view", ["$scope","$state", "$stateParams",
-                "adminApi","mfl.common.forms.changes",
-        function($scope, $state, $stateParams, adminApi, formChanges){
+                "adminApi","mfl.common.forms.changes", "toasty",
+        function($scope, $state, $stateParams, adminApi, formChanges, toasty){
 
             if(!_.isUndefined($stateParams.id) &&
                 $stateParams.id !== "create"){
@@ -149,6 +162,10 @@
                 });
                 $scope.remove = function () {
                     adminApi.chuApprovers.remove($stateParams.id).success(function(){
+                        toasty.success({
+                            title: "CHUL Approver Deleted",
+                            msg: "CHUL Approver has been deleted"
+                        });
                         $state.go("setup.chu_approvers");
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -172,6 +189,10 @@
                 var changes= formChanges.whatChanged(frm);
                 if(!_.isEmpty(changes)){
                     adminApi.chuApprovers.update(id, changes).success(function(){
+                        toasty.success({
+                            title: "CHUL Approver Updated",
+                            msg: "CHUL Approver has been updated"
+                        });
                         $state.go("setup.chu_approvers");
                     }).error(function(error){
                         $scope.alert = error.error;
@@ -182,6 +203,10 @@
 
             $scope.createChuApprovers = function(chuApprover){
                 adminApi.chuApprovers.create(chuApprover).success(function(){
+                    toasty.success({
+                        title: "CHUL Approver Added",
+                        msg: "CHUL Approver has been added"
+                    });
                     $state.go("setup.chu_approvers");
                 }).error(function(error){
                     $scope.alert = error.error;
