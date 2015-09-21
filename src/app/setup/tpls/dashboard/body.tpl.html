@@ -38,8 +38,8 @@
         <li>
           <label class="sidebar-label tree-toggle nav-header">Contacts</label>
           <ul class="nav nav-list tree">
-              <li ui-sref-active="active">
-                <a ui-sref="setup.contact_types" requires-permission="common.view_contacttype">Contact Type</a>
+              <li ui-sref-active="active" requires-permission="common.view_contacttype">
+                <a ui-sref="setup.contact_types">Contact Type</a>
               </li>
           </ul>
         </li>
@@ -69,6 +69,14 @@
               </li>
               <li ui-sref-active="active" requires-permission="facilities.view_kephlevel">
                   <a ui-sref="setup.facility_kephs">KEPH Levels</a>
+              </li>
+          </ul>
+        </li>
+        <li>
+          <label class="sidebar-label tree-toggle nav-header">CHUL</label>
+          <ul class="nav nav-list tree">
+              <li ui-sref-active="active" requires-permission="chul.view_status">
+                <a ui-sref="setup.chu_status" >CHUL Status</a>
               </li>
           </ul>
         </li>
