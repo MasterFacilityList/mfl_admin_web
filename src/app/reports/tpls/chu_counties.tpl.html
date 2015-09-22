@@ -33,15 +33,15 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr>
-                            <td class="col-xs-5">Baringo</td>
-                            <td class="col-xs-4 text-center">39</td>
+                            <td class="text-center">Baringo</td>
+                            <td class="text-center">39</td>
                         </tr>
                         <tr>
-                            <td class="col-xs-5">Bomet</td>
-                            <td class="col-xs-4 text-center">26</td>
+                            <td class="text-center">Bomet</td>
+                            <td class="text-center">26</td>
                         </tr>
                         <tr ng-repeat="county_units in county">
-                            <td class="col-xs-5" data-title="County:">
+                            <td data-title="County:">
                               <a ui-sref="reports.chu_constituencies({county:county.county})">{{::county.county_name | titlecase}}</a>
                             </td>
                             <td class="col-xs-4 text-center" data-title="Beds:">{{::county.beds}}</td>

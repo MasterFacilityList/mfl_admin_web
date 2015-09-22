@@ -35,20 +35,20 @@
                     </thead>
                     <tbody class="fade-content">
                        <tr>
-                            <td class="col-xs-5" data-title="County:">
+                            <td data-title="County:">
                                 Kiambu
                             </td>
-                            <td class="col-xs-3 text-center" data-title="Constituency:">Gatanga</td>
-                            <td class="col-xs-3 text-center" data-title="Name:">Gatanga</td>
-                            <td class="col-xs-3 text-center" data-title="Date Established:">16/09/2012</td>
+                            <td class="text-center" data-title="Constituency:">Gatanga</td>
+                            <td class="text-center" data-title="Name:">Gatanga</td>
+                            <td class="text-center" data-title="Date Established:">16/09/2012</td>
                        </tr>
                         <tr>
-                            <td class="col-xs-5" data-title="County:">
+                            <td data-title="County:">
                                 {{::county.county_name | titlecase}}
                             </td>
-                            <td class="col-xs-3 text-center" data-title="Constituency:">{{::county.constituency}}</td>
-                            <td class="col-xs-3 text-center" data-title="Name:">{{::county.chu_name}}</td>
-                            <td class="col-xs-3 text-center" data-title="Date Established:">{{::county.created}}</td>
+                            <td class="text-center" data-title="Constituency:">{{::county.constituency}}</td>
+                            <td class="text-center" data-title="Name:">{{::county.chu_name}}</td>
+                            <td class="text-center" data-title="Date Established:">{{::county.created}}</td>
                         </tr>
                     </tbody>
                     <tbody ng-if="county_chu.length===0">

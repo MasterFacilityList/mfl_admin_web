@@ -33,18 +33,18 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr>
-                            <td class="col-xs-5">Baringo</td>
-                            <td class="col-xs-4 text-center">39</td>
+                            <td>Baringo</td>
+                            <td class="text-center">39</td>
                         </tr>
                         <tr>
-                            <td class="col-xs-5">Bomet</td>
-                            <td class="col-xs-4 text-center">26</td>
+                            <td>Bomet</td>
+                            <td class="text-center">26</td>
                         </tr>
                         <tr>
-                            <td class="col-xs-5" data-title="Constituency:">
+                            <td data-title="Constituency:">
                               {{::constituency.constituency_name | titlecase}}
                             </td>
-                            <td class="col-xs-3 text-center" data-title="Units:">{{::constituency.units}}</td>
+                            <td class="text-center" data-title="Units:">{{::constituency.units}}</td>
                         </tr>
                     </tbody>
                     <tbody ng-if="constituency_chu.length===0">
