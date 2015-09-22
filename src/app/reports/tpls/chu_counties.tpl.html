@@ -32,7 +32,7 @@
                         <th class="col-xs-4 text-center text-wrap">Number of Units</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="county in county_chu">
+                        <tr ng-repeat="county in county_chu | filter:search">
                             <td data-title="County:">
                               <a ui-sref="reports.chu_constituencies({county:county.county_id})">{{::county.county_name | titlecase}}</a>
                             </td>

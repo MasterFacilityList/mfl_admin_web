@@ -32,7 +32,7 @@
                         <th class="col-xs-4 text-center text-wrap">Number of Units</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="ward in ward_chu">
+                        <tr ng-repeat="ward in ward_chu | filter:search">
                             <td data-title="Ward:">
                                {{::ward.ward_name | titlecase}}
                             </td>

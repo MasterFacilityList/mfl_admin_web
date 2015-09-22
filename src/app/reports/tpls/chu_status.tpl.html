@@ -21,6 +21,10 @@
           </div>
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
+            <div class="col-sm-4">
+               <input class="form-control" type="text"  ng-model="search" placeholder="Search .."/>
+            </div>
+           <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
@@ -28,7 +32,7 @@
                         <th class="col-xs-4 text-center text-wrap">Number of Units</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="status in chu_status">
+                        <tr ng-repeat="status in chu_status | filter:search">
                             <td data-title="County:">
                                 {{::status.status_name | titlecase}}
                             </td>
