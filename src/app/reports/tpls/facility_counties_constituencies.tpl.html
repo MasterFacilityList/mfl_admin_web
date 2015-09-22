@@ -40,8 +40,8 @@
                                </thead>
                                 <tbody>
                                    <tr ng-repeat="c in county.facilities">
-                                        <td class="col-xs-9" data-title="Constituency:">{{::c.constituency | titlecase}}</td>
-                                        <td class="col-xs-3 text-center" data-title="Facilities:">{{::c.number_of_facilities}}</td>
+                                        <td data-title="Constituency:">{{::c.constituency | titlecase}}</td>
+                                        <td class="text-center" data-title="Facilities:">{{::c.number_of_facilities}}</td>
                                     </tr>
                                     <tr ng-if="(county.facilities).length===0"><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
                                 </tbody>

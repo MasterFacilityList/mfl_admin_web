@@ -34,9 +34,9 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="ward in ward_bc | filter:search">
-                            <td class="col-xs-5" data-title="County:">{{::ward.ward_name | titlecase}}</td>
-                            <td class="col-xs-4 text-center" data-title="Beds:">{{::ward.beds}}</td>
-                            <td class="col-xs-3 text-center" data-title="Cots:">{{::ward.cots}}</td>
+                            <td data-title="County:">{{::ward.ward_name | titlecase}}</td>
+                            <td class="text-center" data-title="Beds:">{{::ward.beds}}</td>
+                            <td class="text-center" data-title="Cots:">{{::ward.cots}}</td>
                         </tr>
                     </tbody>
                     <tbody ng-if="ward_bc.length===0">
