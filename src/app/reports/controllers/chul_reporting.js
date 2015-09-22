@@ -62,5 +62,11 @@
             var helper = $controller("mfl.reports.controllers.chu_helper");
             helper.initCtrl($scope, "ward", "ward_chu");
         }
+    ])
+    .controller("mfl.reports.controllers.chu_status", ["$scope", "$controller",
+        function($scope, $controller){
+            var helper = $controller("mfl.reports.controllers.chu_helper");
+            helper.initCtrl($scope, "status", "chu_status");
+        }
     ]);
 })(window.angular, window._);

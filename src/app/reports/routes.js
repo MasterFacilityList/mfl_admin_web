@@ -282,7 +282,7 @@
                 },
                 "main-content@reports.chu_status": {
                     templateUrl: "reports/tpls/chu_status.tpl.html",
-                    controller: "mfl.reports.controllers.chu_wards"
+                    controller: "mfl.reports.controllers.chu_status"
                 }
             }
         })
