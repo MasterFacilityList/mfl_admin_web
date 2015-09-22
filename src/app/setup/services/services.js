@@ -3,7 +3,8 @@
 
     angular.module("mfl.setup.api", [
         "api.wrapper",
-        "mfl.auth.oauth2"
+        "mfl.auth.oauth2",
+        "ngFileUpload"
     ])
 
     .service("adminApi", ["api", "Upload", "api.oauth2",

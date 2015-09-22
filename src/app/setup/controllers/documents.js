@@ -1,9 +1,7 @@
 (function(angular, _){
     "use strict";
 
-    angular.module("mfl.setup.controllers.documents", [
-        "ngFileUpload"
-    ])
+    angular.module("mfl.setup.controllers.documents", [])
 
     .controller("mfl.setup.controllers.documents.list", ["$scope", function ($scope) {
         $scope.title = {
