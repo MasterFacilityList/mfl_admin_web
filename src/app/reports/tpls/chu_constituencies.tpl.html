@@ -32,19 +32,11 @@
                         <th class="col-xs-4 text-center text-wrap">Number of Units</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr>
-                            <td>Baringo</td>
-                            <td class="text-center">39</td>
-                        </tr>
-                        <tr>
-                            <td>Bomet</td>
-                            <td class="text-center">26</td>
-                        </tr>
-                        <tr>
+                        <tr ng-repeat="constituency in constituency_chu">
                             <td data-title="Constituency:">
-                              {{::constituency.constituency_name | titlecase}}
+                               <a ui-sref="reports.chu_wards({constituency:constituency.constituency_id})"> {{::constituency.constituency_name | titlecase}}</a>
                             </td>
-                            <td class="text-center" data-title="Units:">{{::constituency.units}}</td>
+                            <td class="text-center" data-title="Units:">{{::constituency.number_of_units}}</td>
                         </tr>
                     </tbody>
                     <tbody ng-if="constituency_chu.length===0">

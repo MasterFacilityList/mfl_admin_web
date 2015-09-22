@@ -245,7 +245,8 @@
                     templateUrl: "reports/tpls/body.tpl.html"
                 },
                 "main-content@reports.chu_counties": {
-                    templateUrl: "reports/tpls/chu_counties.tpl.html"
+                    templateUrl: "reports/tpls/chu_counties.tpl.html",
+                    controller:"mfl.reports.controllers.chu_counties"
                 }
             }
         })
@@ -256,7 +257,20 @@
                     templateUrl: "reports/tpls/body.tpl.html"
                 },
                 "main-content@reports.chu_constituencies": {
-                    templateUrl: "reports/tpls/chu_constituencies.tpl.html"
+                    templateUrl: "reports/tpls/chu_constituencies.tpl.html",
+                    controller: "mfl.reports.controllers.chu_constituencies"
+                }
+            }
+        })
+        .state("reports.chu_wards", {
+            url: "chu_wards?constituency",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html"
+                },
+                "main-content@reports.chu_wards": {
+                    templateUrl: "reports/tpls/chu_wards.tpl.html",
+                    controller: "mfl.reports.controllers.chu_wards"
                 }
             }
         })
@@ -267,7 +281,8 @@
                     templateUrl: "reports/tpls/body.tpl.html"
                 },
                 "main-content@reports.chu_status": {
-                    templateUrl: "reports/tpls/chu_status.tpl.html"
+                    templateUrl: "reports/tpls/chu_status.tpl.html",
+                    controller: "mfl.reports.controllers.chu_wards"
                 }
             }
         })
