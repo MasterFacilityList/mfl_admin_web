@@ -1,0 +1,68 @@
+<div class="col-xs-12 pad-0">
+    <div class="col-xs-12 pad-0">
+        <h4 class="fw-600 fs-18"> Community Health Extension Workers</h4>
+    </div>
+    <div class="col-xs-12 pad-0">
+        <table class="table table-hover table-condensed custom-well col-xs-12">
+            <thead class="grey-header">
+                <th class="col-xs-3">First Name</th>
+                <th class="col-xs-3">Last Name</th>
+                <th class="col-xs-3">ID Number</th>
+                <th class="col-xs-2 text-center">Incharge</th>
+                <th class="col-xs-1 text-center"></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="worker in unit.health_unit_workers">
+                    <td class="col-xs-5">
+                        <div class="form-group grid-inputs">
+                            <input name="worker.first_name" class="form-control" placeholder="First Name" ng-model="worker.first_name">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group grid-inputs">
+                            <input name="worker.last_name" class="form-control" placeholder="Last Name" ng-model="worker.last_name">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group grid-inputs">
+                            <input name="worker.id_number" class="form-control" placeholder="ID Number" ng-model="worker.id_number">
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="form-group checkbox">
+                            <label>
+                                <input type="checkbox" id="is_incharge" name="is_incharge" ng-model="worker.is_incharge" tooltip="CHEW in Charge">
+                                In Charge
+                            </label>
+                        </div>
+                    </td>
+                    <td class="col-xs-1 text-center">
+                        <a ng-click="removeChew(worker)" style="cursor: pointer;">
+                            <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-if="unit.health_unit_workers === 0" class="">
+                    <td colspan="3" class="alert alert-info">
+                        <i class="fa fa-info-circle"></i> No CHEWS assigned to Community Unit
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12 text-right margin-b-10">
+        <a class="btn btn-primary pull-right" ng-click="addChew()" >
+            <i class="fa fa-plus-square-o"></i> Add
+        </a>
+    </div>
+</div>
+<div class="col-xs-12 pad-0">
+    <button ui-sref="community_units" class="btn btn-primary margin-b-10">
+        &nbsp;<i class="fa fa-angle-double-left"></i> Basic Details
+    </button>
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary margin-b-10 pull-right">
+            Save & Finish <i class="fa fa-angle-double-right"></i>
+        </button>
+    </span>
+</div>
