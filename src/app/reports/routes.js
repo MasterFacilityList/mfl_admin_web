@@ -237,6 +237,50 @@
                     controller:"mfl.reports.controllers.bc_wards"
                 }
             }
+        })
+        .state("reports.chu_counties", {
+            url: "chu_counties",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html"
+                },
+                "main-content@reports.chu_counties": {
+                    templateUrl: "reports/tpls/chu_counties.tpl.html"
+                }
+            }
+        })
+        .state("reports.chu_constituencies", {
+            url: "chu_constituencies?county",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html"
+                },
+                "main-content@reports.chu_constituencies": {
+                    templateUrl: "reports/tpls/chu_constituencies.tpl.html"
+                }
+            }
+        })
+        .state("reports.chu_status", {
+            url: "chu_status",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html"
+                },
+                "main-content@reports.chu_status": {
+                    templateUrl: "reports/tpls/chu_status.tpl.html"
+                }
+            }
+        })
+        .state("reports.chu_created", {
+            url: "chu_created",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html"
+                },
+                "main-content@reports.chu_created": {
+                    templateUrl: "reports/tpls/chu_created.tpl.html"
+                }
+            }
         });
 
     }]);
