@@ -32,6 +32,22 @@
                     }
                 ]);
             });
+            it("should load chul approved list controller", function () {
+                inject(["$controller", "$rootScope",
+                    function ($controller, rootScope) {
+                        var data = { "$scope": rootScope.$new() };
+                        ctrl(".units_approved_list", data);
+                    }
+                ]);
+            });
+            it("should load chul rejected list controller", function () {
+                inject(["$controller", "$rootScope",
+                    function ($controller, rootScope) {
+                        var data = { "$scope": rootScope.$new() };
+                        ctrl(".units_rejected_list", data);
+                    }
+                ]);
+            });
         });
 
         describe("Test chul view controller", function () {

@@ -59,10 +59,10 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in changes.results | filter:search">
-                            <td class="col-xs-5" data-title="County:" >{{county.county | titlecase}}</td>
-                            <td class="col-xs-5 text-center" data-title="Changes:">{{county.changes}}</td>
-                            <td class="col-xs-2 text-right" ng-show="county.changes > 0" data-title="Action:"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
-                            <td class="col-xs-2 text-right" ng-hide="county.changes > 0" data-title="Action:"><button class="btn btn-success" disabled>View</button></td>
+                            <td data-title="County:" >{{county.county | titlecase}}</td>
+                            <td class="text-center" data-title="Changes:">{{county.changes}}</td>
+                            <td class="text-right" ng-show="county.changes > 0" data-title="Action:"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
+                            <td class="text-right" ng-hide="county.changes > 0" data-title="Action:"><button class="btn btn-success" disabled>View</button></td>
                         </tr>
                         <tr ng-if="(changes.results).length===0"><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
                         <tr>
