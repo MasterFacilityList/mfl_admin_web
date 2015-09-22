@@ -24,6 +24,22 @@
             ];
         }]
     )
+    .controller("mfl.chul.controllers.units_approved_list",
+        ["$scope", function ($scope) {
+            $scope.filters = {
+                "is_approved":true,
+                "fields": "id,code,name,status_name,facility"
+            };
+        }]
+    )
+    .controller("mfl.chul.controllers.units_rejected_list",
+        ["$scope", function ($scope) {
+            $scope.filters = {
+                "is_rejected":true,
+                "fields": "id,code,name,status_name,facility"
+            };
+        }]
+    )
     .controller("mfl.chul.controllers.view_chul", ["$scope",
         "mfl.chul.services.wrappers", "$stateParams",
         function ($scope, wrappers, $stateParams){

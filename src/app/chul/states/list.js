@@ -23,18 +23,7 @@
             views: {
                 "main-content@chul": {
                     templateUrl: "chul/tpls/chul_approve.grid.tpl.html",
-                    controller: "mfl.chul.controllers.units_list"
-                }
-            },
-            permission: "chul.view_communityhealthunit"
-        })
-        .state("chu_approved_recently", {
-            parent: "chul",
-            url: "^/chu_approved_recently/",
-            views: {
-                "main-content@chul": {
-                    templateUrl: "chul/tpls/chul_approved_recently.grid.tpl.html",
-                    controller: "mfl.chul.controllers.units_list"
+                    controller: "mfl.chul.controllers.units_approved_list"
                 }
             },
             permission: "chul.view_communityhealthunit"
@@ -45,7 +34,7 @@
             views: {
                 "main-content@chul": {
                     templateUrl: "chul/tpls/chul_rejected.grid.tpl.html",
-                    controller: "mfl.chul.controllers.units_list"
+                    controller: "mfl.chul.controllers.units_rejected_list"
                 }
             },
             permission: "chul.view_communityhealthunit"
