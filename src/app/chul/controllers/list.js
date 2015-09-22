@@ -10,7 +10,8 @@
                 "icon": "fa-hospital-o"
             };
             $scope.filters = {
-                "fields": "id,code,name,status_name,facility"
+                "fields": "id,code,name,status_name,facility_name,"+
+                "facility_county,facility_subcounty,facility_ward"
             };
             $scope.action = [
                 {
