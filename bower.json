@@ -28,7 +28,8 @@
     "ng-idle": "https://github.com/MasterFacilityList/ng-idle.git#develop",
     "angular-auto-validate": "https://github.com/MasterFacilityList/angular-auto-validate.git#api-message-hack",
     "angular-toasty": "~1.0.3",
-    "angularjs-datepicker": "~0.2.10"
+    "angularjs-datepicker": "~0.2.10",
+    "ng-file-upload": "~7.3.6"
   },
   "resolutions": {
     "angular": "~1.3.15",
