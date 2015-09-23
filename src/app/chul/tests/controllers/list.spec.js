@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
     "use strict";
     describe("Test chul controllers", function () {
         var rootScope, ctrl, httpBackend, server_url,
@@ -156,7 +156,20 @@
                     data.$scope.select_values = {
                         facility : {id : "1"}
                     };
-                    data.$scope.unit = {facility : "2"};
+                    data.$scope.facilities = [
+                        {
+                            id : "2",
+                            county : "NAIROBI",
+                            constituency : "MATHARE",
+                            ward_name : "HOSPITAL"
+                        }
+                    ];
+                    data.$scope.unit = {
+                        facility : "2",
+                        facility_county : "",
+                        facility_subcounty : "",
+                        facility_ward : ""
+                    };
                     var frm = {
                         "$dirty": true,
                         "name": {
@@ -171,6 +184,7 @@
                     data.$scope.addContact();
                     data.$scope.removeContact(obj);
                     data.$scope.save(frm);
+                    data.$scope.unitLocation("2");
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
                     httpBackend.verifyNoOutstandingExpectation();
@@ -212,9 +226,15 @@
             });
             it("should test chul basic controller create", function () {
                 var data = {
-                    "$scope" : rootScope.$new()
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
+                };
+                spyOn(state, "params");
+                state.params = {
+                    unit_id : "1"
                 };
                 data.$scope.nxtState = false;
+                data.$scope.nextState = angular.noop;
                 data.$scope.create = true;
                 ctrl(".edit_chul.basic", data);
                 httpBackend.expectGET(server_url+"api/chul/statuses/")
@@ -235,15 +255,144 @@
                         "$dirty": true
                     }
                 };
+                var changed = {
+                    name : "Mathare 4B"
+                };
+                httpBackend.expectPATCH(server_url + "api/chul/units/1/",changed).respond(200);
                 data.$scope.save(frm);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
             });
-            it("should fail to get one chul", function () {
+            it("should test fail to update CU", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
+                };
+                spyOn(state, "params");
+                state.params = {
+                    unit_id : "1"
+                };
+                data.$scope.nxtState = false;
+                data.$scope.nextState = angular.noop;
+                data.$scope.create = true;
+                ctrl(".edit_chul.basic", data);
+                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                    .respond(500, {});
+                data.$scope.unit_id = 1;
+                data.$scope.select_values = {
+                    facility : {id : "1"}
+                };
+                data.$scope.unit = {facility : "2"};
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$modelValue": "Mathare 4B",
+                        "$dirty": true
+                    }
+                };
+                var changed = {
+                    name : "Mathare 4B"
+                };
+                httpBackend.expectPATCH(server_url + "api/chul/units/1/",changed).respond(500);
+                data.$scope.save(frm);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test creation of CU : successfully", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
+                };
+                spyOn(state, "params");
+                state.params = {
+                    unit_id : ""
+                };
+                data.$scope.nxtState = false;
+                data.$scope.nextState = angular.noop;
+                data.$scope.create = true;
+                ctrl(".edit_chul.basic", data);
+                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                    .respond(500, {});
+                data.$scope.unit_id = 1;
+                data.$scope.select_values = {
+                    facility : {id : "1"}
+                };
+                data.$scope.unit = {facility : "2"};
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$modelValue": "Mathare 4B",
+                        "$dirty": true
+                    }
+                };
+                var changed = {
+                    name : "Mathare 4B"
+                };
+                httpBackend.expectPOST(server_url + "api/chul/units/")
+                    .respond(200, changed);
+                data.$scope.save(frm);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test creation of a CU: failure", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
+                };
+                spyOn(state, "params");
+                state.params = {
+                    unit_id : ""
+                };
+                data.$scope.nxtState = false;
+                data.$scope.nextState = angular.noop;
+                data.$scope.create = true;
+                ctrl(".edit_chul.basic", data);
+                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                    .respond(500, {});
+                data.$scope.unit_id = 1;
+                data.$scope.select_values = {
+                    facility : {id : "1"}
+                };
+                data.$scope.unit = {facility : "2"};
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$modelValue": "Mathare 4B",
+                        "$dirty": true
+                    }
+                };
+                var changed = {
+                    name : "Mathare 4B"
+                };
+                httpBackend.expectPOST(server_url + "api/chul/units/")
+                    .respond(500, changed);
+                data.$scope.save(frm);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+
+            it("should test chew controller", function () {
                 var data = {
                     "$scope" : rootScope.$new()
                 };
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
                 ctrl(".edit_chul.chews", data);
                 data.$scope.unit = {
                     health_unit_workers: [
@@ -261,15 +410,37 @@
                         }
                     ]
                 };
+                data.$scope.$apply();
                 var obj = {
                     "first_name" : "anto",
                     "last_name" : "wag",
                     "id_number" : "254",
                     "is_incharge" : "true"
                 };
+                data.$scope.unitWorkers(data.$scope.unit);
                 data.$scope.addChew();
                 data.$scope.removeChew(obj);
             });
+            it("should test chew controller: edit node", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                data.$scope.create = false;
+                ctrl(".edit_chul.chews", data);
+                data.$scope.unit = {
+                    health_unit_workers: []
+                };
+                data.$scope.unitWorkers(data.$scope.unit);
+            });
+            it("should test chew controller: edit node", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                data.$scope.create = false;
+                ctrl(".edit_chul.chews", data);
+                data.$scope.unit = undefined;
+                data.$scope.$apply();
+            });
         });
     });
-})();
+})(window.angular);
