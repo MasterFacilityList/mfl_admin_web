@@ -32,22 +32,14 @@
                         <th class="col-xs-4 text-center text-wrap">Number of Units</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr>
-                            <td class="text-center">Baringo</td>
-                            <td class="text-center">39</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">Bomet</td>
-                            <td class="text-center">26</td>
-                        </tr>
-                        <tr ng-repeat="county_units in county">
+                        <tr ng-repeat="county in county_chu | filter:search">
                             <td data-title="County:">
-                              <a ui-sref="reports.chu_constituencies({county:county.county})">{{::county.county_name | titlecase}}</a>
+                              <a ui-sref="reports.chu_constituencies({county:county.county_id})">{{::county.county_name | titlecase}}</a>
                             </td>
-                            <td class="col-xs-4 text-center" data-title="Beds:">{{::county.beds}}</td>
+                            <td class="text-center" data-title="Units:">{{::county.number_of_units}}</td>
                         </tr>
                     </tbody>
-                    <tbody ng-if="county_units.length===0">
+                    <tbody ng-if="county_chu.length===0">
                         <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
                     </tbody>
                 </table>
