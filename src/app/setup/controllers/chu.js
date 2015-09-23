@@ -28,8 +28,8 @@
         }]
     )
 
-    .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state", "$stateParams",
-                "adminApi","mfl.common.forms.changes", "toasty",
+    .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state",
+        "$stateParams", "adminApi","mfl.common.forms.changes", "toasty",
         function($scope, $state, $stateParams, adminApi, formChanges, toasty){
             if(!_.isUndefined($stateParams.id) && $stateParams.id !== "create"){
                 $scope.title = {
@@ -52,7 +52,7 @@
                     $scope.chuStatus = data;
                     $scope.deleteText = $scope.chuStatus.name;
                 }).error(function(error){
-                    $scope.alert = error.error;
+                    $scope.erros = error;
                 });
                 $scope.remove = function () {
                     adminApi.chuStatus.remove($stateParams.id).success(function(){
@@ -103,6 +103,80 @@
                     $state.go("setup.chu_status");
                 }).error(function(error){
                     $scope.alert = error.error;
+                    $scope.errors = error;
+                });
+            };
+        }]
+    )
+
+    .controller("mfl.setup.controller.chuService.list", ["$scope",
+        function ($scope) {
+            $scope.title = {
+                icon: "fa-exchange",
+                name: "Manage Community Units Service"
+            };
+
+            $scope.filters =  {
+                "fields": "id,name,description"
+            };
+            $scope.action = [
+                {
+                    func : "ui-sref='setup.chu_service.create'" +
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='chul.add_chuservice'",
+                    class: "btn btn-primary",
+                    tipmsg: "Add community unit service",
+                    wording: "Add CU Service"
+                }
+            ];
+        }]
+    )
+
+    .controller("mfl.setup.controller.chuService.view", ["$scope",
+        "$stateParams", "adminApi", "$state", "toasty",
+        function ($scope, $stateParams, adminApi, $state, toasty) {
+            if(!_.isEmpty($stateParams.id) && !_.isNull($stateParams.id)) {
+                $scope.create = false;
+                $scope.title = {
+                    icon: "fa-edit",
+                    name: "Edit Community Unit Service"
+                };
+                $scope.action = [
+                    {
+                        func : "ui-sref='setup.chu_service.view.delete'" +
+                               "ng-if='!create'"+
+                               " requires-user-feature='is_staff'" +
+                               " requires-permission='chul.delete_chuservice'",
+                        class: "btn btn-danger",
+                        wording: "Delete",
+                        tipmsg: "Delete CHU Service"
+                    }
+                ];
+                $scope.service_id = $stateParams.id;
+                $scope.wrapper = adminApi.chuService;
+                adminApi.chuService.get($stateParams.id)
+                .success(function (data){
+                    $scope.chuService = data;
+                    $scope.deleteText = $scope.chuService.name;
+                }).error(function (data){
+                    $scope.erros = data;
+                });
+            }else{
+                $scope.create = true;
+                $scope.title = {
+                    icon: "fa-plus-circle",
+                    name: "New Community Unit Status"
+                };
+            }
+            $scope.remove = function () {
+                adminApi.chuService.remove($stateParams.id)
+                .success(function(){
+                    toasty.success({
+                        title: "CHUL Service Deleted",
+                        msg: "CHUL Service deleted successfully"
+                    });
+                    $state.go("setup.chu_service");
+                }).error(function(error){
                     $scope.errors = error;
                 });
             };
