@@ -7,7 +7,7 @@
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title">Beds and Cots Report by County</span>
+        <span class="main-title">Units Report by County</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -29,19 +29,17 @@
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
                         <th class="col-xs-5 text-wrap">County</th>
-                        <th class="col-xs-4 text-center text-wrap">Beds</th>
-                        <th class="col-xs-3 text-center text-wrap">Cots</th>
+                        <th class="col-xs-4 text-center text-wrap">Number of Units</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="county in county_bc | filter:search">
+                        <tr ng-repeat="county in county_chu | filter:search">
                             <td data-title="County:">
-                              <a ui-sref="reports.bc_constituencies({county:county.county})">{{::county.county_name | titlecase}}</a>
+                              <a ui-sref="reports.chu_constituencies({county:county.county_id})">{{::county.county_name | titlecase}}</a>
                             </td>
-                            <td class="text-center" data-title="Beds:">{{::county.beds}}</td>
-                            <td class="text-center" data-title="Cots:">{{::county.cots}}</td>
+                            <td class="text-center" data-title="Units:">{{::county.number_of_units}}</td>
                         </tr>
                     </tbody>
-                    <tbody ng-if="county_bc.length===0">
+                    <tbody ng-if="county_chu.length===0">
                         <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
                     </tbody>
                 </table>
