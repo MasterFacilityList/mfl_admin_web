@@ -1,7 +1,7 @@
 (function(angular, _){
     "use strict";
 
-    angular.module("mfl.setup.controllers.documents", [])
+    angular.module("mfl.setup.controllers.documents", ["mfl.setup.api"])
 
     .controller("mfl.setup.controllers.documents.list", ["$scope", function ($scope) {
         $scope.title = {
@@ -24,13 +24,9 @@
         ];
     }])
 
-    .directive("mflFile", [function () {
-
-    }])
-
     .controller("mfl.setup.controllers.documents.edit",
-        ["$scope", "adminApi", "$stateParams", "$state",
-        function ($scope, adminApi, $stateParams, $state) {
+        ["$scope", "adminApi", "$stateParams", "$state", "$window",
+        function ($scope, adminApi, $stateParams, $state, $window) {
             $scope.title = {
                 icon: "",
                 name: "Manage Documents"
@@ -55,21 +51,23 @@
                 "file": null
             };
 
-            if ($stateParams.document_id) {
+            var success_fxn = function() {$state.go("setup.documents");};
+            var error_fxn = function(config) {$scope.errors = _.omit(config.data, "error_msg");};
+
+            var is_update = !!$stateParams.document_id;
+
+            if (is_update) {
                 adminApi.documents.get($stateParams.document_id)
-                .success(function (data) {
+                .then(function (config) {
                     $scope.document = {
-                        "id": data.id,
-                        "name": data.name,
-                        "description": data.description,
-                        "file_url": data.fyl,
+                        "id": config.data.id,
+                        "name": config.data.name,
+                        "description": config.data.description,
+                        "file_url": config.data.fyl,
                         "file": null
                     };
                     $scope.deleteText = $scope.document.name;
-                })
-                .error(function (data) {
-                    $scope.errors = data;
-                });
+                }, error_fxn);
             }
             var validateFile = function (frm_field, fyl_obj) {
                 var max_size = (100 * 1024 * 1024);  // 100MB
@@ -86,10 +84,12 @@
                         return true;
                     }
 
-                    $scope.errors = {"fyl": errors};
+                    $scope.errors = {};
+                    $scope.errors[frm_field.$name] = errors;
                     return false;
                 }
-                $scope.errors = {"fyl": ["This field is required"]};
+                $scope.errors = {};
+                $scope.errors[frm_field.$name] = ["This field is required"];
                 return false;
             };
             $scope.fileUpdated = function (elem, fyl) {
@@ -97,21 +97,17 @@
                 validateFile(elem, fyl);
             };
 
-            var success_fxn = function() {$state.go("setup.documents");};
-            var error_fxn = function(data) {$scope.errors = data;};
-
             $scope.save = function (frm) {
-                var f = window.$("input[type='file'][name='fyl']")[0].files[0];
+                var f = $window.$("input[type='file'][name='fyl']")[0].files[0];
                 var payload = {
                     "name": $scope.document.name,
                     "description": $scope.document.description
                 };
-                var is_update = !!$scope.document.id;
 
                 if (is_update && !f) {
                     // use json if the file is not updated
                     adminApi.documents.update($scope.document.id, payload)
-                    .success(success_fxn).error(error_fxn);
+                    .then(success_fxn, error_fxn);
                 } else {
                     // use multipart form for everything else
                     if (validateFile(frm.fyl, f)) {
@@ -120,15 +116,14 @@
                             url += $scope.document.id + "/";
                         }
                         adminApi.uploadFile(url, f, "fyl", payload, is_update)
-                        .success(success_fxn).error(error_fxn);
+                        .then(success_fxn, error_fxn);
                     }
                 }
             };
 
             $scope.remove = function () {
                 adminApi.documents.remove($scope.document.id)
-                .success(success_fxn)
-                .error(error_fxn);
+                .then(success_fxn, error_fxn);
             };
             $scope.cancel = function () {
                 $state.go("setup.documents.edit", {"document_id": $scope.document.id});
