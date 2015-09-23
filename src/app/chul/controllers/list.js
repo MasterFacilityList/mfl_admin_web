@@ -28,7 +28,7 @@
     .controller("mfl.chul.controllers.units_approved_list",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "is_approved":true,
+                "is_approved":"True",
                 "fields": "id,code,name,status_name,facility"
             };
         }]
@@ -36,7 +36,7 @@
     .controller("mfl.chul.controllers.units_rejected_list",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "is_rejected":true,
+                "is_rejected":"True",
                 "fields": "id,code,name,status_name,facility"
             };
         }]
@@ -49,6 +49,12 @@
             wrappers.chuls.get($stateParams.unit_id)
             .success(function (data) {
                 $scope.unit = data;
+                //checks if chul has been approved/rejected at least once
+                $scope.approve_reject = $scope.unit.is_approved || $scope.unit.is_rejected;
+                //status of approval
+                $scope.approved = $scope.unit.is_approved;
+                //status of rejection
+                $scope.rejected = $scope.unit.is_rejected;
                 $scope.spinner = false;
             })
             .error(function (data) {
