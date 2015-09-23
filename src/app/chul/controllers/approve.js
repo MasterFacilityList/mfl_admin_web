@@ -1,11 +1,11 @@
 (function(angular){
     "use strict";
 
-    angular.module("mfl.chul.controllers.approve", [])
+    angular.module("mfl.chul.controllers.approve", ["angular-toasty"])
 
     .controller("mfl.chul.controllers.approve_reject", ["$scope",
-        "mfl.chul.services.wrappers", "$stateParams","$state",
-        function ($scope, wrappers, $stateParams,$state){
+        "mfl.chul.services.wrappers", "$stateParams","$state","toasty",
+        function ($scope, wrappers, $stateParams,$state,toasty){
             $scope.spinner = true;
             $scope.wrapper = wrappers.chuls;
             wrappers.chuls.get($stateParams.unit_id)
@@ -42,8 +42,16 @@
                     $scope.unit = data;
                     $scope.spinner = false;
                     if(status === true){
+                        toasty.success({
+                            title: "Community Unit Approval",
+                            msg: "Community Unit successfully approved"
+                        });
                         $state.go("chu_approve_list");
                     } else {
+                        toasty.success({
+                            title: "Community Unit Rejection",
+                            msg: "Community Unit successfully rejected"
+                        });
                         $state.go("chu_reject_list");
                     }
                 })
