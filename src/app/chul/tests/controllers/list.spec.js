@@ -428,9 +428,7 @@
                 data.$scope.create = false;
                 ctrl(".edit_chul.chews", data);
                 data.$scope.unit = {
-                    health_unit_workers: [
-                        length : 0
-                    ]
+                    health_unit_workers: []
                 };
                 data.$scope.unitWorkers(data.$scope.unit);
             });
@@ -440,11 +438,7 @@
                 };
                 data.$scope.create = false;
                 ctrl(".edit_chul.chews", data);
-                data.$scope.unit = {
-                    health_unit_workers: [
-                        length : 0
-                    ]
-                };
+                data.$scope.unit = undefined;
                 data.$scope.$apply();
             });
         });
