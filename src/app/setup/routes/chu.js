@@ -48,7 +48,7 @@
                         templateUrl: "setup/tpls/chu/status/status-view.tpl.html"
                     }
                 },
-                permission: "chul.create_status",
+                permission: "chul.add_status",
                 userFeature: "is_staff,is_national"
             })
         .state("setup.chu_approvers", {

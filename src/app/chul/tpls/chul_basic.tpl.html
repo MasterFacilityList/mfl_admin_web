@@ -1,0 +1,140 @@
+<div class="col-xs-12 pad-0">
+    <form name="frm_unit_basic" ng-submit="save(frm_unit_basic)" novalidate>
+    <div class="col-xs-12 pad-0 custom-well">
+        <div class="col-xs-12">
+            <h4 class="margin-b-10 fw-600">Community Unit Basic Details</h4>
+        </div>
+        <div class="form-group col-xs-12 margin-b-0">
+          <p class="lead col-xs-12 pad-0">
+            <label class="control-label fs-16 fw-600 margin-t-5">Community Unit Code: </label>
+              <span class="label label-info fs-15">{{create ?  'Automatically generated after creating facility' : unit.code}}
+              </span>
+          </p>
+        </div>
+        <div class="form-group col-xs-12">
+            <label class="control-label">Community Unit Name</label>
+            <input class="form-control" name="name" ng-model="unit.name" required placeholder="Commnunity Unit Name" api-checker/>
+        </div>
+        <div class="form-group col-xs-6">
+            <label for="established date" class="control-label">
+                <span class="fs-16">Date Established: {{unit.date_established| date}}</span>
+            </label>
+            <datepicker date-format="y-MM-ddTHH:mm:ss" date-max-limit="{{maxDate}}">
+              <input class="form-control" name="date_established" ng-model="unit.date_established" type="text"/>
+            </datepicker>
+        </div>
+        <div class="form-group col-xs-6">
+            <label for="operatinal date" class="control-label">
+                <span class="fs-16">Date Operational: {{unit.date_operational| date}}</span>
+            </label>
+            <datepicker date-format="y-MM-ddTHH:mm:ss" date-max-limit="{{maxDate}}">
+              <input class="form-control" name="date_operational" ng-model="unit.date_operational" type="text"/>
+            </datepicker>
+        </div>
+        <div class="form-group col-xs-12">
+            <label class="control-label">Community Unit Status</label>
+            <select name="status" class="form-control"  ng-model="unit.status" api-checker required>
+                <option value="">Select Status</option>
+                <option ng-repeat="a_status in unit_status" ng-selected="{{a_status.id == unit.status}}" value="{{a_status.id}}">{{a_status.name}}</option>
+            </select>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="form-group col-xs-12">
+            <label class="control-label">Linked Facility &#42;</label>
+            <ui-select ng-model="select_values.facility" required name="facility" api-checker register-custom-form-control>
+                <ui-select-match placeholder="Select a facility...">
+                    <span>{{$select.selected.name}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="ft.id as ft in facilities | filter:$select.search">
+                    <span>{{ft.name}}</span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group col-xs-12">
+            <label class="control-label">No. of Monitored Households</label>
+            <input class="form-control" name="households_monitored" ng-model="unit.households_monitored" required placeholder="Number of Monitored Households" api-checker/>
+        </div>
+        <div class="form-group col-xs-12">
+            <label>County</label>
+            <input class="form-control" readonly ng-model="unit.facility_county">
+        </div>
+        <div class="form-group col-xs-12">
+            <label>Sub-county</label>
+            <input class="form-control" readonly ng-model="unit.facility_subcounty">
+        </div>
+        <div class="form-group col-xs-12">
+            <label>Ward</label>
+            <input class="form-control" readonly ng-model="unit.facility_ward">
+        </div>
+        <div class="form-group col-xs-12">
+            <label class="control-label">Location </label>
+            <input class="form-control" name="location" ng-model="unit.location" placeholder="Community Unit Location" api-checker/>
+        </div>
+    </div>
+    <!-- End of basic details -->
+    <!-- Beggining of unit contacts -->
+    <div class="col-xs-12 pad-0 custom-well">
+        <div class="col-xs-12">
+            <h4 class="fw-600 fs-18"> Community Unit Contacts</h4>
+        </div>
+        <div class="col-xs-12">
+            <table class="table table-hover table-condensed custom-well col-xs-12">
+                <thead class="grey-header">
+                    <th class="col-xs-5">Contact Type</th>
+                    <th class="col-xs-6">Contact Details</th>
+                    <th class="col-xs-1 text-center"></th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="unit_cont in unit_contacts">
+                        <td class="col-xs-5">
+                            <div class="form-group grid-inputs">
+                                <select name="unit_cont.type" class="form-control" ng-model="unit_cont.contact_type" place-holder="Select Contact Details" api-checker>
+                                    <option value="">Select Contact Type</option>
+                                    <option ng-repeat="cont in contact_types" ng-selected="{{cont.id == unit_cont.contact_type}}" ng-value="cont.id">{{cont.name}}</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group grid-inputs">
+                                <input name="unit_cont.cont" class="form-control" placeholder="Contact Details" ng-model="unit_cont.contact" api-checker>
+                            </div>
+                        </td>
+                        <td class="col-xs-1 text-center">
+                            <a ng-click="removeContact(unit_cont)" style="cursor: pointer;">
+                                <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr ng-if="detailed_contacts.length === 0" class="">
+                        <td colspan="3" class="text-center">
+                            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12 text-right margin-b-10">
+            <a class="btn btn-primary pull-right" ng-click="addContact()" >
+                <i class="fa fa-plus-square-o"></i> Add
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-12 pad-0">
+        <button ui-sref="community_units" class="btn btn-default margin-b-10">
+            &nbsp;<i class="fa fa-angle-double-left"></i> Cancel
+        </button>
+        <span class="pull-right" ng-if="!create">
+            <button ng-if="!create" ng-click="setNxt(true)" type="submit" class="btn btn-primary margin-b-10 margin-r-5">
+                Finish
+            </button>
+            <button ng-if="!create" ng-click="setNxt(false)" type="submit" class="btn btn-primary margin-b-10 pull-right">
+                Save & Continue <i class="fa fa-angle-double-right"></i>
+            </button>
+        </span>
+        <button ng-if="create" type="submit" class="btn btn-primary margin-b-10 pull-right">
+            CHEWs <i class="fa fa-angle-double-right"></i>
+        </button>
+    </div>
+    </form>
+</div>

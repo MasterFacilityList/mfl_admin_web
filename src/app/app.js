@@ -15,6 +15,7 @@
         "mfl.dashboard",
         "mfl.reports",
         "mfl.facility_mgmt",
+        "mfl.chul",
         "jcs-autoValidate"
     ]);
 

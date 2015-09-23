@@ -33,8 +33,8 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="owner in owner_cat_facilities | filter:search">
-                            <td class="col-xs-9" data-title="Owner Category:">{{::owner.owner_category}}</td>
-                            <td class="col-xs-3 text-center" data-title="Facilities:">{{::owner.number_of_facilities}}</td>
+                            <td data-title="Owner Category:">{{::owner.owner_category}}</td>
+                            <td class=" text-center" data-title="Facilities:">{{::owner.number_of_facilities}}</td>
                         </tr>
                     </tbody>
                 </table>

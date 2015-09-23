@@ -47,10 +47,19 @@
         it( "Should test titlecase filter",function() {
             var result;
             result = titlecase_filter( "i am a test" );
-            expect( result ).toEqual( "I Am A Test" );
+            expect( result ).toEqual( "I am a Test" );
+
+            result = titlecase_filter( "i-am-a-test" );
+            expect( result ).toEqual( "I-am-a-Test" );
+
+            result = titlecase_filter( "i am a ng'ombe" );
+            expect( result ).toEqual( "I am a Ng'ombe" );
+
+            result = titlecase_filter( "I am a Test" );
+            expect( result ).toEqual( "I am a Test" );
 
             result = titlecase_filter( "I AM A TEST" );
-            expect( result ).toEqual( "I Am A Test" );
+            expect( result ).toEqual( "I am a Test" );
 
             result = titlecase_filter( "" );
             expect( result ).toEqual( "" );

@@ -150,7 +150,7 @@ module.exports = function ( karma ) {
             SL_Opera: {
                 base: "SauceLabs",
                 browserName: "opera",
-                version: "11",
+                version: "12",
                 platform: "Windows 7"
             }
         };

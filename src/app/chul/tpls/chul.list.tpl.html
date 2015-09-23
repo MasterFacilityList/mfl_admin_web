@@ -1,0 +1,32 @@
+<div class="content-card">
+    <ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
+    <table class="table table-hover table-condensed fs-13" id="no-more-tables">
+        <thead>
+            <tr>
+                <th sil-grid-sort field='code'>Code</th>
+                <th sil-grid-sort field='name'>Name</th>
+                <th sil-grid-sort field='status'>Status</th>
+                <th >Facility</th>
+                <th >County</th>
+                <th >Sub-County</th>
+                <th >Ward</th>
+            </tr>
+        </thead>
+        <tbody class="fade-content">
+            <tr ng-repeat="unit in chuls">
+                <td data-title="Code:" >{{unit.code}}</td>
+                <td data-title="Name:">
+                    <a ui-sref="community_units.view_unit({unit_id : unit.id})" ui-sref-opts="{reload : true}">
+                        {{unit.name}}
+                    </a>
+                </td>
+                <td data-title="Abbreviation:">{{unit.status_name}}</td>
+                <td data-title="Category:">{{unit.facility_name}}</td>
+                <td data-title="Category:">{{unit.facility_county}}</td>
+                <td data-title="Category:">{{unit.facility_subcounty}}</td>
+                <td data-title="Category:">{{unit.facility_ward}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>
