@@ -11,6 +11,7 @@
         "mfl.setup.routes.contacts",
         "mfl.setup.routes.facilities",
         "mfl.setup.routes.chu",
-        "mfl.setup.routes.gis"
+        "mfl.setup.routes.gis",
+        "mfl.setup.routes.documents"
     ]);
 })(window.angular);

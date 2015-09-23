@@ -1,0 +1,29 @@
+<ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
+<div class="col-lg-12 margin-t-15">
+    <table class="table table-hover table-condensed fs-14">
+        <thead class="cf">
+            <th sil-grid-sort field='name'>Name</th>
+            <th>Description</th>
+            <th>Link</th>
+            <th class="text-right">Actions</th>
+        </thead>
+        <tbody class="example-animate-container">
+            <tr class="animate-repeat" ng-repeat="doc in documents">
+                <td data-title="Name" class="pad-t-15">{{::doc.name}}</td>
+                <td data-title="Description" class="pad-t-15">{{::doc.description}}</td>
+                <td data-title="Link" class="pad-t-15"><a target="_blank" ng-href="{{doc.fyl}}">{{::doc.fyl}}</a></td>
+                <td class="text-right">
+                    <a class="btn btn-success"
+                     tooltip-placement="bottom" tooltip="View Document"
+                    ui-sref="setup.documents.edit({document_id:doc.id})">
+                    View
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+        <tbody ng-if="documents.length===0">
+            <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
+        </tbody>
+    </table>
+    <sil-grid-pagination> </sil-grid-pagination>
+</div>

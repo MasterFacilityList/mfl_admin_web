@@ -81,6 +81,14 @@
           </ul>
         </li>
         <li>
+          <label class="sidebar-label tree-toggle nav-header">Documents</label>
+          <ul class="nav nav-list tree">
+              <li ui-sref-active="active" requires-permission="common.view_documentupload">
+                <a ui-sref="setup.documents" >Documents</a>
+              </li>
+          </ul>
+        </li>
+        <li>
           <label class="sidebar-label tree-toggle nav-header">Geo Codes</label>
           <ul class="nav nav-list tree">
             <li ui-sref-active="active" requires-permission="mfl_gis.view_geocodemethod">
