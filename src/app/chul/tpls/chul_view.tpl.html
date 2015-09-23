@@ -1,6 +1,10 @@
 <div class="content-header">
    <div class="action-container content-header-extra margin-t-3">
-        <a requires-permission='chul.change_communityhealthunit' ui-sref="community_units.approve_reject({unit_id: unit.id})" class="btn btn-success">Approve/Reject</a>
+        <a requires-permission='chul.change_communityhealthunit' ui-sref="community_units.approve_reject({unit_id: unit.id})" class="btn btn-success">
+            <span ng-hide="approve_reject">Approve/Reject</span>
+            <span ng-show="approved">Reject</span>
+            <span ng-show="rejected">Approve</span>
+        </a>
         <a  tooltip="Print Community Unit" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md"><i class="fa fa-print"></i></a>
 
         <a requires-permission='chul.change_communityhealthunit' tooltip="Edit Community Unit" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="community_unit.unit_edit({unit_id: chu_id})" ui-sref-opts="{reload:true}"><i class="fa fa-pencil"></i></a>
