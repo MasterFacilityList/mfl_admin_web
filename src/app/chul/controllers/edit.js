@@ -1,12 +1,16 @@
 (function(angular, _){
     "use strict";
 
-    angular.module("mfl.chul.controllers.edit", [])
+    angular.module("mfl.chul.controllers.edit", [
+        "mfl.common.forms",
+        "angular-toasty"
+    ])
 
     .controller("mfl.chul.controllers.edit_chul", ["$scope",
         "mfl.chul.services.wrappers", "$stateParams",
         function ($scope, wrappers, $stateParams) {
             $scope.create = false;
+            $scope.unit_id = $stateParams.unit_id;
             wrappers.chuls.get($stateParams.unit_id)
             .success(function (data) {
                 $scope.unit = data;
@@ -22,11 +26,15 @@
                 $scope.spinner = false;
                 $scope.error = data;
             });
+            $scope.setNxt = function (arg) {
+                $scope.nxtState = arg;
+            };
         }]
     )
     .controller("mfl.chul.controllers.edit_chul.basic", ["$scope",
-        "mfl.chul.services.wrappers",
-        function ($scope, wrappers) {
+        "mfl.chul.services.wrappers", "mfl.common.forms.changes", "toasty",
+        "$state",
+        function ($scope, wrappers, formChanges, toasty, $state) {
             var value = new Date();
             $scope.maxDate = value.getFullYear() + "/" + (value.getMonth()+1) +
             "/" + value.getDate();
@@ -63,6 +71,25 @@
             };
             $scope.removeContact = function (obj) {
                 $scope.unit_contacts = _.without($scope.unit_contacts, obj);
+            };
+            $scope.save = function (frm) {
+                $scope.finish = ($scope.nxtState ? "community_units" :
+                    "community_units.edit_unit.chews");
+                var changes = formChanges.whatChanged(frm);
+                $scope.unit.facility = $scope.select_values.facility;
+                if(!$scope.create) {
+                    wrappers.chuls.update($scope.unit_id, changes)
+                    .success(function () {
+                        toasty.success({
+                            title: "Community Unit Update",
+                            msg: "Community Unit successfully updated"
+                        });
+                        $state.go($scope.finish, {reload : true});
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+                }
             };
         }]
     )
