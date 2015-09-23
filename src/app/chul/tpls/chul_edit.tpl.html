@@ -1,0 +1,40 @@
+<div class="content-header">
+   <h2 class="content-title">
+       <span class="main-title"><i class="fa fa-edit"></i> Edit Community Unit</span>
+   </h2>
+</div>
+<div class="col-xs-12 margin-t-30" ng-if="spinner">
+    <div class="map-change-state">
+        <div class="loader"></div>
+        <div class="row">
+            <h3 class="text-center loader-text">Please wait...</h3>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 margin-t-20" ng-if="!spinner">
+    <div class="content-body">
+        <ul class="nav nav-tabs col-xs-12">
+           <li ui-sref-active="active" >
+               <a ui-sref="community_units.edit_unit.basic">
+                   <span class="fw-900">
+                       <i class="fa fa-hospital-o"></i> Basic Details
+                   </span>
+               </a>
+           </li>
+           <li ui-sref-active="active" >
+               <a ui-sref="community_units.edit_unit.chews">
+                   <span class="fw-900 ">
+                      <i class="fa fa-users"></i>  CHEWs
+                   </span>
+               </a>
+           </li>
+        </ul>
+    </div>
+    <div class="content-card col-xs-12">
+        <div class="col-xs-12">
+            <div class="tab-content margin-t-5">
+                <div class="col-xs-12 pad-0" ui-view="form-view"></div>
+            </div><!-- /tab-content -->
+        </div>
+    </div>
+</div>
