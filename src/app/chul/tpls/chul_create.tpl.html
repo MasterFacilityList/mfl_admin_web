@@ -1,0 +1,14 @@
+<div class="content-header">
+   <h2 class="content-title">
+        <span class="main-title"><i class="fa fa-plus-circle"></i> New Community Unit</span>
+   </h2>
+</div>
+<div class="col-sm-12" style="display: inline-flex;">
+    <div class="col-xs-12 margin-t-20 content-card">
+        <div ui-view="tab-header" class="margin-t-20"></div>
+        <hr class="line-divider" ng-if="!print">
+        <div class="tab-content margin-t-20">
+            <div class="listing col-sm-12" ui-view="form-view"></div>
+        </div>
+    </div>
+</div>
