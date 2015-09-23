@@ -83,5 +83,116 @@
                 httpBackend.verifyNoOutstandingExpectation();
             });
         });
+
+        describe("Test chul view controller", function () {
+            it("should test chul edit controller", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$stateParams": {
+                        unit_id: 1
+                    }
+                };
+                ctrl(".edit_chul", data);
+                var chul = {
+                    facility : "5",
+                    facility_name : "name"
+                };
+                httpBackend.expectGET(server_url+"api/chul/units/1/")
+                    .respond(200, chul);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should fail to get one chul", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$stateParams": {
+                        unit_id: 1
+                    }
+                };
+                ctrl(".edit_chul", data);
+                httpBackend.expectGET(server_url+"api/chul/units/1/")
+                    .respond(500, {});
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test chul basic controller", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                ctrl(".edit_chul.basic", data);
+                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                    .respond(200, {results: []});
+                httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
+                    .respond(200, {results: []});
+                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                    .respond(200, {results: []});
+                data.$scope.unit_contacts = [
+                    {
+                        contact_type : "",
+                        contact : ""
+                    },
+                    {
+                        contact_type : "MOBILE",
+                        contact : "999"
+                    }
+                ];
+                var obj = {
+                    contact_type : "MOBILE",
+                    contact : "999"
+                };
+                data.$scope.addContact();
+                data.$scope.removeContact(obj);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test chul basic controller failing calls", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                ctrl(".edit_chul.basic", data);
+                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                    .respond(500, {});
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should fail to get one chul", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                ctrl(".edit_chul.chews", data);
+                data.$scope.unit = {
+                    health_unit_workers: [
+                        {
+                            "first_name" : "",
+                            "last_name" : "",
+                            "id_number" : "",
+                            "is_incharge" : ""
+                        },
+                        {
+                            "first_name" : "anto",
+                            "last_name" : "wag",
+                            "id_number" : "254",
+                            "is_incharge" : "true"
+                        }
+                    ]
+                };
+                var obj = {
+                    "first_name" : "anto",
+                    "last_name" : "wag",
+                    "id_number" : "254",
+                    "is_incharge" : "true"
+                };
+                data.$scope.addChew();
+                data.$scope.removeChew(obj);
+            });
+        });
     });
 })();
