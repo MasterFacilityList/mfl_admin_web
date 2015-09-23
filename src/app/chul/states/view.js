@@ -16,6 +16,16 @@
                     }
                 },
                 permission: "chul.view_communityhealthunit"
+            })
+            .state("community_units.approve_reject", {
+                url: "chul_approve_reject/:unit_id/",
+                views: {
+                    "main-content@chul": {
+                        templateUrl: "chul/tpls/chul_approve_reject.view.tpl.html",
+                        controller: "mfl.chul.controllers.approve_reject"
+                    }
+                },
+                permission: "chul.change_communityhealthunit"
             });
     }]);
 

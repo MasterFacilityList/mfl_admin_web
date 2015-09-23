@@ -56,6 +56,22 @@
                 $scope.error = data;
             });
         }]
+    )
+    .controller("mfl.chul.controllers.approve_reject", ["$scope",
+        "mfl.chul.services.wrappers", "$stateParams",
+        function ($scope, wrappers, $stateParams){
+            $scope.spinner = true;
+            $scope.wrapper = wrappers.chuls;
+            wrappers.chuls.get($stateParams.unit_id)
+            .success(function (data) {
+                $scope.unit = data;
+                $scope.spinner = false;
+            })
+            .error(function (data) {
+                $scope.spinner = false;
+                $scope.error = data;
+            });
+        }]
     );
 
 })(window.angular);
