@@ -123,7 +123,6 @@
                         $scope["q_dump"+name] = {page: $scope.filters.page};
                         delete $scope.filters.page;
                     }
-                    self.getData();
                 };
                 self.removeFilter = function(name){
                     if(_.has($scope.filters, name)){
@@ -136,7 +135,6 @@
                             }
 
                         }
-                        self.getData();
                     }
                 };
                 $scope.getData = self.getData;
@@ -146,6 +144,7 @@
                         $scope.filters = {};
                     }
                     $scope.filters.page = page_count;
+
                     $scope.getData();
                 };
                 if(_.isUndefined($scope.filters)){
@@ -153,14 +152,8 @@
                 }
             }],
             link: function(scope){
-                scope.$watch("filters", function(filters){
-                    if(_.has(filters, "page")||
-                       _.has(filters, "ordering")||_.has(filters, "search")){
-
-                        delete filters.page;
-                    }else{
-                         scope.getData();
-                    }
+                scope.$watch("filters", function(){
+                    scope.getData();
                 });
                 $rootScope.$on("silGrid.data.refresh", function(event){
                     event.stopPropagation();
@@ -213,8 +206,10 @@
                     if(clear){
                         scope.silGrid.searchQuery = "";
                         gridCtrl.removeFilter("search");
-                    }else{
-                         gridCtrl.addFilter("search", scope.silGrid.searchQuery);
+                        gridCtrl.getData();
+                    } else {
+                        gridCtrl.addFilter("search", scope.silGrid.searchQuery);
+                        gridCtrl.getData();
                     }
 
                 };
@@ -297,7 +292,6 @@
                             elem.addClass("sil-orderable-desc");
                             //order desc
                             addOrdering($scope.field, "desc");
-
                         }
                     }
                     gridCtrl.addFilter("ordering", $scope.sil_orderings.join(","));

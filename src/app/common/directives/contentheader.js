@@ -35,7 +35,7 @@
                 "<h2 class='content-title'>"+
                 "<span class='main-title'>"+
                 "<i class='sidebar-icon fa {{title.icon}}'> {{title.name}}</i>"+
-                "</span></contenttitle></h2>" +
+                "</span></h2>" +
                 "</div>"
         };
     }]);
