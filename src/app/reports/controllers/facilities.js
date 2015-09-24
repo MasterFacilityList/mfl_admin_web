@@ -26,7 +26,6 @@
             "checked": false
         };
         $scope.hide = true;
-        $scope.state_name = $state.current.name;
         $scope.filters_grid = params;
         $scope.toggle = false;
         $scope.filters = {
@@ -178,7 +177,6 @@
             _.each(URL_SEARCH_PARAMS, function (a) {
                 params[a] = undefined;
             });
-            // TODO : cancel filter_promise defined in L120
             $state.go($state.current.name, params);
         };
 
