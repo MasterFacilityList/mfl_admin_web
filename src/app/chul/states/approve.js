@@ -15,7 +15,7 @@
                         controller: "mfl.chul.controllers.approve_reject"
                     }
                 },
-                permission: "chul.change_communityhealthunit"
+                permission: "chul.can_approve_chu"
             });
     }]);
 
