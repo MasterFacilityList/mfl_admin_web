@@ -3,6 +3,7 @@
         <h4 class="fw-600 fs-18"> Community Health Extension Workers</h4>
     </div>
     <div class="col-xs-12 pad-0">
+        <drf-err-msg></drf-err-msg>
         <table class="table table-hover table-condensed custom-well col-xs-12">
             <thead class="grey-header">
                 <th class="col-xs-3">First Name</th>
@@ -57,11 +58,14 @@
     </div>
 </div>
 <div class="col-xs-12 pad-0">
-    <button ui-sref="community_units" class="btn btn-primary margin-b-10">
+    <button ng-if="create" ui-sref="community_units.create_unit.basic({unit_id : unit_id, furthest : 2})" class="btn btn-primary margin-b-10">
+        &nbsp;<i class="fa fa-angle-double-left"></i> Basic Details
+    </button>
+    <button ng-if="!create" ui-sref="community_units.edit_unit.basic" class="btn btn-primary margin-b-10">
         &nbsp;<i class="fa fa-angle-double-left"></i> Basic Details
     </button>
     <span class="pull-right">
-        <button type="submit" class="btn btn-primary margin-b-10 pull-right">
+        <button ng-click="saveChews()" class="btn btn-primary margin-b-10 pull-right">
             Save & Finish <i class="fa fa-angle-double-right"></i>
         </button>
     </span>
