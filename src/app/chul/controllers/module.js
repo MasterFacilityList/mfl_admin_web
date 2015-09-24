@@ -6,7 +6,6 @@
         "mfl.chul.controllers.create",
         "mfl.chul.controllers.approve",
         "mfl.chul.controllers.edit"
->>>>>>> master
     ]);
 
 })(window.angular);
