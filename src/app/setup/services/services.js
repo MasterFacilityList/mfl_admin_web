@@ -53,7 +53,7 @@
                 facility_rating_comments: api.setBaseUrl(
                     "api/facilities/facility_service_ratings/"
                 ),
-                chu_rating_comments: api.setBaseUrl("api/chu/chu_ratings/"),
+                chu_rating_comments: api.setBaseUrl("api/chul/chu_ratings/"),
                 facility_depts: api.setBaseUrl("api/facilities/facility_depts/"),
                 documents: api.setBaseUrl("api/common/documents/"),
                 uploadFile: uploadFile
