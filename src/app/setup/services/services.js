@@ -50,7 +50,10 @@
                 geocode_sources: api.setBaseUrl("api/gis/geo_code_sources/"),
                 county_users : api.setBaseUrl("api/common/user_counties/"),
                 county_slim : api.setBaseUrl("api/counties/slim_detail/"),
-                rating_comments: api.setBaseUrl("api/facilities/facility_service_ratings/"),
+                facility_rating_comments: api.setBaseUrl(
+                    "api/facilities/facility_service_ratings/"
+                ),
+                chu_rating_comments: api.setBaseUrl("api/chu/chu_ratings/"),
                 facility_depts: api.setBaseUrl("api/facilities/facility_depts/"),
                 documents: api.setBaseUrl("api/common/documents/"),
                 uploadFile: uploadFile
