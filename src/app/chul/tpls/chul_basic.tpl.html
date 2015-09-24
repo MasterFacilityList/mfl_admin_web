@@ -4,16 +4,28 @@
         <div class="col-xs-12">
             <h4 class="margin-b-10 fw-600">Community Unit Basic Details</h4>
         </div>
+        <drf-err-msg></drf-err-msg>
         <div class="form-group col-xs-12 margin-b-0">
           <p class="lead col-xs-12 pad-0">
             <label class="control-label fs-16 fw-600 margin-t-5">Community Unit Code: </label>
-              <span class="label label-info fs-15">{{create ?  'Automatically generated after creating facility' : unit.code}}
+              <span class="label label-info fs-15">{{create ?  'Automatically generated after creating unit' : unit.code}}
               </span>
           </p>
         </div>
         <div class="form-group col-xs-12">
             <label class="control-label">Community Unit Name</label>
             <input class="form-control" name="name" ng-model="unit.name" required placeholder="Commnunity Unit Name" api-checker/>
+        </div>
+        <div class="form-group col-xs-12">
+            <label class="control-label">Linked Facility &#42;</label>
+            <ui-select ng-model="select_values.facility" required name="facility" api-checker register-custom-form-control ng-change="unitLocation(select_values.facility)">
+                <ui-select-match placeholder="Select a facility...">
+                    <span>{{$select.selected.name}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="ft.id as ft in facilities | filter:$select.search">
+                    <span>{{ft.name}}</span>
+                </ui-select-choices>
+            </ui-select>
         </div>
         <div class="form-group col-xs-6">
             <label for="established date" class="control-label">
@@ -39,17 +51,6 @@
             </select>
             <span class="highlight"></span>
             <span class="bar"></span>
-        </div>
-        <div class="form-group col-xs-12">
-            <label class="control-label">Linked Facility &#42;</label>
-            <ui-select ng-model="select_values.facility" required name="facility" api-checker register-custom-form-control>
-                <ui-select-match placeholder="Select a facility...">
-                    <span>{{$select.selected.name}}</span>
-                </ui-select-match>
-                <ui-select-choices repeat="ft.id as ft in facilities | filter:$select.search">
-                    <span>{{ft.name}}</span>
-                </ui-select-choices>
-            </ui-select>
         </div>
         <div class="form-group col-xs-12">
             <label class="control-label">No. of Monitored Households</label>
@@ -133,7 +134,7 @@
             </button>
         </span>
         <button ng-if="create" type="submit" class="btn btn-primary margin-b-10 pull-right">
-            CHEWs <i class="fa fa-angle-double-right"></i>
+            CHEWS <i class="fa fa-angle-double-right"></i>
         </button>
     </div>
     </form>
