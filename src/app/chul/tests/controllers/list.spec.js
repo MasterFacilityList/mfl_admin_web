@@ -389,11 +389,14 @@
 
             it("should test chew controller", function () {
                 var data = {
-                    "$scope" : rootScope.$new()
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
                 };
+                state.params = {unit_id : 1};
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
                 ctrl(".edit_chul.chews", data);
+                data.$scope.unit_id = "";
                 data.$scope.unit = {
                     health_unit_workers: [
                         {
@@ -421,7 +424,152 @@
                 data.$scope.addChew();
                 data.$scope.removeChew(obj);
             });
-            it("should test chew controller: edit node", function () {
+            it("should test chew controller deleting a chew", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
+                };
+                spyOn(state, "go");
+                data.$scope.create = false;
+                ctrl(".edit_chul.chews", data);
+                data.$scope.unit_id = 1;
+                data.$scope.unit = {
+                    health_unit_workers: [
+                        {
+                            "id" : "1",
+                            "first_name" : "anto",
+                            "last_name" : "wag",
+                            "id_number" : "254",
+                            "is_incharge" : true
+                        },
+                        {
+                            "id" : "2",
+                            "first_name" : "day",
+                            "last_name" : "wag",
+                            "id_number" : "+254",
+                            "is_incharge" : false
+                        }
+                    ]
+                };
+                var obj = {
+                    "id" : "1",
+                    "first_name" : "anto",
+                    "last_name" : "wag",
+                    "id_number" : "254",
+                    "is_incharge" : "true"
+                };
+                httpBackend.expectDELETE(server_url + "api/chul/workers/1/")
+                    .respond(201);
+                httpBackend.expectPATCH(server_url + "api/chul/units/1/")
+                    .respond(200, data.$scope.unit);
+                data.$scope.unitWorkers(data.$scope.unit);
+                data.$scope.removeChew(obj);
+                data.$scope.saveChews();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test creating chew : create mode", function () {
+                var data = {
+                    "$scope" : rootScope.$new(),
+                    "$state" : state
+                };
+                spyOn(state, "go");
+                data.$scope.create = true;
+                data.$scope.nextState = angular.noop;
+                ctrl(".edit_chul.chews", data);
+                data.$scope.unit_id = 1;
+                data.$scope.unit = {
+                    health_unit_workers: [
+                        {
+                            "id" : "1",
+                            "first_name" : "anto",
+                            "last_name" : "wag",
+                            "id_number" : "254",
+                            "is_incharge" : true
+                        },
+                        {
+                            "id" : "2",
+                            "first_name" : "day",
+                            "last_name" : "wag",
+                            "id_number" : "+254",
+                            "is_incharge" : false
+                        }
+                    ]
+                };
+                var obj = {
+                    "id" : "1",
+                    "first_name" : "anto",
+                    "last_name" : "wag",
+                    "id_number" : "254",
+                    "is_incharge" : "true"
+                };
+                httpBackend.expectDELETE(server_url + "api/chul/workers/1/")
+                    .respond(201);
+                httpBackend.expectPATCH(server_url + "api/chul/units/1/")
+                    .respond(200, data.$scope.unit);
+                data.$scope.unitWorkers(data.$scope.unit);
+                data.$scope.removeChew(obj);
+                data.$scope.saveChews();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test failure to delete a chew", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                data.$scope.create = false;
+                ctrl(".edit_chul.chews", data);
+                data.$scope.unit_id = 1;
+                data.$scope.unit = {
+                    health_unit_workers: [
+                        {
+                            "id" : "1",
+                            "first_name" : "anto",
+                            "last_name" : "wag",
+                            "id_number" : "254",
+                            "is_incharge" : "true"
+                        },
+                        {
+                            "id" : "2",
+                            "first_name" : "day",
+                            "last_name" : "wag",
+                            "id_number" : "+254",
+                            "is_incharge" : false
+                        }
+                    ]
+                };
+                var obj = {
+                    "id" : "1",
+                    "first_name" : "anto",
+                    "last_name" : "wag",
+                    "id_number" : "254",
+                    "is_incharge" : "true"
+                };
+                httpBackend.expectDELETE(server_url + "api/chul/workers/1/")
+                    .respond(500);
+                httpBackend.expectPATCH(server_url + "api/chul/units/1/")
+                    .respond(500);
+                data.$scope.unitWorkers(data.$scope.unit);
+                data.$scope.removeChew(obj);
+                data.$scope.saveChews();
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test saving chew with no worker", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                data.$scope.create = false;
+                ctrl(".edit_chul.chews", data);
+                data.$scope.unit = {
+                    health_unit_workers: []
+                };
+                data.$scope.saveChews();
+            });
+            it("should test chew controller: edit mode", function () {
                 var data = {
                     "$scope" : rootScope.$new()
                 };
@@ -432,7 +580,7 @@
                 };
                 data.$scope.unitWorkers(data.$scope.unit);
             });
-            it("should test chew controller: edit node", function () {
+            it("should test chew controller unit undefined", function () {
                 var data = {
                     "$scope" : rootScope.$new()
                 };
