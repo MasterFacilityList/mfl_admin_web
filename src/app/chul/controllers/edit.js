@@ -125,7 +125,8 @@
         }]
     )
     .controller("mfl.chul.controllers.edit_chul.chews", ["$scope",
-        function ($scope) {
+        "mfl.chul.services.wrappers", "toasty", "$state",
+        function ($scope, wrappers, toasty, $state) {
             if($scope.create) {
                 $scope.nextState();
             }
@@ -134,8 +135,8 @@
                     $scope.unit.health_unit_workers.push({
                         "first_name" : "",
                         "last_name" : "",
-                        "id_number" : "",
-                        "is_incharge" : ""
+                        "id_number" : null,
+                        "is_incharge" : false
                     });
                 }
             };
@@ -143,13 +144,48 @@
                 $scope.unit.health_unit_workers.push({
                     "first_name" : "",
                     "last_name" : "",
-                    "id_number" : "",
-                    "is_incharge" : ""
+                    "id_number" : null,
+                    "is_incharge" : false
                 });
             };
             $scope.removeChew = function (obj) {
-                $scope.unit.health_unit_workers = _.without(
-                    $scope.unit.health_unit_workers, obj);
+                if(_.isUndefined(obj.id)){
+                    $scope.unit.health_unit_workers = _.without(
+                        $scope.unit.health_unit_workers, obj);
+                }else{
+                    wrappers.workers.remove(obj.id)
+                    .success(function (){
+                        $scope.unit.health_unit_workers = _.without(
+                            $scope.unit.health_unit_workers, obj);
+                        toasty.success({
+                            title: "Community Unit Worker Deleted",
+                            msg: "Community Unit woker successfully deleted"
+                        });
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+                }
+            };
+            /*Creating health workers*/
+            $scope.saveChews = function () {
+                $scope.workers = {health_unit_workers : []};
+                $scope.workers.health_unit_workers =
+                    $scope.unit.health_unit_workers;
+                if($scope.workers.health_unit_workers.length > 0){
+                    var save_msg = $scope.create ? "Added" : "Updated";
+                    wrappers.chuls.update($scope.unit_id, $scope.workers)
+                    .success(function () {
+                        toasty.success({
+                            title: "Community Unit " + save_msg,
+                            msg: "Community Unit successfully " + save_msg
+                        });
+                        $state.go("community_units", {reload: true});
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+                }
             };
             /*Wait for facility to be defined*/
             $scope.$watch("unit", function (u) {

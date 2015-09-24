@@ -31,6 +31,7 @@
             if(_.isEmpty($state.params.unit_id)) {
                 $scope.select_values = {};
             }else{
+                $scope.unit_id = $state.params.unit_id;
                 wrappers.chuls.get($state.params.unit_id)
                 .success(function (data) {
                     $scope.unit = data;
