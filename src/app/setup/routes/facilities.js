@@ -15,7 +15,6 @@
                                      "/rating_comments.grid.tpl.html"
                     }
                 },
-                permission: "facilities.view_owner",
                 userFeature: "is_staff,is_national"
             })
 

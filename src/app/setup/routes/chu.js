@@ -4,6 +4,20 @@
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+        .state("setup.chu_rating_comments", {
+                url: "/chu_rating_comments",
+                views: {
+                    "body@setup" : {
+                        templateUrl : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.chu_rating_comments": {
+                        templateUrl: "setup/tpls/chu/rating_comments" +
+                                     "/rating_comments.grid.tpl.html"
+                    }
+                },
+                userFeature: "is_staff,is_national"
+            })
+
         .state("setup.chu_status", {
                 url: "/chu_status",
                 views: {
