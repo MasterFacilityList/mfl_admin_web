@@ -26,7 +26,7 @@
         <button ng-if="!chuStatus.id" ng-click="createChuStatus(chuStatus)" class="btn btn-primary" ng-disabled="frm_chu_status.$invalid">Save</button>
         <button ng-if="chuStatus.id" ng-click="updateChuStatus(chuStatus.id, frm_chu_status)" class="btn btn-primary" ng-disabled="frm_chu_status.$invalid">Save</button>
         <a ui-sref="setup.chu_status" class="btn btn-default">Cancel</a>
-        <mfl-revision-view id="approver_id" wrapper="wrapper" ></mfl-revision-view>
+        <mfl-revision-view id="status_id" wrapper="wrapper" ></mfl-revision-view>
     </form>
 </div>
 </div>

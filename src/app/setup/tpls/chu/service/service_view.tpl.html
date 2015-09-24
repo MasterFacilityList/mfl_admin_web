@@ -1,0 +1,27 @@
+<contentheader></contentheader>
+<div ui-view="delete"></div>
+<div class="col-lg-12">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 content-card">
+    <form role="form" name="frm_chu_service" class="col-sm-10 col-sm-offset-1 margin-t-20" ng-submit="saveChuservice(frm_chu_service)" novalidate>
+        <drf-err-msg></drf-err-msg>
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" name="name" ng-model="chuService.name" required api-checker class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Description</label>
+            <textarea type="text" name="description" ng-model="chuService.description" api-checker class="form-control"></textarea>
+        </div>
+        <div class="form-group checkbox" ng-if="chuService.id">
+            <label>
+                <input type="checkbox" id="active" name="active" ng-model="chuService.active" api-checker>
+                Is Active?
+            </label>
+        </div>
+        <!-- End of the dynamic form -->
+        <button type="submit" class="btn btn-primary" >Save</button>
+        <a ui-sref="setup.chu_service" class="btn btn-default">Cancel</a>
+        <mfl-revision-view id="service_id" wrapper="wrapper" ></mfl-revision-view>
+    </form>
+</div>
+</div>

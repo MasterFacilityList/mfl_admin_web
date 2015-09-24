@@ -51,6 +51,55 @@
                 permission: "chul.add_status",
                 userFeature: "is_staff,is_national"
             })
+        /*chu services*/
+        .state("setup.chu_service", {
+                url: "/chu_service/",
+                views: {
+                    "body@setup" : {
+                        templateUrl : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.chu_service": {
+                        controller: "mfl.setup.controller.chuService.list",
+                        templateUrl: "setup/tpls/chu/service/service_list.tpl.html"
+                    }
+                },
+                permission: "chul.view_chuservice",
+                userFeature: "is_national"
+            })
+        .state("setup.chu_service.view", {
+                url: "edit/:id",
+                views: {
+                    "main-content@setup.chu_service": {
+                        controller: "mfl.setup.controller.chuService.view",
+                        templateUrl: "setup/tpls/chu/service/service_view.tpl.html"
+                    }
+                },
+                permission: "chul.view_chuservice",
+                userFeature: "is_national"
+            })
+        .state("setup.chu_service.view.delete", {
+                url: "/delete/",
+                views: {
+                    "delete@setup.chu_service.view": {
+                        controller: "mfl.setup.controller.chuService.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                },
+                permission: "chul.delete_chuservice",
+                userFeature: "is_staff,is_national"
+            })
+        .state("setup.chu_service.create", {
+                url: "create/",
+                views: {
+                    "main-content@setup.chu_service": {
+                        controller: "mfl.setup.controller.chuService.view",
+                        templateUrl: "setup/tpls/chu/service/service_view.tpl.html"
+                    }
+                },
+                permission: "chul.add_chuservice",
+                userFeature: "is_staff,is_national"
+            })
+        /*chu approvers*/
         .state("setup.chu_approvers", {
                 url: "/chu_approvers",
                 views: {
