@@ -18,7 +18,7 @@
         // pagination controls
         "page_size", "page"
     ])
-    .config(["$stateProvider","URL_SEARCH_PARAMS", function ($stateProvider,URL_SEARCH_PARAMS) {
+    .config(["$stateProvider", "URL_SEARCH_PARAMS", function ($stateProvider, URL_SEARCH_PARAMS) {
         $stateProvider
         .state("facilities", {
             parent: "facility_mgmt",
