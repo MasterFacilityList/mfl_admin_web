@@ -134,8 +134,9 @@
 
     .controller("mfl.setup.controller.chuService.view", ["$scope",
         "$stateParams", "adminApi", "$state", "toasty",
-        function ($scope, $stateParams, adminApi, $state, toasty) {
-            if(!_.isEmpty($stateParams.id) && !_.isNull($stateParams.id)) {
+        "mfl.common.forms.changes",
+        function ($scope, $stateParams, adminApi, $state, toasty, formChanges){
+            if(!_.isEmpty($stateParams.id) && !_.isUndefined($stateParams.id)) {
                 $scope.create = false;
                 $scope.title = {
                     icon: "fa-edit",
@@ -173,12 +174,40 @@
                 .success(function(){
                     toasty.success({
                         title: "CHUL Service Deleted",
-                        msg: "CHUL Service deleted successfully"
+                        msg: "CHUL Service successfully deleted"
                     });
                     $state.go("setup.chu_service");
                 }).error(function(error){
                     $scope.errors = error;
                 });
+            };
+            $scope.saveChuservice = function (frm) {
+                var changes = formChanges.whatChanged(frm);
+                if($scope.create){
+                    adminApi.chuService.create($scope.chuService)
+                    .success(function () {
+                        toasty.success({
+                            title: "CHUL Service Added",
+                            msg: "CHUL Service successfully added"
+                        });
+                        $state.go("setup.chu_service");
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+                }else{
+                    adminApi.chuService.update($scope.service_id, changes)
+                    .success(function () {
+                        toasty.success({
+                            title: "CHUL Service Updated",
+                            msg: "CHUL Service successfully updated"
+                        });
+                        $state.go("setup.chu_service");
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+                }
             };
         }]
     );
