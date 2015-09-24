@@ -15,7 +15,7 @@
                         controller: "mfl.chul.controllers.approve_reject"
                     }
                 },
-                permission: "chul.chul.can_approve_chu"
+                permission: "chul.can_approve_chu"
             });
     }]);
 
