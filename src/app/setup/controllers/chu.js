@@ -28,8 +28,8 @@
         }]
     )
 
-    .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state", "$stateParams",
-                "adminApi","mfl.common.forms.changes", "toasty",
+    .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state",
+        "$stateParams", "adminApi","mfl.common.forms.changes", "toasty",
         function($scope, $state, $stateParams, adminApi, formChanges, toasty){
             if(!_.isUndefined($stateParams.id) && $stateParams.id !== "create"){
                 $scope.title = {
@@ -52,7 +52,7 @@
                     $scope.chuStatus = data;
                     $scope.deleteText = $scope.chuStatus.name;
                 }).error(function(error){
-                    $scope.alert = error.error;
+                    $scope.erros = error;
                 });
                 $scope.remove = function () {
                     adminApi.chuStatus.remove($stateParams.id).success(function(){
@@ -105,6 +105,109 @@
                     $scope.alert = error.error;
                     $scope.errors = error;
                 });
+            };
+        }]
+    )
+
+    .controller("mfl.setup.controller.chuService.list", ["$scope",
+        function ($scope) {
+            $scope.title = {
+                icon: "fa-exchange",
+                name: "Manage Community Unit Services"
+            };
+
+            $scope.filters =  {
+                "fields": "id,name,description"
+            };
+            $scope.action = [
+                {
+                    func : "ui-sref='setup.chu_service.create'" +
+                           " requires-user-feature='is_staff'" +
+                           " requires-permission='chul.add_chuservice'",
+                    class: "btn btn-primary",
+                    tipmsg: "Add community unit service",
+                    wording: "Add CU Service"
+                }
+            ];
+        }]
+    )
+
+    .controller("mfl.setup.controller.chuService.view", ["$scope",
+        "$stateParams", "adminApi", "$state", "toasty",
+        "mfl.common.forms.changes",
+        function ($scope, $stateParams, adminApi, $state, toasty, formChanges){
+            if(!_.isEmpty($stateParams.id) && !_.isUndefined($stateParams.id)) {
+                $scope.create = false;
+                $scope.title = {
+                    icon: "fa-edit",
+                    name: "Edit Community Unit Service"
+                };
+                $scope.action = [
+                    {
+                        func : "ui-sref='setup.chu_service.view.delete'" +
+                               "ng-if='!create'"+
+                               " requires-user-feature='is_staff'" +
+                               " requires-permission='chul.delete_chuservice'",
+                        class: "btn btn-danger",
+                        wording: "Delete",
+                        tipmsg: "Delete CHU Service"
+                    }
+                ];
+                $scope.service_id = $stateParams.id;
+                $scope.wrapper = adminApi.chuService;
+                adminApi.chuService.get($stateParams.id)
+                .success(function (data){
+                    $scope.chuService = data;
+                    $scope.deleteText = $scope.chuService.name;
+                }).error(function (data){
+                    $scope.erros = data;
+                });
+            }else{
+                $scope.create = true;
+                $scope.title = {
+                    icon: "fa-plus-circle",
+                    name: "New Community Unit Service"
+                };
+            }
+            $scope.remove = function () {
+                adminApi.chuService.remove($stateParams.id)
+                .success(function(){
+                    toasty.success({
+                        title: "CHUL Service Deleted",
+                        msg: "CHUL Service successfully deleted"
+                    });
+                    $state.go("setup.chu_service");
+                }).error(function(error){
+                    $scope.errors = error;
+                });
+            };
+            $scope.saveChuservice = function (frm) {
+                var changes = formChanges.whatChanged(frm);
+                if($scope.create){
+                    adminApi.chuService.create($scope.chuService)
+                    .success(function () {
+                        toasty.success({
+                            title: "CHUL Service Added",
+                            msg: "CHUL Service successfully added"
+                        });
+                        $state.go("setup.chu_service");
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+                }else{
+                    adminApi.chuService.update($scope.service_id, changes)
+                    .success(function () {
+                        toasty.success({
+                            title: "CHUL Service Updated",
+                            msg: "CHUL Service successfully updated"
+                        });
+                        $state.go("setup.chu_service");
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+                }
             };
         }]
     );

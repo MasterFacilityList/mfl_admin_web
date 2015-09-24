@@ -44,6 +44,7 @@
                 change_reasons: api.setBaseUrl("api/facilities/level_change_reasons/"),
                 RegulatoryBodyContacts: api.setBaseUrl("api/facilities/regulating_body_contacts/"),
                 chuStatus: api.setBaseUrl("api/chul/statuses/"),
+                chuService: api.setBaseUrl("api/chul/services/"),
                 chuApprovers: api.setBaseUrl("api/chul/approvers/"),
                 geocode_methods: api.setBaseUrl("api/gis/geo_code_methods/"),
                 geocode_sources: api.setBaseUrl("api/gis/geo_code_sources/"),

@@ -77,7 +77,6 @@
                 500, res);
                 createController("mfl.setup.controller.chuStatus.view", dt);
                 $httpBackend.flush();
-                expect($scope.alert).toEqual(res.error);
             });
 
         it("should delete chuStatus: success",function(){
@@ -189,6 +188,131 @@
                 $httpBackend.flush();
                 expect($scope.alert).toEqual("error");
                 expect($state.go).not.toHaveBeenCalledWith("setup.chu_status");
+            });
+
+        it("should have `mfl.setup.controller.chuService.list` defined",
+           function(){
+                var ctrl = createController("mfl.setup.controller.chuService.list", {});
+                expect(ctrl).toBeDefined();
+            });
+
+        it("should have `mfl.setup.controller.chuService.view` defined",
+           function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                var ctrl = createController("mfl.setup.controller.chuService.view", dt);
+                expect(ctrl).toBeDefined();
+            });
+        it("should view a chuService: success",function(){
+                var dt = {
+                    $stateParams: {id: "1"}
+                };
+                var res = {id: "1"};
+                $scope.create = false;
+                $httpBackend.expectGET(SERVER_URL+"api/chul/services/1/").respond(200, res);
+                createController("mfl.setup.controller.chuService.view", dt);
+                $httpBackend.flush();
+                expect($scope.chuService).toEqual(res);
+            });
+
+        it("should view a chuService: fail",function(){
+                var dt = {
+                    $stateParams: {id: "1"}
+                };
+                $scope.create = false;
+                $httpBackend.expectGET(SERVER_URL+"api/chul/services/1/").respond(500, {});
+                createController("mfl.setup.controller.chuService.view", dt);
+                $httpBackend.flush();
+            });
+
+        it("should delete chuService: success",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                spyOn($state, "go");
+                var res = {mgs: "ok"};
+                $httpBackend.expectDELETE(SERVER_URL+"api/chul/services/1/").respond(200, res);
+                createController("mfl.setup.controller.chuService.view", dt);
+                $scope.remove();
+                $httpBackend.flush();
+                expect($state.go).toHaveBeenCalledWith("setup.chu_service");
+            });
+
+        it("should delete chuService: fail",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                $httpBackend.expectDELETE(SERVER_URL+"api/chul/services/1/").respond(500, {});
+                createController("mfl.setup.controller.chuService.view", dt);
+                $scope.remove();
+                $httpBackend.flush();
+            });
+
+        it("should update chuService: success",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                var res = {msg: "Ok"};
+                var form = {name : "Antony"};
+                spyOn($state, "go");
+                spyOn(formService, "whatChanged").andReturn(form);
+                $httpBackend.expectPATCH(SERVER_URL+"api/chul/services/1/")
+                    .respond(200, res);
+                createController("mfl.setup.controller.chuService.view", dt);
+                $scope.service_id = 1;
+                $scope.create = false;
+                $scope.saveChuservice(form);
+                $httpBackend.flush();
+            });
+
+        it("should update chuService: fail",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                var form = {name : "Antony"};
+                spyOn($state, "go");
+                spyOn(formService, "whatChanged").andReturn(form);
+                $httpBackend.expectPATCH(SERVER_URL+"api/chul/services/1/")
+                    .respond(500, {});
+                createController("mfl.setup.controller.chuService.view", dt);
+                $scope.service_id = 1;
+                $scope.create = false;
+                $scope.saveChuservice(form);
+                $httpBackend.flush();
+            });
+
+        it("should create chuService: success",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                var res = {msg: "Ok"};
+                var form = {name : "Antony"};
+                spyOn($state, "go");
+                spyOn(formService, "whatChanged").andReturn(form);
+                $httpBackend.expectPOST(SERVER_URL+"api/chul/services/")
+                    .respond(200, res);
+                createController("mfl.setup.controller.chuService.view", dt);
+                $scope.service_id = 1;
+                $scope.create = true;
+                $scope.saveChuservice(form);
+                $httpBackend.flush();
+            });
+
+        it("should create chuService: fail",function(){
+                var dt = {
+                    $stateParams: {id: 1}
+                };
+                var form = {name : "Antony"};
+                spyOn($state, "go");
+                spyOn(formService, "whatChanged").andReturn(form);
+                $httpBackend.expectPOST(SERVER_URL+"api/chul/services/")
+                    .respond(500, {});
+                createController("mfl.setup.controller.chuService.view", dt);
+                $scope.service_id = 1;
+                $scope.create = true;
+                $scope.saveChuservice(form);
+                $httpBackend.flush();
             });
     });
 })(window._);
