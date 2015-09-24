@@ -113,7 +113,7 @@
         function ($scope) {
             $scope.title = {
                 icon: "fa-exchange",
-                name: "Manage Community Units Service"
+                name: "Manage Community Unit Services"
             };
 
             $scope.filters =  {
@@ -166,7 +166,7 @@
                 $scope.create = true;
                 $scope.title = {
                     icon: "fa-plus-circle",
-                    name: "New Community Unit Status"
+                    name: "New Community Unit Service"
                 };
             }
             $scope.remove = function () {

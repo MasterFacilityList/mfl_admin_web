@@ -63,7 +63,7 @@
                         templateUrl: "setup/tpls/chu/service/service_list.tpl.html"
                     }
                 },
-                permission: "chul.view_status",
+                permission: "chul.view_chuservice",
                 userFeature: "is_national"
             })
         .state("setup.chu_service.view", {
