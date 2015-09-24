@@ -102,6 +102,7 @@ module.exports = {
             "vendor/angular-auto-validate/dist/jcs-auto-validate.js",
             "vendor/angular-toasty/dist/angular-toasty.js",
             "vendor/angularjs-datepicker/src/js/angular-datepicker.js",
+            "vendor/ng-file-upload/ng-file-upload.js",
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
