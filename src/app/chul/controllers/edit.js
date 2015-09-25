@@ -65,12 +65,14 @@
             .error(function (data) {
                 $scope.errors = data;
             });
-            $scope.unit_contacts = [
-                {
-                    contact_type : "",
-                    contact : ""
+            $scope.unitContacts = function (u){
+                if(u.contacts.length === 0) {
+                    $scope.unit.contacts.push({
+                        "contact_type" : "",
+                        "contact" : ""
+                    });
                 }
-            ];
+            };
             $scope.addContact = function () {
                 $scope.unit.contacts.push({contact_type: "", contact : ""});
             };
@@ -144,6 +146,13 @@
                     }
                 }
             };
+            /*Wait for facility to be defined*/
+            $scope.$watch("unit", function (u) {
+                if (_.isUndefined(u)){
+                    return;
+                }
+                $scope.unitContacts(u);
+            });
         }]
     )
     .controller("mfl.chul.controllers.edit_chul.chews", ["$scope",
