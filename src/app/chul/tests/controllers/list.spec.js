@@ -795,6 +795,15 @@
                 };
                 data.$scope.unitWorkers(data.$scope.unit);
             });
+            it("should test basic controller unit undefined", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                data.$scope.create = false;
+                ctrl(".edit_chul.basic", data);
+                data.$scope.unit = undefined;
+                data.$scope.$apply();
+            });
             it("should test chew controller unit undefined", function () {
                 var data = {
                     "$scope" : rootScope.$new()
