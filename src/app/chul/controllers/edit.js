@@ -72,10 +72,29 @@
                 }
             ];
             $scope.addContact = function () {
-                $scope.unit_contacts.push({contact_type: "", contact : ""});
+                $scope.unit.contacts.push({contact_type: "", contact : ""});
             };
             $scope.removeContact = function (obj) {
-                $scope.unit_contacts = _.without($scope.unit_contacts, obj);
+                if(_.isUndefined(obj.id)){
+                    $scope.unit.contacts = _.without($scope.unit.contacts,obj);
+                }else{
+                    wrappers.unit_contacts.remove(obj.id)
+                    .success(function () {
+                        wrappers.contacts.remove(obj.contact_id)
+                        .success(function () {
+                            toasty.success({
+                                title: "Unit Contact Deleted",
+                                msg: "Contact successfully deleted"
+                            });
+                        })
+                        .error(function (data) {
+                            $scope.errors = data;
+                        });
+                    })
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+                }
             };
             $scope.unitLocation = function (fac_id) {
                 var fac = _.findWhere($scope.facilities, {"id" : fac_id});
@@ -89,6 +108,9 @@
                 var changes = formChanges.whatChanged(frm);
                 $scope.unit.facility = $scope.select_values.facility;
                 if(!$scope.create) {
+                    if($scope.unit.contacts.length > 0){
+                        changes.contacts = $scope.unit.contacts;
+                    }
                     wrappers.chuls.update($scope.unit_id, changes)
                     .success(function () {
                         toasty.success({

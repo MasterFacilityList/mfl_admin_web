@@ -71,6 +71,12 @@
             <div class="col-xs-12">
                 <h4 class="fw-600">Unit Contacts</h4>
             </div>
+            <div ng-repeat="cont in unit.contacts" class="col-xs-12 fw-500">
+                <label class="text-black fw-600">
+                    {{cont.contact_type_name | titlecase}}:
+                </label>
+                {{cont.contact}}
+            </div>
           </div>
         </div>
         <div class="col-xs-12 margin-t-10 margin-b-0 pad-0"><hr class="line-divider"></div>
