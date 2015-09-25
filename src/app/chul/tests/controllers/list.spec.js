@@ -149,10 +149,7 @@
                         }
                     ];
                     data.$scope.unit_id = 1;
-                    var obj = {
-                        contact_type : "MOBILE",
-                        contact : "999"
-                    };
+
                     data.$scope.select_values = {
                         facility : {id : "1"}
                     };
@@ -168,7 +165,17 @@
                         facility : "2",
                         facility_county : "",
                         facility_subcounty : "",
-                        facility_ward : ""
+                        facility_ward : "",
+                        contacts : [
+                            {
+                                contact_type : "",
+                                contact : ""
+                            },
+                            {
+                                contact_type : "MOBILE",
+                                contact : "999"
+                            }
+                        ]
                     };
                     var frm = {
                         "$dirty": true,
@@ -178,17 +185,200 @@
                         }
                     };
                     var changed = {
-                        name : "Mathare 4B"
+                        name : "Mathare 4B",
+                        contacts : [
+                            {
+                                contact_type : "",
+                                contact : ""
+                            },
+                            {
+                                contact_type : "MOBILE",
+                                contact : "999"
+                            }
+                        ]
                     };
-                    httpBackend.expectPATCH(server_url + "api/chul/units/1/",changed).respond(200);
-                    data.$scope.addContact();
-                    data.$scope.removeContact(obj);
+                    httpBackend.expectPATCH(server_url +"api/chul/units/1/",
+                        changed).respond(200);
                     data.$scope.save(frm);
                     data.$scope.unitLocation("2");
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
                     httpBackend.verifyNoOutstandingExpectation();
                 }]);
+            });
+            it("should test chul contacts add and removal", function() {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                ctrl(".edit_chul.basic", data);
+                var obj = {
+                    contact_type : "MOBILE",
+                    contact : "999"
+                };
+                data.$scope.unit = {
+                    facility : "2",
+                    facility_county : "",
+                    facility_subcounty : "",
+                    facility_ward : "",
+                    contacts : [
+                        {
+                            contact_type : "",
+                            contact : ""
+                        },
+                        {
+                            contact_type : "MOBILE",
+                            contact : "999"
+                        }
+                    ]
+                };
+                data.$scope.addContact();
+                data.$scope.removeContact(obj);
+            });
+            it("should test chul backend-contact removal", function() {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                ctrl(".edit_chul.basic", data);
+                var obj = {
+                    id : "3",
+                    contact_type : "MOBILE",
+                    contact : "999",
+                    contact_id : "1"
+                };
+                data.$scope.unit = {
+                    facility : "2",
+                    facility_county : "",
+                    facility_subcounty : "",
+                    facility_ward : "",
+                    contacts : [
+                        {
+                            contact_type : "",
+                            contact : ""
+                        },
+                        {
+                            id : "3",
+                            contact_type : "MOBILE",
+                            contact : "999",
+                            contact_id : "1"
+                        }
+                    ]
+                };
+                httpBackend.expectDELETE(server_url+
+                    "api/chul/unit_contacts/3/").respond(204, {});
+                httpBackend.expectDELETE(server_url+
+                    "api/common/contacts/1/").respond(204, {});
+                data.$scope.removeContact(obj);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test chul backend-contact removal: fail", function() {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                ctrl(".edit_chul.basic", data);
+                var obj = {
+                    id : "3",
+                    contact_type : "MOBILE",
+                    contact : "999",
+                    contact_id : "1"
+                };
+                data.$scope.unit = {
+                    facility : "2",
+                    facility_county : "",
+                    facility_subcounty : "",
+                    facility_ward : "",
+                    contacts : [
+                        {
+                            contact_type : "",
+                            contact : ""
+                        },
+                        {
+                            id : "3",
+                            contact_type : "MOBILE",
+                            contact : "999",
+                            contact_id : "1"
+                        }
+                    ]
+                };
+                httpBackend.expectDELETE(server_url+
+                    "api/chul/unit_contacts/3/").respond(204, {});
+                httpBackend.expectDELETE(server_url+
+                    "api/common/contacts/1/").respond(500);
+                data.$scope.removeContact(obj);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test chul backend-contact removal: total fail",
+                function() {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                ctrl(".edit_chul.basic", data);
+                var obj = {
+                    id : "3",
+                    contact_type : "MOBILE",
+                    contact : "999",
+                    contact_id : "1"
+                };
+                data.$scope.unit = {
+                    facility : "2",
+                    facility_county : "",
+                    facility_subcounty : "",
+                    facility_ward : "",
+                    contacts : [
+                        {
+                            contact_type : "",
+                            contact : ""
+                        },
+                        {
+                            id : "3",
+                            contact_type : "MOBILE",
+                            contact : "999",
+                            contact_id : "1"
+                        }
+                    ]
+                };
+                httpBackend.expectDELETE(server_url+
+                    "api/chul/unit_contacts/3/").respond(500);
+                data.$scope.removeContact(obj);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+            it("should test chul updates removed contacts", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                data.$scope.nxtState = false;
+                data.$scope.create = false;
+                ctrl(".edit_chul.basic", data);
+                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
+                    .respond(500, {});
+                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                    .respond(500, {});
+                data.$scope.unit_id = 1;
+                data.$scope.select_values = {
+                    facility : {id : "1"}
+                };
+                data.$scope.unit = {
+                    facility : "2",
+                    contacts : []
+                };
+                var frm = {
+                    "$dirty": true,
+                    "name": {
+                        "$modelValue": "Mathare 4B",
+                        "$dirty": true
+                    }
+                };
+                data.$scope.save(frm);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
             });
             it("should test chul basic controller failing calls", function () {
                 var data = {
@@ -207,7 +397,19 @@
                 data.$scope.select_values = {
                     facility : {id : "1"}
                 };
-                data.$scope.unit = {facility : "2"};
+                data.$scope.unit = {
+                    facility : "2",
+                    contacts : [
+                        {
+                            contact_type : "",
+                            contact : ""
+                        },
+                        {
+                            contact_type : "MOBILE",
+                            contact : "999"
+                        }
+                    ]
+                };
                 var frm = {
                     "$dirty": true,
                     "name": {
@@ -216,7 +418,17 @@
                     }
                 };
                 var changed = {
-                    name : "Mathare 4B"
+                    name : "Mathare 4B",
+                    contacts : [
+                        {
+                            contact_type : "",
+                            contact : ""
+                        },
+                        {
+                            contact_type : "MOBILE",
+                            contact : "999"
+                        }
+                    ]
                 };
                 httpBackend.expectPATCH(server_url + "api/chul/units/1/",changed).respond(500);
                 data.$scope.save(frm);
@@ -247,7 +459,10 @@
                 data.$scope.select_values = {
                     facility : {id : "1"}
                 };
-                data.$scope.unit = {facility : "2"};
+                data.$scope.unit = {
+                    facility : "2",
+                    contacts : []
+                };
                 var frm = {
                     "$dirty": true,
                     "name": {
