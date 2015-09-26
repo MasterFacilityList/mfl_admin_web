@@ -12,6 +12,11 @@
                 </a>
             </li>
             <li ui-sref-active="active">
+                <a ui-sref="chu_pending_aprovals" has-permissions='chul.can_approve_chu,chul.view_communityhealthunit' ui-sref-opts="{reload : true}">
+                    <span class="sidebar-text">Units Pending Approvals</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
                 <a ui-sref="chu_reject_list" ui-sref-opts="{reload : true}">
                     <span class="sidebar-text">Rejected Units</span>
                 </a>
