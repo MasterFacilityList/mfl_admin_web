@@ -99,8 +99,12 @@
     <h3>Pending updates</h3>
 
    <div ng-if="unit.pending_updates.basic">
-        <h4>Basic</h4>
-        <table class="table table-stripped">
+        <div class="col-xs-12 margin-t-20">
+            <i class="lato fs-14 fw-600">Basic:</i>
+        </div>
+        <div class="col-xs-12 pad-0margin-0"><hr class="line-divider-dashed margin-0"></div>
+        <div class="col-xs-12">
+            <table class="table table-stripped">
             <thead>
                 <th>Field</th>
                 <th>Old Value</th>
@@ -142,27 +146,36 @@
                 <td>{{unit.pending_updates.basic.date_operational | date}}</td>
             </tr>
         </table>
-   </div>
+        </div>
+      </div>
 
    <div ng-if="unit.pending_updates.workers">
-        <h4>Workers</h4>
+        <div class="col-xs-12 margin-t-20">
+            <i class="lato fs-14 fw-600">Workers:</i>
+        </div>
+        <div class="col-xs-12 pad-0margin-0"><hr class="line-divider-dashed margin-0"></div>
          <div ng-repeat="worker in unit.pending_updates.workers" class="col-xs-12 fw-500 pad-0 margin-b-0">
           <div class="col-xs-12">
-            <h5 class="margin-b--2">
-              <span class="fa-stack fa-lg fs-13">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa {{worker.is_incharge ? 'fa-user-md' : 'fa-user'}} fa-stack-1x fa-inverse"></i>
-              </span>
-              <span class="fw-600">CHEW <span ng-if="worker.is_incharge">in Charge</span> <span ng-if="!worker.is_incharge">at Facility</span> :</span>
-              {{worker.name}}
-            </h5>
+           <div class="col-xs-12">
+                <h5 class="margin-b--2">
+                  <span class="fa-stack fa-lg fs-13">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa {{worker.is_incharge ? 'fa-user-md' : 'fa-user'}} fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <span class="fw-600">CHEW <span ng-if="worker.is_incharge">in Charge</span> <span ng-if="!worker.is_incharge">at Facility</span> :</span>
+                  {{worker.name}}
+                </h5>
+           </div>
           </div>
         </div>
    </div>
 
 
     <div ng-if="unit.pending_updates.contacts">
-        <h4>Contacts</h4>
+        <div class="col-xs-12 margin-t-20">
+            <i class="lato fs-14 fw-600">Contacts:</i>
+        </div>
+        <div class="col-xs-12 pad-0margin-0"><hr class="line-divider-dashed margin-0"></div>
         <div class="col-md-4 pad-0 col-xs-12">
             <div ng-repeat="cont in unit.pending_updates.contacts" class="col-xs-12 fw-500">
                 <label class="text-black fw-600">
