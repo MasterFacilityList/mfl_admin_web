@@ -24,5 +24,14 @@
                 }
             ]);
         });
+
+        it("should load regulator sync list controller", function () {
+            inject(["$controller", "$rootScope",
+                function ($controller, rootScope) {
+                    var data = { "$scope": rootScope.$new() };
+                    $controller("mfl.facility_mgmt.controllers.regulator_sync", data);
+                }
+            ]);
+        });
     });
 })();
