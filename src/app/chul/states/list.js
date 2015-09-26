@@ -28,16 +28,16 @@
             },
             permission: "chul.view_communityhealthunit"
         })
-        .state("chu_pending_aprovals", {
+        .state("chu_pending_approvals", {
             parent: "chul",
-            url: "^/chu_pending_approvals/",
+            url: "^/chul_pending_approvals/",
             views: {
                 "main-content@chul": {
-                    templateUrl: "chul/tpls/chul.grid.tpl.html",
+                    templateUrl: "chul/tpls/chul_pending_approval.grid.tpl.html",
                     controller: "mfl.chul.controllers.units_pending_approvals"
                 }
             },
-            permission: "chul.can_approve_chu"
+            permission: "chul.view_communityhealthunit"
         })
         .state("chu_reject_list", {
             parent: "chul",

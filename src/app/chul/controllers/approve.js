@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular,_){
     "use strict";
 
     angular.module("mfl.chul.controllers.approve", ["angular-toasty"])
@@ -11,6 +11,36 @@
             wrappers.chuls.get($stateParams.unit_id)
             .success(function (data) {
                 $scope.unit = data;
+                $scope.approveChuUpdate = function (approve) {
+                    if(approve=== true){
+                        $scope.approval = {
+                            is_approved: true
+                        };
+                    } else {
+                        $scope.approval = {
+                            is_rejected: true
+                        };
+                    }
+                    wrappers.chuls_updates.update($scope.unit.latest_update,$scope.approval)
+                    .success(function () {
+                        if(approve === true){
+                            toasty.success({
+                                title: "Community Unit Update",
+                                msg: "Community Unit update successfully updated"
+                            });
+                        } else {
+                            toasty.success({
+                                title: "Community Unit Update",
+                                msg: "Community Unit update successfully rejected"
+                            });
+                        }
+                        $state.go("chu_pending_approvals");
+                    })
+                    .error(function (error) {
+                        $scope.alert =  error;
+                    });
+                };
+                $scope.updates_empty = _.isEmpty(data.pending_updates);
                 //checks if chul has been approved/rejected at least once
                 $scope.approve_reject = $scope.unit.is_approved || $scope.unit.is_rejected;
                 //status of approval
@@ -63,4 +93,4 @@
         }]
     );
 
-})(window.angular);
+})(window.angular, window._);
