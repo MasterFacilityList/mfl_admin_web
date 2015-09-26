@@ -42,6 +42,14 @@
                     }
                 ]);
             });
+            it("should load chul pending approval list controller", function () {
+                inject(["$controller", "$rootScope",
+                    function ($controller, rootScope) {
+                        var data = { "$scope": rootScope.$new() };
+                        ctrl(".units_pending_approvals", data);
+                    }
+                ]);
+            });
             it("should load chul rejected list controller", function () {
                 inject(["$controller", "$rootScope",
                     function ($controller, rootScope) {
