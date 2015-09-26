@@ -14,7 +14,6 @@
         this.contact_types = api.setBaseUrl("api/common/contact_types/");
         this.contacts = api.setBaseUrl("api/common/contacts/");
         this.unit_contacts = api.setBaseUrl("api/chul/unit_contacts/");
-        this.unit_contacts = api.setBaseUrl("api/chul/unit_contacts/");
     }]);
 
 })(window.angular);
