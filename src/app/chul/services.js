@@ -11,6 +11,8 @@
         this.unit_status = api.setBaseUrl("api/chul/statuses/");
         this.facilities = api.setBaseUrl("api/facilities/facilities/");
         this.contact_types = api.setBaseUrl("api/common/contact_types/");
+        this.contacts = api.setBaseUrl("api/common/contacts/");
+        this.unit_contacts = api.setBaseUrl("api/chul/unit_contacts/");
     }]);
 
 })(window.angular);

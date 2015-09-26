@@ -13,7 +13,14 @@
         function ($scope, multistepService, $state, $stateParams, wrappers) {
             $scope.create = true;
             /*Declaring unit scope variable*/
-            $scope.unit = {};
+            $scope.unit = {
+                contacts : [
+                    {
+                        contact_type: "",
+                        contacts: ""
+                    }
+                ]
+            };
             $scope.steps = [
                 {
                     name : "basic",
