@@ -79,6 +79,7 @@
             this.create_officer = api.setBaseUrl("api/facilities/officer_facade/");
             this.officer_contacts = api.setBaseUrl("api/facilities/officer_contacts/");
             this.keph_levels = api.setBaseUrl("api/facilities/keph/");
+            this.regulator_sync = api.setBaseUrl("api/facilities/regulator_sync/");
 
             var downloadFile = function (base_url, facility_id) {
                 var helpers = api.apiHelpers;

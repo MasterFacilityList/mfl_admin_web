@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _){
     "use strict";
 
     angular.module("mfl.facility_mgmt.controllers.list", [])
@@ -39,6 +39,16 @@
                           "operation_status_name,date_requested,date_approved"
             };
         }]
+    )
+
+    .controller("mfl.facility_mgmt.controllers.regulator_sync",
+        ["$scope", "mfl.auth.services.login", function ($scope, loginUser) {
+            $scope.title = { "name": "Synchronize Regulated Facilities" };
+            $scope.filters = {
+                "mfl_code": null,
+                "county": _.pluck(loginUser.getUser().user_counties, "county_code")
+            };
+        }]
     );
 
-})(window.angular);
+})(window.angular, window._);
