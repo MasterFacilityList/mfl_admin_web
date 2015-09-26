@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="pull-right col-xs-12">
+        <p ng-if="pagination.active" class="text-right margin-t-5">Showing <strong>{{pagination.start_index}} - {{pagination.end_index}}</strong> of <span>{{pagination.count}} records</span></p>
+    </div>
+</div>
+
+<table class="table table-hover table-condensed fs-12 margin-t-20">
+    <thead>
+        <th class="text-wrap fs-11" sil-grid-sort field='name'>Facility Name</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='facility_type_name'>Registration Number</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='owner_name'>County</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='county'>Facility Type</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='constituency'>Facility owner</th>
+        <th class="text-wrap fs-11" sil-grid-sort field='ward'>MFL Code</th>
+    </thead>
+
+    <tbody ng-if="facilities.length===0">
+        <tr><td class="text-center" colspan="8">Sorry, no data is available</td></tr>
+    </tbody>
+
+    <tbody class="fade-content" ng-if="facilities.length>0">
+        <tr ng-repeat="fac in facilities" >
+            <td data-title="Facility Name:" >{{::fac.name}}</td>
+            <td class="text-wrap" data-title="Registration Number:" >{{::fac.registration_number | titlecase}}</td>
+            <td class="text-wrap" data-title="County:"> {{::fac.county_name | titlecase}}</td>
+            <td class="text-wrap" data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
+            <td class="text-wrap" data-title="Facility Owner:" >{{::fac.owner_name}}</td>
+            <td class="text-wrap" data-title="MFL Code:" >{{::fac.mfl_code}}</td>
+        </tr>
+    </tbody>
+</table>
+<sil-grid-pagination> </sil-grid-pagination>

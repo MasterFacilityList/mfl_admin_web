@@ -52,6 +52,18 @@
                 }
             },
             permission: "facilities.view_facility"
+        })
+
+        .state("facilities_regulator_sync", {
+            "parent": "facility_mgmt",
+            "url": "^/facilities_regulator_sync/",
+            "views": {
+                "main-content@facility_mgmt": {
+                    templateUrl: "facility_mgmt/tpls/regulator_sync.grid.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.regulator_sync"
+                }
+            },
+            permission: "facilities.view_facility"
         });
     }]);
 
