@@ -42,6 +42,31 @@
                 httpBackend.verifyNoOutstandingExpectation();
             });
 
+            it("should load controller and data but fail to do updates", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$stateParams": {
+                        unit_id: 1
+                    }
+                };
+                ctrl("approve_reject", data);
+                httpBackend
+                    .expectGET(server_url+"api/chul/units/1/")
+                    .respond(200, {latest_update:1});
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.resetExpectations();
+                httpBackend
+                    .expectPATCH(server_url+"api/chul/updates/1/")
+                    .respond(500, {});
+                data.$scope.approveChu(true,"comment");
+                data.$scope.approveChuUpdate(true);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+            });
+
             it("should test failing to view one chul", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -68,7 +93,7 @@
                 ctrl("approve_reject", data);
                 httpBackend
                     .expectGET(server_url+"api/chul/units/1/")
-                    .respond(200, {});
+                    .respond(200, {latest_update:1});
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -77,7 +102,11 @@
                 httpBackend
                     .expectPATCH(server_url+"api/chul/units/1/")
                     .respond(200, {});
+                httpBackend
+                    .expectPATCH(server_url+"api/chul/updates/1/")
+                    .respond(200, {});
                 data.$scope.approveChu(true,"comment");
+                data.$scope.approveChuUpdate(true);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -118,7 +147,7 @@
                 ctrl("approve_reject", data);
                 httpBackend
                     .expectGET(server_url+"api/chul/units/1/")
-                    .respond(200, {});
+                    .respond(200, {latest_update:1});
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -127,7 +156,11 @@
                 httpBackend
                     .expectPATCH(server_url+"api/chul/units/1/")
                     .respond(200, {});
+                httpBackend
+                    .expectPATCH(server_url+"api/chul/updates/1/")
+                    .respond(200, {});
                 data.$scope.approveChu(false,"comment");
+                data.$scope.approveChuUpdate(false);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();

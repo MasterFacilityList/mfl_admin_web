@@ -104,48 +104,50 @@
         </div>
         <div class="col-xs-12 pad-0margin-0"><hr class="line-divider-dashed margin-0"></div>
         <div class="col-xs-12">
-            <table class="table table-stripped">
-            <thead>
-                <th>Field</th>
-                <th>Old Value</th>
-                <th>New Value</th>
-            </thead>
+            <div class="col-xs-12">
+                <table class="table table-stripped">
+                <thead>
+                    <th>Field</th>
+                    <th>Old Value</th>
+                    <th>New Value</th>
+                </thead>
 
-        <tr ng-if="unit.pending_updates.basic.name">
-            <td>Name</td>
-            <td>{{unit.name}}</td>
-            <td>{{unit.pending_updates.basic.name}}</td>
-            </tr>
+            <tr ng-if="unit.pending_updates.basic.name">
+                <td>Name</td>
+                <td>{{unit.name}}</td>
+                <td>{{unit.pending_updates.basic.name}}</td>
+                </tr>
 
-            <tr ng-if="unit.pending_updates.basic.facility">
-                <td>Facility</td>
-            <td>{{unit.facility_name}}</td>
-                <td>{{unit.pending_updates.basic.facility.facility_name}} </td>
-            </tr>
+                <tr ng-if="unit.pending_updates.basic.facility">
+                    <td>Facility</td>
+                <td>{{unit.facility_name}}</td>
+                    <td>{{unit.pending_updates.basic.facility.facility_name}} </td>
+                </tr>
 
-            <tr ng-if="unit.pending_updates.basic.status">
-                <td>Status</td>
-                <td>{{unit.status_name}}</td>
-                <td>{{unit.pending_updates.basic.status.status_name}}</td>
-            </tr>
+                <tr ng-if="unit.pending_updates.basic.status">
+                    <td>Status</td>
+                    <td>{{unit.status_name}}</td>
+                    <td>{{unit.pending_updates.basic.status.status_name}}</td>
+                </tr>
 
-            <tr ng-if="unit.pending_updates.basic.location">
-                <td>Location</td>
-                <td>{{unit.location}}</td>
-                <td>{{unit.pending_updates.basic.location}}</td>
-            </tr>
+                <tr ng-if="unit.pending_updates.basic.location">
+                    <td>Location</td>
+                    <td>{{unit.location}}</td>
+                    <td>{{unit.pending_updates.basic.location}}</td>
+                </tr>
 
-            <tr ng-if="unit.pending_updates.basic.date_etablished">
-                <td>Date Established</td>
-                <td>{{unit.date_established | date}}</td>
-                <td>{{unit.pending_updates.basic.date_etablished | date }}</td>
-            </tr>
-            <tr ng-if="unit.pending_updates.basic.date_operational">
-                <td>Date Operational</td>
-                <td>{{unit.date_operational | date}}</td>
-                <td>{{unit.pending_updates.basic.date_operational | date}}</td>
-            </tr>
-        </table>
+                <tr ng-if="unit.pending_updates.basic.date_etablished">
+                    <td>Date Established</td>
+                    <td>{{unit.date_established | date}}</td>
+                    <td>{{unit.pending_updates.basic.date_etablished | date }}</td>
+                </tr>
+                <tr ng-if="unit.pending_updates.basic.date_operational">
+                    <td>Date Operational</td>
+                    <td>{{unit.date_operational | date}}</td>
+                    <td>{{unit.pending_updates.basic.date_operational | date}}</td>
+                </tr>
+            </table>
+            </div>
         </div>
       </div>
 
@@ -177,17 +179,27 @@
         </div>
         <div class="col-xs-12 pad-0margin-0"><hr class="line-divider-dashed margin-0"></div>
         <div class="col-md-4 pad-0 col-xs-12">
-            <div ng-repeat="cont in unit.pending_updates.contacts" class="col-xs-12 fw-500">
-                <label class="text-black fw-600">
-                    {{cont.contact_type_name | titlecase}}:
-                </label>
-                {{cont.contact}}
-            </div>
+           <div class="col-xs-12">
+                <div ng-repeat="cont in unit.pending_updates.contacts" class="col-xs-12 fw-500">
+                    <label class="text-black fw-600">
+                        {{cont.contact_type_name | titlecase}}:
+                    </label>
+                    {{cont.contact}}
+                </div>
+           </div>
       </div>
         </div>
-    
-</div>
+    <div class="col-xs-12 margin-t-20">
+        <form name="frm_approve_up" ng-submit="approveChuUpdate(approve_update)" role="form" novalidate>
+            <!--For when cu is neither rejected or approved-->
+            <div>
+                <button type="submit" class="btn btn-success" ng-click="approve_update=true">Approve CU Updates</button>
+                <button type="submit" class="btn btn-danger margin-l-5" ng-click="approve_update=false">Reject CU Updates</button>
+            </div>
+        </form>
+    </div>
 
+</div>
 
     <!-- Overall community approval -->
     <div class="col-xs-12 content-card margin-t-20 pad-0" ng-if="approve_reject" ng-show="updates_empty">
@@ -222,8 +234,8 @@
                 </div>
                 <!--For when cu is neither rejected or approved-->
                 <div ng-hide="approve_reject">
-                    <button type="submit" class="btn btn-success" ng-click="approve=true">Approve Community</button>
-                    <button type="submit" class="btn btn-danger margin-l-5" ng-click="approve=false">Reject Community</button>
+                    <button type="submit" class="btn btn-success" ng-click="approve=true">Approve Community Unit</button>
+                    <button type="submit" class="btn btn-danger margin-l-5" ng-click="approve=false">Reject Community Unit</button>
                 </div>
                 <!--For when cu was either rejected or approved at least once-->
                 <button ng-show="rejected" type="submit" class="btn btn-success" ng-click="approve=true">Approve Community</button>
