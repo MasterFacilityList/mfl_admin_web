@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    ddescribe("Test facility list controllers", function () {
+    describe("Test facility list controllers", function () {
 
         beforeEach(function () {
             module("mfl.facility_mgmt.controllers");
