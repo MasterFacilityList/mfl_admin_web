@@ -54,55 +54,55 @@
             </div>
         </div>
         <div class=" col-xs-12"  ng-hide="updates_empty">
-            <div>
-               <div ng-if="unit.pending_updates.basic">
-                <div class="margin-t-10">
-                    <i class="lato fs-14 fw-600">Basic Details:</i>
-                </div>
-                <div class="col-xs-12 pad-0 margin-t-10 margin-0"><hr class="line-divider-dashed margin-0"></div>
-                <table class="table table-stripped">
-                    <thead>
-                        <th>Field</th>
-                        <th>Old Value</th>
-                        <th>New Value</th>
-                    </thead>
-                <tr ng-if="unit.pending_updates.basic.name">
-                    <td>Name</td>
-                    <td>{{unit.name}}</td>
-                    <td>{{unit.pending_updates.basic.name}}</td>
-                    </tr>
-                    <tr ng-if="unit.pending_updates.basic.facility">
-                        <td>Facility</td>
-                    <td>{{unit.facility_name}}</td>
-                        <td>{{unit.pending_updates.basic.facility.facility_name}} </td>
-                    </tr>
-                    <tr ng-if="unit.pending_updates.basic.status">
-                        <td>Status</td>
-                        <td>{{unit.status_name}}</td>
-                        <td>{{unit.pending_updates.basic.status.status_name}}</td>
-                    </tr>
-                    <tr ng-if="unit.pending_updates.basic.location">
-                        <td>Location</td>
-                        <td>{{unit.location}}</td>
-                        <td>{{unit.pending_updates.basic.location}}</td>
-                    </tr>
-                    <tr ng-if="unit.pending_updates.basic.date_etablished">
-                        <td>Date Established</td>
-                        <td>{{unit.date_established | date}}</td>
-                        <td>{{unit.pending_updates.basic.date_etablished | date }}</td>
-                    </tr>
-                    <tr ng-if="unit.pending_updates.basic.date_operational">
-                        <td>Date Operational</td>
-                        <td>{{unit.date_operational | date}}</td>
-                        <td>{{unit.pending_updates.basic.date_operational | date}}</td>
-                    </tr>
-                </table>
-           </div>
-               <div ng-if="unit.pending_updates.workers">
-                    <div class="margin-b-20">
-                        <i class="lato fs-14 fw-600">Workers:</i>
+            <div class="">
+               <div class="col-xs-12" ng-if="unit.pending_updates.basic">
+                    <div class="margin-t-10">
+                        <i class="lato fs-14 fw-600">Basic Details:</i>
                     </div>
                     <div class="col-xs-12 pad-0 margin-t-10 margin-0"><hr class="line-divider-dashed margin-0"></div>
+                    <table class="table table-stripped">
+                        <thead>
+                            <th>Field</th>
+                            <th>Old Value</th>
+                            <th>New Value</th>
+                        </thead>
+                    <tr ng-if="unit.pending_updates.basic.name">
+                        <td>Name</td>
+                        <td>{{unit.name}}</td>
+                        <td>{{unit.pending_updates.basic.name}}</td>
+                        </tr>
+                        <tr ng-if="unit.pending_updates.basic.facility">
+                            <td>Facility</td>
+                        <td>{{unit.facility_name}}</td>
+                            <td>{{unit.pending_updates.basic.facility.facility_name}} </td>
+                        </tr>
+                        <tr ng-if="unit.pending_updates.basic.status">
+                            <td>Status</td>
+                            <td>{{unit.status_name}}</td>
+                            <td>{{unit.pending_updates.basic.status.status_name}}</td>
+                        </tr>
+                        <tr ng-if="unit.pending_updates.basic.location">
+                            <td>Location</td>
+                            <td>{{unit.location}}</td>
+                            <td>{{unit.pending_updates.basic.location}}</td>
+                        </tr>
+                        <tr ng-if="unit.pending_updates.basic.date_etablished">
+                            <td>Date Established</td>
+                            <td>{{unit.date_established | date}}</td>
+                            <td>{{unit.pending_updates.basic.date_etablished | date }}</td>
+                        </tr>
+                        <tr ng-if="unit.pending_updates.basic.date_operational">
+                            <td>Date Operational</td>
+                            <td>{{unit.date_operational | date}}</td>
+                            <td>{{unit.pending_updates.basic.date_operational | date}}</td>
+                        </tr>
+                    </table>
+               </div>
+               <div ng-if="unit.pending_updates.workers" ng-hide="unit.pending_updates.workers.length == 0">
+                    <div class="col-xs-12 margin-t-20">
+                        <i class="lato fs-14 fw-600">Workers:</i>
+                    </div>
+                    <div class="col-xs-12 pad-0margin-0"><hr class="line-divider-dashed margin-0"></div>
                      <div ng-repeat="worker in unit.pending_updates.workers" class="col-xs-12 fw-500 pad-0 margin-b-0">
                       <div class="col-xs-12">
                         <h5 class="margin-b--2">
@@ -116,7 +116,7 @@
                       </div>
                     </div>
                </div>
-                <div ng-if="unit.pending_updates.contacts">
+                <div class="col-xs-12" ng-if="unit.pending_updates.contacts">
                     <div class="margin-t-20">
                         <i class="lato fs-14 fw-600">Contacts:</i>
                     </div>

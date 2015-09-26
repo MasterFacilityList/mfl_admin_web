@@ -95,7 +95,7 @@
     </div>
 
 <!-- Updates start here-->
-<div class="content-card col-xs-12">
+<div class="content-card col-xs-12" ng-hide="updates_empty">
     <h3>Pending updates</h3>
 
    <div ng-if="unit.pending_updates.basic">
@@ -177,7 +177,7 @@
 
 
     <!-- Overall community approval -->
-    <div class="col-xs-12 content-card margin-t-20 pad-0" ng-if="approve_reject">
+    <div class="col-xs-12 content-card margin-t-20 pad-0" ng-if="approve_reject" ng-show="updates_empty">
         <div class="col-xs-12 margin-b-10">
             <h4 class="fw-600">
                 <span ng-show="rejected">Rejection</span>
@@ -188,7 +188,7 @@
             <p ng-show="rejected">{{unit.rejection_reason}}</p>
         </div>
     </div>
-    <div class="col-xs-12 content-card margin-t-20 pad-0">
+    <div class="col-xs-12 content-card margin-t-20 pad-0" ng-show="updates_empty">
         <div class="col-xs-12 margin-b-10">
             <h4 class="fw-600">
                 <span ng-hide="approve_reject">Approve/Reject</span>
