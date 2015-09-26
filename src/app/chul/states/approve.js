@@ -47,6 +47,16 @@
                 },
                 permission: "chul.view_communityhealthunit,chul.can_approve_chu"
             })
+            .state("chu_pending_approvals.view", {
+                url: "pending_approval/:unit_id/",
+                views: {
+                    "main-content@chul": {
+                        templateUrl: "chul/tpls/chul_pending_approval.view.tpl.html",
+                        controller: "mfl.chul.controllers.approve_reject"
+                    }
+                },
+                permission: "chul.view_communityhealthunit"
+            })
             .state("chu_reject_list.rejected", {
                 url: "rejected/:unit_id/",
                 views: {
