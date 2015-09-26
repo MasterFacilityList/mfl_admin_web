@@ -31,16 +31,16 @@
             <label for="established date" class="control-label">
                 <span class="fs-16">Date Established: {{unit.date_established| date}}</span>
             </label>
-            <datepicker date-format="y-MM-ddTHH:mm:ss" date-max-limit="{{maxDate}}">
-              <input class="form-control" name="date_established" ng-model="unit.date_established" type="text"/>
+            <datepicker date-format="y-MM-dd" date-max-limit="{{maxDate}}">
+              <input class="form-control" name="date_established" ng-model="unit.date_established" type="text"  placeholder="yy-MM-dd" required api-checker/>
             </datepicker>
         </div>
         <div class="form-group col-xs-6">
             <label for="operatinal date" class="control-label">
                 <span class="fs-16">Date Operational: {{unit.date_operational| date}}</span>
             </label>
-            <datepicker date-format="y-MM-ddTHH:mm:ss" date-max-limit="{{maxDate}}">
-              <input class="form-control" name="date_operational" ng-model="unit.date_operational" type="text"/>
+            <datepicker date-format="y-MM-dd" date-max-limit="{{maxDate}}">
+              <input class="form-control" name="date_operational" ng-model="unit.date_operational" placeholder="yy-MM-dd" api-checker required type="text"/>
             </datepicker>
         </div>
         <div class="form-group col-xs-12">
@@ -87,10 +87,10 @@
                     <th class="col-xs-1 text-center"></th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="unit_cont in unit_contacts">
+                    <tr ng-repeat="unit_cont in unit.contacts">
                         <td class="col-xs-5">
                             <div class="form-group grid-inputs">
-                                <select name="unit_cont.type" class="form-control" ng-model="unit_cont.contact_type" place-holder="Select Contact Details" api-checker>
+                                <select class="form-control" name="contact_type" ng-model="unit_cont.contact_type" place-holder="Select Contact Details" api-checker>
                                     <option value="">Select Contact Type</option>
                                     <option ng-repeat="cont in contact_types" ng-selected="{{cont.id == unit_cont.contact_type}}" ng-value="cont.id">{{cont.name}}</option>
                                 </select>
@@ -98,7 +98,7 @@
                         </td>
                         <td>
                             <div class="form-group grid-inputs">
-                                <input name="unit_cont.cont" class="form-control" placeholder="Contact Details" ng-model="unit_cont.contact" api-checker>
+                                <input class="form-control" name="contact" placeholder="Contact Details" ng-model="unit_cont.contact" api-checker>
                             </div>
                         </td>
                         <td class="col-xs-1 text-center">

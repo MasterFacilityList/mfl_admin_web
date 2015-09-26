@@ -15,7 +15,47 @@
                         controller: "mfl.chul.controllers.approve_reject"
                     }
                 },
-                permission: "chul.can_approve_chu"
+                permission: "chul.view_communityhealthunit,chul.can_approve_chu"
+            })
+            .state("chu_approve_list.approve_view_unit", {
+                url: "approve_view/:unit_id/",
+                views: {
+                    "main-content@chul": {
+                        templateUrl: "chul/tpls/chul_approve_reject.detail.tpl.html",
+                        controller: "mfl.chul.controllers.view_chul"
+                    }
+                },
+                permission: "chul.view_communityhealthunit"
+            })
+            .state("chu_reject_list.reject_view_unit", {
+                url: "reject_view/:unit_id/",
+                views: {
+                    "main-content@chul": {
+                        templateUrl: "chul/tpls/chul_approve_reject.detail.tpl.html",
+                        controller: "mfl.chul.controllers.view_chul"
+                    }
+                },
+                permission: "chul.view_communityhealthunit"
+            })
+            .state("chu_approve_list.approved", {
+                url: "approved/:unit_id/",
+                views: {
+                    "main-content@chul": {
+                        templateUrl: "chul/tpls/chul_approve_reject.view.tpl.html",
+                        controller: "mfl.chul.controllers.approve_reject"
+                    }
+                },
+                permission: "chul.view_communityhealthunit,chul.can_approve_chu"
+            })
+            .state("chu_reject_list.rejected", {
+                url: "rejected/:unit_id/",
+                views: {
+                    "main-content@chul": {
+                        templateUrl: "chul/tpls/chul_approve_reject.view.tpl.html",
+                        controller: "mfl.chul.controllers.approve_reject"
+                    }
+                },
+                permission: "chul.view_communityhealthunit,chul.can_approve_chu"
             });
     }]);
 
