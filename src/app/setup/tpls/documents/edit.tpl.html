@@ -19,7 +19,7 @@
             <div class="form-group" ng-if="document.file_url">
                 <label class="control-label">Current file</label>
                 <div class="row">
-                    <a target="_blank" href="{{document.file_url}}" class="form-control-static col-xs-12">{{document.file_url}}</a>
+                    <a target="_blank" download ng-href="{{document.file_url}}" class="form-control-static col-xs-12">{{document.file_url}}</a>
                 </div>
             </div>
             <div class="form-group margin-b-20 margin-t-20">
