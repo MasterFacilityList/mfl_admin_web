@@ -4,6 +4,7 @@
     </div>
     <!-- Start of new implementation -->
     <div class="col-xs-12 margin-t-10 pad-0" requires-permission="facilities.add_facilityunit">
+        <form name="facility_units" role="form" >
         <div class="col-xs-12">
             <h4 class="fw-600 fs-18">Facility Regulation</h4>
         </div>
@@ -18,8 +19,8 @@
                     <tr ng-repeat="fac_dept in fac_depts">
                         <td>
                             <div class="form-group grid-inputs">
-                                <select class="form-control"
-                                ng-model="fac_dept.unit" place-holder="Select Contact Details" ng-change="autoFillRegBody(fac_dept)">
+                                <select name="department_name" class="form-control"
+                                ng-model="fac_dept.unit" place-holder="Select Contact Details" ng-change="autoFillRegBody(fac_dept)" required api-checker>
                                     <option value="">Select Facility Department</option>
                                     <option ng-repeat="dept in facility_depts"
                                     ng-selected="{{dept.id == fac_dept.unit}}"
@@ -80,4 +81,5 @@
             </a>
         </span>
     </div>
+    </form>
 </div>
