@@ -11,13 +11,9 @@
             <tr class="animate-repeat" ng-repeat="doc in documents">
                 <td data-title="Name" class="pad-t-15">{{::doc.name}}</td>
                 <td data-title="Description" class="pad-t-15">{{::doc.description}}</td>
-                <td data-title="Link" class="pad-t-15"><a target="_blank" ng-href="{{doc.fyl}}">{{::doc.fyl}}</a></td>
+                <td data-title="Link" class="pad-t-15"><a target="_blank" download ng-href="{{doc.fyl}}">{{::doc.fyl}}</a></td>
                 <td class="text-right">
-                    <a class="btn btn-success"
-                     tooltip-placement="bottom" tooltip="View Document"
-                    ui-sref="setup.documents.edit({document_id:doc.id})">
-                    View
-                    </a>
+                    <a class="btn btn-success" tooltip-placement="bottom" tooltip="View Document" ui-sref="setup.documents.edit({document_id:doc.id})">View</a>
                 </td>
             </tr>
         </tbody>
