@@ -81,11 +81,11 @@
             "url": "^/facilities_approve/",
             "views": {
                 "main-content@facility_mgmt": {
-                    templateUrl: "facility_mgmt/tpls/facilities_grid.tpl.html",
+                    templateUrl: "facility_mgmt/tpls/facilities_pending.grid.tpl.html",
                     controller: "mfl.facility_mgmt.controllers.facilities_approve"
                 }
             },
-            permission: "facilities.view_facilityapproval,facilities.view_facility"
+            permission: "facilities.view_facility"
         })
 
         .state("facilities_approve_update", {
@@ -101,7 +101,7 @@
         })
 
         .state("facilities_approve.approve", {
-            url: ":facility_id/",
+            url: "approve_updates/:facility_id/",
             views: {
                 "main-content@facility_mgmt": {
                     templateUrl: "facility_mgmt/tpls/facility_approve.tpl.html",
@@ -109,6 +109,17 @@
                 }
             },
             permission: "facilities.add_facilityapproval,facilities.view_facility"
+        })
+
+        .state("facilities_approve.pending_approval", {
+            url: "pending_updates/:facility_id/",
+            views: {
+                "main-content@facility_mgmt": {
+                    templateUrl: "facility_mgmt/tpls/facilities_pending.view.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facility_approve"
+                }
+            },
+            permission: "facilities.view_facility"
         })
 
         .state("facilities_approve.approve.basic", {
