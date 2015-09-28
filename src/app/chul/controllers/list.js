@@ -28,7 +28,7 @@
     .controller("mfl.chul.controllers.units_approved_list",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "is_approved":"True",
+                "is_approved": true,
                 "fields": "id,code,name,status_name,facility_name,"+
                 "facility_county,facility_subcounty,facility_ward"
             };
@@ -37,7 +37,7 @@
     .controller("mfl.chul.controllers.units_pending_approvals",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "has_edits":true,
+                "pending_approval":true,
                 "fields": "id,code,name,status_name,facility_name,"+
                 "facility_county,facility_subcounty,facility_ward"
             };
@@ -46,7 +46,7 @@
     .controller("mfl.chul.controllers.units_rejected_list",
         ["$scope", function ($scope) {
             $scope.filters = {
-                "is_rejected":"True",
+                "is_rejected": true,
                 "fields": "id,code,name,status_name,facility_name,"+
                 "facility_county,facility_subcounty,facility_ward"
             };
