@@ -320,7 +320,7 @@
                     </th>
                 </thead>
                <tr ng-repeat="unit_changed in facility_changes.units">
-                    <td class="col-xs-7">{{unit_changed.unit_name | titlecase}}</td>
+                    <td class="col-xs-7">{{unit_changed.department_name}}</td>
                     <td class="col-xs-5 text-center">{{unit_changed.regulating_body_name | titlecase}}</td>
                 </tr>
             </table>
@@ -349,53 +349,6 @@
         </div>
     </div>
     <!-- End of approving facility updates -->
-
-        <div class="col-xs-12 margin-t-10" ng-if="fac_units.length !== 0">
-            <h4 class="fw-600">Regulation</h4>
-        </div>
-        <div class="col-xs-12" ng-if="fac_units.length !== 0">
-            <table class="table fs-14 table-hover table-condensed table-stripped">
-                <thead>
-                    <th class="col-xs-8">Name</th>
-                    <th class="col-xs-4 text-center">Regulating Body</th>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="unit in fac_units">
-                        <td>
-                            {{unit.name}}
-                        </td>
-                        <td class="text-center">
-                            {{unit.regulating_body_name}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-xs-12 margin-t-20" ng-if="facility.facility_services.length !== 0">
-            <h4 class="fw-600">Facility Health Services</h4>
-        </div>
-        <div class="col-xs-12" ng-if="facility.facility_services.length !== 0">
-            <table class="table table-hover table-condensed fs-14 table-stripped">
-                <thead>
-                    <th class="col-xs-4">Service Name</th>
-                    <th class="col-xs-4">Service Category</th>
-                    <th class="col-xs-4 text-center">Service Option</th>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="service in facility.facility_services">
-                        <td>
-                            {{service.service_name}}
-                        </td>
-                        <td>
-                            {{service.category_name}}
-                        </td>
-                        <td class="text-center">
-                            {{service.option_name}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>
 </div>
