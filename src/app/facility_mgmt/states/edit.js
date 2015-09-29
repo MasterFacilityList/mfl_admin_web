@@ -28,7 +28,7 @@
                         controller: "mfl.facility_mgmt.controllers.facility_edit.close"
                     }
                 },
-                permission: "facilities.delete_facility"
+                permission: "facilities.view_closed_facilities"
             })
             .state("facilities.facility_edit", {
                 url: "edit/:facility_id/",
