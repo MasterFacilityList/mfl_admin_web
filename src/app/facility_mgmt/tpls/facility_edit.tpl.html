@@ -37,7 +37,7 @@
                         </span>
                     </span>
                 </div>
-                <div class="col-sm-6"><span class="pull-right">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
+                <div class="col-sm-6"><span class="pull-sm-right pull-xs-left">Operation Status: <span class="fs-14 label label-primary" style="font-size: 13px">{{facility.operation_status_name | titlecase}}</span></span></div>
            </div>
         </div>
         <div class="fade-content alert alert-danger alert-dismissible margin-t-20" ng-show="error">
@@ -48,14 +48,14 @@
         </div>
     </div>
 </div>
-<div class="margin-t-20 col-xs-12" ng-if="!create">
+<div class="margin-t-20 col-xs-12 content-body" ng-if="!create">
     <div ui-view="tab-header"></div>
     <div class="fade-content" ui-view="tab-content">
         <div class="fade-content" ui-view="publish"></div>
         <div class="listing fade-content" ui-view="form-view"></div>
     </div>
 </div>
-<div class="margin-20 content-card" ng-if="create">
+<div class="margin-20 content-card content-body" ng-if="create">
     <div class="margin-t-20 ">
         <div class="container-fluid">
             <div ui-view="tab-header"></div>
