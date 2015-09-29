@@ -119,7 +119,7 @@
                     controller: "mfl.facility_mgmt.controllers.facility_approve"
                 }
             },
-            permission: "facilities.view_facility"
+            permission: "facilities.view_facilityapproval"
         })
 
         .state("facilities_approve.approve.basic", {
