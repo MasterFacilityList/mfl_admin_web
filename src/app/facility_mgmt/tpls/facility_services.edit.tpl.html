@@ -78,7 +78,7 @@
     </div>
     <div class="col-xs-12 margin-t-20" ng-show="create">
         <div class="col-xs-12 pad-0">
-            <table class="table table-fixed table-hover fs-14" id="no-more-tables">
+            <table class="table table-fixed fs-14">
                 <thead class="table-head">
                         <th class="col-xs-10">Name</th>
                         <th class="col-xs-2">Service Option&nbsp;&nbsp;</th>
@@ -88,7 +88,7 @@
                         <td data-title="Name:" class="col-xs-10">
                             {{service.name}}
                         </td>
-                        <td data-title="Abbreviation:" class="col-xs-2 text-center">
+                        <td data-title="Abbreviation:" class="text-center">
                         <span ng-if="service.has_options">
                             {{service.option | optionName:service.serv_options}}
                         </span>
