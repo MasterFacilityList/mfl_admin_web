@@ -1,7 +1,7 @@
 (function(angular){
     "use strict";
 
-    angular.module("mfl.chul.controllers.list", [])
+    angular.module("mfl.chul.controllers.list", ["mfl.facility_mgmt.services"])
 
     .controller("mfl.chul.controllers.units_list",
         ["$scope", function ($scope) {
@@ -54,7 +54,8 @@
     )
     .controller("mfl.chul.controllers.view_chul", ["$scope",
         "mfl.chul.services.wrappers", "$stateParams",
-        function ($scope, wrappers, $stateParams){
+        "mfl.facility_mgmt.services.wrappers",
+        function ($scope, wrappers, $stateParams, printWrapper){
             $scope.spinner = true;
             $scope.wrapper = wrappers.chuls;
             wrappers.chuls.get($stateParams.unit_id)
@@ -72,6 +73,10 @@
                 $scope.spinner = false;
                 $scope.error = data;
             });
+            //setting up the query params
+            $scope.print_params = {"format" : "pdf"};
+            //printing a chul
+            $scope.print_chul = printWrapper.printChul;
         }]
     );
 
