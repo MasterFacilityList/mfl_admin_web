@@ -1,0 +1,26 @@
+<div class="content-header">
+   <div class="action-container content-header-extra">
+       <a ui-sref="setup.facility_statuses.edit.delete" class="btn btn-danger">Delete</a>
+   </div>
+   <h2 class="content-title">
+       <span class="main-title"><i class="fa {{state ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{state ? 'Edit' : 'New'}} Facility Status</span>
+   </h2>
+</div>
+<div ui-view="delete"></div>
+<div class="col-xs-12">
+<div class="fade-content col-md-10 col-md-offset-1 margin-t-20 col-xs-12 content-card">
+    <form name="frm_facility_status" ng-submit="saveFrm((state ? frm_facility_status : facility_status))" novalidate>
+        <drf-err-msg></drf-err-msg>
+        <div class="col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
+          <div class="form-group">
+              <label class="control-label">Facility Status</label>
+              <input class="form-control" name="name" required ng-model="facility_status.name" placeholder="Enter facility status" api-checker/>
+          </div>
+          <!-- </div> -->
+          <button type="submit" class="btn btn-primary pull-left">Save</button>
+          <a class="btn btn-default margin-l-10 pull-left" ui-sref="setup.facility_statuses">Cancel</a>
+          <mfl-revision-view ng-show="state" id="facility_status.id" wrapper="wrapper" ></mfl-revision-view>
+        </div>
+    </form>
+</div>
+</div>

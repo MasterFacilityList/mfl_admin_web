@@ -1,0 +1,23 @@
+<div class="content-header">
+   <div class="action-container content-header-extra">
+       <div class="action-container content-header-extra pad-r-5">
+            <a ui-sref="setup.regulation_statuses.create" tooltip-placement="bottom" tooltip="export regulation status"  class="btn btn-primary">
+                Add Regulation Status
+            </a>
+       </div>
+   </div>
+   <h2 class="content-title">
+        <span class="main-title"> Regulation Status</span>
+   </h2>
+</div>
+<section class="margin-t-10">
+    <div class="col-sm-12">
+        <div class="content-card col-xs-12">
+            <div class="col-xs-12 margin-b-20">
+                <sil-grid template="setup/tpls/facilities/regulation_statuses/regulation_statuses_list.tpl.html" grid-for="admin"
+                   api-key="regulation_statuses" data="regulation_statuses" error="alert">
+                </sil-grid>
+            </div>
+        </div>
+    </div>
+</section>

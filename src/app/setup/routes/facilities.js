@@ -319,6 +319,147 @@
                     }
                 },
                 userFeature: "is_national,is_staff"
+            })
+
+         /** ------------------- facility types ----------------------------------------**/
+
+        .state("setup.facility_types", {
+                url: "/facility_types",
+                views: {
+                    "body@setup" : {
+                        "templateUrl" : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.facility_types": {
+                        templateUrl: "setup/tpls/facilities/types/types_grid.tpl.html",
+                        controller:"mfl.setup.controller.facility_types.list"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.facility_types.create", {
+                url: "/create",
+                views: {
+                    "main-content@setup.facility_types": {
+                        templateUrl: "setup/tpls/facilities/types/types_view.tpl.html",
+                        controller:"mfl.setup.controller.facility_types.view"
+                    }
+                },
+                userFeature: "is_staff,is_national"
+            })
+        .state("setup.facility_types.edit", {
+                url: "/edit/:type_id",
+                views: {
+                    "main-content@setup.facility_types": {
+                        templateUrl: "setup/tpls/facilities/types/types_view.tpl.html",
+                        controller:"mfl.setup.controller.facility_types.view"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.facility_types.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_types.edit": {
+                        controller:"mfl.setup.controller.facility_types.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+
+         /** ------------------- facility statuses ----------------------------------------**/
+
+        .state("setup.facility_statuses", {
+                url: "/facility_statuses",
+                views: {
+                    "body@setup" : {
+                        "templateUrl" : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.facility_statuses": {
+                        templateUrl: "setup/tpls/facilities/statuses/statuses_grid.tpl.html",
+                        controller:"mfl.setup.controller.facility_statuses.list"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.facility_statuses.create", {
+                url: "/create",
+                views: {
+                    "main-content@setup.facility_statuses": {
+                        templateUrl: "setup/tpls/facilities/statuses/statuses_view.tpl.html",
+                        controller:"mfl.setup.controller.facility_statuses.view"
+                    }
+                },
+                userFeature: "is_staff,is_national"
+            })
+        .state("setup.facility_statuses.edit", {
+                url: "/edit/:status_id",
+                views: {
+                    "main-content@setup.facility_statuses": {
+                        templateUrl: "setup/tpls/facilities/statuses/statuses_view.tpl.html",
+                        controller:"mfl.setup.controller.facility_statuses.view"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.facility_statuses.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.facility_statuses.edit": {
+                        controller:"mfl.setup.controller.facility_statuses.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+
+        /** ------------------- regulation statuses ----------------------------------------**/
+
+        .state("setup.regulation_statuses", {
+                url: "/regulation_statuses",
+                views: {
+                    "body@setup" : {
+                        "templateUrl" : "setup/tpls/dashboard/body.tpl.html"
+                    },
+                    "main-content@setup.regulation_statuses": {
+                        templateUrl: "setup/tpls/facilities/regulation_statuses/"+
+                        "regulation_statuses_grid.tpl.html",
+                        controller:"mfl.setup.controller.regulation_statuses.list"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.regulation_statuses.create", {
+                url: "/create",
+                views: {
+                    "main-content@setup.regulation_statuses": {
+                        templateUrl: "setup/tpls/facilities/regulation_statuses/"+
+                        "regulation_statuses_view.tpl.html",
+                        controller:"mfl.setup.controller.regulation_statuses.view"
+                    }
+                },
+                userFeature: "is_staff,is_national"
+            })
+        .state("setup.regulation_statuses.edit", {
+                url: "/edit/:regstatus_id",
+                views: {
+                    "main-content@setup.regulation_statuses": {
+                        templateUrl: "setup/tpls/facilities/regulation_statuses/regulation"+
+                        "_statuses_view.tpl.html",
+                        controller:"mfl.setup.controller.regulation_statuses.view"
+                    }
+                },
+                userFeature: "is_national,is_staff"
+            })
+        .state("setup.regulation_statuses.edit.delete", {
+                url: "/delete",
+                views: {
+                    "delete@setup.regulation_statuses.edit": {
+                        controller:"mfl.setup.controller.regulation_statuses.view",
+                        templateUrl: "common/tpls/delete.tpl.html"
+                    }
+                },
+                userFeature: "is_national,is_staff"
             });
     }]);
 })(window.angular);

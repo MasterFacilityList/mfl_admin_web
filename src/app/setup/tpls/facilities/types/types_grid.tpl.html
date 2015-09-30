@@ -1,0 +1,23 @@
+<div class="content-header">
+   <div class="action-container content-header-extra">
+       <div class="action-container content-header-extra pad-r-5">
+            <a ui-sref="setup.facility_types.create" tooltip-placement="bottom" tooltip="export facility types"  class="btn btn-primary">
+                Add Facility Types
+            </a>
+       </div>
+   </div>
+   <h2 class="content-title">
+        <span class="main-title"> Facility Types</span>
+   </h2>
+</div>
+<section class="margin-t-10">
+    <div class="col-sm-12">
+        <div class="content-card col-xs-12">
+            <div class="col-xs-12 margin-b-20">
+                <sil-grid template="setup/tpls/facilities/types/types_list.tpl.html" grid-for="admin"
+                   api-key="facility_types" data="facility_types" error="alert">
+                </sil-grid>
+            </div>
+        </div>
+    </div>
+</section>
