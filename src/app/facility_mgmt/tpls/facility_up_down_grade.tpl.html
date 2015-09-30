@@ -1,0 +1,57 @@
+<div class="content-header">
+   <div class="action-container content-header-extra margin-t-3">
+   </div>
+   <h2 class="content-title">
+       <span class="main-title"> {{(upgrade) ? 'Upgrade' : 'Downgrade'}} Facility</span>
+   </h2>
+</div>
+<div class="col-xs-12 content-body margin-t--15">
+   <div class="content-card col-xs-12">
+        <span class='margin-t-20 margin-b-20 fs-18'><strong>{{(upgrade) ? 'Upgrade' : 'Downgrade'}}</strong></span>
+        <form ng-submit="updateType()" class="margin-t-20">
+            <drf-err-msg></drf-err-msg>
+            <div class="alert alert-info" ng-if="new_type.id">
+                <p>The facility has pending upgrade/downgrade.</p>
+            </div>
+            <div class="form-group" >
+                <label for="facility_type" class="control-label">New KEPH Level</label>
+                <ui-select ng-model="new_type.keph_level" name="keph_level" required ng-disabled="new_type.id" api-checker register-custom-form-control>
+                    <ui-select-match placeholder="Select a Keph Level">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="kl.id as kl in keph_levels | filter:$select.search">{{kl.name}}</ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group" >
+                <label for="facility_type" class="control-label">New Facility Type</label>
+                <ui-select ng-model="new_type.facility_type" name="facility_type" required ng-disabled="new_type.id" api-checker register-custom-form-control>
+                    <ui-select-match placeholder="Select a new facility type">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="factype.id as factype in facility_types | filter:$select.search">{{factype.name}}</ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group" >
+                <label for="reason" class="control-label">Reason for {{(upgrade) ? 'Upgrade' : 'Downgrade'}}</label>
+                <ui-select ng-model="new_type.reason" name="reason" required ng-disabled="new_type.id" api-checker register-custom-form-control>
+                    <ui-select-match placeholder="Select a reason...">{{$select.selected.reason}}</ui-select-match>
+                    <ui-select-choices repeat="reas.id as reas in change_reasons | filter:$select.search">{{reas.reason}}</ui-select-choices>
+                </ui-select>
+            </div>
+
+        <div class="col-xs-12 pad-0">
+            <a class="btn btn-primary margin-b-10" ng-click="viewServices = !viewServices">
+                &nbsp;Click to {{viewServices ? 'Hide' : 'Edit'}} Facility Services <i class="fa {{viewServices ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+            </a>
+        </div>
+        <div class="col-xs-12 pad-0 margin-t-20" content-slide-in="viewServices" slide-show-duration="1000">
+            <div class="col-xs-12 pad-0 margin-b-20 margin-t-10">
+                <sil-grid template="facility_mgmt/tpls/facility_services.list.tpl.html" grid-for="facilities"
+                    data="services" filters="filters" error="alert" api-key="facility_services">
+                </sil-grid>
+            </div>
+        </div>
+        <div class="col-xs-12 pad-0 margin-t-10">
+            <button class="btn" ng-class="{'btn-danger': !upgrade, 'btn-success': upgrade}" type="submit" ng-disabled="new_type.id">
+                {{(upgrade) ? 'Upgrade' : 'Downgrade' }} Facility
+            </button>
+        </div>
+        </form>
+   </div>
+</div>
