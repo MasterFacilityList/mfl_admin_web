@@ -9,16 +9,17 @@
 
     .controller("mfl.facility_mgmt.controllers.updown_helper",
         ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
-        "toasty", "$state",
-        function ($log, wrappers, errorMessages, toasty, $state) {
+        "toasty", "$state", "$stateParams",
+        function ($log, wrappers, errorMessages, toasty, $state, $stateParams){
             var load = function ($scope) {
+                $scope.facility_id = $stateParams.facility_id;
                 $scope.new_type = {
                     facility_type: "",
                     keph_level: "",
                     reason: "",
                     facility: $scope.facility_id
                 };
-
+                $scope.filters = {"facility" : $scope.facility_id};
                 wrappers.facility_upgrade.filter(
                     {facility: $scope.facility_id, is_cancelled: false, is_confirmed: false}
                 )
