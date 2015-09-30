@@ -50,6 +50,12 @@
                 <a ui-sref="setup.facility_depts">Facility Departments</a>
               </li>
               <li ui-sref-active="active">
+                <a ui-sref="setup.facility_types">Facility Types</a>
+              </li>
+              <li ui-sref-active="active">
+                <a ui-sref="setup.facility_statuses">Facility Status</a>
+              </li>
+              <li ui-sref-active="active">
                 <a ui-sref="setup.rating_comments">Rating Comments</a>
               </li>
               <li ui-sref-active="active" requires-permission="facilities.view_owner">
@@ -63,6 +69,9 @@
               </li>
               <li ui-sref-active="active" requires-permission="facilities.view_regulatingbody">
                 <a ui-sref="setup.facility_regulatory_bodies">Regulatory Bodies</a>
+              </li>
+              <li ui-sref-active="active" requires-permission="facilities.view_regulatingbody">
+                <a ui-sref="setup.regulation_statuses">Regulatory Status</a>
               </li>
               <li ui-sref-active="active">
                 <a ui-sref="setup.facility_reasons">Reasons</a>

@@ -733,6 +733,216 @@
                 }
             };
         }])
+
+    // Facility types
+    .controller("mfl.setup.controller.facility_types.list", ["$scope", function ($scope) {
+        $scope.filters = {"fields":"id,name"};
+    }])
+
+    .controller("mfl.setup.controller.facility_types.view",["$scope","adminApi",
+        "$stateParams","$state","mfl.common.forms.changes","toasty",
+        function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
+            $scope.wrapper = adminApi.facility_types;
+            if(!_.isUndefined($stateParams.type_id)){
+                $scope.state = true;
+                adminApi.facility_types.get($stateParams.type_id)
+                .success(function (data) {
+                    $scope.facility_type = data;
+                    $scope.deleteText = data.name;
+                })
+                .error(function  (err) {
+                    $scope.errors = err;
+                });
+                $scope.remove = function () {
+                    adminApi.facility_types.remove($stateParams.type_id).success(function(){
+                        toasty.success({
+                            title: "Facility type deleted",
+                            msg: "Facility type has been deleted"
+                        });
+                        $state.go("setup.facility_types");
+                    }).error(function(error){
+                        $scope.errors = error;
+                        $state.go("setup.facility_types");
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.facility_types");
+                };
+            } else {
+                $scope.state = false;
+            }
+            $scope.saveFrm = function (frm) {
+                if(_.isUndefined($stateParams.type_id)){
+                    adminApi.facility_types.create(frm)
+                    .success(function () {
+                        toasty.success({
+                            title: "Facility type added",
+                            msg: "Facility type has been added"
+                        });
+                        $state.go("setup.facility_types");
+                    })
+                    .error(function (err) {
+                        $scope.errors = err;
+                    });
+                } else {
+                    var changes= formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        adminApi.facility_types.update($stateParams.type_id, changes)
+                        .success(function () {
+                            toasty.success({
+                                title: "Facility type updated",
+                                msg: "Facility type has been updated"
+                            });
+                            $state.go("setup.facility_types");
+                        })
+                        .error(function (err) {
+                            $scope.errors = err;
+                        });
+                    }
+                }
+            };
+        }])
+
+    // Facility statuses
+    .controller("mfl.setup.controller.facility_statuses.list", ["$scope", function ($scope) {
+        $scope.filters = {"fields":"id,name"};
+    }])
+
+    .controller("mfl.setup.controller.facility_statuses.view",["$scope","adminApi",
+        "$stateParams","$state","mfl.common.forms.changes","toasty",
+        function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
+            $scope.wrapper = adminApi.facility_statuses;
+
+            if(!_.isUndefined($stateParams.status_id)){
+                $scope.state = true;
+                adminApi.facility_statuses.get($stateParams.status_id)
+                .success(function (data) {
+                    $scope.facility_status = data;
+                    $scope.deleteText = data.name;
+                })
+                .error(function  (err) {
+                    $scope.errors = err;
+                });
+                $scope.remove = function () {
+                    adminApi.facility_statuses.remove($stateParams.status_id).success(function(){
+                        toasty.success({
+                            title: "Facility status deleted",
+                            msg: "Facility status has been deleted"
+                        });
+                        $state.go("setup.facility_statuses");
+                    }).error(function(error){
+                        $scope.errors = error;
+                        $state.go("setup.facility_statuses");
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.facility_statuses");
+                };
+            } else {
+                $scope.state = false;
+            }
+            $scope.saveFrm = function (frm) {
+                if(_.isUndefined($stateParams.status_id)){
+                    adminApi.facility_statuses.create(frm)
+                    .success(function () {
+                        toasty.success({
+                            title: "Facility status added",
+                            msg: "Facility status has been added"
+                        });
+                        $state.go("setup.facility_statuses");
+                    })
+                    .error(function (err) {
+                        $scope.errors = err;
+                    });
+                } else {
+                    var changes= formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        adminApi.facility_statuses.update($stateParams.status_id, changes)
+                        .success(function () {
+                            toasty.success({
+                                title: "Facility status updated",
+                                msg: "Facility status has been updated"
+                            });
+                            $state.go("setup.facility_statuses");
+                        })
+                        .error(function (err) {
+                            $scope.errors = err;
+                        });
+                    }
+                }
+            };
+        }])
+
+    // Regulation statuses
+    .controller("mfl.setup.controller.regulation_statuses.list", ["$scope", function ($scope) {
+        $scope.filters = {"fields":"id,name"};
+    }])
+
+    .controller("mfl.setup.controller.regulation_statuses.view",["$scope","adminApi",
+        "$stateParams","$state","mfl.common.forms.changes","toasty",
+        function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
+            $scope.wrapper = adminApi.regulation_statuses;
+
+            if(!_.isUndefined($stateParams.regstatus_id)){
+                $scope.state = true;
+                adminApi.regulation_statuses.get($stateParams.regstatus_id)
+                .success(function (data) {
+                    $scope.regulation_status = data;
+                    $scope.deleteText = data.name;
+                })
+                .error(function  (err) {
+                    $scope.errors = err;
+                });
+                $scope.remove = function () {
+                    adminApi.regulation_statuses.remove($stateParams.regstatus_id)
+                        .success(function(){
+                        toasty.success({
+                            title: "Regulation status deleted",
+                            msg: "Regulation status has been deleted"
+                        });
+                        $state.go("setup.regulation_statuses");
+                    }).error(function(error){
+                        $scope.errors = error;
+                        $state.go("setup.regulation_statuses");
+                    });
+                };
+                $scope.cancel = function () {
+                    $state.go("setup.regulation_statuses");
+                };
+            } else {
+                $scope.state = false;
+            }
+            $scope.saveFrm = function (frm) {
+                if(_.isUndefined($stateParams.regstatus_id)){
+                    adminApi.regulation_statuses.create(frm)
+                    .success(function () {
+                        toasty.success({
+                            title: "Regulation status added",
+                            msg: "Regulation status has been added"
+                        });
+                        $state.go("setup.regulation_statuses");
+                    })
+                    .error(function (err) {
+                        $scope.errors = err;
+                    });
+                } else {
+                    var changes= formChanges.whatChanged(frm);
+                    if(!_.isEmpty(changes)){
+                        adminApi.regulation_statuses.update($stateParams.regstatus_id, changes)
+                        .success(function () {
+                            toasty.success({
+                                title: "Regulation status updated",
+                                msg: "Regulation status has been updated"
+                            });
+                            $state.go("setup.regulation_statuses");
+                        })
+                        .error(function (err) {
+                            $scope.errors = err;
+                        });
+                    }
+                }
+            };
+        }])
 ;
 
 })(window.angular, window._);
