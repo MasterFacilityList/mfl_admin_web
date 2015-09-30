@@ -10,6 +10,14 @@
         <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac_id})" class="btn btn-success" ng-if="(!facility.rejected&&!facility.closed)&&(!facility.is_approved||facility.has_edits)" tooltip="Approve Facility">
             Approve/Reject
         </a>
+        <a class="btn btn-info margin-l-3"
+            requires-permission="facilities.add_facilitytype,facilities.add_facilityservice"
+            ui-sref="facilities.upgrade({facility_id: facility.id})"
+            ui-sref-opts="{reload:true}">Upgrade</a>
+        <a class="btn btn-info margin-l-3"
+            requires-permission="facilities.add_facilitytype,facilities.add_facilityservice"
+            ui-sref="facilities.downgrade({facility_id: facility.id})"
+            ui-sref-opts="{reload:true}">Downgrade</a>
         <a ng-if="!facility.closed" class="btn btn-danger margin-l-3"
             requires-permission="facilities.view_closed_facilities"
             ui-sref=".close({facility_id: facility.id})">Close</a>
