@@ -99,6 +99,10 @@
             this.printFacility = function (facility_id) {
                 downloadFile("api/facilities/facility_cover_report/", facility_id);
             };
+
+            this.printChul = function (unit_id) {
+                downloadFile("api/chul/units_detail_report/", unit_id);
+            };
         }
     ]);
 })(window.angular);
