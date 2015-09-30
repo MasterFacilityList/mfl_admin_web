@@ -2,14 +2,15 @@
     "use strict";
 
     describe("Test facility upgrade, downgrade controllers", function () {
-        var rootScope, ctrl, httpBackend, server_url, log, state;
+        var rootScope, ctrl, httpBackend, server_url, log, state, stateParams;
 
         beforeEach(function () {
             module("mflAdminAppConfig");
             module("mfl.facility_mgmt.controllers");
 
-            inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL", "$log", "$state",
-                function (c, r, h, s, lg, st) {
+            inject(["$controller", "$rootScope", "$httpBackend", "SERVER_URL",
+                "$log", "$state", "$stateParams",
+                function (c, r, h, s, lg, st, sp) {
                     ctrl = function (name, data) {
                         return c("mfl.facility_mgmt.controllers."+name, data);
                     };
@@ -17,6 +18,7 @@
                     httpBackend = h;
                     server_url = s;
                     log = lg;
+                    stateParams = sp;
                     state = st;
                     spyOn(state, "go");
                     spyOn(log, "error");
@@ -28,7 +30,10 @@
 
             it("should load data", function () {
                 var data = {
-                    "$log": log
+                    "$log": log,
+                    "$stateParams" : {
+                        facility_id : "33"
+                    }
                 };
                 var scope = {
                     "facility_id": "33"
@@ -64,7 +69,10 @@
 
             it("should update facility types", function () {
                 var data = {
-                    "$log": log
+                    "$log": log,
+                    "$stateParams" : {
+                        facility_id : "33"
+                    }
                 };
                 var scope = {
                     "facility_id": "33"
@@ -120,7 +128,10 @@
 
             it("should catch failures", function () {
                 var data = {
-                    "$log": log
+                    "$log": log,
+                    "$stateParams" : {
+                        facility_id : "33"
+                    }
                 };
                 var scope = {
                     "facility_id": "33"
