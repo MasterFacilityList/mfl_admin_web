@@ -25,7 +25,7 @@
             <td data-title="Code:" >{{::fac.code}}</td>
             <td data-title="Name:" >
                 <a ui-sref="facility_reject_list.view({facility_id: fac.id})"
-                ui-sref-opts="{reload: true}">{{::fac.name}}</a>
+                ui-sref-opts="{reload: true}">{{::fac.official_name}}</a>
             </td>
             <td data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
             <td data-title="Operation Status:" >{{::fac.operation_status_name | titlecase }}</td>

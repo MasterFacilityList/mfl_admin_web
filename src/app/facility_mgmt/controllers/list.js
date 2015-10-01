@@ -12,7 +12,7 @@
             $scope.filters = {
                 "rejected": false,
                 "closed": false,
-                "fields": "id,code,name,facility_type_name,owner_name,county," +
+                "fields": "id,code,official_name,facility_type_name,owner_name,county," +
                           "sub_county,constituency,ward_name,updated,operation_status_name"
             };
             $scope.action = [
@@ -34,7 +34,7 @@
             $scope.filters = {
                 "approved": true,
                 "rejected": false,
-                "fields": "id,code,name,facility_type_name,owner_name,county," +
+                "fields": "id,code,official_name,facility_type_name,owner_name,county," +
                           "sub_county,constituency,ward_name,updated," +
                           "operation_status_name,date_requested,date_approved"
             };

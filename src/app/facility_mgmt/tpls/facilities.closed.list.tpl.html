@@ -24,7 +24,7 @@
             <td data-title="Code:" >{{::fac.code}}</td>
             <td data-title="Name:" >
                 <a ui-sref="facilities.facility_view({facility_id: fac.id})"
-                ui-sref-opts="{reload: true}">{{::fac.name}}</a>
+                ui-sref-opts="{reload: true}">{{::fac.official_name}}</a>
             </td>
             <td data-title="Closing Reason:">
                 {{::fac.closing_reason}}
