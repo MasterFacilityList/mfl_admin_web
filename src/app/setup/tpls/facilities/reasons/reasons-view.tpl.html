@@ -1,6 +1,6 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-       <a ui-sref="setup.facility_reasons.edit.delete" class="btn btn-danger">Delete</a>
+       <a ng-show="state" ui-sref="setup.facility_reasons.edit.delete" class="btn btn-danger">Delete</a>
    </div>
    <h2 class="content-title">
        <span class="main-title"><i class="fa {{state ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{state ? 'Edit' : 'New'}} Facility Change Reason</span>
