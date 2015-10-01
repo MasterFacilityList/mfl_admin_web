@@ -11,7 +11,7 @@
             };
             $scope.filters = {
                 "fields": "id,code,name,status_name,facility_name,"+
-                "facility_county,facility_subcounty,facility_ward"
+                "facility_county,facility_subcounty,facility_ward,date_established"
             };
             $scope.action = [
                 {
@@ -30,7 +30,7 @@
             $scope.filters = {
                 "is_approved": true,
                 "fields": "id,code,name,status_name,facility_name,"+
-                "facility_county,facility_subcounty,facility_ward"
+                "facility_county,facility_subcounty,facility_ward,date_established"
             };
         }]
     )
@@ -39,7 +39,7 @@
             $scope.filters = {
                 "pending_approval":true,
                 "fields": "id,code,name,status_name,facility_name,"+
-                "facility_county,facility_subcounty,facility_ward"
+                "facility_county,facility_subcounty,facility_ward,date_established"
             };
         }]
     )
@@ -48,7 +48,7 @@
             $scope.filters = {
                 "is_rejected": true,
                 "fields": "id,code,name,status_name,facility_name,"+
-                "facility_county,facility_subcounty,facility_ward"
+                "facility_county,facility_subcounty,facility_ward,date_established"
             };
         }]
     )

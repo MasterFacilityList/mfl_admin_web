@@ -285,17 +285,6 @@
                     controller: "mfl.reports.controllers.chu_status"
                 }
             }
-        })
-        .state("reports.chu_created", {
-            url: "chu_created",
-            views: {
-                "body@reports": {
-                    templateUrl: "reports/tpls/body.tpl.html"
-                },
-                "main-content@reports.chu_created": {
-                    templateUrl: "reports/tpls/chu_created.tpl.html"
-                }
-            }
         });
 
     }]);
