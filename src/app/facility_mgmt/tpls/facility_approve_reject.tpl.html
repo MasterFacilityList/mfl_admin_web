@@ -11,7 +11,7 @@
                 <i class="fa fa-spin fa-circle-o-notch fa-3x margin-t-20 margin-b-20"></i>
             </div>
             <div class="col-xs-12 pad-0" ng-if="!spinner">
-            <h4 class="fw-400"><a ui-sref="facilities.facility_view({facility_id:facility.id})">{{facility.code}} | {{facility.name}}</a></h4>
+            <h4 class="fw-400"><a ui-sref="facilities.facility_view({facility_id:facility.id})">{{facility.code}} | {{facility.official_name}}</a></h4>
             <div class="row">
                 <div class="col-xs-12 margin-b-10 fs-16">
                     <span>Facility Type: <strong>{{facility.facility_type_name}}</strong></span>
