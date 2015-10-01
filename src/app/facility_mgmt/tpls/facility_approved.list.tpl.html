@@ -23,7 +23,7 @@
         <tr ng-repeat="fac in facilities" >
             <td data-title="Code:" >{{::fac.code}}</td>
             <td data-title="Name:" >
-                <a ui-sref="facility_approve_list.view({facility_id: fac.id})">{{::fac.name}}</a>
+                <a ui-sref="facility_approve_list.view({facility_id: fac.id})">{{::fac.official_name}}</a>
             </td>
             <td data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
             <td data-title="Owner:" >{{::fac.owner_name}}</td>

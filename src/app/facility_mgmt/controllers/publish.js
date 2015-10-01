@@ -13,7 +13,7 @@
                 "is_published": false,
                 "approved": true,
                 "rejected": false,
-                "fields": "id,code,name,facility_type_name,owner_name,county,"+
+                "fields": "id,code,official_name,facility_type_name,owner_name,county,"+
                           "sub_county,constituency,ward_name,updated"
             };
             $scope.title = {
