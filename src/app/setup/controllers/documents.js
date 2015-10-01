@@ -27,13 +27,14 @@
     .controller("mfl.setup.controllers.documents.edit",
         ["$scope", "adminApi", "$stateParams", "$state", "$window",
         function ($scope, adminApi, $stateParams, $state, $window) {
+            $scope.state = !_.isUndefined($stateParams.document_id);
             $scope.title = {
                 icon: "",
                 name: "Manage Documents"
             };
             $scope.action = [
                 {
-                    func: "ui-sref='setup.documents.edit.delete({"+
+                    func: "ng-show='state' ui-sref='setup.documents.edit.delete({"+
                         "document_id:document.id})'" +
                        " requires-user-feature='is_staff'" +
                        " requires-permission='common.delete_documentupload'",
