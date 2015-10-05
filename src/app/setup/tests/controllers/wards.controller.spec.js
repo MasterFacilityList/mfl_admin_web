@@ -45,7 +45,8 @@
                 name:"HOSPITAL",
                 constituency:"1"
             };
-            $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/?fields=id,name&"+
+            $httpBackend.expectGET(SERVER_URL+"api/common/"+
+                "constituencies/?fields=id,name,county_name&"+
             "page_size=300").respond(200);
             createController("edit", data);
             $httpBackend.flush();
@@ -68,7 +69,8 @@
                 name:"HOSPITAL",
                 constituency:"1"
             };
-            $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/?fields=id,name&"+
+            $httpBackend.expectGET(SERVER_URL+"api/common/"+
+                "constituencies/?fields=id,name,county_name&"+
             "page_size=300").respond(200);
             createController("edit", data);
             $httpBackend.flush();
@@ -91,12 +93,22 @@
             };
             var frm = {
                 name:"HOSPITAL",
-                constituency:"1"
+                constituency:"1",
+                county_name : "NAIROBI"
             };
             $httpBackend.expectGET(SERVER_URL+"api/common/wards/1/").respond(200);
-            $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/?fields=id,name&"+
+            $httpBackend.expectGET(SERVER_URL+"api/common/"+
+                "constituencies/?fields=id,name,county_name&"+
             "page_size=300").respond(200);
             createController("edit", data);
+            data.$scope.constituencies = [
+                {
+                    id : "1",
+                    county_name : "NAIROBI"
+                }
+            ];
+            data.$scope.ward_details = frm;
+            data.$scope.autofillCounty(1);
             $httpBackend.flush();
             $httpBackend.verifyNoOutstandingRequest();
             $httpBackend.verifyNoOutstandingExpectation();
@@ -121,7 +133,8 @@
                 constituency:"1"
             };
             $httpBackend.expectGET(SERVER_URL+"api/common/wards/1/").respond(200);
-            $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/?fields=id,name&"+
+            $httpBackend.expectGET(SERVER_URL+"api/common/"+
+                "constituencies/?fields=id,name,county_name&"+
             "page_size=300").respond(200);
             createController("edit", data);
             $httpBackend.flush();
@@ -148,7 +161,8 @@
                 constituency:"1"
             };
             $httpBackend.expectGET(SERVER_URL+"api/common/wards/1/").respond(200);
-            $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/?fields=id,name&"+
+            $httpBackend.expectGET(SERVER_URL+"api/common/"+
+                "constituencies/?fields=id,name,county_name&"+
             "page_size=300").respond(200);
             createController("edit", data);
             $httpBackend.flush();
@@ -166,7 +180,8 @@
             };
             $httpBackend.expectGET(SERVER_URL+"api/common/wards/1/").respond(500);
             createController("edit", data);
-            $httpBackend.expectGET(SERVER_URL+"api/common/constituencies/?fields=id,name&"+
+            $httpBackend.expectGET(SERVER_URL+"api/common/"+
+                "constituencies/?fields=id,name,county_name&"+
             "page_size=300").respond(500);
             $httpBackend.flush();
             $httpBackend.verifyNoOutstandingRequest();
