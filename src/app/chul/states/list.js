@@ -49,6 +49,16 @@
                 }
             },
             permission: "chul.view_communityhealthunit"
+        })
+        .state("chu_feedback", {
+            parent: "chul",
+            url: "^/chu_feedback/",
+            views: {
+                "main-content@chul": {
+                    templateUrl: "chul/tpls/chul_feedback.grid.tpl.html"
+                }
+            },
+            permission: "chul.view_churating"
         });
     }]);
 
