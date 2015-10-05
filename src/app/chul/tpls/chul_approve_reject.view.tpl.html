@@ -164,7 +164,7 @@
                     <i class="fa {{worker.is_incharge ? 'fa-user-md' : 'fa-user'}} fa-stack-1x fa-inverse"></i>
                   </span>
                   <span class="fw-600">CHEW <span ng-if="worker.is_incharge">in Charge</span> <span ng-if="!worker.is_incharge">at Facility</span> :</span>
-                  {{worker.name}}
+                  {{worker.first_name | titlecase }} {{worker.last_name | titlecase }}
                 </h5>
            </div>
           </div>
