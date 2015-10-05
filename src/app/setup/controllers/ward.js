@@ -52,7 +52,7 @@
                 $scope.state = false;
             }
             $scope.filters = {
-                "fields":"id,name",
+                "fields":"id,name,county_name",
                 "page_size":300
             };
             adminApi.constituencies.filter($scope.filters)
