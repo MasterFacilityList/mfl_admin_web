@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Constituency:</label>
-                    <ui-select ng-model="select_values.constituency" required name="constituency" api-checker register-custom-form-control>
+                    <ui-select ng-model="select_values.constituency" required name="constituency" api-checker register-custom-form-control ng-change="autofillCounty(select_values.constituency)">
                         <ui-select-match placeholder="Select a constituency...">
                             <span>{{$select.selected.name}}</span>
                         </ui-select-match>
@@ -31,6 +31,11 @@
                             <span>{{const.name}}</span>
                         </ui-select-choices>
                     </ui-select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">County:</label>
+                    <input type="text" readonly class="form-control"
+                        ng-model="ward_details.county_name">
                 </div>
                 <div class="margin-t-20 pad-b-10">
                     <button class="btn btn-primary">Save</button>
