@@ -58,7 +58,7 @@
                     <i class="fa {{worker.is_incharge ? 'fa-user-md' : 'fa-user'}} fa-stack-1x fa-inverse"></i>
                   </span>
                   <span class="fw-600">CHEW <span ng-if="worker.is_incharge">in Charge</span> <span ng-if="!worker.is_incharge">at Facility</span> :</span>
-                  {{worker.first_name}} {{worker.last_name}}
+                  {{worker.first_name | titlecase }} {{worker.last_name | titlecase }}
                 </h5>
               </div>
             </div>
@@ -89,6 +89,12 @@
         <div class="col-md-4 pad-0 col-xs-12">
             <div class="col-xs-12">
                 <h4 class="fw-600">Unit Contacts</h4>
+            </div>
+             <div ng-repeat="cont in unit.contacts" class="col-xs-12 fw-500">
+                <label class="text-black fw-600">
+                    {{cont.contact_type_name | titlecase}}:
+                </label>
+                {{cont.contact}}
             </div>
         </div>
     </div>
