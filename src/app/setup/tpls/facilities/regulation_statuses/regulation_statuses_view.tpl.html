@@ -1,6 +1,6 @@
 <div class="content-header">
    <div class="action-container content-header-extra">
-       <a ui-sref="setup.facility_statuses.edit.delete" class="btn btn-danger">Delete</a>
+       <a requires-permission="facilities.delete_regulationstatus" ui-sref="setup.facility_statuses.edit.delete" class="btn btn-danger">Delete</a>
    </div>
    <h2 class="content-title">
        <span class="main-title"><i class="fa {{state ? 'fa-edit' : 'fa-plus-circle'}}"></i> {{state ? 'Edit' : 'New'}} Regulatory Status</span>
@@ -17,7 +17,8 @@
               <input class="form-control" name="name" required ng-model="regulation_status.name" placeholder="Enter regulatory status" api-checker/>
           </div>
           <!-- </div> -->
-          <button type="submit" class="btn btn-primary pull-left">Save</button>
+          <button ng-if="state" requires-permission="facilities.change_regulationstatus" type="submit" class="btn btn-primary pull-left">Save</button>
+          <button ng-if="!state" requires-permission="facilities.add_regulationstatus" type="submit" class="btn btn-primary pull-left">Save</button>
           <a class="btn btn-default margin-l-10 pull-left" ui-sref="setup.facility_statuses">Cancel</a>
           <mfl-revision-view ng-show="state" id="regulation_status.id" wrapper="wrapper" ></mfl-revision-view>
         </div>
