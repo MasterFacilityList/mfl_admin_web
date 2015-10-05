@@ -58,7 +58,7 @@
                     <i class="fa {{worker.is_incharge ? 'fa-user-md' : 'fa-user'}} fa-stack-1x fa-inverse"></i>
                   </span>
                   <span class="fw-600">CHEW <span ng-if="worker.is_incharge">in Charge</span> <span ng-if="!worker.is_incharge">at Facility</span> :</span>
-                  {{worker.name}}
+                  {{worker.first_name}} {{worker.last_name}}
                 </h5>
               </div>
             </div>
@@ -223,7 +223,7 @@
             <form name="frm_approve" ng-submit="approveChu(approve,comment)" role="form" novalidate>
                 <div class="form-group margin-t-10">
                     <label class="control-label">
-                        Comment for 
+                        Comment for
                         <span ng-hide="approve_reject">Approve/Reject</span>
                         <span ng-show="approved">Reject</span>
                         <span ng-show="rejected">Approve</span>
