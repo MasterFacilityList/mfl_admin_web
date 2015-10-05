@@ -47,6 +47,9 @@
             controller("mfl.setup.controller.facilityRegulatoryBody.edit");
             $httpBackend.expectGET(
                 SERVER_URL + "api/common/contact_types/").respond(200, {});
+            $httpBackend.expectGET(
+                SERVER_URL +"api/facilities/regulation_status/?fields=id,name")
+                .respond(200, {});
             $httpBackend.flush();
         }]));
         //beginning of failing test

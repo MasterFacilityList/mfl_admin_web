@@ -560,6 +560,10 @@
             .success(function (data) {$scope.owner_types = data.results;})
             .error(function (err) {$scope.errors = err;});
 
+            adminApi.regulation_statuses.filter({"fields": "id,name"})
+            .success(function (data) {$scope.regulation_status= data.results;})
+            .error(function (err) {$scope.errors = err;});
+
             $scope.remove = function () {
                 adminApi.facilityRegulatoryBodies.remove($stateParams.id)
                 .success(function(){
