@@ -51,8 +51,12 @@
             } else {
                 $scope.state = false;
             }
+            $scope.autofillCounty = function (constituency_id){
+                var new_county = _.findWhere($scope.constituencies, {"id" : constituency_id});
+                $scope.ward_details.county_name = new_county.county_name;
+            };
             $scope.filters = {
-                "fields":"id,name",
+                "fields":"id,name,county_name",
                 "page_size":300
             };
             adminApi.constituencies.filter($scope.filters)
