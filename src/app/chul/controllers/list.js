@@ -78,6 +78,20 @@
             //printing a chul
             $scope.print_chul = printWrapper.printChul;
         }]
+    )
+        
+   .controller("mfl.chul.controllers.chu_feedback",
+        ["$scope", "$stateParams", function ($scope, $stateParams) {
+            $scope.filters = {
+                "fields": "comment,facility_id,facility_name,chu_name,created,rating"
+            };
+            if ($stateParams.facility_id) {
+                $scope.filters.facility = $stateParams.facility_id;
+            }
+            if ($stateParams.chu) {
+                $scope.filters.chu = $stateParams.chu;
+            }
+        }]
     );
 
 })(window.angular);

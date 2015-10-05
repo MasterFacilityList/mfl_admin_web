@@ -60,6 +60,60 @@
             });
         });
 
+        describe("Test chul feedback list controllers", function () {
+
+            it("should load chul feedback list controller", function () {
+                inject(["$controller", "$rootScope",
+                    function ($controller, rootScope) {
+                        var data = { "$scope": rootScope.$new(), "$stateParams": {} };
+                        ctrl(".chu_feedback", data);
+                        expect(data.$scope.filters.facility).toBe(undefined);
+                        expect(data.$scope.filters.chu).toBe(undefined);
+                    }
+                ]);
+            });
+
+            it("should load feedback filtered by facility", function () {
+                inject(["$controller", "$rootScope",
+                    function ($controller, rootScope) {
+                        var data = { 
+                            "$scope": rootScope.$new(),
+                            "$stateParams": {"facility_id": "123"} 
+                        };
+                        ctrl(".chu_feedback", data);
+                        expect(data.$scope.filters.facility).toEqual("123");
+                        expect(data.$scope.filters.chu).toBe(undefined);
+                    }
+                ]);
+            });
+
+            it("should load feedback filtered by chu", function () {
+                inject(["$controller", "$rootScope",
+                    function ($controller, rootScope) {
+                        var data = { "$scope": rootScope.$new(), "$stateParams": {"chu": "456"} };
+                        ctrl(".chu_feedback", data);
+                        expect(data.$scope.filters.facility).toBe(undefined);
+                        expect(data.$scope.filters.chu).toEqual("456");
+                    }
+                ]);
+            });
+
+            it("should filter feedback by facility and chu", function () {
+                inject(["$controller", "$rootScope",
+                    function ($controller, rootScope) {
+                        var data = { 
+                            "$scope": rootScope.$new(), 
+                            "$stateParams": {"chu": "456", "facility_id":"123" } 
+                        };
+                        ctrl(".chu_feedback", data);
+                        expect(data.$scope.filters.facility).toEqual("123");
+                        expect(data.$scope.filters.chu).toEqual("456");
+                    }
+                ]);
+            });
+        });
+
+
         describe("Test chul view controller", function () {
 
             it("should test viewing one chul", function () {
