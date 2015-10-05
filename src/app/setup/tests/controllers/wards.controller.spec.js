@@ -107,8 +107,14 @@
                     county_name : "NAIROBI"
                 }
             ];
-            data.$scope.ward_details = frm;
-            data.$scope.autofillCounty(1);
+            data.$scope.ward_details = {
+                id : "1",
+                name:"HOSPITAL",
+                constituency:"1",
+                county_name : "NAIROBI"
+            };
+            var constituency_id = "1";
+            data.$scope.autofillCounty(constituency_id);
             $httpBackend.flush();
             $httpBackend.verifyNoOutstandingRequest();
             $httpBackend.verifyNoOutstandingExpectation();
