@@ -427,7 +427,8 @@
                         controller:"mfl.setup.controller.regulation_statuses.list"
                     }
                 },
-                userFeature: "is_national,is_staff"
+                userFeature: "is_national,is_staff",
+                permission: "facilities.view_regulationstatus"
             })
         .state("setup.regulation_statuses.create", {
                 url: "/create",
@@ -438,7 +439,8 @@
                         controller:"mfl.setup.controller.regulation_statuses.view"
                     }
                 },
-                userFeature: "is_staff,is_national"
+                userFeature: "is_staff,is_national",
+                permission: "facilities.add_regulationstatus"
             })
         .state("setup.regulation_statuses.edit", {
                 url: "/edit/:regstatus_id",
@@ -449,7 +451,8 @@
                         controller:"mfl.setup.controller.regulation_statuses.view"
                     }
                 },
-                userFeature: "is_national,is_staff"
+                userFeature: "is_national,is_staff",
+                permission: "facilities.change_regulationstatus"
             })
         .state("setup.regulation_statuses.edit.delete", {
                 url: "/delete",
@@ -459,7 +462,8 @@
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
                 },
-                userFeature: "is_national,is_staff"
+                userFeature: "is_national,is_staff",
+                permission: "facilities.delete_regulationstatus"
             });
     }]);
 })(window.angular);
