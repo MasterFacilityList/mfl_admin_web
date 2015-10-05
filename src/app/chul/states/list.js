@@ -52,10 +52,11 @@
         })
         .state("chu_feedback", {
             parent: "chul",
-            url: "^/chu_feedback/",
+            url: "^/chu_feedback/?chu&facility_id",
             views: {
                 "main-content@chul": {
-                    templateUrl: "chul/tpls/chul_feedback.grid.tpl.html"
+                    templateUrl: "chul/tpls/chul_feedback.grid.tpl.html",
+                    controller: "mfl.chul.controllers.chu_feedback"
                 }
             },
             permission: "chul.view_churating"
