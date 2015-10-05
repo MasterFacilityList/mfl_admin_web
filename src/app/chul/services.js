@@ -14,6 +14,7 @@
         this.contact_types = api.setBaseUrl("api/common/contact_types/");
         this.contacts = api.setBaseUrl("api/common/contacts/");
         this.unit_contacts = api.setBaseUrl("api/chul/unit_contacts/");
+        this.chu_rating_comments = api.setBaseUrl("api/chul/chu_ratings/");
     }]);
 
 })(window.angular);

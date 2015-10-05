@@ -64,6 +64,17 @@
                 }
             },
             permission: "facilities.view_facility"
+        })
+
+        .state("facilities_feedback", {
+            "parent": "facility_mgmt",
+            "url": "^/facilities_feedback/",
+            "views": {
+                "main-content@facility_mgmt": {
+                    templateUrl: "facility_mgmt/tpls/facilities_feedback.grid.tpl.html"
+                }
+            },
+            permission: "facilities.view_facilityservicerating"
         });
     }]);
 
