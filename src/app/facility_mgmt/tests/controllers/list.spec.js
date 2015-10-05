@@ -41,5 +41,24 @@
                 }
             ]);
         });
+
+        it("should load facilities feedback  list controller", function () {
+            inject(["$controller", "$rootScope",
+                function ($controller, rootScope) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$stateParams": {
+                            "facility_id": undefined
+                        }
+                    };
+                    $controller("mfl.facility_mgmt.controllers.facilities_feedback", data);
+                    expect(data.$scope.filters.facility).toBe(undefined);
+                    
+                    data.$stateParams.facility_id = "123";
+                    $controller("mfl.facility_mgmt.controllers.facilities_feedback", data);
+                    expect(data.$scope.filters.facility).toEqual("123");
+                }
+            ]);
+        });    
     });
 })();

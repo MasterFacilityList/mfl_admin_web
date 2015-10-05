@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="rt in rating_comments">
-                <td data-title="Facility" class="pad-t-15">{{rt.facility_name}}</td>
+                <td data-title="Facility" class="pad-t-15"><a ui-sref="facilities_feedback({facility_id:rt.facility_id})">{{rt.facility_name}}</a></td>
                 <td data-title="Service" class="pad-t-15">{{rt.service_name}}</td>
                 <td data-title="Comment" class="pad-t-15">{{rt.comment}}</td>
                 <td data-title="Rating" class="pad-t-15">{{rt.rating}}</td>

@@ -68,10 +68,11 @@
 
         .state("facilities_feedback", {
             "parent": "facility_mgmt",
-            "url": "^/facilities_feedback/",
+            "url": "^/facilities_feedback/?facility_id",
             "views": {
                 "main-content@facility_mgmt": {
-                    templateUrl: "facility_mgmt/tpls/facilities_feedback.grid.tpl.html"
+                    templateUrl: "facility_mgmt/tpls/facilities_feedback.grid.tpl.html",
+                    controller: "mfl.facility_mgmt.controllers.facilities_feedback"
                 }
             },
             permission: "facilities.view_facilityservicerating"

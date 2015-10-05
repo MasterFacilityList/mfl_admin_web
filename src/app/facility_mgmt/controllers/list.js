@@ -49,6 +49,17 @@
                 "county": _.pluck(loginUser.getUser().user_counties, "county_code")
             };
         }]
+    )
+
+    .controller("mfl.facility_mgmt.controllers.facilities_feedback",
+        ["$scope", "$stateParams", function ($scope, $stateParams) {
+            $scope.filters = {
+                "fields": "comment,facility_id,facility_name,service_name,created,rating"
+            };
+            if ($stateParams.facility_id) {
+                $scope.filters.facility = $stateParams.facility_id;
+            }
+        }]
     );
 
 })(window.angular, window._);
