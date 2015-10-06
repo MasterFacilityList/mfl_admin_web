@@ -30,32 +30,24 @@ function run_backend(){
     cd $OLDPWD
 }
 
-case $CIRCLE_NODE_INDEX in
-0)
-    export RUN_SAUCE_TESTS=true
-    grunt test:unit
-    ;;
-1)
-    # run_backend
-
-    grunt test:unit
-
-    exit 0
-    
+function run_e2e(){
     cd $BUILD_DIR
     curl --retry 5 --retry-delay 2 -Lv http://localhost:8061 -o /dev/null
     nohup grunt connect:prod &
     npm run update-webdriver
-    grunt protractor:e2e
+    grunt test:e2e
 
     killall --wait grunt
-    killall --wait sc
-    ;;
-2)
-    export RUN_SAUCE_TESTS=true
 
-    exit 0
-    
+    cd $OLDPWD
+}
+
+case $CIRCLE_NODE_INDEX in
+0)
+
+    export RUN_SAUCE_TESTS=true
+    grunt test:unit
+
     run_backend
 
     # setup saucelabs connect
@@ -66,13 +58,13 @@ case $CIRCLE_NODE_INDEX in
     nohup ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY -f ~/sc_ready &
     while [ ! -e ~/sc_ready ]; do sleep 1; done  # Wait for tunnel to be ready
 
+    run_e2e
 
-    cd $BUILD_DIR
-    curl --retry 5 --retry-delay 2 -Lv http://localhost:8061 -o /dev/null
-    nohup grunt connect:prod &
-    grunt test:e2e
-
-    killall --wait grunt
     killall --wait sc
-
+    ;;
+1)
+    run_backend
+    grunt test:unit
+    run_e2e
+    ;;
 esac
