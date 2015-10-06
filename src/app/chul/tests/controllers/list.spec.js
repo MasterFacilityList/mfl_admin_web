@@ -76,9 +76,9 @@
             it("should load feedback filtered by facility", function () {
                 inject(["$controller", "$rootScope",
                     function ($controller, rootScope) {
-                        var data = { 
+                        var data = {
                             "$scope": rootScope.$new(),
-                            "$stateParams": {"facility_id": "123"} 
+                            "$stateParams": {"facility_id": "123"}
                         };
                         ctrl(".chu_feedback", data);
                         expect(data.$scope.filters.facility).toEqual("123");
@@ -101,9 +101,9 @@
             it("should filter feedback by facility and chu", function () {
                 inject(["$controller", "$rootScope",
                     function ($controller, rootScope) {
-                        var data = { 
-                            "$scope": rootScope.$new(), 
-                            "$stateParams": {"chu": "456", "facility_id":"123" } 
+                        var data = {
+                            "$scope": rootScope.$new(),
+                            "$stateParams": {"chu": "456", "facility_id":"123" }
                         };
                         ctrl(".chu_feedback", data);
                         expect(data.$scope.filters.facility).toEqual("123");
@@ -873,6 +873,15 @@
                 data.$scope.create = false;
                 ctrl(".edit_chul.chews", data);
                 data.$scope.unit = undefined;
+                data.$scope.$apply();
+            });
+            it("should test health_unit_workers not present", function () {
+                var data = {
+                    "$scope" : rootScope.$new()
+                };
+                data.$scope.create = false;
+                ctrl(".edit_chul.chews", data);
+                data.$scope.unit = {"id" : "3"};
                 data.$scope.$apply();
             });
         });

@@ -155,7 +155,7 @@
                 if (_.isUndefined(f)){
                     return;
                 }
-                if(!_.isNull(f.coordinates)) {
+                if(f.hasOwnProperty("coordinates")&& !_.isNull(f.coordinates)){
                     $scope.getFacilityCoords(f);
                 }
             });
