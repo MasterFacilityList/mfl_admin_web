@@ -1,14 +1,14 @@
-<div class="col-sm-12 margin-t-20 listing">
-    <div class="col-sm-12">
-        <div class="col-sm-12">
+<div class="col-xs-12 margin-t-20 listing">
+    <div class="col-xs-12">
+        <div class="col-xs-12">
             <h3 ng-if="create">
                 Step 2 of 2 Service Options
             </h3>
         </div>
     </div>
-    <div class="col-sm-12 margin-t-30 detail-content margin-b-10">
-        <div class="col-sm-12 content-card form-card margin-t-20" requires-user-feature="is_staff" requires-permission="facilities.add_serviceoption">
-            <div class="col-sm-12">
+    <div class="col-xs-12 margin-t-30 detail-content margin-b-10">
+        <div class="col-xs-12 content-card form-card margin-t-20" requires-user-feature="is_staff" requires-permission="facilities.add_serviceoption">
+            <div class="col-xs-12">
                 <h4 class="fw-600 fs-18">Available options</h4>
             </div>
                 <form ng-submit="addOption()">
@@ -20,14 +20,14 @@
                         <span class="highlight"></span>
                         <span class="bar"></span>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-xs-12">
                         <button type="submit" class="btn btn-info margin-t-10 margin-b-10" >
                             <i class="fa fa-plus-circle"></i> Add
                         </button>
                     </div>
                 </form>
         </div>
-        <div class="col-sm-12 content-card margin-t-30">
+        <div class="col-xs-12 content-card margin-t-30">
             <h4 class="fw-600 fs-18">Options tied to the service</h4>
             <table class="table table-hover fs-14">
                 <thead>
@@ -60,7 +60,7 @@
                 </tbody>
             </table>
         </div>
-        <div ng-if="!create" class="col-sm-12 margin-b-20 margin-t-20">
+        <div ng-if="!create" class="col-xs-12 margin-b-20 margin-t-20">
             <button class="btn btn-primary margin-l--10" ui-sref="service_mgmt.service_list.service_edit.basic ({service_id : service_id})">
                 <i class="fa fa-angle-double-left"></i> Details
             </button>
