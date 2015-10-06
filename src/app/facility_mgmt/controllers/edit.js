@@ -296,8 +296,11 @@
                             "name": $scope.facility.town_name
                         }
                     };
-                    $scope.off_contacts =
-                        $scope.facility.officer_in_charge.contacts;
+                    if($scope.facility.hasOwnProperty
+                        ("officer_in_charge") && !_.isNull($scope.facility.officer_in_charge)){
+                        $scope.off_contacts =
+                            $scope.facility.officer_in_charge.contacts;
+                    }
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -612,7 +615,9 @@
                 if (_.isUndefined(f)){
                     return;
                 }
-                $scope.facilityContacts(f);
+                if(f.hasOwnProperty("contacts")){
+                    $scope.facilityContacts(f);
+                }
             });
             /*contact types*/
             wrappers.contact_types.list()
@@ -943,7 +948,9 @@
                 if (_.isUndefined(f)){
                     return;
                 }
-                $scope.facilityUnits(f);
+                if(f.hasOwnProperty("facility_units")){
+                    $scope.facilityUnits(f);
+                }
             });
             /*add existing regulatory to facility*/
             $scope.add = function () {
@@ -1411,7 +1418,9 @@
                     return;
                 }
                 //draw facility on the map
-                $scope.facilityWard(f);
+                if(f.hasOwnProperty("ward")){
+                    $scope.facilityWard(f);
+                }
             });
         }]);
 

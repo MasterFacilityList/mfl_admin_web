@@ -151,7 +151,9 @@
                 if (_.isUndefined(u)){
                     return;
                 }
-                $scope.unitContacts(u);
+                if(u.hasOwnProperty("contacts")){
+                    $scope.unitContacts(u);
+                }
             });
         }]
     )
@@ -223,7 +225,9 @@
                 if (_.isUndefined(u)){
                     return;
                 }
-                $scope.unitWorkers(u);
+                if(u.hasOwnProperty("health_unit_workers")){
+                    $scope.unitWorkers(u);
+                }
             });
         }]
     );
