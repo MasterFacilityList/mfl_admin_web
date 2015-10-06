@@ -1,5 +1,5 @@
 <ng-include src="'common/tpls/table_head.tpl.html'"></ng-include>
-<div id="no-more-tables" class="col-lg-12 margin-t-15">
+<div id="no-more-tables" class="col-xs-12 margin-t-15">
     <table class="table table-condensed table-hover fs-14">
         <thead class="cf">
             <th sil-grid-sort field='name'>Name</th>
@@ -7,7 +7,7 @@
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="status in statuses">
-                <td class="pad-t-15">{{status.name}}</td>
+                <td data-title="Name" class="pad-t-15">{{status.name}}</td>
                 <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.chu_status.view({id : status.id})" class="btn btn-success">
                         View
