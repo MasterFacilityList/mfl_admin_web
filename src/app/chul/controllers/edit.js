@@ -151,7 +151,9 @@
                 if (_.isUndefined(u)){
                     return;
                 }
-                $scope.unitContacts(u);
+                if(u.hasOwnProperty("contacts")){
+                    $scope.unitContacts(u);
+                }
             });
         }]
     )
