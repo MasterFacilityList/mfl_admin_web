@@ -142,7 +142,7 @@
             expect(browser.getLocationAbsUrl()).toEqual("/setup/contact_types");
         });
 
-        it("logout user after tests",function () {
+        iit("logout user after tests",function () {
             test_utils.logoutUser(browser);
         });
     });

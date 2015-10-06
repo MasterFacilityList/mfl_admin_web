@@ -121,6 +121,9 @@
                         regulatory_body: "23",
                         town : "3",
                         town_name : "Mombasa",
+                        officer_in_charge : {
+                            "name" : "Test"
+                        },
                         facility_physical_address : {
                             town_id : "3",
                             town : "Mombasa"
@@ -1389,7 +1392,7 @@
                 data.$scope.nextState = angular.noop;
                 data.$scope.nxtState = true;
                 ctrl(".contacts", data);
-
+                data.$scope.facility = {"id" : "3"};
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -1763,7 +1766,7 @@
                     .expectGET(server_url+"api/facilities/contacts/?facility=3")
                     .respond(500, {results: []});
                 ctrl(".contacts", data);
-
+                data.$scope.facility = {};
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -2761,6 +2764,7 @@
                         }
                     ]
                 };
+                data.$scope.facility = {"id" : "3"};
                 httpBackend
                     .expectPATCH(server_url + "api/facilities/facilities/3/")
                     .respond(201, {"id": "3"});

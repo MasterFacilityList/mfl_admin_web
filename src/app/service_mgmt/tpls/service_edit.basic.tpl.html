@@ -53,7 +53,9 @@
                 <a class="btn btn-default margin-t-10" ui-sref="service_mgmt.service_list">
                     Cancel
                 </a>
-                <mfl-revision-view ng-show="edit_view" id="service_id" wrapper="wrapper" ></mfl-revision-view>
+                <div class="col-xs-12 pad-0" ng-if="edit_view">
+                    <mfl-revision-view ng-show="edit_view" id="service_id" wrapper="wrapper" ></mfl-revision-view>
+                </div>
             </div>
         </div>
 
