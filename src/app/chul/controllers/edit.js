@@ -225,7 +225,9 @@
                 if (_.isUndefined(u)){
                     return;
                 }
-                $scope.unitWorkers(u);
+                if(u.hasOwnProperty("health_unit_workers")){
+                    $scope.unitWorkers(u);
+                }
             });
         }]
     );
