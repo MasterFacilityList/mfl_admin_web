@@ -7,7 +7,7 @@
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="status in statuses">
-                <td class="pad-t-15">{{status.name}}</td>
+                <td data-title="Name" class="pad-t-15">{{status.name}}</td>
                 <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.chu_status.view({id : status.id})" class="btn btn-success">
                         View
