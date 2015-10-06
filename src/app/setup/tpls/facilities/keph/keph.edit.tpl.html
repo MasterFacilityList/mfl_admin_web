@@ -3,7 +3,7 @@
 <div class="col-md-10 col-md-offset-1 content-card margin-t-20">
     <form name="kephForm" ng-submit="save(keph_id, kephForm)" novalidate>
         <drf-err-msg></drf-err-msg>
-        <div class="col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
+        <div class="col-md-10 col-md-offset-1 margin-t-20 margin-b-10">
             <div class="form-group">
                 <label for="name" class="control-label">KEPH Name</label>
                 <input id="name" name="name" type="text" ng-model="keph.name" required class="form-control" api-checker/>
@@ -16,6 +16,7 @@
             <a class="btn btn-default" ui-sref="setup.facility_kephs">Cancel</a>
         </div>
     </form>
-
-    <mfl-revision-view id="keph_id" wrapper="wrapper" ></mfl-revision-view>
+    <div class="col-md-10 col-md-offset-1" ng-if="edit">
+        <mfl-revision-view id="keph_id" wrapper="wrapper" ></mfl-revision-view>
+    </div>
 </div>
