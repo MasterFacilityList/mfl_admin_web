@@ -19,7 +19,7 @@
                 <a class="btn btn-default" ui-sref="setup.geocode_methods_list" requires-user-feature="is_staff">
                     Cancel
                 </a>
-                <mfl-revision-view ng-show="geocode_method_id" id="geocode_method_id" wrapper="wrapper" ></mfl-revision-view>
+                <mfl-revision-view ng-if="geocode_method_id" id="geocode_method_id" wrapper="wrapper" ></mfl-revision-view>
             </div>
         </form>
     </div>

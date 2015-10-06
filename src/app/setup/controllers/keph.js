@@ -33,7 +33,7 @@
             $scope.keph = {
                 name: ""
             };
-
+            $scope.edit = false;
             $scope.save = function () {
                 adminApi.kephs.create($scope.keph)
                 .success(function () {
@@ -68,6 +68,7 @@
                     wording: "Delete"
                 }
             ];
+            $scope.edit = true;
             $scope.keph_id = $stateParams.keph_id;
             $scope.wrapper = adminApi.kephs;
 

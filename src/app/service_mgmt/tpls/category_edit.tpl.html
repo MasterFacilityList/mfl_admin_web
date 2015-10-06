@@ -40,14 +40,16 @@
             <div class="pull-left">
                 <button class="btn btn-primary" requires-permission="facilities.change_servicecategory" requires-user-feature="is_staff">Save</button>
                 <a class="margin-l-10 btn btn-default margin-l-5" ui-sref="service_mgmt.category_list">Cancel</a>
-                <mfl-revision-view id="category_id" wrapper="wrapper" ></mfl-revision-view>
+                <div class="col-xs-12 pad-0" ng-if="edit_view">
+                  <mfl-revision-view id="category_id" wrapper="wrapper" ></mfl-revision-view>
+                </div>
             </div>
            </div>
         </form>
       </div>
     </div>
     <div class="col-xs-10 col-xs-offset-1">
-      <button ng-show="edit_view" class="btn btn-primary" ng-click="viewServices = !viewServices">
+      <button ng-if="edit_view" class="btn btn-primary" ng-click="viewServices = !viewServices">
           {{viewServices ? 'Hide' : 'View'}} Services <i class="fa {{viewServices ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
       </button>
     </div>
