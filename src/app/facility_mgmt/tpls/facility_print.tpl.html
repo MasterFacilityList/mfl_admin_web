@@ -219,7 +219,7 @@
         <h4 class="fw-600">Facility Health Services</h4>
     </div>
     <div class="col-xs-12" ng-if="facility.facility_services.length !== 0">
-        <table class="table table-hover fs-14 table-condensed table-stripped">
+        <table id="no-more-tables" class="table table-hover fs-14 table-condensed table-stripped">
             <thead>
                 <th class="col-xs-4">Service Name</th>
                 <th class="col-xs-4">Service Category</th>
@@ -227,13 +227,13 @@
             </thead>
             <tbody>
                 <tr ng-repeat="service in facility.facility_services">
-                    <td>
+                    <td data-title="Service Name">
                         {{service.service_name}}
                     </td>
-                    <td>
+                    <td data-title="Service Category">
                         {{service.category_name}}
                     </td>
-                    <td class="text-center">
+                    <td data-title="Service Option" class="text-center">
                         {{service.option_name}}
                     </td>
                 </tr>
