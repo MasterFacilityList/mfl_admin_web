@@ -1,5 +1,5 @@
 <div class="col-xs-12 content-card">
-    <div class="col-sm-12 margin-t-20">
+    <div class="col-xs-12 margin-t-20">
         <div class="col-xs-12">
             <h4 class="fw-600 fs-18"> Geolocation Details</h4>
         </div>
@@ -11,79 +11,68 @@
                </div>
                <div ng-if="!spinner1">
                     <form name="geoForm">
-                        <div class="col-xs-12">
+                        <!-- Start of form -->
+                        <div class="form-group col-xs-12">
+                            <label>Geocode source</label>
+                            <ui-select name="source" ng-model="select_values.source" required api-checker register-custom-form-control>
+                                <ui-select-match placeholder="Select a geo code source...">
+                                    <span>{{$select.selected.name}}</span>
+                                </ui-select-match>
+                                <ui-select-choices repeat="gcm.id as gcm in geo_sources | filter:$select.search">
+                                    <span>{{gcm.name}}</span>
+                                </ui-select-choices>
+                            </ui-select>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-sm-12">
-                                    <!-- Start of form -->
-                                    <div class="form-group col-md-12">
-                                        <label>Geocode source</label>
-                                        <ui-select name="source" ng-model="select_values.source" required api-checker register-custom-form-control>
-                                            <ui-select-match placeholder="Select a geo code source...">
-                                                <span>{{$select.selected.name}}</span>
-                                            </ui-select-match>
-                                            <ui-select-choices repeat="gcm.id as gcm in geo_sources | filter:$select.search">
-                                                <span>{{gcm.name}}</span>
-                                            </ui-select-choices>
-                                        </ui-select>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label>Geocode method</label>
-                                        <ui-select name="method" ng-model="select_values.method" required api-checker register-custom-form-control>
-                                            <ui-select-match placeholder="Select a geo code method...">
-                                                <span>{{$select.selected.name}}</span>
-                                            </ui-select-match>
-                                            <ui-select-choices repeat="gcm.id as gcm in geo_methods | filter:$select.search">
-                                                <span>{{gcm.name}}</span>
-                                            </ui-select-choices>
-                                        </ui-select>
-                                    </div>
-                                    <div class="col-xs-12 pad-0">
-                                    <div class="form-group col-md-6 col-xs-12">
-                                        <label for="collection date" class="control-label">
-                                            <span class="fs-16">Collection date: {{geo.collection_date | date}}</span>
-                                        </label>
-                                                <datepicker date-format="y-MM-dTHH:mm:ss" date-max-limit="{{maxDate}}">
-                                                  <input class="form-control" name="collection_date" ng-model="geo.collection_date" type="text"/>
-                                                </datepicker>
-                                    </div>
-                                    </div>
-                                <!-- End of first section of form -->
-                                <!-- Start lat long -->
-                                            <div class="form-group col-sm-6">
-                                                <label class="control-label">
-                                                    Longitude
-                                                </label>
-                                                <input type="number" class="form-control" step="0.00000001" name="longitude" ng-model="geo.coordinates.coordinates[0]"
-                                                ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label class="control-label">
-                                                    Latitude
-                                                </label>
-                                                <input type="number" class="form-control" step="0.00000001" name="latitude" ng-model="geo.coordinates.coordinates[1]"
-                                                ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
-                                            </div>
-                                  <!-- End lat long -->
-                                <div class="col-md-12 margin-t-10 margin-b-20">
-                                   <div>
-                                    <h4>{{ward_gis.properties.name | titlecase}} Ward</h4>
-                                   </div>
-                                    <leaflet id="wardmap"
-                                        defaults="defaults"
-                                        markers="markers"
-                                        events="events"
-                                        layers="layers"
-                                        tiles="tiles"
-                                        width="100%"
-                                        height="300px"
-                                        geojson="geojson">
-                                     </leaflet>
-                                </div>
-                                </div>
-
-                            </div>
+                        <div class="form-group col-xs-12">
+                            <label>Geocode method</label>
+                            <ui-select name="method" ng-model="select_values.method" required api-checker register-custom-form-control>
+                                <ui-select-match placeholder="Select a geo code method...">
+                                    <span>{{$select.selected.name}}</span>
+                                </ui-select-match>
+                                <ui-select-choices repeat="gcm.id as gcm in geo_methods | filter:$select.search">
+                                    <span>{{gcm.name}}</span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="form-group col-xs-12">
+                            <label for="collection date" class="control-label">
+                                Collection date: {{geo.collection_date | date}}
+                            </label>
+                            <datepicker date-format="y-MM-dTHH:mm:ss" date-max-limit="{{maxDate}}">
+                              <input class="form-control" name="collection_date" ng-model="geo.collection_date" type="text"/>
+                            </datepicker>
+                        </div>
+                        <!-- End of first section of form -->
+                        <!-- Start lat long -->
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label class="control-label">
+                                Longitude
+                            </label>
+                            <input type="number" class="form-control" step="0.00000001" name="longitude" ng-model="geo.coordinates.coordinates[0]"
+                            ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
+                        </div>
+                        <div class="form-group col-sm-6 col-xs-12">
+                            <label class="control-label">
+                                Latitude
+                            </label>
+                            <input type="number" class="form-control" step="0.00000001" name="latitude" ng-model="geo.coordinates.coordinates[1]"
+                            ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
+                        </div>
+                          <!-- End lat long -->
+                        <div class="col-xs-12 margin-t-10 margin-b-20">
+                           <div>
+                            <h4>{{ward_gis.properties.name | titlecase}} Ward</h4>
+                           </div>
+                            <leaflet id="wardmap"
+                                defaults="defaults"
+                                markers="markers"
+                                events="events"
+                                layers="layers"
+                                tiles="tiles"
+                                width="100%"
+                                height="300px"
+                                geojson="geojson">
+                             </leaflet>
                         </div>
                     </form>
                </div>
