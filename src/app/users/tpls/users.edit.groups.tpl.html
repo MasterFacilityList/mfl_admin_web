@@ -65,24 +65,18 @@
                     <i class="fa fa-angle-double-left"></i> Contacts
                 </a>
                 <a ui-sref="users.user_edit.constituency({user_id:user.id})"
-                   ng-if="$parent.current_group === 'Sub County Health Records Information Officer'"
                    class="btn btn-primary pull-right">
                      <span>Sub County <i class="fa fa-angle-double-right"></i></span>
                 </a>
                 <a ui-sref="users.user_edit.counties({user_id:user.id})"
-                   ng-if="$parent.current_group === 'County Administrators' ||
-                   $parent.current_group === 'County Health Records Information Officer'"
                    class="btn btn-primary pull-right fade-content">
                      <span>County <i class="fa fa-angle-double-right"></i></span>
                 </a>
                 <a  ui-sref="users.user_edit.regulatory_body({user_id:user.id})"
-                    ng-if="$parent.current_group === 'Regulators (Approvers)' ||
-                          $parent.current_group === 'Regulators (makers)'"
                     class="btn btn-primary pull-right">
                      <span>Regulatory Body <i class="fa fa-angle-double-right"></i></span>
                 </a>
                 <a  ui-sref="users"
-                    ng-if="$parent.current_group === 'others'"
                     class="btn btn-primary pull-right">
                      <span>Update</span>
                 </a>
@@ -92,24 +86,18 @@
                     <i class="fa fa-angle-double-left"></i> Contacts
                 </a>
                 <a ui-sref="users.user_create.constituency({user_id:user.id})"
-                   ng-if="$parent.current_group === 'Sub County Health Records Information Officer'"
                    class="btn btn-primary pull-right">
                      <span>Sub County <i class="fa fa-angle-double-right"></i></span>
                 </a>
                 <a ui-sref="users.user_create.counties({user_id:user.id})"
-                   ng-if="$parent.current_group === 'County Administrators' ||
-                   $parent.current_group === 'County Health Records Information Officer'"
                    class="btn btn-primary pull-right fade-content">
                      <span>County <i class="fa fa-angle-double-right"></i></span>
                 </a>
                 <a  ui-sref="users.user_create.regulatory_body({user_id:user.id})"
-                    ng-if="$parent.current_group === 'Regulators (Approvers)' ||
-                          $parent.current_group === 'Regulators (makers)'"
                     class="btn btn-primary pull-right">
                      <span>Regulatory Body <i class="fa fa-angle-double-right"></i></span>
                 </a>
                 <a  ui-sref="users"
-                    ng-if="$parent.current_group === 'others'"
                     class="btn btn-primary pull-right">
                      <span>Update</span>
                 </a>
