@@ -31,9 +31,7 @@
                </span>
            </a>
        </li>
-       <li ui-sref-active="active"
-       ng-if="current_group === 'County Administrators' ||
-       current_group === 'County Health Records Information Officer'">
+       <li ui-sref-active="active">
            <a ui-sref="users.user_edit.counties">
                <span class="fw-900 ">
                    County
@@ -41,9 +39,7 @@
            </a>
        </li>
        <li ui-sref-active="active">
-           <a ui-sref="users.user_edit.regulatory_body"
-           ng-if="current_group === 'Regulators (Approvers)' ||
-           current_group === 'Regulators (makers)'">
+           <a ui-sref="users.user_edit.regulatory_body">
                <span class="fw-900 ">
                     Regulatory Body
                </span>

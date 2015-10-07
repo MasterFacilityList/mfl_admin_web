@@ -31,17 +31,12 @@
                         </div>
                         <p  class="text-center step-label" ng-class="{'step-label-active': steps[2].active ,'step-label-done' : steps[2].done || steps[2].furthest }"  ng-click="tabState(steps[2])">User Groups</p>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 margin-t-15" ng-if="
-                current_group === 'County Administrators' ||
-            current_group === 'County Health Records Information Officer' || current_group === 'Sub County Health Records Information Officer' || current_group === 'Regulators (Approvers)' ||
-            current_group === 'Regulators (makers)'">
+                <div class="col-lg-6 col-md-6 col-sm-6 margin-t-15">
                 <i class="stretch fa fa-long-arrow-right" style="width: 100%;"></i>
                 </div>
             </div>
             <!-- To assign county -->
-            <div class="col-sm-3 text-left pad-0"
-            ng-if="current_group === 'County Administrators' ||
-            current_group === 'County Health Records Information Officer'">
+            <div class="col-sm-3 text-left pad-0">
                 <div class="col-xs-12">
                         <div class="progress-badge progress-badge-done margin-l-30" ng-class="{'progress-badge-active': steps[3].active}" ng-click="tabState(steps[3])">
                             4
@@ -50,7 +45,7 @@
                 </div>
             </div>
             <!-- To assign constituency -->
-            <div class="col-sm-3 text-left pad-0" ng-if="current_group === 'Sub County Health Records Information Officer'">
+            <div class="col-sm-3 text-left pad-0">
                 <div class="col-xs-12">
                         <div class="progress-badge progress-badge-done margin-l-40" ng-class="{'progress-badge-active': steps[4].active}" ng-click="tabState(steps[4])">
                             4
@@ -60,9 +55,7 @@
             </div>
             <!-- End of assigning constituency -->
             <!-- To assign regulatory bodies -->
-            <div class="col-sm-3 text-left pad-0"
-            ng-if="current_group === 'Regulators (Approvers)' ||
-            current_group === 'Regulators (makers)'">
+            <div class="col-sm-3 text-left pad-0">
                 <div class="col-xs-12">
                         <div class="progress-badge progress-badge-done margin-l-30" ng-class="{'progress-badge-active': steps[5].active}" ng-click="tabState(steps[5])">
                             4
