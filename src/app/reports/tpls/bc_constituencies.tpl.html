@@ -34,11 +34,11 @@
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="const in constituency_bc | filter:search">
-                            <td class="col-xs-5" data-title="Constituency:">
+                            <td data-title="Constituency:">
                               <a ui-sref="reports.bc_wards({constituency:const.constituency})">{{::const.constituency_name | titlecase}}</a>
                             </td>
-                            <td class="col-xs-4 text-center" data-title="Beds:">{{::const.beds}}</td>
-                            <td class="col-xs-3 text-center" data-title="Cots:">{{::const.cots}}</td>
+                            <td class=" text-center" data-title="Beds:">{{::const.beds}}</td>
+                            <td class=" text-center" data-title="Cots:">{{::const.cots}}</td>
                         </tr>
                     </tbody>
                     <tbody ng-if="constituency_bc.length===0">
