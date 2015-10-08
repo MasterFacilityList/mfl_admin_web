@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("mflAdminApp scenario tests for service categories:", function() {
+    xdescribe("mflAdminApp scenario tests for service categories:", function() {
 
         var test_utils = require("../../../common/tests/utils.e2e.js");
         var category = test_utils.getRandomString(25);

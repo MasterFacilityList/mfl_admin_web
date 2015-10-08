@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("mflAdminApp scenario tests for facility count of keph levels by county"+
+    xdescribe("mflAdminApp scenario tests for facility count of keph levels by county"+
              " with constituencies report:", function() {
 
         var test_utils = require("../../../common/tests/utils.e2e.js");

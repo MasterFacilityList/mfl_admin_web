@@ -23,7 +23,7 @@ function run_backend(){
     psql circle_test ubuntu -c "create extension if not exists postgis;" --quiet -o /dev/null
     psql circle_test ubuntu -c "create role mfl with password 'mfl' login superuser;" --quiet -o /dev/null
     psql circle_test ubuntu -c "create database mfl;" --quiet -o /dev/null
-    psql circle_test ubuntu -f mfl_dump.sql --quiet -o /dev/null
+    psql mfl mfl -f mfl_dump.sql --quiet -o /dev/null
     python manage.py migrate -v0
     gunicorn -w 3 --timeout=300 --graceful-timeout=300 config.wsgi:application --bind=127.0.0.1:8061 --access-logfile "$acc_log" --error-logfile "$err_log" --log-level info --daemon
     deactivate
@@ -44,8 +44,10 @@ function run_e2e(){
 
 case $CIRCLE_NODE_INDEX in
 0)
-
     export RUN_SAUCE_TESTS=true
+    export E2E_PAGE_TIMEOUT=5000
+    export DEFAULT_TIMEOUT_INTERVAL=60000
+
     grunt test:unit
 
     run_backend

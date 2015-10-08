@@ -1,4 +1,3 @@
-
 (function () {
     "use strict";
 
@@ -26,7 +25,7 @@
             //navigation
             browser.get("/#/setup/towns/create");
             browser.waitForAngular(); //navigation to create
-            browser.driver.sleep(3000);
+            browser.driver.sleep(browser.params.page_timeout);
 
             //interaction setup
 
@@ -36,7 +35,7 @@
             //interations
             town_input_name.sendKeys(town);
             town_save_btn.click(); //saves town
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //expectations
@@ -49,7 +48,7 @@
 
             //navigation
             browser.get("/#/setup/towns");
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //interaction setup
@@ -70,7 +69,7 @@
 
             //interaction
             view_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();  //navigation to detail page
 
             //expectations
@@ -95,7 +94,7 @@
             });
             expect(town_save_btn.getText()).toEqual("Save");
             town_save_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();//navigates to list page
 
             townNameEl = element.all(by.repeater("town in towns")
@@ -109,7 +108,7 @@
 
             //navigation
             browser.get("/#/setup/towns");
-            browser.driver.sleep(1500);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //interation setup
@@ -118,7 +117,7 @@
 
             //interaction
             view_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();  //navigation to detail
 
             //interaction setup
@@ -127,11 +126,11 @@
             //interaction
             town_del_btn.click();
             browser.waitForAngular(); //navigation to delete page
-            browser.driver.sleep(1500);
+            browser.driver.sleep(browser.params.page_timeout);
 
             del_btn = element(by.id("del_btn"));
             del_btn.click();
-            browser.driver.sleep(1500);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();//goes back to list page
 
             //expectations
