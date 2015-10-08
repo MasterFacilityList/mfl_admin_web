@@ -24,7 +24,7 @@
             //navigation
             browser.get("/#/setup/geocode_methods/create");
             browser.waitForAngular(); //navigation to create
-            browser.driver.sleep(3000);
+            browser.driver.sleep(browser.params.page_timeout);
 
             //interaction setup
 
@@ -36,7 +36,7 @@
             gm_input_name.sendKeys(geocode_method);
             gm_textarea_desc.sendKeys(geocode_desc);
             gm_save_btn.click(); //saves geocode_method
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //expectations
@@ -49,7 +49,7 @@
 
             //navigation
             browser.get("/#/setup/geocode_methods");
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //interaction setup
@@ -69,7 +69,7 @@
 
             //interaction
             view_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();  //navigation to detail page
 
             //expectations
@@ -98,7 +98,7 @@
             });
             expect(gm_save_btn.getText()).toEqual("Save");
             gm_save_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();//navigates to list page
 
             gmNameEl = element.all(by.repeater("gm in geocode_methods").row(0).column("gm.name"));
@@ -111,7 +111,7 @@
 
             //navigation
             browser.get("/#/setup/geocode_methods");
-            browser.driver.sleep(1500);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //interation setup
@@ -120,7 +120,7 @@
 
             //interaction
             view_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();  //navigation to detail
 
             //interaction setup
@@ -129,11 +129,11 @@
             //interaction
             gm_del_btn.click();
             browser.waitForAngular(); //navigation to delete page
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
 
             del_btn = element(by.id("del_btn"));
             del_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();//goes back to list page
 
             //expectations

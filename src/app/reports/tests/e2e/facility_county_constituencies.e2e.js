@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("mflAdminApp scenario tests for facility count by county"+
+    xdescribe("mflAdminApp scenario tests for facility count by county"+
              " with constituencies report:", function() {
         var test_utils = require("../../../common/tests/utils.e2e.js");
 

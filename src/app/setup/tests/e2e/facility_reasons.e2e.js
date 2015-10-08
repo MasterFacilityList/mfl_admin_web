@@ -24,7 +24,7 @@
             //navigation
             browser.get("/#/setup/facility_reasons/create");
             browser.waitForAngular(); //navigation to create
-            browser.driver.sleep(3000);
+            browser.driver.sleep(browser.params.page_timeout);
 
             //interaction setup
 
@@ -36,7 +36,7 @@
             facility_reason_input_name.sendKeys(facility_reason);
             facility_reason_textarea_desc.sendKeys(facility_reason_desc);
             facility_reason_save_btn.click(); //saves facility_reason
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //expectations
@@ -49,7 +49,7 @@
 
             //navigation
             browser.get("/#/setup/facility_reasons");
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //interaction setup
@@ -70,7 +70,7 @@
 
             //interaction
             view_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();  //navigation to detail page
 
             //expectations
@@ -100,7 +100,7 @@
             });
             expect(facility_reason_save_btn.getText()).toEqual("Save");
             facility_reason_save_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();//navigates to list page
 
             facility_reasonNameEl = element.all(by.repeater("reason in change_reasons")
@@ -110,32 +110,25 @@
 
         //Only to be added if deleted fields can be recreated
         it("should delete facility reason from edit view",function () {
-            var facility_reason_del_btn,view_btn,del_btn,facility_reasonRow;
+            var facility_reasonRow;
 
             //navigation
             browser.get("/#/setup/facility_reasons");
-            browser.driver.sleep(1500);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
-            //interation setup
             facility_reasonRow = element(by.repeater("reason in change_reasons").row(0));
-            view_btn = facility_reasonRow.element(by.cssContainingText(".btn","View"));
-
-            //interaction
-            view_btn.click();
-            browser.driver.sleep(1000);
+            facility_reasonRow.element(by.cssContainingText(".btn","View")).click();
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();  //navigation to detail
 
             //interaction setup
-            facility_reason_del_btn = element(by.cssContainingText(".btn-danger","Delete"));
-
-            //interaction
-            facility_reason_del_btn.click();
+            element(by.cssContainingText(".btn-danger","Delete")).click();
             browser.waitForAngular(); //navigation to delete page
+            browser.driver.sleep(browser.params.page_timeout);
 
-            del_btn = element(by.id("del_btn"));
-            del_btn.click();
-            browser.driver.sleep(1500);
+            element(by.id("del_btn")).click();
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();//goes back to list page
 
             //expectations
