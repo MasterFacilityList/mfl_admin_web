@@ -10,11 +10,11 @@
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="body in regulatingBodies">
-                <td data-title="Name" class="col-xs-3 pad-t-15">{{body.name}}</td>
-                <td data-title="Abbreviation" class="col-xs-2 pad-t-15">{{body.abbreviation}}</td>
-                <td data-title="Regulation Verb" class="col-xs-3 text-center pad-t-15">{{body.regulation_verb}}</td>
-                <td data-title="Body Type" class="col-xs-3 text-center pad-t-15">{{body.regulatory_body_type_name}}</td>
-                <td data-title="Actions" class="col-xs-1 text-right">
+                <td data-title="Name" class="pad-t-15">{{body.name}}</td>
+                <td data-title="Abbreviation" class="pad-t-15">{{body.abbreviation}}</td>
+                <td data-title="Regulation Verb" class="text-center pad-t-15">{{body.regulation_verb}}</td>
+                <td data-title="Body Type" class="text-center pad-t-15">{{body.regulatory_body_type_name}}</td>
+                <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.facility_regulatory_bodies.edit({id : body.id})" class="btn btn-success" tooltip-placement="bottom" tooltip="View Regulatory Body">
                         View
                     </a>
