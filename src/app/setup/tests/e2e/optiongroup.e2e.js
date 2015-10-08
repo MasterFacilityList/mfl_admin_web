@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("mflAdminApp scenario tests for service option groups:", function() {
+    xdescribe("mflAdminApp scenario tests for service option groups:", function() {
 
         //variable required in test
         var test_utils = require("../../../common/tests/utils.e2e.js");

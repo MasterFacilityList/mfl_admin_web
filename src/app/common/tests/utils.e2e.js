@@ -28,16 +28,15 @@
         loginButton.click();
         browser.ignoreSynchronization = true;
         browser.waitForAngular();
-        browser.driver.sleep(1000);
+        browser.driver.sleep(browser.params.page_timeout);
 
         expect(element(by.linkText("Home")).isPresent()).toBe(true);
-        browser.driver.sleep(2000);
     };
 
     var logoutUser = function (browser) {
         browser.get("/#/logout");
         browser.waitForAngular();
-        browser.driver.sleep(1000);
+        browser.driver.sleep(browser.params.page_timeout);
         expect(element(by.css("h2")).getText()).toEqual("Master Facility List V 2.0");
     };
 

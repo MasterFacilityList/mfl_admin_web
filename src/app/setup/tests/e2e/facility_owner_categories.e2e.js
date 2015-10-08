@@ -26,7 +26,7 @@
             //navigation
             browser.get("/#/setup/facility_owners_types/create");
             browser.waitForAngular(); //navigation to create
-            browser.driver.sleep(3000);
+            browser.driver.sleep(browser.params.page_timeout);
 
             //interaction setup
 
@@ -38,7 +38,7 @@
             facilityOwnerType_input_name.sendKeys(facilityOwnerType);
             facilityOwnerType_textarea_desc.sendKeys(facilityOwnerType_desc);
             facilityOwnerType_save_btn.click(); //saves facilityOwnerType
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //expectations
@@ -51,7 +51,7 @@
 
             //navigation
             browser.get("/#/setup/facility_owners_types");
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //interaction setup
@@ -72,7 +72,7 @@
 
             //interaction
             view_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();  //navigation to detail page
 
             //expectations
@@ -102,7 +102,7 @@
             });
             expect(facilityOwnerType_save_btn.getText()).toEqual("Save");
             facilityOwnerType_save_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();//navigates to list page
 
             facilityOwnerTypeNameEl = element.all(by.repeater("ownerType in facilityOwnerTypes")
@@ -116,7 +116,7 @@
 
             //navigation
             browser.get("/#/setup/facility_owners_types");
-            browser.driver.sleep(1500);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular(); //navigation to list page
 
             //interation setup
@@ -125,7 +125,7 @@
 
             //interaction
             view_btn.click();
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();  //navigation to detail
 
             //interaction setup
@@ -134,11 +134,11 @@
             //interaction
             facilityOwnerType_del_btn.click();
             browser.waitForAngular(); //navigation to delete page
-            browser.driver.sleep(1000);
+            browser.driver.sleep(browser.params.page_timeout);
 
             del_btn = element(by.id("del_btn"));
             del_btn.click();
-            browser.driver.sleep(1500);
+            browser.driver.sleep(browser.params.page_timeout);
             browser.waitForAngular();//goes back to list page
 
             //expectations

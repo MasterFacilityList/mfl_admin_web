@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("mflAdminApp scenario tests for beds and cots by county report:", function() {
+    xdescribe("mflAdminApp scenario tests for beds and cots by county report:", function() {
         var test_utils = require("../../../common/tests/utils.e2e.js");
 
         it("should log in and load the dashboard", function() {

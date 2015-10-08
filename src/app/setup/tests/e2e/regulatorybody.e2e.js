@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    describe("mflAdminApp scenario tests for facility regulatory bodies:", function() {
+    xdescribe("mflAdminApp scenario tests for facility regulatory bodies:", function() {
 
         //variable required in test
         var test_utils = require("../../../common/tests/utils.e2e.js");
