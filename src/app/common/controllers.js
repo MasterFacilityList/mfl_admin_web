@@ -1,4 +1,4 @@
-(function (angular, _) {
+(function (angular) {
     "use strict";
 
     angular.module("mfl.common.controllers", [
@@ -17,4 +17,4 @@
         }]
     );
 
-})(window.angular, window._);
+})(window.angular);
