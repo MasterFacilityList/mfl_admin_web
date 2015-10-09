@@ -67,6 +67,8 @@ case $CIRCLE_NODE_INDEX in
     killall --wait sc
     ;;
 1)
+    export E2E_PAGE_TIMEOUT=4000
+    export DEFAULT_TIMEOUT_INTERVAL=40000
     run_backend
     grunt test:unit
     run_e2e
