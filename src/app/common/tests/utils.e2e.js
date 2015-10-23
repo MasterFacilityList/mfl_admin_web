@@ -30,7 +30,7 @@
         browser.waitForAngular();
         browser.driver.sleep(browser.params.page_timeout);
 
-        expect(element(by.linkText("Home")).isPresent()).toBe(true);
+        expect(element(by.cssContainingText(".sidebar-icon","Dashboard")).isPresent()).toBe(true);
     };
 
     var logoutUser = function (browser) {
