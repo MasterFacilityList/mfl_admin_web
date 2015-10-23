@@ -2,47 +2,47 @@
     <aside class="side-left">
         <ul class=" nav nav-sidebar">
             <li ui-sref-active="active">
-                <a ui-sref="facilities">
+                <a ui-sref="facilities" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">All Facilities</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.view_facility">
-                <a ui-sref="facility_approve_list">
+                <a ui-sref="facility_approve_list" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">Approved Facilities</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.view_facilityapproval">
-                <a ui-sref="facilities_approve">
+                <a ui-sref="facilities_approve" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">Facilities Pending Approval</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.publish_facilities,facilities.view_facility">
-                <a ui-sref="facilities_publish">
+                <a ui-sref="facilities_publish" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">Publish Facilities</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.view_rejected_facilities" >
-                <a ui-sref="facility_reject_list">
+                <a ui-sref="facility_reject_list" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">Rejected Facilities</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.view_closed_facilities" >
-                <a ui-sref="facilities_closed">
+                <a ui-sref="facilities_closed" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">Closed Facilities</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.view_facility" requires-user-feature="is_national,regulator">
-                <a ui-sref="facilities_regulation">
+                <a ui-sref="facilities_regulation" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">Regulate Facilities</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.view_facility">
-                <a ui-sref="facilities_regulator_sync">
+                <a ui-sref="facilities_regulator_sync" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">Synchronize Regulated Facilities</span>
                 </a>
             </li>
             <li ui-sref-active="active" requires-permission="facilities.view_facilityservicerating">
-                <a ui-sref="facilities_feedback">
+                <a ui-sref="facilities_feedback" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">Feedback on Facilities</span>
                 </a>
             </li>
