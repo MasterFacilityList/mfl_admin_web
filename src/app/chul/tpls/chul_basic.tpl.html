@@ -2,18 +2,18 @@
     <form name="frm_unit_basic" ng-submit="save(frm_unit_basic)" novalidate>
     <div class="col-xs-12 pad-0 custom-well">
         <div class="col-xs-12">
-            <h4 class="margin-b-10 fw-600">Community Unit Basic Details</h4>
+            <h4 class="margin-b-10 fw-600">Community Health Unit Basic Details</h4>
         </div>
         <drf-err-msg></drf-err-msg>
         <div class="form-group col-xs-12 margin-b-0">
           <p class="lead col-xs-12 pad-0">
-            <label class="control-label fs-16 fw-600 margin-t-5">Community Unit Code: </label>
+            <label class="control-label fs-16 fw-600 margin-t-5">Community Health Unit Code: </label>
               <span class="label label-info fs-15">{{create ?  'Automatically generated after creating unit' : unit.code}}
               </span>
           </p>
         </div>
         <div class="form-group col-xs-12">
-            <label class="control-label">Community Unit Name</label>
+            <label class="control-label">Community Health Unit Name</label>
             <input class="form-control" name="name" ng-model="unit.name" required placeholder="Commnunity Unit Name" api-checker/>
         </div>
         <div class="form-group col-xs-12">
@@ -44,7 +44,7 @@
             </datepicker>
         </div>
         <div class="form-group col-xs-12">
-            <label class="control-label">Community Unit Status</label>
+            <label class="control-label">Community Health Unit Status</label>
             <select name="status" class="form-control"  ng-model="unit.status" api-checker required>
                 <option value="">Select Status</option>
                 <option ng-repeat="a_status in unit_status" ng-selected="{{a_status.id == unit.status}}" value="{{a_status.id}}">{{a_status.name}}</option>
@@ -70,14 +70,14 @@
         </div>
         <div class="form-group col-xs-12">
             <label class="control-label">Location </label>
-            <input class="form-control" name="location" ng-model="unit.location" placeholder="Community Unit Location" api-checker/>
+            <input class="form-control" name="location" ng-model="unit.location" placeholder="Community Health Unit Location" api-checker/>
         </div>
     </div>
     <!-- End of basic details -->
     <!-- Beggining of unit contacts -->
     <div class="col-xs-12 pad-0 custom-well">
         <div class="col-xs-12">
-            <h4 class="fw-600 fs-18"> Community Unit Contacts</h4>
+            <h4 class="fw-600 fs-18"> Community Health Unit Contacts</h4>
         </div>
         <div class="col-xs-12">
             <table class="table table-hover table-condensed custom-well col-xs-12">
