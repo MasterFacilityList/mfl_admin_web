@@ -32,7 +32,7 @@
                     <div class="col-xs-12 text-left margin-t--5 pad-r-0 pad-l-0" tooltip="Click to view facilities with pending updates">
                         <h4 class="fw-600 ">
                             <span class="fs-26 text-black" style="font-family : 'Lato Light', sans-serif;">
-                                #{{summary.pending_updates}} Updated Facilities
+                                #{{summary.pending_updates}} Facilities Pending Approval
                                 <br/>
                                 <span class="fs-16">
                                     Pending approval <span ng-if="user.county_name">in {{user.county_name | titlecase}} County</span>
@@ -106,9 +106,10 @@
                 <div class="col-xs-12 content-card">
                     <div class="">
                         <h3 class="text-center dash" ng-if="!spinner">
-                            <span ng-if="ward">Wards</span>
-                            <span ng-if="constituency">Sub Counties</span>
-                            <span ng-if="county">Top 20 Counties</span> With Most Facilities
+                           Number of health facilities by
+                            <span ng-if="ward">Ward</span>
+                            <span ng-if="constituency">Sub-County</span>
+                            <span ng-if="county">County</span>
                             <span ng-if="user.constituency_name">
                                 in {{user.constituency_name | titlecase}} Sub-county
                             </span>

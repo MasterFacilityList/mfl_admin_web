@@ -27,11 +27,11 @@
                 <li ui-sref-active="active" requires-permission="facilities.view_servicecategory">
                     <a ui-sref="service_mgmt.category_list">Categories</a>
                 </li>
-                <li ui-sref-active="active" requires-permission="facilities.view_service">
-                    <a ui-sref="service_mgmt.service_list">Services</a>
-                </li>
                 <li ui-sref-active="active" requires-permission="facilities.view_option">
                     <a ui-sref="service_mgmt.option_groups_list">Option Groups</a>
+                </li>
+                <li ui-sref-active="active" requires-permission="facilities.view_service">
+                    <a ui-sref="service_mgmt.service_list">Services</a>
                 </li>
             </ul>
         </li>
@@ -82,16 +82,16 @@
           </ul>
         </li>
         <li>
-          <label class="sidebar-label tree-toggle nav-header">CHUL</label>
+          <label class="sidebar-label tree-toggle nav-header">CHU</label>
           <ul class="nav nav-list tree">
               <li ui-sref-active="active" requires-permission="chul.view_status">
-                <a ui-sref="setup.chu_status" >CHUL Status</a>
+                <a ui-sref="setup.chu_status" >CHU Status</a>
               </li>
               <li ui-sref-active="active">
                 <a ui-sref="setup.chu_rating_comments">CHU Rating Comments</a>
               </li>
               <li ui-sref-active="active" requires-permission="chul.view_chuservice">
-                <a ui-sref="setup.chu_service" >CHUL Services</a>
+                <a ui-sref="setup.chu_service" >CHU Services</a>
               </li>
           </ul>
         </li>
