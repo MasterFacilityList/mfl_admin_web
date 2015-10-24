@@ -1,6 +1,15 @@
 (function (angular) {
     "use strict";
 
+    /**
+     * @ngdoc module
+     * @name mflAdminApp
+     *
+     * @description
+     * The main application module.
+     * It combines the various components to make the application.
+     *
+     */
     angular.module("mflAdminApp", [
         "templates-app",
         "templates-common",

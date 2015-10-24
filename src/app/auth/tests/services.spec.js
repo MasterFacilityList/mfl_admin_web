@@ -19,6 +19,7 @@
         afterEach(function () {
             inject(["$window", function ($window) {
                 $window.localStorage.removeItem("auth.user");
+                $window.localStorage.removeItem("state.dump");
             }]);
         });
 
@@ -33,6 +34,7 @@
             expect(angular.isFunction (loginService.currentUser)).toBeTruthy();
             expect(angular.isFunction (loginService.isLoggedIn)).toBeTruthy();
         }]));
+
         it("should send user details to login Api: successfully",
         inject(["api.oauth2", "mfl.auth.services.login",
             function (oauth2, loginService) {
@@ -46,6 +48,7 @@
 
             expect(response).toEqual({});
         }]));
+
         it("should send user details to login Api: successfully",
         inject(["$httpBackend","mfl.auth.services.login",
             function ($httpBackend, loginService) {
@@ -75,6 +78,7 @@
                 expect(response).toEqual(true);
             }
         ]));
+
         it("should call isLoggedIn method: logged in is null",
         inject(["mfl.auth.services.login", "api.oauth2",
             function (loginService, oauth2) {
@@ -83,6 +87,7 @@
                 expect(response).toEqual(false);
             }
         ]));
+
         it("should call isLoggedIn method: getToken is null",
         inject(["mfl.auth.services.login", "api.oauth2", "$window",
             function (loginService, oauth2, $window) {
@@ -92,6 +97,7 @@
                 expect(response).toEqual(false);
             }
         ]));
+
         it("should call isLoggedIn method: getToken and isLoggedIn are null",
         inject(["mfl.auth.services.login", "api.oauth2", "$window",
             function (loginService, oauth2) {
@@ -100,6 +106,7 @@
                 expect(response).toEqual(false);
             }
         ]));
+
         it("should test getUser method",
         inject(["mfl.auth.services.login", "$window",
             function (loginService, $window) {
@@ -135,6 +142,70 @@
                 expect(JSON.parse($window.localStorage.getItem("auth.user"))).toBe(null);
             }
         ]));
+
+        it("should not load state without user", function () {
+            inject(["mfl.auth.services.login", "$window",
+                function (loginService, $window) {
+                    $window.localStorage.setItem("state.dump", "{}");
+                    expect(loginService.loadState()).toBe(null);
+                }
+            ]);
+        });
+
+        it("should load state", function () {
+            inject(["mfl.auth.services.login", "$window",
+                function (loginService, $window) {
+                    $window.localStorage.setItem("state.dump", "{\"user\":\"23\"}");
+                    $window.localStorage.setItem("auth.user", "{\"id\":\"23\"}");
+                    expect(loginService.loadState()).toEqual({name: undefined, params: undefined});
+                }
+            ]);
+        });
+
+        it("should not load state from another user", function () {
+            inject(["mfl.auth.services.login", "$window",
+                function (loginService, $window) {
+                    $window.localStorage.setItem("state.dump", "{\"user\":\"3\"}");
+                    $window.localStorage.setItem("auth.user", "{\"id\":\"2\"}");
+                    expect(loginService.loadState()).toEqual(null);
+                }
+            ]);
+        });
+
+        it("should not dump state without user", function () {
+            inject(["mfl.auth.services.login", "$window",
+                function (loginService, $window) {
+                    loginService.dumpState("name", {"param": "one"});
+                    expect(JSON.parse($window.localStorage.getItem("state.dump"))).toBe(null);
+                }
+            ]);
+        });
+
+        it("should dump state", function () {
+            inject(["mfl.auth.services.login", "$window",
+                function (loginService, $window) {
+                    $window.localStorage.setItem("auth.user", "{\"id\":\"23\"}");
+                    loginService.dumpState({"name": "name"}, {"param": "one"});
+                    expect(JSON.parse($window.localStorage.getItem("state.dump"))).toEqual({
+                        "user": "23",
+                        "name": "name",
+                        "params": {
+                            "param": "one"
+                        }
+                    });
+                }
+            ]);
+        });
+
+        it("should clear state", function () {
+            inject(["mfl.auth.services.login", "$window",
+                function (loginService, $window) {
+                    $window.localStorage.setItem("state.dump", "{}");
+                    loginService.clearState();
+                    expect(JSON.parse($window.localStorage.getItem("state.dump"))).toBe(null);
+                }
+            ]);
+        });
     });
 
     describe("Test auth statecheck service: ", function () {
