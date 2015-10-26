@@ -130,8 +130,8 @@
              */
             this.loadState = function () {
                 var user = this.getUser();
-                if (user) {
-                    var dump = JSON.parse(storage.getItem(store_keys.state));
+                var dump = JSON.parse(storage.getItem(store_keys.state));
+                if (user && dump) {
                     if (dump.user === user.id) {
                         return {
                             "name": dump.name,
