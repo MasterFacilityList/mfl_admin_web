@@ -1,6 +1,14 @@
 (function (angular, jQuery) {
     "use strict";
 
+    /**
+     * @ngdoc module
+     * @name mflAdminAppConfig
+     *
+     * @description
+     * The main configuration file for the application
+     */
+
     angular.module("mflAdminAppConfig", [
         "common.logging",
         "api.wrapper",
