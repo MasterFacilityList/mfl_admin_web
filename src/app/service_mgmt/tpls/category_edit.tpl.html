@@ -25,15 +25,6 @@
                 <input class="form-control" name="abbreviation" ng-model="category.abbreviation" api-checker/>
             </div>
             <div class="form-group">
-                <label class="control-label">KEPH Level&#42;</label>
-                <select class="form-control" name="keph_level" ng-model="category.keph_level" required api-checker>
-                    <option value="" disabled>Select a keph level</option>
-                    <option  ng-repeat="keph in kephs" ng-selected="{{keph.id == category.keph_level}}" value="{{keph.id}}">{{keph.name}}</option>
-                </select>
-                <span class="highlight"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="form-group">
                 <label class="control-label">Description</label>
                 <textarea class="form-control" name="description" ng-model="category.description" api-checker placeholder="Description"></textarea>
             </div>
