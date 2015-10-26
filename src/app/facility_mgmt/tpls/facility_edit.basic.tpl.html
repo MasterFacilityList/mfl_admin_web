@@ -180,7 +180,7 @@
                     </ui-select>
                 </div>
                 <div class="form-group col-xs-12">
-                    <label class="control-label">Town</label>
+                    <label class="control-label">Nearest Town/Shopping Center</label>
                     <ui-select name="town" ng-model="select_values.town" api-checker register-custom-form-control>
                         <ui-select-match placeholder="Select a town...">
                             <span>{{$select.selected.name}}</span>
@@ -240,7 +240,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <label class="">
-                        Registration Number &#42;
+                        Registration Number/License Number &#42;
                     </label>
                     <input class="form-control" name="reg_number" ng-model="facility.officer_in_charge.reg_no" placeholder="Registration Number" api-checker required>
                     <span class="highlght"></span>
