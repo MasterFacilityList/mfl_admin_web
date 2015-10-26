@@ -22,7 +22,6 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-istanbul-coverage");
     grunt.loadNpmTasks("grunt-contrib-connect");
     grunt.loadNpmTasks("grunt-concurrent");
-    grunt.loadNpmTasks("protractor-html-screenshot-reporter");
 
     /**
      * Load in our build configuration file.
@@ -49,7 +48,7 @@ module.exports = function ( grunt ) {
             banner:
                 "/*!Version <%= pkg.version %> \n" +
                 " * Generated <%= grunt.template.today('yyyy-mm-dd') %>\n" +
-                " * Copyright Savannah Informatics\n" +
+                " * Copyright Republic of Kenya, Ministry of Health\n" +
                 " */"
         },
 

@@ -47,6 +47,8 @@
                     .respond(200, {email: ""});
 
                 spyOn(srvc, "login").andCallThrough();
+                spyOn(srvc, "loadState").andReturn(null);
+                spyOn(srvc, "clearState");
                 spyOn($state, "go");
                 $controller("mfl.auth.controllers.login", {
                     "$scope": s,
@@ -58,6 +60,7 @@
 
                 expect(srvc.login).toHaveBeenCalledWith(obj);
                 $httpBackend.flush();
+                expect(srvc.clearState).not.toHaveBeenCalled();
             }
         ]));
 

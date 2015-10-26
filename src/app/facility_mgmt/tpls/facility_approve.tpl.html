@@ -245,11 +245,11 @@
     <!-- Overall facility approval -->
     <div class="col-xs-12 content-card margin-t-20 pad-0" ng-class="{'alert-success':facility.is_approved}" ng-if="!facility.is_approved">
         <div class="col-xs-12 margin-b-10" ng-if="!facility.is_approved && !spinner">
-            <h4 class>Approve newly created facility</h4>
+            <h4 class>Approve/Reject newly created facility</h4>
             <form name="frm_approve" role="form" ng-submit="approveFacility(stat)" novalidate>
                 <div class="form-group margin-t-10">
                     <label class="control-label">
-                        Comment for approval
+                        Facility approve/reject comment
                     </label>
                     <textarea class="form-control" name="comment" ng-model="facility_approval.comment" required api-checker rows="2">
                     </textarea>
