@@ -20,7 +20,7 @@
             <form name="scounty_frm" ng-submit="saveFrm(state ? scounty_frm : scount_details)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
                 <div class="form-group">
-                    <label class="control-label">Sub County Name:</label>
+                    <label class="control-label">Sub County Name&#42;:</label>
                     <input type="text" class="form-control" name="name" ng-model="scount_details.name" placeholder="Sub County Name" required api-checker/>
                 </div>
                 <div ng-if="state" class="form-group">
@@ -28,7 +28,7 @@
                     <input type="text" readonly class="form-control" ng-model="scount_details.code">
                 </div>
                 <div class="form-group">
-                    <label class="control-label"><span class="pull-left">County:</span></label>
+                    <label class="control-label"><span class="pull-left">County&#42;:</span></label>
                     <ui-select ng-model="select_values.county" required name="county" api-checker register-custom-form-control>
                         <ui-select-match placeholder="Select a county...">
                             <span>{{$select.selected.name}}</span>

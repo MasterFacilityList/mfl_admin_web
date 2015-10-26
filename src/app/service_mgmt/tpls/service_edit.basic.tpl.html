@@ -9,7 +9,7 @@
                 <input ng-hide="create" class="form-control" readonly ng-model="service.code"/>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Service Name</label>
+                <label class="control-label">Service Name&#42;</label>
                 <input class="form-control" name="name" ng-model="service.name" required api-checker placeholder="Service Name"/>
             </div>
             <div class="form-group col-xs-12">
@@ -17,14 +17,14 @@
                 <input class="form-control" name="abbreviation" ng-model="service.abbreviation" api-checker placeholder="Service Abbreviation"/>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Category</label>
+                <label class="control-label">Category&#42;</label>
                 <select class="form-control" name="category" ng-model="service.category" required api-checker>
                     <option value="" disabled>Select a Category</option>
                     <option  ng-repeat="cat in categories" ng-selected="{{cat.id == service.category}}" value="{{cat.id}}">{{cat.name}}</option>
                 </select>
             </div>
             <div class="form-group col-xs-12">
-                <label class="control-label">Option Groups</label>
+                <label class="control-label">Option Groups&#42;</label>
                 <select class="form-control" name="group" ng-model="service.group" required api-checker>
                     <option value="" disabled>Select an option group</option>
                     <option  ng-repeat="opt_grp in option_groups" ng-selected="{{opt_grp.id == service.group}}" value="{{opt_grp.id}}">{{opt_grp.name}}</option>
