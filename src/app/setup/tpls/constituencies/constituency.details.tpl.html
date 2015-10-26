@@ -22,7 +22,7 @@
         <form ng-submit="saveFrm(const_frm)" name="const_frm" role="form">
             <drf-err-msg></drf-err-msg>
             <div class="form-group">
-                <label class="control-label">Constituency Name:</label>
+                <label class="control-label">Constituency Name&#42;:</label>
                 <input type="text" class="form-control" name="name" ng-model="const_details.name" placeholder="Enter Constituency Name">
             </div>
             <div class="form-group">
@@ -30,7 +30,7 @@
                 <input type="text" readonly class="form-control" ng-model="const_details.code">
             </div>
             <div class="form-group">
-                <label class="control-label">County:</label>
+                <label class="control-label">County&#42;:</label>
                 <ui-select ng-model="select_values.county" required name="county" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select a county...">
                         <span>{{$select.selected.name}}</span>

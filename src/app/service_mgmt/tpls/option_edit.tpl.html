@@ -15,13 +15,13 @@
     <form name="option_frm" novalidate>
         <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
                 <div class="form-group">
-                    <label>Display Text</label>
+                    <label>Display Text&#42;</label>
                     <input class="form-control" name="display_text" ng-model="option.display_text" placeholder="Display Text" required />
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
                 <div class="form-group">
-                    <label>Option Type</label>
+                    <label>Option Type&#42;</label>
                     <select class="form-control" name="option_type" ng-model="option.option_type" placeholder="Option Type" required>
                         <option value="" disabled>Select an option type</option>
                         <option ng-repeat="opt_type in option_types" value="{{opt_type}}">{{opt_type}}</option>
@@ -30,13 +30,13 @@
                     <span class="bar"></span>
                 </div>
                 <div class="form-group">
-                    <label>Option Value</label>
+                    <label>Option Value&#42;&#42;</label>
                     <input class="form-control" name="value" ng-model="option.value" required placeholder="Option Value"/>
                     <span class="highlight"></span>
                     <span class="bar"></span>
                 </div>
                 <div class="form-group">
-                    <label>Option Group</label>
+                    <label>Option Group&#42;</label>
                     <select class="form-control" name="group" ng-model="option.group" required>
                         <option value="" disabled>Select an option group</option>
                         <option  ng-repeat="opt_grp in option_groups" ng-selected="{{opt_grp.id == option.group}}" value="{{opt_grp.id}}">{{opt_grp.name}}</option>
