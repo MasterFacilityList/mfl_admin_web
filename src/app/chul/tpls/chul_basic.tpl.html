@@ -27,6 +27,15 @@
                 </ui-select-choices>
             </ui-select>
         </div>
+        <div class="form-group col-xs-12">
+            <label class="control-label">Community Health Unit Status</label>
+            <select name="status" class="form-control"  ng-model="unit.status" api-checker required>
+                <option value="">Select Status</option>
+                <option ng-repeat="a_status in unit_status" ng-selected="{{a_status.id == unit.status}}" value="{{a_status.id}}">{{a_status.name}}</option>
+            </select>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+        </div>
         <div class="form-group col-md-6 col-xs-12">
             <label for="established date" class="control-label">
                 <span class="fs-16">Date Established: {{unit.date_established| date}}</span>
@@ -42,15 +51,6 @@
             <datepicker date-format="y-MM-dd" date-max-limit="{{maxDate}}">
               <input class="form-control" name="date_operational" ng-model="unit.date_operational" placeholder="yy-MM-dd" api-checker required type="text"/>
             </datepicker>
-        </div>
-        <div class="form-group col-xs-12">
-            <label class="control-label">Community Health Unit Status</label>
-            <select name="status" class="form-control"  ng-model="unit.status" api-checker required>
-                <option value="">Select Status</option>
-                <option ng-repeat="a_status in unit_status" ng-selected="{{a_status.id == unit.status}}" value="{{a_status.id}}">{{a_status.name}}</option>
-            </select>
-            <span class="highlight"></span>
-            <span class="bar"></span>
         </div>
         <div class="form-group col-xs-12">
             <label class="control-label">No. of Monitored Households</label>
