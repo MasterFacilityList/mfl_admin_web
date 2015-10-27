@@ -37,9 +37,17 @@
                             "id": $scope.facility.facility_type,
                             "name": $scope.facility.facility_type_name
                         },
+                        facility_type_details: {
+                            "id": $scope.facility.facility_type,
+                            "name": $scope.facility.facility_type_name
+                        },
                         owner: {
                             "id": $scope.facility.owner,
                             "name": $scope.facility.owner_name
+                        },
+                        owner_type: {
+                            "id" : $scope.facility.owner_type,
+                            "name" : $scope.facility.owner_type_name
                         },
                         operation_status: {
                             "id": $scope.facility.operation_status,
@@ -54,10 +62,8 @@
                             "name": $scope.facility.keph_level_name
                         },
                         town: {
-                            "id": $scope.facility_physical_address ?
-                            $scope.facility_physical_address.town_id : "",
-                            "name": $scope.facility_physical_address ?
-                            $scope.facility_physical_address.town : ""
+                            "id": $scope.facility.town,
+                            "name": $scope.facility.town_name
                         }
                     };
                 })
