@@ -24,10 +24,18 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Password</label>
+                <a class=" btn-info btn btn-xs btn-default" popover-toggle popover-trigger="open" popover-placement="right"
+                    popover="The password must be at least 8 characters long and have at least one number">
+                    <i class="fa fa-info-circle"></i>
+                </a>
                 <input type="password" name="password" ng-model="user.password" ng-required="!user.id" class="form-control"/>
             </div>
             <div class="form-group">
                 <label class="control-label">Confirm Password</label>
+                <a class=" btn-info btn btn-xs btn-default" popover-toggle popover-trigger="open" popover-placement="right"
+                    popover="The password must be at least 8 characters long and have at least one number">
+                    <i class="fa fa-info-circle"></i>
+                </a>
                 <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-required="!user.id" ng-blur="confirmPassword(user.password, user.confirm_password)" class="form-control" />
             </div>
             <div ng-if="confirm" class="err_class">The two passwords did not match</div>
