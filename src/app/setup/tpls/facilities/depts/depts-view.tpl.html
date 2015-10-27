@@ -13,7 +13,7 @@
         <drf-err-msg></drf-err-msg>
         <div class="col-md-10 col-md-offset-1 margin-t-20 margin-b-20">
           <div class="form-group">
-              <label class="control-label">Name</label>
+              <label class="control-label">Name&#42;</label>
               <input class="form-control" name="name" required ng-model="facility_dept.name" placeholder="Enter department name" api-checker/>
           </div>
           <div class="form-group">
@@ -21,7 +21,7 @@
               <textarea class="form-control" row="2" name="description" ng-model="facility_dept.description" placeholder="Enter description" api-checker></textarea>
           </div>
           <div class="form-group">
-              <label class="control-label">Regulatory Body</label>
+              <label class="control-label">Regulatory Body&#42;</label>
               <ui-select ng-model="facility_dept.regulatory_body" required name="regulatory_body" api-checker register-custom-form-control>
                   <ui-select-match placeholder="Select a regulatory body...">
                       <span>{{$select.selected.name}}</span>

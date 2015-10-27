@@ -13,11 +13,11 @@
             <form name="const_frm" ng-submit="saveFrm(conts_details)" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
                 <div class="form-group">
-                    <label class="control-label">Constituency Name:</label>
+                    <label class="control-label">Constituency Name<span class="text-danger">&#42;</span>:</label>
                     <input type="text" class="form-control" name="name" ng-model="conts_details.name" placeholder="Constituency Name" required api-checker/>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">County:</label>
+                    <label class="control-label">County &#42;:</label>
                     <ui-select ng-model="conts_details.county" required name="county" api-checker register-custom-form-control>
                         <ui-select-match placeholder="Select a county...">
                         <span>{{$select.selected.name}}</span>

@@ -29,7 +29,7 @@
             <td class="text-wrap" data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
             <td class="text-wrap" data-title="Owner:" >{{::fac.owner_name}}</td>
             <td class="text-wrap" data-title="County:"> {{::fac.county | titlecase}}</td>
-            <td class="text-wrap" data-title="Constituency:" >{{::fac.constituency}}</td>
+            <td class="text-wrap" data-title="Constituency:" >{{::fac.constituency | titlecase }}</td>
             <td class="text-wrap" data-title="Ward:" >{{::fac.ward_name | titlecase}}</td>
             <td data-title="Date Updated:" >{{::fac.updated|dateFilter}}</td>
         </tr>

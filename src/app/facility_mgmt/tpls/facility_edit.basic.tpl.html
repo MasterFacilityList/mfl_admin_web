@@ -17,14 +17,18 @@
             </div>
             <div class="form-group col-xs-12">
                 <label class="control-label">Facility Offical Name &#42;</label>
-                    <a class=" btn-info btn btn-xs btn-default" popover-toggle popover-trigger="open" popover-placement="right"
-                        popover-template="'facility_mgmt/tpls/guide_official_name.tpl.html'">
-                        <i class="fa fa-info-circle"></i>
-                    </a>
+                <a class=" btn-info btn btn-xs btn-default" popover-toggle popover-trigger="open" popover-placement="right"
+                    popover="This is the official name of the facility. Government health facilities should use the gazetted name of the facility, while other facilities should use the registered/licensed name">
+                    <i class="fa fa-info-circle"></i>
+                </a>
                 <input class="form-control" name="official_name" ng-model="facility.official_name" ng-blur="initUniqueName(frm_facility_basic)" placeholder="Facility Official Name" api-checker>
             </div>
             <div class="form-group col-xs-12">
                 <label class="control-label">Facility Unique Name</label>
+                <a class=" btn-info btn btn-xs btn-default" popover-toggle popover-trigger="open" popover-placement="right"
+                    popover="This is a unique name given to the facility when it is entered into the MFL. It is normally the gazetted or licensing name, but it also can include some other information that identifies it as unique">
+                    <i class="fa fa-info-circle"></i>
+                </a>
                 <input class="form-control" name="name" ng-model="facility.name" required placeholder="Facility Unique Name" api-checker/>
             </div>
             <div class="form-group col-xs-12">
