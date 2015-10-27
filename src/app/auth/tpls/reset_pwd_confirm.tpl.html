@@ -11,10 +11,18 @@
             <drf-err-msg></drf-err-msg>
             <div class="form-group">
               <label class="control-label">Password</label>
+                <a class=" btn-info btn btn-xs btn-default" popover-toggle popover-trigger="open" popover-placement="right"
+                    popover="The password must be at least 8 characters long and have at least one number">
+                    <i class="fa fa-info-circle"></i>
+                </a>
               <input name="new_password1" type="password" ng-model="new_password1" required autofocus name="new_password1" api-checker class="form-control"/>
             </div>
             <div class="form-group">
               <label class="control-label">Confirm Password</label>
+                <a class=" btn-info btn btn-xs btn-default" popover-toggle popover-trigger="open" popover-placement="right"
+                    popover="The password must be at least 8 characters long and have at least one number">
+                    <i class="fa fa-info-circle"></i>
+                </a>
               <input name="new_password2" type="password" ng-model="new_password2" required name="new_password2" api-checker class="form-control"/>
             </div>
             <button type="submit" class="btn btn-primary" ng-disabled="frm_reset_pwd_confirm.$invalid">Confirm Password Reset</button>
