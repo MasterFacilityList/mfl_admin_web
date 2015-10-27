@@ -7,7 +7,7 @@
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title">Units Report by Constituency</span>
+        <span class="main-title">Community Health Units Report by Constituency</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -29,14 +29,14 @@
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
                         <th class="col-xs-5 text-wrap">Constituency</th>
-                        <th class="col-xs-4 text-center text-wrap">Number of Units</th>
+                        <th class="col-xs-4 text-center text-wrap">Number of Community Health Units</th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="constituency in constituency_chu | filter:search">
                             <td data-title="Constituency:">
                                <a ui-sref="reports.chu_wards({constituency:constituency.constituency_id})"> {{::constituency.constituency_name | titlecase}}</a>
                             </td>
-                            <td class="text-center" data-title="Units:">{{::constituency.number_of_units}}</td>
+                            <td class="text-center" data-title="Community Health Units:">{{::constituency.number_of_units}}</td>
                         </tr>
                     </tbody>
                     <tbody ng-if="constituency_chu.length===0">

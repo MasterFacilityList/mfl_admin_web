@@ -7,7 +7,7 @@
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title">Units Report by Ward</span>
+        <span class="main-title">Community Health Units Report by Ward</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -29,14 +29,14 @@
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
                         <th class="col-xs-5 text-wrap">Ward</th>
-                        <th class="col-xs-4 text-center text-wrap">Number of Units</th>
+                        <th class="col-xs-4 text-center text-wrap">Number of Community Health Units</th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="ward in ward_chu | filter:search">
                             <td data-title="Ward:">
                                {{::ward.ward_name | titlecase}}
                             </td>
-                            <td class="text-center" data-title="Units:">{{::ward.number_of_units}}</td>
+                            <td class="text-center" data-title="Community Health Units:">{{::ward.number_of_units}}</td>
                         </tr>
                     </tbody>
                     <tbody ng-if="ward_chu.length===0">
@@ -47,3 +47,5 @@
         </div>
     </div>
 </section>
+
+View 
