@@ -94,6 +94,10 @@
                 };
                 $window.location.href = url + "?" + helpers.makeParams(download_params);
             };
+            this.getInspectionReport = function (facility_id) {
+                downloadFile("api/facilities/facility_inspection_report/", facility_id);
+            };
+
             this.getCorrectionTemplate = function (facility_id) {
                 downloadFile("api/facilities/facility_correction_template/", facility_id);
             };
