@@ -1,4 +1,22 @@
-
-<a tooltip="Print Facility Correction Template" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ng-click="correctionTemplate(fac_id)"><i class="fa fa-file-text"></i>
-</a>
-<a  tooltip="Print Facility Cover Letter" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ng-click="printFacility(fac_id)"><i class="fa fa-print"></i></a>
+<div class="col-xs-12 pad-0 margin-t-10" style="max-width: 316px;">
+    <div class="col-xs-6 pad-t-5 pad-l-0 pad-r-0 text-center print-btn" ng-click="correctionTemplate(fac_id)">
+        <i class="fa fa-file-text fa-2x text-primary"></i>
+        <br>
+        <p class="fs-11 margin-t-3">Correction Template</p>
+    </div>
+    <div class="col-xs-6 pad-t-5 pad-l-0 pad-r-0 text-center print-btn" ng-click="printFacility(fac_id)">
+        <i class="fa fa-file-text-o fa-2x text-info "></i>
+        <br>
+        <p class="fs-11 margin-t-3">
+            Cover
+            <br>
+            Letter
+        </p>
+    </div>
+    <div class="col-xs-12"></div>
+    <div class="print-btn col-xs-6 pad-t-5 pad-l-0 pad-r-0 text-center margin-t-5 margin-b-5" ng-click="inspectionReport(fac_id)">
+    <i class="fa fa-file-text fa-2x text-success"></i>
+        <br>
+        <p class="fs-11 margin-t-3">Inspection Report</p>
+    </div>
+</div>
