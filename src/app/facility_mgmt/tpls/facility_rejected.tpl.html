@@ -3,7 +3,7 @@
         <a requires-permission="facilities.view_facility,facilities.add_facilityregulationstatus" ui-sref="facilities_regulation.regulate.basic({facility_id: fac_id})" class="btn btn-success" tooltip="Regulate Facility">
             Regulate
         </a>
-        <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="btn btn-success" ng-if="!facility.is_published" tooltip="Publish Facility">
+        <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="btn btn-success" ng-if="!facility.is_published && facility.is_approved" tooltip="Publish Facility">
             Publish
         </a>
         <a requires-permission="facilities.publish_facilities,facilities.view_facility" ui-sref="facilities_publish.publish.basic({facility_id: fac_id})" class="btn btn-success" ng-if="facility.is_published" tooltip="Unpublish Facility">

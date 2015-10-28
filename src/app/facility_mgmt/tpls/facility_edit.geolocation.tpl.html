@@ -4,7 +4,6 @@
             <h4 class="fw-600 fs-18"> Geolocation Details</h4>
         </div>
     </div>
-    <form name="geoForm">
         <div class="margin-t-50">
                <div ng-if="spinner1">
                    <i class="fa fa-spin fa-circle-o-notch fa-5x"></i>
@@ -12,6 +11,7 @@
                <div ng-if="!spinner1">
                     <form name="geoForm">
                         <!-- Start of form -->
+                        <drf-err-msg></drf-err-msg>
                         <div class="form-group col-xs-12">
                             <label>Geocode source</label>
                             <ui-select name="source" ng-model="select_values.source" required api-checker register-custom-form-control>
@@ -77,7 +77,6 @@
                     </form>
                </div>
         </div>
-    </form>
     <div class="col-xs-12">
         <a ui-sref="facilities.facility_edit.basic" ng-if="!create" class="btn btn-primary margin-t-20 margin-b-10 margin-l-10">
             <i class="fa fa-angle-double-left"></i> Basic Details
