@@ -1,16 +1,30 @@
 (function (angular, _) {
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.users.controllers.users
+     *
+     * @description
+     * Controllers for the user related views
+     *
+     */
     angular.module("mfl.users.controllers.users", [
         "mfl.auth.services",
         "mfl.users.services",
         "ui.router",
         "mfl.common.forms"
     ])
-/*
-    Controller used to create the user
-    State parameters for the navigation
-*/
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_create
+     *
+     * @description
+     * Common controller for the create views of a user
+     */
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
         "$stateParams", "mfl.common.services.multistep",
         "mfl.users.services.wrappers","$log","mfl.auth.services.login","mfl.users.services.groups",
@@ -85,7 +99,15 @@
             $scope.login_user = loginService.getUser();
         }
     ])
-    //Controller for the basic details
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_create
+     *
+     * @description
+     * Common controller for the create views of a user
+     */
     .controller("mfl.users.controllers.user_create.basic",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
         "mfl.common.forms.changes",
@@ -136,7 +158,15 @@
             };
         }]
     )
-    //Controller for edit of the user
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit
+     *
+     * @description
+     * Common controller for the edit views of a user
+     */
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
          "$state","mfl.auth.services.login", "mfl.common.services.multistep",
@@ -189,7 +219,15 @@
             $scope.login_user = loginService.getUser();
         }]
     )
-    // Basic details controller while editing
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.basic
+     *
+     * @description
+     * Controller for the basic view of creating/editing a user
+     */
     .controller("mfl.users.controllers.user_edit.basic",
         ["$scope", "$log", "mfl.common.forms.changes",
         "mfl.users.services.wrappers", "mfl.common.services.multistep",
@@ -222,7 +260,15 @@
             };
         }]
     )
-    // Controller for editing user contacts
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.contacts
+     *
+     * @description
+     * Controller for the contacts view of creating/editing a user
+     */
     .controller("mfl.users.controllers.user_edit.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers", "$state",
         "mfl.common.services.multistep","toasty",
@@ -322,7 +368,15 @@
             };
         }
     ])
-    // Controller for addinng `user groups` to a user
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.groups
+     *
+     * @description
+     * Controller for the groups view of creating/editing a user
+     */
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         "mfl.common.services.multistep","mfl.users.services.groups","toasty",
@@ -389,7 +443,15 @@
             };
         }]
     )
-    // Controller for adding counties to a user
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.counties
+     *
+     * @description
+     * Controller for the counties view of creating/editing a user
+     */
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         "mfl.common.services.multistep",
@@ -451,7 +513,15 @@
             };
         }]
     )
-    // Controller for adding a regulatory body to a user
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.regulatory_body
+     *
+     * @description
+     * Controller for the regulatory body view of creating/editing a user that is a regulator
+     */
     .controller("mfl.users.controllers.user_edit.regulatory_body",
         ["mfl.users.services.wrappers", "$log", "$scope",
         "mfl.common.services.multistep","$state",
@@ -512,7 +582,15 @@
             };
         }]
     )
-    // Controller for adding a constituency to a user
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.constituency
+     *
+     * @description
+     * Controller for the constituency view of creating/editing a constituency user
+     */
     .controller("mfl.users.controllers.user_edit.constituency",
         ["mfl.users.services.wrappers", "$log", "$scope",
         "mfl.common.services.multistep","$state",
@@ -574,7 +652,15 @@
             };
         }]
     )
-    // Controller for the user list
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_list
+     *
+     * @description
+     * Controller for the user list view
+     */
     .controller("mfl.users.controllers.user_list", ["$scope", function ($scope) {
         $scope.tooltip = {
             "title": "",
