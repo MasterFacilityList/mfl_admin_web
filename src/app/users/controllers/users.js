@@ -7,14 +7,14 @@
      * @name mfl.users.controllers.users
      *
      * @description
-     * Contains all the controllers used to manage the users
+     * Controllers for the user related views
+     *
      */
     angular.module("mfl.users.controllers.users", [
         "mfl.auth.services",
         "mfl.users.services",
         "ui.router",
-        "mfl.common.forms",
-        "mfl.common.errors"
+        "mfl.common.forms"
     ])
 
     /**
@@ -23,7 +23,7 @@
      * @name mfl.users.controllers.user_create
      *
      * @description
-     * The parent controller managing creation of users
+     * Common controller for the create views of a user
      */
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
         "$stateParams", "mfl.common.services.multistep",
@@ -36,6 +36,7 @@
             };
             $scope.tab = 0;
             $scope.create = true;
+            // Get user details if `user id` exists
             if(!_.isEmpty($state.params.user_id)) {
                 wrappers.users.get($state.params.user_id)
                 .success(function (data) {
@@ -48,6 +49,7 @@
             }
             $scope.new_user = $state.params.user_id;
             $scope.furthest = $stateParams.furthest;
+            // Navigation steps
             $scope.steps = [
                 {
                     name : "basic",
@@ -101,23 +103,22 @@
     /**
      * @ngdoc controller
      *
-     * @name mfl.users.controllers.user_create.basic
+     * @name mfl.users.controllers.user_create
      *
      * @description
-     * The child controller managing basic details of users when creating new users.
-     * It's parent is 'mfl.users.controllers.user_create'
+     * Common controller for the create views of a user
      */
     .controller("mfl.users.controllers.user_create.basic",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
-        "mfl.common.forms.changes", "PWD_RULE",
-        function ($scope, $log, $state, wrappers, formChanges, PR) {
-            $scope.PWD_RULE = PR;
+        "mfl.common.forms.changes",
+        function ($scope, $log, $state, wrappers, formChanges) {
             $scope.create = true;
             $scope.title = {
                 icon : "fa-plus-circle",
                 name : "New User"
             };
             $scope.nextState();
+            // Save basic details of users
             $scope.save = function (frm) {
                 if($scope.$parent.furthest < 2) {
                     $scope.$parent.furthest = 2;
@@ -164,7 +165,7 @@
      * @name mfl.users.controllers.user_edit
      *
      * @description
-     * The parent controller managing editting of user records
+     * Common controller for the edit views of a user
      */
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
@@ -177,16 +178,6 @@
                 icon: "fa-edit",
                 name: "Edit User"
             };
-            $scope.action = [
-                {
-                    func : "ui-sref='users.user_edit.delete'" +
-                            "requires-user-feature='is_staff'" +
-                            "requires-permission='users.delete_mfluser'",
-                    class: "btn btn-danger",
-                    tipmsg: "Delete User",
-                    wording : "Delete"
-                }
-            ];
             $scope.user_id = $stateParams.user_id;
             $scope.wrapper = wrappers.users;
 
@@ -235,16 +226,14 @@
      * @name mfl.users.controllers.user_edit.basic
      *
      * @description
-     * The child controller that edits basic details of user records.
-     * It's parent controller is 'mfl.users.controllers.user_edit'
+     * Controller for the basic view of creating/editing a user
      */
     .controller("mfl.users.controllers.user_edit.basic",
         ["$scope", "$log", "mfl.common.forms.changes",
         "mfl.users.services.wrappers", "mfl.common.services.multistep",
-        "$state","toasty", "PWD_RULE",
+        "$state","toasty",
         function ($scope, $log, formChanges, wrappers, multistepService,
-            $state,toasty, PR) {
-            $scope.PWD_RULE = PR;
+            $state,toasty) {
             multistepService.filterActive(
                 $scope, $scope.steps, $scope.steps[0]);
             $scope.save = function (frm) {
@@ -278,8 +267,7 @@
      * @name mfl.users.controllers.user_edit.contacts
      *
      * @description
-     * The child controller that edits contacts of users.
-     * It's parent controller is 'mfl.users.controllers.user_edit'
+     * Controller for the contacts view of creating/editing a user
      */
     .controller("mfl.users.controllers.user_edit.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers", "$state",
@@ -387,8 +375,7 @@
      * @name mfl.users.controllers.user_edit.groups
      *
      * @description
-     * The child controller that manages assignment of groups to users
-     * It's parent controller is 'mfl.users.controllers.user_edit'
+     * Controller for the groups view of creating/editing a user
      */
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
@@ -463,8 +450,7 @@
      * @name mfl.users.controllers.user_edit.counties
      *
      * @description
-     * The child controller that manages assignment of counties to users
-     * It's parent controller is 'mfl.users.controllers.user_edit'
+     * Controller for the counties view of creating/editing a user
      */
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
@@ -534,8 +520,7 @@
      * @name mfl.users.controllers.user_edit.regulatory_body
      *
      * @description
-     * The child controller that manages assignment of regulatory_bodies to users
-     * It's parent controller is 'mfl.users.controllers.user_edit'
+     * Controller for the regulatory body view of creating/editing a user that is a regulator
      */
     .controller("mfl.users.controllers.user_edit.regulatory_body",
         ["mfl.users.services.wrappers", "$log", "$scope",
@@ -604,8 +589,7 @@
      * @name mfl.users.controllers.user_edit.constituency
      *
      * @description
-     * The child controller that manages assignment of constituencies to users
-     * It's parent controller is 'mfl.users.controllers.user_edit'
+     * Controller for the constituency view of creating/editing a constituency user
      */
     .controller("mfl.users.controllers.user_edit.constituency",
         ["mfl.users.services.wrappers", "$log", "$scope",
@@ -675,7 +659,7 @@
      * @name mfl.users.controllers.user_list
      *
      * @description
-     * Controls displaying the user listing
+     * Controller for the user list view
      */
     .controller("mfl.users.controllers.user_list", ["$scope", function ($scope) {
         $scope.tooltip = {
