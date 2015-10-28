@@ -1,11 +1,26 @@
 (function (angular) {
     "use strict";
-
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.facility_mgmt.services
+     *
+     * @description
+     * Services facilitating facility management
+     */
     angular.module("mfl.facility_mgmt.services", [
         "api.wrapper",
         "mfl.auth.oauth2"
     ])
-
+    /**
+     * @ngdoc service
+     *
+     * @name mfl.facility.multistep.service
+     *
+     * @description
+     * Holds the object used to coordinate multistep navigation and
+     * functionality
+     */
     .service("mfl.facility.multistep.service", [function () {
         this.facilityObject = function () {
             var result = [
@@ -38,7 +53,15 @@
             return result;
         };
     }])
-
+    /**
+     * @ngdoc service
+     *
+     * @name mfl.facility.services.wrappers
+     *
+     * @description
+     * Its service called by Facility controllers in order to fetch required
+     * data from APIs. And also all printing functionalities.
+     */
     .service("mfl.facility_mgmt.services.wrappers", ["api", "api.oauth2", "$window",
         function (api, oauth2, $window) {
             this.facilities = api.setBaseUrl("api/facilities/facilities/");
