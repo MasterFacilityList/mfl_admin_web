@@ -108,8 +108,8 @@
                     $scope.spinner = false;
                     Idle.watch();
                     var load_state = loginService.loadState();
+                    loginService.clearState();
                     if (load_state) {
-                        loginService.clearState();
                         $state.go(load_state.name, load_state.params);
                     } else {
                         $state.go(HOME_PAGE_NAME);

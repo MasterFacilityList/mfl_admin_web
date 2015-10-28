@@ -60,7 +60,7 @@
 
                 expect(srvc.login).toHaveBeenCalledWith(obj);
                 $httpBackend.flush();
-                expect(srvc.clearState).not.toHaveBeenCalled();
+                expect(srvc.clearState).toHaveBeenCalled();
             }
         ]));
 
