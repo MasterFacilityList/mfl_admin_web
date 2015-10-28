@@ -1,6 +1,14 @@
 (function (angular, _) {
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.users.controllers.users
+     *
+     * @description
+     * Contains all the controllers used to manage the users
+     */
     angular.module("mfl.users.controllers.users", [
         "mfl.auth.services",
         "mfl.users.services",
@@ -8,6 +16,14 @@
         "mfl.common.forms"
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_create
+     *
+     * @description
+     * The parent controller managing creation of users
+     */
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
         "$stateParams", "mfl.common.services.multistep",
         "mfl.users.services.wrappers","$log","mfl.auth.services.login","mfl.users.services.groups",
@@ -81,10 +97,20 @@
         }
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_create.basic
+     *
+     * @description
+     * The child controller managing basic details of users when creating new users.
+     * It's parent is 'mfl.users.controllers.user_create'
+     */
     .controller("mfl.users.controllers.user_create.basic",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
-        "mfl.common.forms.changes",
-        function ($scope, $log, $state, wrappers, formChanges) {
+        "mfl.common.forms.changes", "PWD_RULE",
+        function ($scope, $log, $state, wrappers, formChanges, PR) {
+            $scope.PWD_RULE = PR;
             $scope.create = true;
             $scope.title = {
                 icon : "fa-plus-circle",
@@ -130,7 +156,15 @@
             };
         }]
     )
-    //end of assigning admininstrative areas to users
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit
+     *
+     * @description
+     * The parent controller managing editting of user records
+     */
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
          "$state","mfl.auth.services.login", "mfl.common.services.multistep",
@@ -194,12 +228,22 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.basic
+     *
+     * @description
+     * The child controller that edits basic details of user records.
+     * It's parent controller is 'mfl.users.controllers.user_edit'
+     */
     .controller("mfl.users.controllers.user_edit.basic",
         ["$scope", "$log", "mfl.common.forms.changes",
         "mfl.users.services.wrappers", "mfl.common.services.multistep",
-        "$state","toasty",
+        "$state","toasty", "PWD_RULE",
         function ($scope, $log, formChanges, wrappers, multistepService,
-            $state,toasty) {
+            $state,toasty, PR) {
+            $scope.PWD_RULE = PR;
             multistepService.filterActive(
                 $scope, $scope.steps, $scope.steps[0]);
             $scope.save = function (frm) {
@@ -227,6 +271,15 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.contacts
+     *
+     * @description
+     * The child controller that edits contacts of users.
+     * It's parent controller is 'mfl.users.controllers.user_edit'
+     */
     .controller("mfl.users.controllers.user_edit.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers", "$state",
         "mfl.common.services.multistep","toasty",
@@ -327,6 +380,15 @@
         }
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.groups
+     *
+     * @description
+     * The child controller that manages assignment of groups to users
+     * It's parent controller is 'mfl.users.controllers.user_edit'
+     */
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         "mfl.common.services.multistep","mfl.users.services.groups","toasty",
@@ -394,6 +456,15 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.counties
+     *
+     * @description
+     * The child controller that manages assignment of counties to users
+     * It's parent controller is 'mfl.users.controllers.user_edit'
+     */
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         "mfl.common.services.multistep",
@@ -456,6 +527,15 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.regulatory_body
+     *
+     * @description
+     * The child controller that manages assignment of regulatory_bodies to users
+     * It's parent controller is 'mfl.users.controllers.user_edit'
+     */
     .controller("mfl.users.controllers.user_edit.regulatory_body",
         ["mfl.users.services.wrappers", "$log", "$scope",
         "mfl.common.services.multistep","$state",
@@ -517,6 +597,15 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_edit.constituency
+     *
+     * @description
+     * The child controller that manages assignment of constituencies to users
+     * It's parent controller is 'mfl.users.controllers.user_edit'
+     */
     .controller("mfl.users.controllers.user_edit.constituency",
         ["mfl.users.services.wrappers", "$log", "$scope",
         "mfl.common.services.multistep","$state",
@@ -579,6 +668,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.user_list
+     *
+     * @description
+     * Controls displaying the user listing
+     */
     .controller("mfl.users.controllers.user_list", ["$scope", function ($scope) {
         $scope.tooltip = {
             "title": "",

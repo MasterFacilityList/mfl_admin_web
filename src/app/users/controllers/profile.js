@@ -1,12 +1,29 @@
 (function (angular, _) {
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.users.controllers.profile
+     *
+     * @description
+     * Combines all the controllers used to manage the loggedin user's profile
+     */
     angular.module("mfl.users.controllers.profile", [
         "mfl.users.services",
         "mfl.common.forms",
-        "mfl.auth.services"
+        "mfl.auth.services",
+        "mfl.common.errors"
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.profile.contacts
+     *
+     * @description
+     * Manages contacts section of the user profile
+     */
     .controller("mfl.users.controllers.profile.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers", "mfl.auth.services.login",
         function ($scope, $log, wrappers, loginService) {
@@ -92,6 +109,14 @@
         }
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.profile.basic
+     *
+     * @description
+     * Manages basic details section of the user profile
+     */
     .controller("mfl.users.controllers.profile.basic",
         ["$scope", "$log", "$window", "mfl.auth.services.profile", "mfl.common.forms.changes",
         function ($scope, $log, $window, profileService, formService) {
@@ -131,10 +156,19 @@
         }
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.users.controllers.profile.password
+     *
+     * @description
+     * Powers the password management section of the user profile
+     */
     .controller("mfl.users.controllers.profile.password",
         ["$scope", "$log", "$state", "$stateParams", "mfl.auth.services.profile",
-        "mfl.auth.services.login",
-        function ($scope, $log, $state, $stateParams, profileService, loginService) {
+        "mfl.auth.services.login", "PWD_RULE",
+        function ($scope, $log, $state, $stateParams, profileService, loginService, PR) {
+            $scope.PWD_RULE = PR;
             $scope.title = {
                 icon: "fa-lock",
                 name: "Password"
