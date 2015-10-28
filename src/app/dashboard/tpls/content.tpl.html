@@ -72,9 +72,9 @@
                         <i class="fa fa-users fa-2x icon-circles margin-t-10"></i>
                     </div>
                     <div class="col-xs-9 pad-r-0 text-left pad-l-4" ng-if="user.groups.length!==0">
-                        <h4 class="fw-600 margin-b-0">Active Groups</h4>
-                        <p ng-repeat="g in user.groups" class="fs-14">
-                            {{g.name}}
+                        <h4 class="fw-600 margin-b-0">Job Title</h4>
+                        <p class="fs-14">
+                            {{user.job_title}}
                         </p>
                     </div>
                 </div>
@@ -83,9 +83,9 @@
                         <i class="fa fa-map-marker fa-2x icon-circles pad-icon margin-t-10"></i>
                     </div>
                     <div class="col-xs-9 pad-l-4 pad-r-0 text-left">
-                        <h4 class="fw-600 margin-b-0">Active Counties</h4>
+                        <h4 class="fw-600 margin-b-0">Assigned Counties</h4>
                         <p ng-repeat="c in user.user_counties" class="fs-12">
-                            {{c.county_name | titlecase}} County
+                            {{c.county_name | titlecase}}
                         </p>
                     </div>
                 </div>
@@ -94,9 +94,9 @@
                         <i class="fa fa-map-marker fa-2x icon-circles pad-icon margin-t-10"></i>
                     </div>
                     <div class="col-xs-9 pad-r-0 text-left pad-l-0">
-                        <h4 class="fw-600 margin-b-0">Active Sub-Counties</h4>
+                        <h4 class="fw-600 margin-b-0">Assigned Sub-Counties</h4>
                         <p ng-repeat="c in user.user_constituencies" class="fs-12 margin-b-5">
-                            {{c.constituency_name | titlecase}} Sub-county
+                            {{c.constituency_name | titlecase}}
                         </p>
                     </div>
                 </div>
