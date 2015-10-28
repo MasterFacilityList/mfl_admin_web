@@ -7,7 +7,10 @@
         "ui.router",
         "mfl.common.forms"
     ])
-
+/*
+    Controller used to create the user
+    State parameters for the navigation
+*/
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
         "$stateParams", "mfl.common.services.multistep",
         "mfl.users.services.wrappers","$log","mfl.auth.services.login","mfl.users.services.groups",
@@ -19,6 +22,7 @@
             };
             $scope.tab = 0;
             $scope.create = true;
+            // Get user details if `user id` exists
             if(!_.isEmpty($state.params.user_id)) {
                 wrappers.users.get($state.params.user_id)
                 .success(function (data) {
@@ -31,6 +35,7 @@
             }
             $scope.new_user = $state.params.user_id;
             $scope.furthest = $stateParams.furthest;
+            // Navigation steps
             $scope.steps = [
                 {
                     name : "basic",
@@ -80,7 +85,7 @@
             $scope.login_user = loginService.getUser();
         }
     ])
-
+    //Controller for the basic details
     .controller("mfl.users.controllers.user_create.basic",
         ["$scope", "$log", "$state", "mfl.users.services.wrappers",
         "mfl.common.forms.changes",
@@ -91,6 +96,7 @@
                 name : "New User"
             };
             $scope.nextState();
+            // Save basic details of users
             $scope.save = function (frm) {
                 if($scope.$parent.furthest < 2) {
                     $scope.$parent.furthest = 2;
@@ -130,7 +136,7 @@
             };
         }]
     )
-    //end of assigning admininstrative areas to users
+    //Controller for edit of the user
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
          "$state","mfl.auth.services.login", "mfl.common.services.multistep",
@@ -142,16 +148,6 @@
                 icon: "fa-edit",
                 name: "Edit User"
             };
-            $scope.action = [
-                {
-                    func : "ui-sref='users.user_edit.delete'" +
-                            "requires-user-feature='is_staff'" +
-                            "requires-permission='users.delete_mfluser'",
-                    class: "btn btn-danger",
-                    tipmsg: "Delete User",
-                    wording : "Delete"
-                }
-            ];
             $scope.user_id = $stateParams.user_id;
             $scope.wrapper = wrappers.users;
 
@@ -193,7 +189,7 @@
             $scope.login_user = loginService.getUser();
         }]
     )
-
+    // Basic details controller while editing
     .controller("mfl.users.controllers.user_edit.basic",
         ["$scope", "$log", "mfl.common.forms.changes",
         "mfl.users.services.wrappers", "mfl.common.services.multistep",
@@ -226,7 +222,7 @@
             };
         }]
     )
-
+    // Controller for editing user contacts
     .controller("mfl.users.controllers.user_edit.contacts",
         ["$scope", "$log", "mfl.users.services.wrappers", "$state",
         "mfl.common.services.multistep","toasty",
@@ -326,7 +322,7 @@
             };
         }
     ])
-
+    // Controller for addinng `user groups` to a user
     .controller("mfl.users.controllers.user_edit.groups",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         "mfl.common.services.multistep","mfl.users.services.groups","toasty",
@@ -393,7 +389,7 @@
             };
         }]
     )
-
+    // Controller for adding counties to a user
     .controller("mfl.users.controllers.user_edit.counties",
         ["mfl.users.services.wrappers", "$log", "$scope", "$state",
         "mfl.common.services.multistep",
@@ -455,7 +451,7 @@
             };
         }]
     )
-
+    // Controller for adding a regulatory body to a user
     .controller("mfl.users.controllers.user_edit.regulatory_body",
         ["mfl.users.services.wrappers", "$log", "$scope",
         "mfl.common.services.multistep","$state",
@@ -516,7 +512,7 @@
             };
         }]
     )
-
+    // Controller for adding a constituency to a user
     .controller("mfl.users.controllers.user_edit.constituency",
         ["mfl.users.services.wrappers", "$log", "$scope",
         "mfl.common.services.multistep","$state",
@@ -578,7 +574,7 @@
             };
         }]
     )
-
+    // Controller for the user list
     .controller("mfl.users.controllers.user_list", ["$scope", function ($scope) {
         $scope.tooltip = {
             "title": "",
