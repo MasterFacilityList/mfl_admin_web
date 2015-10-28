@@ -13,7 +13,8 @@
         "mfl.auth.services",
         "mfl.users.services",
         "ui.router",
-        "mfl.common.forms"
+        "mfl.common.forms",
+        "mfl.common.errors"
     ])
 
     /**
