@@ -20,8 +20,6 @@
 
         this.service_options = api.setBaseUrl("api/facilities/service_options/");
 
-        this.keph = api.setBaseUrl("api/facilities/keph/");
-
         this.OPTION_TYPES = [
             "BOOLEAN", "INTEGER", "DECIMAL", "TEXT"
         ];

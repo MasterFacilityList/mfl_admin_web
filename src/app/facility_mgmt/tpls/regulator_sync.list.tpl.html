@@ -6,12 +6,13 @@
 
 <table id="no-more-tables" class="table table-hover table-condensed fs-12 margin-t-20">
     <thead>
-        <th class="text-wrap fs-11" sil-grid-sort field='name'>Facility Name</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='facility_type_name'>Registration Number</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='owner_name'>County</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='county'>Facility Type</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='constituency'>Facility owner</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='ward'>MFL Code</th>
+        <th class="text-wrap fs-11" >Facility Name</th>
+        <th class="text-wrap fs-11" >Regulatory Body</th>
+        <th class="text-wrap fs-11" >Registration Number</th>
+        <th class="text-wrap fs-11" >Facility Type</th>
+        <th class="text-wrap fs-11" >Facility owner</th>
+        <th class="text-wrap fs-11" >No. of Possible Matches</th>
+        <th></th>
     </thead>
 
     <tbody ng-if="facilities.length===0">
@@ -20,12 +21,13 @@
 
     <tbody class="fade-content" ng-if="facilities.length>0">
         <tr ng-repeat="fac in facilities" >
-            <td data-title="Facility Name:" >{{::fac.official_name}}</td>
-            <td class="text-wrap" data-title="Registration Number:" >{{::fac.registration_number | titlecase}}</td>
-            <td class="text-wrap" data-title="County:"> {{::fac.county_name | titlecase}}</td>
+            <td class="text-wrap" data-title="Facility Name:" >{{::fac.name}}</td>
+            <td class="text-wrap" data-title="Regulatory Body:" >{{::fac.regulatory_body_name}}</td>
+            <td class="text-wrap" data-title="Registration Number:" >{{::fac.registration_number}}</td>
             <td class="text-wrap" data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
             <td class="text-wrap" data-title="Facility Owner:" >{{::fac.owner_name}}</td>
-            <td class="text-wrap" data-title="MFL Code:" >{{::fac.mfl_code}}</td>
+            <td class="text-wrap" data-title="No. of Possible Matches:" >{{::fac.probable_matches.length}}</td>
+            <td><a ng-if="fac.probable_matches.length&&!fac.mfl_code" ui-sref="facilities_regulator_sync.update({sync_id:fac.id})" class="btn btn-primary">Update</a></td>
         </tr>
     </tbody>
 </table>

@@ -25,20 +25,11 @@
             ]);
         });
 
-        describe("test regulation list (maker)", function () {
+        describe("test regulation list", function () {
 
             it("should load", function () {
                 var scope = rootScope.$new();
                 ctrl("facilities_regulation", {"$scope": scope});
-                expect(scope.filters.regulated).toEqual(false);
-            });
-        });
-
-        describe("test regulation list (checker)", function () {
-
-            it("should load", function () {
-                var scope = rootScope.$new();
-                ctrl("facilities_regulation_approval", {"$scope": scope});
                 expect(scope.filters.regulated).toEqual(false);
             });
         });
@@ -132,7 +123,107 @@
                 expect(state.go).not.toHaveBeenCalled();
                 expect(log.error).toHaveBeenCalled();
             });
+        });
 
+        describe("test regulator sync update", function () {
+
+            it("should load the sync object", function () {
+                httpBackend.expectGET(
+                    server_url+"api/facilities/regulator_sync/431/?fields=" +
+                        "name,probable_matches,registration_number,"+
+                        "regulatory_body_name,owner_name,facility_type_name"+
+                        "probable_matches,mfl_code"
+                    ).respond(200, {});
+                var scope = rootScope.$new();
+                ctrl("regulator_sync.update", {
+                    "$scope": scope,
+                    "$stateParams": {"sync_id": "431"}
+                });
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(scope.sync_obj).toEqual({});
+            });
+
+            it("should handle failure to load the sync object", function () {
+                httpBackend.expectGET(
+                    server_url+"api/facilities/regulator_sync/431/?fields=" +
+                        "name,probable_matches,registration_number,"+
+                        "regulatory_body_name,owner_name,facility_type_name"+
+                        "probable_matches,mfl_code"
+                    ).respond(500, {});
+                var scope = rootScope.$new();
+                ctrl("regulator_sync.update", {
+                    "$scope": scope,
+                    "$stateParams": {"sync_id": "431"}
+                });
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(scope.sync_obj).toBe(undefined);
+            });
+
+            it("should update the sync object", function () {
+                httpBackend.expectGET(
+                    server_url+"api/facilities/regulator_sync/431/?fields=" +
+                        "name,probable_matches,registration_number,"+
+                        "regulatory_body_name,owner_name,facility_type_name"+
+                        "probable_matches,mfl_code"
+                    ).respond(200, {});
+                var scope = rootScope.$new();
+                ctrl("regulator_sync.update", {
+                    "$scope": scope,
+                    "$stateParams": {"sync_id": "431"},
+                    "$state": state
+                });
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(
+                        server_url+"api/facilities/regulator_sync_update/431/",
+                        {"mfl_code": 783}
+                    )
+                    .respond(200, {});
+                scope.updateSyncObject(783);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(state.go).toHaveBeenCalledWith("facilities_regulator_sync");
+            });
+
+            it("should handle failure to update the sync object", function () {
+                httpBackend.expectGET(
+                    server_url+"api/facilities/regulator_sync/431/?fields=" +
+                        "name,probable_matches,registration_number,"+
+                        "regulatory_body_name,owner_name,facility_type_name"+
+                        "probable_matches,mfl_code"
+                    ).respond(200, {});
+                var scope = rootScope.$new();
+                ctrl("regulator_sync.update", {
+                    "$scope": scope,
+                    "$stateParams": {"sync_id": "431"},
+                    "$state": state
+                });
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.resetExpectations();
+
+                httpBackend
+                    .expectPOST(
+                        server_url+"api/facilities/regulator_sync_update/431/",
+                        {"mfl_code": 783}
+                    )
+                    .respond(500, {});
+                scope.updateSyncObject(783);
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+                expect(state.go).not.toHaveBeenCalledWith("facilities_regulator_sync");
+            });
         });
     });
 })();
