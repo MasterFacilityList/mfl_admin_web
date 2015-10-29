@@ -1349,12 +1349,11 @@
                 /*if(!_.isEmpty(changes)){*/
                 var fac_id = $scope.facility_id || $state.params.facility_id;
                 /*changes.coordinates = [];*/
-                changes.longitude = changes.longitude || $scope.geo.coordinates.coordinates[0];
-                changes.latitude = changes.latitude || $scope.geo.coordinates.coordinates[1];
                 changes.facility = fac_id;
                 changes.coordinates = {
                     type : "Point",
-                    coordinates : [changes.longitude, changes.latitude]
+                    coordinates : [$scope.geo.coordinates.coordinates[0],
+                    $scope.geo.coordinates.coordinates[1]]
                 };
                 if(!_.isNull($scope.facility.coordinates)) {
                     wrappers.facility_coordinates
