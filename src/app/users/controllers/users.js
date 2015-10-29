@@ -34,6 +34,35 @@
                 icon : "fa-plus-circle",
                 name : "New User"
             };
+            //Declaration of user object
+            $scope.user = {
+                user_contacts : [
+                    {
+                        contact_type : "",
+                        contact : ""
+                    }
+                ],
+                groups : [
+                    {
+                        new_grp :""
+                    }
+                ],
+                user_counties : [
+                    {
+                        county : ""
+                    }
+                ],
+                user_constituencies : [
+                    {
+                        constituency : ""
+                    }
+                ],
+                regulatory_users : [
+                    {
+                        new_body : ""
+                    }
+                ]
+            };
             $scope.tab = 0;
             $scope.create = true;
             if(!_.isEmpty($state.params.user_id)) {

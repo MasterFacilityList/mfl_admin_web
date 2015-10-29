@@ -1,66 +1,40 @@
 <contentheader></contentheader>
 <div class="col-xs-12"  style="display: inline-flex;">
-    <div class="col-xs-12 margin-t-20 content-card">
-        <div class="col-xs-12 margin-t-20 text-center pad-l-5">
-            <div class="col-xs-2 text-center pad-0">
-                <div class="col-xs-12">
-                    <div ng-model="steps[0].active" ng-click="tabState(steps[0])" class="progress-badge" ng-class="{'progress-badge-active': steps[0].active ,'progress-badge-done' : steps[0].done || steps[0].furthest && !steps[0].active}">
-                        1
-                    </div>
-                    <p class="text-center step-label" ng-class="{'step-label-active': steps[0].active, 'step-label-done' : steps[0].done || steps[0].furthest}"  ng-click="tabState(steps[0])">Basic Details</p>
-                </div>
-            </div>
-            <div class="col-xs-2 text-center pad-0">
-                <div class="col-xs-12">
-                    <div ng-model="steps[1].active" ng-click="tabState(steps[1])" class="progress-badge" ng-class="{'progress-badge-active': steps[1].active , 'progress-badge-done' : steps[1].done || steps[1].furthest}">
-                        2
-                    </div>
-                    <p  class="text-center step-label" ng-class="{'step-label-active': steps[1].active ,'step-label-done' : steps[1].done || steps[1].furthest }"  ng-click="tabState(steps[1])">User Contacts</p>
-                </div>
-            </div>
-            <div class="col-xs-2 text-center pad-0">
-                <div class="col-xs-12">
-                        <div class="progress-badge" ng-class="{'progress-badge-active': steps[2].active , 'progress-badge-done' : steps[2].done || steps[2].furthest}" ng-click="tabState(steps[2])">
-                            3
-                        </div>
-                        <p  class="text-center step-label" ng-class="{'step-label-active': steps[2].active ,'step-label-done' : steps[2].done || steps[2].furthest }"  ng-click="tabState(steps[2])">User Groups</p>
-                </div>
-            </div>
-            <!-- To assign county -->
-            <div class="col-xs-2 text-center pad-0">
-                <div class="col-xs-12">
-                        <div class="progress-badge progress-badge-done " ng-class="{'progress-badge-active': steps[3].active}" ng-click="tabState(steps[3])">
-                            4
-                        </div>
-                        <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[3].active}"  ng-click="tabState(steps[3])">Assign County</p>
-                </div>
-            </div>
-            <!-- To assign constituency -->
-            <div class="col-xs-2 text-center pad-0">
-                <div class="col-xs-12">
-                        <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[4].active}" ng-click="tabState(steps[4])">
-                            5
-                        </div>
-                        <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[4].active}"  ng-click="tabState(steps[4])">Assign Sub County</p>
-                </div>
-            </div>
-            <!-- End of assigning constituency -->
-            <!-- To assign regulatory bodies -->
-            <div class="col-xs-2 text-center pad-0">
-                <div class="col-xs-12">
-                        <div class="progress-badge progress-badge-done" ng-class="{'progress-badge-active': steps[5].active}" ng-click="tabState(steps[5])">
-                            6
-                        </div>
-                        <p  class="text-center step-label step-label-done" ng-class="{'step-label-active': steps[5].active}"  ng-click="tabState(steps[5])">Regulatory Body</p>
-                </div>
-            </div>
-            <!-- end of assigning regulatory bodies -->
-        </div>
-        <hr class="line-divider">
+    <div class="col-xs-12 margin-t-20">
         <div class="col-xs-12">
-            <div class="tab-content margin-t-20">
-                <div class="" ui-view="form-view"></div>
-            </div><!-- /tab-content -->
-        </div>
+            <form role="form" ng-submit="save(user_frm)" name="user_frm">
+                <div class="col-xs-12 content-card">
+                    <drf-err-msg></drf-err-msg>
+                    <div ui-view="basic"></div>
+                </div>
+                <div class="col-xs-12 pad-0 margin-t-20" ui-view="contacts"></div>
+                <div class="col-xs-12 pad-0 margin-t-20" ui-view="groups"></div>
+                <div class="col-xs-12 pad-0 margin-t-20" ui-view="counties"></div>
+                <div class="col-xs-12 pad-0 margin-t-20" ui-view="sub-counties"></div>
+                <div class="col-xs-12 pad-0 margin-t-20" ui-view="regulatory-bodies"></div>
+                <div class="col-xs-12 margin-t-20 margin-b-20 pad-0">
+                    <a ui-sref="users" class="btn btn-default">
+                        <i class="fa fa-angle-double-left"></i> Cancel
+                    </a>
+                    <div class="pull-right">
+                        <button ng-if="!create" type="submit" class="btn btn-primary" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
+                            Finish
+                        </button>
+                        <button ng-if="!create" type="submit" class="btn btn-primary" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
+                            Save
+                        </button>
+                    </div>
+                    <div class="pull-right" ng-if="create">
+                        <button requires-permission="users.change_mfluser" type="submit" class="btn btn-primary" ng-disabled="user_frm.$invalid">
+                            Save
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xs-12 margin-b-10 pad-0" ng-if="!create">
+                    <mfl-revision-view id="user_id" wrapper="wrapper" ></mfl-revision-view>
+                </div>
+            </form>
+        </div><!-- end of basic details -->
+        <!-- End of users re-implementation -->
     </div>
 </div>
