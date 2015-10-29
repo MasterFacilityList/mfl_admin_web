@@ -10,11 +10,11 @@
           <form ng-submit="reset_pwd_confirm()" name="frm_reset_pwd_confirm" novalidate>
             <drf-err-msg></drf-err-msg>
             <div class="form-group">
-              <label class="control-label">Password ({{:PWD_RULE}})</label>
+              <label class="control-label">Password ({{::PWD_RULE}})</label>
               <input name="new_password1" type="password" ng-model="new_password1" required autofocus name="new_password1" api-checker class="form-control"/>
             </div>
             <div class="form-group">
-              <label class="control-label">Confirm Password ({{:PWD_RULE}})</label>
+              <label class="control-label">Confirm Password ({{::PWD_RULE}})</label>
               <input name="new_password2" type="password" ng-model="new_password2" required name="new_password2" api-checker class="form-control"/>
             </div>
             <button type="submit" class="btn btn-primary" ng-disabled="frm_reset_pwd_confirm.$invalid">Confirm Password Reset</button>
