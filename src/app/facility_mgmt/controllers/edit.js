@@ -1,6 +1,14 @@
 (function(angular, _){
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.facility_mgmt.controllers.edit
+     *
+     * @description
+     * Contains all the controllers used to manage the users
+     */
     angular.module("mfl.facility_mgmt.controllers.edit", [
         "mfl.facility_mgmt.services",
         "mfl.auth.services",
@@ -12,6 +20,15 @@
         "mfl.common.constants"
     ])
 
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.facility_mgmt.controllers.service_helper
+     *
+     * @description
+     * The helper controller to manage services in add/edit a facility
+     */
     .controller("mfl.facility_mgmt.controllers.services_helper",
         ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
         "$state", "toasty",
@@ -230,6 +247,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.facility_mgmt.controllers.facility_edit
+     *
+     * @description
+     * Parent controller used throughout the editing steps of a facility
+     */
     .controller("mfl.facility_mgmt.controllers.facility_edit",
         ["$scope", "$q", "$log", "$stateParams", "mfl.facility_mgmt.services.wrappers",
         "mfl.facility.multistep.service", "$state", "mfl.error.messages",
@@ -344,6 +369,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.facility_mgmt.controllers.facility_edit.close
+     *
+     * @description
+     * Controller used to close a facility
+     */
     .controller("mfl.facility_mgmt.controllers.facility_edit.close",
             ["$scope","mfl.facility_mgmt.services.wrappers","$stateParams",
              "mfl.common.forms.changes","$state", "toasty",
@@ -534,6 +567,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.facility_mgmt.controllers.facility_edit.contacts
+     *
+     * @description
+     * Controller used to add/edit contacts of a facility
+     */
     .controller("mfl.facility_mgmt.controllers.facility_edit.contacts",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers",  "mfl.error.messages", "$state",
@@ -721,6 +762,14 @@
         }]
     )
 
+        /**
+         * @ngdoc controller
+         *
+         * @name mfl.facility_mgmt.controllers.facility_edit.officers
+         *
+         * @description
+         * Controller used to add/edit contacts of a facility
+    */
     .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
@@ -820,6 +869,14 @@
             };
         }])
 
+        /**
+         * @ngdoc controller
+         *
+         * @name mfl.facility_mgmt.controllers.facility_edit.services
+         *
+         * @description
+         * Controller used to add/edit services of a facility
+    */
     .controller("mfl.facility_mgmt.controllers.facility_edit.services",
         ["$scope", "$controller",
         function ($scope, $controller) {
@@ -833,6 +890,14 @@
         }]
     )
 
+        /**
+         * @ngdoc controller
+         *
+         * @name mfl.facility_mgmt.controllers.facility_edit.units
+         *
+         * @description
+         * Controller used to add/edit departments/units of a facility
+    */
     .controller("mfl.facility_mgmt.controllers.facility_edit.units",
         ["$scope", "$log", "$stateParams",
         "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
@@ -1000,6 +1065,14 @@
         }
     ])
 
+    /**
+         * @ngdoc controller
+         *
+         * @name mfl.facility_mgmt.controllers.facility_edit.setup
+         *
+         * @description
+         * Controller used to add/edit setup of a facility
+    */
     .controller("mfl.facility_mgmt.controllers.facility_edit.setup",
         ["$scope","mfl.facility_mgmt.services.wrappers","$log",
         "mfl.common.forms.changes","$state", "mfl.common.services.multistep",
@@ -1046,6 +1119,14 @@
             };
         }])
 
+        /**
+         * @ngdoc controller
+         *
+         * @name mfl.facility_mgmt.controllers.facility_edit.location
+         *
+         * @description
+         * Controller used to add/edit location of a facility
+    */
     .controller("mfl.facility_mgmt.controllers.facility_edit.location",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
@@ -1155,6 +1236,14 @@
             });
         }])
 
+        /**
+         * @ngdoc controller
+         *
+         * @name mfl.facility_mgmt.controllers.facility_edit.geolocation
+         *
+         * @description
+         * Controller used to add/edit geolation details of a facility
+    */
     .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
