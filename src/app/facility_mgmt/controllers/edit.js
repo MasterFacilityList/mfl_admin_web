@@ -17,6 +17,7 @@
         "ui.bootstrap.tpls",
         "mfl.common.forms",
         "leaflet-directive",
+        "nemLogging",
         "mfl.common.constants"
     ])
 
@@ -1360,20 +1361,20 @@
                         geojson: {
                             data: gis,
                             style: {
-                                fillColor: "rgb(255, 135, 32)",
+                                fillColor: "rgba(255, 135, 32, 0.76)",
                                 weight: 2,
                                 opacity: 1,
                                 color: "rgba(0, 0, 0, 0.52)",
-                                dashArray: "3",
-                                fillOpacity: 0.8
+                                dashArray: "5",
+                                fillOpacity: 0.5
                             }
                         },
                         layers:{
                             baselayers:{
-                                Constituency: {
-                                    name: "Constituency",
-                                    url: "/assets/img/transparent.png",
-                                    type:"xyz"
+                                googleRoadmap: {
+                                    name: "Google Streets",
+                                    layerType: "ROADMAP",
+                                    type: "google"
                                 }
                             },
                             overlays:{
