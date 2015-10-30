@@ -8,16 +8,16 @@
           <tr ng-repeat="grp in user.groups">
               <td class="col-xs-8">
                 <div class="form-group grid-inputs">
-                    <select name="new_grp" class="form-control" ng-model="grp.new_grp" class="pad-t-15" required>
+                    <select name="name" class="form-control" ng-model="grp.id" class="pad-t-15">
                         <option value="">Select Group</option>
-                        <option ng-repeat="grp in groups" ng-value="grp.id">{{grp.name}}</option>
+                        <option ng-repeat="mfl_grp in groups" ng-selected="{{mfl_grp.id == grp.id}}" ng-value="mfl_grp.id">{{mfl_grp.name}}</option>
                     </select>
                   <span class="highlight"></span>
                   <span class="bar"></span>
                 </div>
               </td>
               <td class="col-xs-1 text-center">
-                  <a ng-click="removeLine(grp)" style="cursor: pointer">
+                  <a ng-click="removeLine('groups', grp)" style="cursor: pointer">
                       <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                   </a>
               </td>
@@ -31,7 +31,7 @@
   </table>
 </div>
 <div class="col-xs-12 pad-0 text-right margin-t-10 margin-b-10">
-  <a class="btn btn-primary pull-right" ng-click="addLine()" >
+  <a class="btn btn-primary pull-right" ng-click="addLine('groups')" >
       <i class="fa fa-plus-square-o"></i> Add Group
   </a>
 </div>

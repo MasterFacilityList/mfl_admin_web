@@ -8,16 +8,16 @@
           <tr ng-repeat="regbody in user.regulatory_users">
               <td class="col-xs-8">
                 <div class="form-group grid-inputs">
-                   <select name="regbody"  ng-model="regbody.new_body" class="form-control" required>
+                   <select name="regbody"  ng-model="regbody.regulatory_body" class="form-control">
                         <option value="">Select Regulatory Body</option>
-                        <option value="{{reg.id}}" ng-repeat="reg in bodies">{{reg.name}}</option>
+                        <option value="{{reg.id}}" ng-selected="{{reg.id == regbody.regulatory_body}}" ng-repeat="reg in bodies">{{reg.name}}</option>
                     </select>
                   <span class="highlight"></span>
                   <span class="bar"></span>
                 </div>
               </td>
               <td class="col-xs-1 text-center">
-                  <a ng-click="removeLine(regbody)" style="cursor: pointer">
+                  <a ng-click="removeLine('regbody',regbody)" style="cursor: pointer">
                       <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                   </a>
               </td>
@@ -31,7 +31,7 @@
   </table>
 </div>
 <div class="col-xs-12 pad-0 text-right margin-t-10 margin-b-10">
-  <a class="btn btn-primary pull-right" ng-click="addLine()" >
+  <a class="btn btn-primary pull-right" ng-click="addLine('regbody')" >
       <i class="fa fa-plus-square-o"></i> Add Regulatory Body
   </a>
 </div>

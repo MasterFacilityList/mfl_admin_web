@@ -34,17 +34,24 @@
                 icon : "fa-plus-circle",
                 name : "New User"
             };
+            $scope.groups = "";
+            $scope.group_obj = [
+                {
+                    new_grp : ""
+                }
+            ];
             //Declaration of user object
             $scope.user = {
                 user_contacts : [
                     {
                         contact_type : "",
-                        contact : ""
+                        contact_text : ""
                     }
                 ],
                 groups : [
                     {
-                        new_grp :""
+                        id :"",
+                        name : ""
                     }
                 ],
                 user_counties : [
@@ -59,9 +66,69 @@
                 ],
                 regulatory_users : [
                     {
-                        new_body : ""
+                        regulatory_body : ""
                     }
                 ]
+            };
+            $scope.addLine = function (obj_str) {
+                switch(obj_str){
+                case "contacts" :
+                    $scope.user.user_contacts.push({
+                        contact_type : "",
+                        contact_text : ""
+                    });
+                    break;
+                case "groups" :
+                    $scope.user.groups.push({name : ""});
+                    break;
+                case "counties" :
+                    $scope.user.user_counties.push({county : ""});
+                    break;
+                case "constituencies" :
+                    $scope.user.user_constituencies.push({constituencies:""});
+                    break;
+                case "regbody" :
+                    $scope.user.regulatory_users.push({new_body : ""});
+                    break;
+                }
+            };
+            $scope.removeLine = function (obj_str, obj) {
+                switch(obj_str){
+                case "contacts" :
+                    $scope.user.user_contacts = _.without(
+                        $scope.user.user_contacts, obj);
+                    break;
+                case "groups" :
+                    $scope.user.groups = _.without($scope.user.groups, obj);
+                    break;
+                case "counties" :
+                    $scope.user.user_counties = _.without(
+                        $scope.user.user_counties, obj);
+                    break;
+                case "constituencies" :
+                    $scope.user.user_constituencies = _.without(
+                        $scope.user.constituencies, obj);
+                    break;
+                case "regbody" :
+                    $scope.user.regulatory_users = _.without(
+                        $scope.user.regulatory_users, obj);
+                    break;
+                }
+            };
+            $scope.save = function () {
+                _.each($scope.user.groups, function (new_grps) {
+                    var curr_grp = _.findWhere(
+                        $scope.groups, {id : parseInt(new_grps.id, 10)});
+                    new_grps.name = curr_grp.name;
+                });
+                wrappers.users.create($scope.user)
+                    .success(function () {
+                        $state.go("users");
+                    })
+                    .error(function (data) {
+                        $log.error(data);
+                        $scope.errors = data;
+                    });
             };
             $scope.tab = 0;
             $scope.create = true;
@@ -174,9 +241,8 @@
                 }
                 else {
                     wrappers.users.create($scope.user)
-                    .success(function (data) {
-                        $state.go("users.user_create.contacts",
-                            {user_id: data.id, furthest : $scope.furthest});
+                    .success(function () {
+                        $state.go("users");
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -218,7 +284,51 @@
             ];
             $scope.user_id = $stateParams.user_id;
             $scope.wrapper = wrappers.users;
-
+            $scope.addLine = function (obj_str) {
+                switch(obj_str){
+                case "contacts" :
+                    $scope.user.user_contacts.push({
+                        contact_type : "",
+                        contact_text : ""
+                    });
+                    break;
+                case "groups" :
+                    $scope.user.groups.push({name : ""});
+                    break;
+                case "counties" :
+                    $scope.user.user_counties.push({county : ""});
+                    break;
+                case "constituencies" :
+                    $scope.user.user_constituencies.push({constituencies:""});
+                    break;
+                case "regbody" :
+                    $scope.user.regulatory_users.push({new_body : ""});
+                    break;
+                }
+            };
+            $scope.removeLine = function (obj_str, obj) {
+                switch(obj_str){
+                case "contacts" :
+                    $scope.user.user_contacts = _.without(
+                        $scope.user.user_contacts, obj);
+                    break;
+                case "groups" :
+                    $scope.user.groups = _.without($scope.user.groups, obj);
+                    break;
+                case "counties" :
+                    $scope.user.user_counties = _.without(
+                        $scope.user.user_counties, obj);
+                    break;
+                case "constituencies" :
+                    $scope.user.user_constituencies = _.without(
+                        $scope.user.constituencies, obj);
+                    break;
+                case "regbody" :
+                    $scope.user.regulatory_users = _.without(
+                        $scope.user.regulatory_users, obj);
+                    break;
+                }
+            };
             $scope.create = false;
             $scope.tabState = function(obj) {
                 _.each($scope.steps, function (step) {
@@ -432,7 +542,7 @@
             }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
-                $scope.groups =  groupsService.filterGroups(
+                $scope.$parent.groups =  groupsService.filterGroups(
                     $scope.login_user.is_national, data.results);
             })
             .error(function (data) {

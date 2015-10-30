@@ -11,7 +11,7 @@
                 <div class="form-group grid-inputs">
                     <select class="form-control" name="contact_type" ng-model="contact.contact_type" required api-checker>
                         <option value="">Select Contact Type</option>
-                        <option ng-repeat="cont in contact_types" ng-value="cont.id">{{cont.name}}</option>
+                        <option ng-repeat="cont in contact_types"  ng-selected="{{cont.id == contact.contact_type}}" ng-value="cont.id">{{cont.name}}</option>
                     </select>
                   <span class="highlight"></span>
                   <span class="bar"></span>
@@ -19,11 +19,11 @@
               </td>
               <td class="col-xs-4">
                 <div class="form-group grid-inputs">
-                     <input class="form-control" name="contact" type="text" placeholder="Contact Details" ng-model="contact.contact" required api-checker/>
+                     <input class="form-control" name="contact_text" type="text" placeholder="Contact Details" ng-model="contact.contact_text" required api-checker/>
                 </div>
               </td>
               <td class="col-xs-1 text-center">
-                  <a ng-click="removeLine(contact)" style="cursor: pointer">
+                  <a ng-click="removeLine('contacts', contact)" style="cursor: pointer">
                       <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                   </a>
               </td>
@@ -37,7 +37,7 @@
   </table>
 </div>
 <div class="col-xs-12 pad-0 text-right margin-t-10 margin-b-10">
-  <a class="btn btn-primary pull-right" ng-click="addLine()" >
+  <a class="btn btn-primary pull-right" ng-click="addLine('contacts')" >
       <i class="fa fa-plus-square-o"></i> Add Contact
   </a>
 </div>
