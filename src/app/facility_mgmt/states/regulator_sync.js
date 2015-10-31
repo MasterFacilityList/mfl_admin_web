@@ -1,6 +1,14 @@
 (function (angular) {
     "use strict";
 
+    /*
+     * @ngdoc module
+     *
+     * @name mfl.facility_mgmt.states.regulator_sync
+     *
+     * @description
+     * Module containing regulator sync states
+     */
     angular.module("mfl.facility_mgmt.states.regulator_sync", [
         "ui.router"
     ])

@@ -2,6 +2,14 @@
 
     "use strict";
 
+    /*
+     * @ngdoc module
+     *
+     * @name mfl.service_mgmt.controllers.categories
+     *
+     * @description
+     * Module containing controllers for categories
+     */
     angular.module("mfl.service_mgmt.controllers.categories", [
         "ui.router",
         "mfl.common.forms",
@@ -9,12 +17,28 @@
         "angular-toasty"
     ])
 
+    /*
+     * @ngdoc controller
+     *
+     * @name mfl.service_mgmt.controllers.category_list
+     *
+     * @description
+     * Manages listing of categories
+     */
     .controller("mfl.service_mgmt.controllers.category_list", ["$scope", function ($scope) {
         $scope.filters = {
             "fields": "id,name,abbreviation,description,"
         };
     }])
 
+    /*
+     * @ngdoc controller
+     *
+     * @name mfl.service_mgmt.controllers.category_edit
+     *
+     * @description
+     * Handles editting of categories
+     */
     .controller("mfl.service_mgmt.controllers.category_edit",
         ["$scope", "$state", "$stateParams", "$log",
         "mfl.service_mgmt.wrappers", "mfl.common.forms.changes","toasty",
@@ -77,6 +101,14 @@
         }
     ])
 
+    /*
+     * @ngdoc controller
+     *
+     * @name mfl.service_mgmt.controllers.category_create
+     *
+     * @description
+     * Manages creation of categories
+     */
     .controller("mfl.service_mgmt.controllers.category_create",
         ["$scope", "$state", "$log",
         "mfl.service_mgmt.wrappers","toasty",

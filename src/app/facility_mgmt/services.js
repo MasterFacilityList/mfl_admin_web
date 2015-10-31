@@ -1,5 +1,6 @@
 (function (angular) {
     "use strict";
+
     /**
      * @ngdoc module
      *
@@ -12,6 +13,7 @@
         "api.wrapper",
         "mfl.auth.oauth2"
     ])
+
     /**
      * @ngdoc service
      *
@@ -53,6 +55,7 @@
             return result;
         };
     }])
+
     /**
      * @ngdoc service
      *
