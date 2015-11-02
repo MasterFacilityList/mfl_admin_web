@@ -68,7 +68,7 @@
             var obj_str_4 = "constituencies";
             var obj_str_5 = "regbody";
             scope.user = {
-                user_contacts : [
+                contacts : [
                     {
                         contact_type : "",
                         contact_text : ""
@@ -110,7 +110,7 @@
                 var obj_str = "contacts";
                 var obj_without_id = {contact_type : "", contact_text : ""};
                 scope.user = {
-                    user_contacts : [
+                    contacts : [
                         {
                             contact_type : "",
                             contact_text : ""
@@ -124,7 +124,7 @@
                     ]
                 };
                 scope.removeLine(obj_str, obj_without_id);
-                scope.removeLine(obj_str, scope.user.user_contacts[1]);
+                scope.removeLine(obj_str, scope.user.contacts[1]);
                 $httpBackend.expectDELETE(SERVER_URL +
                     "api/common/user_contacts/3/").respond(204);
                 $httpBackend.expectDELETE(SERVER_URL +
@@ -140,7 +140,7 @@
                 var obj_str = "contacts";
                 var obj_without_id = {contact_type : "", contact_text : ""};
                 scope.user = {
-                    user_contacts : [
+                    contacts : [
                         {
                             contact_type : "",
                             contact_text : ""
@@ -154,7 +154,7 @@
                     ]
                 };
                 scope.removeLine(obj_str, obj_without_id);
-                scope.removeLine(obj_str, scope.user.user_contacts[1]);
+                scope.removeLine(obj_str, scope.user.contacts[1]);
                 $httpBackend.expectDELETE(SERVER_URL +
                     "api/common/user_contacts/3/").respond(204);
                 $httpBackend.expectDELETE(SERVER_URL +
@@ -171,7 +171,7 @@
                 var obj_str = "contacts";
                 var obj_without_id = {contact_type : "", contact_text : ""};
                 scope.user = {
-                    user_contacts : [
+                    contacts : [
                         {
                             contact_type : "",
                             contact_text : ""
@@ -185,7 +185,7 @@
                     ]
                 };
                 scope.removeLine(obj_str, obj_without_id);
-                scope.removeLine(obj_str, scope.user.user_contacts[1]);
+                scope.removeLine(obj_str, scope.user.contacts[1]);
                 $httpBackend.expectDELETE(SERVER_URL +
                     "api/common/user_contacts/3/").respond(500);
                 $httpBackend.flush();
@@ -277,7 +277,7 @@
                 controller("mfl.users.controllers.user_create");
                 scope.groups = [{id : 5, name : "CHRIO"}];
                 scope.user = {
-                    user_contacts : [
+                    contacts : [
                         {
                             contact_type : "3",
                             contact_text : "test@test.com"
@@ -305,7 +305,7 @@
                 controller("mfl.users.controllers.user_create");
                 scope.groups = [{id : 5, name : "CHRIO"}];
                 scope.user = {
-                    user_contacts : [
+                    contacts : [
                         {
                             contact_type : "3",
                             contact_text : "test@test.com"
@@ -333,7 +333,7 @@
                 controller("mfl.users.controllers.user_create");
                 scope.groups = [{id : 5, name : "CHRIO"}];
                 scope.user = {
-                    user_contacts : [
+                    contacts : [
                         {
                             contact_type : "3",
                             contact_text : "test@test.com"
@@ -361,7 +361,7 @@
                 controller("mfl.users.controllers.user_create");
                 scope.groups = [{id : 5, name : "CHRIO"}];
                 scope.user = {
-                    user_contacts : [
+                    contacts : [
                         {
                             contact_type : "3",
                             contact_text : "test@test.com"

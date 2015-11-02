@@ -33,7 +33,7 @@
             $scope.addLine = function (obj_str) {
                 switch(obj_str){
                 case "contacts" :
-                    $scope.user.user_contacts.push({
+                    $scope.user.contacts.push({
                         contact_type : "",
                         contact_text : ""
                     });
@@ -73,15 +73,15 @@
                 switch(obj_str){
                 case "contacts" :
                     if(_.isUndefined(obj.id)){
-                        $scope.user.user_contacts = _.without(
-                            $scope.user.user_contacts, obj);
+                        $scope.user.contacts = _.without(
+                            $scope.user.contacts, obj);
                     }else{
                         wrappers.user_contacts.remove(obj.id)
                         .success(function () {
                             wrappers.contacts.remove(obj.contact)
                             .success(function () {
-                                $scope.user.user_contacts = _.without(
-                                    $scope.user.user_contacts, obj);
+                                $scope.user.contacts = _.without(
+                                    $scope.user.contacts, obj);
                             })
                             .error(function (data) {
                                 $scope.errors = data;
@@ -151,7 +151,7 @@
                 ];
                 //Declaration of user object
                 $scope.user = {
-                    user_contacts : [
+                    contacts : [
                         {
                             contact_type : "",
                             contact_text : ""
