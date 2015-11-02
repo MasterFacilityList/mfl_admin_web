@@ -66,7 +66,21 @@
                     </div>
                 </div>
             </div><!--/col-->
-            <div class="col-md-5 col-xs-12 pad-0" ng-if="user.groups.length!==0" ng-class="{'col-md-offset-1' : user.user_constituencies.length!==0 || user.user_counties.length!==0 || user.all_permissions.facilities.add_facilityapproval}">
+            <!-- Showing national admin is at national level -->
+            <div class="col-md-6 col-xs-12 pad-l-0" ng-if="user.is_national">
+                <div class="col-xs-12 content-card margin-b-5">
+                    <div class="col-md-1 col-sm-1 margin-r-10 pad-l-0  hidden-xs text-center">
+                        <i class="fa fa-map-marker fa-2x icon-circles pad-icon margin-t-10"></i>
+                    </div>
+                    <div class="col-xs-9 pad-r-0 text-left pad-l-0">
+                        <h4 class="fw-600 margin-b-0">National</h4>
+                        <p class="fs-12 margin-b-5">
+                            National Level Access
+                        </p>
+                    </div>
+                </div>
+             </div>
+            <div class="col-md-5 col-xs-12 pad-0" ng-if="user.groups.length!==0" ng-class="{'col-md-offset-1' : user.user_constituencies.length!==0 || user.user_counties.length!==0 || user.all_permissions.facilities.add_facilityapproval || user.is_national}">
                 <div class="col-xs-12 content-card margin-b-5" style="border-bottom: 1px solid #e0e0e0;" ng-if="user.groups.length!==0">
                     <div class="col-md-1 col-sm-1 margin-r-10 pad-l-0 hidden-xs text-center">
                         <i class="fa fa-users fa-2x icon-circles margin-t-10"></i>

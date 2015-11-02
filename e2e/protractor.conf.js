@@ -53,10 +53,6 @@ var protractorConfig = {
             public_user: {
                 username: "public@mfltest.slade360.co.ke",
                 password: "public"
-            },
-            facility_officer: {
-                username: "facility_officer@mfltest.slade360.co.ke",
-                password: "password1"
             }
         }
     }
