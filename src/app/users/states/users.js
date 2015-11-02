@@ -24,6 +24,30 @@
                     "main-content@usermgmt": {
                         controller: "mfl.users.controllers.user_create",
                         templateUrl: "users/tpls/user.create.tpl.html"
+                    },
+                    "basic@users.user_create": {
+                        controller: "mfl.users.controllers.user_create.basic",
+                        templateUrl: "users/tpls/users.edit.basic.tpl.html"
+                    },
+                    "contacts@users.user_create": {
+                        controller: "mfl.users.controllers.user_edit.contacts",
+                        templateUrl: "users/tpls/users.edit.contacts.tpl.html"
+                    },
+                    "groups@users.user_create": {
+                        controller: "mfl.users.controllers.user_edit.groups",
+                        templateUrl: "users/tpls/users.edit.groups.tpl.html"
+                    },
+                    "counties@users.user_create": {
+                        controller: "mfl.users.controllers.user_edit.counties",
+                        templateUrl: "users/tpls/users.edit.counties.tpl.html"
+                    },
+                    "sub-counties@users.user_create": {
+                        controller: "mfl.users.controllers.user_edit.constituency",
+                        templateUrl: "users/tpls/users.edit.constituencies.tpl.html"
+                    },
+                    "regulatory-bodies@users.user_create": {
+                        controller: "mfl.users.controllers.user_edit.regulatory_body",
+                        templateUrl: "users/tpls/users.edit.regulatory_body.tpl.html"
                     }
                 },
                 permission: "users.add_mfluser",
@@ -102,8 +126,32 @@
                 url: "edit/:user_id/",
                 views: {
                     "main-content@usermgmt": {
-                        controller: "mfl.users.controllers.user_edit",
-                        templateUrl: "users/tpls/users.edit.tpl.html"
+                        controller: "mfl.users.controllers.user_create",
+                        templateUrl: "users/tpls/user.create.tpl.html"
+                    },
+                    "basic@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.basic",
+                        templateUrl: "users/tpls/users.edit.basic.tpl.html"
+                    },
+                    "contacts@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.contacts",
+                        templateUrl: "users/tpls/users.edit.contacts.tpl.html"
+                    },
+                    "groups@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.groups",
+                        templateUrl: "users/tpls/users.edit.groups.tpl.html"
+                    },
+                    "counties@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.counties",
+                        templateUrl: "users/tpls/users.edit.counties.tpl.html"
+                    },
+                    "sub-counties@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.constituency",
+                        templateUrl: "users/tpls/users.edit.constituencies.tpl.html"
+                    },
+                    "regulatory-bodies@users.user_edit": {
+                        controller: "mfl.users.controllers.user_edit.regulatory_body",
+                        templateUrl: "users/tpls/users.edit.regulatory_body.tpl.html"
                     }
                 },
                 permission: "users.view_mfluser",

@@ -1,107 +1,37 @@
-<div class="tab-content">
-    <div class="row detail-content margin-b-10">
-        <div class="col-xs-12 pad-t-20">
-            <div class="col-xs-12 alert alert-danger alert-dismissible" ng-show="error">
-                <button type="button" class="close">
-                    <span ng-click="error = !error">&times;</span>
-                </button>
-                <span class="fs-18"><i class="fa fa-times-circle"></i> &nbsp; {{error}}</span>
-            </div>
-            <div class="col-xs-12 content-card form-card margin-b-10" write-perm="users.change_mfluser">
-                <h4 class="fw-600 fs-16">Assign User Group</h4>
-                <form name="countyForm" ng-submit="add()">
-                    <div class="col-sm-10 pad-l-0">
-                    <select name="county" class="form-control" ng-model="new_grp" class="pad-t-15" required>
+<div class="col-xs-12 pad-0 margin-t-0 margin-b-0 content-card">
+  <table class="table table-hover table-condensed col-xs-12">
+      <thead class="grey-header">
+          <th class="col-xs-8">Group Title&#42;</th>
+          <th class="col-xs-1 text-center"></th>
+      </thead>
+      <tbody>
+          <tr ng-repeat="grp in user.groups">
+              <td class="col-xs-8">
+                <div class="form-group grid-inputs">
+                    <select name="name" class="form-control" ng-model="grp.id" class="pad-t-15">
                         <option value="">Select Group</option>
-                        <option ng-repeat="grp in groups" ng-value="grp.id">{{grp.name}}</option>
+                        <option ng-repeat="mfl_grp in groups" ng-selected="{{mfl_grp.id == grp.id}}" ng-value="mfl_grp.id">{{mfl_grp.name}}</option>
                     </select>
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    </div>
-                    <div class="col-sm-2 margin-b-10 ">
-                        <button type="submit" class="btn btn-primary margin-t-5 pull-right" tooltip="Assign User Group">
-                            <i class="fa fa-plus-circle"></i> Add
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="alert alert-info col-xs-12 margin-t-20" ng-show="user.groups.length === 0">
-                <span class="fs-14"><i class="fa fa-info-circle"></i> User has no group assigned yet</span>
-            </div>
-
-            <div class="col-xs-12 content-card margin-t-20" ng-show="user.groups.length > 0">
-                <h4 class="fw-600 fs-16"> User's Group</h4>
-                <table class="table table-condensed table-hover fs-14">
-                    <tbody>
-                        <tr ng-repeat="child in user.groups">
-                            <td class="pad-t-15 fs-14 fw-500 text-left">
-                                {{child.name}}
-                            </td>
-                            <td class="text-right">
-                                <span ng-if="uc.delete_spinner">
-                                    <i class="fa fa-spin fa-circle-o-notch"></i>
-                                </span>
-                                <a  class="btn btn-danger"
-                                    popover-toggle popover-trigger="open" popover-placement="left"
-                                    popover-template="'common/tpls/del-pop.tpl.html'"
-                                    requires-permission="users.change_mfluser" >
-                                    Delete
-                                </a>
-                            </td>
-                        </tr>
-                        <tr ng-if="spinner">
-                            <td colspan="3" class="text-center">
-                                <i class="fa fa-spin fa-circle-o-notch fa-2x"></i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div ng-if="!create" class="margin-b-20 margin-t-20"
-                 requires-permission="users.change_mfluser">
-                <a class="btn btn-primary" ui-sref="users.user_edit.contacts ({user_id : user_id})">
-                    <i class="fa fa-angle-double-left"></i> Contacts
-                </a>
-                <a ui-sref="users.user_edit.constituency({user_id:user.id})"
-                   class="btn btn-primary pull-right">
-                     <span>Sub County <i class="fa fa-angle-double-right"></i></span>
-                </a>
-                <a ui-sref="users.user_edit.counties({user_id:user.id})"
-                   class="btn btn-primary pull-right fade-content">
-                     <span>County <i class="fa fa-angle-double-right"></i></span>
-                </a>
-                <a  ui-sref="users.user_edit.regulatory_body({user_id:user.id})"
-                    class="btn btn-primary pull-right">
-                     <span>Regulatory Body <i class="fa fa-angle-double-right"></i></span>
-                </a>
-                <a  ui-sref="users"
-                    class="btn btn-primary pull-right">
-                     <span>Update</span>
-                </a>
-            </div>
-            <div ng-if="create" class="margin-b-20 margin-t-20" requires-permission="users.change_mfluser">
-                <a class="btn btn-primary" ui-sref="users.user_create.contacts ({user_id : user_id})">
-                    <i class="fa fa-angle-double-left"></i> Contacts
-                </a>
-                <a ui-sref="users.user_create.constituency({user_id:user.id})"
-                   class="btn btn-primary pull-right">
-                     <span>Sub County <i class="fa fa-angle-double-right"></i></span>
-                </a>
-                <a ui-sref="users.user_create.counties({user_id:user.id})"
-                   class="btn btn-primary pull-right fade-content">
-                     <span>County <i class="fa fa-angle-double-right"></i></span>
-                </a>
-                <a  ui-sref="users.user_create.regulatory_body({user_id:user.id})"
-                    class="btn btn-primary pull-right">
-                     <span>Regulatory Body <i class="fa fa-angle-double-right"></i></span>
-                </a>
-                <a  ui-sref="users"
-                    class="btn btn-primary pull-right">
-                     <span>Update</span>
-                </a>
-            </div>
-        </div>
-    </div>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                </div>
+              </td>
+              <td class="col-xs-1 text-center">
+                  <a ng-click="removeLine('groups', grp)" style="cursor: pointer">
+                      <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                  </a>
+              </td>
+          </tr>
+          <tr ng-if="user.groups.length === 0" class="">
+              <td colspan="2">
+                  <i class="fa fa-info-circle"></i> No Groups Assigned to User
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+<div class="col-xs-12 pad-0 text-right margin-t-10 margin-b-10">
+  <a class="btn btn-primary pull-right" ng-click="addLine('groups')" >
+      <i class="fa fa-plus-square-o"></i> Add Group
+  </a>
 </div>
