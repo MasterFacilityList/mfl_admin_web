@@ -137,7 +137,6 @@
                 }
             };
             $scope.tab = 0;
-            $scope.create = true;
             if(_.isUndefined($stateParams.user_id)) {
                 $scope.create = true;
                 $scope.title = {
