@@ -1,10 +1,26 @@
 (function (angular) {
     "use strict";
 
+    /*
+     * @ngdoc module
+     *
+     * @name mfl.service_mgmt.services
+     *
+     * @description
+     * Module containing services used in service management app
+     */
     angular.module("mfl.service_mgmt.services", [
         "api.wrapper"
     ])
 
+    /*
+     * @ngdoc service
+     *
+     * @name mfl.service_mgmt.wrappers
+     *
+     * @description
+     * Module containing api wrappers used in service management app
+     */
     .service("mfl.service_mgmt.wrappers", ["api", function (api) {
 
         this.services = api.setBaseUrl("api/facilities/services/");
@@ -20,12 +36,19 @@
 
         this.service_options = api.setBaseUrl("api/facilities/service_options/");
 
-        this.keph = api.setBaseUrl("api/facilities/keph/");
-
         this.OPTION_TYPES = [
             "BOOLEAN", "INTEGER", "DECIMAL", "TEXT"
         ];
 
+        /*
+         *
+         * @name newCategory
+         *
+         * @description
+         * Creates a new object representing a category
+         *
+         * @returns {Object} - Object representing a category
+         */
         this.newCategory = function () {
             return {
                 "name": "",
@@ -34,6 +57,15 @@
             };
         };
 
+        /*
+         *
+         * @name newService
+         *
+         * @description
+         * Creates a new object representing a service
+         *
+         * @returns {Object} - Object representing a service
+         */
         this.newService = function () {
             return {
                 "name": "",
@@ -43,6 +75,15 @@
             };
         };
 
+        /*
+         *
+         * @name newOption
+         *
+         * @description
+         * Creates a new object representing an option
+         *
+         * @returns {Object} - Object representing an option
+         */
         this.newOption = function () {
             return {
                 "value": "",

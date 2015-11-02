@@ -46,9 +46,10 @@
                 httpBackend
                     .expectGET(server_url + "api/facilities/service_categories/1/")
                     .respond(200, {});
-                httpBackend.expectGET(server_url +
-                    "api/facilities/keph/?page_size=1000")
-                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url +
+                        "api/facilities/service_categories/?fields=id,name&page_size=100")
+                    .respond(200, {});
                 ctrl("category_edit", data);
 
                 httpBackend.flush();
@@ -72,8 +73,9 @@
                     .expectGET(server_url +
                                "api/facilities/service_categories/1/")
                     .respond(500, {"error": "a"});
-                httpBackend.expectGET(server_url +
-                    "api/facilities/keph/?page_size=1000")
+                httpBackend
+                    .expectGET(server_url +
+                        "api/facilities/service_categories/?fields=id,name&page_size=100")
                     .respond(500, {});
                 spyOn(log, "warn");
                 ctrl("category_edit", data);
@@ -128,6 +130,48 @@
                 ]);
             });
 
+            it("should handle failure to save updated category", function () {
+                inject(["mfl.common.forms.changes",
+                    function (formChanges) {
+                        var scope = rootScope.$new();
+                        var data = {
+                            "$stateParams": {
+                                category_id: 1
+                            },
+                            "$state": state,
+                            "$scope": scope,
+                            "mfl.common.forms.changes": formChanges
+                        };
+                        httpBackend
+                            .expectGET(server_url +
+                                       "api/facilities/service_categories/1/")
+                            .respond(200, {});
+
+                        spyOn(formChanges, "whatChanged").andReturn({"name": "get"});
+                        spyOn(state, "go");
+                        ctrl("category_edit", data);
+
+                        httpBackend.flush();
+                        httpBackend.verifyNoOutstandingRequest();
+                        httpBackend.verifyNoOutstandingExpectation();
+
+                        httpBackend.resetExpectations();
+
+                        httpBackend
+                            .expectPATCH(
+                                server_url + "api/facilities/service_categories/1/",
+                                {"name": "get"})
+                            .respond(500, {});
+                        scope.save();
+
+                        httpBackend.flush();
+                        httpBackend.verifyNoOutstandingRequest();
+                        httpBackend.verifyNoOutstandingExpectation();
+                        expect(formChanges.whatChanged).toHaveBeenCalled();
+                        expect(state.go).not.toHaveBeenCalled();
+                    }
+                ]);
+            });
             it("should not save if category is not updated", function () {
                 inject(["mfl.common.forms.changes",
                     function (formChanges) {
@@ -243,9 +287,10 @@
                 scope.category = {
                     "name": "get"
                 };
-                httpBackend.expectGET(server_url +
-                    "api/facilities/keph/?page_size=1000")
-                    .respond(200, {results: []});
+                httpBackend
+                    .expectGET(server_url +
+                        "api/facilities/service_categories/?fields=id,name&page_size=100")
+                    .respond(200, {});
                 httpBackend
                     .expectPOST(server_url + "api/facilities/service_categories/", {"name": "get"})
                     .respond(200, {});
@@ -258,7 +303,7 @@
 
                 expect(state.go).toHaveBeenCalled();
             });
-            it("should fail to fetch keph levels", function () {
+            it("should fail to fetch parent categories", function () {
                 var scope = rootScope.$new();
                 var data = {
                     "$state": state,
@@ -271,8 +316,9 @@
                 scope.category = {
                     "name": "get"
                 };
-                httpBackend.expectGET(server_url +
-                    "api/facilities/keph/?page_size=1000")
+                httpBackend
+                    .expectGET(server_url +
+                        "api/facilities/service_categories/?fields=id,name&page_size=100")
                     .respond(500, {});
                 httpBackend
                     .expectPOST(server_url + "api/facilities/service_categories/", {"name": "get"})
