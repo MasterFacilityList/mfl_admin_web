@@ -126,7 +126,7 @@
                 url: "edit/:user_id/",
                 views: {
                     "main-content@usermgmt": {
-                        controller: "mfl.users.controllers.user_edit",
+                        controller: "mfl.users.controllers.user_create",
                         templateUrl: "users/tpls/user.create.tpl.html"
                     },
                     "basic@users.user_edit": {
@@ -137,7 +137,7 @@
                         controller: "mfl.users.controllers.user_edit.contacts",
                         templateUrl: "users/tpls/users.edit.contacts.tpl.html"
                     },
-                    "groups@users.user_create": {
+                    "groups@users.user_edit": {
                         controller: "mfl.users.controllers.user_edit.groups",
                         templateUrl: "users/tpls/users.edit.groups.tpl.html"
                     },

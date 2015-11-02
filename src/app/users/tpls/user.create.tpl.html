@@ -17,11 +17,6 @@
                         <i class="fa fa-angle-double-left"></i> Cancel
                     </a>
                     <div class="pull-right">
-                        <button ng-if="!create" type="submit" class="btn btn-primary" requires-permission="users.change_mfluser" ng-disabled="user_frm.$invalid">
-                            Save
-                        </button>
-                    </div>
-                    <div class="pull-right" ng-if="create">
                         <button requires-permission="users.change_mfluser" type="submit" class="btn btn-primary">
                             Save
                         </button>

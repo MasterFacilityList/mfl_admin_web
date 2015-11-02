@@ -22,8 +22,8 @@
                   </a>
               </td>
           </tr>
-          <tr ng-if="user.groups.length < 1" class="">
-              <td colspan="3">
+          <tr ng-if="user.groups.length === 0" class="">
+              <td colspan="2">
                   <i class="fa fa-info-circle"></i> No Groups Assigned to User
               </td>
           </tr>
