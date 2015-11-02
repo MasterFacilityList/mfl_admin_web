@@ -130,7 +130,7 @@
             it("should load the sync object", function () {
                 httpBackend.expectGET(
                     server_url+"api/facilities/regulator_sync/431/?fields=" +
-                        "official_name,name,registration_number,"+
+                        "name,registration_number,"+
                         "regulatory_body_name,owner_name,facility_type_name,"+
                         "probable_matches,mfl_code"
                     ).respond(200, {});
@@ -148,7 +148,7 @@
             it("should handle failure to load the sync object", function () {
                 httpBackend.expectGET(
                     server_url+"api/facilities/regulator_sync/431/?fields=" +
-                        "official_name,name,registration_number,"+
+                        "name,registration_number,"+
                         "regulatory_body_name,owner_name,facility_type_name,"+
                         "probable_matches,mfl_code"
                     ).respond(500, {});
@@ -166,7 +166,7 @@
             it("should update the sync object", function () {
                 httpBackend.expectGET(
                     server_url+"api/facilities/regulator_sync/431/?fields=" +
-                        "official_name,name,registration_number,"+
+                        "name,registration_number,"+
                         "regulatory_body_name,owner_name,facility_type_name,"+
                         "probable_matches,mfl_code"
                     ).respond(200, {});
@@ -197,7 +197,7 @@
             it("should handle failure to update the sync object", function () {
                 httpBackend.expectGET(
                     server_url+"api/facilities/regulator_sync/431/?fields=" +
-                        "official_name,name,registration_number,"+
+                        "name,registration_number,"+
                         "regulatory_body_name,owner_name,facility_type_name,"+
                         "probable_matches,mfl_code"
                     ).respond(200, {});
