@@ -1,0 +1,36 @@
+<contentheader hide-back-button></contentheader>
+
+<div class="col-xs-12 margin-t-20">
+
+    <div class="content-card">
+        <div class="row">
+            <div class="col-xs-12"><label class="text-black fw-600">Facility Name: </label> {{::sync_obj.name}}</div>
+            <div class="col-xs-6"><label class="text-black fw-600">Facility Type: </label> {{::sync_obj.facility_type_name}}</div>
+            <div class="col-xs-6"><label class="text-black fw-600">Facility Owner: </label> {{::sync_obj.owner_name}}</div>
+            <div class="col-xs-6"><label class="text-black fw-600">Regulatory Body: </label> {{::sync_obj.regulatory_body_name}}</div>
+            <div class="col-xs-6"><label class="text-black fw-600">Registration Number: </label> {{::sync_obj.registration_number}}</div>
+        </div>
+        <div class="col-xs-12"><hr class="line-divider"></div>
+        <div>
+            <div class="margin-t-5"><h4 class="fw-600">Probable Matches</h4></div>
+            <table class="table table-hover table-condensed margin-t-20 fs-13" id="no-more-tables">
+                <thead>
+                    <tr>
+                        <th>Facility Official Name</th>
+                        <th>Facility Unique Name</th>
+                        <th>MFL Code</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="match in sync_obj.probable_matches">
+                        <td>{{::match.official_name}}</td>
+                        <td>{{::match.name}}</td>
+                        <td>{{::match.code}}</td>
+                        <td><button ng-if="!sync_obj.mfl_code" ng-click="updateSyncObject(match.code)" class="btn btn-primary">Attach</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
