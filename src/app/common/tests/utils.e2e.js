@@ -37,7 +37,9 @@
         browser.get("/#/logout");
         browser.waitForAngular();
         browser.driver.sleep(browser.params.page_timeout);
-        expect(element(by.css("h2")).getText()).toEqual("Master Facility List V 2.0");
+        expect(element(by.css("h2")).getText()).toEqual(
+            "Kenya Health Master Facility List V 2.0"
+        );
     };
 
     module.exports = {

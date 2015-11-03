@@ -2,6 +2,14 @@
 
     "use strict";
 
+    /*
+     * @ngdoc module
+     *
+     * @name mfl.service_mgmt.controllers.categories
+     *
+     * @description
+     * Module containing controllers for categories
+     */
     angular.module("mfl.service_mgmt.controllers.categories", [
         "ui.router",
         "mfl.common.forms",
@@ -9,12 +17,28 @@
         "angular-toasty"
     ])
 
+    /*
+     * @ngdoc controller
+     *
+     * @name mfl.service_mgmt.controllers.category_list
+     *
+     * @description
+     * Manages listing of categories
+     */
     .controller("mfl.service_mgmt.controllers.category_list", ["$scope", function ($scope) {
         $scope.filters = {
             "fields": "id,name,abbreviation,description,"
         };
     }])
 
+    /*
+     * @ngdoc controller
+     *
+     * @name mfl.service_mgmt.controllers.category_edit
+     *
+     * @description
+     * Handles editting of categories
+     */
     .controller("mfl.service_mgmt.controllers.category_edit",
         ["$scope", "$state", "$stateParams", "$log",
         "mfl.service_mgmt.wrappers", "mfl.common.forms.changes","toasty",
@@ -30,11 +54,16 @@
             }).error(function (data) {
                 $scope.errors = data;
             });
-            wrappers.keph.filter({page_size: 1000}).success(function (data) {
-                $scope.kephs = data.results;
-            }).error(function (data) {
-                $scope.errors = data;
-            });
+            wrappers.categories.filter({"fields":"id,name", "page_size": 100})
+                .success(function (data) {
+                    $scope.parents = _.without(
+                        data.results, _.findWhere(data.results, {"id": $scope.category_id})
+                    );
+                })
+                .error(function (data) {
+                    $scope.errors = data;
+                });
+
             $scope.save = function (frm) {
                 var changed = forms.whatChanged(frm);
 
@@ -50,6 +79,8 @@
                                 {"category_id": $scope.category_id},
                                 {reload: true}
                             );
+                        }).error(function(data){
+                            $scope.errors = data;
                         });
                 }
             };
@@ -70,16 +101,27 @@
         }
     ])
 
+    /*
+     * @ngdoc controller
+     *
+     * @name mfl.service_mgmt.controllers.category_create
+     *
+     * @description
+     * Manages creation of categories
+     */
     .controller("mfl.service_mgmt.controllers.category_create",
         ["$scope", "$state", "$log",
         "mfl.service_mgmt.wrappers","toasty",
         function ($scope, $state, $log, wrappers, toasty) {
             $scope.category = wrappers.newCategory();
-            wrappers.keph.filter({page_size: 1000}).success(function (data) {
-                $scope.kephs = data.results;
-            }).error(function (data) {
-                $scope.errors = data;
-            });
+            wrappers.categories.filter({"fields":"id,name", "page_size": 100})
+                .success(function (data) {
+                    $scope.parents = data.results;
+                })
+                .error(function (data) {
+                    $scope.errors = data;
+                });
+
             $scope.save = function () {
                 wrappers.categories.create($scope.category)
                 .success(function (data) {

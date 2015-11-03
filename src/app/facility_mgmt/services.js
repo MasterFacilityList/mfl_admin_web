@@ -1,5 +1,6 @@
 (function (angular) {
     "use strict";
+
     /**
      * @ngdoc module
      *
@@ -12,6 +13,7 @@
         "api.wrapper",
         "mfl.auth.oauth2"
     ])
+
     /**
      * @ngdoc service
      *
@@ -53,6 +55,7 @@
             return result;
         };
     }])
+
     /**
      * @ngdoc service
      *
@@ -103,6 +106,7 @@
             this.officer_contacts = api.setBaseUrl("api/facilities/officer_contacts/");
             this.keph_levels = api.setBaseUrl("api/facilities/keph/");
             this.regulator_sync = api.setBaseUrl("api/facilities/regulator_sync/");
+            this.regulator_sync_update = api.setBaseUrl("api/facilities/regulator_sync_update/");
             this.facility_rating_comments = api.setBaseUrl(
                     "api/facilities/facility_service_ratings/"
                 );

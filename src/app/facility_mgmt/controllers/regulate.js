@@ -1,11 +1,27 @@
 (function(angular){
     "use strict";
 
+    /*
+     * @ngdoc module
+     *
+     * @name mfl.service_mgmt.controllers.regulate
+     *
+     * @description
+     * Module containing controllers for facility regulation
+     */
     angular.module("mfl.facility_mgmt.controllers.regulate", [
         "mfl.facility_mgmt.services",
         "angular-toasty"
     ])
 
+    /*
+     * @ngdoc controller
+     *
+     * @name mfl.facility_mgmt.controllers.facilities_regulation
+     *
+     * @description
+     * Handles listing of facilities for regulation
+     */
     .controller("mfl.facility_mgmt.controllers.facilities_regulation",
         ["$scope", function ($scope) {
             $scope.filters = {
@@ -21,19 +37,14 @@
         }]
     )
 
-    .controller("mfl.facility_mgmt.controllers.facilities_regulation_approval",
-        ["$scope", function ($scope) {
-            $scope.filters = {
-                "regulated": false,
-                "rejected": false
-            };
-            $scope.title = {
-                "name": "Approve Facility Regulations",
-                "icon": "fa-building"
-            };
-        }]
-    )
-
+    /*
+     * @ngdoc controller
+     *
+     * @name mfl.facility_mgmt.controllers.facility_regulate
+     *
+     * @description
+     * Handles updating a facility's regulation
+     */
     .controller("mfl.facility_mgmt.controllers.facility_regulate",
         ["$scope", "$state", "$stateParams", "$log",
         "mfl.facility_mgmt.services.wrappers", "toasty",
@@ -79,6 +90,46 @@
                     $log.error(data);
                     $scope.errors = data;
                 });
+            };
+        }]
+    )
+
+    /*
+     * @ngdoc controller
+     *
+     * @name mfl.facility_mgmt.controllers.regulator_sync.update
+     *
+     * @description
+     * Handles synchronization of facilities from regulator system
+     */
+    .controller("mfl.facility_mgmt.controllers.regulator_sync.update",
+        ["$scope", "$stateParams", "$state", "mfl.facility_mgmt.services.wrappers", "toasty",
+        function ($scope, $stateParams, $state, wrappers, toasty) {
+            $scope.title = { "name": "Synchronize Regulated Facilities" };
+            $scope.sync_id = $stateParams.sync_id;
+            wrappers.regulator_sync.get($scope.sync_id, {
+                "fields": "name,registration_number,"+
+                          "regulatory_body_name,owner_name,facility_type_name,"+
+                          "probable_matches,mfl_code"
+            })
+            .success(function (data) { $scope.sync_obj = data; })
+            .error(function (data) { $scope.errors = data; });
+
+            $scope.updateSyncObject = function (mfl_code) {
+                var r = wrappers.regulator_sync_update;
+                r.callApi(
+                    "POST",
+                    r.makeUrl(r.apiBaseUrl+$scope.sync_id+"/"),
+                    {"mfl_code": mfl_code}
+                )
+                .success(function () {
+                    toasty.success({
+                        "title": "Facility Synchronized",
+                        "msg": "The facility has been updated with regulatory details"
+                    });
+                    $state.go("facilities_regulator_sync");
+                })
+                .error(function (data) { $scope.errors = data; });
             };
         }]
     );
