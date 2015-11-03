@@ -39,7 +39,7 @@
         if(_.isEmpty($state.params.facility_id)){
             $scope.select_values = {};
         } else {
-            wrappers.facility_detail.get($scope.new_facility)
+            wrappers.facilities.get($scope.new_facility)
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.facility = data;
@@ -152,8 +152,8 @@
             if(!_.isUndefined($stateParams.facility_id) &&
                 !_.isEmpty($stateParams.facility_id)){
                 $scope.spinner = true;
-                $scope.wrapper = wrappers.facility_detail;
-                wrappers.facility_detail.get($scope.fac_id)
+                $scope.wrapper = wrappers.facilities;
+                wrappers.facilities.get($scope.fac_id)
                     .success(function(data){
                         $scope.facility = data;
                         $scope.spinner = false;

@@ -59,7 +59,7 @@
                 "regulating_body": ""
             };
 
-            wrappers.facility_detail.get($scope.facility_id)
+            wrappers.facilities.get($scope.facility_id)
             .success(function(data) {
                 $scope.facility = data;
                 $scope.spinner = false;
