@@ -213,7 +213,7 @@
                             $scope.fac_serv.services =
                                 _.without($scope.fac_serv.services, obj);
                         });
-                    wrappers.facility_detail.update($scope.facility_id,
+                    wrappers.facilities.update($scope.facility_id,
                         $scope.fac_serv)
                         .success(function () {
                             if(!$scope.create){
@@ -279,7 +279,7 @@
                         "facilities.facility_edit."+ obj.name,
                         {facility_id : $scope.facility_id}, {reload: true});
             };
-            wrappers.facility_detail.get($scope.facility_id)
+            wrappers.facilities.get($scope.facility_id)
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.facility = data;
@@ -349,7 +349,7 @@
                 });
             };
             $scope.remove = function () {
-                wrappers.facility_detail.update($scope.facility_id, {"is_active": false})
+                wrappers.facilities.update($scope.facility_id, {"is_active": false})
                 .success(function () {
                     $state.go("facilities");
                 })
@@ -387,7 +387,7 @@
             "/" + value.getDate();
             $scope.close = function (frm) {
                 var changes = formChanges.whatChanged(frm);
-                wrappers.facility_detail.update($stateParams.facility_id,changes)
+                wrappers.facilities.update($stateParams.facility_id,changes)
                 .success(function (data) {
                     $scope.facility = data;
                     toasty.success({
@@ -467,7 +467,7 @@
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {
-                        wrappers.facility_detail.create($scope.facility)
+                        wrappers.facilities.create($scope.facility)
                         .success(function (data) {
                             $state.go("facilities.facility_create.geolocation",
                             {facility_id : data.id,
@@ -480,7 +480,7 @@
                         });
                     }
                     else {
-                        wrappers.facility_detail.update(
+                        wrappers.facilities.update(
                             $state.params.facility_id, changes)
                         .success(function () {
                             $state.go(
@@ -497,7 +497,7 @@
                     }
                 } else {
                     changes.officer_in_charge = $scope.facility.officer_in_charge;
-                    wrappers.facility_detail.update($scope.facility_id, changes)
+                    wrappers.facilities.update($scope.facility_id, changes)
                     .success(function () {
                         if($scope.nxtState){
                             toasty.success({
@@ -620,7 +620,7 @@
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.units");
                 if(!_.isEmpty($scope.fac_contobj.contacts)){
-                    wrappers.facility_detail.update($scope.facility_id, $scope.fac_contobj)
+                    wrappers.facilities.update($scope.facility_id, $scope.fac_contobj)
                     .success(function () {
                         if(!$scope.create){
                             toasty.success({
@@ -977,7 +977,7 @@
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.services");
                 if(!_.isEmpty($scope.fac_unitobj.units)){
-                    wrappers.facility_detail.update($scope.facility_id, $scope.fac_unitobj)
+                    wrappers.facilities.update($scope.facility_id, $scope.fac_unitobj)
                     .success(function () {
                         if(!$scope.create){
                             toasty.success({
@@ -1092,7 +1092,7 @@
                 opFrm.facility = $scope.facility_id;
                 $scope.spinner1 = true; //show spinner
                 if (! _.isEmpty(changed)) {
-                    wrappers.facility_detail.update($scope.facility_id, changed)
+                    wrappers.facilities.update($scope.facility_id, changed)
                         .success(function (data) {
                             $scope.spinner1 = false;
                             $scope.geo = data;
@@ -1216,7 +1216,7 @@
                     } else {
                         wrappers.physical_addresses.create(changes)
                             .success(function (data) {
-                                wrappers.facility_detail.update(
+                                wrappers.facilities.update(
                                     $state.params.facility_id,
                                     {"physical_address" : data.id})
                                     .success(function () {
@@ -1464,7 +1464,7 @@
                 } else {
                     wrappers.facility_coordinates.create(changes)
                     .success(function (data) {
-                        wrappers.facility_detail.update(
+                        wrappers.facilities.update(
                             fac_id, {"coordinates" : data.id})
                             .success(function () {
                                 $scope.toState(arg);

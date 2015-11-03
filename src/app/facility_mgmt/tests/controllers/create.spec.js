@@ -240,7 +240,7 @@
                                    "?search_auto=kitale")
                         .respond(200);
 
-                    data.$scope.selectReload(wrappers.facility_detail, "kitale", "facilities");
+                    data.$scope.selectReload(wrappers.facilities, "kitale", "facilities");
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();
@@ -266,7 +266,7 @@
                                    "?search_auto=kitale")
                         .respond(400);
 
-                    data.$scope.selectReload(wrappers.facility_detail,"kitale", "facilities");
+                    data.$scope.selectReload(wrappers.facilities,"kitale", "facilities");
 
                     httpBackend.flush();
                     httpBackend.verifyNoOutstandingRequest();

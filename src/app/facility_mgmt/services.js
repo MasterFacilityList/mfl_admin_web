@@ -68,7 +68,6 @@
     .service("mfl.facility_mgmt.services.wrappers", ["api", "api.oauth2", "$window",
         function (api, oauth2, $window) {
             this.facilities = api.setBaseUrl("api/facilities/facilities/");
-            this.facility_detail = api.setBaseUrl("api/facilities/facilities/");
             this.facility_types = api.setBaseUrl("api/facilities/facility_types/");
             this.facility_owners = api.setBaseUrl("api/facilities/owners/");
             this.facility_owner_types = api.setBaseUrl("api/facilities/owner_types/");
