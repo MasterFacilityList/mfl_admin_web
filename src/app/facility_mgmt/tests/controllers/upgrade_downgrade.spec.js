@@ -47,12 +47,19 @@
 
                 httpBackend
                     .expectGET(
-                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
+                        server_url+"api/facilities/facility_types/?page_size=100" +
+                                   "&ordering=name&fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
                         server_url+"api/facilities/keph/?fields=id,name&ordering=name")
                     .respond(200, {results: [{"id": 3, "name": "Level 2"}]});
+
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/facilities/33/?" +
+                        "fields=keph_level_name,facility_type_name")
+                    .respond(200, {});
 
                 var c = ctrl("updown_helper", data);
                 c.bootstrap(scope, false);
@@ -86,7 +93,8 @@
 
                 httpBackend
                     .expectGET(
-                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
+                        server_url+"api/facilities/facility_types/?page_size=100&" +
+                                   "ordering=name&fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(
@@ -97,6 +105,12 @@
                         server_url+"api/facilities/level_change_reasons/?fields=id,"+
                     "reason")
                     .respond(200, {results: []});
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/facilities/33/?" +
+                        "fields=keph_level_name,facility_type_name")
+                    .respond(200, {});
+
                 var c = ctrl("updown_helper", data);
                 c.bootstrap(scope, false);
 
@@ -145,12 +159,18 @@
 
                 httpBackend
                     .expectGET(
-                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name")
+                        server_url+"api/facilities/facility_types/?page_size=100&ordering=name" +
+                                   "&fields=id,name")
                     .respond(500);
                 httpBackend
                     .expectGET(
                         server_url+"api/facilities/keph/?fields=id,name&ordering=name")
                     .respond(404);
+                httpBackend
+                    .expectGET(
+                        server_url+"api/facilities/facilities/33/?" +
+                        "fields=keph_level_name,facility_type_name")
+                    .respond(404, {});
 
                 var c = ctrl("updown_helper", data);
                 c.bootstrap(scope, true);

@@ -33,7 +33,7 @@
                 "name": "Publish Facility"
             };
 
-            wrappers.facility_detail.get($scope.facility_id)
+            wrappers.facilities.get($scope.facility_id)
             .success(function(data) {
                 $scope.facility = data;
             })
@@ -44,7 +44,7 @@
 
             $scope.publish = function (publish) {
                 var pub = publish ? true : false;
-                wrappers.facility_detail.update($scope.facility_id, {"is_published": pub})
+                wrappers.facilities.update($scope.facility_id, {"is_published": pub})
                 .success(function () {
                     toasty.success({
                         title: "Publish Facility",

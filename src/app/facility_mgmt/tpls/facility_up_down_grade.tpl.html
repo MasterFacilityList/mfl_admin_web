@@ -14,11 +14,19 @@
                 <p>The facility has pending upgrade/downgrade.</p>
             </div>
             <div class="form-group" >
-                <label for="facility_type" class="control-label">New KEPH Level</label>
+                <label for="facility_type" class="control-label">Previous KEPH Level</label>
+                <input type="text" ng-model="facility.keph_level_name" readonly class="form-control">
+            </div>
+            <div class="form-group" >
+                <label class="control-label">New KEPH Level</label>
                 <ui-select ng-model="new_type.keph_level" name="keph_level" required ng-disabled="new_type.id" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select a Keph Level">{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="kl.id as kl in keph_levels | filter:$select.search">{{kl.name}}</ui-select-choices>
                 </ui-select>
+            </div>
+            <div class="form-group" >
+                <label class="control-label">Previous Facility Type</label>
+                <input type="text" ng-model="facility.facility_type_name" readonly class="form-control">
             </div>
             <div class="form-group" >
                 <label for="facility_type" class="control-label">New Facility Type</label>
