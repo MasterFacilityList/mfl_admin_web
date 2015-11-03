@@ -17,9 +17,14 @@
                 </div>
               </td>
               <td class="col-xs-1 text-center">
-                  <a ng-click="removeLine('counties',county)" style="cursor: pointer">
+                  <a ng-click="removeLine('counties',county)" style="cursor: pointer" ng-if="create || !county.id">
                       <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                   </a>
+                  <div class="form-group checkbox" ng-if="!create && county.id">
+                      <label for="open_late_night" class="control-label">
+                      <input type="checkbox" tooltip="Activate or inactivate county" id="county{{index}}" name="county{{index}}" ng-model="county.active" ng-change="removeLine('counties',county)">
+                      </label>
+                  </div>
               </td>
           </tr>
           <tr ng-if="user.user_counties.length < 1" class="">

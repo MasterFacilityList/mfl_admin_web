@@ -27,9 +27,10 @@
      */
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
         "$stateParams", "mfl.common.services.multistep",
-        "mfl.users.services.wrappers","$log","mfl.auth.services.login","mfl.users.services.groups",
-        function ($scope, $state, $stateParams, multistepService, wrappers,$log,loginService,
-        groupsService) {
+        "mfl.users.services.wrappers","$log","mfl.auth.services.login",
+        "mfl.users.services.groups", "toasty",
+        function ($scope, $state, $stateParams, multistepService, wrappers,
+            $log,loginService, groupsService, toasty) {
             $scope.addLine = function (obj_str) {
                 switch(obj_str){
                 case "contacts" :
@@ -52,17 +53,32 @@
                     break;
                 }
             };
+            $scope.inactivate = function (obj, obj_str) {
+                console.log(obj, obj_str);
+                var active_obj = {};
+                var active_key = JSON.stringify(obj_str);
+                if(obj_str === "user_constituencies"){
+                    active_obj[active_key] = $scope.user.user_constituencies;
+                    wrappers.users.update($scope.user_id, active_obj)
+                        .success(function (){})
+                        .error(function (data) {
+                            $scope.errors = data;
+                        });
+                }
+            };
             $scope.removeItems = function (parent_obj, child_obj, obj_string) {
+                var usr_obj = {};
+                var usr_key = JSON.stringify(obj_string);
                 var modified;
                 if(!child_obj.hasOwnProperty ("id")){
                     modified = _.without(parent_obj, child_obj);
                 }
                 else{
                     modified = _.without(parent_obj, child_obj);
-                    wrappers.users.update($scope.user_id,{obj_string : parent_obj})
-                        .success(function () {
-                            console.log(obj_string);
-                        })
+                    usr_obj[usr_key] = modified;
+                    console.log(usr_obj);
+                    wrappers.users.update($scope.user_id,usr_obj)
+                        .success(function () {})
                         .error(function (data) {
                             $scope.errors = data;
                         });
@@ -119,6 +135,14 @@
                 if($scope.create){
                     wrappers.users.create($scope.user)
                         .success(function () {
+                            toasty.success({
+                                title: "Email sent",
+                                msg: "An email has been sent to the new user"
+                            });
+                            toasty.success({
+                                title: "User Added",
+                                msg: "User added successfully"
+                            });
                             $state.go("users");
                         })
                         .error(function (data) {
@@ -128,6 +152,10 @@
                 }else{
                     wrappers.users.update($scope.user_id, $scope.user)
                         .success(function () {
+                            toasty.success({
+                                title: "User Updates",
+                                msg: "User updated successfully"
+                            });
                             $state.go("users");
                         })
                         .error(function (data) {
@@ -186,16 +214,6 @@
                     icon: "fa-edit",
                     name: "Edit User"
                 };
-                $scope.action = [
-                    {
-                        func : "ui-sref='users.user_edit.delete'" +
-                                "requires-user-feature='is_staff'" +
-                                "requires-permission='users.delete_mfluser'",
-                        class: "btn btn-danger",
-                        tipmsg: "Delete User",
-                        wording : "Delete"
-                    }
-                ];
                 wrappers.users.get($stateParams.user_id)
                 .success(function (data) {
                     $scope.user = data;
