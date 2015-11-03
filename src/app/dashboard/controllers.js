@@ -110,7 +110,7 @@
                             },
                             y: {
                                 label: {
-                                    text: "Facility count",
+                                    text: "count",
                                     position: "outer-middle"
                                 }
                             }
@@ -121,45 +121,50 @@
                 };
                 var top_ten = function (_dt) {
                     var _list = [];
+                    var _chu_list = [];
                     var _names_list = [];
 
                     if(!_.isEmpty(_dt.county_summary)) {
                         $scope.county = true;
                         angular.forEach(_dt.county_summary, function (item) {
                             _list.push(item.count);
+                            _chu_list.push(item.chu_count);
                             _names_list.push(item.name);
                         });
-                        _list.unshift("county");
+                        _list.unshift("facilities");
+                        _chu_list.unshift("chus");
                     }
                     if(!_.isEmpty(_dt.constituencies_summary)) {
                         $scope.constituency = true;
                         angular.forEach(_dt.constituencies_summary, function (item) {
                             _list.push(item.count);
+                            _chu_list.push(item.chu_count);
                             _names_list.push(item.name);
                         });
-                        _list.unshift("constituency");
+                        _list.unshift("facilities");
+                        _chu_list.unshift("chus");
                     }
                     if(!_.isEmpty(_dt.wards_summary)) {
                         $scope.ward = true;
                         angular.forEach(_dt.wards_summary, function (item) {
                             _list.push(item.count);
+                            _chu_list.push(item.chu_count);
                             _names_list.push(item.name);
                         });
-                        _list.unshift("wards");
+                        _list.unshift("facilities");
+                        _chu_list.unshift("chus");
                     }
                     var obj = {
                         bindto: "#facilitybar",
                         data: {
                             columns:[
-                                _list
+                                _list,
+                                _chu_list
                             ],
                             bar: {
                                 width: 10
                             },
                             type : "bar",
-                            color: function () {
-                                return "#03a9f4";
-                            },
                             empty: {
                                 label:{
                                     text: "Sorry, data is unavailable"
@@ -178,7 +183,7 @@
                             },
                             y: {
                                 label: {
-                                    text: "Facility Count",
+                                    text: "Count",
                                     position: "outer-middle"
                                 }
                             }

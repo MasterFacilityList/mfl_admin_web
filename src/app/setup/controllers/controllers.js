@@ -18,7 +18,7 @@
         function ($scope) {
             $scope.title = {
                 icon: "fa-map-marker",
-                name: "Adminstrative Units"
+                name: "Administrative Units"
             };
         }]);
 
