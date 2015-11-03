@@ -22,7 +22,7 @@
                   </a>
                   <div class="form-group checkbox" ng-if="!create && regbody.id">
                       <label for="open_late_night" class="control-label">
-                      <input type="checkbox" tooltip="Activate or inactivate regulatory body" id="regbody{{index}}" name="regbody{{index}}" ng-model="regbody.active" ng-change="removeLine('regbody',regbody)">
+                      <input type="checkbox" tooltip="Activate or inactivate regulatory body" id="regbody{{index}}" name="regbody{{index}}" ng-model="regbody.active" ng-change="inactivate(regbody, 'regulatory_users')">
                       </label>
                   </div>
               </td>

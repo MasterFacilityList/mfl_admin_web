@@ -22,7 +22,7 @@
                   </a>
                   <div class="form-group checkbox" ng-if="!create && county.id">
                       <label for="open_late_night" class="control-label">
-                      <input type="checkbox" tooltip="Activate or inactivate county" id="county{{index}}" name="county{{index}}" ng-model="county.active" ng-change="removeLine('counties',county)">
+                      <input type="checkbox" tooltip="Activate or inactivate county" id="county{{index}}" name="county{{index}}" ng-model="county.active" ng-change="inactivate(county, 'user_counties')">
                       </label>
                   </div>
               </td>

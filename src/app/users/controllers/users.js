@@ -54,17 +54,22 @@
                 }
             };
             $scope.inactivate = function (obj, obj_str) {
-                console.log(obj, obj_str);
                 var active_obj = {};
                 var active_key = JSON.stringify(obj_str);
                 if(obj_str === "user_constituencies"){
                     active_obj[active_key] = $scope.user.user_constituencies;
-                    wrappers.users.update($scope.user_id, active_obj)
-                        .success(function (){})
-                        .error(function (data) {
-                            $scope.errors = data;
-                        });
                 }
+                else if(obj_str === "user_counties"){
+                    active_obj[active_key] = $scope.user.user_counties;
+                }
+                else if(obj_str === "regulatory_users"){
+                    active_obj[active_key] = $scope.user.regulatory_users;
+                }
+                wrappers.users.update($scope.user_id, active_obj)
+                    .success(function (){})
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
             };
             $scope.removeItems = function (parent_obj, child_obj, obj_string) {
                 var usr_obj = {};
