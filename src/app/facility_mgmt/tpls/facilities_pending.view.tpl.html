@@ -12,9 +12,9 @@
         <a ng-if="(!facility.rejected&&!facility.closed)&&(!facility.is_approved||facility.has_edits)" requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve({facility_id: facility.id})" class="btn btn-success" tooltip="Approve Facility">
             Approve/Reject
         </a>
-        <a  tooltip="Print Facility Cover Letter" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ng-click="printFacility(facility.id)"><i class="fa fa-print"></i></a>
+        <a  tooltip="Print Facility Cover Letter" tooltip-placement="bottom" class="btn btn-primary" ng-click="printFacility(facility.id)">Print</a>
 
-        <a requires-permission='facilities.change_facility' tooltip="Edit Facility" tooltip-placement="bottom" class="action-btn action-btn-primary action-btn-md" ui-sref="facilities.facility_edit({facility_id: facility.id})" ui-sref-opts="{reload:true}"><i class="fa fa-pencil"></i></a>
+        <a requires-permission='facilities.change_facility' tooltip="Edit Facility" tooltip-placement="bottom" class="btn btn-primary" ui-sref="facilities.facility_edit({facility_id: facility.id})" ui-sref-opts="{reload:true}">Edit</a>
    </div>
    <h2 class="content-title">
        <span class="main-title"><i class="fa {{reject ? 'fa-times-circle-o' : 'fa-check-circle-o'}}"></i> Facility Updates Pending Approval</span>
