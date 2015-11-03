@@ -44,7 +44,7 @@
             }
             $scope.spinner = true;
             $scope.fac_id = $stateParams.facility_id;
-            wrappers.facility_detail.get($stateParams.facility_id)
+            wrappers.facilities.get($stateParams.facility_id)
                 .success(function (data) {
                     $scope.spinner = false;
                     $scope.facility = data;
@@ -128,7 +128,7 @@
                 $log.error(data);
                 $scope.errors = data;
             });
-            wrappers.facility_detail.get($scope.facility_id)
+            wrappers.facilities.get($scope.facility_id)
             .success(function(data) {
                 $scope.spinner = false;
                 $scope.facility = data;
