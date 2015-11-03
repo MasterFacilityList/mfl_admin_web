@@ -2,8 +2,24 @@
 
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.dashboard.controllers
+     *
+     * @description
+     * Contains controller for the dashboard
+     */
     angular.module("mfl.dashboard.controllers", ["mfl.dashboard.wrapper"])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.dashboard.content
+     *
+     * @description
+     * Controller used for the dashboard features
+     */
     .controller("mfl.dashboard.content", ["$scope", "$filter", "dashboardApi",
         "mfl.auth.services.login",
         function ($scope, $filter, dashboardApi, loginService) {
