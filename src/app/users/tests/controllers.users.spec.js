@@ -269,6 +269,46 @@
                 $httpBackend.flush();
             }
         ]));
+        //should test inactivating user details
+        it("should test inactivating : success", inject(["$httpBackend",
+            "$stateParams",
+            function ($httpBackend, $stateParams) {
+                $stateParams = {user_id : 6};
+                controller("mfl.users.controllers.user_create");
+                var obj_str_2 = "user_counties";
+                var obj_two = {county : "", active : true};
+                var obj_str_3 = "user_constituencies";
+                var obj_three = {constituency : "", active : true};
+                var obj_str_4 = "regulatory_users";
+                var obj_four = {regulatory_body : "", active : true};
+                scope.user = {
+                    id : 6,
+                    user_counties : [
+                        {
+                            county : "NAIROBI"
+                        }
+                    ],
+                    user_consituencies : [
+                        {
+                            consituency : "MATHARE"
+                        }
+                    ],
+                    regulatory_users : [
+                        {
+                            regulatory_body : "KMPDB"
+                        }
+                    ]
+                };
+                scope.inactivate(obj_two, obj_str_2);
+                scope.inactivate(obj_three, obj_str_3);
+                scope.inactivate(obj_four, obj_str_4);
+                scope.inactivate(obj_four, "test");
+                $httpBackend.expectPATCH(SERVER_URL +
+                    "api/users/6/")
+                    .respond(200, {"user_counties" :scope.user.user_counties});
+                $httpBackend.flush();
+            }
+        ]));
         it("should update mfl user details : success",
         inject(["$httpBackend", "$state", "$stateParams",
             function ($httpBackend, $state, $stateParams) {
