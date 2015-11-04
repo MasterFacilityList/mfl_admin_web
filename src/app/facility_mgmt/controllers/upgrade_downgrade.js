@@ -31,7 +31,9 @@
                     $scope.errors = data;
                 });
 
-                wrappers.facility_types.filter({page_size: 100, "ordering": "name"})
+                wrappers.facility_types.filter(
+                    {page_size: 100, "ordering": "name", "fields": "id,name"}
+                )
                 .success(function(data) {
                     $scope.facility_types = data.results;
                 })
@@ -39,6 +41,7 @@
                     $log.error(data);
                     $scope.errors = data;
                 });
+
                 wrappers.keph_levels.filter({fields: "id,name", ordering: "name"})
                 .success(function (data) {
                     $scope.keph_levels = data.results;
@@ -47,12 +50,23 @@
                     $log.error(data);
                     $scope.errors = data;
                 });
+
                 wrappers.change_reasons.filter({fields: "id,reason"})
                 .success(function (data) {
                     $scope.change_reasons = data.results;
                 })
                 .error(function (data) {
                     $log.error(data);
+                    $scope.errors = data;
+                });
+
+                wrappers.facilities.get(
+                    $scope.facility_id, {"fields": "keph_level_name,facility_type_name"}
+                )
+                .success(function (data) {
+                    $scope.facility = data;
+                })
+                .error(function (data) {
                     $scope.errors = data;
                 });
             };
