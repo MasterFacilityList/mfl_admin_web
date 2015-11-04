@@ -17,14 +17,19 @@
                 </div>
               </td>
               <td class="col-xs-1 text-center">
-                  <a ng-click="removeLine('regbody',regbody)" style="cursor: pointer">
+                  <a ng-click="removeLine('regbody',regbody)" style="cursor: pointer" ng-if="create || !regbody.id">
                       <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                   </a>
+                  <div class="form-group checkbox" ng-if="!create && regbody.id">
+                      <label for="open_late_night" class="control-label">
+                      <input type="checkbox" tooltip="Activate or inactivate regulatory body" id="regbody{{index}}" name="regbody{{index}}" ng-model="regbody.active" ng-change="inactivate(regbody, 'regulatory_users')">
+                      </label>
+                  </div>
               </td>
           </tr>
           <tr ng-if="user.regulatory_users.length < 1" class="">
               <td colspan="2">
-                  <i class="fa fa-info-circle"></i> No Groups Assigned to User
+                  <i class="fa fa-info-circle"></i> No Regulatory Body Assigned to User
               </td>
           </tr>
       </tbody>
