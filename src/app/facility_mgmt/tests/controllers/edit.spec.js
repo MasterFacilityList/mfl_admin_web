@@ -3360,7 +3360,7 @@
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(200, {results: [{"id": 3}]});
                 httpBackend.expectGET(server_url+
-                    "api/facilities/service_categories/")
+                    "api/facilities/flattened_categories/?fields=id,name")
                     .respond(200, {results: [{"id": 1}]});
                 var c = ctrl();
                 var scope = rootScope.$new();

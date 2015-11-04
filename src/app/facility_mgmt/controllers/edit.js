@@ -45,7 +45,7 @@
                     errorMessages.fetching_services;
                 });
 
-                wrappers.categories.list()
+                wrappers.categories.filter({"fields": "id,name"})
                 .success(function (data) {
                     $scope.categories = data.results;
                 })
