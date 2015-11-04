@@ -53,6 +53,28 @@
                     break;
                 }
             };
+            $scope.grpChecker = function () {
+                $scope.county_counter = 0;
+                $scope.regulator_counter = 0;
+                $scope.show_county = false;
+                $scope.show_regulator = false;
+                if($scope.user.groups.length > 0){
+                    _.each($scope.user.groups, function (usr_grp) {
+                        var curr_grp = _.findWhere(
+                            $scope.groups, {id : parseInt(usr_grp.id, 10)});
+                        if(curr_grp.is_national === false) {
+                            $scope.county_counter += 1;
+                        }
+                        if(curr_grp.is_regulator === true){
+                            $scope.regulator_counter += 1;
+                        }
+                    });
+                    if($scope.county_counter > 0){$scope.show_county = true;}
+                    if($scope.regulator_counter > 0){
+                        $scope.show_regulator = true;
+                    }
+                }
+            };
             $scope.inactivate = function (obj, obj_str) {
                 var active_obj = {};
                 var active_key = JSON.stringify(obj_str);
@@ -71,23 +93,9 @@
                         $scope.errors = data;
                     });
             };
-            $scope.removeItems = function (parent_obj, child_obj, obj_string) {
-                var usr_obj = {};
-                var usr_key = JSON.stringify(obj_string);
+            $scope.removeItems = function (parent_obj, child_obj) {
                 var modified;
-                if(!child_obj.hasOwnProperty ("id")){
-                    modified = _.without(parent_obj, child_obj);
-                }
-                else{
-                    modified = _.without(parent_obj, child_obj);
-                    usr_obj[usr_key] = modified;
-                    console.log(usr_obj);
-                    wrappers.users.update($scope.user_id,usr_obj)
-                        .success(function () {})
-                        .error(function (data) {
-                            $scope.errors = data;
-                        });
-                }
+                modified = _.without(parent_obj, child_obj);
                 return modified;
             };
             $scope.removeLine = function (obj_str, obj) {
@@ -115,6 +123,7 @@
                     break;
                 case "groups" :
                     $scope.user.groups = $scope.removeItems($scope.user.groups, obj, "groups");
+                    $scope.grpChecker();
                     break;
                 case "counties" :
                     $scope.user.user_counties = $scope.removeItems(
@@ -184,35 +193,12 @@
                 ];
                 //Declaration of user object
                 $scope.user = {
-                    contacts : [
-                        {
-                            contact_type : "",
-                            contact_text : ""
-                        }
-                    ],
-                    groups : [
-                        {
-                            id :"",
-                            name : ""
-                        }
-                    ],
-                    user_counties : [
-                        {
-                            county : ""
-                        }
-                    ],
-                    user_constituencies : [
-                        {
-                            constituency : ""
-                        }
-                    ],
-                    regulatory_users : [
-                        {
-                            regulatory_body : ""
-                        }
-                    ]
+                    contacts : [],
+                    groups : [],
+                    user_counties : [],
+                    user_constituencies : [],
+                    regulatory_users : []
                 };
-
             }else{
                 $scope.create = false;
                 $scope.title = {

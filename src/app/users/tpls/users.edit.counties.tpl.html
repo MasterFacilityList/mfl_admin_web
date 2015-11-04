@@ -8,7 +8,7 @@
           <tr ng-repeat="county in user.user_counties">
               <td class="col-xs-8">
                 <div class="form-group grid-inputs">
-                    <select name="county" class="form-control" ng-model="county.county" class="pad-t-15" required>
+                    <select name="county" class="form-control" ng-model="county.county" class="pad-t-15" required api-checker>
                         <option value="">Select County</option>
                         <option ng-repeat="cty in counties" ng-selected="{{cty.id == county.county}}" ng-value="cty.id">{{cty.name}}</option>
                     </select>

@@ -8,7 +8,7 @@
           <tr ng-repeat="grp in user.groups">
               <td class="col-xs-8">
                 <div class="form-group grid-inputs">
-                    <select name="name" class="form-control" ng-model="grp.id" class="pad-t-15">
+                    <select name="name" class="form-control" ng-model="grp.id" class="pad-t-15" required api-checker ng-change="grpChecker()">
                         <option value="">Select Group</option>
                         <option ng-repeat="mfl_grp in groups" ng-selected="{{mfl_grp.id == grp.id}}" ng-value="mfl_grp.id">{{mfl_grp.name}}</option>
                     </select>

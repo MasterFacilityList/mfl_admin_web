@@ -197,25 +197,50 @@
                 $stateParams = {user_id : 6};
                 controller("mfl.users.controllers.user_create");
                 var obj_str = "groups";
-                var obj_without_id = {name : ""};
+                var obj_without_id = {id : "1", name : "", is_national : true};
                 var obj_str_2 = "counties";
                 var obj_without_id2 = {county : ""};
                 var obj_str_3 = "constituencies";
                 var obj_without_id3 = {constituency : ""};
                 var obj_str_4 = "regbody";
                 var obj_without_id4 = {regulatory_body : ""};
+                scope.groups = [
+                    {
+                        id : 3,
+                        name : "CHRIO",
+                        is_national : false,
+                        is_regulator : true
+                    },
+                    {
+                        id : 2,
+                        name : "SCHRIO",
+                        is_national : true,
+                        is_regulator : false
+                    },
+                    {
+                        id : 1,
+                        name : "Regulator",
+                        is_national : true,
+                        is_regulator : true
+                    }
+                ];
                 scope.user = {
                     id : 6,
                     groups : [
                         {
-                            name : ""
+                            id : "1",
+                            name : "",
+                            is_national: true
                         },
                         {
                             id : "3",
-                            name : "CHRIO"
+                            name : "CHRIO",
+                            is_national : false
                         },
                         {
-                            name : "SCHRIO"
+                            id : "2",
+                            name : "SCHRIO",
+                            is_national : false
                         }
                     ]
                 };
@@ -224,10 +249,6 @@
                 scope.removeLine(obj_str_2, obj_without_id2);
                 scope.removeLine(obj_str_3, obj_without_id3);
                 scope.removeLine(obj_str_4, obj_without_id4);
-                $httpBackend.expectPATCH(SERVER_URL +
-                    "api/users/6/")
-                    .respond(200, {"groups" : scope.user.groups});
-                $httpBackend.flush();
             }
         ]));
         it("should test removing a group : fail", inject(["$httpBackend",
@@ -236,25 +257,50 @@
                 $stateParams = {user_id : 6};
                 controller("mfl.users.controllers.user_create");
                 var obj_str = "groups";
-                var obj_without_id = {name : ""};
+                var obj_without_id = {id: "1", name : "", is_national : false};
                 var obj_str_2 = "counties";
                 var obj_without_id2 = {county : ""};
                 var obj_str_3 = "constituencies";
                 var obj_without_id3 = {constituency : ""};
                 var obj_str_4 = "regbody";
                 var obj_without_id4 = {regulatory_body : ""};
+                scope.groups = [
+                    {
+                        id : 3,
+                        name : "CHRIO",
+                        is_national : true,
+                        is_regulator : true
+                    },
+                    {
+                        id : 2,
+                        name : "SCHRIO",
+                        is_national : false,
+                        is_regulator : false
+                    },
+                    {
+                        id : 1,
+                        name : "Regulator",
+                        is_national : true,
+                        is_regulator : false
+                    }
+                ];
                 scope.user = {
                     id : 6,
                     groups : [
                         {
-                            name : ""
+                            id : "1",
+                            name : "",
+                            is_national : false
                         },
                         {
                             id : "3",
-                            name : "CHRIO"
+                            name : "CHRIO",
+                            is_national : false
                         },
                         {
-                            name : "SCHRIO"
+                            id : "2",
+                            name : "SCHRIO",
+                            is_national : true
                         }
                     ]
                 };
@@ -263,10 +309,39 @@
                 scope.removeLine(obj_str_2, obj_without_id2);
                 scope.removeLine(obj_str_3, obj_without_id3);
                 scope.removeLine(obj_str_4, obj_without_id4);
-                $httpBackend.expectPATCH(SERVER_URL +
-                    "api/users/6/")
-                    .respond(500, {"groups" : scope.user.groups});
-                $httpBackend.flush();
+            }
+        ]));
+        it("should test grpChecker function", inject(["$httpBackend",
+            "$stateParams",
+            function ($httpBackend, $stateParams) {
+                $stateParams = {user_id : 6};
+                controller("mfl.users.controllers.user_create");
+                var obj_str = "groups";
+                scope.groups = [
+                    {
+                        id : 3,
+                        name : "CHRIO",
+                        is_national : false,
+                        is_regulator : true
+                    },
+                    {
+                        id : 2,
+                        name : "SCHRIO",
+                        is_national : false,
+                        is_regulator : false
+                    },
+                    {
+                        id : 1,
+                        name : "Regulator",
+                        is_national : true,
+                        is_regulator : true
+                    }
+                ];
+                scope.user = {
+                    id : 6,
+                    groups : []
+                };
+                scope.removeLine(obj_str, scope.user.groups[1]);
             }
         ]));
         //should test inactivating user details
@@ -281,6 +356,14 @@
                 var obj_three = {constituency : "", active : true};
                 var obj_str_4 = "regulatory_users";
                 var obj_four = {regulatory_body : "", active : true};
+                scope.groups = [
+                    {
+                        id : "3",
+                        name : "CHRIO",
+                        is_national : false,
+                        is_regulator : true
+                    }
+                ];
                 scope.user = {
                     id : 6,
                     user_counties : [
