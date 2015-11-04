@@ -86,7 +86,12 @@
         </div>
         <div class="col-xs-12 pad-0">
             <h4 ng-if="facility_changes.basic">Facility Basic Details</h4>
-            <table class="table table-hover table-condensed table-fixed">
+               <div ng-if="facility_changes.basic.length === 0 || !facility_changes.basic">
+                        <p class="col-xs-12 alert alert-info" colspan="3">
+                            <i class="fa fa-info-circle"></i> No Facility Basic Details Edited
+                        </p>
+                    </div>
+            <table class="table table-hover table-condensed table-fixed" ng-if="facility_changes.basic">
                 <thead>
                     <tr>
                         <th class="col-xs-4">Field</th>
@@ -99,11 +104,6 @@
                         <td class="col-xs-4">{{change.human_field_name | titlecase}}</td>
                         <td class="col-xs-4">{{facility[change.field_name] | boolFilter}}</td>
                         <td class="col-xs-4">{{change.display_value}}</td>
-                    </tr>
-                    <tr ng-if="facility_changes.basic.length === 0 || !facility_changes.basic">
-                        <td class="col-xs-12 alert alert-info" colspan="3">
-                            <i class="fa fa-info-circle"></i> No Facility Basic Details Edited
-                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -198,7 +198,7 @@
         </div>
 
         <!-- Start Facility Upgrade-->
-        <div class="col-xs-12 pad-0">
+        <div class="col-xs-12 pad-0" ng-if="facility_changes.upgrades">
             <h4>Facility Upgrade</h4>
             <table class="table table-hover table-condensed table-fixed">
                 <thead>
@@ -218,11 +218,6 @@
                         <td class="col-xs-4">Facility Type</td>
                         <td class="col-xs-4">{{facility.facility_type_name}}</td>
                         <td class="col-xs-4">{{facility_changes.upgrades.facility_type}}</td>
-                    </tr>
-                    <tr ng-if="!facility_changes.upgrades">
-                        <td class="col-xs-12 alert alert-info" colspan="3">
-                            <i class="fa fa-info-circle"></i> No Facility Upgrades have been requested
-                        </td>
                     </tr>
                 </tbody>
             </table>

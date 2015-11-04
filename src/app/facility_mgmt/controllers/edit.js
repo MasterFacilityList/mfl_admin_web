@@ -1498,7 +1498,7 @@
                 });
             };
             // update coordinates after dragging marker
-            $scope.$on("leafletDirectiveMarker.dragend", function (e, args) {
+            $scope.$on("leafletDirectiveMarker.wardmap.dragend", function (e, args) {
                 $scope.geo.coordinates.coordinates = [args.model.lng,args.model.lat];
             });
             /*Wait for facility to be defined*/
