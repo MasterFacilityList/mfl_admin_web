@@ -27,9 +27,10 @@
      */
     .controller("mfl.users.controllers.user_create", ["$scope", "$state",
         "$stateParams", "mfl.common.services.multistep",
-        "mfl.users.services.wrappers","$log","mfl.auth.services.login","mfl.users.services.groups",
-        function ($scope, $state, $stateParams, multistepService, wrappers,$log,loginService,
-        groupsService) {
+        "mfl.users.services.wrappers","$log","mfl.auth.services.login",
+        "mfl.users.services.groups", "toasty",
+        function ($scope, $state, $stateParams, multistepService, wrappers,
+            $log,loginService, groupsService, toasty) {
             $scope.addLine = function (obj_str) {
                 switch(obj_str){
                 case "contacts" :
@@ -52,21 +53,49 @@
                     break;
                 }
             };
-            $scope.removeItems = function (parent_obj, child_obj, obj_string) {
+            $scope.grpChecker = function () {
+                $scope.county_counter = 0;
+                $scope.regulator_counter = 0;
+                $scope.show_county = false;
+                $scope.show_regulator = false;
+                if($scope.user.groups.length > 0){
+                    _.each($scope.user.groups, function (usr_grp) {
+                        var curr_grp = _.findWhere(
+                            $scope.groups, {id : parseInt(usr_grp.id, 10)});
+                        if(curr_grp.is_national === false) {
+                            $scope.county_counter += 1;
+                        }
+                        if(curr_grp.is_regulator === true){
+                            $scope.regulator_counter += 1;
+                        }
+                    });
+                    if($scope.county_counter > 0){$scope.show_county = true;}
+                    if($scope.regulator_counter > 0){
+                        $scope.show_regulator = true;
+                    }
+                }
+            };
+            $scope.inactivate = function (obj, obj_str) {
+                var active_obj = {};
+                var active_key = JSON.stringify(obj_str);
+                if(obj_str === "user_constituencies"){
+                    active_obj[active_key] = $scope.user.user_constituencies;
+                }
+                else if(obj_str === "user_counties"){
+                    active_obj[active_key] = $scope.user.user_counties;
+                }
+                else if(obj_str === "regulatory_users"){
+                    active_obj[active_key] = $scope.user.regulatory_users;
+                }
+                wrappers.users.update($scope.user_id, active_obj)
+                    .success(function (){})
+                    .error(function (data) {
+                        $scope.errors = data;
+                    });
+            };
+            $scope.removeItems = function (parent_obj, child_obj) {
                 var modified;
-                if(!child_obj.hasOwnProperty ("id")){
-                    modified = _.without(parent_obj, child_obj);
-                }
-                else{
-                    modified = _.without(parent_obj, child_obj);
-                    wrappers.users.update($scope.user_id,{obj_string : parent_obj})
-                        .success(function () {
-                            console.log(obj_string);
-                        })
-                        .error(function (data) {
-                            $scope.errors = data;
-                        });
-                }
+                modified = _.without(parent_obj, child_obj);
                 return modified;
             };
             $scope.removeLine = function (obj_str, obj) {
@@ -94,6 +123,7 @@
                     break;
                 case "groups" :
                     $scope.user.groups = $scope.removeItems($scope.user.groups, obj, "groups");
+                    $scope.grpChecker();
                     break;
                 case "counties" :
                     $scope.user.user_counties = $scope.removeItems(
@@ -119,6 +149,14 @@
                 if($scope.create){
                     wrappers.users.create($scope.user)
                         .success(function () {
+                            toasty.success({
+                                title: "Email sent",
+                                msg: "An email has been sent to the new user"
+                            });
+                            toasty.success({
+                                title: "User Added",
+                                msg: "User added successfully"
+                            });
                             $state.go("users");
                         })
                         .error(function (data) {
@@ -128,6 +166,10 @@
                 }else{
                     wrappers.users.update($scope.user_id, $scope.user)
                         .success(function () {
+                            toasty.success({
+                                title: "User Updates",
+                                msg: "User updated successfully"
+                            });
                             $state.go("users");
                         })
                         .error(function (data) {
@@ -151,51 +193,18 @@
                 ];
                 //Declaration of user object
                 $scope.user = {
-                    contacts : [
-                        {
-                            contact_type : "",
-                            contact_text : ""
-                        }
-                    ],
-                    groups : [
-                        {
-                            id :"",
-                            name : ""
-                        }
-                    ],
-                    user_counties : [
-                        {
-                            county : ""
-                        }
-                    ],
-                    user_constituencies : [
-                        {
-                            constituency : ""
-                        }
-                    ],
-                    regulatory_users : [
-                        {
-                            regulatory_body : ""
-                        }
-                    ]
+                    contacts : [],
+                    groups : [],
+                    user_counties : [],
+                    user_constituencies : [],
+                    regulatory_users : []
                 };
-
             }else{
                 $scope.create = false;
                 $scope.title = {
                     icon: "fa-edit",
                     name: "Edit User"
                 };
-                $scope.action = [
-                    {
-                        func : "ui-sref='users.user_edit.delete'" +
-                                "requires-user-feature='is_staff'" +
-                                "requires-permission='users.delete_mfluser'",
-                        class: "btn btn-danger",
-                        tipmsg: "Delete User",
-                        wording : "Delete"
-                    }
-                ];
                 wrappers.users.get($stateParams.user_id)
                 .success(function (data) {
                     $scope.user = data;
