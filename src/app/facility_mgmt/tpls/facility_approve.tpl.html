@@ -198,7 +198,7 @@
         </div>
 
         <!-- Start Facility Upgrade-->
-        <div class="col-xs-12 pad-0">
+        <div class="col-xs-12 pad-0" ng-if="facility_changes.upgrades">
             <h4>Facility Upgrade</h4>
             <table class="table table-hover table-condensed table-fixed">
                 <thead>
@@ -218,11 +218,6 @@
                         <td class="col-xs-4">Facility Type</td>
                         <td class="col-xs-4">{{facility.facility_type_name}}</td>
                         <td class="col-xs-4">{{facility_changes.upgrades.facility_type}}</td>
-                    </tr>
-                    <tr ng-if="!facility_changes.upgrades">
-                        <td class="col-xs-12 alert alert-info" colspan="3">
-                            <i class="fa fa-info-circle"></i> No Facility Upgrades have been requested
-                        </td>
                     </tr>
                 </tbody>
             </table>
