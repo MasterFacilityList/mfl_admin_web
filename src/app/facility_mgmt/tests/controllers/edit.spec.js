@@ -4861,7 +4861,7 @@
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
                     ctrl(".geolocation", data);
-                    rootScope.$broadcast("leafletDirectiveMarker.dragend",null,args);
+                    rootScope.$broadcast("leafletDirectiveMarker.wardmap.dragend",null,args);
                     data.$scope.$apply();
                     data.$scope.facility={
                         coordinates : "3",
