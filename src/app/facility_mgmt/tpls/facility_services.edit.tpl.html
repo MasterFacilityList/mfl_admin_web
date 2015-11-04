@@ -88,12 +88,12 @@
                         <td data-title="Name:" class="col-xs-10">
                             {{service.name}}
                         </td>
-                        <td data-title="Abbreviation:" class="text-center">
+                        <td data-title="Abbreviation:" class="text-center col-xs-2">
                         <span ng-if="service.has_options">
                             {{service.option | optionName:service.serv_options}}
                         </span>
                         <span ng-if="!service.has_options">
-                            N/A
+                            Yes
                         </span>
                         &nbsp;&nbsp;&nbsp;
                         </td>
