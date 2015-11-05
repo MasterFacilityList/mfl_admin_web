@@ -9,7 +9,6 @@
             module("mflAdminAppConfig");
             module("mfl.auth.services");
             module("mfl.auth.controllers");
-            module("ngIdle");
 
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
                 "mfl.auth.services.login", "$state",

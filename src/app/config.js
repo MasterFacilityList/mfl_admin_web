@@ -75,8 +75,9 @@
             theme: "default"
         });
     }])
-    .run(["Idle", function (idle) {
-        idle.watch();
+
+    .run(["mfl.auth.services.login", function (loginService) {
+        loginService.startTimeout();
     }])
 
     .run(["api.oauth2",function (oauth2) {
