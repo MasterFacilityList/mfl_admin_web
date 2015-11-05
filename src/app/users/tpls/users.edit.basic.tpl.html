@@ -23,11 +23,11 @@
                 <input name="employee_number" type="text" ng-model="user.employee_number" class="form-control" required api-checker/>
             </div>
             <div class="form-group">
-                <label class="control-label">Password ({{::PWD_RULE}})</label>
+                <label class="control-label">Password <span class="fs-12"><em>({{::PWD_RULE}})</em></span></label>
                 <input type="password" name="password" ng-model="user.password" ng-required="!user.id" class="form-control"/>
             </div>
             <div class="form-group">
-                <label class="control-label">Confirm Password ({{::PWD_RULE}})</label>
+                <label class="control-label">Confirm Password <span class="fs-12"><em>({{::PWD_RULE}})</em></span></label>
                 <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-required="!user.id" ng-blur="confirmPassword(user.password, user.confirm_password)" class="form-control" />
             </div>
             <div ng-if="confirm" class="err_class">The two passwords did not match</div>

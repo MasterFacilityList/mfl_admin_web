@@ -38,7 +38,7 @@
         browser.waitForAngular();
         browser.driver.sleep(browser.params.page_timeout);
         expect(element(by.css("h2")).getText()).toEqual(
-            "Kenya Health Master Facility List V 2.0"
+            "Kenya Master Facility and Community Units Database"
         );
     };
 

@@ -8,7 +8,7 @@
           <tr ng-repeat="county in user.user_counties">
               <td class="col-xs-8">
                 <div class="form-group grid-inputs">
-                    <select name="county" class="form-control" ng-model="county.county" class="pad-t-15" required>
+                    <select name="county" class="form-control" ng-model="county.county" class="pad-t-15" required api-checker>
                         <option value="">Select County</option>
                         <option ng-repeat="cty in counties" ng-selected="{{cty.id == county.county}}" ng-value="cty.id">{{cty.name}}</option>
                     </select>
@@ -17,9 +17,14 @@
                 </div>
               </td>
               <td class="col-xs-1 text-center">
-                  <a ng-click="removeLine('counties',county)" style="cursor: pointer">
+                  <a ng-click="removeLine('counties',county)" style="cursor: pointer" ng-if="create || !county.id">
                       <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                   </a>
+                  <div class="form-group checkbox" ng-if="!create && county.id">
+                      <label for="open_late_night" class="control-label">
+                      <input type="checkbox" tooltip="Activate or inactivate county" id="county{{index}}" name="county{{index}}" ng-model="county.active" ng-change="inactivate(county, 'user_counties')">
+                      </label>
+                  </div>
               </td>
           </tr>
           <tr ng-if="user.user_counties.length < 1" class="">

@@ -14,7 +14,8 @@
         "api.wrapper",
         "mfl.auth.oauth2",
         "mfl.auth.permissions",
-        "ui.router"
+        "ui.router",
+        "ngIdle"
     ])
 
     /**
@@ -26,8 +27,8 @@
      * Auth login service
      * Handles logins, logouts, fetching current user
      */
-    .service("mfl.auth.services.login", ["api", "$window", "$q", "api.oauth2",
-        function (API, $window, $q, oauth2) {
+    .service("mfl.auth.services.login", ["api", "$window", "$q", "api.oauth2", "Idle", "Title",
+        function (API, $window, $q, oauth2, Idle, Title) {
             var url = {
                 curr_user : "api/rest-auth/user/"
             };
@@ -104,6 +105,7 @@
              * @returns {Promise} Token revocation promise
              */
             this.logout = function () {
+                this.stopTimeout();
                 storage.removeItem(store_keys.user);
                 return oauth2.revokeToken(oauth2.getToken());
             };
@@ -162,6 +164,27 @@
                     };
                     storage.setItem(store_keys.state, JSON.stringify(state_dump));
                 }
+            };
+
+            /**
+             * @name startTimeout
+             * @description
+             * Starts ngIdle timeout if the user is logged in
+             */
+            this.startTimeout = function () {
+                if (this.isLoggedIn()) {
+                    Title.restore();  // fixes bug: title isn't restored after resume
+                    Idle.watch();
+                }
+            };
+
+            /**
+             * @name stopTimeout
+             * @description
+             * Stops ngIdle timeout
+             */
+            this.stopTimeout = function () {
+                Idle.unwatch();
             };
         }
     ])

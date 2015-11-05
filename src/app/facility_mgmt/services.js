@@ -78,12 +78,13 @@
             this.regulation_status = api.setBaseUrl("api/facilities/regulation_status/");
             this.wards = api.setBaseUrl("api/common/wards/");
             this.towns = api.setBaseUrl("api/common/towns");
+            this.sub_counties = api.setBaseUrl("api/common/sub_counties/");
             this.officers = api.setBaseUrl("api/facilities/officers/");
             this.contact_types = api.setBaseUrl("api/common/contact_types/");
             this.contacts = api.setBaseUrl("api/common/contacts/");
             this.physical_addresses = api.setBaseUrl("api/common/address/");
             this.facility_contacts = api.setBaseUrl("api/facilities/contacts/");
-            this.categories = api.setBaseUrl("api/facilities/service_categories/");
+            this.categories = api.setBaseUrl("api/facilities/flattened_categories/");
             this.services = api.setBaseUrl("api/facilities/services/");
             this.service_options = api.setBaseUrl("api/facilities/service_options/");
             this.options = api.setBaseUrl("api/facilities/options/");

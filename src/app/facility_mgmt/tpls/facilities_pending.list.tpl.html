@@ -13,6 +13,7 @@
         <th >Sub County</th>
         <th sil-grid-sort field='constituency'>Constituency</th>
         <th sil-grid-sort field='ward'>Ward</th>
+        <th>Approval Type</th>
         <th sil-grid-sort field='updated'>Date Updated</th>
     </thead>
 
@@ -34,6 +35,7 @@
             <td data-title="Sub County:" >{{::fac.constituency | titlecase }}</td>
             <td data-title="Constituency:" >{{::fac.constituency | titlecase }}</td>
             <td data-title="Ward:" >{{::fac.ward_name | titlecase }}</td>
+            <td>{{::fac.has_edits ? 'Update' : 'New'}}</td>
             <td data-title="Date Updated:" >{{::fac.updated|dateFilter}}</td>
         </tr>
     </tbody>

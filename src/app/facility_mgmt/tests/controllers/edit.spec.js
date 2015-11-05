@@ -114,6 +114,8 @@
                         owner_type : "5",
                         keph_level : "6",
                         keph_level_name : "level 6",
+                        sub_county : "7",
+                        sub_county_name : "Mathare",
                         owner_type_name : "ownertype",
                         operation_status: "4",
                         operation_status_name: "opstatus",
@@ -187,6 +189,10 @@
                             "id": "23",
                             "name": "def"
                         },
+                        sub_county : {
+                            "id" : "7",
+                            "name" : "Mathare"
+                        },
                         town : {
                             "id" : "3",
                             "name" : "Mombasa"
@@ -217,6 +223,8 @@
                         owner_type_name : "ownertype",
                         keph_level : "6",
                         keph_level_name : "level 6",
+                        sub_county : "7",
+                        sub_county_name : "Mathare",
                         town : "3",
                         town_name : "Mombasa",
                         operation_status: "4",
@@ -280,6 +288,10 @@
                             "id": "23",
                             "name": "def"
                         },
+                        sub_county: {
+                            "id" : "7",
+                            "name" : "Mathare"
+                        },
                         town : {
                             "id" : "3",
                             "name" : "Mombasa"
@@ -322,6 +334,8 @@
                         owner_type : "5",
                         keph_level : "6",
                         keph_level_name : "level 6",
+                        sub_county : "7",
+                        sub_county_name : "Mathare",
                         town : "3",
                         town_name : "Mombasa",
                         owner_type_name : "ownertype",
@@ -385,6 +399,10 @@
                         regulatory_body: {
                             "id": "23",
                             "name": "def"
+                        },
+                        sub_county: {
+                            "id" : "7",
+                            "name" : "Mathare"
                         },
                         town : {
                             "id" : "3",
@@ -3360,7 +3378,7 @@
                     .expectGET(server_url+"api/facilities/services/?page_size=100&ordering=name")
                     .respond(200, {results: [{"id": 3}]});
                 httpBackend.expectGET(server_url+
-                    "api/facilities/service_categories/")
+                    "api/facilities/flattened_categories/?fields=id,name")
                     .respond(200, {results: [{"id": 1}]});
                 var c = ctrl();
                 var scope = rootScope.$new();
@@ -4861,7 +4879,7 @@
                         .expectGET(server_url+"api/common/wards/3/")
                         .respond(200, {results: []});
                     ctrl(".geolocation", data);
-                    rootScope.$broadcast("leafletDirectiveMarker.dragend",null,args);
+                    rootScope.$broadcast("leafletDirectiveMarker.wardmap.dragend",null,args);
                     data.$scope.$apply();
                     data.$scope.facility={
                         coordinates : "3",
