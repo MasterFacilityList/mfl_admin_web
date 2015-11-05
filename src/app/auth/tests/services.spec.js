@@ -206,6 +206,26 @@
                 }
             ]);
         });
+
+        it("should start timeout if user is loggedin", function () {
+            inject(["mfl.auth.services.login", function (loginService) {
+                spyOn(loginService, "isLoggedIn").andReturn(true);
+                loginService.startTimeout();
+            }]);
+        });
+
+        it("should not start timeout if user is not loggedin", function () {
+            inject(["mfl.auth.services.login", function (loginService) {
+                spyOn(loginService, "isLoggedIn").andReturn(false);
+                loginService.startTimeout();
+            }]);
+        });
+
+        it("should stop timeout", function () {
+            inject(["mfl.auth.services.login", function (loginService) {
+                loginService.stopTimeout();
+            }]);
+        });
     });
 
     describe("Test auth statecheck service: ", function () {

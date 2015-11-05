@@ -13,7 +13,6 @@
     angular.module("mfl.auth.controllers", [
         "mfl.auth.services",
         "ui.router",
-        "ngIdle",
         "mfl.common.errors"
     ])
 
@@ -88,9 +87,9 @@
      * Manages the login view
      */
     .controller("mfl.auth.controllers.login",
-        ["$scope", "$sce", "$state", "$stateParams", "Idle",
+        ["$scope", "$sce", "$state", "$stateParams",
         "mfl.auth.services.login", "HOME_PAGE_NAME",
-        function ($scope, $sce, $state, $stateParams, Idle, loginService, HOME_PAGE_NAME) {
+        function ($scope, $sce, $state, $stateParams, loginService, HOME_PAGE_NAME) {
             $scope.login_err = "";
             $scope.login_err_html = "";
             $scope.params = $stateParams;
@@ -106,7 +105,7 @@
                 };
                 var success_fxn = function () {
                     $scope.spinner = false;
-                    Idle.watch();
+                    loginService.startTimeout();
                     var load_state = loginService.loadState();
                     loginService.clearState();
                     if (load_state) {
@@ -135,11 +134,11 @@
      * Orchestrates the logout process and views
      */
     .controller("mfl.auth.controllers.logout",
-        ["$scope", "$state", "$stateParams", "mfl.auth.services.login", "Idle",
-        function ($scope, $state, $stateParams, loginService, Idle) {
+        ["$scope", "$state", "$stateParams", "mfl.auth.services.login",
+        function ($scope, $state, $stateParams, loginService) {
             $scope.logout = true;
             var callback = function () {
-                Idle.unwatch();
+                loginService.stopTimeout();
                 $state.go("login", {
                     "timeout": $stateParams.timeout,
                     "change_pwd": $stateParams.change_pwd
