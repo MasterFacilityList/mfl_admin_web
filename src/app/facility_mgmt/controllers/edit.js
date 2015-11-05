@@ -317,6 +317,10 @@
                             "id": $scope.facility.keph_level,
                             "name": $scope.facility.keph_level_name
                         },
+                        sub_county: {
+                            "id": $scope.facility.sub_county,
+                            "name": $scope.facility.sub_county_name
+                        },
                         town: {
                             "id": $scope.facility.town,
                             "name": $scope.facility.town_name
@@ -453,6 +457,7 @@
             $scope.selectReload(wrappers.regulating_bodies, "", "regulating_bodies");
             $scope.selectReload(wrappers.facility_types, "", "facility_types");
             $scope.selectReload(wrappers.towns, "", "towns");
+            $scope.selectReload(wrappers.sub_counties, "", "sub_counties");
             $scope.save = function (frm) {
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.geolocation");
@@ -464,6 +469,7 @@
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
                 $scope.facility.town = $scope.select_values.town;
+                $scope.facility.sub_county = $scope.select_values.sub_county;
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {
