@@ -170,6 +170,17 @@
             </div>
            <!-- <form name="phyForm"> -->
                 <div class="form-group col-xs-12">
+                    <label class="control-label">Sub-county</label>
+                    <ui-select name="sub_county" ng-model="select_values.sub_county" api-checker register-custom-form-control>
+                        <ui-select-match placeholder="Select a sub-county...">
+                            <span>{{$select.selected.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="sub_county.id as sub_county in sub_counties | filter:$select.search">
+                            <span>{{sub_county.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group col-xs-12">
                     <label class="control-label">Ward &#42;</label>
                     <ui-select ng-model="select_values.ward" required name="ward" api-checker register-custom-form-control>
                         <ui-select-match placeholder="Select a ward...">
