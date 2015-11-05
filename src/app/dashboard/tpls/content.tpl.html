@@ -56,22 +56,31 @@
                 <!-- Total facilities -->
                 <div class="col-xs-12 margin-b-5 content-card" style="border-bottom: 1px solid #e0e0e0;">
                     <div class="col-xs-4">
-                        <h4 class="text-center">
-                                Total Facilities <br>
-                                <b class="margin-t-10">{{summary.total_facilities }}</b>
-                        </h4>
+                        <a ui-sref="facilities">
+                            <h4 class="text-center">
+                                    Total Facilities <br>
+                                    <i ng-if="spinner" class="fa fa-circle-o-notch fa-spin"></i>
+                                    <b ng-if="!spinner" class="margin-t-10">{{summary.total_facilities }}</b>
+                            </h4>
+                        </a>
                     </div>
                     <div class="col-xs-4">
-                        <h4 class="text-center">
-                                Rejected Facilities <br>
-                                <b class="margin-t-10">{{summary.rejected_facilities_count }}</b>
-                        </h4>
+                        <a ui-sref="facility_reject_list">
+                            <h4 class="text-center">
+                                    Rejected Facilities <br>
+                                    <i ng-if="spinner" class="fa fa-circle-o-notch fa-spin"></i>
+                                    <b ng-if="!spinner" class="margin-t-10">{{summary.rejected_facilities_count }}</b>
+                            </h4>
+                        </a>
                     </div>
                     <div class="col-xs-4">
-                        <h4 class="text-center">
-                                Closed Facilities <br>
-                                <b class="margin-t-10">{{summary.closed_facilities_count }}</b>
-                        </h4>
+                        <a ui-sref="facilities_closed">
+                            <h4 class="text-center">
+                                    Closed Facilities <br>
+                                    <i ng-if="spinner" class="fa fa-circle-o-notch fa-spin"></i>
+                                    <b ng-if="!spinner" class="margin-t-10">{{summary.closed_facilities_count }}</b>
+                            </h4>
+                        </a>
                     </div>
                 </div>
                 <!-- Facilities with updates pending approval -->
