@@ -17,7 +17,7 @@
             Approve/Reject
         </a>
         <a class="btn btn-info margin-l-3"
-            requires-permission="facilities.add_facilitytype,facilities.add_facilityservice"
+            requires-permission="facilities.change_facility,facilities.add_facilityservice"
             ui-sref="facilities.upgrade({facility_id: facility.id})"
             ui-sref-opts="{reload:true}">Upgrade</a>
         <a ng-if="!facility.closed" class="btn btn-danger margin-l-3"
