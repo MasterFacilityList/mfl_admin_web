@@ -258,7 +258,8 @@
                     $stateParams: {id: 1}
                 };
                 var res = {error: "error"};
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/"+
+                                       "owner_types/?fields=id,name").respond(
                 500, res);
                 createController("mfl.setup.controller.facilityOwner.view", dt);
                 $httpBackend.flush();
@@ -359,7 +360,8 @@
 
         it("should create facilityOwner: success",function(){
                 spyOn($state, "go");
-                $httpBackend.expectGET(SERVER_URL+"api/facilities/owner_types/").respond(
+                $httpBackend.expectGET(SERVER_URL+"api/facilities/"+
+                                       "owner_types/?fields=id,name").respond(
                 200, {resutls: {msg:"ok"}});
                 createController("mfl.setup.controller.facilityOwner.view", {});
                 $httpBackend.flush();

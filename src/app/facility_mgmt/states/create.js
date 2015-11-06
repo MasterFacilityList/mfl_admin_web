@@ -94,20 +94,6 @@
                 permission: "facilities.add_facility"
             })
 
-            .state("facilities.facility_create.officers", {
-                url: ":facility_id/officers/",
-                views: {
-                    "tab-header@facilities.facility_create": {
-                        templateUrl: "facility_mgmt/tpls/facility_create.tab-headers.tpl.html"
-                    },
-                    "form-view@facilities.facility_create": {
-                        templateUrl: "facility_mgmt/tpls/facility_edit.officers.tpl.html",
-                        controller: "mfl.facility_mgmt.controllers.facility_edit.officers"
-                    }
-                },
-                permission: "facilities.add_facility"
-            })
-
             .state("facilities.facility_create.units", {
                 url: ":facility_id/units/",
                 views: {

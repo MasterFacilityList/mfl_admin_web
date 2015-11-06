@@ -522,7 +522,7 @@
                 }
             };
             /*Job Titles*/
-            wrappers.job_titles.list()
+            wrappers.job_titles.filter({"fields":"id,name"})
             .success(function (data) {
                 $scope.job_titles = data.results;
             })
@@ -530,7 +530,7 @@
                 $log.error(error);
             });
             /*contact types*/
-            wrappers.contact_types.list()
+            wrappers.contact_types.filter({"fields":"id,name"})
             .success(function(data){
                 $scope.contact_types = data.results;
             })
@@ -668,7 +668,7 @@
                 }
             });
             /*contact types*/
-            wrappers.contact_types.list()
+            wrappers.contact_types.filter({"fields":"id,name"})
             .success(function(data){
                 $scope.contact_types = data.results;
             })
@@ -769,121 +769,6 @@
         }]
     )
 
-        /**
-         * @ngdoc controller
-         *
-         * @name mfl.facility_mgmt.controllers.facility_edit.officers
-         *
-         * @description
-         * Controller used to add/edit contacts of a facility
-    */
-    .controller("mfl.facility_mgmt.controllers.facility_edit.officers",
-        ["$scope", "$log", "$stateParams",
-        "mfl.facility_mgmt.services.wrappers", "mfl.common.services.multistep",
-        "mfl.common.forms.changes", "$state",
-        function($scope, $log, $stateParams, wrappers, multistepService, formChanges, $state){
-            if(!$scope.create) {
-                multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[3]);
-            }else {
-                $scope.nextState();
-            }
-            $scope.fac_officers = [];
-            $scope.contacts = [{type: "", contact : ""}];
-            /*Contact types*/
-            wrappers.contact_types.list()
-            .success(function (data) {
-                $scope.contact_types = data.results;
-            })
-            .error(function (error) {
-                $log.error(error);
-            });
-            /*Job Titles*/
-            wrappers.job_titles.list()
-            .success(function (data) {
-                $scope.job_titles = data.results;
-            })
-            .error(function (error) {
-                $log.error(error);
-            });
-            /*officers*/
-            wrappers.officers.list()
-            .success(function(data){
-                $scope.officers = data.results;
-            })
-            .error(function(error){
-                $log.error(error);
-            });
-            /*facility officers*/
-            wrappers.facility_officers.filter({facility:$stateParams.facility_id})
-            .success(function(data){
-                $scope.fac_officers = data.results;
-                $scope.off = $scope.fac_officers[0];
-            })
-            .error(function(error){
-                $log.error(error);
-            });
-            /*adding contact object*/
-            $scope.add_contact = function() {
-                $scope.contacts.push({type : "", contact : ""});
-            };
-            /*removing contact object*/
-            $scope.remove_contact = function (obj) {
-                $scope.contacts = _.without($scope.contacts, obj);
-            };
-            /*add existing officer to facility*/
-            $scope.add = function (frm) {
-                $scope.spinner = true;
-                var changes = formChanges.whatChanged(frm);
-                changes.facility_id = $scope.facility_id;
-                //commented out pending refactor in backend
-                //changes.contacts = $scope.contacts;
-                if(!$scope.create) {
-                    wrappers.facility_officers_incharge.update($scope.off.officer, changes)
-                        .success(function (data) {
-                            $state.go("facilities.facility_edit.units");
-                            $scope.fac_officers.push(data);
-                            $scope.spinner = false;
-                            $scope.off = {};
-                            $scope.contacts = [{type : "", contacts : ""}];
-                        })
-                        .error(function (data) {
-                            $log.error(data);
-                            $scope.spinner = false;
-                        });
-                }else {
-                    wrappers.create_officer.create(changes)
-                        .success(function () {
-                            $scope.goToNext(5, "units");
-                        })
-                        .error(function (err) {
-                            $scope.alert = err.error;
-                        });
-                }
-            };
-            /*remove officer*/
-            $scope.removeChild = function (obj) {
-                obj.delete_spinner = true;
-                wrappers.facility_officers.remove(obj.id)
-                .success(function () {
-                    $scope.fac_officers = _.without($scope.fac_officers, obj);
-                    obj.delete_spinner = false;
-                })
-                .error(function (data) {
-                    $log.error(data);
-                    obj.delete_spinner = false;
-                });
-            };
-        }])
-
-        /**
-         * @ngdoc controller
-         *
-         * @name mfl.facility_mgmt.controllers.facility_edit.services
-         *
-         * @description
-         * Controller used to add/edit services of a facility
-    */
     .controller("mfl.facility_mgmt.controllers.facility_edit.services",
         ["$scope", "$controller",
         function ($scope, $controller) {
@@ -1129,123 +1014,6 @@
         /**
          * @ngdoc controller
          *
-         * @name mfl.facility_mgmt.controllers.facility_edit.location
-         *
-         * @description
-         * Controller used to add/edit location of a facility
-    */
-    .controller("mfl.facility_mgmt.controllers.facility_edit.location",
-        ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
-        "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
-        "mfl.error.messages",
-        function ($scope,wrappers,$log, leafletData, multistepService,
-            formChanges, $state, errorMessages) {
-            if(!$scope.create) {
-                multistepService.filterActive(
-                    $scope, $scope.steps, $scope.steps[5]);
-            }else{
-                $scope.nextState();
-            }
-            $scope.spinner = true;
-            $scope.categoryForm = {};
-            /*Setup for map data*/
-            angular.extend($scope, {
-                defaults: {
-                    scrollWheelZoom: false
-                },
-                layers:{},
-                tiles:{
-                    openstreetmap: {
-                        url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                        options: {
-                            opacity: 0.2
-                        }
-                    }
-                }
-            });
-
-            /*Fetch towns*/
-            wrappers.towns.list()
-                .success(function (data) {
-                    $scope.towns = data.results;
-                })
-                .error(function(error){
-                    $log.error(error);
-                });
-
-            /*Wait for facility to be defined*/
-            $scope.$watch("facility", function (f) {
-                if (_.isUndefined(f)){
-                    return;
-                }
-                if(angular.isDefined(f.facility_physical_address)) {
-                    $scope.select_values = {
-                        town:{
-                            "id": f.facility_physical_address.town_id,
-                            "name": f.facility_physical_address.town
-                        }
-                    };
-                } else {
-                    $scope.select_values = {
-                        town: null
-                    };
-                }
-                /*Save physical location details*/
-                $scope.savePhy = function (frm) {
-                    var changes = formChanges.whatChanged(frm);
-                    if(!_.isNull($scope.facility.physical_address)) {
-                        if(!_.isEmpty(changes)){
-                            wrappers.physical_addresses
-                                .update($scope.facility.facility_physical_address.id, changes)
-                                .success(function (data) {
-                                    $scope.$parent.facility.facility_physical_address = data;
-                                    if(!$scope.create){
-                                        $state.go("facilities.facility_edit.geolocation",
-                                        {"facility_id": $scope.facility_id}, {reload: true});
-                                    }else{
-                                        $scope.goToNext(7, "geolocation");
-                                    }
-                                })
-                                .error(function (error) {
-                                    $log.error(error);
-                                    $scope.loc_error = errorMessages.errors +
-                                        errorMessages.location;
-                                });
-                        }else {
-                            if(!$scope.create){
-                                $state.go("facilities.facility_edit.geolocation",
-                                {"facility_id": $scope.facility_id}, {reload: true});
-                            }else{
-                                $scope.goToNext(7, "geolocation");
-                            }
-                        }
-                    } else {
-                        wrappers.physical_addresses.create(changes)
-                            .success(function (data) {
-                                wrappers.facilities.update(
-                                    $state.params.facility_id,
-                                    {"physical_address" : data.id})
-                                    .success(function () {
-                                        $scope.goToNext(7, "geolocation");
-                                    })
-                                    .error(function (error) {
-                                        $log.error(error);
-                                    });
-                            })
-                            .error(function (error) {
-                                $log.error(error);
-                                $scope.loc_error = errorMessages.errors +
-                                        errorMessages.location;
-                            });
-                    }
-
-                };
-            });
-        }])
-
-        /**
-         * @ngdoc controller
-         *
          * @name mfl.facility_mgmt.controllers.facility_edit.geolocation
          *
          * @description
@@ -1402,7 +1170,7 @@
                 });
             };
             /*Fetch geo code methods*/
-            wrappers.geo_code_methods.list()
+            wrappers.geo_code_methods.filter({"fields":"id,name"})
                 .success(function (data) {
                     $scope.geo_methods = data.results;
                 })
@@ -1430,7 +1198,7 @@
                 }
             };
             /*Fetch geo code sources*/
-            wrappers.geo_code_sources.list()
+            wrappers.geo_code_sources.filter({"fields":"id,name"})
                 .success(function (data) {
                     $scope.geo_sources = data.results;
                 })

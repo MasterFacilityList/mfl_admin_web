@@ -43,7 +43,7 @@
             var value = new Date();
             $scope.maxDate = value.getFullYear() + "/" + (value.getMonth()+1) +
             "/" + value.getDate();
-            wrappers.unit_status.list()
+            wrappers.unit_status.filter({"fields":"id,name"})
             .success(function (data) {
                 $scope.unit_status = data.results;
             })
@@ -58,7 +58,7 @@
             .error(function (data) {
                 $scope.errors = data;
             });
-            wrappers.contact_types.list()
+            wrappers.contact_types.filter({"fields":"id,name"})
             .success(function (data) {
                 $scope.contact_types = data.results;
             })

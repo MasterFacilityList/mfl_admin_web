@@ -194,11 +194,11 @@
                     data.$scope.nxtState = true;
                     data.$scope.create = false;
                     ctrl(".edit_chul.basic", data);
-                    httpBackend.expectGET(server_url+"api/chul/statuses/")
+                    httpBackend.expectGET(server_url+"api/chul/statuses/?fields=id,name")
                         .respond(200, {results: []});
                     httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
                         .respond(200, {results: []});
-                    httpBackend.expectGET(server_url+"api/common/contact_types/")
+                    httpBackend.expectGET(server_url+"api/common/contact_types/?fields=id,name")
                         .respond(200, {results: []});
                     data.$scope.unit_contacts = [
                         {
@@ -416,11 +416,11 @@
                 data.$scope.nxtState = false;
                 data.$scope.create = false;
                 ctrl(".edit_chul.basic", data);
-                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                httpBackend.expectGET(server_url+"api/chul/statuses/?fields=id,name")
                     .respond(500, {});
                 httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
                     .respond(500, {});
-                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                httpBackend.expectGET(server_url+"api/common/contact_types/?fields=id,name")
                     .respond(500, {});
                 data.$scope.unit_id = 1;
                 data.$scope.select_values = {
@@ -449,11 +449,11 @@
                 data.$scope.nxtState = false;
                 data.$scope.create = false;
                 ctrl(".edit_chul.basic", data);
-                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                httpBackend.expectGET(server_url+"api/chul/statuses/?fields=id,name")
                     .respond(500, {});
                 httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
                     .respond(500, {});
-                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                httpBackend.expectGET(server_url+"api/common/contact_types/?fields=id,name")
                     .respond(500, {});
                 data.$scope.unit_id = 1;
                 data.$scope.select_values = {
@@ -511,11 +511,11 @@
                 data.$scope.nextState = angular.noop;
                 data.$scope.create = true;
                 ctrl(".edit_chul.basic", data);
-                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                httpBackend.expectGET(server_url+"api/chul/statuses/?fields=id,name")
                     .respond(500, {});
                 httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
                     .respond(500, {});
-                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                httpBackend.expectGET(server_url+"api/common/contact_types/?fields=id,name")
                     .respond(500, {});
                 data.$scope.unit_id = 1;
                 data.$scope.select_values = {
@@ -554,11 +554,11 @@
                 data.$scope.nextState = angular.noop;
                 data.$scope.create = true;
                 ctrl(".edit_chul.basic", data);
-                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                httpBackend.expectGET(server_url+"api/chul/statuses/?fields=id,name")
                     .respond(500, {});
                 httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
                     .respond(500, {});
-                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                httpBackend.expectGET(server_url+"api/common/contact_types/?fields=id,name")
                     .respond(500, {});
                 data.$scope.unit_id = 1;
                 data.$scope.select_values = {
@@ -594,11 +594,11 @@
                 data.$scope.nextState = angular.noop;
                 data.$scope.create = true;
                 ctrl(".edit_chul.basic", data);
-                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                httpBackend.expectGET(server_url+"api/chul/statuses/?fields=id,name")
                     .respond(500, {});
                 httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
                     .respond(500, {});
-                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                httpBackend.expectGET(server_url+"api/common/contact_types/?fields=id,name")
                     .respond(500, {});
                 data.$scope.unit_id = 1;
                 data.$scope.select_values = {
@@ -635,11 +635,11 @@
                 data.$scope.nextState = angular.noop;
                 data.$scope.create = true;
                 ctrl(".edit_chul.basic", data);
-                httpBackend.expectGET(server_url+"api/chul/statuses/")
+                httpBackend.expectGET(server_url+"api/chul/statuses/?fields=id,name")
                     .respond(500, {});
                 httpBackend.expectGET(server_url+"api/facilities/facilities/?page_size=100000")
                     .respond(500, {});
-                httpBackend.expectGET(server_url+"api/common/contact_types/")
+                httpBackend.expectGET(server_url+"api/common/contact_types/?fields=id,name")
                     .respond(500, {});
                 data.$scope.unit_id = 1;
                 data.$scope.select_values = {

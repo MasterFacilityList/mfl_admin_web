@@ -281,7 +281,7 @@
                 spyOn(loginService, "getUser").andReturn({"id": 3});
                 spyOn(log, "error");
                 httpBackend
-                    .expectGET(server_url + "api/common/contact_types/")
+                    .expectGET(server_url + "api/common/contact_types/?fields=id,name")
                     .respond(500, {"error": "e"});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
@@ -307,7 +307,7 @@
                 spyOn(loginService, "getUser").andReturn({"id": 3});
                 spyOn(log, "error");
                 httpBackend
-                    .expectGET(server_url + "api/common/contact_types/")
+                    .expectGET(server_url + "api/common/contact_types/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
@@ -332,7 +332,7 @@
             it("should load user contacts", function () {
                 spyOn(loginService, "getUser").andReturn({"id": 3});
                 httpBackend
-                    .expectGET(server_url + "api/common/contact_types/")
+                    .expectGET(server_url + "api/common/contact_types/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
@@ -355,7 +355,7 @@
             it("should add a new contact to the current user", function () {
                 spyOn(loginService, "getUser").andReturn({"id": 3});
                 httpBackend
-                    .expectGET(server_url + "api/common/contact_types/")
+                    .expectGET(server_url + "api/common/contact_types/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
@@ -398,7 +398,7 @@
                 spyOn(log, "error");
 
                 httpBackend
-                    .expectGET(server_url + "api/common/contact_types/")
+                    .expectGET(server_url + "api/common/contact_types/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
@@ -440,7 +440,7 @@
                 spyOn(log, "error");
 
                 httpBackend
-                    .expectGET(server_url + "api/common/contact_types/")
+                    .expectGET(server_url + "api/common/contact_types/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
@@ -484,7 +484,7 @@
             it("should remove a contact from the current user", function () {
                 spyOn(loginService, "getUser").andReturn({"id": 3});
                 httpBackend
-                    .expectGET(server_url + "api/common/contact_types/")
+                    .expectGET(server_url + "api/common/contact_types/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
@@ -524,7 +524,7 @@
                 spyOn(log, "error");
 
                 httpBackend
-                    .expectGET(server_url + "api/common/contact_types/")
+                    .expectGET(server_url + "api/common/contact_types/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
@@ -569,7 +569,7 @@
                 spyOn(log, "error");
 
                 httpBackend
-                    .expectGET(server_url + "api/common/contact_types/")
+                    .expectGET(server_url + "api/common/contact_types/?fields=id,name")
                     .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url + "api/common/user_contacts/?user=3")
