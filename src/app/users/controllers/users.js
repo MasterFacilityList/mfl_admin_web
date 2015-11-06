@@ -477,7 +477,7 @@
                 $scope, $scope.steps, $scope.steps[1]);
             }
             $scope.user_id = $scope.user_id || $state.params.user_id;
-            wrappers.contact_types.list()
+            wrappers.contact_types.filter({"fields":"id,name"})
                 .success(function (data) {
                     $scope.contact_types = data.results;
                 })

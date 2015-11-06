@@ -46,7 +46,7 @@
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.facilityRegulatoryBody.edit");
             $httpBackend.expectGET(
-                SERVER_URL + "api/common/contact_types/").respond(200, {});
+                SERVER_URL + "api/common/contact_types/?fields=id,name").respond(200, {});
             $httpBackend.expectGET(
                 SERVER_URL +"api/facilities/regulation_status/?fields=id,name")
                 .respond(200, {});
@@ -118,14 +118,14 @@
                 items : []
             };
             $httpBackend.expectGET(
-                SERVER_URL + "api/common/contact_types/").respond(200, {});
+                SERVER_URL + "api/common/contact_types/?fields=id,name").respond(200, {});
             $httpBackend.flush();
         }]));
         it("should test that regulatory body contact_list fetch: fail",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.setup.controller.facilityRegulatoryBody.create");
             $httpBackend.expectGET(
-                SERVER_URL + "api/common/contact_types/").respond(400, {});
+                SERVER_URL + "api/common/contact_types/?fields=id,name").respond(400, {});
             $httpBackend.flush();
         }]));
         it("should test deleting reg_body contact: total success",

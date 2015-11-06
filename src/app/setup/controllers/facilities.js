@@ -199,7 +199,8 @@
                 };
             }
 
-            adminApi.facilityOwnerTypes.list().success(function(ownerTypes){
+            adminApi.facilityOwnerTypes.filter({"fields":"id,name"})
+            .success(function(ownerTypes){
                 $scope.ownerTypes = ownerTypes.results;
             }).error(function(error){
                 $scope.alert = error.error;
@@ -455,7 +456,7 @@
                 icon: "fa-plus-circle",
                 name: "New Regulatory Body"
             };
-            adminApi.contact_types.list()
+            adminApi.contact_types.filter({"fields":"id,name"})
                 .success(function (data) {
                     $scope.contact_types = data.results;
                 })
@@ -549,7 +550,7 @@
                     contact : ""
                 });
             };
-            adminApi.contact_types.list()
+            adminApi.contact_types.filter({"fields":"id,name"})
                 .success(function (data) {
                     $scope.contact_types = data.results;
                 })

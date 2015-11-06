@@ -157,19 +157,6 @@
                 },
                 permission: "facilities.view_facility"
             })
-            .state("facilities.facility_edit.location", {
-                url: "location/",
-                views: {
-                    "tab-header@facilities.facility_edit": {
-                        templateUrl: "facility_mgmt/tpls/facility_edit.tab-headers.tpl.html"
-                    },
-                    "form-view@facilities.facility_edit": {
-                        templateUrl: "facility_mgmt/tpls/facility_edit.location.tpl.html",
-                        controller: "mfl.facility_mgmt.controllers.facility_edit.location"
-                    }
-                },
-                permission: "facilities.view_facility"
-            })
 
             .state("facilities.facility_edit.geolocation", {
                 url: "geolocation/",

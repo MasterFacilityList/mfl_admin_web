@@ -37,7 +37,7 @@
                 contact: ""
             };
 
-            wrappers.contact_types.list()
+            wrappers.contact_types.filter({"fields":"id,name"})
                 .success(function (data) {
                     $scope.contact_types = data.results;
                 })
