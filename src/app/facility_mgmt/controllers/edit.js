@@ -522,7 +522,7 @@
                 }
             };
             /*Job Titles*/
-            wrappers.job_titles.list()
+            wrappers.job_titles.filter({"fields":"id,name"})
             .success(function (data) {
                 $scope.job_titles = data.results;
             })
@@ -530,7 +530,7 @@
                 $log.error(error);
             });
             /*contact types*/
-            wrappers.contact_types.list()
+            wrappers.contact_types.filter({"fields":"id,name"})
             .success(function(data){
                 $scope.contact_types = data.results;
             })

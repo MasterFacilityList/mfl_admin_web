@@ -588,9 +588,9 @@
                 };
                 data.$scope.nxtState = false;
                 httpBackend.expectGET(server_url +
-                    "api/facilities/job_titles/").respond(200, {results : []});
+                    "api/facilities/job_titles/?fields=id,name").respond(200, {results : []});
                 httpBackend.expectGET(server_url +
-                    "api/common/contact_types/").respond(200, {results : []});
+                    "api/common/contact_types/?fields=id,name").respond(200, {results : []});
                 ctrl(".basic", data);
 
                 var frm = {
@@ -946,9 +946,9 @@
                 };
                 data.$scope.create = false;
                 httpBackend.expectGET(server_url +
-                    "api/facilities/job_titles/").respond(200, {results : []});
+                    "api/facilities/job_titles/?fields=id,name").respond(200, {results : []});
                 httpBackend.expectGET(server_url +
-                    "api/common/contact_types/").respond(200, {results : []});
+                    "api/common/contact_types/?fields=id,name").respond(200, {results : []});
                 ctrl(".basic", data);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingExpectation();
