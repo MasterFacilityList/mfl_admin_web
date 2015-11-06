@@ -131,19 +131,6 @@
                 },
                 permission: "facilities.view_facility"
             })
-            .state("facilities.facility_edit.officers", {
-                url: "officers/",
-                views: {
-                    "tab-header@facilities.facility_edit": {
-                        templateUrl: "facility_mgmt/tpls/facility_edit.tab-headers.tpl.html"
-                    },
-                    "form-view@facilities.facility_edit": {
-                        templateUrl: "facility_mgmt/tpls/facility_edit.officers.tpl.html",
-                        controller: "mfl.facility_mgmt.controllers.facility_edit.officers"
-                    }
-                },
-                permission: "facilities.view_facility"
-            })
             .state("facilities.facility_edit.setup", {
                 url: "setup/",
                 views: {
