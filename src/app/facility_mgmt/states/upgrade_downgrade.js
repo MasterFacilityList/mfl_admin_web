@@ -15,7 +15,8 @@
                     controller: "mfl.facility_mgmt.controllers.facility_upgrade"
                 }
             },
-            permission: "facilities.add_facilitytype,facilities.view_facility"
+            permission: "facilities.change_facility,"+
+                        "facilities.add_facilityservice"
         })
         .state("facilities.downgrade", {
             url: "downgrade/:facility_id/",
