@@ -63,7 +63,7 @@
                         wrappers.getInspectionReport("456");
                         expect($window.location.href).toEqual(
                             server_url+"api/facilities/facility_"+
-                            "inspection_report/456/?access_token=123");
+                            "detail_report/456/?access_token=123");
                     }
                 ]);
             });
