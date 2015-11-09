@@ -84,6 +84,8 @@
                     .success(function () {
                         wrappers.contacts.remove(obj.contact_id)
                         .success(function () {
+                            $scope.unit.contacts = _.without(
+                                $scope.unit.contacts,obj);
                             toasty.success({
                                 title: "Unit Contact Deleted",
                                 msg: "Contact successfully deleted"
@@ -168,7 +170,6 @@
                     $scope.unit.health_unit_workers.push({
                         "first_name" : "",
                         "last_name" : "",
-                        "id_number" : null,
                         "is_incharge" : false
                     });
                 }
@@ -177,7 +178,6 @@
                 $scope.unit.health_unit_workers.push({
                     "first_name" : "",
                     "last_name" : "",
-                    "id_number" : null,
                     "is_incharge" : false
                 });
             };
