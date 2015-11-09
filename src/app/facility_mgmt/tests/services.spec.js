@@ -60,7 +60,7 @@
             it("should print inspection report", function () {
                 inject(["mfl.facility_mgmt.services.wrappers", "SERVER_URL",
                     function(wrappers, server_url){
-                        wrappers.getInspectionReport("456");
+                        wrappers.getDetailReport("456");
                         expect($window.location.href).toEqual(
                             server_url+"api/facilities/facility_"+
                             "detail_report/456/?access_token=123");
