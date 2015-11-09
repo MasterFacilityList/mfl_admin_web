@@ -10,6 +10,7 @@
                 <th >County</th>
                 <th >Sub-County</th>
                 <th >Ward</th>
+                <th>Approval Status</th>
                 <th  sil-grid-sort field='date_established' >Date Established</th>
             </tr>
         </thead>
@@ -26,6 +27,7 @@
                 <td data-title="County:">{{unit.facility_county | titlecase}}</td>
                 <td data-title="Sub County:">{{unit.facility_subcounty | titlecase}}</td>
                 <td data-title="Ward:">{{unit.facility_ward | titlecase}}</td>
+                <td data-title="Approval Status:">{{unit.has_edits ? 'Update' : 'New'}}</td>
                 <td data-title="Date Established:">{{unit.date_established}}</td>
             </tr>
         </tbody>

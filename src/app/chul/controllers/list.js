@@ -38,7 +38,7 @@
         ["$scope", function ($scope) {
             $scope.filters = {
                 "pending_approval":true,
-                "fields": "id,code,name,status_name,facility_name,"+
+                "fields": "id,code,name,status_name,facility_name,has_edits,"+
                 "facility_county,facility_subcounty,facility_ward,date_established"
             };
         }]
