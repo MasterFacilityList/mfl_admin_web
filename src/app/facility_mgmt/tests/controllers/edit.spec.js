@@ -3844,8 +3844,8 @@
         });
 
         it("should save geolocation details", function () {
-            inject(["mfl.common.services.multistep",
-                function (multistepService) {
+            inject(["mfl.common.services.multistep","mfl.common.forms.changes",
+                function (multistepService, formChanges) {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$stateParams": {
@@ -3882,6 +3882,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/wards/3/")
                     .respond(200, {results: []});
+                spyOn(formChanges, "whatChanged").andReturn({collection_date:"November 9, 2015"});
                 ctrl(".geolocation", data);
                 rootScope.$broadcast("leafletDirectiveMarker.wardmap.dragend",null,args);
                 data.$scope.$apply();

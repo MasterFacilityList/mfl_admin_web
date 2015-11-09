@@ -1022,9 +1022,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
-        "mfl.error.messages", "toasty",
+        "mfl.error.messages", "toasty","$filter",
         function ($scope,wrappers,$log, leafletData, multistepService,
-            formChanges, $state, errorMessages, toasty) {
+            formChanges, $state, errorMessages, toasty,$filter) {
             var value = new Date();
             $scope.maxDate = value.getFullYear() + "/" + (value.getMonth()+1) +
             "/" + value.getDate();
@@ -1061,6 +1061,8 @@
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.geo = data;
+                    $scope.collection_date = $filter("date")($scope.geo.collection_date);
+                    
                     $scope.select_values = {
                         source: {
                             "id": $scope.geo.source,
@@ -1213,6 +1215,10 @@
                 /*if(!_.isEmpty(changes)){*/
                 var fac_id = $scope.facility_id || $state.params.facility_id;
                 /*changes.coordinates = [];*/
+                if(!_.isUndefined(changes.collection_date)){
+                    changes.collection_date = new Date(changes.collection_date);
+                    changes.collection_date = changes.collection_date.toISOString();
+                }
                 changes.facility = fac_id;
                 changes.coordinates = {
                     type : "Point",
