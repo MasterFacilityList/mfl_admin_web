@@ -190,7 +190,7 @@
             });
             $scope.printFacility = wrappers.printFacility;
             $scope.correctionTemplate = wrappers.getCorrectionTemplate;
-            $scope.inspectionReport = wrappers.getInspectionReport;
+            $scope.detailReport = wrappers.getDetailReport;
         }
     ]);
 
