@@ -250,10 +250,6 @@
                         name : "Mathare 4B",
                         contacts : [
                             {
-                                contact_type : "",
-                                contact : ""
-                            },
-                            {
                                 contact_type : "MOBILE",
                                 contact : "999"
                             }
@@ -482,10 +478,6 @@
                 var changed = {
                     name : "Mathare 4B",
                     contacts : [
-                        {
-                            contact_type : "",
-                            contact : ""
-                        },
                         {
                             contact_type : "MOBILE",
                             contact : "999"

@@ -67,10 +67,7 @@
             });
             $scope.unitContacts = function (u){
                 if(u.contacts.length === 0) {
-                    $scope.unit.contacts.push({
-                        "contact_type" : "",
-                        "contact" : ""
-                    });
+                    $scope.unit.contacts = [];
                 }
             };
             $scope.addContact = function () {
@@ -111,6 +108,13 @@
                     "community_units.edit_unit.chews");
                 var changes = formChanges.whatChanged(frm);
                 $scope.unit.facility = $scope.select_values.facility;
+                _.each($scope.unit.contacts, function (curr_obj) {
+                    if(_.isEmpty(curr_obj.contact) ||
+                        _.isEmpty(curr_obj.contact_type)) {
+                        $scope.unit.contacts = _.without($scope.unit.contacts,
+                            curr_obj);
+                    }
+                });
                 if(!$scope.create) {
                     if($scope.unit.contacts.length > 0){
                         changes.contacts = $scope.unit.contacts;

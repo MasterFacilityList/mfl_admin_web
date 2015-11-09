@@ -14,12 +14,7 @@
             $scope.create = true;
             /*Declaring unit scope variable*/
             $scope.unit = {
-                contacts : [
-                    {
-                        contact_type: "",
-                        contacts: ""
-                    }
-                ]
+                contacts : []
             };
             $scope.steps = [
                 {
