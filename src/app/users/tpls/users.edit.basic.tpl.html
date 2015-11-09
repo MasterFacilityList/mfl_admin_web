@@ -3,11 +3,11 @@
         <form role="form" ng-submit="save(user_frm)" name="user_frm">
             <drf-err-msg></drf-err-msg>
             <div class="form-group">
-                <label class="control-label">First Name</label>
+                <label class="control-label">First Name &#42;</label>
                 <input name="first_name" type="text" ng-model="user.first_name" required class="form-control" api-checker/>
             </div>
             <div class="form-group">
-                <label class="control-label">Last Name</label>
+                <label class="control-label">Last Name &#42;</label>
                 <input type="text" name="last_name" ng-model="user.last_name" required class="form-control" api-checker/>
             </div>
             <div class="form-group">
@@ -15,19 +15,30 @@
                 <input type="text" name="other_names" ng-model="user.other_names" class="form-control"/>
             </div>
             <div class="form-group">
-                <label class="control-label">Email</label>
+                <label class="control-label">Email &#42;</label>
                 <input type="email" ng-model="user.email" name="email"  required class="form-control" api-checker/>
             </div>
             <div class="form-group">
-                <label class="control-label">Employee Number</label>
+                <label class="control-label">Employee Number &#42;</label>
                 <input name="employee_number" type="text" ng-model="user.employee_number" class="form-control" required api-checker/>
             </div>
             <div class="form-group">
-                <label class="control-label">Password <span class="fs-12"><em>({{::PWD_RULE}})</em></span></label>
+                <label class="control-label">
+                    Job Title
+                </label>
+                <select class="form-control" name="title" ng-model="user.job_title" api-checker>
+                    <option value="" disabled>Select Job Title</option>
+                    <option ng-repeat="title in job_titles" ng-selected="{{title.id == user.job_title}}" value="{{title.id}}">{{title.name}}</option>
+                </select>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password &#42;<span class="fs-12"><em>({{::PWD_RULE}})</em></span></label>
                 <input type="password" name="password" ng-model="user.password" ng-required="!user.id" class="form-control"/>
             </div>
             <div class="form-group">
-                <label class="control-label">Confirm Password <span class="fs-12"><em>({{::PWD_RULE}})</em></span></label>
+                <label class="control-label">Confirm Password &#42;<span class="fs-12"><em>({{::PWD_RULE}})</em></span></label>
                 <input type="password" name="confirm_password" ng-model="user.confirm_password" ng-required="!user.id" ng-blur="confirmPassword(user.password, user.confirm_password)" class="form-control" />
             </div>
             <div ng-if="confirm" class="err_class">The two passwords did not match</div>

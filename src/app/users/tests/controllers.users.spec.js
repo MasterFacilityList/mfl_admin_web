@@ -471,6 +471,9 @@
                 };
                 scope.create = true;
                 scope.save();
+                $httpBackend.expectGET(SERVER_URL +
+                        "api/facilities/job_titles/")
+                        .respond(200,{results:[]});
                 $httpBackend.expectPOST(SERVER_URL +
                         "api/users/").respond(200, scope.user);
                 $httpBackend.flush();
@@ -499,6 +502,9 @@
                 };
                 scope.create = true;
                 scope.save();
+                $httpBackend.expectGET(SERVER_URL +
+                        "api/facilities/job_titles/")
+                        .respond(500,{results:[]});
                 $httpBackend.expectPOST(SERVER_URL +
                         "api/users/").respond(500, scope.user);
                 $httpBackend.flush();

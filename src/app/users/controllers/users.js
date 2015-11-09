@@ -265,6 +265,13 @@
                 }
             };
             $scope.login_user = loginService.getUser();
+            wrappers.job_titles.list()
+            .success(function (data) {
+                $scope.job_titles = data.results;
+            })
+            .error(function (data) {
+                $scope.errors = data;
+            });
         }
     ])
 
