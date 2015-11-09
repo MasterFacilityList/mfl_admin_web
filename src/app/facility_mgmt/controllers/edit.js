@@ -1213,6 +1213,10 @@
                 /*if(!_.isEmpty(changes)){*/
                 var fac_id = $scope.facility_id || $state.params.facility_id;
                 /*changes.coordinates = [];*/
+                if(!_.isUndefined(changes.collection_date)){
+                    changes.collection_date = new Date(changes.collection_date);
+                    changes.collection_date = changes.collection_date.toISOString();
+                }
                 changes.facility = fac_id;
                 changes.coordinates = {
                     type : "Point",
