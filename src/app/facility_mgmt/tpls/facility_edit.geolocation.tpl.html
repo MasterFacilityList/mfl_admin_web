@@ -36,10 +36,10 @@
                     </div>
                     <div class="form-group col-xs-12">
                         <label for="collection date" class="control-label">
-                            Collection date: {{geo.collection_date | dateFilter}}
+                            Collection date:
                         </label>
                         <datepicker date-format="{{'longDate'}}" date-max-limit="{{maxDate}}">
-                          <input class="form-control" name="collection_date" ng-model="geo.collection_date" type="text"/>
+                          <input class="form-control" name="collection_date" ng-model="collection_date" type="text"/>
                         </datepicker>
                     </div>
                     <!-- End of first section of form -->
