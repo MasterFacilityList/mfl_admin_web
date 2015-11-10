@@ -1,9 +1,26 @@
 (function(angular,_){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.constituency.controllers
+     *
+     * @description
+     * Contains all the controllers used for constituency setup
+     */
     angular.module("mfl.setup.constituency.controllers",[
         "mfl.setup.api"
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.constituency.list
+     *
+     * @description
+     * The controller used to list the constituencies
+     */
     .controller("mfl.setup.controller.constituency.list", ["$scope",
         function ($scope) {
             $scope.filters = {
@@ -26,6 +43,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.constituency.create
+     *
+     * @description
+     * The controller used to create a constituency
+     */
     .controller("mfl.setup.controller.constituency.create", ["$scope",
         "adminApi","$state","toasty",
         function ($scope, adminApi,$state,toasty) {
@@ -62,6 +87,15 @@
                 });
         }
     ])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.constituency.details
+     *
+     * @description
+     * The controller used for consistuency details
+     */
     .controller("mfl.setup.controller.constituency.details", ["$scope",
         "$stateParams", "adminApi","mfl.common.forms.changes","$state","toasty",
         function ($scope, $stateParams, adminApi, formChanges,$state,toasty) {
