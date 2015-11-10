@@ -1,9 +1,25 @@
 (function(angular){
     "use strict";
-    angular.module("mfl.setup.routes.chu", ["mfl.setup.routes.dashboard"])
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.routes.chu
+     *
+     * @description
+     * Contains all the states used for chu setup
+     */
+    angular.module("mfl.setup.routes.chu", ["mfl.setup.routes.dashboard"])
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_rating_comments
+     *
+     * @description
+     * The state used to view list of chu rating comments
+     */
         .state("setup.chu_rating_comments", {
                 url: "/chu_rating_comments",
                 views: {
@@ -18,6 +34,14 @@
                 userFeature: "is_staff,is_national"
             })
 
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_status
+     *
+     * @description
+     * The state used to view list of chu statuses
+     */
         .state("setup.chu_status", {
                 url: "/chu_status",
                 views: {
@@ -32,6 +56,15 @@
                 permission: "chul.view_status",
                 userFeature: "is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_status
+     *
+     * @description
+     * The state used to view list of chu statuses
+     */
         .state("setup.chu_status.view", {
                 url: "/:id",
                 views: {
@@ -43,6 +76,15 @@
                 permission: "chul.view_status",
                 userFeature: "is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_status.view.delete
+     *
+     * @description
+     * The state used to delete a chu status
+     */
         .state("setup.chu_status.view.delete", {
                 url: "/delete",
                 views: {
@@ -54,6 +96,15 @@
                 permission: "chul.delete_status",
                 userFeature: "is_staff,is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_status.create
+     *
+     * @description
+     * The state used to create a chu status
+     */
         .state("setup.chu_status.create", {
                 url: "/create",
                 views: {
@@ -65,7 +116,15 @@
                 permission: "chul.add_status",
                 userFeature: "is_staff,is_national"
             })
-        /*chu services*/
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_services
+     *
+     * @description
+     * The state used to list a chu services
+     */
         .state("setup.chu_service", {
                 url: "/chu_service/",
                 views: {
@@ -80,6 +139,15 @@
                 permission: "chul.view_chuservice",
                 userFeature: "is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_services.view
+     *
+     * @description
+     * The state used to view/edit a chu service
+     */
         .state("setup.chu_service.view", {
                 url: "edit/:id",
                 views: {
@@ -91,6 +159,15 @@
                 permission: "chul.view_chuservice",
                 userFeature: "is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_services.view.delete
+     *
+     * @description
+     * The state used to delete a chu service
+     */
         .state("setup.chu_service.view.delete", {
                 url: "/delete/",
                 views: {
@@ -102,6 +179,15 @@
                 permission: "chul.delete_chuservice",
                 userFeature: "is_staff,is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_services.create
+     *
+     * @description
+     * The state used to create a chu service
+     */
         .state("setup.chu_service.create", {
                 url: "create/",
                 views: {
@@ -113,7 +199,15 @@
                 permission: "chul.add_chuservice",
                 userFeature: "is_staff,is_national"
             })
-        /*chu approvers*/
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_approvers
+     *
+     * @description
+     * The state used to list chu approvers
+     */
         .state("setup.chu_approvers", {
                 url: "/chu_approvers",
                 views: {
@@ -128,6 +222,15 @@
                 permission: "chul.view_approver",
                 userFeature: "is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_approvers.view
+     *
+     * @description
+     * The state used to view/edit chu approvers
+     */
         .state("setup.chu_approvers.view", {
                 url: "/:id",
                 views: {
@@ -139,6 +242,15 @@
                 permission: "chul.view_approver",
                 userFeature: "is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_approvers.view.delete
+     *
+     * @description
+     * The state used to delete chu approvers
+     */
         .state("setup.chu_approvers.view.delete", {
                 url: "/delete",
                 views: {
@@ -150,6 +262,15 @@
                 permission: "chul.delete_approver",
                 userFeature: "is_staff,is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.chu_approvers.create
+     *
+     * @description
+     * The state used to view/edit chu approvers
+     */
         .state("setup.chu_approvers.create", {
                 url: "/create",
                 views: {

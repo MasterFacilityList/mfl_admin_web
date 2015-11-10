@@ -1,9 +1,27 @@
 (function(angular){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.routes.counties
+     *
+     * @description
+     * Contains all the states used for counties setup
+     */
     angular.module("mfl.setup.routes.counties", ["mfl.setup.routes.dashboard"])
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.counties
+             *
+             * @description
+             * The state used to view list of counties
+             */
             .state("setup.counties", {
                 url: "/counties",
                 views: {
@@ -18,6 +36,15 @@
                 permission: "common.view_county",
                 userFeature: "is_staff,is_national"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.counties.create
+             *
+             * @description
+             * The state used to create counties
+             */
             .state("setup.counties.create", {
                 url: "/new",
                 views: {
@@ -29,6 +56,15 @@
                 permission: "common.view_county",
                 userFeature: "is_staff,is_national"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.counties.view_consts
+             *
+             * @description
+             * The state used to view/edit counties
+             */
             .state("setup.counties.view_consts", {
                 url: "/:count_id",
                 views: {
@@ -40,6 +76,15 @@
                 permission: "common.view_county",
                 userFeature: "is_staff,is_national"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.counties.view_consts.constituencies
+             *
+             * @description
+             * The state used to view constituencies belonging to a county
+             */
             .state("setup.counties.view_consts.constituencies", {
                 url: "/constituencies",
                 views: {
@@ -50,6 +95,15 @@
                 permission: "common.view_constituency",
                 userFeature: "is_staff,is_national"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.counties.view_consts.users
+             *
+             * @description
+             * The state used to view users belonging to a county
+             */
             .state("setup.counties.view_consts.users", {
                 url: "/users",
                 views: {

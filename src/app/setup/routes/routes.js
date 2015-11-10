@@ -1,5 +1,14 @@
 (function(angular){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.routes
+     *
+     * @description
+     * Contains the modules used for setup routes
+     */
     angular.module("mfl.setup.routes",[
         "mfl.setup.routes.constituencies",
         "mfl.setup.routes.counties",

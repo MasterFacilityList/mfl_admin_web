@@ -1,9 +1,27 @@
 (function(angular){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.routes.towns
+     *
+     * @description
+     * Contains the states used for towns
+     */
     angular.module("mfl.setup.routes.towns", ["mfl.setup.routes.dashboard"])
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.towns
+             *
+             * @description
+             * The state used to view list of towns
+             */
             .state("setup.towns", {
                 url: "/towns",
                 views: {
@@ -18,6 +36,15 @@
                 permission: "common.view_town",
                 userFeature: "is_staff,is_national"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.towns.town_edit
+             *
+             * @description
+             * The state used to view/edit a town
+             */
             .state("setup.towns.town_edit", {
                 url: "/edit/:town_id",
                 views: {
@@ -29,6 +56,15 @@
                 permission: "common.view_town",
                 userFeature: "is_staff,is_national"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.towns.town_edit.delete
+             *
+             * @description
+             * The state used to delete a town
+             */
             .state("setup.towns.town_edit.delete", {
                 url: "/delete",
                 views: {
@@ -40,6 +76,15 @@
                 permission: "common.delete_town",
                 userFeature: "is_staff,is_national"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.towns.town_create
+             *
+             * @description
+             * The state used to create a town
+             */
             .state("setup.towns.town_create", {
                 url: "/create",
                 views: {
