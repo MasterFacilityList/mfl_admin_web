@@ -1,12 +1,27 @@
 (function(angular){
     "use strict";
-
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.api
+     *
+     * @description
+     * Contains the wrapper service used for system setup
+     */
     angular.module("mfl.setup.api", [
         "api.wrapper",
         "mfl.auth.oauth2",
         "ngFileUpload"
     ])
 
+    /**
+     * @ngdoc service
+     *
+     * @name adminApi
+     *
+     * @description
+     * The service used to for all system setup endpoints
+     */
     .service("adminApi", ["api", "Upload", "api.oauth2",
         function(api, Upload, oauth2) {
 
