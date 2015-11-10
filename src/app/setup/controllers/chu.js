@@ -1,10 +1,28 @@
 (function(angular, _){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.chu.controllers
+     *
+     * @description
+     * Contains all the controllers used for chu setup
+     */
     angular.module("mfl.setup.chu.controllers",[
         "mfl.setup.api",
         "mfl.common.forms",
         "angular-toasty"
     ])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.chuStatus.list
+     *
+     * @description
+     * The controller used to list the chu status
+     */
     .controller("mfl.setup.controller.chuStatus.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -28,6 +46,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.chuStatus.view
+     *
+     * @description
+     * The controller used to view the chu status
+     */
     .controller("mfl.setup.controller.chuStatus.view", ["$scope","$state",
         "$stateParams", "adminApi","mfl.common.forms.changes", "toasty",
         function($scope, $state, $stateParams, adminApi, formChanges, toasty){
@@ -109,6 +135,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.chuService.list
+     *
+     * @description
+     * The controller used to view the chu service list
+     */
     .controller("mfl.setup.controller.chuService.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -132,6 +166,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.chuService.view
+     *
+     * @description
+     * The controller used to view the chu service view
+     */
     .controller("mfl.setup.controller.chuService.view", ["$scope",
         "$stateParams", "adminApi", "$state", "toasty",
         "mfl.common.forms.changes",

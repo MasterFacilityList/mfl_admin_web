@@ -2,12 +2,26 @@
 
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.facilities.controllers
+     *
+     * @description
+     * Contains all the controllers used for facility setup
+     */
     angular.module("mfl.setup.facilities.controllers",[
         "mfl.setup.api"
     ])
+
     /**
-        Facility OwnerTypes
-    **/
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facilityOwnerType.list
+     *
+     * @description
+     * The controller used to list facility owner types
+     */
     .controller("mfl.setup.controller.facilityOwnerType.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -30,6 +44,15 @@
             ];
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facilityOwnerType.view
+     *
+     * @description
+     * The controller used to view a facility owner type
+     */
     .controller("mfl.setup.controller.facilityOwnerType.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes","toasty",
         function($scope, $state, $stateParams, adminApi, formChanges,toasty){
@@ -114,9 +137,13 @@
     )
 
     /**
-        Facility Owners
-
-    **/
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facilityOwner.list
+     *
+     * @description
+     * The controller used to list facility owners
+     */
     .controller("mfl.setup.controller.facilityOwner.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -139,6 +166,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facilityOwner.view
+     *
+     * @description
+     * The controller used to view/edit a facility owner
+     */
     .controller("mfl.setup.controller.facilityOwner.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes","toasty",
         function($scope, $state, $stateParams, adminApi, formChanges,toasty) {
@@ -240,8 +275,13 @@
     )
 
     /**
-        Facility Job Title
-    **/
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facilityJobTitle.list
+     *
+     * @description
+     * The controller used to list facility job titles
+     */
     .controller("mfl.setup.controller.facilityJobTitle.list", ["$scope",
         function ($scope) {
             $scope.tooltip = {
@@ -269,6 +309,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facilityJobTitle.view
+     *
+     * @description
+     * The controller used to view/edit a facility job title
+     */
     .controller("mfl.setup.controller.facilityJobTitle.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes", "toasty",
         function($scope, $state, $stateParams, adminApi, formChanges, toasty){
@@ -355,11 +403,27 @@
         }]
     )
 
+        /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.change_reasons.list
+     *
+     * @description
+     * The controller used to list facility change reasons
+     */
     .controller("mfl.setup.controller.change_reasons.list",["$scope",
         function ($scope) {
             $scope.filters = {"fields":"id,reason,description"};
         }])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.change_reasons.view
+     *
+     * @description
+     * The controller used to view/edit a facility change reason
+     */
     .controller("mfl.setup.controller.change_reasons.view",["$scope","adminApi",
         "$stateParams","$state","mfl.common.forms.changes","toasty",
         function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
@@ -424,7 +488,14 @@
             };
         }])
 
-    /**Facility Regulatory Body**/
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facilityRegulatoryBody.list
+     *
+     * @description
+     * The controller used to list facility regulatory bodies
+     */
     .controller("mfl.setup.controller.facilityRegulatoryBody.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -449,6 +520,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facilityRegulatoryBody.create
+     *
+     * @description
+     * The controller used to create a facility regulatory body
+     */
     .controller("mfl.setup.controller.facilityRegulatoryBody.create",["$scope",
         "$stateParams", "$state", "adminApi",
         function ($scope, $stateParams, $state, adminApi) {
@@ -493,6 +572,14 @@
         }
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facilityRegulatoryBody.edit
+     *
+     * @description
+     * The controller used to view/edit a facility regulatory body
+     */
     .controller("mfl.setup.controller.facilityRegulatoryBody.edit", ["$scope",
         "$stateParams", "adminApi", "mfl.common.forms.changes", "$state","toasty",
         function ($scope, $stateParams, adminApi, formChanges, $state,toasty) {
@@ -665,11 +752,26 @@
         }
     ])
 
-    // Facility departments
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facility_depts.list
+     *
+     * @description
+     * The controller used to list facility departments/units
+     */
     .controller("mfl.setup.controller.facility_depts.list", ["$scope", function ($scope) {
         $scope.filters = {"fields":"id,name,description"};
     }])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facility_depts.view
+     *
+     * @description
+     * The controller used to view/edit a facility department/unit
+     */
     .controller("mfl.setup.controller.facility_depts.view",["$scope","adminApi",
         "$stateParams","$state","mfl.common.forms.changes","toasty",
         function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
@@ -739,11 +841,26 @@
             };
         }])
 
-    // Facility types
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facility_types.list
+     *
+     * @description
+     * The controller used to list facility types
+     */
     .controller("mfl.setup.controller.facility_types.list", ["$scope", function ($scope) {
         $scope.filters = {"fields":"id,name"};
     }])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facility_types.view
+     *
+     * @description
+     * The controller used to view/edit a facility type
+     */
     .controller("mfl.setup.controller.facility_types.view",["$scope","adminApi",
         "$stateParams","$state","mfl.common.forms.changes","toasty",
         function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
@@ -808,11 +925,26 @@
             };
         }])
 
-    // Facility statuses
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facility_statuses.list
+     *
+     * @description
+     * The controller used to list facility statuses
+     */
     .controller("mfl.setup.controller.facility_statuses.list", ["$scope", function ($scope) {
         $scope.filters = {"fields":"id,name"};
     }])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.facility_statuses.view
+     *
+     * @description
+     * The controller used to view/edit a facility status
+     */
     .controller("mfl.setup.controller.facility_statuses.view",["$scope","adminApi",
         "$stateParams","$state","mfl.common.forms.changes","toasty",
         function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
@@ -878,11 +1010,26 @@
             };
         }])
 
-    // Regulation statuses
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.regulation_statuses.list
+     *
+     * @description
+     * The controller used to list regulation statuses
+     */
     .controller("mfl.setup.controller.regulation_statuses.list", ["$scope", function ($scope) {
         $scope.filters = {"fields":"id,name"};
     }])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.regulation_statuses.view
+     *
+     * @description
+     * The controller used to view/edit a regulation status
+     */
     .controller("mfl.setup.controller.regulation_statuses.view",["$scope","adminApi",
         "$stateParams","$state","mfl.common.forms.changes","toasty",
         function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {

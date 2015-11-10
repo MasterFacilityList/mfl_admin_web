@@ -1,11 +1,27 @@
 (function (angular) {
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.facilities.controllers
+     *
+     * @description
+     * Contains all the controllers used for gis
+     */
     angular.module("mfl.setup.gis.controllers", [
         "ui.router",
         "mfl.setup.api"
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.geocode_methods_list
+     *
+     * @description
+     * The controller used to list geocode methods
+     */
     .controller("mfl.setup.gis.controllers.geocode_methods_list", ["$scope", function ($scope) {
         $scope.title = {
             icon: "fa-crosshairs",
@@ -26,6 +42,16 @@
             }
         ];
     }])
+
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.geocode_methods_create
+     *
+     * @description
+     * The controller used to create geocode methods
+     */
     .controller("mfl.setup.gis.controllers.geocode_methods_create",
         ["$scope", "adminApi", "$log", "$state","toasty",
          function ($scope, adminApi, $log, $state,toasty) {
@@ -55,6 +81,15 @@
             };
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.geocode_methods_edit
+     *
+     * @description
+     * The controller used to view/edit geocode methods
+     */
     .controller("mfl.setup.gis.controllers.geocode_methods_edit",
         ["$scope", "$state", "$log", "$stateParams", "adminApi","toasty",
         function ($scope, $state, $log, $stateParams, adminApi, toasty) {
@@ -106,6 +141,15 @@
             };
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.geocode_methods_create
+     *
+     * @description
+     * The controller used to create geocode methods
+     */
     .controller("mfl.setup.gis.controllers.geocode_methods_delete",
         ["$scope", "$state", "$log", "$stateParams", "adminApi","toasty",
         function ($scope, $state, $log, $stateParams, adminApi, toasty) {
@@ -142,6 +186,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.geocode_sources_list
+     *
+     * @description
+     * The controller used to list geocode sources
+     */
     .controller("mfl.setup.gis.controllers.geocode_sources_list", ["$scope", function ($scope) {
         $scope.title = {
             icon : "fa-compass",
@@ -161,6 +213,15 @@
             }
         ];
     }])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.geocode_sources_create
+     *
+     * @description
+     * The controller used to create geocode sources
+     */
     .controller("mfl.setup.gis.controllers.geocode_sources_create",
         ["$scope", "adminApi", "$log", "$state","toasty",
          function ($scope, adminApi, $log, $state, toasty) {
@@ -190,6 +251,15 @@
             };
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.geocode_sources_edit
+     *
+     * @description
+     * The controller used to edit geocode sources
+     */
     .controller("mfl.setup.gis.controllers.geocode_sources_edit",
         ["$scope", "$state", "$log", "$stateParams", "adminApi","toasty",
         function ($scope, $state, $log, $stateParams, adminApi, toasty) {
@@ -241,6 +311,15 @@
             };
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.geocode_sources_delete
+     *
+     * @description
+     * The controller used to delete geocode sources
+     */
     .controller("mfl.setup.gis.controllers.geocode_sources_delete",
         ["$scope", "$state", "$log", "$stateParams", "adminApi","toasty",
         function ($scope, $state, $log, $stateParams, adminApi, toasty) {
