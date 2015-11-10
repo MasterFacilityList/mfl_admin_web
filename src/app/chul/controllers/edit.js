@@ -1,14 +1,29 @@
 (function(angular, _){
     "use strict";
-
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.chul.controllers.edit
+     *
+     * @description
+     * contains controllers used to manage CHUs
+     */
     angular.module("mfl.chul.controllers.edit", [
         "mfl.common.forms",
-        "angular-toasty"
+        "angular-toasty",
+        "mfl.common.filters"
     ])
-
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.chul.controllers.edit_chul
+     *
+     * @description
+     * Parent controller used throughout the editing steps of a CHU
+     */
     .controller("mfl.chul.controllers.edit_chul", ["$scope",
-        "mfl.chul.services.wrappers", "$stateParams",
-        function ($scope, wrappers, $stateParams) {
+        "mfl.chul.services.wrappers", "$stateParams", "$filter",
+        function ($scope, wrappers, $stateParams, $filter) {
             $scope.create = false;
             /*Declaring unit scope variable*/
             $scope.unit = {};
@@ -16,6 +31,12 @@
             wrappers.chuls.get($stateParams.unit_id)
             .success(function (data) {
                 $scope.unit = data;
+                $scope.unit.facility_county = $filter("titlecase")
+                    ($scope.unit.facility_county);
+                $scope.unit.facility_subcounty = $filter("titlecase")
+                    ($scope.unit.facility_subcounty);
+                $scope.unit.facility_ward = $filter("titlecase")
+                    ($scope.unit.facility_ward);
                 $scope.select_values = {
                     facility: {
                         "id": $scope.unit.facility,
@@ -33,10 +54,18 @@
             };
         }]
     )
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.chul.controllers.edit_chul.basic
+     *
+     * @description
+     * A helper Controller used to edit CHU basic details
+     */
     .controller("mfl.chul.controllers.edit_chul.basic", ["$scope",
         "mfl.chul.services.wrappers", "mfl.common.forms.changes", "toasty",
-        "$state",
-        function ($scope, wrappers, formChanges, toasty, $state) {
+        "$state", "$filter",
+        function ($scope, wrappers, formChanges, toasty, $state, $filter) {
             if($scope.create) {
                 $scope.nextState();
             }
@@ -99,9 +128,11 @@
             };
             $scope.unitLocation = function (fac_id) {
                 var fac = _.findWhere($scope.facilities, {"id" : fac_id});
-                $scope.unit.facility_county = fac.county;
-                $scope.unit.facility_subcounty = fac.constituency;
-                $scope.unit.facility_ward = fac.ward_name;
+                $scope.unit.facility_county = $filter("titlecase")(fac.county);
+                $scope.unit.facility_subcounty = $filter("titlecase")
+                    (fac.constituency);
+                $scope.unit.facility_ward = $filter("titlecase")
+                    (fac.ward_name);
             };
             $scope.save = function (frm) {
                 $scope.finish = ($scope.nxtState ? "community_units" :
@@ -163,6 +194,14 @@
             });
         }]
     )
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.chul.controllers.edit_chul.basic
+     *
+     * @description
+     * A helper Controller used to manage Community Health Workers of a CHU
+     */
     .controller("mfl.chul.controllers.edit_chul.chews", ["$scope",
         "mfl.chul.services.wrappers", "toasty", "$state",
         function ($scope, wrappers, toasty, $state) {
