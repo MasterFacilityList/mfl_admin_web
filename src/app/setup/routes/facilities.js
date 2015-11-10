@@ -133,7 +133,7 @@
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-list.tpl.html"
                     }
                 },
-                permission: "facilities.view_jobtitle",
+                permission: "users.view_jobtitle",
                 userFeature: "is_staff,is_national"
             })
 
@@ -145,7 +145,7 @@
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
                 },
-                permission: "facilities.view_jobtitle",
+                permission: "users.view_jobtitle",
                 userFeature: "is_staff,is_national"
             })
         .state("setup.facility_job_titles.view.delete", {
@@ -156,7 +156,7 @@
                         templateUrl: "common/tpls/delete.tpl.html"
                     }
                 },
-                permission: "facilities.delete_jobtitle",
+                permission: "users.delete_jobtitle",
                 userFeature: "is_staff,is_national"
             })
         .state("setup.facility_job_titles.create", {
@@ -167,7 +167,7 @@
                         templateUrl: "setup/tpls/facilities/job_titles/job-titles-view.tpl.html"
                     }
                 },
-                permission: "facilities.add_jobtitle",
+                permission: "users.add_jobtitle",
                 userFeature: "is_staff,is_national"
             })
 

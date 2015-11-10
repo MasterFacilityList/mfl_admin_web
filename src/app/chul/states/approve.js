@@ -23,6 +23,10 @@
                     "main-content@chul": {
                         templateUrl: "chul/tpls/chul_approve_reject.detail.tpl.html",
                         controller: "mfl.chul.controllers.view_chul"
+                    },
+                    "header-buttons@chu_approve_list.approve_view_unit" : {
+                        templateUrl: "chul/tpls/chul_approve_btns.tpl.html",
+                        controller: "mfl.chul.controllers.view_chul"
                     }
                 },
                 permission: "chul.view_communityhealthunit"
