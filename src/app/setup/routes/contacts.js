@@ -1,9 +1,27 @@
 (function(angular){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.routes.contacts
+     *
+     * @description
+     * Contains all the states used for contacts setup
+     */
     angular.module("mfl.setup.routes.contacts", ["mfl.setup.routes.dashboard"])
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.contact_types
+     *
+     * @description
+     * The state used to view list of contact types
+     */
         .state("setup.contact_types", {
                 url: "/contact_types",
                 views: {
@@ -18,6 +36,15 @@
                 permission: "common.view_contacttype",
                 userFeature: "is_staff,is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.contact_types.view
+     *
+     * @description
+     * The state used to view contact types
+     */
         .state("setup.contact_types.view", {
                 url: "/edit/:id",
                 views: {
@@ -29,6 +56,15 @@
                 permission: "common.view_contacttype",
                 userFeature: "is_staff,is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.contact_types.view.delete
+     *
+     * @description
+     * The state used to delete contact types
+     */
         .state("setup.contact_types.view.delete", {
                 url: "/delete",
                 views: {
@@ -40,6 +76,15 @@
                 permission: "common.delete_contacttype",
                 userFeature: "is_staff,is_national"
             })
+
+    /**
+     * @ngdoc state
+     *
+     * @name setup.contact_types.create
+     *
+     * @description
+     * The state used to create contact types
+     */
         .state("setup.contact_types.create", {
                 url: "/create",
                 views: {

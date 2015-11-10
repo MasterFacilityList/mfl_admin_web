@@ -1,8 +1,26 @@
 (function(angular){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.routes.sub_counties
+     *
+     * @description
+     * Contains the states used for sub-county setup
+     */
     angular.module("mfl.setup.routes.sub_counties", ["mfl.setup.routes.dashboard"])
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.sub_counties
+             *
+             * @description
+             * The state used to view list of sub-counties
+             */
             .state("setup.sub_counties", {
                 url: "/sub_counties",
                 views: {
@@ -17,6 +35,15 @@
                 permission: "common.view_subcounty",
                 userFeature: "is_national,is_staff"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.sub_counties.edit
+             *
+             * @description
+             * The state used to edit a sub-county
+             */
             .state("setup.sub_counties.edit", {
                 url: "/details/:scount_id",
                 views: {
@@ -28,6 +55,15 @@
                 permission: "common.change_subcounty",
                 userFeature: "is_national,is_staff"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.sub_counties.edit.delete
+             *
+             * @description
+             * The state used to delete a sub-county
+             */
             .state("setup.sub_counties.edit.delete", {
                 url: "/delete",
                 views: {
@@ -39,6 +75,15 @@
                 permission: "common.delete_subcounty",
                 userFeature: "is_national,is_staff"
             })
+
+            /**
+             * @ngdoc state
+             *
+             * @name setup.sub_counties.create
+             *
+             * @description
+             * The state used to create a of sub-county
+             */
             .state("setup.sub_counties.create", {
                 url: "/create",
                 views: {

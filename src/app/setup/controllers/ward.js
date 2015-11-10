@@ -1,8 +1,26 @@
 (function(angular, _) {
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.wards.controllers
+     *
+     * @description
+     * Contains all the controllers used for ward setup
+     */
     angular.module("mfl.setup.ward.controllers",[
         "mfl.setup.api"
     ])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.ward.list
+     *
+     * @description
+     * The controller used to list wards
+     */
     .controller("mfl.setup.controller.ward.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -24,6 +42,15 @@
             ];
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.ward.edit
+     *
+     * @description
+     * The controller used to create/edit wards
+     */
     .controller("mfl.setup.controller.ward.edit", ["$scope","adminApi","$stateParams",
         "mfl.common.forms.changes","$state","toasty",
         function ($scope,adminApi,$stateParams,formChanges,$state,toasty) {

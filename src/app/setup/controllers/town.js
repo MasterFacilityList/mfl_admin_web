@@ -1,8 +1,26 @@
 (function(angular){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.town.controllers
+     *
+     * @description
+     * Contains all the controllers used for town setup
+     */
     angular.module("mfl.setup.town.controllers",[
         "mfl.setup.api"
     ])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.town.list
+     *
+     * @description
+     * The controller used to list towns
+     */
     .controller("mfl.setup.controller.town.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -24,6 +42,15 @@
             ];
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.town.create
+     *
+     * @description
+     * The controller used to create towns
+     */
     .controller("mfl.setup.controller.town.create",
         ["$scope", "$state", "$log", "adminApi","toasty",
          function ($scope, $state, $log, adminApi, toasty) {
@@ -52,6 +79,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.town.edit
+     *
+     * @description
+     * The controller used to create/edit towns
+     */
     .controller("mfl.setup.controller.town.edit",
         ["$scope", "$stateParams", "$state", "$log", "adminApi","toasty",
         function ($scope, $stateParams, $state, $log, adminApi, toasty) {
