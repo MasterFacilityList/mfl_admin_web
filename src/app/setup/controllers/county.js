@@ -1,8 +1,26 @@
 (function(angular, _){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.county.controllers
+     *
+     * @description
+     * Contains all the controllers used for county setup
+     */
     angular.module("mfl.setup.county.controllers",[
         "mfl.setup.api"
     ])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.county.list
+     *
+     * @description
+     * The controller used to list the counties
+     */
     .controller("mfl.setup.controller.county.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -24,6 +42,15 @@
             ];
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.county.view
+     *
+     * @description
+     * The controller used to view/edit a constituency
+     */
     .controller("mfl.setup.controller.county.view", ["$scope", "$stateParams",
         "adminApi","mfl.common.forms.changes","$state","toasty",
         function ($scope, $stateParams, adminApi, formChanges,$state,toasty) {
@@ -78,6 +105,15 @@
                 });
         }
     ])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.county.create
+     *
+     * @description
+     * The controller used to create a constituency
+     */
     .controller("mfl.setup.controller.county.create", ["$scope", "$stateParams",
         "adminApi","mfl.common.forms.changes","$state","toasty",
         function ($scope, $stateParams, adminApi, formChanges,$state,toasty) {

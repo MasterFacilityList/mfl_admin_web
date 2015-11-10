@@ -1,8 +1,25 @@
 (function(angular, _){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.contacts.controllers
+     *
+     * @description
+     * Contains all the controllers used for contacts setup
+     */
     angular.module("mfl.setup.contacts.controllers",[
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.contact_types.list
+     *
+     * @description
+     * The controller used to list the contact types
+     */
     .controller("mfl.setup.controller.contact_types.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -24,6 +41,15 @@
             ];
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.contact_types.view
+     *
+     * @description
+     * The controller used to view a contact type
+     */
     .controller("mfl.setup.controller.contact_types.view", ["$scope","$state", "$stateParams",
                 "adminApi","mfl.common.forms.changes","toasty",
         function($scope, $state, $stateParams, adminApi, formChanges,toasty){
