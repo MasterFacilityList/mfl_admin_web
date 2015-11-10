@@ -1,14 +1,5 @@
 <div class="content-header">
-   <div class="action-container content-header-extra margin-t-3">
-        <a requires-permission='chul.can_approve_chu' ui-sref="community_units.approve_reject({unit_id: unit.id})" class="btn btn-success">
-            <span ng-hide="approve_reject">Approve/Reject</span>
-            <span ng-show="approved">Reject</span>
-            <span ng-show="rejected">Approve</span>
-        </a>
-        <a  tooltip="Print Community Unit" tooltip-placement="bottom" class="btn btn-primary">Print</a>
-
-        <a requires-permission='chul.change_communityhealthunit' tooltip="Edit Community Unit" tooltip-placement="bottom" class="btn btn-primary" ui-sref="community_units.edit_unit.basic({unit_id: unit.id})" ui-sref-opts="{reload:true}">Edit</a>
-   </div>
+    <div class="action-container content-header-extra margin-t-3" ui-view="header-buttons"></div>
    <h2 class="content-title">
        <span class="main-title">
         <span ng-hide="approve_reject">Approve/Reject</span>
@@ -37,7 +28,7 @@
         </div>
         <div class="col-md-6 col-xs-12 content-right fs-16 pad-0">
             <label class="text-black fw-600">Date Established: </label>
-            {{unit.date_established | dateFilter}}
+            {{unit.date_established | date}}
         </div>
         <div class="col-xs-6 fs-16 pad-l-0">
             <label class="text-black fw-600">Linked Facility: </label>
@@ -45,7 +36,7 @@
         </div>
         <div class="col-md-6 col-xs-12 content-right fs-16 pad-0">
             <label class="text-black fw-600">Date Operational: </label>
-            <span ng-if="unit.date_operational">{{unit.date_operational | dateFilter}}</span>
+            <span ng-if="unit.date_operational">{{unit.date_operational | date}}</span>
             <span ng-if="!unit.date_operational">-</span>
         </div>
         <div class="col-xs-6 fs-16 pad-l-0">
@@ -82,15 +73,15 @@
         </div>
         <div class="col-xs-12 fs-14 pad-l-0">
             <label class="text-black fw-600">County: </label>
-            {{unit.facility_county}}
+            {{unit.facility_county | titlecase}}
         </div>
         <div class="col-xs-12 fs-14 pad-l-0">
             <label class="text-black fw-600">Sub-county: </label>
-            {{unit.facility_subcounty}}
+            {{unit.facility_subcounty | titlecase}}
         </div>
         <div class="col-xs-12 fs-14 pad-l-0">
             <label class="text-black fw-600">Ward: </label>
-            {{unit.facility_ward}}
+            {{unit.facility_ward | titlecase}}
         </div>
         <div class="col-xs-12 fs-14 pad-l-0">
             <label class="text-black fw-600">Location Description: </label>
