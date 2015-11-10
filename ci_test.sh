@@ -67,9 +67,9 @@ case $CIRCLE_NODE_INDEX in
     killall --wait sc
     ;;
 1)
-    # run_backend
-    # grunt test:unit
-    # run_e2e
+    run_backend
     grunt test:unit
+    run_e2e
+
     ;;
 esac
