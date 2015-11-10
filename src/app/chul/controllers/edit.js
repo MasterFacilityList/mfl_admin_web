@@ -1,12 +1,26 @@
 (function(angular, _){
     "use strict";
-
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.chul.controllers.edit
+     *
+     * @description
+     * contains controllers used to manage CHUs
+     */
     angular.module("mfl.chul.controllers.edit", [
         "mfl.common.forms",
         "angular-toasty",
         "mfl.common.filters"
     ])
-
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.chul.controllers.edit_chul
+     *
+     * @description
+     * Parent controller used throughout the editing steps of a CHU
+     */
     .controller("mfl.chul.controllers.edit_chul", ["$scope",
         "mfl.chul.services.wrappers", "$stateParams", "$filter",
         function ($scope, wrappers, $stateParams, $filter) {
@@ -40,6 +54,14 @@
             };
         }]
     )
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.chul.controllers.edit_chul.basic
+     *
+     * @description
+     * A helper Controller used to edit CHU basic details
+     */
     .controller("mfl.chul.controllers.edit_chul.basic", ["$scope",
         "mfl.chul.services.wrappers", "mfl.common.forms.changes", "toasty",
         "$state", "$filter",
@@ -172,6 +194,14 @@
             });
         }]
     )
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.chul.controllers.edit_chul.basic
+     *
+     * @description
+     * A helper Controller used to manage Community Health Workers of a CHU
+     */
     .controller("mfl.chul.controllers.edit_chul.chews", ["$scope",
         "mfl.chul.services.wrappers", "toasty", "$state",
         function ($scope, wrappers, toasty, $state) {
