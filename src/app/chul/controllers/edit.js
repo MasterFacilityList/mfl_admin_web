@@ -8,8 +8,8 @@
     ])
 
     .controller("mfl.chul.controllers.edit_chul", ["$scope",
-        "mfl.chul.services.wrappers", "$stateParams",
-        function ($scope, wrappers, $stateParams) {
+        "mfl.chul.services.wrappers", "$stateParams", "$filter",
+        function ($scope, wrappers, $stateParams, $filter) {
             $scope.create = false;
             /*Declaring unit scope variable*/
             $scope.unit = {};
@@ -17,6 +17,12 @@
             wrappers.chuls.get($stateParams.unit_id)
             .success(function (data) {
                 $scope.unit = data;
+                $scope.unit.facility_county = $filter("titlecase")
+                    ($scope.unit.facility_county);
+                $scope.unit.facility_subcounty = $filter("titlecase")
+                    ($scope.unit.facility_subcounty);
+                $scope.unit.facility_ward = $filter("titlecase")
+                    ($scope.unit.facility_ward);
                 $scope.select_values = {
                     facility: {
                         "id": $scope.unit.facility,
