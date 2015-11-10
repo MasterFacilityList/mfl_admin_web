@@ -260,7 +260,7 @@
                 {
                     func : "ui-sref='setup.facility_job_titles.create'" +
                            " requires-user-feature='is_staff'" +
-                           " requires-permission='facilities.add_jobtitle'",
+                           " requires-permission='users.add_jobtitle'",
                     class: "btn btn-primary",
                     tipmsg: "Add Job Title",
                     wording: "Add Job Title"
@@ -287,7 +287,7 @@
                     {
                         func : "ui-sref='setup.facility_job_titles.view.delete'" +
                                " requires-user-feature='is_staff'" +
-                           " requires-permission='facilities.delete_jobtitle'",
+                           " requires-permission='users.delete_jobtitle'",
                         class: "btn btn-danger",
                         tipmsg: "Delete Facility Job Title",
                         wording: "Delete"
