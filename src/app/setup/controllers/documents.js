@@ -1,8 +1,24 @@
 (function(angular, _){
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.controllers.documents
+     *
+     * @description
+     * Contains all the controllers used for county setup
+     */
     angular.module("mfl.setup.controllers.documents", ["mfl.setup.api"])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.documents.list
+     *
+     * @description
+     * The controller used to list the documents
+     */
     .controller("mfl.setup.controllers.documents.list", ["$scope", function ($scope) {
         $scope.title = {
             icon: "",
@@ -24,6 +40,14 @@
         ];
     }])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.documents.edit
+     *
+     * @description
+     * The controller used to edit a document
+     */
     .controller("mfl.setup.controllers.documents.edit",
         ["$scope", "adminApi", "$stateParams", "$state", "$window",
         function ($scope, adminApi, $stateParams, $state, $window) {

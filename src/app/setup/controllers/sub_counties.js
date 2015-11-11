@@ -1,9 +1,27 @@
 (function(angular, _){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.sub_counties.controllers
+     *
+     * @description
+     * Contains all the controllers used for sub_counties setup
+     */
     angular.module("mfl.setup.sub_counties.controllers",[
         "mfl.setup.api"
     ])
 
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.sub_counties.list
+     *
+     * @description
+     * The controller used to list sub_counties
+     */
     .controller("mfl.setup.controller.sub_counties.list", ["$scope",
         function ($scope) {
             $scope.filters = {
@@ -26,6 +44,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.sub_counties.edit
+     *
+     * @description
+     * The controller used to create/edit sub_counties
+     */
     .controller("mfl.setup.controller.sub_counties.edit", ["$scope",
         "$stateParams", "adminApi","$state","mfl.common.forms.changes","toasty",
         function ($scope, $stateParams, adminApi,$state,formChanges, toasty) {

@@ -1,8 +1,26 @@
 (function(angular,_){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.setup.keph.controllers
+     *
+     * @description
+     * Contains all the controllers used for keph setup
+     */
     angular.module("mfl.setup.keph.controllers",[
         "mfl.setup.api"
     ])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.keph.list
+     *
+     * @description
+     * The controller used to list kephs
+     */
     .controller("mfl.setup.controller.keph.list", ["$scope",
         function ($scope) {
             $scope.title = {
@@ -23,6 +41,15 @@
             ];
         }]
     )
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.keph.create
+     *
+     * @description
+     * The controller used to create kephs
+     */
     .controller("mfl.setup.controller.keph.create",
         ["$scope", "$state", "$log", "adminApi","toasty",
          function ($scope, $state, $log, adminApi,toasty) {
@@ -51,6 +78,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.setup.controller.keph.edit
+     *
+     * @description
+     * The controller used to view/edit kephs
+     */
     .controller("mfl.setup.controller.keph.edit",
         ["$scope", "$stateParams", "$state", "$log", "adminApi","mfl.common.forms.changes","toasty",
         function ($scope, $stateParams, $state, $log, adminApi, formChanges,toasty) {
