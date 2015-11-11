@@ -36,8 +36,8 @@
                            " requires-user-feature='is_staff'" +
                            " requires-permission='common.add_town'",
                     class: "btn btn-primary",
-                    tipmsg: "New Town",
-                    wording: "New Town"
+                    tipmsg: "Add Town",
+                    wording: "Add Town"
                 }
             ];
         }]
@@ -56,7 +56,7 @@
          function ($scope, $state, $log, adminApi, toasty) {
             $scope.title = {
                 icon: "fa-plus-circle",
-                name: "New Town"
+                name: "Add Town"
             };
             $scope.town = {
                 name: ""
