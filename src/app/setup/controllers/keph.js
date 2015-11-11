@@ -17,8 +17,8 @@
                            " requires-user-feature='is_staff'" +
                            " requires-permission='facilities.add_kephlevel'",
                     class: "btn btn-primary",
-                    tipmsg: "New KEPH Level",
-                    wording: "New KEPH Level"
+                    tipmsg: "Add KEPH Level",
+                    wording: "Add KEPH Level"
                 }
             ];
         }]
@@ -28,7 +28,7 @@
          function ($scope, $state, $log, adminApi,toasty) {
             $scope.title = {
                 icon: "fa-plus-circle",
-                name: "New KEPH Level"
+                name: "Add KEPH Level"
             };
             $scope.keph = {
                 name: ""
