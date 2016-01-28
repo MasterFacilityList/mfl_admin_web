@@ -1062,16 +1062,8 @@
                     $scope.spinner = false;
                     $scope.geo = data;
                     $scope.collection_date = $filter("date")($scope.geo.collection_date);
-                    
+
                     $scope.select_values = {
-                        source: {
-                            "id": $scope.geo.source,
-                            "name": $scope.geo.source_name
-                        },
-                        method: {
-                            "id": $scope.geo.method,
-                            "name": $scope.geo.method_name
-                        },
                         town:{
                             "id": f.town,
                             "name": f.town_name
@@ -1171,15 +1163,6 @@
                         errorMessages.ward;
                 });
             };
-            /*Fetch geo code methods*/
-            wrappers.geo_code_methods.filter({"fields":"id,name"})
-                .success(function (data) {
-                    $scope.geo_methods = data.results;
-                })
-                .error(function(error){
-                    $log.error(error);
-                    $scope.errors = error;
-                });
             //if create go to create or edit state
             $scope.toState = function (arg) {
                 if($scope.create){
@@ -1199,15 +1182,6 @@
                         {reload: true});
                 }
             };
-            /*Fetch geo code sources*/
-            wrappers.geo_code_sources.filter({"fields":"id,name"})
-                .success(function (data) {
-                    $scope.geo_sources = data.results;
-                })
-                .error(function(error){
-                    $log.error(error);
-                    $scope.errors = error;
-                });
             //Save geolocation details
             $scope.saveGeo = function (frm, arg) {
                 var spinner1 = true;

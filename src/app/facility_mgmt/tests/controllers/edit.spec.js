@@ -3874,12 +3874,6 @@
                     }
                 };
                 httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_methods/?fields=id,name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_sources/?fields=id,name")
-                    .respond(200, {results: []});
-                httpBackend
                     .expectGET(server_url+"api/common/wards/3/")
                     .respond(200, {results: []});
                 spyOn(formChanges, "whatChanged").andReturn({collection_date:"November 9, 2015"});
@@ -3949,12 +3943,6 @@
                     {name : "location"}
                 ];
                 data.$scope.nxtState = true;
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_methods/?fields=id,name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_sources/?fields=id,name")
-                    .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url+"api/common/wards/3/")
                     .respond(200, {results: []});
@@ -4031,12 +4019,6 @@
                         coordinates : [3, 1]
                     }
                 };
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_methods/?fields=id,name")
-                    .respond(200, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_sources/?fields=id,name")
-                    .respond(200, {results: []});
                 httpBackend
                     .expectGET(server_url+"api/common/wards/3/")
                     .respond(200, {results: []});
@@ -4168,12 +4150,6 @@
                         coordinates : [3, 1]
                     }
                 };
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_methods/?fields=id,name")
-                    .respond(500, {results: []});
-                httpBackend
-                    .expectGET(server_url+"api/gis/geo_code_sources/?fields=id,name")
-                    .respond(500, {results: []});
                 ctrl(".geolocation", data);
                 data.$scope.$apply();
                 data.$scope.facility={
@@ -4190,9 +4166,6 @@
                 data.$scope.$digest();
                 data.$scope.checkLocation(coords);
 
-                httpBackend.flush();
-
-                httpBackend.resetExpectations();
                 spyOn(log, "error");
                 httpBackend
                     .expectPATCH(server_url+"api/gis/facility_coordinates/3/")
