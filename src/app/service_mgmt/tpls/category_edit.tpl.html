@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Parent</label>
-                <ui-select ng-model="category.parent" required name="parent" api-checker register-custom-form-control>
+                <ui-select ng-model="category.parent" name="parent" api-checker register-custom-form-control>
                     <ui-select-match placeholder="Select a parent category...">
                         <span>{{$select.selected.name}}</span>
                     </ui-select-match>
