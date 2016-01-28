@@ -98,8 +98,6 @@
             this.facility_upgrade = api.setBaseUrl("api/facilities/facility_upgrade/");
             this.facility_units = api.setBaseUrl("api/facilities/facility_units/");
             this.facility_depts = api.setBaseUrl("api/facilities/facility_depts/");
-            this.geo_code_methods = api.setBaseUrl("api/gis/geo_code_methods/");
-            this.geo_code_sources = api.setBaseUrl("api/gis/geo_code_sources/");
             this.facility_coordinates = api.setBaseUrl("api/gis/facility_coordinates/");
             this.job_titles = api.setBaseUrl("api/facilities/job_titles/");
             this.create_officer = api.setBaseUrl("api/facilities/officer_facade/");

@@ -15,7 +15,6 @@
         "mfl.setup.contacts.controllers",
         "mfl.setup.town.controllers",
         "mfl.setup.chu.controllers",
-        "mfl.setup.gis.controllers",
         "mfl.setup.controllers.documents",
         "mfl.setup.api"
     ])

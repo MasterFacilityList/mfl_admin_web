@@ -114,18 +114,6 @@
             browser.waitForAngular();
             browser.driver.sleep(browser.params.page_timeout);
 
-            var geo_source = element(by.name("source"));
-            geo_source.element(by.css(".caret")).click();
-            var geo_source_input = geo_source.element(by.css(".ui-select-search"));
-            geo_source_input.sendKeys("SARAM");
-            enter.perform();
-
-            var geo_method = element(by.model("select_values.method"));
-            geo_method.element(by.css(".caret")).click();
-            var geo_method_input = geo_method.element(by.css(".ui-select-search"));
-            geo_method_input.sendKeys("Taken with GPS Device");
-            enter.perform();
-
             var contactsBtn = element(by.partialButtonText("Facility Contacts"));
             expect(contactsBtn.getText()).toEqual("Facility Contacts");
             contactsBtn.click();
