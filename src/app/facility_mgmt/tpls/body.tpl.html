@@ -16,11 +16,7 @@
                     <span class="sidebar-text">Facilities Pending Approval</span>
                 </a>
             </li>
-            <li ui-sref-active="active" requires-permission="facilities.publish_facilities,facilities.view_facility">
-                <a ui-sref="facilities_publish" ui-sref-opts="{reload:true}">
-                    <span class="sidebar-text">Publish Facilities</span>
-                </a>
-            </li>
+
             <li ui-sref-active="active" requires-permission="facilities.view_rejected_facilities" >
                 <a ui-sref="facility_reject_list" ui-sref-opts="{reload:true}">
                     <span class="sidebar-text">Rejected Facilities</span>
