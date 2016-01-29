@@ -12,7 +12,6 @@
         <a ng-if="(!facility.rejected&&!facility.closed)&&(!facility.is_approved||facility.has_edits)" requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve({facility_id: facility.id})" class="btn btn-success" tooltip="Approve Facility">
             Approve/Reject
         </a>
-        <a  tooltip="Print Facility Cover Letter" tooltip-placement="bottom" class="btn btn-primary" ng-click="printFacility(facility.id)">Print</a>
 
         <a requires-permission='facilities.change_facility' tooltip="Edit Facility" tooltip-placement="bottom" class="btn btn-primary" ui-sref="facilities.facility_edit({facility_id: facility.id})" ui-sref-opts="{reload:true}">Edit</a>
    </div>
