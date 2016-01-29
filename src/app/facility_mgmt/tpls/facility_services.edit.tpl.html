@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="category-list fade-content">
-                <div class="category-item col-xs-12" ng-repeat="cat in categories | filter : category.query" ng-click="showServices(cat)" ng-class="{'active-item' : cat.selected}">
+                <div class="category-item col-xs-12" ng-repeat="cat in categories | filter : category.query | orderBy:'name'" ng-click="showServices(cat)" ng-class="{'active-item' : cat.selected}">
                     <span class="col-xs-10">{{cat.name}}</span>
                     <span class="col-xs-2 pointer">
                         <i class="fa fa-chevron-right pull-right"></i>
