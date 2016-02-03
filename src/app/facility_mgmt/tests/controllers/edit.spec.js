@@ -92,7 +92,7 @@
                     httpBackend.verifyNoOutstandingExpectation();
                 }]);
             });
-             it("should test opening a facility but fails to patch", function () {
+            it("should test opening a facility but fails to patch", function () {
                 inject(["mfl.facility_mgmt.services.wrappers","mfl.common.forms.changes",
                     function (wrappers, formChanges) {
                     var data = {
