@@ -1,19 +1,19 @@
 <statemodal>
-  <h4 class="text-left">Are you sure you want to close <strong>{{facility.official_name}}</strong>?</h4>
+  <h4 class="text-left">Are you sure you want to open <strong>{{facility.official_name}}</strong>?</h4>
   <div class="margin-t-20">
-   <form name="close_frm" ng-submit="close(close_frm)" novalidate>
+   <form name="open_frm" ng-submit="open(close_frm)" novalidate>
      <drf-err-msg></drf-err-msg>
       <div class="form-group checkbox text-left">
       </div>
        <div class="text-left form-group">
-           <label for="Closing Reason" class="control-label">Closing Reason</label>
-           <textarea name="closing_reason" type="text" class="form-control" ng-model="closing_reason" required placeholder="Enter closing reason" api-checker></textarea>
+           <label for="Closing Reason" class="control-label">Opening Reason</label>
+           <textarea name="closing_reason" type="text" class="form-control" ng-model="closing_reason" required placeholder="Enter Opening reason" api-checker></textarea>
        </div>
         <div class="text-left form-group">
-           <label for="Closing Date" class="control-label">Closing Date</label>
+           <label for="Opening Date" class="control-label">Opening Date</label>
             <p class="input-group">
             <label for="closing date">
-                <span class="fs-16">Closing Date: {{facility.closed_date | date}}</span>
+                <span class="fs-16">Opening Date: {{facility.closed_date | date}}</span>
                     <datepicker date-format="y-MM-d" date-max-limit="{{maxDate}}">
                       <input class="form-control" name="collection_date" ng-model="facility.closed_date" type="text" required api-checker/>
                     </datepicker>
@@ -21,7 +21,7 @@
             </p>
         </div>
         <div class="text-left">
-            <button type="submit" class="btn btn-danger">Close Facility</button>
+            <button type="submit" class="btn btn-warning">Open Facility</button>
             <a class="btn btn-default" ui-sref="facilities.facility_view({facility_id: fac.id})">Cancel</a>
         </div>
    </form>

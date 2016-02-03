@@ -391,12 +391,29 @@
             "/" + value.getDate();
             $scope.close = function (frm) {
                 var changes = formChanges.whatChanged(frm);
+                changes.closed = true;
                 wrappers.facilities.update($stateParams.facility_id,changes)
                 .success(function (data) {
                     $scope.facility = data;
                     toasty.success({
                         title: "Facility",
                         msg: "Facility successfully closed"
+                    });
+                    $state.go("facilities");
+                })
+                .error(function (err) {
+                    $scope.errors = err;
+                });
+            };
+            $scope.open = function (frm) {
+                var changes = formChanges.whatChanged(frm);
+                changes.closed = false;
+                wrappers.facilities.update($stateParams.facility_id, changes)
+                .success(function (data) {
+                    $scope.facility = data;
+                    toasty.success({
+                        title: "Facility",
+                        msg: "Facility successfully Opened"
                     });
                     $state.go("facilities");
                 })
