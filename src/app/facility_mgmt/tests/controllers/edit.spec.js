@@ -79,7 +79,7 @@
                         closed:false,
                         closing_reason:"Very good"
                     };
-                    ctrl(".open", data);
+                    ctrl(".close", data);
 
                     httpBackend
                         .expectPATCH(server_url+"api/facilities/facilities/3/")
@@ -107,7 +107,7 @@
                         closed:false,
                         closing_reason:"Very good"
                     };
-                    ctrl(".open", data);
+                    ctrl(".close", data);
 
                     httpBackend
                         .expectPATCH(server_url+"api/facilities/facilities/3/")
