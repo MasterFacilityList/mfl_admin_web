@@ -30,6 +30,16 @@
                 },
                 permission: "facilities.view_closed_facilities"
             })
+            .state("facilities.facility_view.open", {
+                url: "open/",
+                views: {
+                    "delete@facilities.facility_view": {
+                        templateUrl: "facility_mgmt/tpls/facility_edit_open.tpl.html",
+                        controller: "mfl.facility_mgmt.controllers.facility_edit.close"
+                    }
+                },
+                permission: "facilities.view_closed_facilities"
+            })
             .state("facilities.facility_edit", {
                 url: "edit/:facility_id/",
                 views: {

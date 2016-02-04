@@ -64,6 +64,62 @@
                     httpBackend.verifyNoOutstandingExpectation();
                 }]);
             });
+            it("should test opening a facility and patch successfully", function () {
+                inject(["mfl.facility_mgmt.services.wrappers","mfl.common.forms.changes",
+                    function (wrappers, formChanges) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "$stateParams": {
+                            facility_id: 3
+                        },
+                        "mfl.common.forms.changes" : formChanges
+                    };
+                    var frm = {
+                        closed:false,
+                        closing_reason:"Very good"
+                    };
+                    ctrl(".close", data);
+
+                    httpBackend
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(200, {});
+                    spyOn(formChanges, "whatChanged").andReturn({closed : false,
+                                             closing_reason : "Very good"});
+                    data.$scope.open(frm);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+                }]);
+            });
+            it("should test opening a facility but fails to patch", function () {
+                inject(["mfl.facility_mgmt.services.wrappers","mfl.common.forms.changes",
+                    function (wrappers, formChanges) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "$stateParams": {
+                            facility_id: 3
+                        },
+                        "mfl.common.forms.changes" : formChanges
+                    };
+                    var frm = {
+                        closed:false,
+                        closing_reason:"Very good"
+                    };
+                    ctrl(".close", data);
+
+                    httpBackend
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(500);
+                    spyOn(formChanges, "whatChanged").andReturn({closed : false,
+                                             closing_reason : "Very good"});
+                    data.$scope.open(frm);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+                }]);
+            });
             it("should test closing a facility but fails to patch", function () {
                 inject(["mfl.facility_mgmt.services.wrappers","mfl.common.forms.changes",
                     function (wrappers, formChanges) {
