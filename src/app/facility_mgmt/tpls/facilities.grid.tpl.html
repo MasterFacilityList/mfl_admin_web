@@ -29,10 +29,10 @@
                     <label class="fw-500">County:</label>
                     <ui-select ng-model="filters.multiple.county" multiple id="county" name="county">
                         <ui-select-match placeholder="Select a county...">
-                            <span>{{$item.name}}</span>
+                            <span>{{$item.name | titlecase}}</span>
                         </ui-select-match>
                         <ui-select-choices repeat="county in filter_summaries.county | filter:$select.search">
-                            <span>{{county.name}}</span>
+                            <span>{{county.name  | titlecase}}</span>
                         </ui-select-choices>
                     </ui-select>
                 </div>
@@ -40,10 +40,10 @@
                     <label class="fw-500">Sub County:</label>
                     <ui-select ng-model="filters.multiple.constituency" multiple class="height-30" ng-disabled="filters.multiple.county.length==0" id="constituency" name="constituency">
                         <ui-select-match placeholder="Select a sub county...">
-                            <span>{{$item.name}}</span>
+                            <span>{{$item.name | titlecase }}</span>
                         </ui-select-match>
                         <ui-select-choices repeat="const in filter_summaries.constituency | filter:filterFxns.constFilter | filter:$select.search">
-                            <span>{{const.name}}</span>
+                            <span>{{const.name | titlecase }}</span>
                         </ui-select-choices>
                     </ui-select>
                 </div>
@@ -51,10 +51,10 @@
                     <label class="fw-500">Ward:</label>
                     <ui-select ng-model="filters.multiple.ward" multiple class="height-30" ng-disabled="filters.multiple.constituency.length==0" id="ward" name="ward">
                         <ui-select-match placeholder="Select a ward...">
-                            <span>{{$item.name}}</span>
+                            <span>{{$item.name | titlecase }}</span>
                         </ui-select-match>
                         <ui-select-choices repeat="ward in filter_summaries.ward | filter:filterFxns.wardFilter | filter:$select.search">
-                            <span>{{ward.name}}</span>
+                            <span>{{ward.name | titlecase }}</span>
                         </ui-select-choices>
                     </ui-select>
                 </div>
