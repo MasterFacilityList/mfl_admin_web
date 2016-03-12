@@ -41,10 +41,6 @@
                         controller: "mfl.users.controllers.user_edit.counties",
                         templateUrl: "users/tpls/users.edit.counties.tpl.html"
                     },
-                    "sub-counties@users.user_create": {
-                        controller: "mfl.users.controllers.user_edit.constituency",
-                        templateUrl: "users/tpls/users.edit.constituencies.tpl.html"
-                    },
                     "regulatory-bodies@users.user_create": {
                         controller: "mfl.users.controllers.user_edit.regulatory_body",
                         templateUrl: "users/tpls/users.edit.regulatory_body.tpl.html"
@@ -100,7 +96,7 @@
                 permission: "users.change_mfluser"
             })
             .state("users.user_create.constituency", {
-                url: ":user_id/sub-counties/",
+                url: ":user_id/constituencies/",
                 views: {
                     "form-view@users.user_create": {
                         controller: "mfl.users.controllers.user_edit.constituency",
@@ -110,6 +106,7 @@
                 permission: "users.view_mfluser",
                 userFeature: "is_staff"
             })
+
 
             .state("users.user_create.regulatory_body", {
                 url: ":user_id/regulatory_body/",
@@ -144,10 +141,6 @@
                     "counties@users.user_edit": {
                         controller: "mfl.users.controllers.user_edit.counties",
                         templateUrl: "users/tpls/users.edit.counties.tpl.html"
-                    },
-                    "sub-counties@users.user_edit": {
-                        controller: "mfl.users.controllers.user_edit.constituency",
-                        templateUrl: "users/tpls/users.edit.constituencies.tpl.html"
                     },
                     "regulatory-bodies@users.user_edit": {
                         controller: "mfl.users.controllers.user_edit.regulatory_body",

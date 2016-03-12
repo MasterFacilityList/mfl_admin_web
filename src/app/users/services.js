@@ -13,6 +13,8 @@
         this.counties = api.setBaseUrl("api/common/counties/");
         this.constituencies = api.setBaseUrl("api/common/constituencies/");
         this.user_constituencies = api.setBaseUrl("api/common/user_constituencies/");
+        this.sub_counties = api.setBaseUrl("api/common/sub_counties/");
+        this.user_sub_counties = api.setBaseUrl("api/common/user_sub_counties/");
         this.contacts = api.setBaseUrl("api/common/contacts/");
         this.regulatory_bodies = api.setBaseUrl("api/facilities/regulating_bodies/");
         this.regulatory_body_users = api.setBaseUrl("api/facilities/regulatory_body_users/");

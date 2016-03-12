@@ -1,0 +1,43 @@
+<div class="col-xs-12 pad-0 margin-t-0 margin-b-0 content-card">
+  <table class="table table-hover table-condensed col-xs-12">
+      <thead class="grey-header">
+          <th class="col-xs-8">Sub-County&#42;</th>
+          <th class="col-xs-1 text-center"></th>
+      </thead>
+      <tbody>
+          <tr ng-repeat="sub_county in user.user_sub_counties">
+              <td class="col-xs-8">
+                <div class="form-group grid-inputs">
+                    <select name="sub_county" ng-model="sub_county.sub_county" class="form-control" required api-checker>
+                        <option value="">Select Sub-County</option>
+                        <option ng-repeat="sub in $parent.sub_counties | orderBy:'name'" ng-selected="{{sub.id == sub_county.sub_county}}" ng-value="sub.id">{{sub.name | titlecase }}</option>
+                    </select>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                </div>
+              </td>
+              <td class="col-xs-1 text-center">
+                  <a ng-click="removeLine('user_sub_counties',sub_county)" style="cursor: pointer" ng-if="create || !sub_county.id">
+                      <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                  </a>
+                  <div class="form-group checkbox" ng-if="!create && sub_county.id">
+                      <label for="open_late_night" class="control-label">
+                      <input type="checkbox" tooltip="Activate or inactivate sub_county" id="sub_county{{index}}" name="sub_county{{index}}" ng-model="sub_county.active" ng-change="inactivate(sub_county, 'user_sub_counties')">
+                      </label>
+                  </div>
+              </td>
+          </tr>
+          <tr ng-if="user.user_sub_counties.length === 0" class="">
+              <td colspan="2">
+                  <i class="fa fa-info-circle"></i> No Sub-county Assigned to User
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+<div class="col-xs-12 pad-0 text-right margin-t-10 margin-b-10">
+  <a class="btn btn-primary pull-right" ng-click="addLine('sub_county')" >
+      <i class="fa fa-plus-square-o"></i> Add sub-county
+    </a>
+</div>
+

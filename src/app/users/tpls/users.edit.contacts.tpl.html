@@ -11,7 +11,7 @@
                 <div class="form-group grid-inputs">
                     <select class="form-control" name="contact_type" ng-model="contact.contact_type" required api-checker>
                         <option value="">Select Contact Type</option>
-                        <option ng-repeat="cont in contact_types"  ng-selected="{{cont.id == contact.contact_type}}" ng-value="cont.id">{{cont.name}}</option>
+                        <option ng-repeat="cont in contact_types"  ng-selected="{{cont.id == contact.contact_type}}" ng-value="cont.id">{{cont.name }}</option>
                     </select>
                   <span class="highlight"></span>
                   <span class="bar"></span>

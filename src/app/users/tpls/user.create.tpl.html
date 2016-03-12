@@ -8,9 +8,9 @@
                 </div>
                 <div class="col-xs-12 pad-0 margin-t-20" ui-view="contacts"></div>
                 <div class="col-xs-12 pad-0 margin-t-20" ui-view="groups"></div>
-                <div class="col-xs-12 pad-0 margin-t-20" ng-if="login_user.user_groups.is_national && show_county || user.user_counties.length > 0"ui-view="counties">
+                <div class="col-xs-12 pad-0 margin-t-20" ui-view="counties">
                 </div>
-                <div class="col-xs-12 pad-0 margin-t-20" ng-if="!login_user.user_groups.is_national || user.user_constituencies.length > 0" ui-view="sub-counties"></div>
+
                 <div class="col-xs-12 pad-0 margin-t-20" ng-if="login_user.user_groups.is_national && show_regulator ||
                 user.regulatory_users.length > 0"
                 ui-view="regulatory-bodies"></div>

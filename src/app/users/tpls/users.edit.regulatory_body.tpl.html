@@ -10,7 +10,7 @@
                 <div class="form-group grid-inputs">
                    <select name="regbody"  ng-model="regbody.regulatory_body" class="form-control">
                         <option value="">Select Regulatory Body</option>
-                        <option value="{{reg.id}}" ng-selected="{{reg.id == regbody.regulatory_body}}" ng-repeat="reg in bodies">{{reg.name}}</option>
+                        <option value="{{reg.id}}" ng-selected="{{reg.id == regbody.regulatory_body}}" ng-repeat="reg in bodies">{{reg.name | titlecase}}</option>
                     </select>
                   <span class="highlight"></span>
                   <span class="bar"></span>

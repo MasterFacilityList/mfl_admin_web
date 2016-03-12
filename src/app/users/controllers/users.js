@@ -51,8 +51,20 @@
                 case "regbody" :
                     $scope.user.regulatory_users.push({regulatory_body : ""});
                     break;
+                case "sub_county" :
+                    if(_.isUndefined($scope.user.user_sub_counties)){
+                        $scope.user.user_sub_counties = [];
+                        $scope.user.user_sub_counties.push({sub_county :""});
+                    }
+                    else{
+                        $scope.user.user_sub_counties.push({sub_county :""});
+                    }
+                    break;
                 }
             };
+            $scope.county_required = false;
+            $scope.sub_county_required = false;
+
             $scope.grpChecker = function () {
                 $scope.county_counter = 0;
                 $scope.regulator_counter = 0;
@@ -83,10 +95,13 @@
                 }
                 else if(obj_str === "user_counties"){
                     active_obj[active_key] = $scope.user.user_counties;
+                    console.log(active_obj);
                 }
                 else if(obj_str === "regulatory_users"){
                     active_obj[active_key] = $scope.user.regulatory_users;
                 }
+                console.log($scope.user_id);
+                console.log(active_obj);
                 wrappers.users.update($scope.user_id, active_obj)
                     .success(function (){})
                     .error(function (data) {
@@ -138,9 +153,64 @@
                     $scope.user.regulatory_users = $scope.removeItems(
                         $scope.user.regulatory_users, obj, "regulatory_users");
                     break;
+                case "sub_county" :
+                    $scope.user.user_sub_counties = $scope.removeItems(
+                        $scope.user.user_sub_counties, obj,
+                        "user_sub_counties");
+                    break;
                 }
             };
             $scope.save = function () {
+                if(!$scope.user.groups.length){
+                    $scope.js_errors = "Please select a user group";
+                    console.log($scope.user);
+                    return;
+
+                }
+                var county_groups_signature = {
+                    "is_national": false,
+                    "is_administrator": true,
+                    "is_county_level": false
+                };
+                var sub_county_groups_signature = {
+                    "is_county_level": true
+                };
+
+                var regulator_groups_signature = {
+                    "is_regulator": true
+                };
+                var selected_group = $scope.user.groups[0];
+                var all_grp_dets = _.find($scope.groups, function (sel_grp)
+                    {
+                        return parseInt(sel_grp.id, 10
+                        ) === parseInt(selected_group.id, 10);
+                    }
+                );
+                var sltcd_user_subs = $scope.user.user_sub_counties || [];
+                var sltcd_user_counties = $scope.user.user_counties || [];
+                var sltcd_user_regs = $scope.user.regulatory_users || [];
+
+                if(!_.isUndefined(_.findWhere(
+                    [all_grp_dets], county_groups_signature)
+                    ) && sltcd_user_counties.length === 0){
+                    $scope.js_errors = "Please select a county";
+                    return;
+                }
+
+                if(!_.isUndefined(_.findWhere(
+                    [all_grp_dets], sub_county_groups_signature)
+                    ) && sltcd_user_subs.length === 0){
+                    $scope.js_errors = "Please select a sub-county";
+                    return;
+                }
+
+                if(!_.isUndefined(_.findWhere(
+                    [all_grp_dets], regulator_groups_signature)
+                    ) && sltcd_user_regs.length === 0){
+                    $scope.js_errors = "Please select a regulator";
+                    return;
+                }
+
                 _.each($scope.user.groups, function (new_grps) {
                     var curr_grp = _.findWhere(
                         $scope.groups, {id : parseInt(new_grps.id, 10)});
@@ -578,8 +648,8 @@
             }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
-                $scope.$parent.groups =  groupsService.filterGroups(
-                    $scope.login_user.is_national, data.results);
+                $scope.$parent.groups = data.results;
+
             })
             .error(function (data) {
                 $log.error(data);
@@ -589,6 +659,16 @@
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
             var updateGroups = function (new_grps) {
+                console.log(new_grps);
+                if(!$scope.$parent.user.user_sub_counties.length){
+                    $scope.error = "Please select a sub-county";
+                    return;
+                }
+                if(!$scope.$parent.user.user_counties.length){
+                    $scope.error = "Please select a County";
+                    return;
+                }
+
                 $scope.spinner = true;
                 if($scope.$parent.furthest < 4) {
                     $scope.$parent.furthest = 4;
@@ -655,7 +735,7 @@
             $scope.edit_counties = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
-            wrappers.counties.filter({page_size: 50, ordering: "name"})
+            wrappers.counties.filter({page_size: 500, ordering: "name"})
             .success(function (data) {
                 $scope.counties = data.results;
             })
@@ -669,14 +749,69 @@
             .error(function (data) {
                 $log.error(data);
             });
+
+            wrappers.sub_counties.filter({page_size: 500, ordering: "name"})
+            .success(function (data) {
+                $scope.sub_counties = data.results;
+                $scope.original_sub_counties = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            wrappers.constituencies.filter({page_size: 500, ordering: "name"})
+            .success(function (data) {
+                $scope.constituencies = data.results;
+                $scope.original_constituencies = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
+            $scope.filter_sub_counties = function(county_id){
+                console.log("called filter subs with " + county_id);
+                var sub_counties_to_filter = angular.copy(
+                    $scope.original_sub_counties);
+                console.log($scope.original_sub_counties);
+                var new_sub_counties = _.filter(
+                    sub_counties_to_filter, function(sub){
+                        return sub.county === county_id;
+                    }
+                );
+                console.log(new_sub_counties);
+                $scope.sub_counties = new_sub_counties;
+            };
+
+            $scope.filter_constituencies = function(county_id){
+                console.log("called filter conts with " + county_id);
+                var constituencies_to_filter = angular.copy(
+                    $scope.original_constituencies);
+                console.log($scope.original_constituencies);
+                var new_constituencies = _.filter(
+                    constituencies_to_filter, function(con){
+                        return con.county === county_id;
+                    }
+                );
+                console.log(new_constituencies);
+                $scope.constituencies = new_constituencies;
+            };
+
+            $scope.update_admin_units = function(county_id){
+                console.log("callled counties with " + county_id);
+                $scope.filter_constituencies(county_id);
+                $scope.filter_sub_counties(county_id);
+            };
+
+
             $scope.new_county = "";
 
             $scope.add = function (county_id) {
                 $scope.spinner = true;
                 var payload = {
                     "user": $scope.user_id,
-                    "county": county_id
+                    "county": county_id,
+                    "active": $scope.county.active
                 };
+                console.log(payload);
                 wrappers.user_counties.create(payload)
                 .success(function (data) {
                     $scope.user_counties.push(data);
@@ -794,9 +929,10 @@
                 $scope.nextState();
             }
             wrappers.constituencies.filter(
-                {"page_size": 20, "ordering": "name", "county": $scope.login_user.county})
+                {"page_size": 5000, "ordering": "name"})
             .success(function (data) {
                 $scope.constituencies = data.results;
+                $scope.original_constituencies = data.results;
             })
             .error(function (data) {
                 $log.error(data);
@@ -839,6 +975,71 @@
                 .error(function (data) {
                     $log.error(data);
                     user_const.delete_spinner = false;
+                });
+            };
+        }]
+    )
+.controller("mfl.users.controllers.user_edit.sub_county",
+        ["mfl.users.services.wrappers", "$log", "$scope",
+        "mfl.common.services.multistep","$state",
+        function (wrappers, $log, $scope, multistepService, $state) {
+            $scope.$parent.tab = 4;
+            if(!$scope.create) {
+                multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[4]);
+            } else {
+                $scope.nextState();
+            }
+            // wrappers.sub_counties.filter(
+            //     {"page_size": 5000, "ordering": "name"})
+            // .success(function (data) {
+            //     $scope.sub_counties = data.results;
+            //     $scope.original_sub_counties = data.results;
+            // })
+            // .error(function (data) {
+            //     $log.error(data);
+            // });
+            $scope.sub_counties = $scope.$parent.sub_counties;
+
+            $scope.user_id = $scope.user_id || $state.params.user_id;
+            wrappers.user_sub_counties.filter({user: $scope.user_id})
+            .success(function (data) {
+                $scope.user_sub_counties = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            $scope.new_sub_county = "";
+
+            $scope.add = function (sub_id) {
+                console.log(sub_id);
+                $scope.spinner = true;
+                var payload = {
+                    "user": $scope.user_id,
+                    "sub_county": sub_id
+                };
+                wrappers.user_sub_counties.create(payload)
+                .success(function (data) {
+                    $scope.user_sub_counties.push(data);
+                    $scope.spinner = false;
+                    $scope.new_sub_county = "";
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    $scope.error =  "A user can only be active in only one sub-county at a time";
+                    $scope.spinner = false;
+                });
+            };
+            $scope.removeChild = function (user_sub) {
+                user_sub.delete_spinner = true;
+                wrappers.user_sub_counties.remove(user_sub.id)
+                .success(function () {
+                    $scope.user_sub_counties = _.without($scope.user_sub_counties, user_sub);
+                    user_sub.delete_spinner = false;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    user_sub.delete_spinner = false;
                 });
             };
         }]

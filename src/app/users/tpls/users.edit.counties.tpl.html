@@ -8,9 +8,10 @@
           <tr ng-repeat="county in user.user_counties">
               <td class="col-xs-8">
                 <div class="form-group grid-inputs">
-                    <select name="county" class="form-control" ng-model="county.county" class="pad-t-15" required api-checker>
+                    <select name="county" class="form-control" ng-model="county.county" class="pad-t-15" required='' api-checker  ng-change="update_admin_units(county.county)">
                         <option value="">Select County</option>
-                        <option ng-repeat="cty in counties" ng-selected="{{cty.id == county.county}}" ng-value="cty.id">{{cty.name}}</option>
+                        <option ng-repeat="cty in counties | orderBy:'name'" ng-selected="{{cty.id == county.county}}" ng-value="cty.id"
+                        >{{cty.name | titlecase }}</option>
                     </select>
                   <span class="highlight"></span>
                   <span class="bar"></span>
@@ -21,7 +22,7 @@
                       <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
                   </a>
                   <div class="form-group checkbox" ng-if="!create && county.id">
-                      <label for="open_late_night" class="control-label">
+                      <label for="Active county" class="control-label">
                       <input type="checkbox" tooltip="Activate or inactivate county" id="county{{index}}" name="county{{index}}" ng-model="county.active" ng-change="inactivate(county, 'user_counties')">
                       </label>
                   </div>
@@ -40,4 +41,96 @@
       <i class="fa fa-plus-square-o"></i> Add County
   </a>
 </div>
+
+
+<div class="col-xs-12 pad-0 margin-t-0 margin-b-0 content-card">
+  <table class="table table-hover table-condensed col-xs-12">
+      <thead class="grey-header">
+          <th class="col-xs-8">Sub-County&#42;</th>
+          <th class="col-xs-1 text-center"></th>
+      </thead>
+      <tbody>
+          <tr ng-repeat="sub_county in user.user_sub_counties">
+              <td class="col-xs-8">
+                <div class="form-group grid-inputs">
+                    <select name="sub_county" ng-model="sub_county.sub_county"
+                    class="form-control" required="$parent.sub_county_required" api-checker>
+                        <option value="">Select Sub-County</option>
+                        <option ng-repeat="sub in $parent.sub_counties | orderBy:'name'" ng-selected="{{sub.id == sub_county.sub_county}}" ng-value="sub.id">{{sub.name | titlecase }}</option>
+                    </select>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                </div>
+              </td>
+              <td class="col-xs-1 text-center">
+                  <a ng-click="removeLine('user_sub_counties',sub_county)" style="cursor: pointer" ng-if="create || !sub_county.id">
+                      <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                  </a>
+                  <div class="form-group checkbox" ng-if="!create && sub_county.id">
+                      <label for="open_late_night" class="control-label">
+                      <input type="checkbox" tooltip="Activate or inactivate sub_county" id="sub_county{{index}}" name="sub_county{{index}}" ng-model="sub_county.active" ng-change="inactivate(sub_county, 'user_sub_counties')">
+                      </label>
+                  </div>
+              </td>
+          </tr>
+          <tr ng-if="user.user_sub_counties.length === 0" class="">
+              <td colspan="2">
+                  <i class="fa fa-info-circle"></i> No Sub-county Assigned to User
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+<div class="col-xs-12 pad-0 text-right margin-t-10 margin-b-10">
+  <a class="btn btn-primary pull-right" ng-click="addLine('sub_county')" >
+      <i class="fa fa-plus-square-o"></i> Add sub-county
+    </a>
+</div>
+
+
+
+
+<div class="col-xs-12 pad-0 margin-t-0 margin-b-0 content-card">
+  <table class="table table-hover table-condensed col-xs-12">
+      <thead class="grey-header">
+          <th class="col-xs-8">Constituency&#42;</th>
+          <th class="col-xs-1 text-center"></th>
+      </thead>
+      <tbody>
+          <tr ng-repeat="constituency in user.user_constituencies">
+              <td class="col-xs-8">
+                <div class="form-group grid-inputs">
+                    <select name="constituency" ng-model="constituency.constituency" class="form-control" required api-checker>
+                        <option value="">Select Constituency</option>
+                        <option ng-repeat="cnst in $parent.constituencies | orderBy:'name'" ng-selected="{{cnst.id == constituency.constituency}}" ng-value="cnst.id">{{cnst.name | titlecase }}</option>
+                    </select>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+                </div>
+              </td>
+              <td class="col-xs-1 text-center">
+                  <a ng-click="removeLine('constituencies',constituency)" style="cursor: pointer" ng-if="create || !constituency.id">
+                      <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                  </a>
+                  <div class="form-group checkbox" ng-if="!create && constituency.id">
+                      <label for="open_late_night" class="control-label">
+                      <input type="checkbox" tooltip="Activate or inactivate constituency" id="constituency{{index}}" name="constituency{{index}}" ng-model="constituency.active" ng-change="inactivate(constituency, 'user_constituencies')">
+                      </label>
+                  </div>
+              </td>
+          </tr>
+          <tr ng-if="user.user_constituencies.length === 0" class="">
+              <td colspan="2">
+                  <i class="fa fa-info-circle"></i> No Constituency Assigned to User
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+<div class="col-xs-12 pad-0 text-right margin-t-10 margin-b-10">
+  <a class="btn btn-primary pull-right" ng-click="addLine('constituencies')" >
+      <i class="fa fa-plus-square-o"></i> Add Constituency
+  </a>
+</div>
+
 
