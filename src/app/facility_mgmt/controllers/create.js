@@ -81,6 +81,7 @@
                             "name": $scope.facility.town_name
                         }
                     };
+
                 })
                 .error(function (data) {
                     $log.error(data);

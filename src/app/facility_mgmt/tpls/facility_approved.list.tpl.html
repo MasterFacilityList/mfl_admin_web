@@ -9,6 +9,7 @@
         <th sil-grid-sort field='facility_type_name'>Facility Type</th>
         <th sil-grid-sort field='owner_name'>Owner</th>
         <th sil-grid-sort field='county'>County</th>
+         <th sil-grid-sort field='constituency'>Sub-County</th>
         <th sil-grid-sort field='constituency'>Constituency</th>
         <th sil-grid-sort field='ward'>Ward</th>
         <th>Date Requested</th>
@@ -28,6 +29,7 @@
             <td data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
             <td data-title="Owner:" >{{::fac.owner_name}}</td>
             <td data-title="County:"> {{::fac.county | titlecase }}</td>
+            <td data-title="Constituency:" >{{::fac.sub_county | titlecase }}</td>
             <td data-title="Constituency:" >{{::fac.constituency | titlecase }}</td>
             <td data-title="Ward:" >{{::fac.ward_name | titlecase }}</td>
             <td data-title="Date Requested:" >{{::fac.date_requested | dateFilter}}</td>

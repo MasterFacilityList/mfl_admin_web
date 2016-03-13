@@ -65,6 +65,15 @@
                     </ui-select-choices>
                 </ui-select>
             </div>
+            <div class="form-group col-md-6 col-xs-12">
+                <label for="established date" class="control-label">
+                    <span class="fs-16">Date Established: {{ft.date_established | date}}</span>
+                </label>
+                <datepicker date-format="y-MM-dd" date-max-limit="{{maxDate}}">
+                  <input class="form-control" name="date_established" ng-model="ft.date_established" type="text"  placeholder="yy-MM-dd" required api-checker/>
+                </datepicker>
+            </div>
+
             <div class="form-group col-xs-12">
                 <label class="control-label">Owner Category &#42;</label>
                  <ui-select ng-model="select_values.owner_type" required name="owner_type" api-checker register-custom-form-control>
@@ -160,6 +169,14 @@
                   <label for="open_weekends">
                     <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="facility.open_weekends" api-checker>
                     Open during weekends
+                   </label>
+              </div>
+            </div>
+        <div class="col-xs-12">
+              <div class="form-group checkbox">
+                  <label for="open_weekends">
+                    <input type="checkbox" id="open_normal_day" name="open_normal_day" ng-model="facility.open_normal_day" api-checker>
+                    Open from 8 am to 5 pm
                    </label>
               </div>
             </div>

@@ -14,7 +14,8 @@
         "mfl.users.services",
         "ui.router",
         "mfl.common.forms",
-        "mfl.common.errors"
+        "mfl.common.errors",
+        "ngAnimate"
     ])
 
     /**
@@ -68,6 +69,7 @@
             $scope.grpChecker = function () {
                 $scope.county_counter = 0;
                 $scope.regulator_counter = 0;
+                $scope.national_counter = 0;
                 $scope.show_county = false;
                 $scope.show_regulator = false;
                 if($scope.user.groups.length > 0){
@@ -76,6 +78,9 @@
                             $scope.groups, {id : parseInt(usr_grp.id, 10)});
                         if(curr_grp.is_national === false) {
                             $scope.county_counter += 1;
+                        }
+                        if(curr_grp.is_national === true && curr_grp.is_regulator === false) {
+                            $scope.national_counter += 1;
                         }
                         if(curr_grp.is_regulator === true){
                             $scope.regulator_counter += 1;
