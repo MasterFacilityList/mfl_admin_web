@@ -14,8 +14,7 @@
         "mfl.users.services",
         "ui.router",
         "mfl.common.forms",
-        "mfl.common.errors",
-        "ngAnimate"
+        "mfl.common.errors"
     ])
 
     /**

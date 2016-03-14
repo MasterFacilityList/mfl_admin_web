@@ -19,7 +19,8 @@
             return memo;
         }, {
             "fields": "id,code,official_name,regulatory_status_name,updated," +
-                      "facility_type_name,owner_name,county,constituency,ward_name,keph_level"
+                      "facility_type_name,owner_name,county,sub_county_name,"+
+                      "ward_name,keph_level"
         });
         $scope.tooltip = {
             "title": "tooltip",

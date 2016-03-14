@@ -300,7 +300,7 @@
                 };
                 elem.on("click", function(){
                     if(elem.hasClass("sil-orderable")){
-                        // assume default ordering is asceding
+                        // assume default ordering is ascending
                         elem.removeClass("sil-orderable");
                         elem.addClass("sil-orderable-desc");
                         //order desc
@@ -320,6 +320,7 @@
                         }
                     }
                     gridCtrl.addFilter("ordering", $scope.sil_orderings.join(","));
+                    gridCtrl.getData();
                 });
             }
         };
