@@ -67,10 +67,10 @@
             </div>
             <div class="form-group col-md-6 col-xs-12">
                 <label for="established date" class="control-label">
-                    <span class="fs-16">Date Established: {{ft.date_established | date}}</span>
+                    <span class="fs-16">Date Established: {{facility.date_established | date}}</span>
                 </label>
                 <datepicker date-format="y-MM-dd" date-max-limit="{{maxDate}}">
-                  <input class="form-control" name="date_established" ng-model="ft.date_established" type="text"  placeholder="yy-MM-dd" required api-checker/>
+                  <input class="form-control" name="date_established" ng-model="facility.date_established" type="text"  placeholder="dd-mm-yy"  api-checker/>
                 </datepicker>
             </div>
 

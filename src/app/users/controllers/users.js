@@ -91,6 +91,7 @@
                     }
                 }
             };
+
             $scope.inactivate = function (obj, obj_str) {
                 var active_obj = {};
                 var active_key = JSON.stringify(obj_str);
@@ -414,7 +415,7 @@
      * @name mfl.users.controllers.user_edit
      *
      * @description
-     * The parent controller managing editting of user records
+     * The parent controller managing editing of user records
      */
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
@@ -654,6 +655,15 @@
             .success(function (data) {
                 $scope.$parent.groups = data.results;
 
+                $scope.$watch("user", function(usr){
+                    if(_.isUndefined(usr)){
+                        return;
+                    }
+                    if(!_.isUndefined(usr)){
+                        $scope.$parent.grpChecker();
+                    }
+
+                });
             })
             .error(function (data) {
                 $log.error(data);

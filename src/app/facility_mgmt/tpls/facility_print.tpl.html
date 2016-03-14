@@ -66,14 +66,30 @@
                     <i class="fa fa-times-circle-o fa-1x fs-15"></i>
                 </span>
             </span>
+
+            <span  class="content-right  col-md-6 col-xs-12">
+                <label class="text-black">Date Established: </label>
+                {{facility.date_established | date}}
+            </span>
+             <span class="pull-left col-md-6 col-xs-12">
+                <label class="text-black">Open from  8 A.M to 5 P.M </label>
+                <span ng-if="facility.open_normal_day" class="text-success">
+                    <i class="fa fa-check-circle-o fa-1x fs-15"></i>
+                </span>
+                <span ng-if="!facility.open_normal_day" class="text-danger">
+                    <i class="fa fa-times-circle-o fa-1x fs-15"></i>
+                </span>
+            </span>
             <span class="content-right col-md-6 col-xs-12">
                 <label class="text-black">Keph Level: </label>
                 {{facility.keph_level_name}}
             </span>
+
             <span ng-if="facility.facility_catchment_population" class="col-xs-12">
                 <label class="text-black">Facility Catchment Population: </label>
                 {{facility.facility_catchment_population}}
             </span>
+
             <div class="col-xs-12"><hr class="line-divider"></div>
             <div class="col-xs-12 margin-t-5">
                 <h4 class="fw-600">Location Details</h4>
