@@ -22,7 +22,7 @@
                   <div class="col-sm-6 col-xs-12 pad-0 form-group checkbox" style="margin-top: 10px !important;">
                       <label>
                           <input type="checkbox" data-toggle="checkbox-x" id="is_national" name="is_national" ng-model="group.is_national" api-checker >
-                          Is National?
+                          Will the users in this group see all facilities in Kenya?
                           <i class="fa fa-info-circle" bs-tooltip tooltip-placement="right" tooltip="Will the users in this group see all facilities in the country?"></i>
                        </label>
                   </div>
@@ -31,14 +31,24 @@
                   <div class="col-sm-6 col-xs-12 pad-0 form-group checkbox checkbox-lg">
                       <label>
                           <input type="checkbox" data-toggle="checkbox-x" id="is_administrator" name="is_administrator" ng-model="group.is_administrator" api-checker >
-                          Is Administrator?
+                          Can the users in this group create users?
                           <i class="fa fa-info-circle" bs-tooltip tooltip-placement="right" tooltip="Will the users in this group administor user rights?"></i>
                        </label>
                   </div>
                   <div class="col-sm-6 col-xs-12 pad-0 form-group checkbox checkbox-lg" style="margin-top: 10px !important;">
                       <label>
                           <input type="checkbox" data-toggle="checkbox-x" id="is_county_level" name="is_county_level" ng-model="group.is_county_level" api-checker >
-                          Is County Level?
+                          Can  the CHRIO assign users to this group?
+                          <i class="fa fa-info-circle" bs-tooltip tooltip-placement="right" tooltip="Will the users in this group create sub county users?"></i>
+                       </label>
+                  </div>
+              </div>
+              <div class="col-xs-12 pad-0">
+
+                  <div class="col-sm-6 col-xs-12 pad-0 form-group checkbox checkbox-lg" style="margin-top: 10px !important;">
+                      <label>
+                          <input type="checkbox" data-toggle="checkbox-x" id="is_sub_county_level" name="is_county_level" ng-model="group.is_county_level" api-checker >
+                          Can  the SCHRIO assign users to this group?
                           <i class="fa fa-info-circle" bs-tooltip tooltip-placement="right" tooltip="Will the users in this group create sub county users?"></i>
                        </label>
                   </div>
