@@ -1011,7 +1011,7 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
-            it("should save facility basic details", function () {
+            iit("should save facility basic details", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state" : state,
@@ -1019,9 +1019,8 @@
                         facility_id: 3
                     }
                 };
-                data.$scope.selectReload = function () {
-                    return {"results": []};
-                };
+                var parent_c = controller("mfl.facility_mgmt.controllers.facility_create");
+                data.$scope.selectReload = parent_c.selectReload;
                 state.params.facility_id = "";
                 data.$scope.facility = {
                     facility_physical_address : {town : "5"}
@@ -1041,7 +1040,60 @@
                 data.$scope.nextState = angular.noop;
                 data.$scope.setFurthest = angular.noop;
                 ctrl(".basic", data);
-
+                var counties = [
+                    {
+                        "id": "1",
+                        "name": "Mombasa"
+                    }
+                ];
+                var sub_counties = [
+                    {
+                        "id": "1",
+                        "name": "Kisauni",
+                        "county": "1"
+                    }
+                ];
+                var consituencies = [
+                    {
+                        "id": "1",
+                        "name": "Kisauni",
+                        "county": "1"
+                    }
+                ];
+                var wards = [
+                    {
+                        "id": "1",
+                        "name": "Kisauni",
+                        "sub_county": "1",
+                        "consituency": "1"
+                    }
+                ];
+                data.$scope.select_values = {
+                    county : {
+                        "id" : 1 ,
+                        "name" : "Mombasa"
+                    },
+                    sub_county : {
+                        "id" : 10 ,
+                        "name" : "Kisauni"
+                    },
+                    consituency : {
+                        "id" : 10 ,
+                        "name" : "Kisauni"
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/common/counties/?page_size=10000&fields=name,id")
+                    .respond(200, counties);
+                httpBackend
+                    .expectGET(server_url+"api/common/consituencies/?page_size=10000&fields=name,id,county")
+                    .respond(200, consituencies);
+                httpBackend
+                    .expectGET(server_url+"api/common/sub_counties/?page_size=10000&fields=name,id,county")
+                    .respond(200, sub_counties);
+                httpBackend
+                    .expectGET(server_url+"api/common/wards/?page_size=10000&fields=name,id,sub_county,consituency")
+                    .respond(200, wards);
                 httpBackend
                     .expectPOST(server_url+"api/facilities/facilities/")
                     .respond(201, {name : "Yitchouse"});

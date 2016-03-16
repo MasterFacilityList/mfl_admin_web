@@ -11,7 +11,6 @@
         <th >Owner</th>
         <th >County</th>
         <th >Sub County</th>
-        <th >Constituency</th>
         <th sil-grid-sort field='ward'>Ward</th>
         <th>Approval Type</th>
         <th sil-grid-sort field='updated'>Date Updated</th>
@@ -32,8 +31,7 @@
             <td data-title="Operation Status:" >{{::fac.operation_status_name | titlecase }}</td>
             <td data-title="Owner:" >{{::fac.owner_name}}</td>
             <td data-title="County:"> {{::fac.county | titlecase }}</td>
-            <td data-title="Sub County:" >{{::fac.constituency | titlecase }}</td>
-            <td data-title="Constituency:" >{{::fac.constituency | titlecase }}</td>
+            <td data-title="Sub County:" >{{::fac.sub_county_name | titlecase }}</td>
             <td data-title="Ward:" >{{::fac.ward_name | titlecase }}</td>
             <td>{{::fac.has_edits ? 'Update' : 'New'}}</td>
             <td data-title="Date Updated:" >{{::fac.updated|dateFilter}}</td>

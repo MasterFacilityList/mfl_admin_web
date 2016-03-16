@@ -30,105 +30,27 @@
         multistepService, $state, $q, $log, wrappers, toasty) {
         $scope.print = false;
         $scope.create = true;
-        console.log("Using this controller");
         //declaration of facility scope variable
         $scope.facility = {};
         $scope.new_facility = $state.params.facility_id;
         $scope.facility_id = $state.params.facility_id;
         $scope.furthest = $stateParams.furthest;
-        var ward_filters = {
-            "page_size": 10000,
-            "fields":"name,id,sub_county,constituency"
-        };
-        wrappers.wards.filter(ward_filters)
-        .success(function(data){
-            $scope.wards = data.results;
-            $scope.original_wards = data.results;
-        })
-        .error(function(data){
-            $log.error(data);
-        });
 
-        wrappers.sub_counties.filter({"page_size": 10000})
-        .success(function(data){
-            $scope.sub_counties = data.results;
-            $scope.original_sub_counties = data.results;
-        })
-        .error(function(data){
-            $log.error(data);
-        });
-
-        $scope.original_sub_counties = angular.copy($scope.sub_counties);
-        wrappers.counties.filter({"page_size": 10000})
-        .success(function(data){
-            $scope.counties = data.results;
-            $scope.original_counties = data.results;
-        })
-        .error(function(data){
-            $log.error(data);
-        });
-
-        wrappers.constituencies.filter({"page_size": 10000})
-        .success(function(data){
-            $scope.constituencies = data.results;
-            $scope.original_constituencies = data.results;
-        })
-        .error(function(data){
-            $log.error(data);
-        });
-
-        $scope.filter_wards = function(sub_county_id, const_id){
-            var wards_to_filter = angular.copy($scope.original_wards);
-            var  new_wards = [];
-
-            if(!_.isEmpty(sub_county_id)){
-                new_wards = _.filter(
-                    wards_to_filter, function(ward){
-                        return ward.sub_county === sub_county_id;
-                    }
-                );
-
+        $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
+            if (! _.isString(search_term)) {
+                return $q.reject();
             }
-            if(!_.isEmpty(const_id)){
-                new_wards = _.filter(
-                    wards_to_filter, function(ward){
-                        return ward.constituency === const_id;
-                    }
-                );
-            }
-            $scope.wards = new_wards;
+            var filters = _.isEmpty(search_term) ? {} : {"search_auto": search_term};
+            return wrapper.filter(_.extend(filters, extra_filters))
+            .success(function (data) {
+                $scope[scope_var] = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
         };
 
-        $scope.filter_sub_counties = function(county_id){
-            var sub_counties_to_filter = angular.copy(
-                $scope.original_sub_counties);
-
-            var new_sub_counties = _.filter(
-                sub_counties_to_filter, function(sub){
-                    return sub.county === county_id;
-                }
-            );
-            $scope.sub_counties = new_sub_counties;
-        };
-
-        $scope.filter_constituencies = function(county_id){
-
-            var constituencies_to_filter = angular.copy(
-                $scope.original_constituencies);
-
-            var new_constituencies = _.filter(
-                constituencies_to_filter, function(con){
-                    return con.county === county_id;
-                }
-            );
-            $scope.constituencies = new_constituencies;
-        };
-
-        $scope.update_admin_units = function(county_id){
-            $scope.filter_constituencies(county_id);
-            $scope.filter_sub_counties(county_id);
-        };
-        //intializing ui select values
+        //initializing ui select values
         if(_.isEmpty($state.params.facility_id)){
             $scope.select_values = {};
         } else {
@@ -179,19 +101,7 @@
                     $log.error(data);
                 });
         }
-        $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
-            if (! _.isString(search_term)) {
-                return $q.reject();
-            }
-            var filters = _.isEmpty(search_term) ? {} : {"search_auto": search_term};
-            return wrapper.filter(_.extend(filters, extra_filters))
-            .success(function (data) {
-                $scope[scope_var] = data.results;
-            })
-            .error(function (data) {
-                $log.error(data);
-            });
-        };
+
         $scope.steps = facilityMultistepService.facilityObject();
         //multistep config
         $scope.nextState = function () {

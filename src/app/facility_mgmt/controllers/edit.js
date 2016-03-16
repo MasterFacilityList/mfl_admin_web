@@ -318,18 +318,6 @@
                             "id": $scope.facility.keph_level,
                             "name": $scope.facility.keph_level_name
                         },
-                        sub_county: {
-                            "id": $scope.facility.sub_county,
-                            "name": $scope.facility.sub_county_name
-                        },
-                        constituency: {
-                            "id": $scope.facility.constituency_id,
-                            "name": $scope.facility.constituency
-                        },
-                        county: {
-                            "id": $scope.facility.county,
-                            "name": $scope.facility.county_name
-                        },
                         town: {
                             "id": $scope.facility.town,
                             "name": $scope.facility.town_name
@@ -341,98 +329,6 @@
                         $scope.off_contacts =
                             $scope.facility.officer_in_charge.contacts;
                     }
-                    var ward_filters = {
-                        "page_size": 10000,
-                        "fields":"name,id,sub_county,constituency"
-                    };
-                    wrappers.wards.filter(ward_filters)
-                    .success(function(data){
-                        $scope.wards = data.results;
-                        $scope.original_wards = data.results;
-                    })
-                    .error(function(data){
-                        $log.error(data);
-                    });
-
-                    wrappers.sub_counties.filter({"page_size": 10000})
-                    .success(function(data){
-                        $scope.sub_counties = data.results;
-                        $scope.original_sub_counties = data.results;
-                    })
-                    .error(function(data){
-                        $log.error(data);
-                    });
-
-                    $scope.original_sub_counties = angular.copy($scope.sub_counties);
-                    wrappers.counties.filter({"page_size": 10000})
-                    .success(function(data){
-                        $scope.counties = data.results;
-                        $scope.original_counties = data.results;
-                    })
-                    .error(function(data){
-                        $log.error(data);
-                    });
-
-                    wrappers.constituencies.filter({"page_size": 10000})
-                    .success(function(data){
-                        $scope.constituencies = data.results;
-                        $scope.original_constituencies = data.results;
-                    })
-                    .error(function(data){
-                        $log.error(data);
-                    });
-
-                    $scope.filter_wards = function(sub_county_id, const_id){
-                        var wards_to_filter = angular.copy($scope.original_wards);
-                        var  new_wards = [];
-
-                        if(!_.isEmpty(sub_county_id)){
-                            new_wards = _.filter(
-                                wards_to_filter, function(ward){
-                                    return ward.sub_county === sub_county_id;
-                                }
-                            );
-
-                        }
-                        if(!_.isEmpty(const_id)){
-                            new_wards = _.filter(
-                                wards_to_filter, function(ward){
-                                    return ward.constituency === const_id;
-                                }
-                            );
-                        }
-                        $scope.wards = new_wards;
-                    };
-
-                    $scope.filter_sub_counties = function(county_id){
-                        var sub_counties_to_filter = angular.copy(
-                            $scope.original_sub_counties);
-
-                        var new_sub_counties = _.filter(
-                            sub_counties_to_filter, function(sub){
-                                return sub.county === county_id;
-                            }
-                        );
-                        $scope.sub_counties = new_sub_counties;
-                    };
-
-                    $scope.filter_constituencies = function(county_id){
-
-                        var constituencies_to_filter = angular.copy(
-                            $scope.original_constituencies);
-
-                        var new_constituencies = _.filter(
-                            constituencies_to_filter, function(con){
-                                return con.county === county_id;
-                            }
-                        );
-                        $scope.constituencies = new_constituencies;
-                    };
-
-                    $scope.update_admin_units = function(county_id){
-                        $scope.filter_constituencies(county_id);
-                        $scope.filter_sub_counties(county_id);
-                    };
 
                 })
                 .error(function (data) {
@@ -442,6 +338,7 @@
                     errorMessages.facility_details;
                 });
 
+
             $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
                 if (! _.isString(search_term)) {
                     return $q.reject();
@@ -449,6 +346,7 @@
                 var filters = _.isEmpty(search_term) ? {} : {"search_auto": search_term};
                 return wrapper.filter(_.extend(filters, extra_filters))
                 .success(function (data) {
+
                     $scope[scope_var] = data.results;
                 })
                 .error(function (data) {
@@ -564,6 +462,39 @@
                     frm.name.$render();
                 }
             };
+            var ward_filters = {
+                fields: "id,name,sub_county,constituency",
+                page_size:10000
+            };
+            var county_filters = {
+                fields: "id,name",
+                page_size:10000
+            };
+            var const_filters = {
+                fields: "id,name,county",
+                page_size:10000
+            };
+            var sub_county_filters = {
+                fields: "id,name,county",
+                page_size:10000
+            };
+
+            $scope.filterFxns = {
+                subFilter: function (a) {
+                   return a.county === $scope.select_values.county;
+                },
+                constFilter: function (a) {
+                   return a.county === $scope.select_values.county;
+                },
+                wardConstFilter: function (a) {
+                   return a.constituency === $scope.select_values.constituency;
+                },
+                wardSubFilter: function (a) {
+                    return a.constituency === $scope.select_values.sub_county;
+                }
+            };
+
+
             $scope.contacts = [{type: "", contact : ""}];
             $scope.login_user = loginService.getUser();
             $scope.selectReload(wrappers.facility_owners, "", "owners");
@@ -571,11 +502,15 @@
                 "owner_types");
             $scope.selectReload(wrappers.operation_status, "", "operation_status");
             $scope.selectReload(wrappers.keph_levels, "", "keph_levels");
-            $scope.selectReload(wrappers.wards, "", "wards");
+
             $scope.selectReload(wrappers.regulating_bodies, "", "regulating_bodies");
             $scope.selectReload(wrappers.facility_types, "", "facility_types");
             $scope.selectReload(wrappers.towns, "", "towns");
-            $scope.selectReload(wrappers.sub_counties, "", "sub_counties");
+            $scope.selectReload(wrappers.wards, "", "wards", ward_filters);
+            $scope.selectReload(wrappers.sub_counties, "", "sub_counties", sub_county_filters);
+            $scope.selectReload(wrappers.constituencies, "", "constituencies", const_filters);
+            $scope.selectReload(wrappers.counties, "", "counties", county_filters);
+
             $scope.save = function (frm) {
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.geolocation");

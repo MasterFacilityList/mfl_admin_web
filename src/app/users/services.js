@@ -19,6 +19,7 @@
         this.regulatory_bodies = api.setBaseUrl("api/facilities/regulating_bodies/");
         this.regulatory_body_users = api.setBaseUrl("api/facilities/regulatory_body_users/");
         this.job_titles = api.setBaseUrl("api/facilities/job_titles/");
+        this.filter_summaries = api.setBaseUrl("api/common/filtering_summaries");
     }])
     .service("mfl.users.services.groups",[function () {
             this.filterGroups = function (user,grps) {

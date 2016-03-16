@@ -45,7 +45,7 @@
                             return val[k] || [];
                         });
                         if (_.isEmpty(scope.err_list)) {
-                            wiered_errors = ["An error occurred while processing your request"];
+                            wiered_errors = ["An error occured while processing your request"];
                         }
                         wiered_errors = _.flatten(wiered_errors);
 
