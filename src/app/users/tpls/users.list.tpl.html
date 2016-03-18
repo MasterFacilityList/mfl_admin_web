@@ -4,10 +4,11 @@
         <table class="table table-hover table-condensed fs-14">
             <thead>
                 <th sil-grid-sort field='first_name' class="col-xs-2">Name</th>
-                <th sil-grid-sort field='username' class="col-xs-2">Employee Number</th>
-                <th sil-grid-sort field='email' class="col-xs-4">Email</th>
-                <th sil-grid-sort field='last_login' class="col-xs-3">Last Login</th>
-                <th sil-grid-sort field='is_active' class="col-xs-1">Is Active</th>
+                <th sil-grid-sort field='employee_number' class="col-xs-2">Employee No.</th>
+                <th sil-grid-sort field='email' class="col-xs-2">Email</th>
+                <th class="col-xs-2">County</th>
+                <th sil-grid-sort field='last_login' class="col-xs-2">Last Login</th>
+                <th sil-grid-sort field='is_active' class="col-xs-1">Active</th>
             </thead>
             <tbody class="example-animate-container">
                 <tr class="animate-repeat" ng-repeat="user in users | filter: search.query">
@@ -18,6 +19,7 @@
                     </td>
                     <td data-title="Username" class="pad-t-15 text-center">{{::user.employee_number}}</td>
                     <td data-title="Email" class="pad-t-15">{{::user.email}}</td>
+                    <td data-title="county" class="pad-t-15">{{::user.county_name | titlecase}}</td>
                     <td data-title="Last Login" class="pad-t-15">{{::user.last_login | dateFilter }}</td>
                     <td data-title="Is Active" class="pad-t-15 text-center">{{::user.is_active | boolFilter}}</td>
                 </tr>

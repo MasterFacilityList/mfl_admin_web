@@ -14,7 +14,8 @@
         "mfl.users.services",
         "ui.router",
         "mfl.common.forms",
-        "mfl.common.errors"
+        "mfl.common.errors",
+        "mfl.common.filters"
     ])
 
     /**
@@ -31,6 +32,20 @@
         "mfl.users.services.groups", "toasty",
         function ($scope, $state, $stateParams, multistepService, wrappers,
             $log,loginService, groupsService, toasty) {
+            $scope.title = {
+                icon: "fa-edit",
+                name: "Edit User"
+            };
+            $scope.action = [
+                {
+                    func : "ui-sref='users.user_edit.delete'" +
+                            "requires-user-feature='is_staff'" +
+                            "requires-permission='users.delete_mfluser'",
+                    class: "btn btn-danger",
+                    tipmsg: "Delete User",
+                    wording : "Delete"
+                }
+            ];
             $scope.addLine = function (obj_str) {
                 switch(obj_str){
                 case "contacts" :
@@ -173,6 +188,7 @@
                     "is_administrator": true,
                     "is_county_level": false
                 };
+
                 var sub_county_groups_signature = {
                     "is_county_level": true
                 };
@@ -188,7 +204,6 @@
                     }
                 );
 
-                console.log($scope.user);
                 var sltcd_user_subs = $scope.user.user_sub_counties || [];
                 var sltcd_user_counties = $scope.user.user_counties || [];
                 var sltcd_user_regs = $scope.user.regulatory_users || [];
@@ -439,6 +454,7 @@
             $scope.user_id = $stateParams.user_id;
             $scope.wrapper = wrappers.users;
             $scope.create = false;
+
             $scope.tabState = function(obj) {
                 _.each($scope.steps, function (step) {
                     if(step.name === obj.name) {
@@ -671,7 +687,6 @@
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
             var updateGroups = function (new_grps) {
-                console.log(new_grps);
                 if(!$scope.$parent.user.user_sub_counties.length){
                     $scope.error = "Please select a sub-county";
                     return;
@@ -798,9 +813,8 @@
 
             if(!_.isUndefined($scope.user_counties)){
                 selected_counties = _.pluck($scope.user_counties, "county");
-                console.log(selected_counties)
             }
-            $scope.new_sub_counties = []
+            $scope.new_sub_counties = [];
             $scope.new_counties = [];
 
 
@@ -818,7 +832,7 @@
                 sub_county: []
             };
 
-             $scope.$watch("user", function(usr){
+            $scope.$watch("user", function(usr){
                 if(_.isUndefined(usr)){
                     return;
                 }
@@ -829,18 +843,19 @@
                             name: usr.user_counties[x].county_name
                         });
                     }
-                    for(var x=0;x<usr.user_constituencies.length;x++){
+                    for(x=0;x<usr.user_constituencies.length;x++){
                         $scope.filters.constituency.push({
                             id: usr.user_constituencies[x].constituency,
                             name: usr.user_constituencies[x].constituency_name
                         });
                     }
-                    for(var x=0;x<usr.user_sub_counties.length;x++){
+                    for(x=0;x<usr.user_sub_counties.length;x++){
                         $scope.filters.sub_county.push({
                             id: usr.user_sub_counties[x].sub_county,
                             name: usr.user_sub_counties[x].sub_county_name
                         });
                     }
+
                 }
 
             });
@@ -880,7 +895,6 @@
                     "county": county_id,
                     "active": $scope.county.active
                 };
-                console.log(payload);
                 wrappers.user_counties.create(payload)
                 .success(function (data) {
                     $scope.user_counties.push(data);
@@ -1072,7 +1086,6 @@
             $scope.new_sub_county = "";
 
             $scope.add = function (sub_id) {
-                console.log(sub_id);
                 $scope.spinner = true;
                 var payload = {
                     "user": $scope.user_id,
@@ -1123,7 +1136,8 @@
             name: "Manage users"
         };
         $scope.filters = {
-            "fields": "id,first_name,last_name,username,email,last_login,is_active,employee_number"
+            "fields": "id,first_name,last_name,email,last_login,is_active,"+
+            "employee_number,county_name, sub_county_name, constituency_name"
         };
         $scope.action = [
             {

@@ -9,7 +9,8 @@
     ])
 
     .controller("mfl.reports.controllers.facilities", ["$scope","$stateParams",
-        "mfl.reports.services.wrappers","$state","URL_SEARCH_PARAMS","$window","api.oauth2",
+        "mfl.reports.services.wrappers","$state","URL_SEARCH_PARAMS","$window",
+        "api.oauth2",
         function($scope,filterParams,wrappers,$state, URL_SEARCH_PARAMS,$window,auth){
         var filter_keys = _.keys(filterParams);
         var params = _.reduce(filter_keys, function (memo, b) {
@@ -20,7 +21,7 @@
         }, {
             "fields": "id,code,official_name,regulatory_status_name,updated," +
                       "facility_type_name,owner_name,county,sub_county_name,"+
-                      "ward_name,keph_level"
+                      "ward_name,keph_level, keph_level_name,constituency_name"
         });
         $scope.tooltip = {
             "title": "tooltip",
@@ -44,6 +45,7 @@
                 county: [],
                 facility_type: [],
                 constituency: [],
+                sub_county: [],
                 ward: [],
                 operation_status: [],
                 service_category: [],
@@ -85,6 +87,7 @@
             // update ui-select with relationships
             var relationships = [
                 {child: "ward", parent: "constituency"},
+                {child: "ward", parent: "sub_county"},
                 {child: "constituency", parent: "county"}
             ];
             _.each(relationships, function (r) {
@@ -122,6 +125,10 @@
                 var county_ids = _.pluck($scope.filters.multiple.county, "id");
                 return _.contains(county_ids, a.county);
             },
+            subFilter: function (a) {
+                var county_ids = _.pluck($scope.filters.multiple.county, "id");
+                return _.contains(county_ids, a.county);
+            },
             wardFilter: function (a) {
                 var const_ids = _.pluck($scope.filters.multiple.constituency, "id");
                 return _.contains(const_ids, a.constituency);
@@ -142,7 +149,7 @@
 
         wrappers.filters.filter({"fields": ["county", "facility_type",
             "constituency", "ward", "operation_status", "service_category",
-            "owner_type", "owner", "service", "keph_level"
+            "owner_type", "owner", "service", "keph_level", "sub_county"
         ]})
         .success(function (data) {
             $scope.filter_summaries = data;
@@ -166,8 +173,10 @@
 
         $scope.filterFacilities = function () {
             var multiple = dumpMultipleFilters($scope.filters.multiple);
+            console.log(multiple);
             var single = dumpSingleFilters($scope.filters.single);
             var params = _.extend(single, multiple);
+            console.log(params);
             params.page = undefined;
             params.page_size = undefined;
             $state.go($state.current.name, params);

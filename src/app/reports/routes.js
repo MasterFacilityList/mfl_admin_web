@@ -6,7 +6,7 @@
         "ui.router"
     ])
     .constant("URL_SEARCH_PARAMS", [
-        "name", "code",
+        "name", "code", "sub_county",
 
         "search",
 

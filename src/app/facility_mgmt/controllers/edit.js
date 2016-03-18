@@ -321,6 +321,20 @@
                         town: {
                             "id": $scope.facility.town,
                             "name": $scope.facility.town_name
+                        },
+                        county: {
+                            "id": $scope.facility.county_id,
+                            "name": $scope.facility.county_name
+                        },
+                        sub_county: {
+                            "id": $scope.facility.sub_county_id,
+                            "name": $scope.facility.sub_county_name,
+                            "county": $scope.facility.county_id
+                        },
+                        constituency: {
+                            "id": $scope.facility.constituency_id,
+                            "name": $scope.facility.constituency,
+                            "county": $scope.facility.county_id
                         }
                     };
 
@@ -481,13 +495,13 @@
 
             $scope.filterFxns = {
                 subFilter: function (a) {
-                   return a.county === $scope.select_values.county;
+                    return a.county === $scope.select_values.county;
                 },
                 constFilter: function (a) {
-                   return a.county === $scope.select_values.county;
+                    return a.county === $scope.select_values.county;
                 },
                 wardConstFilter: function (a) {
-                   return a.constituency === $scope.select_values.constituency;
+                    return a.constituency === $scope.select_values.constituency;
                 },
                 wardSubFilter: function (a) {
                     return a.constituency === $scope.select_values.sub_county;

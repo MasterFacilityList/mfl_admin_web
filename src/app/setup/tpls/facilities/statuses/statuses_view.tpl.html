@@ -16,6 +16,15 @@
               <label class="control-label">Facility Status&#42;</label>
               <input class="form-control" name="name" required ng-model="facility_status.name" placeholder="Enter facility status" api-checker/>
           </div>
+           <div class="form-group ">
+                <label for="is_exclusive">
+                  <input type="checkbox" name="is_public_visible"
+                  ng-model="facility_status.is_public_visible"  id="is_public_visible"/>
+
+
+                      Will facilities with this status be seen in pubic?
+                   </label>
+              </div>
           <!-- </div> -->
           <button type="submit" class="btn btn-primary pull-left">Save</button>
           <a class="btn btn-default margin-l-10 pull-left" ui-sref="setup.facility_statuses">Cancel</a>

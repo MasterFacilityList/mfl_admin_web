@@ -59,6 +59,12 @@
             <label class="control-label">No. of Monitored Households</label>
             <input type="number" class="form-control" name="households_monitored" ng-model="unit.households_monitored" required placeholder="Number of Monitored Households" api-checker/>
         </div>
+
+        <div class="form-group col-xs-12">
+            <label class="control-label">No. of CHVs</label>
+            <input type="number" class="form-control" name="number_of_chvs" ng-model="unit.number_of_chvs" required placeholder="Number of Community Health Volunteers in the unit" api-checker/>
+        </div>
+
         <div class="form-group col-xs-12">
             <label>County</label>
             <input class="form-control" readonly ng-model="unit.facility_county">
