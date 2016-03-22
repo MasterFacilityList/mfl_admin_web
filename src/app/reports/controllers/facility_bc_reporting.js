@@ -16,6 +16,7 @@
     angular.module("mfl.reports.controllers.facility_reporting", [
         "mfl.reports.services",
         "mfl.common.export",
+        "mfl.common.filters",
         "mfl.reports.controllers.chu_reporting"
     ])
 
@@ -24,6 +25,51 @@
         function($scope, $controller,wrappers) {
             var helper = $controller("mfl.reports.controllers.helper");
             helper.initCtrl($scope,wrappers.reporting, "beds_and_cots_by_county", "county_bc");
+        }
+    ])
+    .controller("mfl.reports.controllers.facility_counties_bed_cots", ["$scope",
+        "mfl.reports.services.wrappers", "$stateParams", "$controller",
+        function($scope, $wrappers, $stateParams, $controller){
+            $scope.filters  = {
+                "report_level": "county",
+                "report_type": "individual_facility_beds_and_cots",
+                "county": $stateParams.county_id
+            };
+            $scope.admin_area =  $stateParams.area_name + " "+ $stateParams.area_class;
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, $wrappers.reporting,
+               "individual_facility_beds_and_cots", "data"
+            );
+        }
+    ])
+    .controller("mfl.reports.controllers.facility_cons_bed_cots", ["$scope",
+        "mfl.reports.services.wrappers", "$stateParams", "$controller",
+        function($scope, $wrappers, $stateParams, $controller){
+            $scope.filters  = {
+                "report_level": "county",
+                "report_type": "individual_facility_beds_and_cots",
+                "sub_county": $stateParams.sub_id
+            };
+            $scope.admin_area =  $stateParams.area_name + " "+ $stateParams.area_class;
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, $wrappers.reporting,
+               "individual_facility_beds_and_cots", "data"
+            );
+        }
+    ])
+    .controller("mfl.reports.controllers.facility_wards_bed_cots", ["$scope",
+        "mfl.reports.services.wrappers", "$stateParams", "$controller",
+        function($scope, $wrappers, $stateParams, $controller){
+            $scope.filters  = {
+                "report_level": "county",
+                "report_type": "individual_facility_beds_and_cots",
+                "ward": $stateParams.ward_id
+            };
+            $scope.admin_area =  $stateParams.area_name + " "+ $stateParams.area_class;
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, $wrappers.reporting,
+               "individual_facility_beds_and_cots", "data"
+            );
         }
     ])
     .controller("mfl.reports.controllers.bc_constituencies",

@@ -1,0 +1,54 @@
+<div class="content-header">
+   <div class="action-container content-header-extra">
+       <div class="action-container content-header-extra pad-r-5">
+            <button tooltip-placement="bottom"  class="btn btn-primary" ng-click="exportToExcel()">
+                Export To Excel
+            </button>
+
+       </div>
+   </div>
+   <h2 class="content-title">
+        <span class="main-title">Facilities with beds and cots in {{admin_area | titlecase}}</span>
+   </h2>
+</div>
+<section class="margin-t-10">
+    <div class="col-sm-12">
+        <div class="col-xs-12 margin-t-40" ng-if="spinner">
+        <div class="map-change-state">
+              <div class="loader"></div>
+              <div class="row">
+                  <h3 class="text-center loader-text">Please wait...</h3>
+              </div>
+          </div>
+        </div>
+        <div ng-if="!spinner" class="content-card col-xs-12">
+            <div class="col-sm-4">
+               <input class="form-control" type="text"  ng-model="search" placeholder="Search County.."/>
+            </div>
+           <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+
+            <div class="col-xs-12 margin-b-20">
+                <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
+                    <thead>
+                       <th class="col-xs-3 text-wrap">Facility Code</th>
+                        <th class="col-xs-3 text-wrap">Facility Name</th>
+                        <th class="col-xs-3 text-center text-wrap">No. of Beds</th>
+                        <th class="col-xs-3 text-center text-wrap">No. of Cots</th>
+                    </thead>
+                    <tbody class="fade-content">
+                        <tr ng-repeat="facility in data | filter:search">
+                            <td  data-title="Beds:">{{::facility.facility_code}}</td>
+                            <td  data-title="Cots:">{{::facility.facility_name}}</td>
+                            <td  class="text-center" data-title="Beds:">{{::facility.number_of_beds}}</td>
+                            <td  class="text-center" data-title="Cots:">
+                              {{::facility.number_of_cots}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if="data.length===0">
+                        <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

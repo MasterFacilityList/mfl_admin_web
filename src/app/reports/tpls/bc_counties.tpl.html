@@ -4,6 +4,7 @@
             <button tooltip-placement="bottom"  class="btn btn-primary" ng-click="exportToExcel()">
                 Export To Excel
             </button>
+
        </div>
    </div>
    <h2 class="content-title">
@@ -25,12 +26,40 @@
                <input class="form-control" type="text"  ng-model="search" placeholder="Search County.."/>
             </div>
            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+
+                <div class="dropdown pull-right">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      Filter By:
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li>
+                        <a ui-sref="reports.bc_counties">
+                            <span class="">Beds and Cots (County)</span>
+                        </a>
+                      </li>
+                      <li>
+                      <a ui-sref="reports.bc_constituencies">
+                            <span class="">Beds and Cots (Sub-County)</span>
+                      </a>
+                      </li>
+                      <li>
+                        <a ui-sref="reports.bc_wards">
+                          <span class="">Beds and Cots (Ward)</span>
+                        </a>
+                      </li>
+
+                    </ul>
+              </div>
+
+
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="col-xs-5 text-wrap">County</th>
-                        <th class="col-xs-4 text-center text-wrap">Beds</th>
+                        <th class="col-xs-3 text-wrap">County</th>
+                        <th class="col-xs-3 text-center text-wrap">Beds</th>
                         <th class="col-xs-3 text-center text-wrap">Cots</th>
+                        <th class="col-xs-3 text-center text-wrap">Actions</th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in county_bc | filter:search">
@@ -39,6 +68,13 @@
                             </td>
                             <td class="text-center" data-title="Beds:">{{::county.beds}}</td>
                             <td class="text-center" data-title="Cots:">{{::county.cots}}</td>
+                            <td class="text-right">
+                              <a ui-sref="reports.bed_cots_facilities({county_id : county.county,
+                              area_name:county.county_name, area_class:'county'})" class="btn btn-success" tooltip="View Facilities in the county">
+                                  View Facilities
+                              </a>
+                          </td>
+
                         </tr>
                     </tbody>
                     <tbody ng-if="county_bc.length===0">

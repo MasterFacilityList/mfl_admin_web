@@ -7,7 +7,7 @@
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title">Beds and Cots Report by Constituency</span>
+        <span class="main-title">Beds and Cots Report by Sub-County</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -22,23 +22,58 @@
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
             <div class="col-sm-4">
-               <input class="form-control" type="text"  ng-model="search" placeholder="Search Constituency.."/>
+               <input class="form-control" type="text"  ng-model="search" placeholder="Search sub-county.."/>
             </div>
            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+
+
+            <div class="dropdown pull-right">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      Filter By:
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <li>
+                        <a ui-sref="reports.bc_counties">
+                            <span class="">Beds and Cots (County)</span>
+                        </a>
+                      </li>
+                      <li>
+                      <a ui-sref="reports.bc_constituencies">
+                            <span class="">Beds and Cots (Sub-County)</span>
+                      </a>
+                      </li>
+                      <li>
+                        <a ui-sref="reports.bc_wards">
+                          <span class="">Beds and Cots (Ward)</span>
+                        </a>
+                      </li>
+
+                    </ul>
+              </div>
+
+
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="col-xs-5 text-wrap">Constituency</th>
-                        <th class="col-xs-4 text-center text-wrap">Beds</th>
+                        <th class="col-xs-3 text-wrap">Sub-County</th>
+                        <th class="col-xs-3 text-center text-wrap">Beds</th>
                         <th class="col-xs-3 text-center text-wrap">Cots</th>
+                        <th class="col-xs-3 text-center text-wrap">Actions</th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="const in constituency_bc | filter:search">
                             <td data-title="Constituency:">
-                              <a ui-sref="reports.bc_wards({constituency:const.constituency})">{{::const.constituency_name | titlecase}}</a>
+                              <a ui-sref="reports.bc_wards({constituency:const.sub_county})">{{::const.sub_county_name | titlecase}}</a>
                             </td>
                             <td class=" text-center" data-title="Beds:">{{::const.beds}}</td>
                             <td class=" text-center" data-title="Cots:">{{::const.cots}}</td>
+                            <td class="text-right">
+                              <a ui-sref="reports.bed_cots_facilities_sub({sub_id : const.sub_county,
+                              area_name:const.sub_county_name, area_class:'Sub-county'})" class="btn btn-success" tooltip="View Facilities in the Sub-County">
+                                  View Facilities
+                              </a>
+                          </td>
                         </tr>
                     </tbody>
                     <tbody ng-if="constituency_bc.length===0">
