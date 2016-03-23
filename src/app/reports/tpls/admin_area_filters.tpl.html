@@ -1,0 +1,16 @@
+<div class='admin-filter'>
+    <select name="selected_county" ng-model="selected_values.county">
+       <option ng-repeat="county in counties" value="{{county.id}}">
+          {{county.name | titlecase}}</option>
+    </select>
+    <select name='sub_county' ng-model='selected_values.sub_county'>
+       <option ng-repeat="sub_county in sub_counties | filter:filterFxns.subFilter" value="{{sub_county.id}}">
+          {{sub_county.name | titlecase}}</option>
+    </select>
+    <select name='ward' ng-model='selected_values.ward' >
+       <option ng-repeat="ward in wards | filter:filterFxns.wardSubFilter" value="{{ward.id}}">
+          {{ward.name | titlecase}}</option>
+    </select>
+    <button class="filter-btn" ng-click='update_report()'>Filter</button>
+    <button class="filter-btn" ng-click='update_report()'>Clear</button>
+</div>

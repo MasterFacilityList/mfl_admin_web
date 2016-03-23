@@ -108,6 +108,32 @@
                 }
             }
         })
+        .state("reports.facilities_count_subs", {
+            url: "facilities_count/:county_id/",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.facilities_count_subs": {
+                    templateUrl: "reports/tpls/facilities_count_subs.tpl.html",
+                    controller:"mfl.reports.controllers.facilities_count_subs"
+                }
+            }
+        })
+        .state("reports.facilities_count_wards", {
+            url: "facilities_count_wards/:sub_county_id/",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html",
+                    controller:"mfl.reports.controllers.main"
+                },
+                "main-content@reports.facilities_count_wards": {
+                    templateUrl: "reports/tpls/facilities_count_wards.tpl.html",
+                    controller:"mfl.reports.controllers.facilities_count_wards"
+                }
+            }
+        })
         .state("reports.constituencies", {
             url: "facility_constituencies",
             views: {

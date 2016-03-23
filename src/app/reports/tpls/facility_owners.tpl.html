@@ -25,16 +25,27 @@
                <input class="form-control" type="text"  ng-model="search" placeholder="Search Owner.."/>
             </div>
             <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+
+            <div ng-include src="'reports/tpls/admin_area_filters.tpl.html'" onload></div>
+
+
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="col-xs-9 text-wrap">Owner</th>
+                        <th class="col-xs-3 text-wrap">Owner</th>
                         <th class="col-xs-3 text-center text-wrap">Number of Facilities</th>
+                        <th>Actions</ht>
+
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="owner in owner_facilities | filter:search">
                             <td data-title="Owner:">{{::owner.owner}}</td>
                             <td class="text-center" data-title="Facilities:">{{::owner.number_of_facilities}}</td>
+                            <td class="text-right">
+                              <a class="btn btn-success" tooltip="View Facilities in the Area selected">
+                                  View Facilities
+                              </a>
+                          </td>
                         </tr>
                     </tbody>
                 </table>
