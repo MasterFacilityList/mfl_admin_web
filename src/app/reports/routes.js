@@ -315,6 +315,18 @@
                 }
             }
         })
+         .state("reports.chu_detail_status", {
+            url: "chu_detail/:status_id",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html"
+                },
+                "main-content@reports.chu_detail_status": {
+                    templateUrl: "reports/tpls/chu_detail.tpl.html",
+                    controller:"mfl.reports.controllers.chu_detail"
+                }
+            }
+        })
         .state("reports.chu_constituencies", {
             url: "chu_constituencies?county",
             views: {

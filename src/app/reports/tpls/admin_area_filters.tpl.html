@@ -1,16 +1,36 @@
-<div class='admin-filter'>
-    <select name="selected_county" ng-model="selected_values.county">
-       <option ng-repeat="county in counties" value="{{county.id}}">
-          {{county.name | titlecase}}</option>
-    </select>
-    <select name='sub_county' ng-model='selected_values.sub_county'>
-       <option ng-repeat="sub_county in sub_counties | filter:filterFxns.subFilter" value="{{sub_county.id}}">
-          {{sub_county.name | titlecase}}</option>
-    </select>
-    <select name='ward' ng-model='selected_values.ward' >
-       <option ng-repeat="ward in wards | filter:filterFxns.wardSubFilter" value="{{ward.id}}">
-          {{ward.name | titlecase}}</option>
-    </select>
-    <button class="filter-btn" ng-click='update_report()'>Filter</button>
-    <button class="filter-btn" ng-click='update_report()'>Clear</button>
+ <div class="form-group row margin-t-10" style="margin-left:5px;">
+
+        <div class=" form-group col-xs-2">
+            <label class="control-label">County</label>
+
+  <select name="selected_county" id='selected_county'
+  class="form-control col-sm-2" ng-model="selected_values.county">
+     <option ng-repeat="county in counties" value="{{county.id}}">
+        {{county.name | titlecase}}</option>
+  </select>
+        </div>
+        <div class=" form-group col-xs-2">
+            <label class="control-label">Sub-County</label>
+            <select name='sub_county' class="form-control col-sm-2" ng-model='selected_values.sub_county'>
+      <option ng-repeat="sub_county in sub_counties | filter:filterFxns.subFilter" value="{{sub_county.id}}">
+        {{sub_county.name | titlecase}}</option>
+  </select>
+        </div>
+
+        <div class=" form-group col-xs-2">
+            <label class="control-label">Ward</label>
+            <select name='ward' class="form-control col-sm-2"  ng-model='selected_values.ward' >
+     <option ng-repeat="ward in wards | filter:filterFxns.wardSubFilter" value="{{ward.id}}">
+        {{ward.name | titlecase}}</option>
+  </select>
+
+        </div>
+          <div class=" form-group col-xs-3">
+            <br>
+            <button class="btn btn-primary" style="margin-top:5px;" ng-click='update_report()'>Filter</button>
+            <button class="btn btn-warning"  style="margin-top:5px;" ng-click="clear_report_filters()">Clear</button>
+        </div>
+      <div class="col-xs-12">
+  <hr>
+</dov>
 </div>

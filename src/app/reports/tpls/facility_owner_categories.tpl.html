@@ -21,14 +21,14 @@
           </div>
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
-            <div class="col-sm-4">
-               <input class="form-control" type="text"  ng-model="search" placeholder="Search Owner Category.."/>
-            </div>
-            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+          <!--     <div class="col-sm-2">
+                 <input class="form-control" type="text"  ng-model="search" placeholder="Search Owner Category.."/>
+              </div>
+              <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div> -->
 
-            <div ng-include src="'reports/tpls/admin_area_filters.tpl.html'" onload></div>
+              <div ng-include src="'reports/tpls/admin_area_filters.tpl.html'" onload></div>
 
-            <div class="col-xs-12 margin-b-20">
+              <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
                         <th class="col-xs-3 text-wrap">Owner Category</th>
@@ -40,7 +40,7 @@
                             <td data-title="Owner Category:">{{::owner.owner_category}}</td>
                             <td class=" text-center" data-title="Facilities:">{{::owner.number_of_facilities}}</td>
                             <td class="text-right">
-                              <a class="btn btn-success" tooltip="View Facilities in the Area selected">
+                              <a href="#/reports/facilities?owner_type={{owner.id}}" class="btn btn-success" tooltip="View Facilities in the Area selected">
                                   View Facilities
                               </a>
                           </td>

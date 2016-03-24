@@ -30,6 +30,7 @@
                     <thead>
                         <th class="col-xs-5 text-wrap">County</th>
                         <th class="col-xs-4 text-center text-wrap">Number of Community Health Units</th>
+                        <th class="col-xs-4 text-center text-wrap">Actions</th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in county_chu | filter:search">
@@ -37,6 +38,11 @@
                               <a ui-sref="reports.chu_constituencies({county:county.county_id})">{{::county.county_name | titlecase}}</a>
                             </td>
                             <td class="text-center" data-title="Community Health Units:">{{::county.number_of_units}}</td>
+                            <td class="text-center" data-title="Community Health Units:">
+                              <a>
+                                View CHUs
+                              </a>
+                            </td>
                         </tr>
                     </tbody>
                     <tbody ng-if="county_chu.length===0">

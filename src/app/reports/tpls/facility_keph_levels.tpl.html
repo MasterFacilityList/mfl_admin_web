@@ -7,7 +7,7 @@
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title"> Facility Report by County KEPH Levels</span>
+        <span class="main-title"> Facility Report by KEPH Levels</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -21,25 +21,30 @@
           </div>
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
-            <div class="col-sm-4">
-               <input class="form-control" type="text"  ng-model="search" placeholder="Search County.."/>
-            </div>
-            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+
+             <div ng-include src="'reports/tpls/admin_area_filters.tpl.html'" onload></div>
+
+
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-condensed fs-14 margin-t-20">
                     <tbody class="fade-content" ng-repeat="county in keph_facilities | filter:search">
-                        <tr><td data-title="County:"><strong class="fs-16">{{::county.county | titlecase}}</strong></td></tr>
+
                         <tr>
                             <td>
                               <table class="table table-condensed">
                                <thead>
-                                   <td class="col-xs-9"><i class="fw-600">KEPH Level</i></td>
+                                   <td class="col-xs-3"><i class="fw-600">KEPH Level</i></td>
                                    <td class="col-xs-3 text-center"><i class="fw-600">Number of Facilities</i></td>
+                                   <td class="col-xs-3 text-right"><i class="fw-600">Actions</i></td>
                                </thead>
                                 <tbody>
                                    <tr ng-repeat="c in county.facilities">
                                         <td data-title="Keph Level:">{{::c.keph_level}}</td>
                                         <td class="text-center" data-title="Facilities:">{{::c.number_of_facilities}}</td>
+                                         <td class="text-right">
+                            <a href="#/reports/facilities?keph_level={{c.id}}" class="btn btn-success" tooltip="View Facilities in the Area selected">
+                                  View Facilities
+                              </a>
                                     </tr>
                                 </tbody>
                               </table>
