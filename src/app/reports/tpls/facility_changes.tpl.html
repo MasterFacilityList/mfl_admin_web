@@ -40,31 +40,30 @@
                     <div class="btn-group">
                         <button class="btn btn-default" ng-model="recent" btn-radio="{last_week:true}" ng-click="search_changes(upgrades,{last_week:true})">Last Week</button>
                         <button class="btn btn-default" ng-model="recent" btn-radio="{last_month:true}" ng-click="search_changes(upgrades,{last_month:true})" >Last Month</button>
-                        <button class="btn btn-default" ng-model="recent" btn-radio="{last_3_months:true}" ng-click="search_changes(upgrades,{last_3_months:true})">Last Quarter</button>
+
                         <button class="btn btn-default" ng-model="recent" btn-radio="{}" ng-click="search_changes(upgrades,{})">Reset</button>
                     </div>
             </div>
        </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
-            <div class="col-sm-4 col-xs-12">
-               <input class="form-control" type="text"  ng-model="search" placeholder="Search County.."/>
-            </div>
-            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div>
+
+            <div ng-include src="'reports/tpls/admin_area_filters.tpl.html'" onload></div>
+
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="col-xs-5 text-wrap">County</th>
+                        <th class="col-xs-5 text-wrap">{{area_class}}</th>
                         <th class="col-xs-5 text-center text-wrap">Changes</th>
                         <th class="col-xs-2 text-right text-wrap"> <span class="pull-right">Action</span></th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="county in changes.results | filter:search">
-                            <td data-title="County:" >{{county.county | titlecase}}</td>
+                        <tr ng-repeat="county in changes | filter:search">
+                            <td data-title="area:" >{{county.area | titlecase}}</td>
                             <td class="text-center" data-title="Changes:">{{county.changes}}</td>
-                            <td class="text-right" ng-show="county.changes > 0" data-title="Action:"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.county_id})" class="btn btn-success">View Change</a></span></td>
+                            <td class="text-right" ng-show="county.changes > 0" data-title="Action:"><span><a ui-sref="reports.facility_county_changes.view({county_id:county.area_id})" class="btn btn-success">View Change</a></span></td>
                             <td class="text-right" ng-hide="county.changes > 0" data-title="Action:"><button class="btn btn-success" disabled>View</button></td>
                         </tr>
-                        <tr ng-if="(changes.results).length===0"><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
+                        <tr ng-if="(changes).length===0"><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
                         <tr>
                             <td class="col-xs-5">TOTAL</td>
                             <td class="col-xs-5 text-center">{{changes.total_number_of_changes}}</td>

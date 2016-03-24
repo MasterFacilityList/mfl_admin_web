@@ -6,12 +6,12 @@
 
 <table class="table table-hover table-condensed fs-12 margin-t-20" id="no-more-tables">
     <thead>
-        <th class="col-xs-1 text-wrap">Code</th>
+        <th class="col-xs-1 text-wrap" sil-grid-sort field='code'>Code</th>
         <th class="text-wrap fs-11" sil-grid-sort field='name'>Name</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='facility_type_name'>Facility Type</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='owner_name'>Owner</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='county'>County</th>
-        <th class="text-wrap fs-11" sil-grid-sort field='constituency'>Sub County</th>
+        <th class="text-wrap fs-11" >Facility Type</th>
+        <th class="text-wrap fs-11" >Owner</th>
+        <th class="text-wrap fs-11" >County</th>
+        <th class="text-wrap fs-11" >Sub-County</th>
         <th class="text-wrap fs-11" sil-grid-sort field='ward'>Ward</th>
         <th sil-grid-sort field='updated'>Date Updated</th>
     </thead>
@@ -29,7 +29,7 @@
             <td class="text-wrap" data-title="Facility Type:" >{{::fac.facility_type_name}}</td>
             <td class="text-wrap" data-title="Owner:" >{{::fac.owner_name}}</td>
             <td class="text-wrap" data-title="County:"> {{::fac.county | titlecase}}</td>
-            <td class="text-wrap" data-title="Constituency:" >{{::fac.constituency | titlecase}}</td>
+            <td class="text-wrap" data-title="Constituency:" >{{::fac.sub_county_name | titlecase}}</td>
             <td class="text-wrap" data-title="Ward:" >{{::fac.ward_name | titlecase}}</td>
             <td data-title="Date Updated:" >{{::fac.updated|dateFilter}}</td>
         </tr>

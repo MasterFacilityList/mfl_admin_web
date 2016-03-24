@@ -168,7 +168,8 @@
                         modal = $modal.open(
                         {
                             template:"<div>"+
-                                    "<div class='modal-body'>Please wait.."+
+                                    "<div class='modal-body'>Loading "+
+                                    "<span><i class='fa fa-spinner fa-spin'></i></span>"+
                                     "<div class='panel-loader'>"+
                                     "<div class='loader-container'>"+
                                         "<div class='loader-spinner'></div>"+
@@ -202,14 +203,38 @@
             controller: function(){},
             link: function(scope, elem, attrs, gridCtrl){
                 scope.silGrid = {searchQuery:""};
+                var search_term = scope.silGrid.searchQuery;
+
                 scope.silGridSearch = function(clear){
+
                     if(clear){
                         scope.silGrid.searchQuery = "";
                         gridCtrl.removeFilter("search");
                         gridCtrl.getData();
+
                     } else {
+                           // transform search param into a query DSL
+                        if(gridCtrl.api.apiBaseUrl === "api/facilities/facilities/"){
+                            var dsl = {
+                                "query": { }
+                            };
+                            if (_.isNaN(parseInt(scope.silGrid.searchQuery, 10))) {
+                                dsl.query.query_string = {
+                                    "default_field": "name",
+                                    "query": scope.silGrid.searchQuery
+                                };
+                            } else {
+                                dsl.query.term = {
+                                    "code": scope.silGrid.searchQuery
+                                };
+                            }
+
+                            scope.silGrid.searchQuery = JSON.stringify(dsl);
+                        }
+
                         gridCtrl.addFilter("search", scope.silGrid.searchQuery);
                         gridCtrl.getData();
+                        scope.silGrid.searchQuery = search_term;
                     }
 
                 };
@@ -275,7 +300,7 @@
                 };
                 elem.on("click", function(){
                     if(elem.hasClass("sil-orderable")){
-                        // assume default ordering is asceding
+                        // assume default ordering is ascending
                         elem.removeClass("sil-orderable");
                         elem.addClass("sil-orderable-desc");
                         //order desc
@@ -295,6 +320,7 @@
                         }
                     }
                     gridCtrl.addFilter("ordering", $scope.sil_orderings.join(","));
+                    gridCtrl.getData();
                 });
             }
         };

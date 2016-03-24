@@ -17,26 +17,56 @@
                     <label class="control-label">Ward Name&#42;:</label>
                     <input type="text" class="form-control" name="name" ng-model="ward_details.name" placeholder="Enter Ward Name Here..." required api-checker/>
                 </div>
+
+
                 <div ng-if="state" class="form-group">
                     <label class="control-label">Ward Code:</label>
                     <input type="text" readonly class="form-control" ng-model="ward_details.code">
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="control-label">County&#42;:</label>
+                    <ui-select ng-model="select_values.county" required name="county" api-checker register-custom-form-control ng-change="autofillConstituencyAndSubCounties(select_values.county)">
+                        <ui-select-match placeholder="Select a County...">
+                            <span>{{$select.selected.name | titlecase}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="county.id as county in counties | filter:$select.search">
+                            <span>{{county.name | titlecase}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label">Sub-County&#42;:</label>
+                    <ui-select ng-model="select_values.sub_county" required name="sub_county" api-checker register-custom-form-control ng-change="autofillCountyFromSubCounty(select_values.sub_county)">
+                        <ui-select-match placeholder="Select a Sub-County...">
+                            <span>{{$select.selected.name | titlecase}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="sub.id as sub in sub_counties | filter:$select.search">
+                            <span>{{sub.name | titlecase}}</span>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Constituency&#42;:</label>
                     <ui-select ng-model="select_values.constituency" required name="constituency" api-checker register-custom-form-control ng-change="autofillCounty(select_values.constituency)">
                         <ui-select-match placeholder="Select a constituency...">
-                            <span>{{$select.selected.name}}</span>
+                            <span>{{$select.selected.name | titlecase}}</span>
                         </ui-select-match>
                         <ui-select-choices repeat="const.id as const in constituencies | filter:$select.search">
-                            <span>{{const.name}}</span>
+                            <span>{{const.name | titlecase}}</span>
                         </ui-select-choices>
                     </ui-select>
                 </div>
+<!--
                 <div class="form-group">
                     <label class="control-label">County:</label>
                     <input type="text" readonly class="form-control"
                         ng-model="ward_details.county_name">
-                </div>
+                </div> -->
                 <div class="margin-t-20 pad-b-10">
                     <button class="btn btn-primary">Save</button>
                     <button class="btn btn-default" ui-sref="setup.wards">Cancel</button>

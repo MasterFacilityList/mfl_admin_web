@@ -27,7 +27,7 @@
     <div class="content-card col-xs-12 margin-t-20" ng-if="!spinner">
     <div class="col-xs-12 pad-0 fade-content">
         <div class="col-xs-12">
-            <h3><b>{{facility.code}}</b> | {{facility.official_name | uppercase}}</h3>
+            <h3><b>{{facility.code}}</b> | {{facility.official_name }}</h3>
         </div>
         <div class="col-xs-6 fs-16">
             <label class="text-black fw-600">Type: </label>
@@ -107,8 +107,11 @@
                 <span class="pull-left col-md-6 col-xs-12">
                      <label class="text-black">County:</label> {{facility.county | titlecase}}
                 </span>
+                  <span class="content-right col-md-6 col-xs-12">
+                    <label class="text-black">Sub-County:</label> {{facility.sub_county | titlecase}}
+                </span>
                 <span class="content-right col-md-6 col-xs-12">
-                    <label class="text-black">Sub-County:</label> {{facility.constituency | titlecase}}
+                    <label class="text-black">Constituency:</label> {{facility.constituency | titlecase}}
                 </span>
                 <span class="pull-left col-md-6 col-xs-12 margin-t-10">
                     <label class="text-black">Ward:</label> {{facility.ward_name | titlecase}}

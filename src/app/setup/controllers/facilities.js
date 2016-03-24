@@ -11,7 +11,8 @@
      * Contains all the controllers used for facility setup
      */
     angular.module("mfl.setup.facilities.controllers",[
-        "mfl.setup.api"
+        "mfl.setup.api",
+        "mfl.common.filters"
     ])
 
     /**

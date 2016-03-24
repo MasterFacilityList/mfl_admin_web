@@ -4,10 +4,11 @@
             <button tooltip-placement="bottom"  class="btn btn-primary" ng-click="exportToExcel()">
                 Export To Excel
             </button>
+
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title">Community Health Units Report by Status</span>
+        <span class="main-title">Facilities with beds and cots in {{admin_area | titlecase}}</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -22,26 +23,28 @@
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
 
-            <div ng-include src="'reports/tpls/admin_area_filters.tpl.html'" onload></div>
 
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="col-xs-5 text-wrap">Status</th>
-                        <th class="col-xs-4 text-center text-wrap">Number of Community Health Units</th>
-                        <th class="col-xs-4 text-center text-wrap">Actions</th>
+                       <th class="col-xs-3 text-wrap">Facility Code</th>
+                        <th class="col-xs-3 text-wrap">Facility Name</th>
+                        <th class="col-xs-3 text-center text-wrap">No. of Beds</th>
+                        <th class="col-xs-3 text-center text-wrap">No. of Cots</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="status in chu_status | filter:search">
-                            <td data-title="County:">
-                                {{::status.status_name | titlecase}}
+                        <tr ng-repeat="facility in data | filter:search">
+                            <td  data-title="Beds:">{{::facility.facility_code}}</td>
+                            <td  data-title="facility_name:">
+                              <a ui-sref="facilities.facility_view({facility_id: facility.facility_id})">{{::facility.facility_name}}
+                              </a>
                             </td>
-                            <td class="text-center" data-title="Community Health Units:">{{::status.number_of_units}}</td>
-                            <td class="text-center" data-title="Community Health Units:"><a
-                              ui-sref="reports.chu_detail_status({'status_id': status.id})">View CHUs</a></td>
+                            <td  class="text-center" data-title="Beds:">{{::facility.number_of_beds}}</td>
+                            <td  class="text-center" data-title="Cots:">
+                              {{::facility.number_of_cots}}</td>
                         </tr>
                     </tbody>
-                    <tbody ng-if="county_chu.length===0">
+                    <tbody ng-if="data.length===0">
                         <tr><td class="text-center" colspan="9">Sorry, no data is available</td></tr>
                     </tbody>
                 </table>

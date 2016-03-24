@@ -108,6 +108,10 @@
             this.facility_rating_comments = api.setBaseUrl(
                     "api/facilities/facility_service_ratings/"
                 );
+            this.counties = api.setBaseUrl("api/common/counties/");
+            this.constituencies = api.setBaseUrl("api/common/constituencies/");
+            this.material_facilities = api.setBaseUrl("api/facilities/material");
+
             var downloadFile = function (base_url, facility_id) {
                 var helpers = api.apiHelpers;
                 var wrapper = api.setBaseUrl(base_url);

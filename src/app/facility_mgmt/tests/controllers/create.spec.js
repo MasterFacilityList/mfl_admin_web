@@ -70,6 +70,7 @@
                     data.$scope.goToNext(1, "contacts");
                 }])
             );
+
             //checking else part for above test
             it("should load facility creation setup details: failures + fetch",
                 inject(["mfl.facility.multistep.service", function (facObjService) {
@@ -106,6 +107,10 @@
                         facility_physical_address : {
                             town : "Mombasa",
                             town_id : "13"
+                        },
+                        sub_county: {
+                            "name": "Kisauni",
+                            "id": 10
                         }
                     };
                     httpBackend
@@ -189,7 +194,6 @@
                     httpBackend.verifyNoOutstandingExpectation();
                 }])
             );
-
             //test failure to fetch facility details
             it("should load facility creation setup details: failures - fetch",
                 inject(["mfl.facility.multistep.service", function (facObjService) {

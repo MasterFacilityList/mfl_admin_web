@@ -28,13 +28,23 @@
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="col-xs-9 text-wrap">County</th>
+                        <th class="col-xs-3 text-wrap">County</th>
                         <th class="col-xs-3 text-center text-wrap">Number of Facilities</th>
+                        <th class="col-xs-3 text-center text-wrap">Action</th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="county in county_facilities | filter:search">
-                            <td data-title="County:">{{::county.county_name | titlecase}}</td>
+                             <td>
+                              <a ui-sref="reports.facilities_count_subs({county_id : county.area_id})" tooltip="View Facilities in the county sub-counties">
+                                  {{::county.area_name | titlecase}}
+                              </a>
+                            </td>
                             <td class="text-center" data-title="Facilities:">{{::county.number_of_facilities}}</td>
+                             <td class="text-right">
+                              <a href="#/reports/facilities?county={{county.area_id}}" class="btn btn-success" tooltip="View Facilities in the County">
+                                  View Facilities
+                              </a>
+                          </td>
                         </tr>
                     </tbody>
                 </table>

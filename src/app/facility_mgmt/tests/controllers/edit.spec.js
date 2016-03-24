@@ -1011,7 +1011,7 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
-            it("should save facility basic details", function () {
+            iit("should save facility basic details", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state" : state,
@@ -1019,9 +1019,8 @@
                         facility_id: 3
                     }
                 };
-                data.$scope.selectReload = function () {
-                    return {"results": []};
-                };
+                var parent_c = controller("mfl.facility_mgmt.controllers.facility_create");
+                data.$scope.selectReload = parent_c.selectReload;
                 state.params.facility_id = "";
                 data.$scope.facility = {
                     facility_physical_address : {town : "5"}
@@ -1041,6 +1040,20 @@
                 data.$scope.nextState = angular.noop;
                 data.$scope.setFurthest = angular.noop;
                 ctrl(".basic", data);
+                data.$scope.select_values = {
+                    county : {
+                        "id" : 1 ,
+                        "name" : "Mombasa"
+                    },
+                    sub_county : {
+                        "id" : 10 ,
+                        "name" : "Kisauni"
+                    },
+                    consituency : {
+                        "id" : 10 ,
+                        "name" : "Kisauni"
+                    }
+                };
 
                 httpBackend
                     .expectPOST(server_url+"api/facilities/facilities/")

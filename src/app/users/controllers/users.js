@@ -14,7 +14,8 @@
         "mfl.users.services",
         "ui.router",
         "mfl.common.forms",
-        "mfl.common.errors"
+        "mfl.common.errors",
+        "mfl.common.filters"
     ])
 
     /**
@@ -31,6 +32,20 @@
         "mfl.users.services.groups", "toasty",
         function ($scope, $state, $stateParams, multistepService, wrappers,
             $log,loginService, groupsService, toasty) {
+            $scope.title = {
+                icon: "fa-edit",
+                name: "Edit User"
+            };
+            $scope.action = [
+                {
+                    func : "ui-sref='users.user_edit.delete'" +
+                            "requires-user-feature='is_staff'" +
+                            "requires-permission='users.delete_mfluser'",
+                    class: "btn btn-danger",
+                    tipmsg: "Delete User",
+                    wording : "Delete"
+                }
+            ];
             $scope.addLine = function (obj_str) {
                 switch(obj_str){
                 case "contacts" :
@@ -51,11 +66,24 @@
                 case "regbody" :
                     $scope.user.regulatory_users.push({regulatory_body : ""});
                     break;
+                case "sub_county" :
+                    if(_.isUndefined($scope.user.user_sub_counties)){
+                        $scope.user.user_sub_counties = [];
+                        $scope.user.user_sub_counties.push({sub_county :""});
+                    }
+                    else{
+                        $scope.user.user_sub_counties.push({sub_county :""});
+                    }
+                    break;
                 }
             };
+            $scope.county_required = false;
+            $scope.sub_county_required = false;
+
             $scope.grpChecker = function () {
                 $scope.county_counter = 0;
                 $scope.regulator_counter = 0;
+                $scope.national_counter = 0;
                 $scope.show_county = false;
                 $scope.show_regulator = false;
                 if($scope.user.groups.length > 0){
@@ -64,6 +92,9 @@
                             $scope.groups, {id : parseInt(usr_grp.id, 10)});
                         if(curr_grp.is_national === false) {
                             $scope.county_counter += 1;
+                        }
+                        if(curr_grp.is_national === true && curr_grp.is_regulator === false) {
+                            $scope.national_counter += 1;
                         }
                         if(curr_grp.is_regulator === true){
                             $scope.regulator_counter += 1;
@@ -75,6 +106,7 @@
                     }
                 }
             };
+
             $scope.inactivate = function (obj, obj_str) {
                 var active_obj = {};
                 var active_key = JSON.stringify(obj_str);
@@ -138,9 +170,65 @@
                     $scope.user.regulatory_users = $scope.removeItems(
                         $scope.user.regulatory_users, obj, "regulatory_users");
                     break;
+                case "sub_county" :
+                    $scope.user.user_sub_counties = $scope.removeItems(
+                        $scope.user.user_sub_counties, obj,
+                        "user_sub_counties");
+                    break;
                 }
             };
             $scope.save = function () {
+                if(!$scope.user.groups.length){
+                    $scope.js_errors = "Please select a user group";
+                    return;
+
+                }
+                var county_groups_signature = {
+                    "is_national": false,
+                    "is_administrator": true,
+                    "is_county_level": false
+                };
+
+                var sub_county_groups_signature = {
+                    "is_county_level": true
+                };
+
+                var regulator_groups_signature = {
+                    "is_regulator": true
+                };
+                var selected_group = $scope.user.groups[0];
+                var all_grp_dets = _.find($scope.groups, function (sel_grp)
+                    {
+                        return parseInt(sel_grp.id, 10
+                        ) === parseInt(selected_group.id, 10);
+                    }
+                );
+
+                var sltcd_user_subs = $scope.user.user_sub_counties || [];
+                var sltcd_user_counties = $scope.user.user_counties || [];
+                var sltcd_user_regs = $scope.user.regulatory_users || [];
+
+                if(!_.isUndefined(_.findWhere(
+                    [all_grp_dets], county_groups_signature)
+                    ) && sltcd_user_counties.length === 0){
+                    $scope.js_errors = "Please select a county";
+                    return;
+                }
+
+                if(!_.isUndefined(_.findWhere(
+                    [all_grp_dets], sub_county_groups_signature)
+                    ) && sltcd_user_subs.length === 0){
+                    $scope.js_errors = "Please select a sub-county";
+                    return;
+                }
+
+                if(!_.isUndefined(_.findWhere(
+                    [all_grp_dets], regulator_groups_signature)
+                    ) && sltcd_user_regs.length === 0){
+                    $scope.js_errors = "Please select a regulator";
+                    return;
+                }
+
                 _.each($scope.user.groups, function (new_grps) {
                     var curr_grp = _.findWhere(
                         $scope.groups, {id : parseInt(new_grps.id, 10)});
@@ -340,7 +428,7 @@
      * @name mfl.users.controllers.user_edit
      *
      * @description
-     * The parent controller managing editting of user records
+     * The parent controller managing editing of user records
      */
     .controller("mfl.users.controllers.user_edit",
         ["$scope", "$stateParams", "$log", "mfl.users.services.wrappers",
@@ -366,6 +454,7 @@
             $scope.user_id = $stateParams.user_id;
             $scope.wrapper = wrappers.users;
             $scope.create = false;
+
             $scope.tabState = function(obj) {
                 _.each($scope.steps, function (step) {
                     if(step.name === obj.name) {
@@ -578,8 +667,17 @@
             }
             wrappers.groups.filter({page_size: 100, ordering: "name"})
             .success(function (data) {
-                $scope.$parent.groups =  groupsService.filterGroups(
-                    $scope.login_user.is_national, data.results);
+                $scope.$parent.groups = data.results;
+
+                $scope.$watch("user", function(usr){
+                    if(_.isUndefined(usr)){
+                        return;
+                    }
+                    if(!_.isUndefined(usr)){
+                        $scope.$parent.grpChecker();
+                    }
+
+                });
             })
             .error(function (data) {
                 $log.error(data);
@@ -589,6 +687,15 @@
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
             var updateGroups = function (new_grps) {
+                if(!$scope.$parent.user.user_sub_counties.length){
+                    $scope.error = "Please select a sub-county";
+                    return;
+                }
+                if(!$scope.$parent.user.user_counties.length){
+                    $scope.error = "Please select a County";
+                    return;
+                }
+
                 $scope.spinner = true;
                 if($scope.$parent.furthest < 4) {
                     $scope.$parent.furthest = 4;
@@ -655,27 +762,138 @@
             $scope.edit_counties = (! _.isUndefined($scope.user_id));
             $scope.user_id = $scope.user_id || $state.params.user_id;
 
-            wrappers.counties.filter({page_size: 50, ordering: "name"})
+            wrappers.counties.filter({page_size: 500, ordering: "name"})
             .success(function (data) {
                 $scope.counties = data.results;
             })
             .error(function (data) {
                 $log.error(data);
             });
+
+
             wrappers.user_counties.filter({user: $scope.user_id})
             .success(function (data) {
                 $scope.user_counties = data.results;
+
             })
             .error(function (data) {
                 $log.error(data);
             });
+
+            wrappers.sub_counties.filter({page_size: 500, ordering: "name"})
+            .success(function (data) {
+                $scope.sub_counties = data.results;
+                $scope.original_sub_counties = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            wrappers.constituencies.filter({page_size: 500, ordering: "name"})
+            .success(function (data) {
+                $scope.constituencies = data.results;
+                $scope.original_constituencies = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            var summary_filters = {
+                "fields": "sub_county,county,constituency,wards",
+                "page_size": 500,
+                "ordering": "name"
+            };
+            wrappers.filter_summaries.filter(summary_filters)
+            .success(function (data) {
+                $scope.filter_summaries = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+
+            var selected_counties = [];
+
+            if(!_.isUndefined($scope.user_counties)){
+                selected_counties = _.pluck($scope.user_counties, "county");
+            }
+            $scope.new_sub_counties = [];
+            $scope.new_counties = [];
+
+
             $scope.new_county = "";
+            $scope.collect_sub_counties = function(value){
+                $scope.new_sub_counties.push({
+                    "sub_county": value
+                });
+                $scope.$parent.user.user_sub_counties = $scope.new_sub_counties;
+            };
+
+            $scope.filters = {
+                county: [],
+                constituency: [],
+                sub_county: []
+            };
+
+            $scope.$watch("user", function(usr){
+                if(_.isUndefined(usr)){
+                    return;
+                }
+                if(!_.isUndefined(usr)){
+                    for(var x=0;x<usr.user_counties.length;x++){
+                        $scope.filters.county.push({
+                            id: usr.user_counties[x].county,
+                            name: usr.user_counties[x].county_name
+                        });
+                    }
+                    for(x=0;x<usr.user_constituencies.length;x++){
+                        $scope.filters.constituency.push({
+                            id: usr.user_constituencies[x].constituency,
+                            name: usr.user_constituencies[x].constituency_name
+                        });
+                    }
+                    for(x=0;x<usr.user_sub_counties.length;x++){
+                        $scope.filters.sub_county.push({
+                            id: usr.user_sub_counties[x].sub_county,
+                            name: usr.user_sub_counties[x].sub_county_name
+                        });
+                    }
+
+                }
+
+            });
+
+            $scope.filterFxns = {
+                constFilter: function (a) {
+                    if(!_.isUndefined($scope.filters.county)){
+                        var county_ids = _.pluck($scope.filters.county, "id");
+                        $scope.$parent.user.user_counties = $scope.filters.county;
+                        $scope.$parent.user.user_constituencies = $scope.filters.constituency;
+                        $scope.$parent.user.user_sub_counties = $scope.filters.sub_county;
+                        return _.contains(county_ids, a.county);
+                    }
+                    else{
+                        return false;
+                    }
+                },
+                subFilter: function (a) {
+                    if(!_.isUndefined($scope.filters.county)){
+                        var county_ids = _.pluck($scope.filters.county, "id");
+                        $scope.$parent.user.user_counties = $scope.filters.county;
+                        $scope.$parent.user.user_constituencies = $scope.filters.constituency;
+                        $scope.$parent.user.user_sub_counties = $scope.filters.sub_county;
+                        return _.contains(county_ids, a.county);
+                    }
+                    else{
+                        return false;
+                    }
+
+                }
+            };
 
             $scope.add = function (county_id) {
                 $scope.spinner = true;
                 var payload = {
                     "user": $scope.user_id,
-                    "county": county_id
+                    "county": county_id,
+                    "active": $scope.county.active
                 };
                 wrappers.user_counties.create(payload)
                 .success(function (data) {
@@ -794,9 +1012,10 @@
                 $scope.nextState();
             }
             wrappers.constituencies.filter(
-                {"page_size": 20, "ordering": "name", "county": $scope.login_user.county})
+                {"page_size": 5000, "ordering": "name"})
             .success(function (data) {
                 $scope.constituencies = data.results;
+                $scope.original_constituencies = data.results;
             })
             .error(function (data) {
                 $log.error(data);
@@ -843,6 +1062,61 @@
             };
         }]
     )
+.controller("mfl.users.controllers.user_edit.sub_county",
+        ["mfl.users.services.wrappers", "$log", "$scope",
+        "mfl.common.services.multistep","$state",
+        function (wrappers, $log, $scope, multistepService, $state) {
+            $scope.$parent.tab = 4;
+            if(!$scope.create) {
+                multistepService.filterActive(
+                $scope, $scope.steps, $scope.steps[4]);
+            } else {
+                $scope.nextState();
+            }
+            $scope.sub_counties = $scope.$parent.sub_counties;
+
+            $scope.user_id = $scope.user_id || $state.params.user_id;
+            wrappers.user_sub_counties.filter({user: $scope.user_id})
+            .success(function (data) {
+                $scope.user_sub_counties = data.results;
+            })
+            .error(function (data) {
+                $log.error(data);
+            });
+            $scope.new_sub_county = "";
+
+            $scope.add = function (sub_id) {
+                $scope.spinner = true;
+                var payload = {
+                    "user": $scope.user_id,
+                    "sub_county": sub_id
+                };
+                wrappers.user_sub_counties.create(payload)
+                .success(function (data) {
+                    $scope.user_sub_counties.push(data);
+                    $scope.spinner = false;
+                    $scope.new_sub_county = "";
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    $scope.error =  "A user can only be active in only one sub-county at a time";
+                    $scope.spinner = false;
+                });
+            };
+            $scope.removeChild = function (user_sub) {
+                user_sub.delete_spinner = true;
+                wrappers.user_sub_counties.remove(user_sub.id)
+                .success(function () {
+                    $scope.user_sub_counties = _.without($scope.user_sub_counties, user_sub);
+                    user_sub.delete_spinner = false;
+                })
+                .error(function (data) {
+                    $log.error(data);
+                    user_sub.delete_spinner = false;
+                });
+            };
+        }]
+    )
 
     /**
      * @ngdoc controller
@@ -862,7 +1136,8 @@
             name: "Manage users"
         };
         $scope.filters = {
-            "fields": "id,first_name,last_name,username,email,last_login,is_active,employee_number"
+            "fields": "id,first_name,last_name,email,last_login,is_active,"+
+            "employee_number,county_name, sub_county_name, constituency_name"
         };
         $scope.action = [
             {

@@ -4,7 +4,8 @@
         <thead class="cf">
             <th sil-grid-sort field='name' class="fs-16">Name</th>
             <th sil-grid-sort field='code' class="fs-16">Code</th>
-            <th sil-grid-sort field='constituency' class="fs-16">Constituency</th>
+            <th sil-grid-sort field='constituency' class="fs-16">Sub-county</th>
+             <th sil-grid-sort field='constituency' class="fs-16">Constituency</th>
             <th sil-grid-sort field='county' class="fs-16">County</th>
             <th class="fs-16 text-right">Action</th>
         </thead>
@@ -12,6 +13,7 @@
             <tr class="animate-repeat" ng-repeat="ward in wards | filter: search.query">
                 <td data-title="Name" colspan="1" class="pad-t-15 fs-14 fw-500">{{ward.name | titlecase}}</td>
                 <td data-title="Code" colspan="1" class="pad-t-15 fs-14 fw-500">{{ward.code}}</td>
+                <td data-title="sub_county" colspan="1" class="pad-t-15 fs-14 fw-500">{{ward.sub_county_name | titlecase}}</td>
                 <td data-title="Constituency" colspan="1" class="pad-t-15 fs-14 fw-500">{{ward.constituency_name | titlecase}}</td>
                 <td data-title="County" colspan="1" class="pad-t-15 fs-14 fw-500">{{ward.county_name | titlecase}}</td>
                 <td  data-title="Action"  class="fs-14 fw-500 text-right">

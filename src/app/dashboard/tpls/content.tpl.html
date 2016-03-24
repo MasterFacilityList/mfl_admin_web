@@ -120,7 +120,6 @@
                 <span class="text-right col-sm-8 pad-r-0">
                     <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="weekly()">Last Week</button>
                     <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="monthly()">Last Month</button>
-                    <button class="btn btn-xs btn-rounded btn-warning fs-12" ng-click="quarterly()">Last Quarter</button>
                 </span>
                 <ul class="col-xs-12 list-group pad-0 margin-b-0">
                   <li class="list-group-item fs-16 pad-t-5 pad-b-5" style="font-family : 'Lato Light', sans-serif;">
@@ -196,7 +195,7 @@
                         </span>
                     </span>
                   </li>
-                  <li class="col-xs-12 list-group-item fs-16 pad-t-5 pad-b-5" style="font-family : 'Lato Light', sans-serif;" ng-if="user.user_constituencies.length!==0">
+                  <li class="col-xs-12 list-group-item fs-16 pad-t-5 pad-b-5" style="font-family : 'Lato Light', sans-serif;" ng-if="user.user_constituencies.length!==0 || user.user_sub_counties.length!==0">
                     <span class="col-xs-12 pad-0">
                         <span class="col-xs-3 fa-stack fa-lg fs-26 text-success">
                           <i class="fa fa-circle fa-stack-2x"></i>
@@ -204,10 +203,17 @@
                           </i>
                         </span>
                         <span class="col-xs-9 fs-18">
-                            <b>Assigned Sub-Counties</b>
+                            <b>Assigned Constituencies</b>
                             <br>
                             <span ng-repeat="c in user.user_constituencies" class="fs-16">
                                 {{c.constituency_name | titlecase}}
+                            </span>
+                        </span>
+                             <span class="col-xs-9 fs-18">
+                            <b>Assigned Sub-Counties</b>
+                            <br>
+                            <span ng-repeat="c in user.user_sub_counties" class="fs-16">
+                                {{c.sub_county_name | titlecase}}
                             </span>
                         </span>
                     </span>

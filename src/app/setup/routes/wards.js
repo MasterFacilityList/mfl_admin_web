@@ -9,7 +9,10 @@
      * @description
      * Contains the states used for ward setup
      */
-    angular.module("mfl.setup.routes.wards", ["mfl.setup.routes.dashboard"])
+    angular.module("mfl.setup.routes.wards", [
+        "mfl.setup.routes.dashboard",
+        "mfl.common.filters"
+    ])
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider

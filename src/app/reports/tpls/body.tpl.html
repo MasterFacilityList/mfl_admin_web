@@ -1,6 +1,7 @@
 <div class="pad-r-0 col-xs-12" ng-class="{'hide':hide_sidebar,'col-sm-2':!hide_sidebar}">
     <aside class="side-left partial">
         <ul class=" nav nav-sidebar">
+            <label class="sidebar-label tree-toggle nav-header">Health Facility Reports</label>
             <li ui-sref-active="active">
                 <a ui-sref="reports.list">
                     <span class="sidebar-text">Facility Reports</span>
@@ -8,10 +9,10 @@
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="reports.bc_counties">
-                    <span class="sidebar-text">Beds and Cots (County)</span>
+                    <span class="sidebar-text">Beds and Cots</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <!-- <li ui-sref-active="active">
                 <a ui-sref="reports.bc_constituencies">
                     <span class="sidebar-text">Beds and Cots (Constituency)</span>
                 </a>
@@ -20,43 +21,43 @@
                 <a ui-sref="reports.bc_wards">
                     <span class="sidebar-text">Beds and Cots (Ward)</span>
                 </a>
-            </li>
+            </li> -->
             <li ui-sref-active="active">
                 <a ui-sref="reports.counties">
-                    <span class="sidebar-text">Facilities (County)</span>
+                    <span class="sidebar-text">Facilities Count</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+           <!--  <li ui-sref-active="active">
                 <a ui-sref="reports.constituencies">
                     <span class="sidebar-text">Facilities (Constituency)</span>
                 </a>
-            </li>
+            </li> -->
             <li ui-sref-active="active">
                 <a ui-sref="reports.facility_owner_categories">
-                    <span class="sidebar-text">Facility Owner Categories</span>
+                    <span class="sidebar-text">Facilities by Owner Categories</span>
                 </a>
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="reports.facility_owners">
-                    <span class="sidebar-text">Facility Owners</span>
+                    <span class="sidebar-text">Facilities by Owners</span>
                 </a>
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="reports.facility_types">
-                    <span class="sidebar-text">Facility Types</span>
+                    <span class="sidebar-text">Facilities by Facility Types</span>
                 </a>
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="reports.facility_county_keph_levels">
-                    <span class="sidebar-text">County KEPH Levels</span>
+                    <span class="sidebar-text">KEPH Levels</span>
                 </a>
             </li>
             <li ui-sref-active="active">
                 <a ui-sref="reports.facility_county_changes">
-                    <span class="sidebar-text">County with Changes</span>
+                    <span class="sidebar-text">Facility Upgrades</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <!-- <li ui-sref-active="active">
                 <a ui-sref="reports.facility_county_facility_types">
                     <span class="sidebar-text">County with Facility Types</span>
                 </a>
@@ -65,13 +66,16 @@
                 <a ui-sref="reports.facility_county_constituencies">
                     <span class="sidebar-text">County with Constituencies</span>
                 </a>
-            </li>
+            </li> -->
+
+          <label class="sidebar-label tree-toggle nav-header">Community Health Units</label>
+
             <li ui-sref-active="active">
                 <a ui-sref="reports.chu_counties">
-                    <span class="sidebar-text">Community Health Units (County)</span>
+                    <span class="sidebar-text">Community Health Units Count</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
+            <!-- <li ui-sref-active="active">
                 <a ui-sref="reports.chu_constituencies">
                     <span class="sidebar-text">Community Health Units (Constituency)</span>
                 </a>
@@ -80,7 +84,7 @@
                 <a ui-sref="reports.chu_wards">
                     <span class="sidebar-text">Community Health Units (Wards)</span>
                 </a>
-            </li>
+            </li> -->
             <li ui-sref-active="active">
                 <a ui-sref="reports.chu_status">
                     <span class="sidebar-text">Community Health Units (Status)</span>

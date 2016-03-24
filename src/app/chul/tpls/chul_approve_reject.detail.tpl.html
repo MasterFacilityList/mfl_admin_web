@@ -43,6 +43,10 @@
             <label class="text-black fw-600">No. of Households Monitored: </label>
             {{unit.households_monitored}}
         </div>
+         <div class="col-xs-6 fs-16 pad-l-0">
+            <label class="text-black fw-600">No. of CHVs: </label>
+            {{unit.number_of_chvs}}
+        </div>
         <div class="col-xs-12 pad-0 margin-t-10 margin-b-0"><hr class="line-divider"></div>
         <div class="row">
           <div class="col-md-8 col-xs-12 pad-0 fs-14" style="border-right: 1px solid #F0F0F0;">
@@ -76,8 +80,12 @@
             {{unit.facility_county | titlecase}}
         </div>
         <div class="col-xs-12 fs-14 pad-l-0">
-            <label class="text-black fw-600">Sub-county: </label>
+            <label class="text-black fw-600">Sub-County: </label>
             {{unit.facility_subcounty | titlecase}}
+        </div>
+        <div class="col-xs-12 fs-14 pad-l-0">
+            <label class="text-black fw-600">Constituency: </label>
+            {{unit.facility_constituency | titlecase}}
         </div>
         <div class="col-xs-12 fs-14 pad-l-0">
             <label class="text-black fw-600">Ward: </label>

@@ -18,7 +18,8 @@
         "mfl.common.forms",
         "leaflet-directive",
         "nemLogging",
-        "mfl.common.constants"
+        "mfl.common.constants",
+        "mfl.common.filters"
     ])
 
 
@@ -317,20 +318,32 @@
                             "id": $scope.facility.keph_level,
                             "name": $scope.facility.keph_level_name
                         },
-                        sub_county: {
-                            "id": $scope.facility.sub_county,
-                            "name": $scope.facility.sub_county_name
-                        },
                         town: {
                             "id": $scope.facility.town,
                             "name": $scope.facility.town_name
+                        },
+                        county: {
+                            "id": $scope.facility.county_id,
+                            "name": $scope.facility.county_name
+                        },
+                        sub_county: {
+                            "id": $scope.facility.sub_county_id,
+                            "name": $scope.facility.sub_county_name,
+                            "county": $scope.facility.county_id
+                        },
+                        constituency: {
+                            "id": $scope.facility.constituency_id,
+                            "name": $scope.facility.constituency,
+                            "county": $scope.facility.county_id
                         }
                     };
+
                     if($scope.facility.hasOwnProperty
                         ("officer_in_charge") && !_.isNull($scope.facility.officer_in_charge)){
                         $scope.off_contacts =
                             $scope.facility.officer_in_charge.contacts;
                     }
+
                 })
                 .error(function (data) {
                     $log.error(data);
@@ -339,6 +352,7 @@
                     errorMessages.facility_details;
                 });
 
+
             $scope.selectReload = function (wrapper, search_term, scope_var, extra_filters) {
                 if (! _.isString(search_term)) {
                     return $q.reject();
@@ -346,6 +360,7 @@
                 var filters = _.isEmpty(search_term) ? {} : {"search_auto": search_term};
                 return wrapper.filter(_.extend(filters, extra_filters))
                 .success(function (data) {
+
                     $scope[scope_var] = data.results;
                 })
                 .error(function (data) {
@@ -461,6 +476,39 @@
                     frm.name.$render();
                 }
             };
+            var ward_filters = {
+                fields: "id,name,sub_county,constituency",
+                page_size:10000
+            };
+            var county_filters = {
+                fields: "id,name",
+                page_size:10000
+            };
+            var const_filters = {
+                fields: "id,name,county",
+                page_size:10000
+            };
+            var sub_county_filters = {
+                fields: "id,name,county",
+                page_size:10000
+            };
+
+            $scope.filterFxns = {
+                subFilter: function (a) {
+                    return a.county === $scope.select_values.county;
+                },
+                constFilter: function (a) {
+                    return a.county === $scope.select_values.county;
+                },
+                wardConstFilter: function (a) {
+                    return a.constituency === $scope.select_values.constituency;
+                },
+                wardSubFilter: function (a) {
+                    return a.constituency === $scope.select_values.sub_county;
+                }
+            };
+
+
             $scope.contacts = [{type: "", contact : ""}];
             $scope.login_user = loginService.getUser();
             $scope.selectReload(wrappers.facility_owners, "", "owners");
@@ -468,13 +516,15 @@
                 "owner_types");
             $scope.selectReload(wrappers.operation_status, "", "operation_status");
             $scope.selectReload(wrappers.keph_levels, "", "keph_levels");
-            $scope.selectReload(
-                wrappers.wards, "", "wards", {"constituency": $scope.login_user.constituency}
-            );
+
             $scope.selectReload(wrappers.regulating_bodies, "", "regulating_bodies");
             $scope.selectReload(wrappers.facility_types, "", "facility_types");
             $scope.selectReload(wrappers.towns, "", "towns");
-            $scope.selectReload(wrappers.sub_counties, "", "sub_counties");
+            $scope.selectReload(wrappers.wards, "", "wards", ward_filters);
+            $scope.selectReload(wrappers.sub_counties, "", "sub_counties", sub_county_filters);
+            $scope.selectReload(wrappers.constituencies, "", "constituencies", const_filters);
+            $scope.selectReload(wrappers.counties, "", "counties", county_filters);
+
             $scope.save = function (frm) {
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.geolocation");
