@@ -508,7 +508,7 @@
                     return a.constituency === $scope.select_values.constituency;
                 },
                 wardSubFilter: function (a) {
-                    return a.constituency === $scope.select_values.sub_county;
+                    return a.sub_county === $scope.select_values.sub_county;
                 }
             };
 

@@ -98,6 +98,17 @@
                 {{cont.contact}}
             </div>
         </div>
+        <div class="col-md-8 col-xs-12 pad-0 fs-14" style="border-right: 1px solid #F0F0F0;">
+            <div class="col-xs-12">
+                <h4 class="fw-600"> Services</h4>
+            </div>
+            <div ng-repeat="service in unit.services" class="col-xs-12 fw-500 pad-0 margin-b-0">
+              <div class="col-xs-12">
+                <h5 class="margin-b--2">{{service.name}}</h5>
+              </div>
+              <br><br>
+            </div>
+            </div>
     </div>
 
 <!-- Updates start here-->
@@ -170,6 +181,22 @@
           </div>
         </div>
    </div>
+
+   <div ng-if="unit.pending_updates.services">
+        <div class="col-xs-12 margin-t-20">
+            <i class="lato fs-14 fw-600">Services:</i>
+        </div>
+        <div class="col-xs-12 pad-0margin-0"><hr class="line-divider-dashed margin-0"></div>
+         <div ng-repeat="service in unit.pending_updates.services" class="col-xs-12 fw-500 pad-0 margin-b-0">
+          <div class="col-xs-12">
+           <div class="col-xs-12">
+                <h5 class="margin-b--2">{{service.name}}</h5>
+           </div>
+          </div>
+        </div>
+   </div>
+
+
 
 
     <div ng-if="unit.pending_updates.contacts">

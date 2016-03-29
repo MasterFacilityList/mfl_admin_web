@@ -43,6 +43,19 @@
                 }
             },
             permission: "chul.add_communityhealthunit"
+        })
+        .state("community_units.create_unit.services", {
+            url: ":unit_id/services/",
+            views: {
+                "tab-header@community_units.create_unit": {
+                    templateUrl: "chul/tpls/chul_create.tab-headers.tpl.html"
+                },
+                "form-view@community_units.create_unit": {
+                    templateUrl: "chul/tpls/chul_services.tpl.html",
+                    controller: "mfl.chul.controllers.edit_chul.services"
+                }
+            },
+            permission: "chul.add_communityhealthunit"
         });
     }]);
 

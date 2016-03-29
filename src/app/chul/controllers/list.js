@@ -11,7 +11,8 @@
             };
             $scope.filters = {
                 "fields": "id,code,name,status_name,facility_name,"+
-                "facility_county,facility_subcounty,facility_ward,date_established"
+                "facility_county,facility_subcounty,facility_ward,date_established,"+
+                "services"
             };
             $scope.action = [
                 {
@@ -79,7 +80,7 @@
             $scope.print_chul = printWrapper.printChul;
         }]
     )
-        
+
    .controller("mfl.chul.controllers.chu_feedback",
         ["$scope", "$stateParams", function ($scope, $stateParams) {
             $scope.filters = {

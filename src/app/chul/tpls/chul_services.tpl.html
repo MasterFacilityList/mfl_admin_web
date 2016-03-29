@@ -1,20 +1,33 @@
  <div class="col-xs-12 results-card margin-b-10">
-    <span class="grey-header fs-16 col-xs-12" style="font-weight: bold">Community Health Unit Services</span>
     <div class="form-group fs-14">
-        <label class="fw-500 fs-14">Services</label>
-        <ui-select ng-model="select_values.chu_services" multiple id="services"
+        <label class="fw-500 fs-14">Available Services</label>
+        <ui-select ng-model="select_values.chu_services" id="services"
         name="services" ng-change="track_service_updates()">
             <ui-select-match placeholder="Select a service...">
                 <span>{{$item.name }}</span>
             </ui-select-match>
-            <ui-select-choices repeat="service in services | filter:$select.search | orderBy:'name'">
+            <ui-select-choices repeat="service in services | filter:filterChuServices | filter:$select.search | orderBy:'name'">
                 <span>{{service.name}}</span>
             </ui-select-choices>
         </ui-select>
     </div>
-     <div class="form-group fs-14">
-       <button class="btn btn-primary" ng-click="update_services()">Update Services</button>
+
+    <div ng-if="update_chu_services">
+        <label class="fw-500 fs-14">Assigned Services</label>
+        <table class="table table-stripped">
+            <th>Service</th>
+            <th>Action</th>
+            <tr ng-repeat="chu_service in update_chu_services">
+                <td>{{chu_service.name}}</td>
+                <td><span class="btn btn-danger" ng-click="remove_service(chu_service.id)">Remove</span></td>
+            </tr>
+        </table>
+        <div class="form-group fs-14">
+            <button ui-sref="community_units.create_unit.chews({unit_id : unit_id, furthest : 2})" class="btn btn-primary margin-b-10">
+                &nbsp;<i class="fa fa-angle-double-left"></i> CHEWS
+        </button>
+       <button class="btn btn-primary margin-b-10 pull-right" ng-click="update_services()">Save & Finish</button>
     </div>
-    <h3>Assigned Services</h3>
+    </div>
 </div>
 </div>
