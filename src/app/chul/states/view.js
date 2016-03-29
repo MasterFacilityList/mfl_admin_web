@@ -43,6 +43,15 @@
                         controller: "mfl.chul.controllers.edit_chul.chews"
                     }
                 }
+            })
+            .state("community_units.edit_unit.services", {
+                url: "services/",
+                views: {
+                    "form-view@community_units.edit_unit": {
+                        templateUrl : "chul/tpls/chul_services.tpl.html",
+                        controller: "mfl.chul.controllers.edit_chul.services"
+                    }
+                }
             });
     }]);
 

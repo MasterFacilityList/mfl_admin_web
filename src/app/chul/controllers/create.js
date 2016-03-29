@@ -26,6 +26,11 @@
                     name : "chews",
                     prev : ["basic"],
                     count: "2"
+                },
+                {
+                    name : "services",
+                    prev : ["chews"],
+                    count: "3"
                 }
             ];
             $scope.new_unit = $state.params.unit_id;

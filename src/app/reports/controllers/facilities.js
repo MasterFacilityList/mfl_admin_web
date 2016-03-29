@@ -39,7 +39,8 @@
                 number_of_cots: "",
                 open_public_holidays: "",
                 open_weekends: "",
-                open_whole_day: ""
+                open_whole_day: "",
+                open_normal_day: ""
             },
             multiple: {
                 county: [],
@@ -60,6 +61,7 @@
             $scope.filters.single.open_weekends = "";
             $scope.filters.single.open_whole_day = "";
             $scope.filters.single.open_public_holidays = "";
+            $scope.filters.single.open_normal_day = "";
         };
 
         var updateSingleFilters = function (params) {
@@ -130,8 +132,8 @@
                 return _.contains(county_ids, a.county);
             },
             wardFilter: function (a) {
-                var const_ids = _.pluck($scope.filters.multiple.constituency, "id");
-                return _.contains(const_ids, a.constituency);
+                var const_ids = _.pluck($scope.filters.multiple.sub_county, "id");
+                return _.contains(const_ids, a.sub_county);
             },
             ownerFilter: function (a) {
                 var owner_types = _.pluck($scope.filters.multiple.owner_type, "id");

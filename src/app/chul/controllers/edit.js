@@ -263,7 +263,7 @@
                     });
                 }
             };
-            /*Wait for facility to be defined*/
+            /*Wait for unit to be defined*/
             $scope.$watch("unit", function (u) {
                 if (_.isUndefined(u)){
                     return;
@@ -273,6 +273,49 @@
                 }
             });
         }]
-    );
+    )
+    .controller("mfl.chul.controllers.edit_chul.services", [
+        "$scope", "mfl.chul.services.wrappers","$stateParams",
+        "toasty", "$state",
+        function($scope, wrapper, $stateParams, toasty, $state){
+            wrapper.services.filter({page_size:1000, fields:"id,name"})
+            .success(function(data){
+                $scope.services = data.results;
+            })
+            .error(function(data){
+                $scope.errors = data;
+            });
+
+            wrapper.chuls.get($stateParams.unit_id)
+            .success(function(data){
+                $scope.unit = data;
+            })
+            .error(function(data){
+                $scope.errors = data;
+            });
+            $scope.select_values = {
+                chu_services: []
+            };
+
+            $scope.track_service_updates = function(){
+                console.log($scope.select_values.chu_services);
+            };
+            $scope.update_services = function(){
+                $scope.unit.services = $scope.select_values.chu_services;
+                console.log($scope.unit.services);
+
+                wrapper.chuls.update($stateParams.unit_id, $scope.unit)
+                .success(function(data){
+                    toasty.success({
+                        title: "Community Unit Services",
+                        msg: "Community Unit services updated successfully "
+                    });
+                    $state.go("community_units", {reload: true});
+                })
+                .error(function(data){
+                    $scope.errors = data;
+                });
+            };
+    }]);
 
 })(window.angular, window._);

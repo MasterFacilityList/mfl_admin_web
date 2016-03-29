@@ -26,6 +26,15 @@
         <label class="text-black fw-600" >Regulatory Body: </label>
         {{facility.regulatory_body_name}}
     </div>
+     <div class="col-md-6 col-xs-12 fs-16">
+        <label class="text-black fw-600">License Number: </label>
+        {{facility.license_number}}
+    </div>
+    <div class="col-md-6 col-xs-12 content-right fs-16">
+        <label class="text-black fw-600" >Registration Number: </label>
+        {{facility.registration_number}}
+    </div>
+
     <div class="col-xs-12"><hr class="line-divider"></div>
     <!-- Basic Details -->
     <div class="row">
@@ -98,7 +107,7 @@
                  <label class="text-black">County:</label> {{facility.county | titlecase}}
             </span>
             <span class="content-right col-md-6 col-xs-12">
-                <label class="text-black">Sub-County:</label> {{facility.constituency | titlecase}}
+                <label class="text-black">Sub-County:</label> {{facility.sub_county_name | titlecase}}
             </span>
             <span class="pull-left col-md-6 col-xs-12 margin-t-10">
                 <label class="text-black">Ward:</label> {{facility.ward_name | titlecase}}

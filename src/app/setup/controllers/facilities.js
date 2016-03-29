@@ -851,7 +851,7 @@
      * The controller used to list facility types
      */
     .controller("mfl.setup.controller.facility_types.list", ["$scope", function ($scope) {
-        $scope.filters = {"fields":"id,name"};
+        $scope.filters = {"fields":"id,name,sub_division"};
     }])
 
     /**
@@ -866,6 +866,22 @@
         "$stateParams","$state","mfl.common.forms.changes","toasty",
         function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
             $scope.wrapper = adminApi.facility_types;
+            // $scope.sub_division = {
+            //     "name": ""
+            // };
+            var type_filters = {
+                page_size:1000,
+                fields:"id,name,sub_division"
+            };
+
+            adminApi.facility_types.filter(type_filters)
+            .success(function(data){
+                $scope.facility_types = data.results;
+            })
+            .error(function(err){
+                $scope.errors = err;
+            });
+
             if(!_.isUndefined($stateParams.type_id)){
                 $scope.state = true;
                 adminApi.facility_types.get($stateParams.type_id)
@@ -876,6 +892,9 @@
                 .error(function  (err) {
                     $scope.errors = err;
                 });
+                // $scope.sub_division = {
+                //     "name": $scope.facility_type.sub_division
+                // };
                 $scope.remove = function () {
                     adminApi.facility_types.remove($stateParams.type_id).success(function(){
                         toasty.success({
@@ -895,6 +914,7 @@
                 $scope.state = false;
             }
             $scope.saveFrm = function (frm) {
+                console.log(frm);
                 if(_.isUndefined($stateParams.type_id)){
                     adminApi.facility_types.create(frm)
                     .success(function () {

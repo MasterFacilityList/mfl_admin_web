@@ -335,6 +335,10 @@
                             "id": $scope.facility.constituency_id,
                             "name": $scope.facility.constituency,
                             "county": $scope.facility.county_id
+                        },
+                        regulation_status: {
+                            "id": $scope.facility.regulation_status,
+                            "name": $scope.facility.regulatory_status_name
                         }
                     };
 
@@ -518,6 +522,7 @@
             $scope.selectReload(wrappers.keph_levels, "", "keph_levels");
 
             $scope.selectReload(wrappers.regulating_bodies, "", "regulating_bodies");
+            $scope.selectReload(wrappers.regulation_status, "", "regulation_statuses");
             $scope.selectReload(wrappers.facility_types, "", "facility_types");
             $scope.selectReload(wrappers.towns, "", "towns");
             $scope.selectReload(wrappers.wards, "", "wards", ward_filters);
@@ -537,6 +542,7 @@
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
                 $scope.facility.town = $scope.select_values.town;
                 $scope.facility.sub_county = $scope.select_values.sub_county;
+                $scope.facility.regulation_status = $scope.select_values.regulation_status;
                 if($scope.create) {
                     $scope.setFurthest(2);
                     if(_.isEmpty($state.params.facility_id)) {

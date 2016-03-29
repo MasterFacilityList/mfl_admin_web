@@ -7,13 +7,14 @@
     .constant("URL_SEARCH_PARAMS", [
         "name", "code",
 
-        "search",
+        "search","sub_county",
 
         "county", "constituency", "ward",
 
         "operation_status", "facility_type", "keph_level",
 
         "open_public_holidays", "open_weekends", "open_whole_day",
+        "open_normal_day",
 
         // pagination controls
         "page_size", "page"

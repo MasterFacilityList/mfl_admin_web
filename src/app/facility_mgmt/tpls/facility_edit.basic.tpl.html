@@ -116,6 +116,25 @@
                     </ui-select-choices>
                 </ui-select>
             </div>
+               <div class="form-group col-xs-12">
+                <label class="control-label">Regulatory Status</label>
+                <ui-select ng-model="select_values.regulation_status" required name="regulation_status" api-checker register-custom-form-control>
+                    <ui-select-match placeholder="Select a regulatory status...">
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="reg_status.id as reg_status in regulation_statuses | filter:$select.search">
+                        <span>{{reg_status.name}}</span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+               <div class="form-group col-xs-12">
+                <label class="control-label">License Number</label>
+                 <input type="text" class="form-control" name="license_number" ng-model="facility.license_number"  required placeholder="License Number of the Facility" api-checker/>
+            </div>
+           <div class="form-group col-xs-12">
+                <label class="control-label">Registration Number</label>
+                <input type="text" class="form-control" name="registration_number" ng-model="facility.registration_number"  required placeholder="Registration Number of the Facility" api-checker/>
+            </div>
 
             <div class="form-group col-xs-12">
                 <label class="control-label">

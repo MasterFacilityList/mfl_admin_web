@@ -9,6 +9,7 @@
         this.chuls = api.setBaseUrl("api/chul/units/");
         this.chuls_updates = api.setBaseUrl("api/chul/updates/");
         this.workers = api.setBaseUrl("api/chul/workers/");
+        this.services = api.setBaseUrl("api/chul/services/");
         this.unit_status = api.setBaseUrl("api/chul/statuses/");
         this.facilities = api.setBaseUrl("api/facilities/facilities/");
         this.contact_types = api.setBaseUrl("api/common/contact_types/");
