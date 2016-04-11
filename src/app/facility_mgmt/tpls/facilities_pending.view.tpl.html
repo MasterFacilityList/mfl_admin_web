@@ -4,7 +4,7 @@
             Regulate
         </a>
 
-        <a ng-if="(!facility.rejected&&!facility.closed)&&(!facility.is_approved||facility.has_edits)" requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve({facility_id: facility.id})" class="btn btn-success" tooltip="Approve Facility">
+        <a ng-if="(!facility.closed)&&(!facility.is_approved||facility.has_edits)" requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve({facility_id: facility.id})" class="btn btn-success" tooltip="Approve Facility">
             Approve/Reject
         </a>
 
@@ -99,13 +99,16 @@
                 <span class="pull-left col-md-6 col-xs-12">
                      <label class="text-black">County:</label> {{facility.county | titlecase}}
                 </span>
-                <span class="content-right col-md-6 col-xs-12">
-                    <label class="text-black">Constituency:</label> {{facility.constituency | titlecase}}
+                 <span class="content-right col-md-6 col-xs-12">
+                    <label class="text-black">Sub-County:</label> {{facility.sub_county_name | titlecase}}
                 </span>
-                <span class="pull-left col-md-6 col-xs-12 margin-t-10">
+                <span class="pull-left col-md-6 col-xs-12">
+                    <label class="text-black">Constituency:</label> {{facility.constituency_name | titlecase}}
+                </span>
+                <span class="content-right col-md-6 col-xs-12">
                     <label class="text-black">Ward:</label> {{facility.ward_name | titlecase}}
                 </span>
-                <span class="content-right col-md-6 col-xs-12 margin-t-10">
+                <span class="pull-left col-md-6 col-xs-12">
                     <label class="text-black">Town:</label> {{facility.town_name}}
                 </span>
                 <!-- Geo -->
@@ -288,16 +291,20 @@
             <h4>Regulation</h4>
             <table class="table table-condensed table-hover fs-14">
                 <thead>
-                    <th class="col-xs-7">
+                    <th class="col-xs-4">
                         Department Name
                     </th>
-                    <th class="col-xs-5 text-center">
+                    <th class="col-xs-4 text-center">
                         Regulating Body
+                    </th>
+                     <th class="col-xs-4 text-center">
+                        License Number
                     </th>
                 </thead>
                <tr ng-repeat="unit_changed in facility_changes.units">
                     <td class="col-xs-7">{{unit_changed.department_name}}</td>
                     <td class="col-xs-5 text-center">{{unit_changed.regulating_body_name | titlecase}}</td>
+                    <td class="col-xs-7">{{unit_changed.license_number}}</td>
                 </tr>
             </table>
         </div>

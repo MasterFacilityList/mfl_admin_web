@@ -27,14 +27,14 @@
                             Longitude
                         </label>
                         <input type="number" class="form-control" step="0.00000001" name="longitude" ng-model="geo.coordinates.coordinates[0]"
-                        ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
+                        ng-change="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
                     </div>
                     <div class="form-group col-sm-6 col-xs-12">
                         <label class="control-label">
                             Latitude
                         </label>
                         <input type="number" class="form-control" step="0.00000001" name="latitude" ng-model="geo.coordinates.coordinates[1]"
-                        ng-keypress="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
+                        ng-change="checkLocation()" ng-model-options="{ debounce: 250 }" api-checker/>
                     </div>
                       <!-- End lat long -->
                     <div class="col-xs-12 margin-t-10 margin-b-20">

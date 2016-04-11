@@ -179,7 +179,7 @@
                         </span>
                     </span>
                   </li>
-                  <li class="col-xs-12 list-group-item fs-16 pad-t-5 pad-b-5" style="font-family : 'Lato Light', sans-serif;" ng-if="user.user_counties.length!==0">
+                  <li class="col-xs-12 list-group-item fs-16 pad-t-5 pad-b-5" style="font-family : 'Lato Light', sans-serif;" ng-if="user.user_counties.length!==0 && !user.user_sub_counties.length">
                     <span class="col-xs-12 pad-0">
                         <span class="col-xs-3 fa-stack fa-lg fs-26 text-success">
                           <i class="fa fa-circle fa-stack-2x"></i>
@@ -201,13 +201,6 @@
                           <i class="fa fa-circle fa-stack-2x"></i>
                           <i class="fa fa-map-marker fa-stack-1x fa-inverse">
                           </i>
-                        </span>
-                        <span class="col-xs-9 fs-18">
-                            <b>Assigned Constituencies</b>
-                            <br>
-                            <span ng-repeat="c in user.user_constituencies" class="fs-16">
-                                {{c.constituency_name | titlecase}}
-                            </span>
                         </span>
                              <span class="col-xs-9 fs-18">
                             <b>Assigned Sub-Counties</b>
@@ -249,10 +242,10 @@
                                 <span ng-if="ward">Ward</span>
                                 <span ng-if="constituency">Sub-County</span>
                                 <span ng-if="county">County</span>
-                                <span ng-if="user.constituency_name">
-                                    in {{user.constituency_name | titlecase}} Sub-county
+                                <span ng-if="user.sub_county_name">
+                                    in {{user.sub_county_name | titlecase}} Sub-county
                                 </span>
-                                <span ng-if="user.county_name">
+                                <span ng-if="user.county_name && !user.sub_county_name ">
                                     in {{user.county_name | titlecase}} County
                                 </span>
                             </h3>

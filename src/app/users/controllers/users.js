@@ -1136,8 +1136,9 @@
             name: "Manage users"
         };
         $scope.filters = {
-            "fields": "id,first_name,last_name,email,last_login,is_active,"+
-            "employee_number,county_name, sub_county_name, constituency_name"
+            "fields": "id,sub_county_name,first_name,last_name,email,"+
+            "last_login,is_active,employee_number,county_name,"+
+            "constituency_name,job_title_name"
         };
         $scope.action = [
             {

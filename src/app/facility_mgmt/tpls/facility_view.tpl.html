@@ -10,7 +10,7 @@
             Regulate
         </a>
 
-        <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac_id})" class="btn btn-success" ng-if="(!facility.rejected&&!facility.closed)&&(!facility.is_approved||facility.has_edits)" tooltip="Approve Facility">
+        <a requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve.basic({facility_id: fac_id})" class="btn btn-success" ng-if="!facility.closed&&(!facility.is_approved||facility.has_edits)" tooltip="Approve Facility">
             Approve/Reject
         </a>
         <a class="btn btn-info margin-l-3"

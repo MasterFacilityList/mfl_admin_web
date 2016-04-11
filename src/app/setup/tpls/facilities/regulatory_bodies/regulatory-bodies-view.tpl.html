@@ -22,28 +22,12 @@
                 <label class="control-label">Name&#42;</label>
                 <input type="text" name="name" ng-model="facilityRegulatoryBodies.name" required api-checker class="form-control">
             </div>
-            <div class="form-group">
-                <label class="control-label">Regulation Verb&#42;</label>
-                <input type="text" name="regulation_verb" ng-model="facilityRegulatoryBodies.regulation_verb" required api-checker class="form-control">
-            </div>
+
             <div class="form-group">
                 <label class="control-label">Abbreviation</label>
                 <input type="text" name="abbreviation" ng-model="facilityRegulatoryBodies.abbreviation" api-checker class="form-control">
             </div>
-            <div class="form-group">
-                <label class="control-label">Body Type</label>
-                <ui-select ng-model="facilityRegulatoryBodies.regulatory_body_type" api-checker name="regulatory_body_type" register-custom-form-control>
-                    <ui-select-match placeholder="Select a body type"><span>{{$select.selected.name}}</span></ui-select-match>
-                    <ui-select-choices repeat="ot.id as ot in owner_types | filter:$select.search"><span>{{ot.name}}</span></ui-select-choices>
-                </ui-select>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Default Status</label>
-                <ui-select ng-model="facilityRegulatoryBodies.default_status" api-checker name="default_status" register-custom-form-control>
-                    <ui-select-match placeholder="Select a default status"><span>{{$select.selected.name}}</span></ui-select-match>
-                    <ui-select-choices repeat="reg_status.id as reg_status in regulation_status | filter:$select.search"><span>{{reg_status.name}}</span></ui-select-choices>
-                </ui-select>
-            </div>
+
             <div class="checkbox form-group" ng-if="facilityRegulatoryBodies.id">
                 <label for="active">
                     <input type="checkbox" id="active" name="active" ng-model="facilityRegulatoryBodies.active" api-checker>

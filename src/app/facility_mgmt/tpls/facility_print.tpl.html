@@ -109,10 +109,15 @@
             <span class="content-right col-md-6 col-xs-12">
                 <label class="text-black">Sub-County:</label> {{facility.sub_county_name | titlecase}}
             </span>
-            <span class="pull-left col-md-6 col-xs-12 margin-t-10">
+
+            <span class="pull-left col-md-6 col-xs-12">
                 <label class="text-black">Ward:</label> {{facility.ward_name | titlecase}}
             </span>
-            <span class="content-right col-md-6 col-xs-12 margin-t-10">
+             <span class="content-right col-md-6 col-xs-12">
+                <label class="text-black">Constituency:</label> {{facility.constituency_name | titlecase}}
+            </span>
+
+            <span class="pull-left col-md-6 col-xs-12">
                 <label class="text-black">Town:</label> {{facility.town_name}}
             </span>
             <!-- Geo -->
@@ -210,21 +215,29 @@
     <!-- End of basic details -->
     <div class="col-xs-12 margin-t-10 margin-b-10" ng-if="fac_units.length !== 0 || facility.facility_services.length !== 0"><hr class="line-divider"></div>
     <div class="col-xs-12 margin-t-10" ng-if="fac_units.length !== 0">
-        <h4 class="fw-600">Regulation</h4>
+        <h4 class="fw-600">Departments Regulation</h4>
     </div>
     <div class="col-xs-12" ng-if="fac_units.length !== 0">
         <table class="table fs-14 table-hover table-condensed table-stripped">
             <thead>
-                <th class="col-xs-8">Name</th>
-                <th class="col-xs-4 text-center">Regulating Body</th>
+                <th class="col-xs-4">Name</th>
+                <th class="col-xs-5">Regulating Body</th>
+                <th class="col-xs-4">License Number</th>
+                <th class="col-xs-4">Registration Number</th>
             </thead>
             <tbody>
                 <tr ng-repeat="unit in fac_units">
                     <td>
                         {{unit.unit_name}}
                     </td>
-                    <td class="text-center">
+                    <td>
                         {{unit.regulating_body_name}}
+                    </td>
+                      <td>
+                        {{unit.license_number}}
+                    </td>
+                    <td>
+                        {{unit.registration_number}}
                     </td>
                 </tr>
             </tbody>

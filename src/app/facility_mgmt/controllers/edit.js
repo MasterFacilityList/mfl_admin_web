@@ -480,6 +480,20 @@
                     frm.name.$render();
                 }
             };
+            $scope.populate_operational_hours = function(){
+                if($scope.facility.open_whole_day){
+                    $scope.facility.open_late_night = true;
+                    $scope.facility.open_public_holidays = true;
+                    $scope.facility.open_weekends = true;
+                    $scope.facility.open_normal_day = true;                    
+                }
+                else{
+                    $scope.facility.open_late_night = false;
+                    $scope.facility.open_public_holidays = false;
+                    $scope.facility.open_weekends = false;
+                    $scope.facility.open_normal_day = false;    
+                }
+            };
             var ward_filters = {
                 fields: "id,name,sub_county,constituency",
                 page_size:10000
@@ -531,9 +545,11 @@
             $scope.selectReload(wrappers.counties, "", "counties", county_filters);
 
             $scope.save = function (frm) {
+
                 $scope.finish = ($scope.nxtState ? "facilities" :
                     "facilities.facility_edit.geolocation");
                 var changes = formChanges.whatChanged(frm);
+                console.log(changes);
                 $scope.facility.ward = $scope.select_values.ward;
                 $scope.facility.keph_level = $scope.select_values.keph_level;
                 $scope.facility.facility_type = $scope.select_values.facility_type;
@@ -541,7 +557,7 @@
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
                 $scope.facility.town = $scope.select_values.town;
-                $scope.facility.sub_county = $scope.select_values.sub_county;
+                $scope.facility.sub_county = $scope.select_values.sub_county.id;
                 $scope.facility.regulation_status = $scope.select_values.regulation_status;
                 if($scope.create) {
                     $scope.setFurthest(2);
@@ -559,6 +575,8 @@
                         });
                     }
                     else {
+                        changes.sub_county = $scope.facility.sub_county;
+                        console.log(changes);
                         wrappers.facilities.update(
                             $state.params.facility_id, changes)
                         .success(function () {
@@ -575,7 +593,9 @@
                         });
                     }
                 } else {
+                    console.log("Hapa Hivi");
                     changes.officer_in_charge = $scope.facility.officer_in_charge;
+                    changes.sub_county = $scope.facility.sub_county;
                     wrappers.facilities.update($scope.facility_id, changes)
                     .success(function () {
                         if($scope.nxtState){
@@ -893,6 +913,23 @@
             .error(function(error){
                 $scope.errors = error;
             });
+
+            /*regulation_statuses*/
+            wrappers.regulation_status.filter({fields:"id,name"})
+            .success(function(data){
+                $scope.regulation_statuses = data.results;
+            })
+            .error(function(error){
+                $scope.errors = error;
+            });
+
+            $scope.select_values = {
+                regulatory_body: {
+                },
+                regulation_status:{
+                }
+            };
+
             /*facility units*/
             wrappers.facility_units.filter({
                 facility: $scope.facility_id,
@@ -965,8 +1002,33 @@
                     }
                 }
             };
+
+            $scope.update_facility_regulatory_details = function(){
+                var updates = {};
+                if(_.isUndefined($scope.select_values.regulatory_body.name)){
+                    updates.regulatory_body = $scope.select_values.regulatory_body;
+                }
+
+                if(_.isUndefined($scope.select_values.regulation_status.name)){
+                    updates.regulation_status = $scope.select_values.regulation_status;
+                }
+
+                if(!_.isUndefined($scope.facility.license_number)){
+                    updates.license_number = $scope.facility.license_number;
+                }
+
+                if(!_.isUndefined($scope.facility.registration_number)){
+                    updates.registration_number = $scope.facility.registration_number;
+                }
+
+                wrappers.facilities.update($scope.facility_id, updates)
+                .success(function(data){}).error(function(){});
+            };
+            
             $scope.saveUnits = function (arg) {
+                $scope.update_facility_regulatory_details();
                 $scope.fac_unitobj = {units : []};
+
                 _.each($scope.fac_depts, function (a_unit) {
                     if(_.isUndefined(a_unit.id)){
                         $scope.fac_unitobj.units.push(a_unit);
@@ -980,6 +1042,16 @@
                 }
                 if(f.hasOwnProperty("facility_units")){
                     $scope.facilityUnits(f);
+                    $scope.select_values = {
+                        regulatory_body: {
+                            "id": $scope.facility.regulatory_body,
+                            "name": $scope.facility.regulatory_body_name
+                        },
+                        regulation_status:{
+                            "name": $scope.facility.regulatory_status_name,
+                            "id": $scope.facility.regulatory_status
+                        }
+                    };
                 }
             });
             /*add existing regulatory to facility*/
@@ -1149,7 +1221,7 @@
                                 lat: data.coordinates.coordinates[1],
                                 lng: data.coordinates.coordinates[0],
                                 message: f.name,
-                                draggable: true
+                                draggable: false
                             }
                         }
                     });
@@ -1190,7 +1262,7 @@
                                             lat: $scope.geo.coordinates.coordinates[1],
                                             lng: $scope.geo.coordinates.coordinates[0],
                                             message: f.name,
-                                            draggable: true
+                                            draggable: false
                                         }
                                     }
                                 });
@@ -1323,6 +1395,7 @@
                         }
                     }
                 });
+
             };
             // update coordinates after dragging marker
             $scope.$on("leafletDirectiveMarker.wardmap.dragend", function (e, args) {

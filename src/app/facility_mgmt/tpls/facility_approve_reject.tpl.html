@@ -80,10 +80,10 @@
                          <label class="text-black">County:</label> {{facility.county | titlecase}}
                     </span>
                     <span class="content-right col-md-6 col-xs-12">
-                        <label class="text-black">Sub-County:</label> {{facility.sub_county | titlecase}}
+                        <label class="text-black">Sub-County:</label> {{facility.sub_county__name | titlecase}}
                     </span>
                      <span class="content-right col-md-6 col-xs-12">
-                        <label class="text-black">Constituency:</label> {{facility.constituency | titlecase}}
+                        <label class="text-black">Constituency:</label> {{facility.constituency_name | titlecase}}
                     </span>
                     <span class="pull-left col-md-6 col-xs-12 margin-t-10">
                         <label class="text-black">Ward:</label> {{facility.ward_name | titlecase}}
@@ -204,7 +204,7 @@
                         <label class="control-label">
                             Comment for {{reject?'approval':'rejection'}}
                         </label>
-                        <textarea class="form-control" name="comment" ng-model="facility_approval.comment" required rows="2" api-checker>
+                        <textarea class="form-control" name="comment" ng-model="facility_approval.comment" rows="2" api-checker>
                         </textarea>
                     </div>
                     <button ng-if="reject" class="btn btn-success">Approve Facility</button>
