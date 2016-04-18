@@ -43,7 +43,8 @@
             admin: ["mfl.setup.api", "adminApi"],
             facilities: ["mfl.facility_mgmt.services","mfl.facility_mgmt.services.wrappers"],
             chuls: ["mfl.chul.services","mfl.chul.services.wrappers"],
-            service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"]
+            service_mgmt: ["mfl.service_mgmt.services", "mfl.service_mgmt.wrappers"],
+            admin_offices: ["mfl.admin_offices.services", "mfl.admin_offices.services.wrappers"]
         };
     }])
 

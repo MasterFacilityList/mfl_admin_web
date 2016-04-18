@@ -1,0 +1,83 @@
+
+<div class="content-header margin-b-20">
+    <div class="action-container content-header-extra"></div>
+    <h2 class="content-title">
+        <span class="main-title">
+          <i></i> Add Admin Office
+        </span>
+    </h2>
+</div>
+<!-- End of content header -->
+<div class="col-xs-12">
+    <div class="col-xs-12">
+        <div class=" col-xs-12 col-sm-offset-1 col-sm-10 content-card">
+            <form name="admin_office_frm" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
+                <drf-err-msg></drf-err-msg>
+                <div class="form-group">
+                    <label class="control-label">First Name&#42;:</label>
+                    <input type="text" class="form-control" name="first_name" ng-model="admin_office.first_name" placeholder="Enter First Name Here..." required api-checker/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Last Name&#42;:</label>
+                    <input type="text" class="form-control" name="last_name" ng-model="admin_office.last_name" placeholder="Enter Last Name Here..." required api-checker/>
+                </div>
+                <div class="form-group checkbox">
+                  <label for="is_national">
+                    <input type="checkbox" id="is_national" name="is_national" ng-model="admin_office.is_national" api-checker >
+                    Is National Office
+                   </label>
+                </div>
+
+                <div class="form-group" ng-if="!admin_office.is_national">
+                    <label class="control-label">County:</label>
+                    <ui-select ng-model="select_values.county" name="county" register-custom-form-control>
+                        <ui-select-match placeholder="Select a County...">
+                            <span>{{$select.selected.name | titlecase}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="county.id as county in config_info.county | filter:$select.search">
+                            <span>{{county.name | titlecase}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+
+                <div class="form-group" ng-if="!admin_office.is_national">
+                    <label class="control-label">Sub-County:</label>
+                    <ui-select ng-model="select_values.sub_county" name="sub_county" register-custom-form-control>
+                        <ui-select-match placeholder="Select a Sub-County...">
+                            <span>{{$select.selected.name | titlecase}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="sub.id as sub in config_info.sub_county |filter:subFilter | filter:$select.search">
+                            <span>{{sub.name | titlecase}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Job-title&#42;:</label>
+                    <ui-select ng-model="select_values.job_title" required name="job_title" api-checker register-custom-form-control>
+                        <ui-select-match placeholder="Select a Job-title...">
+                            <span>{{$select.selected.name | titlecase}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="jt.id as jt in config_info.job_title | filter:$select.search">
+                            <span>{{jt.name | titlecase}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Email&#42;:</label>
+                    <input type="email" class="form-control" name="first_name" ng-model="admin_office.email" placeholder="Enter Email Here..." required api-checker/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Phone Number&#42;:</label>
+                    <input type="text" class="form-control" name="phone_number" ng-model="admin_office.phone_number" placeholder="Enter Phone Number Here..." required api-checker/>
+                </div>
+
+                <div class="margin-t-20 pad-b-10">
+                    <button class="btn btn-primary" ng-click='save_admin_office()'>Save</button>
+                    <button class="btn btn-default" ui-sref="admin_offices">Cancel</button>
+                    <mfl-revision-view ng-show="state" id="admin_office.id" wrapper="wrapper" ></mfl-revision-view>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

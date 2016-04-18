@@ -25,6 +25,7 @@
         "mfl.reports",
         "mfl.facility_mgmt",
         "mfl.chul",
+        "mfl.admin_offices",
         "jcs-autoValidate"
     ]);
 

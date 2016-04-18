@@ -25,7 +25,7 @@
 
      <div class="form-group fs-14">
         <label class="fw-500 fs-14">Constituency</label>
-        <ui-select ng-model="filters.constituency" multiple ng-disabled="true" id="constituency" name="constituency">
+        <ui-select ng-model="filters.constituency" multiple id="constituency" name="constituency">
             <ui-select-match placeholder="Select constituency...">
                 <span>{{$item.name | titlecase }}</span>
             </ui-select-match>
