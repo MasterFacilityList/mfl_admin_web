@@ -72,19 +72,23 @@
                 var sub_county = $scope.selected_values.sub_county;
                 var ward = $scope.selected_values.ward;
                 $scope.filters = {};
+                var new_filter ={
+                    report_type: api_filters.report_type
+                };
 
-                if(!_.isEmpty(county)){
+                if(!_.isObject(county)){
                     $scope.filters.county = county;
                 }
-                if(!_.isEmpty(sub_county)){
+                if(!_.isObject(sub_county)){
                     $scope.filters.sub_county = sub_county;
                 }
-                if(!_.isEmpty(ward)){
+
+                if(!_.isObject(ward)){
                     $scope.filters.ward = ward;
                 }
-                _.extend(api_filters, $scope.filters);
-                console.log(api_filters);
-                wrapper.filter(api_filters)
+                _.extend(new_filter, $scope.filters);
+                console.log(new_filter);
+                wrapper.filter(new_filter)
                 .success(function (data) {
                     var transform = transform_fxn || _.identity;
                     $scope[data_param] = transform(data.results, $scope);
@@ -198,6 +202,13 @@
         function($scope, $controller,wrappers){
             var helper = $controller("mfl.reports.controllers.helper");
             helper.initCtrl($scope, wrappers.chul_reporting, "status", "chu_status");
+        }
+    ])
+    .controller("mfl.reports.controllers.admin_offices", ["$scope", "$controller",
+        "mfl.reports.services.wrappers",
+        function($scope, $controller,wrappers) {
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope, wrappers.admin_offices, "county", "admin_offices");
         }
     ]);
 })(window.angular, window._);

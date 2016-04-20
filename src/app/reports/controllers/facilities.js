@@ -2,7 +2,7 @@
 
     "use strict";
 
-    angular.module("mfl.reports.controllers.facilities", [
+    angular.module("mfl.reports.controllers.facilities.reports", [
         "mfl.reports.states",
         "mfl.reports.services",
         "mfl.auth.oauth2"
@@ -40,7 +40,9 @@
                 open_public_holidays: "",
                 open_weekends: "",
                 open_whole_day: "",
-                open_normal_day: ""
+                open_normal_day: "",
+                created_after: "",
+                created_before: ""
             },
             multiple: {
                 county: [],
@@ -69,23 +71,8 @@
             _.each(_.keys($scope.filters.single), function (a) {
                 $scope.filters.single[a] = params[a] || "";
             });
-            // if(!_.isUndefined(params.search)){
-            //     var search_query = window.JSON.parse(params.search);
-            //     $scope.filters.single.search  = null;
-
-            //     if(!_.isUndefined(search_query.query)){
-            //         $scope.filters.single.search = search_query.query.query_string.query;
-            //     }
-            //     if(!_.isUndefined(search_query.query.term)){
-            //         $scope.filters.single.search = search_query.query.term.code; 
-
-            //     }
-            //     console.log(search_query);
-
-            // }
         };
         updateSingleFilters(filterParams);
-
 
         var updateMultipleFilters = function (params, filter_summaries) {
             // update ui-select inputs
@@ -187,40 +174,26 @@
                 return memo;
             }, {});
         };
-        $scope.get_search_query_dsl = function(search_term){
-            var dsl = {
-                "query": { }
-            };
-            if (_.isNaN(parseInt(search_term, 10))) {
-                dsl.query.query_string = {
-                    "default_field": "name",
-                    "query": search_term
-                };
-            } else {
-                dsl.query.term = {
-                    "code": search_term
-                };
-            }
-            return {
-                dsl: dsl,
-                search_term: search_term
-            };
-        };
-        $scope.filterFacilities = function () {
-            $scope.search_dsl = null;
-            var multiple = dumpMultipleFilters($scope.filters.multiple);
 
-            // if(!_.isUndefined($scope.filters.single.search)){
-            //     var search_term = $scope.filters.single.search;
-            //     $scope.search_dsl = $scope.get_search_query_dsl(search_term);
-            //     $scope.filters.single.search = window.JSON.stringify($scope.search_dsl.dsl);
-            // }
-            
+        $scope.filterFacilities = function () {
+
+            if($scope.filters.single.created_after!==""){
+                var date_from = new Date($scope.filters.single.created_after);
+                $scope.filters.single.created_after = date_from.toISOString();
+            }
+
+            if($scope.filters.single.created_before!==""){
+                var date_to = new Date($scope.filters.single.created_before);
+                $scope.filters.single.created_before = date_to.toISOString();
+
+            }
+
+            var multiple = dumpMultipleFilters($scope.filters.multiple);
             var single = dumpSingleFilters($scope.filters.single);
             var params = _.extend(single, multiple);
             params.page = undefined;
             params.page_size = undefined;
-            $state.go($state.current.name, params);     
+            $state.go($state.current.name, params);
         };
 
         $scope.clearFilters = function () {

@@ -1,6 +1,5 @@
 
 <div class="content-header margin-b-20">
-    <div class="action-container content-header-extra"></div>
     <h2 class="content-title">
         <span class="main-title">
           <i></i> Add Admin Office
@@ -21,7 +20,7 @@
                     <label class="control-label">Last Name&#42;:</label>
                     <input type="text" class="form-control" name="last_name" ng-model="admin_office.last_name" placeholder="Enter Last Name Here..." required api-checker/>
                 </div>
-                <div class="form-group checkbox">
+                <div class="form-group checkbox" ng-if='logged_in_user.is_national'>
                   <label for="is_national">
                     <input type="checkbox" id="is_national" name="is_national" ng-model="admin_office.is_national" api-checker >
                     Is National Office

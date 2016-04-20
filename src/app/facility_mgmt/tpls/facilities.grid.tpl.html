@@ -111,6 +111,17 @@
                         </ui-select-choices>
                     </ui-select>
                 </div>
+                <div class="form-group">
+                    <label  class="fw-500">Facility Owner</label>
+                    <ui-select ng-model="filters.multiple.owner" multiple>
+                        <ui-select-match placeholder="Select a facility owner..." id="owner" name="owner">
+                            <span>{{$item.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="ot in filter_summaries.owner | filter:filterFxns.ownerFilter | filter:$select.search">
+                            <span>{{ot.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
@@ -167,6 +178,22 @@
                              </label>
                         </div>
                     </div>
+                </div>
+                     <div class="form-group col-xs-8 pad-l-5">
+                    <label for="established date" class="fw-600 fs-14">
+                        Created after
+                    </label>
+                    <datepicker date-format="y-MM-dd">
+                      <input class="form-control" name="c" ng-model="filters.single.created_after" type="text"  placeholder="dd-mm-yy"/>
+                    </datepicker>
+                </div>
+                 <div class="form-group col-xs-8 pad-l-52">
+                    <label for="established date" class="fw-600 fs-14">
+                        Created before
+                    </label>
+                    <datepicker date-format="y-MM-dd">
+                      <input class="form-control" name="c" ng-model="filters.single.created_before" type="text"  placeholder="dd-mm-yy"/>
+                    </datepicker>
                 </div>
 
             </div>

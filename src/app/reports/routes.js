@@ -20,6 +20,7 @@
 
         "number_of_beds", "number_of_cots",
         "open_public_holidays", "open_weekends", "open_whole_day",
+        "created_after", "created_before",
 
         // pagination controls
         "page_size", "page"
@@ -360,6 +361,30 @@
                 "main-content@reports.chu_status": {
                     templateUrl: "reports/tpls/chu_status.tpl.html",
                     controller: "mfl.reports.controllers.chu_status"
+                }
+            }
+        })
+        .state("reports.admin_offices", {
+            url: "reports/admin_offices",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html"
+                },
+                "main-content@reports.admin_offices": {
+                    templateUrl: "reports/tpls/admin_offices.tpl.html",
+                    controller: "mfl.reports.controllers.admin_offices"
+                }
+            }
+        })
+        .state("reports.gis", {
+            url: "reports/gis",
+            views: {
+                "body@reports": {
+                    templateUrl: "reports/tpls/body.tpl.html"
+                },
+                "main-content@reports.gis": {
+                    templateUrl: "reports/tpls/facilities_gis.tpl.html",
+                    controller: "mfl.reports.controllers.gis"
                 }
             }
         });

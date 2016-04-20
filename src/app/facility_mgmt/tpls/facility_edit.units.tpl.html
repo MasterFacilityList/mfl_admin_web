@@ -5,7 +5,7 @@
     <!-- Start of new implementation -->
     <div class="col-xs-12 margin-t-10 pad-0" requires-permission="facilities.add_facilityunit">
         <form name="facility_units" role="form" >
-       
+
         <div class="col-xs-12">
              <!-- Facility regulation-->
              <fieldset>
@@ -43,7 +43,7 @@
         <!-- Facility regulation-->
     </fieldset>
 
-    
+
            <legend> <h4 class="fw-600 fs-18">Facility Departments Regulation</h4></legend>
            <fieldset>
             <table class="table table-hover table-condensed custom-well col-xs-12">
@@ -76,14 +76,14 @@
                         </td>
                          <td>
                             <div class="form-group grid-inputs" >
-                                
+
                                 <input type="text" class="form-control" ng-model="fac_dept.license_number"
                                 placeholder='License Number'>
                             </div>
                         </td>
                         <td>
                             <div class="form-group grid-inputs" >
-                                
+
                                 <input type="text" class="form-control" ng-model="fac_dept.registration_number"
                                 placeholder='Registration No.'>
                             </div>
@@ -109,9 +109,9 @@
                 </tbody>
             </table>
             </fieldset>
-           
 
-        
+
+
         <div class="col-xs-12 text-right margin-b-10">
             <a class="btn btn-primary pull-right" ng-click="addUnit()">
                 <i class="fa fa-plus-square-o"></i> Add
@@ -133,6 +133,7 @@
             <button ng-if="!create" ng-click="saveUnits(true)" type="submit" class="btn btn-primary margin-t-20 margin-b-10 margin-r-5">
                  Finish
             </button>
+
             <a ng-click="saveUnits(false)" class="btn btn-primary margin-t-20 margin-b-10 pull-right">
                  {{create ? 'Facility Services' : 'Save & Continue'}}<i class="fa fa-angle-double-right"></i>
             </a>

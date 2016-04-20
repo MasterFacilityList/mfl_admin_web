@@ -1,0 +1,79 @@
+<div class="content-header">
+   <div class="action-container content-header-extra">
+       <div class="action-container content-header-extra pad-r-5">
+            <button tooltip-placement="bottom"  class="btn btn-primary" ng-click="exportToExcel()">
+                Export To Excel
+            </button>
+       </div>
+   </div>
+   <h2 class="content-title">
+        <span class="main-title">Admin Offices</span>
+   </h2>
+</div>
+<section class="margin-t-10">
+
+    <div class="content-card">
+
+                 <div class="form-group row margin-t-10" style="margin-left:5px;">
+
+        <div class=" form-group col-xs-2">
+            <label class="control-label">County</label>
+
+  <select name="selected_county" id='selected_county'
+  class="form-control col-sm-2" ng-model="selected_values.county">
+     <option ng-repeat="county in counties" value="{{county.id}}">
+        {{county.name | titlecase}}</option>
+  </select>
+        </div>
+        <div class=" form-group col-xs-2">
+            <label class="control-label">Sub-County</label>
+            <select name='sub_county' class="form-control col-sm-2" ng-model='selected_values.sub_county'>
+        <option ng-repeat="sub_county in sub_counties | filter:filterFxns.subFilter" value="{{sub_county.id}}">
+        {{sub_county.name | titlecase}}</option>
+        </select>
+        </div>
+
+          <div class=" form-group col-xs-3">
+            <br>
+            <button class="btn btn-primary" style="margin-top:5px;" ng-click='update_report()'>Filter</button>
+            <button class="btn btn-warning"  style="margin-top:5px;" ng-click="clear_report_filters()">Clear</button>
+        </div>
+      <div class="col-xs-12">
+  <hr>
+</dov>
+</div>
+
+
+        <table class="table table-hover table-condensed fs-13" id="no-more-tables">
+            <thead>
+                <tr>
+                    <th>County</th>
+                    <th>Sub-county</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Job-title</th>
+                    <th>National</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="fade-content">
+                <tr ng-repeat="office in admin_offices">
+                    <td data-title="county_name:" >{{office.county_name | titlecase}}</td>
+                    <td data-title="Sub_county:">{{office.sub_county_name }}</td>
+                    <td data-title="first_name:">{{office.first_name}}</td>
+                    <td data-title="last_name">{{office.last_name}}</td>
+                    <td data-title="job_title:">{{office.job_title_name}}</td>
+                    <td data-title="job_title:">{{office.is_national | boolFilter}}</td>
+                    <td data-title="job_title:">{{office.phone_number}}</td>
+                    <td data-title="job_title:">{{office.email}}</td>
+                    <td data-title="job_title:">
+                        <a ui-sref='admin_offices.edit({admin_office_id:office.id})' class="btn btn-success">
+                        View</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

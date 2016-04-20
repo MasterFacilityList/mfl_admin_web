@@ -32,6 +32,25 @@
         "mfl.users.services.groups", "toasty",
         function ($scope, $state, $stateParams, multistepService, wrappers,
             $log,loginService, groupsService, toasty) {
+
+            $scope.login_user = loginService.getUser();
+
+            if($stateParams.user_id){
+                if(_.contains($scope.login_user.all_permissions, "users.delete_mfluser")){
+                    if($scope.login_user.is_national || $scope.login_user.is_superuser){
+                        $scope.can_delete_user = true;
+                    }
+                }
+                if(_.contains($scope.login_user.all_permissions, "users.change_mfluser")){
+                    if(!$scope.login_user.is_national){
+                        $scope.can_delete_user = true;
+                    }
+                }
+            }else{
+                // allow creation of users
+                $scope.can_delete_user = true;
+            }
+
             $scope.title = {
                 icon: "fa-edit",
                 name: "Edit User"
@@ -352,7 +371,7 @@
                     {furthest: $scope.furthest, user_id : $scope.new_user});
                 }
             };
-            $scope.login_user = loginService.getUser();
+
             wrappers.job_titles.list()
             .success(function (data) {
                 $scope.job_titles = data.results;
@@ -1136,9 +1155,9 @@
             name: "Manage users"
         };
         $scope.filters = {
-            "fields": "id,sub_county_name,first_name,last_name,email,"+
+            "fields": "id,first_name,last_name,email,"+
             "last_login,is_active,employee_number,county_name,"+
-            "constituency_name,job_title_name"
+            "job_title_name,sub_county_name"
         };
         $scope.action = [
             {

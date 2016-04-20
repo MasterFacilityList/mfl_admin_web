@@ -167,6 +167,17 @@
                     }
                 },
                 permission: "facilities.view_facility"
+            })
+
+            .state("facilities.facility_view_changes", {
+                url: "facility_changes/:facility_id/",
+                views: {
+                    "main-content@facility_mgmt": {
+                        templateUrl: "facility_mgmt/tpls/facility.preview_changes.tpl.html",
+                        controller: "mfl.facilities.preview_changes"
+                    }
+                },
+                permission: "facilities.view_facility"
             });
     }]);
 

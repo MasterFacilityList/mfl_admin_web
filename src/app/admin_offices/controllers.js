@@ -22,11 +22,13 @@
     )
     .controller("mfl.admin_offices.controllers.create",
         ["$scope","mfl.admin_offices.services.wrappers","toasty",
-        "$state", "$stateParams",
-        function ($scope, wrappers, toasty, $state, $stateParams) {
+        "$state", "$stateParams","mfl.auth.services.login",
+        function ($scope, wrappers, toasty, $state, $stateParams, loginService) {
             $scope.title = {
                 "name": "New Admin Office"
             };
+            $scope.logged_in_user = loginService.getUser();
+
             var filter_fields = {
                 fields: "county,sub_county,job_title"
             };

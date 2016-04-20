@@ -33,8 +33,8 @@
      */
     .controller("mfl.facility_mgmt.controllers.services_helper",
         ["$log", "mfl.facility_mgmt.services.wrappers", "mfl.error.messages",
-        "$state", "toasty",
-        function ($log, wrappers, errorMessages, $state, toasty) {
+        "$state", "toasty", "$stateParams",
+        function ($log, wrappers, errorMessages, $state, toasty, $stateParams) {
             var loadData = function ($scope) {
                 wrappers.services.filter({page_size: 100, ordering: "name"})
                 .success(function (data) {
@@ -235,7 +235,14 @@
                         msg : "Facility successfully updated"
                     };
                     toasty.success(update_msg);
-                    $state.go("facilities");
+                    if($scope.facility.approved){
+                        $state.go("facilities.facility_view_changes",
+                            {facility_id: $stateParams.facility_id});
+                    }
+                    else{
+                        $state.go("facilities");
+                    }
+
                 };
                 $scope.$watch("new_service.service", function (newVal) {
                     var s = _.findWhere($scope.services, {"id": newVal});
@@ -387,6 +394,7 @@
             };
             $scope.printFacility = wrappers.printFacility;
             $scope.nxtState = true;
+
             $scope.setNxt = function (arg) {
                 $scope.nxtState = arg;
             };
@@ -485,13 +493,13 @@
                     $scope.facility.open_late_night = true;
                     $scope.facility.open_public_holidays = true;
                     $scope.facility.open_weekends = true;
-                    $scope.facility.open_normal_day = true;                    
+                    $scope.facility.open_normal_day = true;
                 }
                 else{
                     $scope.facility.open_late_night = false;
                     $scope.facility.open_public_holidays = false;
                     $scope.facility.open_weekends = false;
-                    $scope.facility.open_normal_day = false;    
+                    $scope.facility.open_normal_day = false;
                 }
             };
             var ward_filters = {
@@ -513,16 +521,36 @@
 
             $scope.filterFxns = {
                 subFilter: function (a) {
-                    return a.county === $scope.select_values.county;
+                    if(!_.isUndefined($scope.select_values)){
+                        return a.county === $scope.select_values.county;
+                    }
+                    else{
+                        return false;
+                    }
                 },
                 constFilter: function (a) {
-                    return a.county === $scope.select_values.county;
+                    if(!_.isUndefined($scope.select_values)){
+                        return a.county === $scope.select_values.county;
+                    }
+                    else{
+                        return false;
+                    }
                 },
                 wardConstFilter: function (a) {
-                    return a.constituency === $scope.select_values.constituency;
+                    if(!_.isUndefined($scope.select_values)){
+                        return a.constituency === $scope.select_values.constituency;
+                    }
+                    else{
+                        return false;
+                    }
                 },
                 wardSubFilter: function (a) {
-                    return a.sub_county === $scope.select_values.sub_county;
+                    if(!_.isUndefined($scope.select_values)){
+                        return a.sub_county === $scope.select_values.sub_county;
+                    }
+                    else{
+                        return false;
+                    }
                 }
             };
 
@@ -593,7 +621,6 @@
                         });
                     }
                 } else {
-                    console.log("Hapa Hivi");
                     changes.officer_in_charge = $scope.facility.officer_in_charge;
                     changes.sub_county = $scope.facility.sub_county;
                     wrappers.facilities.update($scope.facility_id, changes)
@@ -604,8 +631,16 @@
                                 msg: "Facility successfully updated"
                             });
                         }
-                        $state.go($scope.finish,
-                        {facility_id:$scope.facility_id}, {reload : true});
+                        // $state.go($scope.finish,
+                        // {facility_id:$scope.facility_id}, {reload : true});
+
+                        if($scope.facility.approved){
+                            $state.go("facilities.facility_view_changes",
+                                {facility_id: $stateParams.facility_id});
+                        }
+                        else{
+                            $state.go($scope.finish);
+                        }
                     })
                     .error(function (data) {
                         $log.error(data);
@@ -726,7 +761,14 @@
                                 title: "Facility",
                                 msg: "Facility contacts successfully updated"
                             });
-                            $state.go($scope.finish, {reload : true});
+
+                            if($scope.facility.approved){
+                                $state.go("facilities.facility_view_changes",
+                                    {facility_id: $stateParams.facility_id});
+                            }
+                            else{
+                                $state.go($scope.finish);
+                            }
                         }else{
                             $scope.goToNext(4, "units");
                         }
@@ -980,15 +1022,23 @@
                 if(!_.isEmpty($scope.fac_unitobj.units)){
                     wrappers.facilities.update($scope.facility_id, $scope.fac_unitobj)
                     .success(function () {
+                        toasty.success({
+                            title: "Facility",
+                            msg: "Facility regulation successfully updated"
+                        });
                         if(!$scope.create){
-                            toasty.success({
-                                title: "Facility",
-                                msg: "Facility regulation successfully updated"
-                            });
-                            $state.go($scope.finish);
-                        }else{
+                            if($scope.facility.approved){
+                                $state.go("facilities.facility_view_changes",
+                                    {facility_id: $stateParams.facility_id});
+                            }
+                            else{
+                               $scope.goToNext(5, "services");
+                            }
+                        }
+                        else{
                             $scope.goToNext(5, "services");
                         }
+
                     })
                     .error(function (err) {
                         $scope.alert = err.error;
@@ -996,7 +1046,13 @@
                     });
                 } else {
                     if(!$scope.create){
-                        $state.go($scope.finish);
+                        if($scope.facility.approved){
+                            $state.go("facilities.facility_view_changes",
+                                {facility_id: $stateParams.facility_id});
+                            }
+                        else{
+                           $state.go("facilities");
+                        }
                     }else{
                         $scope.goToNext(5, "services");
                     }
@@ -1024,7 +1080,7 @@
                 wrappers.facilities.update($scope.facility_id, updates)
                 .success(function(data){}).error(function(){});
             };
-            
+
             $scope.saveUnits = function (arg) {
                 $scope.update_facility_regulatory_details();
                 $scope.fac_unitobj = {units : []};
@@ -1167,9 +1223,9 @@
     .controller("mfl.facility_mgmt.controllers.facility_edit.geolocation",
         ["$scope", "mfl.facility_mgmt.services.wrappers", "$log","leafletData",
         "mfl.common.services.multistep", "mfl.common.forms.changes", "$state",
-        "mfl.error.messages", "toasty","$filter",
+        "mfl.error.messages", "toasty","$filter","$stateParams",
         function ($scope,wrappers,$log, leafletData, multistepService,
-            formChanges, $state, errorMessages, toasty,$filter) {
+            formChanges, $state, errorMessages, toasty,$filter,$stateParams) {
             var value = new Date();
             $scope.maxDate = value.getFullYear() + "/" + (value.getMonth()+1) +
             "/" + value.getDate();
@@ -1350,7 +1406,18 @@
                         .success(function (data) {
                             spinner1 =false;
                             $scope.geo = data;
-                            $scope.toState(arg);
+
+                            if($scope.create){
+                                $scope.toState(arg);
+                            }
+                            if($scope.facility.approved){
+                                $state.go("facilities.facility_view_changes",
+                                    {facility_id: $stateParams.facility_id});
+                            }
+                            else{
+                                $scope.toState(arg);
+                            }
+
                         })
                         .error(function (error) {
                             spinner1 =false;
@@ -1366,7 +1433,18 @@
                         wrappers.facilities.update(
                             fac_id, {"coordinates" : data.id})
                             .success(function () {
+
+                            if($scope.create){
                                 $scope.toState(arg);
+                            }
+                            if($scope.facility.approved){
+                                $state.go("facilities.facility_view_changes",
+                                    {facility_id: $stateParams.facility_id});
+                            }
+                            else{
+                                $scope.toState(arg);
+                            }
+
                             })
                             .error(function (error) {
                                 $log.error(error);
@@ -1409,6 +1487,37 @@
                 //draw facility on the map
                 if(f.hasOwnProperty("ward")){
                     $scope.facilityWard(f);
+                }
+            });
+        }])
+    .controller("mfl.facilities.preview_changes", ["$scope",
+        "$stateParams", "mfl.facility_mgmt.services.wrappers",
+        function($scope, $stateParams, wrappers){
+            var facility_id = $stateParams.facility_id;
+
+            wrappers.facilities.get(facility_id)
+            .success(function(data){
+                $scope.facility = data;
+                console.log($scope.facility);
+            })
+            .error(function(data){
+                $scope.errors = data;
+            });
+            $scope.$watch("facility", function(fac){
+                if(!_.isUndefined(fac)){
+                    if($scope.facility.latest_update) {
+                        wrappers.facility_updates.get($scope.facility.latest_update)
+                        .success(function(data) {
+                            $scope.facility_update = data;
+                            $scope.facility_update.facility_updates = JSON.parse(
+                                $scope.facility_update.facility_updates
+                            );
+                            $scope.facility_changes = data.facility_updated_json;
+                        })
+                        .error(function (data) {
+                            $scope.errors = data;
+                        });
+                    }
                 }
             });
         }]);

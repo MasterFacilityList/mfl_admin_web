@@ -168,7 +168,6 @@
             };
 
             $scope.approveFacility = function (cancel) {
-                console.log(cancel);
                 $scope.facility_approval.is_cancelled = !!cancel;
                 wrappers.facility_approvals.create($scope.facility_approval)
                 .success(function () {

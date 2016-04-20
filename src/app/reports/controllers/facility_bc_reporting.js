@@ -192,5 +192,13 @@
             helper.initCtrl($scope,wrappers.reporting, "facility_constituency_report",
                             "county_constituencies_facilities", results_transform);
         }
+    ])
+    .controller("mfl.reports.controllers.gis", ["$scope",
+        "$controller","mfl.reports.services.wrappers",
+        function($scope,$controller,wrappers){
+            var helper = $controller("mfl.reports.controllers.helper");
+            helper.initCtrl($scope,wrappers.reporting, "gis",
+                            "fac_coordinates");
+        }
     ]);
 })(window.angular, window._);
