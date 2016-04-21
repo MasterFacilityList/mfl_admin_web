@@ -39,7 +39,7 @@
                             <td class="text-center" data-title="Community Health Units:">{{::status.number_of_units}}</td>
                             <td class="text-center" data-title="Community Health Units:"><a
                               class="btn btn-success"
-                              ui-sref="reports.chu_detail_status({'status_id': status.id})">View CHUs</a></td>
+                              ui-sref="reports.chu_detail_status({'status_id': status.id, county_id:filters.county,sub_county_id:filters.sub_county, ward_id:filters.ward})">View CHUs</a></td>
                         </tr>
                     </tbody>
                     <tbody ng-if="county_chu.length===0">

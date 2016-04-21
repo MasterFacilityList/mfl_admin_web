@@ -28,8 +28,9 @@
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="col-xs-5 text-wrap">Sub-county</th>
-                        <th class="col-xs-4 text-center text-wrap">Number of Community Health Units</th>
+                        <th class="col-xs-4 text-wrap">Sub-county</th>
+                        <th class="col-xs-4 text-center">Number of Community Health Units</th>
+                        <th class="col-xs-4">Actions</th>
                     </thead>
                     <tbody class="fade-content">
                         <tr ng-repeat="sub in constituency_chu | filter:search">
@@ -37,7 +38,7 @@
                                <a ui-sref="reports.chu_wards({constituency:sub.sub_county_id})"> {{::sub.sub_county_name | titlecase}}</a>
                             </td>
                             <td class="text-center" data-title="Community Health Units:">{{::sub.number_of_units}}</td>
-                            <td class="text-center" data-title="Community Health Units:">
+                            <td class="" data-title="Community Health Units:">
                               <a ui-sref="reports.chu_detail_status({sub_county_id: sub.sub_county_id})" class="btn btn-success">
                                 View CHUs
                               </a>
