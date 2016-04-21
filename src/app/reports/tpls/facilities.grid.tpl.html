@@ -143,39 +143,40 @@
                     </ui-select>
                 </div>
                  <div class="form-group">
-                    <div class="col-xs-8 pad-l-5">
+                    <div class="col-xs-8">
                         <div class="checkbox">
-                            <label class="fw-600 fs-14 text-black">
+                            <label class="fw-500">
                                 <input type="checkbox" id="number_of_beds" name="number_of_beds" ng-model="filters.single.number_of_beds"
                                     ng-true-value="'true'" ng-false-value="'false'" indeterminate-value/>
-                                Number of Beds
+                                Has Beds
                              </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-xs-8 pad-l-5">
+                    <div class="col-xs-8">
                         <div class="checkbox">
-                            <label class="fw-600 fs-14 text-black">
+                            <label class="fw-500">
                                 <input type="checkbox" id="number_of_cots" name="number_of_cots" ng-model="filters.single.number_of_cots"
                                     ng-true-value="'true'" ng-false-value="'false'" indeterminate-value/>
-                                 Number of Cots
+                                 Has Cots
                              </label>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group col-xs-8 pad-l-5">
-                    <label for="established date" class="fw-600 fs-14 text-black">
-                        Date From
+                <div class="form-group pad-b-5">
+                    <label for="established date" class="fw-500">
+                        Created After
                     </label>
                     <div class='datepicker' date-format="y-MM-dd">
                       <input class="form-control" name="c" ng-model="filters.single.created_after" type="text"  placeholder="dd-mm-yy"/>
                     </div>
                 </div>
-                 <div class="form-group col-xs-8 pad-l-52">
-                    <label for="established date" class="fw-600 fs-14 text-black">
-                        Date To
+
+                 <div class="form-group pad-b-5">
+                    <label for="established date" class="fw-500">
+                        Created Before
                     </label>
                     <div class='datepicker' date-format="y-MM-dd">
                       <input class="form-control" name="c" ng-model="filters.single.created_before" type="text"  placeholder="dd-mm-yy"/>

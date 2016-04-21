@@ -42,7 +42,7 @@
                                         <td data-title="Keph Level:">{{::c.keph_level}}</td>
                                         <td class="text-center" data-title="Facilities:">{{::c.number_of_facilities}}</td>
                                          <td class="text-right">
-                            <a href="#/reports/facilities?keph_level={{c.id}}" class="btn btn-success" tooltip="View Facilities in the Area selected">
+                            <a ng-click="switch_state('reports.list', 'keph_level', c.id)" class="btn btn-success" tooltip="View Facilities in the Area selected">
                                   View Facilities
                               </a>
                                     </tr>

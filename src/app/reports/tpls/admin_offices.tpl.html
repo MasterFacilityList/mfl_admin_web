@@ -62,7 +62,6 @@
                     <th>National</th>
                     <th>Phone Number</th>
                     <th>Email</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody class="fade-content">
@@ -75,10 +74,6 @@
                     <td data-title="job_title:">{{office.is_national | boolFilter}}</td>
                     <td data-title="job_title:">{{office.phone_number}}</td>
                     <td data-title="job_title:">{{office.email}}</td>
-                    <td data-title="job_title:">
-                        <a ui-sref='admin_offices.edit({admin_office_id:office.id})' class="btn btn-success">
-                        View</a>
-                    </td>
                 </tr>
             </tbody>
         </table>

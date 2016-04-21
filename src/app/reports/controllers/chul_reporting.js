@@ -8,8 +8,8 @@
     ])
 
     .controller("mfl.reports.controllers.helper", [
-        "mfl.common.export.service", "mfl.reports.services.wrappers",
-        function(exportService, apiWrapper){
+        "mfl.common.export.service", "mfl.reports.services.wrappers", "$state",
+        function(exportService, apiWrapper, $state){
 
             var self = this;
 
@@ -124,7 +124,11 @@
                     $scope.spinner = false;
                 });
                 $scope.exportToExcel = function () {
-                    exportService.excelExport(wrapper, _.extend(api_filters, $scope.filters), 10000);
+                    exportService.excelExport(
+                        wrapper,
+                        _.extend(api_filters, $scope.filters),
+                        10000
+                    );
                 };
 
                 self.fetch_summaries($scope);
@@ -140,6 +144,26 @@
                 $scope.update_report = function() {
                     self.update_report(
                     $scope, wrapper, api_filters, data_param, transform_fxn);
+                };
+
+                $scope.switch_state = function(state_name, key, value){
+                    var county  = $scope.selected_values.county;
+                    var sub_county  = $scope.selected_values.sub_county;
+                    var ward  = $scope.selected_values.ward;
+                    var query_params = {};
+
+                    if(!_.isObject(county)){
+                        query_params["county"] = county;
+                    }
+                    if(!_.isObject(sub_county)){
+                        query_params["sub_county"] = sub_county;
+                    }
+                    if(!_.isObject(ward)){
+                        query_params["ward"] = ward;
+                    }
+
+                    query_params[key] =  value;
+                    $state.go(state_name, query_params);
                 };
             };
         }

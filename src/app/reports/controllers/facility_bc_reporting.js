@@ -162,8 +162,8 @@
         }
     ])
     .controller("mfl.reports.controllers.facility_owners", ["$scope","$controller",
-        "mfl.reports.services.wrappers",
-        function($scope,$controller,wrappers){
+        "mfl.reports.services.wrappers", "$state",
+        function($scope,$controller,wrappers, $state){
             var helper = $controller("mfl.reports.controllers.helper");
             helper.initCtrl($scope,wrappers.reporting, "facility_count_by_owner",
                             "owner_facilities");

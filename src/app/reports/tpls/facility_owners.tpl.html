@@ -21,10 +21,6 @@
           </div>
         </div>
         <div ng-if="!spinner" class="content-card col-xs-12">
-        <!--     <div class="col-sm-4">
-               <input class="form-control" type="text"  ng-model="search" placeholder="Search Owner.."/>
-            </div>
-            <div ng-show="search!==''" class="col-sm-1"><button class="btn btn-default" ng-click="search=''">Clear</button></div> -->
 
             <div ng-include src="'reports/tpls/admin_area_filters.tpl.html'" onload></div>
 
@@ -42,7 +38,7 @@
                             <td data-title="Owner:">{{::owner.owner}}</td>
                             <td class="text-center" data-title="Facilities:">{{::owner.number_of_facilities}}</td>
                             <td class="text-right">
-                              <a href="#/reports/facilities?owner={{owner.id}}" class="btn btn-success" tooltip="View Facilities in the Area selected">
+                              <a ng-click="switch_state('reports.list', 'owner', owner.id)" class="btn btn-success" tooltip="View Facilities in the Area selected">
                                   View Facilities
                               </a>
                           </td>

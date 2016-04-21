@@ -40,7 +40,7 @@
                             <td data-title="Owner Category:">{{::owner.owner_category}}</td>
                             <td class=" text-center" data-title="Facilities:">{{::owner.number_of_facilities}}</td>
                             <td class="text-right">
-                              <a href="#/reports/facilities?owner_type={{owner.id}}" class="btn btn-success" tooltip="View Facilities in the Area selected">
+                              <a ng-click="switch_state('reports.list', 'owner_type', owner.id)" class="btn btn-success" tooltip="View Facilities in the Area selected">
                                   View Facilities
                               </a>
                           </td>

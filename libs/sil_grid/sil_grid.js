@@ -75,7 +75,26 @@
                     if(_.isEmpty($scope.filters)) {
                         promise = self.api.list();
                     } else {
-                        promise = self.api.filter($scope.filters);
+                        var raw_filters = $scope.filters;
+                        //transform search param into a query DSL
+                        if(self.api.apiBaseUrl === "api/facilities/facilities/" && !_.isEmpty($scope.filters.search)){
+                            var dsl = {
+                                "query": { }
+                            };
+                            if(_.isNaN(parseInt($scope.filters.search, 10))){
+                                dsl.query.query_string = {
+                                    "default_field": "name",
+                                    "query": $scope.filters.search
+                                };
+                            } else {
+                                dsl.query.term = {
+                                    "code": $scope.filters.search
+                                };
+                            }
+                            raw_filters.search = JSON.stringify(dsl);
+                        }
+
+                        promise = self.api.filter(raw_filters);
                     }
                     promise.success(self.setData).error(self.setError);
                 };
@@ -203,7 +222,7 @@
             controller: function(){},
             link: function(scope, elem, attrs, gridCtrl){
                 scope.silGrid = {searchQuery:""};
-                var search_term = scope.silGrid.searchQuery;
+                // var search_term = scope.silGrid.searchQuery;
 
                 scope.silGridSearch = function(clear){
 
@@ -214,27 +233,27 @@
 
                     } else {
                            // transform search param into a query DSL
-                        if(gridCtrl.api.apiBaseUrl === "api/facilities/facilities/"){
-                            var dsl = {
-                                "query": { }
-                            };
-                            if (_.isNaN(parseInt(scope.silGrid.searchQuery, 10))) {
-                                dsl.query.query_string = {
-                                    "default_field": "name",
-                                    "query": scope.silGrid.searchQuery
-                                };
-                            } else {
-                                dsl.query.term = {
-                                    "code": scope.silGrid.searchQuery
-                                };
-                            }
+                        // if(gridCtrl.api.apiBaseUrl === "api/facilities/facilities/"){
+                        //     var dsl = {
+                        //         "query": { }
+                        //     };
+                        //     if (_.isNaN(parseInt(scope.silGrid.searchQuery, 10))) {
+                        //         dsl.query.query_string = {
+                        //             "default_field": "name",
+                        //             "query": scope.silGrid.searchQuery
+                        //         };
+                        //     } else {
+                        //         dsl.query.term = {
+                        //             "code": scope.silGrid.searchQuery
+                        //         };
+                        //     }
 
-                            scope.silGrid.searchQuery = JSON.stringify(dsl);
-                        }
+                        //     scope.silGrid.searchQuery = JSON.stringify(dsl);
+                        // }
 
                         gridCtrl.addFilter("search", scope.silGrid.searchQuery);
                         gridCtrl.getData();
-                        scope.silGrid.searchQuery = search_term;
+                        // scope.silGrid.searchQuery = search_term;
                     }
 
                 };
