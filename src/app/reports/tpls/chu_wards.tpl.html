@@ -34,9 +34,17 @@
                     <tbody class="fade-content">
                         <tr ng-repeat="ward in ward_chu | filter:search">
                             <td data-title="Ward:">
-                               {{::ward.ward_name | titlecase}}
+                              <a ui-sref="reports.chu_detail_status({ward_id: ward.ward_id})">
+                                {{::ward.ward_name | titlecase}}
+                              </a>
                             </td>
                             <td class="text-center" data-title="Community Health Units:">{{::ward.number_of_units}}</td>
+                            <td class="text-center" data-title="Community Health Units:">
+                              <a ui-sref="reports.chu_detail_status({ward_id: ward.ward_id})" class="btn btn-success">
+                                View CHUs
+                              </a>
+
+                            </td>
                         </tr>
                     </tbody>
                     <tbody ng-if="ward_chu.length===0">

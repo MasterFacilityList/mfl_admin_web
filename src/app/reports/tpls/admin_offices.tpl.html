@@ -32,6 +32,13 @@
         {{sub_county.name | titlecase}}</option>
         </select>
         </div>
+        <div class=" form-group col-xs-2">
+            <label class="control-label">National Offices</label>
+            <select name='national' class="form-control col-sm-2" ng-model='national_office'>
+            <option value="null">--------</option>
+            <option value="true">National Offices </option>
+        </select>
+        </div>
 
           <div class=" form-group col-xs-3">
             <br>
@@ -60,7 +67,7 @@
             </thead>
             <tbody class="fade-content">
                 <tr ng-repeat="office in admin_offices">
-                    <td data-title="county_name:" >{{office.county_name | titlecase}}</td>
+                    <td data-title="county_name:">{{office.county_name | titlecase}}</td>
                     <td data-title="Sub_county:">{{office.sub_county_name }}</td>
                     <td data-title="first_name:">{{office.first_name}}</td>
                     <td data-title="last_name">{{office.last_name}}</td>

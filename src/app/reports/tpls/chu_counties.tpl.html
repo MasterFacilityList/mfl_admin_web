@@ -39,9 +39,10 @@
                             </td>
                             <td class="text-center" data-title="Community Health Units:">{{::county.number_of_units}}</td>
                             <td class="text-center" data-title="Community Health Units:">
-                              <a>
+                              <a ui-sref="reports.chu_detail_status({county_id: county.county_id})" class="btn btn-success">
                                 View CHUs
                               </a>
+
                             </td>
                         </tr>
                     </tbody>

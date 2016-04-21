@@ -65,6 +65,7 @@
                 $scope.selected_values.sub_county = {};
                 $scope.selected_values.ward = {};
                 $scope.search = "";
+                $scope.national_office = null;
             };
 
             this.update_report = function($scope, wrapper,api_filters, data_param, transform_fxn){
@@ -75,6 +76,9 @@
                 var new_filter ={
                     report_type: api_filters.report_type
                 };
+                if($scope.national_office === "true"){
+                    new_filter.is_national = true;
+                }
 
                 if(!_.isObject(county)){
                     $scope.filters.county = county;
@@ -87,7 +91,7 @@
                     $scope.filters.ward = ward;
                 }
                 _.extend(new_filter, $scope.filters);
-                console.log(new_filter);
+
                 wrapper.filter(new_filter)
                 .success(function (data) {
                     var transform = transform_fxn || _.identity;
@@ -107,9 +111,9 @@
                     "report_type": report_type
                 };
                 $scope.spinner = true;
-                _.extend(api_filters, $scope.filters);
+                var merged_filters = _.extend(api_filters, $scope.filters);
 
-                wrapper.filter(api_filters)
+                wrapper.filter(merged_filters)
                 .success(function (data) {
                     var transform = transform_fxn || _.identity;
                     $scope[data_param] = transform(data.results, $scope);
@@ -120,7 +124,7 @@
                     $scope.spinner = false;
                 });
                 $scope.exportToExcel = function () {
-                    exportService.excelExport(wrapper, api_filters);
+                    exportService.excelExport(wrapper, _.extend(api_filters, $scope.filters), 10000);
                 };
 
                 self.fetch_summaries($scope);
@@ -155,6 +159,9 @@
             $scope.selected_values = helper.selected_values();
             $scope.filters = {
                 status: $stateParams.status_id,
+                county: $stateParams.county_id,
+                sub_county: $stateParams.sub_county_id,
+                ward: $stateParams.ward_id,
                 chu_list: true
             };
             var county = $scope.selected_values.county;
@@ -182,7 +189,7 @@
                 };
             }
             var helper = $controller("mfl.reports.controllers.helper");
-            helper.initCtrl($scope, wrappers.chul_reporting, "constituency", "constituency_chu");
+            helper.initCtrl($scope, wrappers.chul_reporting, "sub_county", "constituency_chu");
         }
     ])
     .controller("mfl.reports.controllers.chu_wards", ["$scope", "$controller", "$stateParams",

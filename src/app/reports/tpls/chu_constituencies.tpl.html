@@ -7,7 +7,7 @@
        </div>
    </div>
    <h2 class="content-title">
-        <span class="main-title">Community Health Units Report by Constituency</span>
+        <span class="main-title">Community Health Units Report by Sub-County</span>
    </h2>
 </div>
 <section class="margin-t-10">
@@ -28,15 +28,21 @@
             <div class="col-xs-12 margin-b-20">
                 <table class="table table-hover table-condensed fs-14 margin-t-20" id="no-more-tables">
                     <thead>
-                        <th class="col-xs-5 text-wrap">Constituency</th>
+                        <th class="col-xs-5 text-wrap">Sub-county</th>
                         <th class="col-xs-4 text-center text-wrap">Number of Community Health Units</th>
                     </thead>
                     <tbody class="fade-content">
-                        <tr ng-repeat="constituency in constituency_chu | filter:search">
-                            <td data-title="Constituency:">
-                               <a ui-sref="reports.chu_wards({constituency:constituency.constituency_id})"> {{::constituency.constituency_name | titlecase}}</a>
+                        <tr ng-repeat="sub in constituency_chu | filter:search">
+                            <td data-title="sub_county:">
+                               <a ui-sref="reports.chu_wards({constituency:sub.sub_county_id})"> {{::sub.sub_county_name | titlecase}}</a>
                             </td>
-                            <td class="text-center" data-title="Community Health Units:">{{::constituency.number_of_units}}</td>
+                            <td class="text-center" data-title="Community Health Units:">{{::sub.number_of_units}}</td>
+                            <td class="text-center" data-title="Community Health Units:">
+                              <a ui-sref="reports.chu_detail_status({sub_county_id: sub.sub_county_id})" class="btn btn-success">
+                                View CHUs
+                              </a>
+
+                            </td>
                         </tr>
                     </tbody>
                     <tbody ng-if="constituency_chu.length===0">

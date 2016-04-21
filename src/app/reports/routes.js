@@ -317,7 +317,7 @@
             }
         })
          .state("reports.chu_detail_status", {
-            url: "chu_detail/:status_id",
+            url: "chu_detail/:status_id/:county_id/:sub_county_id/:ward_id/",
             views: {
                 "body@reports": {
                     templateUrl: "reports/tpls/body.tpl.html"
