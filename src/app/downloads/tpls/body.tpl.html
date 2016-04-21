@@ -1,0 +1,12 @@
+<div class="col-sm-2 pad-r-0">
+    <aside class="side-left">
+        <ul class=" nav nav-sidebar">
+            <li ui-sref-active="active" requires-permission="common.view_documentupload">
+                <a ui-sref="downloads" ui-sref-opts="{reload:true}">
+                    <span class="sidebar-text">Downloads</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+</div>
+<div class="content col-sm-10" ui-view="main-content"></div>

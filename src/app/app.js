@@ -26,6 +26,7 @@
         "mfl.facility_mgmt",
         "mfl.chul",
         "mfl.admin_offices",
+        "mfl.downloads",
         "jcs-autoValidate"
     ]);
 

@@ -109,6 +109,7 @@
             this.counties = api.setBaseUrl("api/common/counties/");
             this.constituencies = api.setBaseUrl("api/common/constituencies/");
             this.material_facilities = api.setBaseUrl("api/facilities/material");
+            this.documents = api.setBaseUrl("api/common/documents/");
 
             var downloadFile = function (base_url, facility_id) {
                 var helpers = api.apiHelpers;
