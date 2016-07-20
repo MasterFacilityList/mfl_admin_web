@@ -5,11 +5,9 @@
             <tr>
                 <th sil-grid-sort field='county'>County</th>
                 <th sil-grid-sort field='sub_county'>Sub-county</th>
-                <th sil-grid-sort field='first_name'>First Name</th>
-                <th sil-grid-sort field='last_name'>Last Name</th>
-                <th sil-grid-sort field='job_title'>Job-title</th>
-                <th sil-grid-sort field='job_title'>National</th>
-                <th sil-grid-sort field='job_title'>Phone Number</th>
+                <th sil-grid-sort field='is_national'>National</th>
+                 <th sil-grid-sort field='name'>Office Name</th>
+                <th sil-grid-sort field='phone_number'>Phone Number</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,11 +15,9 @@
             <tr ng-repeat="office in admin_offices">
                 <td data-title="county_name:" >{{office.county_name | titlecase}}</td>
                 <td data-title="Sub_county:">{{office.sub_county_name }}</td>
-                <td data-title="first_name:">{{office.first_name}}</td>
-                <td data-title="last_name">{{office.last_name}}</td>
-                <td data-title="job_title:">{{office.job_title_name}}</td>
-                <td data-title="job_title:">{{office.is_national | boolFilter}}</td>
-                <td data-title="job_title:">{{office.phone_number}}</td>
+                <td data-title="is_national:">{{office.is_national | boolFilter}}</td>
+                <td data-title="name">{{office.name}}</td>
+                <td data-title="phone_number:">{{office.phone_number}}</td>
                 <td data-title="job_title:">
                     <a ui-sref='admin_offices.edit({admin_office_id:office.id})' class="btn btn-success">
                     View</a>

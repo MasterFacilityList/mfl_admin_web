@@ -25,7 +25,7 @@
                 <tbody>
                     <tr ng-repeat="match in sync_obj.probable_matches">
                          <td data-title="Name:" >
-                <a ui-sref="facilities.facility_view({facility_id: fac.id})"
+                <a ui-sref="facilities.facility_view({facility_id: match.id})"
                 ui-sref-opts="{reload: true}">{{::match.official_name}}</a>
             </td>
                         <td>{{::match.name}}</td>

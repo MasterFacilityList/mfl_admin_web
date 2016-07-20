@@ -13,13 +13,11 @@
             <form name="admin_office_frm" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
                 <drf-err-msg></drf-err-msg>
                 <div class="form-group">
-                    <label class="control-label">First Name&#42;:</label>
-                    <input type="text" class="form-control" name="first_name" ng-model="admin_office.first_name" placeholder="Enter First Name Here..." required api-checker/>
+                    <label class="control-label">Office Name&#42;:</label>
+                    <input type="text" class="form-control" name="name" ng-model="admin_office.name" placeholder="Enter  Office Name Here..." required api-checker/>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Last Name&#42;:</label>
-                    <input type="text" class="form-control" name="last_name" ng-model="admin_office.last_name" placeholder="Enter Last Name Here..." required api-checker/>
-                </div>
+
+
                 <div class="form-group checkbox" ng-if='logged_in_user.is_national'>
                   <label for="is_national">
                     <input type="checkbox" id="is_national" name="is_national" ng-model="admin_office.is_national" api-checker >
@@ -48,17 +46,6 @@
                         </ui-select-match>
                         <ui-select-choices repeat="sub.id as sub in config_info.sub_county |filter:subFilter | filter:$select.search">
                             <span>{{sub.name | titlecase}}</span>
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Job-title&#42;:</label>
-                    <ui-select ng-model="select_values.job_title" required name="job_title" api-checker register-custom-form-control>
-                        <ui-select-match placeholder="Select a Job-title...">
-                            <span>{{$select.selected.name | titlecase}}</span>
-                        </ui-select-match>
-                        <ui-select-choices repeat="jt.id as jt in config_info.job_title | filter:$select.search">
-                            <span>{{jt.name | titlecase}}</span>
                         </ui-select-choices>
                     </ui-select>
                 </div>

@@ -20,7 +20,7 @@
 
         "number_of_beds", "number_of_cots",
         "open_public_holidays", "open_weekends", "open_whole_day",
-        "created_after", "created_before",
+        "created_after", "created_before", "is_classified",
 
         // pagination controls
         "page_size", "page"

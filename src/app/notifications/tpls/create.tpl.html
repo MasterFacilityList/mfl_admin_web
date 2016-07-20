@@ -1,0 +1,53 @@
+
+<div class="content-header margin-b-20">
+    <h2 class="content-title">
+        <span class="main-title">
+          <i></i> Create Notification
+        </span>
+    </h2>
+</div>
+<!-- End of content header -->
+<div class="col-xs-12">
+    <div class="col-xs-12">
+        <div class=" col-xs-12 col-sm-offset-1 col-sm-10 content-card">
+            <form name="admin_office_frm" class="margin-t-20 col-xs-12 col-sm-offset-1 col-sm-10" novalidate>
+                <drf-err-msg></drf-err-msg>
+                <div class="form-group">
+                    <label class="control-label">Title&#42;:</label>
+                    <input type="text" class="form-control" name="title" ng-model="notification.title" placeholder="Enter  Title..." required api-checker/>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label">Group:</label>
+                    <ui-select ng-model="select_values.grp" name="grp" register-custom-form-control>
+                        <ui-select-match placeholder="Select a group...">
+                            <span>{{$select.selected.name | titlecase}}</span>
+                             <a uib-tooltip="Clear" class="fa fa-times clear-button text-danger"
+                             ng-click="clearUiSelect($event, $select)">
+                            </a>
+
+                        </ui-select-match>
+                        <ui-select-choices repeat="grp in grps | filter:$select.search | orderBy:'name'">
+                            <span>{{grp.name | titlecase}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Message&#42;:</label>
+                    <textarea ng-model='notification.message'  class='form-control' required cols="60" rows="20">
+                    </textarea>
+
+                </div>
+
+
+                <div class="margin-t-20 pad-b-10">
+                    <button class="btn btn-primary" ng-click='save_notification()'>Save</button>
+                    <button class="btn btn-default" ui-sref="notifications">Cancel</button>
+                    <mfl-revision-view ng-show="state" id="notification.id" wrapper="wrapper" ></mfl-revision-view>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

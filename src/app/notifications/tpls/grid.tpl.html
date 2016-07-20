@@ -1,0 +1,19 @@
+<div class="content-header">
+   <div class="action-container content-header-extra">
+       <div class="action-container content-header-extra pad-r-5">
+            <a tooltip-placement="bottom" class="btn btn-primary" ui-sref="notifications.create" tooltip="Create a new notification" requires-permission="common.add_notification">
+                Create Notification
+            </a>
+       </div>
+   </div>
+   <h2 class="content-title">
+        <span class="main-title"><i class="fa fa-comment-o"></i> Notifications</span>
+   </h2>
+</div>
+<div class="content-body col-xs-12">
+    <div class="col-xs-12 margin-t-20 margin-b-20">
+        <sil-grid template="notifications/tpls/list.tpl.html" grid-for="notifications"
+            data="notifications" filters="filters" error="alert" api-key="notifications">
+        </sil-grid>
+    </div>
+</div>

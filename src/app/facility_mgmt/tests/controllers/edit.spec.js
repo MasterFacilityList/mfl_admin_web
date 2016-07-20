@@ -170,8 +170,12 @@
                         owner_type : "5",
                         keph_level : "6",
                         keph_level_name : "level 6",
-                        sub_county : "7",
+                        sub_county_id : "7",
                         sub_county_name : "Mathare",
+                        constituency_id : "7",
+                        constituency: "Mathare",
+                        county_id : "7",
+                        county_name : "Nairobi",
                         owner_type_name : "ownertype",
                         operation_status: "4",
                         operation_status_name: "opstatus",
@@ -179,6 +183,8 @@
                         regulatory_body: "23",
                         town : "3",
                         town_name : "Mombasa",
+                        regulation_status: 1,
+                        regulatory_status_name: "licensed",
                         officer_in_charge : {
                             "name" : "Test"
                         },
@@ -245,9 +251,23 @@
                             "id": "23",
                             "name": "def"
                         },
+                        regulation_status: {
+                            "id": 1,
+                            "name": "licensed"
+                        },
                         sub_county : {
                             "id" : "7",
-                            "name" : "Mathare"
+                            "name" : "Mathare",
+                            "county": "7"
+                        },
+                        constituency : {
+                            "id" : "7",
+                            "name" : "Mathare",
+                            "county": "7"
+                        },
+                        county : {
+                            "id" : "7",
+                            "name" : "Nairobi"
                         },
                         town : {
                             "id" : "3",
@@ -276,129 +296,30 @@
                         owner: "3",
                         owner_name: "owner",
                         owner_type : "5",
-                        owner_type_name : "ownertype",
                         keph_level : "6",
                         keph_level_name : "level 6",
-                        sub_county : "7",
+                        sub_county_id : "7",
                         sub_county_name : "Mathare",
-                        town : "3",
-                        town_name : "Mombasa",
+                        constituency_id : "7",
+                        constituency: "Mathare",
+                        county_id : "7",
+                        county_name : "Nairobi",
+                        owner_type_name : "ownertype",
                         operation_status: "4",
                         operation_status_name: "opstatus",
                         regulatory_body_name: "def",
-                        regulatory_body: "23"
-                    };
-                    spyOn(state, "go");
-                    httpBackend
-                        .expectGET(server_url+"api/facilities/facilities/3/")
-                        .respond(200, f);
-                    data.$scope.steps = [
-                        {
-                            name : "basic",
-                            active : false
-                        },
-                        {
-                            name : "contacts",
-                            active : false
-                        }
-                    ];
-
-                    ctrl("", data);
-                    var obj = {name : "basic", active : false};
-                    data.$scope.tabState(obj);
-                    httpBackend.flush();
-                    httpBackend.verifyNoOutstandingRequest();
-                    httpBackend.verifyNoOutstandingExpectation();
-
-                    expect(data.$scope.facility).toEqual(f);
-                    expect(data.$scope.select_values).toEqual({
-                        ward: {
-                            "id": "1",
-                            "name": "ward"
-                        },
-                        facility_type: {
-                            "id": "2",
-                            "name": "type"
-                        },
-                        facility_type_details: {
-                            "id" : "2",
-                            "name" : "type"
-                        },
-                        owner: {
-                            "id": "3",
-                            "name": "owner"
-                        },
-                        owner_type: {
-                            "id" : "5",
-                            "name" : "ownertype"
-                        },
-                        keph_level : {
-                            "id" : "6",
-                            "name" : "level 6"
-                        },
-                        operation_status: {
-                            "id": "4",
-                            "name": "opstatus"
-                        },
-                        regulatory_body: {
-                            "id": "23",
-                            "name": "def"
-                        },
-                        sub_county: {
-                            "id" : "7",
-                            "name" : "Mathare"
-                        },
-                        town : {
-                            "id" : "3",
-                            "name" : "Mombasa"
-                        }
-                    });
-
-                    httpBackend.resetExpectations();
-
-                    httpBackend
-                        .expectPATCH(server_url+"api/facilities/facilities/3/")
-                        .respond(200, {});
-
-                    data.$scope.remove();
-
-                    httpBackend.flush();
-                    httpBackend.verifyNoOutstandingRequest();
-                    httpBackend.verifyNoOutstandingExpectation();
-
-                }])
-            );
-
-            it("should show error on fail to delete facility",
-                inject(["mfl.facility.multistep.service", function (facObjService) {
-                    var data = {
-                        "$scope": rootScope.$new(),
-                        "$state" : state,
-                        "mfl.facility.multistep.service" : facObjService,
-                        "$stateParams": {
-                            facility_id: 3
-                        }
-                    };
-
-                    var f = {
-                        ward_name: "ward",
-                        ward: "1",
-                        facility_type: "2",
-                        facility_type_name: "type",
-                        owner: "3",
-                        owner_name: "owner",
-                        owner_type : "5",
-                        keph_level : "6",
-                        keph_level_name : "level 6",
-                        sub_county : "7",
-                        sub_county_name : "Mathare",
+                        regulatory_body: "23",
                         town : "3",
                         town_name : "Mombasa",
-                        owner_type_name : "ownertype",
-                        operation_status: "4",
-                        operation_status_name: "opstatus",
-                        regulatory_body: "23",
-                        regulatory_body_name: "def"
+                        regulation_status: 1,
+                        regulatory_status_name: "licensed",
+                        officer_in_charge : {
+                            "name" : "Test"
+                        },
+                        facility_physical_address : {
+                            town_id : "3",
+                            town : "Mombasa"
+                        }
                     };
                     spyOn(state, "go");
                     httpBackend
@@ -456,9 +377,162 @@
                             "id": "23",
                             "name": "def"
                         },
-                        sub_county: {
+                        regulation_status: {
+                            "id": 1,
+                            "name": "licensed"
+                        },
+                        sub_county : {
                             "id" : "7",
-                            "name" : "Mathare"
+                            "name" : "Mathare",
+                            "county": "7"
+                        },
+                        constituency : {
+                            "id" : "7",
+                            "name" : "Mathare",
+                            "county": "7"
+                        },
+                        county : {
+                            "id" : "7",
+                            "name" : "Nairobi"
+                        },
+                        town : {
+                            "id" : "3",
+                            "name" : "Mombasa"
+                        }
+                    });
+
+                    httpBackend.resetExpectations();
+
+                    httpBackend
+                        .expectPATCH(server_url+"api/facilities/facilities/3/")
+                        .respond(200, {});
+
+                    data.$scope.remove();
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                }])
+            );
+
+            it("should show error on fail to delete facility",
+                inject(["mfl.facility.multistep.service", function (facObjService) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "$state" : state,
+                        "mfl.facility.multistep.service" : facObjService,
+                        "$stateParams": {
+                            facility_id: 3
+                        }
+                    };
+
+                    var f = {
+                        ward_name: "ward",
+                        ward: "1",
+                        facility_type: "2",
+                        facility_type_name: "type",
+                        owner: "3",
+                        owner_name: "owner",
+                        owner_type : "5",
+                        keph_level : "6",
+                        keph_level_name : "level 6",
+                        sub_county_id : "7",
+                        sub_county_name : "Mathare",
+                        constituency_id : "7",
+                        constituency: "Mathare",
+                        county_id : "7",
+                        county_name : "Nairobi",
+                        owner_type_name : "ownertype",
+                        operation_status: "4",
+                        operation_status_name: "opstatus",
+                        regulatory_body_name: "def",
+                        regulatory_body: "23",
+                        town : "3",
+                        town_name : "Mombasa",
+                        regulation_status: 1,
+                        regulatory_status_name: "licensed",
+                        officer_in_charge : {
+                            "name" : "Test"
+                        },
+                        facility_physical_address : {
+                            town_id : "3",
+                            town : "Mombasa"
+                        }
+                    };
+                    spyOn(state, "go");
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities/3/")
+                        .respond(200, f);
+                    data.$scope.steps = [
+                        {
+                            name : "basic",
+                            active : false
+                        },
+                        {
+                            name : "contacts",
+                            active : false
+                        }
+                    ];
+
+                    ctrl("", data);
+                    var obj = {name : "basic", active : false};
+                    data.$scope.tabState(obj);
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingRequest();
+                    httpBackend.verifyNoOutstandingExpectation();
+
+                    expect(data.$scope.facility).toEqual(f);
+                    expect(data.$scope.select_values).toEqual({
+                        ward: {
+                            "id": "1",
+                            "name": "ward"
+                        },
+                        facility_type: {
+                            "id": "2",
+                            "name": "type"
+                        },
+                        facility_type_details: {
+                            "id" : "2",
+                            "name" : "type"
+                        },
+                        owner: {
+                            "id": "3",
+                            "name": "owner"
+                        },
+                        owner_type : {
+                            "id": "5",
+                            "name" : "ownertype"
+                        },
+                        keph_level : {
+                            "id" : "6",
+                            "name" : "level 6"
+                        },
+                        operation_status: {
+                            "id": "4",
+                            "name": "opstatus"
+                        },
+                        regulatory_body: {
+                            "id": "23",
+                            "name": "def"
+                        },
+                        regulation_status: {
+                            "id": 1,
+                            "name": "licensed"
+                        },
+                        sub_county : {
+                            "id" : "7",
+                            "name" : "Mathare",
+                            "county": "7"
+                        },
+                        constituency : {
+                            "id" : "7",
+                            "name" : "Mathare",
+                            "county": "7"
+                        },
+                        county : {
+                            "id" : "7",
+                            "name" : "Nairobi"
                         },
                         town : {
                             "id" : "3",
@@ -640,7 +714,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.nxtState = false;
                 httpBackend.expectGET(server_url +
@@ -715,7 +792,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.nxtState = true;
                 ctrl(".basic", data);
@@ -791,7 +871,11 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
+
                 };
                 data.$scope.nxtState = true;
                 ctrl(".basic", data);
@@ -867,7 +951,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.nxtState = true;
                 ctrl(".basic", data);
@@ -942,7 +1029,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.create = false;
                 ctrl(".basic", data);
@@ -998,7 +1088,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.create = false;
                 httpBackend.expectGET(server_url +
@@ -1011,7 +1104,7 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
-            iit("should save facility basic details", function () {
+            it("should save facility basic details", function () {
                 var data = {
                     "$scope": rootScope.$new(),
                     "$state" : state,
@@ -1034,7 +1127,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -1097,7 +1193,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -1183,7 +1282,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.create = false;
                 data.$scope.nextState = angular.noop;
@@ -1264,7 +1366,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -1328,7 +1433,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -1376,7 +1484,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 data.$scope.create = true;
                 data.$scope.nextState = angular.noop;
@@ -1421,7 +1532,10 @@
                     facility_type : {id : "2"},
                     owner : {id : "3"},
                     operation_status : {id : "4"},
-                    town : {id : "5"}
+                    town : {id : "5"},
+                    county: {"name": "Nairobi", "id": 1},
+                    sub_county : {id : "5", "name": "Mathare", "county": 1},
+                    constituency : {id : "5", "name": "Mathare", "county": 1}
                 };
                 ctrl(".basic", data);
 

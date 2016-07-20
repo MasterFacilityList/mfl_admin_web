@@ -27,6 +27,7 @@
         "mfl.chul",
         "mfl.admin_offices",
         "mfl.downloads",
+        "mfl.notifications",
         "jcs-autoValidate"
     ]);
 

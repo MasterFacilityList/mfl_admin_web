@@ -65,7 +65,7 @@
                         },
                         facility_type: {
                             "id": $scope.facility.facility_type,
-                            "name": $scope.facility.facility_type_name
+                            "name": $scope.facility.facility_type_parent
                         },
                         facility_type_details: {
                             "id": $scope.facility.facility_type,

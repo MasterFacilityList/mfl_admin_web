@@ -4,7 +4,7 @@
             Regulate
         </a>
 
-        <a ng-if="(!facility.closed)&&(!facility.is_approved||facility.has_edits)" requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve({facility_id: facility.id})" class="btn btn-success" tooltip="Approve Facility">
+        <a ng-if="facility.has_edits" requires-permission="facilities.view_facility,facilities.add_facilityapproval" ui-sref="facilities_approve.approve({facility_id: facility.id})" class="btn btn-success" tooltip="Approve Facility">
             Approve/Reject
         </a>
 

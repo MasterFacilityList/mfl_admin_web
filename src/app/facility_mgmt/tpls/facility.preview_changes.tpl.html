@@ -40,7 +40,7 @@ facility_changes.services || facility_changes.geo_codes.longitude || facility_ch
         <tbody>
             <tr ng-repeat="change in facility_changes.basic">
                 <td class="col-xs-4">{{change.human_field_name | titlecase}}</td>
-                <td class="col-xs-4">{{facility[change.field_name] | boolFilter}}</td>
+                <td class="col-xs-4">{{facility[change.display_field_name] | boolFilter}}</td>
                 <td class="col-xs-4">{{change.display_value}}</td>
             </tr>
             <tr ng-if="facility_changes.basic.length === 0 || !facility_changes.basic">

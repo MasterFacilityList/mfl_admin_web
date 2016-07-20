@@ -19,11 +19,17 @@
                <div class="form-group">
                 <label class="control-label">Parent</label>
                 <ui-select ng-model="facility_type.sub_division" name="sub_division" api-checker register-custom-form-control>
-                    <ui-select-match placeholder="Select a facility type...">
+                    <ui-select-match allow-clear="true"  placeholder="Select a facility type...">
+
                         <span>{{$select.selected.name}}</span>
+
+                        <a uib-tooltip="Clear" class="fa fa-times clear-button text-danger"
+                             ng-click="clearUiSelect($event, $select)">
+                        </a>
+
                     </ui-select-match>
                     <ui-select-choices repeat="ft.name as ft in facility_types | filter:$select.search">
-                        <span>{{ft.name}}</span>
+                        <span>{{ft.name}}1</span>
                     </ui-select-choices>
                 </ui-select>
             </div>

@@ -165,25 +165,30 @@
                     </div>
                 </div>
 
-                <div class="form-group pad-b-5">
-                    <label for="established date" class="fw-500">
-                        Created After
-                    </label>
-                    <div class='datepicker' date-format="y-MM-dd">
-                      <input class="form-control" name="c" ng-model="filters.single.created_after" type="text"  placeholder="dd-mm-yy"/>
-                    </div>
-                </div>
-
-                 <div class="form-group pad-b-5">
-                    <label for="established date" class="fw-500">
-                        Created Before
-                    </label>
-                    <div class='datepicker' date-format="y-MM-dd">
-                      <input class="form-control" name="c" ng-model="filters.single.created_before" type="text"  placeholder="dd-mm-yy"/>
-                    </div>
-                </div>
-
             </div>
+
+              <div class="col-xs-12 custom-well">
+                    <h5 class="text-muted">Date Facility Added:</h5>
+
+                    <div class="form-group pad-b-5">
+                        <label for="established date" class="fw-500">
+                            Date From
+                        </label>
+                        <div class='datepicker' date-format="y-MM-dd">
+                          <input class="form-control" name="c" ng-model="filters.single.created_after" type="text"  placeholder="dd-mm-yy"/>
+                        </div>
+                    </div>
+
+                     <div class="form-group pad-b-5">
+                        <label for="established date" class="fw-500">
+                            Date To
+                        </label>
+                        <div class='datepicker' date-format="y-MM-dd">
+                          <input class="form-control" name="c" ng-model="filters.single.created_before" type="text"  placeholder="dd-mm-yy"/>
+                        </div>
+                    </div>
+                </div>
+
             <h5 class="text-muted">Availability</h5>
             <div class="col-xs-12 custom-well">
                 <div class="form-group">
@@ -229,6 +234,23 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div requires-permission="facilities.view_all_facility_fields">
+             <h5 class="text-muted">Military Facilities</h5>
+            <div class="col-xs-12 custom-well">
+                <div class="form-group">
+                    <div class="col-xs-8 pad-l-5">
+                        <div class="checkbox">
+                            <label class="fw-600 fs-14 text-black">
+                                <input type="checkbox" id="is_classified" name="is_classified" ng-model="filters.single.is_classified"
+                                    ng-true-value="'true'" ng-false-value="'false'" indeterminate-value/>
+                                 Military Facilities
+                             </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             </div>
             <div class="col-xs-12 margin-t-10">
                 <button class="btn btn-primary margin-l--10" type="submit">

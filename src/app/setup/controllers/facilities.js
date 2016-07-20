@@ -865,6 +865,12 @@
     .controller("mfl.setup.controller.facility_types.view",["$scope","adminApi",
         "$stateParams","$state","mfl.common.forms.changes","toasty",
         function ($scope,adminApi,$stateParams,$state,formChanges,toasty) {
+            $scope.clearUiSelect = function($event, $select) {
+                  $event.stopPropagation();
+                  $select.selected = '';
+                  $select.search = null;
+            };
+
             $scope.wrapper = adminApi.facility_types;
             // $scope.sub_division = {
             //     "name": ""
@@ -914,7 +920,6 @@
                 $scope.state = false;
             }
             $scope.saveFrm = function (frm) {
-                console.log(frm);
                 if(_.isUndefined($stateParams.type_id)){
                     adminApi.facility_types.create(frm)
                     .success(function () {
@@ -929,6 +934,13 @@
                     });
                 } else {
                     var changes= formChanges.whatChanged(frm);
+
+                    var sub_division_change = changes.sub_division;
+
+                    if(_.isUndefined(sub_division_change)){
+                        changes.sub_division = null;
+                    }
+
                     if(!_.isEmpty(changes)){
                         adminApi.facility_types.update($stateParams.type_id, changes)
                         .success(function () {

@@ -1,0 +1,31 @@
+<div class="content-header margin-b-20">
+    <div class="action-container content-header-extra">
+    <a ui-sref="notifications"
+       class="btn btn-primary"><< Back</a>
+       <a ui-sref="notifications.delete({notification_id: notification.id})"
+       requires-permission="common.delete_notification"
+       class="btn btn-danger">Delete</a>
+   </div>
+
+    <h2 class="content-title">
+        <span class="main-title">
+        <i class="fa fa-comment-o"></i>
+         Notifications
+        </span>
+    </h2>
+
+</div>
+
+<div class="col-xs-12">
+    <div class="col-xs-12">
+
+        <div class=" col-xs-12 col-sm-offset-1 col-sm-10 content-card">
+        <h2 class="content-title">
+        <span class="main-title">
+          {{notification.title}}
+        </span>
+        </h2>
+        <div ng-bind-html="notification.message"></div>
+        </div>
+    </div>
+</div>

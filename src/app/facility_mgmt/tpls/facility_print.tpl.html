@@ -22,7 +22,7 @@
         <label class="text-black fw-600">Regulatory status: </label>
         {{facility.regulatory_status_name}}
     </div>
-    <div class="col-md-6 col-xs-12 content-right fs-16" ng-if="facility.regulatory_body_name !== null">
+    <div class="col-md-6 col-xs-12 content-right fs-16">
         <label class="text-black fw-600" >Regulatory Body: </label>
         {{facility.regulatory_body_name}}
     </div>
@@ -33,6 +33,12 @@
     <div class="col-md-6 col-xs-12 content-right fs-16">
         <label class="text-black fw-600" >Registration Number: </label>
         {{facility.registration_number}}
+    </div>
+     <div class="col-md-6 col-xs-12 fs-16" ng-if="facility.is_classified">
+        <label class="text-black fw-600">Military Facility</label>
+        <span ng-if="facility.is_classified" class="text-success">
+            <i class="fa fa-check-circle-o fa-1x fs-15"></i>
+        </span>
     </div>
 
     <div class="col-xs-12"><hr class="line-divider"></div>

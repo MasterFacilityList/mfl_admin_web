@@ -109,10 +109,17 @@ module.exports = {
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
             "libs/error_handler.js",
-            "libs/datepicker.js"
+            "libs/datepicker.js",
+            "vendor/textAngular/dist/textAngular.js",
+            "vendor/textAngular/dist/textAngularSetup.js",
+            "vendor/textAngular/dist/textAngular-rangy.min.js",
+            "vendor/textAngular/dist/textAngular-sanitize.js",
+            "vendor/textAngular/dist/textAngular.umd.js",
+            "vendor/textAngular/dist/rangy-selectionsaverestore.js",
+            "vendor/requirejs/require.js"
         ],
         css: [
-
+            "vendor/textAngular/dist/textAngular.css"
         ],
         assets: [
             "vendor/fontawesome/fonts/fontawesome-webfont.woff2"

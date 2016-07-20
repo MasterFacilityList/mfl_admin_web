@@ -4,16 +4,12 @@
         <thead class="cf">
             <th class="col-xs-4" sil-grid-sort field='name'>Name</th>
             <th class="col-xs-2">Abbreviation</th>
-            <th class="col-xs-2 text-center">Regulation Verb</th>
-            <th class="col-xs-3 text-center">Body Type</th>
             <th class="col-xs-1 text-right">Actions</th>
         </thead>
         <tbody class="example-animate-container">
             <tr class="animate-repeat" ng-repeat="body in regulatingBodies">
                 <td data-title="Name" class="pad-t-15">{{body.name}}</td>
                 <td data-title="Abbreviation" class="pad-t-15">{{body.abbreviation}}</td>
-                <td data-title="Regulation Verb" class="text-center pad-t-15">{{body.regulation_verb}}</td>
-                <td data-title="Body Type" class="text-center pad-t-15">{{body.regulatory_body_type_name}}</td>
                 <td data-title="Actions" class="text-right">
                     <a ui-sref="setup.facility_regulatory_bodies.edit({id : body.id})" class="btn btn-success" tooltip-placement="bottom" tooltip="View Regulatory Body">
                         View

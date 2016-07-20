@@ -49,6 +49,87 @@
             </a>
         </div>
     </div>
+
+    <!-- Beggining of officers in charge -->
+            <div class="col-xs-12 custom-well">
+                <div class="col-xs-12 margin-b-5">
+                    <h4 class="fw-600 fs-18">Facility Officer In-Charge Details</h4>
+                </div>
+                <div class="form-group col-xs-12">
+                    <label class="">
+                        Name &#42;
+                    </label>
+                    <input type="text" class="form-control" ng-model="facility.officer_in_charge.name" name="officer_name" placeholder="Name" api-checker >
+                    <span class="highlght"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="form-group col-xs-12">
+                    <label class="">
+                        Registration Number/License Number
+                    </label>
+                    <input class="form-control" name="reg_number" ng-model="facility.officer_in_charge.reg_no" placeholder="Registration Number" api-checker >
+                    <span class="highlght"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="form-group col-xs-12">
+                    <label class="">
+                        Job Title &#42;
+                    </label>
+                    <select class="form-control" name="title" ng-model="facility.officer_in_charge.title" api-checker >
+                        <option value="" disabled>Select Job Title</option>
+                        <option ng-repeat="title in job_titles" ng-selected="{{title.id == facility.officer_in_charge.title}}" value="{{title.id}}">{{title.name}}</option>
+                    </select>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                </div>
+                <div class="col-xs-12">
+                    <table class="table table-hover custom-well table-condensed col-xs-12">
+                    <thead class="grey-header">
+                        <th class="col-xs-5">Contact Type</th>
+                        <th class="col-xs-6">Contact Details</th>
+                        <th class="col-xs-1 text-center"></th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="cont in facility.officer_in_charge.contacts">
+                            <td class="col-xs-5">
+                                <div class="form-group grid-inputs">
+                                    <select name="contact_type" class="form-control"  ng-model="cont.type" api-checker >
+                                        <option value="">Select Contact Type</option>
+                                        <option ng-repeat="cont_type in contact_types" ng-selected="{{cont_type.id == cont.type}}" ng-value="cont_type.id">{{cont_type.name}}</option>
+                                    </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                </div>
+                            </td>
+                            <td class="col-xs-6">
+                                <div class="form-group grid-inputs">
+                                    <input name="contact" class="form-control" ng-model="cont.contact" placeholder="Contact Details" api-checker>
+                                    <span class="highlght"></span>
+                                    <span class="bar"></span>
+                                </div>
+                            </td>
+                            <td class="col-xs-1 text-center">
+                                <a ng-click="removeOfficerContact(cont)" style="cursor: pointer; margin-botom: 5px;">
+                                    <i class="fa fa-times-circle fa-2x grid-inputs text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="facility.officer_in_charge.contacts.length < 1">
+                            <td class="alert alert-info" colspan="3">
+                                <i class="fa fa-info-circle"></i> No contacts assigned to officer in charge
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                    <div class="col-xs-12 text-right margin-b-10">
+                        <a class="btn btn-primary pull-right" ng-click="addOfficerContact()" >
+                            <i class="fa fa-plus-square-o"></i> Add
+                        </a>
+                    </div>
+            </div>
+        <!-- End of Officer In-Charge -->
+
    <div class="col-xs-12">
     <!-- Buttons for creation of facility -->
         <a ui-sref="facilities.facility_edit.geolocation" ng-if="!create" class="btn btn-primary margin-t-20 margin-b-10">

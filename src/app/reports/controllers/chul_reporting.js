@@ -147,19 +147,19 @@
                 };
 
                 $scope.switch_state = function(state_name, key, value){
-                    var county  = $scope.selected_values.county;
-                    var sub_county  = $scope.selected_values.sub_county;
-                    var ward  = $scope.selected_values.ward;
+                    var selected_county  = $scope.selected_values.county;
+                    var selected_sub_county  = $scope.selected_values.sub_county;
+                    var selected_ward  = $scope.selected_values.ward;
                     var query_params = {};
 
-                    if(!_.isObject(county)){
-                        query_params["county"] = county;
+                    if(!_.isObject(selected_county)){
+                        query_params.county = selected_county;
                     }
-                    if(!_.isObject(sub_county)){
-                        query_params["sub_county"] = sub_county;
+                    if(!_.isObject(selected_sub_county)){
+                        query_params.sub_county = selected_sub_county;
                     }
-                    if(!_.isObject(ward)){
-                        query_params["ward"] = ward;
+                    if(!_.isObject(selected_ward)){
+                        query_params.ward = selected_ward;
                     }
 
                     query_params[key] =  value;

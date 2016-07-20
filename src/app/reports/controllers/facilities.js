@@ -42,7 +42,8 @@
                 open_whole_day: "",
                 open_normal_day: "",
                 created_after: "",
-                created_before: ""
+                created_before: "",
+                is_classified: ""
             },
             multiple: {
                 county: [],
@@ -176,18 +177,6 @@
         };
 
         $scope.filterFacilities = function () {
-
-            if($scope.filters.single.created_after!==""){
-                var date_from = new Date($scope.filters.single.created_after);
-                $scope.filters.single.created_after = date_from.toISOString();
-            }
-
-            if($scope.filters.single.created_before!==""){
-                var date_to = new Date($scope.filters.single.created_before);
-                $scope.filters.single.created_before = date_to.toISOString();
-
-            }
-
             var multiple = dumpMultipleFilters($scope.filters.multiple);
             var single = dumpSingleFilters($scope.filters.single);
             var params = _.extend(single, multiple);

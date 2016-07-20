@@ -80,8 +80,7 @@
                 $scope.errors = data;
             });
             $scope.facility_no = {
-                "page_size" : 100000,
-                "fields": "id,name,"
+                "page_size" : 100000
             };
 
             wrappers.facilities.filter($scope.facility_no)
@@ -253,7 +252,6 @@
                 $scope.workers.health_unit_workers =
                     $scope.unit.health_unit_workers;
                 if($scope.workers.health_unit_workers.length > 0){
-                    var save_msg = $scope.create ? "Added" : "Updated";
                     wrappers.chuls.update($scope.unit_id, $scope.workers)
                     .success(function () {
                         $state.go("community_units.create_unit.services",
@@ -311,7 +309,7 @@
                 }
             });
             $scope.filterChuServices = function(a){
-                 var service_ids = _.pluck($scope.update_chu_services, "service");
+                var service_ids = _.pluck($scope.update_chu_services, "service");
                 return !_.contains(service_ids, a.id);
             };
 
@@ -336,7 +334,7 @@
                     services: $scope.unit.services
                 };
                 wrapper.chuls.update($stateParams.unit_id, changes)
-                .success(function(data){
+                .success(function(){
                     toasty.success({
                         title: "Community Unit",
                         msg: "Community Unit Updated successfully "
@@ -354,6 +352,7 @@
                     $scope.update_chu_services, service_obj)
                 );
             };
-    }]);
+        }
+    ]);
 
 })(window.angular, window._);

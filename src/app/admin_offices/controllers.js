@@ -15,7 +15,7 @@
             };
             $scope.filters = {
                 "fields": "id,county,county_name,sub_county,sub_county_name,"+
-                          "first_name,last_name,job_title_name,email,"+
+                          "name,job_title_name,email,"+
                           "phone_number,is_national"
             };
         }]
@@ -61,10 +61,6 @@
                         sub_county: {
                             "id": $scope.admin_office.sub_county || null,
                             "name": $scope.admin_office.sub_county_name || null
-                        },
-                        job_title: {
-                            "id": $scope.admin_office.job_title || null,
-                            "name": $scope.admin_office.job_title_name || null
                         }
                     };
                 }
@@ -75,10 +71,6 @@
                     "name": null
                 },
                 sub_county: {
-                    "id": null,
-                    "name": null
-                },
-                job_title: {
                     "id": null,
                     "name": null
                 }
@@ -101,9 +93,7 @@
 
                 admin_office_data.county = $scope.select_values.county;
                 admin_office_data.sub_county = $scope.select_values.sub_county;
-                admin_office_data.first_name = $scope.admin_office.first_name;
-                admin_office_data.last_name = $scope.admin_office.last_name;
-                admin_office_data.job_title = $scope.select_values.job_title;
+                admin_office_data.name = $scope.admin_office.name;
                 admin_office_data.is_national = $scope.admin_office.is_national;
                 admin_office_data.email = $scope.admin_office.email;
                 admin_office_data.phone_number = $scope.admin_office.phone_number;
@@ -113,9 +103,6 @@
                 }
                 if(!_.isUndefined($scope.select_values.sub_county.id)){
                     admin_office_data.sub_county = $scope.select_values.sub_county.id;
-                }
-                if(!_.isUndefined($scope.select_values.job_title.id)){
-                    admin_office_data.job_title = $scope.select_values.job_title.id;
                 }
 
                 if($scope.create){

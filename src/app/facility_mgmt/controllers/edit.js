@@ -299,7 +299,7 @@
                         },
                         facility_type: {
                             "id": $scope.facility.facility_type,
-                            "name": $scope.facility.facility_type_name
+                            "name": $scope.facility.facility_type_parent
                         },
                         facility_type_details: {
                             "id": $scope.facility.facility_type,
@@ -519,6 +519,10 @@
                 page_size:10000
             };
 
+            $scope.operationStatusFilter = function (a) {
+                return a.name !== "Closed";
+            };
+
             $scope.filterFxns = {
                 subFilter: function (a) {
                     if(!_.isUndefined($scope.select_values)){
@@ -580,7 +584,7 @@
                 console.log(changes);
                 $scope.facility.ward = $scope.select_values.ward;
                 $scope.facility.keph_level = $scope.select_values.keph_level;
-                $scope.facility.facility_type = $scope.select_values.facility_type;
+                $scope.facility.facility_type = $scope.select_values.facility_type_details;
                 $scope.facility.owner = $scope.select_values.owner;
                 $scope.facility.operation_status = $scope.select_values.operation_status;
                 $scope.facility.regulatory_body = $scope.select_values.regulatory_body;
@@ -1032,7 +1036,7 @@
                                     {facility_id: $stateParams.facility_id});
                             }
                             else{
-                               $scope.goToNext(5, "services");
+                                $scope.goToNext(5, "services");
                             }
                         }
                         else{
@@ -1049,9 +1053,9 @@
                         if($scope.facility.approved){
                             $state.go("facilities.facility_view_changes",
                                 {facility_id: $stateParams.facility_id});
-                            }
+                        }
                         else{
-                           $state.go("facilities");
+                            $state.go("facilities");
                         }
                     }else{
                         $scope.goToNext(5, "services");
@@ -1078,7 +1082,7 @@
                 }
 
                 wrappers.facilities.update($scope.facility_id, updates)
-                .success(function(data){}).error(function(){});
+                    .success(function(){}).error(function(){});
             };
 
             $scope.saveUnits = function (arg) {
@@ -1261,6 +1265,7 @@
                 wrappers.facility_coordinates.get(f.coordinates)
                 .success(function(data){
                     $scope.spinner = false;
+
                     $scope.geo = data;
                     $scope.collection_date = $filter("date")($scope.geo.collection_date);
 
@@ -1300,7 +1305,7 @@
                     leafletData.getMap("wardmap")
                         .then(function (map) {
                             var coords = data.ward_boundary.properties.bound.coordinates[0];
-                            $scope.center = data.ward_boundary.properties.center;
+                            $scope.center = [];
                             var bounds = _.map(coords, function(c) {
                                 return [c[1], c[0]];
                             });
@@ -1308,18 +1313,19 @@
                             //has to be there for marker to appear
                             if(!_.isNull(f.coordinates)) {
                                 $scope.getFacilityCoordinates(f);
-                            }else{
+                            }
+                            else{
                                 $scope.geo.coordinates =
                                 $scope.center;
                                 angular.extend($scope,{
                                     markers: {
-                                        mainMarker: {
-                                            layer:"facility",
-                                            lat: $scope.geo.coordinates.coordinates[1],
-                                            lng: $scope.geo.coordinates.coordinates[0],
-                                            message: f.name,
-                                            draggable: false
-                                        }
+                                        // mainMarker: {
+                                        //     layer:"facility",
+                                        //     lat: $scope.geo.coordinates.coordinates[1],
+                                        //     lng: $scope.geo.coordinates.coordinates[0],
+                                        //     message: f.name,
+                                        //     draggable: false
+                                        // }
                                     }
                                 });
                             }
@@ -1433,17 +1439,16 @@
                         wrappers.facilities.update(
                             fac_id, {"coordinates" : data.id})
                             .success(function () {
-
-                            if($scope.create){
-                                $scope.toState(arg);
-                            }
-                            if($scope.facility.approved){
-                                $state.go("facilities.facility_view_changes",
-                                    {facility_id: $stateParams.facility_id});
-                            }
-                            else{
-                                $scope.toState(arg);
-                            }
+                                if($scope.create){
+                                    $scope.toState(arg);
+                                }
+                                if($scope.facility.approved){
+                                    $state.go("facilities.facility_view_changes",
+                                        {facility_id: $stateParams.facility_id});
+                                }
+                                else{
+                                    $scope.toState(arg);
+                                }
 
                             })
                             .error(function (error) {

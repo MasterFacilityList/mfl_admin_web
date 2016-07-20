@@ -1,0 +1,11 @@
+<div class="col-xs-12">
+    <div class="col-xs-12 col-md-10 col-md-offset-1 margin-t-20 margin-b-20 text-center content-card">
+    <div class="col-xs-12 col-md-10 col-md-offset-1 margin-b-20 margin-t-20">
+        <p class="lead margin-b-10">Are you sure you want to delete the notification <strong>{{notification.title}}</strong> ?</p>
+
+        <button class="btn btn-danger margin-h-5" ng-click="remove()">Yes</button>
+        <a requires-permission="common.delete_notification" class="btn btn-default margin-h-5"
+            ui-sref="notifications.view({notification_id: notification.id})">No</a>
+    </div>
+    </div>
+</div>

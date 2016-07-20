@@ -9,7 +9,7 @@
     .service("mfl.common.export.service",
         ["api.oauth2", "api", "$window", function (oauth2, api, $window) {
             var helpers = api.apiHelpers;
-            var DEFAULT_PAGE_SIZE = 10000;
+            var DEFAULT_PAGE_SIZE = 100000;
 
             var exportTo = function (wrapper, format, params, page_size) {
                 var download_params = {

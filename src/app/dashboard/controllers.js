@@ -114,9 +114,6 @@
                         legend: {
                             show: false
                         },
-                        tooltip: {
-                            grouped: false
-                        },
                         axis: {
                             x: {
                                 type: "categorized",

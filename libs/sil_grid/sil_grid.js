@@ -94,6 +94,20 @@
                             raw_filters.search = JSON.stringify(dsl);
                         }
 
+                        if(!_.isUndefined($scope.filters.created_after)){
+                            if($scope.filters.created_after !== ""){
+                                var date_from = new Date($scope.filters.created_after);
+                                raw_filters.created_after = date_from.toISOString();
+                            }
+                        }
+
+                        if(!_.isUndefined($scope.filters.created_before)){
+                            if($scope.filters.created_before !== ""){
+                                var date_from = new Date($scope.filters.created_before);
+                                raw_filters.created_before = date_from.toISOString();
+                            }
+                        }
+
                         promise = self.api.filter(raw_filters);
                     }
                     promise.success(self.setData).error(self.setError);
