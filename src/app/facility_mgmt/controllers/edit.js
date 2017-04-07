@@ -860,8 +860,8 @@
                 if(f.facility_units.length === 0) {
                     $scope.dept_spinner = false;
                     $scope.fac_depts.push({
-                        unit : "",
-                        regulating_body_name : ""
+                        unit : null,
+                        regulating_body_name :null
                     });
                 }
                 else{
@@ -871,8 +871,8 @@
             };
             $scope.addUnit = function () {
                 $scope.fac_depts.push({
-                    unit : "",
-                    regulating_body_name : ""
+                    unit : null,
+                    regulating_body_name : null
                 });
             };
             $scope.removeUnit = function (obj) {
@@ -912,7 +912,8 @@
             $scope.saveUnits = function (arg) {
                 $scope.fac_unitobj = {units : []};
                 _.each($scope.fac_depts, function (a_unit) {
-                    if(_.isUndefined(a_unit.id)){
+
+                    if(!_.isNull(a_unit.unit)){
                         $scope.fac_unitobj.units.push(a_unit);
                     }
                 });
